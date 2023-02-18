@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,49 +33,53 @@ using System.Collections;
 
 namespace System.Web.UI.WebControls
 {
-    public class GridViewRowCollection: ICollection, IEnumerable
+    public class GridViewRowCollection : ICollection, IEnumerable
     {
-        ArrayList rows = new ArrayList ();
-        
-        public GridViewRowCollection (ArrayList rows)
+        ArrayList rows = new ArrayList();
+
+        public GridViewRowCollection(ArrayList rows)
         {
             this.rows = rows;
         }
-        
-        public GridViewRow this [int index] {
-            get { return (GridViewRow) rows [index]; }
-        }
-        
-        public void CopyTo (GridViewRow[] array, int index)
+
+        public GridViewRow this[int index]
         {
-            rows.CopyTo (array, index);
+            get { return (GridViewRow)rows[index]; }
         }
-        
-        public IEnumerator GetEnumerator ()
+
+        public void CopyTo(GridViewRow[] array, int index)
         {
-            return rows.GetEnumerator ();
+            rows.CopyTo(array, index);
         }
-        
-        public int Count {
+
+        public IEnumerator GetEnumerator()
+        {
+            return rows.GetEnumerator();
+        }
+
+        public int Count
+        {
             get { return rows.Count; }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return false; }
         }
-        
-        public bool IsSynchronized {
+
+        public bool IsSynchronized
+        {
             get { return false; }
         }
-        
-        public object SyncRoot {
+
+        public object SyncRoot
+        {
             get { return this; }
         }
-        
-        void System.Collections.ICollection.CopyTo (Array array, int index)
+
+        void System.Collections.ICollection.CopyTo(Array array, int index)
         {
-            rows.CopyTo (array, index);
+            rows.CopyTo(array, index);
         }
     }
 }
-

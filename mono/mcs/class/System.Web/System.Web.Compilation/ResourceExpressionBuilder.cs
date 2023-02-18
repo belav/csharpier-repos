@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,21 +38,30 @@ using System.Web.UI;
 
 namespace System.Web.Compilation
 {
-    [ExpressionEditor("System.Web.UI.Design.ResourceExpressionEditor, " + Consts.AssemblySystem_Design)]
+    [ExpressionEditor(
+        "System.Web.UI.Design.ResourceExpressionEditor, " + Consts.AssemblySystem_Design
+    )]
     [ExpressionPrefix("Resources")]
     public class ResourceExpressionBuilder : ExpressionBuilder
     {
-        public ResourceExpressionBuilder ()
-        {
-        }
+        public ResourceExpressionBuilder() { }
 
-        public override object EvaluateExpression (object target, BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
+        public override object EvaluateExpression(
+            object target,
+            BoundPropertyEntry entry,
+            object parsedData,
+            ExpressionBuilderContext context
+        )
         {
             ResourceExpressionFields fields = parsedData as ResourceExpressionFields;
-            return HttpContext.GetGlobalResourceObject (fields.ClassKey, fields.ResourceKey);
+            return HttpContext.GetGlobalResourceObject(fields.ClassKey, fields.ResourceKey);
         }
 
-        public override CodeExpression GetCodeExpression (BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
+        public override CodeExpression GetCodeExpression(
+            BoundPropertyEntry entry,
+            object parsedData,
+            ExpressionBuilderContext context
+        )
         {
             ResourceExpressionFields fields = parsedData as ResourceExpressionFields;
             CodeExpression[] expr;
@@ -60,57 +69,74 @@ namespace System.Web.Compilation
             // TODO: check what MS runtime does in this situation
             if (entry == null)
                 return null;
-            
-            if (!String.IsNullOrEmpty (fields.ClassKey)) {
-                if (! (entry.PropertyInfo is PropertyInfo))
+
+            if (!String.IsNullOrEmpty(fields.ClassKey))
+            {
+                if (!(entry.PropertyInfo is PropertyInfo))
                     return null; // TODO: check what MS runtime does here
-                
-                expr = new CodeExpression [] {
-                    new CodePrimitiveExpression (fields.ClassKey),
-                    new CodePrimitiveExpression (fields.ResourceKey)
+
+                expr = new CodeExpression[]
+                {
+                    new CodePrimitiveExpression(fields.ClassKey),
+                    new CodePrimitiveExpression(fields.ResourceKey)
                 };
-                CodeMethodInvokeExpression getgro = new CodeMethodInvokeExpression (new CodeThisReferenceExpression (), "GetGlobalResourceObject", expr);
-                return new CodeCastExpression (entry.PropertyInfo.PropertyType, getgro);
-            } else
-                return CreateGetLocalResourceObject (entry, fields.ResourceKey);
-        }
-
-        public static ResourceExpressionFields ParseExpression (string expression)
-        {
-            int comma = expression.IndexOf (',');
-            if (comma == -1)
-                return new ResourceExpressionFields (expression.Trim ());
+                CodeMethodInvokeExpression getgro = new CodeMethodInvokeExpression(
+                    new CodeThisReferenceExpression(),
+                    "GetGlobalResourceObject",
+                    expr
+                );
+                return new CodeCastExpression(entry.PropertyInfo.PropertyType, getgro);
+            }
             else
-                return new ResourceExpressionFields (expression.Substring (0, comma).Trim (),
-                                     expression.Substring (comma + 1).Trim ());
+                return CreateGetLocalResourceObject(entry, fields.ResourceKey);
         }
 
-        public override object ParseExpression (string expression, Type propertyType, ExpressionBuilderContext context)
+        public static ResourceExpressionFields ParseExpression(string expression)
+        {
+            int comma = expression.IndexOf(',');
+            if (comma == -1)
+                return new ResourceExpressionFields(expression.Trim());
+            else
+                return new ResourceExpressionFields(
+                    expression.Substring(0, comma).Trim(),
+                    expression.Substring(comma + 1).Trim()
+                );
+        }
+
+        public override object ParseExpression(
+            string expression,
+            Type propertyType,
+            ExpressionBuilderContext context
+        )
         {
             //FIXME: not sure what the propertyType should be used for
-            return ParseExpression (expression);
+            return ParseExpression(expression);
         }
 
-        public override bool SupportsEvaluate {
+        public override bool SupportsEvaluate
+        {
             get { return true; }
         }
 
-        internal static CodeExpression CreateGetLocalResourceObject (BoundPropertyEntry bpe, string resname)
+        internal static CodeExpression CreateGetLocalResourceObject(
+            BoundPropertyEntry bpe,
+            string resname
+        )
         {
-            if (bpe == null || String.IsNullOrEmpty (resname))
+            if (bpe == null || String.IsNullOrEmpty(resname))
                 return null;
 
             if (bpe.UseSetAttribute)
-                return CreateGetLocalResourceObject (bpe.Type, typeof (string), null, resname);
+                return CreateGetLocalResourceObject(bpe.Type, typeof(string), null, resname);
             else
-                return CreateGetLocalResourceObject (bpe.PropertyInfo, resname);
+                return CreateGetLocalResourceObject(bpe.PropertyInfo, resname);
         }
-        
-        internal static CodeExpression CreateGetLocalResourceObject (MemberInfo mi, string resname)
+
+        internal static CodeExpression CreateGetLocalResourceObject(MemberInfo mi, string resname)
         {
-            if (String.IsNullOrEmpty (resname))
+            if (String.IsNullOrEmpty(resname))
                 return null;
-            
+
             Type member_type = null;
             if (mi is PropertyInfo)
                 member_type = ((PropertyInfo)mi).PropertyType;
@@ -119,45 +145,56 @@ namespace System.Web.Compilation
             else
                 return null; // an "impossible" case
 
-            return CreateGetLocalResourceObject (member_type, mi.DeclaringType, mi.Name, resname);
+            return CreateGetLocalResourceObject(member_type, mi.DeclaringType, mi.Name, resname);
         }
-        
-        static CodeExpression CreateGetLocalResourceObject (Type member_type, Type declaringType, string memberName, string resname)
+
+        static CodeExpression CreateGetLocalResourceObject(
+            Type member_type,
+            Type declaringType,
+            string memberName,
+            string resname
+        )
         {
             TypeConverter converter;
 
-            if (!String.IsNullOrEmpty (memberName))
-                converter = TypeDescriptor.GetProperties (declaringType) [memberName].Converter;
+            if (!String.IsNullOrEmpty(memberName))
+                converter = TypeDescriptor.GetProperties(declaringType)[memberName].Converter;
             else
                 converter = null;
 
-            if (member_type != typeof (System.Drawing.Color) &&
-                (converter == null || converter.CanConvertFrom (typeof (String)))) {
-                CodeMethodInvokeExpression getlro = new CodeMethodInvokeExpression (
-                    new CodeThisReferenceExpression (),
+            if (
+                member_type != typeof(System.Drawing.Color)
+                && (converter == null || converter.CanConvertFrom(typeof(String)))
+            )
+            {
+                CodeMethodInvokeExpression getlro = new CodeMethodInvokeExpression(
+                    new CodeThisReferenceExpression(),
                     "GetLocalResourceObject",
-                    new CodeExpression [] { new CodePrimitiveExpression (resname) });
-                
-                return TemplateControlCompiler.CreateConvertToCall (Type.GetTypeCode (member_type), getlro);
-            } else if (!String.IsNullOrEmpty (memberName)) {
-                CodeMethodInvokeExpression getlro = new CodeMethodInvokeExpression (
-                    new CodeThisReferenceExpression (),
+                    new CodeExpression[] { new CodePrimitiveExpression(resname) }
+                );
+
+                return TemplateControlCompiler.CreateConvertToCall(
+                    Type.GetTypeCode(member_type),
+                    getlro
+                );
+            }
+            else if (!String.IsNullOrEmpty(memberName))
+            {
+                CodeMethodInvokeExpression getlro = new CodeMethodInvokeExpression(
+                    new CodeThisReferenceExpression(),
                     "GetLocalResourceObject",
-                    new CodeExpression [] {
-                        new CodePrimitiveExpression (resname),
-                        new CodeTypeOfExpression (new CodeTypeReference (declaringType)),
-                        new CodePrimitiveExpression (memberName)
+                    new CodeExpression[]
+                    {
+                        new CodePrimitiveExpression(resname),
+                        new CodeTypeOfExpression(new CodeTypeReference(declaringType)),
+                        new CodePrimitiveExpression(memberName)
                     }
                 );
 
-                return new CodeCastExpression (member_type, getlro);
-            } else
+                return new CodeCastExpression(member_type, getlro);
+            }
+            else
                 return null;
         }
     }
-
 }
-
-
-
-

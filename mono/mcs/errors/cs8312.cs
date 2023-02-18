@@ -4,9 +4,8 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
-        foreach (var x in default) {
-        }
+        foreach (var x in default) { }
     }
 }

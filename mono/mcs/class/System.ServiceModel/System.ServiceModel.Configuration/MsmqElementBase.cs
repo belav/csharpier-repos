@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,142 +54,282 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public abstract class MsmqElementBase
-         : TransportElement
+    public abstract class MsmqElementBase : TransportElement
     {
         ConfigurationPropertyCollection _properties;
 
-        protected MsmqElementBase () {
-        }
-
+        protected MsmqElementBase() { }
 
         // Properties
 
-        [ConfigurationProperty ("customDeadLetterQueue",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = null)]
-        public Uri CustomDeadLetterQueue {
-            get { return (Uri) base ["customDeadLetterQueue"]; }
-            set { base ["customDeadLetterQueue"] = value; }
+        [ConfigurationProperty(
+            "customDeadLetterQueue",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = null
+        )]
+        public Uri CustomDeadLetterQueue
+        {
+            get { return (Uri)base["customDeadLetterQueue"]; }
+            set { base["customDeadLetterQueue"] = value; }
         }
 
-        [ConfigurationProperty ("deadLetterQueue",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "System")]
-        public DeadLetterQueue DeadLetterQueue {
-            get { return (DeadLetterQueue) base ["deadLetterQueue"]; }
-            set { base ["deadLetterQueue"] = value; }
+        [ConfigurationProperty(
+            "deadLetterQueue",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "System"
+        )]
+        public DeadLetterQueue DeadLetterQueue
+        {
+            get { return (DeadLetterQueue)base["deadLetterQueue"]; }
+            set { base["deadLetterQueue"] = value; }
         }
 
-        [ConfigurationProperty ("durable",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = true)]
-        public bool Durable {
-            get { return (bool) base ["durable"]; }
-            set { base ["durable"] = value; }
+        [ConfigurationProperty(
+            "durable",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true
+        )]
+        public bool Durable
+        {
+            get { return (bool)base["durable"]; }
+            set { base["durable"] = value; }
         }
 
-        [ConfigurationProperty ("exactlyOnce",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = true)]
-        public bool ExactlyOnce {
-            get { return (bool) base ["exactlyOnce"]; }
-            set { base ["exactlyOnce"] = value; }
+        [ConfigurationProperty(
+            "exactlyOnce",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true
+        )]
+        public bool ExactlyOnce
+        {
+            get { return (bool)base["exactlyOnce"]; }
+            set { base["exactlyOnce"] = value; }
         }
 
-        [ConfigurationProperty ("maxRetryCycles",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "2")]
-        [IntegerValidator (MinValue = 0,
-            MaxValue = int.MaxValue,
-            ExcludeRange = false)]
-        public int MaxRetryCycles {
-            get { return (int) base ["maxRetryCycles"]; }
-            set { base ["maxRetryCycles"] = value; }
+        [ConfigurationProperty(
+            "maxRetryCycles",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "2"
+        )]
+        [IntegerValidator(MinValue = 0, MaxValue = int.MaxValue, ExcludeRange = false)]
+        public int MaxRetryCycles
+        {
+            get { return (int)base["maxRetryCycles"]; }
+            set { base["maxRetryCycles"] = value; }
         }
 
-        [ConfigurationProperty ("msmqTransportSecurity",
-             Options = ConfigurationPropertyOptions.None)]
-        public MsmqTransportSecurityElement MsmqTransportSecurity {
-            get { return (MsmqTransportSecurityElement) base ["msmqTransportSecurity"]; }
+        [ConfigurationProperty(
+            "msmqTransportSecurity",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public MsmqTransportSecurityElement MsmqTransportSecurity
+        {
+            get { return (MsmqTransportSecurityElement)base["msmqTransportSecurity"]; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
                     _properties = base.Properties;
-                    _properties.Add (new ConfigurationProperty ("customDeadLetterQueue", typeof (Uri), null, new UriTypeConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("deadLetterQueue", typeof (DeadLetterQueue), "System", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("durable", typeof (bool), "true", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("exactlyOnce", typeof (bool), "true", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("maxRetryCycles", typeof (int), "2", null, new IntegerValidator (0, int.MaxValue, false), ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("msmqTransportSecurity", typeof (MsmqTransportSecurityElement), null, null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("receiveErrorHandling", typeof (ReceiveErrorHandling), "Fault", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("receiveRetryCount", typeof (int), "5", null, new IntegerValidator (0, int.MaxValue, false), ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("retryCycleDelay", typeof (TimeSpan), "00:30:00", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("timeToLive", typeof (TimeSpan), "1.00:00:00", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("useMsmqTracing", typeof (bool), "false", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("useSourceJournal", typeof (bool), "false", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "customDeadLetterQueue",
+                            typeof(Uri),
+                            null,
+                            new UriTypeConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "deadLetterQueue",
+                            typeof(DeadLetterQueue),
+                            "System",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "durable",
+                            typeof(bool),
+                            "true",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "exactlyOnce",
+                            typeof(bool),
+                            "true",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "maxRetryCycles",
+                            typeof(int),
+                            "2",
+                            null,
+                            new IntegerValidator(0, int.MaxValue, false),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "msmqTransportSecurity",
+                            typeof(MsmqTransportSecurityElement),
+                            null,
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "receiveErrorHandling",
+                            typeof(ReceiveErrorHandling),
+                            "Fault",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "receiveRetryCount",
+                            typeof(int),
+                            "5",
+                            null,
+                            new IntegerValidator(0, int.MaxValue, false),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "retryCycleDelay",
+                            typeof(TimeSpan),
+                            "00:30:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "timeToLive",
+                            typeof(TimeSpan),
+                            "1.00:00:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "useMsmqTracing",
+                            typeof(bool),
+                            "false",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "useSourceJournal",
+                            typeof(bool),
+                            "false",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        [ConfigurationProperty ("receiveErrorHandling",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Fault")]
-        public ReceiveErrorHandling ReceiveErrorHandling {
-            get { return (ReceiveErrorHandling) base ["receiveErrorHandling"]; }
-            set { base ["receiveErrorHandling"] = value; }
-        }
-
-        [ConfigurationProperty ("receiveRetryCount",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "5")]
-        [IntegerValidator (MinValue = 0,
-            MaxValue = int.MaxValue,
-            ExcludeRange = false)]
-        public int ReceiveRetryCount {
-            get { return (int) base ["receiveRetryCount"]; }
-            set { base ["receiveRetryCount"] = value; }
-        }
-
-        [ConfigurationProperty ("retryCycleDelay",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:30:00")]
-        public TimeSpan RetryCycleDelay {
-            get { return (TimeSpan) base ["retryCycleDelay"]; }
-            set { base ["retryCycleDelay"] = value; }
-        }
-
-        [ConfigurationProperty ("timeToLive",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "1.00:00:00")]
-        public TimeSpan TimeToLive {
-            get { return (TimeSpan) base ["timeToLive"]; }
-            set { base ["timeToLive"] = value; }
-        }
-
-        [ConfigurationProperty ("useMsmqTracing",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool UseMsmqTracing {
-            get { return (bool) base ["useMsmqTracing"]; }
-            set { base ["useMsmqTracing"] = value; }
-        }
-
-        [ConfigurationProperty ("useSourceJournal",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool UseSourceJournal {
-            get { return (bool) base ["useSourceJournal"]; }
-            set { base ["useSourceJournal"] = value; }
-        }
-
-        public override void ApplyConfiguration (BindingElement bindingElement)
+        [ConfigurationProperty(
+            "receiveErrorHandling",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Fault"
+        )]
+        public ReceiveErrorHandling ReceiveErrorHandling
         {
-            var b = (System.ServiceModel.Channels.MsmqBindingElementBase) bindingElement;
-            base.ApplyConfiguration (b);
+            get { return (ReceiveErrorHandling)base["receiveErrorHandling"]; }
+            set { base["receiveErrorHandling"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "receiveRetryCount",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "5"
+        )]
+        [IntegerValidator(MinValue = 0, MaxValue = int.MaxValue, ExcludeRange = false)]
+        public int ReceiveRetryCount
+        {
+            get { return (int)base["receiveRetryCount"]; }
+            set { base["receiveRetryCount"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "retryCycleDelay",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:30:00"
+        )]
+        public TimeSpan RetryCycleDelay
+        {
+            get { return (TimeSpan)base["retryCycleDelay"]; }
+            set { base["retryCycleDelay"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "timeToLive",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "1.00:00:00"
+        )]
+        public TimeSpan TimeToLive
+        {
+            get { return (TimeSpan)base["timeToLive"]; }
+            set { base["timeToLive"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "useMsmqTracing",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool UseMsmqTracing
+        {
+            get { return (bool)base["useMsmqTracing"]; }
+            set { base["useMsmqTracing"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "useSourceJournal",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool UseSourceJournal
+        {
+            get { return (bool)base["useSourceJournal"]; }
+            set { base["useSourceJournal"] = value; }
+        }
+
+        public override void ApplyConfiguration(BindingElement bindingElement)
+        {
+            var b = (System.ServiceModel.Channels.MsmqBindingElementBase)bindingElement;
+            base.ApplyConfiguration(b);
             b.CustomDeadLetterQueue = CustomDeadLetterQueue;
             b.DeadLetterQueue = DeadLetterQueue;
             b.Durable = Durable;
@@ -210,10 +350,10 @@ namespace System.ServiceModel.Configuration
             bs.MsmqSecureHashAlgorithm = cs.MsmqSecureHashAlgorithm;
         }
 
-        public override void CopyFrom (ServiceModelExtensionElement from)
+        public override void CopyFrom(ServiceModelExtensionElement from)
         {
-            var e = (MsmqElementBase) from;
-            base.CopyFrom (from);
+            var e = (MsmqElementBase)from;
+            base.CopyFrom(from);
             CustomDeadLetterQueue = e.CustomDeadLetterQueue;
             DeadLetterQueue = e.DeadLetterQueue;
             Durable = e.Durable;
@@ -234,10 +374,10 @@ namespace System.ServiceModel.Configuration
             cs.MsmqSecureHashAlgorithm = es.MsmqSecureHashAlgorithm;
         }
 
-        protected internal override void InitializeFrom (BindingElement bindingElement)
+        protected internal override void InitializeFrom(BindingElement bindingElement)
         {
-            var b = (System.ServiceModel.Channels.MsmqBindingElementBase) bindingElement;
-            base.InitializeFrom (b);
+            var b = (System.ServiceModel.Channels.MsmqBindingElementBase)bindingElement;
+            base.InitializeFrom(b);
             CustomDeadLetterQueue = b.CustomDeadLetterQueue;
             DeadLetterQueue = b.DeadLetterQueue;
             Durable = b.Durable;
@@ -258,5 +398,4 @@ namespace System.ServiceModel.Configuration
             cs.MsmqSecureHashAlgorithm = bs.MsmqSecureHashAlgorithm;
         }
     }
-
 }

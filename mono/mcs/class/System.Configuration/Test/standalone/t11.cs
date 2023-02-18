@@ -5,15 +5,12 @@ using System.Text;
 using System.Configuration;
 using System.Web;
 
-public class CustomSection :  ConfigurationSection
+public class CustomSection : ConfigurationSection
 {
-    public CustomSection()
-    {
-    }
-  
-    [LongValidator(MinValue = 1, MaxValue = 1000000,
-               ExcludeRange = false)]
-    [ConfigurationProperty ("longSetting", DefaultValue=1000)]
+    public CustomSection() { }
+
+    [LongValidator(MinValue = 1, MaxValue = 1000000, ExcludeRange = false)]
+    [ConfigurationProperty("longSetting", DefaultValue = 1000)]
     public long LongSetting
     {
         get { return (long)this["longSetting"]; }
@@ -27,14 +24,16 @@ class T1
     {
         try
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             CustomSection sect = (CustomSection)config.GetSection("customSection");
 
-            Console.WriteLine ("longSetting = {0}", sect.LongSetting);
+            Console.WriteLine("longSetting = {0}", sect.LongSetting);
         }
         catch (ConfigurationErrorsException e)
         {
-            Console.WriteLine ("ConfigurationErrorsException raised");
+            Console.WriteLine("ConfigurationErrorsException raised");
         }
     }
 }

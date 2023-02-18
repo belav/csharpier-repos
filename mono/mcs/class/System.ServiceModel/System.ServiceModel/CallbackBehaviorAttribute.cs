@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,11 +35,10 @@ using System.Transactions;
 
 namespace System.ServiceModel
 {
-    [AttributeUsage (AttributeTargets.Class)]
-    public sealed class CallbackBehaviorAttribute : Attribute,
-        IEndpointBehavior
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class CallbackBehaviorAttribute : Attribute, IEndpointBehavior
     {
-        public CallbackBehaviorAttribute ()
+        public CallbackBehaviorAttribute()
         {
             AutomaticSessionShutdown = true;
             ConcurrencyMode = ConcurrencyMode.Single;
@@ -81,35 +80,39 @@ namespace System.ServiceModel
         [MonoTODO]
         public bool ValidateMustUnderstand { get; set; }
 
-        void IEndpointBehavior.AddBindingParameters (
+        void IEndpointBehavior.AddBindingParameters(
             ServiceEndpoint endpoint,
-            BindingParameterCollection parameters)
-        {
-        }
+            BindingParameterCollection parameters
+        ) { }
 
-        void IEndpointBehavior.ApplyDispatchBehavior (
+        void IEndpointBehavior.ApplyDispatchBehavior(
             ServiceEndpoint serviceEndpoint,
-            EndpointDispatcher dispatcher)
+            EndpointDispatcher dispatcher
+        )
         {
-            throw new InvalidOperationException ("This attribute cannot be applied to service endpoint dispatcher");
+            throw new InvalidOperationException(
+                "This attribute cannot be applied to service endpoint dispatcher"
+            );
         }
 
         [MonoTODO]
-        void IEndpointBehavior.ApplyClientBehavior (
+        void IEndpointBehavior.ApplyClientBehavior(
             ServiceEndpoint serviceEndpoint,
-            ClientRuntime behavior)
+            ClientRuntime behavior
+        )
         {
             if (serviceEndpoint.Contract.CallbackContractType == null)
-                throw new InvalidOperationException ("This attribute can be applied only to duplex service endpoint");
+                throw new InvalidOperationException(
+                    "This attribute can be applied only to duplex service endpoint"
+                );
 
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        void IEndpointBehavior.Validate (
-            ServiceEndpoint serviceEndpoint)
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

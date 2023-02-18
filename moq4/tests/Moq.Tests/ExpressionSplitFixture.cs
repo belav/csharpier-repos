@@ -35,8 +35,7 @@ namespace Moq.Tests
             // a => a()
             var expression = E((ADelegate a) => a());
 
-            AssertSplitYields(expression,
-                E((ADelegate a) => a()));
+            AssertSplitYields(expression, E((ADelegate a) => a()));
         }
 
         [Fact]
@@ -45,8 +44,7 @@ namespace Moq.Tests
             // a => a.B
             var expression = E((IA a) => a.B);
 
-            AssertSplitYields(expression,
-                E((IA a) => a.B));
+            AssertSplitYields(expression, E((IA a) => a.B));
         }
 
         [Fact]
@@ -55,8 +53,7 @@ namespace Moq.Tests
             // a => a.B = ...
             var expression = A((IA a) => a.B, D<IB>());
 
-            AssertSplitYields(expression,
-                A((IA a) => a.B, D<IB>()));
+            AssertSplitYields(expression, A((IA a) => a.B, D<IB>()));
         }
 
         [Fact]
@@ -65,9 +62,7 @@ namespace Moq.Tests
             // a => a.B.C
             var expression = E((IA a) => a.B.C);
 
-            AssertSplitYields(expression,
-                E((IA a) => a.B),
-                E((IB b) => b.C));
+            AssertSplitYields(expression, E((IA a) => a.B), E((IB b) => b.C));
         }
 
         [Fact]
@@ -76,8 +71,7 @@ namespace Moq.Tests
             // a => a.GetB()
             var expression = E((IA a) => a.GetB());
 
-            AssertSplitYields(expression,
-                E((IA a) => a.GetB()));
+            AssertSplitYields(expression, E((IA a) => a.GetB()));
         }
 
         [Fact]
@@ -86,8 +80,7 @@ namespace Moq.Tests
             // a => a.GetB(...)
             var expression = E((IA a) => a.GetB(1));
 
-            AssertSplitYields(expression,
-                E((IA a) => a.GetB(1)));
+            AssertSplitYields(expression, E((IA a) => a.GetB(1)));
         }
 
         [Fact]
@@ -96,9 +89,7 @@ namespace Moq.Tests
             // a => a.GetB().GetC()
             var expression = E((IA a) => a.GetB().GetC());
 
-            AssertSplitYields(expression,
-                E((IA a) => a.GetB()),
-                E((IB b) => b.GetC()));
+            AssertSplitYields(expression, E((IA a) => a.GetB()), E((IB b) => b.GetC()));
         }
 
         [Fact]
@@ -107,9 +98,7 @@ namespace Moq.Tests
             // a => a.GetB(...).GetC(...)
             var expression = E((IA a) => a.GetB(1).GetC(false, true));
 
-            AssertSplitYields(expression,
-                E((IA a) => a.GetB(1)),
-                E((IB b) => b.GetC(false, true)));
+            AssertSplitYields(expression, E((IA a) => a.GetB(1)), E((IB b) => b.GetC(false, true)));
         }
 
         [Fact]
@@ -118,9 +107,7 @@ namespace Moq.Tests
             // a => a.B.GetC()
             var expression = E((IA a) => a.B.GetC());
 
-            AssertSplitYields(expression,
-                E((IA a) => a.B),
-                E((IB b) => b.GetC()));
+            AssertSplitYields(expression, E((IA a) => a.B), E((IB b) => b.GetC()));
         }
 
         [Fact]
@@ -129,9 +116,7 @@ namespace Moq.Tests
             // a => GetB().C
             var expression = E((IA a) => a.GetB().C);
 
-            AssertSplitYields(expression,
-                E((IA a) => a.GetB()),
-                E((IB b) => b.C));
+            AssertSplitYields(expression, E((IA a) => a.GetB()), E((IB b) => b.C));
         }
 
         [Fact]
@@ -140,9 +125,7 @@ namespace Moq.Tests
             // a => a.GetB().C = ...
             var expression = A((IA a) => a.GetB().C, D<IC>());
 
-            AssertSplitYields(expression,
-                E((IA a) => a.GetB()),
-                A((IB b) => b.C, D<IC>()));
+            AssertSplitYields(expression, E((IA a) => a.GetB()), A((IB b) => b.C, D<IC>()));
         }
 
         [Fact]
@@ -151,9 +134,7 @@ namespace Moq.Tests
             // a => a().C
             var expression = E((ADelegate a) => a().C);
 
-            AssertSplitYields(expression,
-                E((ADelegate a) => a()),
-                E((IB b) => b.C));
+            AssertSplitYields(expression, E((ADelegate a) => a()), E((IB b) => b.C));
         }
 
         [Fact]
@@ -162,10 +143,12 @@ namespace Moq.Tests
             // a => a.DelegateB().C
             var expression = E((IA a) => a.DelegateB().C);
 
-            AssertSplitYields(expression,
+            AssertSplitYields(
+                expression,
                 E((IA a) => a.DelegateB),
                 E((ADelegate a) => a()),
-                E((IB b) => b.C));
+                E((IB b) => b.C)
+            );
         }
 
         [Fact]
@@ -174,8 +157,7 @@ namespace Moq.Tests
             // a => a[...]
             var expression = E((IA a) => a[1]);
 
-            AssertSplitYields(expression,
-                E((IA a) => a[1]));
+            AssertSplitYields(expression, E((IA a) => a[1]));
         }
 
         [Fact]
@@ -184,9 +166,7 @@ namespace Moq.Tests
             // a => a[...][...]
             var expression = E((IA a) => a[1][false, true]);
 
-            AssertSplitYields(expression,
-                E((IA a) => a[1]),
-                E((IB b) => b[false, true]));
+            AssertSplitYields(expression, E((IA a) => a[1]), E((IB b) => b[false, true]));
         }
 
         [Fact]
@@ -195,9 +175,7 @@ namespace Moq.Tests
             // a => a.B[...]
             var expression = E((IA a) => a.B[true, false]);
 
-            AssertSplitYields(expression,
-                E((IA a) => a.B),
-                E((IB b) => b[true, false]));
+            AssertSplitYields(expression, E((IA a) => a.B), E((IB b) => b[true, false]));
         }
 
         [Fact]
@@ -206,9 +184,7 @@ namespace Moq.Tests
             // a => a[...].C
             var expression = E((IA a) => a[1].C);
 
-            AssertSplitYields(expression,
-                E((IA a) => a[1]),
-                E((IB b) => b.C));
+            AssertSplitYields(expression, E((IA a) => a[1]), E((IB b) => b.C));
         }
 
         [Fact]
@@ -217,9 +193,7 @@ namespace Moq.Tests
             // a => a.GetB()[...]
             var expression = E((IA a) => a.GetB()[false, false]);
 
-            AssertSplitYields(expression,
-                E((IA a) => a.GetB()),
-                E((IB b) => b[false, false]));
+            AssertSplitYields(expression, E((IA a) => a.GetB()), E((IB b) => b[false, false]));
         }
 
         [Fact]
@@ -228,9 +202,7 @@ namespace Moq.Tests
             // a => a[...].GetC()
             var expression = E((IA a) => a[1].GetC());
 
-            AssertSplitYields(expression,
-                E((IA a) => a[1]),
-                E((IB b) => b.GetC()));
+            AssertSplitYields(expression, E((IA a) => a[1]), E((IB b) => b.GetC()));
         }
 
         [Fact]
@@ -239,8 +211,7 @@ namespace Moq.Tests
             // a => a[...] = ...
             var expression = A((IA a) => a[1], D<IB>());
 
-            AssertSplitYields(expression,
-                A((IA a) => a[1], D<IB>()));
+            AssertSplitYields(expression, A((IA a) => a[1], D<IB>()));
         }
 
         [Fact]
@@ -249,9 +220,7 @@ namespace Moq.Tests
             // a => a.B[...] = ...
             var expression = A((IA a) => a.B[true, true], D<IC>());
 
-            AssertSplitYields(expression,
-                E((IA a) => a.B),
-                A((IB b) => b[true, true], D<IC>()));
+            AssertSplitYields(expression, E((IA a) => a.B), A((IB b) => b[true, true], D<IC>()));
         }
 
         [Fact]
@@ -260,9 +229,7 @@ namespace Moq.Tests
             // a => a[...].C = ...
             var expression = A((IA a) => a[1].C, D<IC>());
 
-            AssertSplitYields(expression,
-                E((IA a) => a[1]),
-                A((IB b) => b.C, D<IC>()));
+            AssertSplitYields(expression, E((IA a) => a[1]), A((IB b) => b.C, D<IC>()));
         }
 
         [Fact]
@@ -278,9 +245,12 @@ namespace Moq.Tests
         {
             var expression = E((U u) => u.V.SealedW);
 
-            AssertSplitYields(expression, allowNonOverridableLastProperty: true,
+            AssertSplitYields(
+                expression,
+                allowNonOverridableLastProperty: true,
                 E((U u) => u.V),
-                E((V v) => v.SealedW));
+                E((V v) => v.SealedW)
+            );
         }
 
         [Fact]
@@ -291,37 +261,63 @@ namespace Moq.Tests
             AssertSplitFails(expression, allowNonOverridableLastProperty: true);
         }
 
-        private void AssertSplitFails(LambdaExpression expression, params LambdaExpression[] expected)
+        private void AssertSplitFails(
+            LambdaExpression expression,
+            params LambdaExpression[] expected
+        )
         {
             Assert.Throws<ArgumentException>(() => expression.Split());
         }
 
-        private void AssertSplitFails(LambdaExpression expression, bool allowNonOverridableLastProperty)
+        private void AssertSplitFails(
+            LambdaExpression expression,
+            bool allowNonOverridableLastProperty
+        )
         {
             Assert.ThrowsAny<Exception>(() => expression.Split(allowNonOverridableLastProperty));
         }
 
-        private void AssertSplitYields(LambdaExpression expression, params LambdaExpression[] expected)
+        private void AssertSplitYields(
+            LambdaExpression expression,
+            params LambdaExpression[] expected
+        )
         {
-            Assert.Equal(expected, expression.Split().Select(e => e.Expression), ExpressionComparer.Default);
+            Assert.Equal(
+                expected,
+                expression.Split().Select(e => e.Expression),
+                ExpressionComparer.Default
+            );
         }
 
-        private void AssertSplitYields(LambdaExpression expression, bool allowNonOverridableLastProperty, params LambdaExpression[] expected)
+        private void AssertSplitYields(
+            LambdaExpression expression,
+            bool allowNonOverridableLastProperty,
+            params LambdaExpression[] expected
+        )
         {
-            Assert.Equal(expected, expression.Split(allowNonOverridableLastProperty).Select(e => e.Expression), ExpressionComparer.Default);
+            Assert.Equal(
+                expected,
+                expression.Split(allowNonOverridableLastProperty).Select(e => e.Expression),
+                ExpressionComparer.Default
+            );
         }
 
         /// <summary>
         ///   Helper method producing an assignment <see cref="BinaryExpression"/>.
         ///   Useful because C# does not allow assignments in literal expressions.
         /// </summary>
-        private static LambdaExpression A<T, TResult>(Expression<Func<T, TResult>> left, Expression right)
+        private static LambdaExpression A<T, TResult>(
+            Expression<Func<T, TResult>> left,
+            Expression right
+        )
         {
             return Expression.Lambda(
                 Expression.Assign(
                     IndexerReplacer.Instance.Visit(left.Body),
-                    IndexerReplacer.Instance.Visit(right)),
-                left.Parameters);
+                    IndexerReplacer.Instance.Visit(right)
+                ),
+                left.Parameters
+            );
         }
 
         /// <summary>
@@ -358,14 +354,16 @@ namespace Moq.Tests
                     return Expression.MakeIndex(
                         this.Visit(node.Object),
                         indexer,
-                        node.Arguments.Select(a => this.Visit(a)));
+                        node.Arguments.Select(a => this.Visit(a))
+                    );
                 }
                 else
                 {
                     return Expression.Call(
                         this.Visit(node.Object),
                         node.Method,
-                        node.Arguments.Select(a => this.Visit(a)));
+                        node.Arguments.Select(a => this.Visit(a))
+                    );
                 }
             }
         }
@@ -387,26 +385,28 @@ namespace Moq.Tests
             IC this[bool arg1, bool arg2] { get; set; }
         }
 
-        public interface IC
-        {
-        }
+        public interface IC { }
 
         public delegate IB ADelegate();
 
         public abstract class U
         {
             public abstract V V { get; }
-            public V SealedV { get => throw new NotImplementedException(); }
+            public V SealedV
+            {
+                get => throw new NotImplementedException();
+            }
         }
 
         public abstract class V
         {
             public abstract W W { get; }
-            public W SealedW { get => throw new NotImplementedException(); }
+            public W SealedW
+            {
+                get => throw new NotImplementedException();
+            }
         }
 
-        public abstract class W
-        {
-        }
+        public abstract class W { }
     }
 }

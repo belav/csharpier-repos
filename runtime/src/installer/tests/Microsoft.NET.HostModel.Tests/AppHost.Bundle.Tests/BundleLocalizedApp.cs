@@ -11,7 +11,9 @@ using Xunit;
 
 namespace AppHost.Bundle.Tests
 {
-    public class BundleLocalizedApp : BundleTestBase, IClassFixture<BundleLocalizedApp.SharedTestState>
+    public class BundleLocalizedApp
+        : BundleTestBase,
+            IClassFixture<BundleLocalizedApp.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
@@ -32,14 +34,16 @@ namespace AppHost.Bundle.Tests
                 Command.Create("chcp 65001").Execute();
             }
 
-            Command.Create(singleFile)
+            Command
+                .Create(singleFile)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("\u0CA8\u0CAE\u0CB8\u0CCD\u0C95\u0CBE\u0CB0! \u0BB5\u0BA3\u0B95\u0BCD\u0B95\u0BAE\u0BCD! Hello!");
+                .And.HaveStdOutContaining(
+                    "\u0CA8\u0CAE\u0CB8\u0CCD\u0C95\u0CBE\u0CB0! \u0BB5\u0BA3\u0B95\u0BCD\u0B95\u0BAE\u0BCD! Hello!"
+                );
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

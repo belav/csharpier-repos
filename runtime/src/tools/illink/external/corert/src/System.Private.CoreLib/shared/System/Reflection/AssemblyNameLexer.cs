@@ -23,7 +23,7 @@ namespace System.Reflection
         }
 
         //
-        // Return the next token in assembly name. If you expect the result to be DisplayNameToken.String, 
+        // Return the next token in assembly name. If you expect the result to be DisplayNameToken.String,
         // use GetNext(out String) instead.
         //
         internal Token GetNext()
@@ -33,7 +33,7 @@ namespace System.Reflection
         }
 
         //
-        // Return the next token in assembly name. If the result is DisplayNameToken.String, 
+        // Return the next token in assembly name. If the result is DisplayNameToken.String,
         // sets "tokenString" to the tokenized string.
         //
         internal Token GetNext(out string tokenString)
@@ -64,20 +64,20 @@ namespace System.Reflection
                 if (c == 0)
                 {
                     _index--;
-                    break;  // Terminate: End of string (desktop compat: if string was quoted, permitted to terminate without end-quote.)
+                    break; // Terminate: End of string (desktop compat: if string was quoted, permitted to terminate without end-quote.)
                 }
 
                 if (quoteChar != 0 && c == quoteChar)
-                    break;  // Terminate: Found closing quote of quoted string.
+                    break; // Terminate: Found closing quote of quoted string.
 
                 if (quoteChar == 0 && (c == ',' || c == '='))
                 {
                     _index--;
-                    break;  // Terminate: Found start of a new ',' or '=' token.
+                    break; // Terminate: Found start of a new ',' or '=' token.
                 }
 
                 if (quoteChar == 0 && (c == '\'' || c == '\"'))
-                    throw new FileLoadException();  // Desktop compat: Unescaped quote illegal unless entire string is quoted.
+                    throw new FileLoadException(); // Desktop compat: Unescaped quote illegal unless entire string is quoted.
 
                 if (c == '\\')
                 {
@@ -93,7 +93,7 @@ namespace System.Reflection
                         }
                     }
                     if (!matched)
-                        throw new FileLoadException();  // Unrecognized escape
+                        throw new FileLoadException(); // Unrecognized escape
                 }
                 else
                 {

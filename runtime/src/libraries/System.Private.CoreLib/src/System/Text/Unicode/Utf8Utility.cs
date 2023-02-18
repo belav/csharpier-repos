@@ -19,7 +19,8 @@ namespace System.Text.Unicode
         /// The UTF-8 representation of <see cref="UnicodeUtility.ReplacementChar"/>.
         /// </summary>
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)
-        private static ReadOnlySpan<byte> ReplacementCharSequence => new byte[] { 0xEF, 0xBF, 0xBD };
+        private static ReadOnlySpan<byte> ReplacementCharSequence =>
+            new byte[] { 0xEF, 0xBF, 0xBD };
 #else
         private static readonly byte[] ReplacementCharSequence = new byte[] { 0xEF, 0xBF, 0xBD };
 #endif
@@ -31,18 +32,25 @@ namespace System.Text.Unicode
         /// comes first) is ASCII.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe int GetIndexOfFirstInvalidUtf8Sequence(ReadOnlySpan<byte> utf8Data, out bool isAscii)
+        public static unsafe int GetIndexOfFirstInvalidUtf8Sequence(
+            ReadOnlySpan<byte> utf8Data,
+            out bool isAscii
+        )
         {
             fixed (byte* pUtf8Data = &MemoryMarshal.GetReference(utf8Data))
             {
-                byte* pFirstInvalidByte = GetPointerToFirstInvalidByte(pUtf8Data, utf8Data.Length, out int utf16CodeUnitCountAdjustment, out _);
+                byte* pFirstInvalidByte = GetPointerToFirstInvalidByte(
+                    pUtf8Data,
+                    utf8Data.Length,
+                    out int utf16CodeUnitCountAdjustment,
+                    out _
+                );
                 int index = (int)(void*)Unsafe.ByteOffset(ref *pUtf8Data, ref *pFirstInvalidByte);
 
                 isAscii = (utf16CodeUnitCountAdjustment == 0); // If UTF-16 char count == UTF-8 byte count, it's ASCII.
                 return (index < utf8Data.Length) ? index : -1;
             }
         }
-
 
         /// <summary>
         /// Returns true iff the UInt32 represents four ASCII UTF-8 characters in machine endianness.
@@ -54,7 +62,8 @@ namespace System.Text.Unicode
         /// Returns true iff the UInt64 represents eighty ASCII UTF-8 characters in machine endianness.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool AllBytesInUInt64AreAscii(ulong value) => (value & ~0x7F7F_7F7F_7F7F_7F7Ful) == 0;
+        internal static bool AllBytesInUInt64AreAscii(ulong value) =>
+            (value & ~0x7F7F_7F7F_7F7F_7F7Ful) == 0;
 
         /// <summary>
         /// Given a UInt32 that represents four ASCII UTF-8 characters, returns the invariant

@@ -16,7 +16,7 @@ namespace Roslyn.Utilities
 
         /// <summary>
         /// Returns 'true' when the same instance could be used more than once.
-        /// Instances that return 'false' should not be tracked for the purpose 
+        /// Instances that return 'false' should not be tracked for the purpose
         /// of de-duplication while serializing/deserializing.
         /// </summary>
         bool ShouldReuseInSerialization { get; }

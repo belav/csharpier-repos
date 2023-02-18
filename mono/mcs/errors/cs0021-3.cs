@@ -3,9 +3,8 @@
 
 public class Foo<G>
 {
-    public static void Bar ()
+    public static void Bar()
     {
-        int i = default (G)[0];
+        int i = default(G)[0];
     }
 }
-

@@ -4,10 +4,11 @@
 
 class Class
 {
-    static void Foo (object arg)
+    static void Foo(object arg)
     {
-        if (arg is Type v) {
+        if (arg is Type v)
+        {
             return;
         }
-    }    
+    }
 }

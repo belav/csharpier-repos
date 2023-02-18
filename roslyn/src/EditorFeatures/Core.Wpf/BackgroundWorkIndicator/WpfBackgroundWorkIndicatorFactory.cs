@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator
 {
     [Export(typeof(WpfBackgroundWorkIndicatorFactory))]
     [ExportWorkspaceService(typeof(IBackgroundWorkIndicatorFactory), ServiceLayer.Editor), Shared]
-    internal sealed partial class WpfBackgroundWorkIndicatorFactory : IBackgroundWorkIndicatorFactory
+    internal sealed partial class WpfBackgroundWorkIndicatorFactory
+        : IBackgroundWorkIndicatorFactory
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IToolTipPresenterFactory _toolTipPresenterFactory;
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator
         public WpfBackgroundWorkIndicatorFactory(
             IThreadingContext threadingContext,
             IToolTipPresenterFactory toolTipPresenterFactory,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _toolTipPresenterFactory = toolTipPresenterFactory;
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator
             SnapshotSpan applicableToSpan,
             string description,
             bool cancelOnEdit,
-            bool cancelOnFocusLost)
+            bool cancelOnFocusLost
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
@@ -52,8 +55,13 @@ namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator
 
             // Create the indicator in its default/empty state.
             _currentContext = new BackgroundWorkIndicatorContext(
-                this, textView, applicableToSpan, description,
-                cancelOnEdit, cancelOnFocusLost);
+                this,
+                textView,
+                applicableToSpan,
+                description,
+                cancelOnEdit,
+                cancelOnFocusLost
+            );
 
             // Then add a single scope representing the how the UI should look initially.
             _currentContext.AddScope(allowCancellation: true, description);

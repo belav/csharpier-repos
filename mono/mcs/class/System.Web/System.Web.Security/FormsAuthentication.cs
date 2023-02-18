@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,12 +44,15 @@ using System.Collections.Specialized;
 namespace System.Web.Security
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class FormsAuthentication
     {
         static string authConfigPath = "system.web/authentication";
         static string machineKeyConfigPath = "system.web/machineKey";
-        static object locker = new object ();
+        static object locker = new object();
         static bool initialized;
         static string cookieName;
         static string cookiePath;
@@ -63,51 +66,54 @@ namespace System.Web.Security
         static string default_url;
         static bool enable_crossapp_redirects;
         static string login_url;
-        // same names and order used in xsp
-        static string [] indexFiles = { "index.aspx",
-                        "Default.aspx",
-                        "default.aspx",
-                        "index.html",
-                        "index.htm" };
-        public static TimeSpan Timeout {
-            get; private set;
-        }
 
-        public static bool IsEnabled { 
+        // same names and order used in xsp
+        static string[] indexFiles =
+        {
+            "index.aspx",
+            "Default.aspx",
+            "default.aspx",
+            "index.html",
+            "index.htm"
+        };
+        public static TimeSpan Timeout { get; private set; }
+
+        public static bool IsEnabled
+        {
             get { return initialized; }
         }
 
-        public static void EnableFormsAuthentication (NameValueCollection configurationData)
+        public static void EnableFormsAuthentication(NameValueCollection configurationData)
         {
-            BuildManager.AssertPreStartMethodsRunning ();
+            BuildManager.AssertPreStartMethodsRunning();
             if (configurationData == null || configurationData.Count == 0)
                 return;
 
-            string value = configurationData ["loginUrl"];
-            if (!String.IsNullOrEmpty (value))
+            string value = configurationData["loginUrl"];
+            if (!String.IsNullOrEmpty(value))
                 login_url = value;
 
-            value = configurationData ["defaultUrl"];
-            if (!String.IsNullOrEmpty (value))
+            value = configurationData["defaultUrl"];
+            if (!String.IsNullOrEmpty(value))
                 default_url = value;
         }
-        public FormsAuthentication ()
-        {
-        }
 
-        public static bool Authenticate (string name, string password)
+        public FormsAuthentication() { }
+
+        public static bool Authenticate(string name, string password)
         {
             if (name == null || password == null)
                 return false;
 
-            Initialize ();
+            Initialize();
             HttpContext context = HttpContext.Current;
             if (context == null)
-                throw new HttpException ("Context is null!");
+                throw new HttpException("Context is null!");
 
-            name = name.ToLower (Helpers.InvariantCulture);
+            name = name.ToLower(Helpers.InvariantCulture);
 
-            AuthenticationSection section = (AuthenticationSection) WebConfigurationManager.GetSection (authConfigPath);
+            AuthenticationSection section = (AuthenticationSection)
+                WebConfigurationManager.GetSection(authConfigPath);
             FormsAuthenticationCredentials config = section.Forms.Credentials;
             FormsAuthenticationUser user = config.Users[name];
             string stored = null;
@@ -119,91 +125,121 @@ namespace System.Web.Security
                 return false;
 
             bool caseInsensitive = true;
-            switch (config.PasswordFormat) {
+            switch (config.PasswordFormat)
+            {
                 case FormsAuthPasswordFormat.Clear:
                     caseInsensitive = false;
                     /* Do nothing */
                     break;
                 case FormsAuthPasswordFormat.MD5:
-                    password = HashPasswordForStoringInConfigFile (password, FormsAuthPasswordFormat.MD5);
+                    password = HashPasswordForStoringInConfigFile(
+                        password,
+                        FormsAuthPasswordFormat.MD5
+                    );
                     break;
                 case FormsAuthPasswordFormat.SHA1:
-                    password = HashPasswordForStoringInConfigFile (password, FormsAuthPasswordFormat.SHA1);
+                    password = HashPasswordForStoringInConfigFile(
+                        password,
+                        FormsAuthPasswordFormat.SHA1
+                    );
                     break;
             }
 
-            return String.Compare (password, stored, caseInsensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal) == 0;
+            return String.Compare(
+                    password,
+                    stored,
+                    caseInsensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+                ) == 0;
         }
 
-        static FormsAuthenticationTicket Decrypt2 (byte [] bytes)
+        static FormsAuthenticationTicket Decrypt2(byte[] bytes)
         {
             if (protection == FormsProtectionEnum.None)
-                return FormsAuthenticationTicket.FromByteArray (bytes);
+                return FormsAuthenticationTicket.FromByteArray(bytes);
 
-            MachineKeySection config = (MachineKeySection) WebConfigurationManager.GetWebApplicationSection (machineKeyConfigPath);
-            byte [] result = null;
-            if (protection == FormsProtectionEnum.All) {
-                result = MachineKeySectionUtils.VerifyDecrypt (config, bytes);
-            } else if (protection == FormsProtectionEnum.Encryption) {
-                result = MachineKeySectionUtils.Decrypt (config, bytes);
-            } else if (protection == FormsProtectionEnum.Validation) {
-                result = MachineKeySectionUtils.Verify (config, bytes);
+            MachineKeySection config = (MachineKeySection)
+                WebConfigurationManager.GetWebApplicationSection(machineKeyConfigPath);
+            byte[] result = null;
+            if (protection == FormsProtectionEnum.All)
+            {
+                result = MachineKeySectionUtils.VerifyDecrypt(config, bytes);
+            }
+            else if (protection == FormsProtectionEnum.Encryption)
+            {
+                result = MachineKeySectionUtils.Decrypt(config, bytes);
+            }
+            else if (protection == FormsProtectionEnum.Validation)
+            {
+                result = MachineKeySectionUtils.Verify(config, bytes);
             }
 
-            return FormsAuthenticationTicket.FromByteArray (result);
+            return FormsAuthenticationTicket.FromByteArray(result);
         }
 
-        public static FormsAuthenticationTicket Decrypt (string encryptedTicket)
+        public static FormsAuthenticationTicket Decrypt(string encryptedTicket)
         {
-            if (String.IsNullOrEmpty (encryptedTicket))
-                throw new ArgumentException ("Invalid encrypted ticket", "encryptedTicket");
+            if (String.IsNullOrEmpty(encryptedTicket))
+                throw new ArgumentException("Invalid encrypted ticket", "encryptedTicket");
 
-            Initialize ();
+            Initialize();
 
             FormsAuthenticationTicket ticket;
-            byte [] bytes = Convert.FromBase64String (encryptedTicket);
+            byte[] bytes = Convert.FromBase64String(encryptedTicket);
 
-            try {
-                ticket = Decrypt2 (bytes);
-            } catch (Exception) {
+            try
+            {
+                ticket = Decrypt2(bytes);
+            }
+            catch (Exception)
+            {
                 ticket = null;
             }
 
             return ticket;
         }
 
-        public static string Encrypt (FormsAuthenticationTicket ticket)
+        public static string Encrypt(FormsAuthenticationTicket ticket)
         {
             if (ticket == null)
-                throw new ArgumentNullException ("ticket");
+                throw new ArgumentNullException("ticket");
 
-            Initialize ();
-            byte [] ticket_bytes = ticket.ToByteArray ();
+            Initialize();
+            byte[] ticket_bytes = ticket.ToByteArray();
             if (protection == FormsProtectionEnum.None)
-                return Convert.ToBase64String (ticket_bytes);
+                return Convert.ToBase64String(ticket_bytes);
 
-            byte [] result = null;
-            MachineKeySection config = (MachineKeySection) WebConfigurationManager.GetWebApplicationSection (machineKeyConfigPath);
+            byte[] result = null;
+            MachineKeySection config = (MachineKeySection)
+                WebConfigurationManager.GetWebApplicationSection(machineKeyConfigPath);
 
-            if (protection == FormsProtectionEnum.All) {
-                result = MachineKeySectionUtils.EncryptSign (config, ticket_bytes);
-            } else if (protection == FormsProtectionEnum.Encryption) {
-                result = MachineKeySectionUtils.Encrypt (config, ticket_bytes);
-            } else if (protection == FormsProtectionEnum.Validation) {
-                result = MachineKeySectionUtils.Sign (config, ticket_bytes);
+            if (protection == FormsProtectionEnum.All)
+            {
+                result = MachineKeySectionUtils.EncryptSign(config, ticket_bytes);
+            }
+            else if (protection == FormsProtectionEnum.Encryption)
+            {
+                result = MachineKeySectionUtils.Encrypt(config, ticket_bytes);
+            }
+            else if (protection == FormsProtectionEnum.Validation)
+            {
+                result = MachineKeySectionUtils.Sign(config, ticket_bytes);
             }
 
-            return Convert.ToBase64String (result);
+            return Convert.ToBase64String(result);
         }
 
-        public static HttpCookie GetAuthCookie (string userName, bool createPersistentCookie)
+        public static HttpCookie GetAuthCookie(string userName, bool createPersistentCookie)
         {
-            return GetAuthCookie (userName, createPersistentCookie, null);
+            return GetAuthCookie(userName, createPersistentCookie, null);
         }
 
-        public static HttpCookie GetAuthCookie (string userName, bool createPersistentCookie, string strCookiePath)
+        public static HttpCookie GetAuthCookie(
+            string userName,
+            bool createPersistentCookie,
+            string strCookiePath
+        )
         {
-            Initialize ();
+            Initialize();
 
             if (userName == null)
                 userName = String.Empty;
@@ -213,35 +249,43 @@ namespace System.Web.Security
 
             DateTime now = DateTime.Now;
             DateTime ticketExpiry = now.AddMinutes(timeout);
-                    DateTime cookieExpiry = createPersistentCookie ? ticketExpiry : DateTime.MinValue;
+            DateTime cookieExpiry = createPersistentCookie ? ticketExpiry : DateTime.MinValue;
 
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket (1,
-                                              userName,
-                                              now,
-                                              ticketExpiry,
-                                              createPersistentCookie,
-                                              String.Empty,
-                                              cookiePath);
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                1,
+                userName,
+                now,
+                ticketExpiry,
+                createPersistentCookie,
+                String.Empty,
+                cookiePath
+            );
 
-            HttpCookie cookie = new HttpCookie (cookieName, Encrypt (ticket), strCookiePath, cookieExpiry);
+            HttpCookie cookie = new HttpCookie(
+                cookieName,
+                Encrypt(ticket),
+                strCookiePath,
+                cookieExpiry
+            );
             if (requireSSL)
                 cookie.Secure = true;
-            if (!String.IsNullOrEmpty (cookie_domain))
+            if (!String.IsNullOrEmpty(cookie_domain))
                 cookie.Domain = cookie_domain;
 
             return cookie;
         }
 
-        internal static string ReturnUrl {
-            get { return HttpContext.Current.Request ["RETURNURL"]; }
+        internal static string ReturnUrl
+        {
+            get { return HttpContext.Current.Request["RETURNURL"]; }
         }
 
-        public static string GetRedirectUrl (string userName, bool createPersistentCookie)
+        public static string GetRedirectUrl(string userName, bool createPersistentCookie)
         {
             if (userName == null)
                 return null;
 
-            Initialize ();
+            Initialize();
             HttpRequest request = HttpContext.Current.Request;
             string returnUrl = ReturnUrl;
             if (returnUrl != null)
@@ -251,70 +295,94 @@ namespace System.Web.Security
             string apppath = request.PhysicalApplicationPath;
             bool found = false;
 
-            foreach (string indexFile in indexFiles) {
-                string filePath = Path.Combine (apppath, indexFile);
-                if (File.Exists (filePath)) {
-                    returnUrl = UrlUtils.Combine (returnUrl, indexFile);
+            foreach (string indexFile in indexFiles)
+            {
+                string filePath = Path.Combine(apppath, indexFile);
+                if (File.Exists(filePath))
+                {
+                    returnUrl = UrlUtils.Combine(returnUrl, indexFile);
                     found = true;
                     break;
                 }
             }
 
             if (!found)
-                returnUrl = UrlUtils.Combine (returnUrl, "index.aspx");
+                returnUrl = UrlUtils.Combine(returnUrl, "index.aspx");
 
             return returnUrl;
         }
 
-        static string HashPasswordForStoringInConfigFile (string password, FormsAuthPasswordFormat passwordFormat)
+        static string HashPasswordForStoringInConfigFile(
+            string password,
+            FormsAuthPasswordFormat passwordFormat
+        )
         {
             if (password == null)
-                throw new ArgumentNullException ("password");
-            
-            byte [] bytes;
-            switch (passwordFormat) {
+                throw new ArgumentNullException("password");
+
+            byte[] bytes;
+            switch (passwordFormat)
+            {
                 case FormsAuthPasswordFormat.MD5:
-                    bytes = MD5.Create ().ComputeHash (Encoding.UTF8.GetBytes (password));
+                    bytes = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(password));
                     break;
 
                 case FormsAuthPasswordFormat.SHA1:
-                    bytes = SHA1.Create ().ComputeHash (Encoding.UTF8.GetBytes (password));
+                    bytes = SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(password));
                     break;
 
                 default:
-                    throw new ArgumentException ("The format must be either MD5 or SHA1", "passwordFormat");
+                    throw new ArgumentException(
+                        "The format must be either MD5 or SHA1",
+                        "passwordFormat"
+                    );
             }
 
-            return MachineKeySectionUtils.GetHexString (bytes);
+            return MachineKeySectionUtils.GetHexString(bytes);
         }
-        
-        public static string HashPasswordForStoringInConfigFile (string password, string passwordFormat)
+
+        public static string HashPasswordForStoringInConfigFile(
+            string password,
+            string passwordFormat
+        )
         {
             if (password == null)
-                throw new ArgumentNullException ("password");
+                throw new ArgumentNullException("password");
 
             if (passwordFormat == null)
-                throw new ArgumentNullException ("passwordFormat");
+                throw new ArgumentNullException("passwordFormat");
 
-            if (String.Compare (passwordFormat, "MD5", StringComparison.OrdinalIgnoreCase) == 0) {
-                return HashPasswordForStoringInConfigFile (password, FormsAuthPasswordFormat.MD5);
-            } else if (String.Compare (passwordFormat, "SHA1", StringComparison.OrdinalIgnoreCase) == 0) {
-                return HashPasswordForStoringInConfigFile (password, FormsAuthPasswordFormat.SHA1);
-            } else {
-                throw new ArgumentException ("The format must be either MD5 or SHA1", "passwordFormat");
+            if (String.Compare(passwordFormat, "MD5", StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                return HashPasswordForStoringInConfigFile(password, FormsAuthPasswordFormat.MD5);
+            }
+            else if (
+                String.Compare(passwordFormat, "SHA1", StringComparison.OrdinalIgnoreCase) == 0
+            )
+            {
+                return HashPasswordForStoringInConfigFile(password, FormsAuthPasswordFormat.SHA1);
+            }
+            else
+            {
+                throw new ArgumentException(
+                    "The format must be either MD5 or SHA1",
+                    "passwordFormat"
+                );
             }
         }
 
-        public static void Initialize ()
+        public static void Initialize()
         {
             if (initialized)
                 return;
 
-            lock (locker) {
+            lock (locker)
+            {
                 if (initialized)
                     return;
 
-                AuthenticationSection section = (AuthenticationSection)WebConfigurationManager.GetSection (authConfigPath);
+                AuthenticationSection section = (AuthenticationSection)
+                    WebConfigurationManager.GetSection(authConfigPath);
                 FormsAuthenticationConfiguration config = section.Forms;
 
                 cookieName = config.Name;
@@ -327,13 +395,13 @@ namespace System.Web.Security
                 cookie_domain = config.Domain;
                 cookie_mode = config.Cookieless;
                 cookies_supported = true; /* XXX ? */
-                if (!String.IsNullOrEmpty (default_url))
-                    default_url = MapUrl (default_url);
+                if (!String.IsNullOrEmpty(default_url))
+                    default_url = MapUrl(default_url);
                 else
                     default_url = MapUrl(config.DefaultUrl);
                 enable_crossapp_redirects = config.EnableCrossAppRedirects;
-                if (!String.IsNullOrEmpty (login_url))
-                    login_url = MapUrl (login_url);
+                if (!String.IsNullOrEmpty(login_url))
+                    login_url = MapUrl(login_url);
                 else
                     login_url = MapUrl(config.LoginUrl);
 
@@ -341,29 +409,34 @@ namespace System.Web.Security
             }
         }
 
-        static string MapUrl (string url) {
-            if (UrlUtils.IsRelativeUrl (url))
-                return UrlUtils.Combine (HttpRuntime.AppDomainAppVirtualPath, url);
-            else
-                return UrlUtils.ResolveVirtualPathFromAppAbsolute (url);
-        }
-
-        public static void RedirectFromLoginPage (string userName, bool createPersistentCookie)
+        static string MapUrl(string url)
         {
-            RedirectFromLoginPage (userName, createPersistentCookie, null);
+            if (UrlUtils.IsRelativeUrl(url))
+                return UrlUtils.Combine(HttpRuntime.AppDomainAppVirtualPath, url);
+            else
+                return UrlUtils.ResolveVirtualPathFromAppAbsolute(url);
         }
 
-        public static void RedirectFromLoginPage (string userName, bool createPersistentCookie, string strCookiePath)
+        public static void RedirectFromLoginPage(string userName, bool createPersistentCookie)
+        {
+            RedirectFromLoginPage(userName, createPersistentCookie, null);
+        }
+
+        public static void RedirectFromLoginPage(
+            string userName,
+            bool createPersistentCookie,
+            string strCookiePath
+        )
         {
             if (userName == null)
                 return;
 
-            Initialize ();
-            SetAuthCookie (userName, createPersistentCookie, strCookiePath);
-            Redirect (GetRedirectUrl (userName, createPersistentCookie), false);
+            Initialize();
+            SetAuthCookie(userName, createPersistentCookie, strCookiePath);
+            Redirect(GetRedirectUrl(userName, createPersistentCookie), false);
         }
 
-        public static FormsAuthenticationTicket RenewTicketIfOld (FormsAuthenticationTicket tOld)
+        public static FormsAuthenticationTicket RenewTicketIfOld(FormsAuthenticationTicket tOld)
         {
             if (tOld == null)
                 return null;
@@ -374,127 +447,167 @@ namespace System.Web.Security
             if (toExpiration > toIssue)
                 return tOld;
 
-            FormsAuthenticationTicket tNew = tOld.Clone ();
-            tNew.SetDates (now, now + (tOld.Expiration - tOld.IssueDate));
+            FormsAuthenticationTicket tNew = tOld.Clone();
+            tNew.SetDates(now, now + (tOld.Expiration - tOld.IssueDate));
             return tNew;
         }
 
-        public static void SetAuthCookie (string userName, bool createPersistentCookie)
+        public static void SetAuthCookie(string userName, bool createPersistentCookie)
         {
-            Initialize ();
-            SetAuthCookie (userName, createPersistentCookie, cookiePath);
+            Initialize();
+            SetAuthCookie(userName, createPersistentCookie, cookiePath);
         }
 
-        public static void SetAuthCookie (string userName, bool createPersistentCookie, string strCookiePath)
+        public static void SetAuthCookie(
+            string userName,
+            bool createPersistentCookie,
+            string strCookiePath
+        )
         {
             HttpContext context = HttpContext.Current;
             if (context == null)
-                throw new HttpException ("Context is null!");
+                throw new HttpException("Context is null!");
 
             HttpResponse response = context.Response;
             if (response == null)
-                throw new HttpException ("Response is null!");
+                throw new HttpException("Response is null!");
 
-            response.Cookies.Add (GetAuthCookie (userName, createPersistentCookie, strCookiePath));
+            response.Cookies.Add(GetAuthCookie(userName, createPersistentCookie, strCookiePath));
         }
 
-        public static void SignOut ()
+        public static void SignOut()
         {
-            Initialize ();
+            Initialize();
 
             HttpContext context = HttpContext.Current;
             if (context == null)
-                throw new HttpException ("Context is null!");
+                throw new HttpException("Context is null!");
 
             HttpResponse response = context.Response;
             if (response == null)
-                throw new HttpException ("Response is null!");
+                throw new HttpException("Response is null!");
 
             HttpCookieCollection cc = response.Cookies;
-            cc.Remove (cookieName);
-            HttpCookie expiration_cookie = new HttpCookie (cookieName, String.Empty);
-            expiration_cookie.Expires = new DateTime (1999, 10, 12);
+            cc.Remove(cookieName);
+            HttpCookie expiration_cookie = new HttpCookie(cookieName, String.Empty);
+            expiration_cookie.Expires = new DateTime(1999, 10, 12);
             expiration_cookie.Path = cookiePath;
-            if (!String.IsNullOrEmpty (cookie_domain))
+            if (!String.IsNullOrEmpty(cookie_domain))
                 expiration_cookie.Domain = cookie_domain;
-            cc.Add (expiration_cookie);
-            Roles.DeleteCookie ();
+            cc.Add(expiration_cookie);
+            Roles.DeleteCookie();
         }
 
         public static string FormsCookieName
         {
-            get {
-                Initialize ();
+            get
+            {
+                Initialize();
                 return cookieName;
             }
         }
 
         public static string FormsCookiePath
         {
-            get {
-                Initialize ();
+            get
+            {
+                Initialize();
                 return cookiePath;
             }
         }
 
-        public static bool RequireSSL {
-            get {
-                Initialize ();
+        public static bool RequireSSL
+        {
+            get
+            {
+                Initialize();
                 return requireSSL;
             }
         }
 
-        public static bool SlidingExpiration {
-            get {
-                Initialize ();
+        public static bool SlidingExpiration
+        {
+            get
+            {
+                Initialize();
                 return slidingExpiration;
             }
         }
 
-        public static string CookieDomain {
-            get { Initialize (); return cookie_domain; }
-        }
-
-        public static HttpCookieMode CookieMode {
-            get { Initialize (); return cookie_mode; }
-        }
-
-        public static bool CookiesSupported {
-            get { Initialize (); return cookies_supported; }
-        }
-
-        public static string DefaultUrl {
-            get { Initialize (); return default_url; }
-        }
-
-        public static bool EnableCrossAppRedirects {
-            get { Initialize (); return enable_crossapp_redirects; }
-        }
-
-        public static string LoginUrl {
-            get { Initialize (); return login_url; }
-        }
-
-        public static void RedirectToLoginPage ()
+        public static string CookieDomain
         {
-            Redirect (LoginUrl);
+            get
+            {
+                Initialize();
+                return cookie_domain;
+            }
         }
 
-        [MonoTODO ("needs more tests")]
-        public static void RedirectToLoginPage (string extraQueryString)
+        public static HttpCookieMode CookieMode
+        {
+            get
+            {
+                Initialize();
+                return cookie_mode;
+            }
+        }
+
+        public static bool CookiesSupported
+        {
+            get
+            {
+                Initialize();
+                return cookies_supported;
+            }
+        }
+
+        public static string DefaultUrl
+        {
+            get
+            {
+                Initialize();
+                return default_url;
+            }
+        }
+
+        public static bool EnableCrossAppRedirects
+        {
+            get
+            {
+                Initialize();
+                return enable_crossapp_redirects;
+            }
+        }
+
+        public static string LoginUrl
+        {
+            get
+            {
+                Initialize();
+                return login_url;
+            }
+        }
+
+        public static void RedirectToLoginPage()
+        {
+            Redirect(LoginUrl);
+        }
+
+        [MonoTODO("needs more tests")]
+        public static void RedirectToLoginPage(string extraQueryString)
         {
             // TODO: if ? is in LoginUrl (legal?), ? in query (legal?) ...
-            Redirect (LoginUrl + "?" + extraQueryString);
+            Redirect(LoginUrl + "?" + extraQueryString);
         }
 
-        static void Redirect (string url)
+        static void Redirect(string url)
         {
-            HttpContext.Current.Response.Redirect (url);
+            HttpContext.Current.Response.Redirect(url);
         }
 
-        static void Redirect (string url, bool end)
+        static void Redirect(string url, bool end)
         {
-            HttpContext.Current.Response.Redirect (url, end);
+            HttpContext.Current.Response.Redirect(url, end);
         }
     }
 }

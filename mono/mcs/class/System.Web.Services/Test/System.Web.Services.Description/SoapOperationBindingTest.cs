@@ -28,11 +28,11 @@ namespace MonoTests.System.Web.Services.Description
         [Test]
         public void TestDefaultProperties()
         {
-            Assert.AreEqual (String.Empty, sob.SoapAction);
-            Assert.AreEqual (SoapBindingStyle.Default, sob.Style);
-            Assert.AreEqual (false, sob.Required);
-            Assert.IsNull (sob.Parent);
-            Assert.AreEqual (false, sob.Handled);
+            Assert.AreEqual(String.Empty, sob.SoapAction);
+            Assert.AreEqual(SoapBindingStyle.Default, sob.Style);
+            Assert.AreEqual(false, sob.Required);
+            Assert.IsNull(sob.Parent);
+            Assert.AreEqual(false, sob.Handled);
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,10 +38,13 @@ namespace Mono.Globalization.Unicode
     internal class NormalizationCodeGenerator
     {
         private int lineCount = 0;
-        int singleCount = 1, multiCount = 1, propValueCount = 1;
-//        int [] singleNorm = new int [550];
-//        int [] multiNorm = new int [280];
-        int [] prop = new int [char.MaxValue + 1];
+        int singleCount = 1,
+            multiCount = 1,
+            propValueCount = 1;
+
+        //        int [] singleNorm = new int [550];
+        //        int [] multiNorm = new int [280];
+        int[] prop = new int[char.MaxValue + 1];
 
         public const int NoNfd = 1;
         public const int NoNfkd = 2;
@@ -51,158 +54,173 @@ namespace Mono.Globalization.Unicode
         public const int MaybeNfkc = 32;
         public const int FullCompositionExclusion = 64;
         public const int IsUnsafe = 128;
-//        public const int ExpandOnNfd = 256;
-//        public const int ExpandOnNfc = 512;
-//        public const int ExpandOnNfkd = 1024;
-//        public const int ExpandOnNfkc = 2048;
+
+        //        public const int ExpandOnNfd = 256;
+        //        public const int ExpandOnNfc = 512;
+        //        public const int ExpandOnNfkd = 1024;
+        //        public const int ExpandOnNfkc = 2048;
 
         CharMappingComparer comparer;
 
         int mappedCharCount = 1;
-        int [] mappedChars = new int [100];
-        int [] mapIndex = new int [char.MaxValue + 1];
+        int[] mappedChars = new int[100];
+        int[] mapIndex = new int[char.MaxValue + 1];
 
-        ArrayList mappings = new ArrayList ();
+        ArrayList mappings = new ArrayList();
 
-        byte [] combining = new byte [0x20000];
+        byte[] combining = new byte[0x20000];
 
-
-        public static void Main ()
+        public static void Main()
         {
-            new NormalizationCodeGenerator ().Run ();
+            new NormalizationCodeGenerator().Run();
         }
 
-        private void Run ()
+        private void Run()
         {
-            comparer = new CharMappingComparer (this);
-            try {
-                Parse ();
-            } catch (Exception ex) {
-                throw new InvalidOperationException ("Internal error at line " + lineCount + " : " + ex);
+            comparer = new CharMappingComparer(this);
+            try
+            {
+                Parse();
             }
-            RebaseUCD ();
-            Serialize ();
-            ProcessCombiningClass ();
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(
+                    "Internal error at line " + lineCount + " : " + ex
+                );
+            }
+            RebaseUCD();
+            Serialize();
+            ProcessCombiningClass();
         }
 
         TextWriter CSOut = Console.Out;
         TextWriter COut = TextWriter.Null;
 
-        private void Serialize ()
+        private void Serialize()
         {
-            SerializeNormalizationProps ();
-            SerializeUCD ();
+            SerializeNormalizationProps();
+            SerializeUCD();
         }
 
-        private void SerializeUCD ()
+        private void SerializeUCD()
         {
-            COut = new StreamWriter ("normalization-tables.h", true);
+            COut = new StreamWriter("normalization-tables.h", true);
 
             // mappedChars
-            COut.WriteLine ("static const guint32 mappedChars [] = {");
-            CSOut.WriteLine ("static readonly int [] mappedCharsArr = new int [] {");
-            DumpMapArray (mappedChars, mappedCharCount, false);
-            COut.WriteLine ("0};");
-            CSOut.WriteLine ("};");
+            COut.WriteLine("static const guint32 mappedChars [] = {");
+            CSOut.WriteLine("static readonly int [] mappedCharsArr = new int [] {");
+            DumpMapArray(mappedChars, mappedCharCount, false);
+            COut.WriteLine("0};");
+            CSOut.WriteLine("};");
 
             // charMapIndex
-            COut.WriteLine ("static const guint16 charMapIndex [] = {");
-            CSOut.WriteLine ("static readonly short [] charMapIndexArr = new short [] {");
-            DumpMapArray (mapIndex, NUtil.MapCount, true);
-            COut.WriteLine ("0};");
-            CSOut.WriteLine ("};");
+            COut.WriteLine("static const guint16 charMapIndex [] = {");
+            CSOut.WriteLine("static readonly short [] charMapIndexArr = new short [] {");
+            DumpMapArray(mapIndex, NUtil.MapCount, true);
+            COut.WriteLine("0};");
+            CSOut.WriteLine("};");
 
-            short [] helperIndexes = new short [0x30000];
+            short[] helperIndexes = new short[0x30000];
 
             // GetPrimaryCompositeHelperIndex ()
             int currentHead = 0;
-            foreach (CharMapping m in mappings) {
-                if (mappedChars [m.MapIndex] == currentHead)
+            foreach (CharMapping m in mappings)
+            {
+                if (mappedChars[m.MapIndex] == currentHead)
                     continue; // has the same head
                 if (!m.IsCanonical)
                     continue;
-                currentHead = mappedChars [m.MapIndex];
-                helperIndexes [currentHead] = (short) m.MapIndex;
+                currentHead = mappedChars[m.MapIndex];
+                helperIndexes[currentHead] = (short)m.MapIndex;
             }
 
-            helperIndexes = CodePointIndexer.CompressArray (
-                helperIndexes, typeof (short), NUtil.Helper)
-                as short [];
+            helperIndexes =
+                CodePointIndexer.CompressArray(helperIndexes, typeof(short), NUtil.Helper)
+                as short[];
 
-            COut.WriteLine ("static const guint16 helperIndex [] = {");
-            CSOut.WriteLine ("static short [] helperIndexArr = new short [] {");
-            for (int i = 0; i < helperIndexes.Length; i++) {
-                short value = helperIndexes [i];
+            COut.WriteLine("static const guint16 helperIndex [] = {");
+            CSOut.WriteLine("static short [] helperIndexArr = new short [] {");
+            for (int i = 0; i < helperIndexes.Length; i++)
+            {
+                short value = helperIndexes[i];
                 if (value < 10)
-                    CSOut.Write ("{0},", value);
+                    CSOut.Write("{0},", value);
                 else
-                    CSOut.Write ("0x{0:X04},", value);
-                COut.Write ("{0},", value);
-                if (i % 16 == 15) {
-                    CSOut.WriteLine (" // {0:X04}", NUtil.Helper.ToCodePoint (i - 15));
-                    COut.WriteLine ();
+                    CSOut.Write("0x{0:X04},", value);
+                COut.Write("{0},", value);
+                if (i % 16 == 15)
+                {
+                    CSOut.WriteLine(" // {0:X04}", NUtil.Helper.ToCodePoint(i - 15));
+                    COut.WriteLine();
                 }
             }
-            COut.WriteLine ("0};");
-            CSOut.WriteLine ("};");
+            COut.WriteLine("0};");
+            CSOut.WriteLine("};");
 
-            ushort [] mapIndexes = new ushort [char.MaxValue + 1];
+            ushort[] mapIndexes = new ushort[char.MaxValue + 1];
 
             // GetPrimaryCompositeFromMapIndex ()
             int currentIndex = -1;
-            foreach (CharMapping m in mappings) {
+            foreach (CharMapping m in mappings)
+            {
                 if (m.MapIndex == currentIndex)
                     continue;
                 if (!m.IsCanonical)
                     continue;
-                mapIndexes [m.MapIndex] = (ushort) m.CodePoint;
+                mapIndexes[m.MapIndex] = (ushort)m.CodePoint;
                 currentIndex = m.MapIndex;
             }
 
-            mapIndexes = CodePointIndexer.CompressArray (mapIndexes, typeof (ushort), NUtil.Composite) as ushort [];
+            mapIndexes =
+                CodePointIndexer.CompressArray(mapIndexes, typeof(ushort), NUtil.Composite)
+                as ushort[];
 
-            COut.WriteLine ("static const guint16 mapIdxToComposite [] = {");
-            CSOut.WriteLine ("static ushort [] mapIdxToCompositeArr = new ushort [] {");
-            for (int i = 0; i < mapIndexes.Length; i++) {
-                ushort value = (ushort) mapIndexes [i];
+            COut.WriteLine("static const guint16 mapIdxToComposite [] = {");
+            CSOut.WriteLine("static ushort [] mapIdxToCompositeArr = new ushort [] {");
+            for (int i = 0; i < mapIndexes.Length; i++)
+            {
+                ushort value = (ushort)mapIndexes[i];
                 if (value < 10)
-                    CSOut.Write ("{0},", value);
+                    CSOut.Write("{0},", value);
                 else
-                    CSOut.Write ("0x{0:X04},", value);
-                COut.Write ("{0},", value);
-                if (i % 16 == 15) {
-                    CSOut.WriteLine (" // {0:X04}", NUtil.Composite.ToCodePoint (i - 15));
-                    COut.WriteLine ();
+                    CSOut.Write("0x{0:X04},", value);
+                COut.Write("{0},", value);
+                if (i % 16 == 15)
+                {
+                    CSOut.WriteLine(" // {0:X04}", NUtil.Composite.ToCodePoint(i - 15));
+                    COut.WriteLine();
                 }
             }
-            COut.WriteLine ("0};");
-            CSOut.WriteLine ("};");
+            COut.WriteLine("0};");
+            CSOut.WriteLine("};");
 
-            COut.Close ();
+            COut.Close();
         }
 
-        private void DumpMapArray (int [] array, int count, bool getCP)
+        private void DumpMapArray(int[] array, int count, bool getCP)
         {
             if (array.Length < count)
-                throw new ArgumentOutOfRangeException ("count");
-            for (int i = 0; i < count; i++) {
-                int value = array [i];
+                throw new ArgumentOutOfRangeException("count");
+            for (int i = 0; i < count; i++)
+            {
+                int value = array[i];
                 if (value < 10)
-                    CSOut.Write ("{0}, ", value);
+                    CSOut.Write("{0}, ", value);
                 else
-                    CSOut.Write ("0x{0:X}, ", value);
-                COut.Write ("{0},", value);
-                if (i % 16 == 15) {
-                    int l = getCP ? NUtil.MapCP (i) : i;
-                    CSOut.WriteLine ("// {0:X04}-{1:X04}", l - 15, l);
-                    COut.WriteLine ();
+                    CSOut.Write("0x{0:X}, ", value);
+                COut.Write("{0},", value);
+                if (i % 16 == 15)
+                {
+                    int l = getCP ? NUtil.MapCP(i) : i;
+                    CSOut.WriteLine("// {0:X04}-{1:X04}", l - 15, l);
+                    COut.WriteLine();
                 }
             }
         }
 
-        private void SerializeNormalizationProps ()
+        private void SerializeNormalizationProps()
         {
-            COut = new StreamWriter ("normalization-tables.h", false);
+            COut = new StreamWriter("normalization-tables.h", false);
 
             /*
             CSOut.WriteLine ("static readonly int [] singleNorm = new int [] {");
@@ -212,255 +230,267 @@ namespace Mono.Globalization.Unicode
             DumpArray (multiNorm, multiCount, false);
             CSOut.WriteLine ("};");
             */
-            CSOut.WriteLine ("static readonly byte [] propsArr = new byte [] {");
-            COut.WriteLine ("static const guint8 props [] = {");
-            DumpPropArray (prop, NUtil.PropCount, true);
-            CSOut.WriteLine ("};");
-            COut.WriteLine ("0};");
+            CSOut.WriteLine("static readonly byte [] propsArr = new byte [] {");
+            COut.WriteLine("static const guint8 props [] = {");
+            DumpPropArray(prop, NUtil.PropCount, true);
+            CSOut.WriteLine("};");
+            COut.WriteLine("0};");
 
-            COut.Close ();
+            COut.Close();
         }
 
-        private void DumpPropArray (int [] array, int count, bool getCP)
+        private void DumpPropArray(int[] array, int count, bool getCP)
         {
             if (array.Length < count)
-                throw new ArgumentOutOfRangeException ("count");
-            for (int i = 0; i < count; i++) {
-                uint value = (uint) array [i];
+                throw new ArgumentOutOfRangeException("count");
+            for (int i = 0; i < count; i++)
+            {
+                uint value = (uint)array[i];
                 if (value < 10)
-                    CSOut.Write ("{0}, ", value);
+                    CSOut.Write("{0}, ", value);
                 else
-                    CSOut.Write ("0x{0:X}, ", value);
-                COut.Write ("{0},", value);
-                if (i % 16 == 15) {
-                    int l = getCP ? NUtil.PropCP (i) : i;
-                    CSOut.WriteLine ("// {0:X04}-{1:X04}", l - 15, l);
-                    COut.WriteLine ();
+                    CSOut.Write("0x{0:X}, ", value);
+                COut.Write("{0},", value);
+                if (i % 16 == 15)
+                {
+                    int l = getCP ? NUtil.PropCP(i) : i;
+                    CSOut.WriteLine("// {0:X04}-{1:X04}", l - 15, l);
+                    COut.WriteLine();
                 }
             }
         }
 
-        private void RebaseUCD ()
+        private void RebaseUCD()
         {
-            mappings.Sort (comparer);
+            mappings.Sort(comparer);
             // mappedChars[0] = 0. This assures that value 0 of
             // mapIndex means there is no mapping.
             int count = 1;
-            int [] compressedMapping = new int [mappedCharCount];
+            int[] compressedMapping = new int[mappedCharCount];
             // Update map index.
-            int [] newMapIndex = new int [mappings.Count];
-            for (int mi = 0; mi < mappings.Count; mi++) {
-                CharMapping m = (CharMapping) mappings [mi];
-                if (mi > 0 && 0 == comparer.Compare (
-                    mappings [mi - 1], mappings [mi])) {
-                    newMapIndex [mi] = newMapIndex [mi - 1];
+            int[] newMapIndex = new int[mappings.Count];
+            for (int mi = 0; mi < mappings.Count; mi++)
+            {
+                CharMapping m = (CharMapping)mappings[mi];
+                if (mi > 0 && 0 == comparer.Compare(mappings[mi - 1], mappings[mi]))
+                {
+                    newMapIndex[mi] = newMapIndex[mi - 1];
                     continue;
                 }
-                newMapIndex [mi] = count;
-                for (int i = m.MapIndex; mappedChars [i] != 0; i++)
-                    compressedMapping [count++] = mappedChars [i];
-                compressedMapping [count++] = 0;
+                newMapIndex[mi] = count;
+                for (int i = m.MapIndex; mappedChars[i] != 0; i++)
+                    compressedMapping[count++] = mappedChars[i];
+                compressedMapping[count++] = 0;
             }
             for (int mi = 0; mi < mappings.Count; mi++)
-                ((CharMapping) mappings [mi]).MapIndex = newMapIndex [mi];
+                ((CharMapping)mappings[mi]).MapIndex = newMapIndex[mi];
 
-            int [] compressedMapIndex = new int [mapIndex.Length];
+            int[] compressedMapIndex = new int[mapIndex.Length];
             foreach (CharMapping m in mappings)
                 if (m.CodePoint <= char.MaxValue)
-                    compressedMapIndex [NUtil.MapIdx (m.CodePoint)] = m.MapIndex;
+                    compressedMapIndex[NUtil.MapIdx(m.CodePoint)] = m.MapIndex;
 
             mappedChars = compressedMapping;
             mapIndex = compressedMapIndex;
             mappedCharCount = count;
         }
 
-        private void Parse ()
+        private void Parse()
         {
-            ParseNormalizationProps ();
-            ParseUCD ();
+            ParseNormalizationProps();
+            ParseUCD();
         }
-        
-        private void ParseUCD ()
+
+        private void ParseUCD()
         {
             lineCount = 0;
-            TextReader reader = new StreamReader ("downloaded/UnicodeData.txt");
-            while (reader.Peek () != -1) {
-                string line = reader.ReadLine ();
+            TextReader reader = new StreamReader("downloaded/UnicodeData.txt");
+            while (reader.Peek() != -1)
+            {
+                string line = reader.ReadLine();
                 lineCount++;
-                int idx = line.IndexOf ('#');
+                int idx = line.IndexOf('#');
                 if (idx >= 0)
-                    line = line.Substring (0, idx);
+                    line = line.Substring(0, idx);
                 if (line.Length == 0)
                     continue;
                 int n = 0;
-                while (Char.IsDigit (line [n]) || Char.IsLetter (line [n]))
+                while (Char.IsDigit(line[n]) || Char.IsLetter(line[n]))
                     n++;
-                int cp = int.Parse (line.Substring (0, n), NumberStyles.HexNumber);
+                int cp = int.Parse(line.Substring(0, n), NumberStyles.HexNumber);
                 // Windows does not handle surrogate characters.
                 if (cp >= 0x10000)
                     continue;
 
-                string [] values = line.Substring (n + 1).Split (';');
-                string canon = values [4];
-                string combiningCategory = canon.IndexOf ('>') < 0 ? "" : canon.Substring (1, canon.IndexOf ('>') - 1);
+                string[] values = line.Substring(n + 1).Split(';');
+                string canon = values[4];
+                string combiningCategory =
+                    canon.IndexOf('>') < 0 ? "" : canon.Substring(1, canon.IndexOf('>') - 1);
                 string mappedCharsValue = canon;
                 if (combiningCategory.Length > 0)
-                    mappedCharsValue = canon.Substring (combiningCategory.Length + 2).Trim ();
-                if (mappedCharsValue.Length > 0) {
+                    mappedCharsValue = canon.Substring(combiningCategory.Length + 2).Trim();
+                if (mappedCharsValue.Length > 0)
+                {
                     int start = mappedCharCount;
-                    mappings.Add (new CharMapping (cp,
-                        mappedCharCount, 
-                        combiningCategory.Length == 0));
-                    SetCanonProp (cp, -1, mappedCharCount);
-                    foreach (string v in mappedCharsValue.Split (' '))
-                        AddMappedChars (cp,
-                            int.Parse (v, NumberStyles.HexNumber));
-                    AddMappedChars (cp, 0);
+                    mappings.Add(
+                        new CharMapping(cp, mappedCharCount, combiningCategory.Length == 0)
+                    );
+                    SetCanonProp(cp, -1, mappedCharCount);
+                    foreach (string v in mappedCharsValue.Split(' '))
+                        AddMappedChars(cp, int.Parse(v, NumberStyles.HexNumber));
+                    AddMappedChars(cp, 0);
                     // For canonical composite, set IsUnsafe
-                    if (combiningCategory == "") {
+                    if (combiningCategory == "")
+                    {
                         for (int ca = start; ca < mappedCharCount - 1; ca++)
-                            FillUnsafe (mappedChars [ca]);
+                            FillUnsafe(mappedChars[ca]);
                     }
                 }
             }
             if (reader != Console.In)
-                reader.Close ();
+                reader.Close();
         }
 
-        private void FillUnsafe (int i)
+        private void FillUnsafe(int i)
         {
             if (i < 0 || i > char.MaxValue)
                 return;
             if (0x3400 <= i && i <= 0x9FBB)
                 return;
-            SetProp (i, -1, IsUnsafe);
+            SetProp(i, -1, IsUnsafe);
         }
 
-        private void AddMappedChars (int cp, int cv)
+        private void AddMappedChars(int cp, int cv)
         {
-            if (mappedCharCount == mappedChars.Length) {
-                int [] tmp = new int [mappedCharCount * 2];
-                Array.Copy (mappedChars, tmp, mappedCharCount);
+            if (mappedCharCount == mappedChars.Length)
+            {
+                int[] tmp = new int[mappedCharCount * 2];
+                Array.Copy(mappedChars, tmp, mappedCharCount);
                 mappedChars = tmp;
             }
-            mappedChars [mappedCharCount++] = cv;
+            mappedChars[mappedCharCount++] = cv;
         }
 
-        private void SetCanonProp (int cp, int cpEnd, int flag)
+        private void SetCanonProp(int cp, int cpEnd, int flag)
         {
-            int idx = NUtil.MapIdx (cp);
+            int idx = NUtil.MapIdx(cp);
             if (cpEnd < 0)
-                mapIndex [idx] = flag;
-            else {
-                int idxEnd = NUtil.MapIdx (cpEnd);
+                mapIndex[idx] = flag;
+            else
+            {
+                int idxEnd = NUtil.MapIdx(cpEnd);
                 for (int i = idx; i <= idxEnd; i++)
-                    mapIndex [i] = flag;
+                    mapIndex[i] = flag;
             }
         }
 
-        private void ParseNormalizationProps ()
+        private void ParseNormalizationProps()
         {
             lineCount = 0;
-            TextReader reader = new StreamReader ("downloaded/DerivedNormalizationProps.txt");
-            while (reader.Peek () != -1) {
-                string line = reader.ReadLine ();
+            TextReader reader = new StreamReader("downloaded/DerivedNormalizationProps.txt");
+            while (reader.Peek() != -1)
+            {
+                string line = reader.ReadLine();
                 lineCount++;
-                int idx = line.IndexOf ('#');
+                int idx = line.IndexOf('#');
                 if (idx >= 0)
-                    line = line.Substring (0, idx);
+                    line = line.Substring(0, idx);
                 if (line.Length == 0)
                     continue;
                 int n = 0;
-                while (Char.IsDigit (line [n]) || Char.IsLetter (line [n]))
+                while (Char.IsDigit(line[n]) || Char.IsLetter(line[n]))
                     n++;
-                int cp = int.Parse (line.Substring (0, n), NumberStyles.HexNumber);
+                int cp = int.Parse(line.Substring(0, n), NumberStyles.HexNumber);
                 // Windows does not handle surrogate characters.
                 if (cp >= 0x10000)
                     continue;
 
                 int cpEnd = -1;
-                if (line [n] == '.' && line [n + 1] == '.')
-                    cpEnd = int.Parse (line.Substring (n + 2, n), NumberStyles.HexNumber);
-                int nameStart = line.IndexOf (';') + 1;
-                int valueStart = line.IndexOf (';', nameStart) + 1;
-                string name = valueStart == 0 ? line.Substring (nameStart) :
-                    line.Substring (nameStart, valueStart - nameStart - 1);
-                name = name.Trim ();
-                string values = valueStart > 0 ?
-                    line.Substring (valueStart).Trim () : "";
-                switch (name) {
-                case "Full_Composition_Exclusion":
-                    SetProp (cp, cpEnd, FullCompositionExclusion);
-                    break;
-                case "NFD_QC":
-                    if (cp != 0xAC00) // Hangul Syllables are computed
-                        SetProp (cp, cpEnd, NoNfd);
-                    break;
-                case "NFC_QC":
-                    SetProp (cp, cpEnd, (values == "M") ?
-                        MaybeNfc :NoNfc);
-                    break;
-                case "NFKD_QC":
-                    if (cp != 0xAC00) // Hangul Syllables are computed
-                        SetProp (cp, cpEnd, NoNfkd);
-                    break;
-                case "NFKC_QC":
-                    SetProp (cp, cpEnd, (values == "M") ?
-                        MaybeNfkc :NoNfkc);
-                    break;
-                /*
-                case "Expands_On_NFD":
-                    if (cp != 0xAC00) // Hangul Syllables are computed
-                        SetProp (cp, cpEnd, ExpandOnNfd);
-                    break;
-                case "Expands_On_NFC":
-                    SetProp (cp, cpEnd, ExpandOnNfc);
-                    break;
-                case "Expands_On_NFKD":
-                    if (cp != 0xAC00) // Hangul Syllables are computed
-                        SetProp (cp, cpEnd, ExpandOnNfkd);
-                    break;
-                case "Expands_On_NFKC":
-                    SetProp (cp, cpEnd, ExpandOnNfkc);
-                    break;
-                */
-                /*
-                case "FC_NFKC":
-                    int v1 = 0, v2 = 0, v3 = 0, v4 = 0;
-                    foreach (string s in values.Split (' ')) {
-                        if (s.Trim ().Length == 0)
-                            continue;
-                        int v = int.Parse (s, NumberStyles.HexNumber);
-                        if (v1 == 0)
-                            v1 = v;
-                        else if (v2 == 0)
-                            v2 = v;
-                        else if (v3 == 0)
-                            v3 = v;
-                        else if (v4 == 0)
-                            v4 = v;
-                        else
-                            throw new NotSupportedException (String.Format ("more than 4 values in FC_NFKC: {0:x}", cp));
-                    }
-                    SetNFKC (cp, cpEnd, v1, v2, v3, v4);
-                    break;
-                */
+                if (line[n] == '.' && line[n + 1] == '.')
+                    cpEnd = int.Parse(line.Substring(n + 2, n), NumberStyles.HexNumber);
+                int nameStart = line.IndexOf(';') + 1;
+                int valueStart = line.IndexOf(';', nameStart) + 1;
+                string name =
+                    valueStart == 0
+                        ? line.Substring(nameStart)
+                        : line.Substring(nameStart, valueStart - nameStart - 1);
+                name = name.Trim();
+                string values = valueStart > 0 ? line.Substring(valueStart).Trim() : "";
+                switch (name)
+                {
+                    case "Full_Composition_Exclusion":
+                        SetProp(cp, cpEnd, FullCompositionExclusion);
+                        break;
+                    case "NFD_QC":
+                        if (cp != 0xAC00) // Hangul Syllables are computed
+                            SetProp(cp, cpEnd, NoNfd);
+                        break;
+                    case "NFC_QC":
+                        SetProp(cp, cpEnd, (values == "M") ? MaybeNfc : NoNfc);
+                        break;
+                    case "NFKD_QC":
+                        if (cp != 0xAC00) // Hangul Syllables are computed
+                            SetProp(cp, cpEnd, NoNfkd);
+                        break;
+                    case "NFKC_QC":
+                        SetProp(cp, cpEnd, (values == "M") ? MaybeNfkc : NoNfkc);
+                        break;
+                    /*
+                    case "Expands_On_NFD":
+                        if (cp != 0xAC00) // Hangul Syllables are computed
+                            SetProp (cp, cpEnd, ExpandOnNfd);
+                        break;
+                    case "Expands_On_NFC":
+                        SetProp (cp, cpEnd, ExpandOnNfc);
+                        break;
+                    case "Expands_On_NFKD":
+                        if (cp != 0xAC00) // Hangul Syllables are computed
+                            SetProp (cp, cpEnd, ExpandOnNfkd);
+                        break;
+                    case "Expands_On_NFKC":
+                        SetProp (cp, cpEnd, ExpandOnNfkc);
+                        break;
+                    */
+                    /*
+                    case "FC_NFKC":
+                        int v1 = 0, v2 = 0, v3 = 0, v4 = 0;
+                        foreach (string s in values.Split (' ')) {
+                            if (s.Trim ().Length == 0)
+                                continue;
+                            int v = int.Parse (s, NumberStyles.HexNumber);
+                            if (v1 == 0)
+                                v1 = v;
+                            else if (v2 == 0)
+                                v2 = v;
+                            else if (v3 == 0)
+                                v3 = v;
+                            else if (v4 == 0)
+                                v4 = v;
+                            else
+                                throw new NotSupportedException (String.Format ("more than 4 values in FC_NFKC: {0:x}", cp));
+                        }
+                        SetNFKC (cp, cpEnd, v1, v2, v3, v4);
+                        break;
+                    */
                 }
             }
-            reader.Close ();
+            reader.Close();
         }
 
-        private void SetProp (int cp, int cpEnd, int flag)
+        private void SetProp(int cp, int cpEnd, int flag)
         {
-            int idx = NUtil.PropIdx (cp);
+            int idx = NUtil.PropIdx(cp);
             if (idx == 0)
-                throw new Exception (String.Format ("Codepoint {0:X04} should be included in the indexer.", cp));
+                throw new Exception(
+                    String.Format("Codepoint {0:X04} should be included in the indexer.", cp)
+                );
             if (cpEnd < 0)
-                prop [idx] |= flag;
-            else {
-                int idxEnd = NUtil.PropIdx (cpEnd);
+                prop[idx] |= flag;
+            else
+            {
+                int idxEnd = NUtil.PropIdx(cpEnd);
                 for (int i = idx; i <= idxEnd; i++)
-                    prop [i] |= flag;
+                    prop[i] |= flag;
             }
         }
 
@@ -502,7 +532,7 @@ namespace Mono.Globalization.Unicode
 
         class CharMapping
         {
-            public CharMapping (int cp, int mapIndex, bool isCanonical)
+            public CharMapping(int cp, int mapIndex, bool isCanonical)
             {
                 MapIndex = mapIndex;
                 CodePoint = cp;
@@ -518,25 +548,26 @@ namespace Mono.Globalization.Unicode
         {
             NormalizationCodeGenerator parent;
 
-            public CharMappingComparer (NormalizationCodeGenerator g)
+            public CharMappingComparer(NormalizationCodeGenerator g)
             {
                 parent = g;
             }
 
             // Note that this never considers IsCanonical
-            public int Compare (object o1, object o2)
+            public int Compare(object o1, object o2)
             {
-                CharMapping c1 = (CharMapping) o1;
-                CharMapping c2 = (CharMapping) o2;
-                return CompareArray (c1.MapIndex, c2.MapIndex);
+                CharMapping c1 = (CharMapping)o1;
+                CharMapping c2 = (CharMapping)o2;
+                return CompareArray(c1.MapIndex, c2.MapIndex);
             }
 
             // Note that this never considers IsCanonical
-            public int CompareArray (int idx1, int idx2)
+            public int CompareArray(int idx1, int idx2)
             {
-                for (int i = 0; ; i++) {
-                    int l = parent.mappedChars [idx1 + i];
-                    int r = parent.mappedChars [idx2 + i];
+                for (int i = 0; ; i++)
+                {
+                    int l = parent.mappedChars[idx1 + i];
+                    int r = parent.mappedChars[idx2 + i];
                     if (l != r)
                         return l - r;
                     if (l == 0)
@@ -545,72 +576,76 @@ namespace Mono.Globalization.Unicode
             }
         }
 
-        private void ProcessCombiningClass ()
+        private void ProcessCombiningClass()
         {
-            TextReader reader = new StreamReader ("downloaded/DerivedCombiningClass.txt");
-            while (reader.Peek () != -1) {
-                string line = reader.ReadLine ();
+            TextReader reader = new StreamReader("downloaded/DerivedCombiningClass.txt");
+            while (reader.Peek() != -1)
+            {
+                string line = reader.ReadLine();
                 lineCount++;
-                int idx = line.IndexOf ('#');
+                int idx = line.IndexOf('#');
                 if (idx >= 0)
-                    line = line.Substring (0, idx).Trim ();
+                    line = line.Substring(0, idx).Trim();
                 if (line.Length == 0)
                     continue;
                 int n = 0;
-                while (Char.IsDigit (line [n]) || Char.IsLetter (line [n]))
+                while (Char.IsDigit(line[n]) || Char.IsLetter(line[n]))
                     n++;
-                int cp = int.Parse (line.Substring (0, n), NumberStyles.HexNumber);
+                int cp = int.Parse(line.Substring(0, n), NumberStyles.HexNumber);
                 // Windows does not handle surrogate characters.
                 if (cp >= 0x10000)
                     continue;
 
                 int cpEnd = -1;
-                if (line [n] == '.' && line [n + 1] == '.')
-                    cpEnd = int.Parse (line.Substring (n + 2, n), NumberStyles.HexNumber);
-                int nameStart = line.IndexOf (';') + 1;
-                int valueStart = line.IndexOf (';', nameStart) + 1;
-                string val = valueStart == 0 ? line.Substring (nameStart) :
-                    line.Substring (nameStart, valueStart - nameStart - 1);
-                SetCombiningProp (cp, cpEnd, short.Parse (val));
+                if (line[n] == '.' && line[n + 1] == '.')
+                    cpEnd = int.Parse(line.Substring(n + 2, n), NumberStyles.HexNumber);
+                int nameStart = line.IndexOf(';') + 1;
+                int valueStart = line.IndexOf(';', nameStart) + 1;
+                string val =
+                    valueStart == 0
+                        ? line.Substring(nameStart)
+                        : line.Substring(nameStart, valueStart - nameStart - 1);
+                SetCombiningProp(cp, cpEnd, short.Parse(val));
             }
 
-            reader.Close ();
+            reader.Close();
 
-            byte [] ret = (byte []) CodePointIndexer.CompressArray (
-                combining, typeof (byte), NUtil.Combining);
+            byte[] ret = (byte[])
+                CodePointIndexer.CompressArray(combining, typeof(byte), NUtil.Combining);
 
-            COut = new StreamWriter ("normalization-tables.h", true);
+            COut = new StreamWriter("normalization-tables.h", true);
 
-            COut.WriteLine ("static const guint8 combiningClass [] = {");
-            CSOut.WriteLine ("public static byte [] combiningClassArr = new byte [] {");
-            for (int i = 0; i < ret.Length; i++) {
-                byte value = ret [i];
+            COut.WriteLine("static const guint8 combiningClass [] = {");
+            CSOut.WriteLine("public static byte [] combiningClassArr = new byte [] {");
+            for (int i = 0; i < ret.Length; i++)
+            {
+                byte value = ret[i];
                 if (value < 10)
-                    CSOut.Write ("{0},", value);
+                    CSOut.Write("{0},", value);
                 else
-                    CSOut.Write ("0x{0:X02},", value);
-                COut.Write ("{0},", value);
-                if (i % 16 == 15) {
-                    CSOut.WriteLine (" // {0:X04}", NUtil.Combining.ToCodePoint (i - 15));
-                    COut.WriteLine ();
+                    CSOut.Write("0x{0:X02},", value);
+                COut.Write("{0},", value);
+                if (i % 16 == 15)
+                {
+                    CSOut.WriteLine(" // {0:X04}", NUtil.Combining.ToCodePoint(i - 15));
+                    COut.WriteLine();
                 }
             }
-            CSOut.WriteLine ("};");
-            COut.WriteLine ("0};");
+            CSOut.WriteLine("};");
+            COut.WriteLine("0};");
 
-            COut.Close ();
+            COut.Close();
         }
 
-        private void SetCombiningProp (int cp, int cpEnd, short val)
+        private void SetCombiningProp(int cp, int cpEnd, short val)
         {
             if (val == 0)
                 return;
             if (cpEnd < 0)
-                combining [cp] = (byte) val;
+                combining[cp] = (byte)val;
             else
                 for (int i = cp; i <= cpEnd; i++)
-                    combining [i] = (byte) val;
+                    combining[i] = (byte)val;
         }
     }
 }
-

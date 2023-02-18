@@ -7,31 +7,31 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     [ExpectedNoWarnings]
     public class LocalDataFlowKeptMembers
     {
-        public static void Main ()
+        public static void Main()
         {
             // These behave as expected
-            TestBranchMergeGoto ();
-            TestBranchMergeIf ();
-            TestBranchMergeIfElse ();
-            TestBranchMergeSwitch ();
+            TestBranchMergeGoto();
+            TestBranchMergeIf();
+            TestBranchMergeIfElse();
+            TestBranchMergeSwitch();
 
             // These are overly conservative (keep members on the wrong types)
             // Only illustrate a few cases to keep it concise.
-            TestBranchGoto ();
-            TestBranchIf ();
-            TestBranchIfElse ();
+            TestBranchGoto();
+            TestBranchIf();
+            TestBranchIfElse();
         }
 
         [Kept]
-        public static void TestBranchMergeGoto ()
+        public static void TestBranchMergeGoto()
         {
-            Type t = typeof (BranchMergeGotoType1);
+            Type t = typeof(BranchMergeGotoType1);
             if (String.Empty.Length == 0)
                 goto End;
-            t = typeof (BranchMergeGotoType2);
+            t = typeof(BranchMergeGotoType2);
 
-        End:
-            RequirePublicFields (t); // keeps fields for both types
+            End:
+            RequirePublicFields(t); // keeps fields for both types
         }
 
         [Kept]
@@ -49,13 +49,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        public static void TestBranchMergeIf ()
+        public static void TestBranchMergeIf()
         {
-            Type t = typeof (BranchMergeIfType1);
+            Type t = typeof(BranchMergeIfType1);
             if (String.Empty.Length == 0)
-                t = typeof (BranchMergeIfType2);
+                t = typeof(BranchMergeIfType2);
 
-            RequirePublicFields (t); // keeps fields for both types
+            RequirePublicFields(t); // keeps fields for both types
         }
 
         [Kept]
@@ -73,15 +73,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        public static void TestBranchMergeIfElse ()
+        public static void TestBranchMergeIfElse()
         {
             Type t = null;
-            if (String.Empty.Length == 0) {
-                t = typeof (BranchMergeIfElseType1);
-            } else {
-                t = typeof (BranchMergeIfElseType2);
+            if (String.Empty.Length == 0)
+            {
+                t = typeof(BranchMergeIfElseType1);
             }
-            RequirePublicFields (t); // keeps fields for both types
+            else
+            {
+                t = typeof(BranchMergeIfElseType2);
+            }
+            RequirePublicFields(t); // keeps fields for both types
         }
 
         [Kept]
@@ -102,35 +105,36 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         static int _switchOnField;
 
         [Kept]
-        public static void TestBranchMergeSwitch ()
+        public static void TestBranchMergeSwitch()
         {
             Type t = null;
-            switch (_switchOnField) {
-            case 0:
-                t = typeof (BranchMergeSwitchType0);
-                break;
-            case 1:
-                t = typeof (BranchMergeSwitchType1);
-                break;
-            case 2:
-                t = typeof (BranchMergeSwitchType2);
-                break;
-            case 3:
-                t = typeof (BranchMergeSwitchType3);
-                break;
+            switch (_switchOnField)
+            {
+                case 0:
+                    t = typeof(BranchMergeSwitchType0);
+                    break;
+                case 1:
+                    t = typeof(BranchMergeSwitchType1);
+                    break;
+                case 2:
+                    t = typeof(BranchMergeSwitchType2);
+                    break;
+                case 3:
+                    t = typeof(BranchMergeSwitchType3);
+                    break;
             }
-            RequirePublicFields (t); // keeps fields for all types
+            RequirePublicFields(t); // keeps fields for all types
         }
 
         [Kept]
-        public static void TestBranchGoto ()
+        public static void TestBranchGoto()
         {
-            Type t = typeof (BranchGotoType1);
+            Type t = typeof(BranchGotoType1);
             if (String.Empty.Length == 0)
                 goto End;
-            t = typeof (BranchGotoType2);
-            RequirePublicFields (t);
-        End:
+            t = typeof(BranchGotoType2);
+            RequirePublicFields(t);
+            End:
             return;
         }
 
@@ -149,12 +153,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        public static void TestBranchIf ()
+        public static void TestBranchIf()
         {
-            Type t = typeof (BranchIfType1);
-            if (String.Empty.Length == 0) {
-                t = typeof (BranchIfType2);
-                RequirePublicFields (t);
+            Type t = typeof(BranchIfType1);
+            if (String.Empty.Length == 0)
+            {
+                t = typeof(BranchIfType2);
+                RequirePublicFields(t);
             }
         }
 
@@ -173,17 +178,20 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         [Kept]
-        public static void TestBranchIfElse ()
+        public static void TestBranchIfElse()
         {
             Type t;
-            if (String.Empty.Length == 0) {
+            if (String.Empty.Length == 0)
+            {
                 // because this branch *happens* to come first in IL, we will only see one value
-                t = typeof (BranchIfElseTypeWithMethods);
-                RequirePublicMethods (t); // this works
-            } else {
+                t = typeof(BranchIfElseTypeWithMethods);
+                RequirePublicMethods(t); // this works
+            }
+            else
+            {
                 // because this branch *happens* to come second in IL, we will see the merged value for str
-                t = typeof (BranchIfElseTypeWithFields);
-                RequirePublicFields (t); // keeps field on BranchIfElseTypeWithMethods
+                t = typeof(BranchIfElseTypeWithFields);
+                RequirePublicFields(t); // keeps field on BranchIfElseTypeWithMethods
             }
         }
 
@@ -191,7 +199,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class BranchIfElseTypeWithMethods
         {
             [Kept]
-            public void Method () { }
+            public void Method() { }
+
             [Kept] // unnecessary
             public string field;
         }
@@ -199,7 +208,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         class BranchIfElseTypeWithFields
         {
-            public void Method () { }
+            public void Method() { }
+
             [Kept]
             public string field;
         }
@@ -232,21 +242,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public string field;
         }
 
-
         [Kept]
-        public static void RequirePublicFields (
+        public static void RequirePublicFields(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
-        public static void RequirePublicMethods (
+        public static void RequirePublicMethods(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
     }
 }

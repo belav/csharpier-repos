@@ -5,16 +5,18 @@ using System;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         int b = 0;
-        switch (b) {
+        switch (b)
+        {
             case 1:
-            Action a = () => {
+                Action a = () =>
+                {
+                    break;
+                };
+
                 break;
-            };
-            
-            break;
         }
     }
 }

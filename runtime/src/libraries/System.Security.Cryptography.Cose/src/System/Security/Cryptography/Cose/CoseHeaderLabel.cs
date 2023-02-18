@@ -12,8 +12,10 @@ namespace System.Security.Cryptography.Cose
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public readonly struct CoseHeaderLabel : IEquatable<CoseHeaderLabel>
     {
-        internal string LabelName => LabelAsString != null ? $"\"{LabelAsString}\"" : LabelAsInt32.ToString();
-        private string DebuggerDisplay => $"Label = {LabelName}, Type = {(LabelAsString != null ? typeof(string) : typeof(int))}";
+        internal string LabelName =>
+            LabelAsString != null ? $"\"{LabelAsString}\"" : LabelAsInt32.ToString();
+        private string DebuggerDisplay =>
+            $"Label = {LabelName}, Type = {(LabelAsString != null ? typeof(string) : typeof(int))}";
 
         // https://www.iana.org/assignments/cose/cose.xhtml#header-parameters
         /// <summary>
@@ -21,16 +23,19 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <value>A header label that represents the known header parameter "alg".</value>
         public static CoseHeaderLabel Algorithm => new CoseHeaderLabel(KnownHeaders.Alg);
+
         /// <summary>
         /// Gets a header label that represents the known header parameter "crit".
         /// </summary>
         /// <value>A header label that represents the known header parameter "crit".</value>
         public static CoseHeaderLabel CriticalHeaders => new CoseHeaderLabel(KnownHeaders.Crit);
+
         /// <summary>
         /// Gets a header label that represents the known header parameter "content type".
         /// </summary>
         /// <value>A header label> that represents the known header parameter "content type".</value>
         public static CoseHeaderLabel ContentType => new CoseHeaderLabel(KnownHeaders.ContentType);
+
         /// <summary>
         /// Gets a header label that represents the known header parameter "kid".
         /// </summary>
@@ -84,7 +89,8 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="obj">The object to compare to this instance.</param>
         /// <returns><see langword="true"/> if value is an instance of <see cref="CoseHeaderLabel"/> and equals the value of this instance; otherwise, <see langword="false"/>.</returns>
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is CoseHeaderLabel otherObj && Equals(otherObj);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is CoseHeaderLabel otherObj && Equals(otherObj);
 
         /// <summary>
         /// Returns the hash code for this instance.
@@ -110,7 +116,8 @@ namespace System.Security.Cryptography.Cose
         /// <param name="left">The first object to compare.</param>
         /// <param name="right">The second object to compare.</param>
         /// <returns><see langword="true"/> if left and right represent the same label; otherwise, <see langword="false"/>.</returns>
-        public static bool operator ==(CoseHeaderLabel left, CoseHeaderLabel right) => left.Equals(right);
+        public static bool operator ==(CoseHeaderLabel left, CoseHeaderLabel right) =>
+            left.Equals(right);
 
         /// <summary>
         /// Determines whether two specified header label instances are not equal.
@@ -118,6 +125,7 @@ namespace System.Security.Cryptography.Cose
         /// <param name="left">The first object to compare.</param>
         /// <param name="right">The second object to compare.</param>
         /// <returns><see langword="true"/> if left and right do not represent the same label; otherwise, <see langword="false"/>.</returns>
-        public static bool operator !=(CoseHeaderLabel left, CoseHeaderLabel right) => !left.Equals(right);
+        public static bool operator !=(CoseHeaderLabel left, CoseHeaderLabel right) =>
+            !left.Equals(right);
     }
 }

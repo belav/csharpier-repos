@@ -4,7 +4,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -31,82 +31,75 @@ using System.Threading;
 
 namespace Microsoft.Build.Framework
 {
-    [Serializable]        
-    public abstract class BuildEventArgs : System.EventArgs {
-    
-        string    helpKeyword;
-        string    message;
-        string    senderName;
-        int    threadId;
-        DateTime    timestamp;
+    [Serializable]
+    public abstract class BuildEventArgs : System.EventArgs
+    {
+        string helpKeyword;
+        string message;
+        string senderName;
+        int threadId;
+        DateTime timestamp;
         BuildEventContext context;
 
-        protected BuildEventArgs ()
-            : this (null, null, null)
-        {
-        }
+        protected BuildEventArgs()
+            : this(null, null, null) { }
 
-        protected BuildEventArgs (string message, string helpKeyword,
-                      string senderName)
-            : this (message, helpKeyword, senderName, DateTime.Now)
-        {
-        }
+        protected BuildEventArgs(string message, string helpKeyword, string senderName)
+            : this(message, helpKeyword, senderName, DateTime.Now) { }
 
-        protected
-        BuildEventArgs (string message, string helpKeyword,
-                        string senderName, DateTime eventTimestamp)
+        protected BuildEventArgs(
+            string message,
+            string helpKeyword,
+            string senderName,
+            DateTime eventTimestamp
+        )
         {
             this.message = message;
             this.helpKeyword = helpKeyword;
             this.senderName = senderName;
-            this.threadId = Thread.CurrentThread.GetHashCode ();
+            this.threadId = Thread.CurrentThread.GetHashCode();
             this.timestamp = eventTimestamp;
-            this.context = BuildEventContext.NewInstance ();
+            this.context = BuildEventContext.NewInstance();
         }
 
-        public string HelpKeyword {
-            get {
-                return helpKeyword;
-            }
+        public string HelpKeyword
+        {
+            get { return helpKeyword; }
         }
 
-        virtual
-        public string Message {
-            get {
-                return message;
-            }
-            protected set {
-                message = value;
-            }
+        virtual public string Message
+        {
+            get { return message; }
+            protected set { message = value; }
         }
 
-        public string SenderName {
-            get {
-                return senderName;
-            }
+        public string SenderName
+        {
+            get { return senderName; }
         }
+
         // Gets the integer hash code value of the thread that raised
         // the event
-        public int ThreadId {
-            get {
-                return threadId;
-            }
-        }
-        // Time when event was fired
-        public DateTime Timestamp {
-            get {
-                return timestamp;
-            }
+        public int ThreadId
+        {
+            get { return threadId; }
         }
 
-        public BuildEventContext BuildEventContext {
+        // Time when event was fired
+        public DateTime Timestamp
+        {
+            get { return timestamp; }
+        }
+
+        public BuildEventContext BuildEventContext
+        {
             get { return context; }
-            set {
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
                 context = value;
             }
         }
     }
 }
-

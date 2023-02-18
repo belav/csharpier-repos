@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,28 +31,31 @@ using System.Globalization;
 
 namespace System.Configuration
 {
-    public sealed class InfiniteTimeSpanConverter: ConfigurationConverterBase
+    public sealed class InfiniteTimeSpanConverter : ConfigurationConverterBase
     {
-        public InfiniteTimeSpanConverter ()
-        {
-        }
+        public InfiniteTimeSpanConverter() { }
 
-        public override object ConvertFrom (ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
         {
             if ((string)data == "Infinite")
                 return TimeSpan.MaxValue;
             else
-                return TimeSpan.Parse ((string)data);
+                return TimeSpan.Parse((string)data);
         }
 
-        public override object ConvertTo (ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
         {
             /* don't use "value is TimeSpan" here, since
              * we want to generate both a NRE on null
              * value, and ArgumentException on non-null,
              * but non-TimeSpan. */
-            if (value.GetType () != typeof (TimeSpan))
-                throw new ArgumentException ();
+            if (value.GetType() != typeof(TimeSpan))
+                throw new ArgumentException();
 
             if (((TimeSpan)value) == TimeSpan.MaxValue)
                 return "Infinite";
@@ -61,4 +64,3 @@ namespace System.Configuration
         }
     }
 }
-

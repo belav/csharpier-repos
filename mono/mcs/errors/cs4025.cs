@@ -6,12 +6,10 @@ using System.Runtime.CompilerServices;
 
 partial class D
 {
-    partial void Foo (string x = "x");
+    partial void Foo(string x = "x");
 }
 
 partial class D
 {
-    partial void Foo ([CallerFilePath] string x)
-    {
-    }
+    partial void Foo([CallerFilePath] string x) { }
 }

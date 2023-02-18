@@ -2,13 +2,11 @@
 
 class A : IA
 {
-    public void Method (IG<double[][]> arg)
+    public void Method(IG<double[][]> arg) { }
+
+    public static int Main()
     {
-    }
-    
-    public static int Main ()
-    {
-        new A ().Method (null);
+        new A().Method(null);
         return 0;
     }
 }

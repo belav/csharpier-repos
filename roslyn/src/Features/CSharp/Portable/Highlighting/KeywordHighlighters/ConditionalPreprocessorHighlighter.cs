@@ -17,16 +17,18 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
 {
     [ExportHighlighter(LanguageNames.CSharp), Shared]
-    internal class ConditionalPreprocessorHighlighter : AbstractKeywordHighlighter<DirectiveTriviaSyntax>
+    internal class ConditionalPreprocessorHighlighter
+        : AbstractKeywordHighlighter<DirectiveTriviaSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConditionalPreprocessorHighlighter()
-        {
-        }
+        public ConditionalPreprocessorHighlighter() { }
 
         protected override void AddHighlights(
-            DirectiveTriviaSyntax directive, List<TextSpan> highlights, CancellationToken cancellationToken)
+            DirectiveTriviaSyntax directive,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        )
         {
             var conditionals = directive.GetMatchingConditionalDirectives(cancellationToken);
             if (conditionals == null)
@@ -36,9 +38,12 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
 
             foreach (var conditional in conditionals)
             {
-                highlights.Add(TextSpan.FromBounds(
-                    conditional.HashToken.SpanStart,
-                    conditional.DirectiveNameToken.Span.End));
+                highlights.Add(
+                    TextSpan.FromBounds(
+                        conditional.HashToken.SpanStart,
+                        conditional.DirectiveNameToken.Span.End
+                    )
+                );
             }
         }
     }

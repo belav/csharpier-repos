@@ -4,7 +4,7 @@
 
 class C
 {
-    public static implicit operator C (int i = 8)
+    public static implicit operator C(int i = 8)
     {
         return null;
     }

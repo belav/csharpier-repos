@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,8 +43,12 @@ namespace System.ServiceModel.Channels
         NamedPipeServerStream server;
         TcpBinaryFrameManager frame;
 
-        public NamedPipeReplyChannel (ChannelListenerBase listener, MessageEncoder encoder, NamedPipeServerStream server)
-            : base (listener)
+        public NamedPipeReplyChannel(
+            ChannelListenerBase listener,
+            MessageEncoder encoder,
+            NamedPipeServerStream server
+        )
+            : base(listener)
         {
             this.server = server;
             this.Encoder = encoder;
@@ -52,23 +56,25 @@ namespace System.ServiceModel.Channels
 
         public MessageEncoder Encoder { get; private set; }
 
-        public override RequestContext ReceiveRequest (TimeSpan timeout)
+        public override RequestContext ReceiveRequest(TimeSpan timeout)
         {
             // It is used while it is already closed.
             if (server == null || !server.IsConnected)
                 return null;
 
             if (timeout <= TimeSpan.Zero)
-                throw new ArgumentException (String.Format ("Timeout value must be positive value. It was {0}", timeout));
-            var msg = frame.ReadUnsizedMessage (timeout);
-            frame.ReadEndRecord ();
-            return new NamedPipeRequestContext (this, msg);
+                throw new ArgumentException(
+                    String.Format("Timeout value must be positive value. It was {0}", timeout)
+                );
+            var msg = frame.ReadUnsizedMessage(timeout);
+            frame.ReadEndRecord();
+            return new NamedPipeRequestContext(this, msg);
         }
 
         class NamedPipeRequestContext : InternalRequestContext
         {
-            public NamedPipeRequestContext (NamedPipeReplyChannel owner, Message request)
-                : base (owner.Manager)
+            public NamedPipeRequestContext(NamedPipeReplyChannel owner, Message request)
+                : base(owner.Manager)
             {
                 this.owner = owner;
                 this.request = request;
@@ -77,57 +83,64 @@ namespace System.ServiceModel.Channels
             NamedPipeReplyChannel owner;
             Message request;
 
-            public override Message RequestMessage {
+            public override Message RequestMessage
+            {
                 get { return request; }
             }
 
-            public override void Abort ()
+            public override void Abort()
             {
-                Close (TimeSpan.Zero);
+                Close(TimeSpan.Zero);
             }
 
-            public override void Close (TimeSpan timeout)
-            {
-            }
+            public override void Close(TimeSpan timeout) { }
 
-            public override void Reply (Message message, TimeSpan timeout)
+            public override void Reply(Message message, TimeSpan timeout)
             {
                 if (message.Headers.RelatesTo == null)
                     message.Headers.RelatesTo = request.Headers.MessageId;
 
-                owner.frame.WriteUnsizedMessage (message, timeout);
-                owner.frame.WriteEndRecord ();
-                owner.server.Close ();
+                owner.frame.WriteUnsizedMessage(message, timeout);
+                owner.frame.WriteEndRecord();
+                owner.server.Close();
                 owner.server = null;
             }
         }
 
-        public override bool TryReceiveRequest (TimeSpan timeout, out RequestContext context)
+        public override bool TryReceiveRequest(TimeSpan timeout, out RequestContext context)
         {
-            try {
-                context = ReceiveRequest (timeout);
+            try
+            {
+                context = ReceiveRequest(timeout);
                 return context != null;
-            } catch (TimeoutException) {
+            }
+            catch (TimeoutException)
+            {
                 context = null;
                 return false;
             }
         }
 
-        public override bool WaitForRequest (TimeSpan timeout)
+        public override bool WaitForRequest(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClose (TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
-        protected override void OnOpen (TimeSpan timeout)
+        protected override void OnOpen(TimeSpan timeout)
         {
             // FIXME: use timeout
-            frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.SingletonUnsizedMode, server, true) { Encoder = this.Encoder };
-            frame.ProcessPreambleRecipient ();
-            frame.ProcessPreambleAckRecipient ();
+            frame = new TcpBinaryFrameManager(
+                TcpBinaryFrameManager.SingletonUnsizedMode,
+                server,
+                true
+            )
+            {
+                Encoder = this.Encoder
+            };
+            frame.ProcessPreambleRecipient();
+            frame.ProcessPreambleAckRecipient();
         }
     }
 }

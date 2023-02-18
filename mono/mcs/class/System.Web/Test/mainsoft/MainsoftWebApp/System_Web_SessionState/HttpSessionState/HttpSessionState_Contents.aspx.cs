@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_SessionState
 {
-    public class HttpSessionState_Contents
-        : GHTBaseWeb 
+    public class HttpSessionState_Contents : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,18 +46,18 @@ namespace GHTTests.System_Web_dll.System_Web_SessionState
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -66,17 +65,15 @@ namespace GHTTests.System_Web_dll.System_Web_SessionState
             GHTTestBegin(frm);
 
             GHTSubTestBegin("GHTSubTest1");
-            try 
+            try
             {
                 GHTSubTestAddResult(Session.Contents.GetType().ToString());
                 if (Equals(Session, Session.Contents))
                     GHTSubTestAddResult("Objects are equal");
                 else
                     GHTSubTestAddResult("Objects are not equal");
-                
-
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

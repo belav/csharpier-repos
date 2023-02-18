@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,11 +35,21 @@ using System.Security.Permissions;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DesignerAttribute ("System.Web.UI.Design.WebControls.AccessDataSourceDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    [ToolboxBitmap ("")]
+    [DesignerAttribute(
+        "System.Web.UI.Design.WebControls.AccessDataSourceDesigner, "
+            + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [ToolboxBitmap("")]
     public class AccessDataSource : SqlDataSource
     {
         const string PROVIDER_NAME = "System.Data.OleDb";
@@ -48,86 +58,120 @@ namespace System.Web.UI.WebControls
         //string dataFile;
         string connectionString;
 
-        public AccessDataSource () : base ()
+        public AccessDataSource()
+            : base()
         {
             base.ProviderName = PROVIDER_NAME;
         }
 
-        public AccessDataSource (string dataFile, string selectCommand) : 
-            base (String.Empty, selectCommand)
+        public AccessDataSource(string dataFile, string selectCommand)
+            : base(String.Empty, selectCommand)
         {
             //this.dataFile = dataFile;
             this.ProviderName = PROVIDER_NAME;
         }
 
-        protected override SqlDataSourceView CreateDataSourceView (string viewName)
+        protected override SqlDataSourceView CreateDataSourceView(string viewName)
         {
-            AccessDataSourceView view = new AccessDataSourceView (this, viewName, this.Context);
+            AccessDataSourceView view = new AccessDataSourceView(this, viewName, this.Context);
             if (IsTrackingViewState)
-                ((IStateManager) view).TrackViewState ();                
+                ((IStateManager)view).TrackViewState();
             return view;
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [Browsable (false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
         [MonoTODO("AccessDataSource does not support SQL Cache Dependencies")]
-        public override string SqlCacheDependency {
-            get { throw new NotSupportedException ("AccessDataSource does not supports SQL Cache Dependencies."); }
-            set { throw new NotSupportedException ("AccessDataSource does not supports SQL Cache Dependencies."); }
+        public override string SqlCacheDependency
+        {
+            get
+            {
+                throw new NotSupportedException(
+                    "AccessDataSource does not supports SQL Cache Dependencies."
+                );
+            }
+            set
+            {
+                throw new NotSupportedException(
+                    "AccessDataSource does not supports SQL Cache Dependencies."
+                );
+            }
         }
 
-        [MonoTODO ("why override?  maybe it doesn't call DbProviderFactories.GetFactory?")]
-        protected override DbProviderFactory GetDbProviderFactory ()
+        [MonoTODO("why override?  maybe it doesn't call DbProviderFactories.GetFactory?")]
+        protected override DbProviderFactory GetDbProviderFactory()
         {
-            return DbProviderFactories.GetFactory (PROVIDER_NAME);
+            return DbProviderFactories.GetFactory(PROVIDER_NAME);
         }
 
-        string GetPhysicalDataFilePath ()
+        string GetPhysicalDataFilePath()
         {
-            if (String.IsNullOrEmpty (DataFile))
+            if (String.IsNullOrEmpty(DataFile))
                 return String.Empty;
 
             // more here?  how do we handle |DataDirectory|?
-            return HttpContext.Current.Request.MapPath (DataFile);
+            return HttpContext.Current.Request.MapPath(DataFile);
         }
 
-        [BrowsableAttribute (false), 
-        DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Hidden)]
-        public override string ConnectionString {
-            get {
-                if (connectionString == null) {
-                    connectionString = String.Concat ("Provider=", PROVIDER_STRING, "; Data Source=", GetPhysicalDataFilePath ());
+        [
+            BrowsableAttribute(false),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)
+        ]
+        public override string ConnectionString
+        {
+            get
+            {
+                if (connectionString == null)
+                {
+                    connectionString = String.Concat(
+                        "Provider=",
+                        PROVIDER_STRING,
+                        "; Data Source=",
+                        GetPhysicalDataFilePath()
+                    );
                 }
 
                 return connectionString;
             }
-            set {
-                throw new InvalidOperationException 
-                    ("The ConnectionString is automatically generated for AccessDataSource and hence cannot be set."); 
+            set
+            {
+                throw new InvalidOperationException(
+                    "The ConnectionString is automatically generated for AccessDataSource and hence cannot be set."
+                );
             }
         }
 
         [UrlPropertyAttribute]
-        [DefaultValueAttribute ("")]
-        [WebCategoryAttribute ("Data")]
-        [WebSysDescriptionAttribute ("MS Office Access database file name")]
-        [EditorAttribute ("System.Web.UI.Design.MdbDataFileEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        public string DataFile {
-            get { return ViewState.GetString ("DataFile", String.Empty); }
-            set {
-                ViewState ["DataFile"] = value;
+        [DefaultValueAttribute("")]
+        [WebCategoryAttribute("Data")]
+        [WebSysDescriptionAttribute("MS Office Access database file name")]
+        [EditorAttribute(
+            "System.Web.UI.Design.MdbDataFileEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        public string DataFile
+        {
+            get { return ViewState.GetString("DataFile", String.Empty); }
+            set
+            {
+                ViewState["DataFile"] = value;
                 connectionString = null;
             }
         }
 
-        [BrowsableAttribute (false), 
-        DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Hidden)]            
-        public override string ProviderName {
+        [
+            BrowsableAttribute(false),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)
+        ]
+        public override string ProviderName
+        {
             get { return base.ProviderName; }
-            set { throw new InvalidOperationException
-                ("Setting ProviderName on an AccessDataSource is not allowed");
+            set
+            {
+                throw new InvalidOperationException(
+                    "Setting ProviderName on an AccessDataSource is not allowed"
+                );
             }
         }
     }
 }
-

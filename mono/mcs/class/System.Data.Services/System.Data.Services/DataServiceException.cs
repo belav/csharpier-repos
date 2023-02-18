@@ -32,57 +32,54 @@ using System.Security;
 
 namespace System.Data.Services
 {
-    [DebuggerDisplay ("{statusCode}: {Message}")]
+    [DebuggerDisplay("{statusCode}: {Message}")]
     [Serializable]
     public sealed class DataServiceException : InvalidOperationException
     {
-        public DataServiceException()
-        {
-        }
+        public DataServiceException() { }
 
-        public DataServiceException (string message)
-            : base (message)
-        {
-        }
+        public DataServiceException(string message)
+            : base(message) { }
 
-        public DataServiceException (int statusCode, string message)
-            : base (message)
+        public DataServiceException(int statusCode, string message)
+            : base(message)
         {
             this.StatusCode = statusCode;
         }
 
-        public DataServiceException (string message, Exception innerException)
-            : base (message, innerException)
-        {
-        }
+        public DataServiceException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        public DataServiceException (int statusCode, string errorCode, string message, string messageXmlLang, Exception innerException)
-            : base (message, innerException)
+        public DataServiceException(
+            int statusCode,
+            string errorCode,
+            string message,
+            string messageXmlLang,
+            Exception innerException
+        )
+            : base(message, innerException)
         {
             this.StatusCode = statusCode;
             this.ErrorCode = errorCode;
             this.MessageLanguage = messageXmlLang;
         }
 
-        protected DataServiceException (SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected DataServiceException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new NotImplementedException();
         }
 
-        public int StatusCode {
-            get; private set;
-        }
+        public int StatusCode { get; private set; }
 
-        public string ErrorCode {
-            get; private set;
-        }
+        public string ErrorCode { get; private set; }
 
-        public string MessageLanguage {
-            get; private set;
-        }
+        public string MessageLanguage { get; private set; }
 
         [SecurityCritical]
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             throw new NotImplementedException();
         }

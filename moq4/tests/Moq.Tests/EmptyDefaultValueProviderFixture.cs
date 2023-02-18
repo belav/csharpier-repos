@@ -130,7 +130,7 @@ namespace Moq.Tests
 
             Assert.NotNull(value);
             Assert.True(((Task)value).IsCompleted);
-            Assert.Equal(default(int), ((Task<Task<int>>) value).Result.Result);
+            Assert.Equal(default(int), ((Task<Task<int>>)value).Result.Result);
         }
 
         [Fact]
@@ -179,7 +179,9 @@ namespace Moq.Tests
         [Fact]
         public void ProvidesDefaultValueTupleOfReferenceTypeArrayAndTaskOfReferenceType()
         {
-            var value = GetDefaultValueForProperty(nameof(IFoo.ValueTupleOfReferenceTypeArrayAndTaskOfReferenceType));
+            var value = GetDefaultValueForProperty(
+                nameof(IFoo.ValueTupleOfReferenceTypeArrayAndTaskOfReferenceType)
+            );
 
             var (bars, barTask) = ((IBar[], Task<IBar>))value;
             Assert.NotNull(bars);
@@ -192,7 +194,10 @@ namespace Moq.Tests
         private static object GetDefaultValueForProperty(string propertyName)
         {
             var propertyGetter = typeof(IFoo).GetProperty(propertyName).GetGetMethod();
-            return DefaultValueProvider.Empty.GetDefaultReturnValue(propertyGetter, new Mock<IFoo>());
+            return DefaultValueProvider.Empty.GetDefaultReturnValue(
+                propertyGetter,
+                new Mock<IFoo>()
+            );
         }
 
         public interface IFoo

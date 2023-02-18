@@ -6,19 +6,19 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Serialization
 {
-    [Reference ("System.Runtime.Serialization.dll")]
-    [Reference ("System.Runtime.Serialization.Primitives.dll")]
-    [Reference ("System.Runtime.Serialization.Json.dll")]
-    [SetupLinkerArgument ("--enable-serialization-discovery")]
+    [Reference("System.Runtime.Serialization.dll")]
+    [Reference("System.Runtime.Serialization.Primitives.dll")]
+    [Reference("System.Runtime.Serialization.Json.dll")]
+    [SetupLinkerArgument("--enable-serialization-discovery")]
     public class DataContractJsonSerialization
     {
-        public static void Main ()
+        public static void Main()
         {
             // This ctor call should activate the data contract serializer logic
-            new DataContractJsonSerializer (typeof (RootType));
+            new DataContractJsonSerializer(typeof(RootType));
 
             // Reference types to ensure they are scanned for attributes.
-            Type t = typeof (AttributedType);
+            Type t = typeof(AttributedType);
         }
 
         [Kept]
@@ -29,8 +29,8 @@ namespace Mono.Linker.Tests.Cases.Serialization
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptAttributeAttribute (typeof (DataContractAttribute))]
+        [KeptMember(".ctor()")]
+        [KeptAttributeAttribute(typeof(DataContractAttribute))]
         [DataContract]
         class AttributedType
         {

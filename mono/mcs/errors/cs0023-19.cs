@@ -3,7 +3,7 @@
 
 class Z
 {
-    public static void Main ()
+    public static void Main()
     {
         int? n = null;
         var m = !n;

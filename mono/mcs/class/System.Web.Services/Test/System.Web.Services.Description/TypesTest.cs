@@ -29,11 +29,11 @@ namespace MonoTests.System.Web.Services.Description
         [Test]
         public void TestDefaultProperties()
         {
-            Assert.AreEqual (String.Empty, types.Documentation);
-            Assert.IsNotNull (types.Schemas);
-            Assert.AreEqual (0, types.Schemas.Count);
-            Assert.IsNotNull (types.Extensions);
-            Assert.AreEqual (0, types.Extensions.Count);
+            Assert.AreEqual(String.Empty, types.Documentation);
+            Assert.IsNotNull(types.Schemas);
+            Assert.AreEqual(0, types.Schemas.Count);
+            Assert.IsNotNull(types.Extensions);
+            Assert.AreEqual(0, types.Extensions.Count);
         }
     }
 }

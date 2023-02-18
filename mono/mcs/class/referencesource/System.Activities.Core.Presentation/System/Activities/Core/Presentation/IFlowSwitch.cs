@@ -13,41 +13,22 @@ namespace System.Activities.Core.Presentation
     interface IFlowSwitchLink
     {
         [BrowsableAttribute(false)]
-        ModelItem ModelItem
-        { get; set; }
+        ModelItem ModelItem { get; set; }
 
         [BrowsableAttribute(false)]
-        FlowNode ParentFlowSwitch
-        {
-            get;
-            set;
-        }
+        FlowNode ParentFlowSwitch { get; set; }
 
-        bool IsDefaultCase
-        {
-            get;
-            set;
-        }
+        bool IsDefaultCase { get; set; }
 
-        string CaseName
-        {
-            get;
-        }
+        string CaseName { get; }
 
-        object CaseObject
-        {
-            get;
-        }
+        object CaseObject { get; }
 
         MultiBinding CreateConnectorLabelTextBinding();
     }
 
     interface IFlowSwitchDefaultLink : IFlowSwitchLink
     {
-        string DefaultCaseDisplayName
-        {
-            get;
-            set;
-        }
+        string DefaultCaseDisplayName { get; set; }
     }
 }

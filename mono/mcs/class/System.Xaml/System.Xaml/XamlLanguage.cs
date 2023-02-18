@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,7 +29,7 @@ using System.Reflection;
 using System.Xaml.Schema;
 using System.Windows.Markup;
 
-[assembly:XmlnsDefinition (System.Xaml.XamlLanguage.Xaml2006Namespace, "System.Windows.Markup")] // FIXME: verify.
+[assembly: XmlnsDefinition(System.Xaml.XamlLanguage.Xaml2006Namespace, "System.Windows.Markup")] // FIXME: verify.
 
 namespace System.Xaml
 {
@@ -44,125 +44,323 @@ namespace System.Xaml
 
         internal class SpecialTypeNameList : List<SpecialTypeName>
         {
-            internal SpecialTypeNameList ()
+            internal SpecialTypeNameList()
             {
-                Add (new SpecialTypeName ("Member", XamlLanguage.Member));
-                Add (new SpecialTypeName ("Property", XamlLanguage.Property));
+                Add(new SpecialTypeName("Member", XamlLanguage.Member));
+                Add(new SpecialTypeName("Property", XamlLanguage.Property));
             }
 
-            public XamlType Find (string name, string ns)
+            public XamlType Find(string name, string ns)
             {
                 if (ns != XamlLanguage.Xaml2006Namespace)
                     return null;
-                var stn = this.FirstOrDefault (s => s.Name == name);
+                var stn = this.FirstOrDefault(s => s.Name == name);
                 return stn != null ? stn.Type : null;
             }
         }
 
         internal class SpecialTypeName
         {
-            public SpecialTypeName (string name, XamlType type)
+            public SpecialTypeName(string name, XamlType type)
             {
                 Name = name;
                 Type = type;
             }
-            
+
             public string Name { get; private set; }
             public XamlType Type { get; private set; }
         }
 
-        static readonly XamlSchemaContext sctx = new XamlSchemaContext (new Assembly [] {typeof (XamlType).Assembly});
+        static readonly XamlSchemaContext sctx = new XamlSchemaContext(
+            new Assembly[] { typeof(XamlType).Assembly }
+        );
 
-        static XamlType XT<T> ()
+        static XamlType XT<T>()
         {
-            return sctx.GetXamlType (typeof (T));
+            return sctx.GetXamlType(typeof(T));
         }
 
         internal static readonly bool InitializingDirectives;
         internal static readonly bool InitializingTypes;
 
-        static XamlLanguage ()
+        static XamlLanguage()
         {
             InitializingTypes = true;
 
             // types
 
-            Array = XT<ArrayExtension> ();
-            Boolean = XT<bool> ();
-            Byte = XT<byte> ();
-            Char = XT<char> ();
-            Decimal = XT<decimal> ();
-            Double = XT<double> ();
-            Int16 = XT<short> ();
-            Int32 = XT<int> ();
-            Int64 = XT<long> ();
-            Member = XT<MemberDefinition> ();
-            Null = XT<NullExtension> ();
-            Object = XT<object> ();
-            Property = XT<PropertyDefinition> ();
-            Reference = XT<Reference> ();
-            Single = XT<float> ();
-            Static = XT<StaticExtension> ();
-            String = XT<string> ();
-            TimeSpan = XT<TimeSpan> ();
-            Type = XT<TypeExtension> ();
-            Uri = XT<Uri> ();
-            XData = XT<XData> ();
+            Array = XT<ArrayExtension>();
+            Boolean = XT<bool>();
+            Byte = XT<byte>();
+            Char = XT<char>();
+            Decimal = XT<decimal>();
+            Double = XT<double>();
+            Int16 = XT<short>();
+            Int32 = XT<int>();
+            Int64 = XT<long>();
+            Member = XT<MemberDefinition>();
+            Null = XT<NullExtension>();
+            Object = XT<object>();
+            Property = XT<PropertyDefinition>();
+            Reference = XT<Reference>();
+            Single = XT<float>();
+            Static = XT<StaticExtension>();
+            String = XT<string>();
+            TimeSpan = XT<TimeSpan>();
+            Type = XT<TypeExtension>();
+            Uri = XT<Uri>();
+            XData = XT<XData>();
 
             InitializingTypes = false;
 
-            AllTypes = new ReadOnlyCollection<XamlType> (new XamlType [] {Array, Boolean, Byte, Char, Decimal, Double, Int16, Int32, Int64, Member, Null, Object, Property, Reference, Single, Static, String, TimeSpan, Type, Uri, XData});
+            AllTypes = new ReadOnlyCollection<XamlType>(
+                new XamlType[]
+                {
+                    Array,
+                    Boolean,
+                    Byte,
+                    Char,
+                    Decimal,
+                    Double,
+                    Int16,
+                    Int32,
+                    Int64,
+                    Member,
+                    Null,
+                    Object,
+                    Property,
+                    Reference,
+                    Single,
+                    Static,
+                    String,
+                    TimeSpan,
+                    Type,
+                    Uri,
+                    XData
+                }
+            );
 
             // directives
 
-            // Looks like predefined XamlDirectives have no ValueSerializer. 
+            // Looks like predefined XamlDirectives have no ValueSerializer.
             // To handle this situation, differentiate them from non-primitive XamlMembers.
             InitializingDirectives = true;
 
-            var nss = new string [] {XamlLanguage.Xaml2006Namespace};
-            var nssXml = new string [] {XamlLanguage.Xml1998Namespace};
+            var nss = new string[] { XamlLanguage.Xaml2006Namespace };
+            var nssXml = new string[] { XamlLanguage.Xml1998Namespace };
 
-            Arguments = new XamlDirective (nss, "Arguments", XT<List<object>> (), null, AllowedMemberLocations.Any);
-            AsyncRecords = new XamlDirective (nss, "AsyncRecords", XT<string> (), null, AllowedMemberLocations.Attribute);
-            Base = new XamlDirective (nssXml, "base", XT<string> (), null, AllowedMemberLocations.Attribute);
-            Class = new XamlDirective (nss, "Class", XT<string> (), null, AllowedMemberLocations.Attribute);
-            ClassAttributes = new XamlDirective (nss, "ClassAttributes", XT<List<Attribute>> (), null, AllowedMemberLocations.MemberElement);
-            ClassModifier = new XamlDirective (nss, "ClassModifier", XT<string> (), null, AllowedMemberLocations.Attribute);
-            Code = new XamlDirective (nss, "Code", XT<string> (), null, AllowedMemberLocations.Attribute);
-            ConnectionId = new XamlDirective (nss, "ConnectionId", XT<string> (), null, AllowedMemberLocations.Any);
-            FactoryMethod = new XamlDirective (nss, "FactoryMethod", XT<string> (), null, AllowedMemberLocations.Any);
-            FieldModifier = new XamlDirective (nss, "FieldModifier", XT<string> (), null, AllowedMemberLocations.Attribute);
-            Initialization = new XamlDirective (nss, "_Initialization", XT<object> (), null, AllowedMemberLocations.Any);
-            Items = new XamlDirective (nss, "_Items", XT<List<object>> (), null, AllowedMemberLocations.Any);
-            Key = new XamlDirective (nss, "Key", XT<object> (), null, AllowedMemberLocations.Any);
-            Lang = new XamlDirective (nssXml, "lang", XT<string> (), null, AllowedMemberLocations.Attribute);
-            Members = new XamlDirective (nss, "Members", XT<List<MemberDefinition>> (), null, AllowedMemberLocations.MemberElement);
-            Name = new XamlDirective (nss, "Name", XT<string> (), null, AllowedMemberLocations.Attribute);
-            PositionalParameters = new XamlDirective (nss, "_PositionalParameters", XT<List<object>> (), null, AllowedMemberLocations.Any);
-            Space = new XamlDirective (nssXml, "space", XT<string> (), null, AllowedMemberLocations.Attribute);
-            Subclass = new XamlDirective (nss, "Subclass", XT<string> (), null, AllowedMemberLocations.Attribute);
-            SynchronousMode = new XamlDirective (nss, "SynchronousMode", XT<string> (), null, AllowedMemberLocations.Attribute);
-            Shared = new XamlDirective (nss, "Shared", XT<string> (), null, AllowedMemberLocations.Attribute);
-            TypeArguments = new XamlDirective (nss, "TypeArguments", XT<string> (), null, AllowedMemberLocations.Attribute);
-            Uid = new XamlDirective (nss, "Uid", XT<string> (), null, AllowedMemberLocations.Attribute);
-            UnknownContent = new XamlDirective (nss, "_UnknownContent", XT<object> (), null, AllowedMemberLocations.MemberElement) { InternalIsUnknown = true };
+            Arguments = new XamlDirective(
+                nss,
+                "Arguments",
+                XT<List<object>>(),
+                null,
+                AllowedMemberLocations.Any
+            );
+            AsyncRecords = new XamlDirective(
+                nss,
+                "AsyncRecords",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            Base = new XamlDirective(
+                nssXml,
+                "base",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            Class = new XamlDirective(
+                nss,
+                "Class",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            ClassAttributes = new XamlDirective(
+                nss,
+                "ClassAttributes",
+                XT<List<Attribute>>(),
+                null,
+                AllowedMemberLocations.MemberElement
+            );
+            ClassModifier = new XamlDirective(
+                nss,
+                "ClassModifier",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            Code = new XamlDirective(
+                nss,
+                "Code",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            ConnectionId = new XamlDirective(
+                nss,
+                "ConnectionId",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Any
+            );
+            FactoryMethod = new XamlDirective(
+                nss,
+                "FactoryMethod",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Any
+            );
+            FieldModifier = new XamlDirective(
+                nss,
+                "FieldModifier",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            Initialization = new XamlDirective(
+                nss,
+                "_Initialization",
+                XT<object>(),
+                null,
+                AllowedMemberLocations.Any
+            );
+            Items = new XamlDirective(
+                nss,
+                "_Items",
+                XT<List<object>>(),
+                null,
+                AllowedMemberLocations.Any
+            );
+            Key = new XamlDirective(nss, "Key", XT<object>(), null, AllowedMemberLocations.Any);
+            Lang = new XamlDirective(
+                nssXml,
+                "lang",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            Members = new XamlDirective(
+                nss,
+                "Members",
+                XT<List<MemberDefinition>>(),
+                null,
+                AllowedMemberLocations.MemberElement
+            );
+            Name = new XamlDirective(
+                nss,
+                "Name",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            PositionalParameters = new XamlDirective(
+                nss,
+                "_PositionalParameters",
+                XT<List<object>>(),
+                null,
+                AllowedMemberLocations.Any
+            );
+            Space = new XamlDirective(
+                nssXml,
+                "space",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            Subclass = new XamlDirective(
+                nss,
+                "Subclass",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            SynchronousMode = new XamlDirective(
+                nss,
+                "SynchronousMode",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            Shared = new XamlDirective(
+                nss,
+                "Shared",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            TypeArguments = new XamlDirective(
+                nss,
+                "TypeArguments",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            Uid = new XamlDirective(
+                nss,
+                "Uid",
+                XT<string>(),
+                null,
+                AllowedMemberLocations.Attribute
+            );
+            UnknownContent = new XamlDirective(
+                nss,
+                "_UnknownContent",
+                XT<object>(),
+                null,
+                AllowedMemberLocations.MemberElement
+            )
+            {
+                InternalIsUnknown = true
+            };
 
-            AllDirectives = new ReadOnlyCollection<XamlDirective> (new XamlDirective [] {Arguments, AsyncRecords, Base, Class, ClassAttributes, ClassModifier, Code, ConnectionId, FactoryMethod, FieldModifier, Initialization, Items, Key, Lang, Members, Name, PositionalParameters, Space, Subclass, SynchronousMode, Shared, TypeArguments, Uid, UnknownContent});
+            AllDirectives = new ReadOnlyCollection<XamlDirective>(
+                new XamlDirective[]
+                {
+                    Arguments,
+                    AsyncRecords,
+                    Base,
+                    Class,
+                    ClassAttributes,
+                    ClassModifier,
+                    Code,
+                    ConnectionId,
+                    FactoryMethod,
+                    FieldModifier,
+                    Initialization,
+                    Items,
+                    Key,
+                    Lang,
+                    Members,
+                    Name,
+                    PositionalParameters,
+                    Space,
+                    Subclass,
+                    SynchronousMode,
+                    Shared,
+                    TypeArguments,
+                    Uid,
+                    UnknownContent
+                }
+            );
 
             InitializingDirectives = false;
 
-            SpecialNames = new SpecialTypeNameList ();
+            SpecialNames = new SpecialTypeNameList();
         }
 
-        static readonly string [] xaml_nss = new string [] {Xaml2006Namespace};
+        static readonly string[] xaml_nss = new string[] { Xaml2006Namespace };
 
-        public static IList<string> XamlNamespaces {
+        public static IList<string> XamlNamespaces
+        {
             get { return xaml_nss; }
         }
 
-        static readonly string [] xml_nss = new string [] {Xml1998Namespace};
+        static readonly string[] xml_nss = new string[] { Xml1998Namespace };
 
-        public static IList<string> XmlNamespaces {
+        public static IList<string> XmlNamespaces
+        {
             get { return xml_nss; }
         }
 
@@ -217,36 +415,37 @@ namespace System.Xaml
         public static XamlType Uri { get; private set; }
         public static XamlType XData { get; private set; }
 
-        internal static bool IsValidXamlName (string name)
+        internal static bool IsValidXamlName(string name)
         {
-            if (string.IsNullOrEmpty (name))
+            if (string.IsNullOrEmpty(name))
                 return false;
-            if (!IsValidXamlName (name [0], true))
+            if (!IsValidXamlName(name[0], true))
                 return false;
             foreach (char c in name)
-                if (!IsValidXamlName (c, false))
+                if (!IsValidXamlName(c, false))
                     return false;
             return true;
         }
 
-        static bool IsValidXamlName (char c, bool first)
+        static bool IsValidXamlName(char c, bool first)
         {
             if (c == '_')
                 return true;
-            switch (char.GetUnicodeCategory (c)) {
-            case UnicodeCategory.LowercaseLetter:
-            case UnicodeCategory.UppercaseLetter:
-            case UnicodeCategory.TitlecaseLetter:
-            case UnicodeCategory.OtherLetter:
-            case UnicodeCategory.LetterNumber:
-                return true;
-            case UnicodeCategory.NonSpacingMark:
-            case UnicodeCategory.DecimalDigitNumber:
-            case UnicodeCategory.SpacingCombiningMark:
-            case UnicodeCategory.ModifierLetter:
-                return !first;
-            default:
-                return false;
+            switch (char.GetUnicodeCategory(c))
+            {
+                case UnicodeCategory.LowercaseLetter:
+                case UnicodeCategory.UppercaseLetter:
+                case UnicodeCategory.TitlecaseLetter:
+                case UnicodeCategory.OtherLetter:
+                case UnicodeCategory.LetterNumber:
+                    return true;
+                case UnicodeCategory.NonSpacingMark:
+                case UnicodeCategory.DecimalDigitNumber:
+                case UnicodeCategory.SpacingCombiningMark:
+                case UnicodeCategory.ModifierLetter:
+                    return !first;
+                default:
+                    return false;
             }
         }
     }

@@ -1,21 +1,22 @@
 // Bug #57014.
 using System;
 
-public class X {
+public class X
+{
     public const string Address = null;
-    
-    public static bool Resolve (string addr)
+
+    public static bool Resolve(string addr)
     {
         return true;
     }
 
-    static string Test ()
+    static string Test()
     {
         return Address;
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Resolve (Address);
+        Resolve(Address);
     }
 }

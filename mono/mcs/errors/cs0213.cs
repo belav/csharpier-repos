@@ -2,15 +2,16 @@
 // Line: 12
 // Compiler options: -unsafe
 
-class UnsafeClass {
-        unsafe UnsafeClass () {
-                int value = 5;
-                Calculate(value);
-        }
-        
-        unsafe void Calculate (int value) {
-                fixed (int *x = &value) {}
-        }
+class UnsafeClass
+{
+    unsafe UnsafeClass()
+    {
+        int value = 5;
+        Calculate(value);
+    }
+
+    unsafe void Calculate(int value)
+    {
+        fixed (int* x = &value) { }
+    }
 }
-
-

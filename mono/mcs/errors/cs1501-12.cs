@@ -3,13 +3,14 @@
 
 public class Blah
 {
-    int this [short id, string v] {
-        set {}
+    int this[short id, string v]
+    {
+        set { }
     }
 
-    public void Test ()
+    public void Test()
     {
         dynamic d = 1;
-        this [d] = 1;
+        this[d] = 1;
     }
 }

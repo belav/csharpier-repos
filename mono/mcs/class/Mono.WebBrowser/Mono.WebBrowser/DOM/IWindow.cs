@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,15 +36,15 @@ namespace Mono.WebBrowser.DOM
         IWindow Parent { get; }
         string StatusText { get; }
         IWindow Top { get; }
-        IHistory History {get;}
-        
-        void AttachEventHandler (string eventName, EventHandler handler);
-        void DetachEventHandler (string eventName, EventHandler handler);
-        void Focus ();
-        bool Equals (object obj);        
-        int GetHashCode ();
-        void Open (string url);
-        void ScrollTo (int x, int y);
+        IHistory History { get; }
+
+        void AttachEventHandler(string eventName, EventHandler handler);
+        void DetachEventHandler(string eventName, EventHandler handler);
+        void Focus();
+        bool Equals(object obj);
+        int GetHashCode();
+        void Open(string url);
+        void ScrollTo(int x, int y);
 
         event EventHandler Load;
         event EventHandler Unload;

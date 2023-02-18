@@ -15,11 +15,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal sealed partial class
 #if DEBUG
-        FunctionPointerTypeSymbolAdapter : SymbolAdapter,
+    FunctionPointerTypeSymbolAdapter : SymbolAdapter,
 #else
-        FunctionPointerTypeSymbol :
-#endif 
-        IFunctionPointerTypeReference
+    FunctionPointerTypeSymbol :
+#endif
+            IFunctionPointerTypeReference
     {
         private FunctionPointerMethodSignature? _lazySignature;
         ISignature IFunctionPointerTypeReference.Signature
@@ -28,13 +28,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazySignature is null)
                 {
-                    Interlocked.CompareExchange(ref _lazySignature, new FunctionPointerMethodSignature(AdaptedFunctionPointerTypeSymbol.Signature), null);
+                    Interlocked.CompareExchange(
+                        ref _lazySignature,
+                        new FunctionPointerMethodSignature(
+                            AdaptedFunctionPointerTypeSymbol.Signature
+                        ),
+                        null
+                    );
                 }
 
                 return _lazySignature;
             }
         }
-        void IReference.Dispatch(MetadataVisitor visitor) => visitor.Visit((IFunctionPointerTypeReference)this);
+
+        void IReference.Dispatch(MetadataVisitor visitor) =>
+            visitor.Visit((IFunctionPointerTypeReference)this);
 
         bool ITypeReference.IsEnum => false;
         Cci.PrimitiveTypeCode ITypeReference.TypeCode => Cci.PrimitiveTypeCode.FunctionPointer;
@@ -45,13 +53,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         INamespaceTypeReference? ITypeReference.AsNamespaceTypeReference => null;
         INestedTypeReference? ITypeReference.AsNestedTypeReference => null;
         ISpecializedNestedTypeReference? ITypeReference.AsSpecializedNestedTypeReference => null;
-        INamespaceTypeDefinition? ITypeReference.AsNamespaceTypeDefinition(EmitContext context) => null;
+
+        INamespaceTypeDefinition? ITypeReference.AsNamespaceTypeDefinition(EmitContext context) =>
+            null;
+
         INestedTypeDefinition? ITypeReference.AsNestedTypeDefinition(EmitContext context) => null;
+
         ITypeDefinition? ITypeReference.AsTypeDefinition(EmitContext context) => null;
+
         ITypeDefinition? ITypeReference.GetResolvedType(EmitContext context) => null;
+
         bool ITypeReference.IsValueType => AdaptedFunctionPointerTypeSymbol.IsValueType;
 
-        IEnumerable<ICustomAttribute> IReference.GetAttributes(EmitContext context) => SpecializedCollections.EmptyEnumerable<ICustomAttribute>();
+        IEnumerable<ICustomAttribute> IReference.GetAttributes(EmitContext context) =>
+            SpecializedCollections.EmptyEnumerable<ICustomAttribute>();
+
         IDefinition? IReference.AsDefinition(EmitContext context) => null;
 
         /// <summary>
@@ -71,12 +87,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public CallingConvention CallingConvention => Underlying.CallingConvention;
             public ushort ParameterCount => Underlying.ParameterCount;
-            public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers => Underlying.ReturnValueCustomModifiers;
-            public ImmutableArray<ICustomModifier> RefCustomModifiers => Underlying.RefCustomModifiers;
+            public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers =>
+                Underlying.ReturnValueCustomModifiers;
+            public ImmutableArray<ICustomModifier> RefCustomModifiers =>
+                Underlying.RefCustomModifiers;
             public bool ReturnValueIsByRef => Underlying.ReturnValueIsByRef;
 
-            public ImmutableArray<IParameterTypeInformation> GetParameters(EmitContext context)
-                => Underlying.GetParameters(context);
+            public ImmutableArray<IParameterTypeInformation> GetParameters(EmitContext context) =>
+                Underlying.GetParameters(context);
+
             public ITypeReference GetType(EmitContext context) => Underlying.GetType(context);
 
             public override bool Equals(object? obj)
@@ -88,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
             public override int GetHashCode() => throw ExceptionUtilities.Unreachable();
 
-            public override string ToString() => _underlying.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat);
+            public override string ToString() =>
+                _underlying.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat);
         }
     }
 
@@ -103,7 +123,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyAdapter is null)
             {
-                return InterlockedOperations.Initialize(ref _lazyAdapter, new FunctionPointerTypeSymbolAdapter(this));
+                return InterlockedOperations.Initialize(
+                    ref _lazyAdapter,
+                    new FunctionPointerTypeSymbolAdapter(this)
+                );
             }
 
             return _lazyAdapter;
@@ -115,13 +138,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return this;
         }
-#endif 
+#endif
     }
 
 #if DEBUG
     internal partial class FunctionPointerTypeSymbolAdapter
     {
-        internal FunctionPointerTypeSymbolAdapter(FunctionPointerTypeSymbol underlyingFunctionPointerTypeSymbol)
+        internal FunctionPointerTypeSymbolAdapter(
+            FunctionPointerTypeSymbol underlyingFunctionPointerTypeSymbol
+        )
         {
             AdaptedFunctionPointerTypeSymbol = underlyingFunctionPointerTypeSymbol;
         }

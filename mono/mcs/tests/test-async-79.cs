@@ -3,31 +3,39 @@ using System.Threading.Tasks;
 
 class Test
 {
-    public int in_catch, in_finally;
+    public int in_catch,
+        in_finally;
 
-    async Task ExecuteCore ()
+    async Task ExecuteCore()
     {
-        try {
-            await Task.Run (() => { 
-                throw new ApplicationException ();
+        try
+        {
+            await Task.Run(() =>
+            {
+                throw new ApplicationException();
             });
-        } catch (Exception ex) {
+        }
+        catch (Exception ex)
+        {
             ++in_catch;
             throw;
-        } finally {
+        }
+        finally
+        {
             ++in_finally;
-            await Task.Yield ();
+            await Task.Yield();
         }
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        var t = new Test ();
-        try {
-            t.ExecuteCore ().Wait ();
+        var t = new Test();
+        try
+        {
+            t.ExecuteCore().Wait();
             return 3;
-        } catch (AggregateException) {            
         }
+        catch (AggregateException) { }
 
         if (t.in_catch != 1)
             return 1;

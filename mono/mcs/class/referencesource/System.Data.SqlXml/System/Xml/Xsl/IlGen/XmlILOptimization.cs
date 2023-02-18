@@ -5,12 +5,13 @@
 // <owner current="true" primary="true">akimball</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Xsl.IlGen {
-
+namespace System.Xml.Xsl.IlGen
+{
     /// <summary>
     /// Xml IL patterns.
     /// </summary>
-    internal enum XmlILOptimization {
+    internal enum XmlILOptimization
+    {
         None,
         EliminateLiteralVariables,
         TailCall,

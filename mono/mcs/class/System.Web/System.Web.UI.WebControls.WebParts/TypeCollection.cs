@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,41 +35,39 @@ namespace System.Web.UI.WebControls.WebParts
 {
     public class TypeCollection : ReadOnlyCollectionBase
     {
-        public TypeCollection ()
-        {            
-        }
+        public TypeCollection() { }
 
-        public TypeCollection (ICollection types)
+        public TypeCollection(ICollection types)
         {
-            InnerList.AddRange (types);
+            InnerList.AddRange(types);
         }
 
-        public TypeCollection (TypeCollection existingTypes, 
-                                ICollection types)
+        public TypeCollection(TypeCollection existingTypes, ICollection types)
         {
-            InnerList.AddRange (existingTypes.InnerList);
-            InnerList.AddRange (types);
+            InnerList.AddRange(existingTypes.InnerList);
+            InnerList.AddRange(types);
         }
 
-        public static readonly TypeCollection Empty = new TypeCollection ();
+        public static readonly TypeCollection Empty = new TypeCollection();
 
-        public bool Contains (Type value)
+        public bool Contains(Type value)
         {
-            return InnerList.Contains (value);
+            return InnerList.Contains(value);
         }
 
-        public void CopyTo (Type [] array, int index)
+        public void CopyTo(Type[] array, int index)
         {
-            InnerList.CopyTo (0, array, index, Count);        
+            InnerList.CopyTo(0, array, index, Count);
         }
 
-        public int IndexOf (Type value)
+        public int IndexOf(Type value)
         {
-            return (InnerList.IndexOf (value));
+            return (InnerList.IndexOf(value));
         }
 
-        public Type this [int index ] {
-            get { return (Type)InnerList [index]; }
+        public Type this[int index]
+        {
+            get { return (Type)InnerList[index]; }
         }
     }
 }

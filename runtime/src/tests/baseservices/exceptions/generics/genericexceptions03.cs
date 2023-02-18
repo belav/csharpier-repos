@@ -4,9 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 
-class MyException : Exception
-{
-}
+class MyException : Exception { }
 
 public class Help
 {
@@ -15,8 +13,9 @@ public class Help
 
     public static Object s_object = new object();
 }
+
 public class A<T>
-where T: Exception
+    where T : Exception
 {
     public static void StaticFunctionWithFewArgs()
     {
@@ -41,10 +40,8 @@ where T: Exception
     }
 }
 
-
 public class GenericExceptions
 {
-
     public static void StaticFunctionWithFewArgs()
     {
         Help.s_matchingException = true;
@@ -57,27 +54,25 @@ public class GenericExceptions
         A<MyException>.StaticFunctionWithFewArgs();
     }
 
-
-        [System.Runtime.CompilerServices.MethodImpl(
-          System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     public static int Main()
     {
         try
         {
-        Console.WriteLine("This test checks that we can catch generic exceptions.");
-        Console.WriteLine("All exceptions should be handled by the test itself");
+            Console.WriteLine("This test checks that we can catch generic exceptions.");
+            Console.WriteLine("All exceptions should be handled by the test itself");
 
-        StaticFunctionWithFewArgs();
-        
+            StaticFunctionWithFewArgs();
         }
-        catch(Exception)
+        catch (Exception)
         {
-        Console.WriteLine("Test Failed");
-        return -1;
+            Console.WriteLine("Test Failed");
+            return -1;
         }
 
         Console.WriteLine("Test Passed");
         return 100;
     }
-
 }

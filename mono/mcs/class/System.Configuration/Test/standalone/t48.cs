@@ -7,9 +7,10 @@ namespace TestConfigSection
 {
     class Test
     {
-        public static int Main (string[] args)
+        public static int Main(string[] args)
         {
-            Hashtable testCustomSection = (Hashtable)System.Configuration.ConfigurationManager.GetSection ("TestCustomSection");
+            Hashtable testCustomSection = (Hashtable)
+                System.Configuration.ConfigurationManager.GetSection("TestCustomSection");
             string proxyServer = (string)testCustomSection["ProxyServer"];
 
             if (proxyServer == null)

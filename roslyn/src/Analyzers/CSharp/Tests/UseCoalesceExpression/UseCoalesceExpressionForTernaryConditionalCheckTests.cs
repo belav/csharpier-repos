@@ -18,22 +18,25 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCoalesceExpression
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseCoalesceExpression)]
-    public class UseCoalesceExpressionForTernaryConditionalCheckTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class UseCoalesceExpressionForTernaryConditionalCheckTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseCoalesceExpressionForTernaryConditionalCheckTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseCoalesceExpressionForTernaryConditionalCheckDiagnosticAnalyzer(),
-                new UseCoalesceExpressionForTernaryConditionalCheckCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseCoalesceExpressionForTernaryConditionalCheckDiagnosticAnalyzer(),
+                new UseCoalesceExpressionForTernaryConditionalCheckCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestOnLeft_Equals()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -42,7 +45,7 @@ class C
         var z = [||]x == null ? y : x;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -50,14 +53,15 @@ class C
     {
         var z = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnLeft_NotEquals()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -66,7 +70,7 @@ class C
         var z = [||]x != null ? x : y;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -74,14 +78,15 @@ class C
     {
         var z = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnRight_Equals()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -90,7 +95,7 @@ class C
         var z = [||]null == x ? y : x;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -98,14 +103,15 @@ class C
     {
         var z = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnRight_NotEquals()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -114,7 +120,7 @@ class C
         var z = [||]null != x ? x : y;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -122,14 +128,15 @@ class C
     {
         var z = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComplexExpression()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -138,7 +145,7 @@ class C
         var z = [||]x.ToString() == null ? y : x.ToString();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -146,14 +153,15 @@ class C
     {
         var z = x.ToString() ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestParens1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -162,7 +170,7 @@ class C
         var z = [||](x == null) ? y : x;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -170,14 +178,15 @@ class C
     {
         var z = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestParens2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -186,7 +195,7 @@ class C
         var z = [||](x) == null ? y : x;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -194,14 +203,15 @@ class C
     {
         var z = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestParens3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -210,7 +220,7 @@ class C
         var z = [||]x == null ? y : (x);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -218,14 +228,15 @@ class C
     {
         var z = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestParens4()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -234,7 +245,7 @@ class C
         var z = [||]x == null ? (y) : x;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -242,14 +253,15 @@ class C
     {
         var z = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -259,7 +271,7 @@ class C
         var z2 = x != null ? x : y;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -268,14 +280,15 @@ class C
         var z1 = x ?? y;
         var z2 = x ?? y;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -284,7 +297,7 @@ class C
         var w = {|FixAllInDocument:x|} != null ? x : y.ToString(z != null ? z : y);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -292,14 +305,15 @@ class C
     {
         var w = x ?? y.ToString(z ?? y);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -308,7 +322,7 @@ class C
         var w = {|FixAllInDocument:x|} != null ? x : y != null ? y : z;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -316,14 +330,15 @@ class C
     {
         var w = x ?? y ?? z;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(16025, "https://github.com/dotnet/roslyn/issues/16025")]
         public async Task TestTrivia1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -334,7 +349,7 @@ class Program
         string y = [|x|] == null ? string.Empty : x;
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -344,14 +359,15 @@ class Program
 
         string y = x ?? string.Empty;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(17028, "https://github.com/dotnet/roslyn/issues/17028")]
         public async Task TestInExpressionOfT()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 class C
@@ -361,7 +377,7 @@ class C
         Expression<Func<string>> e = () => [||]s != null ? s : y;
     }
 }",
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 class C
@@ -370,42 +386,45 @@ class C
     {
         Expression<Func<string>> e = () => {|Warning:s ?? y|};
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUnconstrainedTypeParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C<T>
 {
     void Main(T t)
     {
         var v = [||]t == null ? throw new Exception() : t;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestStructConstrainedTypeParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C<T> where T : struct
 {
     void Main(T t)
     {
         var v = [||]t == null ? throw new Exception() : t;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestClassConstrainedTypeParameter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C<T> where T : class
 {
     void Main(T t)
@@ -413,35 +432,37 @@ class C<T> where T : class
         var v = [||]t == null ? throw new Exception() : t;
     }
 }",
-@"
+                @"
 class C<T> where T : class
 {
     void Main(T t)
     {
         var v = t ?? throw new Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnNullable()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void Main(int? t)
     {
         var v = [||]t == null ? throw new Exception() : t;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnArray()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void Main(int[] t)
@@ -449,21 +470,22 @@ class C
         var v = [||]t == null ? throw new Exception() : t;
     }
 }",
-@"
+                @"
 class C
 {
     void Main(int[] t)
     {
         var v = t ?? throw new Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnInterface()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void Main(System.ICloneable t)
@@ -471,21 +493,22 @@ class C
         var v = [||]t == null ? throw new Exception() : t;
     }
 }",
-@"
+                @"
 class C
 {
     void Main(System.ICloneable t)
     {
         var v = t ?? throw new Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnDynamic()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void Main(dynamic t)
@@ -493,21 +516,22 @@ class C
         var v = [||]t == null ? throw new Exception() : t;
     }
 }",
-@"
+                @"
 class C
 {
     void Main(dynamic t)
     {
         var v = t ?? throw new Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(38066, "https://github.com/dotnet/roslyn/issues/38066")]
         public async Task TestSemicolonPlacement()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(string s)
@@ -517,21 +541,22 @@ class C
             : s;
     }
 }",
-@"
+                @"
 class C
 {
     void M(string s)
     {
         _ = s ?? """";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(38066, "https://github.com/dotnet/roslyn/issues/38066")]
         public async Task TestParenthesisPlacement()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(string s)
@@ -541,21 +566,22 @@ class C
             : s);
     }
 }",
-@"
+                @"
 class C
 {
     void M(string s)
     {
         M(s ?? """");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(38066, "https://github.com/dotnet/roslyn/issues/38066")]
         public async Task TestAnotherConditionalPlacement()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(string s)
@@ -567,7 +593,7 @@ class C
             : """";
     }
 }",
-@"
+                @"
 class C
 {
     void M(string s)
@@ -576,14 +602,15 @@ class C
             ? s ?? """"
             : """";
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(53190, "https://github.com/dotnet/roslyn/issues/53190")]
         public async Task TestNotWithTargetTyping()
         {
             await TestMissingAsync(
-@"
+                @"
 class Program
 {
     class A { }
@@ -596,7 +623,8 @@ class Program
 
         object x = [||]a != null ? a : b;
     }
-}");
+}"
+            );
         }
     }
 }

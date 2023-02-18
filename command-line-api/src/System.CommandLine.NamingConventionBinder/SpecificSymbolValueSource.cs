@@ -9,14 +9,17 @@ internal class SpecificSymbolValueSource : IValueSource
 {
     public SpecificSymbolValueSource(IValueDescriptor valueDescriptor)
     {
-        ValueDescriptor = valueDescriptor ?? throw new ArgumentNullException(nameof(valueDescriptor));
+        ValueDescriptor =
+            valueDescriptor ?? throw new ArgumentNullException(nameof(valueDescriptor));
     }
 
     public IValueDescriptor ValueDescriptor { get; }
 
-    public bool TryGetValue(IValueDescriptor valueDescriptor,
+    public bool TryGetValue(
+        IValueDescriptor valueDescriptor,
         BindingContext? bindingContext,
-        out object? boundValue)
+        out object? boundValue
+    )
     {
         var specificDescriptor = ValueDescriptor;
         switch (specificDescriptor)

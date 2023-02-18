@@ -3,9 +3,9 @@
 
 using System;
 
-class A {
-}
+class A { }
 
-class B : A {
+class B : A
+{
     public override event EventHandler MyMissingSuperclassEvent;
 }

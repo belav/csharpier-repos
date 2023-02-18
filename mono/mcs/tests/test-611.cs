@@ -1,17 +1,13 @@
 public class T
 {
-    protected class Protected
-    {
-    }
+    protected class Protected { }
 }
 
 public class D : T
 {
     private class Private
     {
-        public void Stuff (Protected p)
-        {
-        }
+        public void Stuff(Protected p) { }
     }
 }
 
@@ -21,16 +17,12 @@ public class D2 : T
     {
         private class Private
         {
-            public void Stuff (Protected p)
-            {
-            }
+            public void Stuff(Protected p) { }
         }
     }
 }
 
 public class Z
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

@@ -17,9 +17,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public const int DefaultPriority = 50;
 
-        public abstract Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken);
+        public abstract Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
 
-        public abstract Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken);
+        public abstract Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// it is not allowed one to implement both DocumentDiagnosticAnalzyer and DiagnosticAnalyzer
@@ -29,8 +35,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public sealed override void Initialize(AnalysisContext context)
 #pragma warning restore RS1025 // Configure generated code analysis
 #pragma warning restore RS1026 // Enable concurrent execution
-        {
-        }
+        { }
 
         /// <summary>
         /// This lets vsix installed <see cref="DocumentDiagnosticAnalyzer"/> or <see cref="ProjectDiagnosticAnalyzer"/> to

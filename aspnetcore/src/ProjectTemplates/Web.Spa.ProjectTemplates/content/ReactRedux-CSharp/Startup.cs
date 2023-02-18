@@ -61,7 +61,8 @@ namespace Company.WebApplication1
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action=Index}/{id?}"
+                );
             });
 
             app.UseSpa(spa =>

@@ -9,7 +9,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
     {
         public string TrimMode;
         public string DefaultAssembliesAction;
-        public List<KeyValuePair<string, string>> AssembliesAction = new List<KeyValuePair<string, string>> ();
+        public List<KeyValuePair<string, string>> AssembliesAction =
+            new List<KeyValuePair<string, string>>();
 
         public string Il8n;
         public bool IgnoreDescriptors;
@@ -22,12 +23,13 @@ namespace Mono.Linker.Tests.TestCasesRunner
         public bool StripSubstitutions;
         public bool StripLinkAttributes;
 
-        public List<KeyValuePair<string, string[]>> AdditionalArguments = new List<KeyValuePair<string, string[]>> ();
+        public List<KeyValuePair<string, string[]>> AdditionalArguments =
+            new List<KeyValuePair<string, string[]>>();
 
-        public List<string> Descriptors = new List<string> ();
+        public List<string> Descriptors = new List<string>();
 
-        public List<string> Substitutions = new List<string> ();
+        public List<string> Substitutions = new List<string>();
 
-        public List<string> LinkAttributes = new List<string> ();
+        public List<string> LinkAttributes = new List<string>();
     }
 }

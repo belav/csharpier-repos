@@ -3,7 +3,7 @@
 
 class A
 {
-    public static A operator + (A a, B b)
+    public static A operator +(A a, B b)
     {
         return null;
     }
@@ -11,13 +11,13 @@ class A
 
 class B
 {
-    public static A operator + (A a, B b)
+    public static A operator +(A a, B b)
     {
         return null;
     }
 
-    static void Main ()
+    static void Main()
     {
-        object o = new A () + new B ();
+        object o = new A() + new B();
     }
 }

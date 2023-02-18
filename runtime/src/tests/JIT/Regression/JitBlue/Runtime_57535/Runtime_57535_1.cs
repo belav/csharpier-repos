@@ -11,7 +11,7 @@ public class Runtime_57535_1
         int[] a = F();
         long zz = z;
         int result = 0;
-        for (int i = (int) zz; i < a.Length; i++)
+        for (int i = (int)zz; i < a.Length; i++)
         {
             result += a[i];
         }
@@ -22,10 +22,10 @@ public class Runtime_57535_1
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int[] F()
     {
-       int[] result = new int[100];
-       result[3] = 100;
-       return result;
+        int[] result = new int[100];
+        result[3] = 100;
+        return result;
     }
 
-    static void Bar(long z) {}
+    static void Bar(long z) { }
 }

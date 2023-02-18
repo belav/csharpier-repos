@@ -9,13 +9,13 @@ using System.Threading;
 
 namespace System.Data.SqlClient
 {
-    public enum SqlConnectionColumnEncryptionSetting 
+    public enum SqlConnectionColumnEncryptionSetting
     {
         Disabled = 0,
         Enabled,
     }
 
-    public enum SqlAuthenticationMethod 
+    public enum SqlAuthenticationMethod
     {
         NotSpecified = 0,
         SqlPassword,
@@ -23,7 +23,7 @@ namespace System.Data.SqlClient
         ActiveDirectoryIntegrated,
     }
 
-    public enum SqlCommandColumnEncryptionSetting 
+    public enum SqlCommandColumnEncryptionSetting
     {
         UseConnectionSetting = 0,
         Enabled,

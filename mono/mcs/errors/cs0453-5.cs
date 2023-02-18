@@ -6,7 +6,8 @@ using System;
 
 public static class Foo
 {
-    public static string Test_2<T> (this T s) where T : struct
+    public static string Test_2<T>(this T s)
+        where T : struct
     {
         return null;
     }
@@ -16,7 +17,7 @@ namespace B
 {
     public class M
     {
-        public static void Main ()
+        public static void Main()
         {
             new M().Test_2();
         }

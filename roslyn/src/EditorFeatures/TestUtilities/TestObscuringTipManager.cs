@@ -21,16 +21,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestObscuringTipManager()
-        {
-        }
+        public TestObscuringTipManager() { }
 
-        public void PushTip(ITextView view, IObscuringTip tip)
-        {
-        }
+        public void PushTip(ITextView view, IObscuringTip tip) { }
 
-        public void RemoveTip(ITextView view, IObscuringTip tip)
-        {
-        }
+        public void RemoveTip(ITextView view, IObscuringTip tip) { }
     }
 }

@@ -22,22 +22,30 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             private static readonly string s_summaryHeader = FeaturesResources.Summary_colon;
             private static readonly string s_paramHeader = FeaturesResources.Parameters_colon;
             private const string s_labelFormat = "{0}:";
-            private static readonly string s_typeParameterHeader = FeaturesResources.Type_parameters_colon;
+            private static readonly string s_typeParameterHeader =
+                FeaturesResources.Type_parameters_colon;
             private static readonly string s_returnsHeader = FeaturesResources.Returns_colon;
             private static readonly string s_valueHeader = FeaturesResources.Value_colon;
             private static readonly string s_exceptionsHeader = FeaturesResources.Exceptions_colon;
             private static readonly string s_remarksHeader = FeaturesResources.Remarks_colon;
 
-            internal static ImmutableArray<string> Format(IDocumentationCommentFormattingService docCommentFormattingService, DocumentationComment docComment)
+            internal static ImmutableArray<string> Format(
+                IDocumentationCommentFormattingService docCommentFormattingService,
+                DocumentationComment docComment
+            )
             {
                 var formattedCommentLinesBuilder = ArrayBuilder<string>.GetInstance();
                 var lineBuilder = new StringBuilder();
 
-                var formattedSummaryText = docCommentFormattingService.Format(docComment.SummaryText);
+                var formattedSummaryText = docCommentFormattingService.Format(
+                    docComment.SummaryText
+                );
                 if (!string.IsNullOrWhiteSpace(formattedSummaryText))
                 {
                     formattedCommentLinesBuilder.Add(s_summaryHeader);
-                    formattedCommentLinesBuilder.AddRange(CreateWrappedTextFromRawText(formattedSummaryText));
+                    formattedCommentLinesBuilder.AddRange(
+                        CreateWrappedTextFromRawText(formattedSummaryText)
+                    );
                 }
 
                 var parameterNames = docComment.ParameterNames;
@@ -59,10 +67,14 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         formattedCommentLinesBuilder.Add(lineBuilder.ToString());
 
                         var rawParameterText = docComment.GetParameterText(parameterNames[i]);
-                        var formattedParameterText = docCommentFormattingService.Format(rawParameterText);
+                        var formattedParameterText = docCommentFormattingService.Format(
+                            rawParameterText
+                        );
                         if (!string.IsNullOrWhiteSpace(formattedParameterText))
                         {
-                            formattedCommentLinesBuilder.AddRange(CreateWrappedTextFromRawText(formattedParameterText));
+                            formattedCommentLinesBuilder.AddRange(
+                                CreateWrappedTextFromRawText(formattedParameterText)
+                            );
                         }
                     }
                 }
@@ -85,21 +97,31 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         lineBuilder.Append(string.Format(s_labelFormat, typeParameterNames[i]));
                         formattedCommentLinesBuilder.Add(lineBuilder.ToString());
 
-                        var rawTypeParameterText = docComment.GetTypeParameterText(typeParameterNames[i]);
-                        var formattedTypeParameterText = docCommentFormattingService.Format(rawTypeParameterText);
+                        var rawTypeParameterText = docComment.GetTypeParameterText(
+                            typeParameterNames[i]
+                        );
+                        var formattedTypeParameterText = docCommentFormattingService.Format(
+                            rawTypeParameterText
+                        );
                         if (!string.IsNullOrWhiteSpace(formattedTypeParameterText))
                         {
-                            formattedCommentLinesBuilder.AddRange(CreateWrappedTextFromRawText(formattedTypeParameterText));
+                            formattedCommentLinesBuilder.AddRange(
+                                CreateWrappedTextFromRawText(formattedTypeParameterText)
+                            );
                         }
                     }
                 }
 
-                var formattedReturnsText = docCommentFormattingService.Format(docComment.ReturnsText);
+                var formattedReturnsText = docCommentFormattingService.Format(
+                    docComment.ReturnsText
+                );
                 if (!string.IsNullOrWhiteSpace(formattedReturnsText))
                 {
                     formattedCommentLinesBuilder.Add(string.Empty);
                     formattedCommentLinesBuilder.Add(s_returnsHeader);
-                    formattedCommentLinesBuilder.AddRange(CreateWrappedTextFromRawText(formattedReturnsText));
+                    formattedCommentLinesBuilder.AddRange(
+                        CreateWrappedTextFromRawText(formattedReturnsText)
+                    );
                 }
 
                 var formattedValueText = docCommentFormattingService.Format(docComment.ValueText);
@@ -107,7 +129,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 {
                     formattedCommentLinesBuilder.Add(string.Empty);
                     formattedCommentLinesBuilder.Add(s_valueHeader);
-                    formattedCommentLinesBuilder.AddRange(CreateWrappedTextFromRawText(formattedValueText));
+                    formattedCommentLinesBuilder.AddRange(
+                        CreateWrappedTextFromRawText(formattedValueText)
+                    );
                 }
 
                 var exceptionTypes = docComment.ExceptionTypes;
@@ -132,33 +156,45 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                             lineBuilder.Append(string.Format(s_labelFormat, exceptionTypes[i]));
                             formattedCommentLinesBuilder.Add(lineBuilder.ToString());
 
-                            var formattedExceptionText = docCommentFormattingService.Format(rawExceptionTexts[j]);
+                            var formattedExceptionText = docCommentFormattingService.Format(
+                                rawExceptionTexts[j]
+                            );
                             if (!string.IsNullOrWhiteSpace(formattedExceptionText))
                             {
-                                formattedCommentLinesBuilder.AddRange(CreateWrappedTextFromRawText(formattedExceptionText));
+                                formattedCommentLinesBuilder.AddRange(
+                                    CreateWrappedTextFromRawText(formattedExceptionText)
+                                );
                             }
                         }
                     }
                 }
 
-                var formattedRemarksText = docCommentFormattingService.Format(docComment.RemarksText);
+                var formattedRemarksText = docCommentFormattingService.Format(
+                    docComment.RemarksText
+                );
                 if (!string.IsNullOrWhiteSpace(formattedRemarksText))
                 {
                     formattedCommentLinesBuilder.Add(string.Empty);
                     formattedCommentLinesBuilder.Add(s_remarksHeader);
-                    formattedCommentLinesBuilder.AddRange(CreateWrappedTextFromRawText(formattedRemarksText));
+                    formattedCommentLinesBuilder.AddRange(
+                        CreateWrappedTextFromRawText(formattedRemarksText)
+                    );
                 }
 
                 // Eliminate any blank lines at the beginning.
-                while (formattedCommentLinesBuilder.Count > 0 &&
-                       formattedCommentLinesBuilder[0].Length == 0)
+                while (
+                    formattedCommentLinesBuilder.Count > 0
+                    && formattedCommentLinesBuilder[0].Length == 0
+                )
                 {
                     formattedCommentLinesBuilder.RemoveAt(0);
                 }
 
                 // Eliminate any blank lines at the end.
-                while (formattedCommentLinesBuilder.Count > 0 &&
-                       formattedCommentLinesBuilder[^1].Length == 0)
+                while (
+                    formattedCommentLinesBuilder.Count > 0
+                    && formattedCommentLinesBuilder[^1].Length == 0
+                )
                 {
                     formattedCommentLinesBuilder.RemoveAt(formattedCommentLinesBuilder.Count - 1);
                 }
@@ -181,7 +217,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             }
 
             private static void SplitRawLineIntoFormattedLines(
-                string line, ArrayBuilder<string> lines)
+                string line,
+                ArrayBuilder<string> lines
+            )
             {
                 var indent = new StringBuilder().Append(' ', s_indentSize * 2).ToString();
 

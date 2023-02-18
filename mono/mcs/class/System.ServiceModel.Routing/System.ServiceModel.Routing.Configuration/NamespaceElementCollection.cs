@@ -10,31 +10,33 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-    [ConfigurationCollection (typeof(NamespaceElement))]
+    [ConfigurationCollection(typeof(NamespaceElement))]
     public class NamespaceElementCollection : ConfigurationElementCollection
     {
-        public void Add (NamespaceElement element)
+        public void Add(NamespaceElement element)
         {
-            BaseAdd (element);
+            BaseAdd(element);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new NamespaceElement ();
+            return new NamespaceElement();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((NamespaceElement) element).Prefix;
+            return ((NamespaceElement)element).Prefix;
         }
 
-        public new NamespaceElement this [string name] {
-            get {
+        public new NamespaceElement this[string name]
+        {
+            get
+            {
                 foreach (NamespaceElement ne in this)
                     if (ne.Namespace == name)
                         return ne;
@@ -42,18 +44,19 @@ namespace System.ServiceModel.Routing.Configuration
             }
         }
 
-        public NamespaceElement this [int index] {
-            get { return (NamespaceElement) BaseGet (index); }
+        public NamespaceElement this[int index]
+        {
+            get { return (NamespaceElement)BaseGet(index); }
         }
 
-        public override bool IsReadOnly ()
+        public override bool IsReadOnly()
         {
-            return base.IsReadOnly ();
+            return base.IsReadOnly();
         }
 
-        public void Remove (NamespaceElement element)
+        public void Remove(NamespaceElement element)
         {
-            BaseRemove (element);
+            BaseRemove(element);
         }
     }
 }

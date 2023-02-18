@@ -8,7 +8,14 @@ using Microsoft.CodeAnalysis.CodeCleanup;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<TService, TExpressionSyntax, TTypeSyntax, TTypeDeclarationSyntax, TQueryExpressionSyntax, TNameSyntax>
+    internal partial class AbstractIntroduceVariableService<
+        TService,
+        TExpressionSyntax,
+        TTypeSyntax,
+        TTypeDeclarationSyntax,
+        TQueryExpressionSyntax,
+        TNameSyntax
+    >
     {
         private class IntroduceVariableCodeAction : AbstractIntroduceVariableCodeAction
         {
@@ -20,10 +27,18 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 bool allOccurrences,
                 bool isConstant,
                 bool isLocal,
-                bool isQueryLocal)
-                : base(service, document, options, expression, allOccurrences, isConstant, isLocal, isQueryLocal)
-            {
-            }
+                bool isQueryLocal
+            )
+                : base(
+                    service,
+                    document,
+                    options,
+                    expression,
+                    allOccurrences,
+                    isConstant,
+                    isLocal,
+                    isQueryLocal
+                ) { }
         }
     }
 }

@@ -4,10 +4,8 @@
 
 unsafe class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        fixed (void* f = Main)
-        {
-        }
+        fixed (void* f = Main) { }
     }
 }

@@ -29,7 +29,11 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             {
                 return false;
             }
-            return string.Equals("services", parent.ProcessName, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(
+                "services",
+                parent.ProcessName,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
     }
 }

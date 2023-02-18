@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,72 +35,80 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-    [EditorAttribute ("System.Web.UI.Design.WebControls.HotSpotCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public sealed class HotSpotCollection: StateManagedCollection
+    [EditorAttribute(
+        "System.Web.UI.Design.WebControls.HotSpotCollectionEditor, " + Consts.AssemblySystem_Design,
+        "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class HotSpotCollection : StateManagedCollection
     {
-        static Type[] _knownTypes = new Type[] { 
-            typeof (CircleHotSpot),
-            typeof (PolygonHotSpot),
-            typeof (RectangleHotSpot)
+        static Type[] _knownTypes = new Type[]
+        {
+            typeof(CircleHotSpot),
+            typeof(PolygonHotSpot),
+            typeof(RectangleHotSpot)
         };
-                            
-        public HotSpot this [int index] {
-            get { return (HotSpot) ((IList)this)[index]; }
+
+        public HotSpot this[int index]
+        {
+            get { return (HotSpot)((IList)this)[index]; }
         }
 
-        public int Add (HotSpot spot)
+        public int Add(HotSpot spot)
         {
-            return ((IList)this).Add (spot);
+            return ((IList)this).Add(spot);
         }
-        
-        protected override object CreateKnownType (int index)
+
+        protected override object CreateKnownType(int index)
         {
-            switch (index) {
+            switch (index)
+            {
                 case 0:
-                    return new CircleHotSpot ();
+                    return new CircleHotSpot();
                 case 1:
-                    return new PolygonHotSpot ();
+                    return new PolygonHotSpot();
                 case 2:
-                    return new RectangleHotSpot ();
+                    return new RectangleHotSpot();
             }
 
-            throw new ArgumentOutOfRangeException ("index");
+            throw new ArgumentOutOfRangeException("index");
         }
-        
-        protected override Type[] GetKnownTypes ()
+
+        protected override Type[] GetKnownTypes()
         {
             return _knownTypes;
         }
-        
-        public void Insert (int index, HotSpot spot)
+
+        public void Insert(int index, HotSpot spot)
         {
-            ((IList)this).Insert (index, spot);
+            ((IList)this).Insert(index, spot);
         }
-        
-        protected override void OnValidate (object o)
+
+        protected override void OnValidate(object o)
         {
-            base.OnValidate (o);
-            
+            base.OnValidate(o);
+
             if ((o is HotSpot) == false)
-                throw new ArgumentException ("o is not a HotSpot");
+                throw new ArgumentException("o is not a HotSpot");
         }
 
-        public void Remove (HotSpot spot)
+        public void Remove(HotSpot spot)
         {
-            ((IList)this).Remove (spot);
+            ((IList)this).Remove(spot);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            ((IList)this).RemoveAt (index);
+            ((IList)this).RemoveAt(index);
         }
 
-        protected override void SetDirtyObject (object o)
+        protected override void SetDirtyObject(object o)
         {
             HotSpot spot = (HotSpot)o;
-            spot.SetDirty ();
+            spot.SetDirty();
         }
     }
 }
-

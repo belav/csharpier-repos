@@ -4,8 +4,8 @@
 
 using System;
 
-[class:Serializable]
+[class: Serializable]
 public class C
 {
-    public static void Main () {}
+    public static void Main() { }
 }

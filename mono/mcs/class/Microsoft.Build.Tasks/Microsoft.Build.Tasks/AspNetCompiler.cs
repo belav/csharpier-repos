@@ -31,119 +31,136 @@ using System.IO;
 using Microsoft.Build.Framework;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.Tasks {
-    public class AspNetCompiler : ToolTaskExtension {
-    
-        bool    allowPartiallyTrustedCallers;
-        bool    clean;
-        bool    debug;
-        bool    delaySign;
-        bool    fixedNames;
-        bool    force;
-        string    keyContainer;
-        string    keyFile;
-        string    metabasePath;
-        string    physicalPath;
-        string    targetPath;
-        bool    updateable;
-        string    virtualPath;
-    
-        public AspNetCompiler ()
-        {
-        }
-        
+namespace Microsoft.Build.Tasks
+{
+    public class AspNetCompiler : ToolTaskExtension
+    {
+        bool allowPartiallyTrustedCallers;
+        bool clean;
+        bool debug;
+        bool delaySign;
+        bool fixedNames;
+        bool force;
+        string keyContainer;
+        string keyFile;
+        string metabasePath;
+        string physicalPath;
+        string targetPath;
+        bool updateable;
+        string virtualPath;
+
+        public AspNetCompiler() { }
+
         [MonoTODO]
-        public override bool Execute ()
+        public override bool Execute()
         {
             return false;
         }
-        
+
         [MonoTODO]
-        protected internal override void AddCommandLineCommands (CommandLineBuilderExtension commandLine)
+        protected internal override void AddCommandLineCommands(
+            CommandLineBuilderExtension commandLine
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        protected override string GenerateFullPathToTool ()
+        protected override string GenerateFullPathToTool()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
+
         [MonoTODO]
-        protected override bool ValidateParameters ()
+        protected override bool ValidateParameters()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public bool AllowPartiallyTrustedCallers {
+
+        public bool AllowPartiallyTrustedCallers
+        {
             get { return allowPartiallyTrustedCallers; }
             set { allowPartiallyTrustedCallers = value; }
         }
-        
-        public bool Clean {
+
+        public bool Clean
+        {
             get { return clean; }
             set { clean = value; }
         }
-        
-        public bool Debug {
+
+        public bool Debug
+        {
             get { return debug; }
             set { debug = value; }
         }
-        
-        public bool DelaySign {
+
+        public bool DelaySign
+        {
             get { return delaySign; }
             set { delaySign = value; }
         }
-        
-        public bool FixedNames {
+
+        public bool FixedNames
+        {
             get { return fixedNames; }
             set { fixedNames = value; }
         }
-        
-        public bool Force {
+
+        public bool Force
+        {
             get { return force; }
             set { force = value; }
         }
-        
-        public string KeyContainer {
+
+        public string KeyContainer
+        {
             get { return keyContainer; }
             set { keyContainer = value; }
         }
-        
-        public string KeyFile {
+
+        public string KeyFile
+        {
             get { return keyFile; }
             set { keyFile = value; }
         }
-        
-        public string MetabasePath {
+
+        public string MetabasePath
+        {
             get { return metabasePath; }
             set { metabasePath = value; }
         }
-        
-        public string PhysicalPath {
+
+        public string PhysicalPath
+        {
             get { return physicalPath; }
             set { physicalPath = value; }
         }
-        
-        public string TargetPath {
+
+        public string TargetPath
+        {
             get { return targetPath; }
             set { targetPath = value; }
         }
-        
-        public bool Updateable {
+
+        public bool Updateable
+        {
             get { return updateable; }
             set { updateable = value; }
         }
-        
-        public string VirtualPath {
+
+        public string VirtualPath
+        {
             get { return virtualPath; }
             set { virtualPath = value; }
         }
-        
-        protected override string ToolName {
-            get { return MSBuildUtils.RunningOnWindows ? "aspnet_compiler.bat" : "aspnet_compiler"; }
+
+        protected override string ToolName
+        {
+            get
+            {
+                return MSBuildUtils.RunningOnWindows ? "aspnet_compiler.bat" : "aspnet_compiler";
+            }
         }
     }
 }
-

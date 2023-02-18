@@ -23,6 +23,7 @@ using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using System.Linq;
+
 namespace Mono.WebAssembly.Build
 {
     public class WasmCreateRuntimeJs : Task
@@ -38,19 +39,22 @@ namespace Mono.WebAssembly.Build
         [Required]
         public string OutputFile { get; set; }
 
-        public override bool Execute ()
+        public override bool Execute()
         {
-            var template = new RuntimeJs {
+            var template = new RuntimeJs
+            {
                 EnableDebugging = EnableDebugging,
                 VfsPrefix = VfsPrefix,
                 DeployPrefix = DeployPrefix,
-                FileList = FileList.Select (f => f.GetMetadata ("Filename") + f.GetMetadata ("Extension"))
+                FileList = FileList.Select(
+                    f => f.GetMetadata("Filename") + f.GetMetadata("Extension")
+                )
             };
 
-            var text = template.TransformText ();
+            var text = template.TransformText();
 
-            Directory.CreateDirectory (Path.GetDirectoryName (OutputFile));
-            File.WriteAllText (OutputFile, text);
+            Directory.CreateDirectory(Path.GetDirectoryName(OutputFile));
+            File.WriteAllText(OutputFile, text);
 
             return true;
         }

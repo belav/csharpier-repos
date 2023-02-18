@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,53 +29,55 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-namespace System.IO.Packaging {
-
+namespace System.IO.Packaging
+{
     public abstract class PackagePart
     {
         string contentType;
-        
+
         internal bool IsRelationship { get; set; }
-        
+
         int relationshipId;
         Dictionary<string, PackageRelationship> relationships;
-        PackageRelationshipCollection relationshipsCollection = new PackageRelationshipCollection ();
-        
-        Dictionary<string, PackageRelationship> Relationships {
-            get {
-                if (relationships == null) {
-                    relationships = new Dictionary<string, PackageRelationship> (StringComparer.OrdinalIgnoreCase);
-                    if (Package.PartExists (RelationshipsPartUri))
-                        using (Stream s = Package.GetPart (RelationshipsPartUri).GetStream ())
-                            LoadRelationships (relationships, s);
+        PackageRelationshipCollection relationshipsCollection = new PackageRelationshipCollection();
+
+        Dictionary<string, PackageRelationship> Relationships
+        {
+            get
+            {
+                if (relationships == null)
+                {
+                    relationships = new Dictionary<string, PackageRelationship>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
+                    if (Package.PartExists(RelationshipsPartUri))
+                        using (Stream s = Package.GetPart(RelationshipsPartUri).GetStream())
+                            LoadRelationships(relationships, s);
                 }
 
                 return relationships;
             }
         }
-        Stream PartStream { get; set;  }
+        Stream PartStream { get; set; }
 
-        internal Uri RelationshipsPartUri {
-            get; set;
-        }
-        
-        protected PackagePart (Package package, Uri partUri)
-            : this(package, partUri, null)
-        {
-            
-        }
+        internal Uri RelationshipsPartUri { get; set; }
 
-        protected internal PackagePart (Package package, Uri partUri, string contentType)
-            : this (package, partUri, contentType, CompressionOption.Normal)
-        {
-            
-        }
+        protected PackagePart(Package package, Uri partUri)
+            : this(package, partUri, null) { }
 
-        protected internal PackagePart (Package package, Uri partUri, string contentType, CompressionOption compressionOption)
+        protected internal PackagePart(Package package, Uri partUri, string contentType)
+            : this(package, partUri, contentType, CompressionOption.Normal) { }
+
+        protected internal PackagePart(
+            Package package,
+            Uri partUri,
+            string contentType,
+            CompressionOption compressionOption
+        )
         {
-            Check.Package (package);
-            Check.PartUri (partUri);
-            Check.ContentTypeIsValid (contentType);
+            Check.Package(package);
+            Check.PartUri(partUri);
+            Check.ContentTypeIsValid(contentType);
 
             Package = package;
             Uri = partUri;
@@ -84,186 +86,221 @@ namespace System.IO.Packaging {
             RelationshipsPartUri = PackUriHelper.GetRelationshipPartUri(Uri);
         }
 
-        public CompressionOption CompressionOption {
-            get; private set;
-        }
+        public CompressionOption CompressionOption { get; private set; }
 
-        public string ContentType {
-            get {
+        public string ContentType
+        {
+            get
+            {
                 if (contentType == null && (contentType = GetContentTypeCore()) == null)
-                    throw new NotSupportedException ("If contentType is not supplied in the constructor, GetContentTypeCore must be overridden");
+                    throw new NotSupportedException(
+                        "If contentType is not supplied in the constructor, GetContentTypeCore must be overridden"
+                    );
                 return contentType;
             }
-            private set {
-                contentType = value;
-            }
+            private set { contentType = value; }
         }
 
-        public Package Package {
-            get; internal set;
-        }
+        public Package Package { get; internal set; }
 
-        public Uri Uri {
-            get; private set;
-        }
+        public Uri Uri { get; private set; }
 
-        private void CheckIsRelationship ()
+        private void CheckIsRelationship()
         {
             if (IsRelationship)
-                throw new InvalidOperationException ("A relationship cannot have relationships to other parts"); 
+                throw new InvalidOperationException(
+                    "A relationship cannot have relationships to other parts"
+                );
         }
 
-        public PackageRelationship CreateRelationship (Uri targetUri, TargetMode targetMode, string relationshipType)
+        public PackageRelationship CreateRelationship(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType
+        )
         {
-            return CreateRelationship (targetUri, targetMode, relationshipType, null);
+            return CreateRelationship(targetUri, targetMode, relationshipType, null);
         }
 
-        public PackageRelationship CreateRelationship (Uri targetUri, TargetMode targetMode, string relationshipType, string id)
+        public PackageRelationship CreateRelationship(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType,
+            string id
+        )
         {
-            return CreateRelationship (targetUri, targetMode, relationshipType, id, false);
+            return CreateRelationship(targetUri, targetMode, relationshipType, id, false);
         }
 
-        private PackageRelationship CreateRelationship (Uri targetUri, TargetMode targetMode, string relationshipType, string id, bool loading)
+        private PackageRelationship CreateRelationship(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType,
+            string id,
+            bool loading
+        )
         {
             if (!loading)
-                Package.CheckIsReadOnly ();
-            Check.TargetUri (targetUri);
-            Check.RelationshipTypeIsValid (relationshipType);
-            Check.IdIsValid (id);
+                Package.CheckIsReadOnly();
+            Check.TargetUri(targetUri);
+            Check.RelationshipTypeIsValid(relationshipType);
+            Check.IdIsValid(id);
 
             if (id == null)
-                id = NextId ();
+                id = NextId();
 
-            if (Relationships.ContainsKey (id))
-                throw new XmlException ("A relationship with this ID already exists");
-            
-            PackageRelationship r = new PackageRelationship (id, Package, relationshipType, Uri, targetMode, targetUri);
-            Relationships.Add (r.Id, r);
+            if (Relationships.ContainsKey(id))
+                throw new XmlException("A relationship with this ID already exists");
+
+            PackageRelationship r = new PackageRelationship(
+                id,
+                Package,
+                relationshipType,
+                Uri,
+                targetMode,
+                targetUri
+            );
+            Relationships.Add(r.Id, r);
 
             if (!loading)
-                WriteRelationships ();
+                WriteRelationships();
             return r;
         }
 
-        public void DeleteRelationship (string id)
+        public void DeleteRelationship(string id)
         {
-            Package.CheckIsReadOnly ();
-            CheckIsRelationship ();
-            Relationships.Remove (id);
-            WriteRelationships ();
+            Package.CheckIsReadOnly();
+            CheckIsRelationship();
+            Relationships.Remove(id);
+            WriteRelationships();
         }
 
-        void LoadRelationships (Dictionary<string, PackageRelationship> relationships, Stream stream)
+        void LoadRelationships(Dictionary<string, PackageRelationship> relationships, Stream stream)
         {
-            XmlDocument doc = new XmlDocument ();
-            doc.Load (stream);
-            XmlNamespaceManager manager = new XmlNamespaceManager (doc.NameTable);
-            manager.AddNamespace ("rel", Package.RelationshipNamespace);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(stream);
+            XmlNamespaceManager manager = new XmlNamespaceManager(doc.NameTable);
+            manager.AddNamespace("rel", Package.RelationshipNamespace);
 
-            foreach (XmlNode node in doc.SelectNodes ("/rel:Relationships/*", manager))
+            foreach (XmlNode node in doc.SelectNodes("/rel:Relationships/*", manager))
             {
                 TargetMode mode = TargetMode.Internal;
                 if (node.Attributes["TargetMode"] != null)
-                    mode = (TargetMode) Enum.Parse (typeof(TargetMode), node.Attributes ["TargetMode"].Value);
+                    mode = (TargetMode)
+                        Enum.Parse(typeof(TargetMode), node.Attributes["TargetMode"].Value);
 
                 // Workaround for Mono relative paths
                 // http://www.mono-project.com/docs/faq/known-issues/urikind-relativeorabsolute/
-                var kind = (UriKind) 300;
-                CreateRelationship (new Uri (node.Attributes["Target"].Value.ToString(), kind),
-                                    mode,
-                                    node.Attributes["Type"].Value.ToString (),
-                                    node.Attributes["Id"].Value.ToString (),
-                                    true);
+                var kind = (UriKind)300;
+                CreateRelationship(
+                    new Uri(node.Attributes["Target"].Value.ToString(), kind),
+                    mode,
+                    node.Attributes["Type"].Value.ToString(),
+                    node.Attributes["Id"].Value.ToString(),
+                    true
+                );
             }
         }
 
-        public bool RelationshipExists (string id)
+        public bool RelationshipExists(string id)
         {
-            CheckIsRelationship ();
-            return Relationships.ContainsKey (id);
+            CheckIsRelationship();
+            return Relationships.ContainsKey(id);
         }
 
-        public PackageRelationship GetRelationship (string id)
+        public PackageRelationship GetRelationship(string id)
         {
-            CheckIsRelationship ();
-            return Relationships [id];
+            CheckIsRelationship();
+            return Relationships[id];
         }
 
-        public PackageRelationshipCollection GetRelationships ()
+        public PackageRelationshipCollection GetRelationships()
         {
-            CheckIsRelationship ();
-            relationshipsCollection.Relationships.Clear ();
-            relationshipsCollection.Relationships.AddRange (Relationships.Values);
+            CheckIsRelationship();
+            relationshipsCollection.Relationships.Clear();
+            relationshipsCollection.Relationships.AddRange(Relationships.Values);
             return relationshipsCollection;
         }
 
-        public PackageRelationshipCollection GetRelationshipsByType (string relationshipType)
+        public PackageRelationshipCollection GetRelationshipsByType(string relationshipType)
         {
-            CheckIsRelationship ();
-            PackageRelationshipCollection collection = new PackageRelationshipCollection ();
+            CheckIsRelationship();
+            PackageRelationshipCollection collection = new PackageRelationshipCollection();
             foreach (PackageRelationship r in Relationships.Values)
                 if (r.RelationshipType == relationshipType)
-                    collection.Relationships.Add (r);
-            
+                    collection.Relationships.Add(r);
+
             return collection;
         }
 
-        public Stream GetStream ()
+        public Stream GetStream()
         {
-            return GetStream (Package.FileOpenAccess == FileAccess.Read && !IsRelationship ? FileMode.Open : FileMode.OpenOrCreate);
+            return GetStream(
+                Package.FileOpenAccess == FileAccess.Read && !IsRelationship
+                    ? FileMode.Open
+                    : FileMode.OpenOrCreate
+            );
         }
 
-        public Stream GetStream (FileMode mode)
+        public Stream GetStream(FileMode mode)
         {
-            return GetStream (mode, IsRelationship ? FileAccess.ReadWrite : Package.FileOpenAccess);
+            return GetStream(mode, IsRelationship ? FileAccess.ReadWrite : Package.FileOpenAccess);
         }
 
-        public Stream GetStream (FileMode mode, FileAccess access)
+        public Stream GetStream(FileMode mode, FileAccess access)
         {
-            bool notAllowed = mode == FileMode.Append || mode == FileMode.CreateNew || mode == FileMode.Truncate;
+            bool notAllowed =
+                mode == FileMode.Append || mode == FileMode.CreateNew || mode == FileMode.Truncate;
             if (access != FileAccess.Read && notAllowed)
-                throw new ArgumentException (string.Format (string.Format ("FileMode '{0}' not supported", mode)));
+                throw new ArgumentException(
+                    string.Format(string.Format("FileMode '{0}' not supported", mode))
+                );
 
             if (access == FileAccess.Read && (notAllowed || mode == FileMode.Create))
-                throw new IOException (string.Format ("FileMode '{0}' not allowed on a readonly stream", mode));
-            
-            return GetStreamCore (mode, access);
+                throw new IOException(
+                    string.Format("FileMode '{0}' not allowed on a readonly stream", mode)
+                );
+
+            return GetStreamCore(mode, access);
         }
 
-        protected abstract Stream GetStreamCore (FileMode mode, FileAccess access);
+        protected abstract Stream GetStreamCore(FileMode mode, FileAccess access);
 
-        protected virtual string GetContentTypeCore ()
+        protected virtual string GetContentTypeCore()
         {
             return null;
         }
 
-        private string NextId ()
+        private string NextId()
         {
             while (true)
             {
-                string s = "Re" + relationshipId.ToString ();
-                if (!RelationshipExists (s))
+                string s = "Re" + relationshipId.ToString();
+                if (!RelationshipExists(s))
                     return s;
-                relationshipId ++;
+                relationshipId++;
             }
         }
 
-        void WriteRelationships ()
+        void WriteRelationships()
         {
-            bool exists = Package.PartExists (RelationshipsPartUri);
+            bool exists = Package.PartExists(RelationshipsPartUri);
             if (exists && Relationships.Count == 0)
             {
-                Package.DeletePart (RelationshipsPartUri);
+                Package.DeletePart(RelationshipsPartUri);
                 return;
             }
-            
+
             if (!exists)
             {
-                PackagePart part = Package.CreatePart (RelationshipsPartUri, Package.RelationshipContentType);
+                PackagePart part = Package.CreatePart(
+                    RelationshipsPartUri,
+                    Package.RelationshipContentType
+                );
                 part.IsRelationship = true;
             }
-            using (Stream s = Package.GetPart (RelationshipsPartUri).GetStream ())
-                Package.WriteRelationships (Relationships, s);
+            using (Stream s = Package.GetPart(RelationshipsPartUri).GetStream())
+                Package.WriteRelationships(Relationships, s);
         }
     }
 }

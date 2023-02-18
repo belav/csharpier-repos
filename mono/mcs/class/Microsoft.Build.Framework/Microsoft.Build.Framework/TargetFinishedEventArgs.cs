@@ -29,48 +29,52 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
+namespace Microsoft.Build.Framework
+{
     [Serializable]
-    public class TargetFinishedEventArgs : BuildStatusEventArgs {
-    
-        string    targetName;
-        string    projectFile;
-        string    targetFile;
-        bool    succeeded;
-                
-        protected TargetFinishedEventArgs ()
-        {
-        }
+    public class TargetFinishedEventArgs : BuildStatusEventArgs
+    {
+        string targetName;
+        string projectFile;
+        string targetFile;
+        bool succeeded;
 
-        public TargetFinishedEventArgs (string message,
-                        string helpKeyword,
-                        string targetName,
-                        string projectFile,
-                        string targetFile,
-                        bool succeeded)
-            : base (message, helpKeyword, null)
+        protected TargetFinishedEventArgs() { }
+
+        public TargetFinishedEventArgs(
+            string message,
+            string helpKeyword,
+            string targetName,
+            string projectFile,
+            string targetFile,
+            bool succeeded
+        )
+            : base(message, helpKeyword, null)
         {
             this.targetName = targetName;
             this.projectFile = projectFile;
-            this.targetFile = targetFile;  
+            this.targetFile = targetFile;
             this.succeeded = succeeded;
         }
 
-        public string ProjectFile {
+        public string ProjectFile
+        {
             get { return projectFile; }
         }
 
-        public string TargetFile {
+        public string TargetFile
+        {
             get { return targetFile; }
         }
 
-        public string TargetName {
+        public string TargetName
+        {
             get { return targetName; }
         }
-        
-        public bool Succeeded {
+
+        public bool Succeeded
+        {
             get { return succeeded; }
         }
     }
 }
-

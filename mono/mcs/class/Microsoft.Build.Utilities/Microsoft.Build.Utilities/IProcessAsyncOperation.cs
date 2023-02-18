@@ -30,7 +30,7 @@ using System;
 
 namespace Microsoft.Build.Utilities
 {
-    internal interface IProcessAsyncOperation: IAsyncOperation
+    internal interface IProcessAsyncOperation : IAsyncOperation
     {
         int ExitCode { get; }
 

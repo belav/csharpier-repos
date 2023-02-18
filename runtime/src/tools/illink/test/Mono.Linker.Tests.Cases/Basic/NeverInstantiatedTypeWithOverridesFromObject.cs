@@ -4,35 +4,33 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     public class NeverInstantiatedTypeWithOverridesFromObject
     {
-        public static void Main ()
+        public static void Main()
         {
-            typeof (Foo).ToString ();
+            typeof(Foo).ToString();
         }
 
         [Kept]
         class Foo
         {
-            ~Foo ()
+            ~Foo()
             {
                 // Finalize shouldn't be empty
-                DoCleanupStuff ();
+                DoCleanupStuff();
             }
 
-            void DoCleanupStuff ()
-            {
-            }
+            void DoCleanupStuff() { }
 
-            public override bool Equals (object obj)
+            public override bool Equals(object obj)
             {
                 return false;
             }
 
-            public override string ToString ()
+            public override string ToString()
             {
                 return null;
             }
 
-            public override int GetHashCode ()
+            public override int GetHashCode()
             {
                 return 0;
             }

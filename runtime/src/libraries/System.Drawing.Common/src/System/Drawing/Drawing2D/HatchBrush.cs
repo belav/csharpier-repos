@@ -9,19 +9,31 @@ namespace System.Drawing.Drawing2D
 {
     public sealed class HatchBrush : Brush
     {
-        public HatchBrush(HatchStyle hatchstyle, Color foreColor) : this(hatchstyle, foreColor, Color.FromArgb(unchecked((int)0xff000000)))
-        {
-        }
+        public HatchBrush(HatchStyle hatchstyle, Color foreColor)
+            : this(hatchstyle, foreColor, Color.FromArgb(unchecked((int)0xff000000))) { }
 
         public HatchBrush(HatchStyle hatchstyle, Color foreColor, Color backColor)
         {
             if (hatchstyle < HatchStyle.Min || hatchstyle > HatchStyle.SolidDiamond)
             {
-                throw new ArgumentException(SR.Format(SR.InvalidEnumArgument, nameof(hatchstyle), hatchstyle, nameof(HatchStyle)), nameof(hatchstyle));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.InvalidEnumArgument,
+                        nameof(hatchstyle),
+                        hatchstyle,
+                        nameof(HatchStyle)
+                    ),
+                    nameof(hatchstyle)
+                );
             }
 
             IntPtr nativeBrush;
-            int status = Gdip.GdipCreateHatchBrush(unchecked((int)hatchstyle), foreColor.ToArgb(), backColor.ToArgb(), out nativeBrush);
+            int status = Gdip.GdipCreateHatchBrush(
+                unchecked((int)hatchstyle),
+                foreColor.ToArgb(),
+                backColor.ToArgb(),
+                out nativeBrush
+            );
             Gdip.CheckStatus(status);
 
             SetNativeBrushInternal(nativeBrush);
@@ -47,7 +59,10 @@ namespace System.Drawing.Drawing2D
             get
             {
                 int hatchStyle;
-                int status = Gdip.GdipGetHatchStyle(new HandleRef(this, NativeBrush), out hatchStyle);
+                int status = Gdip.GdipGetHatchStyle(
+                    new HandleRef(this, NativeBrush),
+                    out hatchStyle
+                );
                 Gdip.CheckStatus(status);
 
                 return (HatchStyle)hatchStyle;
@@ -59,7 +74,10 @@ namespace System.Drawing.Drawing2D
             get
             {
                 int foregroundArgb;
-                int status = Gdip.GdipGetHatchForegroundColor(new HandleRef(this, NativeBrush), out foregroundArgb);
+                int status = Gdip.GdipGetHatchForegroundColor(
+                    new HandleRef(this, NativeBrush),
+                    out foregroundArgb
+                );
                 Gdip.CheckStatus(status);
 
                 return Color.FromArgb(foregroundArgb);
@@ -71,7 +89,10 @@ namespace System.Drawing.Drawing2D
             get
             {
                 int backgroundArgb;
-                int status = Gdip.GdipGetHatchBackgroundColor(new HandleRef(this, NativeBrush), out backgroundArgb);
+                int status = Gdip.GdipGetHatchBackgroundColor(
+                    new HandleRef(this, NativeBrush),
+                    out backgroundArgb
+                );
                 Gdip.CheckStatus(status);
 
                 return Color.FromArgb(backgroundArgb);

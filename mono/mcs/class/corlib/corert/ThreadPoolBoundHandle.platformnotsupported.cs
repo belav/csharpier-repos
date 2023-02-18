@@ -2,48 +2,52 @@ namespace System.Threading
 {
     public sealed class ThreadPoolBoundHandle : IDisposable
     {
-        internal ThreadPoolBoundHandle ()
+        internal ThreadPoolBoundHandle() { }
+
+        public System.Runtime.InteropServices.SafeHandle Handle
         {
+            get { throw new PlatformNotSupportedException(); }
         }
 
-        public System.Runtime.InteropServices.SafeHandle Handle {
-            get {
-                throw new PlatformNotSupportedException ();
-            }
+        [System.CLSCompliantAttribute(false)]
+        public unsafe System.Threading.NativeOverlapped* AllocateNativeOverlapped(
+            System.Threading.IOCompletionCallback callback,
+            object state,
+            object pinData
+        )
+        {
+            throw new PlatformNotSupportedException();
         }
 
-        [System.CLSCompliantAttribute (false)]
-        public unsafe System.Threading.NativeOverlapped* AllocateNativeOverlapped (System.Threading.IOCompletionCallback callback, object state, object pinData)
+        [System.CLSCompliantAttribute(false)]
+        public unsafe System.Threading.NativeOverlapped* AllocateNativeOverlapped(
+            System.Threading.PreAllocatedOverlapped preAllocated
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [System.CLSCompliantAttribute (false)]
-        public unsafe System.Threading.NativeOverlapped* AllocateNativeOverlapped (System.Threading.PreAllocatedOverlapped preAllocated)
+        public static System.Threading.ThreadPoolBoundHandle BindHandle(
+            System.Runtime.InteropServices.SafeHandle handle
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public static System.Threading.ThreadPoolBoundHandle BindHandle (System.Runtime.InteropServices.SafeHandle handle)
+        public void Dispose() { }
+
+        [System.CLSCompliantAttribute(false)]
+        public unsafe void FreeNativeOverlapped(System.Threading.NativeOverlapped* overlapped)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public void Dispose ()
+        [System.CLSCompliantAttribute(false)]
+        public static unsafe object GetNativeOverlappedState(
+            System.Threading.NativeOverlapped* overlapped
+        )
         {
-
-        }
-
-        [System.CLSCompliantAttribute (false)]
-        public unsafe void FreeNativeOverlapped (System.Threading.NativeOverlapped* overlapped)
-        {
-            throw new PlatformNotSupportedException ();
-        }
-
-        [System.CLSCompliantAttribute (false)]
-        public static unsafe object GetNativeOverlappedState (System.Threading.NativeOverlapped* overlapped)
-        {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

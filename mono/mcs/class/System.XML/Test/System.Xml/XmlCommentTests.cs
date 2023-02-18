@@ -25,81 +25,92 @@ namespace MonoTests.System.Xml
         XmlNode shallow;
 
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            document = new XmlDocument ();
+            document = new XmlDocument();
         }
 
         [Test]
-        public void XmlCommentCloneNode ()
+        public void XmlCommentCloneNode()
         {
-            document.LoadXml ("<root><foo></foo></root>");
-            comment = document.CreateComment ("Comment");
+            document.LoadXml("<root><foo></foo></root>");
+            comment = document.CreateComment("Comment");
             original = comment;
 
-            shallow = comment.CloneNode (false); // shallow
-            XmlNodeBaseProperties (original, shallow);
-            
-            deep = comment.CloneNode (true); // deep
-            XmlNodeBaseProperties (original, deep);
-            Assert.AreEqual (original.Value, deep.Value, "Value incorrectly cloned");
+            shallow = comment.CloneNode(false); // shallow
+            XmlNodeBaseProperties(original, shallow);
 
-            Assert.AreEqual (deep.OuterXml, shallow.OuterXml, "deep cloning differs from shallow cloning");
+            deep = comment.CloneNode(true); // deep
+            XmlNodeBaseProperties(original, deep);
+            Assert.AreEqual(original.Value, deep.Value, "Value incorrectly cloned");
+
+            Assert.AreEqual(
+                deep.OuterXml,
+                shallow.OuterXml,
+                "deep cloning differs from shallow cloning"
+            );
         }
 
         [Test]
-        public void XmlCommentInnerAndOuterXml ()
+        public void XmlCommentInnerAndOuterXml()
         {
-            comment = document.CreateComment ("foo");
-            Assert.AreEqual (String.Empty, comment.InnerXml);
-            Assert.AreEqual ("<!--foo-->", comment.OuterXml);
+            comment = document.CreateComment("foo");
+            Assert.AreEqual(String.Empty, comment.InnerXml);
+            Assert.AreEqual("<!--foo-->", comment.OuterXml);
         }
 
         [Test]
-        public void XmlCommentIsReadOnly ()
+        public void XmlCommentIsReadOnly()
         {
-            document.LoadXml ("<root><foo></foo></root>");
-            comment = document.CreateComment ("Comment");
-            Assert.AreEqual (comment.IsReadOnly, false, "XmlComment IsReadOnly property broken");
+            document.LoadXml("<root><foo></foo></root>");
+            comment = document.CreateComment("Comment");
+            Assert.AreEqual(comment.IsReadOnly, false, "XmlComment IsReadOnly property broken");
         }
 
         [Test]
-        public void XmlCommentLocalName ()
+        public void XmlCommentLocalName()
         {
-            document.LoadXml ("<root><foo></foo></root>");
-            comment = document.CreateComment ("Comment");
-            Assert.AreEqual (comment.LocalName, "#comment", comment.NodeType + " LocalName property broken");
+            document.LoadXml("<root><foo></foo></root>");
+            comment = document.CreateComment("Comment");
+            Assert.AreEqual(
+                comment.LocalName,
+                "#comment",
+                comment.NodeType + " LocalName property broken"
+            );
         }
 
         [Test]
-        public void XmlCommentName ()
+        public void XmlCommentName()
         {
-            document.LoadXml ("<root><foo></foo></root>");
-            comment = document.CreateComment ("Comment");
-            Assert.AreEqual (comment.Name, "#comment", comment.NodeType + " Name property broken");
+            document.LoadXml("<root><foo></foo></root>");
+            comment = document.CreateComment("Comment");
+            Assert.AreEqual(comment.Name, "#comment", comment.NodeType + " Name property broken");
         }
 
         [Test]
-        public void XmlCommentNodeType ()
+        public void XmlCommentNodeType()
         {
-            document.LoadXml ("<root><foo></foo></root>");
-            comment = document.CreateComment ("Comment");
-            Assert.AreEqual (comment.NodeType.ToString (), "Comment", "XmlComment NodeType property broken");
+            document.LoadXml("<root><foo></foo></root>");
+            comment = document.CreateComment("Comment");
+            Assert.AreEqual(
+                comment.NodeType.ToString(),
+                "Comment",
+                "XmlComment NodeType property broken"
+            );
         }
 
-        internal void XmlNodeBaseProperties (XmlNode original, XmlNode cloned)
+        internal void XmlNodeBaseProperties(XmlNode original, XmlNode cloned)
         {
-            document.LoadXml ("<root><foo></foo></root>");
-            comment = document.CreateComment ("Comment");
+            document.LoadXml("<root><foo></foo></root>");
+            comment = document.CreateComment("Comment");
 
             //            assertequals (original.nodetype + " was incorrectly cloned.",
-            //                      original.baseuri, cloned.baseuri);            
+            //                      original.baseuri, cloned.baseuri);
 
-            Assert.IsNull (cloned.ParentNode);
-            Assert.AreEqual (original.Value, cloned.Value, "Value incorrectly cloned");
+            Assert.IsNull(cloned.ParentNode);
+            Assert.AreEqual(original.Value, cloned.Value, "Value incorrectly cloned");
 
-            Assert.IsTrue (!Object.ReferenceEquals (original, cloned), "Copies, not pointers");
+            Assert.IsTrue(!Object.ReferenceEquals(original, cloned), "Copies, not pointers");
         }
-       
     }
 }

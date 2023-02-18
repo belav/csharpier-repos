@@ -27,70 +27,114 @@ namespace Internal.Cryptography.Pal
             switch (contentType)
             {
                 case X509ContentType.Cert:
-                    {
-                        SafeCertContextHandle? pCertContext = null;
-                        if (!Interop.crypt32.CertEnumCertificatesInStore(_certStore, ref pCertContext))
-                            return null;
-                        try
-                        {
-                            unsafe
-                            {
-                                byte[] rawData = new byte[pCertContext.CertContext->cbCertEncoded];
-                                Marshal.Copy((IntPtr)(pCertContext.CertContext->pbCertEncoded), rawData, 0, rawData.Length);
-                                GC.KeepAlive(pCertContext);
-                                return rawData;
-                            }
-                        }
-                        finally
-                        {
-                            pCertContext.Dispose();
-                        }
-                    }
-
-                case X509ContentType.SerializedCert:
-                    {
-                        SafeCertContextHandle? pCertContext = null;
-                        if (!Interop.crypt32.CertEnumCertificatesInStore(_certStore, ref pCertContext))
-                            return null;
-
-                        try
-                        {
-                            int cbEncoded = 0;
-                            if (!Interop.Crypt32.CertSerializeCertificateStoreElement(pCertContext, 0, null, ref cbEncoded))
-                                throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
-
-                            byte[] pbEncoded = new byte[cbEncoded];
-                            if (!Interop.Crypt32.CertSerializeCertificateStoreElement(pCertContext, 0, pbEncoded, ref cbEncoded))
-                                throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
-
-                            return pbEncoded;
-                        }
-                        finally
-                        {
-                            pCertContext.Dispose();
-                        }
-                    }
-
-                case X509ContentType.Pkcs12:
+                {
+                    SafeCertContextHandle? pCertContext = null;
+                    if (!Interop.crypt32.CertEnumCertificatesInStore(_certStore, ref pCertContext))
+                        return null;
+                    try
                     {
                         unsafe
                         {
-                            Interop.Crypt32.DATA_BLOB dataBlob = new Interop.Crypt32.DATA_BLOB(IntPtr.Zero, 0);
-
-                            if (!Interop.Crypt32.PFXExportCertStore(_certStore, ref dataBlob, password, Interop.Crypt32.PFXExportFlags.EXPORT_PRIVATE_KEYS | Interop.Crypt32.PFXExportFlags.REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY))
-                                throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
-
-                            byte[] pbEncoded = new byte[dataBlob.cbData];
-                            fixed (byte* ppbEncoded = pbEncoded)
-                            {
-                                dataBlob.pbData = new IntPtr(ppbEncoded);
-                                if (!Interop.Crypt32.PFXExportCertStore(_certStore, ref dataBlob, password, Interop.Crypt32.PFXExportFlags.EXPORT_PRIVATE_KEYS | Interop.Crypt32.PFXExportFlags.REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY))
-                                    throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
-                            }
-
-                            return pbEncoded;
+                            byte[] rawData = new byte[pCertContext.CertContext->cbCertEncoded];
+                            Marshal.Copy(
+                                (IntPtr)(pCertContext.CertContext->pbCertEncoded),
+                                rawData,
+                                0,
+                                rawData.Length
+                            );
+                            GC.KeepAlive(pCertContext);
+                            return rawData;
                         }
                     }
+                    finally
+                    {
+                        pCertContext.Dispose();
+                    }
+                }
+
+                case X509ContentType.SerializedCert:
+                {
+                    SafeCertContextHandle? pCertContext = null;
+                    if (!Interop.crypt32.CertEnumCertificatesInStore(_certStore, ref pCertContext))
+                        return null;
+
+                    try
+                    {
+                        int cbEncoded = 0;
+                        if (
+                            !Interop.Crypt32.CertSerializeCertificateStoreElement(
+                                pCertContext,
+                                0,
+                                null,
+                                ref cbEncoded
+                            )
+                        )
+                            throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
+
+                        byte[] pbEncoded = new byte[cbEncoded];
+                        if (
+                            !Interop.Crypt32.CertSerializeCertificateStoreElement(
+                                pCertContext,
+                                0,
+                                pbEncoded,
+                                ref cbEncoded
+                            )
+                        )
+                            throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
+
+                        return pbEncoded;
+                    }
+                    finally
+                    {
+                        pCertContext.Dispose();
+                    }
+                }
+
+                case X509ContentType.Pkcs12:
+                {
+                    unsafe
+                    {
+                        Interop.Crypt32.DATA_BLOB dataBlob = new Interop.Crypt32.DATA_BLOB(
+                            IntPtr.Zero,
+                            0
+                        );
+
+                        if (
+                            !Interop.Crypt32.PFXExportCertStore(
+                                _certStore,
+                                ref dataBlob,
+                                password,
+                                Interop.Crypt32.PFXExportFlags.EXPORT_PRIVATE_KEYS
+                                    | Interop
+                                        .Crypt32
+                                        .PFXExportFlags
+                                        .REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY
+                            )
+                        )
+                            throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
+
+                        byte[] pbEncoded = new byte[dataBlob.cbData];
+                        fixed (byte* ppbEncoded = pbEncoded)
+                        {
+                            dataBlob.pbData = new IntPtr(ppbEncoded);
+                            if (
+                                !Interop.Crypt32.PFXExportCertStore(
+                                    _certStore,
+                                    ref dataBlob,
+                                    password,
+                                    Interop.Crypt32.PFXExportFlags.EXPORT_PRIVATE_KEYS
+                                        | Interop
+                                            .Crypt32
+                                            .PFXExportFlags
+                                            .REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY
+                                )
+                            )
+                                throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
+                        }
+
+                        return pbEncoded;
+                    }
+                }
 
                 case X509ContentType.SerializedStore:
                     return SaveToMemoryStore(CertStoreSaveAs.CERT_STORE_SAVE_AS_STORE);
@@ -108,14 +152,32 @@ namespace Internal.Cryptography.Pal
             unsafe
             {
                 Interop.Crypt32.DATA_BLOB blob = new Interop.Crypt32.DATA_BLOB(IntPtr.Zero, 0);
-                if (!Interop.crypt32.CertSaveStore(_certStore, Interop.Crypt32.CertEncodingType.All, dwSaveAs, CertStoreSaveTo.CERT_STORE_SAVE_TO_MEMORY, ref blob, 0))
+                if (
+                    !Interop.crypt32.CertSaveStore(
+                        _certStore,
+                        Interop.Crypt32.CertEncodingType.All,
+                        dwSaveAs,
+                        CertStoreSaveTo.CERT_STORE_SAVE_TO_MEMORY,
+                        ref blob,
+                        0
+                    )
+                )
                     throw Marshal.GetLastWin32Error().ToCryptographicException();
 
                 byte[] exportedData = new byte[blob.cbData];
                 fixed (byte* pExportedData = exportedData)
                 {
                     blob.pbData = new IntPtr(pExportedData);
-                    if (!Interop.crypt32.CertSaveStore(_certStore, Interop.Crypt32.CertEncodingType.All, dwSaveAs, CertStoreSaveTo.CERT_STORE_SAVE_TO_MEMORY, ref blob, 0))
+                    if (
+                        !Interop.crypt32.CertSaveStore(
+                            _certStore,
+                            Interop.Crypt32.CertEncodingType.All,
+                            dwSaveAs,
+                            CertStoreSaveTo.CERT_STORE_SAVE_TO_MEMORY,
+                            ref blob,
+                            0
+                        )
+                    )
                         throw Marshal.GetLastWin32Error().ToCryptographicException();
                 }
 

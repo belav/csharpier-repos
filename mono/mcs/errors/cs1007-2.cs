@@ -3,7 +3,8 @@
 
 class DoubleAccessor
 {
-    public bool Breaker {
+    public bool Breaker
+    {
         set { }
         set { }
     }

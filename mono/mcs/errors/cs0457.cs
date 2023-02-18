@@ -3,12 +3,12 @@
 
 class A
 {
-    public static implicit operator sbyte (A mask)
+    public static implicit operator sbyte(A mask)
     {
         return 1;
     }
 
-    public static implicit operator byte (A mask)
+    public static implicit operator byte(A mask)
     {
         return 2;
     }

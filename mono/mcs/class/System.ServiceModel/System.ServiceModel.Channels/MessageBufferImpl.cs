@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,16 +38,26 @@ namespace System.ServiceModel.Channels
         MessageHeaders headers;
         MessageProperties properties;
         BodyWriter body;
-        bool closed, is_fault;
+        bool closed,
+            is_fault;
         int max_buffer_size;
         AttributeCollection attributes;
 
-        internal DefaultMessageBuffer (MessageHeaders headers, MessageProperties properties, AttributeCollection attributes)
-            : this (0, headers, properties, null, false, attributes)
-        {
-        }
+        internal DefaultMessageBuffer(
+            MessageHeaders headers,
+            MessageProperties properties,
+            AttributeCollection attributes
+        )
+            : this(0, headers, properties, null, false, attributes) { }
 
-        internal DefaultMessageBuffer (int maxBufferSize, MessageHeaders headers, MessageProperties properties, BodyWriter body, bool isFault, AttributeCollection attributes)
+        internal DefaultMessageBuffer(
+            int maxBufferSize,
+            MessageHeaders headers,
+            MessageProperties properties,
+            BodyWriter body,
+            bool isFault,
+            AttributeCollection attributes
+        )
         {
             this.max_buffer_size = maxBufferSize;
             this.headers = headers;
@@ -58,33 +68,39 @@ namespace System.ServiceModel.Channels
             this.attributes = attributes;
         }
 
-        public override void Close ()
+        public override void Close()
         {
-            if (closed) 
+            if (closed)
                 return;
-            
+
             headers = null;
             body = null;
             closed = true;
         }
-        
 
-        public override Message CreateMessage ()
+        public override Message CreateMessage()
         {
             if (closed)
-                throw new ObjectDisposedException ("The message buffer has already been closed.");
+                throw new ObjectDisposedException("The message buffer has already been closed.");
             Message msg;
             if (body == null)
-                msg = new EmptyMessage (headers.MessageVersion, headers.Action);
+                msg = new EmptyMessage(headers.MessageVersion, headers.Action);
             else
-                msg = new SimpleMessage (headers.MessageVersion, headers.Action, body.CreateBufferedCopy (max_buffer_size), is_fault, attributes);
-            msg.Headers.Clear ();
-            msg.Headers.CopyHeadersFrom (headers);
-            msg.Properties.CopyProperties (properties);
+                msg = new SimpleMessage(
+                    headers.MessageVersion,
+                    headers.Action,
+                    body.CreateBufferedCopy(max_buffer_size),
+                    is_fault,
+                    attributes
+                );
+            msg.Headers.Clear();
+            msg.Headers.CopyHeadersFrom(headers);
+            msg.Properties.CopyProperties(properties);
             return msg;
         }
 
-        public override int BufferSize {
+        public override int BufferSize
+        {
             get { return 0; }
         }
     }
@@ -98,7 +114,13 @@ namespace System.ServiceModel.Channels
         MessageProperties properties;
         AttributeCollection attributes;
 
-        public XPathMessageBuffer (IXPathNavigable source, MessageVersion version, int maxSizeOfHeaders, MessageProperties properties, AttributeCollection attributes)
+        public XPathMessageBuffer(
+            IXPathNavigable source,
+            MessageVersion version,
+            int maxSizeOfHeaders,
+            MessageProperties properties,
+            AttributeCollection attributes
+        )
         {
             this.source = source;
             this.version = version;
@@ -107,19 +129,20 @@ namespace System.ServiceModel.Channels
             this.attributes = attributes;
         }
 
-        public override void Close ()
-        {
-        }
+        public override void Close() { }
 
-        public override Message CreateMessage ()
+        public override Message CreateMessage()
         {
-            XmlDictionaryReader r = XmlDictionaryReader.CreateDictionaryReader (source.CreateNavigator ().ReadSubtree ());
-            Message msg = new XmlReaderMessage (version, r, max_header_size);
-            msg.Properties.CopyProperties (properties);
+            XmlDictionaryReader r = XmlDictionaryReader.CreateDictionaryReader(
+                source.CreateNavigator().ReadSubtree()
+            );
+            Message msg = new XmlReaderMessage(version, r, max_header_size);
+            msg.Properties.CopyProperties(properties);
             return msg;
         }
 
-        public override int BufferSize {
+        public override int BufferSize
+        {
             // FIXME: implement
             get { return 0; }
         }

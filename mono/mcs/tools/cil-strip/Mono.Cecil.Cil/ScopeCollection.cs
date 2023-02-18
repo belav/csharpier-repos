@@ -29,65 +29,67 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Cil {
-
+namespace Mono.Cecil.Cil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class ScopeCollection : CollectionBase, ICodeVisitable {
-
+    internal sealed class ScopeCollection : CollectionBase, ICodeVisitable
+    {
         IScopeProvider m_container;
 
-        public Scope this [int index] {
-            get { return List [index] as Scope; }
-            set { List [index] = value; }
+        public Scope this[int index]
+        {
+            get { return List[index] as Scope; }
+            set { List[index] = value; }
         }
 
-        public IScopeProvider Container {
+        public IScopeProvider Container
+        {
             get { return m_container; }
         }
 
-        public ScopeCollection (IScopeProvider container)
+        public ScopeCollection(IScopeProvider container)
         {
             m_container = container;
         }
 
-        public void Add (Scope value)
+        public void Add(Scope value)
         {
-            List.Add (value);
+            List.Add(value);
         }
 
-        public bool Contains (Scope value)
+        public bool Contains(Scope value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (Scope value)
+        public int IndexOf(Scope value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, Scope value)
+        public void Insert(int index, Scope value)
         {
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (Scope value)
+        public void Remove(Scope value)
         {
-            List.Remove (value);
+            List.Remove(value);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is Scope))
-                throw new ArgumentException ("Must be of type " + typeof (Scope).FullName);
+            if (!(o is Scope))
+                throw new ArgumentException("Must be of type " + typeof(Scope).FullName);
         }
 
-        public void Accept (ICodeVisitor visitor)
+        public void Accept(ICodeVisitor visitor)
         {
-            visitor.VisitScopeCollection (this);
+            visitor.VisitScopeCollection(this);
         }
     }
 }

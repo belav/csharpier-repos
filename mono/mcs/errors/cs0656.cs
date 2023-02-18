@@ -4,7 +4,7 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         decimal d = 12M;
     }

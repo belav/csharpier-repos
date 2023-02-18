@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,47 +46,48 @@ namespace MonoTests.System.ServiceModel
     public class ServiceSecurityContextTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNullArgs1 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNullArgs1()
         {
-            new ServiceSecurityContext (null, null);
+            new ServiceSecurityContext(null, null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNullArgs2 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNullArgs2()
         {
-            new ServiceSecurityContext ((AuthorizationContext) null);
+            new ServiceSecurityContext((AuthorizationContext)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNullArgs3 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNullArgs3()
         {
-            new ServiceSecurityContext ((PolicyList) null);
+            new ServiceSecurityContext((PolicyList)null);
         }
 
         [Test]
-        public void Constructor ()
+        public void Constructor()
         {
-            ServiceSecurityContext c = new ServiceSecurityContext (new PolicyList (new IAuthorizationPolicy [0]));
-            Assert.IsNotNull (c.AuthorizationContext, "#1");
-            Assert.AreEqual (0, c.AuthorizationPolicies.Count, "#2");
+            ServiceSecurityContext c = new ServiceSecurityContext(
+                new PolicyList(new IAuthorizationPolicy[0])
+            );
+            Assert.IsNotNull(c.AuthorizationContext, "#1");
+            Assert.AreEqual(0, c.AuthorizationPolicies.Count, "#2");
             // it is somehow treated as anonymous ...
-            Assert.IsTrue (c.IsAnonymous, "#3");
+            Assert.IsTrue(c.IsAnonymous, "#3");
             // FIXME: test PrimaryIdentity
         }
 
         [Test]
-        public void Anonymous ()
+        public void Anonymous()
         {
             ServiceSecurityContext c = ServiceSecurityContext.Anonymous;
-            Assert.IsNotNull (c.AuthorizationContext, "#1");
-            Assert.AreEqual (0, c.AuthorizationPolicies.Count, "#2");
-            Assert.IsTrue (c.IsAnonymous, "#3");
+            Assert.IsNotNull(c.AuthorizationContext, "#1");
+            Assert.AreEqual(0, c.AuthorizationPolicies.Count, "#2");
+            Assert.IsTrue(c.IsAnonymous, "#3");
             // FIXME: test PrimaryIdentity
         }
     }
 }
 #endif
-

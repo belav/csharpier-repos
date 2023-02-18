@@ -3,12 +3,10 @@
 
 class CS0102
 {
-    object Clone ()
+    object Clone()
     {
         return this;
     }
-    
-    public class Clone
-    {
-    }
+
+    public class Clone { }
 }

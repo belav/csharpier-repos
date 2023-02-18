@@ -7,9 +7,6 @@ public class PlatformHelper
 {
     public static bool IsMono
     {
-        get
-        {
-            return Type.GetType("Mono.Runtime") != null;
-        }
+        get { return Type.GetType("Mono.Runtime") != null; }
     }
 }

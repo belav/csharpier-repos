@@ -2,7 +2,7 @@
 // Line: 0
 // Compiler options: -main:ClassMain -target:library
 
-class ClassMain {
-        public static void Main () {}
+class ClassMain
+{
+    public static void Main() { }
 }
-

@@ -1,11 +1,10 @@
 using System;
+
 public abstract class MyTestAbstract
 {
     protected abstract string GetName();
-    
-    public MyTestAbstract()
-    {
-    }
+
+    public MyTestAbstract() { }
 
     public void PrintName()
     {

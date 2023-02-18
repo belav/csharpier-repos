@@ -1,4 +1,3 @@
-
 /* test for https://bugzilla.xamarin.com/show_bug.cgi?id=41914 */
 
 using System;
@@ -8,38 +7,44 @@ namespace Crasher
 {
     class Program
     {
-        public static void Main (string[] args)
+        public static void Main(string[] args)
         {
             Thread[] threads = new Thread[100];
 
             DateTime start = DateTime.Now;
 
-            for (int i = 0; i < threads.Length; ++i) {
-                threads [i] = new Thread (() => {
+            for (int i = 0; i < threads.Length; ++i)
+            {
+                threads[i] = new Thread(() =>
+                {
                     var rnd = new Random();
-                    do {
-                        using (var mutex = new Mutex(false, "Global\\TEST")) {
+                    do
+                    {
+                        using (var mutex = new Mutex(false, "Global\\TEST"))
+                        {
                             var owner = false;
-                            try {
+                            try
+                            {
                                 owner = mutex.WaitOne(TimeSpan.FromMinutes(1));
-                            } finally {
+                            }
+                            finally
+                            {
                                 if (owner)
                                     mutex.ReleaseMutex();
                             }
                         }
                         Thread.Sleep(rnd.Next(100, 1000));
-                    } while ((DateTime.Now - start) < TimeSpan.FromSeconds (10));
+                    } while ((DateTime.Now - start) < TimeSpan.FromSeconds(10));
                 });
             }
 
             for (int i = 0; i < threads.Length; ++i)
-                threads [i].Start ();
+                threads[i].Start();
 
             for (int i = 0; i < threads.Length; ++i)
-                threads [i].Join ();
+                threads[i].Join();
         }
 
-        private static void Crasher(){
-        }
+        private static void Crasher() { }
     }
 }

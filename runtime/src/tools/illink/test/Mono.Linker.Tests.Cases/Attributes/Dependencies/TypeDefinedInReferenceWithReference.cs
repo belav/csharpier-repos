@@ -1,10 +1,8 @@
 namespace Mono.Linker.Tests.Cases.Attributes.Dependencies
 {
-    [AttributeDefinedInReference (typeof (TypeDefinedInReference))]
+    [AttributeDefinedInReference(typeof(TypeDefinedInReference))]
     public class TypeDefinedInReferenceWithReference
     {
-        public static void Unused ()
-        {
-        }
+        public static void Unused() { }
     }
 }

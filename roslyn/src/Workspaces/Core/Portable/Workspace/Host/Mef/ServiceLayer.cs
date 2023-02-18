@@ -7,8 +7,8 @@
 namespace Microsoft.CodeAnalysis.Host.Mef
 {
     /// <summary>
-    /// The layer of an exported service.  
-    /// 
+    /// The layer of an exported service.
+    ///
     /// If there are multiple definitions of a service, the <see cref="ServiceLayer"/> is used to determine which is used.
     /// </summary>
     public static class ServiceLayer

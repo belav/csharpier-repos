@@ -34,7 +34,9 @@ namespace System.Windows.Forms
     [DesignTimeVisible(false)]
     [DefaultProperty("Header")]
     [ToolboxItem(false)]
-    public abstract class DataGridColumnStyle : Component, IDataGridColumnStyleEditingNotificationService
+    public abstract class DataGridColumnStyle
+        : Component,
+            IDataGridColumnStyleEditingNotificationService
     {
         [ComVisible(true)]
         protected class DataGridColumnHeaderAccessibleObject : AccessibleObject
@@ -44,78 +46,71 @@ namespace System.Windows.Forms
             #endregion
 
             #region Constructors
-            public DataGridColumnHeaderAccessibleObject ()
-            {
-            }
-            public DataGridColumnHeaderAccessibleObject (DataGridColumnStyle owner)
+            public DataGridColumnHeaderAccessibleObject() { }
+
+            public DataGridColumnHeaderAccessibleObject(DataGridColumnStyle owner)
             {
                 this.owner = owner;
             }
             #endregion //Constructors
 
             #region Public Instance Properties
-            [MonoTODO ("Not implemented, will throw NotImplementedException")]
-            public override Rectangle Bounds {
-                get {
-                    throw new NotImplementedException ();
-                }
+            [MonoTODO("Not implemented, will throw NotImplementedException")]
+            public override Rectangle Bounds
+            {
+                get { throw new NotImplementedException(); }
             }
 
-            public override string Name {
-                get {
-                    throw new NotImplementedException ();
-                }
+            public override string Name
+            {
+                get { throw new NotImplementedException(); }
             }
 
-            protected DataGridColumnStyle Owner {
+            protected DataGridColumnStyle Owner
+            {
                 get { return owner; }
             }
 
-            public override AccessibleObject Parent {
-                get {
-                    throw new NotImplementedException ();
-                }
+            public override AccessibleObject Parent
+            {
+                get { throw new NotImplementedException(); }
             }
 
-            public override AccessibleRole Role {
-                get {
-                    throw new NotImplementedException ();
-                }
+            public override AccessibleRole Role
+            {
+                get { throw new NotImplementedException(); }
             }
             #endregion
 
             #region Public Instance Methods
-            [MonoTODO ("Not implemented, will throw NotImplementedException")]
-            public override AccessibleObject Navigate (AccessibleNavigation navdir)
+            [MonoTODO("Not implemented, will throw NotImplementedException")]
+            public override AccessibleObject Navigate(AccessibleNavigation navdir)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
             #endregion Public Instance Methods
         }
 
         protected class CompModSwitches
         {
-            public CompModSwitches ()
-            {
-            }
+            public CompModSwitches() { }
 
             #region Public Instance Methods
-            [MonoTODO ("Not implemented, will throw NotImplementedException")]
-            public static TraceSwitch DGEditColumnEditing {
-                get {
-                    throw new NotImplementedException ();
-                }
+            [MonoTODO("Not implemented, will throw NotImplementedException")]
+            public static TraceSwitch DGEditColumnEditing
+            {
+                get { throw new NotImplementedException(); }
             }
             #endregion Public Instance Methods
         }
-        
+
         internal enum ArrowDrawing
         {
             No = 0,
             Ascending = 1,
             Descending = 2
         }
-        
+
         #region    Local Variables
         internal HorizontalAlignment alignment;
         private int fontheight;
@@ -135,20 +130,19 @@ namespace System.Windows.Forms
         #endregion    // Local Variables
 
         #region Constructors
-        public DataGridColumnStyle () : this (null)
-        {
-        }
+        public DataGridColumnStyle()
+            : this(null) { }
 
-        public DataGridColumnStyle (PropertyDescriptor prop)
+        public DataGridColumnStyle(PropertyDescriptor prop)
         {
             property_descriptor = prop;
 
             fontheight = -1;
             table_style = null;
             header_text = string.Empty;
-            mapping_name  = string.Empty;
+            mapping_name = string.Empty;
             null_text = def_null_text;
-            accesible_object = new DataGridColumnHeaderAccessibleObject (this);
+            accesible_object = new DataGridColumnHeaderAccessibleObject(this);
             _readonly = prop == null ? false : prop.IsReadOnly;
             width = -1;
             grid = null;
@@ -161,37 +155,44 @@ namespace System.Windows.Forms
         #region Public Instance Properties
         [Localizable(true)]
         [DefaultValue(HorizontalAlignment.Left)]
-        public virtual HorizontalAlignment Alignment {
-            get {
-                return alignment;
-            }
-            set {
-                if (value != alignment) {
+        public virtual HorizontalAlignment Alignment
+        {
+            get { return alignment; }
+            set
+            {
+                if (value != alignment)
+                {
                     alignment = value;
-                    
-                    if (table_style != null && table_style.DataGrid != null) {
-                        table_style.DataGrid.Invalidate ();
+
+                    if (table_style != null && table_style.DataGrid != null)
+                    {
+                        table_style.DataGrid.Invalidate();
                     }
-                    
-                    EventHandler eh = (EventHandler)(Events [AlignmentChangedEvent]);
+
+                    EventHandler eh = (EventHandler)(Events[AlignmentChangedEvent]);
                     if (eh != null)
-                        eh (this, EventArgs.Empty);
+                        eh(this, EventArgs.Empty);
                 }
             }
         }
 
         [Browsable(false)]
-        public virtual DataGridTableStyle DataGridTableStyle {
+        public virtual DataGridTableStyle DataGridTableStyle
+        {
             get { return table_style; }
         }
-        
-        protected int FontHeight {
-            get {
-                if (fontheight != -1) {
+
+        protected int FontHeight
+        {
+            get
+            {
+                if (fontheight != -1)
+                {
                     return fontheight;
                 }
 
-                if (table_style != null) {
+                if (table_style != null)
+                {
                     //return table_style.DataGrid.FontHeight
                     return -1;
                 }
@@ -202,65 +203,71 @@ namespace System.Windows.Forms
         }
 
         [Browsable(false)]
-        public AccessibleObject HeaderAccessibleObject {
-            get {
-                return accesible_object;
-            }
+        public AccessibleObject HeaderAccessibleObject
+        {
+            get { return accesible_object; }
         }
 
         [Localizable(true)]
-        public virtual string HeaderText {
-            get {
-                return header_text;
-            }
-            set {
-                if (value != header_text) {
+        public virtual string HeaderText
+        {
+            get { return header_text; }
+            set
+            {
+                if (value != header_text)
+                {
                     header_text = value;
-                    
-                    Invalidate ();
 
-                    EventHandler eh = (EventHandler)(Events [HeaderTextChangedEvent]);
+                    Invalidate();
+
+                    EventHandler eh = (EventHandler)(Events[HeaderTextChangedEvent]);
                     if (eh != null)
-                        eh (this, EventArgs.Empty);
+                        eh(this, EventArgs.Empty);
                 }
             }
         }
 
-
-        [Editor("System.Windows.Forms.Design.DataGridColumnStyleMappingNameEditor, " + Consts.AssemblySystem_Design, typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(
+            "System.Windows.Forms.Design.DataGridColumnStyleMappingNameEditor, "
+                + Consts.AssemblySystem_Design,
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
         [Localizable(true)]
-        [DefaultValue ("")]
-        public string MappingName {
-            get {
-                return mapping_name;
-            }
-            set {
-                if (value != mapping_name) {
+        [DefaultValue("")]
+        public string MappingName
+        {
+            get { return mapping_name; }
+            set
+            {
+                if (value != mapping_name)
+                {
                     mapping_name = value;
 
-                    EventHandler eh = (EventHandler)(Events [MappingNameChangedEvent]);
+                    EventHandler eh = (EventHandler)(Events[MappingNameChangedEvent]);
                     if (eh != null)
-                        eh (this, EventArgs.Empty);
+                        eh(this, EventArgs.Empty);
                 }
             }
         }
 
         [Localizable(true)]
-        public virtual string NullText {
-            get {
-                return null_text;
-            }
-            set {
-                if (value != null_text) {
+        public virtual string NullText
+        {
+            get { return null_text; }
+            set
+            {
+                if (value != null_text)
+                {
                     null_text = value;
-                    
-                    if (table_style != null && table_style.DataGrid != null) {
-                        table_style.DataGrid.Invalidate ();
+
+                    if (table_style != null && table_style.DataGrid != null)
+                    {
+                        table_style.DataGrid.Invalidate();
                     }
 
-                    EventHandler eh = (EventHandler)(Events [NullTextChangedEvent]);
+                    EventHandler eh = (EventHandler)(Events[NullTextChangedEvent]);
                     if (eh != null)
-                        eh (this, EventArgs.Empty);
+                        eh(this, EventArgs.Empty);
                 }
             }
         }
@@ -268,207 +275,245 @@ namespace System.Windows.Forms
         [Browsable(false)]
         [DefaultValue(null)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public virtual PropertyDescriptor PropertyDescriptor {
-            get {
-                return property_descriptor;
-            }
-            set {
-                if (value != property_descriptor) {
+        public virtual PropertyDescriptor PropertyDescriptor
+        {
+            get { return property_descriptor; }
+            set
+            {
+                if (value != property_descriptor)
+                {
                     property_descriptor = value;
 
-                    EventHandler eh = (EventHandler)(Events [PropertyDescriptorChangedEvent]);
+                    EventHandler eh = (EventHandler)(Events[PropertyDescriptorChangedEvent]);
                     if (eh != null)
-                        eh (this, EventArgs.Empty);
+                        eh(this, EventArgs.Empty);
                 }
             }
         }
 
         [DefaultValue(false)]
-        public virtual bool ReadOnly {
-            get {
-                return _readonly;
-            }
-            set {
-                if (value != _readonly) {
+        public virtual bool ReadOnly
+        {
+            get { return _readonly; }
+            set
+            {
+                if (value != _readonly)
+                {
                     _readonly = value;
-                    
-                    if (table_style != null && table_style.DataGrid != null) {
-                        table_style.DataGrid.CalcAreasAndInvalidate ();
+
+                    if (table_style != null && table_style.DataGrid != null)
+                    {
+                        table_style.DataGrid.CalcAreasAndInvalidate();
                     }
-                    
-                    EventHandler eh = (EventHandler)(Events [ReadOnlyChangedEvent]);
+
+                    EventHandler eh = (EventHandler)(Events[ReadOnlyChangedEvent]);
                     if (eh != null)
-                        eh (this, EventArgs.Empty);
+                        eh(this, EventArgs.Empty);
                 }
             }
         }
 
         [DefaultValue(100)]
         [Localizable(true)]
-        public virtual int Width {
-            get {
-                return width;
-            }
-            set {
-                if (value != width) {
+        public virtual int Width
+        {
+            get { return width; }
+            set
+            {
+                if (value != width)
+                {
                     width = value;
-                    
-                    if (table_style != null && table_style.DataGrid != null) {
-                        table_style.DataGrid.CalcAreasAndInvalidate ();
+
+                    if (table_style != null && table_style.DataGrid != null)
+                    {
+                        table_style.DataGrid.CalcAreasAndInvalidate();
                     }
 
-                    EventHandler eh = (EventHandler)(Events [WidthChangedEvent]);
+                    EventHandler eh = (EventHandler)(Events[WidthChangedEvent]);
                     if (eh != null)
-                        eh (this, EventArgs.Empty);
+                        eh(this, EventArgs.Empty);
                 }
             }
         }
 
         #endregion    // Public Instance Properties
-        
+
         #region Private Instance Properties
 
-        internal ArrowDrawing ArrowDrawingMode {
+        internal ArrowDrawing ArrowDrawingMode
+        {
             get { return arrow_drawing; }
             set { arrow_drawing = value; }
         }
-        
-        internal bool TableStyleReadOnly {
-            get {
-                return table_style != null && table_style.ReadOnly; 
-            }
+
+        internal bool TableStyleReadOnly
+        {
+            get { return table_style != null && table_style.ReadOnly; }
         }
-        
-        internal DataGridTableStyle TableStyle {
+
+        internal DataGridTableStyle TableStyle
+        {
             set { table_style = value; }
         }
-        
-        internal bool IsDefault {
+
+        internal bool IsDefault
+        {
             get { return is_default; }
         }
         #endregion Private Instance Properties
 
         #region Public Instance Methods
-        protected internal abstract void Abort (int rowNum);
+        protected internal abstract void Abort(int rowNum);
 
-        [MonoTODO ("Will not suspend updates")]
-        protected void BeginUpdate ()
+        [MonoTODO("Will not suspend updates")]
+        protected void BeginUpdate() { }
+
+        protected void CheckValidDataSource(CurrencyManager value)
         {
-        }
-        
-        protected void CheckValidDataSource (CurrencyManager value)
-        {
-            if (value == null) {
-                throw new ArgumentNullException ("CurrencyManager cannot be null");
+            if (value == null)
+            {
+                throw new ArgumentNullException("CurrencyManager cannot be null");
             }
-            
-            if (property_descriptor == null) {
-                property_descriptor = value.GetItemProperties ()[mapping_name];
 
-//                 Console.WriteLine ("mapping name = {0}", mapping_name);
-//                 foreach (PropertyDescriptor prop in value.GetItemProperties ()) {
-//                     Console.WriteLine (" + prop = {0}", prop.Name);
-//                 }
+            if (property_descriptor == null)
+            {
+                property_descriptor = value.GetItemProperties()[mapping_name];
+
+                //                 Console.WriteLine ("mapping name = {0}", mapping_name);
+                //                 foreach (PropertyDescriptor prop in value.GetItemProperties ()) {
+                //                     Console.WriteLine (" + prop = {0}", prop.Name);
+                //                 }
 
                 if (property_descriptor == null)
-                    throw new InvalidOperationException ("The PropertyDescriptor for this column is a null reference");
+                    throw new InvalidOperationException(
+                        "The PropertyDescriptor for this column is a null reference"
+                    );
 
-                 /*MonoTests.System.Windows.Forms.DataGridColumnStyleTest.GetColumnValueAtRow : System.InvalidOperationException : The 'foo' DataGridColumnStyle cannot be used because it is not associated with a Property or Column in the DataSource.*/
-
-                
+                /*MonoTests.System.Windows.Forms.DataGridColumnStyleTest.GetColumnValueAtRow : System.InvalidOperationException : The 'foo' DataGridColumnStyle cannot be used because it is not associated with a Property or Column in the DataSource.*/
             }
         }
 
-        protected internal virtual void ColumnStartedEditing (Control editingControl)
+        protected internal virtual void ColumnStartedEditing(Control editingControl) { }
+
+        protected internal abstract bool Commit(CurrencyManager dataSource, int rowNum);
+
+        protected internal virtual void ConcedeFocus() { }
+
+        protected virtual AccessibleObject CreateHeaderAccessibleObject()
         {
+            return new DataGridColumnHeaderAccessibleObject(this);
         }
 
-        protected internal abstract bool Commit (CurrencyManager dataSource, int rowNum);
-
-
-        protected internal virtual void ConcedeFocus ()
+        protected internal virtual void Edit(
+            CurrencyManager source,
+            int rowNum,
+            Rectangle bounds,
+            bool readOnly
+        )
         {
-        }
-        
-        protected virtual AccessibleObject CreateHeaderAccessibleObject ()
-        {
-            return new DataGridColumnHeaderAccessibleObject (this);
+            Edit(source, rowNum, bounds, readOnly, string.Empty);
         }
 
-        protected internal virtual void Edit (CurrencyManager source, int rowNum,  Rectangle bounds,  bool readOnly)
-        {
-            Edit (source, rowNum, bounds, readOnly, string.Empty);
-        }
-
-        protected internal virtual void Edit (CurrencyManager source, int rowNum, Rectangle bounds, bool readOnly, string displayText)
+        protected internal virtual void Edit(
+            CurrencyManager source,
+            int rowNum,
+            Rectangle bounds,
+            bool readOnly,
+            string displayText
+        )
         {
             string instantText = displayText;
-            Edit (source, rowNum, bounds, readOnly, instantText, true);
+            Edit(source, rowNum, bounds, readOnly, instantText, true);
         }
 
-        protected internal abstract void Edit (CurrencyManager source,
-            int rowNum, Rectangle bounds, bool readOnly,
+        protected internal abstract void Edit(
+            CurrencyManager source,
+            int rowNum,
+            Rectangle bounds,
+            bool readOnly,
             string displayText,
-            bool cellIsVisible);
+            bool cellIsVisible
+        );
 
+        protected void EndUpdate() { }
 
-        protected void EndUpdate ()
+        protected internal virtual void EnterNullValue() { }
+
+        protected internal virtual object GetColumnValueAtRow(CurrencyManager source, int rowNum)
         {
-        }
-
-        protected internal virtual void EnterNullValue () {}
-        
-        protected internal virtual object GetColumnValueAtRow (CurrencyManager source, int rowNum)
-        {
-            CheckValidDataSource (source);
+            CheckValidDataSource(source);
             if (rowNum >= source.Count)
                 return DBNull.Value;
-            return property_descriptor.GetValue (source [rowNum]);
+            return property_descriptor.GetValue(source[rowNum]);
         }
 
-        protected internal abstract int GetMinimumHeight ();
+        protected internal abstract int GetMinimumHeight();
 
-        protected internal abstract int GetPreferredHeight (Graphics g, object value);
+        protected internal abstract int GetPreferredHeight(Graphics g, object value);
 
-        protected internal abstract Size GetPreferredSize (Graphics g,  object value);
+        protected internal abstract Size GetPreferredSize(Graphics g, object value);
 
-        void IDataGridColumnStyleEditingNotificationService.ColumnStartedEditing (Control editingControl)
+        void IDataGridColumnStyleEditingNotificationService.ColumnStartedEditing(
+            Control editingControl
+        )
         {
-            ColumnStartedEditing (editingControl);
+            ColumnStartedEditing(editingControl);
         }
 
-        protected virtual void Invalidate ()
+        protected virtual void Invalidate()
         {
             if (grid != null)
-                grid.InvalidateColumn (this);
+                grid.InvalidateColumn(this);
         }
 
-        protected internal abstract void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum);
-        protected internal abstract void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum, bool alignToRight);
-        
-        protected internal virtual void Paint (Graphics g, Rectangle bounds, CurrencyManager source, int rowNum,
-            Brush backBrush,  Brush foreBrush, bool alignToRight) {}
+        protected internal abstract void Paint(
+            Graphics g,
+            Rectangle bounds,
+            CurrencyManager source,
+            int rowNum
+        );
+        protected internal abstract void Paint(
+            Graphics g,
+            Rectangle bounds,
+            CurrencyManager source,
+            int rowNum,
+            bool alignToRight
+        );
 
-        protected internal virtual void ReleaseHostedControl () {}
+        protected internal virtual void Paint(
+            Graphics g,
+            Rectangle bounds,
+            CurrencyManager source,
+            int rowNum,
+            Brush backBrush,
+            Brush foreBrush,
+            bool alignToRight
+        ) { }
 
-        public void ResetHeaderText ()
+        protected internal virtual void ReleaseHostedControl() { }
+
+        public void ResetHeaderText()
         {
             HeaderText = string.Empty;
         }
 
-        protected internal virtual void SetColumnValueAtRow (CurrencyManager source, int rowNum,  object value)
+        protected internal virtual void SetColumnValueAtRow(
+            CurrencyManager source,
+            int rowNum,
+            object value
+        )
         {
-            CheckValidDataSource (source);
+            CheckValidDataSource(source);
 
-            IEditableObject editable = source [rowNum] as IEditableObject;
+            IEditableObject editable = source[rowNum] as IEditableObject;
 
             if (editable != null)
-                editable.BeginEdit ();
+                editable.BeginEdit();
 
-            property_descriptor.SetValue (source [rowNum], value);
+            property_descriptor.SetValue(source[rowNum], value);
         }
 
-        protected virtual void SetDataGrid (DataGrid value)
+        protected virtual void SetDataGrid(DataGrid value)
         {
             grid = value;
 
@@ -478,102 +523,124 @@ namespace System.Windows.Forms
             // This is done by .net later as requiered, but not at this point.
         }
 
-        protected virtual void SetDataGridInColumn (DataGrid value)
+        protected virtual void SetDataGridInColumn(DataGrid value)
         {
-            SetDataGrid (value);
-        }
-        
-        internal void SetDataGridInternal (DataGrid value)
-        {
-            SetDataGridInColumn (value);
+            SetDataGrid(value);
         }
 
-        protected internal virtual void UpdateUI (CurrencyManager source, int rowNum, string displayText)
+        internal void SetDataGridInternal(DataGrid value)
         {
+            SetDataGridInColumn(value);
         }
+
+        protected internal virtual void UpdateUI(
+            CurrencyManager source,
+            int rowNum,
+            string displayText
+        ) { }
 
         #endregion    // Public Instance Methods
-        
+
         #region Private Instance Methods
-        virtual internal void OnMouseDown (MouseEventArgs e, int row, int column) {}
-        virtual internal void OnKeyDown (KeyEventArgs ke, int row, int column) {}
-        
-        internal void PaintHeader (Graphics g, Rectangle bounds, int colNum)
+        virtual internal void OnMouseDown(MouseEventArgs e, int row, int column) { }
+
+        virtual internal void OnKeyDown(KeyEventArgs ke, int row, int column) { }
+
+        internal void PaintHeader(Graphics g, Rectangle bounds, int colNum)
         {
-            ThemeEngine.Current.DataGridPaintColumnHeader (g, bounds, grid, colNum);
+            ThemeEngine.Current.DataGridPaintColumnHeader(g, bounds, grid, colNum);
         }
-        
-        internal void PaintNewRow (Graphics g, Rectangle bounds, Brush backBrush, Brush foreBrush)
+
+        internal void PaintNewRow(Graphics g, Rectangle bounds, Brush backBrush, Brush foreBrush)
         {
-            g.FillRectangle (backBrush, bounds);
-            PaintGridLine (g, bounds);
+            g.FillRectangle(backBrush, bounds);
+            PaintGridLine(g, bounds);
         }
-        
-        internal void PaintGridLine (Graphics g, Rectangle bounds)
+
+        internal void PaintGridLine(Graphics g, Rectangle bounds)
         {
-            if (table_style.CurrentGridLineStyle != DataGridLineStyle.Solid) {
+            if (table_style.CurrentGridLineStyle != DataGridLineStyle.Solid)
+            {
                 return;
             }
-            
-            g.DrawLine (ThemeEngine.Current.ResPool.GetPen (table_style.CurrentGridLineColor),
-                bounds.X, bounds.Y + bounds.Height - 1, bounds.X + bounds.Width - 1, bounds.Y + bounds.Height - 1);
-            
-            g.DrawLine (ThemeEngine.Current.ResPool.GetPen (table_style.CurrentGridLineColor),
-                bounds.X + bounds.Width - 1, bounds.Y , bounds.X + bounds.Width - 1, bounds.Y + bounds.Height);
+
+            g.DrawLine(
+                ThemeEngine.Current.ResPool.GetPen(table_style.CurrentGridLineColor),
+                bounds.X,
+                bounds.Y + bounds.Height - 1,
+                bounds.X + bounds.Width - 1,
+                bounds.Y + bounds.Height - 1
+            );
+
+            g.DrawLine(
+                ThemeEngine.Current.ResPool.GetPen(table_style.CurrentGridLineColor),
+                bounds.X + bounds.Width - 1,
+                bounds.Y,
+                bounds.X + bounds.Width - 1,
+                bounds.Y + bounds.Height
+            );
         }
-        
+
         #endregion Private Instance Methods
 
         #region Events
-        static object AlignmentChangedEvent = new object ();
-        static object FontChangedEvent = new object ();
-        static object HeaderTextChangedEvent = new object ();
-        static object MappingNameChangedEvent = new object ();
-        static object NullTextChangedEvent = new object ();
-        static object PropertyDescriptorChangedEvent = new object ();
-        static object ReadOnlyChangedEvent = new object ();
-        static object WidthChangedEvent = new object ();
+        static object AlignmentChangedEvent = new object();
+        static object FontChangedEvent = new object();
+        static object HeaderTextChangedEvent = new object();
+        static object MappingNameChangedEvent = new object();
+        static object NullTextChangedEvent = new object();
+        static object PropertyDescriptorChangedEvent = new object();
+        static object ReadOnlyChangedEvent = new object();
+        static object WidthChangedEvent = new object();
 
-        public event EventHandler AlignmentChanged {
-            add { Events.AddHandler (AlignmentChangedEvent, value); }
-            remove { Events.RemoveHandler (AlignmentChangedEvent, value); }
+        public event EventHandler AlignmentChanged
+        {
+            add { Events.AddHandler(AlignmentChangedEvent, value); }
+            remove { Events.RemoveHandler(AlignmentChangedEvent, value); }
         }
 
-        public event EventHandler FontChanged {
-            add { Events.AddHandler (FontChangedEvent, value); }
-            remove { Events.RemoveHandler (FontChangedEvent, value); }
+        public event EventHandler FontChanged
+        {
+            add { Events.AddHandler(FontChangedEvent, value); }
+            remove { Events.RemoveHandler(FontChangedEvent, value); }
         }
 
-        public event EventHandler HeaderTextChanged {
-            add { Events.AddHandler (HeaderTextChangedEvent, value); }
-            remove { Events.RemoveHandler (HeaderTextChangedEvent, value); }
+        public event EventHandler HeaderTextChanged
+        {
+            add { Events.AddHandler(HeaderTextChangedEvent, value); }
+            remove { Events.RemoveHandler(HeaderTextChangedEvent, value); }
         }
 
-        public event EventHandler MappingNameChanged {
-            add { Events.AddHandler (MappingNameChangedEvent, value); }
-            remove { Events.RemoveHandler (MappingNameChangedEvent, value); }
+        public event EventHandler MappingNameChanged
+        {
+            add { Events.AddHandler(MappingNameChangedEvent, value); }
+            remove { Events.RemoveHandler(MappingNameChangedEvent, value); }
         }
 
-        public event EventHandler NullTextChanged {
-            add { Events.AddHandler (NullTextChangedEvent, value); }
-            remove { Events.RemoveHandler (NullTextChangedEvent, value); }
+        public event EventHandler NullTextChanged
+        {
+            add { Events.AddHandler(NullTextChangedEvent, value); }
+            remove { Events.RemoveHandler(NullTextChangedEvent, value); }
         }
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public event EventHandler PropertyDescriptorChanged {
-            add { Events.AddHandler (PropertyDescriptorChangedEvent, value); }
-            remove { Events.RemoveHandler (PropertyDescriptorChangedEvent, value); }
+        public event EventHandler PropertyDescriptorChanged
+        {
+            add { Events.AddHandler(PropertyDescriptorChangedEvent, value); }
+            remove { Events.RemoveHandler(PropertyDescriptorChangedEvent, value); }
         }
 
-        public event EventHandler ReadOnlyChanged {
-            add { Events.AddHandler (ReadOnlyChangedEvent, value); }
-            remove { Events.RemoveHandler (ReadOnlyChangedEvent, value); }
+        public event EventHandler ReadOnlyChanged
+        {
+            add { Events.AddHandler(ReadOnlyChangedEvent, value); }
+            remove { Events.RemoveHandler(ReadOnlyChangedEvent, value); }
         }
 
-        public event EventHandler WidthChanged {
-            add { Events.AddHandler (WidthChangedEvent, value); }
-            remove { Events.RemoveHandler (WidthChangedEvent, value); }
+        public event EventHandler WidthChanged
+        {
+            add { Events.AddHandler(WidthChangedEvent, value); }
+            remove { Events.RemoveHandler(WidthChangedEvent, value); }
         }
         #endregion    // Events
     }

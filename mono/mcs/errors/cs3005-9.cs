@@ -2,10 +2,8 @@
 // Line: 9
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public class C1 {
-}
+public class C1 { }
 
-public class c1 {
-}
+public class c1 { }

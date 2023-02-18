@@ -11,114 +11,126 @@ interface IGen<T>
 
 struct GenInt : IGen<int>
 {
-    public int Dummy(int t) { return t; }
+    public int Dummy(int t)
+    {
+        return t;
+    }
 
     public void Target()
-    {        
+    {
         Interlocked.Increment(ref Test_thread14.Xcounter);
     }
-    
+
     public static void DelegateTest()
     {
         IGen<int> obj = new GenInt();
         ThreadStart d = new ThreadStart(obj.Target);
-        
-        
+
         d();
-        Test_thread14.Eval(Test_thread14.Xcounter==1);
+        Test_thread14.Eval(Test_thread14.Xcounter == 1);
         Test_thread14.Xcounter = 0;
     }
 }
 
 struct GenDouble : IGen<double>
 {
-    public double Dummy(double t) { return t; }
+    public double Dummy(double t)
+    {
+        return t;
+    }
 
     public void Target()
-    {        
+    {
         Interlocked.Increment(ref Test_thread14.Xcounter);
     }
-    
+
     public static void DelegateTest()
     {
         IGen<double> obj = new GenDouble();
         ThreadStart d = new ThreadStart(obj.Target);
-        
-        
+
         d();
-        Test_thread14.Eval(Test_thread14.Xcounter==1);
+        Test_thread14.Eval(Test_thread14.Xcounter == 1);
         Test_thread14.Xcounter = 0;
     }
 }
 
 struct GenString : IGen<string>
 {
-    public string Dummy(string t) { return t; }
+    public string Dummy(string t)
+    {
+        return t;
+    }
 
     public void Target()
-    {        
+    {
         Interlocked.Increment(ref Test_thread14.Xcounter);
     }
-    
+
     public static void DelegateTest()
     {
         IGen<string> obj = new GenString();
         ThreadStart d = new ThreadStart(obj.Target);
-        
-        
+
         d();
-        Test_thread14.Eval(Test_thread14.Xcounter==1);
+        Test_thread14.Eval(Test_thread14.Xcounter == 1);
         Test_thread14.Xcounter = 0;
     }
 }
 
 struct GenObject : IGen<object>
 {
-    public object Dummy(object t) { return t; }
+    public object Dummy(object t)
+    {
+        return t;
+    }
 
     public void Target()
-    {        
+    {
         Interlocked.Increment(ref Test_thread14.Xcounter);
     }
-    
+
     public static void DelegateTest()
     {
         IGen<object> obj = new GenObject();
         ThreadStart d = new ThreadStart(obj.Target);
-        
-        
+
         d();
-        Test_thread14.Eval(Test_thread14.Xcounter==1);
+        Test_thread14.Eval(Test_thread14.Xcounter == 1);
         Test_thread14.Xcounter = 0;
     }
 }
 
 struct GenGuid : IGen<Guid>
 {
-    public Guid Dummy(Guid t) { return t; }
+    public Guid Dummy(Guid t)
+    {
+        return t;
+    }
 
     public void Target()
-    {        
+    {
         Interlocked.Increment(ref Test_thread14.Xcounter);
     }
-    
+
     public static void DelegateTest()
     {
         IGen<Guid> obj = new GenGuid();
         ThreadStart d = new ThreadStart(obj.Target);
-        
-        
+
         d();
-        Test_thread14.Eval(Test_thread14.Xcounter==1);
+        Test_thread14.Eval(Test_thread14.Xcounter == 1);
         Test_thread14.Xcounter = 0;
     }
 }
+
 public class Test_thread14
 {
-    public static int nThreads =50;
+    public static int nThreads = 50;
     public static int counter = 0;
     public static int Xcounter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -127,18 +139,16 @@ public class Test_thread14
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-    
         GenInt.DelegateTest();
         GenDouble.DelegateTest();
         GenString.DelegateTest();
-        GenObject.DelegateTest(); 
-        GenGuid.DelegateTest(); 
-        
+        GenObject.DelegateTest();
+        GenGuid.DelegateTest();
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -150,6 +160,4 @@ public class Test_thread14
             return 1;
         }
     }
-}        
-
-
+}

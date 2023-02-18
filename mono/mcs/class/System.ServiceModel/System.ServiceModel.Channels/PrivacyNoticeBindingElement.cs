@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,12 +32,12 @@ namespace System.ServiceModel.Channels
 {
     public sealed class PrivacyNoticeBindingElement : BindingElement, IPolicyExportExtension
     {
-        public PrivacyNoticeBindingElement ()
+        public PrivacyNoticeBindingElement()
         {
             // FIXME: apply configuration
         }
 
-        public PrivacyNoticeBindingElement (PrivacyNoticeBindingElement elementToBeCloned)
+        public PrivacyNoticeBindingElement(PrivacyNoticeBindingElement elementToBeCloned)
         {
             var e = elementToBeCloned;
             Url = e.Url;
@@ -46,22 +46,26 @@ namespace System.ServiceModel.Channels
 
         [MonoTODO]
         public Uri Url { get; set; }
+
         [MonoTODO]
         public int Version { get; set; }
 
-        public override BindingElement Clone ()
+        public override BindingElement Clone()
         {
-            return new PrivacyNoticeBindingElement (this);
+            return new PrivacyNoticeBindingElement(this);
         }
 
-        public override T GetProperty<T> (BindingContext context)
+        public override T GetProperty<T>(BindingContext context)
         {
-            return context.GetInnerProperty<T> ();
+            return context.GetInnerProperty<T>();
         }
 
-        void IPolicyExportExtension.ExportPolicy (MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

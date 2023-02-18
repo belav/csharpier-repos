@@ -3,12 +3,10 @@
 
 static class C
 {
-    static void Foo<T> ()
-    {
-    }
+    static void Foo<T>() { }
 
-     static void Main ()
+    static void Main()
     {
-        string s = nameof (C.Foo<>);
+        string s = nameof(C.Foo<>);
     }
 }

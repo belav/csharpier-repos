@@ -15,14 +15,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
     {
         internal partial class UnitTestingWorkCoordinator
         {
-            private sealed class UnitTestingAsyncProjectWorkItemQueue : UnitTestingAsyncWorkItemQueue<ProjectId>
+            private sealed class UnitTestingAsyncProjectWorkItemQueue
+                : UnitTestingAsyncWorkItemQueue<ProjectId>
             {
-                private readonly Dictionary<ProjectId, UnitTestingWorkItem> _projectWorkQueue = new();
+                private readonly Dictionary<ProjectId, UnitTestingWorkItem> _projectWorkQueue =
+                    new();
 
-                public UnitTestingAsyncProjectWorkItemQueue(UnitTestingSolutionCrawlerProgressReporter progressReporter)
-                    : base(progressReporter)
-                {
-                }
+                public UnitTestingAsyncProjectWorkItemQueue(
+                    UnitTestingSolutionCrawlerProgressReporter progressReporter
+                )
+                    : base(progressReporter) { }
 
                 protected override int WorkItemCount_NoLock => _projectWorkQueue.Count;
 
@@ -36,7 +38,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     return base.WaitAsync(cancellationToken);
                 }
 
-                protected override bool TryTake_NoLock(ProjectId key, out UnitTestingWorkItem workInfo)
+                protected override bool TryTake_NoLock(
+                    ProjectId key,
+                    out UnitTestingWorkItem workInfo
+                )
                 {
                     if (!_projectWorkQueue.TryGetValue(key, out workInfo))
                     {
@@ -53,7 +58,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     ProjectDependencyGraph dependencyGraph,
                     IDiagnosticAnalyzerService? analyzerService,
 #endif
-                    out UnitTestingWorkItem workItem)
+                    out UnitTestingWorkItem workItem
+                )
                 {
                     // there must be at least one item in the map when this is called unless host is shutting down.
                     if (_projectWorkQueue.Count == 0)
@@ -62,13 +68,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         return false;
                     }
 
-                    var projectId = GetBestProjectId_NoLock(
-                        _projectWorkQueue, preferableProjectId
+                    var projectId = GetBestProjectId_NoLock(_projectWorkQueue, preferableProjectId
 #if false // Not used in unit testing crawling
                         , dependencyGraph
                         , analyzerService
 #endif
-                        );
+                    );
                     if (TryTake_NoLock(projectId, out workItem))
                     {
                         return true;
@@ -87,7 +92,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     if (_projectWorkQueue.TryGetValue(key, out var existingWorkItem))
                     {
                         // replace it.
-                        _projectWorkQueue[key] = existingWorkItem.With(item.InvocationReasons, item.ActiveMember, item.SpecificAnalyzers, item.IsRetry, item.AsyncToken);
+                        _projectWorkQueue[key] = existingWorkItem.With(
+                            item.InvocationReasons,
+                            item.ActiveMember,
+                            item.SpecificAnalyzers,
+                            item.IsRetry,
+                            item.AsyncToken
+                        );
                         return false;
                     }
 

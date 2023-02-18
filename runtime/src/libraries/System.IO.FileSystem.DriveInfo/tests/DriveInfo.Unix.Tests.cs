@@ -15,16 +15,33 @@ namespace System.IO.FileSystem.Tests
         {
             Assert.All(
                 new[] { "", "\0", "\0/" },
-                driveName => AssertExtensions.Throws<ArgumentException>("driveName", () => { new DriveInfo(driveName); }));
+                driveName =>
+                    AssertExtensions.Throws<ArgumentException>(
+                        "driveName",
+                        () =>
+                        {
+                            new DriveInfo(driveName);
+                        }
+                    )
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("driveName", () => { new DriveInfo(null); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "driveName",
+                () =>
+                {
+                    new DriveInfo(null);
+                }
+            );
 
             Assert.Equal("/", new DriveInfo("/").Name);
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60586", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60586",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void TestGetDrives()
         {
             var drives = DriveInfo.GetDrives();
@@ -32,13 +49,16 @@ namespace System.IO.FileSystem.Tests
             Assert.True(drives.Length > 0, "Expected at least one drive");
             Assert.All(drives, d => Assert.NotNull(d));
             Assert.Contains(drives, d => d.Name == "/");
-            Assert.All(drives, d =>
-            {
-                // None of these should throw
-                DriveType dt = d.DriveType;
-                bool isReady = d.IsReady;
-                DirectoryInfo di = d.RootDirectory;
-            });
+            Assert.All(
+                drives,
+                d =>
+                {
+                    // None of these should throw
+                    DriveType dt = d.DriveType;
+                    bool isReady = d.IsReady;
+                    DirectoryInfo di = d.RootDirectory;
+                }
+            );
         }
 
         [Fact]
@@ -48,7 +68,7 @@ namespace System.IO.FileSystem.Tests
             string invalidDriveName = "NonExistentDriveName";
             var invalidDrive = new DriveInfo(invalidDriveName);
 
-            Assert.Throws<DriveNotFoundException>(() =>invalidDrive.AvailableFreeSpace);
+            Assert.Throws<DriveNotFoundException>(() => invalidDrive.AvailableFreeSpace);
             Assert.Throws<DriveNotFoundException>(() => invalidDrive.DriveFormat);
             Assert.Equal(DriveType.NoRootDirectory, invalidDrive.DriveType);
             Assert.False(invalidDrive.IsReady);
@@ -57,17 +77,21 @@ namespace System.IO.FileSystem.Tests
             Assert.Equal(invalidDriveName, invalidDrive.RootDirectory.Name);
             Assert.Throws<DriveNotFoundException>(() => invalidDrive.TotalFreeSpace);
             Assert.Throws<DriveNotFoundException>(() => invalidDrive.TotalSize);
-            Assert.Equal(invalidDriveName, invalidDrive.VolumeLabel);   // VolumeLabel is equivalent to Name on Unix
+            Assert.Equal(invalidDriveName, invalidDrive.VolumeLabel); // VolumeLabel is equivalent to Name on Unix
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void PropertiesOfValidDrive()
         {
-            var driveName = PlatformDetection.IsAndroid || PlatformDetection.IsLinuxBionic ? "/data" : "/";
+            var driveName =
+                PlatformDetection.IsAndroid || PlatformDetection.IsLinuxBionic ? "/data" : "/";
             var driveInfo = new DriveInfo(driveName);
             var format = driveInfo.DriveFormat;
-            Assert.Equal(PlatformDetection.IsBrowser ? DriveType.Unknown : DriveType.Fixed, driveInfo.DriveType);
+            Assert.Equal(
+                PlatformDetection.IsBrowser ? DriveType.Unknown : DriveType.Fixed,
+                driveInfo.DriveType
+            );
             Assert.True(driveInfo.IsReady);
             Assert.Equal(driveName, driveInfo.Name);
             Assert.Equal(driveName, driveInfo.ToString());

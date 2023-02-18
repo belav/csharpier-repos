@@ -14,26 +14,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeProperty))]
-    public sealed class ExternalCodeProperty : AbstractExternalCodeMember, ICodeElementContainer<ExternalCodeParameter>, EnvDTE.CodeProperty, EnvDTE80.CodeProperty2
+    public sealed class ExternalCodeProperty
+        : AbstractExternalCodeMember,
+            ICodeElementContainer<ExternalCodeParameter>,
+            EnvDTE.CodeProperty,
+            EnvDTE80.CodeProperty2
     {
-        internal static EnvDTE.CodeProperty Create(CodeModelState state, ProjectId projectId, IPropertySymbol symbol)
+        internal static EnvDTE.CodeProperty Create(
+            CodeModelState state,
+            ProjectId projectId,
+            IPropertySymbol symbol
+        )
         {
             var element = new ExternalCodeProperty(state, projectId, symbol);
             return (EnvDTE.CodeProperty)ComAggregate.CreateAggregatedObject(element);
         }
 
-        private ExternalCodeProperty(CodeModelState state, ProjectId projectId, IPropertySymbol symbol)
-            : base(state, projectId, symbol)
-        {
-        }
+        private ExternalCodeProperty(
+            CodeModelState state,
+            ProjectId projectId,
+            IPropertySymbol symbol
+        )
+            : base(state, projectId, symbol) { }
 
         private IPropertySymbol PropertySymbol
         {
             get { return (IPropertySymbol)LookupSymbol(); }
         }
 
-        EnvDTE.CodeElements ICodeElementContainer<ExternalCodeParameter>.GetCollection()
-            => this.Parameters;
+        EnvDTE.CodeElements ICodeElementContainer<ExternalCodeParameter>.GetCollection() =>
+            this.Parameters;
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -50,13 +60,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     throw Exceptions.ThrowEFail();
                 }
 
-                return ExternalCodeAccessorFunction.Create(this.State, this.ProjectId, symbol.GetMethod, this);
+                return ExternalCodeAccessorFunction.Create(
+                    this.State,
+                    this.ProjectId,
+                    symbol.GetMethod,
+                    this
+                );
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public new EnvDTE.CodeClass Parent
@@ -74,13 +85,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     throw Exceptions.ThrowEFail();
                 }
 
-                return ExternalCodeAccessorFunction.Create(this.State, this.ProjectId, symbol.SetMethod, this);
+                return ExternalCodeAccessorFunction.Create(
+                    this.State,
+                    this.ProjectId,
+                    symbol.SetMethod,
+                    this
+                );
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE.CodeTypeRef Type
@@ -89,24 +101,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             {
                 return CodeTypeRef.Create(this.State, this, this.ProjectId, PropertySymbol.Type);
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public bool IsDefault
         {
-            get
-            {
-                return PropertySymbol.IsIndexer;
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { return PropertySymbol.IsIndexer; }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public bool IsGeneric
@@ -143,11 +144,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
                 return result;
             }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            set { throw Exceptions.ThrowEFail(); }
         }
 
         public EnvDTE.CodeElement Parent2

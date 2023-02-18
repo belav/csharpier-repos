@@ -2,4 +2,4 @@
 // Line: 0
 // Compiler options: -warnaserror -d:a.b
 
-class C {}
+class C { }

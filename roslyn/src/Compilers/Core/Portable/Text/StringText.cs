@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Text
             Encoding? encodingOpt,
             ImmutableArray<byte> checksum = default(ImmutableArray<byte>),
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1,
-            ImmutableArray<byte> embeddedTextBlob = default(ImmutableArray<byte>))
+            ImmutableArray<byte> embeddedTextBlob = default(ImmutableArray<byte>)
+        )
             : base(checksum, checksumAlgorithm, embeddedTextBlob)
         {
             RoslynDebug.Assert(source != null);
@@ -51,13 +52,13 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="position">The position to get the character from.</param>
         /// <returns>The character.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">When position is negative or 
+        /// <exception cref="ArgumentOutOfRangeException">When position is negative or
         /// greater than <see cref="Length"/>.</exception>
         public override char this[int position]
         {
             get
             {
-                // NOTE: we are not validating position here as that would not 
+                // NOTE: we are not validating position here as that would not
                 //       add any value to the range check that string accessor performs anyways.
 
                 return _source[position];
@@ -83,12 +84,21 @@ namespace Microsoft.CodeAnalysis.Text
             return this.Source.Substring(span.Start, span.Length);
         }
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             this.Source.CopyTo(sourceIndex, destination, destinationIndex, count);
         }
 
-        public override void Write(TextWriter textWriter, TextSpan span, CancellationToken cancellationToken = default(CancellationToken))
+        public override void Write(
+            TextWriter textWriter,
+            TextSpan span,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (span.Start == 0 && span.End == this.Length)
             {

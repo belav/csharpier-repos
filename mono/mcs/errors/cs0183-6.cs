@@ -4,11 +4,14 @@
 
 using System;
 
-enum E { Item };
+enum E
+{
+    Item
+};
 
 class C
 {
-    static bool Check (E e)
+    static bool Check(E e)
     {
         return e is Enum;
     }

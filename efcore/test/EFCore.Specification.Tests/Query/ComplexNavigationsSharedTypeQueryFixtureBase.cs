@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavigationsQueryFixtureBase, IQueryFixtureBase
+public abstract class ComplexNavigationsSharedTypeQueryFixtureBase
+    : ComplexNavigationsQueryFixtureBase,
+        IQueryFixtureBase
 {
-    protected override string StoreName
-        => "ComplexNavigationsOwned";
+    protected override string StoreName => "ComplexNavigationsOwned";
 
-    public override ISetSource GetExpectedData()
-        => ComplexNavigationsWeakData.Instance;
+    public override ISetSource GetExpectedData() => ComplexNavigationsWeakData.Instance;
 
-    Func<DbContext, ISetSource> IQueryFixtureBase.GetSetSourceCreator()
-        => context => new ComplexNavigationsWeakSetExtractor(context);
+    Func<DbContext, ISetSource> IQueryFixtureBase.GetSetSourceCreator() =>
+        context => new ComplexNavigationsWeakSetExtractor(context);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
@@ -25,7 +25,8 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavi
 
         modelBuilder.Entity<Level1>().Property(e => e.Id).ValueGeneratedNever();
 
-        var level1Builder = modelBuilder.Entity<Level1>()
+        var level1Builder = modelBuilder
+            .Entity<Level1>()
             .Ignore(e => e.OneToOne_Optional_Self1)
             .Ignore(e => e.OneToMany_Required_Self1)
             .Ignore(e => e.OneToMany_Required_Self_Inverse1)
@@ -35,13 +36,27 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavi
         var level1 = level1Builder.Metadata;
 
         ForeignKey level2Fk;
-        var level2 = level1.Model.AddEntityType("Level1.OneToOne_Required_PK1#Level2", typeof(Level2));
+        var level2 = level1.Model.AddEntityType(
+            "Level1.OneToOne_Required_PK1#Level2",
+            typeof(Level2)
+        );
         using (var batch = ((Model)modelBuilder.Model).ConventionDispatcher.DelayConventions())
         {
-            level2Fk = (ForeignKey)level2.AddForeignKey(level2.FindProperty(nameof(Level2.Id)), level1.FindPrimaryKey(), level1);
+            level2Fk = (ForeignKey)
+                level2.AddForeignKey(
+                    level2.FindProperty(nameof(Level2.Id)),
+                    level1.FindPrimaryKey(),
+                    level1
+                );
             level2Fk.IsUnique = true;
-            level2Fk.SetPrincipalToDependent(nameof(Level1.OneToOne_Required_PK1), ConfigurationSource.Explicit);
-            level2Fk.SetDependentToPrincipal(nameof(Level2.OneToOne_Required_PK_Inverse2), ConfigurationSource.Explicit);
+            level2Fk.SetPrincipalToDependent(
+                nameof(Level1.OneToOne_Required_PK1),
+                ConfigurationSource.Explicit
+            );
+            level2Fk.SetDependentToPrincipal(
+                nameof(Level2.OneToOne_Required_PK_Inverse2),
+                ConfigurationSource.Explicit
+            );
             level2Fk.DeleteBehavior = DeleteBehavior.Restrict;
             level2Fk = (ForeignKey)batch.Run(level2Fk);
         }
@@ -54,31 +69,73 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavi
         modelBuilder.Entity<InheritanceLeaf2>().Property(e => e.Id).ValueGeneratedNever();
 
         // FK name needs to be explicitly provided because issue #9310
-        modelBuilder.Entity<InheritanceBase2>().HasOne(e => e.Reference).WithOne()
+        modelBuilder
+            .Entity<InheritanceBase2>()
+            .HasOne(e => e.Reference)
+            .WithOne()
             .HasForeignKey<InheritanceBase1>("InheritanceBase2Id")
             .IsRequired(false);
-        modelBuilder.Entity<InheritanceBase2>().HasMany(e => e.Collection).WithOne()
+        modelBuilder
+            .Entity<InheritanceBase2>()
+            .HasMany(e => e.Collection)
+            .WithOne()
             .HasForeignKey("InheritanceBase2Id1");
 
         modelBuilder.Entity<InheritanceDerived1>().HasBaseType<InheritanceBase1>();
-        modelBuilder.Entity<InheritanceDerived1>().HasOne(e => e.ReferenceSameType).WithOne()
-            .HasForeignKey<InheritanceLeaf1>("SameTypeReference_InheritanceDerived1Id").IsRequired(false);
-        modelBuilder.Entity<InheritanceDerived1>().HasOne(e => e.ReferenceDifferentType).WithOne()
-            .HasForeignKey<InheritanceLeaf1>("DifferentTypeReference_InheritanceDerived1Id").IsRequired(false);
-        modelBuilder.Entity<InheritanceDerived1>().HasMany(e => e.CollectionSameType).WithOne()
-            .HasForeignKey("SameTypeCollection_InheritanceDerived1Id").IsRequired(false);
-        modelBuilder.Entity<InheritanceDerived1>().HasMany(e => e.CollectionDifferentType).WithOne()
-            .HasForeignKey("DifferentTypeCollection_InheritanceDerived1Id").IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceDerived1>()
+            .HasOne(e => e.ReferenceSameType)
+            .WithOne()
+            .HasForeignKey<InheritanceLeaf1>("SameTypeReference_InheritanceDerived1Id")
+            .IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceDerived1>()
+            .HasOne(e => e.ReferenceDifferentType)
+            .WithOne()
+            .HasForeignKey<InheritanceLeaf1>("DifferentTypeReference_InheritanceDerived1Id")
+            .IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceDerived1>()
+            .HasMany(e => e.CollectionSameType)
+            .WithOne()
+            .HasForeignKey("SameTypeCollection_InheritanceDerived1Id")
+            .IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceDerived1>()
+            .HasMany(e => e.CollectionDifferentType)
+            .WithOne()
+            .HasForeignKey("DifferentTypeCollection_InheritanceDerived1Id")
+            .IsRequired(false);
 
         modelBuilder.Entity<InheritanceDerived2>().HasBaseType<InheritanceBase1>();
-        modelBuilder.Entity<InheritanceDerived2>().HasOne(e => e.ReferenceSameType).WithOne()
-            .HasForeignKey<InheritanceLeaf1>("SameTypeReference_InheritanceDerived2Id").IsRequired(false);
-        modelBuilder.Entity<InheritanceDerived2>().HasOne(e => e.ReferenceDifferentType).WithOne()
-            .HasForeignKey<InheritanceLeaf2>("DifferentTypeReference_InheritanceDerived2Id").IsRequired(false);
-        modelBuilder.Entity<InheritanceDerived2>().HasMany(e => e.CollectionSameType).WithOne().IsRequired(false);
-        modelBuilder.Entity<InheritanceDerived2>().HasMany(e => e.CollectionDifferentType).WithOne().IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceDerived2>()
+            .HasOne(e => e.ReferenceSameType)
+            .WithOne()
+            .HasForeignKey<InheritanceLeaf1>("SameTypeReference_InheritanceDerived2Id")
+            .IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceDerived2>()
+            .HasOne(e => e.ReferenceDifferentType)
+            .WithOne()
+            .HasForeignKey<InheritanceLeaf2>("DifferentTypeReference_InheritanceDerived2Id")
+            .IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceDerived2>()
+            .HasMany(e => e.CollectionSameType)
+            .WithOne()
+            .IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceDerived2>()
+            .HasMany(e => e.CollectionDifferentType)
+            .WithOne()
+            .IsRequired(false);
 
-        modelBuilder.Entity<InheritanceLeaf2>().HasMany(e => e.BaseCollection).WithOne().IsRequired(false);
+        modelBuilder
+            .Entity<InheritanceLeaf2>()
+            .HasMany(e => e.BaseCollection)
+            .WithOne()
+            .IsRequired(false);
 
         modelBuilder.Entity<ComplexNavigationField>().HasKey(e => e.Name);
         modelBuilder.Entity<ComplexNavigationString>().HasKey(e => e.DefaultText);
@@ -130,13 +187,27 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavi
             .IsRequired(false);
 
         ForeignKey level3Fk;
-        var level3 = level2.Model.AddEntityType("Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3", typeof(Level3));
+        var level3 = level2.Model.AddEntityType(
+            "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3",
+            typeof(Level3)
+        );
         using (var batch = ((Model)level2.Model).ConventionDispatcher.DelayConventions())
         {
-            level3Fk = (ForeignKey)level3.AddForeignKey(level3.FindProperty(nameof(Level3.Id)), level2.FindPrimaryKey(), level2);
+            level3Fk = (ForeignKey)
+                level3.AddForeignKey(
+                    level3.FindProperty(nameof(Level3.Id)),
+                    level2.FindPrimaryKey(),
+                    level2
+                );
             level3Fk.IsUnique = true;
-            level3Fk.SetPrincipalToDependent(nameof(Level2.OneToOne_Required_PK2), ConfigurationSource.Explicit);
-            level3Fk.SetDependentToPrincipal(nameof(Level3.OneToOne_Required_PK_Inverse3), ConfigurationSource.Explicit);
+            level3Fk.SetPrincipalToDependent(
+                nameof(Level2.OneToOne_Required_PK2),
+                ConfigurationSource.Explicit
+            );
+            level3Fk.SetDependentToPrincipal(
+                nameof(Level3.OneToOne_Required_PK_Inverse3),
+                ConfigurationSource.Explicit
+            );
             level3Fk.DeleteBehavior = DeleteBehavior.Restrict;
             level3Fk = (ForeignKey)batch.Run(level3Fk);
         }
@@ -183,13 +254,25 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavi
         ForeignKey level4Fk;
         var level4 = level3.Model.AddEntityType(
             "Level1.OneToOne_Required_PK1#Level2.OneToOne_Required_PK2#Level3.OneToOne_Required_PK3#Level4",
-            typeof(Level4));
+            typeof(Level4)
+        );
         using (var batch = ((Model)level3.Model).ConventionDispatcher.DelayConventions())
         {
-            level4Fk = (ForeignKey)level4.AddForeignKey(level4.FindProperty(nameof(Level4.Id)), level3.FindPrimaryKey(), level3);
+            level4Fk = (ForeignKey)
+                level4.AddForeignKey(
+                    level4.FindProperty(nameof(Level4.Id)),
+                    level3.FindPrimaryKey(),
+                    level3
+                );
             level4Fk.IsUnique = true;
-            level4Fk.SetPrincipalToDependent(nameof(Level3.OneToOne_Required_PK3), ConfigurationSource.Explicit);
-            level4Fk.SetDependentToPrincipal(nameof(Level4.OneToOne_Required_PK_Inverse4), ConfigurationSource.Explicit);
+            level4Fk.SetPrincipalToDependent(
+                nameof(Level3.OneToOne_Required_PK3),
+                ConfigurationSource.Explicit
+            );
+            level4Fk.SetDependentToPrincipal(
+                nameof(Level4.OneToOne_Required_PK_Inverse4),
+                ConfigurationSource.Explicit
+            );
             level4Fk.DeleteBehavior = DeleteBehavior.Restrict;
             level4Fk = (ForeignKey)batch.Run(level4Fk);
         }
@@ -233,8 +316,8 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavi
             .IsRequired(false);
     }
 
-    protected override void Seed(ComplexNavigationsContext context)
-        => ComplexNavigationsData.Seed(context, tableSplitting: true);
+    protected override void Seed(ComplexNavigationsContext context) =>
+        ComplexNavigationsData.Seed(context, tableSplitting: true);
 
     private class ComplexNavigationsWeakSetExtractor : ISetSource
     {
@@ -263,29 +346,28 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavi
                 return (IQueryable<TEntity>)GetLevelThree(_context);
             }
 
-            return typeof(TEntity) == typeof(Level4) ? (IQueryable<TEntity>)GetLevelFour(_context) : _context.Set<TEntity>();
+            return typeof(TEntity) == typeof(Level4)
+                ? (IQueryable<TEntity>)GetLevelFour(_context)
+                : _context.Set<TEntity>();
         }
 
-        private static IQueryable<Level1> GetLevelOne(DbContext context)
-            => context.Set<Level1>();
+        private static IQueryable<Level1> GetLevelOne(DbContext context) => context.Set<Level1>();
 
-        private static IQueryable<Level2> GetLevelTwo(DbContext context)
-            => GetLevelOne(context).Select(t => t.OneToOne_Required_PK1).Where(t => t != null);
+        private static IQueryable<Level2> GetLevelTwo(DbContext context) =>
+            GetLevelOne(context).Select(t => t.OneToOne_Required_PK1).Where(t => t != null);
 
-        private static IQueryable<Level3> GetLevelThree(DbContext context)
-            => GetLevelTwo(context).Select(t => t.OneToOne_Required_PK2).Where(t => t != null);
+        private static IQueryable<Level3> GetLevelThree(DbContext context) =>
+            GetLevelTwo(context).Select(t => t.OneToOne_Required_PK2).Where(t => t != null);
 
-        private static IQueryable<Level4> GetLevelFour(DbContext context)
-            => GetLevelThree(context).Select(t => t.OneToOne_Required_PK3).Where(t => t != null);
+        private static IQueryable<Level4> GetLevelFour(DbContext context) =>
+            GetLevelThree(context).Select(t => t.OneToOne_Required_PK3).Where(t => t != null);
     }
 
     private class ComplexNavigationsWeakData : ComplexNavigationsData
     {
         public static readonly ComplexNavigationsWeakData Instance = new();
 
-        private ComplexNavigationsWeakData()
-        {
-        }
+        private ComplexNavigationsWeakData() { }
 
         public override IQueryable<TEntity> Set<TEntity>()
         {
@@ -332,16 +414,15 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase : ComplexNavi
             throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));
         }
 
-        private IQueryable<Level1> GetExpectedLevelOne()
-            => SplitLevelOnes.AsQueryable();
+        private IQueryable<Level1> GetExpectedLevelOne() => SplitLevelOnes.AsQueryable();
 
-        private IQueryable<Level2> GetExpectedLevelTwo()
-            => GetExpectedLevelOne().Select(t => t.OneToOne_Required_PK1).Where(t => t != null);
+        private IQueryable<Level2> GetExpectedLevelTwo() =>
+            GetExpectedLevelOne().Select(t => t.OneToOne_Required_PK1).Where(t => t != null);
 
-        private IQueryable<Level3> GetExpectedLevelThree()
-            => GetExpectedLevelTwo().Select(t => t.OneToOne_Required_PK2).Where(t => t != null);
+        private IQueryable<Level3> GetExpectedLevelThree() =>
+            GetExpectedLevelTwo().Select(t => t.OneToOne_Required_PK2).Where(t => t != null);
 
-        private IQueryable<Level4> GetExpectedLevelFour()
-            => GetExpectedLevelThree().Select(t => t.OneToOne_Required_PK3).Where(t => t != null);
+        private IQueryable<Level4> GetExpectedLevelFour() =>
+            GetExpectedLevelThree().Select(t => t.OneToOne_Required_PK3).Where(t => t != null);
     }
 }

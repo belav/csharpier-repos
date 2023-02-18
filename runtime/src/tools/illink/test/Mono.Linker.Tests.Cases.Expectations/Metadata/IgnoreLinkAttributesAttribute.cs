@@ -7,7 +7,7 @@ namespace Mono.Linker.Tests.Cases.Expectations.Metadata
     {
         public readonly bool Value;
 
-        public IgnoreLinkAttributesAttribute (bool value)
+        public IgnoreLinkAttributesAttribute(bool value)
         {
             Value = value;
         }

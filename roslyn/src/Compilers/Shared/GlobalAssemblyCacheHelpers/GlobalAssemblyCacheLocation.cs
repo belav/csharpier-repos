@@ -15,13 +15,13 @@ namespace Microsoft.CodeAnalysis
         internal enum ASM_CACHE
         {
             ZAP = 0x1,
-            GAC = 0x2,                // C:\Windows\Assembly\GAC
+            GAC = 0x2, // C:\Windows\Assembly\GAC
             DOWNLOAD = 0x4,
-            ROOT = 0x8,               // C:\Windows\Assembly
+            ROOT = 0x8, // C:\Windows\Assembly
             GAC_MSIL = 0x10,
-            GAC_32 = 0x20,            // C:\Windows\Assembly\GAC_32
-            GAC_64 = 0x40,            // C:\Windows\Assembly\GAC_64
-            ROOT_EX = 0x80,           // C:\Windows\Microsoft.NET\assembly
+            GAC_32 = 0x20, // C:\Windows\Assembly\GAC_32
+            GAC_64 = 0x40, // C:\Windows\Assembly\GAC_64
+            ROOT_EX = 0x80, // C:\Windows\Microsoft.NET\assembly
         }
 
         [DllImport("clr", PreserveSig = true)]
@@ -35,7 +35,10 @@ namespace Microsoft.CodeAnalysis
             {
                 if (s_rootLocations.IsDefault)
                 {
-                    s_rootLocations = ImmutableArray.Create(GetLocation(ASM_CACHE.ROOT), GetLocation(ASM_CACHE.ROOT_EX));
+                    s_rootLocations = ImmutableArray.Create(
+                        GetLocation(ASM_CACHE.ROOT),
+                        GetLocation(ASM_CACHE.ROOT_EX)
+                    );
                 }
 
                 return s_rootLocations;

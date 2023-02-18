@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,14 +38,12 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Reflection;
 
-namespace System.Xml.Serialization 
+namespace System.Xml.Serialization
 {
     [MonoTODO]
     // FIXME: provide expected elements/attributes on unknown elements/attributs
-    public abstract class XmlSerializationReader 
-        : XmlSerializationGeneratedCode
+    public abstract class XmlSerializationReader : XmlSerializationGeneratedCode
     {
-
         #region Fields
 
         XmlDocument document;
@@ -60,7 +58,8 @@ namespace System.Xml.Serialization
         XmlSerializer eventSource;
         int delayedFixupId = 0;
         Hashtable referencedObjects;
-        int readCount, whileIterationCount;
+        int readCount,
+            whileIterationCount;
 
         string w3SchemaNS;
         string w3InstanceNS;
@@ -75,295 +74,341 @@ namespace System.Xml.Serialization
         XmlQualifiedName arrayQName;
         #endregion
 
-        internal void Initialize (XmlReader reader, XmlSerializer eventSource)
+        internal void Initialize(XmlReader reader, XmlSerializer eventSource)
         {
-            w3SchemaNS = reader.NameTable.Add (XmlSchema.Namespace);
-            w3InstanceNS = reader.NameTable.Add (XmlSchema.InstanceNamespace);
-            w3InstanceNS2000 = reader.NameTable.Add ("http://www.w3.org/2000/10/XMLSchema-instance");
-            w3InstanceNS1999 = reader.NameTable.Add ("http://www.w3.org/1999/XMLSchema-instance");
-            soapNS = reader.NameTable.Add (XmlSerializer.EncodingNamespace);
-            wsdlNS = reader.NameTable.Add (XmlSerializer.WsdlNamespace);
-            nullX = reader.NameTable.Add ("null");
-            nil = reader.NameTable.Add ("nil");
-            typeX = reader.NameTable.Add ("type");
-            arrayType = reader.NameTable.Add ("arrayType");
+            w3SchemaNS = reader.NameTable.Add(XmlSchema.Namespace);
+            w3InstanceNS = reader.NameTable.Add(XmlSchema.InstanceNamespace);
+            w3InstanceNS2000 = reader.NameTable.Add("http://www.w3.org/2000/10/XMLSchema-instance");
+            w3InstanceNS1999 = reader.NameTable.Add("http://www.w3.org/1999/XMLSchema-instance");
+            soapNS = reader.NameTable.Add(XmlSerializer.EncodingNamespace);
+            wsdlNS = reader.NameTable.Add(XmlSerializer.WsdlNamespace);
+            nullX = reader.NameTable.Add("null");
+            nil = reader.NameTable.Add("nil");
+            typeX = reader.NameTable.Add("type");
+            arrayType = reader.NameTable.Add("arrayType");
             this.reader = reader;
             this.eventSource = eventSource;
-            arrayQName = new XmlQualifiedName ("Array", soapNS);
-            InitIDs ();
+            arrayQName = new XmlQualifiedName("Array", soapNS);
+            InitIDs();
         }
-            
-        private ArrayList EnsureArrayList (ArrayList list)
+
+        private ArrayList EnsureArrayList(ArrayList list)
         {
             if (list == null)
-                list = new ArrayList ();
+                list = new ArrayList();
             return list;
         }
-        
-        private Hashtable EnsureHashtable (Hashtable hash)
+
+        private Hashtable EnsureHashtable(Hashtable hash)
         {
             if (hash == null)
-                hash = new Hashtable ();
+                hash = new Hashtable();
             return hash;
         }
-        
-        protected XmlSerializationReader ()
-        {
-        }
+
+        protected XmlSerializationReader() { }
 
         protected XmlDocument Document
         {
-            get {
+            get
+            {
                 if (document == null)
-                    document = new XmlDocument (reader.NameTable);
+                    document = new XmlDocument(reader.NameTable);
 
                 return document;
             }
         }
 
-        protected XmlReader Reader {
+        protected XmlReader Reader
+        {
             get { return reader; }
         }
 
         [MonoTODO]
         protected bool IsReturnValue
         {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
-
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        protected int ReaderCount {
+        protected int ReaderCount
+        {
             get { return readCount; }
         }
 
         #region Methods
 
-        protected void AddFixup (CollectionFixup fixup)
+        protected void AddFixup(CollectionFixup fixup)
         {
-            collFixups = EnsureHashtable (collFixups);
-            collFixups [fixup.Id] = fixup;
+            collFixups = EnsureHashtable(collFixups);
+            collFixups[fixup.Id] = fixup;
 
-            if (delayedListFixups != null && delayedListFixups.ContainsKey (fixup.Id)) {
-                fixup.CollectionItems = delayedListFixups [fixup.Id];
-                delayedListFixups.Remove (fixup.Id);
+            if (delayedListFixups != null && delayedListFixups.ContainsKey(fixup.Id))
+            {
+                fixup.CollectionItems = delayedListFixups[fixup.Id];
+                delayedListFixups.Remove(fixup.Id);
             }
         }
 
-        protected void AddFixup (Fixup fixup)
+        protected void AddFixup(Fixup fixup)
         {
-            fixups = EnsureArrayList (fixups);
-            fixups.Add (fixup);
+            fixups = EnsureArrayList(fixups);
+            fixups.Add(fixup);
         }
 
-        void AddFixup (CollectionItemFixup fixup)
+        void AddFixup(CollectionItemFixup fixup)
         {
-            collItemFixups = EnsureArrayList (collItemFixups);
+            collItemFixups = EnsureArrayList(collItemFixups);
             collItemFixups.Add(fixup);
         }
 
-        protected void AddReadCallback (string name, string ns, Type type, XmlSerializationReadCallback read)
+        protected void AddReadCallback(
+            string name,
+            string ns,
+            Type type,
+            XmlSerializationReadCallback read
+        )
         {
-            WriteCallbackInfo info = new WriteCallbackInfo ();
+            WriteCallbackInfo info = new WriteCallbackInfo();
             info.Type = type;
             info.TypeName = name;
             info.TypeNs = ns;
             info.Callback = read;
-            typesCallbacks = EnsureHashtable (typesCallbacks);
-            typesCallbacks.Add (new XmlQualifiedName (name, ns), info);
+            typesCallbacks = EnsureHashtable(typesCallbacks);
+            typesCallbacks.Add(new XmlQualifiedName(name, ns), info);
         }
 
-        protected void AddTarget (string id, object o)
+        protected void AddTarget(string id, object o)
         {
-            if (id != null) {
-                targets = EnsureHashtable (targets);
-                if (targets [id] == null)
-                    targets.Add (id, o);
-            } else {
+            if (id != null)
+            {
+                targets = EnsureHashtable(targets);
+                if (targets[id] == null)
+                    targets.Add(id, o);
+            }
+            else
+            {
                 if (o != null)
                     return;
-                noIDTargets = EnsureArrayList (noIDTargets);
-                noIDTargets.Add (o);
+                noIDTargets = EnsureArrayList(noIDTargets);
+                noIDTargets.Add(o);
             }
         }
 
-        private string CurrentTag ()
+        private string CurrentTag()
         {
-            switch (reader.NodeType) {
-            case XmlNodeType.Element:
-                return String.Format ("<{0} xmlns='{1}'>", reader.LocalName,
-                                       reader.NamespaceURI);
-            case XmlNodeType.Attribute:
-                return reader.Value;
-            case XmlNodeType.Text:
-                return "CDATA";
-            case XmlNodeType.ProcessingInstruction:
-                return "<--";
-            case XmlNodeType.Entity:
-                return "<?";
-            case XmlNodeType.EndElement:
-                return ">";
-            default:
-                return "(unknown)";
+            switch (reader.NodeType)
+            {
+                case XmlNodeType.Element:
+                    return String.Format(
+                        "<{0} xmlns='{1}'>",
+                        reader.LocalName,
+                        reader.NamespaceURI
+                    );
+                case XmlNodeType.Attribute:
+                    return reader.Value;
+                case XmlNodeType.Text:
+                    return "CDATA";
+                case XmlNodeType.ProcessingInstruction:
+                    return "<--";
+                case XmlNodeType.Entity:
+                    return "<?";
+                case XmlNodeType.EndElement:
+                    return ">";
+                default:
+                    return "(unknown)";
             }
         }
 
-        protected Exception CreateCtorHasSecurityException (string typeName)
+        protected Exception CreateCtorHasSecurityException(string typeName)
         {
-            string message = string.Format ("The type '{0}' cannot"
-                + " be serialized because its parameterless"
-                + " constructor is decorated with declarative"
-                + " security permission attributes."
-                + " Consider using imperative asserts or demands"
-                + " in the constructor.", typeName);
-            return new InvalidOperationException (message);
+            string message = string.Format(
+                "The type '{0}' cannot"
+                    + " be serialized because its parameterless"
+                    + " constructor is decorated with declarative"
+                    + " security permission attributes."
+                    + " Consider using imperative asserts or demands"
+                    + " in the constructor.",
+                typeName
+            );
+            return new InvalidOperationException(message);
         }
 
-        protected Exception CreateInaccessibleConstructorException (string typeName)
+        protected Exception CreateInaccessibleConstructorException(string typeName)
         {
-            string message = string.Format ("{0} cannot be serialized"
-                + " because it does not have a default public"
-                + " constructor.", typeName);
-            return new InvalidOperationException (message);
+            string message = string.Format(
+                "{0} cannot be serialized"
+                    + " because it does not have a default public"
+                    + " constructor.",
+                typeName
+            );
+            return new InvalidOperationException(message);
         }
 
-        protected Exception CreateAbstractTypeException (string name, string ns)
+        protected Exception CreateAbstractTypeException(string name, string ns)
         {
-            string message = "The specified type is abstrace: name='" + name + "' namespace='" + ns + "', at " + CurrentTag ();
-            return new InvalidOperationException (message);
+            string message =
+                "The specified type is abstrace: name='"
+                + name
+                + "' namespace='"
+                + ns
+                + "', at "
+                + CurrentTag();
+            return new InvalidOperationException(message);
         }
 
-        protected Exception CreateInvalidCastException (Type type, object value)
+        protected Exception CreateInvalidCastException(Type type, object value)
         {
-            string message = String.Format (CultureInfo.InvariantCulture, "Cannot assign object of type {0} to an object of " +
-                            "type {1}.", value.GetType (), type);
-            return new InvalidCastException (message);
+            string message = String.Format(
+                CultureInfo.InvariantCulture,
+                "Cannot assign object of type {0} to an object of " + "type {1}.",
+                value.GetType(),
+                type
+            );
+            return new InvalidCastException(message);
         }
 
-        protected Exception CreateReadOnlyCollectionException (string name)
+        protected Exception CreateReadOnlyCollectionException(string name)
         {
-            string message = String.Format ("Could not serialize {0}. Default constructors are " +
-                            "required for collections and enumerators.", name);
-            return new InvalidOperationException (message);
+            string message = String.Format(
+                "Could not serialize {0}. Default constructors are "
+                    + "required for collections and enumerators.",
+                name
+            );
+            return new InvalidOperationException(message);
         }
 
-        protected Exception CreateUnknownConstantException (string value, Type enumType)
+        protected Exception CreateUnknownConstantException(string value, Type enumType)
         {
-            string message = String.Format ("'{0}' is not a valid value for {1}.", value, enumType);
-            return new InvalidOperationException (message);
+            string message = String.Format("'{0}' is not a valid value for {1}.", value, enumType);
+            return new InvalidOperationException(message);
         }
 
-        protected Exception CreateUnknownNodeException ()
+        protected Exception CreateUnknownNodeException()
         {
-            string message = CurrentTag () + " was not expected";
-            return new InvalidOperationException (message);
+            string message = CurrentTag() + " was not expected";
+            return new InvalidOperationException(message);
         }
 
-        protected Exception CreateUnknownTypeException (XmlQualifiedName type)
+        protected Exception CreateUnknownTypeException(XmlQualifiedName type)
         {
-            string message = "The specified type was not recognized: name='" + type.Name + "' namespace='" + type.Namespace + "', at " + CurrentTag ();
-            return new InvalidOperationException (message);
+            string message =
+                "The specified type was not recognized: name='"
+                + type.Name
+                + "' namespace='"
+                + type.Namespace
+                + "', at "
+                + CurrentTag();
+            return new InvalidOperationException(message);
         }
 
-        protected void CheckReaderCount (ref int whileIterations, ref int readerCount)
+        protected void CheckReaderCount(ref int whileIterations, ref int readerCount)
         {
             whileIterations = whileIterationCount;
             readerCount = readCount;
         }
 
-        protected Array EnsureArrayIndex (Array a, int index, Type elementType)
+        protected Array EnsureArrayIndex(Array a, int index, Type elementType)
         {
             if (a != null && index < a.Length)
                 return a;
 
             int size;
-            if (a == null) {
+            if (a == null)
+            {
                 size = 32;
-            } else {
+            }
+            else
+            {
                 size = a.Length * 2;
             }
 
-            Array result = Array.CreateInstance (elementType, size);
+            Array result = Array.CreateInstance(elementType, size);
             if (a != null)
-                Array.Copy (a, result, index);
+                Array.Copy(a, result, index);
 
             return result;
         }
 
         [MonoTODO]
-        protected void FixupArrayRefs (object fixup)
+        protected void FixupArrayRefs(object fixup)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        protected int GetArrayLength (string name, string ns)
+        protected int GetArrayLength(string name, string ns)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected bool GetNullAttr ()
+        protected bool GetNullAttr()
         {
-            string na = reader.GetAttribute (nullX, w3InstanceNS);
-            if (na == null) {
-                na = reader.GetAttribute (nil, w3InstanceNS);
-                if (na == null) {
-                    na = reader.GetAttribute (nullX, w3InstanceNS2000);
+            string na = reader.GetAttribute(nullX, w3InstanceNS);
+            if (na == null)
+            {
+                na = reader.GetAttribute(nil, w3InstanceNS);
+                if (na == null)
+                {
+                    na = reader.GetAttribute(nullX, w3InstanceNS2000);
                     if (na == null)
-                        na = reader.GetAttribute (nullX, w3InstanceNS1999);
+                        na = reader.GetAttribute(nullX, w3InstanceNS1999);
                 }
             }
             return (na != null);
         }
 
-        protected object GetTarget (string id)
+        protected object GetTarget(string id)
         {
-            if (targets == null) return null;
-            object ob = targets [id];
-            if (ob != null) {
-                if (referencedObjects == null) referencedObjects = new Hashtable ();
-                referencedObjects [ob] = ob;
+            if (targets == null)
+                return null;
+            object ob = targets[id];
+            if (ob != null)
+            {
+                if (referencedObjects == null)
+                    referencedObjects = new Hashtable();
+                referencedObjects[ob] = ob;
             }
             return ob;
         }
 
-        bool TargetReady (string id)
+        bool TargetReady(string id)
         {
-            if (targets == null) return false;
-            return targets.ContainsKey (id);
+            if (targets == null)
+                return false;
+            return targets.ContainsKey(id);
         }
 
-        protected XmlQualifiedName GetXsiType ()
+        protected XmlQualifiedName GetXsiType()
         {
-            string typeName = Reader.GetAttribute (typeX, XmlSchema.InstanceNamespace);
-            
-            if (typeName == string.Empty || typeName == null) {
-                typeName = Reader.GetAttribute (typeX, w3InstanceNS1999);
-                if (typeName == string.Empty || typeName == null) {
-                    typeName = Reader.GetAttribute (typeX, w3InstanceNS2000);
+            string typeName = Reader.GetAttribute(typeX, XmlSchema.InstanceNamespace);
+
+            if (typeName == string.Empty || typeName == null)
+            {
+                typeName = Reader.GetAttribute(typeX, w3InstanceNS1999);
+                if (typeName == string.Empty || typeName == null)
+                {
+                    typeName = Reader.GetAttribute(typeX, w3InstanceNS2000);
                     if (typeName == string.Empty || typeName == null)
                         return null;
                 }
             }
-            
-            int i = typeName.IndexOf (":");
-            if (i == -1) return new XmlQualifiedName (typeName, Reader.NamespaceURI);
-            else 
+
+            int i = typeName.IndexOf(":");
+            if (i == -1)
+                return new XmlQualifiedName(typeName, Reader.NamespaceURI);
+            else
             {
-                string prefix = typeName.Substring(0,i);
-                string name = typeName.Substring (i+1);
-                return new XmlQualifiedName (name, Reader.LookupNamespace (prefix));
+                string prefix = typeName.Substring(0, i);
+                string name = typeName.Substring(i + 1);
+                return new XmlQualifiedName(name, Reader.LookupNamespace(prefix));
             }
         }
 
-        protected abstract void InitCallbacks ();
-        protected abstract void InitIDs ();
+        protected abstract void InitCallbacks();
+        protected abstract void InitIDs();
 
-        protected bool IsXmlnsAttribute (string name)
+        protected bool IsXmlnsAttribute(string name)
         {
             int length = name.Length;
             if (length < 5)
@@ -372,129 +417,142 @@ namespace System.Xml.Serialization
             if (length == 5)
                 return (name == "xmlns");
 
-            return name.StartsWith ("xmlns:");
+            return name.StartsWith("xmlns:");
         }
 
-        protected void ParseWsdlArrayType (XmlAttribute attr)
+        protected void ParseWsdlArrayType(XmlAttribute attr)
         {
             if (attr.NamespaceURI == wsdlNS && attr.LocalName == arrayType)
             {
-                string ns = "", type, dimensions;
-                TypeTranslator.ParseArrayType (attr.Value, out type, out ns, out dimensions);
-                if (ns != "") ns = Reader.LookupNamespace (ns) + ":";
+                string ns = "",
+                    type,
+                    dimensions;
+                TypeTranslator.ParseArrayType(attr.Value, out type, out ns, out dimensions);
+                if (ns != "")
+                    ns = Reader.LookupNamespace(ns) + ":";
                 attr.Value = ns + type + dimensions;
             }
         }
 
-        protected XmlQualifiedName ReadElementQualifiedName ()
+        protected XmlQualifiedName ReadElementQualifiedName()
         {
             readCount++;
 
-            if (reader.IsEmptyElement) {
+            if (reader.IsEmptyElement)
+            {
                 reader.Skip();
-                return ToXmlQualifiedName (String.Empty);
+                return ToXmlQualifiedName(String.Empty);
             }
 
-            reader.ReadStartElement ();
-            XmlQualifiedName xqn = ToXmlQualifiedName(reader.ReadString ());
-            reader.ReadEndElement ();
+            reader.ReadStartElement();
+            XmlQualifiedName xqn = ToXmlQualifiedName(reader.ReadString());
+            reader.ReadEndElement();
             return xqn;
         }
 
-        protected void ReadEndElement ()
+        protected void ReadEndElement()
         {
             readCount++;
 
             while (reader.NodeType == XmlNodeType.Whitespace)
-                reader.Skip ();
+                reader.Skip();
 
-            if (reader.NodeType != XmlNodeType.None) {
-                reader.ReadEndElement ();
-            } else {
-                reader.Skip ();
+            if (reader.NodeType != XmlNodeType.None)
+            {
+                reader.ReadEndElement();
+            }
+            else
+            {
+                reader.Skip();
             }
         }
 
-        protected bool ReadNull ()
+        protected bool ReadNull()
         {
-            if (!GetNullAttr ())
+            if (!GetNullAttr())
                 return false;
 
             readCount++;
 
-            if (reader.IsEmptyElement) {
+            if (reader.IsEmptyElement)
+            {
                 reader.Skip();
                 return true;
             }
 
             reader.ReadStartElement();
             while (reader.NodeType != XmlNodeType.EndElement)
-                UnknownNode (null);
+                UnknownNode(null);
 
-            ReadEndElement ();
+            ReadEndElement();
             return true;
         }
 
-        protected XmlQualifiedName ReadNullableQualifiedName ()
+        protected XmlQualifiedName ReadNullableQualifiedName()
         {
-            if (ReadNull ())
+            if (ReadNull())
                 return null;
 
-            return ReadElementQualifiedName ();
+            return ReadElementQualifiedName();
         }
 
-        protected string ReadNullableString ()
+        protected string ReadNullableString()
         {
-            if (ReadNull ())
+            if (ReadNull())
                 return null;
 
             readCount++;
-            return reader.ReadElementString ();
+            return reader.ReadElementString();
         }
 
-        protected bool ReadReference (out string fixupReference)
+        protected bool ReadReference(out string fixupReference)
         {
-            string href = reader.GetAttribute ("href");
-            if (href == null) {
+            string href = reader.GetAttribute("href");
+            if (href == null)
+            {
                 fixupReference = null;
                 return false;
             }
 
-            if (href [0] != '#')
+            if (href[0] != '#')
                 throw new InvalidOperationException("href not found: " + href);
 
-            fixupReference = href.Substring (1);
+            fixupReference = href.Substring(1);
             readCount++;
-            if (!reader.IsEmptyElement) {
-                reader.ReadStartElement ();
-                ReadEndElement ();
-            } else {
-                reader.Skip ();
+            if (!reader.IsEmptyElement)
+            {
+                reader.ReadStartElement();
+                ReadEndElement();
+            }
+            else
+            {
+                reader.Skip();
             }
             return true;
         }
 
-        protected object ReadReferencedElement ()
+        protected object ReadReferencedElement()
         {
-            return ReadReferencedElement (Reader.LocalName, Reader.NamespaceURI);
+            return ReadReferencedElement(Reader.LocalName, Reader.NamespaceURI);
         }
 
-        WriteCallbackInfo GetCallbackInfo (XmlQualifiedName qname)
+        WriteCallbackInfo GetCallbackInfo(XmlQualifiedName qname)
         {
-            if (typesCallbacks == null) 
+            if (typesCallbacks == null)
             {
-                typesCallbacks = new Hashtable ();
-                InitCallbacks ();
+                typesCallbacks = new Hashtable();
+                InitCallbacks();
             }
-            return (WriteCallbackInfo) typesCallbacks[qname];
+            return (WriteCallbackInfo)typesCallbacks[qname];
         }
 
-        protected object ReadReferencedElement (string name, string ns)
+        protected object ReadReferencedElement(string name, string ns)
         {
-            XmlQualifiedName qname = GetXsiType ();
-            if (qname == null) qname = new XmlQualifiedName (name, ns);
+            XmlQualifiedName qname = GetXsiType();
+            if (qname == null)
+                qname = new XmlQualifiedName(name, ns);
 
-            string id = Reader.GetAttribute ("id");
+            string id = Reader.GetAttribute("id");
             object ob;
 
             // it takes precedence over xsi:type.
@@ -504,22 +562,23 @@ namespace System.Xml.Serialization
             // soap-env:arrayType, so use it (this could coexist
             // with xsi:type, which indicates the type in WSDL).
             // See bug #79057.
-            string arrayTypeVal = Reader.GetAttribute (arrayType, soapNS);
+            string arrayTypeVal = Reader.GetAttribute(arrayType, soapNS);
 
             if (qname == arrayQName || arrayTypeVal != null && arrayTypeVal.Length > 0)
             {
-                CollectionFixup fixup = (collFixups != null) ? (CollectionFixup) collFixups[id] : null;
-                if (ReadList (out ob))
+                CollectionFixup fixup =
+                    (collFixups != null) ? (CollectionFixup)collFixups[id] : null;
+                if (ReadList(out ob))
                 {
                     // List complete (does not contain references)
                     if (fixup != null)
                     {
-                        fixup.Callback (fixup.Collection, ob);
-                        collFixups.Remove (id);
+                        fixup.Callback(fixup.Collection, ob);
+                        collFixups.Remove(id);
                         ob = fixup.Collection;
                     }
                 }
-                else if (fixup != null) 
+                else if (fixup != null)
                 {
                     fixup.CollectionItems = (object[])ob;
                     ob = fixup.Collection;
@@ -527,99 +586,111 @@ namespace System.Xml.Serialization
             }
             else
             {
-                WriteCallbackInfo info = GetCallbackInfo (qname);
+                WriteCallbackInfo info = GetCallbackInfo(qname);
                 if (info == null)
-                    ob = ReadTypedPrimitive (qname, id != null);
+                    ob = ReadTypedPrimitive(qname, id != null);
                 else
                     ob = info.Callback();
             }
-            AddTarget (id, ob);
+            AddTarget(id, ob);
             return ob;
         }
-        
-        bool ReadList (out object resultList)
+
+        bool ReadList(out object resultList)
         {
-            string arrayTypeAttr = Reader.GetAttribute (arrayType, soapNS);
-            if (arrayTypeAttr == null) arrayTypeAttr = Reader.GetAttribute (arrayType, wsdlNS);
-            
-            XmlQualifiedName qn = ToXmlQualifiedName (arrayTypeAttr);
-            int i = qn.Name.LastIndexOf ('[');
-            string dim = qn.Name.Substring (i);
-            string itemType = qn.Name.Substring (0,i);
-            int count = Int32.Parse (dim.Substring (1, dim.Length - 2), CultureInfo.InvariantCulture);
+            string arrayTypeAttr = Reader.GetAttribute(arrayType, soapNS);
+            if (arrayTypeAttr == null)
+                arrayTypeAttr = Reader.GetAttribute(arrayType, wsdlNS);
+
+            XmlQualifiedName qn = ToXmlQualifiedName(arrayTypeAttr);
+            int i = qn.Name.LastIndexOf('[');
+            string dim = qn.Name.Substring(i);
+            string itemType = qn.Name.Substring(0, i);
+            int count = Int32.Parse(dim.Substring(1, dim.Length - 2), CultureInfo.InvariantCulture);
 
             Array list;
 
-            i = itemType.IndexOf ('['); if (i == -1) i = itemType.Length;
-            string baseType = itemType.Substring (0,i);
+            i = itemType.IndexOf('[');
+            if (i == -1)
+                i = itemType.Length;
+            string baseType = itemType.Substring(0, i);
             string arrayTypeName;
 
             if (qn.Namespace == w3SchemaNS)
-                arrayTypeName = TypeTranslator.GetPrimitiveTypeData (baseType).Type.FullName + itemType.Substring (i);
+                arrayTypeName =
+                    TypeTranslator.GetPrimitiveTypeData(baseType).Type.FullName
+                    + itemType.Substring(i);
             else
             {
-                WriteCallbackInfo info = GetCallbackInfo (new XmlQualifiedName (baseType,qn.Namespace));
-                arrayTypeName = info.Type.FullName + itemType.Substring (i) + ", " + info.Type.Assembly.FullName;
+                WriteCallbackInfo info = GetCallbackInfo(
+                    new XmlQualifiedName(baseType, qn.Namespace)
+                );
+                arrayTypeName =
+                    info.Type.FullName + itemType.Substring(i) + ", " + info.Type.Assembly.FullName;
             }
 
-            list = Array.CreateInstance (Type.GetType (arrayTypeName), count);
+            list = Array.CreateInstance(Type.GetType(arrayTypeName), count);
 
             bool listComplete = true;
 
-            if (Reader.IsEmptyElement) {
+            if (Reader.IsEmptyElement)
+            {
                 readCount++;
-                Reader.Skip ();
-            } else {
-                Reader.ReadStartElement ();
-                for (int n=0; n<count; n++)
+                Reader.Skip();
+            }
+            else
+            {
+                Reader.ReadStartElement();
+                for (int n = 0; n < count; n++)
                 {
                     whileIterationCount++;
                     readCount++;
-                    Reader.MoveToContent ();
+                    Reader.MoveToContent();
                     string id;
-                    object item = ReadReferencingElement (itemType, qn.Namespace, out id);
-                    if (id == null) 
-                        list.SetValue (item,n);
+                    object item = ReadReferencingElement(itemType, qn.Namespace, out id);
+                    if (id == null)
+                        list.SetValue(item, n);
                     else
                     {
-                        AddFixup (new CollectionItemFixup (list, n, id));
+                        AddFixup(new CollectionItemFixup(list, n, id));
                         listComplete = false;
                     }
                 }
                 whileIterationCount = 0;
-                Reader.ReadEndElement ();
+                Reader.ReadEndElement();
             }
 
             resultList = list;
             return listComplete;
         }
-        
-        protected void ReadReferencedElements ()
+
+        protected void ReadReferencedElements()
         {
             reader.MoveToContent();
             XmlNodeType nt = reader.NodeType;
-            while (nt != XmlNodeType.EndElement && nt != XmlNodeType.None) {
+            while (nt != XmlNodeType.EndElement && nt != XmlNodeType.None)
+            {
                 whileIterationCount++;
                 readCount++;
-                ReadReferencedElement ();
-                reader.MoveToContent ();
+                ReadReferencedElement();
+                reader.MoveToContent();
                 nt = reader.NodeType;
             }
             whileIterationCount = 0;
 
             // Registers delayed list
-            
+
             if (delayedListFixups != null)
             {
                 foreach (DictionaryEntry entry in delayedListFixups)
-                    AddTarget ((string)entry.Key, entry.Value);
+                    AddTarget((string)entry.Key, entry.Value);
             }
             // Fix arrays
 
             if (collItemFixups != null)
             {
                 foreach (CollectionItemFixup itemFixup in collItemFixups)
-                    itemFixup.Collection.SetValue (GetTarget (itemFixup.Id), itemFixup.Index);
+                    itemFixup.Collection.SetValue(GetTarget(itemFixup.Id), itemFixup.Index);
             }
 
             // Fills collections
@@ -628,7 +699,7 @@ namespace System.Xml.Serialization
             {
                 ICollection cfixups = collFixups.Values;
                 foreach (CollectionFixup fixup in cfixups)
-                    fixup.Callback (fixup.Collection, fixup.CollectionItems);
+                    fixup.Callback(fixup.Collection, fixup.CollectionItems);
             }
 
             // Fills class instances
@@ -636,76 +707,90 @@ namespace System.Xml.Serialization
             if (fixups != null)
             {
                 foreach (Fixup fixup in fixups)
-                    fixup.Callback (fixup);
+                    fixup.Callback(fixup);
             }
-            
-            if (targets != null) {
-                foreach (DictionaryEntry e in targets) {
-                    if (e.Value != null && (referencedObjects == null || !referencedObjects.Contains (e.Value)))
-                        UnreferencedObject ((string)e.Key, e.Value);
+
+            if (targets != null)
+            {
+                foreach (DictionaryEntry e in targets)
+                {
+                    if (
+                        e.Value != null
+                        && (referencedObjects == null || !referencedObjects.Contains(e.Value))
+                    )
+                        UnreferencedObject((string)e.Key, e.Value);
                 }
             }
         }
 
-        protected object ReadReferencingElement (out string fixupReference)
+        protected object ReadReferencingElement(out string fixupReference)
         {
-            return ReadReferencingElement (Reader.LocalName, Reader.NamespaceURI, false, out fixupReference);
+            return ReadReferencingElement(
+                Reader.LocalName,
+                Reader.NamespaceURI,
+                false,
+                out fixupReference
+            );
         }
 
-        protected object ReadReferencingElement (string name, string ns, out string fixupReference)
+        protected object ReadReferencingElement(string name, string ns, out string fixupReference)
         {
-            return ReadReferencingElement (name, ns, false, out fixupReference);
+            return ReadReferencingElement(name, ns, false, out fixupReference);
         }
 
-        protected object ReadReferencingElement (string name,
-                             string ns,
-                             bool elementCanBeType,
-                             out string fixupReference)
+        protected object ReadReferencingElement(
+            string name,
+            string ns,
+            bool elementCanBeType,
+            out string fixupReference
+        )
         {
-            if (ReadNull ())
+            if (ReadNull())
             {
                 fixupReference = null;
                 return null;
             }
 
-            string refid = Reader.GetAttribute ("href");
+            string refid = Reader.GetAttribute("href");
 
             if (refid == string.Empty || refid == null)
             {
                 fixupReference = null;
 
-                XmlQualifiedName qname = GetXsiType ();
-                if (qname == null) qname = new XmlQualifiedName (name, ns);
-                string arrayTypeAttr = Reader.GetAttribute (arrayType, soapNS);
+                XmlQualifiedName qname = GetXsiType();
+                if (qname == null)
+                    qname = new XmlQualifiedName(name, ns);
+                string arrayTypeAttr = Reader.GetAttribute(arrayType, soapNS);
 
                 if (qname == arrayQName || arrayTypeAttr != null)
                 {
-                    delayedListFixups = EnsureHashtable (delayedListFixups);
+                    delayedListFixups = EnsureHashtable(delayedListFixups);
                     fixupReference = "__<" + (delayedFixupId++) + ">";
                     object items;
-                    ReadList (out items);
-                    delayedListFixups [fixupReference] = items;
+                    ReadList(out items);
+                    delayedListFixups[fixupReference] = items;
                     return null;
                 }
                 else
                 {
-                    WriteCallbackInfo info = GetCallbackInfo (qname);
+                    WriteCallbackInfo info = GetCallbackInfo(qname);
                     if (info == null)
-                        return ReadTypedPrimitive (qname, true);
+                        return ReadTypedPrimitive(qname, true);
                     else
                         return info.Callback();
                 }
             }
             else
             {
-                if (refid.StartsWith ("#")) refid = refid.Substring (1);
+                if (refid.StartsWith("#"))
+                    refid = refid.Substring(1);
 
                 readCount++;
-                Reader.Skip ();
-                if (TargetReady (refid))
+                Reader.Skip();
+                if (TargetReady(refid))
                 {
                     fixupReference = null;
-                    return GetTarget (refid);
+                    return GetTarget(refid);
                 }
                 else
                 {
@@ -715,79 +800,91 @@ namespace System.Xml.Serialization
             }
         }
 
-        protected IXmlSerializable ReadSerializable (IXmlSerializable serializable)
+        protected IXmlSerializable ReadSerializable(IXmlSerializable serializable)
         {
-            if (ReadNull ()) return null;
+            if (ReadNull())
+                return null;
             int depth = reader.Depth;
             readCount++;
-            serializable.ReadXml (reader);
-            Reader.MoveToContent ();
+            serializable.ReadXml(reader);
+            Reader.MoveToContent();
             while (reader.Depth > depth)
-                reader.Skip ();
+                reader.Skip();
             if (reader.Depth == depth && reader.NodeType == XmlNodeType.EndElement)
-                reader.ReadEndElement ();
+                reader.ReadEndElement();
             return serializable;
         }
 
-        protected IXmlSerializable ReadSerializable (IXmlSerializable serializable, bool wrappedAny)
+        protected IXmlSerializable ReadSerializable(IXmlSerializable serializable, bool wrappedAny)
         {
             string name = null;
             string ns = null;
 
-            if (wrappedAny) {
+            if (wrappedAny)
+            {
                 name = reader.LocalName;
                 ns = reader.NamespaceURI;
-                reader.Read ();
-                reader.MoveToContent ();
+                reader.Read();
+                reader.MoveToContent();
             }
-            serializable.ReadXml (reader);
+            serializable.ReadXml(reader);
 
-            if (wrappedAny) {
-                while (reader.NodeType == XmlNodeType.Whitespace) reader.Skip ();
-                if (reader.NodeType == XmlNodeType.None) reader.Skip ();
-                if (reader.NodeType == XmlNodeType.EndElement && reader.LocalName == name && reader.NamespaceURI == ns) {
-                    reader.Read ();
+            if (wrappedAny)
+            {
+                while (reader.NodeType == XmlNodeType.Whitespace)
+                    reader.Skip();
+                if (reader.NodeType == XmlNodeType.None)
+                    reader.Skip();
+                if (
+                    reader.NodeType == XmlNodeType.EndElement
+                    && reader.LocalName == name
+                    && reader.NamespaceURI == ns
+                )
+                {
+                    reader.Read();
                 }
             }
             return serializable;
         }
 
-        protected string ReadString (string value)
+        protected string ReadString(string value)
         {
             readCount++;
             if (value == null || value == String.Empty)
-                return reader.ReadString ();
+                return reader.ReadString();
 
-            return (value + reader.ReadString ());
+            return (value + reader.ReadString());
         }
 
-        protected object ReadTypedPrimitive (XmlQualifiedName type)
+        protected object ReadTypedPrimitive(XmlQualifiedName type)
         {
-            return ReadTypedPrimitive (type, false);
+            return ReadTypedPrimitive(type, false);
         }
-        
-        object ReadTypedPrimitive (XmlQualifiedName qname, bool reportUnknown)
+
+        object ReadTypedPrimitive(XmlQualifiedName qname, bool reportUnknown)
         {
-            if (qname == null) qname = GetXsiType ();
-            
-            TypeData typeData = TypeTranslator.FindPrimitiveTypeData (qname.Name);
+            if (qname == null)
+                qname = GetXsiType();
+
+            TypeData typeData = TypeTranslator.FindPrimitiveTypeData(qname.Name);
             if (typeData == null || typeData.SchemaType != SchemaTypes.Primitive)
             {
                 // Put everything into a node array
                 readCount++;
-                XmlNode node = Document.ReadNode (reader);
-                
+                XmlNode node = Document.ReadNode(reader);
+
                 if (reportUnknown)
-                    OnUnknownNode (node, null, null);
+                    OnUnknownNode(node, null, null);
 
                 if (node.ChildNodes.Count == 0 && node.Attributes.Count == 0)
-                    return new Object ();
+                    return new Object();
 
                 XmlElement elem = node as XmlElement;
-                
+
                 if (elem == null)
-                    return new XmlNode[] {node};
-                else {
+                    return new XmlNode[] { node };
+                else
+                {
                     XmlNode[] nodes = new XmlNode[elem.Attributes.Count + elem.ChildNodes.Count];
                     int n = 0;
                     foreach (XmlNode no in elem.Attributes)
@@ -798,250 +895,284 @@ namespace System.Xml.Serialization
                 }
             }
 
-            if (typeData.Type == typeof (XmlQualifiedName)) return ReadNullableQualifiedName ();
+            if (typeData.Type == typeof(XmlQualifiedName))
+                return ReadNullableQualifiedName();
             readCount++;
-            return XmlCustomFormatter.FromXmlString (typeData, Reader.ReadElementString ());
+            return XmlCustomFormatter.FromXmlString(typeData, Reader.ReadElementString());
         }
 
-        protected XmlNode ReadXmlNode (bool wrapped)
+        protected XmlNode ReadXmlNode(bool wrapped)
         {
             readCount++;
-            XmlNode node = Document.ReadNode (reader);
+            XmlNode node = Document.ReadNode(reader);
             if (wrapped)
                 return node.FirstChild;
             else
                 return node;
         }
 
-        protected XmlDocument ReadXmlDocument (bool wrapped)
+        protected XmlDocument ReadXmlDocument(bool wrapped)
         {
             readCount++;
 
             if (wrapped)
-                reader.ReadStartElement ();
-            reader.MoveToContent ();
-            XmlDocument doc = new XmlDocument (reader.NameTable);
-            XmlNode node = doc.ReadNode (reader);
-            doc.AppendChild (node);
-            
+                reader.ReadStartElement();
+            reader.MoveToContent();
+            XmlDocument doc = new XmlDocument(reader.NameTable);
+            XmlNode node = doc.ReadNode(reader);
+            doc.AppendChild(node);
+
             if (wrapped)
-                reader.ReadEndElement ();
-                
+                reader.ReadEndElement();
+
             return doc;
         }
 
-        protected void Referenced (object o)
+        protected void Referenced(object o)
         {
-            if (o != null) {
-                if (referencedObjects == null) referencedObjects = new Hashtable ();
-                referencedObjects [o] = o;
+            if (o != null)
+            {
+                if (referencedObjects == null)
+                    referencedObjects = new Hashtable();
+                referencedObjects[o] = o;
             }
         }
 
-        protected Array ShrinkArray (Array a, int length, Type elementType, bool isNullable)
+        protected Array ShrinkArray(Array a, int length, Type elementType, bool isNullable)
         {
-            if (length == 0 && isNullable) return null;
-            if (a == null) return Array.CreateInstance (elementType, length);
-            if (a.Length == length) return a;
+            if (length == 0 && isNullable)
+                return null;
+            if (a == null)
+                return Array.CreateInstance(elementType, length);
+            if (a.Length == length)
+                return a;
 
-            Array result = Array.CreateInstance (elementType, length);
-            Array.Copy (a, result, length);
+            Array result = Array.CreateInstance(elementType, length);
+            Array.Copy(a, result, length);
             return result;
         }
 
-        protected byte[] ToByteArrayBase64 (bool isNull)
+        protected byte[] ToByteArrayBase64(bool isNull)
         {
             readCount++;
-            if (isNull) {
-                Reader.ReadString ();
+            if (isNull)
+            {
+                Reader.ReadString();
                 return null;
             }
             else
-                return ToByteArrayBase64 (Reader.ReadString ());
+                return ToByteArrayBase64(Reader.ReadString());
         }
 
-        protected static byte[] ToByteArrayBase64 (string value)
+        protected static byte[] ToByteArrayBase64(string value)
         {
-            return Convert.FromBase64String (value);
+            return Convert.FromBase64String(value);
         }
 
-        protected byte[] ToByteArrayHex (bool isNull)
+        protected byte[] ToByteArrayHex(bool isNull)
         {
             readCount++;
-            if (isNull) {
-                Reader.ReadString ();
+            if (isNull)
+            {
+                Reader.ReadString();
                 return null;
             }
             else
-                return ToByteArrayHex (Reader.ReadString ());
+                return ToByteArrayHex(Reader.ReadString());
         }
 
-        protected static byte[] ToByteArrayHex (string value)
+        protected static byte[] ToByteArrayHex(string value)
         {
-            return XmlConvert.FromBinHexString (value);
+            return XmlConvert.FromBinHexString(value);
         }
 
-        protected static char ToChar (string value)
+        protected static char ToChar(string value)
         {
-            return XmlCustomFormatter.ToChar (value);
+            return XmlCustomFormatter.ToChar(value);
         }
 
-        protected static DateTime ToDate (string value)
+        protected static DateTime ToDate(string value)
         {
-            return XmlCustomFormatter.ToDate (value);
+            return XmlCustomFormatter.ToDate(value);
         }
 
-        protected static DateTime ToDateTime (string value)
+        protected static DateTime ToDateTime(string value)
         {
-            return XmlCustomFormatter.ToDateTime (value);
+            return XmlCustomFormatter.ToDateTime(value);
         }
 
-        protected static long ToEnum (string value, Hashtable h, string typeName)
+        protected static long ToEnum(string value, Hashtable h, string typeName)
         {
-            return XmlCustomFormatter.ToEnum (value, h, typeName, true);
+            return XmlCustomFormatter.ToEnum(value, h, typeName, true);
         }
 
-        protected static DateTime ToTime (string value)
+        protected static DateTime ToTime(string value)
         {
-            return XmlCustomFormatter.ToTime (value);
+            return XmlCustomFormatter.ToTime(value);
         }
 
-        protected static string ToXmlName (string value)
+        protected static string ToXmlName(string value)
         {
-            return XmlCustomFormatter.ToXmlName (value);
+            return XmlCustomFormatter.ToXmlName(value);
         }
 
-        protected static string ToXmlNCName (string value)
+        protected static string ToXmlNCName(string value)
         {
-            return XmlCustomFormatter.ToXmlNCName (value);
+            return XmlCustomFormatter.ToXmlNCName(value);
         }
 
-        protected static string ToXmlNmToken (string value)
+        protected static string ToXmlNmToken(string value)
         {
-            return XmlCustomFormatter.ToXmlNmToken (value);
+            return XmlCustomFormatter.ToXmlNmToken(value);
         }
 
-        protected static string ToXmlNmTokens (string value)
+        protected static string ToXmlNmTokens(string value)
         {
-            return XmlCustomFormatter.ToXmlNmTokens (value);
+            return XmlCustomFormatter.ToXmlNmTokens(value);
         }
 
-        protected XmlQualifiedName ToXmlQualifiedName (string value)
+        protected XmlQualifiedName ToXmlQualifiedName(string value)
         {
             string name;
             string ns;
-            int lastColon = value.LastIndexOf (':');
-            string decodedValue = XmlConvert.DecodeName (value);
-            if (lastColon < 0) {
-                name = reader.NameTable.Add (decodedValue);
-                ns = reader.LookupNamespace (String.Empty);
-            } else {
-                string prefix = value.Substring (0, lastColon);
-                ns = reader.LookupNamespace (prefix);
+            int lastColon = value.LastIndexOf(':');
+            string decodedValue = XmlConvert.DecodeName(value);
+            if (lastColon < 0)
+            {
+                name = reader.NameTable.Add(decodedValue);
+                ns = reader.LookupNamespace(String.Empty);
+            }
+            else
+            {
+                string prefix = value.Substring(0, lastColon);
+                ns = reader.LookupNamespace(prefix);
                 if (ns == null)
-                    throw new InvalidOperationException ("namespace " + prefix + " not defined");
+                    throw new InvalidOperationException("namespace " + prefix + " not defined");
 
-                name = reader.NameTable.Add (value.Substring (lastColon + 1));
+                name = reader.NameTable.Add(value.Substring(lastColon + 1));
             }
 
-            return new XmlQualifiedName (name, ns);
+            return new XmlQualifiedName(name, ns);
         }
 
-        protected void UnknownAttribute (object o, XmlAttribute attr)
+        protected void UnknownAttribute(object o, XmlAttribute attr)
         {
-            UnknownAttribute (o, attr, null);
+            UnknownAttribute(o, attr, null);
         }
 
-        protected
-        void UnknownAttribute (object o, XmlAttribute attr, string qnames)
+        protected void UnknownAttribute(object o, XmlAttribute attr, string qnames)
         {
-            int line_number, line_position;
-            
-            if (Reader is XmlTextReader){
+            int line_number,
+                line_position;
+
+            if (Reader is XmlTextReader)
+            {
                 line_number = ((XmlTextReader)Reader).LineNumber;
                 line_position = ((XmlTextReader)Reader).LinePosition;
-            } else {
+            }
+            else
+            {
                 line_number = 0;
                 line_position = 0;
             }
 
-            XmlAttributeEventArgs args = new XmlAttributeEventArgs (attr, line_number, line_position, o, qnames);
+            XmlAttributeEventArgs args = new XmlAttributeEventArgs(
+                attr,
+                line_number,
+                line_position,
+                o,
+                qnames
+            );
 
             if (eventSource != null)
-                eventSource.OnUnknownAttribute (args);
+                eventSource.OnUnknownAttribute(args);
         }
 
-        protected void UnknownElement (object o, XmlElement elem)
+        protected void UnknownElement(object o, XmlElement elem)
         {
-            UnknownElement (o, elem, null);
+            UnknownElement(o, elem, null);
         }
 
-        protected
-        void UnknownElement (object o, XmlElement elem, string qnames)
+        protected void UnknownElement(object o, XmlElement elem, string qnames)
         {
-            int line_number, line_position;
-            
-            if (Reader is XmlTextReader){
+            int line_number,
+                line_position;
+
+            if (Reader is XmlTextReader)
+            {
                 line_number = ((XmlTextReader)Reader).LineNumber;
                 line_position = ((XmlTextReader)Reader).LinePosition;
-            } else {
+            }
+            else
+            {
                 line_number = 0;
                 line_position = 0;
             }
 
-            XmlElementEventArgs args = new XmlElementEventArgs (elem, line_number, line_position, o, qnames);
+            XmlElementEventArgs args = new XmlElementEventArgs(
+                elem,
+                line_number,
+                line_position,
+                o,
+                qnames
+            );
 
             if (eventSource != null)
-                eventSource.OnUnknownElement (args);
+                eventSource.OnUnknownElement(args);
         }
 
-        protected void UnknownNode (object o)
+        protected void UnknownNode(object o)
         {
-            UnknownNode (o, null);
+            UnknownNode(o, null);
         }
 
-        protected
-        void UnknownNode (object o, string qnames)
+        protected void UnknownNode(object o, string qnames)
         {
-            OnUnknownNode (ReadXmlNode (false), o, qnames);
+            OnUnknownNode(ReadXmlNode(false), o, qnames);
         }
-        
-        void OnUnknownNode (XmlNode node, object o, string qnames)
+
+        void OnUnknownNode(XmlNode node, object o, string qnames)
         {
-            int line_number, line_position;
-            
-            if (Reader is XmlTextReader){
+            int line_number,
+                line_position;
+
+            if (Reader is XmlTextReader)
+            {
                 line_number = ((XmlTextReader)Reader).LineNumber;
                 line_position = ((XmlTextReader)Reader).LinePosition;
-            } else {
+            }
+            else
+            {
                 line_number = 0;
                 line_position = 0;
             }
-    
+
             if (node is XmlAttribute)
             {
-                UnknownAttribute (o, (XmlAttribute)node, qnames);
+                UnknownAttribute(o, (XmlAttribute)node, qnames);
                 return;
             }
             else if (node is XmlElement)
             {
-                UnknownElement (o, (XmlElement) node, qnames);
+                UnknownElement(o, (XmlElement)node, qnames);
                 return;
             }
             else
             {
                 if (eventSource != null)
-                    eventSource.OnUnknownNode (new XmlNodeEventArgs(node, line_number, line_position, o));
-    
-                if (Reader.ReadState == ReadState.EndOfFile) 
-                    throw new InvalidOperationException ("End of document found");
+                    eventSource.OnUnknownNode(
+                        new XmlNodeEventArgs(node, line_number, line_position, o)
+                    );
+
+                if (Reader.ReadState == ReadState.EndOfFile)
+                    throw new InvalidOperationException("End of document found");
             }
         }
 
-        protected void UnreferencedObject (string id, object o)
+        protected void UnreferencedObject(string id, object o)
         {
             if (eventSource != null)
-                eventSource.OnUnreferencedObject (new UnreferencedObjectEventArgs (o,id));
+                eventSource.OnUnreferencedObject(new UnreferencedObjectEventArgs(o, id));
         }
 
         #endregion // Methods
@@ -1054,36 +1185,47 @@ namespace System.Xml.Serialization
             public XmlSerializationReadCallback Callback;
         }
 
-        protected class CollectionFixup {
-            
+        protected class CollectionFixup
+        {
             XmlSerializationCollectionFixupCallback callback;
             object collection;
             object collectionItems;
             string id;
 
-            public CollectionFixup(object collection, XmlSerializationCollectionFixupCallback callback, object collectionItems)
+            public CollectionFixup(
+                object collection,
+                XmlSerializationCollectionFixupCallback callback,
+                object collectionItems
+            )
             {
                 this.callback = callback;
                 this.collection = collection;
                 this.collectionItems = collectionItems;
             }
 
-            internal CollectionFixup (object collection, XmlSerializationCollectionFixupCallback callback, string id)
+            internal CollectionFixup(
+                object collection,
+                XmlSerializationCollectionFixupCallback callback,
+                string id
+            )
             {
                 this.callback = callback;
                 this.collection = collection;
                 this.id = id;
             }
 
-            public XmlSerializationCollectionFixupCallback Callback { 
+            public XmlSerializationCollectionFixupCallback Callback
+            {
                 get { return callback; }
             }
 
-            public object Collection {
+            public object Collection
+            {
                 get { return collection; }
             }
 
-            internal object Id {
+            internal object Id
+            {
                 get { return id; }
             }
 
@@ -1094,47 +1236,50 @@ namespace System.Xml.Serialization
             }
         }
 
-        protected class Fixup {
-
+        protected class Fixup
+        {
             object source;
             string[] ids;
             XmlSerializationFixupCallback callback;
 
-            public Fixup (object o, XmlSerializationFixupCallback callback, int count) 
+            public Fixup(object o, XmlSerializationFixupCallback callback, int count)
             {
                 this.source = o;
                 this.callback = callback;
                 this.ids = new string[count];
             }
 
-            public Fixup (object o, XmlSerializationFixupCallback callback, string[] ids)
+            public Fixup(object o, XmlSerializationFixupCallback callback, string[] ids)
             {
                 this.source = o;
                 this.ids = ids;
                 this.callback = callback;
             }
 
-            public XmlSerializationFixupCallback Callback {
+            public XmlSerializationFixupCallback Callback
+            {
                 get { return callback; }
             }
 
-            public string[] Ids {
+            public string[] Ids
+            {
                 get { return ids; }
             }
 
-            public object Source {
+            public object Source
+            {
                 get { return source; }
                 set { source = value; }
             }
         }
 
-        class CollectionItemFixup 
+        class CollectionItemFixup
         {
             Array list;
             int index;
             string id;
 
-            public CollectionItemFixup (Array list, int index, string id)
+            public CollectionItemFixup(Array list, int index, string id)
             {
                 this.list = list;
                 this.index = index;
@@ -1156,7 +1301,7 @@ namespace System.Xml.Serialization
                 get { return id; }
             }
         }
-        
+
         [MonoTODO]
         protected bool DecodeName
         {
@@ -1164,53 +1309,56 @@ namespace System.Xml.Serialization
             set { throw new NotImplementedException(); }
         }
 
-        protected string CollapseWhitespace (string value)
+        protected string CollapseWhitespace(string value)
         {
-            return value == null ? null : value.Trim ();
-        }
-                
-        [MonoTODO]
-        protected Exception CreateBadDerivationException (
-            string xsdDerived, 
-            string nsDerived, 
-            string xsdBase, 
-            string nsBase, 
-            string clrDerived, 
-            string clrBase)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        protected Exception CreateInvalidCastException (Type type, object value, string id)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        protected Exception CreateMissingIXmlSerializableType (string name, string ns, string clrType)
-        {
-            throw new NotImplementedException ();
+            return value == null ? null : value.Trim();
         }
 
         [MonoTODO]
-        protected string ReadString (string value, bool trim)
+        protected Exception CreateBadDerivationException(
+            string xsdDerived,
+            string nsDerived,
+            string xsdBase,
+            string nsBase,
+            string clrDerived,
+            string clrBase
+        )
         {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        protected object ReadTypedNull (XmlQualifiedName type)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        [MonoTODO]
-        protected static Assembly ResolveDynamicAssembly (string assemblyFullName)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
+        [MonoTODO]
+        protected Exception CreateInvalidCastException(Type type, object value, string id)
+        {
+            throw new NotImplementedException();
+        }
 
+        [MonoTODO]
+        protected Exception CreateMissingIXmlSerializableType(
+            string name,
+            string ns,
+            string clrType
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected string ReadString(string value, bool trim)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected object ReadTypedNull(XmlQualifiedName type)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected static Assembly ResolveDynamicAssembly(string assemblyFullName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

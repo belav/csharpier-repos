@@ -18,13 +18,20 @@ internal class FileKeywordRecommender : AbstractSyntacticSingleKeywordRecommende
         .ToSet();
 
     public FileKeywordRecommender()
-        : base(SyntaxKind.FileKeyword)
-    {
-    }
+        : base(SyntaxKind.FileKeyword) { }
 
-    protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+    protected override bool IsValidContext(
+        int position,
+        CSharpSyntaxContext context,
+        CancellationToken cancellationToken
+    )
     {
         return context.ContainingTypeDeclaration == null
-            && context.IsTypeDeclarationContext(s_validModifiers, SyntaxKindSet.AllTypeDeclarations, canBePartial: true, cancellationToken);
+            && context.IsTypeDeclarationContext(
+                s_validModifiers,
+                SyntaxKindSet.AllTypeDeclarations,
+                canBePartial: true,
+                cancellationToken
+            );
     }
 }

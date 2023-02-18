@@ -31,12 +31,12 @@ using System.IO;
 
 namespace Microsoft.Build.Utilities
 {
-    internal delegate void OperationHandler (IAsyncOperation op);
+    internal delegate void OperationHandler(IAsyncOperation op);
 
     internal interface IAsyncOperation
     {
-        void Cancel ();
-        void WaitForCompleted ();
+        void Cancel();
+        void WaitForCompleted();
         bool IsCompleted { get; }
         bool Success { get; }
         bool SuccessWithWarnings { get; }

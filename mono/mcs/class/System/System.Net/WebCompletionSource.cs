@@ -35,22 +35,23 @@ namespace System.Net
         TaskCompletionSource<Result> completion;
         Result currentResult;
 
-        public WebCompletionSource (bool runAsync = true)
+        public WebCompletionSource(bool runAsync = true)
         {
-            completion = new TaskCompletionSource<Result> (
-                runAsync ?
-                TaskCreationOptions.RunContinuationsAsynchronously :
-                TaskCreationOptions.None);
+            completion = new TaskCompletionSource<Result>(
+                runAsync
+                    ? TaskCreationOptions.RunContinuationsAsynchronously
+                    : TaskCreationOptions.None
+            );
         }
 
         /*
          * Provide a non-blocking way of getting the current status.
-         * 
+         *
          * We are using `TaskCreationOptions.RunContinuationsAsynchronously`
          * to prevent any user continuations from being run during the
          * `TrySet*()` methods - to make these safe to be called while holding
          * internal locks.
-         * 
+         *
          */
         internal Result CurrentResult => currentResult;
 
@@ -58,61 +59,62 @@ namespace System.Net
 
         internal Task Task => completion.Task;
 
-        public bool TrySetCompleted (T argument)
+        public bool TrySetCompleted(T argument)
         {
-            var result = new Result (argument);
-            if (Interlocked.CompareExchange (ref currentResult, result, null) != null)
+            var result = new Result(argument);
+            if (Interlocked.CompareExchange(ref currentResult, result, null) != null)
                 return false;
-            return completion.TrySetResult (result);
+            return completion.TrySetResult(result);
         }
 
-        public bool TrySetCompleted ()
+        public bool TrySetCompleted()
         {
-            var result = new Result (Status.Completed, null);
-            if (Interlocked.CompareExchange (ref currentResult, result, null) != null)
+            var result = new Result(Status.Completed, null);
+            if (Interlocked.CompareExchange(ref currentResult, result, null) != null)
                 return false;
-            return completion.TrySetResult (result);
+            return completion.TrySetResult(result);
         }
 
-        public bool TrySetCanceled ()
+        public bool TrySetCanceled()
         {
-            return TrySetCanceled (new OperationCanceledException ());
+            return TrySetCanceled(new OperationCanceledException());
         }
 
-        public bool TrySetCanceled (OperationCanceledException error)
+        public bool TrySetCanceled(OperationCanceledException error)
         {
-            var result = new Result (Status.Canceled, ExceptionDispatchInfo.Capture (error));
-            if (Interlocked.CompareExchange (ref currentResult, result, null) != null)
+            var result = new Result(Status.Canceled, ExceptionDispatchInfo.Capture(error));
+            if (Interlocked.CompareExchange(ref currentResult, result, null) != null)
                 return false;
-            return completion.TrySetResult (result);
+            return completion.TrySetResult(result);
         }
 
-        public bool TrySetException (Exception error)
+        public bool TrySetException(Exception error)
         {
-            var result = new Result (Status.Faulted, ExceptionDispatchInfo.Capture (error));
-            if (Interlocked.CompareExchange (ref currentResult, result, null) != null)
+            var result = new Result(Status.Faulted, ExceptionDispatchInfo.Capture(error));
+            if (Interlocked.CompareExchange(ref currentResult, result, null) != null)
                 return false;
-            return completion.TrySetResult (result);
+            return completion.TrySetResult(result);
         }
 
-        public void ThrowOnError ()
+        public void ThrowOnError()
         {
             if (!completion.Task.IsCompleted)
                 return;
-            completion.Task.Result.Error?.Throw ();
+            completion.Task.Result.Error?.Throw();
         }
 
-        public async Task<T> WaitForCompletion ()
+        public async Task<T> WaitForCompletion()
         {
-            var result = await completion.Task.ConfigureAwait (false);
+            var result = await completion.Task.ConfigureAwait(false);
             if (result.Status == Status.Completed)
                 return (T)result.Argument;
             // This will always throw once we get here.
-            result.Error.Throw ();
-            throw new InvalidOperationException ("Should never happen.");
+            result.Error.Throw();
+            throw new InvalidOperationException("Should never happen.");
         }
 
-        internal enum Status : int {
+        internal enum Status : int
+        {
             Running,
             Completed,
             Canceled,
@@ -121,27 +123,21 @@ namespace System.Net
 
         internal class Result
         {
-            public Status Status {
-                get;
-            }
+            public Status Status { get; }
 
             public bool Success => Status == Status.Completed;
 
-            public ExceptionDispatchInfo Error {
-                get;
-            }
+            public ExceptionDispatchInfo Error { get; }
 
-            public T Argument {
-                get;
-            }
+            public T Argument { get; }
 
-            public Result (T argument)
+            public Result(T argument)
             {
                 Status = Status.Completed;
                 Argument = argument;
             }
 
-            public Result (Status state, ExceptionDispatchInfo error)
+            public Result(Status state, ExceptionDispatchInfo error)
             {
                 Status = state;
                 Error = error;
@@ -149,7 +145,5 @@ namespace System.Net
         }
     }
 
-    class WebCompletionSource : WebCompletionSource<object>
-    {
-    }
+    class WebCompletionSource : WebCompletionSource<object> { }
 }

@@ -23,10 +23,14 @@ namespace System.IO.MemoryMappedFiles.Tests
             const int _SC_PAGESIZE_NetBSD = 28;
             const int _SC_PAGESIZE_OSX = 29;
             pageSize = sysconf(
-                OperatingSystem.IsMacOS() ? _SC_PAGESIZE_OSX :
-                OperatingSystem.IsFreeBSD() ? _SC_PAGESIZE_FreeBSD :
-                RuntimeInformation.IsOSPlatform(OSPlatform.Create("NETBSD")) ? _SC_PAGESIZE_NetBSD :
-                _SC_PAGESIZE_Linux);
+                OperatingSystem.IsMacOS()
+                    ? _SC_PAGESIZE_OSX
+                    : OperatingSystem.IsFreeBSD()
+                        ? _SC_PAGESIZE_FreeBSD
+                        : RuntimeInformation.IsOSPlatform(OSPlatform.Create("NETBSD"))
+                            ? _SC_PAGESIZE_NetBSD
+                            : _SC_PAGESIZE_Linux
+            );
             Assert.InRange(pageSize, 1, int.MaxValue);
             return pageSize;
         });
@@ -38,7 +42,10 @@ namespace System.IO.MemoryMappedFiles.Tests
         protected static partial int mkfifo(string path, int mode);
 
         /// <summary>Asserts that the handle's inheritability matches the specified value.</summary>
-        protected static void AssertInheritability(SafeHandle handle, HandleInheritability inheritability)
+        protected static void AssertInheritability(
+            SafeHandle handle,
+            HandleInheritability inheritability
+        )
         {
             //intentional noop
         }

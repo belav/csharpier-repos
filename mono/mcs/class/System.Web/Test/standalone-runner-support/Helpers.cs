@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,50 +40,53 @@ namespace StandAloneRunnerSupport
     {
         public const string BEGIN_CODE_MARKER = "<!-- @CODE_BEGIN@ -->";
         public const string END_CODE_MARKER = "<!-- @CODE_END@ -->";
-        
-        public static string ExtractCodeFromHtml (string html)
+
+        public static string ExtractCodeFromHtml(string html)
         {
             AppDomain ad = AppDomain.CurrentDomain;
-            return HtmlDiff.GetControlFromPageHtml (html, BEGIN_CODE_MARKER, END_CODE_MARKER);
+            return HtmlDiff.GetControlFromPageHtml(html, BEGIN_CODE_MARKER, END_CODE_MARKER);
         }
 
-        public static void ExtractAndCompareCodeFromHtml (string html, string original, string msg)
+        public static void ExtractAndCompareCodeFromHtml(string html, string original, string msg)
         {
-            string rendered = ExtractCodeFromHtml (html);
-            HtmlDiff.AssertAreEqual (original, rendered, msg);
+            string rendered = ExtractCodeFromHtml(html);
+            HtmlDiff.AssertAreEqual(original, rendered, msg);
         }
 
-        public static string StripWebResourceAxdQuery (string origHtml)
+        public static string StripWebResourceAxdQuery(string origHtml)
         {
-            return StripWebResourceAxdQuery (StripWebResourceAxdQuery (origHtml, "\""), "&quot;");
+            return StripWebResourceAxdQuery(StripWebResourceAxdQuery(origHtml, "\""), "&quot;");
         }
 
-        static string StripWebResourceAxdQuery (string origHtml, string delimiter)
+        static string StripWebResourceAxdQuery(string origHtml, string delimiter)
         {
-            if (String.IsNullOrEmpty (origHtml))
+            if (String.IsNullOrEmpty(origHtml))
                 return origHtml;
 
             // Naive approach, enough for now
-            return new Regex (delimiter + "/WebResource\\.axd.*?" + delimiter).Replace (origHtml, delimiter + "/WebResource.axd" + delimiter);
+            return new Regex(delimiter + "/WebResource\\.axd.*?" + delimiter).Replace(
+                origHtml,
+                delimiter + "/WebResource.axd" + delimiter
+            );
         }
 
-        public static bool HasException (string html, Type exceptionType)
+        public static bool HasException(string html, Type exceptionType)
         {
             if (exceptionType == null)
-                throw new ArgumentNullException ("exceptionType");
+                throw new ArgumentNullException("exceptionType");
 
-            return HasException (html, exceptionType.FullName);
+            return HasException(html, exceptionType.FullName);
         }
-        
-        public static bool HasException (string html, string exceptionType)
+
+        public static bool HasException(string html, string exceptionType)
         {
-            if (String.IsNullOrEmpty (exceptionType))
-                throw new ArgumentNullException ("exceptionType");
-            
-            if (String.IsNullOrEmpty (html))
+            if (String.IsNullOrEmpty(exceptionType))
+                throw new ArgumentNullException("exceptionType");
+
+            if (String.IsNullOrEmpty(html))
                 return false;
-            
-            return html.IndexOf ("[" + exceptionType + "]:") != -1;
+
+            return html.IndexOf("[" + exceptionType + "]:") != -1;
         }
     }
 }

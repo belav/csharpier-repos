@@ -9,21 +9,37 @@ namespace System.Text.Json
 {
     public static partial class JsonSerializer
     {
-        private static TValue? ReadCore<TValue>(ref Utf8JsonReader reader, JsonTypeInfo jsonTypeInfo, scoped ref ReadStack state)
+        private static TValue? ReadCore<TValue>(
+            ref Utf8JsonReader reader,
+            JsonTypeInfo jsonTypeInfo,
+            scoped ref ReadStack state
+        )
         {
             if (jsonTypeInfo is JsonTypeInfo<TValue> typedInfo)
             {
                 // Call the strongly-typed ReadCore that will not box structs.
-                return typedInfo.EffectiveConverter.ReadCore(ref reader, typedInfo.Options, ref state);
+                return typedInfo.EffectiveConverter.ReadCore(
+                    ref reader,
+                    typedInfo.Options,
+                    ref state
+                );
             }
 
             // The non-generic API was called.
-            object? value = jsonTypeInfo.Converter.ReadCoreAsObject(ref reader, jsonTypeInfo.Options, ref state);
+            object? value = jsonTypeInfo.Converter.ReadCoreAsObject(
+                ref reader,
+                jsonTypeInfo.Options,
+                ref state
+            );
             Debug.Assert(value is null or TValue);
             return (TValue?)value;
         }
 
-        private static TValue? ReadFromSpan<TValue>(ReadOnlySpan<byte> utf8Json, JsonTypeInfo jsonTypeInfo, int? actualByteCount = null)
+        private static TValue? ReadFromSpan<TValue>(
+            ReadOnlySpan<byte> utf8Json,
+            JsonTypeInfo jsonTypeInfo,
+            int? actualByteCount = null
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 
@@ -46,7 +62,11 @@ namespace System.Text.Json
             else
             {
                 // The non-generic API was called.
-                object? objValue = jsonTypeInfo.Converter.ReadCoreAsObject(ref reader, options, ref state);
+                object? objValue = jsonTypeInfo.Converter.ReadCoreAsObject(
+                    ref reader,
+                    options,
+                    ref state
+                );
                 Debug.Assert(objValue is null or TValue);
                 value = (TValue?)objValue;
             }

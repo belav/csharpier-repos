@@ -15,29 +15,19 @@ namespace System.Runtime.DurableInstancing
         const string CommandNameName = "instancePersistenceCommandName";
 
         public InstancePersistenceException()
-            : base(ToMessage(null))
-        {
-        }
+            : base(ToMessage(null)) { }
 
         public InstancePersistenceException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public InstancePersistenceException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public InstancePersistenceException(XName commandName)
-            : this(commandName, ToMessage(commandName))
-        {
-        }
+            : this(commandName, ToMessage(commandName)) { }
 
         public InstancePersistenceException(XName commandName, Exception innerException)
-            : this(commandName, ToMessage(commandName), innerException)
-        {
-        }
+            : this(commandName, ToMessage(commandName), innerException) { }
 
         public InstancePersistenceException(XName commandName, string message)
             : base(message)
@@ -45,7 +35,11 @@ namespace System.Runtime.DurableInstancing
             CommandName = commandName;
         }
 
-        public InstancePersistenceException(XName commandName, string message, Exception innerException)
+        public InstancePersistenceException(
+            XName commandName,
+            string message,
+            Exception innerException
+        )
             : base(message, innerException)
         {
             CommandName = commandName;
@@ -62,8 +56,11 @@ namespace System.Runtime.DurableInstancing
 
         [Fx.Tag.SecurityNote(Critical = "Overrides critical inherited method")]
         [SecurityCritical]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureGetObjectDataOverrides,
-            Justification = "Method is SecurityCritical")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureGetObjectDataOverrides,
+            Justification = "Method is SecurityCritical"
+        )]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -72,7 +69,9 @@ namespace System.Runtime.DurableInstancing
 
         static string ToMessage(XName commandName)
         {
-            return commandName == null ? SRCore.GenericInstanceCommandNull : SRCore.GenericInstanceCommand(commandName);
+            return commandName == null
+                ? SRCore.GenericInstanceCommandNull
+                : SRCore.GenericInstanceCommand(commandName);
         }
     }
 }

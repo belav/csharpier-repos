@@ -35,10 +35,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             string path = "",
             CSharpParseOptions options = null,
             Encoding encoding = null,
-            SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithms.Default)
+            SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithms.Default
+        )
         {
             var stringText = SourceText.From(text, encoding ?? Encoding.UTF8, checksumAlgorithm);
-            var tree = SyntaxFactory.ParseSyntaxTree(stringText, options ?? TestOptions.RegularPreview, path);
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                stringText,
+                options ?? TestOptions.RegularPreview,
+                path
+            );
             CheckSerializable(tree);
             return tree;
         }
@@ -54,7 +59,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             _ = CSharpSyntaxNode.DeserializeFrom(stream);
         }
 
-        public SyntaxTree[] GetSyntaxTrees(CSharpParseOptions parseOptions, string sourceFileName = "")
+        public SyntaxTree[] GetSyntaxTrees(
+            CSharpParseOptions parseOptions,
+            string sourceFileName = ""
+        )
         {
             switch (Value)
             {
@@ -68,7 +76,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
                     return new[] { CSharpTestBase.Parse(source, fileName, parseOptions) };
                 case (string Source, string FileName)[] sources:
                     Debug.Assert(string.IsNullOrEmpty(sourceFileName));
-                    return sources.Select(source => Parse(source.Source, source.FileName, parseOptions)).ToArray();
+                    return sources
+                        .Select(source => Parse(source.Source, source.FileName, parseOptions))
+                        .ToArray();
                 case SyntaxTree tree:
                     Debug.Assert(parseOptions == null);
                     Debug.Assert(string.IsNullOrEmpty(sourceFileName));
@@ -78,7 +88,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
                     Debug.Assert(string.IsNullOrEmpty(sourceFileName));
                     return trees;
                 case CSharpTestSource[] testSources:
-                    return testSources.SelectMany(s => s.GetSyntaxTrees(parseOptions, sourceFileName)).ToArray();
+                    return testSources
+                        .SelectMany(s => s.GetSyntaxTrees(parseOptions, sourceFileName))
+                        .ToArray();
                 case null:
                     return Array.Empty<SyntaxTree>();
                 default:
@@ -86,14 +98,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             }
         }
 
-        public static implicit operator CSharpTestSource(string source) => new CSharpTestSource(source);
-        public static implicit operator CSharpTestSource(string[] source) => new CSharpTestSource(source);
-        public static implicit operator CSharpTestSource((string Source, string FileName) source) => new CSharpTestSource(source);
-        public static implicit operator CSharpTestSource((string Source, string FileName)[] source) => new CSharpTestSource(source);
-        public static implicit operator CSharpTestSource(SyntaxTree source) => new CSharpTestSource(source);
-        public static implicit operator CSharpTestSource(SyntaxTree[] source) => new CSharpTestSource(source);
-        public static implicit operator CSharpTestSource(List<SyntaxTree> source) => new CSharpTestSource(source.ToArray());
-        public static implicit operator CSharpTestSource(ImmutableArray<SyntaxTree> source) => new CSharpTestSource(source.ToArray());
-        public static implicit operator CSharpTestSource(CSharpTestSource[] source) => new CSharpTestSource(source);
+        public static implicit operator CSharpTestSource(string source) =>
+            new CSharpTestSource(source);
+
+        public static implicit operator CSharpTestSource(string[] source) =>
+            new CSharpTestSource(source);
+
+        public static implicit operator CSharpTestSource((string Source, string FileName) source) =>
+            new CSharpTestSource(source);
+
+        public static implicit operator CSharpTestSource(
+            (string Source, string FileName)[] source
+        ) => new CSharpTestSource(source);
+
+        public static implicit operator CSharpTestSource(SyntaxTree source) =>
+            new CSharpTestSource(source);
+
+        public static implicit operator CSharpTestSource(SyntaxTree[] source) =>
+            new CSharpTestSource(source);
+
+        public static implicit operator CSharpTestSource(List<SyntaxTree> source) =>
+            new CSharpTestSource(source.ToArray());
+
+        public static implicit operator CSharpTestSource(ImmutableArray<SyntaxTree> source) =>
+            new CSharpTestSource(source.ToArray());
+
+        public static implicit operator CSharpTestSource(CSharpTestSource[] source) =>
+            new CSharpTestSource(source);
     }
 }

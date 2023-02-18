@@ -53,18 +53,21 @@ namespace System.Data.Tests
             _tables[1].Columns.Add("id", typeof(int));
             _tables[1].Columns.Add("desc", typeof(string));
         }
+
         // clean up code here
         public void Dispose()
         {
             _dataset[0].Tables.Clear();
             _dataset[1].Tables.Clear();
         }
+
         [Fact]
         public void Add()
         {
             DataTableCollection tbcol = _dataset[0].Tables;
             tbcol.Add(_tables[0]);
-            int i, j;
+            int i,
+                j;
             i = 0;
 
             foreach (DataTable table in tbcol)
@@ -98,45 +101,48 @@ namespace System.Data.Tests
         public void AddException1()
         {
             Assert.Throws<ArgumentNullException>(() =>
-           {
-               DataTableCollection tbcol = _dataset[0].Tables;
-               DataTable tb = null;
-               tbcol.Add(tb);
-           });
+            {
+                DataTableCollection tbcol = _dataset[0].Tables;
+                DataTable tb = null;
+                tbcol.Add(tb);
+            });
         }
 
         [Fact]
         public void AddException2()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               /* table already exist in the collection */
-               DataTableCollection tbcol = _dataset[0].Tables;
-               tbcol.Add(_tables[0]);
-               tbcol.Add(_tables[0]);
-           });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    /* table already exist in the collection */
+                    DataTableCollection tbcol = _dataset[0].Tables;
+                    tbcol.Add(_tables[0]);
+                    tbcol.Add(_tables[0]);
+                }
+            );
         }
 
         [Fact]
         public void AddException3()
         {
             Assert.Throws<DuplicateNameException>(() =>
-           {
-               DataTableCollection tbcol = _dataset[0].Tables;
-               tbcol.Add(new DataTable("SameTableName"));
-               tbcol.Add(new DataTable("SameTableName"));
-           });
+            {
+                DataTableCollection tbcol = _dataset[0].Tables;
+                tbcol.Add(new DataTable("SameTableName"));
+                tbcol.Add(new DataTable("SameTableName"));
+            });
         }
 
         [Fact]
         public void AddException4()
         {
             Assert.Throws<DuplicateNameException>(() =>
-           {
-               DataTableCollection tbcol = _dataset[0].Tables;
-               tbcol.Add("SameTableName");
-               tbcol.Add("SameTableName");
-           });
+            {
+                DataTableCollection tbcol = _dataset[0].Tables;
+                tbcol.Add("SameTableName");
+                tbcol.Add("SameTableName");
+            });
         }
 
         [Fact]
@@ -156,7 +162,8 @@ namespace System.Data.Tests
             tbcol.Clear();
             /* _tables is array of type DataTable defined in Setup */
             tbcol.AddRange(_tables);
-            int i, j;
+            int i,
+                j;
             i = 0;
             foreach (DataTable table in tbcol)
             {
@@ -205,6 +212,7 @@ namespace System.Data.Tests
             /* removing a table that is not there in collection */
             Assert.Throws<ArgumentException>(() => tbcol.Remove(new DataTable("newTable")));
         }
+
         [Fact]
         public void Clear()
         {
@@ -217,6 +225,7 @@ namespace System.Data.Tests
             tbcol.Clear();
             Assert.Equal(0, tbcol.Count);
         }
+
         [Fact]
         public void Contains()
         {
@@ -261,6 +270,7 @@ namespace System.Data.Tests
             Assert.Equal("Table3", array1[4].TableName);
             Assert.Equal("Table4", array1[5].TableName);
         }
+
         [Fact]
         public void EqualsTest()
         {
@@ -275,6 +285,7 @@ namespace System.Data.Tests
 
             Assert.NotSame(tbcol1, tbcol2);
         }
+
         [Fact]
         public void IndexOf()
         {
@@ -294,6 +305,7 @@ namespace System.Data.Tests
             DataTable tb = new DataTable("new_table");
             Assert.Equal(-1, tbcol.IndexOf(tb));
         }
+
         [Fact]
         public void RemoveAt()
         {

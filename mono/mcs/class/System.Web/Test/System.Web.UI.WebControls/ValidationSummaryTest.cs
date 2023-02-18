@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,92 +40,107 @@ using System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    [TestFixture]    
-    public class ValidationSummaryTest : ValidatorTest {
-        public class NamingContainer : WebControl, INamingContainer {
+    [TestFixture]
+    public class ValidationSummaryTest : ValidatorTest
+    {
+        public class NamingContainer : WebControl, INamingContainer { }
 
-        }
+        public class ValidationSummaryTestClass : ValidationSummary
+        {
+            public ValidationSummaryTestClass()
+                : base() { }
 
-        public class ValidationSummaryTestClass : ValidationSummary {
-
-            public ValidationSummaryTestClass ()
-                : base () {
-            }
-
-            public StateBag StateBag {
+            public StateBag StateBag
+            {
                 get { return base.ViewState; }
             }
 
-            public string Render () {
-                HtmlTextWriter    writer;
+            public string Render()
+            {
+                HtmlTextWriter writer;
 
                 writer = ValidationSummaryTest.GetWriter();
-                base.Render (writer);
-                return writer.InnerWriter.ToString ();
+                base.Render(writer);
+                return writer.InnerWriter.ToString();
             }
 
-            public bool IsTrackingVS () {
+            public bool IsTrackingVS()
+            {
                 return IsTrackingViewState;
             }
 
-            public void SetTrackingVS () {
-                TrackViewState ();
+            public void SetTrackingVS()
+            {
+                TrackViewState();
             }
 
-            public object Save() {
+            public object Save()
+            {
                 return base.SaveViewState();
             }
 
-            public void Load(object o) {
+            public void Load(object o)
+            {
                 base.LoadViewState(o);
             }
 
-            public void CallInit() {
+            public void CallInit()
+            {
                 base.OnInit(EventArgs.Empty);
             }
-    
-            public new void RenderContents(HtmlTextWriter writer) {
+
+            public new void RenderContents(HtmlTextWriter writer)
+            {
                 base.RenderContents(writer);
             }
 
-            public new void CreateControlCollection() {
+            public new void CreateControlCollection()
+            {
                 base.CreateControlCollection();
             }
 
-            public new void AddAttributesToRender(HtmlTextWriter writer) {
+            public new void AddAttributesToRender(HtmlTextWriter writer)
+            {
                 base.AddAttributesToRender(writer);
             }
 
-            public string[] KeyValuePairs() {
-                IEnumerator    e;
-                string[]    result;
-                int        item;
+            public string[] KeyValuePairs()
+            {
+                IEnumerator e;
+                string[] result;
+                int item;
 
                 e = ViewState.GetEnumerator();
                 result = new string[ViewState.Keys.Count];
                 item = 0;
 
-                while (e.MoveNext()) {
-                    DictionaryEntry    d;
-                    StateItem    si;
+                while (e.MoveNext())
+                {
+                    DictionaryEntry d;
+                    StateItem si;
 
                     d = (DictionaryEntry)e.Current;
                     si = (StateItem)d.Value;
 
-                    if (si.Value is String[]) {
+                    if (si.Value is String[])
+                    {
                         string[] values;
 
-                        values = (string[]) si.Value;
+                        values = (string[])si.Value;
                         result[item] = d.Key.ToString() + "=";
-                        if (values.Length > 0) {
+                        if (values.Length > 0)
+                        {
                             result[item] += values[0];
 
-                            for (int i = 1; i < values.Length; i++) {
+                            for (int i = 1; i < values.Length; i++)
+                            {
                                 result[item] += ", " + values[i];
                             }
                         }
-                    } else {
-                        result[item] =  d.Key.ToString() + "=" + si.Value;
+                    }
+                    else
+                    {
+                        result[item] = d.Key.ToString() + "=" + si.Value;
                     }
                     item++;
                 }
@@ -134,18 +149,22 @@ namespace MonoTests.System.Web.UI.WebControls
             }
         }
 
-        private static HtmlTextWriter GetWriter () {
-            StringWriter sw = new StringWriter ();
+        private static HtmlTextWriter GetWriter()
+        {
+            StringWriter sw = new StringWriter();
             sw.NewLine = "\n";
-            return new HtmlTextWriter (sw);
+            return new HtmlTextWriter(sw);
         }
 
-        private bool IsEqual(object[] a1, object[] a2, string assertion) {
-            int    matches;
-            bool[]    notfound;    
+        private bool IsEqual(object[] a1, object[] a2, string assertion)
+        {
+            int matches;
+            bool[] notfound;
 
-            if (a1.Length != a2.Length) {
-                if (assertion != null) {
+            if (a1.Length != a2.Length)
+            {
+                if (assertion != null)
+                {
                     Assert.Fail(assertion + "( different length )");
                 }
                 return false;
@@ -154,14 +173,18 @@ namespace MonoTests.System.Web.UI.WebControls
             matches = 0;
             notfound = new bool[a1.Length];
 
-            for (int i = 0; i < a1.Length; i++) {
-                for (int j = 0; j < a2.Length; j++) {
-                    if (a1[i].Equals(a2[j])) {
+            for (int i = 0; i < a1.Length; i++)
+            {
+                for (int j = 0; j < a2.Length; j++)
+                {
+                    if (a1[i].Equals(a2[j]))
+                    {
                         matches++;
                         break;
                     }
                 }
-                if ((assertion != null) && (matches != i+1)) {
+                if ((assertion != null) && (matches != i + 1))
+                {
                     Assert.Fail(assertion + "( missing " + a1[i].ToString() + " )");
                 }
             }
@@ -170,44 +193,47 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         [Test]
-        public void ValidationSummary_Defaults () {
-            ValidationSummaryTestClass v = new ValidationSummaryTestClass ();
+        public void ValidationSummary_Defaults()
+        {
+            ValidationSummaryTestClass v = new ValidationSummaryTestClass();
 
-            Assert.AreEqual (ValidationSummaryDisplayMode.BulletList, v.DisplayMode, "D1");
-            Assert.AreEqual (true, v.EnableClientScript, "D2");
-            Assert.AreEqual (Color.Red, v.ForeColor, "D3");
-            Assert.AreEqual (string.Empty, v.HeaderText, "D4");
-            Assert.AreEqual (true, v.ShowSummary, "D5");
+            Assert.AreEqual(ValidationSummaryDisplayMode.BulletList, v.DisplayMode, "D1");
+            Assert.AreEqual(true, v.EnableClientScript, "D2");
+            Assert.AreEqual(Color.Red, v.ForeColor, "D3");
+            Assert.AreEqual(string.Empty, v.HeaderText, "D4");
+            Assert.AreEqual(true, v.ShowSummary, "D5");
         }
 
         [Test]
-        public void ValidationSummary_ValidationGroup () {
-            ValidationSummaryTestClass v = new ValidationSummaryTestClass ();
+        public void ValidationSummary_ValidationGroup()
+        {
+            ValidationSummaryTestClass v = new ValidationSummaryTestClass();
             v.SetTrackingVS();
-            Assert.AreEqual ("", v.ValidationGroup, "VG1");
+            Assert.AreEqual("", v.ValidationGroup, "VG1");
 
             v.ValidationGroup = "group";
-            Assert.AreEqual ("group", v.ValidationGroup, "VG2");
+            Assert.AreEqual("group", v.ValidationGroup, "VG2");
 
             /* make sure ValidationGroup is stored in the view state */
-            object state = v.Save ();
+            object state = v.Save();
 
-            ValidationSummaryTestClass v2 = new ValidationSummaryTestClass ();
+            ValidationSummaryTestClass v2 = new ValidationSummaryTestClass();
             v2.SetTrackingVS();
-            v2.Load (state);
+            v2.Load(state);
 
-            Assert.AreEqual ("group", v2.ValidationGroup, "VG3");
+            Assert.AreEqual("group", v2.ValidationGroup, "VG3");
         }
 
         [Test]
-        public void ValidationSummaryRenderTest () {
-            ValidationSummaryTestClass    v;
-            RangeValidatorTest.RangeValidatorTestClass        p;
-            RangeValidatorTest.RangeValidatorTestClass        p2;
-            TextBox                t1;
-            TextBox                t2;
+        public void ValidationSummaryRenderTest()
+        {
+            ValidationSummaryTestClass v;
+            RangeValidatorTest.RangeValidatorTestClass p;
+            RangeValidatorTest.RangeValidatorTestClass p2;
+            TextBox t1;
+            TextBox t2;
 
-            v = new ValidationSummaryTestClass ();
+            v = new ValidationSummaryTestClass();
             p = new RangeValidatorTest.RangeValidatorTestClass();
 
             v.HeaderText = "I am the header text";
@@ -247,16 +273,32 @@ namespace MonoTests.System.Web.UI.WebControls
             Page.Controls.Add(v);
 
             // Default DisplayMode
-            Assert.AreEqual("<div style=\"color:Red;\">\n\tI am the header text<ul><li>aw shucks</li><li>WhamBamThankYouMam</li></ul>\n</div>", v.Render(), "R2");
+            Assert.AreEqual(
+                "<div style=\"color:Red;\">\n\tI am the header text<ul><li>aw shucks</li><li>WhamBamThankYouMam</li></ul>\n</div>",
+                v.Render(),
+                "R2"
+            );
 
             v.DisplayMode = ValidationSummaryDisplayMode.BulletList;
-            Assert.AreEqual("<div style=\"color:Red;\">\n\tI am the header text<ul><li>aw shucks</li><li>WhamBamThankYouMam</li></ul>\n</div>", v.Render(), "R3");
+            Assert.AreEqual(
+                "<div style=\"color:Red;\">\n\tI am the header text<ul><li>aw shucks</li><li>WhamBamThankYouMam</li></ul>\n</div>",
+                v.Render(),
+                "R3"
+            );
 
             v.DisplayMode = ValidationSummaryDisplayMode.List;
-            Assert.AreEqual("<div style=\"color:Red;\">\n\tI am the header text<br />aw shucks<br />WhamBamThankYouMam<br />\n</div>", v.Render(), "R4");
+            Assert.AreEqual(
+                "<div style=\"color:Red;\">\n\tI am the header text<br />aw shucks<br />WhamBamThankYouMam<br />\n</div>",
+                v.Render(),
+                "R4"
+            );
 
             v.DisplayMode = ValidationSummaryDisplayMode.SingleParagraph;
-            Assert.AreEqual("<div style=\"color:Red;\">\n\tI am the header text aw shucks WhamBamThankYouMam <br />\n</div>", v.Render(), "R5");
+            Assert.AreEqual(
+                "<div style=\"color:Red;\">\n\tI am the header text aw shucks WhamBamThankYouMam <br />\n</div>",
+                v.Render(),
+                "R5"
+            );
 
             v.ShowSummary = false;
             v.DisplayMode = ValidationSummaryDisplayMode.BulletList;
@@ -266,22 +308,27 @@ namespace MonoTests.System.Web.UI.WebControls
             v.EnableClientScript = true;
             v.ShowMessageBox = true;
             v.DisplayMode = ValidationSummaryDisplayMode.SingleParagraph;
-            Assert.AreEqual("<div style=\"color:Red;\">\n\tI am the header text aw shucks WhamBamThankYouMam <br />\n</div>", v.Render(), "R7");
+            Assert.AreEqual(
+                "<div style=\"color:Red;\">\n\tI am the header text aw shucks WhamBamThankYouMam <br />\n</div>",
+                v.Render(),
+                "R7"
+            );
 
             StopValidationTest();
         }
-        [Test]
-        public void SupportsDisabledAttribute ()
-        {
-            var ver40 = new Version (4, 0);
-            var ver35 = new Version (3, 5);
-            var p = new ValidationSummaryTestClass ();
-            Assert.AreEqual (ver40, p.RenderingCompatibility, "#A1-1");
-            Assert.IsFalse (p.SupportsDisabledAttribute, "#A1-2");
 
-            p.RenderingCompatibility = new Version (3, 5);
-            Assert.AreEqual (ver35, p.RenderingCompatibility, "#A2-1");
-            Assert.IsTrue (p.SupportsDisabledAttribute, "#A2-2");
+        [Test]
+        public void SupportsDisabledAttribute()
+        {
+            var ver40 = new Version(4, 0);
+            var ver35 = new Version(3, 5);
+            var p = new ValidationSummaryTestClass();
+            Assert.AreEqual(ver40, p.RenderingCompatibility, "#A1-1");
+            Assert.IsFalse(p.SupportsDisabledAttribute, "#A1-2");
+
+            p.RenderingCompatibility = new Version(3, 5);
+            Assert.AreEqual(ver35, p.RenderingCompatibility, "#A2-1");
+            Assert.IsTrue(p.SupportsDisabledAttribute, "#A2-2");
         }
     }
 }

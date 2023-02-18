@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -119,7 +119,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        void TraceFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args);
+        void TraceFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        );
 
         /// <summary>
         ///   Logs a debug message.
@@ -169,7 +174,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        void DebugFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args);
+        void DebugFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        );
 
         /// <summary>
         ///   Logs an error message.
@@ -219,7 +229,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        void ErrorFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args);
+        void ErrorFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        );
 
         /// <summary>
         ///   Logs a fatal message.
@@ -269,7 +284,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        void FatalFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args);
+        void FatalFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        );
 
         /// <summary>
         ///   Logs an info message.
@@ -319,7 +339,12 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        void InfoFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args);
+        void InfoFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        );
 
         /// <summary>
         ///   Logs a warn message.
@@ -369,6 +394,11 @@ namespace Castle.Core.Logging
         /// <param name = "formatProvider">The format provider to use</param>
         /// <param name = "format">Format string for the message to log</param>
         /// <param name = "args">Format arguments for the message to log</param>
-        void WarnFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args);
+        void WarnFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        );
     }
 }

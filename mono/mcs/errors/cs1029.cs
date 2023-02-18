@@ -2,4 +2,3 @@
 // Line: 4
 
 #error Expected error
-

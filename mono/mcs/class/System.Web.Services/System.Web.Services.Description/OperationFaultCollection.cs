@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.OperationFaultCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,81 +28,83 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Description {
-    public sealed class OperationFaultCollection : ServiceDescriptionBaseCollection {
-
+namespace System.Web.Services.Description
+{
+    public sealed class OperationFaultCollection : ServiceDescriptionBaseCollection
+    {
         #region Constructors
 
-        internal OperationFaultCollection (Operation operation) 
-            : base (operation)
-        {
-        }
+        internal OperationFaultCollection(Operation operation)
+            : base(operation) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public OperationFault this [int index] {
-            get { 
+        public OperationFault this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
-                return (OperationFault) List[index]; 
+                    throw new ArgumentOutOfRangeException();
+                return (OperationFault)List[index];
             }
-                        set { List [index] = value; }
+            set { List[index] = value; }
         }
 
-        public OperationFault this [string name] {
-            get { return this [IndexOf ((OperationFault) Table[name])]; }
+        public OperationFault this[string name]
+        {
+            get { return this[IndexOf((OperationFault)Table[name])]; }
         }
 
         #endregion // Properties
 
         #region Methods
 
-        public int Add (OperationFault operationFaultMessage) 
+        public int Add(OperationFault operationFaultMessage)
         {
-            Insert (Count, operationFaultMessage);
+            Insert(Count, operationFaultMessage);
             return (Count - 1);
         }
 
-        public bool Contains (OperationFault operationFaultMessage)
+        public bool Contains(OperationFault operationFaultMessage)
         {
-            return List.Contains (operationFaultMessage);
+            return List.Contains(operationFaultMessage);
         }
 
-        public void CopyTo (OperationFault[] array, int index) 
+        public void CopyTo(OperationFault[] array, int index)
         {
-            List.CopyTo (array, index);
+            List.CopyTo(array, index);
         }
 
-        protected override string GetKey (object value)
+        protected override string GetKey(object value)
         {
             if (!(value is OperationFault))
-                throw new InvalidCastException ();
+                throw new InvalidCastException();
 
-            return ((OperationFault) value).Name;
-        }
-
-        public int IndexOf (OperationFault operationFaultMessage)
-        {
-            return List.IndexOf (operationFaultMessage);
+            return ((OperationFault)value).Name;
         }
 
-        public void Insert (int index, OperationFault operationFaultMessage)
+        public int IndexOf(OperationFault operationFaultMessage)
         {
-            List.Insert (index, operationFaultMessage);
-        }
-    
-        public void Remove (OperationFault operationFaultMessage)
-        {
-            List.Remove (operationFaultMessage);
+            return List.IndexOf(operationFaultMessage);
         }
 
-        protected override void SetParent (object value, object parent)
+        public void Insert(int index, OperationFault operationFaultMessage)
         {
-            ((OperationFault) value).SetParent ((Operation) parent);
+            List.Insert(index, operationFaultMessage);
         }
-            
+
+        public void Remove(OperationFault operationFaultMessage)
+        {
+            List.Remove(operationFaultMessage);
+        }
+
+        protected override void SetParent(object value, object parent)
+        {
+            ((OperationFault)value).SetParent((Operation)parent);
+        }
+
         #endregion // Methods
     }
 }

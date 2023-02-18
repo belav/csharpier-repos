@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,76 +31,72 @@ using System.IO;
 using System.Text;
 using Mono.Unix;
 
-namespace Mono.Unix {
-
+namespace Mono.Unix
+{
     public sealed class UnixSymbolicLinkInfo : UnixFileSystemInfo
     {
-        public UnixSymbolicLinkInfo (string path)
-            : base (path)
+        public UnixSymbolicLinkInfo(string path)
+            : base(path) { }
+
+        internal UnixSymbolicLinkInfo(string path, Native.Stat stat)
+            : base(path, stat) { }
+
+        public override string Name
         {
+            get { return UnixPath.GetFileName(FullPath); }
         }
 
-        internal UnixSymbolicLinkInfo (string path, Native.Stat stat)
-            : base (path, stat)
+        [Obsolete("Use GetContents()")]
+        public UnixFileSystemInfo Contents
         {
+            get { return GetContents(); }
         }
 
-        public override string Name {
-            get {return UnixPath.GetFileName (FullPath);}
-        }
-
-        [Obsolete ("Use GetContents()")]
-        public UnixFileSystemInfo Contents {
-            get {return GetContents ();}
-        }
-
-        public string ContentsPath {
-            get {
-                return UnixPath.ReadLink (FullPath);
-            }
-        }
-
-        public bool HasContents {
-            get {
-                return UnixPath.TryReadLink (FullPath) != null;
-            }
-        }
-
-        public UnixFileSystemInfo GetContents ()
+        public string ContentsPath
         {
-            return UnixFileSystemInfo.GetFileSystemEntry (
-                        UnixPath.Combine (UnixPath.GetDirectoryName (FullPath), 
-                            ContentsPath));
+            get { return UnixPath.ReadLink(FullPath); }
         }
 
-        public void CreateSymbolicLinkTo (string path)
+        public bool HasContents
         {
-            int r = Native.Syscall.symlink (path, FullName);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
+            get { return UnixPath.TryReadLink(FullPath) != null; }
         }
 
-        public void CreateSymbolicLinkTo (UnixFileSystemInfo path)
+        public UnixFileSystemInfo GetContents()
         {
-            int r = Native.Syscall.symlink (path.FullName, FullName);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
+            return UnixFileSystemInfo.GetFileSystemEntry(
+                UnixPath.Combine(UnixPath.GetDirectoryName(FullPath), ContentsPath)
+            );
         }
 
-        public override void Delete ()
+        public void CreateSymbolicLinkTo(string path)
         {
-            int r = Native.Syscall.unlink (FullPath);
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
-            base.Refresh ();
+            int r = Native.Syscall.symlink(path, FullName);
+            UnixMarshal.ThrowExceptionForLastErrorIf(r);
         }
 
-        public override void SetOwner (long owner, long group)
+        public void CreateSymbolicLinkTo(UnixFileSystemInfo path)
         {
-            int r = Native.Syscall.lchown (FullPath, Convert.ToInt32 (owner), Convert.ToInt32 (group));
-            UnixMarshal.ThrowExceptionForLastErrorIf (r);
+            int r = Native.Syscall.symlink(path.FullName, FullName);
+            UnixMarshal.ThrowExceptionForLastErrorIf(r);
         }
 
-        protected override bool GetFileStatus (string path, out Native.Stat stat)
+        public override void Delete()
         {
-            return Native.Syscall.lstat (path, out stat) == 0;
+            int r = Native.Syscall.unlink(FullPath);
+            UnixMarshal.ThrowExceptionForLastErrorIf(r);
+            base.Refresh();
+        }
+
+        public override void SetOwner(long owner, long group)
+        {
+            int r = Native.Syscall.lchown(FullPath, Convert.ToInt32(owner), Convert.ToInt32(group));
+            UnixMarshal.ThrowExceptionForLastErrorIf(r);
+        }
+
+        protected override bool GetFileStatus(string path, out Native.Stat stat)
+        {
+            return Native.Syscall.lstat(path, out stat) == 0;
         }
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,9 +37,8 @@ using System.Xml;
 using System.Globalization;
 using System.Web.Util;
 
-
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     public sealed class AuthorizationRule : ConfigurationElement
     {
         static ConfigurationProperty rolesProp;
@@ -49,37 +48,49 @@ namespace System.Web.Configuration {
 
         AuthorizationRuleAction action;
         ConfigurationSaveMode saveMode = ConfigurationSaveMode.Full;
-            
-        static AuthorizationRule ()
-        {
-            rolesProp = new ConfigurationProperty ("roles", typeof (StringCollection), null,
-                                   PropertyHelper.CommaDelimitedStringCollectionConverter,
-                                   PropertyHelper.DefaultValidator,
-                                   ConfigurationPropertyOptions.None);
-            usersProp = new ConfigurationProperty ("users", typeof (StringCollection), null,
-                                   PropertyHelper.CommaDelimitedStringCollectionConverter,
-                                   PropertyHelper.DefaultValidator,
-                                   ConfigurationPropertyOptions.None);
-            verbsProp = new ConfigurationProperty ("verbs", typeof (StringCollection), null,
-                                   PropertyHelper.CommaDelimitedStringCollectionConverter,
-                                   PropertyHelper.DefaultValidator,
-                                   ConfigurationPropertyOptions.None);
-            properties = new ConfigurationPropertyCollection ();
 
-            properties.Add (rolesProp);
-            properties.Add (usersProp);
-            properties.Add (verbsProp);
+        static AuthorizationRule()
+        {
+            rolesProp = new ConfigurationProperty(
+                "roles",
+                typeof(StringCollection),
+                null,
+                PropertyHelper.CommaDelimitedStringCollectionConverter,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            usersProp = new ConfigurationProperty(
+                "users",
+                typeof(StringCollection),
+                null,
+                PropertyHelper.CommaDelimitedStringCollectionConverter,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            verbsProp = new ConfigurationProperty(
+                "verbs",
+                typeof(StringCollection),
+                null,
+                PropertyHelper.CommaDelimitedStringCollectionConverter,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            properties = new ConfigurationPropertyCollection();
+
+            properties.Add(rolesProp);
+            properties.Add(usersProp);
+            properties.Add(verbsProp);
         }
 
-        public AuthorizationRule (AuthorizationRuleAction action)
+        public AuthorizationRule(AuthorizationRuleAction action)
         {
             this.action = action;
-            base[rolesProp] = new CommaDelimitedStringCollection ();
-            base[usersProp] = new CommaDelimitedStringCollection ();
-            base[verbsProp] = new CommaDelimitedStringCollection ();
+            base[rolesProp] = new CommaDelimitedStringCollection();
+            base[usersProp] = new CommaDelimitedStringCollection();
+            base[verbsProp] = new CommaDelimitedStringCollection();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             AuthorizationRule auth = obj as AuthorizationRule;
             if (auth == null)
@@ -88,115 +99,130 @@ namespace System.Web.Configuration {
             if (action != auth.Action)
                 return false;
 
-            if (Roles.Count != auth.Roles.Count
+            if (
+                Roles.Count != auth.Roles.Count
                 || Users.Count != auth.Users.Count
-                || Verbs.Count != auth.Verbs.Count)
+                || Verbs.Count != auth.Verbs.Count
+            )
                 return false;
 
             int i;
 
-            for (i = 0; i < Roles.Count; i ++)
+            for (i = 0; i < Roles.Count; i++)
                 if (Roles[i] != auth.Roles[i])
                     return false;
 
-            for (i = 0; i < Users.Count; i ++)
+            for (i = 0; i < Users.Count; i++)
                 if (Users[i] != auth.Users[i])
                     return false;
 
-            for (i = 0; i < Verbs.Count; i ++)
+            for (i = 0; i < Verbs.Count; i++)
                 if (Verbs[i] != auth.Verbs[i])
                     return false;
-                
+
             return true;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             int hashCode = (int)action;
             int i;
 
-            for (i = 0; i < Roles.Count; i ++)
+            for (i = 0; i < Roles.Count; i++)
                 hashCode += Roles[i].GetHashCode();
 
-            for (i = 0; i < Users.Count; i ++)
+            for (i = 0; i < Users.Count; i++)
                 hashCode += Users[i].GetHashCode();
 
-            for (i = 0; i < Verbs.Count; i ++)
+            for (i = 0; i < Verbs.Count; i++)
                 hashCode += Verbs[i].GetHashCode();
 
             return hashCode;
         }
 
-        [MonoTODO ("Not implemented")]
-        protected internal override bool IsModified ()
+        [MonoTODO("Not implemented")]
+        protected internal override bool IsModified()
         {
-            if (((CommaDelimitedStringCollection)Roles).IsModified || ((CommaDelimitedStringCollection)Users).IsModified || ((CommaDelimitedStringCollection)Verbs).IsModified)
+            if (
+                ((CommaDelimitedStringCollection)Roles).IsModified
+                || ((CommaDelimitedStringCollection)Users).IsModified
+                || ((CommaDelimitedStringCollection)Verbs).IsModified
+            )
                 return true;
 
             return false;
         }
 
-        void VerifyData ()
+        void VerifyData()
         {
             if (Roles.Count == 0 && Users.Count == 0)
-                throw new ConfigurationErrorsException ("You must supply either a list of users or roles when creating an AuthorizationRule");
+                throw new ConfigurationErrorsException(
+                    "You must supply either a list of users or roles when creating an AuthorizationRule"
+                );
         }
 
-        protected override void PostDeserialize ()
+        protected override void PostDeserialize()
         {
             base.PostDeserialize();
 
-            VerifyData ();
+            VerifyData();
         }
 
-        protected override void PreSerialize (XmlWriter writer)
+        protected override void PreSerialize(XmlWriter writer)
         {
-            base.PreSerialize (writer);
+            base.PreSerialize(writer);
 
-            VerifyData ();
+            VerifyData();
         }
 
-        protected internal override void Reset (ConfigurationElement parentElement)
+        protected internal override void Reset(ConfigurationElement parentElement)
         {
             AuthorizationRule r = (AuthorizationRule)parentElement;
             Action = r.Action;
 
-            base.Reset (parentElement);
+            base.Reset(parentElement);
         }
 
-        protected internal override void ResetModified ()
+        protected internal override void ResetModified()
         {
-            base.ResetModified ();
+            base.ResetModified();
         }
 
-        protected internal override bool SerializeElement (XmlWriter writer, bool serializeCollectionKey)
+        protected internal override bool SerializeElement(
+            XmlWriter writer,
+            bool serializeCollectionKey
+        )
         {
-            if (saveMode != ConfigurationSaveMode.Full && !IsModified ())
+            if (saveMode != ConfigurationSaveMode.Full && !IsModified())
                 return true;
-            
-            PreSerialize (writer);
 
-            writer.WriteStartElement (action == AuthorizationRuleAction.Allow ? "allow" : "deny");
+            PreSerialize(writer);
+
+            writer.WriteStartElement(action == AuthorizationRuleAction.Allow ? "allow" : "deny");
             if (Roles.Count > 0)
-                writer.WriteAttributeString ("roles", Roles.ToString());
+                writer.WriteAttributeString("roles", Roles.ToString());
             if (Users.Count > 0)
-                writer.WriteAttributeString ("users", Users.ToString());
+                writer.WriteAttributeString("users", Users.ToString());
             if (Verbs.Count > 0)
-                writer.WriteAttributeString ("verbs", Verbs.ToString());
+                writer.WriteAttributeString("verbs", Verbs.ToString());
 
-            writer.WriteEndElement ();
+            writer.WriteEndElement();
 
             return true;
         }
 
-        protected internal override void SetReadOnly ()
+        protected internal override void SetReadOnly()
         {
             base.SetReadOnly();
         }
 
-        protected internal override void Unmerge (ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
+        protected internal override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
-            base.Unmerge (sourceElement, parentElement, saveMode);
+            base.Unmerge(sourceElement, parentElement, saveMode);
             this.saveMode = saveMode;
 
             AuthorizationRule source = sourceElement as AuthorizationRule;
@@ -204,65 +230,70 @@ namespace System.Web.Configuration {
                 this.action = source.Action;
         }
 
-        public AuthorizationRuleAction Action {
+        public AuthorizationRuleAction Action
+        {
             get { return action; }
             set { action = value; }
         }
 
-        [TypeConverter (typeof (CommaDelimitedStringCollectionConverter))]
-        [ConfigurationProperty ("roles")]
-        public StringCollection Roles {
-            get { return (StringCollection) base [rolesProp];}
+        [TypeConverter(typeof(CommaDelimitedStringCollectionConverter))]
+        [ConfigurationProperty("roles")]
+        public StringCollection Roles
+        {
+            get { return (StringCollection)base[rolesProp]; }
         }
 
-        [TypeConverter (typeof (CommaDelimitedStringCollectionConverter))]
-        [ConfigurationProperty ("users")]
-        public StringCollection Users {
-            get { return (StringCollection) base [usersProp];}
+        [TypeConverter(typeof(CommaDelimitedStringCollectionConverter))]
+        [ConfigurationProperty("users")]
+        public StringCollection Users
+        {
+            get { return (StringCollection)base[usersProp]; }
         }
 
-        [TypeConverter (typeof (CommaDelimitedStringCollectionConverter))]
-        [ConfigurationProperty ("verbs")]
-        public StringCollection Verbs {
-            get { return (StringCollection) base [verbsProp];}
+        [TypeConverter(typeof(CommaDelimitedStringCollectionConverter))]
+        [ConfigurationProperty("verbs")]
+        public StringCollection Verbs
+        {
+            get { return (StringCollection)base[verbsProp]; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-
-        internal bool CheckVerb (string verb)
+        internal bool CheckVerb(string verb)
         {
-            foreach (string v in Verbs) {
-                if (String.Compare (v, verb, true, Helpers.InvariantCulture) == 0)
+            foreach (string v in Verbs)
+            {
+                if (String.Compare(v, verb, true, Helpers.InvariantCulture) == 0)
                     return true;
             }
             return false;
         }
 
-        internal bool CheckUser (string user)
+        internal bool CheckUser(string user)
         {
-            foreach (string u in Users) {
-                if (String.Compare (u, user, true, Helpers.InvariantCulture) == 0 ||
-                    u == "*" ||
-                    (u == "?" && user == ""))
+            foreach (string u in Users)
+            {
+                if (
+                    String.Compare(u, user, true, Helpers.InvariantCulture) == 0
+                    || u == "*"
+                    || (u == "?" && user == "")
+                )
                     return true;
             }
             return false;
         }
 
-        internal bool CheckRole (IPrincipal user)
+        internal bool CheckRole(IPrincipal user)
         {
-            foreach (string r in Roles) {
-                if (user.IsInRole (r))
+            foreach (string r in Roles)
+            {
+                if (user.IsInRole(r))
                     return true;
             }
             return false;
         }
-
     }
-
 }
-
-

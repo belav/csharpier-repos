@@ -23,13 +23,16 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Initializes a new instance of the <see cref="RelativePathResolver"/> class.
         /// </summary>
-        /// <param name="searchPaths">An ordered set of fully qualified 
+        /// <param name="searchPaths">An ordered set of fully qualified
         /// paths which are searched when resolving assembly names.</param>
         /// <param name="baseDirectory">Directory used when resolving relative paths.</param>
         public RelativePathResolver(ImmutableArray<string> searchPaths, string baseDirectory)
         {
             Debug.Assert(searchPaths.All(PathUtilities.IsAbsolute));
-            Debug.Assert(baseDirectory == null || PathUtilities.GetPathKind(baseDirectory) == PathKind.Absolute);
+            Debug.Assert(
+                baseDirectory == null
+                    || PathUtilities.GetPathKind(baseDirectory) == PathKind.Absolute
+            );
 
             SearchPaths = searchPaths;
             BaseDirectory = baseDirectory;
@@ -37,7 +40,13 @@ namespace Microsoft.CodeAnalysis
 
         public string ResolvePath(string reference, string baseFilePath)
         {
-            string resolvedPath = FileUtilities.ResolveRelativePath(reference, baseFilePath, BaseDirectory, SearchPaths, FileExists);
+            string resolvedPath = FileUtilities.ResolveRelativePath(
+                reference,
+                baseFilePath,
+                BaseDirectory,
+                SearchPaths,
+                FileExists
+            );
             if (resolvedPath == null)
             {
                 return null;

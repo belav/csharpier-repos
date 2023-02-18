@@ -9,27 +9,18 @@ namespace System.CommandLine.Rendering
 {
     internal class AnsiRenderingSpanVisitor : ContentRenderingSpanVisitor
     {
-        public AnsiRenderingSpanVisitor(
-            IConsole console,
-            Region region) : base(console.Out, region)
-        {
-        }
+        public AnsiRenderingSpanVisitor(IConsole console, Region region)
+            : base(console.Out, region) { }
 
         protected override void SetCursorPosition(int? left = null, int? top = null)
         {
             if (Region == Region.Scrolling)
             {
-                Writer.WriteLine(
-                    Cursor.Move
-                          .ToLocation(left: left + 1)
-                          .EscapeSequence);
+                Writer.WriteLine(Cursor.Move.ToLocation(left: left + 1).EscapeSequence);
             }
             else
             {
-                Writer.Write(
-                    Cursor.Move
-                          .ToLocation(left: left + 1, top: top + 1)
-                          .EscapeSequence);
+                Writer.Write(Cursor.Move.ToLocation(left: left + 1, top: top + 1).EscapeSequence);
             }
         }
 
@@ -81,7 +72,10 @@ namespace System.CommandLine.Rendering
             }
         }
 
-        private static readonly Dictionary<string, AnsiControlCode> _foregroundColorControlCodeMappings =
+        private static readonly Dictionary<
+            string,
+            AnsiControlCode
+        > _foregroundColorControlCodeMappings =
             new()
             {
                 [nameof(ForegroundColorSpan.Reset)] = Color.Foreground.Default,
@@ -103,7 +97,10 @@ namespace System.CommandLine.Rendering
                 [nameof(ForegroundColorSpan.LightGray)] = Color.Foreground.LightGray,
             };
 
-        private static readonly Dictionary<string, AnsiControlCode> _backgroundColorControlCodeMappings =
+        private static readonly Dictionary<
+            string,
+            AnsiControlCode
+        > _backgroundColorControlCodeMappings =
             new()
             {
                 [nameof(BackgroundColorSpan.Reset)] = Color.Background.Default,

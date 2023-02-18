@@ -14,20 +14,12 @@ namespace Microsoft.TestCommon
     public class PropertyDataAttribute : MemberDataAttributeBase
     {
         public PropertyDataAttribute(string propertyName, params object[] parameters)
-            : base(propertyName, parameters)
-        {
-        }
+            : base(propertyName, parameters) { }
 
         public Type PropertyType
         {
-            get
-            {
-                return MemberType;
-            }
-            set
-            {
-                MemberType = value;
-            }
+            get { return MemberType; }
+            set { MemberType = value; }
         }
 
         protected override object[] ConvertDataItem(MethodInfo testMethod, object item)
@@ -40,10 +32,13 @@ namespace Microsoft.TestCommon
             var array = item as object[];
             if (array == null)
             {
-                throw new ArgumentException(String.Format(
-                    "Property {0} on {1} yielded an item that is not an object[].",
-                    MemberName,
-                    MemberType ?? testMethod.DeclaringType));
+                throw new ArgumentException(
+                    String.Format(
+                        "Property {0} on {1} yielded an item that is not an object[].",
+                        MemberName,
+                        MemberType ?? testMethod.DeclaringType
+                    )
+                );
             }
 
             return array;

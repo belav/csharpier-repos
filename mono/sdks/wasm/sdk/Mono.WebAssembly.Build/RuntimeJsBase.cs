@@ -27,55 +27,69 @@ namespace Mono.WebAssembly.Build
     // custom base for template to strip out CodeDom dependency
     public abstract class TemplateBase
     {
-        public abstract string TransformText ();
-        public virtual void Initialize () { }
+        public abstract string TransformText();
 
-        StringBuilder builder = new StringBuilder ();
+        public virtual void Initialize() { }
 
-        public StringBuilder GenerationEnvironment {
+        StringBuilder builder = new StringBuilder();
+
+        public StringBuilder GenerationEnvironment
+        {
             get => builder;
-            set {
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     builder.Length = 0;
-                } else {
+                }
+                else
+                {
                     builder = value;
                 }
             }
         }
 
-        public ToStringInstanceHelper ToStringHelper { get; } = new ToStringInstanceHelper ();
+        public ToStringInstanceHelper ToStringHelper { get; } = new ToStringInstanceHelper();
 
-        public void Write (string textToAppend) => this.GenerationEnvironment.Append (textToAppend);
+        public void Write(string textToAppend) => this.GenerationEnvironment.Append(textToAppend);
 
-        public void Write (string format, params object[] args) => GenerationEnvironment.AppendFormat (format, args);
+        public void Write(string format, params object[] args) =>
+            GenerationEnvironment.AppendFormat(format, args);
 
-        public void WriteLine (string textToAppend) => GenerationEnvironment.AppendLine (textToAppend);
+        public void WriteLine(string textToAppend) =>
+            GenerationEnvironment.AppendLine(textToAppend);
 
-        public void WriteLine (string format, params object[] args)
+        public void WriteLine(string format, params object[] args)
         {
-            GenerationEnvironment.AppendFormat (format, args);
-            GenerationEnvironment.AppendLine ();
+            GenerationEnvironment.AppendFormat(format, args);
+            GenerationEnvironment.AppendLine();
         }
 
         public class ToStringInstanceHelper
         {
-            public IFormatProvider FormatProvider { get; } = System.Globalization.CultureInfo.InvariantCulture;
+            public IFormatProvider FormatProvider { get; } =
+                System.Globalization.CultureInfo.InvariantCulture;
 
-            public string ToStringWithCulture (object objectToConvert)
+            public string ToStringWithCulture(object objectToConvert)
             {
-                if (objectToConvert == null) {
-                    throw new ArgumentNullException (nameof (objectToConvert));
+                if (objectToConvert == null)
+                {
+                    throw new ArgumentNullException(nameof(objectToConvert));
                 }
-                var type = objectToConvert.GetType ();
-                var iConvertibleType = typeof (IConvertible);
-                if (iConvertibleType.IsAssignableFrom (type)) {
-                    return ((IConvertible)objectToConvert).ToString (FormatProvider);
+                var type = objectToConvert.GetType();
+                var iConvertibleType = typeof(IConvertible);
+                if (iConvertibleType.IsAssignableFrom(type))
+                {
+                    return ((IConvertible)objectToConvert).ToString(FormatProvider);
                 }
-                var methInfo = type.GetMethod ("ToString", new Type[] { iConvertibleType });
-                if ((methInfo != null)) {
-                    return (string)(methInfo.Invoke (objectToConvert, new object[] { FormatProvider}));
+                var methInfo = type.GetMethod("ToString", new Type[] { iConvertibleType });
+                if ((methInfo != null))
+                {
+                    return (string)(
+                        methInfo.Invoke(objectToConvert, new object[] { FormatProvider })
+                    );
                 }
-                return objectToConvert.ToString ();
+                return objectToConvert.ToString();
             }
         }
     }

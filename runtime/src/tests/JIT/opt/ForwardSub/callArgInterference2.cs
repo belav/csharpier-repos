@@ -28,7 +28,8 @@ public struct S0
 public class ForwardSubCallArgInterference2
 {
     public static IRT s_rt;
-    public static int[][] s_28 = new int[][]{new int[]{1}};
+    public static int[][] s_28 = new int[][] { new int[] { 1 } };
+
     public static int Main()
     {
         s_rt = new C();

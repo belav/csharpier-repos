@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,35 +30,28 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Principal {
-
-    [ComVisible (false)]
-    public abstract class IdentityReference {
-
+namespace System.Security.Principal
+{
+    [ComVisible(false)]
+    public abstract class IdentityReference
+    {
         // yep, this means it cannot be inherited outside corlib
         // not sure if this is "by design" reported as FDBK30180
-        internal IdentityReference ()
-        {
-        }
+        internal IdentityReference() { }
 
+        public abstract string Value { get; }
 
-        public abstract string Value { 
-            get;
-        }
+        public abstract override bool Equals(object o);
 
+        public abstract override int GetHashCode();
 
-        public abstract override bool Equals (object o);
+        public abstract bool IsValidTargetType(Type targetType);
 
-        public abstract override int GetHashCode ();
+        public abstract override string ToString();
 
-        public abstract bool IsValidTargetType (Type targetType);
+        public abstract IdentityReference Translate(Type targetType);
 
-        public abstract override string ToString ();
-
-        public abstract IdentityReference Translate (Type targetType);
-
-
-        public static bool operator== (IdentityReference left, IdentityReference right)
+        public static bool operator ==(IdentityReference left, IdentityReference right)
         {
             if (((object)left) == null)
                 return (((object)right) == null);
@@ -67,7 +60,7 @@ namespace System.Security.Principal {
             return (left.Value == right.Value);
         }
 
-        public static bool operator!= (IdentityReference left, IdentityReference right)
+        public static bool operator !=(IdentityReference left, IdentityReference right)
         {
             if (((object)left) == null)
                 return (((object)right) != null);
@@ -77,4 +70,3 @@ namespace System.Security.Principal {
         }
     }
 }
-

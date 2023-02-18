@@ -11,10 +11,7 @@ namespace Internal.IL.Stubs
     {
         MethodSignature IPrefixMangledSignature.BaseSignature
         {
-            get
-            {
-                return _targetSignature;
-            }
+            get { return _targetSignature; }
         }
 
         string IPrefixMangledSignature.Prefix
@@ -24,11 +21,16 @@ namespace Internal.IL.Stubs
                 string prefix = RuntimeMarshallingEnabled ? "CalliWithRuntimeMarshalling" : "Calli";
 
                 // The target signature is expected to be normalized as MethodSignatureFlags.UnmanagedCallingConvention
-                Debug.Assert((_targetSignature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask) == MethodSignatureFlags.UnmanagedCallingConvention);
+                Debug.Assert(
+                    (_targetSignature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
+                        == MethodSignatureFlags.UnmanagedCallingConvention
+                );
 
                 // Append calling convention details to the prefix
                 if (_targetSignature.HasEmbeddedSignatureData)
-                    prefix += _targetSignature.GetStandaloneMethodSignatureCallingConventions().ToString("x");
+                    prefix += _targetSignature
+                        .GetStandaloneMethodSignatureCallingConventions()
+                        .ToString("x");
 
                 return prefix;
             }

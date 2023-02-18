@@ -33,77 +33,74 @@ namespace System.Windows.Forms
         double min;
 
         // Last valid value for the numeric textbox
-        public double Value {
-            get {
-                return val;
-            }
-            set {
+        public double Value
+        {
+            get { return val; }
+            set
+            {
                 if (value == val)
                     return;
                 if (value < min)
                     value = min;
 
                 val = value;
-                OnValueChanged (EventArgs.Empty);
+                OnValueChanged(EventArgs.Empty);
             }
         }
 
-        public double Min {
-            get {
-                return min;
-            }
-            set {
-                min = value;
-            }
+        public double Min
+        {
+            get { return min; }
+            set { min = value; }
         }
 
-        protected override void OnLostFocus (EventArgs args)
+        protected override void OnLostFocus(EventArgs args)
         {
             // Update to the last valid value
-            string val = Value.ToString ();
+            string val = Value.ToString();
             if (Text != val)
                 Text = val;
 
-            base.OnLostFocus (args);
+            base.OnLostFocus(args);
         }
 
-        protected override void OnTextChanged (EventArgs args)
+        protected override void OnTextChanged(EventArgs args)
         {
             // Try to set the value to the new text.
             // Otherwise keep the old one.
-            try {
+            try
+            {
                 string text = Text.Length == 0 ? "0" : Text;
-                double new_value = Double.Parse (text);
+                double new_value = Double.Parse(text);
                 Value = new_value;
-
-            } catch (FormatException) {
-            } catch (OverflowException) {
             }
+            catch (FormatException) { }
+            catch (OverflowException) { }
 
-            base.OnTextChanged (args);
+            base.OnTextChanged(args);
         }
 
-        protected override void OnKeyPress (KeyPressEventArgs args)
+        protected override void OnKeyPress(KeyPressEventArgs args)
         {
             string acceptable = "\b.01234567890";
-            if (acceptable.IndexOf (args.KeyChar) < 0)
+            if (acceptable.IndexOf(args.KeyChar) < 0)
                 args.Handled = true;
 
-            base.OnKeyPress (args);
+            base.OnKeyPress(args);
         }
 
-        protected virtual void OnValueChanged (EventArgs args)
+        protected virtual void OnValueChanged(EventArgs args)
         {
-            EventHandler eh = (EventHandler)(Events [ValueChangedEvent]);
+            EventHandler eh = (EventHandler)(Events[ValueChangedEvent]);
             if (eh != null)
-                eh (this, args);
+                eh(this, args);
         }
 
-        static object ValueChangedEvent = new object ();
-        public event EventHandler ValueChanged {
-            add { Events.AddHandler (ValueChangedEvent, value); }
-            remove { Events.RemoveHandler (ValueChangedEvent, value); }
+        static object ValueChangedEvent = new object();
+        public event EventHandler ValueChanged
+        {
+            add { Events.AddHandler(ValueChangedEvent, value); }
+            remove { Events.RemoveHandler(ValueChangedEvent, value); }
         }
     }
 }
-

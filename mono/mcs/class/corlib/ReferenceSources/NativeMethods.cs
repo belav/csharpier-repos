@@ -1,4 +1,3 @@
-
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -9,7 +8,7 @@ namespace Microsoft.Win32
 {
     static class NativeMethods
     {
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        public static extern int GetCurrentProcessId ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern int GetCurrentProcessId();
     }
 }

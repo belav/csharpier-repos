@@ -6,25 +6,21 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.FunctionPointers
 {
-    [SetupCompileArgument ("/unsafe")]
+    [SetupCompileArgument("/unsafe")]
     unsafe class CanCompileMethodWithFunctionPointerParameter
     {
-        public static void Main ()
+        public static void Main()
         {
-            new CanCompileMethodWithFunctionPointerParameter.B ().Method (null);
+            new CanCompileMethodWithFunctionPointerParameter.B().Method(null);
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class B
         {
-            public void Unused (delegate* unmanaged<void> fnptr)
-            {
-            }
+            public void Unused(delegate* unmanaged<void> fnptr) { }
 
             [Kept]
-            public void Method (delegate* unmanaged<void> fnptr)
-            {
-            }
+            public void Method(delegate* unmanaged<void> fnptr) { }
         }
     }
 }

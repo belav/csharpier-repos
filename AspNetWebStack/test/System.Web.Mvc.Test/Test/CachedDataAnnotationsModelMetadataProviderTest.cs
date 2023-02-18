@@ -3,7 +3,8 @@
 
 namespace System.Web.Mvc.Test
 {
-    public class CachedDataAnnotationsModelMetadataProviderTest : DataAnnotationsModelMetadataProviderTestBase
+    public class CachedDataAnnotationsModelMetadataProviderTest
+        : DataAnnotationsModelMetadataProviderTestBase
     {
         protected override AssociatedMetadataProvider MakeProvider()
         {

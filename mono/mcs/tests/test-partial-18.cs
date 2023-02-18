@@ -1,8 +1,6 @@
 namespace N
 {
-    partial class Foo
-    {
-    }
+    partial class Foo { }
 }
 
 namespace N
@@ -11,12 +9,11 @@ namespace N
 
     partial class Foo
     {
-        public Foo ()
+        public Foo()
         {
-            Console.Write ("Hello, world.\n");
+            Console.Write("Hello, world.\n");
         }
-        public static void Main ()
-        {
-        }
+
+        public static void Main() { }
     }
 }

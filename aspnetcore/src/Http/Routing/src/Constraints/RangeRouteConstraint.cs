@@ -22,7 +22,10 @@ public class RangeRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatch
     {
         if (min > max)
         {
-            var errorMessage = Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax("min", "max");
+            var errorMessage = Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax(
+                "min",
+                "max"
+            );
             throw new ArgumentOutOfRangeException(nameof(min), min, errorMessage);
         }
 
@@ -46,7 +49,8 @@ public class RangeRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatch
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -69,7 +73,14 @@ public class RangeRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatch
 
     private bool CheckConstraintCore(string? valueString)
     {
-        if (long.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var longValue))
+        if (
+            long.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out var longValue
+            )
+        )
         {
             return longValue >= Min && longValue <= Max;
         }

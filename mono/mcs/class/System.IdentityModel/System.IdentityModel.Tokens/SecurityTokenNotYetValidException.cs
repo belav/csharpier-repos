@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,19 +34,15 @@ namespace System.IdentityModel.Tokens
     public class SecurityTokenNotYetValidException : SecurityTokenValidationException
     {
         public SecurityTokenNotYetValidException()
-            : base("ID4182: The security token is not valid yet.")
-        { }
+            : base("ID4182: The security token is not valid yet.") { }
 
         public SecurityTokenNotYetValidException(string message)
-            : base(message)
-        { }
+            : base(message) { }
 
         public SecurityTokenNotYetValidException(string message, Exception inner)
-            : base(message, inner)
-        { }
+            : base(message, inner) { }
 
         public SecurityTokenNotYetValidException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        { }
+            : base(info, context) { }
     }
 }

@@ -12,10 +12,10 @@ namespace MonoTests.System.Web
     public class HttpExceptionTest
     {
         [Test]
-        public void WebEventCode ()
+        public void WebEventCode()
         {
-            var ex = new HttpException ();
-            Assert.AreEqual (WebEventCodes.UndefinedEventCode, ex.WebEventCode);
+            var ex = new HttpException();
+            Assert.AreEqual(WebEventCodes.UndefinedEventCode, ex.WebEventCode);
         }
     }
 }

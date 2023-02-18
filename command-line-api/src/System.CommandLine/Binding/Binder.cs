@@ -10,8 +10,8 @@ namespace System.CommandLine.Binding
 {
     internal static class Binder
     {
-        private static MethodInfo EnumerableEmptyMethod { get; }
-            = typeof(Enumerable).GetMethod(nameof(Array.Empty));
+        private static MethodInfo EnumerableEmptyMethod { get; } =
+            typeof(Enumerable).GetMethod(nameof(Array.Empty));
 
         internal static object? GetDefaultValue(Type type)
         {
@@ -26,10 +26,11 @@ namespace System.CommandLine.Binding
                 {
                     return type.GetGenericTypeDefinition() switch
                     {
-                        { } enumerable when enumerable == typeof(IEnumerable<>) => GetEmptyEnumerable(itemType),
+                        { } enumerable when enumerable == typeof(IEnumerable<>)
+                            => GetEmptyEnumerable(itemType),
                         { } list when list == typeof(List<>) => GetEmptyList(itemType),
-                        { } array when array == typeof(IList<>) || 
-                                       array == typeof(ICollection<>) => CreateEmptyArray(itemType),
+                        { } array when array == typeof(IList<>) || array == typeof(ICollection<>)
+                            => CreateEmptyArray(itemType),
                         _ => null
                     };
                 }
@@ -37,14 +38,14 @@ namespace System.CommandLine.Binding
 
             return type switch
             {
-                { } nonGeneric 
-                when nonGeneric == typeof(IList) ||
-                     nonGeneric == typeof(ICollection) ||
-                     nonGeneric == typeof(IEnumerable)
-                => CreateEmptyArray(typeof(object)),
+                { } nonGeneric
+                    when nonGeneric == typeof(IList)
+                        || nonGeneric == typeof(ICollection)
+                        || nonGeneric == typeof(IEnumerable)
+                    => CreateEmptyArray(typeof(object)),
                 _ => type.IsValueType ? Activator.CreateInstance(type) : null
             };
-            
+
             static object GetEmptyList(Type itemType)
             {
                 return Activator.CreateInstance(typeof(List<>).MakeGenericType(itemType));
@@ -56,8 +57,7 @@ namespace System.CommandLine.Binding
                 return (IEnumerable)genericMethod.Invoke(null, new object[0]);
             }
 
-            static Array CreateEmptyArray(Type itemType)
-                => Array.CreateInstance(itemType, 0);
+            static Array CreateEmptyArray(Type itemType) => Array.CreateInstance(itemType, 0);
         }
 
         internal static Type? GetItemTypeIfEnumerable(Type type)
@@ -75,9 +75,7 @@ namespace System.CommandLine.Binding
             }
             else
             {
-                enumerableInterface = type
-                    .GetInterfaces()
-                    .FirstOrDefault(IsEnumerable);
+                enumerableInterface = type.GetInterfaces().FirstOrDefault(IsEnumerable);
             }
 
             if (enumerableInterface is null)
@@ -99,10 +97,7 @@ namespace System.CommandLine.Binding
                 return false;
             }
 
-            return 
-                type.IsArray 
-                ||
-                typeof(IEnumerable).IsAssignableFrom(type);
+            return type.IsArray || typeof(IEnumerable).IsAssignableFrom(type);
         }
 
         internal static bool IsMatch(this string parameterName, string alias)
@@ -112,9 +107,11 @@ namespace System.CommandLine.Binding
             var indexAfterPrefix = IndexAfterPrefix(alias);
             var parameterCandidateLength = alias.Length - indexAfterPrefix;
 
-            for (var aliasIndex = indexAfterPrefix; 
+            for (
+                var aliasIndex = indexAfterPrefix;
                 aliasIndex < alias.Length && parameterNameIndex < parameterName.Length;
-                aliasIndex++)
+                aliasIndex++
+            )
             {
                 var aliasChar = alias[aliasIndex];
 
@@ -130,10 +127,10 @@ namespace System.CommandLine.Binding
                 {
                     // replacing "|" with "or"
                     parameterNameIndex += 2;
-                    parameterCandidateLength++; 
+                    parameterCandidateLength++;
                     continue;
                 }
-                
+
                 if (char.ToUpperInvariant(parameterNameChar) != char.ToUpperInvariant(aliasChar))
                 {
                     return false;
@@ -169,8 +166,7 @@ namespace System.CommandLine.Binding
 
         internal static bool IsNullable(this Type t)
         {
-            return t.IsGenericType &&
-                   t.GetGenericTypeDefinition() == typeof(Nullable<>);
+            return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
     }
 }

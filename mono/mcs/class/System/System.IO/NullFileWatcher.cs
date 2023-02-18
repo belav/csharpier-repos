@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,30 +34,31 @@ namespace System.IO
     class NullFileWatcher : IFileWatcher
     {
         static IFileWatcher instance;
-        
-        public void StartDispatching (object handle)
+
+        public void StartDispatching(object handle)
         {
             // does nothing
         }
 
-        public void StopDispatching (object handle)
+        public void StopDispatching(object handle)
         {
             // does nothing
         }
 
-        public void Dispose (object handle)
+        public void Dispose(object handle)
         {
             // does nothing
         }
 
-        public static bool GetInstance (out IFileWatcher watcher)
+        public static bool GetInstance(out IFileWatcher watcher)
         {
-            if (instance != null) {
+            if (instance != null)
+            {
                 watcher = instance;
                 return true;
             }
 
-            instance = watcher = new NullFileWatcher ();
+            instance = watcher = new NullFileWatcher();
             return true;
         }
     }

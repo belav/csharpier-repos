@@ -1,32 +1,28 @@
 using System;
-    
+
 class InvokeWindow
 {
     public event D E;
-        
-    public void Run ()
+
+    public void Run()
     {
-        E ();
+        E();
     }
 }
-    
-delegate void D ();
+
+delegate void D();
 
 public class Test
 {
-    public static int Main ()
+    public static int Main()
     {
-        InvokeWindow win = new InvokeWindow ();
-        win.E += new D (OnDeleteEvent);
-        win.Run ();
+        InvokeWindow win = new InvokeWindow();
+        win.E += new D(OnDeleteEvent);
+        win.Run();
         return 0;
     }
 
-    static void OnDeleteEvent ()
-    {
-    }
-    
-    void OnDeleteEvent (int i)
-    {
-    }
+    static void OnDeleteEvent() { }
+
+    void OnDeleteEvent(int i) { }
 }

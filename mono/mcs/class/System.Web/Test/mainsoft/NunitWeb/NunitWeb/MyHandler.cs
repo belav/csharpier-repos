@@ -10,10 +10,9 @@ namespace MonoTests.SystemWeb.Framework
             get { return false; }
         }
 
-        public void ProcessRequest (HttpContext context)
+        public void ProcessRequest(HttpContext context)
         {
-            WebTest.CurrentTest.Invoke (null);
+            WebTest.CurrentTest.Invoke(null);
         }
     }
 }
-

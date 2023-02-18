@@ -24,167 +24,198 @@ using System.Reflection;
  * the IL code looks.
  */
 
-class Tests {
-
-    static int Main (string[] args) {
-        return TestDriver.RunTests (typeof (Tests), args);
+class Tests
+{
+    static int Main(string[] args)
+    {
+        return TestDriver.RunTests(typeof(Tests), args);
     }
-    
-    static public int test_0_many_nested_loops () {
+
+    static public int test_0_many_nested_loops()
+    {
         // we do the loop a few times otherwise it's too fast
-        for (int i = 0; i < 5; ++i) {
-        int n = 16;
-        int x = 0;
-        int a = n;
-        while (a-- != 0) {
-            int b = n;
-            while (b-- != 0) {
-            int c = n;
-            while (c-- != 0) {
-                int d = n;
-                while (d-- != 0) {
-                int e = n;
-                while (e-- != 0) {
-                    int f = n;
-                    while (f-- != 0) {
-                    x++;
+        for (int i = 0; i < 5; ++i)
+        {
+            int n = 16;
+            int x = 0;
+            int a = n;
+            while (a-- != 0)
+            {
+                int b = n;
+                while (b-- != 0)
+                {
+                    int c = n;
+                    while (c-- != 0)
+                    {
+                        int d = n;
+                        while (d-- != 0)
+                        {
+                            int e = n;
+                            while (e-- != 0)
+                            {
+                                int f = n;
+                                while (f-- != 0)
+                                {
+                                    x++;
+                                }
+                            }
+                        }
                     }
                 }
-                }
             }
-            }
-        }
-        if (x != 16777216)
-            return 1;
+            if (x != 16777216)
+                return 1;
         }
         return 0;
     }
 
-    public static int test_0_logic_run ()
+    public static int test_0_logic_run()
     {
         // GPL: Copyright (C) 2001  Southern Storm Software, Pty Ltd.
-        int iter, i = 0;
+        int iter,
+            i = 0;
 
-        while (i++ < 10) {
-        // Initialize.
-        bool flag1 = true;
-        bool flag2 = true;
-        bool flag3 = true;
-        bool flag4 = true;
-        bool flag5 = true;
-        bool flag6 = true;
-        bool flag7 = true;
-        bool flag8 = true;
-        bool flag9 = true;
-        bool flag10 = true;
-        bool flag11 = true;
-        bool flag12 = true;
-        bool flag13 = true;
+        while (i++ < 10)
+        {
+            // Initialize.
+            bool flag1 = true;
+            bool flag2 = true;
+            bool flag3 = true;
+            bool flag4 = true;
+            bool flag5 = true;
+            bool flag6 = true;
+            bool flag7 = true;
+            bool flag8 = true;
+            bool flag9 = true;
+            bool flag10 = true;
+            bool flag11 = true;
+            bool flag12 = true;
+            bool flag13 = true;
 
-        // First set of tests.
-        for(iter = 0; iter < 2000000; ++iter) {
-            if((flag1 || flag2) && (flag3 || flag4) &&
-               (flag5 || flag6 || flag7))
+            // First set of tests.
+            for (iter = 0; iter < 2000000; ++iter)
+            {
+                if ((flag1 || flag2) && (flag3 || flag4) && (flag5 || flag6 || flag7))
                 {
-                flag8 = !flag8;
-                flag9 = !flag9;
-                flag10 = !flag10;
-                flag11 = !flag11;
-                flag12 = !flag12;
-                flag13 = !flag13;
-                flag1 = !flag1;
-                flag2 = !flag2;
-                flag3 = !flag3;
-                flag4 = !flag4;
-                flag5 = !flag5;
-                flag6 = !flag6;
-                flag1 = !flag1;
-                flag2 = !flag2;
-                flag3 = !flag3;
-                flag4 = !flag4;
-                flag5 = !flag5;
-                flag6 = !flag6;
+                    flag8 = !flag8;
+                    flag9 = !flag9;
+                    flag10 = !flag10;
+                    flag11 = !flag11;
+                    flag12 = !flag12;
+                    flag13 = !flag13;
+                    flag1 = !flag1;
+                    flag2 = !flag2;
+                    flag3 = !flag3;
+                    flag4 = !flag4;
+                    flag5 = !flag5;
+                    flag6 = !flag6;
+                    flag1 = !flag1;
+                    flag2 = !flag2;
+                    flag3 = !flag3;
+                    flag4 = !flag4;
+                    flag5 = !flag5;
+                    flag6 = !flag6;
+                }
             }
-        }
         }
         return 0;
     }
-    static public int test_1028_sieve () {
+
+    static public int test_1028_sieve()
+    {
         //int NUM = ((argc == 2) ? atoi(argv[1]) : 1);
         int NUM = 2000;
         byte[] flags = new byte[8192 + 1];
-        int i, k;
+        int i,
+            k;
         int count = 0;
 
-        while (NUM-- != 0) {
-        count = 0; 
-        for (i=2; i <= 8192; i++) {
-            flags[i] = 1;
-        }
-        for (i=2; i <= 8192; i++) {
-            if (flags[i] != 0) {
-            // remove all multiples of prime: i
-            for (k=i+i; k <= 8192; k+=i) {
-                flags[k] = 0;
+        while (NUM-- != 0)
+        {
+            count = 0;
+            for (i = 2; i <= 8192; i++)
+            {
+                flags[i] = 1;
             }
-            count++;
+            for (i = 2; i <= 8192; i++)
+            {
+                if (flags[i] != 0)
+                {
+                    // remove all multiples of prime: i
+                    for (k = i + i; k <= 8192; k += i)
+                    {
+                        flags[k] = 0;
+                    }
+                    count++;
+                }
             }
-        }
         }
         //printf("Count: %d\n", count);
-        return(count);
+        return (count);
     }
-    
-    public static int fib (int n) {
+
+    public static int fib(int n)
+    {
         if (n < 2)
             return 1;
-        return fib(n-2)+fib(n-1);
+        return fib(n - 2) + fib(n - 1);
     }
 
-    public static int test_3524578_fib () {
+    public static int test_3524578_fib()
+    {
         for (int i = 0; i < 10; i++)
-            fib (32);
-        
-        return fib (32);
+            fib(32);
+
+        return fib(32);
     }
 
-        private static ulong numMoves;
+    private static ulong numMoves;
 
-        static void movetower (int disc, int from, int to, int use) {
-        if (disc > 0) {     
+    static void movetower(int disc, int from, int to, int use)
+    {
+        if (disc > 0)
+        {
             numMoves++;
-            movetower (disc-1, from, use, to);
-            movetower (disc-1, use, to, from);
+            movetower(disc - 1, from, use, to);
+            movetower(disc - 1, use, to, from);
         }
-        }
+    }
 
-        public static int test_0_hanoi () {
+    public static int test_0_hanoi()
+    {
         int iterations = 5000;
         int numdiscs = 12;
-        
+
         numMoves = 0;
-        while (iterations > 0) {
+        while (iterations > 0)
+        {
             iterations--;
-            movetower (numdiscs, 1, 3, 2);
+            movetower(numdiscs, 1, 3, 2);
         }
         if (numMoves != 20475000)
             return 1;
         return 0;
-        }
+    }
 
-    public static int test_0_castclass () {
+    public static int test_0_castclass()
+    {
         object a = "a";
 
-        for (int i = 0; i < 100000000; i++) {
+        for (int i = 0; i < 100000000; i++)
+        {
             string b = (string)a;
             if ((object)a != (object)b)
                 return 1;
         }
         return 0;
     }
-    
-    public static int test_23005000_float () {
-        double a, b, c, d;
+
+    public static int test_23005000_float()
+    {
+        double a,
+            b,
+            c,
+            d;
         bool val;
         int loops = 0;
         a = 0.0;
@@ -192,12 +223,14 @@ class Tests {
         c = 2300.5;
         d = 1000.0;
 
-        while (a < c) {
+        while (a < c)
+        {
             if (a == d)
                 b *= 2;
             a += b;
             val = b >= c;
-            if (val) break;
+            if (val)
+                break;
             loops++;
         }
         return loops;
@@ -216,8 +249,8 @@ class Tests {
 
             // Draw fake picture
             for(int i = 0; i < size; i++) {
-                for(int j = 0; j < size; j++) {   
-                    arr1[i, j] = (byte) (i%255); 
+                for(int j = 0; j < size; j++) {
+                    arr1[i, j] = (byte) (i%255);
                 }
             }
 
@@ -242,4 +275,3 @@ class Tests {
         }
      */
 }
-

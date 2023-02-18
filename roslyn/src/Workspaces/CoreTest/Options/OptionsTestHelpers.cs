@@ -17,16 +17,32 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     internal static class OptionsTestHelpers
     {
-        public static readonly Option<bool> CustomPublicOption = new Option<bool>("My Feature", "My Option", defaultValue: true);
+        public static readonly Option<bool> CustomPublicOption = new Option<bool>(
+            "My Feature",
+            "My Option",
+            defaultValue: true
+        );
 
         // all public options and their non-default values:
-        public static readonly ImmutableArray<(IOption, object)> PublicCustomOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
-            (CustomPublicOption, false));
+        public static readonly ImmutableArray<(
+            IOption,
+            object
+        )> PublicCustomOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
+            (CustomPublicOption, false)
+        );
 
-        public static readonly ImmutableArray<(IOption, object)> PublicAutoFormattingOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
-            (FormattingOptions.SmartIndent, FormattingOptions2.IndentStyle.Block));
+        public static readonly ImmutableArray<(
+            IOption,
+            object
+        )> PublicAutoFormattingOptionsWithNonDefaultValues = ImmutableArray.Create<(
+            IOption,
+            object
+        )>((FormattingOptions.SmartIndent, FormattingOptions2.IndentStyle.Block));
 
-        public static readonly ImmutableArray<(IOption, object)> PublicFormattingOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
+        public static readonly ImmutableArray<(
+            IOption,
+            object
+        )> PublicFormattingOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
             (FormattingOptions.UseTabs, true),
             (FormattingOptions.TabSize, 5),
             (FormattingOptions.IndentationSize, 7),
@@ -75,39 +91,73 @@ namespace Microsoft.CodeAnalysis.UnitTests
             (CSharpFormattingOptions.SpaceWithinOtherParentheses, true),
             (CSharpFormattingOptions.SpaceWithinSquareBrackets, true),
             (CSharpFormattingOptions.SpacingAfterMethodDeclarationName, true),
-            (CSharpFormattingOptions.SpacingAroundBinaryOperator, BinaryOperatorSpacingOptions.Remove),
+            (
+                CSharpFormattingOptions.SpacingAroundBinaryOperator,
+                BinaryOperatorSpacingOptions.Remove
+            ),
             (CSharpFormattingOptions.WrappingKeepStatementsOnSingleLine, false),
-            (CSharpFormattingOptions.WrappingPreserveSingleLine, false));
+            (CSharpFormattingOptions.WrappingPreserveSingleLine, false)
+        );
 
-        public static readonly ImmutableArray<(IOption, object)> PublicCodeStyleOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
-            (CodeStyleOptions.QualifyFieldAccess, new CodeStyleOption<bool>(true, NotificationOption.Suggestion)),
-            (CodeStyleOptions.QualifyPropertyAccess, new CodeStyleOption<bool>(true, NotificationOption.Suggestion)),
-            (CodeStyleOptions.QualifyMethodAccess, new CodeStyleOption<bool>(true, NotificationOption.Suggestion)),
-            (CodeStyleOptions.QualifyEventAccess, new CodeStyleOption<bool>(true, NotificationOption.Suggestion)),
-            (CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInDeclaration, new CodeStyleOption<bool>(false, NotificationOption.Suggestion)),
-            (CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, new CodeStyleOption<bool>(false, NotificationOption.Suggestion)));
+        public static readonly ImmutableArray<(
+            IOption,
+            object
+        )> PublicCodeStyleOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
+            (
+                CodeStyleOptions.QualifyFieldAccess,
+                new CodeStyleOption<bool>(true, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.QualifyPropertyAccess,
+                new CodeStyleOption<bool>(true, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.QualifyMethodAccess,
+                new CodeStyleOption<bool>(true, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.QualifyEventAccess,
+                new CodeStyleOption<bool>(true, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                new CodeStyleOption<bool>(false, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                new CodeStyleOption<bool>(false, NotificationOption.Suggestion)
+            )
+        );
 
         public static readonly IEnumerable<(IOption, object)> AllPublicOptionsWithNonDefaultValues =
             PublicCustomOptionsWithNonDefaultValues
-            .Concat(PublicAutoFormattingOptionsWithNonDefaultValues)
-            .Concat(PublicFormattingOptionsWithNonDefaultValues)
-            .Concat(PublicCodeStyleOptionsWithNonDefaultValues);
+                .Concat(PublicAutoFormattingOptionsWithNonDefaultValues)
+                .Concat(PublicFormattingOptionsWithNonDefaultValues)
+                .Concat(PublicCodeStyleOptionsWithNonDefaultValues);
 
-        public static OptionSet GetOptionSetWithChangedOptions(OptionSet options, IEnumerable<(IOption, object)> optionsWithNonDefaultValues)
+        public static OptionSet GetOptionSetWithChangedOptions(
+            OptionSet options,
+            IEnumerable<(IOption, object)> optionsWithNonDefaultValues
+        )
         {
             var updatedOptions = options;
             foreach (var (option, newValue) in optionsWithNonDefaultValues)
             {
                 foreach (var language in GetApplicableLanguages(option))
                 {
-                    updatedOptions = updatedOptions.WithChangedOption(new OptionKey(option, language), newValue);
+                    updatedOptions = updatedOptions.WithChangedOption(
+                        new OptionKey(option, language),
+                        newValue
+                    );
                 }
             }
 
             return updatedOptions;
         }
 
-        public static IEnumerable<string?> GetApplicableLanguages(IOption option)
-            => (option is IPerLanguageValuedOption) ? new[] { LanguageNames.CSharp, LanguageNames.VisualBasic } : new string?[] { null };
+        public static IEnumerable<string?> GetApplicableLanguages(IOption option) =>
+            (option is IPerLanguageValuedOption)
+                ? new[] { LanguageNames.CSharp, LanguageNames.VisualBasic }
+                : new string?[] { null };
     }
 }

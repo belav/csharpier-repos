@@ -7,11 +7,14 @@ namespace System.CommandLine.Parsing
 {
     internal class SymbolResultCollatorVisitor : SymbolResultVisitor
     {
-        public Dictionary<IArgument, ArgumentResult> ArgumentResults { get; } = new Dictionary<IArgument, ArgumentResult>();
+        public Dictionary<IArgument, ArgumentResult> ArgumentResults { get; } =
+            new Dictionary<IArgument, ArgumentResult>();
 
-        public Dictionary<ICommand, CommandResult> CommandResults { get; } = new Dictionary<ICommand, CommandResult>();
+        public Dictionary<ICommand, CommandResult> CommandResults { get; } =
+            new Dictionary<ICommand, CommandResult>();
 
-        public Dictionary<IOption, OptionResult> OptionResults { get; } = new Dictionary<IOption, OptionResult>();
+        public Dictionary<IOption, OptionResult> OptionResults { get; } =
+            new Dictionary<IOption, OptionResult>();
 
         protected override void VisitOptionResult(OptionResult optionResult)
         {

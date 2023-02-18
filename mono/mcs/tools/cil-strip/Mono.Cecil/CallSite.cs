@@ -26,84 +26,99 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System.Collections;
     using System.Text;
 
     using Mono.Cecil.Metadata;
 
-    internal sealed class CallSite : IMethodSignature, IAnnotationProvider, IMetadataTokenProvider {
-
+    internal sealed class CallSite : IMethodSignature, IAnnotationProvider, IMetadataTokenProvider
+    {
         MethodReference m_function;
 
-        public bool HasThis {
+        public bool HasThis
+        {
             get { return m_function.HasThis; }
             set { m_function.HasThis = value; }
         }
 
-        public bool ExplicitThis {
+        public bool ExplicitThis
+        {
             get { return m_function.ExplicitThis; }
             set { m_function.ExplicitThis = value; }
         }
 
-        public MethodCallingConvention CallingConvention {
+        public MethodCallingConvention CallingConvention
+        {
             get { return m_function.CallingConvention; }
             set { m_function.CallingConvention = value; }
         }
 
-        public bool HasParameters {
+        public bool HasParameters
+        {
             get { return m_function.HasParameters; }
         }
 
-        public ParameterDefinitionCollection Parameters {
+        public ParameterDefinitionCollection Parameters
+        {
             get { return m_function.Parameters; }
         }
 
-        public MethodReturnType ReturnType {
+        public MethodReturnType ReturnType
+        {
             get { return m_function.ReturnType; }
             set { m_function.ReturnType = value; }
         }
 
-        public MetadataToken MetadataToken {
+        public MetadataToken MetadataToken
+        {
             get { return m_function.MetadataToken; }
             set { m_function.MetadataToken = value; }
         }
 
-        IDictionary IAnnotationProvider.Annotations {
-            get { return ((IAnnotationProvider) m_function).Annotations; }
+        IDictionary IAnnotationProvider.Annotations
+        {
+            get { return ((IAnnotationProvider)m_function).Annotations; }
         }
 
-        public CallSite (bool hasThis, bool explicitThis, MethodCallingConvention callConv, MethodReturnType retType)
+        public CallSite(
+            bool hasThis,
+            bool explicitThis,
+            MethodCallingConvention callConv,
+            MethodReturnType retType
+        )
         {
-            m_function = new MethodReference (string.Empty, hasThis, explicitThis, callConv);
+            m_function = new MethodReference(string.Empty, hasThis, explicitThis, callConv);
             m_function.ReturnType = retType;
         }
 
-        public int GetSentinel ()
+        public int GetSentinel()
         {
-            return m_function.GetSentinel ();
+            return m_function.GetSentinel();
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            int sentinel = GetSentinel ();
-            StringBuilder sb = new StringBuilder ();
-            sb.Append (m_function.ReturnType.ReturnType.FullName);
-            sb.Append ("(");
-            if (m_function.HasParameters) {
-                for (int i = 0; i < m_function.Parameters.Count; i++) {
+            int sentinel = GetSentinel();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(m_function.ReturnType.ReturnType.FullName);
+            sb.Append("(");
+            if (m_function.HasParameters)
+            {
+                for (int i = 0; i < m_function.Parameters.Count; i++)
+                {
                     if (i > 0)
-                        sb.Append (",");
+                        sb.Append(",");
 
                     if (i == sentinel)
-                        sb.Append ("...,");
+                        sb.Append("...,");
 
-                    sb.Append (m_function.Parameters [i].ParameterType.FullName);
+                    sb.Append(m_function.Parameters[i].ParameterType.FullName);
                 }
             }
-            sb.Append (")");
-            return sb.ToString ();
+            sb.Append(")");
+            return sb.ToString();
         }
     }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,12 +39,15 @@ namespace System.Windows.Forms
         private ToolStrip tool_strip;
 
         #region Public Constructors
-        public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip)
-            : this (g, toolStrip, new Rectangle (0, 0, 100, 25), SystemColors.Control)
-        {
-        }
-        
-        public ToolStripRenderEventArgs (Graphics g, ToolStrip toolStrip, Rectangle affectedBounds, Color backColor)
+        public ToolStripRenderEventArgs(Graphics g, ToolStrip toolStrip)
+            : this(g, toolStrip, new Rectangle(0, 0, 100, 25), SystemColors.Control) { }
+
+        public ToolStripRenderEventArgs(
+            Graphics g,
+            ToolStrip toolStrip,
+            Rectangle affectedBounds,
+            Color backColor
+        )
         {
             this.graphics = g;
             this.tool_strip = toolStrip;
@@ -52,31 +55,37 @@ namespace System.Windows.Forms
             this.back_color = backColor;
         }
         #endregion
-        
+
         #region Public Properties
-        public Rectangle AffectedBounds {
+        public Rectangle AffectedBounds
+        {
             get { return this.affected_bounds; }
         }
 
-        public Color BackColor {
+        public Color BackColor
+        {
             get { return this.back_color; }
         }
 
-        public Rectangle ConnectedArea {
+        public Rectangle ConnectedArea
+        {
             get { return this.connected_area; }
         }
 
-        public Graphics Graphics {
+        public Graphics Graphics
+        {
             get { return this.graphics; }
         }
 
-        public ToolStrip ToolStrip {
+        public ToolStrip ToolStrip
+        {
             get { return this.tool_strip; }
         }
         #endregion
 
         #region Internal Properties
-        internal Rectangle InternalConnectedArea {
+        internal Rectangle InternalConnectedArea
+        {
             set { this.connected_area = value; }
         }
         #endregion

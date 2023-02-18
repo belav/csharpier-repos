@@ -2,9 +2,10 @@
 // Line: 7
 // Compiler options: -unsafe
 
-class UnsafeClass {
-        unsafe UnsafeClass () {
-                fixed (int* a = &(2)) {}
-        }
+class UnsafeClass
+{
+    unsafe UnsafeClass()
+    {
+        fixed (int* a = &(2)) { }
+    }
 }
-

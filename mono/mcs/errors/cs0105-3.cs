@@ -6,8 +6,6 @@ namespace N
 {
     using M;
     using N.M;
-    
-    namespace M
-    {
-    }
+
+    namespace M { }
 }

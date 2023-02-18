@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,7 +32,6 @@ using System.ServiceModel.Description;
 using System.Xml;
 using NUnit.Framework;
 
-
 // This binding element class is for testing some bindings to intercept
 // messages.
 
@@ -40,19 +39,21 @@ namespace MonoTests.System.ServiceModel.Channels
 {
     class DebugBindingElement : BindingElement
     {
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel> (BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
-            return new DebugChannelFactory<TChannel> (context.BuildInnerChannelFactory<TChannel> ());
+            return new DebugChannelFactory<TChannel>(context.BuildInnerChannelFactory<TChannel>());
         }
 
-        public override BindingElement Clone ()
+        public override BindingElement Clone()
         {
-            return new DebugBindingElement ();
+            return new DebugBindingElement();
         }
 
-        public override T GetProperty<T> (BindingContext context)
+        public override T GetProperty<T>(BindingContext context)
         {
-            return context.GetInnerProperty<T> ();
+            return context.GetInnerProperty<T>();
         }
     }
 
@@ -60,36 +61,45 @@ namespace MonoTests.System.ServiceModel.Channels
     {
         IChannelFactory<TChannel> inner;
 
-        public DebugChannelFactory (IChannelFactory<TChannel> inner)
+        public DebugChannelFactory(IChannelFactory<TChannel> inner)
         {
             this.inner = inner;
         }
 
-        public override T GetProperty<T> ()
+        public override T GetProperty<T>()
         {
-            return inner.GetProperty<T> ();
+            return inner.GetProperty<T>();
         }
 
-        protected override void OnOpen (TimeSpan timeout)
+        protected override void OnOpen(TimeSpan timeout)
         {
-            inner.Open (timeout);
+            inner.Open(timeout);
         }
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override TChannel OnCreateChannel (EndpointAddress ep, Uri via)
+        protected override TChannel OnCreateChannel(EndpointAddress ep, Uri via)
         {
-            if (typeof (TChannel) == typeof (IRequestChannel))
-                return (TChannel) (object) new DebugRequestChannel (this, (IRequestChannel) (object) inner.CreateChannel (ep, via));
-            throw new Exception ("huh?");
+            if (typeof(TChannel) == typeof(IRequestChannel))
+                return (TChannel)
+                    (object)
+                        new DebugRequestChannel(
+                            this,
+                            (IRequestChannel)(object)inner.CreateChannel(ep, via)
+                        );
+            throw new Exception("huh?");
         }
     }
 
@@ -98,77 +108,93 @@ namespace MonoTests.System.ServiceModel.Channels
         ChannelFactoryBase source;
         IRequestChannel inner;
 
-        public DebugRequestChannel (ChannelFactoryBase source, IRequestChannel inner)
-             : base (source)
+        public DebugRequestChannel(ChannelFactoryBase source, IRequestChannel inner)
+            : base(source)
         {
             this.source = source;
             this.inner = inner;
         }
 
-        public override EndpointAddress RemoteAddress {
+        public override EndpointAddress RemoteAddress
+        {
             get { return inner.RemoteAddress; }
         }
 
-        public override Uri Via {
+        public override Uri Via
+        {
             get { return inner.Via; }
         }
 
-        protected override void OnAbort ()
+        protected override void OnAbort()
         {
-            inner.Abort ();
+            inner.Abort();
         }
 
-        protected override void OnOpen (TimeSpan timeout)
+        protected override void OnOpen(TimeSpan timeout)
         {
-            inner.Open (timeout);
+            inner.Open(timeout);
         }
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override void OnClose (TimeSpan timeout)
+        protected override void OnClose(TimeSpan timeout)
         {
-            inner.Close (timeout);
+            inner.Close(timeout);
         }
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override Message Request (Message req, TimeSpan timeout)
+        public override Message Request(Message req, TimeSpan timeout)
         {
-XmlWriterSettings settings = new XmlWriterSettings ();
-settings.Indent = true;
-MessageBuffer buf = req.CreateBufferedCopy (0x10000);
-using (XmlWriter w = XmlWriter.Create (Console.Error, settings)) {
-buf.CreateMessage ().WriteMessage (w);
-}
-Console.Error.WriteLine ("******************** Debug Request() ********************");
-Console.Error.Flush ();
-            return inner.Request (buf.CreateMessage (), timeout);
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            MessageBuffer buf = req.CreateBufferedCopy(0x10000);
+            using (XmlWriter w = XmlWriter.Create(Console.Error, settings))
+            {
+                buf.CreateMessage().WriteMessage(w);
+            }
+            Console.Error.WriteLine("******************** Debug Request() ********************");
+            Console.Error.Flush();
+            return inner.Request(buf.CreateMessage(), timeout);
         }
 
-        public override IAsyncResult BeginRequest (Message req, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRequest(
+            Message req,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override Message EndRequest (IAsyncResult result)
+        public override Message EndRequest(IAsyncResult result)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
     }
 }

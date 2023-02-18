@@ -23,29 +23,29 @@ namespace Slow
         {
             const int iterations = 10000;
 
-            Test test = new Test ();
-            
+            Test test = new Test();
+
             DateTime start = DateTime.Now;
-            Console.Write ("Calling Test.DoNothing<Program>() on an object reference...  ");
+            Console.Write("Calling Test.DoNothing<Program>() on an object reference...  ");
             for (int i = 0; i < iterations; ++i)
             {
-                test.DoNothing<Program> ();
+                test.DoNothing<Program>();
             }
             DateTime end = DateTime.Now;
             TimeSpan duration = end - start;
-            Console.WriteLine ("Took " + duration.TotalMilliseconds + " ms.");
-        
+            Console.WriteLine("Took " + duration.TotalMilliseconds + " ms.");
+
             ITest testInterface = test;
 
             start = DateTime.Now;
-            Console.Write ("Calling Test.DoNothing<Program>() on an interface reference...  ");
+            Console.Write("Calling Test.DoNothing<Program>() on an interface reference...  ");
             for (int i = 0; i < iterations; ++i)
             {
-                testInterface.DoNothing<Program> ();
+                testInterface.DoNothing<Program>();
             }
             end = DateTime.Now;
             duration = end - start;
-            Console.WriteLine ("Took " + duration.TotalMilliseconds + " ms.");
+            Console.WriteLine("Took " + duration.TotalMilliseconds + " ms.");
         }
     }
 }

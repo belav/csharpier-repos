@@ -4,8 +4,8 @@
 class C
 {
     string[] values;
-    
-    static void Main ()
+
+    static void Main()
     {
         var v = new C { values = { "a" } };
     }

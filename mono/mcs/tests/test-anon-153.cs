@@ -7,23 +7,22 @@ namespace TestComp
     {
         internal class MyClass
         {
-            public delegate void MyDelegate (out List<int> intToAdd);
-            private void MyTemplate (MyDelegate myData)
+            public delegate void MyDelegate(out List<int> intToAdd);
+
+            private void MyTemplate(MyDelegate myData) { }
+
+            public void UseATemplate()
             {
-            }
-            public void UseATemplate ()
-            {
-                MyTemplate (
-                    delegate (out List<int> intToAdd) {
-                        intToAdd = new List<int> ();
-                        intToAdd.Add (0);
+                MyTemplate(
+                    delegate(out List<int> intToAdd)
+                    {
+                        intToAdd = new List<int>();
+                        intToAdd.Add(0);
                     }
                 );
             }
         }
 
-        public static void Main (string[] args)
-        {
-        }
+        public static void Main(string[] args) { }
     }
 }

@@ -37,11 +37,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGridColumn_ToString_
-        : GHTBaseWeb 
+    public class DataGridColumn_ToString_ : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -49,13 +48,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
@@ -70,13 +69,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 literal1.DataBinding += new EventHandler(this.BindData);
                 container.Controls.Add(literal1);
             }
+
             public void BindData(object sender, EventArgs e)
             {
-                Literal literal1 = (Literal) sender;
-                DataGridItem item1 = (DataGridItem) literal1.NamingContainer;
+                Literal literal1 = (Literal)sender;
+                DataGridItem item1 = (DataGridItem)literal1.NamingContainer;
                 literal1.Text = DataBinder.Eval(item1.DataItem, "Name") + "</div>";
             }
         }
+
         public class t_EmptyLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -86,6 +87,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_PlainTextLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -95,6 +97,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_HtmlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -104,6 +107,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(literal1);
             }
         }
+
         public class t_ControlLitTemplate : ITemplate
         {
             public void InstantiateIn(Control container)
@@ -132,7 +136,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 }
             }
         }
- 
+
         private void setStyle(DataGridColumn c, ListItemType tp)
         {
             switch (tp)
@@ -160,22 +164,21 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 }
             }
         }
- 
+
         private DataGridColumn c_bounded()
         {
             BoundColumn column1 = new BoundColumn();
             column1.DataField = "ID";
             return column1;
         }
- 
+
         private DataGridColumn c_button()
         {
             ButtonColumn column1 = new ButtonColumn();
             column1.DataTextField = "ID";
             return column1;
         }
- 
- 
+
         private DataGridColumn c_hyper_link()
         {
             HyperLinkColumn column1 = new HyperLinkColumn();
@@ -183,24 +186,21 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             column1.NavigateUrl = "http://www.example.com";
             return column1;
         }
- 
- 
+
         private DataGridColumn c_edit()
         {
             EditCommandColumn column1 = new EditCommandColumn();
             column1.EditText = "Edit";
             return column1;
         }
- 
- 
+
         private DataGridColumn c_template()
         {
             TemplateColumn column1 = new TemplateColumn();
             column1.ItemTemplate = new DataGridColumn_ToString_.t_DBLitTemplate();
             return column1;
         }
- 
- 
+
         private void DataGridTest(string TestName, DataGridColumn c)
         {
             DataGrid grid1 = new DataGrid();
@@ -224,10 +224,10 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
- 
+
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 

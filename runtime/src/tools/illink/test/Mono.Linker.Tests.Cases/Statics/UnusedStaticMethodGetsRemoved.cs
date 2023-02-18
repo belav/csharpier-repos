@@ -5,9 +5,9 @@ namespace Mono.Linker.Tests.Cases.Statics
 {
     public class UnusedStaticMethodGetsRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            A.UsedMethod ();
+            A.UsedMethod();
         }
     }
 
@@ -15,12 +15,8 @@ namespace Mono.Linker.Tests.Cases.Statics
     class A
     {
         [Kept]
-        public static void UsedMethod ()
-        {
-        }
+        public static void UsedMethod() { }
 
-        static void UnusedMethod ()
-        {
-        }
+        static void UnusedMethod() { }
     }
 }

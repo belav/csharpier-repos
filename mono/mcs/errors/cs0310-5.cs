@@ -3,13 +3,14 @@
 
 public static class Program
 {
-    static void Main ()
+    static void Main()
     {
-        Ret<string> ();
+        Ret<string>();
     }
 
-    static T Ret<T> () where T : new ()
+    static T Ret<T>()
+        where T : new()
     {
-        return new T ();
+        return new T();
     }
-} 
+}

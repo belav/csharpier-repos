@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             ImmutableArray<VSTypescriptNavigationBarItem> childItems = default,
             int indent = 0,
             bool bolded = false,
-            bool grayed = false)
+            bool grayed = false
+        )
         {
             this.Text = text;
             this.Glyph = glyph;

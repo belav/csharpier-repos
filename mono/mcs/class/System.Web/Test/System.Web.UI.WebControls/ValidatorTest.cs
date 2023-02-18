@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,42 +43,40 @@ namespace MonoTests.System.Web.UI.WebControls
         protected Page Page;
         protected BaseValidator Validator;
 
-        public ValidatorTest ()
-        {
-        }
+        public ValidatorTest() { }
 
-        public void StartValidationTest (BaseValidator validator)
+        public void StartValidationTest(BaseValidator validator)
         {
             Page = new Page();
             Validator = validator;
             Validator.Page = Page;
-            Page.Controls.Add (Validator);
+            Page.Controls.Add(Validator);
         }
 
-        public void StopValidationTest ()
+        public void StopValidationTest()
         {
             Page = null;
             Validator = null;
         }
 
-        public TextBox SetValidationTextBox (string name, string value)
+        public TextBox SetValidationTextBox(string name, string value)
         {
-            TextBox box = new TextBox ();
+            TextBox box = new TextBox();
             box.ID = name;
             box.Text = value;
             Validator.ControlToValidate = name;
-            Page.Controls.Add (box);
+            Page.Controls.Add(box);
 
             return box;
         }
 
-        public TextBox AddTextBox (string name, string value)
+        public TextBox AddTextBox(string name, string value)
         {
-            TextBox box = new TextBox ();
+            TextBox box = new TextBox();
             box.ID = name;
             box.Text = value;
 
-            Page.Controls.Add (box);
+            Page.Controls.Add(box);
 
             return box;
         }

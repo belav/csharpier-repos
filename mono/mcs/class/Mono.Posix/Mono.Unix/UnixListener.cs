@@ -33,141 +33,149 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 
-namespace Mono.Unix {
-
-    public class UnixListener : MarshalByRefObject, IDisposable {
+namespace Mono.Unix
+{
+    public class UnixListener : MarshalByRefObject, IDisposable
+    {
         bool disposed;
         bool listening;
         Socket server;
         EndPoint savedEP;
- 
-        void Init (UnixEndPoint ep)
+
+        void Init(UnixEndPoint ep)
         {
             listening = false;
             string filename = ep.Filename;
-            if (File.Exists (filename)) {
-                Socket conn = new Socket (AddressFamily.Unix, SocketType.Stream, 0);
-                try {
-                    conn.Connect (ep);
-                    conn.Close ();
-                    throw new InvalidOperationException ("There's already a server listening on " + filename);
-                } catch (SocketException) {
+            if (File.Exists(filename))
+            {
+                Socket conn = new Socket(AddressFamily.Unix, SocketType.Stream, 0);
+                try
+                {
+                    conn.Connect(ep);
+                    conn.Close();
+                    throw new InvalidOperationException(
+                        "There's already a server listening on " + filename
+                    );
                 }
-                File.Delete (filename);
+                catch (SocketException) { }
+                File.Delete(filename);
             }
 
-            server = new Socket (AddressFamily.Unix, SocketType.Stream, 0);
-            server.Bind (ep);
+            server = new Socket(AddressFamily.Unix, SocketType.Stream, 0);
+            server.Bind(ep);
             savedEP = server.LocalEndPoint;
         }
-        
-        public UnixListener (string path)
+
+        public UnixListener(string path)
         {
-            if (!Directory.Exists (Path.GetDirectoryName (path)))
-                Directory.CreateDirectory (Path.GetDirectoryName (path));
-            
-            Init (new UnixEndPoint (path));
+            if (!Directory.Exists(Path.GetDirectoryName(path)))
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+
+            Init(new UnixEndPoint(path));
         }
 
-        public UnixListener (UnixEndPoint localEndPoint)
+        public UnixListener(UnixEndPoint localEndPoint)
         {
             if (localEndPoint == null)
-                throw new ArgumentNullException ("localendPoint");
+                throw new ArgumentNullException("localendPoint");
 
-            Init (localEndPoint);
+            Init(localEndPoint);
         }
-        
-        public EndPoint LocalEndpoint {
+
+        public EndPoint LocalEndpoint
+        {
             get { return savedEP; }
         }
-        
-        protected Socket Server {
+
+        protected Socket Server
+        {
             get { return server; }
         }
-        
-        public Socket AcceptSocket ()
-        {
-            CheckDisposed ();
-            if (!listening)
-                throw new InvalidOperationException ("Socket is not listening");
 
-            return server.Accept ();
-        }
-        
-        public UnixClient AcceptUnixClient ()
+        public Socket AcceptSocket()
         {
-            CheckDisposed ();
+            CheckDisposed();
             if (!listening)
-                throw new InvalidOperationException ("Socket is not listening");
+                throw new InvalidOperationException("Socket is not listening");
 
-            return new UnixClient (AcceptSocket ());
+            return server.Accept();
         }
-        
-        ~UnixListener ()
+
+        public UnixClient AcceptUnixClient()
         {
-            Dispose (false);
-        }
-    
-        public bool Pending ()
-        {
-            CheckDisposed ();
+            CheckDisposed();
             if (!listening)
-                throw new InvalidOperationException ("Socket is not listening");
+                throw new InvalidOperationException("Socket is not listening");
 
-            return server.Poll (1000, SelectMode.SelectRead);
+            return new UnixClient(AcceptSocket());
         }
-        
-        public void Start ()
+
+        ~UnixListener()
         {
-            Start (5);
+            Dispose(false);
         }
-        
-        public void Start (int backlog)
+
+        public bool Pending()
         {
-            CheckDisposed ();
+            CheckDisposed();
+            if (!listening)
+                throw new InvalidOperationException("Socket is not listening");
+
+            return server.Poll(1000, SelectMode.SelectRead);
+        }
+
+        public void Start()
+        {
+            Start(5);
+        }
+
+        public void Start(int backlog)
+        {
+            CheckDisposed();
             if (listening)
                 return;
 
-            server.Listen (backlog);
+            server.Listen(backlog);
             listening = true;
         }
 
-        public void Stop ()
+        public void Stop()
         {
-            CheckDisposed ();
-            Dispose (true);
+            CheckDisposed();
+            Dispose(true);
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        protected void Dispose (bool disposing)
+        protected void Dispose(bool disposing)
         {
             if (disposed)
                 return;
 
-            if (disposing) {
-                try {
-                    File.Delete (((UnixEndPoint) savedEP).Filename);
-                } catch {
+            if (disposing)
+            {
+                try
+                {
+                    File.Delete(((UnixEndPoint)savedEP).Filename);
                 }
+                catch { }
                 if (server != null)
-                    server.Close ();
+                    server.Close();
 
                 server = null;
             }
 
             disposed = true;
         }
-        
-        void CheckDisposed ()
+
+        void CheckDisposed()
         {
             if (disposed)
-                throw new ObjectDisposedException (GetType().FullName);
-        }        
+                throw new ObjectDisposedException(GetType().FullName);
+        }
     }
-
 }

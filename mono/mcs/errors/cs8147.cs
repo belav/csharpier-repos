@@ -3,12 +3,9 @@
 
 public class X
 {
-    ref string TestProp { 
-        set {
-
-        }
-        get {
-
-        }
+    ref string TestProp
+    {
+        set { }
+        get { }
     }
 }

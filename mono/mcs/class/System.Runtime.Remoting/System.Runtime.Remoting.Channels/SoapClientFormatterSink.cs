@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,130 +38,150 @@ using System.Runtime.Serialization.Formatters.Soap;
 
 namespace System.Runtime.Remoting.Channels
 {
-    public class SoapClientFormatterSink : IClientFormatterSink,
-        IMessageSink, IClientChannelSink, IChannelSinkBase
+    public class SoapClientFormatterSink
+        : IClientFormatterSink,
+            IMessageSink,
+            IClientChannelSink,
+            IChannelSinkBase
     {
         private IClientChannelSink _nextChannelSink;
         private SoapCore _soapCore = SoapCore.DefaultInstance;
 
-        public SoapClientFormatterSink (IClientChannelSink nextSink)
+        public SoapClientFormatterSink(IClientChannelSink nextSink)
         {
             _nextChannelSink = nextSink;
         }
-        
-        internal SoapCore SoapCore {
+
+        internal SoapCore SoapCore
+        {
             get { return _soapCore; }
             set { _soapCore = value; }
         }
-        
+
         // IClientChannelSink
-        public IClientChannelSink NextChannelSink {
-            get {
-                return _nextChannelSink;
-            }
-        }
-        
-        // IMessageSink
-        public IMessageSink NextSink {
-            get {
-                return null ;
-            }
-        }
-        
-        // IChannelSinkBase
-        public IDictionary Properties {
-            get {
-                return null;
-            }
+        public IClientChannelSink NextChannelSink
+        {
+            get { return _nextChannelSink; }
         }
 
-        public IMessageCtrl AsyncProcessMessage (IMessage msg,
-                             IMessageSink replySink)
+        // IMessageSink
+        public IMessageSink NextSink
+        {
+            get { return null; }
+        }
+
+        // IChannelSinkBase
+        public IDictionary Properties
+        {
+            get { return null; }
+        }
+
+        public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
         {
             Stream requestStream;
             ITransportHeaders requestHeaders;
             SoapMessageFormatter soapMsgFormatter;
-            
-            SerializeMessage (msg, out requestStream, out requestHeaders,
-                out soapMsgFormatter);
 
-            ClientChannelSinkStack stack = new ClientChannelSinkStack (replySink);
-            stack.Push(this, new CallData (msg, soapMsgFormatter));
+            SerializeMessage(msg, out requestStream, out requestHeaders, out soapMsgFormatter);
 
-            _nextChannelSink.AsyncProcessRequest (stack, msg, requestHeaders, requestStream);
+            ClientChannelSinkStack stack = new ClientChannelSinkStack(replySink);
+            stack.Push(this, new CallData(msg, soapMsgFormatter));
+
+            _nextChannelSink.AsyncProcessRequest(stack, msg, requestHeaders, requestStream);
 
             return null;
         }
 
-        public void AsyncProcessRequest (IClientChannelSinkStack sinkStack,
-                         IMessage msg,
-                         ITransportHeaders headers,
-                         Stream stream)
+        public void AsyncProcessRequest(
+            IClientChannelSinkStack sinkStack,
+            IMessage msg,
+            ITransportHeaders headers,
+            Stream stream
+        )
         {
             // this method should never be called
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public void AsyncProcessResponse (IClientResponseChannelSinkStack sinkStack,
-                          object state,
-                          ITransportHeaders headers,
-                          Stream stream)
+        public void AsyncProcessResponse(
+            IClientResponseChannelSinkStack sinkStack,
+            object state,
+            ITransportHeaders headers,
+            Stream stream
+        )
         {
-            CallData data = (CallData) state;
+            CallData data = (CallData)state;
             SoapMessageFormatter soapMsgFormatter = data.Formatter;
-            IMessage replyMessage = (IMessage) DeserializeMessage (
-                stream, headers, (IMethodCallMessage) data.Msg,
-                soapMsgFormatter);
-            sinkStack.DispatchReplyMessage (replyMessage);
-            
+            IMessage replyMessage = (IMessage)DeserializeMessage(
+                stream,
+                headers,
+                (IMethodCallMessage)data.Msg,
+                soapMsgFormatter
+            );
+            sinkStack.DispatchReplyMessage(replyMessage);
         }
 
-        public Stream GetRequestStream (IMessage msg,
-                        ITransportHeaders headers)
+        public Stream GetRequestStream(IMessage msg, ITransportHeaders headers)
         {
             // First sink in the chain so this method should never
             // be called
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public void ProcessMessage (IMessage msg,
-                        ITransportHeaders requestHeaders,
-                        Stream requestStream,
-                        out ITransportHeaders responseHeaders,
-                        out Stream responseStream)
+        public void ProcessMessage(
+            IMessage msg,
+            ITransportHeaders requestHeaders,
+            Stream requestStream,
+            out ITransportHeaders responseHeaders,
+            out Stream responseStream
+        )
         {
             // First sink in the chain so this method should never
             // be called
-            throw new NotSupportedException ();
-            
+            throw new NotSupportedException();
         }
 
-        public IMessage SyncProcessMessage (IMessage msg)
+        public IMessage SyncProcessMessage(IMessage msg)
         {
-            Stream requestStream, responseStream;
-            ITransportHeaders requestHeaders, responseHeaders;
+            Stream requestStream,
+                responseStream;
+            ITransportHeaders requestHeaders,
+                responseHeaders;
             SoapMessageFormatter soapMsgFormatter;
 
-            SerializeMessage (msg, out requestStream, out requestHeaders,
-                out soapMsgFormatter);
-            _nextChannelSink.ProcessMessage(msg, requestHeaders,
-                requestStream, out responseHeaders,
-                out responseStream);
+            SerializeMessage(msg, out requestStream, out requestHeaders, out soapMsgFormatter);
+            _nextChannelSink.ProcessMessage(
+                msg,
+                requestHeaders,
+                requestStream,
+                out responseHeaders,
+                out responseStream
+            );
 
-            return DeserializeMessage(responseStream, responseHeaders,
-                (IMethodCallMessage) msg, soapMsgFormatter);
+            return DeserializeMessage(
+                responseStream,
+                responseHeaders,
+                (IMethodCallMessage)msg,
+                soapMsgFormatter
+            );
         }
-        
-        
-        private void SerializeMessage(IMessage msg, out Stream requestStream, out ITransportHeaders requestHeaders, out SoapMessageFormatter soapMsgFormatter) {
+
+        private void SerializeMessage(
+            IMessage msg,
+            out Stream requestStream,
+            out ITransportHeaders requestHeaders,
+            out SoapMessageFormatter soapMsgFormatter
+        )
+        {
             SoapMessage soapMsg;
             soapMsgFormatter = new SoapMessageFormatter();
-            soapMsg = soapMsgFormatter.BuildSoapMessageFromMethodCall (
-                (IMethodCallMessage) msg, out requestHeaders);
+            soapMsg = soapMsgFormatter.BuildSoapMessageFromMethodCall(
+                (IMethodCallMessage)msg,
+                out requestHeaders
+            );
 
             // Get the stream where the message will be serialized
-            requestStream = _nextChannelSink.GetRequestStream (msg,
-                requestHeaders);
+            requestStream = _nextChannelSink.GetRequestStream(msg, requestHeaders);
 
             if (requestStream == null)
                 requestStream = new MemoryStream();
@@ -172,24 +192,28 @@ namespace System.Runtime.Remoting.Channels
             if (requestStream is MemoryStream)
                 requestStream.Position = 0;
         }
-        
-        
-        private IMessage DeserializeMessage(Stream responseStream, ITransportHeaders responseHeaders,IMethodCallMessage mcm, SoapMessageFormatter soapMsgFormatter) 
+
+        private IMessage DeserializeMessage(
+            Stream responseStream,
+            ITransportHeaders responseHeaders,
+            IMethodCallMessage mcm,
+            SoapMessageFormatter soapMsgFormatter
+        )
         {
-            SoapFormatter fm = _soapCore.GetSafeDeserializer ();
-            SoapMessage rtnMessage = soapMsgFormatter.CreateSoapMessage (false);
+            SoapFormatter fm = _soapCore.GetSafeDeserializer();
+            SoapMessage rtnMessage = soapMsgFormatter.CreateSoapMessage(false);
             fm.TopObject = rtnMessage;
             object objReturn = fm.Deserialize(responseStream);
 
             if (objReturn is SoapFault)
-                return soapMsgFormatter.FormatFault ((SoapFault) objReturn, mcm);
+                return soapMsgFormatter.FormatFault((SoapFault)objReturn, mcm);
             else
-                return soapMsgFormatter.FormatResponse ((ISoapMessage) objReturn, mcm);
+                return soapMsgFormatter.FormatResponse((ISoapMessage)objReturn, mcm);
         }
 
         class CallData
         {
-            public CallData (IMessage msg, SoapMessageFormatter formatter)
+            public CallData(IMessage msg, SoapMessageFormatter formatter)
             {
                 Msg = msg;
                 Formatter = formatter;

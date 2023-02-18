@@ -19,7 +19,9 @@ namespace System.Xml
 
         public override ICredentials Credentials
         {
-            set { /* Do nothing */ }
+            set
+            { /* Do nothing */
+            }
         }
     }
 }

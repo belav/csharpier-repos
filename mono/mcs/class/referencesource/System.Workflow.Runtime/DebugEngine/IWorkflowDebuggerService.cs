@@ -3,7 +3,9 @@ using System.Workflow.ComponentModel;
 
 namespace System.Workflow.Runtime.DebugEngine
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IWorkflowDebuggerService
     {
         void NotifyHandlerInvoking(Delegate delegateHandler);

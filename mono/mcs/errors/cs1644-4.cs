@@ -2,8 +2,9 @@
 // Line: 8
 // Compiler options: -langversion:ISO-1
 
-class Class {
-    public void Foo (bool b)
+class Class
+{
+    public void Foo(bool b)
     {
         switch (b)
         {

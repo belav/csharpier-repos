@@ -11,9 +11,7 @@ namespace Moq.Async
     {
         public static readonly ValueTaskFactory Instance = new ValueTaskFactory();
 
-        private ValueTaskFactory()
-        {
-        }
+        private ValueTaskFactory() { }
 
         public override ValueTask CreateCompleted()
         {

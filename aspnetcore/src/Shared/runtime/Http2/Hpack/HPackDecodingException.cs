@@ -9,20 +9,15 @@ namespace System.Net.Http.HPack
     [Serializable]
     internal sealed class HPackDecodingException : Exception
     {
-        public HPackDecodingException()
-        {
-        }
+        public HPackDecodingException() { }
 
-        public HPackDecodingException(string message) : base(message)
-        {
-        }
+        public HPackDecodingException(string message)
+            : base(message) { }
 
-        public HPackDecodingException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+        public HPackDecodingException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        public HPackDecodingException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        public HPackDecodingException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

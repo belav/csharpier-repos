@@ -1,14 +1,14 @@
 struct C<T>
 {
-    public static implicit operator C<T> (T value)
+    public static implicit operator C<T>(T value)
     {
-        return default (C<T>);
+        return default(C<T>);
     }
 }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         C<bool?> p = true;
         C<int?> p2 = (int?)null;

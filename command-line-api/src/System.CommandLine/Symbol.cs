@@ -14,9 +14,7 @@ namespace System.CommandLine
         private protected string? _name;
         private ParentNode? _firstParent;
 
-        private protected Symbol()
-        {
-        }
+        private protected Symbol() { }
 
         /// <summary>
         /// Gets or sets the description of the symbol.
@@ -38,7 +36,7 @@ namespace System.CommandLine
         /// Represents the first parent node.
         /// </summary>
         internal ParentNode? FirstParent => _firstParent;
-        
+
         internal void AddParent(Symbol symbol)
         {
             if (_firstParent == null)

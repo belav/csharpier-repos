@@ -26,39 +26,42 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    internal class ResourceDirectoryEntry : ResourceNode {
-
+namespace Mono.Cecil.Binary
+{
+    internal class ResourceDirectoryEntry : ResourceNode
+    {
         private bool m_idByName;
 
         public int ID;
         public ResourceDirectoryString Name;
 
-        public bool IdentifiedByName {
+        public bool IdentifiedByName
+        {
             get { return m_idByName; }
         }
 
         public ResourceNode Child;
 
-        public ResourceDirectoryEntry (ResourceDirectoryString name)
+        public ResourceDirectoryEntry(ResourceDirectoryString name)
         {
             this.Name = name;
             m_idByName = true;
         }
 
-        public ResourceDirectoryEntry (ResourceDirectoryString name, int offset) : base (offset)
+        public ResourceDirectoryEntry(ResourceDirectoryString name, int offset)
+            : base(offset)
         {
             this.Name = name;
             m_idByName = true;
         }
 
-        public ResourceDirectoryEntry (int id)
+        public ResourceDirectoryEntry(int id)
         {
             this.ID = id;
         }
 
-        public ResourceDirectoryEntry (int id, int offset) : base (offset)
+        public ResourceDirectoryEntry(int id, int offset)
+            : base(offset)
         {
             this.ID = id;
         }

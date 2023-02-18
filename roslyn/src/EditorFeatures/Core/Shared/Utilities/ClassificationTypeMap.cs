@@ -14,9 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ClassificationTypeMap(
-            IClassificationTypeRegistryService registryService) : base(registryService, ClassificationLayer.Default)
-        {
-        }
+        public ClassificationTypeMap(IClassificationTypeRegistryService registryService)
+            : base(registryService, ClassificationLayer.Default) { }
     }
 }

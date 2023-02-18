@@ -34,133 +34,148 @@ using System.IO;
 using System.Resources;
 using System.Text;
 
-namespace Mono.XBuild.Tasks.GenerateResourceInternal {
-    internal class PoResourceReader : IResourceReader {
+namespace Mono.XBuild.Tasks.GenerateResourceInternal
+{
+    internal class PoResourceReader : IResourceReader
+    {
         Hashtable data;
         Stream s;
         int line_num;
 
-        public PoResourceReader (Stream stream)
+        public PoResourceReader(Stream stream)
         {
-            data = new Hashtable ();
+            data = new Hashtable();
             s = stream;
-            Load ();
+            Load();
         }
 
-        public virtual void Close ()
+        public virtual void Close()
         {
-            s.Close ();
+            s.Close();
         }
 
         public IDictionaryEnumerator GetEnumerator()
         {
-            return data.GetEnumerator ();
+            return data.GetEnumerator();
         }
 
-        string GetValue (string line)
+        string GetValue(string line)
         {
-            int begin = line.IndexOf ('"');
+            int begin = line.IndexOf('"');
             if (begin == -1)
-                throw new FormatException (String.Format ("No begin quote at line {0}: {1}", line_num, line));
+                throw new FormatException(
+                    String.Format("No begin quote at line {0}: {1}", line_num, line)
+                );
 
-            int end = line.LastIndexOf ('"');
+            int end = line.LastIndexOf('"');
             if (end == -1)
-                throw new FormatException (String.Format ("No closing quote at line {0}: {1}", line_num, line));
+                throw new FormatException(
+                    String.Format("No closing quote at line {0}: {1}", line_num, line)
+                );
 
-            return line.Substring (begin + 1, end - begin - 1);
+            return line.Substring(begin + 1, end - begin - 1);
         }
 
-        void Load ()
+        void Load()
         {
-            StreamReader reader = new StreamReader (s);
+            StreamReader reader = new StreamReader(s);
             string line;
             string msgid = null;
             string msgstr = null;
             bool ignoreNext = false;
 
-            while ((line = reader.ReadLine ()) != null) {
+            while ((line = reader.ReadLine()) != null)
+            {
                 line_num++;
-                line = line.Trim ();
+                line = line.Trim();
                 if (line.Length == 0)
                     continue;
-                    
-                if (line [0] == '#') {
-                    if (line.Length == 1 || line [1] != ',')
+
+                if (line[0] == '#')
+                {
+                    if (line.Length == 1 || line[1] != ',')
                         continue;
 
-                    if (line.IndexOf ("fuzzy") != -1) {
+                    if (line.IndexOf("fuzzy") != -1)
+                    {
                         ignoreNext = true;
-                        if (msgid != null) {
+                        if (msgid != null)
+                        {
                             if (msgstr == null)
-                                throw new FormatException ("Error. Line: " + line_num);
-                            data.Add (msgid, msgstr);
+                                throw new FormatException("Error. Line: " + line_num);
+                            data.Add(msgid, msgstr);
                             msgid = null;
                             msgstr = null;
                         }
                     }
                     continue;
                 }
-                
-                if (line.StartsWith ("msgid ")) {
-                    if (msgid == null && msgstr != null)
-                        throw new FormatException ("Found 2 consecutive msgid. Line: " + line_num);
 
-                    if (msgstr != null) {
+                if (line.StartsWith("msgid "))
+                {
+                    if (msgid == null && msgstr != null)
+                        throw new FormatException("Found 2 consecutive msgid. Line: " + line_num);
+
+                    if (msgstr != null)
+                    {
                         if (!ignoreNext)
-                            data.Add (msgid, msgstr);
+                            data.Add(msgid, msgstr);
 
                         ignoreNext = false;
                         msgid = null;
                         msgstr = null;
                     }
 
-                    msgid = GetValue (line);
+                    msgid = GetValue(line);
                     continue;
                 }
 
-                if (line.StartsWith ("msgstr ")) {
+                if (line.StartsWith("msgstr "))
+                {
                     if (msgid == null)
-                        throw new FormatException ("msgstr with no msgid. Line: " + line_num);
+                        throw new FormatException("msgstr with no msgid. Line: " + line_num);
 
-                    msgstr = GetValue (line);
+                    msgstr = GetValue(line);
                     continue;
                 }
 
-                if (line [0] == '"') {
+                if (line[0] == '"')
+                {
                     if (msgid == null || msgstr == null)
-                        throw new FormatException ("Invalid format. Line: " + line_num);
+                        throw new FormatException("Invalid format. Line: " + line_num);
 
-                    msgstr += GetValue (line);
+                    msgstr += GetValue(line);
                     continue;
                 }
 
-                throw new FormatException ("Unexpected data. Line: " + line_num);
+                throw new FormatException("Unexpected data. Line: " + line_num);
             }
 
-            if (msgid != null) {
+            if (msgid != null)
+            {
                 if (msgstr == null)
-                    throw new FormatException ("Expecting msgstr. Line: " + line_num);
+                    throw new FormatException("Expecting msgstr. Line: " + line_num);
 
                 if (!ignoreNext)
-                    data.Add (msgid, msgstr);
+                    data.Add(msgid, msgstr);
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator ()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-        void IDisposable.Dispose ()
+        void IDisposable.Dispose()
         {
             if (data != null)
                 data = null;
 
-            if (s != null) {
-                s.Close ();
+            if (s != null)
+            {
+                s.Close();
                 s = null;
             }
         }
     }
 }
-

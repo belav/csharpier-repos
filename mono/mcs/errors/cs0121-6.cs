@@ -3,12 +3,13 @@
 
 class C
 {
-    delegate void D (int x, string s);
+    delegate void D(int x, string s);
 
-    static void Foo (object o, string s) { }
-    static void Foo (int x, object o) { }
+    static void Foo(object o, string s) { }
 
-    static void Main ()
+    static void Foo(int x, object o) { }
+
+    static void Main()
     {
         D d = Foo;
     }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>AlfreMen</OWNER>
@@ -22,13 +22,45 @@ namespace Windows.Foundation.Diagnostics
     [WindowsRuntimeImport]
     internal interface IAsyncCausalityTracerStatics
     {
-        void TraceOperationCreation(CausalityTraceLevel traceLevel, CausalitySource source, Guid platformId, ulong operationId, string operationName, ulong relatedContext);
-        void TraceOperationCompletion(CausalityTraceLevel traceLevel, CausalitySource source, Guid platformId, ulong operationId, AsyncCausalityStatus status);
-        void TraceOperationRelation(CausalityTraceLevel traceLevel, CausalitySource source, Guid platformId, ulong operationId, CausalityRelation relation);
-        void TraceSynchronousWorkStart(CausalityTraceLevel traceLevel, CausalitySource source, Guid platformId, ulong operationId, CausalitySynchronousWork work);
-        void TraceSynchronousWorkCompletion(CausalityTraceLevel traceLevel, CausalitySource source, CausalitySynchronousWork work);
+        void TraceOperationCreation(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            Guid platformId,
+            ulong operationId,
+            string operationName,
+            ulong relatedContext
+        );
+        void TraceOperationCompletion(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            Guid platformId,
+            ulong operationId,
+            AsyncCausalityStatus status
+        );
+        void TraceOperationRelation(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            Guid platformId,
+            ulong operationId,
+            CausalityRelation relation
+        );
+        void TraceSynchronousWorkStart(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            Guid platformId,
+            ulong operationId,
+            CausalitySynchronousWork work
+        );
+        void TraceSynchronousWorkCompletion(
+            CausalityTraceLevel traceLevel,
+            CausalitySource source,
+            CausalitySynchronousWork work
+        );
+
         //These next 2 functions could've been represented as an event except that the EventRegistrationToken wasn't being propagated to WinRT
-        EventRegistrationToken add_TracingStatusChanged(System.EventHandler<TracingStatusChangedEventArgs> eventHandler);
+        EventRegistrationToken add_TracingStatusChanged(
+            System.EventHandler<TracingStatusChangedEventArgs> eventHandler
+        );
         void remove_TracingStatusChanged(EventRegistrationToken token);
     }
 
@@ -49,16 +81,16 @@ namespace Windows.Foundation.Diagnostics
     [WindowsRuntimeImport]
     internal sealed class TracingStatusChangedEventArgs : ITracingStatusChangedEventArgs
     {
-        public extern bool Enabled 
+        public extern bool Enabled
         {
             [MethodImpl(MethodImplOptions.InternalCall)]
             get;
         }
-        
-        public extern CausalityTraceLevel TraceLevel 
+
+        public extern CausalityTraceLevel TraceLevel
         {
             [MethodImpl(MethodImplOptions.InternalCall)]
-            get; 
+            get;
         }
     }
 
@@ -99,5 +131,4 @@ namespace Windows.Foundation.Diagnostics
         Error = 3,
         Started = 0
     }
-
 }

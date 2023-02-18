@@ -3,21 +3,19 @@
 
 class A
 {
-    public object[] Test {
+    public object[] Test
+    {
         set { }
         protected get { return null; }
     }
 }
 
-class B : A
-{
-}
+class B : A { }
 
 class C : A
 {
-    public void Test2 (B b)
+    public void Test2(B b)
     {
-        foreach (object o in b.Test) {
-        }
+        foreach (object o in b.Test) { }
     }
 }

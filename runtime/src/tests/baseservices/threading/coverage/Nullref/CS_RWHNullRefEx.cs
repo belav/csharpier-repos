@@ -3,28 +3,35 @@
 using System;
 using System.Threading;
 
-public class mytest {
-    public static int Main() {
-        int                   rValue = 100;
-        RegisteredWaitHandle  rwh    = null;
-        
-        Console.WriteLine("Test AutoResetEvent for expected NullRef Exceptions");
-        Console.WriteLine( );
+public class mytest
+{
+    public static int Main()
+    {
+        int rValue = 100;
+        RegisteredWaitHandle rwh = null;
 
-        
-        try {
+        Console.WriteLine("Test AutoResetEvent for expected NullRef Exceptions");
+        Console.WriteLine();
+
+        try
+        {
             rwh.Equals(new ManualResetEvent(true));
             rValue = 4;
         }
-        catch (NullReferenceException) {
-            Console.WriteLine("Caught NullReferenceException   (rwh.Equals(new ManualResetEvent()))");
+        catch (NullReferenceException)
+        {
+            Console.WriteLine(
+                "Caught NullReferenceException   (rwh.Equals(new ManualResetEvent()))"
+            );
         }
 
-        try {
+        try
+        {
             rwh.GetHashCode();
             rValue = 5;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (rwh.GetHasCode())");
         }
 
@@ -34,13 +41,15 @@ public class mytest {
         // }
         // catch (NullReferenceException) {
         //     Console.WriteLine("Caught NullReferenceException   (rwh.GetLifetimeService())");
-        // }        
+        // }
 
-        try {
+        try
+        {
             rwh.GetType();
             rValue = 7;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (rwh.GetType())");
         }
 
@@ -52,24 +61,27 @@ public class mytest {
         //     Console.WriteLine("Caught NullReferenceException   (rwh.InitializeLifeTimeService())");
         // }
 
-        try {
+        try
+        {
             rwh.ToString();
             rValue = 11;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (rwh.ToString())");
         }
 
-        try {
+        try
+        {
             rwh.Unregister(new AutoResetEvent(true));
             rValue = 12;
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Caught NullReferenceException   (rwh.Unregister())");
         }
-        
 
-        Console.WriteLine("Return Code == {0}",rValue);
+        Console.WriteLine("Return Code == {0}", rValue);
         return rValue;
     }
 }

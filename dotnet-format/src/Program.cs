@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Tools
             string? report,
             bool includeGenerated,
             string? binarylog,
-            IConsole console = null!)
+            IConsole console = null!
+        )
         {
             if (s_parseResult == null)
             {
@@ -67,7 +68,11 @@ namespace Microsoft.CodeAnalysis.Tools
 
             // Setup logging.
             var logLevel = GetLogLevel(verbosity);
-            var logger = SetupLogging(console, minimalLogLevel: logLevel, minimalErrorLevel: LogLevel.Warning);
+            var logger = SetupLogging(
+                console,
+                minimalLogLevel: logLevel,
+                minimalErrorLevel: LogLevel.Warning
+            );
 
             // Hook so we can cancel and exit when ctrl+c is pressed.
             var cancellationTokenSource = new CancellationTokenSource();
@@ -94,18 +99,22 @@ namespace Microsoft.CodeAnalysis.Tools
                 if (folder)
                 {
                     // If folder isn't populated, then use the current directory
-                    workspacePath = Path.GetFullPath(workspace ?? ".", Environment.CurrentDirectory);
+                    workspacePath = Path.GetFullPath(
+                        workspace ?? ".",
+                        Environment.CurrentDirectory
+                    );
                     workspaceDirectory = workspacePath;
                     workspaceType = WorkspaceType.Folder;
                 }
                 else
                 {
-                    var (isSolution, workspaceFilePath) = MSBuildWorkspaceFinder.FindWorkspace(currentDirectory, workspace);
+                    var (isSolution, workspaceFilePath) = MSBuildWorkspaceFinder.FindWorkspace(
+                        currentDirectory,
+                        workspace
+                    );
 
                     workspacePath = workspaceFilePath;
-                    workspaceType = isSolution
-                        ? WorkspaceType.Solution
-                        : WorkspaceType.Project;
+                    workspaceType = isSolution ? WorkspaceType.Solution : WorkspaceType.Project;
 
                     // To ensure we get the version of MSBuild packaged with the dotnet SDK used by the
                     // workspace, use its directory as our working directory which will take into account
@@ -127,7 +136,9 @@ namespace Microsoft.CodeAnalysis.Tools
 
                     if (!TryGetDotNetCliVersion(out var dotnetVersion))
                     {
-                        logger.LogError(Resources.Unable_to_locate_dotnet_CLI_Ensure_that_it_is_on_the_PATH);
+                        logger.LogError(
+                            Resources.Unable_to_locate_dotnet_CLI_Ensure_that_it_is_on_the_PATH
+                        );
                         return UnableToLocateDotNetCliExitCode;
                     }
 
@@ -135,7 +146,9 @@ namespace Microsoft.CodeAnalysis.Tools
 
                     if (!TryLoadMSBuild(out var msBuildPath))
                     {
-                        logger.LogError(Resources.Unable_to_locate_MSBuild_Ensure_the_NET_SDK_was_installed_with_the_official_installer);
+                        logger.LogError(
+                            Resources.Unable_to_locate_MSBuild_Ensure_the_NET_SDK_was_installed_with_the_official_installer
+                        );
                         return UnableToLocateMSBuildExitCode;
                     }
 
@@ -155,7 +168,9 @@ namespace Microsoft.CodeAnalysis.Tools
 
                 if (fixType == FixCategory.None && diagnostics.Length > 0)
                 {
-                    logger.LogWarning(Resources.The_diagnostics_option_only_applies_when_fixing_style_or_running_analyzers);
+                    logger.LogWarning(
+                        Resources.The_diagnostics_option_only_applies_when_fixing_style_or_running_analyzers
+                    );
                 }
 
                 if (fixType == FixCategory.None || fixWhitespace)
@@ -180,13 +195,17 @@ namespace Microsoft.CodeAnalysis.Tools
                     changesAreErrors: check,
                     fileMatcher,
                     reportPath: report,
-                    includeGenerated);
+                    includeGenerated
+                );
 
-                var formatResult = await CodeFormatter.FormatWorkspaceAsync(
-                    formatOptions,
-                    logger,
-                    cancellationTokenSource.Token,
-                    binaryLogPath: GetBinaryLogPath(s_parseResult, binarylog)).ConfigureAwait(false);
+                var formatResult = await CodeFormatter
+                    .FormatWorkspaceAsync(
+                        formatOptions,
+                        logger,
+                        cancellationTokenSource.Token,
+                        binaryLogPath: GetBinaryLogPath(s_parseResult, binarylog)
+                    )
+                    .ConfigureAwait(false);
 
                 return GetExitCode(formatResult, check);
 
@@ -227,7 +246,11 @@ namespace Microsoft.CodeAnalysis.Tools
             }
         }
 
-        private static void HandleStandardInput(ILogger logger, ref string[] include, ref string[] exclude)
+        private static void HandleStandardInput(
+            ILogger logger,
+            ref string[] include,
+            ref string[] exclude
+        )
         {
             var isStandardMarkerUsed = false;
             if (include.Length == 1 && s_standardInputKeywords.Contains(include[0]))
@@ -319,10 +342,16 @@ namespace Microsoft.CodeAnalysis.Tools
             };
         }
 
-        private static ILogger<Program> SetupLogging(IConsole console, LogLevel minimalLogLevel, LogLevel minimalErrorLevel)
+        private static ILogger<Program> SetupLogging(
+            IConsole console,
+            LogLevel minimalLogLevel,
+            LogLevel minimalErrorLevel
+        )
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton(new LoggerFactory().AddSimpleConsole(console, minimalLogLevel, minimalErrorLevel));
+            serviceCollection.AddSingleton(
+                new LoggerFactory().AddSimpleConsole(console, minimalLogLevel, minimalErrorLevel)
+            );
             serviceCollection.AddLogging();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
@@ -333,16 +362,24 @@ namespace Microsoft.CodeAnalysis.Tools
 
         private static string GetVersion()
         {
-            return Assembly.GetExecutingAssembly()
+            return Assembly
+                .GetExecutingAssembly()
                 .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 .InformationalVersion;
         }
 
-        private static bool TryGetDotNetCliVersion([NotNullWhen(returnValue: true)] out string? dotnetVersion)
+        private static bool TryGetDotNetCliVersion(
+            [NotNullWhen(returnValue: true)] out string? dotnetVersion
+        )
         {
             try
             {
-                var processInfo = ProcessRunner.CreateProcess("dotnet", "--version", captureOutput: true, displayWindow: false);
+                var processInfo = ProcessRunner.CreateProcess(
+                    "dotnet",
+                    "--version",
+                    captureOutput: true,
+                    displayWindow: false
+                );
                 var versionResult = processInfo.Result.GetAwaiter().GetResult();
 
                 dotnetVersion = versionResult.OutputLines[0].Trim();

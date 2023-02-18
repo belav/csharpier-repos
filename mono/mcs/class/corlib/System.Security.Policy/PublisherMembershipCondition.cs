@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,105 +33,114 @@ using System.Runtime.InteropServices;
 
 using Mono.Security.Cryptography;
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class PublisherMembershipCondition : IConstantMembershipCondition, IMembershipCondition {
-
+    [ComVisible(true)]
+    public sealed class PublisherMembershipCondition
+        : IConstantMembershipCondition,
+            IMembershipCondition
+    {
         private readonly int version = 1;
 
         private X509Certificate x509;
 
         // so System.Activator.CreateInstance can create an instance...
-        internal PublisherMembershipCondition ()
-        {
-        }
+        internal PublisherMembershipCondition() { }
 
-        public PublisherMembershipCondition (X509Certificate certificate) 
+        public PublisherMembershipCondition(X509Certificate certificate)
         {
             if (certificate == null)
-                throw new ArgumentNullException ("certificate");
+                throw new ArgumentNullException("certificate");
             // needed to match MS implementation
-            if (certificate.GetHashCode () == 0) {
-                throw new ArgumentException ("certificate");
+            if (certificate.GetHashCode() == 0)
+            {
+                throw new ArgumentException("certificate");
             }
             x509 = certificate;
         }
-    
-        public X509Certificate Certificate {
+
+        public X509Certificate Certificate
+        {
             get { return x509; }
-            set { 
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
-                x509 = value; 
+                    throw new ArgumentNullException("value");
+                x509 = value;
             }
         }
-    
-        public bool Check (Evidence evidence) 
+
+        public bool Check(Evidence evidence)
         {
             if (evidence == null)
                 return false;
 
-            IEnumerator e = evidence.GetHostEnumerator ();
-            while (e.MoveNext ()) {
-                if (e.Current is Publisher) {
-                    if (x509.Equals ((e.Current as Publisher).Certificate))
+            IEnumerator e = evidence.GetHostEnumerator();
+            while (e.MoveNext())
+            {
+                if (e.Current is Publisher)
+                {
+                    if (x509.Equals((e.Current as Publisher).Certificate))
                         return true;
                 }
             }
             return false;
         }
-    
-        public IMembershipCondition Copy () 
+
+        public IMembershipCondition Copy()
         {
-            return new PublisherMembershipCondition (x509);
+            return new PublisherMembershipCondition(x509);
         }
-    
-        public override bool Equals (object o) 
+
+        public override bool Equals(object o)
         {
             PublisherMembershipCondition pmc = (o as PublisherMembershipCondition);
             if (pmc == null)
                 return false;
-            return x509.Equals (pmc.Certificate);
+            return x509.Equals(pmc.Certificate);
         }
-    
-        public void FromXml (SecurityElement e) 
+
+        public void FromXml(SecurityElement e)
         {
-            FromXml (e, null);
+            FromXml(e, null);
         }
-    
-        public void FromXml (SecurityElement e, PolicyLevel level) 
+
+        public void FromXml(SecurityElement e, PolicyLevel level)
         {
-            MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
-            string cert = e.Attribute ("X509Certificate");
-            if (cert != null) {
-                byte[] rawcert = CryptoConvert.FromHex (cert);
-                x509 = new X509Certificate (rawcert);
+            MembershipConditionHelper.CheckSecurityElement(e, "e", version, version);
+            string cert = e.Attribute("X509Certificate");
+            if (cert != null)
+            {
+                byte[] rawcert = CryptoConvert.FromHex(cert);
+                x509 = new X509Certificate(rawcert);
             }
             // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
         }
-    
-        public override int GetHashCode () 
+
+        public override int GetHashCode()
         {
-            return x509.GetHashCode ();
-        }
-    
-        public override string ToString () 
-        {
-            return "Publisher - " + x509.GetPublicKeyString ();
+            return x509.GetHashCode();
         }
 
-        public SecurityElement ToXml () 
+        public override string ToString()
         {
-            return ToXml (null);
+            return "Publisher - " + x509.GetPublicKeyString();
         }
-    
-        public SecurityElement ToXml (PolicyLevel level) 
+
+        public SecurityElement ToXml()
+        {
+            return ToXml(null);
+        }
+
+        public SecurityElement ToXml(PolicyLevel level)
         {
             // PolicyLevel isn't used as there's no need to resolve NamedPermissionSet references
-            SecurityElement se = MembershipConditionHelper.Element (typeof (PublisherMembershipCondition), version);
-            se.AddAttribute ("X509Certificate", x509.GetRawCertDataString ());
+            SecurityElement se = MembershipConditionHelper.Element(
+                typeof(PublisherMembershipCondition),
+                version
+            );
+            se.AddAttribute("X509Certificate", x509.GetRawCertDataString());
             return se;
         }
     }

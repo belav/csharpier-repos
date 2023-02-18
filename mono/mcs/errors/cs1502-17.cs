@@ -5,12 +5,10 @@ using System.Runtime.CompilerServices;
 
 public class Foo
 {
-    public void Test (int arg, [CallerMemberName] string s = null)
-    {
-    }
+    public void Test(int arg, [CallerMemberName] string s = null) { }
 
-    void X ()
+    void X()
     {
-        Test ("");
+        Test("");
     }
 }

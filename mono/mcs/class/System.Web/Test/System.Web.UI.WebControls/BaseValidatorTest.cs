@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.BaseValidator 
+// Tests for System.Web.UI.WebControls.BaseValidator
 //
 // Author:
 //    Chris Toshok (toshok@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,49 +39,52 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Alternate;
 
-namespace Alternate {
-    [ValidationProperty ("SomeProperty")]
-    class MyTextBox : ICustomTypeDescriptor {
-        public string SomeProperty {
+namespace Alternate
+{
+    [ValidationProperty("SomeProperty")]
+    class MyTextBox : ICustomTypeDescriptor
+    {
+        public string SomeProperty
+        {
             get { return null; }
-            set {}
+            set { }
         }
 
-        public System.ComponentModel.AttributeCollection GetAttributes ()
+        public System.ComponentModel.AttributeCollection GetAttributes()
         {
             // This one is called and then GetProperties
             //Console.WriteLine ("GetAttributes ");
-            return TypeDescriptor.GetAttributes  (this, true);
+            return TypeDescriptor.GetAttributes(this, true);
         }
 
         public string GetClassName()
         {
             //Console.WriteLine ("GetClassName");
-            return TypeDescriptor.GetClassName (this, true);
+            return TypeDescriptor.GetClassName(this, true);
         }
 
         public string GetComponentName()
         {
             //Console.WriteLine ("GetComponentName");
-            return TypeDescriptor.GetComponentName (this, true);
+            return TypeDescriptor.GetComponentName(this, true);
         }
 
         public TypeConverter GetConverter()
         {
             //Console.WriteLine ("GetConverter");
-            return TypeDescriptor.GetConverter (this, true);
+            return TypeDescriptor.GetConverter(this, true);
         }
 
         public EventDescriptor GetDefaultEvent()
         {
             //Console.WriteLine ("GetDefaultEvent");
-            return TypeDescriptor.GetDefaultEvent (this, true);
+            return TypeDescriptor.GetDefaultEvent(this, true);
         }
 
         public PropertyDescriptor GetDefaultProperty()
         {
             //Console.WriteLine ("GetDefaultProperty");
-            return TypeDescriptor.GetDefaultProperty (this, true);
+            return TypeDescriptor.GetDefaultProperty(this, true);
         }
 
         public object GetEditor(Type editorBaseType)
@@ -93,25 +96,25 @@ namespace Alternate {
         public EventDescriptorCollection GetEvents()
         {
             //Console.WriteLine ("GetEvents");
-            return TypeDescriptor.GetEvents (this, true);
+            return TypeDescriptor.GetEvents(this, true);
         }
 
         public EventDescriptorCollection GetEvents(Attribute[] arr)
         {
             //Console.WriteLine ("GetEvents");
-            return TypeDescriptor.GetEvents (arr, true);
+            return TypeDescriptor.GetEvents(arr, true);
         }
 
         public PropertyDescriptorCollection GetProperties()
         {
             //Console.WriteLine ("GetProperties");
-            return TypeDescriptor.GetProperties (this, true);
+            return TypeDescriptor.GetProperties(this, true);
         }
 
         public PropertyDescriptorCollection GetProperties(Attribute[] arr)
         {
             //Console.WriteLine ("GetProperties");
-            return TypeDescriptor.GetProperties (this, arr, true);
+            return TypeDescriptor.GetProperties(this, arr, true);
         }
 
         public object GetPropertyOwner(PropertyDescriptor pd)
@@ -124,220 +127,220 @@ namespace Alternate {
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-    class BaseValidatorPoker : BaseValidator {
-        public BaseValidatorPoker ()
+    class BaseValidatorPoker : BaseValidator
+    {
+        public BaseValidatorPoker()
         {
-            TrackViewState (); 
-        }
-        
-        public object SaveState ()
-        {
-            return SaveViewState ();
+            TrackViewState();
         }
 
-        public void LoadState (object o)
+        public object SaveState()
         {
-            LoadViewState (o);
+            return SaveViewState();
         }
 
-        public void CheckControlProperties ()
+        public void LoadState(object o)
         {
-            ControlPropertiesValid ();
+            LoadViewState(o);
         }
 
-        protected override bool EvaluateIsValid ()
+        public void CheckControlProperties()
+        {
+            ControlPropertiesValid();
+        }
+
+        protected override bool EvaluateIsValid()
         {
             return IsValid;
         }
 
-        public new PropertyDescriptor GetValidationProperty (object o)
+        public new PropertyDescriptor GetValidationProperty(object o)
         {
-            return BaseValidator.GetValidationProperty (o);
+            return BaseValidator.GetValidationProperty(o);
         }
 
-        public string DoGetControlValidationValue (string name)
+        public string DoGetControlValidationValue(string name)
         {
-            return GetControlValidationValue (name);
+            return GetControlValidationValue(name);
         }
 
-        public virtual bool DoControlPropertiesValid ()
+        public virtual bool DoControlPropertiesValid()
         {
-            return ControlPropertiesValid ();
+            return ControlPropertiesValid();
         }
-      
-        public void DoCheckControlValidationProperty (string name, string propertyName)
+
+        public void DoCheckControlValidationProperty(string name, string propertyName)
         {
-            CheckControlValidationProperty (name, propertyName);
+            CheckControlValidationProperty(name, propertyName);
         }
     }
 
-    [TestFixture]    
-    public class BaseValidatorTest : ValidatorTest {
-
+    [TestFixture]
+    public class BaseValidatorTest : ValidatorTest
+    {
         [Test]
-        public void ViewState ()
+        public void ViewState()
         {
-            BaseValidatorPoker p = new BaseValidatorPoker ();
+            BaseValidatorPoker p = new BaseValidatorPoker();
 
             /* defaults */
-            Assert.AreEqual (String.Empty, p.ControlToValidate, "D1");
-            Assert.AreEqual (ValidatorDisplay.Static, p.Display, "D2");
-            Assert.AreEqual (true, p.EnableClientScript, "D3");
-            Assert.AreEqual (true, p.Enabled, "D4");
-            Assert.AreEqual (String.Empty, p.ErrorMessage, "D5");
-            Assert.AreEqual (Color.Red, p.ForeColor, "D6");
-            Assert.AreEqual (true, p.IsValid, "D7");
+            Assert.AreEqual(String.Empty, p.ControlToValidate, "D1");
+            Assert.AreEqual(ValidatorDisplay.Static, p.Display, "D2");
+            Assert.AreEqual(true, p.EnableClientScript, "D3");
+            Assert.AreEqual(true, p.Enabled, "D4");
+            Assert.AreEqual(String.Empty, p.ErrorMessage, "D5");
+            Assert.AreEqual(Color.Red, p.ForeColor, "D6");
+            Assert.AreEqual(true, p.IsValid, "D7");
 
             /* get/set */
             p.ControlToValidate = "foo";
-            Assert.AreEqual ("foo", p.ControlToValidate, "D8");
+            Assert.AreEqual("foo", p.ControlToValidate, "D8");
 
             p.Display = ValidatorDisplay.Dynamic;
-            Assert.AreEqual (ValidatorDisplay.Dynamic, p.Display, "D9");
+            Assert.AreEqual(ValidatorDisplay.Dynamic, p.Display, "D9");
 
             p.EnableClientScript = false;
-            Assert.AreEqual (false, p.EnableClientScript, "D9");
+            Assert.AreEqual(false, p.EnableClientScript, "D9");
 
             p.Enabled = false;
-            Assert.AreEqual (false, p.Enabled, "D10");
+            Assert.AreEqual(false, p.Enabled, "D10");
 
             p.ErrorMessage = "stupid monkey";
-            Assert.AreEqual ("stupid monkey", p.ErrorMessage, "D11");
+            Assert.AreEqual("stupid monkey", p.ErrorMessage, "D11");
 
             p.ForeColor = Color.Blue;
-            Assert.AreEqual (Color.Blue, p.ForeColor, "D12");
+            Assert.AreEqual(Color.Blue, p.ForeColor, "D12");
             //XXX add check to see if setting the color alters the style at all.
 
             p.IsValid = false;
-            Assert.AreEqual (false, p.IsValid, "D13");
+            Assert.AreEqual(false, p.IsValid, "D13");
         }
 
         [Test]
-        public void ValidationProperty ()
+        public void ValidationProperty()
         {
-            BaseValidatorPoker p = new BaseValidatorPoker ();
+            BaseValidatorPoker p = new BaseValidatorPoker();
             PropertyDescriptor d;
 
-            StartValidationTest (p);
+            StartValidationTest(p);
 
-            TextBox box = AddTextBox ("textbox", "hello world");
+            TextBox box = AddTextBox("textbox", "hello world");
 
-            d = p.GetValidationProperty (box);
-            Assert.AreEqual ("Text", d.Name, "A1");
-            Assert.AreEqual ("hello world", p.DoGetControlValidationValue ("textbox"), "A2");
+            d = p.GetValidationProperty(box);
+            Assert.AreEqual("Text", d.Name, "A1");
+            Assert.AreEqual("hello world", p.DoGetControlValidationValue("textbox"), "A2");
 
-            StopValidationTest ();
+            StopValidationTest();
         }
 
         [Test]
-        public void ControlPropertiesValid1 ()
+        public void ControlPropertiesValid1()
         {
-            BaseValidatorPoker p = new BaseValidatorPoker ();
+            BaseValidatorPoker p = new BaseValidatorPoker();
 
-            StartValidationTest (p);
-            TextBox box = SetValidationTextBox ("textbox", "hello world");
+            StartValidationTest(p);
+            TextBox box = SetValidationTextBox("textbox", "hello world");
 
-            Assert.IsTrue (p.DoControlPropertiesValid (), "B1");
+            Assert.IsTrue(p.DoControlPropertiesValid(), "B1");
 
-            StopValidationTest ();
+            StopValidationTest();
         }
 
         [Test]
-        public void NullValidationProperty ()
+        public void NullValidationProperty()
         {
-            BaseValidatorPoker v = new BaseValidatorPoker ();
+            BaseValidatorPoker v = new BaseValidatorPoker();
 
-            Page p = new Page ();
-            p.Controls.Add (v);
-            RadioButtonList l = new RadioButtonList ();
-            p.Controls.Add (l);
+            Page p = new Page();
+            p.Controls.Add(v);
+            RadioButtonList l = new RadioButtonList();
+            p.Controls.Add(l);
             l.ID = "XXX";
             v.ControlToValidate = "XXX";
 
-            Assert.AreEqual (String.Empty, v.DoGetControlValidationValue ("XXX"), "#A1");
+            Assert.AreEqual(String.Empty, v.DoGetControlValidationValue("XXX"), "#A1");
         }
 
         [Test]
-        [ExpectedException (typeof (HttpException))]
-        public void ControlPropertiesValid2 ()
+        [ExpectedException(typeof(HttpException))]
+        public void ControlPropertiesValid2()
         {
-            BaseValidatorPoker p = new BaseValidatorPoker ();
+            BaseValidatorPoker p = new BaseValidatorPoker();
 
-            StartValidationTest (p);
-            TextBox box = AddTextBox ("textbox", "hello world");
+            StartValidationTest(p);
+            TextBox box = AddTextBox("textbox", "hello world");
 
             /* successful */
-            p.DoCheckControlValidationProperty ("textbox", "Text");
+            p.DoCheckControlValidationProperty("textbox", "Text");
 
             /* failure (exception) due to unknown control */
-            p.DoCheckControlValidationProperty ("textbox2", "Text");
+            p.DoCheckControlValidationProperty("textbox2", "Text");
 
-            StopValidationTest ();
+            StopValidationTest();
         }
 
         [Test]
-        [ExpectedException (typeof (HttpException))]
-        public void ControlPropertiesValid3 ()
+        [ExpectedException(typeof(HttpException))]
+        public void ControlPropertiesValid3()
         {
-            BaseValidatorPoker p = new BaseValidatorPoker ();
+            BaseValidatorPoker p = new BaseValidatorPoker();
 
-            StartValidationTest (p);
+            StartValidationTest(p);
 
             p.ControlToValidate = "textbox";
 
             /* failure (exception) due to unknown control */
-            p.DoCheckControlValidationProperty ("textbox", "Text2");
+            p.DoCheckControlValidationProperty("textbox", "Text2");
 
-            StopValidationTest ();
+            StopValidationTest();
         }
-
 
         [Test]
         [ExpectedException(typeof(HttpException))]
-        public void BasicExceptionTest () {
-            BaseValidatorPoker p = new BaseValidatorPoker ();
+        public void BasicExceptionTest()
+        {
+            BaseValidatorPoker p = new BaseValidatorPoker();
 
             p.CheckControlProperties();
         }
 
-
         [Test]
-        public void GetControlValidationValue ()
+        public void GetControlValidationValue()
         {
-            BaseValidatorPoker p = new BaseValidatorPoker ();
+            BaseValidatorPoker p = new BaseValidatorPoker();
 
-            StartValidationTest (p);
-            TextBox box = AddTextBox ("textbox", "hello world");
-            Label label = new Label ();
+            StartValidationTest(p);
+            TextBox box = AddTextBox("textbox", "hello world");
+            Label label = new Label();
 
             label.ID = "label";
 
-            Page.Controls.Add (label);
+            Page.Controls.Add(label);
 
             /* successful */
-            Assert.AreEqual ("hello world", p.DoGetControlValidationValue ("textbox"), "C1");
+            Assert.AreEqual("hello world", p.DoGetControlValidationValue("textbox"), "C1");
 
             /* failure (non-existant control)*/
-            Assert.IsNull (p.DoGetControlValidationValue ("textbox2"), "C2");
+            Assert.IsNull(p.DoGetControlValidationValue("textbox2"), "C2");
 
             /* failure (control without a ValidationProperty */
-            Assert.IsNull (p.DoGetControlValidationValue ("label"), "C3");
+            Assert.IsNull(p.DoGetControlValidationValue("label"), "C3");
 
-            StopValidationTest ();
+            StopValidationTest();
         }
 
         [Test]
-        public void CustomDescriptor ()
+        public void CustomDescriptor()
         {
-            PropertyDescriptor pd = BaseValidator.GetValidationProperty (new MyTextBox ());
-            Assert.AreEqual ("SomeProperty", pd.Name);
+            PropertyDescriptor pd = BaseValidator.GetValidationProperty(new MyTextBox());
+            Assert.AreEqual("SomeProperty", pd.Name);
         }
 
         [Test]
-        public void NoCustomDescriptor ()
+        public void NoCustomDescriptor()
         {
-            PropertyDescriptor pd = BaseValidator.GetValidationProperty (new TextBox ());
-            Assert.AreEqual ("Text", pd.Name);
+            PropertyDescriptor pd = BaseValidator.GetValidationProperty(new TextBox());
+            Assert.AreEqual("Text", pd.Name);
         }
     }
 }

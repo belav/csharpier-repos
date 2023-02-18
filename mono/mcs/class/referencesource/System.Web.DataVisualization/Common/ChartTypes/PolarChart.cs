@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -12,27 +12,27 @@
 //    Classes:    PolarChart
 //
 //  Purpose:    Polar chart type is similar to the Radar chart.
-//              All the drawing functionality is located in the 
-//              RadarChart class and PolarChart class provides 
-//              positionning and style methods required only in 
+//              All the drawing functionality is located in the
+//              RadarChart class and PolarChart class provides
+//              positionning and style methods required only in
 //              Polar chart.
 //
 //  Polar Chart Overview:
 //  ---------------------
 //
-//  The polar chart type is a circular graph on which data points 
-//  are displayed using the angle, and the distance from the center 
-//  point. The X axis is located on the boundaries of the circle and 
+//  The polar chart type is a circular graph on which data points
+//  are displayed using the angle, and the distance from the center
+//  point. The X axis is located on the boundaries of the circle and
 //  the Y axis connects the center of the circle with the X axis.
-//  
-//  By default, the angle scale ranges from 0 to 360 degrees. However, 
-//  the X Axis Minimum and Maximum properties may be used to specify 
-//  a different angular scale. The Minimum angle value starts at the 
-//  top (12 O'Clock position) of the chart but can be changed to 
-//  another angle using the Crossing property. For example, setting 
-//  the Crossing property to 90 will move the "zero" value to the 
+//
+//  By default, the angle scale ranges from 0 to 360 degrees. However,
+//  the X Axis Minimum and Maximum properties may be used to specify
+//  a different angular scale. The Minimum angle value starts at the
+//  top (12 O'Clock position) of the chart but can be changed to
+//  another angle using the Crossing property. For example, setting
+//  the Crossing property to 90 will move the "zero" value to the
 //  3 O'Clock position.
-//  
+//
 //    Reviewed:    AG - Microsoft 6, 2007
 //
 //===================================================================
@@ -56,21 +56,21 @@ using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
 using System.Web.UI.DataVisualization.Charting;
 
-    using System.Web.UI.DataVisualization.Charting.ChartTypes;
-    using System.Web.UI.DataVisualization.Charting.Data;
-    using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web.UI.DataVisualization.Charting.ChartTypes;
+using System.Web.UI.DataVisualization.Charting.Data;
+using System.Web.UI.DataVisualization.Charting.Utilities;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
+namespace System.Windows.Forms.DataVisualization.Charting.ChartTypes
 #else
-    namespace System.Web.UI.DataVisualization.Charting.ChartTypes
+namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 #endif
 {
     /// <summary>
-    /// PolarChart class uses its base class RadarChart to perform most of the 
+    /// PolarChart class uses its base class RadarChart to perform most of the
     /// drawing and calculation operations.
     /// </summary>
     internal class PolarChart : RadarChart
@@ -80,9 +80,7 @@ using System.Web.UI.DataVisualization.Charting;
         /// <summary>
         /// Class public constructor.
         /// </summary>
-        public PolarChart()
-        {
-        }
+        public PolarChart() { }
 
         #endregion
 
@@ -91,7 +89,10 @@ using System.Web.UI.DataVisualization.Charting;
         /// <summary>
         /// Chart type name
         /// </summary>
-        override public string Name            { get{ return ChartTypeNames.Polar;}}
+        override public string Name
+        {
+            get { return ChartTypeNames.Polar; }
+        }
 
         #endregion
 
@@ -142,15 +143,15 @@ using System.Web.UI.DataVisualization.Charting;
         public override int GetNumerOfSectors(ChartArea area, SeriesCollection seriesCollection)
         {
             // By default we split polar chart into 12 sectors (30 degrees in case of 360 degrees scale)
-            int    sectorNumber = 12;
+            int sectorNumber = 12;
 
             // Custom interval is set on the X axis
             double interval = area.AxisX.Interval;
-            if(area.AxisX.LabelStyle.GetInterval() > 0)
+            if (area.AxisX.LabelStyle.GetInterval() > 0)
             {
                 interval = area.AxisX.LabelStyle.GetInterval();
             }
-            if(interval != 0)
+            if (interval != 0)
             {
                 // Get X axis scale size
                 double max = (area.AxisX.AutoMaximum) ? 360.0 : area.AxisX.Maximum;
@@ -170,18 +171,17 @@ using System.Web.UI.DataVisualization.Charting;
         /// <returns>Returns an array of one or more locations of Y axis.</returns>
         public override float[] GetYAxisLocations(ChartArea area)
         {
-            float[]    axesLocation = new float[1];
+            float[] axesLocation = new float[1];
             axesLocation[0] = 0f;
-            
+
             // Check if X axis crossing is set to change location of Y axis
-            if( !double.IsNaN(area.AxisX.Crossing) )
+            if (!double.IsNaN(area.AxisX.Crossing))
             {
                 axesLocation[0] = (float)area.AxisX.Crossing;
-                while(axesLocation[0] < 0)
+                while (axesLocation[0] < 0)
                 {
                     axesLocation[0] = 360f + axesLocation[0];
                 }
-
             }
 
             return axesLocation;
@@ -200,24 +200,36 @@ using System.Web.UI.DataVisualization.Charting;
         override protected RadarDrawingStyle GetDrawingStyle(Series ser, DataPoint point)
         {
             RadarDrawingStyle drawingStyle = RadarDrawingStyle.Line;
-            if (point.IsCustomPropertySet(CustomPropertyName.PolarDrawingStyle) ||
-                ser.IsCustomPropertySet(CustomPropertyName.PolarDrawingStyle))
+            if (
+                point.IsCustomPropertySet(CustomPropertyName.PolarDrawingStyle)
+                || ser.IsCustomPropertySet(CustomPropertyName.PolarDrawingStyle)
+            )
             {
-                string    attributeValue =
-                    (point.IsCustomPropertySet(CustomPropertyName.PolarDrawingStyle)) ?
-                    point[CustomPropertyName.PolarDrawingStyle] :
-                    ser[CustomPropertyName.PolarDrawingStyle];
-                if(String.Compare(attributeValue, "Line", StringComparison.OrdinalIgnoreCase ) == 0)
+                string attributeValue =
+                    (point.IsCustomPropertySet(CustomPropertyName.PolarDrawingStyle))
+                        ? point[CustomPropertyName.PolarDrawingStyle]
+                        : ser[CustomPropertyName.PolarDrawingStyle];
+                if (String.Compare(attributeValue, "Line", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     drawingStyle = RadarDrawingStyle.Line;
                 }
-                else if(String.Compare(attributeValue, "Marker", StringComparison.OrdinalIgnoreCase ) == 0)
+                else if (
+                    String.Compare(attributeValue, "Marker", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     drawingStyle = RadarDrawingStyle.Marker;
                 }
                 else
                 {
-                    throw(new InvalidOperationException(SR.ExceptionCustomAttributeValueInvalid(attributeValue, "PolarDrawingStyle")));
+                    throw (
+                        new InvalidOperationException(
+                            SR.ExceptionCustomAttributeValueInvalid(
+                                attributeValue,
+                                "PolarDrawingStyle"
+                            )
+                        )
+                    );
                 }
             }
             return drawingStyle;
@@ -230,32 +242,38 @@ using System.Web.UI.DataVisualization.Charting;
         /// <param name="area">Chart area.</param>
         /// <param name="series">Point series.</param>
         /// <returns>Array of data points position.</returns>
-        override protected PointF[] GetPointsPosition(ChartGraphics graph, ChartArea area, Series series)
+        override protected PointF[] GetPointsPosition(
+            ChartGraphics graph,
+            ChartArea area,
+            Series series
+        )
         {
-            PointF[]    pointPos = new PointF[series.Points.Count + 1];
+            PointF[] pointPos = new PointF[series.Points.Count + 1];
             int index = 0;
-            foreach( DataPoint point in series.Points )
+            foreach (DataPoint point in series.Points)
             {
                 // Change Y value if line is out of plot area
                 double yValue = GetYValue(Common, area, series, point, index, 0);
 
                 // Recalculates y position
-                double yPosition = area.AxisY.GetPosition( yValue );
+                double yPosition = area.AxisY.GetPosition(yValue);
 
                 // Recalculates x position
                 double xPosition = area.circularCenter.X;
 
                 // Add point position into array
-                pointPos[index] = graph.GetAbsolutePoint(new PointF((float)xPosition, (float)yPosition));
+                pointPos[index] = graph.GetAbsolutePoint(
+                    new PointF((float)xPosition, (float)yPosition)
+                );
 
                 // Rotate position
-                float    sectorAngle = area.CircularPositionToAngle(point.XValue);
+                float sectorAngle = area.CircularPositionToAngle(point.XValue);
                 Matrix matrix = new Matrix();
                 matrix.RotateAt(sectorAngle, graph.GetAbsolutePoint(area.circularCenter));
-                PointF[]    rotatedPoint = new PointF[] { pointPos[index] };
+                PointF[] rotatedPoint = new PointF[] { pointPos[index] };
                 matrix.TransformPoints(rotatedPoint);
                 pointPos[index] = rotatedPoint[0];
-                                
+
                 index++;
             }
 
@@ -268,4 +286,3 @@ using System.Web.UI.DataVisualization.Charting;
         #endregion // Helper Methods
     }
 }
-

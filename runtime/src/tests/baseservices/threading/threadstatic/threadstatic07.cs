@@ -10,18 +10,23 @@ using System.Threading;
 // Just basic heavy reading and writing from ThreadStatic members in normal threads and threadpools threads as well.
 // Ported from .NET Framework test: BaseServices\Regression\V1\Threads\ThreadStatic\threadstatic1.cs
 
-public class Sensor 
+public class Sensor
 {
     [ThreadStatic]
     static int A = 1;
+
     [ThreadStatic]
     static int B = 2;
+
     [ThreadStatic]
     static int C = 3;
+
     [ThreadStatic]
     static int D = 4;
+
     [ThreadStatic]
     static DateTime T = DateTime.Now;
+
     [ThreadStatic]
     static String S = "John Stockton";
 
@@ -32,24 +37,31 @@ public class Sensor
     static DateTime TT = DateTime.Now;
     static String SS = "Karl Malone";
     static volatile int Result = 100;
-    
+
     [ThreadStatic]
     static int AAA = 5;
+
     [ThreadStatic]
     static int BBB = 6;
+
     [ThreadStatic]
     static int CCC = 7;
+
     [ThreadStatic]
     static int DDD = 8;
+
     [ThreadStatic]
     static DateTime TTT = DateTime.Now;
+
     [ThreadStatic]
     static String SSS = "Olden Polynice";
 
     public static int Main()
     {
         Console.WriteLine("Hello NBA Fans!!");
-        Console.WriteLine("ThreadStatic test 2: Various reading and writing of Threadstatic variables.");
+        Console.WriteLine(
+            "ThreadStatic test 2: Various reading and writing of Threadstatic variables."
+        );
         Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}", A, B, C, D, T, S);
         Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}", AA, BB, CC, DD, TT, SS);
 
@@ -67,15 +79,15 @@ public class Sensor
 
         return Result;
     }
-    
+
     public static void StartThread()
     {
-        Thread        SimulationThread;
-        Thread        SimulationThread2;
-        Thread        SimulationThread3;
-        Thread        SimulationThread4;
-        Thread        SimulationThread5;
-        Thread        SimulationThread6;
+        Thread SimulationThread;
+        Thread SimulationThread2;
+        Thread SimulationThread3;
+        Thread SimulationThread4;
+        Thread SimulationThread5;
+        Thread SimulationThread6;
 
         ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadFunc2), null);
         ValueMess2();
@@ -83,28 +95,28 @@ public class Sensor
         ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadFunc2), null);
 
         ValueMess2();
-          SimulationThread = new Thread(new ThreadStart(ThreadFunc));
-            SimulationThread.Start();
+        SimulationThread = new Thread(new ThreadStart(ThreadFunc));
+        SimulationThread.Start();
 
         ValueMess2();
-          SimulationThread2 = new Thread(new ThreadStart(ThreadFunc));
-            SimulationThread2.Start();
+        SimulationThread2 = new Thread(new ThreadStart(ThreadFunc));
+        SimulationThread2.Start();
 
         ValueMess2();
-          SimulationThread3 = new Thread(new ThreadStart(ThreadFunc));
-            SimulationThread3.Start();
+        SimulationThread3 = new Thread(new ThreadStart(ThreadFunc));
+        SimulationThread3.Start();
 
         ValueMess2();
-          SimulationThread4 = new Thread(new ThreadStart(ThreadFunc));
-            SimulationThread4.Start();
+        SimulationThread4 = new Thread(new ThreadStart(ThreadFunc));
+        SimulationThread4.Start();
 
         ValueMess2();
-          SimulationThread5 = new Thread(new ThreadStart(ThreadFunc));
-            SimulationThread5.Start();
+        SimulationThread5 = new Thread(new ThreadStart(ThreadFunc));
+        SimulationThread5.Start();
 
         ValueMess2();
-          SimulationThread6 = new Thread(new ThreadStart(ThreadFunc));
-            SimulationThread6.Start();
+        SimulationThread6 = new Thread(new ThreadStart(ThreadFunc));
+        SimulationThread6.Start();
         Thread.Sleep(500);
         SimulationThread6.Join();
 
@@ -113,9 +125,10 @@ public class Sensor
         Console.WriteLine("Main AA: {0}, {1}, {2}, {3}, {4}, {5}", AA, BB, CC, DD, TT, SS);
         Console.WriteLine("Main AAA: {0}, {1}, {2}, {3}, {4}, {5}", AAA, BBB, CCC, DDD, TTT, SSS);
         int Y = Thread.CurrentThread.GetHashCode();
-        int X = (A ^ Y) | (B ^ Y) | (C ^ Y) |(D ^ Y)| (AAA ^ Y) | (BBB ^ Y) | (CCC ^ Y) |(DDD ^ Y);
+        int X =
+            (A ^ Y) | (B ^ Y) | (C ^ Y) | (D ^ Y) | (AAA ^ Y) | (BBB ^ Y) | (CCC ^ Y) | (DDD ^ Y);
         Console.WriteLine("X: {0}, {1}", X, S);
-        
+
         if (X != 0)
         {
             Console.WriteLine("Something went wrong in thread: {0}", S);
@@ -123,7 +136,7 @@ public class Sensor
         }
     }
 
-    public static void ThreadFunc() 
+    public static void ThreadFunc()
     {
         Console.WriteLine("ThreadStarted.. {0}", Thread.CurrentThread.GetHashCode().ToString());
         Console.WriteLine("A: {0}, {1}, {2}, {3}, {4}, {5}", A, B, C, D, T, S);
@@ -135,11 +148,12 @@ public class Sensor
         Console.WriteLine("A: {0}, {1}, {2}, {3}, {4}, {5}", A, B, C, D, T, S);
         Console.WriteLine("AA: {0}, {1}, {2}, {3}, {4}, {5}", AA, BB, CC, DD, TT, SS);
         Console.WriteLine("AAA: {0}, {1}, {2}, {3}, {4}, {5}", AAA, BBB, CCC, DDD, TTT, SSS);
-    
+
         int Y = Thread.CurrentThread.GetHashCode();
-        int X = (A ^ Y) | (B ^ Y) | (C ^ Y) |(D ^ Y)| (AAA ^ Y) | (BBB ^ Y) | (CCC ^ Y) |(DDD ^ Y);
+        int X =
+            (A ^ Y) | (B ^ Y) | (C ^ Y) | (D ^ Y) | (AAA ^ Y) | (BBB ^ Y) | (CCC ^ Y) | (DDD ^ Y);
         Console.WriteLine("X: {0}, {1}", X, S);
-        
+
         if (X != 0)
         {
             Console.WriteLine("Something went wrong in thread: {0}", S);
@@ -147,9 +161,12 @@ public class Sensor
         }
     }
 
-    public static void ThreadFunc2(Object O) 
+    public static void ThreadFunc2(Object O)
     {
-        Console.WriteLine("Threadpool Started.. {0}", Thread.CurrentThread.GetHashCode().ToString());
+        Console.WriteLine(
+            "Threadpool Started.. {0}",
+            Thread.CurrentThread.GetHashCode().ToString()
+        );
         Console.WriteLine("TP A: {0}, {1}, {2}, {3}, {4}, {5}", A, B, C, D, T, S);
         Console.WriteLine("TP AA: {0}, {1}, {2}, {3}, {4}, {5}", AA, BB, CC, DD, TT, SS);
         Console.WriteLine("TP AAA: {0}, {1}, {2}, {3}, {4}, {5}", AAA, BBB, CCC, DDD, TTT, SSS);
@@ -161,9 +178,10 @@ public class Sensor
         Console.WriteLine("TP AAA: {0}, {1}, {2}, {3}, {4}, {5}", AAA, BBB, CCC, DDD, TTT, SSS);
 
         int Y = Thread.CurrentThread.GetHashCode();
-        int X = (A ^ Y) | (B ^ Y) | (C ^ Y) |(D ^ Y)| (AAA ^ Y) | (BBB ^ Y) | (CCC ^ Y) |(DDD ^ Y);
+        int X =
+            (A ^ Y) | (B ^ Y) | (C ^ Y) | (D ^ Y) | (AAA ^ Y) | (BBB ^ Y) | (CCC ^ Y) | (DDD ^ Y);
         Console.WriteLine("X: {0}, {1}", X, S);
-        
+
         if (X != 0)
         {
             Console.WriteLine("Something went wrong in thread: {0}", S);

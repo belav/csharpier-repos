@@ -9,34 +9,30 @@ class CA
 
 class CB
 {
-    public CB (string arg)
-    {
-    }
+    public CB(string arg) { }
 }
 
 class DeviceDetails
 {
-    public DeviceDetails (string arg)
-    {
-    }
+    public DeviceDetails(string arg) { }
 }
 
 class BB
 {
     public Task<string> GetUser()
-    {        
-        return Task.FromResult ("aa");
+    {
+        return Task.FromResult("aa");
     }
 
     public Task<string> GetDevice()
     {
-        return Task.FromResult ("bb");
-    }    
+        return Task.FromResult("bb");
+    }
 }
 
 class X
 {
-    BB bb = new BB ();
+    BB bb = new BB();
 
     public async Task<CA> GetCAAsync()
     {
@@ -47,9 +43,9 @@ class X
         };
     }
 
-    static void Main ()
+    static void Main()
     {
-        var x = new X ();
-        x.GetCAAsync ().Wait ();
+        var x = new X();
+        x.GetCAAsync().Wait();
     }
 }

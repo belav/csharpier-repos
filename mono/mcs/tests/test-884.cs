@@ -4,24 +4,22 @@ using System;
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
-        AddEH<string> ();
+        AddEH<string>();
     }
 
     static void AddEH<T>()
     {
-        var e = new E<T> ();
+        var e = new E<T>();
         e.EEvent += EHandler;
     }
 
-    static void EHandler ()
-    {
-    }
+    static void EHandler() { }
 
     class E<T>
     {
-        public delegate void EMethod ();
+        public delegate void EMethod();
         public event EMethod EEvent;
     }
 }

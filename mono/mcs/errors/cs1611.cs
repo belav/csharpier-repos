@@ -3,5 +3,5 @@
 
 class Test
 {
-    public static void Error (params ref int args) {}
+    public static void Error(params ref int args) { }
 }

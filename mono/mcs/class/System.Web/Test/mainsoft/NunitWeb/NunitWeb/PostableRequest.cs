@@ -12,27 +12,24 @@ namespace MonoTests.SystemWeb.Framework
     /// </summary>
     /// <seealso cref="BaseRequest"/>
     [Serializable]
-    public class PostableRequest:BaseRequest
+    public class PostableRequest : BaseRequest
     {
         /// <summary>
         /// Default constructor. Does nothing.
         /// </summary>
-        public PostableRequest ()
-            : base ()
-        {
-        }
+        public PostableRequest()
+            : base() { }
 
         /// <summary>
         /// Create an instance of <see cref="PostableRequest"/>,
         /// calling the base constructor with given <paramref name="url"/>.
         /// </summary>
         /// <param name="url">The URL for the request.</param>
-        public PostableRequest (string url)
-            : base (url)
-        {
-        }
+        public PostableRequest(string url)
+            : base(url) { }
 
         bool _isPost;
+
         /// <summary>
         /// Get or set the HTTP method. If <see cref="IsPost"/> is true,
         /// the request will be done with <c>POST</c> HTTP method, otherwise with <c>GET</c>.
@@ -44,6 +41,7 @@ namespace MonoTests.SystemWeb.Framework
         }
 
         byte[] entityBody;
+
         /// <summary>
         /// Get or set the HTTP <c>entity-body</c>.
         /// </summary>
@@ -54,6 +52,7 @@ namespace MonoTests.SystemWeb.Framework
         }
 
         string postContentType;
+
         /// <summary>
         /// Get or set the HTTP <c>content-type</c>.
         /// </summary>
@@ -75,12 +74,18 @@ namespace MonoTests.SystemWeb.Framework
         /// <seealso cref="IsPost"/>
         /// <seealso cref="EntityBody"/>
         /// <seealso cref="BaseWorkerRequest"/>
-        protected override BaseWorkerRequest CreateBaseWorkerRequest (TextWriter wr)
+        protected override BaseWorkerRequest CreateBaseWorkerRequest(TextWriter wr)
         {
             if (EntityBody == null || !IsPost)
-                return base.CreateBaseWorkerRequest (wr);
-            return new PostableWorkerRequest (Url, QueryString,
-                wr, UserAgent, EntityBody, ContentType);
+                return base.CreateBaseWorkerRequest(wr);
+            return new PostableWorkerRequest(
+                Url,
+                QueryString,
+                wr,
+                UserAgent,
+                EntityBody,
+                ContentType
+            );
         }
 
         /// <summary>
@@ -93,17 +98,17 @@ namespace MonoTests.SystemWeb.Framework
         public override WebRequest CreateWebRequest(Uri baseUri, NameValueCollection headers)
         {
             //FIXME: may be it's better to override CreateHttpWebRequest?
-            HttpWebRequest hwr = base.CreateHttpWebRequest (baseUri, headers);
+            HttpWebRequest hwr = base.CreateHttpWebRequest(baseUri, headers);
             if (EntityBody == null || !IsPost)
                 return hwr;
             hwr.ContentLength = EntityBody.Length;
             hwr.Method = "POST";
             hwr.ContentType = ContentType;
-            using (Stream s = hwr.GetRequestStream ()) {
-                s.Write (EntityBody, 0, EntityBody.Length);
+            using (Stream s = hwr.GetRequestStream())
+            {
+                s.Write(EntityBody, 0, EntityBody.Length);
             }
             return hwr;
         }
-
     }
 }

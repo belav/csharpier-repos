@@ -9,7 +9,9 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
     using System.ServiceModel.Description;
 
-    public partial class ServiceMetadataEndpointCollectionElement : StandardEndpointCollectionElement<ServiceMetadataEndpoint, ServiceMetadataEndpointElement>
-    {
-    }
+    public partial class ServiceMetadataEndpointCollectionElement
+        : StandardEndpointCollectionElement<
+            ServiceMetadataEndpoint,
+            ServiceMetadataEndpointElement
+        > { }
 }

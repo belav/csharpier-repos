@@ -14,9 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         /// <summary>
         /// Creates an `^expr` index expression from a given `expr`.
         /// </summary>
-        public static PrefixUnaryExpressionSyntax IndexExpression(ExpressionSyntax expr)
-            => SyntaxFactory.PrefixUnaryExpression(
-                SyntaxKind.IndexExpression,
-                expr.Parenthesize());
+        public static PrefixUnaryExpressionSyntax IndexExpression(ExpressionSyntax expr) =>
+            SyntaxFactory.PrefixUnaryExpression(SyntaxKind.IndexExpression, expr.Parenthesize());
     }
 }

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -31,9 +31,9 @@ using System.ComponentModel.Design;
 
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting.Formulas
+namespace System.Windows.Forms.DataVisualization.Charting.Formulas
 #else
-    namespace System.Web.UI.DataVisualization.Charting.Formulas
+namespace System.Web.UI.DataVisualization.Charting.Formulas
 #endif
 {
     /// <summary>
@@ -44,9 +44,9 @@ using System.ComponentModel.Design;
         #region Fields
 
         // Storage for all registered formula modules
-        internal    Hashtable    registeredModules = new Hashtable(StringComparer.OrdinalIgnoreCase);
+        internal Hashtable registeredModules = new Hashtable(StringComparer.OrdinalIgnoreCase);
         private Hashtable _createdModules = new Hashtable(StringComparer.OrdinalIgnoreCase);
-        private        ArrayList    _modulesNames = new ArrayList();
+        private ArrayList _modulesNames = new ArrayList();
 
         #endregion
 
@@ -55,9 +55,7 @@ using System.ComponentModel.Design;
         /// <summary>
         /// Formula Registry public constructor
         /// </summary>
-        public FormulaRegistry()
-        {
-        }
+        public FormulaRegistry() { }
 
         /// <summary>
         /// Adds modules into the registry.
@@ -67,41 +65,41 @@ using System.ComponentModel.Design;
         public void Register(string name, Type moduleType)
         {
             // First check if module with specified name already registered
-            if(registeredModules.Contains(name))
+            if (registeredModules.Contains(name))
             {
                 // If same type provided - ignore
-                if(registeredModules[name].GetType() == moduleType)
+                if (registeredModules[name].GetType() == moduleType)
                 {
                     return;
                 }
 
                 // Error - throw exception
-                throw( new ArgumentException( SR.ExceptionFormulaModuleNameIsNotUnique( name ) ) );
+                throw (new ArgumentException(SR.ExceptionFormulaModuleNameIsNotUnique(name)));
             }
 
             // Add Module Name
             _modulesNames.Add(name);
 
             // Make sure that specified class support IFormula interface
-            bool    found = false;
-            Type[]    interfaces = moduleType.GetInterfaces();
-            foreach(Type type in interfaces)
-            {   
-                if(type == typeof(IFormula))
+            bool found = false;
+            Type[] interfaces = moduleType.GetInterfaces();
+            foreach (Type type in interfaces)
+            {
+                if (type == typeof(IFormula))
                 {
                     found = true;
                     break;
                 }
             }
-            if(!found)
+            if (!found)
             {
-                throw( new ArgumentException( SR.ExceptionFormulaModuleHasNoInterface));
+                throw (new ArgumentException(SR.ExceptionFormulaModuleHasNoInterface));
             }
 
             // Add formula module to the hash table
             registeredModules[name] = moduleType;
         }
-        
+
         /// <summary>
         /// Returns formula module registry service object.
         /// </summary>
@@ -110,11 +108,15 @@ using System.ComponentModel.Design;
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         object IServiceProvider.GetService(Type serviceType)
         {
-            if(serviceType == typeof(FormulaRegistry))
+            if (serviceType == typeof(FormulaRegistry))
             {
                 return this;
             }
-            throw (new ArgumentException( SR.ExceptionFormulaModuleRegistryUnsupportedType( serviceType.ToString())));
+            throw (
+                new ArgumentException(
+                    SR.ExceptionFormulaModuleRegistryUnsupportedType(serviceType.ToString())
+                )
+            );
         }
 
         /// <summary>
@@ -125,18 +127,18 @@ using System.ComponentModel.Design;
         public IFormula GetFormulaModule(string name)
         {
             // First check if formula module with specified name registered
-            if(!registeredModules.Contains(name))
+            if (!registeredModules.Contains(name))
             {
-                throw( new ArgumentException( SR.ExceptionFormulaModuleNameUnknown( name ) ) );
+                throw (new ArgumentException(SR.ExceptionFormulaModuleNameUnknown(name)));
             }
 
             // Check if the formula module object is already created
-            if(!_createdModules.Contains(name))
-            {    
+            if (!_createdModules.Contains(name))
+            {
                 // Create formula module object
-                _createdModules[name] = 
-                    ((Type)registeredModules[name]).Assembly.
-                    CreateInstance(((Type)registeredModules[name]).ToString());
+                _createdModules[name] = ((Type)registeredModules[name]).Assembly.CreateInstance(
+                    ((Type)registeredModules[name]).ToString()
+                );
             }
 
             return (IFormula)_createdModules[name];
@@ -147,7 +149,7 @@ using System.ComponentModel.Design;
         /// </summary>
         /// <param name="index">Module index.</param>
         /// <returns>Module Name.</returns>
-        public string GetModuleName( int index )
+        public string GetModuleName(int index)
         {
             return (string)_modulesNames[index];
         }
@@ -161,12 +163,9 @@ using System.ComponentModel.Design;
         /// </summary>
         public int Count
         {
-            get
-            {
-                return _modulesNames.Count;
-            }
+            get { return _modulesNames.Count; }
         }
-        
+
         #endregion
     }
 
@@ -181,10 +180,10 @@ using System.ComponentModel.Design;
         /// <summary>
         /// Formula Module name
         /// </summary>
-        string Name            { get; }
+        string Name { get; }
 
         /// <summary>
-        /// The first method in the module, which converts a formula 
+        /// The first method in the module, which converts a formula
         /// name to the corresponding private method.
         /// </summary>
         /// <param name="formulaName">String which represent a formula name</param>
@@ -193,9 +192,15 @@ using System.ComponentModel.Design;
         /// <param name="parameterList">Array of strings - Formula parameters</param>
         /// <param name="extraParameterList">Array of strings - Extra Formula parameters from DataManipulator object</param>
         /// <param name="outLabels">Array of strings - Used for Labels. Description for output results.</param>
-        void Formula(string formulaName, double [][] inputValues, out double [][] outputValues, string [] parameterList, string [] extraParameterList, out string [][] outLabels  );
+        void Formula(
+            string formulaName,
+            double[][] inputValues,
+            out double[][] outputValues,
+            string[] parameterList,
+            string[] extraParameterList,
+            out string[][] outLabels
+        );
 
         #endregion
     }
 }
-

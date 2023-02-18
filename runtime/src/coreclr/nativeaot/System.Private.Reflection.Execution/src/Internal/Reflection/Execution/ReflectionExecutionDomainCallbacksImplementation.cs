@@ -23,21 +23,39 @@ namespace Internal.Reflection.Execution
     //==========================================================================================================================
     // This class provides various services down to System.Private.CoreLib. (Though we forward most or all of them directly up to Reflection.Core.)
     //==========================================================================================================================
-    internal sealed class ReflectionExecutionDomainCallbacksImplementation : ReflectionExecutionDomainCallbacks
+    internal sealed class ReflectionExecutionDomainCallbacksImplementation
+        : ReflectionExecutionDomainCallbacks
     {
-        public ReflectionExecutionDomainCallbacksImplementation(ExecutionDomain executionDomain, ExecutionEnvironmentImplementation executionEnvironment)
+        public ReflectionExecutionDomainCallbacksImplementation(
+            ExecutionDomain executionDomain,
+            ExecutionEnvironmentImplementation executionEnvironment
+        )
         {
             _executionDomain = executionDomain;
             _executionEnvironment = executionEnvironment;
         }
 
-        public sealed override Type GetType(string typeName, Func<AssemblyName, Assembly> assemblyResolver, Func<Assembly, string, bool, Type> typeResolver, bool throwOnError, bool ignoreCase, string defaultAssemblyName)
+        public sealed override Type GetType(
+            string typeName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, bool, Type> typeResolver,
+            bool throwOnError,
+            bool ignoreCase,
+            string defaultAssemblyName
+        )
         {
             LowLevelListWithIList<string> defaultAssemblies = new LowLevelListWithIList<string>();
             if (defaultAssemblyName != null)
                 defaultAssemblies.Add(defaultAssemblyName);
             defaultAssemblies.Add(AssemblyBinder.DefaultAssemblyNameForGetType);
-            return _executionDomain.GetType(typeName, assemblyResolver, typeResolver, throwOnError, ignoreCase, defaultAssemblies);
+            return _executionDomain.GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                defaultAssemblies
+            );
         }
 
         public sealed override bool IsReflectionBlocked(RuntimeTypeHandle typeHandle)
@@ -49,7 +67,10 @@ namespace Internal.Reflection.Execution
         // This group of methods jointly service the Type.GetTypeFromHandle() path. The caller
         // is responsible for analyzing the RuntimeTypeHandle to figure out which flavor to call.
         //=======================================================================================
-        public sealed override Type GetNamedTypeForHandle(RuntimeTypeHandle typeHandle, bool isGenericTypeDefinition)
+        public sealed override Type GetNamedTypeForHandle(
+            RuntimeTypeHandle typeHandle,
+            bool isGenericTypeDefinition
+        )
         {
             return _executionDomain.GetNamedTypeForHandle(typeHandle, isGenericTypeDefinition);
         }
@@ -89,23 +110,36 @@ namespace Internal.Reflection.Execution
 
         // This is called from the ToString() helper of a RuntimeType that does not have full metadata.
         // This helper makes a "best effort" to give the caller something better than "EETypePtr nnnnnnnnn".
-        public sealed override string GetBetterDiagnosticInfoIfAvailable(RuntimeTypeHandle runtimeTypeHandle)
+        public sealed override string GetBetterDiagnosticInfoIfAvailable(
+            RuntimeTypeHandle runtimeTypeHandle
+        )
         {
             return Type.GetTypeFromHandle(runtimeTypeHandle).ToDisplayStringIfAvailable();
         }
 
-        public sealed override MethodBase GetMethodBaseFromStartAddressIfAvailable(IntPtr methodStartAddress)
+        public sealed override MethodBase GetMethodBaseFromStartAddressIfAvailable(
+            IntPtr methodStartAddress
+        )
         {
             RuntimeTypeHandle declaringTypeHandle = default(RuntimeTypeHandle);
             QMethodDefinition methodHandle;
-            if (!ReflectionExecution.ExecutionEnvironment.TryGetMethodForStartAddress(methodStartAddress,
-                ref declaringTypeHandle, out methodHandle))
+            if (
+                !ReflectionExecution.ExecutionEnvironment.TryGetMethodForStartAddress(
+                    methodStartAddress,
+                    ref declaringTypeHandle,
+                    out methodHandle
+                )
+            )
             {
                 return null;
             }
 
             // We don't use the type argument handles as we want the uninstantiated method info
-            return ReflectionCoreExecution.ExecutionDomain.GetMethod(declaringTypeHandle, methodHandle, genericMethodTypeArgumentHandles: null);
+            return ReflectionCoreExecution.ExecutionDomain.GetMethod(
+                declaringTypeHandle,
+                methodHandle,
+                genericMethodTypeArgumentHandles: null
+            );
         }
 
         public sealed override Assembly GetAssemblyForHandle(RuntimeTypeHandle typeHandle)
@@ -113,9 +147,13 @@ namespace Internal.Reflection.Execution
             return Type.GetTypeFromHandle(typeHandle).Assembly;
         }
 
-        public sealed override IntPtr TryGetStaticClassConstructionContext(RuntimeTypeHandle runtimeTypeHandle)
+        public sealed override IntPtr TryGetStaticClassConstructionContext(
+            RuntimeTypeHandle runtimeTypeHandle
+        )
         {
-            return ExecutionEnvironmentImplementation.TryGetStaticClassConstructionContext(runtimeTypeHandle);
+            return ExecutionEnvironmentImplementation.TryGetStaticClassConstructionContext(
+                runtimeTypeHandle
+            );
         }
 
         public sealed override RuntimeTypeHandle GetTypeHandleIfAvailable(Type type)

@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,37 +39,38 @@ using System.Runtime.InteropServices;
 
 namespace System
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
     public abstract class MulticastDelegate : Delegate
     {
         Delegate[] delegates;
 
-        protected MulticastDelegate (object target, string method)
-            : base (target, method)
+        protected MulticastDelegate(object target, string method)
+            : base(target, method) { }
+
+        protected MulticastDelegate(Type target, string method)
+            : base(target, method) { }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            base.GetObjectData(info, context);
         }
 
-        protected MulticastDelegate (Type target, string method)
-            : base (target, method)
+        protected sealed override object DynamicInvokeImpl(object[] args)
         {
-        }
-        
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData  (info, context);
-        }
-
-        protected sealed override object DynamicInvokeImpl (object[] args)
-        {
-            if (delegates == null) {
-                return base.DynamicInvokeImpl (args);
-            } else {
+            if (delegates == null)
+            {
+                return base.DynamicInvokeImpl(args);
+            }
+            else
+            {
                 object r;
-                int i = 0, len = delegates.Length;
-                do {
-                    r = delegates [i].DynamicInvoke (args);
+                int i = 0,
+                    len = delegates.Length;
+                do
+                {
+                    r = delegates[i].DynamicInvoke(args);
                 } while (++i < len);
                 return r;
             }
@@ -84,7 +85,8 @@ namespace System
         // https://gist.github.com/migueldeicaza/cd99938c2a4372e7e5d5
         //
         // Do not remove this API
-        internal bool HasSingleTarget {
+        internal bool HasSingleTarget
+        {
             get { return delegates == null; }
         }
 
@@ -92,25 +94,31 @@ namespace System
         //   Equals: two multicast delegates are equal if their base is equal
         //   and their invocations list is equal.
         // </remarks>
-        public sealed override bool Equals (object obj)
+        public sealed override bool Equals(object obj)
         {
-            if (!base.Equals (obj))
+            if (!base.Equals(obj))
                 return false;
 
             MulticastDelegate d = obj as MulticastDelegate;
             if (d == null)
                 return false;
 
-            if (delegates == null && d.delegates == null) {
+            if (delegates == null && d.delegates == null)
+            {
                 return true;
-            } else if (delegates == null ^ d.delegates == null) {
+            }
+            else if (delegates == null ^ d.delegates == null)
+            {
                 return false;
-            } else {
+            }
+            else
+            {
                 if (delegates.Length != d.delegates.Length)
                     return false;
 
-                for (int i = 0; i < delegates.Length; ++i) {
-                    if (!delegates [i].Equals (d.delegates [i]))
+                for (int i = 0; i < delegates.Length; ++i)
+                {
+                    if (!delegates[i].Equals(d.delegates[i]))
                         return false;
                 }
 
@@ -121,27 +129,27 @@ namespace System
         //
         // FIXME: This could use some improvements.
         //
-        public sealed override int GetHashCode ()
+        public sealed override int GetHashCode()
         {
-            return base.GetHashCode ();
+            return base.GetHashCode();
         }
 
-        protected override MethodInfo GetMethodImpl ()
+        protected override MethodInfo GetMethodImpl()
         {
             if (delegates != null)
-                return delegates [delegates.Length - 1].Method;
+                return delegates[delegates.Length - 1].Method;
 
-            return base.GetMethodImpl ();
+            return base.GetMethodImpl();
         }
 
         // <summary>
         //   Return, in order of invocation, the invocation list
         //   of a MulticastDelegate
         // </summary>
-        public sealed override Delegate[] GetInvocationList ()
+        public sealed override Delegate[] GetInvocationList()
         {
             if (delegates != null)
-                return (Delegate[]) delegates.Clone ();
+                return (Delegate[])delegates.Clone();
             else
                 return new Delegate[1] { this };
         }
@@ -152,53 +160,69 @@ namespace System
         //   thing should have better been a simple System.Delegate class.
         //   Compiler generated delegates are always MulticastDelegates.
         // </summary>
-        protected sealed override Delegate CombineImpl (Delegate follow)
+        protected sealed override Delegate CombineImpl(Delegate follow)
         {
             if (follow == null)
                 return this;
 
-            MulticastDelegate other = (MulticastDelegate) follow;
+            MulticastDelegate other = (MulticastDelegate)follow;
 
-            MulticastDelegate ret = AllocDelegateLike_internal (this);
+            MulticastDelegate ret = AllocDelegateLike_internal(this);
 
-            if (delegates == null && other.delegates == null) {
-                ret.delegates = new Delegate [2] { this, other };
-            } else if (delegates == null) {
-                ret.delegates = new Delegate [1 + other.delegates.Length];
+            if (delegates == null && other.delegates == null)
+            {
+                ret.delegates = new Delegate[2] { this, other };
+            }
+            else if (delegates == null)
+            {
+                ret.delegates = new Delegate[1 + other.delegates.Length];
 
-                ret.delegates [0] = this;
-                Array.Copy (other.delegates, 0, ret.delegates, 1, other.delegates.Length);
-            } else if (other.delegates == null) {
-                ret.delegates = new Delegate [delegates.Length + 1];
+                ret.delegates[0] = this;
+                Array.Copy(other.delegates, 0, ret.delegates, 1, other.delegates.Length);
+            }
+            else if (other.delegates == null)
+            {
+                ret.delegates = new Delegate[delegates.Length + 1];
 
-                Array.Copy (delegates, 0, ret.delegates, 0, delegates.Length);
-                ret.delegates [ret.delegates.Length - 1] = other;
-            } else {
-                ret.delegates = new Delegate [delegates.Length + other.delegates.Length];
+                Array.Copy(delegates, 0, ret.delegates, 0, delegates.Length);
+                ret.delegates[ret.delegates.Length - 1] = other;
+            }
+            else
+            {
+                ret.delegates = new Delegate[delegates.Length + other.delegates.Length];
 
-                Array.Copy (delegates, 0, ret.delegates, 0, delegates.Length);
-                Array.Copy (other.delegates, 0, ret.delegates, delegates.Length, other.delegates.Length);
+                Array.Copy(delegates, 0, ret.delegates, 0, delegates.Length);
+                Array.Copy(
+                    other.delegates,
+                    0,
+                    ret.delegates,
+                    delegates.Length,
+                    other.delegates.Length
+                );
             }
 
             return ret;
         }
 
         /* Based on the Boyer–Moore string search algorithm */
-        int LastIndexOf (Delegate[] haystack, Delegate[] needle)
+        int LastIndexOf(Delegate[] haystack, Delegate[] needle)
         {
             if (haystack.Length < needle.Length)
                 return -1;
 
-            if (haystack.Length == needle.Length) {
+            if (haystack.Length == needle.Length)
+            {
                 for (int i = 0; i < haystack.Length; ++i)
-                    if (!haystack [i].Equals (needle [i]))
+                    if (!haystack[i].Equals(needle[i]))
                         return -1;
 
                 return 0;
             }
 
-            for (int i = haystack.Length - needle.Length, j; i >= 0;) {
-                for (j = 0; needle [j].Equals (haystack [i]); ++i, ++j) {
+            for (int i = haystack.Length - needle.Length, j; i >= 0; )
+            {
+                for (j = 0; needle[j].Equals(haystack[i]); ++i, ++j)
+                {
                     if (j == needle.Length - 1)
                         return i - j;
                 }
@@ -209,82 +233,97 @@ namespace System
             return -1;
         }
 
-        protected sealed override Delegate RemoveImpl (Delegate value)
+        protected sealed override Delegate RemoveImpl(Delegate value)
         {
             if (value == null)
                 return this;
 
-            MulticastDelegate other = (MulticastDelegate) value;
+            MulticastDelegate other = (MulticastDelegate)value;
 
-            if (delegates == null && other.delegates == null) {
+            if (delegates == null && other.delegates == null)
+            {
                 /* if they are not equal and the current one is not
                  * a multicastdelegate then we cannot delete it */
-                return this.Equals (other) ? null : this;
-            } else if (delegates == null) {
-                foreach (var d in other.delegates) {
-                    if (this.Equals (d))
+                return this.Equals(other) ? null : this;
+            }
+            else if (delegates == null)
+            {
+                foreach (var d in other.delegates)
+                {
+                    if (this.Equals(d))
                         return null;
                 }
                 return this;
-            } else if (other.delegates == null) {
-                int idx = Array.LastIndexOf (delegates, other);
+            }
+            else if (other.delegates == null)
+            {
+                int idx = Array.LastIndexOf(delegates, other);
                 if (idx == -1)
                     return this;
 
-                if (delegates.Length <= 1) {
+                if (delegates.Length <= 1)
+                {
                     /* delegates.Length should never be equal or
                      * lower than 1, it should be 2 or greater */
-                    throw new InvalidOperationException ();
+                    throw new InvalidOperationException();
                 }
 
                 if (delegates.Length == 2)
-                    return delegates [idx == 0 ? 1 : 0];
+                    return delegates[idx == 0 ? 1 : 0];
 
-                MulticastDelegate ret = AllocDelegateLike_internal (this);
-                ret.delegates = new Delegate [delegates.Length - 1];
+                MulticastDelegate ret = AllocDelegateLike_internal(this);
+                ret.delegates = new Delegate[delegates.Length - 1];
 
-                Array.Copy (delegates, ret.delegates, idx);
-                Array.Copy (delegates, idx + 1, ret.delegates, idx, delegates.Length - idx - 1);
+                Array.Copy(delegates, ret.delegates, idx);
+                Array.Copy(delegates, idx + 1, ret.delegates, idx, delegates.Length - idx - 1);
 
                 return ret;
-            } else {
+            }
+            else
+            {
                 /* wild case : remove MulticastDelegate from MulticastDelegate
                  * complexity is O(m + n), with n the number of elements in
                  * this.delegates and m the number of elements in other.delegates */
 
-                if (delegates.Equals (other.delegates))
+                if (delegates.Equals(other.delegates))
                     return null;
 
                 /* we need to remove elements from the end to the beginning, as
                  * the addition and removal of delegates behaves like a stack */
-                int idx = LastIndexOf (delegates, other.delegates);
+                int idx = LastIndexOf(delegates, other.delegates);
                 if (idx == -1)
                     return this;
 
-                MulticastDelegate ret = AllocDelegateLike_internal (this);
-                ret.delegates = new Delegate [delegates.Length - other.delegates.Length];
+                MulticastDelegate ret = AllocDelegateLike_internal(this);
+                ret.delegates = new Delegate[delegates.Length - other.delegates.Length];
 
-                Array.Copy (delegates, ret.delegates, idx);
-                Array.Copy (delegates, idx + other.delegates.Length, ret.delegates, idx, delegates.Length - idx - other.delegates.Length);
+                Array.Copy(delegates, ret.delegates, idx);
+                Array.Copy(
+                    delegates,
+                    idx + other.delegates.Length,
+                    ret.delegates,
+                    idx,
+                    delegates.Length - idx - other.delegates.Length
+                );
 
                 return ret;
             }
         }
 
-        public static bool operator == (MulticastDelegate d1, MulticastDelegate d2)
+        public static bool operator ==(MulticastDelegate d1, MulticastDelegate d2)
         {
             if (d1 == null)
                 return d2 == null;
 
-            return d1.Equals (d2);
+            return d1.Equals(d2);
         }
-        
-        public static bool operator != (MulticastDelegate d1, MulticastDelegate d2)
+
+        public static bool operator !=(MulticastDelegate d1, MulticastDelegate d2)
         {
             if (d1 == null)
                 return d2 != null;
 
-            return !d1.Equals (d2);
+            return !d1.Equals(d2);
         }
     }
 }

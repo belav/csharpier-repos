@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace System.Reflection.Runtime.TypeParsing
 {
     //
-    // The TypeName class is the base class for a family of types that represent the nodes in a parse tree for 
+    // The TypeName class is the base class for a family of types that represent the nodes in a parse tree for
     // assembly-qualified type names.
     //
     public abstract class TypeName
@@ -21,7 +21,10 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     public sealed class AssemblyQualifiedTypeName : TypeName
     {
-        public AssemblyQualifiedTypeName(NonQualifiedTypeName typeName, RuntimeAssemblyName assemblyName)
+        public AssemblyQualifiedTypeName(
+            NonQualifiedTypeName typeName,
+            RuntimeAssemblyName assemblyName
+        )
         {
             Debug.Assert(typeName != null);
             TypeName = typeName;
@@ -30,7 +33,8 @@ namespace System.Reflection.Runtime.TypeParsing
 
         public sealed override string ToString()
         {
-            return TypeName.ToString() + ((AssemblyName == null) ? "" : ", " + AssemblyName.FullName);
+            return TypeName.ToString()
+                + ((AssemblyName == null) ? "" : ", " + AssemblyName.FullName);
         }
 
         public RuntimeAssemblyName AssemblyName { get; }
@@ -40,16 +44,12 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     // Base class for all non-assembly-qualified type names.
     //
-    public abstract class NonQualifiedTypeName : TypeName
-    {
-    }
+    public abstract class NonQualifiedTypeName : TypeName { }
 
     //
     // Base class for namespace or nested type.
     //
-    internal abstract class NamedTypeName : NonQualifiedTypeName
-    {
-    }
+    internal abstract class NamedTypeName : NonQualifiedTypeName { }
 
     //
     // Non-nested named type. The full name is the namespace-qualified name. For example, the FullName for
@@ -122,9 +122,7 @@ namespace System.Reflection.Runtime.TypeParsing
     internal sealed class ArrayTypeName : HasElementTypeName
     {
         public ArrayTypeName(TypeName elementTypeName)
-            : base(elementTypeName)
-        {
-        }
+            : base(elementTypeName) { }
 
         public sealed override string ToString()
         {
@@ -157,9 +155,7 @@ namespace System.Reflection.Runtime.TypeParsing
     internal sealed class ByRefTypeName : HasElementTypeName
     {
         public ByRefTypeName(TypeName elementTypeName)
-            : base(elementTypeName)
-        {
-        }
+            : base(elementTypeName) { }
 
         public sealed override string ToString()
         {
@@ -173,9 +169,7 @@ namespace System.Reflection.Runtime.TypeParsing
     internal sealed class PointerTypeName : HasElementTypeName
     {
         public PointerTypeName(TypeName elementTypeName)
-            : base(elementTypeName)
-        {
-        }
+            : base(elementTypeName) { }
 
         public sealed override string ToString()
         {
@@ -188,7 +182,10 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class ConstructedGenericTypeName : NonQualifiedTypeName
     {
-        public ConstructedGenericTypeName(NamedTypeName genericType, IEnumerable<TypeName> genericArguments)
+        public ConstructedGenericTypeName(
+            NamedTypeName genericType,
+            IEnumerable<TypeName> genericArguments
+        )
         {
             GenericType = genericType;
             GenericArguments = genericArguments;
@@ -206,8 +203,12 @@ namespace System.Reflection.Runtime.TypeParsing
             {
                 s += sep;
                 sep = ",";
-                AssemblyQualifiedTypeName assemblyQualifiedTypeArgument = genericTypeArgument as AssemblyQualifiedTypeName;
-                if (assemblyQualifiedTypeArgument == null || assemblyQualifiedTypeArgument.AssemblyName == null)
+                AssemblyQualifiedTypeName assemblyQualifiedTypeArgument =
+                    genericTypeArgument as AssemblyQualifiedTypeName;
+                if (
+                    assemblyQualifiedTypeArgument == null
+                    || assemblyQualifiedTypeArgument.AssemblyName == null
+                )
                     s += genericTypeArgument.ToString();
                 else
                     s += "[" + genericTypeArgument.ToString() + "]";

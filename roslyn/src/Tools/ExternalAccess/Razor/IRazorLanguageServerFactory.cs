@@ -11,7 +11,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     internal interface IRazorLanguageServerFactoryWrapper
     {
-        IRazorLanguageServerTarget CreateLanguageServer(JsonRpc jsonRpc, IRazorCapabilitiesProvider capabilitiesProvider, HostServices hostServices);
+        IRazorLanguageServerTarget CreateLanguageServer(
+            JsonRpc jsonRpc,
+            IRazorCapabilitiesProvider capabilitiesProvider,
+            HostServices hostServices
+        );
 
         DocumentInfo CreateDocumentInfo(
             DocumentId id,
@@ -22,6 +26,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             string? filePath = null,
             bool isGenerated = false,
             bool designTimeOnly = false,
-            IRazorDocumentServiceProvider? razorDocumentServiceProvider = null);
+            IRazorDocumentServiceProvider? razorDocumentServiceProvider = null
+        );
     }
 }

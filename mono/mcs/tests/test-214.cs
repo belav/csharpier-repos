@@ -7,7 +7,7 @@ namespace N2
         public static int Main()
         {
             // Compilation-only test.
-            Foo ();
+            Foo();
             return 0;
         }
     }
@@ -16,8 +16,7 @@ namespace N2
 namespace N1
 {
     public class C1
-    {        
-        public static void Foo ()
-        { }
+    {
+        public static void Foo() { }
     }
 }

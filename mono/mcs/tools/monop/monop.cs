@@ -20,10 +20,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,31 +42,39 @@ using System.IO;
 using IKVM.Reflection;
 using System.Text;
 using Mono.CSharp;
-using Type=IKVM.Reflection.Type;
+using Type = IKVM.Reflection.Type;
 
-class MonoP {
-    static Universe universe = new Universe(UniverseOptions.EnableFunctionPointers | UniverseOptions.ResolveMissingMembers | UniverseOptions.DisablePseudoCustomAttributeRetrieval);
+class MonoP
+{
+    static Universe universe = new Universe(
+        UniverseOptions.EnableFunctionPointers
+            | UniverseOptions.ResolveMissingMembers
+            | UniverseOptions.DisablePseudoCustomAttributeRetrieval
+    );
     static Assembly mscorlib;
     static Type obsolete_attribute;
     static string assembly;
-    
+
     // very common namespaces, all in corlib
-    static readonly string [] v_common_ns = {
+    static readonly string[] v_common_ns =
+    {
         "System",
         "System.Collections",
         "System.Reflection",
         "System.Text",
         "System.IO",
     };
-    
-    static readonly string [] common_assemblies = {
+
+    static readonly string[] common_assemblies =
+    {
         "System.Xml.dll",
         "System.Web.dll",
         "gtk-sharp.dll",
         "glib-sharp.dll"
     };
-    
-    static readonly string [] common_ns = {
+
+    static readonly string[] common_ns =
+    {
         "System.Xml",
         "System.Web",
         "Foundation",
@@ -76,337 +84,399 @@ class MonoP {
         "Gtk",
         "GLib",
     };
-    
-    static Type GetType (string tname, bool ignoreCase)
+
+    static Type GetType(string tname, bool ignoreCase)
     {
         Type t;
-        if (assembly != null) {
-            Assembly a = GetAssembly (assembly, true);
-            t = a.GetType (tname, false, ignoreCase);
-        } else {
-            t = mscorlib.GetType (tname, false, ignoreCase);
+        if (assembly != null)
+        {
+            Assembly a = GetAssembly(assembly, true);
+            t = a.GetType(tname, false, ignoreCase);
+        }
+        else
+        {
+            t = mscorlib.GetType(tname, false, ignoreCase);
         }
         return t;
     }
-    
-    static string SearchTypes (string name, ref Type retval, out int count)
+
+    static string SearchTypes(string name, ref Type retval, out int count)
     {
-        StringBuilder sb = new StringBuilder ();
+        StringBuilder sb = new StringBuilder();
         Type current = null;
         count = 0;
 
-        string [] assemblies = GetKnownAssemblyNames ();
-        for (int i = 0; i < assemblies.Length; i++) {
-            Console.WriteLine ("Loading {0}", assemblies[i]);
-            Assembly a = GetAssembly (assemblies [i], false);
+        string[] assemblies = GetKnownAssemblyNames();
+        for (int i = 0; i < assemblies.Length; i++)
+        {
+            Console.WriteLine("Loading {0}", assemblies[i]);
+            Assembly a = GetAssembly(assemblies[i], false);
             if (a == null)
                 continue;
 
-            Type [] types = a.GetTypes ();
-            for (int j = 0; j < types.Length; j++) {
-                Type t = types [j];
+            Type[] types = a.GetTypes();
+            for (int j = 0; j < types.Length; j++)
+            {
+                Type t = types[j];
                 if (t.IsPublic == false)
                     continue;
-                
-                if (t.Name == name || t.Name.ToLower ().IndexOf (name.ToLower ()) > 0) {
+
+                if (t.Name == name || t.Name.ToLower().IndexOf(name.ToLower()) > 0)
+                {
                     current = t;
-                    count ++;
-                    sb.Append (t.FullName + " from " + a.Location + "\n");
+                    count++;
+                    sb.Append(t.FullName + " from " + a.Location + "\n");
                 }
             }
         }
 
-        if (count == 0) 
+        if (count == 0)
             return null;
 
-        if (count == 1) {
+        if (count == 1)
+        {
             retval = current;
             return String.Empty;
         }
-        
-        return sb.ToString ();
+
+        return sb.ToString();
     }
 
-    static string [] GetKnownAssemblyNames ()
+    static string[] GetKnownAssemblyNames()
     {
-        Console.WriteLine (options.PublicDir);
-        if (options.Style == "xios" || options.Style == "xand"){
-            return Directory.GetFiles (options.PublicDir, "*.dll");
+        Console.WriteLine(options.PublicDir);
+        if (options.Style == "xios" || options.Style == "xand")
+        {
+            return Directory.GetFiles(options.PublicDir, "*.dll");
         }
-        
-        Process p = new Process ();
+
+        Process p = new Process();
         p.StartInfo.UseShellExecute = false;
         p.StartInfo.RedirectStandardOutput = true;
         p.StartInfo.FileName = "gacutil";
         p.StartInfo.Arguments = "-l";
-        try {
-            p.Start ();
+        try
+        {
+            p.Start();
         }
-        catch {
-            Console.WriteLine ("WARNING: gacutil could not be found.");
+        catch
+        {
+            Console.WriteLine("WARNING: gacutil could not be found.");
             return new string[0];
         }
 
         string s;
-        ArrayList names = new ArrayList ();
+        ArrayList names = new ArrayList();
         StreamReader output = p.StandardOutput;
 
-        while ((s = output.ReadLine ()) != null)
-            names.Add (s);
+        while ((s = output.ReadLine()) != null)
+            names.Add(s);
 
-        p.WaitForExit ();
-        
+        p.WaitForExit();
+
         int length = names.Count - 1;
-        string [] retval = new string [length];
-        retval [0] = typeof (Object).Assembly.FullName;        
-        names.CopyTo (1, retval, 1, length - 1); // skip the first and last line
+        string[] retval = new string[length];
+        retval[0] = typeof(Object).Assembly.FullName;
+        names.CopyTo(1, retval, 1, length - 1); // skip the first and last line
         return retval;
     }
 
-    static Assembly GetAssembly (string assembly, bool exit)
+    static Assembly GetAssembly(string assembly, bool exit)
     {
         Assembly a = null;
 
         // if -r:~/foo.dll syntax is used the shell misses it
-        if (assembly.StartsWith ("~/"))
-            assembly = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.Personal), assembly.Substring (2));
+        if (assembly.StartsWith("~/"))
+            assembly = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                assembly.Substring(2)
+            );
 
-        try {
+        try
+        {
             // if it exists try to use LoadFrom
-            if (File.Exists (assembly))
-                a = universe.LoadFile (assembly);
+            if (File.Exists(assembly))
+                a = universe.LoadFile(assembly);
             else
-                a = LoadFromMonoPath (assembly);
-        } catch {
+                a = LoadFromMonoPath(assembly);
+        }
+        catch
+        {
             // ignore exception it gets handled below
         }
 
-        if (a == null && exit) {
-            Console.WriteLine ("Could not load {0}", MonoP.assembly);
-            Environment.Exit (1);
+        if (a == null && exit)
+        {
+            Console.WriteLine("Could not load {0}", MonoP.assembly);
+            Environment.Exit(1);
         }
 
         return a;
     }
 
-    static Assembly LoadFromMonoPath (string assembly)
+    static Assembly LoadFromMonoPath(string assembly)
     {
         // ; on win32, : everywhere else
         char sep = (Path.DirectorySeparatorChar == '/' ? ':' : ';');
-        string[] paths = Environment.GetEnvironmentVariable ("MONO_PATH").Split (sep);
-        foreach (string path in paths) {    
-            string apath = Path.Combine (path, assembly);
-            if (File.Exists (apath))
-                return universe.LoadFile (apath);    
+        string[] paths = Environment.GetEnvironmentVariable("MONO_PATH").Split(sep);
+        foreach (string path in paths)
+        {
+            string apath = Path.Combine(path, assembly);
+            if (File.Exists(apath))
+                return universe.LoadFile(apath);
         }
         return null;
     }
 
-    static Type GetType (string tname)
+    static Type GetType(string tname)
     {
-        return GetType (tname, false);
+        return GetType(tname, false);
     }
 
-    static void PrintRefs (string assembly)
+    static void PrintRefs(string assembly)
     {
-        Assembly a = GetAssembly (assembly, true);
-        foreach (AssemblyName an in a.GetReferencedAssemblies ())
-            Console.WriteLine (an);
+        Assembly a = GetAssembly(assembly, true);
+        foreach (AssemblyName an in a.GetReferencedAssemblies())
+            Console.WriteLine(an);
     }
 
-    static void PrintTypes (string assembly, bool show_private, bool filter_obsolete)
+    static void PrintTypes(string assembly, bool show_private, bool filter_obsolete)
     {
-        Assembly a = GetAssembly (assembly, true);
+        Assembly a = GetAssembly(assembly, true);
 
-        Console.WriteLine ();
-        Console.WriteLine ("Assembly Information:");
+        Console.WriteLine();
+        Console.WriteLine("Assembly Information:");
 
-        foreach (string ai in a.ToString ().Split (','))
-            Console.WriteLine (ai.Trim ());
-            
-        Console.WriteLine ();
-        Type [] types = show_private ? a.GetTypes () : a.GetExportedTypes ();
-        Array.Sort (types, new TypeSorter ());
+        foreach (string ai in a.ToString().Split(','))
+            Console.WriteLine(ai.Trim());
+
+        Console.WriteLine();
+        Type[] types = show_private ? a.GetTypes() : a.GetExportedTypes();
+        Array.Sort(types, new TypeSorter());
 
         int obsolete_count = 0;
-        foreach (Type t in types) {
-            if (filter_obsolete && t.IsDefined (obsolete_attribute, false))
+        foreach (Type t in types)
+        {
+            if (filter_obsolete && t.IsDefined(obsolete_attribute, false))
                 obsolete_count++;
             else
-                Console.WriteLine (t.FullName);
+                Console.WriteLine(t.FullName);
         }
 
-        Console.WriteLine ("\nTotal: {0} types.", types.Length - obsolete_count);
+        Console.WriteLine("\nTotal: {0} types.", types.Length - obsolete_count);
     }
-    
-    internal static void Completion (string prefix)
+
+    internal static void Completion(string prefix)
     {
-        foreach (Type t in mscorlib.GetExportedTypes ()) {
-            if (t.Name.StartsWith (prefix)) {
-                if (Array.IndexOf (v_common_ns, t.Namespace) != -1) {
-                    Console.WriteLine (t.Name);
+        foreach (Type t in mscorlib.GetExportedTypes())
+        {
+            if (t.Name.StartsWith(prefix))
+            {
+                if (Array.IndexOf(v_common_ns, t.Namespace) != -1)
+                {
+                    Console.WriteLine(t.Name);
                     return;
                 }
             }
-            
-            if (t.FullName.StartsWith (prefix)) {
-                Console.WriteLine (t.FullName);
+
+            if (t.FullName.StartsWith(prefix))
+            {
+                Console.WriteLine(t.FullName);
             }
         }
-        
-        foreach (string assm in common_assemblies) {
-            try {
-                
-                Assembly a = GetAssembly (assm, true);
-                foreach (Type t in a.GetExportedTypes ()) {
-                    
-                    if (t.Name.StartsWith (prefix)) {
-                        if (Array.IndexOf (common_ns, t.Namespace) != -1) {
-                            Console.WriteLine (t.Name);
+
+        foreach (string assm in common_assemblies)
+        {
+            try
+            {
+                Assembly a = GetAssembly(assm, true);
+                foreach (Type t in a.GetExportedTypes())
+                {
+                    if (t.Name.StartsWith(prefix))
+                    {
+                        if (Array.IndexOf(common_ns, t.Namespace) != -1)
+                        {
+                            Console.WriteLine(t.Name);
                             return;
                         }
                     }
-                    
-                    if (t.FullName.StartsWith (prefix)) {
-                        Console.WriteLine (t.FullName);
+
+                    if (t.FullName.StartsWith(prefix))
+                    {
+                        Console.WriteLine(t.FullName);
                     }
                 }
-                
-            } catch {
             }
+            catch { }
         }
-        
     }
 
-    static void ShowAll (string assembly, bool show_private, bool filter_obsolete)
+    static void ShowAll(string assembly, bool show_private, bool filter_obsolete)
     {
-        Assembly a = GetAssembly (assembly, true);
+        Assembly a = GetAssembly(assembly, true);
 
-        foreach (string ai in a.ToString ().Split (','))
-            Console.WriteLine (ai.Trim ());
-            
-        Console.WriteLine ();
-        Type [] types = show_private ? a.GetTypes () : a.GetExportedTypes ();
-        Array.Sort (types, new TypeSorter ());
-        
-        var sw = new StreamWriter (Console.OpenStandardOutput (), Console.Out.Encoding);                
-        foreach (Type t in types) {
-            if (filter_obsolete && t.IsDefined (obsolete_attribute, false))
+        foreach (string ai in a.ToString().Split(','))
+            Console.WriteLine(ai.Trim());
+
+        Console.WriteLine();
+        Type[] types = show_private ? a.GetTypes() : a.GetExportedTypes();
+        Array.Sort(types, new TypeSorter());
+
+        var sw = new StreamWriter(Console.OpenStandardOutput(), Console.Out.Encoding);
+        foreach (Type t in types)
+        {
+            if (filter_obsolete && t.IsDefined(obsolete_attribute, false))
                 continue;
 
-            new Outline (universe, mscorlib, t, sw, true, show_private, filter_obsolete).OutlineType ();
+            new Outline(
+                universe,
+                mscorlib,
+                t,
+                sw,
+                true,
+                show_private,
+                filter_obsolete
+            ).OutlineType();
         }
-        sw.Flush ();
+        sw.Flush();
     }
 
-    static Options options = new Options ();
-    
-    static int Main (string [] args)
+    static Options options = new Options();
+
+    static int Main(string[] args)
     {
-        if (!options.ProcessArgs (args))
+        if (!options.ProcessArgs(args))
             return 1;
-        
+
         if (options.Style == null)
-            mscorlib = universe.LoadFile (typeof (int).Assembly.Location);
+            mscorlib = universe.LoadFile(typeof(int).Assembly.Location);
         else
-            mscorlib = universe.LoadFile (Path.Combine (options.PublicDir, "mscorlib.dll"));
-                              
-        obsolete_attribute = mscorlib.GetType ("System.ObsoleteAttribute");
-        
-        if (options.AssemblyReference != null) {
+            mscorlib = universe.LoadFile(Path.Combine(options.PublicDir, "mscorlib.dll"));
+
+        obsolete_attribute = mscorlib.GetType("System.ObsoleteAttribute");
+
+        if (options.AssemblyReference != null)
+        {
             assembly = options.AssemblyReference;
 
-            if (options.ShowAll){
-                ShowAll (assembly, options.ShowPrivate, options.FilterObsolete);
+            if (options.ShowAll)
+            {
+                ShowAll(assembly, options.ShowPrivate, options.FilterObsolete);
                 return 0;
-            } else {
-                if (options.Type == null) {
+            }
+            else
+            {
+                if (options.Type == null)
+                {
                     if (options.PrintRefs)
-                        PrintRefs (assembly);
+                        PrintRefs(assembly);
                     else
-                        PrintTypes (assembly, options.ShowPrivate, options.FilterObsolete);
+                        PrintTypes(assembly, options.ShowPrivate, options.FilterObsolete);
                     return 0;
                 }
             }
         }
-        
+
         string message = null;
         string tname = options.Type;
         Type t = null;
         int count;
 
-
-        if (options.Search) {
-            string matches = SearchTypes (tname, ref t, out count);
+        if (options.Search)
+        {
+            string matches = SearchTypes(tname, ref t, out count);
 
             if (count == 0)
                 goto notfound;
 
             if (count == 1)
                 goto found;
-            
-            if (count > 1){
-                Console.WriteLine ("Found " + count + " types that match:");
-                Console.WriteLine (matches);
+
+            if (count > 1)
+            {
+                Console.WriteLine("Found " + count + " types that match:");
+                Console.WriteLine(matches);
                 return 0;
             }
         }
-            
-        t = GetType (tname);
 
-        if (t == null) {
+        t = GetType(tname);
+
+        if (t == null)
+        {
             // Try some very common ones, dont load anything
-            foreach (string ns in v_common_ns) {
-                t = GetType (ns + "." + tname, true);
+            foreach (string ns in v_common_ns)
+            {
+                t = GetType(ns + "." + tname, true);
                 if (t != null)
                     goto found;
             }
         }
 
-        if (t == null) {
-            foreach (string assm in GetKnownAssemblyNames ()) {
-                try {
-                    Assembly a = GetAssembly (assm, false);
+        if (t == null)
+        {
+            foreach (string assm in GetKnownAssemblyNames())
+            {
+                try
+                {
+                    Assembly a = GetAssembly(assm, false);
                     if (a == null)
                         continue;
-                    t = a.GetType (tname, false, true);
-                    if (t != null) {
-                        message = String.Format ("{0} is included in the {1} assembly.",
-                                t.FullName, 
-                                t.Assembly.GetName ().Name);
+                    t = a.GetType(tname, false, true);
+                    if (t != null)
+                    {
+                        message = String.Format(
+                            "{0} is included in the {1} assembly.",
+                            t.FullName,
+                            t.Assembly.GetName().Name
+                        );
                         goto found;
                     }
-                    foreach (string ns in common_ns) {
-                        t = a.GetType (ns + "." + tname, false, true);
-                        if (t != null) {
-                            message = String.Format ("{0} is included in the {1} assembly.",
-                                    t.FullName, 
-                                    t.Assembly.GetName ().Name);
+                    foreach (string ns in common_ns)
+                    {
+                        t = a.GetType(ns + "." + tname, false, true);
+                        if (t != null)
+                        {
+                            message = String.Format(
+                                "{0} is included in the {1} assembly.",
+                                t.FullName,
+                                t.Assembly.GetName().Name
+                            );
                             goto found;
                         }
                     }
-                } catch (Exception e){
-                    Console.WriteLine ("Failure: " + e);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Failure: " + e);
                 }
             }
         }
 
-    notfound:
-        if (t == null) {
-            Console.WriteLine ("Could not find {0}", tname);
+        notfound:
+        if (t == null)
+        {
+            Console.WriteLine("Could not find {0}", tname);
             return 1;
         }
-    found:
+        found:
         //
         // This gets us nice buffering
         //
-        StreamWriter sw = new StreamWriter (Console.OpenStandardOutput (), Console.Out.Encoding);                
-        new Outline (universe, mscorlib, t, sw, options.DeclaredOnly, options.ShowPrivate, options.FilterObsolete).OutlineType ();
-        sw.Flush ();
+        StreamWriter sw = new StreamWriter(Console.OpenStandardOutput(), Console.Out.Encoding);
+        new Outline(
+            universe,
+            mscorlib,
+            t,
+            sw,
+            options.DeclaredOnly,
+            options.ShowPrivate,
+            options.FilterObsolete
+        ).OutlineType();
+        sw.Flush();
 
         if (message != null)
-            Console.WriteLine (message);
+            Console.WriteLine(message);
         return 0;
     }
 }
-

@@ -4,43 +4,34 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class GenericWithConstraintDoesNotCauseOtherTypesToKeepInterface
     {
-        public static void Main ()
+        public static void Main()
         {
             Foo f = null;
-            Helper (f);
-            OtherMethodToDoStuff ();
+            Helper(f);
+            OtherMethodToDoStuff();
         }
 
         [Kept]
-        static void Helper<T> (T f) where T : IFoo
+        static void Helper<T>(T f)
+            where T : IFoo { }
+
+        [Kept]
+        static void OtherMethodToDoStuff()
         {
+            HelperToUseFoo2(null);
         }
 
         [Kept]
-        static void OtherMethodToDoStuff ()
-        {
-            HelperToUseFoo2 (null);
-        }
+        static void HelperToUseFoo2(Foo2 f) { }
 
         [Kept]
-        static void HelperToUseFoo2 (Foo2 f)
-        {
-        }
+        [KeptInterface(typeof(IFoo))]
+        class Foo : IFoo { }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
-        class Foo : IFoo
-        {
-        }
+        class Foo2 : IFoo { }
 
         [Kept]
-        class Foo2 : IFoo
-        {
-        }
-
-        [Kept]
-        interface IFoo
-        {
-        }
+        interface IFoo { }
     }
 }

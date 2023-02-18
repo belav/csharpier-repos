@@ -7,12 +7,13 @@ struct S
 {
     internal string value;
 
-    public S (int arg)
+    public S(int arg)
     {
-        if (arg > 0) {
+        if (arg > 0)
+        {
             return;
         }
 
-        throw new ApplicationException ();
+        throw new ApplicationException();
     }
 }

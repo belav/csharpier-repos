@@ -32,19 +32,17 @@ namespace Microsoft.Win32.SafeHandles
 {
     public sealed class SafeNCryptKeyHandle : SafeNCryptHandle
     {
-        public SafeNCryptKeyHandle ()
-        {
-        }
+        public SafeNCryptKeyHandle() { }
 
-        public SafeNCryptKeyHandle (IntPtr handle, System.Runtime.InteropServices.SafeHandle parentHandle)
-            : base (handle, parentHandle)
-        {
+        public SafeNCryptKeyHandle(
+            IntPtr handle,
+            System.Runtime.InteropServices.SafeHandle parentHandle
+        )
+            : base(handle, parentHandle) { }
 
-        }
-
-        protected override bool ReleaseNativeHandle ()
+        protected override bool ReleaseNativeHandle()
         {
             return false;
         }
     }
-}    
+}

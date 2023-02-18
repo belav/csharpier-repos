@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
     [Trait(Traits.Feature, Traits.Features.CodeActionsMergeNestedIfStatements)]
     public sealed partial class MergeNestedIfStatementsTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpMergeNestedIfStatementsCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpMergeNestedIfStatementsCodeRefactoringProvider();
 
         [Theory]
         [InlineData("[||]if (b)")]
@@ -30,19 +32,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         public async Task MergedOnNestedIfSpans(string ifLine)
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
         if (a)
         {
-            " + ifLine + @"
+            "
+                    + ifLine
+                    + @"
             {
             }
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -50,14 +54,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedOnNestedIfExtendedHeaderSelection()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -69,7 +74,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -77,14 +82,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedOnNestedIfFullSelection()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -96,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
 |]        }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -104,14 +110,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedOnNestedIfFullSelectionWithElseClause()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -129,7 +136,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -140,14 +147,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnNestedIfFullSelectionWithoutElseClause()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -164,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -178,25 +187,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         public async Task NotMergedOnNestedIfSpans(string ifLine)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
         if (a)
         {
-            " + ifLine + @"
+            "
+                    + ifLine
+                    + @"
             {
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnNestedIfOverreachingSelection1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -207,14 +219,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnNestedIfOverreachingSelection2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -225,14 +238,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnNestedIfBodySelection()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -243,14 +257,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }|]
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnNestedIfBodyCaret1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -261,14 +276,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnNestedIfBodyCaret2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -279,14 +295,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }[||]
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnSingleIfInsideBlock()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -296,14 +313,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnSingleIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -311,14 +329,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithAndExpressions()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -330,7 +349,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -338,14 +357,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithOrExpressionParenthesized1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -357,7 +377,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -365,14 +385,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithOrExpressionParenthesized2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -384,7 +405,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -392,14 +413,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithBitwiseOrExpressionNotParenthesized1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -411,7 +433,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -419,14 +441,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithBitwiseOrExpressionNotParenthesized2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -438,7 +461,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -446,14 +469,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMixedExpressions1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -465,7 +489,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -473,14 +497,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMixedExpressions2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -492,7 +517,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c, bool d)
     {
@@ -500,7 +525,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -508,7 +534,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
             // Do not consider the while loop to be a simple block (as might be suggested by some language-agnostic helpers).
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -518,7 +544,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 {
                 }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -526,7 +553,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
             // Do not consider the using statement to be a simple block (as might be suggested by some language-agnostic helpers).
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -538,7 +565,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 }
             }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -546,7 +574,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
             // Do not consider the using statement to be a simple block (as might be suggested by some language-agnostic helpers).
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -558,14 +586,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithNestedIfInsideNestedBlockStatementInsideBlock()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -580,7 +609,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -589,14 +618,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a && b);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithNestedIfInsideNestedBlockStatementWithoutBlock()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -609,21 +639,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
         if (a && b)
             System.Console.WriteLine(a && b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithNestedIfInsideBlockStatementInsideBlock()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -636,7 +667,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -645,14 +676,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a && b);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithNestedIfInsideBlockStatementWithoutBlock()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -663,21 +695,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
         if (a && b)
             System.Console.WriteLine(a && b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithNestedIfWithoutBlockStatementInsideBlock()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -688,7 +721,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -697,14 +730,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a && b);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithNestedIfWithoutBlockStatementWithoutBlock()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -713,21 +747,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 System.Console.WriteLine(a && b);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
         if (a && b)
             System.Console.WriteLine(a && b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseClauseOnNestedIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -739,14 +774,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 System.Console.WriteLine();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfClauseOnNestedIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -758,14 +794,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 System.Console.WriteLine(a);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfElseClausesOnNestedIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -779,14 +816,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 System.Console.WriteLine();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseClauseOnOuterIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -798,14 +836,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfClauseOnOuterIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -817,14 +856,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else if (a)
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfElseClausesOnOuterIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -838,14 +878,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfElseClauses1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -859,14 +900,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfElseClauses2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -880,14 +922,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else if (a)
             System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfClauses1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -901,14 +944,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else if (b)
             System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfClauses2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -922,14 +966,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else if (a)
             System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfClauses3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -947,14 +992,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(b);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseIfClauses4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -970,14 +1016,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else if (a)
             System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseClauses1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -995,14 +1042,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(b);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseClauses2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1016,14 +1064,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseClauses3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1039,7 +1088,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -1047,7 +1097,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
             // Do not consider the using statement to be a simple block (as might be suggested by some language-agnostic helpers).
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1064,14 +1114,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             using (null)
                 System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedIntoElseIfWithUnmatchingElseClauses1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1091,14 +1142,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(b);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedIntoElseIfWithUnmatchingElseClauses2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1114,14 +1166,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedIntoElseIfWithUnmatchingElseClauses3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1139,7 +1192,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -1147,7 +1201,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
             // Do not consider the using statement to be a simple block (as might be suggested by some language-agnostic helpers).
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1166,14 +1220,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             using (null)
                 System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseClauses1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1188,7 +1243,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1197,14 +1252,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseClauses2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1223,7 +1279,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1234,14 +1290,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseIfClauses()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1256,7 +1313,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1265,14 +1322,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else if (a)
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseIfElseClauses()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1291,7 +1349,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1302,14 +1360,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseClausesWithDifferenceInBlocks1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1326,7 +1385,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1335,14 +1394,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseClausesWithDifferenceInBlocks2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1359,7 +1419,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1370,14 +1430,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseClausesWithDifferenceInBlocks3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1398,7 +1459,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1411,14 +1472,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseIfClausesWithDifferenceInBlocks()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1435,7 +1497,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1444,14 +1506,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else if (a)
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseIfElseClausesWithDifferenceInBlocks()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1474,7 +1537,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1487,14 +1550,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedIntoElseIfWithMatchingElseClauses1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1511,7 +1575,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1522,14 +1586,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedIntoElseIfWithMatchingElseClauses2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1550,7 +1615,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1563,14 +1628,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseClauseOnNestedIfWithoutBlock()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1580,14 +1646,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             else
                 System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithUnmatchingElseClausesForNestedIfWithoutBlock()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1599,14 +1666,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithMatchingElseClausesForNestedIfWithoutBlock()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1619,7 +1687,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             System.Console.WriteLine(a);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1628,14 +1696,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithSingleLineFormatting()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1645,21 +1714,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
         if (a && b)
             System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraUnmatchingStatementBelowNestedIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1675,14 +1745,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithExtraUnmatchingStatementBelowOuterIf()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1699,7 +1770,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         System.Console.WriteLine(b);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1710,14 +1781,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
 
         System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraUnmatchingStatementsIfControlFlowContinues()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1737,14 +1809,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         System.Console.WriteLine(b);
         System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraUnmatchingStatementsIfControlFlowQuits()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1762,14 +1835,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraPrecedingMatchingStatementsIfControlFlowQuits()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1787,14 +1861,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         else
             System.Console.WriteLine(a);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraMatchingStatementsIfControlFlowContinues1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1814,14 +1889,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         System.Console.WriteLine(a);
         System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraMatchingStatementsIfControlFlowContinues2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1841,14 +1917,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         if  (a)
             return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraMatchingStatementsIfControlFlowContinues3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1877,14 +1954,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraMatchingStatementsIfControlFlowContinues4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1907,14 +1985,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 continue;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedIntoElseIfWithExtraMatchingStatementsIfControlFlowContinues()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1938,14 +2017,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
 
         System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithExtraMatchingStatementsIfControlFlowQuits1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1964,7 +2044,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         return;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -1975,14 +2055,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithExtraMatchingStatementsIfControlFlowQuits2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2004,7 +2085,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         System.Console.WriteLine(b);
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2017,14 +2098,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         throw new System.Exception();
         System.Console.WriteLine(b);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithExtraMatchingStatementsIfControlFlowQuits3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2054,7 +2136,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2072,14 +2154,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithExtraMatchingStatementsIfControlFlowQuits4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2109,7 +2192,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2128,14 +2211,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithExtraMatchingStatementsIfControlFlowQuits5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2167,7 +2251,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2187,14 +2271,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithExtraMatchingStatementsIfControlFlowQuits6()
         {
             await TestInRegularAndScriptAsync(
-@"bool a = bool.Parse("""");
+                @"bool a = bool.Parse("""");
 bool b = bool.Parse("""");
 
 start:
@@ -2222,7 +2307,7 @@ switch (a)
         goto start;
 }
 ",
-@"bool a = bool.Parse("""");
+                @"bool a = bool.Parse("""");
 bool b = bool.Parse("""");
 
 start:
@@ -2238,7 +2323,8 @@ switch (a)
     default:
         goto start;
 }
-");
+"
+            );
         }
 
         [Fact]
@@ -2246,7 +2332,7 @@ switch (a)
         {
             // Switch sections are interesting in that they are blocks of statements that aren't BlockSyntax.
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2267,7 +2353,7 @@ switch (a)
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2282,14 +2368,15 @@ switch (a)
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedIntoElseIfWithExtraMatchingStatementsIfControlFlowQuits()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2314,7 +2401,7 @@ switch (a)
         return;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2331,14 +2418,15 @@ switch (a)
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraMatchingStatementsInsideExtraBlockIfControlFlowQuits()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2354,14 +2442,15 @@ switch (a)
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedWithExtraMatchingStatementsInsideInnermostBlockIfControlFlowQuits()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2378,7 +2467,7 @@ switch (a)
         return;
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2387,14 +2476,15 @@ switch (a)
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedWithExtraMatchingStatementInOuterScopeOfEmbeddedStatementIfControlFlowQuits()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2409,14 +2499,15 @@ switch (a)
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedIntoElseIfWithExtraMatchingStatementInOuterScopeOfEmbeddedStatementIfControlFlowQuits()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -2433,7 +2524,8 @@ switch (a)
 
         return;
     }
-}");
+}"
+            );
         }
     }
 }

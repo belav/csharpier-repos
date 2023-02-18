@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,175 +30,192 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class UrlIdentityPermission : CodeAccessPermission, IBuiltInPermission {
-
+    [ComVisible(true)]
+    public sealed class UrlIdentityPermission : CodeAccessPermission, IBuiltInPermission
+    {
         private const int version = 1;
 
         private string url;
 
-        public UrlIdentityPermission (PermissionState state)
+        public UrlIdentityPermission(PermissionState state)
         {
             // false == do not allow Unrestricted for Identity Permissions
-            CheckPermissionState (state, false);
+            CheckPermissionState(state, false);
             url = String.Empty;
         }
 
-        public UrlIdentityPermission (string site)
+        public UrlIdentityPermission(string site)
         {
             if (site == null)
-                throw new ArgumentNullException ("site");
+                throw new ArgumentNullException("site");
             url = site;
         }
 
-        public string Url { 
+        public string Url
+        {
             get { return url; }
             set { url = ((value == null) ? String.Empty : value); }
         }
-        public override IPermission Copy () 
+
+        public override IPermission Copy()
         {
-            if (url == null) {
-                return new UrlIdentityPermission (PermissionState.None);
+            if (url == null)
+            {
+                return new UrlIdentityPermission(PermissionState.None);
             }
             else
-                return new UrlIdentityPermission (url);
+                return new UrlIdentityPermission(url);
         }
 
-        public override void FromXml (SecurityElement esd)
+        public override void FromXml(SecurityElement esd)
         {
             // General validation in CodeAccessPermission
-            CheckSecurityElement (esd, "esd", 1, 1);
-            // Note: we do not (yet) care about the return value 
+            CheckSecurityElement(esd, "esd", 1, 1);
+            // Note: we do not (yet) care about the return value
             // as we only accept version 1 (min/max values)
 
-            string u = esd.Attribute ("Url");
+            string u = esd.Attribute("Url");
             if (u == null)
                 url = String.Empty;
             else
                 Url = u;
         }
 
-        public override IPermission Intersect (IPermission target) 
+        public override IPermission Intersect(IPermission target)
         {
             // if one permission is null (object or url) then there's no intersection
             // if both are null then intersection is null
-            UrlIdentityPermission uip = Cast (target);
-            if ((uip == null) || (IsEmpty ()))
+            UrlIdentityPermission uip = Cast(target);
+            if ((uip == null) || (IsEmpty()))
                 return null;
-            if (Match (uip.url)) {
+            if (Match(uip.url))
+            {
                 // longest form is the intersection
                 if (url.Length > uip.url.Length)
-                    return Copy ();
+                    return Copy();
                 else
-                    return uip.Copy ();
+                    return uip.Copy();
             }
             return null;
         }
 
-        public override bool IsSubsetOf (IPermission target) 
+        public override bool IsSubsetOf(IPermission target)
         {
-            UrlIdentityPermission uip = Cast (target);
+            UrlIdentityPermission uip = Cast(target);
             if (uip == null)
-                return IsEmpty ();
-            if (IsEmpty ())
+                return IsEmpty();
+            if (IsEmpty())
                 return true;
             if (uip.url == null)
                 return false;
 
             // here Match wouldn't work as it is bidirectional
-            int wildcard = uip.url.LastIndexOf ('*');
+            int wildcard = uip.url.LastIndexOf('*');
             if (wildcard == -1)
-                wildcard = uip.url.Length;    // exact match
+                wildcard = uip.url.Length; // exact match
 
-            return (String.Compare (url, 0, uip.url, 0, wildcard, true, CultureInfo.InvariantCulture) == 0);
+            return (
+                String.Compare(url, 0, uip.url, 0, wildcard, true, CultureInfo.InvariantCulture)
+                == 0
+            );
         }
 
-        public override SecurityElement ToXml () 
+        public override SecurityElement ToXml()
         {
-            SecurityElement se = Element (version);
-            if (!IsEmpty ())
-                se.AddAttribute ("Url", url);
+            SecurityElement se = Element(version);
+            if (!IsEmpty())
+                se.AddAttribute("Url", url);
             return se;
         }
 
-        public override IPermission Union (IPermission target) 
+        public override IPermission Union(IPermission target)
         {
-            UrlIdentityPermission uip = Cast (target);
+            UrlIdentityPermission uip = Cast(target);
             if (uip == null)
-                return Copy ();
-            if (IsEmpty () && uip.IsEmpty ())
+                return Copy();
+            if (IsEmpty() && uip.IsEmpty())
                 return null;
-            if (uip.IsEmpty ())
-                return Copy ();
-            if (IsEmpty ())
-                return uip.Copy ();
-            if (Match (uip.url)) {
+            if (uip.IsEmpty())
+                return Copy();
+            if (IsEmpty())
+                return uip.Copy();
+            if (Match(uip.url))
+            {
                 // shortest form is the union
                 if (url.Length < uip.url.Length)
-                    return Copy ();
+                    return Copy();
                 else
-                    return uip.Copy ();
+                    return uip.Copy();
             }
-            throw new ArgumentException (Locale.GetText (
-                "Cannot union two different urls."), "target");
+            throw new ArgumentException(
+                Locale.GetText("Cannot union two different urls."),
+                "target"
+            );
         }
 
         // IBuiltInPermission
-        int IBuiltInPermission.GetTokenIndex ()
+        int IBuiltInPermission.GetTokenIndex()
         {
-            return (int) BuiltInToken.UrlIdentity;
+            return (int)BuiltInToken.UrlIdentity;
         }
 
         // helpers
 
-        private bool IsEmpty ()
+        private bool IsEmpty()
         {
             return ((url == null) || (url.Length == 0));
         }
 
-        private UrlIdentityPermission Cast (IPermission target)
+        private UrlIdentityPermission Cast(IPermission target)
         {
             if (target == null)
                 return null;
 
             UrlIdentityPermission uip = (target as UrlIdentityPermission);
-            if (uip == null) {
-                ThrowInvalidPermission (target, typeof (UrlIdentityPermission));
+            if (uip == null)
+            {
+                ThrowInvalidPermission(target, typeof(UrlIdentityPermission));
             }
 
             return uip;
         }
 
-        private bool Match (string target) 
+        private bool Match(string target)
         {
             if ((url == null) || (target == null))
                 return false;
 
-            int wcu = url.LastIndexOf ('*');
-            int wct = target.LastIndexOf ('*');
+            int wcu = url.LastIndexOf('*');
+            int wct = target.LastIndexOf('*');
             int length = Int32.MaxValue;
 
-            if ((wcu == -1) && (wct == -1)) {
+            if ((wcu == -1) && (wct == -1))
+            {
                 // no wildcard, this is an exact match
-                length = Math.Max (url.Length, target.Length);
+                length = Math.Max(url.Length, target.Length);
             }
-            else if (wcu == -1) {
+            else if (wcu == -1)
+            {
                 // only "this" has a wildcard, use it
                 length = wct;
             }
-            else if (wct == -1) {
+            else if (wct == -1)
+            {
                 // only "target" has a wildcard, use it
                 length = wcu;
             }
-            else {
+            else
+            {
                 // both have wildcards, partial match with the smallest
-                length = Math.Min (wcu, wct);
+                length = Math.Min(wcu, wct);
             }
 
-            return (String.Compare (url, 0, target, 0, length, true, CultureInfo.InvariantCulture) == 0);
+            return (
+                String.Compare(url, 0, target, 0, length, true, CultureInfo.InvariantCulture) == 0
+            );
         }
     }
 }

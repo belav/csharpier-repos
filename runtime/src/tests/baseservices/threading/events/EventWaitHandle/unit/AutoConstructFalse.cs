@@ -28,7 +28,7 @@ public class AutoConstructFalse : EventWaitHandleTest
         // Should not signal
         if (ewh.TestWaitOne(1000, sw))
             return -3;
-        
+
         return TestPassed;
     }
 }

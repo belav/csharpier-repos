@@ -3,29 +3,27 @@
 
 using System;
 
-namespace Mono.ILASM {
-
+namespace Mono.ILASM
+{
     /// <summary>
     /// </summary>
-    public class ScannerAdapter : yyParser.yyInput {
-
+    public class ScannerAdapter : yyParser.yyInput
+    {
         private ITokenStream tokens;
 
         /// <summary>
         /// </summary>
         /// <param name="tokens"></param>
-        public ScannerAdapter (ITokenStream tokens)
+        public ScannerAdapter(ITokenStream tokens)
         {
             this.tokens = tokens;
         }
 
-
         /// <summary>
         /// </summary>
-        public ITokenStream BaseStream {
-            get {
-                return tokens;
-            }
+        public ITokenStream BaseStream
+        {
+            get { return tokens; }
         }
 
         //
@@ -35,7 +33,7 @@ namespace Mono.ILASM {
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public bool advance ()
+        public bool advance()
         {
             return (tokens.NextToken != ILToken.EOF);
         }
@@ -43,7 +41,7 @@ namespace Mono.ILASM {
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public int token ()
+        public int token()
         {
             return tokens.LastToken.TokenId;
         }
@@ -51,10 +49,9 @@ namespace Mono.ILASM {
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public object value ()
+        public object value()
         {
             return tokens.LastToken.Value;
         }
     }
 }
-

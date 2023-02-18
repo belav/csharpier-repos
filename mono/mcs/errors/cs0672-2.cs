@@ -4,12 +4,13 @@
 
 using System;
 
-class BaseClass {
-        [Obsolete]
-        protected virtual void Method () {}
+class BaseClass
+{
+    [Obsolete]
+    protected virtual void Method() { }
 }
 
-class C: BaseClass
+class C : BaseClass
 {
-        protected override void Method () {}
+    protected override void Method() { }
 }

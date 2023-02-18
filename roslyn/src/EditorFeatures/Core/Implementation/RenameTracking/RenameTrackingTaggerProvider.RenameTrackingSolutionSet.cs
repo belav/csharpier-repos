@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             public RenameTrackingSolutionSet(
                 ISymbol symbolToRename,
                 Solution originalSolution,
-                Solution renamedSolution)
+                Solution renamedSolution
+            )
             {
                 Symbol = symbolToRename;
                 OriginalSolution = originalSolution;

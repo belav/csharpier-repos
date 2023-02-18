@@ -26,13 +26,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
+namespace Mono.Cecil.Metadata
+{
     using System;
     using System.Collections;
 
-    internal class MetadataStreamCollection : ICollection, IMetadataVisitable {
-
+    internal class MetadataStreamCollection : ICollection, IMetadataVisitable
+    {
         IList m_items;
 
         BlobHeap m_blobHeap;
@@ -41,72 +41,87 @@ namespace Mono.Cecil.Metadata {
         UserStringsHeap m_usHeap;
         TablesHeap m_tablesHeap;
 
-        public MetadataStream this [int index] {
-            get { return m_items [index] as MetadataStream; }
-            set { m_items [index] = value; }
+        public MetadataStream this[int index]
+        {
+            get { return m_items[index] as MetadataStream; }
+            set { m_items[index] = value; }
         }
 
-        public int Count {
+        public int Count
+        {
             get { return m_items.Count; }
         }
 
-        public bool IsSynchronized {
+        public bool IsSynchronized
+        {
             get { return false; }
         }
 
-        public object SyncRoot {
+        public object SyncRoot
+        {
             get { return this; }
         }
 
-        public BlobHeap BlobHeap {
-            get {
+        public BlobHeap BlobHeap
+        {
+            get
+            {
                 if (m_blobHeap == null)
-                    m_blobHeap = GetHeap (MetadataStream.Blob) as BlobHeap;
+                    m_blobHeap = GetHeap(MetadataStream.Blob) as BlobHeap;
                 return m_blobHeap;
             }
         }
 
-        public GuidHeap GuidHeap {
-            get {
+        public GuidHeap GuidHeap
+        {
+            get
+            {
                 if (m_guidHeap == null)
-                    m_guidHeap = GetHeap (MetadataStream.GUID) as GuidHeap;
+                    m_guidHeap = GetHeap(MetadataStream.GUID) as GuidHeap;
                 return m_guidHeap;
             }
         }
 
-        public StringsHeap StringsHeap {
-            get {
+        public StringsHeap StringsHeap
+        {
+            get
+            {
                 if (m_stringsHeap == null)
-                    m_stringsHeap = GetHeap (MetadataStream.Strings) as StringsHeap;
+                    m_stringsHeap = GetHeap(MetadataStream.Strings) as StringsHeap;
                 return m_stringsHeap;
             }
         }
 
-        public TablesHeap TablesHeap {
-            get {
+        public TablesHeap TablesHeap
+        {
+            get
+            {
                 if (m_tablesHeap == null)
-                    m_tablesHeap = GetHeap (MetadataStream.Tables) as TablesHeap;
+                    m_tablesHeap = GetHeap(MetadataStream.Tables) as TablesHeap;
                 return m_tablesHeap;
             }
         }
 
-        public UserStringsHeap UserStringsHeap {
-            get {
+        public UserStringsHeap UserStringsHeap
+        {
+            get
+            {
                 if (m_usHeap == null)
-                    m_usHeap = GetHeap (MetadataStream.UserStrings) as UserStringsHeap;
+                    m_usHeap = GetHeap(MetadataStream.UserStrings) as UserStringsHeap;
                 return m_usHeap;
             }
         }
 
-        public MetadataStreamCollection ()
+        public MetadataStreamCollection()
         {
-            m_items = new ArrayList (5);
+            m_items = new ArrayList(5);
         }
 
-        private MetadataHeap GetHeap (string name)
+        private MetadataHeap GetHeap(string name)
         {
-            for (int i = 0; i < m_items.Count; i++) {
-                MetadataStream stream = m_items [i] as MetadataStream;
+            for (int i = 0; i < m_items.Count; i++)
+            {
+                MetadataStream stream = m_items[i] as MetadataStream;
                 if (stream.Heap.Name == name)
                     return stream.Heap;
             }
@@ -114,32 +129,32 @@ namespace Mono.Cecil.Metadata {
             return null;
         }
 
-        internal void Add (MetadataStream value)
+        internal void Add(MetadataStream value)
         {
-            m_items.Add (value);
+            m_items.Add(value);
         }
 
-        internal void Remove (MetadataStream value)
+        internal void Remove(MetadataStream value)
         {
-            m_items.Remove (value);
+            m_items.Remove(value);
         }
 
-        public void CopyTo (Array ary, int index)
+        public void CopyTo(Array ary, int index)
         {
-            m_items.CopyTo (ary, index);
+            m_items.CopyTo(ary, index);
         }
 
-        public IEnumerator GetEnumerator ()
+        public IEnumerator GetEnumerator()
         {
-            return m_items.GetEnumerator ();
+            return m_items.GetEnumerator();
         }
 
-        public void Accept (IMetadataVisitor visitor)
+        public void Accept(IMetadataVisitor visitor)
         {
-            visitor.VisitMetadataStreamCollection (this);
+            visitor.VisitMetadataStreamCollection(this);
 
             for (int i = 0; i < m_items.Count; i++)
-                this [i].Accept (visitor);
+                this[i].Accept(visitor);
         }
     }
 }

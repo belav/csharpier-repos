@@ -15,7 +15,13 @@ namespace System.Reflection
     //
     public sealed class RuntimeAssemblyName : IEquatable<RuntimeAssemblyName>
     {
-        public RuntimeAssemblyName(string name, Version version, string cultureName, AssemblyNameFlags flags, byte[] publicKeyOrToken)
+        public RuntimeAssemblyName(
+            string name,
+            Version version,
+            string cultureName,
+            AssemblyNameFlags flags,
+            byte[] publicKeyOrToken
+        )
         {
             Debug.Assert(name != null);
             this.Name = name;
@@ -114,10 +120,7 @@ namespace System.Reflection
 
         public string FullName
         {
-            get
-            {
-                return AssemblyNameFormatter.ComputeDisplayName(this);
-            }
+            get { return AssemblyNameFormatter.ComputeDisplayName(this); }
         }
     }
 }

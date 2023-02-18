@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,44 +36,49 @@ using System.Web.UI.HtmlControls;
 using MonoTests.stand_alone.WebHarness;
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.HtmlControls {
-
-    class TestPage : SystemWebTestShim.Page {
-
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    class TestPage : SystemWebTestShim.Page
+    {
         private HttpContext ctx;
 
         // don't call base class (so _context is never set to a non-null value)
-        protected internal override HttpContext Context {
-            get {
-                if (ctx == null) {
-                    ctx = new HttpContext (
-                        new HttpRequest ("default.aspx", "http://mono-project.com/", "q=1&q2=2"),
-                        new HttpResponse (new StringWriter ())
-                        );
+        protected internal override HttpContext Context
+        {
+            get
+            {
+                if (ctx == null)
+                {
+                    ctx = new HttpContext(
+                        new HttpRequest("default.aspx", "http://mono-project.com/", "q=1&q2=2"),
+                        new HttpResponse(new StringWriter())
+                    );
                 }
                 return ctx;
             }
         }
 
-        public void SetContext ()
-        {            
-            SetContext (Context);
+        public void SetContext()
+        {
+            SetContext(Context);
         }
     }
-    
-    public class FormPoker : HtmlForm {
-        public FormPoker () {
-            TrackViewState ();
+
+    public class FormPoker : HtmlForm
+    {
+        public FormPoker()
+        {
+            TrackViewState();
         }
 
-        public object SaveState ()
+        public object SaveState()
         {
-            return SaveViewState ();
+            return SaveViewState();
         }
 
-        public void LoadState (object state)
+        public void LoadState(object state)
         {
-            LoadViewState (state);
+            LoadViewState(state);
         }
 
         /* Not called at all when running the current tests (2005/09/29)
@@ -83,147 +88,154 @@ namespace MonoTests.System.Web.UI.HtmlControls {
             base.OnInit (e);
         }
         */
-        public string RenderChildren ()
+        public string RenderChildren()
         {
             StringWriter sw = new StringWriter();
-            HtmlTextWriter w = new HtmlTextWriter (sw);
-            
-            RenderChildren (w);
+            HtmlTextWriter w = new HtmlTextWriter(sw);
+
+            RenderChildren(w);
 
             return sw.ToString();
         }
 
-        public string RenderAttributes ()
+        public string RenderAttributes()
         {
             StringWriter sw = new StringWriter();
-            HtmlTextWriter w = new HtmlTextWriter (sw);
-            
-            RenderAttributes (w);
+            HtmlTextWriter w = new HtmlTextWriter(sw);
 
-            return sw.ToString ();
+            RenderAttributes(w);
+
+            return sw.ToString();
         }
-        public ControlCollection GetControlCollection ()
+
+        public ControlCollection GetControlCollection()
         {
             return CreateControlCollection();
         }
     }
 
-    class FUControl : UserControl {
-    }
-
+    class FUControl : UserControl { }
 
     [TestFixture]
-    public class HtmlFormTest {
+    public class HtmlFormTest
+    {
         [Test]
-        public void DefaultProperties ()
+        public void DefaultProperties()
         {
-            HtmlForm form = new HtmlForm ();
-            Assert.AreEqual (0, form.Attributes.Count, "Attributes.Count");
+            HtmlForm form = new HtmlForm();
+            Assert.AreEqual(0, form.Attributes.Count, "Attributes.Count");
 
-            Assert.AreEqual (String.Empty, form.Enctype, "Enctype");
-            Assert.AreEqual ("post", form.Method, "Method");
-            Assert.AreEqual (form.UniqueID, form.Name, "Name");
-            Assert.AreEqual (String.Empty, form.Target, "Target");
+            Assert.AreEqual(String.Empty, form.Enctype, "Enctype");
+            Assert.AreEqual("post", form.Method, "Method");
+            Assert.AreEqual(form.UniqueID, form.Name, "Name");
+            Assert.AreEqual(String.Empty, form.Target, "Target");
 
-            Assert.AreEqual ("form", form.TagName, "TagName");
+            Assert.AreEqual("form", form.TagName, "TagName");
 
-            Assert.IsFalse (form.SubmitDisabledControls, "TagName");
+            Assert.IsFalse(form.SubmitDisabledControls, "TagName");
         }
 
         [Test]
-        public void NullProperties ()
+        public void NullProperties()
         {
-            HtmlForm form = new HtmlForm ();
+            HtmlForm form = new HtmlForm();
 
             form.Enctype = null;
-            Assert.AreEqual (String.Empty, form.Enctype, "Enctype");
+            Assert.AreEqual(String.Empty, form.Enctype, "Enctype");
             form.Method = null;
-            Assert.AreEqual ("post", form.Method, "Method");
+            Assert.AreEqual("post", form.Method, "Method");
             form.Name = null;
-            Assert.AreEqual (form.UniqueID, form.Name, "Name");
+            Assert.AreEqual(form.UniqueID, form.Name, "Name");
             form.Target = null;
-            Assert.AreEqual (String.Empty, form.Target, "Target");
+            Assert.AreEqual(String.Empty, form.Target, "Target");
 
             form.DefaultButton = null;
-            Assert.AreEqual (String.Empty, form.DefaultButton, "DefaultButton");
+            Assert.AreEqual(String.Empty, form.DefaultButton, "DefaultButton");
 
             form.DefaultFocus = null;
-            Assert.AreEqual (String.Empty, form.DefaultFocus, "DefaultFocus");
-            Assert.AreEqual (0, form.Attributes.Count, "Attributes.Count");
-
+            Assert.AreEqual(String.Empty, form.DefaultFocus, "DefaultFocus");
+            Assert.AreEqual(0, form.Attributes.Count, "Attributes.Count");
         }
 
         [Test]
-        public void Attributes ()
+        public void Attributes()
         {
-            HtmlForm form = new HtmlForm ();
+            HtmlForm form = new HtmlForm();
             IAttributeAccessor a = (IAttributeAccessor)form;
 
             /* not stored in Attributes */
             form.DefaultButton = "defaultbutton";
-            Assert.IsNull (a.GetAttribute ("defaultbutton"), "A1");
+            Assert.IsNull(a.GetAttribute("defaultbutton"), "A1");
 
             /* not stored in Attributes */
             form.DefaultFocus = "defaultfocus";
-            Assert.IsNull (a.GetAttribute ("defaultfocus"), "A2");
+            Assert.IsNull(a.GetAttribute("defaultfocus"), "A2");
             form.Enctype = "enctype";
-            Assert.AreEqual ("enctype", a.GetAttribute ("enctype"), "A3");
+            Assert.AreEqual("enctype", a.GetAttribute("enctype"), "A3");
 
             form.Method = "method";
-            Assert.AreEqual ("method", a.GetAttribute ("method"), "A4");
+            Assert.AreEqual("method", a.GetAttribute("method"), "A4");
 
             /* not stored in Attributes */
             form.Name = "name";
-            Assert.AreEqual (form.UniqueID, form.Name, "A5");
-            Assert.IsNull (form.Name, "A6");
-            Assert.IsNull (form.UniqueID, "A7");
-            Assert.IsNull (a.GetAttribute ("name"), "A8");
+            Assert.AreEqual(form.UniqueID, form.Name, "A5");
+            Assert.IsNull(form.Name, "A6");
+            Assert.IsNull(form.UniqueID, "A7");
+            Assert.IsNull(a.GetAttribute("name"), "A8");
             form.ID = "hithere";
-            Assert.AreEqual ("hithere", form.Name, "A9");
+            Assert.AreEqual("hithere", form.Name, "A9");
 
             form.SubmitDisabledControls = true;
-            Assert.IsNull (a.GetAttribute ("submitdisabledcontrols"), "A10");
+            Assert.IsNull(a.GetAttribute("submitdisabledcontrols"), "A10");
 
             form.Target = "target";
-            Assert.AreEqual ("target", a.GetAttribute ("target"), "A11");
+            Assert.AreEqual("target", a.GetAttribute("target"), "A11");
         }
 
 #if !TARGET_DOTNET
         [Test]
-        public void ActionStringWithQuery ()
+        public void ActionStringWithQuery()
         {
-            TestPage p = new TestPage ();
-            p.SetContext ();
-            FormPoker form = new FormPoker ();
+            TestPage p = new TestPage();
+            p.SetContext();
+            FormPoker form = new FormPoker();
             form.Page = p;
-            string attrs = form.RenderAttributes ();
+            string attrs = form.RenderAttributes();
 
             // Indirect test for HttpRequest.QueryStringRaw, see
             // https://bugzilla.novell.com/show_bug.cgi?id=376352
-            Assert.AreEqual (" method=\"post\" action=\"?q=1&amp;q2=2\"", attrs, "A1");
-            form.RenderingCompatibility = new Version (3, 5);
-            attrs = form.RenderAttributes ();
-            Assert.AreEqual (" name=\"aspnetForm\" method=\"post\" action=\"?q=1&amp;q2=2\"", attrs, "A2");
+            Assert.AreEqual(" method=\"post\" action=\"?q=1&amp;q2=2\"", attrs, "A1");
+            form.RenderingCompatibility = new Version(3, 5);
+            attrs = form.RenderAttributes();
+            Assert.AreEqual(
+                " name=\"aspnetForm\" method=\"post\" action=\"?q=1&amp;q2=2\"",
+                attrs,
+                "A2"
+            );
         }
 #endif
 
         [Test]
-        public void Undocumented_ActionProperty ()
+        public void Undocumented_ActionProperty()
         {
-            TestPage p = new TestPage ();
-            p.SetContext ();
-            FormPoker form = new FormPoker ();
+            TestPage p = new TestPage();
+            p.SetContext();
+            FormPoker form = new FormPoker();
             form.Page = p;
             form.Action = "someactionfile.aspx";
-            string attrs = form.RenderAttributes ();
-            Assert.AreEqual (" method=\"post\" action=\"someactionfile.aspx\"", attrs, "A1");
-            form.RenderingCompatibility = new Version (3, 5);
-            attrs = form.RenderAttributes ();
-            Assert.AreEqual (" name=\"aspnetForm\" method=\"post\" action=\"someactionfile.aspx\"", attrs, "A2");
+            string attrs = form.RenderAttributes();
+            Assert.AreEqual(" method=\"post\" action=\"someactionfile.aspx\"", attrs, "A1");
+            form.RenderingCompatibility = new Version(3, 5);
+            attrs = form.RenderAttributes();
+            Assert.AreEqual(
+                " name=\"aspnetForm\" method=\"post\" action=\"someactionfile.aspx\"",
+                attrs,
+                "A2"
+            );
         }
-        
+
         [Test]
-        public void ViewState ()
+        public void ViewState()
         {
             FormPoker form = new FormPoker();
             FormPoker copy = new FormPoker();
@@ -232,55 +244,58 @@ namespace MonoTests.System.Web.UI.HtmlControls {
             form.DefaultFocus = "defaultfocus";
 
             object state = form.SaveState();
-            copy.LoadState (state);
+            copy.LoadState(state);
 
-            Assert.AreEqual ("", copy.DefaultButton, "A1");
-            Assert.AreEqual ("defaultfocus", form.DefaultFocus, "A2");
-
+            Assert.AreEqual("", copy.DefaultButton, "A1");
+            Assert.AreEqual("defaultfocus", form.DefaultFocus, "A2");
         }
 
         [Test]
-        public void Name_InsideNaming ()
+        public void Name_InsideNaming()
         {
-            Control ctrl = new FUControl ();
+            Control ctrl = new FUControl();
             ctrl.ID = "parent";
-            FormPoker form = new FormPoker ();
-            ctrl.Controls.Add (form);
-            Assert.IsNull (form.ID, "ID");
+            FormPoker form = new FormPoker();
+            ctrl.Controls.Add(form);
+            Assert.IsNull(form.ID, "ID");
             form.Name = "name";
-            Assert.AreEqual (form.Name, form.UniqueID, "name and unique id");
+            Assert.AreEqual(form.Name, form.UniqueID, "name and unique id");
 
             form.ID = "id";
-            Assert.AreEqual ("id", form.ID, "ID-2");
-            Assert.AreEqual (form.UniqueID, form.Name, "Name-ID");
+            Assert.AreEqual("id", form.ID, "ID-2");
+            Assert.AreEqual(form.UniqueID, form.Name, "Name-ID");
 
             form.Name = "name";
-            Assert.AreEqual (form.Name, form.UniqueID, "UniqueID-2");
+            Assert.AreEqual(form.Name, form.UniqueID, "UniqueID-2");
 
             form.ID = null;
-            Assert.IsNull (form.ID, "ID-3");
-            Assert.IsNotNull (form.UniqueID, "UniqueID-3");
-            Assert.IsNotNull (form.Name, "Name-2");
+            Assert.IsNull(form.ID, "ID-3");
+            Assert.IsNotNull(form.UniqueID, "UniqueID-3");
+            Assert.IsNotNull(form.Name, "Name-2");
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void RenderChildren ()
+        [Category("NotWorking")]
+        public void RenderChildren()
         {
             Page p = new Page();
-            FormPoker form = new FormPoker ();
+            FormPoker form = new FormPoker();
             form.Page = p;
-            HtmlDiff.AssertAreEqual ("<div>\r\n<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"\r\n__VIEWSTATE\" value=\"\" />\r\n</div>", form.RenderChildren ().Trim (), "A1");
+            HtmlDiff.AssertAreEqual(
+                "<div>\r\n<input type=\"hidden\" name=\"__VIEWSTATE\" id=\"\r\n__VIEWSTATE\" value=\"\" />\r\n</div>",
+                form.RenderChildren().Trim(),
+                "A1"
+            );
         }
 
         [Test]
-        public void ControlCollection ()
+        public void ControlCollection()
         {
             FormPoker poker = new FormPoker();
             ControlCollection col = poker.GetControlCollection();
-            Assert.AreEqual (col.GetType(), typeof (ControlCollection), "A1");
-            Assert.IsFalse (col.IsReadOnly, "A2");
-            Assert.AreEqual (0, col.Count, "A3");
+            Assert.AreEqual(col.GetType(), typeof(ControlCollection), "A1");
+            Assert.IsFalse(col.IsReadOnly, "A2");
+            Assert.AreEqual(0, col.Count, "A3");
         }
     }
 }

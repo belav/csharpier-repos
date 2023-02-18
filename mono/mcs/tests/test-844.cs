@@ -4,24 +4,26 @@
 
 class C
 {
-    int Prop { get { return 4; } }
-
-    int this[char arg] { get { return 2; } }
-
-    static void Foo (ref int arg)
+    int Prop
     {
+        get { return 4; }
     }
 
-    public void Method (int i)
+    int this[char arg]
+    {
+        get { return 2; }
+    }
+
+    static void Foo(ref int arg) { }
+
+    public void Method(int i)
     {
         long p1 = Prop;
-        long p2 = new C ()['h'];
+        long p2 = new C()['h'];
 
         int arg = 1;
-        Foo (ref arg);
+        Foo(ref arg);
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

@@ -22,9 +22,6 @@ namespace Testing
         */
         public string PublicField3;
 
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }
-

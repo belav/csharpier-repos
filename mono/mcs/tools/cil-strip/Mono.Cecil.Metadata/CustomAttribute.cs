@@ -29,52 +29,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
-    internal sealed class CustomAttributeTable : IMetadataTable {
-
+namespace Mono.Cecil.Metadata
+{
+    internal sealed class CustomAttributeTable : IMetadataTable
+    {
         public const int RId = 0x0c;
 
         RowCollection m_rows;
 
-        public CustomAttributeRow this [int index] {
-            get { return m_rows [index] as CustomAttributeRow; }
-            set { m_rows [index] = value; }
+        public CustomAttributeRow this[int index]
+        {
+            get { return m_rows[index] as CustomAttributeRow; }
+            set { m_rows[index] = value; }
         }
 
-        public RowCollection Rows {
+        public RowCollection Rows
+        {
             get { return m_rows; }
             set { m_rows = value; }
         }
 
-        public int Id {
+        public int Id
+        {
             get { return RId; }
         }
 
-        internal CustomAttributeTable ()
-        {
-        }
+        internal CustomAttributeTable() { }
 
-        public void Accept (IMetadataTableVisitor visitor)
+        public void Accept(IMetadataTableVisitor visitor)
         {
-            visitor.VisitCustomAttributeTable (this);
-            this.Rows.Accept (visitor.GetRowVisitor ());
+            visitor.VisitCustomAttributeTable(this);
+            this.Rows.Accept(visitor.GetRowVisitor());
         }
     }
 
-    internal sealed class CustomAttributeRow : IMetadataRow {
-
+    internal sealed class CustomAttributeRow : IMetadataRow
+    {
         public MetadataToken Parent;
         public MetadataToken Type;
         public uint Value;
 
-        internal CustomAttributeRow ()
-        {
-        }
+        internal CustomAttributeRow() { }
 
-        public void Accept (IMetadataRowVisitor visitor)
+        public void Accept(IMetadataRowVisitor visitor)
         {
-            visitor.VisitCustomAttributeRow (this);
+            visitor.VisitCustomAttributeRow(this);
         }
     }
 }

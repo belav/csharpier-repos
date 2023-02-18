@@ -9,7 +9,7 @@ public unsafe class test
 {
     static Foo* pFoo;
 
-    public static void Main ()
+    public static void Main()
     {
         int* pi = &pFoo->i;
     }

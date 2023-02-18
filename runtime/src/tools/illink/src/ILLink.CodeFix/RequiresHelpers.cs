@@ -10,13 +10,22 @@ namespace ILLink.CodeFixProvider
 {
     sealed class RequiresHelpers
     {
-        internal static SyntaxNode[] GetAttributeArgumentsForRequires (ISymbol targetSymbol, SyntaxGenerator syntaxGenerator, bool hasPublicAccessibility)
+        internal static SyntaxNode[] GetAttributeArgumentsForRequires(
+            ISymbol targetSymbol,
+            SyntaxGenerator syntaxGenerator,
+            bool hasPublicAccessibility
+        )
         {
-            var symbolDisplayName = targetSymbol.GetDisplayName ();
-            if (string.IsNullOrEmpty (symbolDisplayName) || hasPublicAccessibility)
-                return Array.Empty<SyntaxNode> ();
+            var symbolDisplayName = targetSymbol.GetDisplayName();
+            if (string.IsNullOrEmpty(symbolDisplayName) || hasPublicAccessibility)
+                return Array.Empty<SyntaxNode>();
 
-            return new[] { syntaxGenerator.AttributeArgument (syntaxGenerator.LiteralExpression ($"Calls {symbolDisplayName}")) };
+            return new[]
+            {
+                syntaxGenerator.AttributeArgument(
+                    syntaxGenerator.LiteralExpression($"Calls {symbolDisplayName}")
+                )
+            };
         }
     }
 }

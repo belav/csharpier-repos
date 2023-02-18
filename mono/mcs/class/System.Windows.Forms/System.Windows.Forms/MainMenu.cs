@@ -37,107 +37,119 @@ namespace System.Windows.Forms
         private RightToLeft right_to_left = RightToLeft.Inherit;
         private Form form = null;
 
-            public MainMenu () : base (null)
-            {
-            
-            }
+        public MainMenu()
+            : base(null) { }
 
-        public MainMenu (MenuItem[] items) : base (items)
-        {
-            
-        }
+        public MainMenu(MenuItem[] items)
+            : base(items) { }
 
-        public MainMenu (IContainer container) : this ()
+        public MainMenu(IContainer container)
+            : this()
         {
-            container.Add (this);
+            container.Add(this);
         }
 
         #region Events
 
-        static object CollapseEvent = new object ();
+        static object CollapseEvent = new object();
 
-        public event EventHandler Collapse {
-            add { Events.AddHandler (CollapseEvent, value); }
-            remove { Events.RemoveHandler (CollapseEvent, value); }
+        public event EventHandler Collapse
+        {
+            add { Events.AddHandler(CollapseEvent, value); }
+            remove { Events.RemoveHandler(CollapseEvent, value); }
         }
-        
+
         #endregion Events
 
         #region Public Properties
         [Localizable(true)]
-        [AmbientValue (RightToLeft.Inherit)]
-        public virtual RightToLeft RightToLeft {
-            get { return right_to_left;}
+        [AmbientValue(RightToLeft.Inherit)]
+        public virtual RightToLeft RightToLeft
+        {
+            get { return right_to_left; }
             set { right_to_left = value; }
         }
 
         #endregion Public Properties
 
         #region Public Methods
-            
-        public virtual MainMenu CloneMenu ()
+
+        public virtual MainMenu CloneMenu()
         {
-            MainMenu new_menu = new MainMenu ();
-            new_menu.CloneMenu (this);
+            MainMenu new_menu = new MainMenu();
+            new_menu.CloneMenu(this);
             return new_menu;
         }
-        
-        protected override IntPtr CreateMenuHandle ()
-        {            
+
+        protected override IntPtr CreateMenuHandle()
+        {
             return IntPtr.Zero;
         }
 
-        protected override void Dispose (bool disposing)
-        {            
-            base.Dispose (disposing);            
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
 
-        public Form GetForm ()
+        public Form GetForm()
         {
             return form;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return base.ToString () + ", GetForm: " + form;
+            return base.ToString() + ", GetForm: " + form;
         }
 
-        protected internal virtual void OnCollapse (EventArgs e)
+        protected internal virtual void OnCollapse(EventArgs e)
         {
-            EventHandler eh = (EventHandler) (Events [CollapseEvent]);
+            EventHandler eh = (EventHandler)(Events[CollapseEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
         #endregion Public Methods
-        
+
         #region Private Methods
 
-        internal void Draw () 
+        internal void Draw()
         {
-            Message m = Message.Create (Wnd.window.Handle, (int) Msg.WM_PAINT, IntPtr.Zero, IntPtr.Zero);
-            PaintEventArgs pe = XplatUI.PaintEventStart (ref m, Wnd.window.Handle, false);
-            Draw (pe, Rect);
+            Message m = Message.Create(
+                Wnd.window.Handle,
+                (int)Msg.WM_PAINT,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
+            PaintEventArgs pe = XplatUI.PaintEventStart(ref m, Wnd.window.Handle, false);
+            Draw(pe, Rect);
         }
 
-        internal void Draw (Rectangle rect) 
+        internal void Draw(Rectangle rect)
         {
-            if (Wnd.IsHandleCreated) {
-                Point pt = XplatUI.GetMenuOrigin (Wnd.window.Handle);
-                Message m = Message.Create (Wnd.window.Handle, (int)Msg.WM_PAINT, IntPtr.Zero, IntPtr.Zero);
-                PaintEventArgs pevent = XplatUI.PaintEventStart (ref m, Wnd.window.Handle, false);
-                pevent.Graphics.SetClip (new Rectangle (rect.X + pt.X, rect.Y + pt.Y, rect.Width, rect.Height));
-                Draw (pevent, Rect);
-                XplatUI.PaintEventEnd (ref m, Wnd.window.Handle, false, pevent);
+            if (Wnd.IsHandleCreated)
+            {
+                Point pt = XplatUI.GetMenuOrigin(Wnd.window.Handle);
+                Message m = Message.Create(
+                    Wnd.window.Handle,
+                    (int)Msg.WM_PAINT,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
+                PaintEventArgs pevent = XplatUI.PaintEventStart(ref m, Wnd.window.Handle, false);
+                pevent.Graphics.SetClip(
+                    new Rectangle(rect.X + pt.X, rect.Y + pt.Y, rect.Width, rect.Height)
+                );
+                Draw(pevent, Rect);
+                XplatUI.PaintEventEnd(ref m, Wnd.window.Handle, false, pevent);
             }
         }
 
-        internal void Draw (PaintEventArgs pe)         
+        internal void Draw(PaintEventArgs pe)
         {
-            Draw (pe, Rect);
+            Draw(pe, Rect);
         }
 
-        internal void Draw (PaintEventArgs pe, Rectangle rect)
+        internal void Draw(PaintEventArgs pe, Rectangle rect)
         {
             if (!Wnd.IsHandleCreated)
                 return;
@@ -146,32 +158,33 @@ namespace System.Windows.Forms
             Y = rect.Y;
             Height = Rect.Height;
 
-            ThemeEngine.Current.DrawMenuBar (pe.Graphics, this, rect);
+            ThemeEngine.Current.DrawMenuBar(pe.Graphics, this, rect);
 
-            PaintEventHandler eh = (PaintEventHandler)(Events [PaintEvent]);
+            PaintEventHandler eh = (PaintEventHandler)(Events[PaintEvent]);
             if (eh != null)
-                eh (this, pe);
+                eh(this, pe);
         }
 
-        internal override void InvalidateItem (MenuItem item)
+        internal override void InvalidateItem(MenuItem item)
         {
-            Draw (item.bounds);
+            Draw(item.bounds);
         }
-        
-        internal void SetForm (Form form)
+
+        internal void SetForm(Form form)
         {
             this.form = form;
             Wnd = form;
-            
-            if (tracker == null) {
-                tracker = new MenuTracker (this);
+
+            if (tracker == null)
+            {
+                tracker = new MenuTracker(this);
                 tracker.GrabControl = form;
             }
         }
-        
-        internal override void OnMenuChanged (EventArgs e)
+
+        internal override void OnMenuChanged(EventArgs e)
         {
-            base.OnMenuChanged (EventArgs.Empty);
+            base.OnMenuChanged(EventArgs.Empty);
             if (form == null)
                 return;
 
@@ -182,34 +195,44 @@ namespace System.Windows.Forms
             if (!Wnd.IsHandleCreated)
                 return;
 
-            Message m = Message.Create (Wnd.window.Handle, (int) Msg.WM_PAINT, IntPtr.Zero, IntPtr.Zero);
-            PaintEventArgs pevent = XplatUI.PaintEventStart (ref m, Wnd.window.Handle, false);
-            pevent.Graphics.SetClip (clip);
-            
-            Draw (pevent, clip);
+            Message m = Message.Create(
+                Wnd.window.Handle,
+                (int)Msg.WM_PAINT,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
+            PaintEventArgs pevent = XplatUI.PaintEventStart(ref m, Wnd.window.Handle, false);
+            pevent.Graphics.SetClip(clip);
+
+            Draw(pevent, clip);
         }
 
         /* Mouse events from the form */
-        internal void OnMouseDown (object window, MouseEventArgs args)
-        {            
-            tracker.OnMouseDown (args);
-        }
-        
-        internal void OnMouseMove (object window, MouseEventArgs e)
-        {            
-            MouseEventArgs args = new MouseEventArgs (e.Button, e.Clicks, Control.MousePosition.X, Control.MousePosition.Y, e.Delta);
-            tracker.OnMotion (args);
+        internal void OnMouseDown(object window, MouseEventArgs args)
+        {
+            tracker.OnMouseDown(args);
         }
 
-        static object PaintEvent = new object ();
+        internal void OnMouseMove(object window, MouseEventArgs e)
+        {
+            MouseEventArgs args = new MouseEventArgs(
+                e.Button,
+                e.Clicks,
+                Control.MousePosition.X,
+                Control.MousePosition.Y,
+                e.Delta
+            );
+            tracker.OnMotion(args);
+        }
 
-        internal event PaintEventHandler Paint {
-            add { Events.AddHandler (PaintEvent, value); }
-            remove { Events.RemoveHandler (PaintEvent, value); }
+        static object PaintEvent = new object();
+
+        internal event PaintEventHandler Paint
+        {
+            add { Events.AddHandler(PaintEvent, value); }
+            remove { Events.RemoveHandler(PaintEvent, value); }
         }
 
         #endregion Private Methods
     }
 }
-
-

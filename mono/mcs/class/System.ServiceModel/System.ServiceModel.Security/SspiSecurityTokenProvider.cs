@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,18 +39,23 @@ namespace System.ServiceModel.Security
     public class SspiSecurityTokenProvider : SecurityTokenProvider
     {
         [MonoTODO]
-        public SspiSecurityTokenProvider (NetworkCredential credential,
+        public SspiSecurityTokenProvider(
+            NetworkCredential credential,
             bool extractGroupsForWindowsAccounts,
-            bool allowUnauthenticatedCallers)
+            bool allowUnauthenticatedCallers
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public SspiSecurityTokenProvider (NetworkCredential credential, 
-            bool allowNtlm, TokenImpersonationLevel impersonationLevel)
+        public SspiSecurityTokenProvider(
+            NetworkCredential credential,
+            bool allowNtlm,
+            TokenImpersonationLevel impersonationLevel
+        )
         {
             if (credential == null)
-                throw new ArgumentNullException ("credential");
+                throw new ArgumentNullException("credential");
             this.credential = credential;
             allow_ntlm = allowNtlm;
             impersonation_level = impersonationLevel;
@@ -63,9 +68,9 @@ namespace System.ServiceModel.Security
         // SecurityTokenProvider
 
         [MonoTODO]
-        protected override SecurityToken GetTokenCore (TimeSpan timeout)
+        protected override SecurityToken GetTokenCore(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

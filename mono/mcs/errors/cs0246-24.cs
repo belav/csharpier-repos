@@ -3,12 +3,10 @@
 
 class C
 {
-    static void Foo<T> (int i)
-    {
-    }
+    static void Foo<T>(int i) { }
 
-    public static void Main ()
+    public static void Main()
     {
-        Foo<TypeMe> (1);
+        Foo<TypeMe>(1);
     }
 }

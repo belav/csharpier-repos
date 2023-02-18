@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -25,7 +25,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="TElement"></typeparam>
     internal class FixedMaxHeap<TElement>
     {
-
         private TElement[] m_elements; // Element array.
         private int m_count; // Current count.
         private IComparer<TElement> m_comparer; // Element comparison routine.
@@ -35,9 +34,7 @@ namespace System.Linq.Parallel
         //
 
         internal FixedMaxHeap(int maximumSize)
-            : this(maximumSize, Util.GetDefaultComparer<TElement>())
-        {
-        }
+            : this(maximumSize, Util.GetDefaultComparer<TElement>()) { }
 
         internal FixedMaxHeap(int maximumSize, IComparer<TElement> comparer)
         {
@@ -86,7 +83,6 @@ namespace System.Linq.Parallel
                 return m_elements[0];
             }
         }
-
 
         //-----------------------------------------------------------------------------------
         // Removes all elements from the heap.

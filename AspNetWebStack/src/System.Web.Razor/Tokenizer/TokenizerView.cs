@@ -10,7 +10,11 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Tokenizer
 {
-    [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "All generic parameters are required")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes",
+        Justification = "All generic parameters are required"
+    )]
     public class TokenizerView<TTokenizer, TSymbol, TSymbolType>
         where TTokenizer : Tokenizer<TSymbol, TSymbolType>
         where TSymbol : SymbolBase<TSymbolType>
@@ -43,10 +47,13 @@ namespace System.Web.Razor.Tokenizer
             {
                 // We've already passed this symbol
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  RazorResources.TokenizerView_CannotPutBack,
-                                  symbol.Start.AbsoluteIndex + symbol.Content.Length,
-                                  Source.Position));
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        RazorResources.TokenizerView_CannotPutBack,
+                        symbol.Start.AbsoluteIndex + symbol.Content.Length,
+                        Source.Position
+                    )
+                );
             }
             Source.Position -= symbol.Content.Length;
             Current = null;

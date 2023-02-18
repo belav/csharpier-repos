@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,8 +33,14 @@ using System.Security.Permissions;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class ButtonColumn : DataGridColumn
     {
         string text_field;
@@ -42,138 +48,152 @@ namespace System.Web.UI.WebControls
 
         [DefaultValue(ButtonColumnType.LinkButton)]
         [WebSysDescription("The type of button contained within the column.")]
-        [WebCategory ("Misc")]
-        public virtual ButtonColumnType ButtonType {
-            get {
-                return (ButtonColumnType) ViewState.GetInt ("LinkButton",
-                        (int) ButtonColumnType.LinkButton);
+        [WebCategory("Misc")]
+        public virtual ButtonColumnType ButtonType
+        {
+            get
+            {
+                return (ButtonColumnType)
+                    ViewState.GetInt("LinkButton", (int)ButtonColumnType.LinkButton);
             }
-            set { ViewState ["LinkButton"] = value; }
-        }
-        
-        [DefaultValue("")]
-        [WebSysDescription("The command associated with the button.")]
-        [WebCategory ("Misc")]
-        public virtual string CommandName {
-            get { return ViewState.GetString ("CommandName", String.Empty); }
-            set { ViewState ["CommandName"] = value; }
+            set { ViewState["LinkButton"] = value; }
         }
 
-        [DefaultValue (false)]
+        [DefaultValue("")]
+        [WebSysDescription("The command associated with the button.")]
+        [WebCategory("Misc")]
+        public virtual string CommandName
+        {
+            get { return ViewState.GetString("CommandName", String.Empty); }
+            set { ViewState["CommandName"] = value; }
+        }
+
+        [DefaultValue(false)]
         [WebSysDescription("")]
-        [WebCategory ("Behavior")]
-        public virtual bool CausesValidation {
-            get { return ViewState.GetBool ("CausesValidation", false); }
-            set { ViewState ["CausesValidation"] = value; }
+        [WebCategory("Behavior")]
+        public virtual bool CausesValidation
+        {
+            get { return ViewState.GetBool("CausesValidation", false); }
+            set { ViewState["CausesValidation"] = value; }
         }
 
         [DefaultValue("")]
         [WebSysDescription("The field bound to the text property of the button.")]
-        [WebCategory ("Misc")]
-        public virtual string DataTextField {
-            get { return ViewState.GetString ("DataTextField", String.Empty); }
-            set { ViewState ["DataTextField"] = value; }
+        [WebCategory("Misc")]
+        public virtual string DataTextField
+        {
+            get { return ViewState.GetString("DataTextField", String.Empty); }
+            set { ViewState["DataTextField"] = value; }
         }
-        
+
         [DefaultValue("")]
         [WebSysDescription("The formatting applied to the value bound to the Text property.")]
-         [WebCategory ("Misc")]
-        public virtual string DataTextFormatString {
-            get { return ViewState.GetString ("DataTextFormatString", String.Empty); }
-            set {
-                ViewState ["DataTextFormatString"] = value;
+        [WebCategory("Misc")]
+        public virtual string DataTextFormatString
+        {
+            get { return ViewState.GetString("DataTextFormatString", String.Empty); }
+            set
+            {
+                ViewState["DataTextFormatString"] = value;
                 format = null;
             }
         }
 
         [DefaultValue("")]
-        [Localizable (true)]
+        [Localizable(true)]
         [WebSysDescription("The text used for the button.")]
-        [WebCategory ("Misc")]
-        public virtual string Text {
-            get { return ViewState.GetString ("Text", String.Empty); }
-            set { ViewState ["Text"] = value; }
+        [WebCategory("Misc")]
+        public virtual string Text
+        {
+            get { return ViewState.GetString("Text", String.Empty); }
+            set { ViewState["Text"] = value; }
         }
 
-        [DefaultValue ("")]
+        [DefaultValue("")]
         [WebSysDescription("")]
-        [WebCategory ("Behavior")]
-        public virtual string ValidationGroup {
-            get { return ViewState.GetString ("ValidationGroup", String.Empty); }
-            set { ViewState ["ValidationGroup"] = value; }
+        [WebCategory("Behavior")]
+        public virtual string ValidationGroup
+        {
+            get { return ViewState.GetString("ValidationGroup", String.Empty); }
+            set { ViewState["ValidationGroup"] = value; }
         }
-        
-        public override void Initialize ()
+
+        public override void Initialize()
         {
             /* No documentation for this method, so it's
              * only here to keep corcompare quiet
              */
-            base.Initialize ();
+            base.Initialize();
         }
 
-        public override void InitializeCell (TableCell cell, int columnIndex, ListItemType itemType)
+        public override void InitializeCell(TableCell cell, int columnIndex, ListItemType itemType)
         {
-            base.InitializeCell (cell, columnIndex, itemType);
+            base.InitializeCell(cell, columnIndex, itemType);
 
-            if (itemType != ListItemType.Header && itemType != ListItemType.Footer) {
-                switch (ButtonType) {
-                    case ButtonColumnType.LinkButton: 
-                    {
-                        LinkButton butt = new ForeColorLinkButton ();
-                    
-                        butt.Text = Text;
-                        butt.CommandName = CommandName;
+            if (itemType != ListItemType.Header && itemType != ListItemType.Footer)
+            {
+                switch (ButtonType)
+                {
+                    case ButtonColumnType.LinkButton:
 
-                        if (!String.IsNullOrEmpty (DataTextField))
-                            butt.DataBinding += new EventHandler (DoDataBind);
+                        {
+                            LinkButton butt = new ForeColorLinkButton();
 
-                        cell.Controls.Add (butt);
-                    }
-                    break;
+                            butt.Text = Text;
+                            butt.CommandName = CommandName;
 
-                    case ButtonColumnType.PushButton: 
-                    {
-                        Button butt = new Button ();
-                    
-                        butt.Text = Text;
-                        butt.CommandName = CommandName;
+                            if (!String.IsNullOrEmpty(DataTextField))
+                                butt.DataBinding += new EventHandler(DoDataBind);
 
-                        if (!String.IsNullOrEmpty (DataTextField))
-                            butt.DataBinding += new EventHandler (DoDataBind);
-                        cell.Controls.Add (butt);
-                    }
-                    break;
-            
+                            cell.Controls.Add(butt);
+                        }
+                        break;
+
+                    case ButtonColumnType.PushButton:
+
+                        {
+                            Button butt = new Button();
+
+                            butt.Text = Text;
+                            butt.CommandName = CommandName;
+
+                            if (!String.IsNullOrEmpty(DataTextField))
+                                butt.DataBinding += new EventHandler(DoDataBind);
+                            cell.Controls.Add(butt);
+                        }
+                        break;
                 }
             }
         }
-        
-        string GetValueFromItem (DataGridItem item)
+
+        string GetValueFromItem(DataGridItem item)
         {
             object val = null;
             if (text_field == null)
                 text_field = DataTextField;
 
-            if (!String.IsNullOrEmpty (text_field))
-                val = DataBinder.Eval (item.DataItem, text_field);
+            if (!String.IsNullOrEmpty(text_field))
+                val = DataBinder.Eval(item.DataItem, text_field);
 
-            return FormatDataTextValue (val);
+            return FormatDataTextValue(val);
         }
 
-        void DoDataBind (object sender, EventArgs e)
+        void DoDataBind(object sender, EventArgs e)
         {
-            Control ctrl = (Control) sender;
-            string text = GetValueFromItem ((DataGridItem) ctrl.NamingContainer);
+            Control ctrl = (Control)sender;
+            string text = GetValueFromItem((DataGridItem)ctrl.NamingContainer);
 
             LinkButton lb = sender as LinkButton;
-            if (lb == null) {
-                Button b = (Button) sender;
+            if (lb == null)
+            {
+                Button b = (Button)sender;
                 b.Text = text;
-            } else
+            }
+            else
                 lb.Text = text;
         }
-        
-        protected virtual string FormatDataTextValue (object dataTextValue)
+
+        protected virtual string FormatDataTextValue(object dataTextValue)
         {
             if (dataTextValue == null)
                 return String.Empty;
@@ -181,11 +201,10 @@ namespace System.Web.UI.WebControls
             if (format == null)
                 format = DataTextFormatString;
 
-            if (String.IsNullOrEmpty (format))
-                return dataTextValue.ToString ();
+            if (String.IsNullOrEmpty(format))
+                return dataTextValue.ToString();
 
-            return String.Format (format, dataTextValue);
+            return String.Format(format, dataTextValue);
         }
     }
 }
-

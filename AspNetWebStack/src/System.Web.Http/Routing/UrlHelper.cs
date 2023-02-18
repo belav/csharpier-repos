@@ -20,9 +20,7 @@ namespace System.Web.Http.Routing
         /// Initializes a new instance of the <see cref="UrlHelper"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public UrlHelper()
-        {
-        }
+        public UrlHelper() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UrlHelper"/> class.
@@ -40,7 +38,7 @@ namespace System.Web.Http.Routing
 
         /// <summary>
         /// Gets the <see cref="HttpRequestMessage"/> of the current <see cref="UrlHelper"/>.
-        /// The setter is not intended to be used other than for unit testing purpose. 
+        /// The setter is not intended to be used other than for unit testing purpose.
         /// </summary>
         public HttpRequestMessage Request
         {
@@ -61,7 +59,11 @@ namespace System.Web.Http.Routing
         /// </summary>
         /// <param name="path">The URL path, which may be a relative URL, a rooted URL, or a virtual path.</param>
         /// <returns>The generated URL.</returns>
-        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "It is safe to pass string here")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2234:PassSystemUriObjectsInsteadOfStrings",
+            Justification = "It is safe to pass string here"
+        )]
         public virtual string Content(string path)
         {
             if (String.IsNullOrEmpty(path))
@@ -89,7 +91,9 @@ namespace System.Web.Http.Routing
                     HttpConfiguration configuration = Request.GetConfiguration();
                     if (configuration == null)
                     {
-                        throw Error.InvalidOperation(SRResources.HttpRequestMessageExtensions_NoConfiguration);
+                        throw Error.InvalidOperation(
+                            SRResources.HttpRequestMessageExtensions_NoConfiguration
+                        );
                     }
 
                     virtualPathRoot = configuration.VirtualPathRoot;
@@ -109,7 +113,10 @@ namespace System.Web.Http.Routing
                     virtualPathRoot += "/";
                 }
 
-                return new Uri(Request.RequestUri, virtualPathRoot + path.Substring("~/".Length)).AbsoluteUri;
+                return new Uri(
+                    Request.RequestUri,
+                    virtualPathRoot + path.Substring("~/".Length)
+                ).AbsoluteUri;
             }
             else
             {
@@ -145,7 +152,11 @@ namespace System.Web.Http.Routing
         /// <param name="routeName">The name of the route to use for generating the URL.</param>
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <returns>The generated URL.</returns>
-        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "It is safe to pass string here")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2234:PassSystemUriObjectsInsteadOfStrings",
+            Justification = "It is safe to pass string here"
+        )]
         public virtual string Link(string routeName, object routeValues)
         {
             return Link(routeName, new HttpRouteValueDictionary(routeValues));
@@ -157,7 +168,11 @@ namespace System.Web.Http.Routing
         /// <param name="routeName">The name of the route to use for generating the URL.</param>
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <returns>The generated URL.</returns>
-        [SuppressMessage("Microsoft.Usage", "CA2234:PassSystemUriObjectsInsteadOfStrings", Justification = "It is safe to pass string here")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2234:PassSystemUriObjectsInsteadOfStrings",
+            Justification = "It is safe to pass string here"
+        )]
         public virtual string Link(string routeName, IDictionary<string, object> routeValues)
         {
             string link = Route(routeName, routeValues);
@@ -169,7 +184,11 @@ namespace System.Web.Http.Routing
             return link;
         }
 
-        private static string GetVirtualPath(HttpRequestMessage request, string routeName, IDictionary<string, object> routeValues)
+        private static string GetVirtualPath(
+            HttpRequestMessage request,
+            string routeName,
+            IDictionary<string, object> routeValues
+        )
         {
             if (routeValues == null)
             {
@@ -192,13 +211,16 @@ namespace System.Web.Http.Routing
             HttpConfiguration configuration = request.GetConfiguration();
             if (configuration == null)
             {
-                throw Error.InvalidOperation(SRResources.HttpRequestMessageExtensions_NoConfiguration);
+                throw Error.InvalidOperation(
+                    SRResources.HttpRequestMessageExtensions_NoConfiguration
+                );
             }
 
             IHttpVirtualPathData vpd = configuration.Routes.GetVirtualPath(
                 request: request,
                 name: routeName,
-                values: routeValues);
+                values: routeValues
+            );
             if (vpd == null)
             {
                 return null;

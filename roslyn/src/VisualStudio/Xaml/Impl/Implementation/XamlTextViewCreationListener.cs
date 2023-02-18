@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
     internal sealed partial class XamlTextViewCreationListener : IWpfTextViewCreationListener
     {
         // Temporary UIConext GUID owned by the XAML language service until we can get a KnownUIContext
-        private static readonly Guid s_serverUIContextGuid = new Guid("39F55746-6E65-4FCF-BEC5-EC0B466EAC0F");
+        private static readonly Guid s_serverUIContextGuid = new Guid(
+            "39F55746-6E65-4FCF-BEC5-EC0B466EAC0F"
+        );
 
         private readonly IServiceProvider _serviceProvider;
         private readonly XamlProjectService _projectService;
@@ -33,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XamlTextViewCreationListener(
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
-            XamlProjectService projectService)
+            XamlProjectService projectService
+        )
         {
             _serviceProvider = serviceProvider;
             _projectService = projectService;
@@ -56,7 +59,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
 
             _projectService.TrackOpenDocument(filePath);
 
-            var target = new XamlOleCommandTarget(textView, (IComponentModel)_serviceProvider.GetService(typeof(SComponentModel)));
+            var target = new XamlOleCommandTarget(
+                textView,
+                (IComponentModel)_serviceProvider.GetService(typeof(SComponentModel))
+            );
             target.AttachToVsTextView();
         }
     }

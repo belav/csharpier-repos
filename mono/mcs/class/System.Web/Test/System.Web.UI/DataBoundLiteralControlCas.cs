@@ -1,5 +1,5 @@
 //
-// DataBoundLiteralControlCas.cs 
+// DataBoundLiteralControlCas.cs
 //    - CAS unit tests for System.Web.UI.DataBoundLiteralControl
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,44 +36,48 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
-
+namespace MonoCasTests.System.Web.UI
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class DataBoundLiteralControlCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class DataBoundLiteralControlCas : AspNetHostingMinimal
+    {
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
         {
-            DataBoundLiteralControl dblc = new DataBoundLiteralControl (1, 1);
-            dblc.SetDataBoundString (0, "mono");
-            dblc.SetStaticString (0, "monkey");
-            Assert.AreEqual ("monkeymono", dblc.Text, "Text");
+            DataBoundLiteralControl dblc = new DataBoundLiteralControl(1, 1);
+            dblc.SetDataBoundString(0, "mono");
+            dblc.SetStaticString(0, "monkey");
+            Assert.AreEqual("monkeymono", dblc.Text, "Text");
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ITextControl_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ITextControl_Deny_Unrestricted()
         {
-            ITextControl tc = new DataBoundLiteralControl (1, 1);
-            Assert.AreEqual (String.Empty, tc.Text, "ITextControl.Text");
+            ITextControl tc = new DataBoundLiteralControl(1, 1);
+            Assert.AreEqual(String.Empty, tc.Text, "ITextControl.Text");
             // setter throw
             tc.Text = "singe";
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[2] { typeof (int), typeof (int) });
-            Assert.IsNotNull (ci, ".ctor(int,int)");
-            return ci.Invoke (new object[2] { 1, 1 });
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[2] { typeof(int), typeof(int) });
+            Assert.IsNotNull(ci, ".ctor(int,int)");
+            return ci.Invoke(new object[2] { 1, 1 });
         }
 
-        public override Type Type {
-            get { return typeof (DataBoundLiteralControl); }
+        public override Type Type
+        {
+            get { return typeof(DataBoundLiteralControl); }
         }
     }
 }

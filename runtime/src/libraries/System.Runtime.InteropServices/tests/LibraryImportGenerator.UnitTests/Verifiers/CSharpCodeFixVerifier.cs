@@ -23,16 +23,16 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
         where TCodeFix : CodeFixProvider, new()
     {
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic()"/>
-        public static DiagnosticResult Diagnostic()
-            => CodeFixVerifier<TAnalyzer, TCodeFix>.Diagnostic();
+        public static DiagnosticResult Diagnostic() =>
+            CodeFixVerifier<TAnalyzer, TCodeFix>.Diagnostic();
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic(string)"/>
-        public static DiagnosticResult Diagnostic(string diagnosticId)
-            => CodeFixVerifier<TAnalyzer, TCodeFix>.Diagnostic(diagnosticId);
+        public static DiagnosticResult Diagnostic(string diagnosticId) =>
+            CodeFixVerifier<TAnalyzer, TCodeFix>.Diagnostic(diagnosticId);
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic(DiagnosticDescriptor)"/>
-        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor)
-            => CodeFixVerifier<TAnalyzer, TCodeFix>.Diagnostic(descriptor);
+        public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
+            CodeFixVerifier<TAnalyzer, TCodeFix>.Diagnostic(descriptor);
 
         /// <summary>
         /// Create a <see cref="DiagnosticResult"/> with the diagnostic message created with the provided arguments.
@@ -42,34 +42,57 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
         /// <param name="descriptor">The diagnostic descriptor</param>
         /// <param name="arguments">The arguments to use to format the diagnostic message</param>
         /// <returns>A <see cref="DiagnosticResult"/> with a <see cref="DiagnosticResult.Message"/> set with the <paramref name="descriptor"/>'s message format and the <paramref name="arguments"/>.</returns>
-        public static DiagnosticResult DiagnosticWithArguments(DiagnosticDescriptor descriptor, params object[] arguments)
+        public static DiagnosticResult DiagnosticWithArguments(
+            DiagnosticDescriptor descriptor,
+            params object[] arguments
+        )
         {
             // Generate the specific message here to ensure a stronger match with the correct diagnostic.
-            return Diagnostic(descriptor).WithMessage(string.Format(descriptor.MessageFormat.ToString(), arguments)).WithArguments(arguments);
+            return Diagnostic(descriptor)
+                .WithMessage(string.Format(descriptor.MessageFormat.ToString(), arguments))
+                .WithArguments(arguments);
         }
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
-        public static async Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
+        public static async Task VerifyAnalyzerAsync(
+            string source,
+            params DiagnosticResult[] expected
+        )
         {
-            var test = new Test
-            {
-                TestCode = source,
-            };
+            var test = new Test { TestCode = source, };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync(CancellationToken.None);
         }
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, string)"/>
-        public static async Task VerifyCodeFixAsync(string source, string fixedSource, string? fixEquivalenceKey = null)
-            => await VerifyCodeFixAsync(source, DiagnosticResult.EmptyDiagnosticResults, fixedSource, fixEquivalenceKey);
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            string fixedSource,
+            string? fixEquivalenceKey = null
+        ) =>
+            await VerifyCodeFixAsync(
+                source,
+                DiagnosticResult.EmptyDiagnosticResults,
+                fixedSource,
+                fixEquivalenceKey
+            );
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult, string)"/>
-        public static async Task VerifyCodeFixAsync(string source, DiagnosticResult expected, string fixedSource, string? fixEquivalenceKey = null)
-            => await VerifyCodeFixAsync(source, new[] { expected }, fixedSource, fixEquivalenceKey);
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            DiagnosticResult expected,
+            string fixedSource,
+            string? fixEquivalenceKey = null
+        ) => await VerifyCodeFixAsync(source, new[] { expected }, fixedSource, fixEquivalenceKey);
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult[], string)"/>
-        public static async Task VerifyCodeFixAsync(string source, DiagnosticResult[] expected, string fixedSource, string? fixEquivalenceKey = null)
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            DiagnosticResult[] expected,
+            string fixedSource,
+            string? fixEquivalenceKey = null
+        )
         {
             var test = new Test
             {
@@ -83,20 +106,25 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
         }
 
         /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult[], string)"/>
-        public static async Task VerifyCodeFixAsync(string source, string fixedSource, params DiagnosticResult[] expected)
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            string fixedSource,
+            params DiagnosticResult[] expected
+        )
         {
-            var test = new Test
-            {
-                TestCode = source,
-                FixedCode = fixedSource,
-            };
+            var test = new Test { TestCode = source, FixedCode = fixedSource, };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync(CancellationToken.None);
         }
 
-        public static async Task VerifyCodeFixAsync(string source, DiagnosticResult[] expected, string fixedSource,
-            int numIncrementalIterations, int numFixAllIterations)
+        public static async Task VerifyCodeFixAsync(
+            string source,
+            DiagnosticResult[] expected,
+            string fixedSource,
+            int numIncrementalIterations,
+            int numFixAllIterations
+        )
         {
             var test = new Test
             {
@@ -117,51 +145,75 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
                 // Clear out the default reference assemblies. We explicitly add references from the live ref pack,
                 // so we don't want the Roslyn test infrastructure to resolve/add any default reference assemblies
                 ReferenceAssemblies = new ReferenceAssemblies(string.Empty);
-                TestState.AdditionalReferences.AddRange(SourceGenerators.Tests.LiveReferencePack.GetMetadataReferences());
+                TestState.AdditionalReferences.AddRange(
+                    SourceGenerators.Tests.LiveReferencePack.GetMetadataReferences()
+                );
                 TestState.AdditionalReferences.Add(TestUtils.GetAncillaryReference());
 
-                SolutionTransforms.Add((solution, projectId) =>
-                {
-                    var project = solution.GetProject(projectId)!;
-                    var compilationOptions = project.CompilationOptions!;
-                    var diagnosticOptions = compilationOptions.SpecificDiagnosticOptions.SetItems(CSharpVerifierHelper.NullableWarnings);
-
-                    // Explicitly enable diagnostics that are not enabled by default
-                    var enableAnalyzersOptions = new System.Collections.Generic.Dictionary<string, ReportDiagnostic>();
-                    foreach (var analyzer in GetDiagnosticAnalyzers().ToImmutableArray())
+                SolutionTransforms.Add(
+                    (solution, projectId) =>
                     {
-                        foreach (var diagnostic in analyzer.SupportedDiagnostics)
+                        var project = solution.GetProject(projectId)!;
+                        var compilationOptions = project.CompilationOptions!;
+                        var diagnosticOptions =
+                            compilationOptions.SpecificDiagnosticOptions.SetItems(
+                                CSharpVerifierHelper.NullableWarnings
+                            );
+
+                        // Explicitly enable diagnostics that are not enabled by default
+                        var enableAnalyzersOptions = new System.Collections.Generic.Dictionary<
+                            string,
+                            ReportDiagnostic
+                        >();
+                        foreach (var analyzer in GetDiagnosticAnalyzers().ToImmutableArray())
                         {
-                            if (diagnostic.IsEnabledByDefault)
-                                continue;
-
-                            // Map the default severity to the reporting behaviour.
-                            // We cannot simply use ReportDiagnostic.Default here, as diagnostics that are not enabled by default
-                            // are treated as suppressed (regardless of their default severity).
-                            var report = diagnostic.DefaultSeverity switch
+                            foreach (var diagnostic in analyzer.SupportedDiagnostics)
                             {
-                                DiagnosticSeverity.Error => ReportDiagnostic.Error,
-                                DiagnosticSeverity.Warning => ReportDiagnostic.Warn,
-                                DiagnosticSeverity.Info => ReportDiagnostic.Info,
-                                DiagnosticSeverity.Hidden => ReportDiagnostic.Hidden,
-                                _ => ReportDiagnostic.Default
-                            };
-                            enableAnalyzersOptions.Add(diagnostic.Id, report);
-                        }
-                    }
+                                if (diagnostic.IsEnabledByDefault)
+                                    continue;
 
-                    compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                        compilationOptions.SpecificDiagnosticOptions
-                            .SetItems(CSharpVerifierHelper.NullableWarnings)
-                            .AddRange(enableAnalyzersOptions)
-                            .AddRange(TestUtils.BindingRedirectWarnings));
-                    solution = solution.WithProjectCompilationOptions(projectId, compilationOptions);
-                    solution = solution.WithProjectParseOptions(projectId, ((CSharpParseOptions)project.ParseOptions!).WithLanguageVersion(LanguageVersion.Preview));
-                    return solution;
-                });
+                                // Map the default severity to the reporting behaviour.
+                                // We cannot simply use ReportDiagnostic.Default here, as diagnostics that are not enabled by default
+                                // are treated as suppressed (regardless of their default severity).
+                                var report = diagnostic.DefaultSeverity switch
+                                {
+                                    DiagnosticSeverity.Error => ReportDiagnostic.Error,
+                                    DiagnosticSeverity.Warning => ReportDiagnostic.Warn,
+                                    DiagnosticSeverity.Info => ReportDiagnostic.Info,
+                                    DiagnosticSeverity.Hidden => ReportDiagnostic.Hidden,
+                                    _ => ReportDiagnostic.Default
+                                };
+                                enableAnalyzersOptions.Add(diagnostic.Id, report);
+                            }
+                        }
+
+                        compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
+                            compilationOptions.SpecificDiagnosticOptions
+                                .SetItems(CSharpVerifierHelper.NullableWarnings)
+                                .AddRange(enableAnalyzersOptions)
+                                .AddRange(TestUtils.BindingRedirectWarnings)
+                        );
+                        solution = solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions
+                        );
+                        solution = solution.WithProjectParseOptions(
+                            projectId,
+                            ((CSharpParseOptions)project.ParseOptions!).WithLanguageVersion(
+                                LanguageVersion.Preview
+                            )
+                        );
+                        return solution;
+                    }
+                );
             }
 
-            protected override CompilationWithAnalyzers CreateCompilationWithAnalyzers(Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, AnalyzerOptions options, CancellationToken cancellationToken)
+            protected override CompilationWithAnalyzers CreateCompilationWithAnalyzers(
+                Compilation compilation,
+                ImmutableArray<DiagnosticAnalyzer> analyzers,
+                AnalyzerOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 return new CompilationWithAnalyzers(
                     compilation,
@@ -182,10 +234,14 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
                                 {
                                     System.Diagnostics.Debugger.Break();
                                 }
-                                Environment.FailFast($"Encountered a NullReferenceException while running an analyzer. Taking the process down to get an actionable crash dump. Exception information:{ex.ToString()}");
+                                Environment.FailFast(
+                                    $"Encountered a NullReferenceException while running an analyzer. Taking the process down to get an actionable crash dump. Exception information:{ex.ToString()}"
+                                );
                             }
                             return true;
-                        }));
+                        }
+                    )
+                );
             }
         }
     }

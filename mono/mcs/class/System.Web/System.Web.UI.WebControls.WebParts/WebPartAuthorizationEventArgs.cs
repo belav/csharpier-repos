@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,10 +39,12 @@ namespace System.Web.UI.WebControls.WebParts
         string authorizationFilter;
         bool isShared;
 
-        public WebPartAuthorizationEventArgs (Type type,
-                              string path,
-                              string authorizationFilter,
-                              bool isShared)
+        public WebPartAuthorizationEventArgs(
+            Type type,
+            string path,
+            string authorizationFilter,
+            bool isShared
+        )
         {
             this.type = type;
             this.path = path;
@@ -50,23 +52,28 @@ namespace System.Web.UI.WebControls.WebParts
             this.isShared = isShared;
         }
 
-        public Type Type {
+        public Type Type
+        {
             get { return type; }
         }
 
-        public string Path {
+        public string Path
+        {
             get { return path; }
         }
 
-        public string AuthorizationFilter {
+        public string AuthorizationFilter
+        {
             get { return authorizationFilter; }
         }
 
-        public bool IsShared {
+        public bool IsShared
+        {
             get { return isShared; }
         }
 
-        public bool IsAuthorized {
+        public bool IsAuthorized
+        {
             get { return authorized; }
             set { authorized = value; }
         }

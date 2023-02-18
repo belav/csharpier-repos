@@ -32,7 +32,13 @@ namespace System.Web.Razor.Generator
         }
 
         // Special case for statement padding to account for brace positioning in the editor.
-        public static string PadStatement(RazorEngineHost host, string code, Span target, ref int startGeneratedCode, out int paddingCharCount)
+        public static string PadStatement(
+            RazorEngineHost host,
+            string code,
+            Span target,
+            ref int startGeneratedCode,
+            out int paddingCharCount
+        )
         {
             if (host == null)
             {
@@ -53,10 +59,13 @@ namespace System.Web.Razor.Generator
             //   }
             //
             // the braces shows up under the @ rather than under the if.
-            if (host.DesignTimeMode &&
-                padding > 0 &&
-                target.Previous.Kind == SpanKind.Transition && // target.Previous is guaranteed to be none null if you got any padding.
-                String.Equals(target.Previous.Content, SyntaxConstants.TransitionString))
+            if (
+                host.DesignTimeMode
+                && padding > 0
+                && target.Previous.Kind == SpanKind.Transition
+                && // target.Previous is guaranteed to be none null if you got any padding.
+                String.Equals(target.Previous.Content, SyntaxConstants.TransitionString)
+            )
             {
                 padding--;
                 startGeneratedCode--;
@@ -67,14 +76,25 @@ namespace System.Web.Razor.Generator
             return generatedCode;
         }
 
-        public static string Pad(RazorEngineHost host, string code, Span target, out int paddingCharCount)
+        public static string Pad(
+            RazorEngineHost host,
+            string code,
+            Span target,
+            out int paddingCharCount
+        )
         {
             int padding = CalculatePadding(host, target, 0);
 
             return PadInternal(host, code, padding, out paddingCharCount);
         }
 
-        public static string Pad(RazorEngineHost host, string code, Span target, int generatedStart, out int paddingCharCount)
+        public static string Pad(
+            RazorEngineHost host,
+            string code,
+            Span target,
+            int generatedStart,
+            out int paddingCharCount
+        )
         {
             int padding = CalculatePadding(host, target, generatedStart);
 
@@ -114,7 +134,12 @@ namespace System.Web.Razor.Generator
             return padding;
         }
 
-        private static string PadInternal(RazorEngineHost host, string code, int padding, out int paddingCharCount)
+        private static string PadInternal(
+            RazorEngineHost host,
+            string code,
+            int padding,
+            out int paddingCharCount
+        )
         {
             if (host.DesignTimeMode && host.IsIndentingWithTabs)
             {

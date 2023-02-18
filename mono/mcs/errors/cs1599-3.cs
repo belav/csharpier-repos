@@ -5,5 +5,5 @@ using System;
 
 class C
 {
-    delegate ArgIterator Test (int arg);
+    delegate ArgIterator Test(int arg);
 }

@@ -4,17 +4,17 @@
 using System;
 using System.Configuration;
 
-namespace System.Runtime.Caching.Configuration {
-    public sealed class CachingSectionGroup : ConfigurationSectionGroup {
-        public CachingSectionGroup() {
-        }
+namespace System.Runtime.Caching.Configuration
+{
+    public sealed class CachingSectionGroup : ConfigurationSectionGroup
+    {
+        public CachingSectionGroup() { }
 
         // public properties
         [ConfigurationProperty("memoryCache")]
-        public MemoryCacheSection MemoryCaches {
-            get {
-                return (MemoryCacheSection)Sections["memoryCache"];
-            }
+        public MemoryCacheSection MemoryCaches
+        {
+            get { return (MemoryCacheSection)Sections["memoryCache"]; }
         }
     }
 }

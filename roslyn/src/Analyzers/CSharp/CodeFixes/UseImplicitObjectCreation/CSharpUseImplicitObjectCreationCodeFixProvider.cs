@@ -21,30 +21,42 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseImplicitObjectCreation), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseImplicitObjectCreation
+        ),
+        Shared
+    ]
     internal class CSharpUseImplicitObjectCreationCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpUseImplicitObjectCreationCodeFixProvider()
-        {
-        }
+        public CSharpUseImplicitObjectCreationCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseImplicitObjectCreationDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseImplicitObjectCreationDiagnosticId);
 
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => !diagnostic.IsSuppressed;
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            !diagnostic.IsSuppressed;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Use_new, nameof(CSharpAnalyzersResources.Use_new));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Use_new,
+                nameof(CSharpAnalyzersResources.Use_new)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             // process from inside->out so that outer rewrites see the effects of inner changes.
             foreach (var diagnostic in diagnostics.OrderBy(d => d.Location.SourceSpan.End))
@@ -53,17 +65,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
             return Task.CompletedTask;
         }
 
-        private static void FixOne(SyntaxEditor editor, Diagnostic diagnostic, CancellationToken cancellationToken)
+        private static void FixOne(
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
-            var node = diagnostic.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken);
-            editor.ReplaceNode(node, (current, _) =>
-            {
-                var currentObjectCreation = (ObjectCreationExpressionSyntax)current;
-                return SyntaxFactory.ImplicitObjectCreationExpression(
-                    WithoutTrailingWhitespace(currentObjectCreation.NewKeyword),
-                    currentObjectCreation.ArgumentList ?? SyntaxFactory.ArgumentList(),
-                    currentObjectCreation.Initializer);
-            });
+            var node = diagnostic.AdditionalLocations[0].FindNode(
+                getInnermostNodeForTie: true,
+                cancellationToken
+            );
+            editor.ReplaceNode(
+                node,
+                (current, _) =>
+                {
+                    var currentObjectCreation = (ObjectCreationExpressionSyntax)current;
+                    return SyntaxFactory.ImplicitObjectCreationExpression(
+                        WithoutTrailingWhitespace(currentObjectCreation.NewKeyword),
+                        currentObjectCreation.ArgumentList ?? SyntaxFactory.ArgumentList(),
+                        currentObjectCreation.Initializer
+                    );
+                }
+            );
         }
 
         private static SyntaxToken WithoutTrailingWhitespace(SyntaxToken newKeyword)

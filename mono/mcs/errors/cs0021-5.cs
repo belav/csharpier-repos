@@ -3,10 +3,8 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        var d = new object {
-            ["a"] = 1
-        };
+        var d = new object { ["a"] = 1 };
     }
 }

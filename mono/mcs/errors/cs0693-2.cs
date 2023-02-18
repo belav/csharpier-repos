@@ -6,8 +6,6 @@ class R<U>
 {
     class A<T>
     {
-        struct I<T>
-        {
-        }
+        struct I<T> { }
     }
 }

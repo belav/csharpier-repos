@@ -38,7 +38,12 @@ namespace System.ServiceModel.Channels
 
         public override bool IsAuthenticated
         {
-            get { return this.user != null ? this.user.Identity != null && this.user.Identity.IsAuthenticated : this.context.IsAuthenticated; }
+            get
+            {
+                return this.user != null
+                    ? this.user.Identity != null && this.user.Identity.IsAuthenticated
+                    : this.context.IsAuthenticated;
+            }
         }
 
         public override bool IsLocal
@@ -83,7 +88,14 @@ namespace System.ServiceModel.Channels
 
         public override WebSocket WebSocket
         {
-            get { throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.WebSocketContextWebSocketCannotBeAccessedError))); }
+            get
+            {
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.WebSocketContextWebSocketCannotBeAccessedError)
+                    )
+                );
+            }
         }
     }
 }

@@ -14,114 +14,72 @@ namespace System.Reflection.Emit
 
         public override Assembly Assembly
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string AssemblyQualifiedName
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type BaseType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string FullName
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Guid GUID
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override bool IsConstructedGenericType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Module Module
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string Name
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string Namespace
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override RuntimeTypeHandle TypeHandle
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public FieldBuilder UnderlyingField
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type UnderlyingSystemType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
@@ -146,13 +104,25 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
             return default;
@@ -178,7 +148,10 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo GetEvent(string name, BindingFlags bindingAttr)
         {
             return default;
@@ -190,19 +163,28 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo[] GetEvents(BindingFlags bindingAttr)
         {
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo GetField(string name, BindingFlags bindingAttr)
         {
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo[] GetFields(BindingFlags bindingAttr)
         {
             return default;
@@ -215,7 +197,13 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public override InterfaceMapping GetInterfaceMap([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type interfaceType)
+        public override InterfaceMapping GetInterfaceMap(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type interfaceType
+        )
         {
             return default;
         }
@@ -227,7 +215,11 @@ namespace System.Reflection.Emit
         }
 
         [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             return default;
         }
@@ -238,38 +230,70 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, System.Type[] types, ParameterModifier[] modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            System.Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type GetNestedType(string name, BindingFlags bindingAttr)
         {
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type[] GetNestedTypes(BindingFlags bindingAttr)
         {
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
         {
             return default;
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             return default;
         }
@@ -280,7 +304,16 @@ namespace System.Reflection.Emit
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-        public override object? InvokeMember(string name, BindingFlags invokeAttr, Binder? binder, object? target, object?[]? args, ParameterModifier[]? modifiers, Globalization.CultureInfo? culture, string[]? namedParameters)
+        public override object? InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object? target,
+            object?[]? args,
+            ParameterModifier[]? modifiers,
+            Globalization.CultureInfo? culture,
+            string[]? namedParameters
+        )
         {
             return default;
         }
@@ -302,10 +335,7 @@ namespace System.Reflection.Emit
 
         public override bool IsByRefLike
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         protected override bool IsCOMObjectImpl()
@@ -330,26 +360,17 @@ namespace System.Reflection.Emit
 
         public override bool IsTypeDefinition
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override bool IsSZArray
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override bool IsVariableBoundArray
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         protected override bool IsValueTypeImpl()
@@ -379,12 +400,8 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
-        {
-        }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
-        {
-        }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
     }
 }

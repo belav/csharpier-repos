@@ -7,9 +7,9 @@ using System;
 public class BadMath
 {
     public static double[,] Res = new double[2, 40];
+
     public static int Main()
     {
-
         double t0 = 1.5;
         int i = 0;
         for (i = 0; i < 4; i++)

@@ -48,34 +48,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (_crefSyntax.Kind())
             {
                 case SyntaxKind.TypeCref:
-                    {
-                        AddTypeParameters(((TypeCrefSyntax)_crefSyntax).Type, map);
-                        break;
-                    }
+                {
+                    AddTypeParameters(((TypeCrefSyntax)_crefSyntax).Type, map);
+                    break;
+                }
                 case SyntaxKind.QualifiedCref:
-                    {
-                        QualifiedCrefSyntax qualifiedCrefSyntax = ((QualifiedCrefSyntax)_crefSyntax);
-                        AddTypeParameters(qualifiedCrefSyntax.Member, map);
-                        AddTypeParameters(qualifiedCrefSyntax.Container, map);
-                        break;
-                    }
+                {
+                    QualifiedCrefSyntax qualifiedCrefSyntax = ((QualifiedCrefSyntax)_crefSyntax);
+                    AddTypeParameters(qualifiedCrefSyntax.Member, map);
+                    AddTypeParameters(qualifiedCrefSyntax.Container, map);
+                    break;
+                }
                 case SyntaxKind.NameMemberCref:
                 case SyntaxKind.IndexerMemberCref:
                 case SyntaxKind.OperatorMemberCref:
                 case SyntaxKind.ConversionOperatorMemberCref:
-                    {
-                        AddTypeParameters((MemberCrefSyntax)_crefSyntax, map);
-                        break;
-                    }
+                {
+                    AddTypeParameters((MemberCrefSyntax)_crefSyntax, map);
+                    break;
+                }
                 default:
-                    {
-                        throw ExceptionUtilities.UnexpectedValue(_crefSyntax.Kind());
-                    }
+                {
+                    throw ExceptionUtilities.UnexpectedValue(_crefSyntax.Kind());
+                }
             }
             return map;
         }
 
-        private void AddTypeParameters(TypeSyntax typeSyntax, MultiDictionary<string, TypeParameterSymbol> map)
+        private void AddTypeParameters(
+            TypeSyntax typeSyntax,
+            MultiDictionary<string, TypeParameterSymbol> map
+        )
         {
             switch (typeSyntax.Kind())
             {
@@ -100,7 +103,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private void AddTypeParameters(MemberCrefSyntax memberSyntax, MultiDictionary<string, TypeParameterSymbol> map)
+        private void AddTypeParameters(
+            MemberCrefSyntax memberSyntax,
+            MultiDictionary<string, TypeParameterSymbol> map
+        )
         {
             // Other members have arity 0.
             if (memberSyntax.Kind() == SyntaxKind.NameMemberCref)
@@ -109,34 +115,48 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private static void AddTypeParameters(GenericNameSyntax genericNameSyntax, MultiDictionary<string, TypeParameterSymbol> map)
+        private static void AddTypeParameters(
+            GenericNameSyntax genericNameSyntax,
+            MultiDictionary<string, TypeParameterSymbol> map
+        )
         {
             // NOTE: Dev11 does not warn about duplication, it just matches parameter types to the
             // *last* type parameter with the same name.  That's why we're iterating backwards and
             // skipping subsequent symbols with the same name.  This can result in some surprising
             // behavior.  For example, both 'T's in "A<T>.B<T>" bind to the second implicitly
             // declared type parameter.
-            SeparatedSyntaxList<TypeSyntax> typeArguments = genericNameSyntax.TypeArgumentList.Arguments;
+            SeparatedSyntaxList<TypeSyntax> typeArguments = genericNameSyntax
+                .TypeArgumentList
+                .Arguments;
             for (int i = typeArguments.Count - 1; i >= 0; i--)
             {
-                // Other types (non-identifiers) are allowed in error scenarios, but they do not introduce new 
+                // Other types (non-identifiers) are allowed in error scenarios, but they do not introduce new
                 // cref type parameters.
                 if (typeArguments[i].Kind() == SyntaxKind.IdentifierName)
                 {
-                    IdentifierNameSyntax typeParameterSyntax = (IdentifierNameSyntax)typeArguments[i];
+                    IdentifierNameSyntax typeParameterSyntax = (IdentifierNameSyntax)
+                        typeArguments[i];
                     Debug.Assert(typeParameterSyntax != null, "Syntactic requirement of crefs");
 
                     string name = typeParameterSyntax.Identifier.ValueText;
                     if (SyntaxFacts.IsValidIdentifier(name) && !map.ContainsKey(name))
                     {
-                        TypeParameterSymbol typeParameterSymbol = new CrefTypeParameterSymbol(name, i, typeParameterSyntax);
+                        TypeParameterSymbol typeParameterSymbol = new CrefTypeParameterSymbol(
+                            name,
+                            i,
+                            typeParameterSyntax
+                        );
                         map.Add(name, typeParameterSymbol);
                     }
                 }
             }
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             if (CanConsiderTypeParameters(options))
             {
@@ -145,7 +165,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     foreach (TypeParameterSymbol typeParameter in kvp.Value)
                     {
                         // In any context where this binder applies, the type parameters are always viable/speakable.
-                        Debug.Assert(!result.CanBeAdded(typeParameter.Name) || originalBinder.CanAddLookupSymbolInfo(typeParameter, options, result, null));
+                        Debug.Assert(
+                            !result.CanBeAdded(typeParameter.Name)
+                                || originalBinder.CanAddLookupSymbolInfo(
+                                    typeParameter,
+                                    options,
+                                    result,
+                                    null
+                                )
+                        );
 
                         result.AddSymbol(typeParameter, kvp.Key, 0);
                     }

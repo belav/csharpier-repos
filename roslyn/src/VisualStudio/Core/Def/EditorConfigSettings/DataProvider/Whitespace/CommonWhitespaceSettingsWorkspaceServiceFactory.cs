@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Whites
             _globalOptions = globalOptions;
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new CommonWhitespaceSettingsProviderFactory(workspaceServices.Workspace, _globalOptions);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new CommonWhitespaceSettingsProviderFactory(
+                workspaceServices.Workspace,
+                _globalOptions
+            );
     }
 }

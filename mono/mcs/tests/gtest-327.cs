@@ -1,37 +1,32 @@
 interface ITest
 {
-    void Test ();
+    void Test();
 }
 
-class Tester<T> where T : ITest, new ()
+class Tester<T>
+    where T : ITest, new()
 {
-    public void Do ()
+    public void Do()
     {
-        new T ().Test ();
+        new T().Test();
     }
 }
 
 class Reference : ITest
 {
-    public void Test ()
-    {
-    }
+    public void Test() { }
 }
 
 struct Value : ITest
 {
-    public void Test ()
-    {
-    }
+    public void Test() { }
 }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        new Tester<Reference> ().Do ();
-        new Tester<Value> ().Do ();
+        new Tester<Reference>().Do();
+        new Tester<Value>().Do();
     }
 }
-
-

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,95 +55,157 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     public abstract class StandardBindingElement
-         : ConfigurationElement,  IBindingConfigurationElement
+        : ConfigurationElement,
+            IBindingConfigurationElement
     {
         ConfigurationPropertyCollection _properties;
 
-        protected StandardBindingElement ()
+        protected StandardBindingElement() { }
+
+        protected StandardBindingElement(string name)
         {
-        }
-        
-        protected StandardBindingElement (string name) {
             Name = name;
         }
 
-
         // Properties
-        protected abstract Type BindingElementType { get;  }
+        protected abstract Type BindingElementType { get; }
 
-        [ConfigurationProperty ("closeTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:01:00")]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan CloseTimeout {
-            get { return (TimeSpan) this ["closeTimeout"]; }
-            set { this ["closeTimeout"] = value; }
+        [ConfigurationProperty(
+            "closeTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:01:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan CloseTimeout
+        {
+            get { return (TimeSpan)this["closeTimeout"]; }
+            set { this["closeTimeout"] = value; }
         }
 
-        [StringValidator ( MinLength = 1,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        [ConfigurationProperty ("name",
-             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "name",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
             IsRequired = true,
-            IsKey = true)]
-        public string Name {
-            get { return (string) this ["name"]; }
-            set { this ["name"] = value; }
+            IsKey = true
+        )]
+        public string Name
+        {
+            get { return (string)this["name"]; }
+            set { this["name"] = value; }
         }
 
-        [ConfigurationProperty ("openTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:01:00")]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan OpenTimeout {
-            get { return (TimeSpan) this ["openTimeout"]; }
-            set { this ["openTimeout"] = value; }
+        [ConfigurationProperty(
+            "openTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:01:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan OpenTimeout
+        {
+            get { return (TimeSpan)this["openTimeout"]; }
+            set { this["openTimeout"] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = new ConfigurationPropertyCollection ();
-                    _properties.Add (new ConfigurationProperty ("closeTimeout", typeof (TimeSpan), "00:01:00", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("name", typeof (string), null, null, new StringValidator (1), ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey));
-                    _properties.Add (new ConfigurationProperty ("openTimeout", typeof (TimeSpan), "00:01:00", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("receiveTimeout", typeof (TimeSpan), "00:10:00", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("sendTimeout", typeof (TimeSpan), "00:01:00", null, null, ConfigurationPropertyOptions.None));
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = new ConfigurationPropertyCollection();
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "closeTimeout",
+                            typeof(TimeSpan),
+                            "00:01:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "name",
+                            typeof(string),
+                            null,
+                            null,
+                            new StringValidator(1),
+                            ConfigurationPropertyOptions.IsRequired
+                                | ConfigurationPropertyOptions.IsKey
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "openTimeout",
+                            typeof(TimeSpan),
+                            "00:01:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "receiveTimeout",
+                            typeof(TimeSpan),
+                            "00:10:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "sendTimeout",
+                            typeof(TimeSpan),
+                            "00:01:00",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        [ConfigurationProperty ("receiveTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:10:00")]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan ReceiveTimeout {
-            get { return (TimeSpan) this ["receiveTimeout"]; }
-            set { this ["receiveTimeout"] = value; }
+        [ConfigurationProperty(
+            "receiveTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:10:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan ReceiveTimeout
+        {
+            get { return (TimeSpan)this["receiveTimeout"]; }
+            set { this["receiveTimeout"] = value; }
         }
 
-        [ConfigurationProperty ("sendTimeout",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "00:01:00")]
-        [TypeConverter (typeof (TimeSpanConverter))]
-        public TimeSpan SendTimeout {
-            get { return (TimeSpan) this ["sendTimeout"]; }
-            set { this ["sendTimeout"] = value; }
+        [ConfigurationProperty(
+            "sendTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:01:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan SendTimeout
+        {
+            get { return (TimeSpan)this["sendTimeout"]; }
+            set { this["sendTimeout"] = value; }
         }
 
-        protected abstract void OnApplyConfiguration (Binding binding);
-        
-        public void ApplyConfiguration (Binding binding) {
+        protected abstract void OnApplyConfiguration(Binding binding);
+
+        public void ApplyConfiguration(Binding binding)
+        {
             binding.CloseTimeout = CloseTimeout;
             binding.OpenTimeout = OpenTimeout;
             binding.ReceiveTimeout = ReceiveTimeout;
             binding.SendTimeout = SendTimeout;
-            OnApplyConfiguration (binding);
+            OnApplyConfiguration(binding);
         }
 
-        protected internal virtual void InitializeFrom (Binding binding)
+        protected internal virtual void InitializeFrom(Binding binding)
         {
             CloseTimeout = binding.CloseTimeout;
             OpenTimeout = binding.OpenTimeout;
@@ -151,5 +213,4 @@ namespace System.ServiceModel.Configuration
             SendTimeout = binding.SendTimeout;
         }
     }
-
 }

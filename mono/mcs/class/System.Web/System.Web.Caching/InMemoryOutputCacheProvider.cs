@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,34 +35,50 @@ namespace System.Web.Caching
     sealed class InMemoryOutputCacheProvider : OutputCacheProvider
     {
         const string CACHE_PREFIX = "@InMemoryOCP_";
-        public InMemoryOutputCacheProvider ()
-        {}
 
-        public override object Add (string key, object entry, DateTime utcExpiry)
+        public InMemoryOutputCacheProvider() { }
+
+        public override object Add(string key, object entry, DateTime utcExpiry)
         {
-            return HttpRuntime.InternalCache.Add (CACHE_PREFIX + key, entry, null, utcExpiry.ToLocalTime (), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+            return HttpRuntime.InternalCache.Add(
+                CACHE_PREFIX + key,
+                entry,
+                null,
+                utcExpiry.ToLocalTime(),
+                Cache.NoSlidingExpiration,
+                CacheItemPriority.Normal,
+                null
+            );
         }
 
-        public override object Get (string key)
+        public override object Get(string key)
         {
-            return HttpRuntime.InternalCache.Get (CACHE_PREFIX + key);
+            return HttpRuntime.InternalCache.Get(CACHE_PREFIX + key);
         }
 
-        public override void Remove (string key)
+        public override void Remove(string key)
         {
-            HttpRuntime.InternalCache.Remove (CACHE_PREFIX + key);
+            HttpRuntime.InternalCache.Remove(CACHE_PREFIX + key);
         }
 
-        public override void Set (string key, object entry, DateTime utcExpiry)
+        public override void Set(string key, object entry, DateTime utcExpiry)
         {
             Cache cache = HttpRuntime.InternalCache;
             string cacheKey = CACHE_PREFIX + key;
-            object oldObject = cache.Get (cacheKey);
+            object oldObject = cache.Get(cacheKey);
 
             if (oldObject != null)
-                cache.Remove (cacheKey);
-            
-            cache.Add (cacheKey, entry, null, utcExpiry.ToLocalTime (), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+                cache.Remove(cacheKey);
+
+            cache.Add(
+                cacheKey,
+                entry,
+                null,
+                utcExpiry.ToLocalTime(),
+                Cache.NoSlidingExpiration,
+                CacheItemPriority.Normal,
+                null
+            );
         }
     }
 }

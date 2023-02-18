@@ -5,12 +5,12 @@ using System;
 
 class C
 {
-    void Foo (__arglist)
+    void Foo(__arglist)
     {
-        InstanceArgList (__arglist);
+        InstanceArgList(__arglist);
     }
-    
-    int InstanceArgList (__arglist)
+
+    int InstanceArgList(__arglist)
     {
         return 54;
     }

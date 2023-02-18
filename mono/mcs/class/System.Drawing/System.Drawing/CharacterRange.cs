@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,49 +37,44 @@ namespace System.Drawing
         private int first;
         private int length;
 
-        public CharacterRange (int First, int Length)
+        public CharacterRange(int First, int Length)
         {
             this.first = First;
             this.length = Length;
         }
 
-        public int First {
-            get {
-                return first;
-            }
-            set {
-                first = value;
-            }
+        public int First
+        {
+            get { return first; }
+            set { first = value; }
         }
 
-        public int Length {
-            get {
-                return length;
-            }
-            set {
-                length = value;
-            }
+        public int Length
+        {
+            get { return length; }
+            set { length = value; }
         }
-        public override bool Equals (object obj)
+
+        public override bool Equals(object obj)
         {
             if (!(obj is CharacterRange))
                 return false;
 
-            CharacterRange cr = (CharacterRange) obj;
+            CharacterRange cr = (CharacterRange)obj;
             return this == cr;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return (first ^ length);
         }
-        
-        public static bool operator == (CharacterRange cr1, CharacterRange cr2)
+
+        public static bool operator ==(CharacterRange cr1, CharacterRange cr2)
         {
             return ((cr1.first == cr2.first) && (cr1.length == cr2.length));
         }
 
-        public static bool operator != (CharacterRange cr1, CharacterRange cr2)
+        public static bool operator !=(CharacterRange cr1, CharacterRange cr2)
         {
             return ((cr1.first != cr2.first) || (cr1.length != cr2.length));
         }

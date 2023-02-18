@@ -1,6 +1,6 @@
 using System;
 
-delegate void D ();
+delegate void D();
 
 class E
 {
@@ -9,20 +9,19 @@ class E
 
 class A
 {
-    E Prop    {
-        get {
-            return new E ();
-        }
+    E Prop
+    {
+        get { return new E(); }
     }
 
-    void Test ()
+    void Test()
     {
-        Prop.temp += delegate () { };
+        Prop.temp += delegate() { };
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        var a = new A ();
-        a.Test ();
+        var a = new A();
+        a.Test();
     }
 }

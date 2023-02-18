@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,7 +30,8 @@
 
 using System;
 
-namespace Mono.Data.Tds.Protocol {
+namespace Mono.Data.Tds.Protocol
+{
     public class TdsInternalInfoMessageEventArgs : EventArgs
     {
         #region Fields
@@ -40,55 +41,64 @@ namespace Mono.Data.Tds.Protocol {
         #endregion // Fields
 
         #region Constructors
-        
-        public TdsInternalInfoMessageEventArgs (TdsInternalErrorCollection errors)
+
+        public TdsInternalInfoMessageEventArgs(TdsInternalErrorCollection errors)
         {
             this.errors = errors;
         }
 
-        public TdsInternalInfoMessageEventArgs (TdsInternalError error)
+        public TdsInternalInfoMessageEventArgs(TdsInternalError error)
         {
-            this.errors = new TdsInternalErrorCollection ();
-            errors.Add (error);
+            this.errors = new TdsInternalErrorCollection();
+            errors.Add(error);
         }
 
         #endregion // Constructors
 
         #region Properties
 
-        public TdsInternalErrorCollection Errors {
+        public TdsInternalErrorCollection Errors
+        {
             get { return errors; }
         }
 
-        public byte Class {
+        public byte Class
+        {
             get { return errors[0].Class; }
         }
 
-        public int LineNumber {
+        public int LineNumber
+        {
             get { return errors[0].LineNumber; }
         }
 
-        public string Message {
+        public string Message
+        {
             get { return errors[0].Message; }
         }
 
-        public int Number {
+        public int Number
+        {
             get { return errors[0].Number; }
         }
 
-        public string Procedure {
+        public string Procedure
+        {
             get { return errors[0].Procedure; }
         }
 
-        public string Server {
+        public string Server
+        {
             get { return errors[0].Server; }
         }
-        
-        public string Source {
+
+        public string Source
+        {
             get { return errors[0].Source; }
         }
 
-        public byte State {
+        public byte State
+        {
             get { return errors[0].State; }
         }
 
@@ -96,9 +106,29 @@ namespace Mono.Data.Tds.Protocol {
 
         #region Methods
 
-        public int Add (byte theClass, int lineNumber, string message, int number, string procedure, string server, string source, byte state)
+        public int Add(
+            byte theClass,
+            int lineNumber,
+            string message,
+            int number,
+            string procedure,
+            string server,
+            string source,
+            byte state
+        )
         {
-            return errors.Add (new TdsInternalError (theClass, lineNumber, message, number, procedure, server, source, state));
+            return errors.Add(
+                new TdsInternalError(
+                    theClass,
+                    lineNumber,
+                    message,
+                    number,
+                    procedure,
+                    server,
+                    source,
+                    state
+                )
+            );
         }
 
         #endregion // Methods

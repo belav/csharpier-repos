@@ -16,18 +16,24 @@ namespace MonoTests.System.ServiceModel.Description
     public class WebHttpEndpointTest
     {
         [Test]
-        public void ReplaceBinding1 ()
+        public void ReplaceBinding1()
         {
-            var se = new WebHttpEndpoint (ContractDescription.GetContract (typeof (IMetadataExchange)), null);
-            se.Binding = new NetTcpBinding (); // this does not throw exception yet.
+            var se = new WebHttpEndpoint(
+                ContractDescription.GetContract(typeof(IMetadataExchange)),
+                null
+            );
+            se.Binding = new NetTcpBinding(); // this does not throw exception yet.
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ReplaceBinding2 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ReplaceBinding2()
         {
-            var se = new WebHttpEndpoint (ContractDescription.GetContract (typeof (IMetadataExchange)), null);
-            se.Binding = new NetTcpBinding ();
+            var se = new WebHttpEndpoint(
+                ContractDescription.GetContract(typeof(IMetadataExchange)),
+                null
+            );
+            se.Binding = new NetTcpBinding();
             se.WriteEncoding = Encoding.UTF8;
         }
     }

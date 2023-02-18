@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         public virtual void SomeMethod() { }
     }
 
-    public class HasAttribute_ReturnsTrueForAttributesOnOverriddenMethodsTest : HasAttribute_ReturnsTrueForAttributesOnOverriddenMethodsBase
+    public class HasAttribute_ReturnsTrueForAttributesOnOverriddenMethodsTest
+        : HasAttribute_ReturnsTrueForAttributesOnOverriddenMethodsBase
     {
         public override void SomeMethod() { }
     }

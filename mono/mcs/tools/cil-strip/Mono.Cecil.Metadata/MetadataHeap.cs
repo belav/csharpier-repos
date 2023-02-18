@@ -26,67 +26,71 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
-
+namespace Mono.Cecil.Metadata
+{
     using System;
 
     using Mono.Cecil;
 
-    internal abstract class MetadataHeap : IMetadataVisitable  {
-
+    internal abstract class MetadataHeap : IMetadataVisitable
+    {
         MetadataStream m_stream;
         string m_name;
-        byte [] m_data;
+        byte[] m_data;
 
-        public string Name {
+        public string Name
+        {
             get { return m_name; }
         }
 
-        public byte [] Data {
+        public byte[] Data
+        {
             get { return m_data; }
             set { m_data = value; }
         }
 
         public int IndexSize;
 
-        internal MetadataHeap (MetadataStream stream, string name)
+        internal MetadataHeap(MetadataStream stream, string name)
         {
             m_name = name;
             m_stream = stream;
         }
 
-        public static MetadataHeap HeapFactory (MetadataStream stream)
+        public static MetadataHeap HeapFactory(MetadataStream stream)
         {
-            switch (stream.Header.Name) {
-            case MetadataStream.Tables :
-            case MetadataStream.IncrementalTables :
-                return new TablesHeap (stream);
-            case MetadataStream.GUID :
-                return new GuidHeap (stream);
-            case MetadataStream.Strings :
-                return new StringsHeap (stream);
-            case MetadataStream.UserStrings :
-                return new UserStringsHeap (stream);
-            case MetadataStream.Blob :
-                return new BlobHeap (stream);
-            default :
-                return null;
+            switch (stream.Header.Name)
+            {
+                case MetadataStream.Tables:
+                case MetadataStream.IncrementalTables:
+                    return new TablesHeap(stream);
+                case MetadataStream.GUID:
+                    return new GuidHeap(stream);
+                case MetadataStream.Strings:
+                    return new StringsHeap(stream);
+                case MetadataStream.UserStrings:
+                    return new UserStringsHeap(stream);
+                case MetadataStream.Blob:
+                    return new BlobHeap(stream);
+                default:
+                    return null;
             }
         }
 
-        public MetadataStream GetStream ()
+        public MetadataStream GetStream()
         {
             return m_stream;
         }
 
-        protected virtual byte [] ReadBytesFromStream (uint pos)
+        protected virtual byte[] ReadBytesFromStream(uint pos)
         {
-            int start, length = Utilities.ReadCompressedInteger (m_data, (int) pos, out start);
-            byte [] buffer = new byte [length];
-            Buffer.BlockCopy (m_data, start, buffer, 0, length);
+            int start,
+                length = Utilities.ReadCompressedInteger(m_data, (int)pos, out start);
+            byte[] buffer = new byte[length];
+            Buffer.BlockCopy(m_data, start, buffer, 0, length);
             return buffer;
         }
 
-        public abstract void Accept (IMetadataVisitor visitor);
+        public abstract void Accept(IMetadataVisitor visitor);
     }
 }

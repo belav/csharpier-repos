@@ -4,28 +4,26 @@ using System.Threading.Tasks;
 // contextual async, parser tests
 class A : Iasync
 {
-    async Task<int> async ()
+    async Task<int> async()
     {
         int async;
-        throw new NotImplementedException ();
+        throw new NotImplementedException();
     }
 
-    async Task async (int async)
+    async Task async(int async)
     {
-        throw new NotImplementedException ();
-    }
-    
-    async void CastTest ()
-    {
-        var res = (int) await async ();
-        var res2 = (Int32) await async ();
-    }
-    
-    async void Iasync.async ()
-    {
+        throw new NotImplementedException();
     }
 
-    public static int Main ()
+    async void CastTest()
+    {
+        var res = (int)await async();
+        var res2 = (Int32)await async();
+    }
+
+    async void Iasync.async() { }
+
+    public static int Main()
     {
         return 0;
     }
@@ -33,45 +31,40 @@ class A : Iasync
 
 interface Iasync
 {
-    void async ();
+    void async();
 }
 
 class B
 {
     class async
     {
-        async (async arg)
-        {
-        }
+        async(async arg) { }
     }
 }
 
 class C
 {
-    static void Test (bool async)
+    static void Test(bool async)
     {
         var a = async ? Prop : 2;
     }
 
-    static int Prop {
-        get {
-            return 3;
-        }
+    static int Prop
+    {
+        get { return 3; }
     }
 }
 
 class D
 {
-    enum E {}
+    enum E { }
 
-    async Task M ()
-    {
-    }
+    async Task M() { }
 }
 
 class async
 {
-    async (async arg)
+    async(async arg)
     {
         int await = 0;
     }
@@ -79,26 +72,22 @@ class async
 
 class await
 {
-    await (await arg)
-    {
-    }
+    await(await arg) { }
 }
 
 [async]
-class asyncAttribute: Attribute
+class asyncAttribute : Attribute
 {
-    delegate async async (async async);
+    delegate async async(async async);
 }
 
 namespace AsyncNS
 {
     class Classes
     {
-        class async
-        {
-        }
-        
-        void M ()
+        class async { }
+
+        void M()
         {
             async local;
         }
@@ -114,22 +103,24 @@ namespace AwaitNS
 {
     class Formals
     {
-        delegate void D (int x);
-        static void M1 ()
+        delegate void D(int x);
+
+        static void M1()
         {
             D d1 = await => { };
             D d2 = (int await) => { };
-            D d3 = delegate (int await) { };
+            D d3 = delegate(int await) { };
         }
     }
 
     class Methods
     {
-        void await () { }
-        void M (Methods m)
+        void await() { }
+
+        void M(Methods m)
         {
-            m.await ();
-            this.await ();
+            m.await();
+            this.await();
             // FIXME: await ();
         }
     }
@@ -137,7 +128,8 @@ namespace AwaitNS
     class Classes
     {
         class await { }
-        void M ()
+
+        void M()
         {
             // FIXME: @await local = new @await ();
         }
@@ -145,7 +137,7 @@ namespace AwaitNS
 
     class AnonTypes
     {
-        static void M ()
+        static void M()
         {
             var x = new { await = 1 };
             var y = x.await;
@@ -158,28 +150,26 @@ namespace AwaitNS
     {
         int await;
 
-        static void M ()
+        static void M()
         {
-            var a = new Initializer () {
-                await = 2
-            };
+            var a = new Initializer() { await = 2 };
         }
     }
 
     class MemberAccess
     {
-        static void M ()
+        static void M()
         {
             var await = new string[0];
-            var l = await.Length;            
+            var l = await.Length;
         }
     }
 
     class TypeChecks
     {
-        static void M (object await)
+        static void M(object await)
         {
-            var b = await is Exception; 
+            var b = await is Exception;
             var c = await as Exception;
         }
     }

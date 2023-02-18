@@ -1,11 +1,11 @@
 struct S
 {
-    public static bool operator true (S? S)
+    public static bool operator true(S? S)
     {
         return true;
     }
 
-    public static bool operator false (S? S)
+    public static bool operator false(S? S)
     {
         return true;
     }
@@ -13,9 +13,8 @@ struct S
 
 class P
 {
-    static void Main ()
+    static void Main()
     {
-        if (new S? ()) {
-        }
+        if (new S?()) { }
     }
 }

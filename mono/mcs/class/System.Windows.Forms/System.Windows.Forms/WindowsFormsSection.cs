@@ -30,21 +30,23 @@ namespace System.Windows.Forms
         private ConfigurationPropertyCollection properties;
         private ConfigurationProperty jit_debugging;
 
-        public WindowsFormsSection ()
+        public WindowsFormsSection()
         {
             properties = new ConfigurationPropertyCollection();
-            jit_debugging = new ConfigurationProperty ("jitDebugging", typeof (bool), false);
+            jit_debugging = new ConfigurationProperty("jitDebugging", typeof(bool), false);
 
-            properties.Add (jit_debugging);
+            properties.Add(jit_debugging);
         }
 
         [ConfigurationProperty("jitDebugging", DefaultValue = "False")]
-        public bool JitDebugging {
+        public bool JitDebugging
+        {
             get { return (bool)base[jit_debugging]; }
             set { base[jit_debugging] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
     }

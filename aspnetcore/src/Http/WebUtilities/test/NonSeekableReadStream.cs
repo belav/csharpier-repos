@@ -8,9 +8,7 @@ public class NonSeekableReadStream : Stream
     private readonly Stream _inner;
 
     public NonSeekableReadStream(byte[] data)
-        : this(new MemoryStream(data))
-    {
-    }
+        : this(new MemoryStream(data)) { }
 
     public NonSeekableReadStream(Stream inner)
     {
@@ -60,7 +58,12 @@ public class NonSeekableReadStream : Stream
         return _inner.Read(buffer, offset, count);
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         count = Math.Max(count, 1);
         return _inner.ReadAsync(buffer, offset, count, cancellationToken);

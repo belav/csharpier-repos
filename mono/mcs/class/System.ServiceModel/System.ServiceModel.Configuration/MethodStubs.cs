@@ -12,120 +12,125 @@ using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-
-// ChannelEndpointElementCollection
+    // ChannelEndpointElementCollection
     public sealed partial class ChannelEndpointElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<ChannelEndpointElement>
+        : ServiceModelEnhancedConfigurationElementCollection<ChannelEndpointElement>
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            ChannelEndpointElement el = (ChannelEndpointElement) element;
+            ChannelEndpointElement el = (ChannelEndpointElement)element;
             return el.Name + ";" + el.Contract;
         }
     }
 
-// ClaimTypeElementCollection
+    // ClaimTypeElementCollection
     public sealed partial class ClaimTypeElementCollection
-         : ServiceModelConfigurationElementCollection<ClaimTypeElement>,  ICollection,  IEnumerable
+        : ServiceModelConfigurationElementCollection<ClaimTypeElement>,
+            ICollection,
+            IEnumerable
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((ClaimTypeElement) element).ClaimType;
+            return ((ClaimTypeElement)element).ClaimType;
         }
     }
 
-// ComContractElementCollection
+    // ComContractElementCollection
     public sealed partial class ComContractElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<ComContractElement>
+        : ServiceModelEnhancedConfigurationElementCollection<ComContractElement>
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((ComContractElement) element).Name;
+            return ((ComContractElement)element).Name;
         }
     }
 
-// ComMethodElementCollection
+    // ComMethodElementCollection
     public sealed partial class ComMethodElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<ComMethodElement>
+        : ServiceModelEnhancedConfigurationElementCollection<ComMethodElement>
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((ComMethodElement) element).ExposedMethod;
+            return ((ComMethodElement)element).ExposedMethod;
         }
     }
 
-// ComPersistableTypeElementCollection
+    // ComPersistableTypeElementCollection
     public sealed partial class ComPersistableTypeElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<ComPersistableTypeElement>
+        : ServiceModelEnhancedConfigurationElementCollection<ComPersistableTypeElement>
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
             // FIXME: ID? anyways, cosmetic COM stuff...
-            return ((ComPersistableTypeElement) element).Name;
+            return ((ComPersistableTypeElement)element).Name;
         }
     }
 
-// ComUdtElementCollection
+    // ComUdtElementCollection
     public sealed partial class ComUdtElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<ComUdtElement>
+        : ServiceModelEnhancedConfigurationElementCollection<ComUdtElement>
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
             // FIXME: another property? anyways COM stuff...
-            return ((ComUdtElement) element).Name;
+            return ((ComUdtElement)element).Name;
         }
     }
 
-// CustomBindingElementCollection
+    // CustomBindingElementCollection
     public sealed partial class CustomBindingElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<CustomBindingElement>,  ICollection,  IEnumerable
+        : ServiceModelEnhancedConfigurationElementCollection<CustomBindingElement>,
+            ICollection,
+            IEnumerable
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((CustomBindingElement) element).Name;
+            return ((CustomBindingElement)element).Name;
         }
     }
 
-// IssuedTokenClientBehaviorsElementCollection
+    // IssuedTokenClientBehaviorsElementCollection
     public sealed partial class IssuedTokenClientBehaviorsElementCollection
-         : ServiceModelConfigurationElementCollection<IssuedTokenClientBehaviorsElement>
+        : ServiceModelConfigurationElementCollection<IssuedTokenClientBehaviorsElement>
     {
         [MonoTODO]
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 
-// StandardBindingElementCollection
+    // StandardBindingElementCollection
     public sealed partial class StandardBindingElementCollection<TBindingConfiguration>
-         : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>,  ICollection,  IEnumerable
-         where TBindingConfiguration : StandardBindingElement, new()
+        : ServiceModelEnhancedConfigurationElementCollection<TBindingConfiguration>,
+            ICollection,
+            IEnumerable
+        where TBindingConfiguration : StandardBindingElement, new()
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((StandardBindingElement) element).Name;
+            return ((StandardBindingElement)element).Name;
         }
     }
 
-// TransportConfigurationTypeElementCollection
+    // TransportConfigurationTypeElementCollection
     public sealed partial class TransportConfigurationTypeElementCollection
-         : ServiceModelConfigurationElementCollection<TransportConfigurationTypeElement>
+        : ServiceModelConfigurationElementCollection<TransportConfigurationTypeElement>
     {
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((TransportConfigurationTypeElement) element).Name;
+            return ((TransportConfigurationTypeElement)element).Name;
         }
     }
 
-// XPathMessageFilterElementCollection
+    // XPathMessageFilterElementCollection
     public sealed partial class XPathMessageFilterElementCollection
-         : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>
+        : ServiceModelConfigurationElementCollection<XPathMessageFilterElement>
     {
         [MonoTODO]
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

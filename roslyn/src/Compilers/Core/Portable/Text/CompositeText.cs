@@ -25,7 +25,11 @@ namespace Microsoft.CodeAnalysis.Text
         private readonly int[] _segmentOffsets;
         private readonly Encoding? _encoding;
 
-        private CompositeText(ImmutableArray<SourceText> segments, Encoding? encoding, SourceHashAlgorithm checksumAlgorithm)
+        private CompositeText(
+            ImmutableArray<SourceText> segments,
+            Encoding? encoding,
+            SourceHashAlgorithm checksumAlgorithm
+        )
             : base(checksumAlgorithm: checksumAlgorithm)
         {
             Debug.Assert(!segments.IsDefaultOrEmpty);
@@ -94,7 +98,10 @@ namespace Microsoft.CodeAnalysis.Text
                     var segment = _segments[segIndex];
                     var copyLength = Math.Min(count, segment.Length - segOffset);
 
-                    AddSegments(newSegments, segment.GetSubText(new TextSpan(segOffset, copyLength)));
+                    AddSegments(
+                        newSegments,
+                        segment.GetSubText(new TextSpan(segOffset, copyLength))
+                    );
 
                     count -= copyLength;
                     segIndex++;
@@ -121,7 +128,12 @@ namespace Microsoft.CodeAnalysis.Text
         /// Validates the arguments passed to <see cref="CopyTo"/> against the published contract.
         /// </summary>
         /// <returns>True if should bother to proceed with copying.</returns>
-        private bool CheckCopyToArguments(int sourceIndex, char[] destination, int destinationIndex, int count)
+        private bool CheckCopyToArguments(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             if (destination == null)
                 throw new ArgumentNullException(nameof(destination));
@@ -132,13 +144,22 @@ namespace Microsoft.CodeAnalysis.Text
             if (destinationIndex < 0)
                 throw new ArgumentOutOfRangeException(nameof(destinationIndex));
 
-            if (count < 0 || count > this.Length - sourceIndex || count > destination.Length - destinationIndex)
+            if (
+                count < 0
+                || count > this.Length - sourceIndex
+                || count > destination.Length - destinationIndex
+            )
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             return count > 0;
         }
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             if (!CheckCopyToArguments(sourceIndex, destination, destinationIndex, count))
                 return;
@@ -174,7 +195,11 @@ namespace Microsoft.CodeAnalysis.Text
             }
         }
 
-        internal static SourceText ToSourceText(ArrayBuilder<SourceText> segments, SourceText original, bool adjustSegments)
+        internal static SourceText ToSourceText(
+            ArrayBuilder<SourceText> segments,
+            SourceText original,
+            bool adjustSegments
+        )
         {
             if (adjustSegments)
             {
@@ -192,7 +217,11 @@ namespace Microsoft.CodeAnalysis.Text
             }
             else
             {
-                return new CompositeText(segments.ToImmutable(), original.Encoding, original.ChecksumAlgorithm);
+                return new CompositeText(
+                    segments.ToImmutable(),
+                    original.Encoding,
+                    original.ChecksumAlgorithm
+                );
             }
         }
 
@@ -228,11 +257,16 @@ namespace Microsoft.CodeAnalysis.Text
         private static int GetMinimalSegmentSizeToUseForCombining(ArrayBuilder<SourceText> segments)
         {
             // find the minimal segment size that reduces enough segments to less that or equal to the ideal segment count
-            for (var segmentSize = INITIAL_SEGMENT_SIZE_FOR_COMBINING;
+            for (
+                var segmentSize = INITIAL_SEGMENT_SIZE_FOR_COMBINING;
                 segmentSize <= MAXIMUM_SEGMENT_SIZE_FOR_COMBINING;
-                segmentSize *= 2)
+                segmentSize *= 2
+            )
             {
-                if (GetSegmentCountIfCombined(segments, segmentSize) <= TARGET_SEGMENT_COUNT_AFTER_REDUCTION)
+                if (
+                    GetSegmentCountIfCombined(segments, segmentSize)
+                    <= TARGET_SEGMENT_COUNT_AFTER_REDUCTION
+                )
                 {
                     return segmentSize;
                 }
@@ -242,10 +276,13 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Determines the segment count that would result if the segments of size less than or equal to 
+        /// Determines the segment count that would result if the segments of size less than or equal to
         /// the specified segment size were to be combined.
         /// </summary>
-        private static int GetSegmentCountIfCombined(ArrayBuilder<SourceText> segments, int segmentSize)
+        private static int GetSegmentCountIfCombined(
+            ArrayBuilder<SourceText> segments,
+            int segmentSize
+        )
         {
             int numberOfSegmentsReduced = 0;
 
@@ -320,13 +357,17 @@ namespace Microsoft.CodeAnalysis.Text
             }
         }
 
-        private static readonly ObjectPool<HashSet<SourceText>> s_uniqueSourcesPool
-            = new ObjectPool<HashSet<SourceText>>(() => new HashSet<SourceText>(), 5);
+        private static readonly ObjectPool<HashSet<SourceText>> s_uniqueSourcesPool =
+            new ObjectPool<HashSet<SourceText>>(() => new HashSet<SourceText>(), 5);
 
         /// <summary>
         /// Compute total text length and total size of storage buffers held
         /// </summary>
-        private static void ComputeLengthAndStorageSize(IReadOnlyList<SourceText> segments, out int length, out int size)
+        private static void ComputeLengthAndStorageSize(
+            IReadOnlyList<SourceText> segments,
+            out int length,
+            out int size
+        )
         {
             var uniqueSources = s_uniqueSourcesPool.Allocate();
 
@@ -353,7 +394,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         private static void TrimInaccessibleText(ArrayBuilder<SourceText> segments)
         {
-            int length, size;
+            int length,
+                size;
             ComputeLengthAndStorageSize(segments, out length, out size);
 
             // if more than half of the storage is unused, compress into a single new segment

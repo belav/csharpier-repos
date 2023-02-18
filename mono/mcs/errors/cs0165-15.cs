@@ -3,9 +3,9 @@
 
 class T
 {
-    static void Main ()
+    static void Main()
     {
         dynamic errors;
-        errors.Call ();
+        errors.Call();
     }
 }

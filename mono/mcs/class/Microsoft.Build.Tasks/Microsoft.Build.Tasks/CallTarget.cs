@@ -32,32 +32,39 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-    public class CallTarget : TaskExtension {
-    
-        bool        runEachTargetSeparately;
-        List<ITaskItem>    targetOutputs_list;
-        ITaskItem[]    targetOutputs_array;
-        string[]    targets;
-    
-        public CallTarget ()
+namespace Microsoft.Build.Tasks
+{
+    public class CallTarget : TaskExtension
+    {
+        bool runEachTargetSeparately;
+        List<ITaskItem> targetOutputs_list;
+        ITaskItem[] targetOutputs_array;
+        string[] targets;
+
+        public CallTarget()
         {
-            targetOutputs_list = new List<ITaskItem> ();
+            targetOutputs_list = new List<ITaskItem>();
         }
-        
-        public override bool Execute ()
+
+        public override bool Execute()
         {
             if (targets == null || targets.Length == 0)
                 return true;
 
-            Hashtable targets_table = new Hashtable ();
+            Hashtable targets_table = new Hashtable();
 
-            if (!RunEachTargetSeparately) {
-                bool ret = BuildEngine.BuildProjectFile (BuildEngine.ProjectFileOfTaskNode,
-                        targets, null, targets_table);
-                foreach (ITaskItem[] items in targets_table.Values) {
+            if (!RunEachTargetSeparately)
+            {
+                bool ret = BuildEngine.BuildProjectFile(
+                    BuildEngine.ProjectFileOfTaskNode,
+                    targets,
+                    null,
+                    targets_table
+                );
+                foreach (ITaskItem[] items in targets_table.Values)
+                {
                     if (items != null)
-                        targetOutputs_list.AddRange (items);
+                        targetOutputs_list.AddRange(items);
                 }
 
                 return ret;
@@ -65,43 +72,51 @@ namespace Microsoft.Build.Tasks {
 
             // RunEachTargetSeparately
             bool allPassed = true;
-            for (int i = 0; i < targets.Length; i ++) {
-                string target = targets [i];
-                bool result = BuildEngine.BuildProjectFile (BuildEngine.ProjectFileOfTaskNode,
-                        new string[] { target }, null, targets_table);
+            for (int i = 0; i < targets.Length; i++)
+            {
+                string target = targets[i];
+                bool result = BuildEngine.BuildProjectFile(
+                    BuildEngine.ProjectFileOfTaskNode,
+                    new string[] { target },
+                    null,
+                    targets_table
+                );
 
                 if (allPassed && !result)
                     allPassed = false;
 
-                if (!targets_table.Contains (target))
+                if (!targets_table.Contains(target))
                     continue;
 
-                ITaskItem [] items = (ITaskItem[]) targets_table [target];
+                ITaskItem[] items = (ITaskItem[])targets_table[target];
                 if (items != null)
-                    targetOutputs_list.AddRange (items);
+                    targetOutputs_list.AddRange(items);
             }
 
             return allPassed;
         }
-        
-        public bool RunEachTargetSeparately {
+
+        public bool RunEachTargetSeparately
+        {
             get { return runEachTargetSeparately; }
             set { runEachTargetSeparately = value; }
         }
-        
+
         [Output]
-        public ITaskItem[] TargetOutputs {
-            get {
+        public ITaskItem[] TargetOutputs
+        {
+            get
+            {
                 if (targetOutputs_array == null)
-                    targetOutputs_array = targetOutputs_list.ToArray ();
+                    targetOutputs_array = targetOutputs_list.ToArray();
                 return targetOutputs_array;
             }
         }
-        
-        public string[] Targets {
+
+        public string[] Targets
+        {
             get { return targets; }
             set { targets = value; }
         }
     }
 }
-

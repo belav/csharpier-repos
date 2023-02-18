@@ -14,6 +14,7 @@ public class C0
     public byte F4;
     public byte F5;
     public uint F6;
+
     public C0(byte f4, byte f5, uint f6)
     {
         F4 = f4;
@@ -25,6 +26,7 @@ public class C0
 public class C1
 {
     public C0 F4;
+
     public C1(C0 f4)
     {
         F4 = f4;
@@ -39,7 +41,9 @@ public struct S0
     public ulong F5;
     public uint F6;
     public bool F7;
-    public S0(sbyte f0, C0 f1, C0 f2, bool f4, ulong f5, uint f6, bool f7) : this()
+
+    public S0(sbyte f0, C0 f1, C0 f2, bool f4, ulong f5, uint f6, bool f7)
+        : this()
     {
         F0 = f0;
         F2 = f2;
@@ -55,11 +59,15 @@ public class Runtime_66624
     public static IRuntime s_rt;
     public static C0 s_1 = new C0(0, 0, 0);
     public static C1[][] s_3 = new C1[][] { new C1[] { new C1(new C0(0, 0, 0)) } };
+
     public static int Main()
     {
         CollectibleALC alc = new CollectibleALC();
-        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        System.Reflection.MethodInfo mi = asm.GetType(typeof(Runtime_66624).FullName).GetMethod(nameof(MainInner));
+        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(
+            System.Reflection.Assembly.GetExecutingAssembly().Location
+        );
+        System.Reflection.MethodInfo mi = asm.GetType(typeof(Runtime_66624).FullName)
+            .GetMethod(nameof(MainInner));
         System.Type runtimeTy = asm.GetType(typeof(Runtime).FullName);
         return (int)mi.Invoke(null, new object[] { System.Activator.CreateInstance(runtimeTy) });
     }
@@ -110,7 +118,6 @@ public class Runtime : IRuntime
 
 public class CollectibleALC : System.Runtime.Loader.AssemblyLoadContext
 {
-    public CollectibleALC() : base(true)
-    {
-    }
+    public CollectibleALC()
+        : base(true) { }
 }

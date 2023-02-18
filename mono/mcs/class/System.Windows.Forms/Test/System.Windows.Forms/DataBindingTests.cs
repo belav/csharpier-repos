@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,92 +41,111 @@ namespace MonoTests.System.Windows.Forms.DataBinding
         protected int event_num;
         protected string event_log = "";
 
-        protected void CurrentChanged (object sender, EventArgs args)
+        protected void CurrentChanged(object sender, EventArgs args)
         {
             //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: CurrentChanged\n", event_num++);
-        }
-        protected void PositionChanged (object sender, EventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: PositionChanged (to {1})\n", event_num++, ((CurrencyManager)sender).Position);
-        }
-        protected void ItemChanged (object sender, ItemChangedEventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: ItemChanged (index = {1})\n", event_num++, args.Index);
-        }
-        protected void ListChanged (object sender, ListChangedEventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: ListChanged ({1}, {2}, {3})\n", event_num++, args.ListChangedType, args.OldIndex, args.NewIndex);
-        }
-        protected void MetaDataChanged (object sender, EventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: MetaDataChanged\n", event_num++);
-        }
-        protected void BindingComplete (object sender, BindingCompleteEventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: BindingComplete\n", event_num++);
-        }
-        protected void CurrentItemChanged (object sender, EventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: CurrentItemChanged\n", event_num++);
-        }
-        protected void DataError (object sender, BindingManagerDataErrorEventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: DataError\n", event_num++);
-        }
-        protected void Format (object sender, ConvertEventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: Binding.Format\n", event_num++);
-        }
-        protected void Parse (object sender, ConvertEventArgs args)
-        {
-            //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: Binding.Parse\n", event_num++);
+            event_log += String.Format("{0}: CurrentChanged\n", event_num++);
         }
 
-        void TextChanged (object sender, EventArgs e)
+        protected void PositionChanged(object sender, EventArgs args)
         {
             //Console.WriteLine (Environment.StackTrace);
-            event_log += String.Format ("{0}: TextChanged\n", event_num++);
+            event_log += String.Format(
+                "{0}: PositionChanged (to {1})\n",
+                event_num++,
+                ((CurrencyManager)sender).Position
+            );
         }
 
-        protected void HookupCurrencyManager (CurrencyManager cm)
+        protected void ItemChanged(object sender, ItemChangedEventArgs args)
         {
-            cm.CurrentChanged += new EventHandler (CurrentChanged);
-            cm.PositionChanged += new EventHandler (PositionChanged);
-            cm.ItemChanged += new ItemChangedEventHandler (ItemChanged);
-            cm.MetaDataChanged += new EventHandler (MetaDataChanged);
-            cm.BindingComplete += new BindingCompleteEventHandler (BindingComplete);
-            cm.CurrentItemChanged += new EventHandler (CurrentItemChanged);
-            cm.DataError += new BindingManagerDataErrorEventHandler (DataError);
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format("{0}: ItemChanged (index = {1})\n", event_num++, args.Index);
         }
 
-        protected void HookupPropertyManager (PropertyManager pm)
+        protected void ListChanged(object sender, ListChangedEventArgs args)
         {
-            pm.CurrentChanged += new EventHandler (CurrentChanged);
-            pm.PositionChanged += new EventHandler (PositionChanged);
-            pm.BindingComplete += new BindingCompleteEventHandler (BindingComplete);
-            pm.CurrentItemChanged += new EventHandler (CurrentItemChanged);
-            pm.DataError += new BindingManagerDataErrorEventHandler (DataError);
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format(
+                "{0}: ListChanged ({1}, {2}, {3})\n",
+                event_num++,
+                args.ListChangedType,
+                args.OldIndex,
+                args.NewIndex
+            );
         }
 
-        protected void HookupBinding (Binding b)
+        protected void MetaDataChanged(object sender, EventArgs args)
         {
-            b.Parse += new ConvertEventHandler (Parse);
-            b.Format += new ConvertEventHandler (Format);
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format("{0}: MetaDataChanged\n", event_num++);
         }
 
-        protected void HookupControl (Control c)
+        protected void BindingComplete(object sender, BindingCompleteEventArgs args)
         {
-            c.TextChanged += new EventHandler (TextChanged);
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format("{0}: BindingComplete\n", event_num++);
+        }
+
+        protected void CurrentItemChanged(object sender, EventArgs args)
+        {
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format("{0}: CurrentItemChanged\n", event_num++);
+        }
+
+        protected void DataError(object sender, BindingManagerDataErrorEventArgs args)
+        {
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format("{0}: DataError\n", event_num++);
+        }
+
+        protected void Format(object sender, ConvertEventArgs args)
+        {
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format("{0}: Binding.Format\n", event_num++);
+        }
+
+        protected void Parse(object sender, ConvertEventArgs args)
+        {
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format("{0}: Binding.Parse\n", event_num++);
+        }
+
+        void TextChanged(object sender, EventArgs e)
+        {
+            //Console.WriteLine (Environment.StackTrace);
+            event_log += String.Format("{0}: TextChanged\n", event_num++);
+        }
+
+        protected void HookupCurrencyManager(CurrencyManager cm)
+        {
+            cm.CurrentChanged += new EventHandler(CurrentChanged);
+            cm.PositionChanged += new EventHandler(PositionChanged);
+            cm.ItemChanged += new ItemChangedEventHandler(ItemChanged);
+            cm.MetaDataChanged += new EventHandler(MetaDataChanged);
+            cm.BindingComplete += new BindingCompleteEventHandler(BindingComplete);
+            cm.CurrentItemChanged += new EventHandler(CurrentItemChanged);
+            cm.DataError += new BindingManagerDataErrorEventHandler(DataError);
+        }
+
+        protected void HookupPropertyManager(PropertyManager pm)
+        {
+            pm.CurrentChanged += new EventHandler(CurrentChanged);
+            pm.PositionChanged += new EventHandler(PositionChanged);
+            pm.BindingComplete += new BindingCompleteEventHandler(BindingComplete);
+            pm.CurrentItemChanged += new EventHandler(CurrentItemChanged);
+            pm.DataError += new BindingManagerDataErrorEventHandler(DataError);
+        }
+
+        protected void HookupBinding(Binding b)
+        {
+            b.Parse += new ConvertEventHandler(Parse);
+            b.Format += new ConvertEventHandler(Format);
+        }
+
+        protected void HookupControl(Control c)
+        {
+            c.TextChanged += new EventHandler(TextChanged);
         }
     }
 
@@ -134,10 +153,10 @@ namespace MonoTests.System.Windows.Forms.DataBinding
     public class CurrencyManagerTest2 : DataBindingTest
     {
         [Test]
-        public void TestDeleteOnlyRow ()
+        public void TestDeleteOnlyRow()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -145,41 +164,47 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            DataRow newrow = dataSet1.Tables[0].NewRow ();
+            DataRow newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
-            HookupBinding (binding);
+            HookupCurrencyManager(cm);
+            HookupBinding(binding);
 
             cm.Position = 0;
 
-            Assert.AreEqual (1, cm.Count, "1");
+            Assert.AreEqual(1, cm.Count, "1");
 
             DataRowView row = (DataRowView)cm.Current;
 
             event_log = "";
             event_num = 0;
 
-            row.Delete ();
+            row.Delete();
 
-            Assert.AreEqual (-1, cm.Position);
+            Assert.AreEqual(-1, cm.Position);
 
-            Assert.AreEqual (
-                 "0: PositionChanged (to -1)\n1: ItemChanged (index = -1)\n2: PositionChanged (to -1)\n3: CurrentChanged\n4: CurrentItemChanged\n5: ItemChanged (index = -1)\n"
-                 , event_log, "2");
+            Assert.AreEqual(
+                "0: PositionChanged (to -1)\n1: ItemChanged (index = -1)\n2: PositionChanged (to -1)\n3: CurrentChanged\n4: CurrentItemChanged\n5: ItemChanged (index = -1)\n",
+                event_log,
+                "2"
+            );
 
-            Assert.AreEqual (0, cm.Count, "3");
+            Assert.AreEqual(0, cm.Count, "3");
         }
 
         [Test]
-        public void TestDeleteRowBeforeCurrent ()
+        public void TestDeleteRowBeforeCurrent()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
             DataRow newrow;
@@ -188,24 +213,28 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
 
             cm.Position = 1;
 
-            Assert.AreEqual (2, cm.Count, "1");
+            Assert.AreEqual(2, cm.Count, "1");
 
             DataView dv = dataSet1.Tables[0].DefaultView;
             DataRowView row = dv[0];
@@ -213,25 +242,27 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             event_log = "";
             event_num = 0;
 
-            row.Delete ();
+            row.Delete();
 
-            Assert.AreEqual (0, cm.Position);
+            Assert.AreEqual(0, cm.Position);
 
-            Assert.AreEqual (
-
+            Assert.AreEqual(
 #if WITH_BINDINGS
-                 "0: CurrentChanged\n1: CurrentItemChanged\n2: PositionChanged (to 0)\n3: ItemChanged (index = -1)\n4: Binding.Format\n"
+                "0: CurrentChanged\n1: CurrentItemChanged\n2: PositionChanged (to 0)\n3: ItemChanged (index = -1)\n4: Binding.Format\n"
 #else
                  "0: CurrentChanged\n1: CurrentItemChanged\n2: PositionChanged (to 0)\n3: ItemChanged (index = -1)\n"
 #endif
-                 , event_log, "2");
+                ,
+                event_log,
+                "2"
+            );
         }
 
         [Test]
-        public void TestDeleteRowAfterCurrent ()
+        public void TestDeleteRowAfterCurrent()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
             DataRow newrow;
@@ -240,24 +271,28 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
 
             cm.Position = 0;
 
-            Assert.AreEqual (2, cm.Count, "1");
+            Assert.AreEqual(2, cm.Count, "1");
 
             DataView dv = dataSet1.Tables[0].DefaultView;
             DataRowView row = dv[1];
@@ -265,24 +300,24 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             event_log = "";
             event_num = 0;
 
-            row.Delete ();
+            row.Delete();
 
-            Assert.AreEqual (0, cm.Position);
+            Assert.AreEqual(0, cm.Position);
 
 #if WITH_BINDINGS
-            Assert.AreEqual ("0: ItemChanged (index = -1)\n1: Binding.Format\n", event_log, "2");
+            Assert.AreEqual("0: ItemChanged (index = -1)\n1: Binding.Format\n", event_log, "2");
 #else
             Assert.AreEqual ("0: ItemChanged (index = -1)\n", event_log, "2");
 #endif
 
-            Assert.AreEqual (1, cm.Count, "3");
+            Assert.AreEqual(1, cm.Count, "3");
         }
 
         [Test]
-        public void TestDeleteCurrentRowWithOthers ()
+        public void TestDeleteCurrentRowWithOthers()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
             DataRow newrow;
@@ -291,23 +326,27 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
             cm.Position = 0;
 
-            Assert.AreEqual (2, cm.Count, "1");
+            Assert.AreEqual(2, cm.Count, "1");
 
             DataView dv = dataSet1.Tables[0].DefaultView;
             DataRowView row = dv[0];
@@ -315,30 +354,34 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             event_log = "";
             event_num = 0;
 
-            row.Delete ();
+            row.Delete();
 
-            Assert.AreEqual (0, cm.Position);
+            Assert.AreEqual(0, cm.Position);
 
-            Assert.AreEqual (
+            Assert.AreEqual(
 #if WITH_BINDINGS
-                 "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: Binding.Format\n"
+                "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: Binding.Format\n"
 #else
                  "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n"
 #endif
-                 , event_log, "2");
+                ,
+                event_log,
+                "2"
+            );
 
-            Assert.AreEqual (1, cm.Count, "3");
+            Assert.AreEqual(1, cm.Count, "3");
         }
 
         [Test]
-        public void TestAddFirstRow ()
+        public void TestAddFirstRow()
         {
-            if (TestHelper.RunningOnUnix) {
-                Assert.Ignore ("Fails at the moment");
+            if (TestHelper.RunningOnUnix)
+            {
+                Assert.Ignore("Fails at the moment");
             }
 
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -346,43 +389,50 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
 
             cm.Position = 0;
 
-            Assert.AreEqual (0, cm.Count, "1");
+            Assert.AreEqual(0, cm.Count, "1");
 
             event_log = "";
             event_num = 0;
 
-            DataRow newrow = dataSet1.Tables[0].NewRow ();
+            DataRow newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            Assert.AreEqual (0, cm.Position);
+            Assert.AreEqual(0, cm.Position);
 
-            Assert.AreEqual (
+            Assert.AreEqual(
 #if WITH_BINDINGS
-                 "0: PositionChanged (to 0)\n1: CurrentChanged\n2: CurrentItemChanged\n3: ItemChanged (index = -1)\n4: ItemChanged (index = -1)\n5: Binding.Format\n6: Binding.Format\n7: Binding.Format\n"
+                "0: PositionChanged (to 0)\n1: CurrentChanged\n2: CurrentItemChanged\n3: ItemChanged (index = -1)\n4: ItemChanged (index = -1)\n5: Binding.Format\n6: Binding.Format\n7: Binding.Format\n"
 #else
                  "0: PositionChanged (to 0)\n1: CurrentChanged\n2: CurrentItemChanged\n3: ItemChanged (index = -1)\n4: ItemChanged (index = -1)\n"
 #endif
-                 , event_log, "2");
+                ,
+                event_log,
+                "2"
+            );
 
-            Assert.AreEqual (1, cm.Count, "3");
+            Assert.AreEqual(1, cm.Count, "3");
         }
 
         [Test]
-        public void TestAppendRowAfterCurrent ()
+        public void TestAppendRowAfterCurrent()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -390,49 +440,54 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
 
             cm.Position = 0;
 
-            Assert.AreEqual (0, cm.Count, "1");
+            Assert.AreEqual(0, cm.Count, "1");
 
-            DataRow newrow = dataSet1.Tables[0].NewRow ();
+            DataRow newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
             event_log = "";
             event_num = 0;
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            Assert.AreEqual (0, cm.Position);
+            Assert.AreEqual(0, cm.Position);
 
 #if WITH_BINDINGS
-            Assert.AreEqual ("0: ItemChanged (index = -1)\n1: Binding.Format\n", event_log, "2");
+            Assert.AreEqual("0: ItemChanged (index = -1)\n1: Binding.Format\n", event_log, "2");
 #else
             Assert.AreEqual ("0: ItemChanged (index = -1)\n", event_log, "2");
 #endif
 
-            Assert.AreEqual (2, cm.Count, "3");
+            Assert.AreEqual(2, cm.Count, "3");
         }
 
         [Test]
-        public void TestInsertRowBeforeCurrent ()
+        public void TestInsertRowBeforeCurrent()
         {
 #if WITH_BINDINGS
-            if (TestHelper.RunningOnUnix) {
-                Assert.Ignore ("Too many Binding.Format events here");
+            if (TestHelper.RunningOnUnix)
+            {
+                Assert.Ignore("Too many Binding.Format events here");
             }
 #endif
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -440,49 +495,56 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
             /* insert 2 rows */
-            DataRow newrow = dataSet1.Tables[0].NewRow ();
+            DataRow newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            Assert.AreEqual (2, cm.Count, "1");
+            Assert.AreEqual(2, cm.Count, "1");
 
             cm.Position = 1;
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
 
             event_log = "";
             event_num = 0;
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.InsertAt(newrow, 0);
 
-            Assert.AreEqual (2, cm.Position);
+            Assert.AreEqual(2, cm.Position);
 
-            Assert.AreEqual (
+            Assert.AreEqual(
 #if WITH_BINDINGS
-                 "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: PositionChanged (to 2)\n4: Binding.Format\n"
+                "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: PositionChanged (to 2)\n4: Binding.Format\n"
 #else
                  "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: PositionChanged (to 2)\n"
 #endif
-                 , event_log, "2");
+                ,
+                event_log,
+                "2"
+            );
 
-            Assert.AreEqual (3, cm.Count, "3");
+            Assert.AreEqual(3, cm.Count, "3");
         }
 
         [Test]
-        public void TestInsertRowAtCurrent ()
+        public void TestInsertRowAtCurrent()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -490,49 +552,56 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
 
             /* insert 2 rows */
-            DataRow newrow = dataSet1.Tables[0].NewRow ();
+            DataRow newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            Assert.AreEqual (2, cm.Count, "1");
+            Assert.AreEqual(2, cm.Count, "1");
 
             cm.Position = 1;
 
             event_log = "";
             event_num = 0;
 
-            newrow = dataSet1.Tables[0].NewRow ();
+            newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.InsertAt(newrow, 1);
 
-            Assert.AreEqual (2, cm.Position);
+            Assert.AreEqual(2, cm.Position);
 
-            Assert.AreEqual (
+            Assert.AreEqual(
 #if WITH_BINDINGS
-                 "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: PositionChanged (to 2)\n4: Binding.Format\n"
+                "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: PositionChanged (to 2)\n4: Binding.Format\n"
 #else
                  "0: CurrentChanged\n1: CurrentItemChanged\n2: ItemChanged (index = -1)\n3: PositionChanged (to 2)\n"
 #endif
-                 , event_log, "2");
+                ,
+                event_log,
+                "2"
+            );
 
-            Assert.AreEqual (3, cm.Count, "3");
+            Assert.AreEqual(3, cm.Count, "3");
         }
 
         [Test]
-        public void TestColumnAdd ()
+        public void TestColumnAdd()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -540,33 +609,37 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
-            HookupBinding (binding);
+            HookupCurrencyManager(cm);
+            HookupBinding(binding);
 
             cm.Position = 0;
 
-            Assert.AreEqual (0, cm.Count, "1");
+            Assert.AreEqual(0, cm.Count, "1");
 
             event_log = "";
             event_num = 0;
 
             dataSet1.Tables[0].Columns.Add();
 
-            Assert.AreEqual (-1, cm.Position);
+            Assert.AreEqual(-1, cm.Position);
 
-            Assert.AreEqual ("0: MetaDataChanged\n", event_log, "2");
-            Assert.AreEqual (0, cm.Count, "3");
+            Assert.AreEqual("0: MetaDataChanged\n", event_log, "2");
+            Assert.AreEqual(0, cm.Count, "3");
         }
 
         [Test]
-        public void TestColumnRemove ()
+        public void TestColumnRemove()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -575,34 +648,38 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables[0].Columns.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
-            HookupBinding (binding);
+            HookupCurrencyManager(cm);
+            HookupBinding(binding);
 
             cm.Position = 0;
 
-            Assert.AreEqual (0, cm.Count, "1");
+            Assert.AreEqual(0, cm.Count, "1");
 
             event_log = "";
             event_num = 0;
 
             dataSet1.Tables[0].Columns.Remove(dataSet1.Tables[0].Columns[1]);
 
-            Assert.AreEqual (-1, cm.Position);
+            Assert.AreEqual(-1, cm.Position);
 
-            Assert.AreEqual ("0: MetaDataChanged\n", event_log, "2");
+            Assert.AreEqual("0: MetaDataChanged\n", event_log, "2");
 
-            Assert.AreEqual (0, cm.Count, "3");
+            Assert.AreEqual(0, cm.Count, "3");
         }
 
         [Test]
-        public void TestColumnRemoveBound ()
+        public void TestColumnRemoveBound()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -611,94 +688,104 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables[0].Columns.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
-            HookupBinding (binding);
+            HookupCurrencyManager(cm);
+            HookupBinding(binding);
 
             cm.Position = 0;
 
-            Assert.IsFalse (binding.IsBinding, "1");
-            Assert.AreEqual (0, cm.Count, "2");
+            Assert.IsFalse(binding.IsBinding, "1");
+            Assert.AreEqual(0, cm.Count, "2");
 
             event_log = "";
             event_num = 0;
 
             dataSet1.Tables[0].Columns.Remove(dataSet1.Tables[0].Columns[0]);
 
-            Assert.AreEqual (-1, cm.Position);
+            Assert.AreEqual(-1, cm.Position);
 
             //riteLine (event_log);
-            
-            Assert.AreEqual ("0: MetaDataChanged\n", event_log, "3");
 
-            Assert.AreEqual (0, cm.Count, "4");
+            Assert.AreEqual("0: MetaDataChanged\n", event_log, "3");
 
-            Assert.IsFalse (binding.IsBinding, "5");
+            Assert.AreEqual(0, cm.Count, "4");
+
+            Assert.IsFalse(binding.IsBinding, "5");
         }
 
         [Test]
-        public void TestColumnChangeName ()
+        public void TestColumnChangeName()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
             DataSet dataSet1 = new DataSet();
             dataSet1.Tables.Add();
 
-            dataSet1.Tables [0].Columns.CollectionChanged += new CollectionChangeEventHandler (
-                DataColumnCollection_CollectionChanged);
+            dataSet1.Tables[0].Columns.CollectionChanged += new CollectionChangeEventHandler(
+                DataColumnCollection_CollectionChanged
+            );
 
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
-            HookupBinding (binding);
+            HookupCurrencyManager(cm);
+            HookupBinding(binding);
 
             cm.Position = 0;
 
-            Assert.IsFalse (binding.IsBinding, "1");
-            Assert.AreEqual (0, cm.Count, "2");
+            Assert.IsFalse(binding.IsBinding, "1");
+            Assert.AreEqual(0, cm.Count, "2");
 
             event_log = "";
             event_num = 0;
 
-            dataSet1.Tables [0].DefaultView.ListChanged += new ListChangedEventHandler (
-                DataView_ListChanged);
+            dataSet1.Tables[0].DefaultView.ListChanged += new ListChangedEventHandler(
+                DataView_ListChanged
+            );
 
             dataSet1.Tables[0].Columns[0].ColumnName = "new name";
 
-            Assert.AreEqual (-1, cm.Position);
+            Assert.AreEqual(-1, cm.Position);
 
-            Assert.AreEqual ("0: MetaDataChanged\n", event_log, "3");
+            Assert.AreEqual("0: MetaDataChanged\n", event_log, "3");
 
-            Assert.AreEqual (0, cm.Count, "4");
+            Assert.AreEqual(0, cm.Count, "4");
 
-            Assert.IsFalse (binding.IsBinding, "5");
+            Assert.IsFalse(binding.IsBinding, "5");
         }
 
-        void DataColumnCollection_CollectionChanged (object sender, CollectionChangeEventArgs e)
+        void DataColumnCollection_CollectionChanged(object sender, CollectionChangeEventArgs e)
         {
             //Console.WriteLine ("collection changed : {0} {1}", e.Action, e.Element.GetType());
         }
 
-        void DataView_ListChanged (object sender, ListChangedEventArgs e)
+        void DataView_ListChanged(object sender, ListChangedEventArgs e)
         {
             //Console.WriteLine ("list changed : {0} {1} {2}", e.ListChangedType, e.OldIndex, e.NewIndex);
         }
 
         [Test]
-        public void TestRowModify ()
+        public void TestRowModify()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
             string column_name;
@@ -707,50 +794,53 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            DataRow newrow = dataSet1.Tables[0].NewRow ();
+            DataRow newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
             column_name = dataSet1.Tables[0].Columns[0].ColumnName;
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
 
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], column_name);
+            binding = c.DataBindings.Add("Text", dataSet1.Tables[0], column_name);
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
             cm.Position = 0;
 
-            Assert.AreEqual (1, cm.Count, "1");
+            Assert.AreEqual(1, cm.Count, "1");
 
             event_log = "";
             event_num = 0;
 
             DataRowView row = (DataRowView)cm.Current;
-            row.BeginEdit ();
+            row.BeginEdit();
             row[column_name] = "hi";
-            row.EndEdit ();
+            row.EndEdit();
 
-            Assert.AreEqual (0, cm.Position);
+            Assert.AreEqual(0, cm.Position);
 
-            Assert.AreEqual (
+            Assert.AreEqual(
 #if WITH_BINDINGS
-                     "0: CurrentItemChanged\n1: ItemChanged (index = 0)\n2: Binding.Format\n"
+                "0: CurrentItemChanged\n1: ItemChanged (index = 0)\n2: Binding.Format\n"
 #else
                      "0: CurrentItemChanged\n1: ItemChanged (index = 0)\n"
 #endif
-                     , event_log, "2");
+                ,
+                event_log,
+                "2"
+            );
 
-            Assert.AreEqual (1, cm.Count, "3");
+            Assert.AreEqual(1, cm.Count, "3");
         }
 
         [Test]
-        public void TestRowCancelModify ()
+        public void TestRowCancelModify()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
             string column_name;
@@ -759,63 +849,66 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            DataRow newrow = dataSet1.Tables[0].NewRow ();
+            DataRow newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
             column_name = dataSet1.Tables[0].Columns[0].ColumnName;
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
 
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], column_name);
+            binding = c.DataBindings.Add("Text", dataSet1.Tables[0], column_name);
 
-            HookupCurrencyManager (cm);
-            HookupBinding (binding);
+            HookupCurrencyManager(cm);
+            HookupBinding(binding);
 
             cm.Position = 0;
 
-            Assert.AreEqual (1, cm.Count, "1");
+            Assert.AreEqual(1, cm.Count, "1");
 
             event_log = "";
             event_num = 0;
 
             DataRowView row = (DataRowView)cm.Current;
-            row.BeginEdit ();
+            row.BeginEdit();
             row[column_name] = "hi";
-            cm.CancelCurrentEdit ();
+            cm.CancelCurrentEdit();
 
-            Assert.AreEqual (0, cm.Position);
+            Assert.AreEqual(0, cm.Position);
 
-            Assert.AreEqual ("0: ItemChanged (index = 0)\n", event_log, "2");
+            Assert.AreEqual("0: ItemChanged (index = 0)\n", event_log, "2");
 
-            Assert.AreEqual (1, cm.Count, "3");
+            Assert.AreEqual(1, cm.Count, "3");
         }
 
-
         [Test]
-        public void TestDeleteInEdit ()
+        public void TestDeleteInEdit()
         {
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
-            BindingContext bc = new BindingContext ();
+            BindingContext bc = new BindingContext();
             CurrencyManager cm;
 
             DataSet dataSet1 = new DataSet();
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            DataRow newrow = dataSet1.Tables[0].NewRow ();
+            DataRow newrow = dataSet1.Tables[0].NewRow();
             dataSet1.Tables[0].Rows.Add(newrow);
 
-            cm = (CurrencyManager) bc[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            cm = (CurrencyManager)bc[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            Assert.AreEqual (1, cm.Count, "1");
+            Assert.AreEqual(1, cm.Count, "1");
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
 
             cm.Position = 0;
@@ -824,79 +917,91 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             event_num = 0;
 
             DataRowView row = (DataRowView)cm.Current;
-            row.Delete ();
+            row.Delete();
 
-            Assert.AreEqual (-1, cm.Position);
+            Assert.AreEqual(-1, cm.Position);
 
-            Assert.AreEqual (
-                 "0: PositionChanged (to -1)\n1: ItemChanged (index = -1)\n2: PositionChanged (to -1)\n3: CurrentChanged\n4: CurrentItemChanged\n5: ItemChanged (index = -1)\n"
-                 , event_log, "1");
+            Assert.AreEqual(
+                "0: PositionChanged (to -1)\n1: ItemChanged (index = -1)\n2: PositionChanged (to -1)\n3: CurrentChanged\n4: CurrentItemChanged\n5: ItemChanged (index = -1)\n",
+                event_log,
+                "1"
+            );
 
-            Assert.AreEqual (0, cm.Count, "2");
+            Assert.AreEqual(0, cm.Count, "2");
         }
 
         [Test]
-        public void Bug81022 ()
+        public void Bug81022()
         {
-            if (TestHelper.RunningOnUnix) {
-                Assert.Ignore ("Fails at the moment");
+            if (TestHelper.RunningOnUnix)
+            {
+                Assert.Ignore("Fails at the moment");
             }
 
-            BindingContext bc = new BindingContext ();
+            BindingContext bc = new BindingContext();
             CurrencyManager cm;
 
             DataView dv = new DataView();
             DataTable dt = new DataTable("Testdata");
 
-            cm = (CurrencyManager)bc [dt];
+            cm = (CurrencyManager)bc[dt];
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 
-            event_log = ""; event_num = 0;
+            event_log = "";
+            event_num = 0;
 
             dv.Table = dt;
 
-            Assert.AreEqual ("", event_log, "1");
+            Assert.AreEqual("", event_log, "1");
 
-            Console.WriteLine (">1");
+            Console.WriteLine(">1");
             dt.Columns.Add("A");
-            Console.WriteLine ("<1");
+            Console.WriteLine("<1");
 
-            Assert.AreEqual ("0: MetaDataChanged\n", event_log, "1");
+            Assert.AreEqual("0: MetaDataChanged\n", event_log, "1");
 
-            event_log = ""; event_num = 0;
-            Console.WriteLine (">2");
+            event_log = "";
+            event_num = 0;
+            Console.WriteLine(">2");
             dt.Columns.Add("B");
-            Console.WriteLine ("<2");
+            Console.WriteLine("<2");
 
-            Assert.AreEqual ("0: MetaDataChanged\n", event_log, "2");
+            Assert.AreEqual("0: MetaDataChanged\n", event_log, "2");
 
-            event_log = ""; event_num = 0;
-            Console.WriteLine (">3");
-            dt.Rows.Add(new object[]{"A1", "B1"});
-            Console.WriteLine ("<3");
+            event_log = "";
+            event_num = 0;
+            Console.WriteLine(">3");
+            dt.Rows.Add(new object[] { "A1", "B1" });
+            Console.WriteLine("<3");
 
-            Assert.AreEqual ("0: PositionChanged (to 0)\n1: CurrentChanged\n2: CurrentItemChanged\n3: ItemChanged (index = -1)\n4: ItemChanged (index = -1)\n", event_log, "3");
+            Assert.AreEqual(
+                "0: PositionChanged (to 0)\n1: CurrentChanged\n2: CurrentItemChanged\n3: ItemChanged (index = -1)\n4: ItemChanged (index = -1)\n",
+                event_log,
+                "3"
+            );
 
-            event_log = ""; event_num = 0;
-            Console.WriteLine (">4");
-            dt.Rows.Add(new object[]{"A2", "B2"});
-            Console.WriteLine ("<4");
+            event_log = "";
+            event_num = 0;
+            Console.WriteLine(">4");
+            dt.Rows.Add(new object[] { "A2", "B2" });
+            Console.WriteLine("<4");
 
-            Assert.AreEqual ("0: ItemChanged (index = -1)\n", event_log, "4");
+            Assert.AreEqual("0: ItemChanged (index = -1)\n", event_log, "4");
 
-            Assert.AreEqual (2, cm.Count, "5");
+            Assert.AreEqual(2, cm.Count, "5");
         }
 
         [Test]
-        public void CancelAddNew ()
+        public void CancelAddNew()
         {
-            if (TestHelper.RunningOnUnix) {
-                Assert.Ignore ("Fails at the moment");
+            if (TestHelper.RunningOnUnix)
+            {
+                Assert.Ignore("Fails at the moment");
             }
 
-            Control c = new Control ();
-            c.CreateControl ();
+            Control c = new Control();
+            c.CreateControl();
             Binding binding;
             CurrencyManager cm;
 
@@ -904,27 +1009,32 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataSet1.Tables.Add();
             dataSet1.Tables[0].Columns.Add();
 
-            c.BindingContext = new BindingContext ();
-            cm = (CurrencyManager) c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
-            binding = c.DataBindings.Add ("Text", dataSet1.Tables[0], dataSet1.Tables[0].Columns[0].ColumnName);
+            c.BindingContext = new BindingContext();
+            cm = (CurrencyManager)c.BindingContext[dataSet1, dataSet1.Tables[0].TableName];
+            binding = c.DataBindings.Add(
+                "Text",
+                dataSet1.Tables[0],
+                dataSet1.Tables[0].Columns[0].ColumnName
+            );
 
-            HookupCurrencyManager (cm);
+            HookupCurrencyManager(cm);
 #if WITH_BINDINGS
-            HookupBinding (binding);
+            HookupBinding(binding);
 #endif
             event_log = "";
             event_num = 0;
 
-            Console.WriteLine (">>>");
-            cm.AddNew ();
+            Console.WriteLine(">>>");
+            cm.AddNew();
 
-            cm.CancelCurrentEdit ();
-            Console.WriteLine ("<<<");
+            cm.CancelCurrentEdit();
+            Console.WriteLine("<<<");
 
-            Assert.AreEqual (
-                 "0: PositionChanged (to 0)\n1: CurrentChanged\n2: CurrentItemChanged\n3: ItemChanged (index = -1)\n4: ItemChanged (index = -1)\n5: PositionChanged (to -1)\n6: ItemChanged (index = -1)\n7: PositionChanged (to -1)\n8: CurrentChanged\n9: CurrentItemChanged\n10: ItemChanged (index = -1)\n11: ItemChanged (index = -1)\n",
-                 event_log, "1");
-
+            Assert.AreEqual(
+                "0: PositionChanged (to 0)\n1: CurrentChanged\n2: CurrentItemChanged\n3: ItemChanged (index = -1)\n4: ItemChanged (index = -1)\n5: PositionChanged (to -1)\n6: ItemChanged (index = -1)\n7: PositionChanged (to -1)\n8: CurrentChanged\n9: CurrentItemChanged\n10: ItemChanged (index = -1)\n11: ItemChanged (index = -1)\n",
+                event_log,
+                "1"
+            );
         }
     }
 
@@ -932,41 +1042,46 @@ namespace MonoTests.System.Windows.Forms.DataBinding
     public class PropertyManagerTest2 : DataBindingTest
     {
         [Test]
-        public void TestPropertyChange ()
+        public void TestPropertyChange()
         {
-            if (TestHelper.RunningOnUnix) {
-                Assert.Ignore ("Fails at the moment");
+            if (TestHelper.RunningOnUnix)
+            {
+                Assert.Ignore("Fails at the moment");
             }
 
-            Control c1 = new Control ();
-            Control c2 = new Control ();
+            Control c1 = new Control();
+            Control c2 = new Control();
 
-            c1.CreateControl ();
-            c2.CreateControl ();
+            c1.CreateControl();
+            c2.CreateControl();
 
             Binding binding;
             PropertyManager pm;
 
-            c1.BindingContext = new BindingContext ();
+            c1.BindingContext = new BindingContext();
             c2.BindingContext = c1.BindingContext;
 
-            pm = (PropertyManager) c2.BindingContext[c1, "Text"];
+            pm = (PropertyManager)c2.BindingContext[c1, "Text"];
 
-            binding = c2.DataBindings.Add ("Text", c1, "Text");
+            binding = c2.DataBindings.Add("Text", c1, "Text");
 
-            Console.WriteLine (pm.GetType());
-            Console.WriteLine (binding.BindingManagerBase.GetType());
-            Assert.IsFalse (pm == binding.BindingManagerBase, "0");
+            Console.WriteLine(pm.GetType());
+            Console.WriteLine(binding.BindingManagerBase.GetType());
+            Assert.IsFalse(pm == binding.BindingManagerBase, "0");
 
-            HookupPropertyManager (pm);
-            HookupBinding (binding);
+            HookupPropertyManager(pm);
+            HookupBinding(binding);
 
             event_log = "";
             event_num = 0;
 
             c1.Text = "hi";
 
-            Assert.AreEqual ("0: CurrentChanged\n1: CurrentItemChanged\n2: Binding.Format\n3: CurrentChanged\n4: CurrentItemChanged\n", event_log, "1");
+            Assert.AreEqual(
+                "0: CurrentChanged\n1: CurrentItemChanged\n2: Binding.Format\n3: CurrentChanged\n4: CurrentItemChanged\n",
+                event_log,
+                "1"
+            );
         }
     }
 }

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,23 +36,27 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public class ServerChannelSinkStack : IServerChannelSinkStack, IServerResponseChannelSinkStack
     {
         // The stack. It is a chain of ChanelSinkStackEntry.
         ChanelSinkStackEntry _sinkStack = null;
 
-        public ServerChannelSinkStack ()
+        public ServerChannelSinkStack() { }
+
+        public Stream GetResponseStream(IMessage msg, ITransportHeaders headers)
         {
+            if (_sinkStack == null)
+                throw new RemotingException("The sink stack is empty");
+            return ((IServerChannelSink)_sinkStack.Sink).GetResponseStream(
+                this,
+                _sinkStack.State,
+                msg,
+                headers
+            );
         }
 
-        public Stream GetResponseStream (IMessage msg, ITransportHeaders headers)
-        {
-            if (_sinkStack == null) throw new RemotingException ("The sink stack is empty");
-            return ((IServerChannelSink)_sinkStack.Sink).GetResponseStream (this, _sinkStack.State, msg, headers);
-        }
-
-        public object Pop (IServerChannelSink sink)
+        public object Pop(IServerChannelSink sink)
         {
             // Pops until the sink is found
 
@@ -60,41 +64,51 @@ namespace System.Runtime.Remoting.Channels
             {
                 ChanelSinkStackEntry stackEntry = _sinkStack;
                 _sinkStack = _sinkStack.Next;
-                if (stackEntry.Sink == sink) return stackEntry.State;
+                if (stackEntry.Sink == sink)
+                    return stackEntry.State;
             }
-            throw new RemotingException ("The current sink stack is empty, or the specified sink was never pushed onto the current stack");
+            throw new RemotingException(
+                "The current sink stack is empty, or the specified sink was never pushed onto the current stack"
+            );
         }
 
-        public void Push (IServerChannelSink sink, object state)
+        public void Push(IServerChannelSink sink, object state)
         {
-            _sinkStack = new ChanelSinkStackEntry (sink, state, _sinkStack);
+            _sinkStack = new ChanelSinkStackEntry(sink, state, _sinkStack);
         }
 
         [MonoTODO]
-        public void ServerCallback (IAsyncResult ar)
-            {
-            throw new NotImplementedException ();
+        public void ServerCallback(IAsyncResult ar)
+        {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Store (IServerChannelSink sink, object state)
+        public void Store(IServerChannelSink sink, object state)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void StoreAndDispatch (IServerChannelSink sink, object state)
+        public void StoreAndDispatch(IServerChannelSink sink, object state)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void AsyncProcessResponse (IMessage msg, ITransportHeaders headers, Stream stream)
+        public void AsyncProcessResponse(IMessage msg, ITransportHeaders headers, Stream stream)
         {
-            if (_sinkStack == null) throw new RemotingException ("The current sink stack is empty");
+            if (_sinkStack == null)
+                throw new RemotingException("The current sink stack is empty");
 
             ChanelSinkStackEntry stackEntry = _sinkStack;
             _sinkStack = _sinkStack.Next;
-            ((IServerChannelSink)stackEntry.Sink).AsyncProcessResponse (this, stackEntry.State, msg, headers, stream);
+            ((IServerChannelSink)stackEntry.Sink).AsyncProcessResponse(
+                this,
+                stackEntry.State,
+                msg,
+                headers,
+                stream
+            );
 
             // Do not call AsyncProcessResponse for each sink in the stack.
             // The sink must recursively call IServerChannelSinkStack.AsyncProcessResponse

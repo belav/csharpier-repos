@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         //{0} is a numeric type
         //{1} is some value
         //{2} is one greater than {1}
-        private const string NUMERIC_INCREMENT_TEMPLATE = @"
+        private const string NUMERIC_INCREMENT_TEMPLATE =
+            @"
 class C
 {{
     static void Main()
@@ -47,7 +48,8 @@ class C
 ";
 
         //{0} is some value, {1} is one greater
-        private const string NUMERIC_OUTPUT_TEMPLATE = @"
+        private const string NUMERIC_OUTPUT_TEMPLATE =
+            @"
 {1}
 {0}
 {1}
@@ -128,7 +130,12 @@ class C
         [Fact]
         public void TestIncrementChar()
         {
-            string source = string.Format(NUMERIC_INCREMENT_TEMPLATE, typeof(char).FullName, "'a'", "'b'");
+            string source = string.Format(
+                NUMERIC_INCREMENT_TEMPLATE,
+                typeof(char).FullName,
+                "'a'",
+                "'b'"
+            );
             string expectedOutput = string.Format(NUMERIC_OUTPUT_TEMPLATE, 'a', 'b');
 
             CompileAndVerify(source, expectedOutput: expectedOutput);
@@ -137,7 +144,8 @@ class C
         [Fact]
         public void TestIncrementEnum()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     enum E
@@ -190,7 +198,8 @@ class C
 }
 ";
 
-            string expectedOutput = @"
+            string expectedOutput =
+                @"
 B
 A
 B
@@ -215,7 +224,8 @@ A
         [Fact]
         public void TestIncrementNonLocal()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     int field;
@@ -263,7 +273,8 @@ class C
 }
 ";
 
-            string expectedOutput = @"
+            string expectedOutput =
+                @"
 3
 2
 4
@@ -284,7 +295,8 @@ a
         [Fact]
         public void TestIncrementIL()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     enum E { A, B }
@@ -439,7 +451,9 @@ class C
 ";
 
             var compilation = CompileAndVerify(source);
-            compilation.VerifyIL("C.Main", @"
+            compilation.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size      754 (0x2f2)
   .maxstack  3
@@ -826,14 +840,16 @@ class C
   IL_02ec:  call       ""void System.Console.WriteLine(object)""
   IL_02f1:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(540718, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540718")]
         [Fact]
         public void GenConditionalBranchTempForInc()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 class Test
 {
     void M(int i)
@@ -845,9 +861,10 @@ class Test
     }
 }
 ";
-            base.CompileAndVerify(source).
-                VerifyIL("Test.M",
-@"
+            base.CompileAndVerify(source)
+                .VerifyIL(
+                    "Test.M",
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  3
@@ -867,7 +884,8 @@ class Test
         [Fact]
         public void IncrementField()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Test
 {
@@ -882,9 +900,10 @@ class Test
     }
 }
 ";
-            base.CompileAndVerify(source).
-                VerifyIL("Test.M",
-@"
+            base.CompileAndVerify(source)
+                .VerifyIL(
+                    "Test.M",
+                    @"
 {
   // Code size       43 (0x2b)
   .maxstack  3
@@ -916,7 +935,8 @@ class Test
         [Fact]
         public void MissingIncInFinallyBlock()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 class My
 {
@@ -937,7 +957,8 @@ class My
         [Fact]
         public void NestedIncrement()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class My
 {
@@ -958,7 +979,8 @@ class My
         [Fact]
         public void IncrementSideEffects()
         {
-            var source = @"
+            var source =
+                @"
 class Class
 {
     static int[] array = new int[1];
@@ -984,7 +1006,9 @@ class Class
     }
 }
 ";
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 Array
 Zero
 0
@@ -996,17 +1020,33 @@ Zero
 2
 Array
 Zero
-0");
+0"
+            );
         }
 
-        private void TestIncrementCompilationAndOutput<T>(T value, T valuePlusOne) where T : struct
+        private void TestIncrementCompilationAndOutput<T>(T value, T valuePlusOne)
+            where T : struct
         {
             Type type = typeof(T);
-            Assert.True(type.IsPrimitive || type == typeof(decimal), string.Format("Type {0} is neither primitive nor decimal", type));
+            Assert.True(
+                type.IsPrimitive || type == typeof(decimal),
+                string.Format("Type {0} is neither primitive nor decimal", type)
+            );
 
             // Explicitly provide InvariantCulture to use the proper C# decimal separator '.' in the source regardless of the current culture
-            string source = string.Format(CultureInfo.InvariantCulture, NUMERIC_INCREMENT_TEMPLATE, type.FullName, value, valuePlusOne);
-            string expectedOutput = string.Format(CultureInfo.InvariantCulture, NUMERIC_OUTPUT_TEMPLATE, value, valuePlusOne);
+            string source = string.Format(
+                CultureInfo.InvariantCulture,
+                NUMERIC_INCREMENT_TEMPLATE,
+                type.FullName,
+                value,
+                valuePlusOne
+            );
+            string expectedOutput = string.Format(
+                CultureInfo.InvariantCulture,
+                NUMERIC_OUTPUT_TEMPLATE,
+                value,
+                valuePlusOne
+            );
 
             CompileAndVerify(source, expectedOutput: expectedOutput);
         }
@@ -1015,7 +1055,8 @@ Zero
         [Fact]
         public void IncrementRefVal()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Test
@@ -1034,9 +1075,10 @@ public class Test
     }
 }
 ";
-            base.CompileAndVerify(source, verify: Verification.FailsILVerify, expectedOutput: "12").
-                VerifyIL("Test.Main",
-@"
+            base.CompileAndVerify(source, verify: Verification.FailsILVerify, expectedOutput: "12")
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       57 (0x39)
   .maxstack  4

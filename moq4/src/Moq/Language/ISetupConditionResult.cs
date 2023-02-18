@@ -13,7 +13,8 @@ namespace Moq.Language
     /// Implements the fluent API.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface ISetupConditionResult<T> where T : class
+    public interface ISetupConditionResult<T>
+        where T : class
     {
         /// <summary>
         /// The expectation will be considered only in the former condition.

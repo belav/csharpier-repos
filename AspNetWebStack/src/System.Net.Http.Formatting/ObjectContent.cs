@@ -26,9 +26,7 @@ namespace System.Net.Http
         /// <param name="value">The value of the object this instance will contain.</param>
         /// <param name="formatter">The formatter to use when serializing the value.</param>
         public ObjectContent(Type type, object value, MediaTypeFormatter formatter)
-            : this(type, value, formatter, (MediaTypeHeaderValue)null)
-        {
-        }
+            : this(type, value, formatter, (MediaTypeHeaderValue)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectContent"/> class.
@@ -38,10 +36,13 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter to use when serializing the value.</param>
         /// <param name="mediaType">The authoritative value of the content's Content-Type header. Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
-        public ObjectContent(Type type, object value, MediaTypeFormatter formatter, string mediaType)
-            : this(type, value, formatter, BuildHeaderValue(mediaType))
-        {
-        }
+        public ObjectContent(
+            Type type,
+            object value,
+            MediaTypeFormatter formatter,
+            string mediaType
+        )
+            : this(type, value, formatter, BuildHeaderValue(mediaType)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectContent"/> class.
@@ -51,7 +52,12 @@ namespace System.Net.Http
         /// <param name="formatter">The formatter to use when serializing the value.</param>
         /// <param name="mediaType">The authoritative value of the content's Content-Type header. Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
-        public ObjectContent(Type type, object value, MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType)
+        public ObjectContent(
+            Type type,
+            object value,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (type == null)
             {
@@ -64,7 +70,11 @@ namespace System.Net.Http
 
             if (!formatter.CanWriteType(type))
             {
-                throw Error.InvalidOperation(Properties.Resources.ObjectContent_FormatterCannotWriteType, formatter.GetType().FullName, type.Name);
+                throw Error.InvalidOperation(
+                    Properties.Resources.ObjectContent_FormatterCannotWriteType,
+                    formatter.GetType().FullName,
+                    type.Name
+                );
             }
 
             _formatter = formatter;
@@ -125,9 +135,8 @@ namespace System.Net.Http
 
         private static bool IsTypeNullable(Type type)
         {
-            return !type.IsValueType() ||
-                   (type.IsGenericType() &&
-                    type.GetGenericTypeDefinition() == typeof(Nullable<>));
+            return !type.IsValueType()
+                || (type.IsGenericType() && type.GetGenericTypeDefinition() == typeof(Nullable<>));
         }
 
         private void VerifyAndSetObject(object value)
@@ -139,7 +148,11 @@ namespace System.Net.Http
                 // Null may not be assigned to value types (unless Nullable<T>)
                 if (!IsTypeNullable(ObjectType))
                 {
-                    throw Error.InvalidOperation(Properties.Resources.CannotUseNullValueType, typeof(ObjectContent).Name, ObjectType.Name);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.CannotUseNullValueType,
+                        typeof(ObjectContent).Name,
+                        ObjectType.Name
+                    );
                 }
             }
             else
@@ -148,7 +161,12 @@ namespace System.Net.Http
                 Type objectType = value.GetType();
                 if (!ObjectType.IsAssignableFrom(objectType))
                 {
-                    throw Error.Argument("value", Properties.Resources.ObjectAndTypeDisagree, objectType.Name, ObjectType.Name);
+                    throw Error.Argument(
+                        "value",
+                        Properties.Resources.ObjectAndTypeDisagree,
+                        objectType.Name,
+                        ObjectType.Name
+                    );
                 }
             }
 

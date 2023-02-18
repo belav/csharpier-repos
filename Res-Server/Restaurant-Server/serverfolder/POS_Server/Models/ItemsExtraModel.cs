@@ -15,25 +15,20 @@ namespace POS_Server.Models
         public Nullable<System.DateTime> updateDate { get; set; }
         public Nullable<long> createUserId { get; set; }
         public Nullable<long> updateUserId { get; set; }
- 
+
         // item parent
-    
+
         public string itemcode { get; set; }
-        public string  itemName { get; set; }
-      
+        public string itemName { get; set; }
+
         public string itemType { get; set; }
         public string itemImage { get; set; }
 
-
-
-        //Extra  
+        //Extra
         public string extraCode { get; set; }
         public string extraName { get; set; }
 
         public string extraType { get; set; }
         public string extraImage { get; set; }
-
-
-
     }
 }

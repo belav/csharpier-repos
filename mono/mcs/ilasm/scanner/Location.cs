@@ -3,23 +3,23 @@
 
 using System;
 
-namespace Mono.ILASM {
-
-
+namespace Mono.ILASM
+{
     /// <summary>
     /// </summary>
-    public class Location : ICloneable {
+    public class Location : ICloneable
+    {
         internal int line;
         internal int column;
 
+        /// <summary>
+        /// </summary>
+        public static readonly Location Unknown = new Location(-1, -1);
 
         /// <summary>
         /// </summary>
-        public static readonly Location Unknown = new Location (-1, -1);
-
-        /// <summary>
-        /// </summary>
-        public Location () {
+        public Location()
+        {
             line = 1;
             column = 1;
         }
@@ -28,37 +28,32 @@ namespace Mono.ILASM {
         /// </summary>
         /// <param name="line"></param>
         /// <param name="column"></param>
-        public Location (int line, int column)
+        public Location(int line, int column)
         {
             this.line = line;
             this.column = column;
         }
 
-
         /// <summary>
         /// </summary>
         /// <param name="that"></param>
-        public Location (Location that)
+        public Location(Location that)
         {
             this.line = that.line;
             this.column = that.column;
         }
 
-
-
-
         /// <summary>
         /// </summary>
-        public void NewLine ()
+        public void NewLine()
         {
             ++line;
             column = 1;
         }
 
-
         /// <summary>
         /// </summary>
-        public void PreviousLine ()
+        public void PreviousLine()
         {
             --line;
             column = 1;
@@ -66,14 +61,14 @@ namespace Mono.ILASM {
 
         /// <summary>
         /// </summary>
-        public void NextColumn ()
+        public void NextColumn()
         {
             ++column;
         }
 
         /// <summary>
         /// </summary>
-        public void PreviousColumn ()
+        public void PreviousColumn()
         {
             --column;
         }
@@ -81,21 +76,21 @@ namespace Mono.ILASM {
         /// <summary>
         /// </summary>
         /// <param name="other"></param>
-        public void CopyFrom (Location other)
+        public void CopyFrom(Location other)
         {
             this.line = other.line;
             this.column = other.column;
         }
 
-
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public virtual object Clone () {
-            return new Location (this);
+        public virtual object Clone()
+        {
+            return new Location(this);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return "line (" + line + ") column (" + column + ")";
         }

@@ -3,7 +3,7 @@
 
 static class C
 {
-    static void Main ()
+    static void Main()
     {
         int c = 0.__0;
     }

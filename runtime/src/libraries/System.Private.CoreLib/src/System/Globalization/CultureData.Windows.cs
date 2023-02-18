@@ -45,8 +45,13 @@ namespace System.Globalization
             char* pBuffer = stackalloc char[Interop.Kernel32.LOCALE_NAME_MAX_LENGTH];
             if (!GlobalizationMode.UseNls)
             {
-                return InitIcuCultureDataCore() &&
-                       GetLocaleInfoEx(_sRealName, Interop.Kernel32.LOCALE_SNAME, pBuffer, Interop.Kernel32.LOCALE_NAME_MAX_LENGTH) != 0; // Ensure the culture name is supported by Windows.
+                return InitIcuCultureDataCore()
+                    && GetLocaleInfoEx(
+                        _sRealName,
+                        Interop.Kernel32.LOCALE_SNAME,
+                        pBuffer,
+                        Interop.Kernel32.LOCALE_NAME_MAX_LENGTH
+                    ) != 0; // Ensure the culture name is supported by Windows.
             }
 
             Debug.Assert(!GlobalizationMode.Invariant);
@@ -54,7 +59,12 @@ namespace System.Globalization
             int result;
             string realNameBuffer = _sRealName;
 
-            result = GetLocaleInfoEx(realNameBuffer, Interop.Kernel32.LOCALE_SNAME, pBuffer, Interop.Kernel32.LOCALE_NAME_MAX_LENGTH);
+            result = GetLocaleInfoEx(
+                realNameBuffer,
+                Interop.Kernel32.LOCALE_SNAME,
+                pBuffer,
+                Interop.Kernel32.LOCALE_NAME_MAX_LENGTH
+            );
 
             // Did it fail?
             if (result == 0)
@@ -69,7 +79,12 @@ namespace System.Globalization
             realNameBuffer = _sRealName;
 
             // Check for neutrality, don't expect to fail
-            result = GetLocaleInfoEx(realNameBuffer, Interop.Kernel32.LOCALE_INEUTRAL | Interop.Kernel32.LOCALE_RETURN_NUMBER, pBuffer, sizeof(int) / sizeof(char));
+            result = GetLocaleInfoEx(
+                realNameBuffer,
+                Interop.Kernel32.LOCALE_INEUTRAL | Interop.Kernel32.LOCALE_RETURN_NUMBER,
+                pBuffer,
+                sizeof(int) / sizeof(char)
+            );
             if (result == 0)
             {
                 return false;
@@ -94,7 +109,11 @@ namespace System.Globalization
 
                 // Specific locale name is whatever ResolveLocaleName (win7+) returns.
                 // (Buffer has our name in it, and we can recycle that because windows resolves it before writing to the buffer)
-                result = Interop.Kernel32.ResolveLocaleName(realNameBuffer, pBuffer, Interop.Kernel32.LOCALE_NAME_MAX_LENGTH);
+                result = Interop.Kernel32.ResolveLocaleName(
+                    realNameBuffer,
+                    pBuffer,
+                    Interop.Kernel32.LOCALE_NAME_MAX_LENGTH
+                );
 
                 // 0 is failure, 1 is invariant (""), which we expect
                 if (result < 1)
@@ -123,7 +142,12 @@ namespace System.Globalization
                 // If we are an alt sort locale then this is the same as the part before the _ in the windows name
                 // This is for like de-DE_phoneb and es-ES_tradnl that shouldn't have the _ part
 
-                result = GetLocaleInfoEx(realNameBuffer, Interop.Kernel32.LOCALE_ILANGUAGE | Interop.Kernel32.LOCALE_RETURN_NUMBER, pBuffer, sizeof(int) / sizeof(char));
+                result = GetLocaleInfoEx(
+                    realNameBuffer,
+                    Interop.Kernel32.LOCALE_ILANGUAGE | Interop.Kernel32.LOCALE_RETURN_NUMBER,
+                    pBuffer,
+                    sizeof(int) / sizeof(char)
+                );
                 if (result == 0)
                 {
                     return false;
@@ -148,7 +172,10 @@ namespace System.Globalization
 
         private void InitUserOverride(bool useUserOverride)
         {
-            Debug.Assert(_sWindowsName != null, "[CultureData.InitUserOverride] Expected _sWindowsName to be populated by already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.InitUserOverride] Expected _sWindowsName to be populated by already"
+            );
             _bUseOverrides = useUserOverride && _sWindowsName == CultureInfo.UserDefaultLocaleName;
         }
 
@@ -164,13 +191,22 @@ namespace System.Globalization
                 int geoIsoIdLength;
                 fixed (char* pGeoIsoId = geoIso2Letters)
                 {
-                    geoIsoIdLength = Interop.Kernel32.GetGeoInfo(geoId, Interop.Kernel32.GEO_ISO2, pGeoIsoId, geoIso2Letters.Length, 0);
+                    geoIsoIdLength = Interop.Kernel32.GetGeoInfo(
+                        geoId,
+                        Interop.Kernel32.GEO_ISO2,
+                        pGeoIsoId,
+                        geoIso2Letters.Length,
+                        0
+                    );
                 }
 
                 if (geoIsoIdLength != 0)
                 {
                     geoIsoIdLength -= geoIso2Letters[geoIsoIdLength - 1] == 0 ? 1 : 0; // handle null termination and exclude it.
-                    CultureData? cd = GetCultureDataForRegion(geoIso2Letters.Slice(0, geoIsoIdLength).ToString(), true);
+                    CultureData? cd = GetCultureDataForRegion(
+                        geoIso2Letters.Slice(0, geoIsoIdLength).ToString(),
+                        true
+                    );
                     if (cd != null)
                     {
                         return cd;
@@ -194,7 +230,12 @@ namespace System.Globalization
             }
 
             char* pBuffer = stackalloc char[Interop.Kernel32.LOCALE_NAME_MAX_LENGTH + 1]; // +1 for the null termination
-            int length = Interop.Kernel32.LCIDToLocaleName(culture, pBuffer, Interop.Kernel32.LOCALE_NAME_MAX_LENGTH + 1, Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES);
+            int length = Interop.Kernel32.LCIDToLocaleName(
+                culture,
+                pBuffer,
+                Interop.Kernel32.LOCALE_NAME_MAX_LENGTH + 1,
+                Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES
+            );
 
             if (length > 0)
             {
@@ -206,11 +247,20 @@ namespace System.Globalization
 
         private string[]? GetTimeFormatsCore(bool shortFormat)
         {
-            Debug.Assert(_sWindowsName != null, "[CultureData.GetTimeFormatsCore] Expected _sWindowsName to be populated by already");
+            Debug.Assert(
+                _sWindowsName != null,
+                "[CultureData.GetTimeFormatsCore] Expected _sWindowsName to be populated by already"
+            );
 
             if (GlobalizationMode.UseNls)
             {
-                return ReescapeWin32Strings(nativeEnumTimeFormats(_sWindowsName, shortFormat ? Interop.Kernel32.TIME_NOSECONDS : 0, _bUseOverrides));
+                return ReescapeWin32Strings(
+                    nativeEnumTimeFormats(
+                        _sWindowsName,
+                        shortFormat ? Interop.Kernel32.TIME_NOSECONDS : 0,
+                        _bUseOverrides
+                    )
+                );
             }
 
             string icuFormatString = IcuGetTimeFormatString(shortFormat);
@@ -221,25 +271,36 @@ namespace System.Globalization
             }
 
             // When using ICU and need to get user overrides, we put the user override at the beginning
-            string userOverride = GetLocaleInfoFromLCType(_sWindowsName, shortFormat ? Interop.Kernel32.LOCALE_SSHORTTIME : Interop.Kernel32.LOCALE_STIMEFORMAT, useUserOverride: true);
+            string userOverride = GetLocaleInfoFromLCType(
+                _sWindowsName,
+                shortFormat
+                    ? Interop.Kernel32.LOCALE_SSHORTTIME
+                    : Interop.Kernel32.LOCALE_STIMEFORMAT,
+                useUserOverride: true
+            );
 
             Debug.Assert(!string.IsNullOrEmpty(userOverride));
 
-            return userOverride != icuFormatString ?
-                 new string[] { userOverride, icuFormatString } : new string[] { userOverride };
+            return userOverride != icuFormatString
+                ? new string[] { userOverride, icuFormatString }
+                : new string[] { userOverride };
         }
 
-        private int GetAnsiCodePage(string _ /*cultureName*/) =>
-            NlsGetLocaleInfo(LocaleNumberData.AnsiCodePage);
+        private int GetAnsiCodePage(
+            string _ /*cultureName*/
+        ) => NlsGetLocaleInfo(LocaleNumberData.AnsiCodePage);
 
-        private int GetOemCodePage(string _ /*cultureName*/) =>
-            NlsGetLocaleInfo(LocaleNumberData.OemCodePage);
+        private int GetOemCodePage(
+            string _ /*cultureName*/
+        ) => NlsGetLocaleInfo(LocaleNumberData.OemCodePage);
 
-        private int GetMacCodePage(string _ /*cultureName*/) =>
-            NlsGetLocaleInfo(LocaleNumberData.MacCodePage);
+        private int GetMacCodePage(
+            string _ /*cultureName*/
+        ) => NlsGetLocaleInfo(LocaleNumberData.MacCodePage);
 
-        private int GetEbcdicCodePage(string _ /*cultureName*/) =>
-            NlsGetLocaleInfo(LocaleNumberData.EbcdicCodePage);
+        private int GetEbcdicCodePage(
+            string _ /*cultureName*/
+        ) => NlsGetLocaleInfo(LocaleNumberData.EbcdicCodePage);
 
         // If we are using ICU and loading the calendar data for the user's default
         // local, and we're using user overrides, then we use NLS to load the data

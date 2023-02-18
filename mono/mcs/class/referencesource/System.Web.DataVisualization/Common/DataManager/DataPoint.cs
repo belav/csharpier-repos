@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -9,7 +9,7 @@
 //
 //  Namespace:    System.Web.UI.WebControls[Windows.Forms].Charting.Data
 //
-//    Classes:    DataPoint, DataPointCustomProperties, DataPointCollection, 
+//    Classes:    DataPoint, DataPointCustomProperties, DataPointCollection,
 //                DataPointComparer, DataPoint3D, CustomProperties
 //
 //  Purpose:    Classes related to the Data Points:
@@ -42,100 +42,96 @@ using System.Collections.ObjectModel;
 using System.Text;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 
-
-    using System.ComponentModel.Design.Serialization;
-    using System.Reflection;
-    using System.CodeDom;
-    using System.Windows.Forms.Design;
+using System.ComponentModel.Design.Serialization;
+using System.Reflection;
+using System.CodeDom;
+using System.Windows.Forms.Design;
 #else
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.DataVisualization.Charting;
-    using System.Web.UI.DataVisualization.Charting.Utilities;
-    using System.IO;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.IO;
 
 #endif
-
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
 #endif
+{
+    #region CustomProperties enumeration
+
+    /// <summary>
+    /// Enumeration of common properties names.
+    /// </summary>
+    internal enum CommonCustomProperties
     {
-        #region CustomProperties enumeration
+        PointName,
+        Label,
+        AxisLabel,
+        LabelFormat,
+        IsValueShownAsLabel,
+        Color,
+        BorderColor,
+        BorderDashStyle,
+        BorderWidth,
+        BackImage,
+        BackImageWrapMode,
+        BackImageAlignment,
+        BackImageTransparentColor,
+        BackGradientStyle,
+        BackSecondaryColor,
+        BackHatchStyle,
+        Font,
+        LabelForeColor,
+        LabelAngle,
+        MarkerStyle,
+        MarkerSize,
+        MarkerImage,
+        MarkerImageTransparentColor,
+        MarkerColor,
+        MarkerBorderColor,
+        MarkerBorderWidth,
+        MapAreaAttributes,
+        PostBackValue,
+        MapAreaType,
+        LegendMapAreaType,
+        LabelMapAreaType,
+        Url,
+        ToolTip,
+        Tag,
+        LegendUrl,
+        LegendToolTip,
+        LegendText,
+        LegendMapAreaAttributes,
+        LegendPostBackValue,
+        IsVisibleInLegend,
+        LabelUrl,
+        LabelToolTip,
+        LabelMapAreaAttributes,
+        LabelPostBackValue,
+        LabelBorderColor,
+        LabelBorderDashStyle,
+        LabelBorderWidth,
+        LabelBackColor,
+    };
 
-        /// <summary>
-        /// Enumeration of common properties names.
-        /// </summary>
-        internal enum    CommonCustomProperties
-        {
-            PointName,
-            Label,
-            AxisLabel, 
-            LabelFormat,
-            IsValueShownAsLabel,
-            Color, 
-            BorderColor, 
-            BorderDashStyle, 
-            BorderWidth, 
-            BackImage, 
-            BackImageWrapMode,
-            BackImageAlignment,
-            BackImageTransparentColor,
-            BackGradientStyle,
-            BackSecondaryColor,
-            BackHatchStyle, 
-            Font, 
-            LabelForeColor, 
-            LabelAngle, 
-            MarkerStyle, 
-            MarkerSize, 
-            MarkerImage,
-            MarkerImageTransparentColor,
-            MarkerColor,
-            MarkerBorderColor,
-            MarkerBorderWidth,
-            MapAreaAttributes,
-            PostBackValue,
-            MapAreaType,
-            LegendMapAreaType,
-            LabelMapAreaType,
-            Url,
-            ToolTip,
-            Tag,
-            LegendUrl,
-            LegendToolTip,
-            LegendText,
-            LegendMapAreaAttributes,
-            LegendPostBackValue,
-            IsVisibleInLegend,
-            LabelUrl,
-            LabelToolTip,
-            LabelMapAreaAttributes,
-            LabelPostBackValue,
-            LabelBorderColor, 
-            LabelBorderDashStyle, 
-            LabelBorderWidth, 
-            LabelBackColor,
-        };
-
-        #endregion 
+    #endregion
 
     /// <summary>
     /// Data points comparer class
     /// </summary>
-    [
-    SRDescription("DescriptionAttributeDataPointComparer_DataPointComparer")
-    ]
+    [SRDescription("DescriptionAttributeDataPointComparer_DataPointComparer")]
     public class DataPointComparer : IComparer<DataPoint>
     {
         #region Fields
@@ -144,7 +140,7 @@ namespace System.Web.UI.DataVisualization.Charting
         private PointSortOrder _sortingOrder = PointSortOrder.Ascending;
 
         // Sorting value index
-        private int                _sortingValueIndex = 1;
+        private int _sortingValueIndex = 1;
 
         #endregion
 
@@ -153,9 +149,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Private default constructor.
         /// </summary>
-        private DataPointComparer()
-        {
-        }
+        private DataPointComparer() { }
 
         /// <summary>
         /// Data points comparer class constructor.
@@ -164,14 +158,20 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="sortOrder">Sorting order.</param>
         /// <param name="sortBy">Value used for sorting ("X", "Y or Y1", "Y2", ...).</param>
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-        [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+        [AspNetHostingPermission(
+            System.Security.Permissions.SecurityAction.InheritanceDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        [AspNetHostingPermission(
+            System.Security.Permissions.SecurityAction.LinkDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
 #endif
         public DataPointComparer(Series series, PointSortOrder sortOrder, string sortBy)
         {
             // Check if sorting value is valid
             sortBy = sortBy.ToUpper(System.Globalization.CultureInfo.InvariantCulture);
-            if(String.Compare(sortBy, "X", StringComparison.Ordinal) == 0)
+            if (String.Compare(sortBy, "X", StringComparison.Ordinal) == 0)
             {
                 _sortingValueIndex = -1;
             }
@@ -183,21 +183,39 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 _sortingValueIndex = -2;
             }
-            else if(sortBy.Length == 2 && 
-                    sortBy.StartsWith("Y", StringComparison.Ordinal) && 
-                    Char.IsDigit(sortBy[1]))
+            else if (
+                sortBy.Length == 2
+                && sortBy.StartsWith("Y", StringComparison.Ordinal)
+                && Char.IsDigit(sortBy[1])
+            )
             {
-                _sortingValueIndex = Int32.Parse(sortBy.Substring(1), System.Globalization.CultureInfo.InvariantCulture) - 1;
+                _sortingValueIndex =
+                    Int32.Parse(
+                        sortBy.Substring(1),
+                        System.Globalization.CultureInfo.InvariantCulture
+                    ) - 1;
             }
             else
             {
-                throw(new ArgumentException( SR.ExceptionDataPointConverterInvalidSorting, "sortBy"));
+                throw (
+                    new ArgumentException(SR.ExceptionDataPointConverterInvalidSorting, "sortBy")
+                );
             }
 
             // Check if data series support as many Y values as required
-            if(_sortingValueIndex > 0 && _sortingValueIndex >= series.YValuesPerPoint)
+            if (_sortingValueIndex > 0 && _sortingValueIndex >= series.YValuesPerPoint)
             {
-                throw(new ArgumentException( SR.ExceptionDataPointConverterUnavailableSorting(sortBy, series.YValuesPerPoint.ToString(System.Globalization.CultureInfo.InvariantCulture) ), "sortBy"));
+                throw (
+                    new ArgumentException(
+                        SR.ExceptionDataPointConverterUnavailableSorting(
+                            sortBy,
+                            series.YValuesPerPoint.ToString(
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                        ),
+                        "sortBy"
+                    )
+                );
             }
 
             this._sortingOrder = sortOrder;
@@ -212,7 +230,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="x">First data point.</param>
         /// <param name="y">Second data point.</param>
-        /// <returns>If the two values are equal, it returns zero.  If point 1 is greater than point 2, 
+        /// <returns>If the two values are equal, it returns zero.  If point 1 is greater than point 2,
         /// it returns a positive integer; otherwise, it returns a negative integer.
         /// </returns>
         public int Compare(DataPoint x, DataPoint y)
@@ -220,12 +238,12 @@ namespace System.Web.UI.DataVisualization.Charting
             int result = -1;
 
             // Compare X value
-            if(_sortingValueIndex == -1)
+            if (_sortingValueIndex == -1)
             {
                 result = x.XValue.CompareTo(y.XValue);
             }
             // Compare Axis Label value
-            else if(_sortingValueIndex == -2)
+            else if (_sortingValueIndex == -2)
             {
                 result = string.Compare(x.AxisLabel, y.AxisLabel, StringComparison.CurrentCulture);
             }
@@ -236,7 +254,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Invert result depending on the sorting order
-            if(this._sortingOrder == PointSortOrder.Descending)
+            if (this._sortingOrder == PointSortOrder.Descending)
             {
                 result = -result;
             }
@@ -250,22 +268,26 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// A collection of data points.
     /// </summary>
-    [
-        SRDescription("DescriptionAttributeDataPointCollection_DataPointCollection"),
-    ]
+    [SRDescription("DescriptionAttributeDataPointCollection_DataPointCollection"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
 #if !Microsoft_CONTROL
-        [Themeable(false)]
-#endif 
+    [Themeable(false)]
+#endif
     public class DataPointCollection : ChartElementCollection<DataPoint>
     {
         #region Fields
 
         // Reference to the sereies of data points
-        internal Series        series = null;
+        internal Series series = null;
 
         #endregion
 
@@ -275,7 +297,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Data Point Collection object constructor.
         /// </summary>
         /// <param name="series">Series object, which the Data Point Collection belongs to.</param>
-        internal DataPointCollection(Series series) : base(series)
+        internal DataPointCollection(Series series)
+            : base(series)
         {
             this.series = series;
         }
@@ -298,20 +321,24 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             dataPoint.series = series;
 
-            if(dataPoint.AxisLabel.Length > 0 && series != null)
+            if (dataPoint.AxisLabel.Length > 0 && series != null)
             {
                 series.noLabelsInPoints = false;
             }
 
 #if Microsoft_CONTROL
             // Set flag that tooltips flags should be recalculated
-            if(dataPoint.ToolTip.Length > 0 && 
-                dataPoint.LegendToolTip.Length > 0 && 
-                dataPoint.LabelToolTip.Length > 0 && 
-                series != null && series.Chart != null && series.Chart.selection != null)
+            if (
+                dataPoint.ToolTip.Length > 0
+                && dataPoint.LegendToolTip.Length > 0
+                && dataPoint.LabelToolTip.Length > 0
+                && series != null
+                && series.Chart != null
+                && series.Chart.selection != null
+            )
             {
                 series.Chart.selection.enabledChecked = false;
-            }            
+            }
 #endif
         }
 
@@ -324,9 +351,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="y">The y.</param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
-        public DataPoint Add(params double[] y) 
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
+        public DataPoint Add(params double[] y)
         {
             DataPoint point = new DataPoint(0, y);
             this.Add(point);
@@ -335,7 +365,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         /// <summary>
         /// Parse the input parameter with other point attribute binding rule
-        /// in format: PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]]. 
+        /// in format: PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]].
         /// For example: "Tooltip=Price{C1},Url=WebSiteName".
         /// </summary>
         /// <param name="otherFields">Other fields parameter.</param>
@@ -346,9 +376,10 @@ namespace System.Web.UI.DataVisualization.Charting
             string otherFields,
             ref string[] otherAttributeNames,
             ref string[] otherFieldNames,
-            ref string[] otherValueFormat)
+            ref string[] otherValueFormat
+        )
         {
-            if(otherFields != null && otherFields.Length > 0)
+            if (otherFields != null && otherFields.Length > 0)
             {
                 // Split string by comma
                 otherAttributeNames = otherFields.Replace(",,", "\n").Split(',');
@@ -356,34 +387,48 @@ namespace System.Web.UI.DataVisualization.Charting
                 otherValueFormat = new string[otherAttributeNames.Length];
 
                 // Loop through all strings
-                for(int index = 0; index < otherAttributeNames.Length; index++)
+                for (int index = 0; index < otherAttributeNames.Length; index++)
                 {
                     // Split string by equal sign
                     int equalSignIndex = otherAttributeNames[index].IndexOf('=');
-                    if(equalSignIndex > 0)
+                    if (equalSignIndex > 0)
                     {
-                        otherFieldNames[index] = otherAttributeNames[index].Substring(equalSignIndex + 1);
-                        otherAttributeNames[index] = otherAttributeNames[index].Substring(0, equalSignIndex);
+                        otherFieldNames[index] = otherAttributeNames[index].Substring(
+                            equalSignIndex + 1
+                        );
+                        otherAttributeNames[index] = otherAttributeNames[index].Substring(
+                            0,
+                            equalSignIndex
+                        );
                     }
                     else
                     {
-                        throw (new ArgumentException(SR.ExceptionParameterFormatInvalid, "otherFields"));
+                        throw (
+                            new ArgumentException(SR.ExceptionParameterFormatInvalid, "otherFields")
+                        );
                     }
 
                     // Check if format string was specified
                     int bracketIndex = otherFieldNames[index].IndexOf('{');
-                    if(bracketIndex > 0 && otherFieldNames[index][otherFieldNames[index].Length - 1] == '}')
+                    if (
+                        bracketIndex > 0
+                        && otherFieldNames[index][otherFieldNames[index].Length - 1] == '}'
+                    )
                     {
-                        otherValueFormat[index] = otherFieldNames[index].Substring(bracketIndex + 1);
+                        otherValueFormat[index] = otherFieldNames[index].Substring(
+                            bracketIndex + 1
+                        );
                         otherValueFormat[index] = otherValueFormat[index].Trim('{', '}');
                         otherFieldNames[index] = otherFieldNames[index].Substring(0, bracketIndex);
                     }
 
                     // Trim and replace new line character
-                    otherAttributeNames[index] = otherAttributeNames[index].Trim().Replace("\n", ",");
+                    otherAttributeNames[index] = otherAttributeNames[index]
+                        .Trim()
+                        .Replace("\n", ",");
                     otherFieldNames[index] = otherFieldNames[index].Trim().Replace("\n", ",");
-                    if ( otherValueFormat[index] != null )
-                         otherValueFormat[index] = otherValueFormat[index].Trim().Replace("\n", ",");
+                    if (otherValueFormat[index] != null)
+                        otherValueFormat[index] = otherValueFormat[index].Trim().Replace("\n", ",");
                 }
             }
         }
@@ -396,13 +441,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="xField">Name of the field for X values.</param>
         /// <param name="yFields">Comma separated names of the fields for Y values.</param>
         /// <param name="otherFields">Other point properties binding rule in format: PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]]. For example: "Tooltip=Price{C1},Url=WebSiteName".</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
-        public void DataBind(IEnumerable dataSource, string xField, string yFields, string otherFields)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
+        public void DataBind(
+            IEnumerable dataSource,
+            string xField,
+            string yFields,
+            string otherFields
+        )
         {
             // Check arguments
             if (dataSource == null)
-                throw new ArgumentNullException("dataSource", SR.ExceptionDataPointInsertionNoDataSource);
+                throw new ArgumentNullException(
+                    "dataSource",
+                    SR.ExceptionDataPointInsertionNoDataSource
+                );
             if (dataSource is string)
                 throw (new ArgumentException(SR.ExceptionDataBindSeriesToString, "dataSource"));
             if (yFields == null)
@@ -410,13 +466,22 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // Convert comma separated Y values field names string to array of names
             string[] yFieldNames = yFields.Replace(",,", "\n").Split(',');
-            for(int index = 0; index < yFieldNames.Length; index++)
+            for (int index = 0; index < yFieldNames.Length; index++)
             {
                 yFieldNames[index] = yFieldNames[index].Replace("\n", ",");
             }
 
             if (yFieldNames.GetLength(0) > series.YValuesPerPoint)
-                throw (new ArgumentOutOfRangeException("yFields", SR.ExceptionDataPointYValuesCountMismatch(series.YValuesPerPoint.ToString(System.Globalization.CultureInfo.InvariantCulture))));
+                throw (
+                    new ArgumentOutOfRangeException(
+                        "yFields",
+                        SR.ExceptionDataPointYValuesCountMismatch(
+                            series.YValuesPerPoint.ToString(
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                        )
+                    )
+                );
 
             // Convert other fields/properties names to two arrays of names
             string[] otherAttributeNames = null;
@@ -426,36 +491,31 @@ namespace System.Web.UI.DataVisualization.Charting
                 otherFields,
                 ref otherAttributeNames,
                 ref otherFieldNames,
-                ref otherValueFormat);        
+                ref otherValueFormat
+            );
 
             // Remove all existing data points
             this.Clear();
 
             // Get and reset enumerator
-            IEnumerator    enumerator = GetDataSourceEnumerator(dataSource);
+            IEnumerator enumerator = GetDataSourceEnumerator(dataSource);
             if (enumerator.GetType() != typeof(System.Data.Common.DbEnumerator))
             {
                 try
                 {
                     enumerator.Reset();
                 }
-                // Some enumerators may not support Resetting 
-                catch (InvalidOperationException)
-                {
-                }
-                catch (NotImplementedException)
-                {
-                }
-                catch (NotSupportedException)
-                {
-                }
+                // Some enumerators may not support Resetting
+                catch (InvalidOperationException) { }
+                catch (NotImplementedException) { }
+                catch (NotSupportedException) { }
             }
 
             // Add data points
-            bool        valueExsist = true;
-            object[]    yValuesObj = new object[yFieldNames.Length];
-            object        xValueObj = null;
-            bool        autoDetectType = true;
+            bool valueExsist = true;
+            object[] yValuesObj = new object[yFieldNames.Length];
+            object xValueObj = null;
+            bool autoDetectType = true;
 
             this.SuspendUpdates();
             try
@@ -472,7 +532,13 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (autoDetectType)
                     {
                         autoDetectType = false;
-                        AutoDetectValuesType(this.series, enumerator, xField, enumerator, yFieldNames[0]);
+                        AutoDetectValuesType(
+                            this.series,
+                            enumerator,
+                            xField,
+                            enumerator,
+                            yFieldNames[0]
+                        );
                     }
 
                     // Create and initialize data point
@@ -506,7 +572,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             for (int i = 0; i < yFieldNames.Length; i++)
                             {
-                                yValuesObj[i] = ConvertEnumerationItem(enumerator.Current, yFieldNames[i]);
+                                yValuesObj[i] = ConvertEnumerationItem(
+                                    enumerator.Current,
+                                    yFieldNames[i]
+                                );
                                 if (IsEmptyValue(yValuesObj[i]))
                                 {
                                     emptyValues = true;
@@ -516,19 +585,22 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
 
                         // Set other values
-                        if (otherAttributeNames != null &&
-                            otherAttributeNames.Length > 0)
+                        if (otherAttributeNames != null && otherAttributeNames.Length > 0)
                         {
                             for (int i = 0; i < otherFieldNames.Length; i++)
                             {
                                 // Get object by field name
-                                object obj = ConvertEnumerationItem(enumerator.Current, otherFieldNames[i]);
+                                object obj = ConvertEnumerationItem(
+                                    enumerator.Current,
+                                    otherFieldNames[i]
+                                );
                                 if (!IsEmptyValue(obj))
                                 {
                                     newDataPoint.SetPointCustomProperty(
                                         obj,
                                         otherAttributeNames[i],
-                                        otherValueFormat[i]);
+                                        otherValueFormat[i]
+                                    );
                                 }
                             }
                         }
@@ -562,9 +634,7 @@ namespace System.Web.UI.DataVisualization.Charting
                             this.Add(newDataPoint);
                         }
                     }
-
                 } while (valueExsist);
-
             }
             finally
             {
@@ -577,8 +647,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or DataRow.
         /// </summary>
         /// <param name="yValue">One or more enumerable objects with Y values.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "Y is a cartesian coordinate and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "Y is a cartesian coordinate and well understood"
+        )]
         public void DataBindY(params IEnumerable[] yValue)
         {
             DataBindXY(null, yValue);
@@ -590,69 +663,83 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="xValue">Enumerable objects with X values.</param>
         /// <param name="yValues">One or more enumerable objects with Y values.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public void DataBindXY(IEnumerable xValue, params IEnumerable[] yValues)
         {
             // Y value must be provided
-            if (yValues == null || 
-                yValues.Length==1 && yValues[0]==null)
+            if (yValues == null || yValues.Length == 1 && yValues[0] == null)
                 throw new ArgumentNullException("yValues");
             if (yValues.GetLength(0) == 0)
-                throw new ArgumentException(SR.ExceptionDataPointBindingYValueNotSpecified, "yValues");
+                throw new ArgumentException(
+                    SR.ExceptionDataPointBindingYValueNotSpecified,
+                    "yValues"
+                );
 
             // Double check that a string object is not provided for data binding
-            for(int i = 0; i < yValues.Length; i++)
+            for (int i = 0; i < yValues.Length; i++)
             {
-                if(yValues[i] is string)
+                if (yValues[i] is string)
                 {
                     throw (new ArgumentException(SR.ExceptionDataBindYValuesToString, "yValues"));
                 }
             }
 
             // Check if number of Y values do not out of range
-            if(yValues.GetLength(0) > series.YValuesPerPoint)
+            if (yValues.GetLength(0) > series.YValuesPerPoint)
             {
-                throw(new ArgumentOutOfRangeException("yValues", SR.ExceptionDataPointYValuesBindingCountMismatch( series.YValuesPerPoint.ToString(System.Globalization.CultureInfo.InvariantCulture) ) ) );
+                throw (
+                    new ArgumentOutOfRangeException(
+                        "yValues",
+                        SR.ExceptionDataPointYValuesBindingCountMismatch(
+                            series.YValuesPerPoint.ToString(
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                        )
+                    )
+                );
             }
 
             // Remove all existing data points
             this.Clear();
 
             // Reset X, Y enumerators
-            IEnumerator    xEnumerator = null;
-            IEnumerator[]    yEnumerator = new IEnumerator[yValues.GetLength(0)];
-            if(xValue != null)
+            IEnumerator xEnumerator = null;
+            IEnumerator[] yEnumerator = new IEnumerator[yValues.GetLength(0)];
+            if (xValue != null)
             {
                 // Double check that a string object is not provided for data binding
-                if(xValue is string)
+                if (xValue is string)
                 {
                     throw (new ArgumentException(SR.ExceptionDataBindXValuesToString, "xValue"));
                 }
-                
+
                 // Get and reset Y values enumerators
                 xEnumerator = GetDataSourceEnumerator(xValue);
-                if(xEnumerator.GetType() != typeof(System.Data.Common.DbEnumerator))
+                if (xEnumerator.GetType() != typeof(System.Data.Common.DbEnumerator))
                 {
                     xEnumerator.Reset();
                 }
             }
-            for(int i = 0; i < yValues.Length; i++)
+            for (int i = 0; i < yValues.Length; i++)
             {
                 // Get and reset Y values enumerators
                 yEnumerator[i] = GetDataSourceEnumerator(yValues[i]);
-                if(yEnumerator[i].GetType() != typeof(System.Data.Common.DbEnumerator))
+                if (yEnumerator[i].GetType() != typeof(System.Data.Common.DbEnumerator))
                 {
                     yEnumerator[i].Reset();
                 }
             }
 
             // Add data points
-            bool        xValueExsist = false;
-            bool        yValueExsist = true;
-            object[]    yValuesObj = new object[series.YValuesPerPoint];
-            object        xValueObj = null;
-            bool        autoDetectType = true;
+            bool xValueExsist = false;
+            bool yValueExsist = true;
+            object[] yValuesObj = new object[series.YValuesPerPoint];
+            object xValueObj = null;
+            bool autoDetectType = true;
 
             SuspendUpdates();
             try
@@ -673,7 +760,12 @@ namespace System.Web.UI.DataVisualization.Charting
                         xValueExsist = xEnumerator.MoveNext();
                         if (yValueExsist && !xValueExsist)
                         {
-                            throw (new ArgumentOutOfRangeException("xValue", SR.ExceptionDataPointInsertionXValuesQtyIsLessYValues));
+                            throw (
+                                new ArgumentOutOfRangeException(
+                                    "xValue",
+                                    SR.ExceptionDataPointInsertionXValuesQtyIsLessYValues
+                                )
+                            );
                         }
                     }
 
@@ -740,13 +832,10 @@ namespace System.Web.UI.DataVisualization.Charting
                             DataPointInit(ref newDataPoint);
                             this.Add(newDataPoint);
                         }
-
                     }
-
                 } while (xValueExsist || yValueExsist);
-
             }
-            finally 
+            finally
             {
                 this.ResumeUpdates();
             }
@@ -758,8 +847,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="yValue">Enumerable objects with Y values.</param>
         /// <param name="yFields">Name of the fields for Y values.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public void DataBindY(IEnumerable yValue, string yFields)
         {
             DataBindXY(null, null, yValue, yFields);
@@ -773,47 +865,73 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="xField">Name of the field for X values.</param>
         /// <param name="yValue">Enumerable objects with Y values.</param>
         /// <param name="yFields">Comma separated names of the fields for Y values.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
-        public void DataBindXY(IEnumerable xValue, string xField, IEnumerable yValue, string yFields)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
+        public void DataBindXY(
+            IEnumerable xValue,
+            string xField,
+            IEnumerable yValue,
+            string yFields
+        )
         {
             // Check arguments
             if (xValue is string)
                 throw new ArgumentException(SR.ExceptionDataBindXValuesToString, "xValue");
             if (yValue == null)
-                throw new ArgumentNullException("yValue", SR.ExceptionDataPointInsertionYValueNotSpecified);
+                throw new ArgumentNullException(
+                    "yValue",
+                    SR.ExceptionDataPointInsertionYValueNotSpecified
+                );
             if (yValue is string)
                 throw new ArgumentException(SR.ExceptionDataBindYValuesToString, "yValue");
             if (yFields == null)
-                throw new ArgumentOutOfRangeException("yFields", SR.ExceptionDataPointYValuesCountMismatch(series.YValuesPerPoint.ToString(System.Globalization.CultureInfo.InvariantCulture)));
+                throw new ArgumentOutOfRangeException(
+                    "yFields",
+                    SR.ExceptionDataPointYValuesCountMismatch(
+                        series.YValuesPerPoint.ToString(
+                            System.Globalization.CultureInfo.InvariantCulture
+                        )
+                    )
+                );
 
             // Convert comma separated field names string to array of names
-            string[] yFieldNames = yFields.Replace(",,", "\n").Split(',');;
-            for(int index = 0; index < yFieldNames.Length; index++)
+            string[] yFieldNames = yFields.Replace(",,", "\n").Split(',');
+            ;
+            for (int index = 0; index < yFieldNames.Length; index++)
             {
                 yFieldNames[index] = yFieldNames[index].Replace("\n", ",");
             }
             if (yFieldNames.GetLength(0) > series.YValuesPerPoint)
-                throw new ArgumentOutOfRangeException("yFields", SR.ExceptionDataPointYValuesCountMismatch(series.YValuesPerPoint.ToString(System.Globalization.CultureInfo.InvariantCulture)));
-            
+                throw new ArgumentOutOfRangeException(
+                    "yFields",
+                    SR.ExceptionDataPointYValuesCountMismatch(
+                        series.YValuesPerPoint.ToString(
+                            System.Globalization.CultureInfo.InvariantCulture
+                        )
+                    )
+                );
+
             // Remove all existing data points
             this.Clear();
 
             // Reset X, Y enumerators
-            IEnumerator    xEnumerator = null;
-            IEnumerator    yEnumerator = GetDataSourceEnumerator(yValue);
-            
-            if(yEnumerator.GetType() != typeof(System.Data.Common.DbEnumerator))
+            IEnumerator xEnumerator = null;
+            IEnumerator yEnumerator = GetDataSourceEnumerator(yValue);
+
+            if (yEnumerator.GetType() != typeof(System.Data.Common.DbEnumerator))
             {
                 yEnumerator.Reset();
             }
 
-            if(xValue != null)
+            if (xValue != null)
             {
-                if(xValue != yValue)
+                if (xValue != yValue)
                 {
                     xEnumerator = GetDataSourceEnumerator(xValue);
-                    if(xEnumerator.GetType() != typeof(System.Data.Common.DbEnumerator))
+                    if (xEnumerator.GetType() != typeof(System.Data.Common.DbEnumerator))
                     {
                         xEnumerator.Reset();
                     }
@@ -825,11 +943,11 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Add data points
-            bool        xValueExsist = false;
-            bool        yValueExsist = true;
-            object[]    yValuesObj = new object[yFieldNames.Length];
-            object        xValueObj = null;
-            bool        autoDetectType = true;
+            bool xValueExsist = false;
+            bool yValueExsist = true;
+            object[] yValuesObj = new object[yFieldNames.Length];
+            object xValueObj = null;
+            bool autoDetectType = true;
 
             this.SuspendUpdates();
             try
@@ -848,7 +966,12 @@ namespace System.Web.UI.DataVisualization.Charting
                             xValueExsist = xEnumerator.MoveNext();
                             if (yValueExsist && !xValueExsist)
                             {
-                                throw (new ArgumentOutOfRangeException("xValue", SR.ExceptionDataPointInsertionXValuesQtyIsLessYValues));
+                                throw (
+                                    new ArgumentOutOfRangeException(
+                                        "xValue",
+                                        SR.ExceptionDataPointInsertionXValuesQtyIsLessYValues
+                                    )
+                                );
                             }
                         }
                         else
@@ -861,7 +984,13 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (autoDetectType)
                     {
                         autoDetectType = false;
-                        AutoDetectValuesType(this.series, xEnumerator, xField, yEnumerator, yFieldNames[0]);
+                        AutoDetectValuesType(
+                            this.series,
+                            xEnumerator,
+                            xField,
+                            yEnumerator,
+                            yFieldNames[0]
+                        );
                     }
 
                     // Create and initialize data point
@@ -879,7 +1008,6 @@ namespace System.Web.UI.DataVisualization.Charting
                                 emptyValues = true;
                                 xValueObj = 0.0;
                             }
-
                         }
 
                         if (yFieldNames.Length == 0)
@@ -895,7 +1023,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             for (int i = 0; i < yFieldNames.Length; i++)
                             {
-                                yValuesObj[i] = ConvertEnumerationItem(yEnumerator.Current, yFieldNames[i]);
+                                yValuesObj[i] = ConvertEnumerationItem(
+                                    yEnumerator.Current,
+                                    yFieldNames[i]
+                                );
                                 if (IsEmptyValue(yValuesObj[i]))
                                 {
                                     emptyValues = true;
@@ -933,11 +1064,9 @@ namespace System.Web.UI.DataVisualization.Charting
                             this.Add(newDataPoint);
                         }
                     }
-
                 } while (xValueExsist || yValueExsist);
-
             }
-            finally 
+            finally
             {
                 this.ResumeUpdates();
             }
@@ -950,15 +1079,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>True if empty.</returns>
         internal static bool IsEmptyValue(object val)
         {
-            if(val is System.DBNull || val == null)
+            if (val is System.DBNull || val == null)
             {
                 return true;
             }
-            if(val is double && double.IsNaN((double)val))
+            if (val is double && double.IsNaN((double)val))
             {
                 return true;
             }
-            if(val is Single && Single.IsNaN((Single)val))
+            if (val is Single && Single.IsNaN((Single)val))
             {
                 return true;
             }
@@ -971,12 +1100,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="yValue">Y value of the data point.</param>
         /// <returns>Index of newly added data point.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "Y is a cartesian coordinate and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "Y is a cartesian coordinate and well understood"
+        )]
         public int AddY(double yValue)
         {
             // Create new point object
-            DataPoint    newDataPoint = new DataPoint(series);
+            DataPoint newDataPoint = new DataPoint(series);
             newDataPoint.SetValueY(yValue);
             DataPointInit(ref newDataPoint);
             Add(newDataPoint);
@@ -988,19 +1120,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="yValue">List of Y values of the data point.</param>
         /// <returns>Index of newly added data point.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "Y is a cartesian coordinate and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "Y is a cartesian coordinate and well understood"
+        )]
         public int AddY(params object[] yValue)
         {
             //Check arguments
-            if (yValue == null || 
-                yValue.Length==1 && yValue[0]==null)
+            if (yValue == null || yValue.Length == 1 && yValue[0] == null)
                 throw new ArgumentNullException("yValue");
 
             // Auto detect DateTime values type
-            if(this.series.YValueType == ChartValueType.Auto && 
-                yValue.Length > 0 &&
-                yValue[0] != null)
+            if (
+                this.series.YValueType == ChartValueType.Auto
+                && yValue.Length > 0
+                && yValue[0] != null
+            )
             {
                 if (yValue[0] is DateTime)
                 {
@@ -1028,12 +1164,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="yValue">Y value of the data point.</param>
         /// <param name="xValue">X value of the data point.</param>
         /// <returns>Index of newly added data poit.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public int AddXY(double xValue, double yValue)
         {
             // Create new point object
-            DataPoint    newDataPoint = new DataPoint(series);
+            DataPoint newDataPoint = new DataPoint(series);
             newDataPoint.SetValueXY(xValue, yValue);
             DataPointInit(ref newDataPoint);
             Add(newDataPoint);
@@ -1046,33 +1185,37 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="yValue">List of Y values of the data point.</param>
         /// <param name="xValue">X value of the data point.</param>
         /// <returns>Index of newly added data poit.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public int AddXY(object xValue, params object[] yValue)
         {
-
             // Auto detect DateTime and String values type
-            if(this.series.XValueType == ChartValueType.Auto)
+            if (this.series.XValueType == ChartValueType.Auto)
             {
-                if(xValue is DateTime)
+                if (xValue is DateTime)
                 {
                     this.series.XValueType = ChartValueType.DateTime;
                 }
-                if(xValue is DateTimeOffset)
+                if (xValue is DateTimeOffset)
                 {
                     this.series.XValueType = ChartValueType.DateTimeOffset;
                 }
-                if(xValue is string)
+                if (xValue is string)
                 {
                     this.series.XValueType = ChartValueType.String;
                 }
-            
+
                 this.series.autoXValueType = true;
             }
 
-            if(this.series.YValueType == ChartValueType.Auto && 
-                yValue.Length > 0 &&
-                yValue[0] != null)
+            if (
+                this.series.YValueType == ChartValueType.Auto
+                && yValue.Length > 0
+                && yValue[0] != null
+            )
             {
                 if (yValue[0] is DateTime)
                 {
@@ -1087,7 +1230,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Create new point object
-            DataPoint    newDataPoint = new DataPoint(series);
+            DataPoint newDataPoint = new DataPoint(series);
             newDataPoint.SetValueXY(xValue, yValue);
             DataPointInit(ref newDataPoint);
             Add(newDataPoint);
@@ -1100,13 +1243,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="index">Index after which to insert the data point.</param>
         /// <param name="xValue">X value of the data point.</param>
         /// <param name="yValue">List of Y values of the data point.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public void InsertXY(int index, object xValue, params object[] yValue)
         {
-            DataPoint    newDataPoint = new DataPoint(series);
+            DataPoint newDataPoint = new DataPoint(series);
             newDataPoint.SetValueXY(xValue, yValue);
-            DataPointInit(ref newDataPoint);            
+            DataPointInit(ref newDataPoint);
             this.Insert(index, newDataPoint);
         }
 
@@ -1115,13 +1261,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="index">Index after which to insert the data point.</param>
         /// <param name="yValue">List of Y values of the data point.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "Y is a cartesian coordinate and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "Y is a cartesian coordinate and well understood"
+        )]
         public void InsertY(int index, params object[] yValue)
         {
-            DataPoint    newDataPoint = new DataPoint(series);
+            DataPoint newDataPoint = new DataPoint(series);
             newDataPoint.SetValueY(yValue);
-            DataPointInit(ref newDataPoint);            
+            DataPointInit(ref newDataPoint);
             this.Insert(index, newDataPoint);
         }
 
@@ -1133,14 +1282,14 @@ namespace System.Web.UI.DataVisualization.Charting
         internal static IEnumerator GetDataSourceEnumerator(IEnumerable dataSource)
         {
             DataView dataView = dataSource as DataView;
-            if(dataView != null)
+            if (dataView != null)
             {
                 return dataView.GetEnumerator();
             }
             DataSet dataSet = dataSource as DataSet;
-            if(dataSet != null)
+            if (dataSet != null)
             {
-                if(dataSet.Tables.Count > 0)
+                if (dataSet.Tables.Count > 0)
                 {
                     return dataSet.Tables[0].Rows.GetEnumerator();
                 }
@@ -1150,7 +1299,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Convert enumeration item object from DataRow and DataRowView 
+        /// Convert enumeration item object from DataRow and DataRowView
         /// to the actual value of specified column in row
         /// </summary>
         /// <param name="item">Enumeration item.</param>
@@ -1158,16 +1307,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns></returns>
         internal static object ConvertEnumerationItem(object item, string fieldName)
         {
-            object    result = item;
+            object result = item;
 
             // If original object is DataRow
             DataRow dataRow = item as DataRow;
-            if(dataRow != null)
+            if (dataRow != null)
             {
-                if(fieldName != null && fieldName.Length > 0)
+                if (fieldName != null && fieldName.Length > 0)
                 {
                     // Check if specified column exist
-                    bool    failed = true;
+                    bool failed = true;
                     if (dataRow.Table.Columns.Contains(fieldName))
                     {
                         result = dataRow[fieldName];
@@ -1177,17 +1326,24 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         // Try to treat field name as column index number
                         int columnIndex;
-                        failed = !int.TryParse(fieldName, NumberStyles.Any, CultureInfo.InvariantCulture, out columnIndex);
+                        failed = !int.TryParse(
+                            fieldName,
+                            NumberStyles.Any,
+                            CultureInfo.InvariantCulture,
+                            out columnIndex
+                        );
 
-                        if (!failed && columnIndex < dataRow.Table.Columns.Count && columnIndex >= 0)
+                        if (
+                            !failed && columnIndex < dataRow.Table.Columns.Count && columnIndex >= 0
+                        )
                         {
                             result = dataRow[columnIndex];
                         }
                     }
 
-                    if(failed)
+                    if (failed)
                     {
-                        throw(new ArgumentException( SR.ExceptionColumnNameNotFound( fieldName) ) );
+                        throw (new ArgumentException(SR.ExceptionColumnNameNotFound(fieldName)));
                     }
                 }
                 else
@@ -1200,12 +1356,12 @@ namespace System.Web.UI.DataVisualization.Charting
             // If original object is DataRowView
 
             DataRowView dataRowView = item as DataRowView;
-            if(dataRowView != null)
+            if (dataRowView != null)
             {
-                if(fieldName != null && fieldName.Length > 0)
+                if (fieldName != null && fieldName.Length > 0)
                 {
                     // Check if specified column exist
-                    bool    failed = true;
+                    bool failed = true;
                     if (dataRowView.DataView.Table.Columns.Contains(fieldName))
                     {
                         result = dataRowView[fieldName];
@@ -1215,16 +1371,25 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         // Try to treat field name as column index number
                         int columnIndex;
-                        failed = !int.TryParse(fieldName, NumberStyles.Any, CultureInfo.InvariantCulture, out columnIndex);
-                        if (!failed && columnIndex < dataRowView.DataView.Table.Columns.Count && columnIndex >= 0)
+                        failed = !int.TryParse(
+                            fieldName,
+                            NumberStyles.Any,
+                            CultureInfo.InvariantCulture,
+                            out columnIndex
+                        );
+                        if (
+                            !failed
+                            && columnIndex < dataRowView.DataView.Table.Columns.Count
+                            && columnIndex >= 0
+                        )
                         {
                             result = dataRowView[columnIndex];
                         }
                     }
 
-                    if(failed)
+                    if (failed)
                     {
-                        throw(new ArgumentException( SR.ExceptionColumnNameNotFound(fieldName)));
+                        throw (new ArgumentException(SR.ExceptionColumnNameNotFound(fieldName)));
                     }
                 }
                 else
@@ -1236,13 +1401,13 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // If original object is DbDataRecord
             DbDataRecord dbDataRecord = item as DbDataRecord;
-            if(dbDataRecord != null)
+            if (dbDataRecord != null)
             {
-                if(fieldName != null && fieldName.Length > 0)
+                if (fieldName != null && fieldName.Length > 0)
                 {
                     // Check if specified column exist
-                    bool    failed = true;
-                    if(!Char.IsNumber(fieldName, 0))
+                    bool failed = true;
+                    if (!Char.IsNumber(fieldName, 0))
                     {
                         try
                         {
@@ -1255,13 +1420,18 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
 
-                    if(failed)
+                    if (failed)
                     {
                         // Try to treat field name as column index number
                         try
                         {
                             int columnIndex;
-                            bool parseSucceed = int.TryParse(fieldName, NumberStyles.Any, CultureInfo.InvariantCulture, out columnIndex);
+                            bool parseSucceed = int.TryParse(
+                                fieldName,
+                                NumberStyles.Any,
+                                CultureInfo.InvariantCulture,
+                                out columnIndex
+                            );
 
                             if (parseSucceed)
                             {
@@ -1279,11 +1449,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
 
-                    if(failed)
+                    if (failed)
                     {
-                        throw(new ArgumentException( SR.ExceptionColumnNameNotFound(fieldName)));
+                        throw (new ArgumentException(SR.ExceptionColumnNameNotFound(fieldName)));
                     }
-
                 }
                 else
                 {
@@ -1295,18 +1464,20 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 if (fieldName != null && fieldName.Length > 0)
                 {
-                    PropertyDescriptor descriptor = TypeDescriptor.GetProperties(item).Find(fieldName, true);
+                    PropertyDescriptor descriptor = TypeDescriptor
+                        .GetProperties(item)
+                        .Find(fieldName, true);
                     if (descriptor != null)
                     {
                         result = descriptor.GetValue(item);
                         return result ?? null;
-
                     }
                 }
             }
 
             return result;
         }
+
         /// <summary>
         /// Auto detects the X and Y(s) values type
         /// </summary>
@@ -1317,23 +1488,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="yField">Y value field.</param>
         internal static void AutoDetectValuesType(
             Series series,
-            IEnumerator xEnumerator, 
-            string xField, 
-            IEnumerator yEnumerator, 
-            string yField)
+            IEnumerator xEnumerator,
+            string xField,
+            IEnumerator yEnumerator,
+            string yField
+        )
         {
-            if(series.XValueType == ChartValueType.Auto)
+            if (series.XValueType == ChartValueType.Auto)
             {
                 series.XValueType = GetValueType(xEnumerator, xField);
-                if(series.XValueType != ChartValueType.Auto)
+                if (series.XValueType != ChartValueType.Auto)
                 {
                     series.autoXValueType = true;
                 }
             }
-            if(series.YValueType == ChartValueType.Auto)
+            if (series.YValueType == ChartValueType.Auto)
             {
                 series.YValueType = GetValueType(yEnumerator, yField);
-                if(series.YValueType != ChartValueType.Auto)
+                if (series.YValueType != ChartValueType.Auto)
                 {
                     series.autoYValueType = true;
                 }
@@ -1347,11 +1519,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="field">Value field.</param>
         private static ChartValueType GetValueType(IEnumerator enumerator, string field)
         {
-            ChartValueType    type = ChartValueType.Auto;
-            Type            columnDataType = null;
+            ChartValueType type = ChartValueType.Auto;
+            Type columnDataType = null;
 
             // Check parameters
-            if(enumerator == null)
+            if (enumerator == null)
             {
                 return type;
             }
@@ -1359,27 +1531,28 @@ namespace System.Web.UI.DataVisualization.Charting
             // Check if current enumeration element is available
             try
             {
-                if(enumerator.Current == null)
+                if (enumerator.Current == null)
                 {
                     return type;
                 }
             }
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 return type;
             }
 
-
             // If original object is DataRow
-            if(enumerator.Current is DataRow)
+            if (enumerator.Current is DataRow)
             {
-                if(field != null && field.Length > 0)
+                if (field != null && field.Length > 0)
                 {
                     // Check if specified column exist
-                    bool    failed = true;
-                    if(((DataRow)enumerator.Current).Table.Columns.Contains(field))
+                    bool failed = true;
+                    if (((DataRow)enumerator.Current).Table.Columns.Contains(field))
                     {
-                        columnDataType = ((DataRow)enumerator.Current).Table.Columns[field].DataType;
+                        columnDataType = ((DataRow)enumerator.Current).Table.Columns[
+                            field
+                        ].DataType;
                         failed = false;
                     }
 
@@ -1387,11 +1560,18 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (failed)
                     {
                         int columnIndex;
-                        bool parseSucceed = int.TryParse(field, NumberStyles.Any, CultureInfo.InvariantCulture, out columnIndex);
+                        bool parseSucceed = int.TryParse(
+                            field,
+                            NumberStyles.Any,
+                            CultureInfo.InvariantCulture,
+                            out columnIndex
+                        );
 
                         if (parseSucceed)
                         {
-                            columnDataType = ((DataRow)enumerator.Current).Table.Columns[columnIndex].DataType;
+                            columnDataType = ((DataRow)enumerator.Current).Table.Columns[
+                                columnIndex
+                            ].DataType;
                             failed = false;
                         }
                         else
@@ -1400,28 +1580,28 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
 
-                    if(failed)
+                    if (failed)
                     {
-                        throw(new ArgumentException( SR.ExceptionColumnNameNotFound(field)));
+                        throw (new ArgumentException(SR.ExceptionColumnNameNotFound(field)));
                     }
-                    
                 }
-                else if(((DataRow)enumerator.Current).Table.Columns.Count > 0)
+                else if (((DataRow)enumerator.Current).Table.Columns.Count > 0)
                 {
                     columnDataType = ((DataRow)enumerator.Current).Table.Columns[0].DataType;
                 }
             }
-
             // If original object is DataRowView
-            else if(enumerator.Current is DataRowView)
+            else if (enumerator.Current is DataRowView)
             {
-                if(field != null && field.Length > 0)
+                if (field != null && field.Length > 0)
                 {
                     // Check if specified column exist
-                    bool    failed = true;
-                    if(((DataRowView)enumerator.Current).DataView.Table.Columns.Contains(field))
+                    bool failed = true;
+                    if (((DataRowView)enumerator.Current).DataView.Table.Columns.Contains(field))
                     {
-                        columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[field].DataType;
+                        columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[
+                            field
+                        ].DataType;
                         failed = false;
                     }
 
@@ -1429,10 +1609,18 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (failed)
                     {
                         int columnIndex;
-                        bool parseSucceed = int.TryParse(field, NumberStyles.Any, CultureInfo.InvariantCulture, out columnIndex);
+                        bool parseSucceed = int.TryParse(
+                            field,
+                            NumberStyles.Any,
+                            CultureInfo.InvariantCulture,
+                            out columnIndex
+                        );
                         if (parseSucceed)
                         {
-                            columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[columnIndex].DataType;
+                            columnDataType = ((DataRowView)enumerator.Current)
+                                .DataView
+                                .Table
+                                .Columns[columnIndex].DataType;
                             failed = false;
                         }
                         else
@@ -1441,50 +1629,58 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
 
-                    if(failed)
+                    if (failed)
                     {
-                        throw(new ArgumentException(SR.ExceptionColumnNameNotFound(field)));
+                        throw (new ArgumentException(SR.ExceptionColumnNameNotFound(field)));
                     }
-                    
                 }
-                else if(((DataRowView)enumerator.Current).DataView.Table.Columns.Count > 0)
+                else if (((DataRowView)enumerator.Current).DataView.Table.Columns.Count > 0)
                 {
-                    columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[0].DataType;
+                    columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[
+                        0
+                    ].DataType;
                 }
             }
-            
             // If original object is DbDataRecord
-            else if(enumerator.Current is DbDataRecord)
+            else if (enumerator.Current is DbDataRecord)
             {
-                if(field != null && field.Length > 0)
+                if (field != null && field.Length > 0)
                 {
-                    bool    failed = true;
+                    bool failed = true;
                     int columnIndex = 0;
-                    if(!Char.IsNumber(field, 0))
+                    if (!Char.IsNumber(field, 0))
                     {
                         columnIndex = ((DbDataRecord)enumerator.Current).GetOrdinal(field);
-                        columnDataType = ((DbDataRecord)enumerator.Current).GetFieldType(columnIndex);
+                        columnDataType = ((DbDataRecord)enumerator.Current).GetFieldType(
+                            columnIndex
+                        );
                         failed = false;
                     }
 
                     // Try to treat field as column number
                     if (failed)
                     {
-                        failed = !int.TryParse(field, NumberStyles.Any, CultureInfo.InvariantCulture, out columnIndex);
+                        failed = !int.TryParse(
+                            field,
+                            NumberStyles.Any,
+                            CultureInfo.InvariantCulture,
+                            out columnIndex
+                        );
 
                         if (!failed)
                         {
-                            columnDataType = ((DbDataRecord)enumerator.Current).GetFieldType(columnIndex);
+                            columnDataType = ((DbDataRecord)enumerator.Current).GetFieldType(
+                                columnIndex
+                            );
                         }
                     }
 
-                    if(failed)
+                    if (failed)
                     {
-                        throw(new ArgumentException(SR.ExceptionColumnNameNotFound(field)));
+                        throw (new ArgumentException(SR.ExceptionColumnNameNotFound(field)));
                     }
-                    
                 }
-                else if(((DbDataRecord)enumerator.Current).FieldCount > 0)
+                else if (((DbDataRecord)enumerator.Current).FieldCount > 0)
                 {
                     columnDataType = ((DbDataRecord)enumerator.Current).GetFieldType(0);
                 }
@@ -1494,22 +1690,24 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 if (field != null && field.Length > 0)
                 {
-                    PropertyDescriptor descriptor = TypeDescriptor.GetProperties(enumerator.Current).Find(field, true);
+                    PropertyDescriptor descriptor = TypeDescriptor
+                        .GetProperties(enumerator.Current)
+                        .Find(field, true);
                     if (descriptor != null)
                     {
                         columnDataType = descriptor.PropertyType;
                     }
                 }
-                if ( columnDataType == null )
+                if (columnDataType == null)
                 {
                     columnDataType = enumerator.Current.GetType();
                 }
             }
 
             // Use data type
-            if(columnDataType != null)
+            if (columnDataType != null)
             {
-                if(columnDataType == typeof(DateTime))
+                if (columnDataType == typeof(DateTime))
                     type = ChartValueType.DateTime;
                 else if (columnDataType == typeof(DateTimeOffset))
                     type = ChartValueType.DateTimeOffset;
@@ -1519,15 +1717,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     type = ChartValueType.Double;
                 else if (columnDataType == typeof(Int32))
                     type = ChartValueType.Int32;
-                else if(columnDataType == typeof(Int64))
+                else if (columnDataType == typeof(Int64))
                     type = ChartValueType.Int64;
-                else if(columnDataType == typeof(Single))
+                else if (columnDataType == typeof(Single))
                     type = ChartValueType.Single;
-                else if(columnDataType == typeof(String))
+                else if (columnDataType == typeof(String))
                     type = ChartValueType.String;
-                else if(columnDataType == typeof(UInt32))
+                else if (columnDataType == typeof(UInt32))
                     type = ChartValueType.UInt32;
-                else if(columnDataType == typeof(UInt64))
+                else if (columnDataType == typeof(UInt64))
                     type = ChartValueType.UInt64;
             }
 
@@ -1545,7 +1743,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="useValue">Which point value to use (X, Y1, Y2,...).</param>
         /// <param name="startIndex">Index of the point to start looking from.</param>
         /// <returns>Enumerator of datapoints.</returns>
-        public IEnumerable<DataPoint> FindAllByValue(double valueToFind, string useValue, int startIndex)
+        public IEnumerable<DataPoint> FindAllByValue(
+            double valueToFind,
+            string useValue,
+            int startIndex
+        )
         {
             // Loop through all points from specified index
             for (int i = startIndex; i < this.Count; i++)
@@ -1584,7 +1786,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Enumerator of datapoints.</returns>
         public IEnumerable<DataPoint> FindAllByValue(double valueToFind)
         {
-            return FindAllByValue(valueToFind, "Y"); 
+            return FindAllByValue(valueToFind, "Y");
         }
 
         /// <summary>
@@ -1652,8 +1854,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 throw new ArgumentOutOfRangeException("startIndex");
 
             bool isYValue = useValue.StartsWith("Y", StringComparison.OrdinalIgnoreCase);
-            double        maxValue = double.MinValue;
-            DataPoint   maxPoint = null;
+            double maxValue = double.MinValue;
+            DataPoint maxPoint = null;
 
             for (int i = startIndex; i < this.Count; i++)
             {
@@ -1688,7 +1890,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Find data point with the maximum value.
         /// </summary>
-       /// <returns>Datapoint with the maximum value.</returns>
+        /// <returns>Datapoint with the maximum value.</returns>
         public DataPoint FindMaxByValue()
         {
             return FindMaxByValue("Y");
@@ -1751,7 +1953,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         #endregion
-        
+
         #region Collection<T> overrides
 
         /// <summary>
@@ -1768,11 +1970,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Removes all elements from the <see cref="T:System.Collections.ObjectModel.Collection`1"/>.
         /// </summary>
-        protected override void  ClearItems()
+        protected override void ClearItems()
         {
-
             // Refresh Minimum and Maximum from data
-            // after recalc and set data            
+            // after recalc and set data
             if (Common != null && Common.ChartPicture != null)
             {
                 Common.ChartPicture.ResetMinMaxFromData();
@@ -1789,13 +1990,19 @@ namespace System.Web.UI.DataVisualization.Charting
     /// Stores values and properties of a DataPoint of a Series.
     /// </summary>
     [
-    SRDescription("DescriptionAttributeDataPoint_DataPoint"),
-    DefaultProperty("YValues"),
-    TypeConverter(Editors.DataPointConverter.Convertor)
+        SRDescription("DescriptionAttributeDataPoint_DataPoint"),
+        DefaultProperty("YValues"),
+        TypeConverter(Editors.DataPointConverter.Convertor)
     ]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
 #if !Microsoft_CONTROL
     [Themeable(false)]
@@ -1805,13 +2012,13 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Fields
 
         // Point X value
-        private    double        _xValue;
+        private double _xValue;
 
         // Point Y values
-        private    double[]    _yValue = new double[1];
+        private double[] _yValue = new double[1];
 
         // Pre calculated (during painting) relative position of data point
-        internal PointF        positionRel = PointF.Empty;
+        internal PointF positionRel = PointF.Empty;
 
         // VSTS:199794 - Accessibility needs the last rendered label content to be exposed.
         // The current label content evaluation is scattered over different chart types and cannot be isolated without risk of regression.
@@ -1825,7 +2032,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// DataPoint object constructor.
         /// </summary>
-        public DataPoint() : base(null, true)
+        public DataPoint()
+            : base(null, true)
         {
             _yValue = new double[1];
         }
@@ -1834,7 +2042,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// DataPoint object constructor.
         /// </summary>
         /// <param name="series">series object, which the DataPoint belongs to.</param>
-        public DataPoint(Series series) : base(series, true)
+        public DataPoint(Series series)
+            : base(series, true)
         {
             // Create Y value(s) array
             _yValue = new double[series.YValuesPerPoint];
@@ -1846,8 +2055,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="xValue">X value.</param>
         /// <param name="yValue">Y value.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public DataPoint(double xValue, double yValue)
             : base(null, true)
         {
@@ -1864,8 +2076,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="xValue">X value.</param>
         /// <param name="yValues">Array of Y values.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public DataPoint(double xValue, double[] yValues)
             : base(null, true)
         {
@@ -1884,8 +2099,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </remarks>
         /// <param name="xValue">X value.</param>
         /// <param name="yValues">String of comma separated Y values.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public DataPoint(double xValue, string yValues)
             : base(null, true)
@@ -1914,29 +2132,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="obj">Attribute value.</param>
         /// <param name="propertyName">Attribute name.</param>
         /// <param name="format">Value format.</param>
-        internal void SetPointCustomProperty(
-            object obj, 
-            string propertyName,
-            string format)
+        internal void SetPointCustomProperty(object obj, string propertyName, string format)
         {
             // Convert value to string
-            string    stringValue = obj as string;
-            if(stringValue == null)
+            string stringValue = obj as string;
+            if (stringValue == null)
             {
                 double doubleObj = double.NaN;
                 ChartValueType valueType = ChartValueType.Auto;
-                if(obj is DateTime)
+                if (obj is DateTime)
                 {
                     doubleObj = ((DateTime)obj).ToOADate();
                     valueType = ChartValueType.Date;
                 }
-                else 
+                else
                 {
                     doubleObj = this.ConvertValue(obj);
                 }
 
                 // Try converting to string
-                if( !double.IsNaN(doubleObj) )
+                if (!double.IsNaN(doubleObj))
                 {
                     try
                     {
@@ -1944,12 +2159,13 @@ namespace System.Web.UI.DataVisualization.Charting
                             this.Chart,
                             this,
                             this.Tag,
-                            doubleObj, 
-                            format, 
-                            valueType, 
-                            ChartElementType.DataPoint);
+                            doubleObj,
+                            format,
+                            valueType,
+                            ChartElementType.DataPoint
+                        );
                     }
-                    catch(FormatException)
+                    catch (FormatException)
                     {
                         // Use basic string converter
                         stringValue = obj.ToString();
@@ -1961,57 +2177,102 @@ namespace System.Web.UI.DataVisualization.Charting
                     stringValue = obj.ToString();
                 }
             }
-            
+
             // Assign data point attribute by name
-            if(stringValue.Length > 0)
+            if (stringValue.Length > 0)
             {
-                if(String.Compare(propertyName, "AxisLabel", StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    String.Compare(propertyName, "AxisLabel", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     this.AxisLabel = stringValue;
                 }
-                else if (String.Compare(propertyName, "Tooltip", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(propertyName, "Tooltip", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     this.ToolTip = stringValue;
                 }
 #if !Microsoft_CONTROL
-                else if(String.Compare(propertyName, "Url", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(propertyName, "Url", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     this.Url = stringValue;
                 }
-                else if (String.Compare(propertyName, "PostBackValue", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(
+                        propertyName,
+                        "PostBackValue",
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     this.PostBackValue = stringValue;
                 }
-                else if (String.Compare(propertyName, "LabelUrl", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(propertyName, "LabelUrl", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     this.LabelUrl = stringValue;
                 }
-                else if (String.Compare(propertyName, "LabelPostBackValue", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(
+                        propertyName,
+                        "LabelPostBackValue",
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     this.LabelPostBackValue = stringValue;
                 }
-                else if (String.Compare(propertyName, "LegendUrl", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(propertyName, "LegendUrl", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     this.LegendUrl = stringValue;
                 }
-                else if (String.Compare(propertyName, "LegendPostBackValue", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(
+                        propertyName,
+                        "LegendPostBackValue",
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     this.LegendPostBackValue = stringValue;
                 }
 #endif // !Microsoft_CONTROL
-                else if (String.Compare(propertyName, "Label", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(propertyName, "Label", StringComparison.OrdinalIgnoreCase) == 0
+                )
                 {
                     this.Label = stringValue;
                 }
-                else if (String.Compare(propertyName, "LegendTooltip", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(
+                        propertyName,
+                        "LegendTooltip",
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     this.LegendToolTip = stringValue;
                 }
-                else if (String.Compare(propertyName, "LegendText", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(propertyName, "LegendText", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     this.LegendText = stringValue;
                 }
-                else if (String.Compare(propertyName, "LabelToolTip", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    String.Compare(propertyName, "LabelToolTip", StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     this.LabelToolTip = stringValue;
                 }
@@ -2022,7 +2283,6 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
         /// <summary>
         /// Converts object to double.
         /// </summary>
@@ -2030,54 +2290,54 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Double value.</returns>
         private double ConvertValue(object value)
         {
-            if(value == null)
+            if (value == null)
             {
                 return 0;
             }
 
-            if(value is Double)
+            if (value is Double)
             {
                 return (double)value;
             }
-            else if(value is Single)
+            else if (value is Single)
             {
                 return (double)((float)value);
             }
-            else if(value is Decimal)
+            else if (value is Decimal)
             {
                 return (double)((Decimal)value);
             }
-            else if(value is Int32)
+            else if (value is Int32)
             {
                 return (double)((Int32)value);
             }
-            else if(value is UInt32)
+            else if (value is UInt32)
             {
                 return (double)((UInt32)value);
             }
-            else if(value is Int64)
+            else if (value is Int64)
             {
                 return (double)((Int64)value);
             }
-            else if(value is UInt64)
+            else if (value is UInt64)
             {
                 return (double)((UInt64)value);
             }
-            else if(value is Byte)
+            else if (value is Byte)
             {
                 return (double)((Byte)value);
             }
-            else if(value is SByte)
+            else if (value is SByte)
             {
                 return (double)((SByte)value);
             }
-            else if(value is Boolean)
+            else if (value is Boolean)
             {
-                return ((Boolean)value) ?  1.0 : 0.0;
+                return ((Boolean)value) ? 1.0 : 0.0;
             }
             else
             {
-                string    stringValue = "";
+                string stringValue = "";
                 stringValue = value.ToString();
                 return CommonElements.ParseDouble(stringValue);
             }
@@ -2088,8 +2348,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="xValue">X value of the data point.</param>
         /// <param name="yValue">List of Y values of the data point.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public void SetValueXY(object xValue, params object[] yValue)
         {
             // Check arguments
@@ -2100,60 +2363,62 @@ namespace System.Web.UI.DataVisualization.Charting
             SetValueY(yValue);
 
             // Check if parameters type matches with series type
-            Type    paramType = xValue.GetType();
-            if(base.series != null)
+            Type paramType = xValue.GetType();
+            if (base.series != null)
             {
                 base.series.CheckSupportedTypes(paramType);
             }
 
             // Save value in the array
-            if(paramType == typeof(String))
+            if (paramType == typeof(String))
             {
                 AxisLabel = (string)xValue;
             }
-            else if(paramType == typeof(DateTime))
+            else if (paramType == typeof(DateTime))
             {
                 this._xValue = ((DateTime)xValue).ToOADate();
             }
-            else 
+            else
             {
                 this._xValue = ConvertValue(xValue);
             }
 
             // Get Date or Time if required
-            if(base.series != null && xValue is DateTime)
+            if (base.series != null && xValue is DateTime)
             {
-                if(base.series.XValueType == ChartValueType.Date)
+                if (base.series.XValueType == ChartValueType.Date)
                 {
                     DateTime time = new DateTime(
-                        ((DateTime)xValue).Year, 
-                        ((DateTime)xValue).Month, 
-                        ((DateTime)xValue).Day, 
-                        0, 
-                        0, 
-                        0, 
-                        0);
+                        ((DateTime)xValue).Year,
+                        ((DateTime)xValue).Month,
+                        ((DateTime)xValue).Day,
+                        0,
+                        0,
+                        0,
+                        0
+                    );
                     this._xValue = time.ToOADate();
                 }
-                else if(base.series.XValueType == ChartValueType.Time)
+                else if (base.series.XValueType == ChartValueType.Time)
                 {
                     DateTime time = new DateTime(
-                        1899, 
-                        12, 
-                        30, 
-                        ((DateTime)xValue).Hour, 
-                        ((DateTime)xValue).Minute, 
-                        ((DateTime)xValue).Second, 
-                        ((DateTime)xValue).Millisecond);
+                        1899,
+                        12,
+                        30,
+                        ((DateTime)xValue).Hour,
+                        ((DateTime)xValue).Minute,
+                        ((DateTime)xValue).Second,
+                        ((DateTime)xValue).Millisecond
+                    );
                     this._xValue = time.ToOADate();
                 }
             }
 
             // Check if one of Y values are not avilable
-            bool    empty = false;
-            foreach(double d in this._yValue)
+            bool empty = false;
+            foreach (double d in this._yValue)
             {
-                if(double.IsNaN(d))
+                if (double.IsNaN(d))
                 {
                     empty = true;
                     break;
@@ -2161,10 +2426,10 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Set point empty flag and values to zero
-            if(empty)
+            if (empty)
             {
                 this.IsEmpty = true;
-                for(int valueIndex = 0; valueIndex < this._yValue.Length; valueIndex++)
+                for (int valueIndex = 0; valueIndex < this._yValue.Length; valueIndex++)
                 {
                     this._yValue[valueIndex] = 0.0;
                 }
@@ -2175,25 +2440,40 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Set one or more Y values of the data point.
         /// </summary>
         /// <param name="yValue">List of Y values of the data point.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "Y is a cartesian coordinate and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "Y is a cartesian coordinate and well understood"
+        )]
         public void SetValueY(params object[] yValue)
         {
             // Check arguments
             if (yValue == null)
                 throw new ArgumentNullException("yValue");
-            
-            // Check number of parameters. Should be more than 0 and 
-            if(yValue.Length == 0 || (base.series != null && yValue.Length > base.series.YValuesPerPoint))
-                throw(new ArgumentOutOfRangeException("yValue", SR.ExceptionDataPointYValuesSettingCountMismatch(base.series.YValuesPerPoint.ToString(System.Globalization.CultureInfo.InvariantCulture))));
+
+            // Check number of parameters. Should be more than 0 and
+            if (
+                yValue.Length == 0
+                || (base.series != null && yValue.Length > base.series.YValuesPerPoint)
+            )
+                throw (
+                    new ArgumentOutOfRangeException(
+                        "yValue",
+                        SR.ExceptionDataPointYValuesSettingCountMismatch(
+                            base.series.YValuesPerPoint.ToString(
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                        )
+                    )
+                );
 
             // Check if there is a Null Y value
-            for( int i = 0 ; i < yValue.Length ; i++ )
+            for (int i = 0; i < yValue.Length; i++)
             {
-                if(yValue[i] == null || yValue[i] is System.DBNull)
+                if (yValue[i] == null || yValue[i] is System.DBNull)
                 {
                     yValue[i] = 0.0;
-                    if(i == 0)
+                    if (i == 0)
                     {
                         this.IsEmpty = true;
                     }
@@ -2201,8 +2481,8 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Check if parameters type matches with series type
-            Type    paramType = yValue[0].GetType();
-            if(base.series != null)
+            Type paramType = yValue[0].GetType();
+            if (base.series != null)
             {
                 base.series.CheckSupportedTypes(paramType);
             }
@@ -2214,7 +2494,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Save value in the array
-            if(paramType == typeof(String))
+            if (paramType == typeof(String))
             {
                 try
                 {
@@ -2226,7 +2506,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 catch
                 {
                     // Get reference to the chart object
-                    if (Common!=null && Common.ChartPicture!=null && Common.ChartPicture.SuppressExceptions)
+                    if (
+                        Common != null
+                        && Common.ChartPicture != null
+                        && Common.ChartPicture.SuppressExceptions
+                    )
                     {
                         this.IsEmpty = true;
                         for (int i = 0; i < yValue.Length; i++)
@@ -2236,17 +2520,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                     else
                     {
-                        throw (new ArgumentException( SR.ExceptionDataPointYValueStringFormat));
+                        throw (new ArgumentException(SR.ExceptionDataPointYValueStringFormat));
                     }
                 }
-
             }
-            else if(paramType == typeof(DateTime))
+            else if (paramType == typeof(DateTime))
             {
-                for( int i = 0 ; i < yValue.Length ; i++ )
+                for (int i = 0; i < yValue.Length; i++)
                 {
-                    if(yValue[i] == null || 
-                        (yValue[i] is double && ((double)yValue[i]) == 0.0) )
+                    if (yValue[i] == null || (yValue[i] is double && ((double)yValue[i]) == 0.0))
                     {
                         this._yValue[i] = DateTime.Now.ToOADate();
                     }
@@ -2256,34 +2538,33 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                 }
             }
-            else 
+            else
             {
-                for( int i = 0 ; i < yValue.Length ; i++ )
+                for (int i = 0; i < yValue.Length; i++)
                 {
                     this._yValue[i] = ConvertValue(yValue[i]);
                 }
             }
 
             // Get Date or Time if required
-            if(base.series != null)
+            if (base.series != null)
             {
-                for( int i = 0 ; i < yValue.Length ; i++ )
+                for (int i = 0; i < yValue.Length; i++)
                 {
-                    if(yValue[i] == null || 
-                        (yValue[i] is double && ((double)yValue[i]) == 0.0) )
+                    if (yValue[i] == null || (yValue[i] is double && ((double)yValue[i]) == 0.0))
                     {
-                        if(base.series.YValueType == ChartValueType.Date)
+                        if (base.series.YValueType == ChartValueType.Date)
                         {
                             this._yValue[i] = Math.Floor(this._yValue[i]);
                         }
-                        else if(base.series.YValueType == ChartValueType.Time)
+                        else if (base.series.YValueType == ChartValueType.Time)
                         {
                             this._yValue[i] = this._xValue - Math.Floor(this._yValue[i]);
                         }
                     }
                     else
                     {
-                        if(base.series.YValueType == ChartValueType.Date)
+                        if (base.series.YValueType == ChartValueType.Date)
                         {
                             DateTime yDate;
                             if (yValue[i] is DateTime)
@@ -2294,41 +2575,42 @@ namespace System.Web.UI.DataVisualization.Charting
                                 yDate = Convert.ToDateTime(yValue[i], CultureInfo.InvariantCulture); //This will throw an exception in case when the yValue type is not compatible with the DateTime
 
                             DateTime date = new DateTime(
-                                yDate.Year, 
-                                yDate.Month, 
-                                yDate.Day, 
-                                0, 
-                                0, 
-                                0, 
-                                0);
+                                yDate.Year,
+                                yDate.Month,
+                                yDate.Day,
+                                0,
+                                0,
+                                0,
+                                0
+                            );
 
                             this._yValue[i] = date.ToOADate();
                         }
                         else if (base.series.YValueType == ChartValueType.Time)
                         {
                             DateTime yTime;
-                            if (yValue[i] is DateTime) 
+                            if (yValue[i] is DateTime)
                                 yTime = (DateTime)yValue[i];
-                            if (yValue[i] is Double)    
+                            if (yValue[i] is Double)
                                 yTime = DateTime.FromOADate((Double)yValue[i]);
                             else
                                 yTime = Convert.ToDateTime(yValue[i], CultureInfo.InvariantCulture); //This will throw an exception in case when the yValue type is not compatible with the DateTime
 
                             DateTime time = new DateTime(
-                                1899, 
-                                12, 
-                                30, 
+                                1899,
+                                12,
+                                30,
                                 yTime.Hour,
                                 yTime.Minute,
                                 yTime.Second,
-                                yTime.Millisecond);
+                                yTime.Millisecond
+                            );
 
                             this._yValue[i] = time.ToOADate();
                         }
                     }
                 }
             }
-
         }
 
         /// <summary>
@@ -2338,12 +2620,12 @@ namespace System.Web.UI.DataVisualization.Charting
         public DataPoint Clone()
         {
             // Create new data point
-            DataPoint    clonePoint = new DataPoint();
+            DataPoint clonePoint = new DataPoint();
 
             // Reset series pointer
             clonePoint.series = null;
             clonePoint.pointCustomProperties = this.pointCustomProperties;
-            
+
             // Copy values
             clonePoint._xValue = this.XValue;
             clonePoint._yValue = new double[this._yValue.Length];
@@ -2352,7 +2634,7 @@ namespace System.Web.UI.DataVisualization.Charting
             clonePoint.isEmptyPoint = this.isEmptyPoint;
 
             // Copy properties
-            foreach(object key in this.properties.Keys)
+            foreach (object key in this.properties.Keys)
             {
                 clonePoint.properties.Add(key, this.properties[key]);
             }
@@ -2367,12 +2649,12 @@ namespace System.Web.UI.DataVisualization.Charting
         internal void ResizeYValueArray(int newSize)
         {
             // Create new array
-            double[]    newArray = new Double[newSize];
+            double[] newArray = new Double[newSize];
 
             // Copy elements
-            if(_yValue != null)
+            if (_yValue != null)
             {
-                for(int i = 0; i < ((_yValue.Length < newSize) ? _yValue.Length : newSize); i++)
+                for (int i = 0; i < ((_yValue.Length < newSize) ? _yValue.Length : newSize); i++)
                 {
                     newArray[i] = _yValue[i];
                 }
@@ -2393,14 +2675,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 throw new ArgumentNullException("valueName");
 
             valueName = valueName.ToUpper(System.Globalization.CultureInfo.InvariantCulture);
-            if(String.Compare(valueName, "X", StringComparison.Ordinal) == 0)
+            if (String.Compare(valueName, "X", StringComparison.Ordinal) == 0)
             {
                 return this.XValue;
             }
             else if (valueName.StartsWith("Y", StringComparison.Ordinal))
-
             {
-                if(valueName.Length == 1)
+                if (valueName.Length == 1)
                 {
                     return this.YValues[0];
                 }
@@ -2409,21 +2690,40 @@ namespace System.Web.UI.DataVisualization.Charting
                     int yIndex = 0;
                     try
                     {
-                        yIndex = Int32.Parse(valueName.Substring(1), System.Globalization.CultureInfo.InvariantCulture) - 1;
+                        yIndex =
+                            Int32.Parse(
+                                valueName.Substring(1),
+                                System.Globalization.CultureInfo.InvariantCulture
+                            ) - 1;
                     }
-                    catch(System.Exception)
+                    catch (System.Exception)
                     {
-                        throw(new ArgumentException( SR.ExceptionDataPointValueNameInvalid, "valueName"));
+                        throw (
+                            new ArgumentException(
+                                SR.ExceptionDataPointValueNameInvalid,
+                                "valueName"
+                            )
+                        );
                     }
 
-                    if(yIndex < 0)
+                    if (yIndex < 0)
                     {
-                        throw(new ArgumentException( SR.ExceptionDataPointValueNameYIndexIsNotPositive, "valueName"));
+                        throw (
+                            new ArgumentException(
+                                SR.ExceptionDataPointValueNameYIndexIsNotPositive,
+                                "valueName"
+                            )
+                        );
                     }
 
-                    if(yIndex >= this.YValues.Length)
+                    if (yIndex >= this.YValues.Length)
                     {
-                        throw(new ArgumentException( SR.ExceptionDataPointValueNameYIndexOutOfRange, "valueName"));
+                        throw (
+                            new ArgumentException(
+                                SR.ExceptionDataPointValueNameYIndexOutOfRange,
+                                "valueName"
+                            )
+                        );
                     }
 
                     return this.YValues[yIndex];
@@ -2431,7 +2731,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             else
             {
-                throw(new ArgumentException( SR.ExceptionDataPointValueNameInvalid, "valueName"));
+                throw (new ArgumentException(SR.ExceptionDataPointValueNameInvalid, "valueName"));
             }
         }
 
@@ -2443,7 +2743,7 @@ namespace System.Web.UI.DataVisualization.Charting
         internal override string ReplaceKeywords(string strOriginal)
         {
             // Nothing to process
-            if(strOriginal == null || strOriginal.Length == 0)
+            if (strOriginal == null || strOriginal.Length == 0)
                 return strOriginal;
 
             // Replace all "\n" strings with '\n' character
@@ -2461,11 +2761,16 @@ namespace System.Web.UI.DataVisualization.Charting
 
             // #CUSTOMPROPERTY - one of the custom properties by name
             result = DataPoint.ReplaceCustomPropertyKeyword(result, this);
-            
-            if(this.series != null)
+
+            if (this.series != null)
             {
                 // #INDEX - point index
-                result = result.Replace(KeywordName.Index, this.series.Points.IndexOf(this).ToString(System.Globalization.CultureInfo.InvariantCulture));
+                result = result.Replace(
+                    KeywordName.Index,
+                    this.series.Points
+                        .IndexOf(this)
+                        .ToString(System.Globalization.CultureInfo.InvariantCulture)
+                );
 
                 // Replace series keywords
                 result = this.series.ReplaceKeywords(result);
@@ -2476,14 +2781,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     this,
                     this.Tag,
                     ChartElementType.DataPoint,
-                    result, 
-                    KeywordName.Percent, 
-                    (this.YValues[0]/(this.series.GetTotalYValue())), 
-                    ChartValueType.Double, 
-                    "P");
+                    result,
+                    KeywordName.Percent,
+                    (this.YValues[0] / (this.series.GetTotalYValue())),
+                    ChartValueType.Double,
+                    "P"
+                );
 
                 // #VAL[X] - point value X, Y, Y2, ...
-                if(this.series.XValueType == ChartValueType.String)
+                if (this.series.XValueType == ChartValueType.String)
                 {
                     result = result.Replace(KeywordName.ValX, this.AxisLabel);
                 }
@@ -2494,20 +2800,25 @@ namespace System.Web.UI.DataVisualization.Charting
                         this,
                         this.Tag,
                         ChartElementType.DataPoint,
-                        result, 
-                        KeywordName.ValX, 
-                        this.XValue, 
-                        this.series.XValueType, 
-                        "");
+                        result,
+                        KeywordName.ValX,
+                        this.XValue,
+                        this.series.XValueType,
+                        ""
+                    );
                 }
-                
+
                 // remove keywords #VAL? for unexisted Y value indices
                 for (int index = this.YValues.Length; index <= 7; index++)
                 {
-                    result = this.RemoveOneKeyword(result, KeywordName.ValY + index + 1, SR.FormatErrorString);
+                    result = this.RemoveOneKeyword(
+                        result,
+                        KeywordName.ValY + index + 1,
+                        SR.FormatErrorString
+                    );
                 }
 
-                for(int index = 1; index <= this.YValues.Length; index++)
+                for (int index = 1; index <= this.YValues.Length; index++)
                 {
                     result = this.series.ReplaceOneKeyword(
                         this.Chart,
@@ -2515,10 +2826,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         this.Tag,
                         ChartElementType.DataPoint,
                         result,
-                        KeywordName.ValY + index, 
-                        this.YValues[index - 1], 
-                        this.series.YValueType, 
-                        "");
+                        KeywordName.ValY + index,
+                        this.YValues[index - 1],
+                        this.series.YValueType,
+                        ""
+                    );
                 }
 
                 result = this.series.ReplaceOneKeyword(
@@ -2527,21 +2839,23 @@ namespace System.Web.UI.DataVisualization.Charting
                     this.Tag,
                     ChartElementType.DataPoint,
                     result,
-                    KeywordName.ValY, 
-                    this.YValues[0], 
-                    this.series.YValueType, 
-                    "");
+                    KeywordName.ValY,
+                    this.YValues[0],
+                    this.series.YValueType,
+                    ""
+                );
 
                 result = this.series.ReplaceOneKeyword(
                     Chart,
                     this,
                     this.Tag,
                     ChartElementType.DataPoint,
-                    result, 
-                    KeywordName.Val, 
-                    this.YValues[0], 
-                    this.series.YValueType, 
-                    "");
+                    result,
+                    KeywordName.Val,
+                    this.YValues[0],
+                    this.series.YValueType,
+                    ""
+                );
             }
 
             return result;
@@ -2567,7 +2881,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     int formatEnd = result.IndexOf('}', keyEndIndex);
                     if (formatEnd == -1)
                     {
-                        throw (new InvalidOperationException(SR.ExceptionDataSeriesKeywordFormatInvalid(result)));
+                        throw (
+                            new InvalidOperationException(
+                                SR.ExceptionDataSeriesKeywordFormatInvalid(result)
+                            )
+                        );
                     }
 
                     keyEndIndex = formatEnd + 1;
@@ -2582,19 +2900,28 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-
         /// <summary>
-        /// Replaces all "#CUSTOMPROPERTY(XXX)" (where XXX is the custom attribute name) 
-        /// keywords in the string provided. 
+        /// Replaces all "#CUSTOMPROPERTY(XXX)" (where XXX is the custom attribute name)
+        /// keywords in the string provided.
         /// </summary>
         /// <param name="originalString">String where the keyword need to be replaced.</param>
         /// <param name="properties">DataPoint or Series properties class.</param>
         /// <returns>Converted string.</returns>
-        internal static string ReplaceCustomPropertyKeyword(string originalString, DataPointCustomProperties properties)
+        internal static string ReplaceCustomPropertyKeyword(
+            string originalString,
+            DataPointCustomProperties properties
+        )
         {
             string result = originalString;
             int keyStartIndex = -1;
-            while ((keyStartIndex = result.IndexOf(KeywordName.CustomProperty, StringComparison.Ordinal)) >= 0)
+            while (
+                (
+                    keyStartIndex = result.IndexOf(
+                        KeywordName.CustomProperty,
+                        StringComparison.Ordinal
+                    )
+                ) >= 0
+            )
             {
                 string attributeValue = string.Empty;
                 string attributeName = string.Empty;
@@ -2613,7 +2940,10 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (closingBracketIndex >= keyEndIndex)
                     {
                         keyEndIndex = closingBracketIndex + 1;
-                        attributeName = result.Substring(attributeNameStartIndex, keyEndIndex - attributeNameStartIndex - 1);
+                        attributeName = result.Substring(
+                            attributeNameStartIndex,
+                            keyEndIndex - attributeNameStartIndex - 1
+                        );
 
                         // Get attribute value
                         if (properties.IsCustomPropertySet(attributeName))
@@ -2628,7 +2958,9 @@ namespace System.Web.UI.DataVisualization.Charting
                             {
                                 if (dataPoint.series.IsCustomPropertySet(attributeName))
                                 {
-                                    attributeValue = dataPoint.series.GetCustomProperty(attributeName);
+                                    attributeValue = dataPoint.series.GetCustomProperty(
+                                        attributeName
+                                    );
                                 }
                             }
                         }
@@ -2686,20 +3018,15 @@ namespace System.Web.UI.DataVisualization.Charting
             SRDescription("DescriptionAttributeDataPoint_XValue"),
             TypeConverter(typeof(DataPointValueConverter)),
             DefaultValue(typeof(double), "0.0"),
-
-
 #if Microsoft_CONTROL
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), 
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
 #else
             PersistenceMode(PersistenceMode.Attribute)
 #endif
         ]
-        public    double XValue
+        public double XValue
         {
-            get
-            {
-                return _xValue;
-            }
+            get { return _xValue; }
             set
             {
                 _xValue = value;
@@ -2714,9 +3041,8 @@ namespace System.Web.UI.DataVisualization.Charting
             SRCategory("CategoryAttributeData"),
             SRDescription("DescriptionAttributeDataPoint_YValues"),
             Bindable(true),
-
 #if Microsoft_CONTROL
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), 
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
 #else
             PersistenceMode(PersistenceMode.Attribute),
 #endif
@@ -2726,18 +3052,15 @@ namespace System.Web.UI.DataVisualization.Charting
             SerializationVisibilityAttribute(SerializationVisibility.Attribute)
         ]
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-        public    double[] YValues
+        public double[] YValues
         {
-            get
-            {
-                return _yValue;
-            }
+            get { return _yValue; }
             set
-            {    
-                if(value == null)
+            {
+                if (value == null)
                 {
                     // Clear array data
-                    for(int i=0; i < _yValue.Length; i++)
+                    for (int i = 0; i < _yValue.Length; i++)
                     {
                         _yValue[i] = 0;
                     }
@@ -2754,21 +3077,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A flag which indicates whether the data point is empty.
         /// </summary>
         [
-        SRCategory("CategoryAttributeData"),
-
-        Bindable(true),
-        SRDescription("DescriptionAttributeDataPoint_Empty"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        DefaultValue(false)
+            SRCategory("CategoryAttributeData"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeDataPoint_Empty"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            DefaultValue(false)
         ]
-        public    bool IsEmpty
+        public bool IsEmpty
         {
-            get
-            {
-                return base.isEmptyPoint;
-            }
+            get { return base.isEmptyPoint; }
             set
             {
                 base.isEmptyPoint = value;
@@ -2780,19 +3099,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Name of the data point. This field is reserved for internal use only.
         /// </summary>
         [
-        SRCategory("CategoryAttributeData"),
-        Bindable(true),
-        Browsable(false),
-        SRDescription("DescriptionAttributeDataPoint_Name"),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden)
+            SRCategory("CategoryAttributeData"),
+            Bindable(true),
+            Browsable(false),
+            SRDescription("DescriptionAttributeDataPoint_Name"),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden)
         ]
         public override string Name
         {
-            get
-            {
-                return "DataPoint";
-            }
+            get { return "DataPoint"; }
             set
             {
                 //Dont call the base method - the names don't need to be unique
@@ -2800,23 +3116,28 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         #endregion
-
     }
 
     /// <summary>
     /// Stores properties of one Data Point and Data series.
     /// </summary>
     [
-    SRDescription("DescriptionAttributeDataPointCustomProperties_DataPointCustomProperties"),
-    DefaultProperty("LabelStyle"),
-    TypeConverter(Editors.DataPointCustomPropertiesConverter.Convertor)
+        SRDescription("DescriptionAttributeDataPointCustomProperties_DataPointCustomProperties"),
+        DefaultProperty("LabelStyle"),
+        TypeConverter(Editors.DataPointCustomPropertiesConverter.Convertor)
     ]
 #if Microsoft_CONTROL
     public class DataPointCustomProperties : ChartNamedElement
 #else
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class DataPointCustomProperties : ChartNamedElement, IChartMapArea
 #endif
@@ -2824,22 +3145,22 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Fields and enumerations
 
         // True indicates data point properties. Otherwise - series.
-        internal        bool            pointCustomProperties = true;
+        internal bool pointCustomProperties = true;
 
         // Reference to the data point series
-        internal        Series            series = null;
+        internal Series series = null;
 
         // Storage for the custom properties names/values
-        internal        Hashtable    properties = new Hashtable();
+        internal Hashtable properties = new Hashtable();
 
         // Flag indicating that temp. color was set
-        internal bool    tempColorIsSet = false;
+        internal bool tempColorIsSet = false;
 
         // Design time custom properties data
         internal CustomProperties customProperties = null;
 
         // IsEmpty point indicator
-        internal bool    isEmptyPoint = false;
+        internal bool isEmptyPoint = false;
 
         #endregion
 
@@ -2860,7 +3181,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="series">The series which the data point belongs to.</param>
         /// <param name="pointProperties">Indicates whether this is a data point custom properties.</param>
-        public DataPointCustomProperties(Series series, bool pointProperties): base( series, String.Empty)
+        public DataPointCustomProperties(Series series, bool pointProperties)
+            : base(series, String.Empty)
         {
             // Initialize the data series
             this.series = series;
@@ -2898,18 +3220,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="name">Name of the property to delete.</param>
         virtual public void DeleteCustomProperty(string name)
         {
-            if(name == null) 
+            if (name == null)
             {
                 throw (new ArgumentNullException(SR.ExceptionAttributeNameIsEmpty));
             }
 
             // Check if trying to delete the common attribute
-            string[] AttributesNames = CommonCustomProperties.GetNames(typeof(CommonCustomProperties));
-            foreach(string commonName in AttributesNames)
+            string[] AttributesNames = CommonCustomProperties.GetNames(
+                typeof(CommonCustomProperties)
+            );
+            foreach (string commonName in AttributesNames)
             {
-                if(name == commonName)
+                if (name == commonName)
                 {
-                    DeleteCustomProperty((CommonCustomProperties)Enum.Parse(typeof(CommonCustomProperties), commonName));
+                    DeleteCustomProperty(
+                        (CommonCustomProperties)
+                            Enum.Parse(typeof(CommonCustomProperties), commonName)
+                    );
                 }
             }
 
@@ -2924,9 +3251,9 @@ namespace System.Web.UI.DataVisualization.Charting
         internal void DeleteCustomProperty(CommonCustomProperties property)
         {
             // Check if trying to delete the common attribute from the series
-            if(!this.pointCustomProperties)
+            if (!this.pointCustomProperties)
             {
-                throw(new ArgumentException( SR.ExceptionAttributeUnableToDelete));
+                throw (new ArgumentException(SR.ExceptionAttributeUnableToDelete));
             }
 
             // Remove attribute
@@ -2937,24 +3264,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets the data point custom property with the specified name.
         /// </summary>
         /// <param name="name">Name of the property to get.</param>
-        /// <returns>Returns the data point custom property with the specified name.  If the requested one is not set, 
+        /// <returns>Returns the data point custom property with the specified name.  If the requested one is not set,
         /// the default custom property of the data series will be returned.</returns>
         virtual public string GetCustomProperty(string name)
         {
-            if(!IsCustomPropertySet(name) && this.pointCustomProperties)
+            if (!IsCustomPropertySet(name) && this.pointCustomProperties)
             {
                 // Check if we are in serialization mode
-                bool    serializing = false;
+                bool serializing = false;
 
-                if(Chart != null && Chart.serializing)
+                if (Chart != null && Chart.serializing)
                 {
                     serializing = true;
                 }
 
-                if(!serializing)
+                if (!serializing)
                 {
-
-                    if(this.isEmptyPoint)
+                    if (this.isEmptyPoint)
                     {
                         // Return empty point properties from series
                         return (string)series.EmptyPointStyle.properties[name];
@@ -2973,7 +3299,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return (string)properties[name];
         }
 
-
         /// <summary>
         /// Checks if data is currently serialized.
         /// </summary>
@@ -2981,13 +3306,13 @@ namespace System.Web.UI.DataVisualization.Charting
         internal bool IsSerializing()
         {
             // Check if series object is provided
-            if(series == null)
+            if (series == null)
             {
                 return true;
             }
 
             // Check if we are in serialization mode
-            if(Chart != null)
+            if (Chart != null)
             {
                 return Chart.serializing;
             }
@@ -3006,24 +3331,24 @@ namespace System.Web.UI.DataVisualization.Charting
         internal object GetAttributeObject(CommonCustomProperties attrib)
         {
             // Get series properties
-            if(!this.pointCustomProperties || series == null)
+            if (!this.pointCustomProperties || series == null)
             {
                 return properties[(int)attrib];
             }
 
             // Get data point properties
-            if(properties.Count == 0 || !IsCustomPropertySet(attrib))
+            if (properties.Count == 0 || !IsCustomPropertySet(attrib))
             {
                 // Check if we are in serialization mode
-                bool    serializing = false;
-                if(Chart != null)
+                bool serializing = false;
+                if (Chart != null)
                 {
                     serializing = Chart.serializing;
                 }
 
-                if(!serializing)
+                if (!serializing)
                 {
-                    if(this.isEmptyPoint)
+                    if (this.isEmptyPoint)
                     {
                         // Return empty point properties from series
                         return series.EmptyPointStyle.properties[(int)attrib];
@@ -3042,7 +3367,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Sets a custom property of the data point. 
+        /// Sets a custom property of the data point.
         /// </summary>
         /// <param name="name">Property name.</param>
         /// <param name="propertyValue">Property value.</param>
@@ -3052,7 +3377,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Sets an attribute of the Data Point as an object. 
+        /// Sets an attribute of the Data Point as an object.
         /// </summary>
         /// <param name="attrib">Attribute name ID.</param>
         /// <param name="attributeValue">Attribute new value.</param>
@@ -3068,9 +3393,9 @@ namespace System.Web.UI.DataVisualization.Charting
         virtual public void SetDefault(bool clearAll)
         {
             // If setting defaults for the data series - clear all properties and initialize common one
-            if(!this.pointCustomProperties)
+            if (!this.pointCustomProperties)
             {
-                if(clearAll)
+                if (clearAll)
                 {
                     properties.Clear();
                 }
@@ -3078,59 +3403,76 @@ namespace System.Web.UI.DataVisualization.Charting
                 // !!! IMPORTANT !!!
                 // After changing the default value of the common attribute you must also
                 // change the DefaultAttribute of the property representing this attribute.
-                if(!IsCustomPropertySet(CommonCustomProperties.ToolTip))
+                if (!IsCustomPropertySet(CommonCustomProperties.ToolTip))
                     SetAttributeObject(CommonCustomProperties.ToolTip, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.LegendToolTip))
+                if (!IsCustomPropertySet(CommonCustomProperties.LegendToolTip))
                     SetAttributeObject(CommonCustomProperties.LegendToolTip, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.Color))
+                if (!IsCustomPropertySet(CommonCustomProperties.Color))
                     SetAttributeObject(CommonCustomProperties.Color, Color.Empty);
-                if(!IsCustomPropertySet(CommonCustomProperties.IsValueShownAsLabel))
+                if (!IsCustomPropertySet(CommonCustomProperties.IsValueShownAsLabel))
                     SetAttributeObject(CommonCustomProperties.IsValueShownAsLabel, false);
-                if(!IsCustomPropertySet(CommonCustomProperties.MarkerStyle))
+                if (!IsCustomPropertySet(CommonCustomProperties.MarkerStyle))
                     SetAttributeObject(CommonCustomProperties.MarkerStyle, MarkerStyle.None);
-                if(!IsCustomPropertySet(CommonCustomProperties.MarkerSize))
+                if (!IsCustomPropertySet(CommonCustomProperties.MarkerSize))
                     SetAttributeObject(CommonCustomProperties.MarkerSize, 5);
-                if(!IsCustomPropertySet(CommonCustomProperties.MarkerImage))
+                if (!IsCustomPropertySet(CommonCustomProperties.MarkerImage))
                     SetAttributeObject(CommonCustomProperties.MarkerImage, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.Label))
+                if (!IsCustomPropertySet(CommonCustomProperties.Label))
                     SetAttributeObject(CommonCustomProperties.Label, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.BorderWidth))
+                if (!IsCustomPropertySet(CommonCustomProperties.BorderWidth))
                     SetAttributeObject(CommonCustomProperties.BorderWidth, 1);
-                if(!IsCustomPropertySet(CommonCustomProperties.BorderDashStyle))
-                    SetAttributeObject(CommonCustomProperties.BorderDashStyle, ChartDashStyle.Solid);
+                if (!IsCustomPropertySet(CommonCustomProperties.BorderDashStyle))
+                    SetAttributeObject(
+                        CommonCustomProperties.BorderDashStyle,
+                        ChartDashStyle.Solid
+                    );
 
-
-                if(!IsCustomPropertySet(CommonCustomProperties.AxisLabel))
+                if (!IsCustomPropertySet(CommonCustomProperties.AxisLabel))
                     SetAttributeObject(CommonCustomProperties.AxisLabel, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.LabelFormat))
+                if (!IsCustomPropertySet(CommonCustomProperties.LabelFormat))
                     SetAttributeObject(CommonCustomProperties.LabelFormat, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.BorderColor))
+                if (!IsCustomPropertySet(CommonCustomProperties.BorderColor))
                     SetAttributeObject(CommonCustomProperties.BorderColor, Color.Empty);
-                if(!IsCustomPropertySet(CommonCustomProperties.BackImage))
+                if (!IsCustomPropertySet(CommonCustomProperties.BackImage))
                     SetAttributeObject(CommonCustomProperties.BackImage, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.BackImageWrapMode))
-                    SetAttributeObject(CommonCustomProperties.BackImageWrapMode, ChartImageWrapMode.Tile);
-                if(!IsCustomPropertySet(CommonCustomProperties.BackImageAlignment))
-                    SetAttributeObject(CommonCustomProperties.BackImageAlignment, ChartImageAlignmentStyle.TopLeft);
-                if(!IsCustomPropertySet(CommonCustomProperties.BackImageTransparentColor))
-                    SetAttributeObject(CommonCustomProperties.BackImageTransparentColor, Color.Empty);
-                if(!IsCustomPropertySet(CommonCustomProperties.BackGradientStyle))
-                    SetAttributeObject(CommonCustomProperties.BackGradientStyle, GradientStyle.None);
-                if(!IsCustomPropertySet(CommonCustomProperties.BackSecondaryColor))
+                if (!IsCustomPropertySet(CommonCustomProperties.BackImageWrapMode))
+                    SetAttributeObject(
+                        CommonCustomProperties.BackImageWrapMode,
+                        ChartImageWrapMode.Tile
+                    );
+                if (!IsCustomPropertySet(CommonCustomProperties.BackImageAlignment))
+                    SetAttributeObject(
+                        CommonCustomProperties.BackImageAlignment,
+                        ChartImageAlignmentStyle.TopLeft
+                    );
+                if (!IsCustomPropertySet(CommonCustomProperties.BackImageTransparentColor))
+                    SetAttributeObject(
+                        CommonCustomProperties.BackImageTransparentColor,
+                        Color.Empty
+                    );
+                if (!IsCustomPropertySet(CommonCustomProperties.BackGradientStyle))
+                    SetAttributeObject(
+                        CommonCustomProperties.BackGradientStyle,
+                        GradientStyle.None
+                    );
+                if (!IsCustomPropertySet(CommonCustomProperties.BackSecondaryColor))
                     SetAttributeObject(CommonCustomProperties.BackSecondaryColor, Color.Empty);
-                if(!IsCustomPropertySet(CommonCustomProperties.BackHatchStyle))
+                if (!IsCustomPropertySet(CommonCustomProperties.BackHatchStyle))
                     SetAttributeObject(CommonCustomProperties.BackHatchStyle, ChartHatchStyle.None);
-                if(!IsCustomPropertySet(CommonCustomProperties.Font))
+                if (!IsCustomPropertySet(CommonCustomProperties.Font))
                     SetAttributeObject(CommonCustomProperties.Font, null);
-                if(!IsCustomPropertySet(CommonCustomProperties.MarkerImageTransparentColor))
-                    SetAttributeObject(CommonCustomProperties.MarkerImageTransparentColor, Color.Empty);
-                if(!IsCustomPropertySet(CommonCustomProperties.MarkerColor))
+                if (!IsCustomPropertySet(CommonCustomProperties.MarkerImageTransparentColor))
+                    SetAttributeObject(
+                        CommonCustomProperties.MarkerImageTransparentColor,
+                        Color.Empty
+                    );
+                if (!IsCustomPropertySet(CommonCustomProperties.MarkerColor))
                     SetAttributeObject(CommonCustomProperties.MarkerColor, Color.Empty);
-                if(!IsCustomPropertySet(CommonCustomProperties.MarkerBorderColor))
+                if (!IsCustomPropertySet(CommonCustomProperties.MarkerBorderColor))
                     SetAttributeObject(CommonCustomProperties.MarkerBorderColor, Color.Empty);
-                if(!IsCustomPropertySet(CommonCustomProperties.MarkerBorderWidth))
+                if (!IsCustomPropertySet(CommonCustomProperties.MarkerBorderWidth))
                     SetAttributeObject(CommonCustomProperties.MarkerBorderWidth, 1);
-                if(!IsCustomPropertySet(CommonCustomProperties.MapAreaAttributes))
+                if (!IsCustomPropertySet(CommonCustomProperties.MapAreaAttributes))
                     SetAttributeObject(CommonCustomProperties.MapAreaAttributes, "");
                 if (!IsCustomPropertySet(CommonCustomProperties.PostBackValue))
                     SetAttributeObject(CommonCustomProperties.PostBackValue, "");
@@ -3141,35 +3483,37 @@ namespace System.Web.UI.DataVisualization.Charting
                     SetAttributeObject(CommonCustomProperties.LabelAngle, 0);
                 if (!IsCustomPropertySet(CommonCustomProperties.LabelToolTip))
                     SetAttributeObject(CommonCustomProperties.LabelToolTip, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.LabelUrl))
+                if (!IsCustomPropertySet(CommonCustomProperties.LabelUrl))
                     SetAttributeObject(CommonCustomProperties.LabelUrl, "");
                 if (!IsCustomPropertySet(CommonCustomProperties.LabelPostBackValue))
                     SetAttributeObject(CommonCustomProperties.LabelPostBackValue, "");
                 if (!IsCustomPropertySet(CommonCustomProperties.LabelMapAreaAttributes))
                     SetAttributeObject(CommonCustomProperties.LabelMapAreaAttributes, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.LabelBackColor))
+                if (!IsCustomPropertySet(CommonCustomProperties.LabelBackColor))
                     SetAttributeObject(CommonCustomProperties.LabelBackColor, Color.Empty);
-                if(!IsCustomPropertySet(CommonCustomProperties.LabelBorderWidth))
+                if (!IsCustomPropertySet(CommonCustomProperties.LabelBorderWidth))
                     SetAttributeObject(CommonCustomProperties.LabelBorderWidth, 1);
-                if(!IsCustomPropertySet(CommonCustomProperties.LabelBorderDashStyle))
-                    SetAttributeObject(CommonCustomProperties.LabelBorderDashStyle, ChartDashStyle.Solid);
-                if(!IsCustomPropertySet(CommonCustomProperties.LabelBorderColor))
+                if (!IsCustomPropertySet(CommonCustomProperties.LabelBorderDashStyle))
+                    SetAttributeObject(
+                        CommonCustomProperties.LabelBorderDashStyle,
+                        ChartDashStyle.Solid
+                    );
+                if (!IsCustomPropertySet(CommonCustomProperties.LabelBorderColor))
                     SetAttributeObject(CommonCustomProperties.LabelBorderColor, Color.Empty);
 
-                if(!IsCustomPropertySet(CommonCustomProperties.Url))
+                if (!IsCustomPropertySet(CommonCustomProperties.Url))
                     SetAttributeObject(CommonCustomProperties.Url, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.LegendUrl))
+                if (!IsCustomPropertySet(CommonCustomProperties.LegendUrl))
                     SetAttributeObject(CommonCustomProperties.LegendUrl, "");
                 if (!IsCustomPropertySet(CommonCustomProperties.LegendPostBackValue))
                     SetAttributeObject(CommonCustomProperties.LegendPostBackValue, "");
                 if (!IsCustomPropertySet(CommonCustomProperties.LegendText))
                     SetAttributeObject(CommonCustomProperties.LegendText, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.LegendMapAreaAttributes))
+                if (!IsCustomPropertySet(CommonCustomProperties.LegendMapAreaAttributes))
                     SetAttributeObject(CommonCustomProperties.LegendMapAreaAttributes, "");
-                if(!IsCustomPropertySet(CommonCustomProperties.IsVisibleInLegend))
+                if (!IsCustomPropertySet(CommonCustomProperties.IsVisibleInLegend))
                     SetAttributeObject(CommonCustomProperties.IsVisibleInLegend, true);
             }
-
             // If setting defaults for the data point - clear all properties
             else
             {
@@ -3190,9 +3534,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get
             {
                 int currentIndex = 0;
-                foreach(object key in properties.Keys)
+                foreach (object key in properties.Keys)
                 {
-                    if(currentIndex == index)
+                    if (currentIndex == index)
                     {
                         string keyStr = key as string;
                         if (keyStr != null)
@@ -3222,9 +3566,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get
             {
                 // If attribute is not set in data point - try getting it from the series
-                if(!IsCustomPropertySet(name) && this.pointCustomProperties)
+                if (!IsCustomPropertySet(name) && this.pointCustomProperties)
                 {
-                    if(this.isEmptyPoint)
+                    if (this.isEmptyPoint)
                     {
                         return (string)series.EmptyPointStyle.properties[name];
                     }
@@ -3244,33 +3588,36 @@ namespace System.Web.UI.DataVisualization.Charting
         /// The text of the data point label.
         /// </summary>
         [
-        Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        SRCategory("CategoryAttributeLabel"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeLabel"),
+            Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            SRCategory("CategoryAttributeLabel"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeLabel"),
         ]
         virtual public string Label
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.Label))
+                    if (properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.Label))
                     {
                         return (string)GetAttributeObject(CommonCustomProperties.Label);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.Label);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.Label
+                                );
                         }
 
                         return series.label;
@@ -3284,7 +3631,7 @@ namespace System.Web.UI.DataVisualization.Charting
             set
             {
                 // Replace NULL with empty string
-                if(value == null)
+                if (value == null)
                 {
                     value = string.Empty;
                 }
@@ -3302,37 +3649,42 @@ namespace System.Web.UI.DataVisualization.Charting
         /// The text of X axis label for the data point.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeAxisLabel"),
-        Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeAxisLabel"),
+            Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         virtual public string AxisLabel
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.AxisLabel))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.AxisLabel)
+                    )
                     {
                         return (string)GetAttributeObject(CommonCustomProperties.AxisLabel);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.AxisLabel);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.AxisLabel
+                                );
                         }
 
                         return series.axisLabel;
-
                     }
                 }
                 else
@@ -3343,18 +3695,18 @@ namespace System.Web.UI.DataVisualization.Charting
             set
             {
                 // Replace NULL with empty string
-                if(value == null)
+                if (value == null)
                 {
                     value = string.Empty;
                 }
 
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.AxisLabel, value);
                 else
                     series.axisLabel = value;
 
                 // Set flag that there are non-empy axis labels in series or points
-                if(value.Length > 0 && series != null)
+                if (value.Length > 0 && series != null)
                 {
                     series.noLabelsInPoints = false;
                 }
@@ -3367,33 +3719,38 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Format string of the data point label.
         /// </summary>
         [
-
-        SRCategory("CategoryAttributeLabel"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeLabelFormat"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
+            SRCategory("CategoryAttributeLabel"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeLabelFormat"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
         ]
         public string LabelFormat
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelFormat))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelFormat)
+                    )
                     {
                         return (string)GetAttributeObject(CommonCustomProperties.LabelFormat);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelFormat);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelFormat
+                                );
                         }
 
                         return series.labelFormat;
@@ -3407,12 +3764,12 @@ namespace System.Web.UI.DataVisualization.Charting
             set
             {
                 // Replace NULL with empty string
-                if(value == null)
+                if (value == null)
                 {
                     value = string.Empty;
                 }
 
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelFormat, value);
                 else
                     series.labelFormat = value;
@@ -3424,37 +3781,41 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A flag which indicates whether to show the data point's value on the label.
         /// </summary>
         [
-
-        SRCategory("CategoryAttributeLabel"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeShowLabelAsValue"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLabel"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeShowLabelAsValue"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public bool IsValueShownAsLabel
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.IsValueShownAsLabel))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.IsValueShownAsLabel)
+                    )
                     {
                         return (bool)GetAttributeObject(CommonCustomProperties.IsValueShownAsLabel);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return false;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (bool)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.IsValueShownAsLabel);
+                            return (bool)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.IsValueShownAsLabel
+                                );
                         }
 
                         return series.showLabelAsValue;
-
                     }
                 }
                 else
@@ -3464,46 +3825,49 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.IsValueShownAsLabel, value);
                 else
                     series.showLabelAsValue = value;
                 this.Invalidate(false);
             }
-        }        
+        }
 
         /// <summary>
         /// Color of the data point.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeColor4"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeColor4"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public Color Color
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.Color))
+                    if (properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.Color))
                     {
                         return (Color)GetAttributeObject(CommonCustomProperties.Color);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.Color);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.Color
+                                );
                         }
 
                         return series.color;
@@ -3519,13 +3883,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Remove the temp color flag
                 this.tempColorIsSet = false;
 
-                if(value == Color.Empty && this.pointCustomProperties)
+                if (value == Color.Empty && this.pointCustomProperties)
                 {
                     DeleteCustomProperty(CommonCustomProperties.Color);
                 }
                 else
                 {
-                    if(this.pointCustomProperties)
+                    if (this.pointCustomProperties)
                         SetAttributeObject(CommonCustomProperties.Color, value);
                     else
                         series.color = value;
@@ -3538,34 +3902,40 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Border color of the data point.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBorderColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBorderColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public Color BorderColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BorderColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BorderColor)
+                    )
                     {
                         return (Color)GetAttributeObject(CommonCustomProperties.BorderColor);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BorderColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BorderColor
+                                );
                         }
 
                         return series.borderColor;
@@ -3578,7 +3948,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BorderColor, value);
                 else
                     series.borderColor = value;
@@ -3590,36 +3960,43 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Border style of the data point.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBorderDashStyle"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBorderDashStyle"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public ChartDashStyle BorderDashStyle
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BorderDashStyle))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BorderDashStyle)
+                    )
                     {
-                        return (ChartDashStyle)GetAttributeObject(CommonCustomProperties.BorderDashStyle);
+                        return (ChartDashStyle)GetAttributeObject(
+                            CommonCustomProperties.BorderDashStyle
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return ChartDashStyle.Solid;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (ChartDashStyle)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BorderDashStyle);
+                            return (ChartDashStyle)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BorderDashStyle
+                                );
                         }
 
                         return series.borderDashStyle;
-
                     }
                 }
                 else
@@ -3629,7 +4006,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BorderDashStyle, value);
                 else
                     series.borderDashStyle = value;
@@ -3641,36 +4018,41 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Border width of the data point.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBorderWidth"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBorderWidth"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public int BorderWidth
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BorderWidth))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BorderWidth)
+                    )
                     {
                         return (int)GetAttributeObject(CommonCustomProperties.BorderWidth);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return 1;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (int)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BorderWidth);
+                            return (int)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BorderWidth
+                                );
                         }
 
                         return series.borderWidth;
-
                     }
                 }
                 else
@@ -3680,53 +4062,63 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionBorderWidthIsNotPositive));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionBorderWidthIsNotPositive
+                        )
+                    );
                 }
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BorderWidth, value);
                 else
                     series.borderWidth = value;
                 this.Invalidate(true);
             }
         }
-        
+
         /// <summary>
         /// Background image of the data point.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBackImage"),
-        Editor(Editors.ImageValueEditor.Editor, Editors.ImageValueEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBackImage"),
+            Editor(Editors.ImageValueEditor.Editor, Editors.ImageValueEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
         ]
         public string BackImage
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BackImage))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BackImage)
+                    )
                     {
                         return (string)GetAttributeObject(CommonCustomProperties.BackImage);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BackImage);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BackImage
+                                );
                         }
 
                         return series.backImage;
-
                     }
                 }
                 else
@@ -3737,14 +4129,14 @@ namespace System.Web.UI.DataVisualization.Charting
             set
             {
                 // Replace NULL with empty string
-                if(value == null)
+                if (value == null)
                 {
                     value = string.Empty;
                 }
 
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BackImage, value);
-                else 
+                else
                     series.backImage = value;
                 this.Invalidate(true);
             }
@@ -3754,39 +4146,46 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the drawing mode of the background image.
         /// </summary>
         /// <value>
-        /// A <see cref="ChartImageWrapMode"/> value that defines the drawing mode of the image. 
+        /// A <see cref="ChartImageWrapMode"/> value that defines the drawing mode of the image.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeImageWrapMode"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeImageWrapMode"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public ChartImageWrapMode BackImageWrapMode
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BackImageWrapMode))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BackImageWrapMode)
+                    )
                     {
-                        return (ChartImageWrapMode)GetAttributeObject(CommonCustomProperties.BackImageWrapMode);
+                        return (ChartImageWrapMode)GetAttributeObject(
+                            CommonCustomProperties.BackImageWrapMode
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return ChartImageWrapMode.Tile;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (ChartImageWrapMode)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BackImageWrapMode);
+                            return (ChartImageWrapMode)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BackImageWrapMode
+                                );
                         }
 
                         return series.backImageWrapMode;
-
                     }
                 }
                 else
@@ -3796,9 +4195,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BackImageWrapMode, value);
-                else 
+                else
                     series.backImageWrapMode = value;
                 this.Invalidate(true);
             }
@@ -3811,39 +4210,46 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Color"/> value which will be replaced with a transparent color while drawing the image.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeImageTransparentColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeImageTransparentColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public Color BackImageTransparentColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BackImageTransparentColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BackImageTransparentColor)
+                    )
                     {
-                        return (Color)GetAttributeObject(CommonCustomProperties.BackImageTransparentColor);
+                        return (Color)GetAttributeObject(
+                            CommonCustomProperties.BackImageTransparentColor
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BackImageTransparentColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BackImageTransparentColor
+                                );
                         }
 
                         return series.backImageTransparentColor;
-
                     }
                 }
                 else
@@ -3853,49 +4259,56 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BackImageTransparentColor, value);
-                else 
+                else
                     series.backImageTransparentColor = value;
                 this.Invalidate(true);
             }
         }
 
         /// <summary>
-            /// Gets or sets the alignment of the background image which is used by ClampUnscale drawing mode.
+        /// Gets or sets the alignment of the background image which is used by ClampUnscale drawing mode.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        NotifyParentPropertyAttribute(true),
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            NotifyParentPropertyAttribute(true),
             SRDescription("DescriptionAttributeBackImageAlign"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public ChartImageAlignmentStyle BackImageAlignment
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BackImageAlignment))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BackImageAlignment)
+                    )
                     {
-                        return (ChartImageAlignmentStyle)GetAttributeObject(CommonCustomProperties.BackImageAlignment);
+                        return (ChartImageAlignmentStyle)GetAttributeObject(
+                            CommonCustomProperties.BackImageAlignment
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return ChartImageAlignmentStyle.TopLeft;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (ChartImageAlignmentStyle)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BackImageAlignment);
+                            return (ChartImageAlignmentStyle)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BackImageAlignment
+                                );
                         }
 
                         return series.backImageAlignment;
-
                     }
                 }
                 else
@@ -3905,9 +4318,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BackImageAlignment, value);
-                else 
+                else
                     series.backImageAlignment = value;
                 this.Invalidate(true);
             }
@@ -3917,37 +4330,44 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the background gradient style.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBackGradientStyle"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBackGradientStyle"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
         ]
         public GradientStyle BackGradientStyle
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BackGradientStyle))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BackGradientStyle)
+                    )
                     {
-                        return (GradientStyle)GetAttributeObject(CommonCustomProperties.BackGradientStyle);
+                        return (GradientStyle)GetAttributeObject(
+                            CommonCustomProperties.BackGradientStyle
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return GradientStyle.None;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (GradientStyle)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BackGradientStyle);
+                            return (GradientStyle)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BackGradientStyle
+                                );
                         }
 
                         return series.backGradientStyle;
-
                     }
                 }
                 else
@@ -3957,9 +4377,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BackGradientStyle, value);
-                else 
+                else
                     series.backGradientStyle = value;
                 this.Invalidate(true);
             }
@@ -3969,38 +4389,43 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the secondary background color.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBackSecondaryColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBackSecondaryColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public Color BackSecondaryColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BackSecondaryColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BackSecondaryColor)
+                    )
                     {
                         return (Color)GetAttributeObject(CommonCustomProperties.BackSecondaryColor);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BackSecondaryColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BackSecondaryColor
+                                );
                         }
 
                         return series.backSecondaryColor;
-
                     }
                 }
                 else
@@ -4010,9 +4435,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BackSecondaryColor, value);
-                else 
+                else
                     series.backSecondaryColor = value;
                 this.Invalidate(true);
             }
@@ -4022,37 +4447,44 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the background hatch style.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBackHatchStyle"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBackHatchStyle"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
         ]
         public ChartHatchStyle BackHatchStyle
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.BackHatchStyle))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.BackHatchStyle)
+                    )
                     {
-                        return (ChartHatchStyle)GetAttributeObject(CommonCustomProperties.BackHatchStyle);
+                        return (ChartHatchStyle)GetAttributeObject(
+                            CommonCustomProperties.BackHatchStyle
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return ChartHatchStyle.None;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (ChartHatchStyle)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.BackHatchStyle);
+                            return (ChartHatchStyle)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.BackHatchStyle
+                                );
                         }
 
                         return series.backHatchStyle;
-
                     }
                 }
                 else
@@ -4062,9 +4494,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.BackHatchStyle, value);
-                else 
+                else
                     series.backHatchStyle = value;
                 this.Invalidate(true);
             }
@@ -4074,32 +4506,32 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the font of the data point.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabelAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeFont"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLabelAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeFont"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public Font Font
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.Font))
+                    if (properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.Font))
                     {
                         Font font = GetAttributeObject(CommonCustomProperties.Font) as Font;
                         if (font != null)
                             return font;
                     }
 
-                    if(IsSerializing())
+                    if (IsSerializing())
                     {
                         return series.FontCache.DefaultFont;
                     }
-                    
-                    if(this.isEmptyPoint)
+
+                    if (this.isEmptyPoint)
                     {
                         return series.EmptyPointStyle.Font;
                     }
@@ -4113,9 +4545,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.Font, value);
-                else 
+                else
                     series.font = value;
                 this.Invalidate(false);
             }
@@ -4125,39 +4557,46 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the label color.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabelAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeFontColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLabelAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeFontColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public Color LabelForeColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelForeColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelForeColor)
+                    )
                     {
-                        Color color =  (Color)GetAttributeObject(CommonCustomProperties.LabelForeColor);
+                        Color color = (Color)GetAttributeObject(
+                            CommonCustomProperties.LabelForeColor
+                        );
                         return color;
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Black;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelForeColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelForeColor
+                                );
                         }
 
                         return series.fontColor;
-
                     }
                 }
                 else
@@ -4167,9 +4606,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelForeColor, value);
-                else 
+                else
                     series.fontColor = value;
                 this.Invalidate(false);
             }
@@ -4179,36 +4618,41 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the angle of the label.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabelAppearance"),
-        Bindable(true),
-        SRDescription(SR.Keys.DescriptionAttributeLabel_FontAngle),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
+            SRCategory("CategoryAttributeLabelAppearance"),
+            Bindable(true),
+            SRDescription(SR.Keys.DescriptionAttributeLabel_FontAngle),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
         ]
         public int LabelAngle
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelAngle))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelAngle)
+                    )
                     {
                         return (int)GetAttributeObject(CommonCustomProperties.LabelAngle);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return 0;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (int)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelAngle);
+                            return (int)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelAngle
+                                );
                         }
 
                         return series.fontAngle;
-
                     }
                 }
                 else
@@ -4218,13 +4662,13 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(value < -90 || value > 90)
+                if (value < -90 || value > 90)
                 {
                     throw (new ArgumentOutOfRangeException("value", SR.ExceptionAngleRangeInvalid));
                 }
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelAngle, value);
-                else 
+                else
                     series.fontAngle = value;
                 this.Invalidate(false);
             }
@@ -4234,38 +4678,43 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the marker style.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMarker"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMarkerStyle4"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        Editor(Editors.MarkerStyleEditor.Editor, Editors.MarkerStyleEditor.Base),
-        RefreshProperties(RefreshProperties.All)
+            SRCategory("CategoryAttributeMarker"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMarkerStyle4"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            Editor(Editors.MarkerStyleEditor.Editor, Editors.MarkerStyleEditor.Base),
+            RefreshProperties(RefreshProperties.All)
         ]
         public MarkerStyle MarkerStyle
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.MarkerStyle))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.MarkerStyle)
+                    )
                     {
                         return (MarkerStyle)GetAttributeObject(CommonCustomProperties.MarkerStyle);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return MarkerStyle.None;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (MarkerStyle)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.MarkerStyle);
+                            return (MarkerStyle)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.MarkerStyle
+                                );
                         }
 
                         return series.markerStyle;
-
                     }
                 }
                 else
@@ -4275,13 +4724,13 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.MarkerStyle, value);
-                else 
+                else
                     series.markerStyle = value;
 
                 Series thisSeries = this as Series;
-                if(thisSeries != null)
+                if (thisSeries != null)
                 {
                     thisSeries.tempMarkerStyleIsSet = false;
                 }
@@ -4293,37 +4742,42 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the size of the marker.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMarker"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMarkerSize"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        RefreshProperties(RefreshProperties.All)
+            SRCategory("CategoryAttributeMarker"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMarkerSize"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            RefreshProperties(RefreshProperties.All)
         ]
         public int MarkerSize
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.MarkerSize))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.MarkerSize)
+                    )
                     {
                         return (int)GetAttributeObject(CommonCustomProperties.MarkerSize);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return 5;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (int)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.MarkerSize);
+                            return (int)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.MarkerSize
+                                );
                         }
 
                         return series.markerSize;
-
                     }
                 }
                 else
@@ -4333,9 +4787,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.MarkerSize, value);
-                else 
+                else
                     series.markerSize = value;
                 this.Invalidate(true);
             }
@@ -4345,38 +4799,43 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the marker image.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMarker"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMarkerImage"),
-        Editor(Editors.ImageValueEditor.Editor, Editors.ImageValueEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        RefreshProperties(RefreshProperties.All)
+            SRCategory("CategoryAttributeMarker"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMarkerImage"),
+            Editor(Editors.ImageValueEditor.Editor, Editors.ImageValueEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            RefreshProperties(RefreshProperties.All)
         ]
         public string MarkerImage
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.MarkerImage))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.MarkerImage)
+                    )
                     {
                         return (string)GetAttributeObject(CommonCustomProperties.MarkerImage);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.MarkerImage);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.MarkerImage
+                                );
                         }
 
                         return series.markerImage;
-
                     }
                 }
                 else
@@ -4387,14 +4846,14 @@ namespace System.Web.UI.DataVisualization.Charting
             set
             {
                 // Replace NULL with empty string
-                if(value == null)
+                if (value == null)
                 {
                     value = string.Empty;
                 }
 
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.MarkerImage, value);
-                else 
+                else
                     series.markerImage = value;
                 this.Invalidate(true);
             }
@@ -4404,39 +4863,46 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the color which will be replaced with a transparent color while drawing the marker image.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMarker"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeImageTransparentColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        RefreshProperties(RefreshProperties.All)
+            SRCategory("CategoryAttributeMarker"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeImageTransparentColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            RefreshProperties(RefreshProperties.All)
         ]
         public Color MarkerImageTransparentColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.MarkerImageTransparentColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.MarkerImageTransparentColor)
+                    )
                     {
-                        return (Color)GetAttributeObject(CommonCustomProperties.MarkerImageTransparentColor);
+                        return (Color)GetAttributeObject(
+                            CommonCustomProperties.MarkerImageTransparentColor
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.MarkerImageTransparentColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.MarkerImageTransparentColor
+                                );
                         }
 
                         return series.markerImageTransparentColor;
-
                     }
                 }
                 else
@@ -4446,51 +4912,56 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.MarkerImageTransparentColor, value);
-                else 
+                else
                     series.markerImageTransparentColor = value;
                 this.Invalidate(true);
             }
         }
-        
+
         /// <summary>
         /// Gets or sets the marker color.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMarker"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMarkerColor3"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        RefreshProperties(RefreshProperties.All)
+            SRCategory("CategoryAttributeMarker"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMarkerColor3"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            RefreshProperties(RefreshProperties.All)
         ]
         public Color MarkerColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.MarkerColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.MarkerColor)
+                    )
                     {
                         return (Color)GetAttributeObject(CommonCustomProperties.MarkerColor);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.MarkerColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.MarkerColor
+                                );
                         }
 
                         return series.markerColor;
-
                     }
                 }
                 else
@@ -4500,51 +4971,56 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.MarkerColor, value);
-                else 
+                else
                     series.markerColor = value;
                 this.Invalidate(true);
             }
         }
-        
+
         /// <summary>
         /// Gets or sets the border color of the marker.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMarker"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMarkerBorderColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        #endif
-        RefreshProperties(RefreshProperties.All)
+            SRCategory("CategoryAttributeMarker"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMarkerBorderColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            RefreshProperties(RefreshProperties.All)
         ]
         public Color MarkerBorderColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.MarkerBorderColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.MarkerBorderColor)
+                    )
                     {
                         return (Color)GetAttributeObject(CommonCustomProperties.MarkerBorderColor);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.MarkerBorderColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.MarkerBorderColor
+                                );
                         }
 
                         return series.markerBorderColor;
-
                     }
                 }
                 else
@@ -4554,51 +5030,53 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.MarkerBorderColor, value);
-                else 
+                else
                     series.markerBorderColor = value;
                 this.Invalidate(true);
             }
         }
 
-
-
         /// <summary>
         /// Gets or sets the border width of the marker.
         /// </summary>
         [
-
-        SRCategory("CategoryAttributeMarker"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMarkerBorderWidth"),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeMarker"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMarkerBorderWidth"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public int MarkerBorderWidth
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.MarkerBorderWidth))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.MarkerBorderWidth)
+                    )
                     {
                         return (int)GetAttributeObject(CommonCustomProperties.MarkerBorderWidth);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return 1;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (int)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.MarkerBorderWidth);
+                            return (int)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.MarkerBorderWidth
+                                );
                         }
 
                         return series.markerBorderWidth;
-
                     }
                 }
                 else
@@ -4608,11 +5086,16 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionBorderWidthIsNotPositive));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionBorderWidthIsNotPositive
+                        )
+                    );
                 }
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.MarkerBorderWidth, value);
                 else
                     series.markerBorderWidth = value;
@@ -4620,71 +5103,71 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
-
         /// <summary>
         /// Gets or sets the extended custom properties of the data point.
-        /// Extended custom properties can be specified in the following format: 
-        /// AttrName1=Value1, AttrName2=Value2, ...  
+        /// Extended custom properties can be specified in the following format:
+        /// AttrName1=Value1, AttrName2=Value2, ...
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(false),
-        SRDescription("DescriptionAttributeCustomAttributesExtended"),
-        DefaultValue(null),
-        RefreshProperties(RefreshProperties.All),
-        NotifyParentPropertyAttribute(true),
-        DesignOnlyAttribute(true),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DisplayName("CustomProperties")
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(false),
+            SRDescription("DescriptionAttributeCustomAttributesExtended"),
+            DefaultValue(null),
+            RefreshProperties(RefreshProperties.All),
+            NotifyParentPropertyAttribute(true),
+            DesignOnlyAttribute(true),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DisplayName("CustomProperties")
         ]
         public CustomProperties CustomPropertiesExtended
         {
-            set
-            {
-                customProperties = value;
-            }
-            get
-            {
-                return customProperties;
-            }
+            set { customProperties = value; }
+            get { return customProperties; }
         }
 
         /// <summary>
         /// Gets or sets the custom properties of the data point.
-        /// Custom properties can be specified in the following format: 
-        /// AttrName1=Value1, AttrName2=Value2, ...  
+        /// Custom properties can be specified in the following format:
+        /// AttrName1=Value1, AttrName2=Value2, ...
         /// </summary>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        Browsable(false),
-        SRDescription("DescriptionAttributeCustomAttributesExtended"),
-        DefaultValue(""),
-        #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            Browsable(false),
+            SRDescription("DescriptionAttributeCustomAttributesExtended"),
+            DefaultValue(""),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public string CustomProperties
         {
             get
             {
                 // Save all custom properties in a string
-                string    result = "";
-                string[] attributesNames = CommonCustomProperties.GetNames(typeof(CommonCustomProperties));
-                for(int i = properties.Count - 1; i >= 0; i--)
+                string result = "";
+                string[] attributesNames = CommonCustomProperties.GetNames(
+                    typeof(CommonCustomProperties)
+                );
+                for (int i = properties.Count - 1; i >= 0; i--)
                 {
-                    if(this[i] != null)
+                    if (this[i] != null)
                     {
-                        string    attributeName = this[i];
+                        string attributeName = this[i];
 
                         // Check if attribute is custom
-                        bool    customAttribute = true;
-                        foreach(string name in attributesNames)
+                        bool customAttribute = true;
+                        foreach (string name in attributesNames)
                         {
-                            if(String.Compare(attributeName, name, StringComparison.OrdinalIgnoreCase) == 0)
+                            if (
+                                String.Compare(
+                                    attributeName,
+                                    name,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
+                            )
                             {
                                 customAttribute = false;
                                 break;
@@ -4692,13 +5175,15 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
 
                         // Add custom attribute to the string
-                        if(customAttribute && properties[attributeName] != null)
+                        if (customAttribute && properties[attributeName] != null)
                         {
-                            if(result.Length > 0)
+                            if (result.Length > 0)
                             {
                                 result += ", ";
                             }
-                            string attributeValue = properties[attributeName].ToString().Replace(",", "\\,");
+                            string attributeValue = properties[attributeName]
+                                .ToString()
+                                .Replace(",", "\\,");
                             attributeValue = attributeValue.Replace("=", "\\=");
 
                             result += attributeName + "=" + attributeValue;
@@ -4711,64 +5196,73 @@ namespace System.Web.UI.DataVisualization.Charting
             set
             {
                 // Replace NULL with empty string
-                if(value == null)
+                if (value == null)
                 {
                     value = string.Empty;
                 }
 
                 // Copy all common properties to the new collection
-                Hashtable    newAttributes = new Hashtable();
+                Hashtable newAttributes = new Hashtable();
                 Array enumValues = Enum.GetValues(typeof(CommonCustomProperties));
-                foreach(object val in enumValues)
+                foreach (object val in enumValues)
                 {
-                    if(IsCustomPropertySet((CommonCustomProperties)val))
+                    if (IsCustomPropertySet((CommonCustomProperties)val))
                     {
                         newAttributes[(int)val] = properties[(int)val];
                     }
                 }
-    
-                if(value.Length > 0)
+
+                if (value.Length > 0)
                 {
                     // Replace commas in value string
                     value = value.Replace("\\,", "\\x45");
                     value = value.Replace("\\=", "\\x46");
 
                     // Add new custom properties
-                    string[]    nameValueStrings = value.Split(',');
-                    foreach(string nameValue in nameValueStrings)
+                    string[] nameValueStrings = value.Split(',');
+                    foreach (string nameValue in nameValueStrings)
                     {
                         string[] values = nameValue.Split('=');
 
                         // Check format
-                        if(values.Length != 2)
+                        if (values.Length != 2)
                         {
-                            throw(new FormatException( SR.ExceptionAttributeInvalidFormat));
+                            throw (new FormatException(SR.ExceptionAttributeInvalidFormat));
                         }
-                        
+
                         // Check for empty name or value
                         values[0] = values[0].Trim();
                         values[1] = values[1].Trim();
-                        if(values[0].Length == 0)
+                        if (values[0].Length == 0)
                         {
-                            throw(new FormatException( SR.ExceptionAttributeInvalidFormat));
+                            throw (new FormatException(SR.ExceptionAttributeInvalidFormat));
                         }
 
                         // Check if value already defined
-                        foreach(object existingAttributeName in newAttributes.Keys)
+                        foreach (object existingAttributeName in newAttributes.Keys)
                         {
                             string existingAttributeNameStr = existingAttributeName as string;
                             if (existingAttributeNameStr != null)
                             {
-                                if (String.Compare(existingAttributeNameStr, values[0], StringComparison.OrdinalIgnoreCase) == 0)
+                                if (
+                                    String.Compare(
+                                        existingAttributeNameStr,
+                                        values[0],
+                                        StringComparison.OrdinalIgnoreCase
+                                    ) == 0
+                                )
                                 {
-                                    throw(new FormatException( SR.ExceptionAttributeNameIsNotUnique(values[0] ) ) );
+                                    throw (
+                                        new FormatException(
+                                            SR.ExceptionAttributeNameIsNotUnique(values[0])
+                                        )
+                                    );
                                 }
                             }
                         }
-                    
+
                         string newValue = values[1].Replace("\\x45", ",");
                         newAttributes[values[0]] = newValue.Replace("\\x46", "=");
-                        
                     }
                 }
                 properties = newAttributes;
@@ -4784,26 +5278,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Tooltip.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMapArea"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeToolTip"),
-        Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
+            SRCategory("CategoryAttributeMapArea"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeToolTip"),
+            Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
 #if !Microsoft_CONTROL
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute)
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute)
 #endif
         ]
         public string ToolTip
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.ToolTip, value);
-                else 
+                else
                     series.toolTip = value;
-                
+
 #if Microsoft_CONTROL
-                if(Chart != null && Chart.selection != null)
+                if (Chart != null && Chart.selection != null)
                 {
                     Chart.selection.enabledChecked = false;
                 }
@@ -4811,25 +5305,29 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.ToolTip))
+                    if (
+                        properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.ToolTip)
+                    )
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.ToolTip);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.ToolTip);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.ToolTip
+                                );
                         }
 
                         return series.toolTip;
-
                     }
                 }
                 else
@@ -4845,45 +5343,47 @@ namespace System.Web.UI.DataVisualization.Charting
         /// URL target of the area.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMapArea"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeUrl"),
-        DefaultValue(""),
+            SRCategory("CategoryAttributeMapArea"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeUrl"),
+            DefaultValue(""),
 #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
-        Editor(Editors.UrlValueEditor.Editor, Editors.UrlValueEditor.Base)
+            PersistenceMode(PersistenceMode.Attribute),
+            Editor(Editors.UrlValueEditor.Editor, Editors.UrlValueEditor.Base)
 #endif
         ]
         public string Url
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.Url, value);
-                else 
+                else
                     series.url = value;
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.Url))
+                    if (properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.Url))
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.Url);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.Url);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.Url
+                                );
                         }
 
                         return series.url;
-
                     }
                 }
                 else
@@ -4897,39 +5397,45 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Other attributes of the area.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMapArea"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMapAreaAttributes"),
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute),
-        Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base)
+            SRCategory("CategoryAttributeMapArea"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMapAreaAttributes"),
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute),
+            Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base)
         ]
         public string MapAreaAttributes
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.MapAreaAttributes, value);
-                else 
+                else
                     series.mapAreaAttributes = value;
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.MapAreaAttributes))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.MapAreaAttributes)
+                    )
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.MapAreaAttributes);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.MapAreaAttributes);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.MapAreaAttributes
+                                );
                         }
 
                         return series.mapAreaAttributes;
@@ -4950,13 +5456,16 @@ namespace System.Web.UI.DataVisualization.Charting
         [SRCategory(SR.Keys.CategoryAttributeMapArea)]
         [SRDescription(SR.Keys.DescriptionAttributePostBackValue)]
         [Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base)]
-        public string PostBackValue 
-        { 
+        public string PostBackValue
+        {
             get
             {
                 if (this.pointCustomProperties)
                 {
-                    if (properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.PostBackValue))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.PostBackValue)
+                    )
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.PostBackValue);
                     }
@@ -4968,7 +5477,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                         if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.PostBackValue);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.PostBackValue
+                                );
                         }
 
                         return series.postbackValue;
@@ -4987,11 +5499,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     series.postbackValue = value;
             }
         }
-
-
-        
-    
 #endif
+
         /// <summary>
         /// Replaces predefined keyword inside the string with their values.
         /// </summary>
@@ -5010,34 +5519,39 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Indicates whether the item is shown in the legend.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLegend"),
-
-        Bindable(true),
-        SRDescription("DescriptionAttributeShowInLegend"),
-        #if !Microsoft_CONTROL
-        DefaultValue(true),
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLegend"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeShowInLegend"),
+#if !Microsoft_CONTROL
+            DefaultValue(true),
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public bool IsVisibleInLegend
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.IsVisibleInLegend))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.IsVisibleInLegend)
+                    )
                     {
                         return (bool)GetAttributeObject(CommonCustomProperties.IsVisibleInLegend);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return true;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (bool)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.IsVisibleInLegend);
+                            return (bool)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.IsVisibleInLegend
+                                );
                         }
 
                         return series.showInLegend;
@@ -5050,54 +5564,60 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.IsVisibleInLegend, value);
-                else 
+                else
                     series.showInLegend = value;
                 this.Invalidate(true);
             }
-        }        
+        }
 
         /// <summary>
         /// Text of the item in the legend
         /// </summary>
         [
-        SRCategory("CategoryAttributeLegend"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeLegendText"),
-        Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
-        #if !Microsoft_CONTROL
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLegend"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeLegendText"),
+            Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
+#if !Microsoft_CONTROL
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public string LegendText
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LegendText, value);
-                else 
+                else
                     series.legendText = value;
                 this.Invalidate(true);
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LegendText))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LegendText)
+                    )
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.LegendText);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LegendText);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LegendText
+                                );
                         }
 
                         return series.legendText;
@@ -5114,26 +5634,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Tooltip of the item in the legend
         /// </summary>
         [
-        SRCategory("CategoryAttributeLegend"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeLegendToolTip"),
-        Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
-        #if !Microsoft_CONTROL
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLegend"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeLegendToolTip"),
+            Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
+#if !Microsoft_CONTROL
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public string LegendToolTip
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LegendToolTip, value);
-                else 
+                else
                     series.legendToolTip = value;
-                
+
 #if Microsoft_CONTROL
-                if(Chart != null && Chart.selection != null)
+                if (Chart != null && Chart.selection != null)
                 {
                     Chart.selection.enabledChecked = false;
                 }
@@ -5141,25 +5661,30 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LegendToolTip))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LegendToolTip)
+                    )
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.LegendToolTip);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LegendToolTip);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LegendToolTip
+                                );
                         }
 
                         return series.legendToolTip;
-
                     }
                 }
                 else
@@ -5169,41 +5694,45 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
-
         /// <summary>
         /// Background color of the data point label.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabelAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeLabelBackColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        DefaultValue(typeof(Color), ""),
+            SRCategory("CategoryAttributeLabelAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeLabelBackColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+            DefaultValue(typeof(Color), ""),
 #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public Color LabelBackColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelBackColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelBackColor)
+                    )
                     {
                         return (Color)GetAttributeObject(CommonCustomProperties.LabelBackColor);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelBackColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelBackColor
+                                );
                         }
 
                         return series.labelBackColor;
@@ -5216,7 +5745,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelBackColor, value);
                 else
                     series.labelBackColor = value;
@@ -5228,35 +5757,41 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Border color of the data point label.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabelAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBorderColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
-        DefaultValue(typeof(Color), ""),
+            SRCategory("CategoryAttributeLabelAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBorderColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base),
+            DefaultValue(typeof(Color), ""),
 #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public Color LabelBorderColor
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelBorderColor))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelBorderColor)
+                    )
                     {
                         return (Color)GetAttributeObject(CommonCustomProperties.LabelBorderColor);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return Color.Empty;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (Color)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelBorderColor);
+                            return (Color)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelBorderColor
+                                );
                         }
 
                         return series.labelBorderColor;
@@ -5269,7 +5804,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelBorderColor, value);
                 else
                     series.labelBorderColor = value;
@@ -5281,37 +5816,44 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Border style of the label.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabelAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeLabelBorderDashStyle"),
-        #if !Microsoft_CONTROL
-        DefaultValue(ChartDashStyle.Solid),
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLabelAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeLabelBorderDashStyle"),
+#if !Microsoft_CONTROL
+            DefaultValue(ChartDashStyle.Solid),
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public ChartDashStyle LabelBorderDashStyle
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelBorderDashStyle))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelBorderDashStyle)
+                    )
                     {
-                        return (ChartDashStyle)GetAttributeObject(CommonCustomProperties.LabelBorderDashStyle);
+                        return (ChartDashStyle)GetAttributeObject(
+                            CommonCustomProperties.LabelBorderDashStyle
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return ChartDashStyle.Solid;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (ChartDashStyle)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelBorderDashStyle);
+                            return (ChartDashStyle)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelBorderDashStyle
+                                );
                         }
 
                         return series.labelBorderDashStyle;
-
                     }
                 }
                 else
@@ -5321,7 +5863,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelBorderDashStyle, value);
                 else
                     series.labelBorderDashStyle = value;
@@ -5333,37 +5875,42 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Border width of the label.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabelAppearance"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeBorderWidth"),
-        #if !Microsoft_CONTROL
-        DefaultValue(1),
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLabelAppearance"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeBorderWidth"),
+#if !Microsoft_CONTROL
+            DefaultValue(1),
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public int LabelBorderWidth
         {
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelBorderWidth))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelBorderWidth)
+                    )
                     {
                         return (int)GetAttributeObject(CommonCustomProperties.LabelBorderWidth);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return 1;
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (int)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelBorderWidth);
+                            return (int)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelBorderWidth
+                                );
                         }
 
                         return series.labelBorderWidth;
-
                     }
                 }
                 else
@@ -5373,11 +5920,16 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
-                    throw(new ArgumentOutOfRangeException("value", SR.ExceptionLabelBorderIsNotPositive));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionLabelBorderIsNotPositive
+                        )
+                    );
                 }
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelBorderWidth, value);
                 else
                     series.labelBorderWidth = value;
@@ -5389,26 +5941,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Tooltip of the data point label.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabel"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeLabelToolTip"),
-        Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
-        #if !Microsoft_CONTROL
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute)
-        #endif
+            SRCategory("CategoryAttributeLabel"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeLabelToolTip"),
+            Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base),
+#if !Microsoft_CONTROL
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
         ]
         public string LabelToolTip
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelToolTip, value);
-                else 
+                else
                     series.labelToolTip = value;
-                
+
 #if Microsoft_CONTROL
-                if(Chart != null && Chart.selection != null)
+                if (Chart != null && Chart.selection != null)
                 {
                     Chart.selection.enabledChecked = false;
                 }
@@ -5416,25 +5968,30 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelToolTip))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelToolTip)
+                    )
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.LabelToolTip);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelToolTip);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelToolTip
+                                );
                         }
 
                         return series.labelToolTip;
-
                     }
                 }
                 else
@@ -5444,47 +6001,52 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
 #if !Microsoft_CONTROL
 
         /// <summary>
         /// URL target of the item in the legend.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLegend"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeLegendUrl"),
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute),
-        Editor(Editors.UrlValueEditor.Editor, Editors.UrlValueEditor.Base),
-        SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")
+            SRCategory("CategoryAttributeLegend"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeLegendUrl"),
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute),
+            Editor(Editors.UrlValueEditor.Editor, Editors.UrlValueEditor.Base),
+            SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")
         ]
         public string LegendUrl
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LegendUrl, value);
-                else 
+                else
                     series.legendUrl = value;
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LegendUrl))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LegendUrl)
+                    )
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.LegendUrl);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LegendUrl);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LegendUrl
+                                );
                         }
 
                         return series.legendUrl;
@@ -5505,43 +6067,50 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Other attributes of the legend map area.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLegend"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMapAreaAttributes"),
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute),
-        Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base)
+            SRCategory("CategoryAttributeLegend"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMapAreaAttributes"),
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute),
+            Editor(Editors.KeywordsStringEditor.Editor, Editors.KeywordsStringEditor.Base)
         ]
         public string LegendMapAreaAttributes
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LegendMapAreaAttributes, value);
-                else 
+                else
                     series.legendMapAreaAttributes = value;
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LegendMapAreaAttributes))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LegendMapAreaAttributes)
+                    )
                     {
-                        return (String)GetAttributeObject(CommonCustomProperties.LegendMapAreaAttributes);
+                        return (String)GetAttributeObject(
+                            CommonCustomProperties.LegendMapAreaAttributes
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LegendMapAreaAttributes);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LegendMapAreaAttributes
+                                );
                         }
 
                         return series.legendMapAreaAttributes;
-
                     }
                 }
                 else
@@ -5565,9 +6134,14 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 if (this.pointCustomProperties)
                 {
-                    if (properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LegendPostBackValue))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LegendPostBackValue)
+                    )
                     {
-                        return (String)GetAttributeObject(CommonCustomProperties.LegendPostBackValue);
+                        return (String)GetAttributeObject(
+                            CommonCustomProperties.LegendPostBackValue
+                        );
                     }
                     else
                     {
@@ -5577,7 +6151,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                         if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LegendPostBackValue);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LegendPostBackValue
+                                );
                         }
 
                         return series.legendPostbackValue;
@@ -5599,48 +6176,52 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #endif  // !Microsoft_CONTROL
 
-
-
 #if !Microsoft_CONTROL
 
         /// <summary>
         /// URL target of the data point label.
         /// </summary>
         [
-        SRCategory("CategoryAttributeMapArea"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeUrl"),
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute),
-        Editor(Editors.UrlValueEditor.Editor, Editors.UrlValueEditor.Base),
-        SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")
+            SRCategory("CategoryAttributeMapArea"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeUrl"),
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute),
+            Editor(Editors.UrlValueEditor.Editor, Editors.UrlValueEditor.Base),
+            SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")
         ]
         public string LabelUrl
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelUrl, value);
-                else 
+                else
                     series.labelUrl = value;
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelUrl))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelUrl)
+                    )
                     {
                         return (String)GetAttributeObject(CommonCustomProperties.LabelUrl);
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelUrl);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelUrl
+                                );
                         }
 
                         return series.labelUrl;
@@ -5661,42 +6242,49 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Other attributes of the data point label.
         /// </summary>
         [
-        SRCategory("CategoryAttributeLabel"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeMapAreaAttributes"),
-        DefaultValue(""),
-        PersistenceMode(PersistenceMode.Attribute)
+            SRCategory("CategoryAttributeLabel"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMapAreaAttributes"),
+            DefaultValue(""),
+            PersistenceMode(PersistenceMode.Attribute)
         ]
         public string LabelMapAreaAttributes
         {
             set
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                     SetAttributeObject(CommonCustomProperties.LabelMapAreaAttributes, value);
-                else 
+                else
                     series.labelMapAreaAttributes = value;
             }
             get
             {
-                if(this.pointCustomProperties)
+                if (this.pointCustomProperties)
                 {
-                    if(properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelMapAreaAttributes))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelMapAreaAttributes)
+                    )
                     {
-                        return (String)GetAttributeObject(CommonCustomProperties.LabelMapAreaAttributes);
+                        return (String)GetAttributeObject(
+                            CommonCustomProperties.LabelMapAreaAttributes
+                        );
                     }
                     else
                     {
-                        if(IsSerializing())
+                        if (IsSerializing())
                         {
                             return "";
                         }
-                        if(this.isEmptyPoint)
+                        if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelMapAreaAttributes);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelMapAreaAttributes
+                                );
                         }
 
                         return series.labelMapAreaAttributes;
-
                     }
                 }
                 else
@@ -5720,9 +6308,14 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 if (this.pointCustomProperties)
                 {
-                    if (properties.Count != 0 && IsCustomPropertySet(CommonCustomProperties.LabelPostBackValue))
+                    if (
+                        properties.Count != 0
+                        && IsCustomPropertySet(CommonCustomProperties.LabelPostBackValue)
+                    )
                     {
-                        return (String)GetAttributeObject(CommonCustomProperties.LabelPostBackValue);
+                        return (String)GetAttributeObject(
+                            CommonCustomProperties.LabelPostBackValue
+                        );
                     }
                     else
                     {
@@ -5732,7 +6325,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                         if (this.isEmptyPoint)
                         {
-                            return (string)series.EmptyPointStyle.GetAttributeObject(CommonCustomProperties.LabelPostBackValue);
+                            return (string)
+                                series.EmptyPointStyle.GetAttributeObject(
+                                    CommonCustomProperties.LabelPostBackValue
+                                );
                         }
 
                         return series.labelPostbackValue;
@@ -5752,10 +6348,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
 #endif // !Microsoft_CONTROL
-
-
 
         #endregion
 
@@ -5765,7 +6358,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         private bool CheckIfSerializationRequired(CommonCustomProperties attribute)
         {
-            if(this is DataPoint)
+            if (this is DataPoint)
             {
                 return IsCustomPropertySet(attribute);
             }
@@ -5773,33 +6366,36 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 object attr1 = this.GetAttributeObject(attribute);
                 object attr2 = Series.defaultCustomProperties.GetAttributeObject(attribute);
-                if(attr1 == null || attr2 == null)
+                if (attr1 == null || attr2 == null)
                 {
                     return false;
                 }
-                return ! attr1.Equals(attr2);
+                return !attr1.Equals(attr2);
             }
         }
 
         private void ResetProperty(CommonCustomProperties attribute)
         {
-            if(this is DataPoint)
+            if (this is DataPoint)
             {
                 DeleteCustomProperty(attribute);
             }
             else
             {
-                this.SetAttributeObject(attribute, Series.defaultCustomProperties.GetAttributeObject(attribute));
+                this.SetAttributeObject(
+                    attribute,
+                    Series.defaultCustomProperties.GetAttributeObject(attribute)
+                );
             }
         }
 
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabel()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.Label);
             else
                 return !String.IsNullOrEmpty(series.label);
@@ -5808,10 +6404,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeAxisLabel()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.AxisLabel);
             else
                 return !String.IsNullOrEmpty(series.axisLabel);
@@ -5820,10 +6416,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelFormat()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelFormat);
             else
                 return !String.IsNullOrEmpty(series.labelFormat);
@@ -5832,22 +6428,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeIsValueShownAsLabel()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.IsValueShownAsLabel);
             else
                 return series.showLabelAsValue != false;
-        }        
+        }
 
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.Color);
             else
                 return series.color != Color.Empty;
@@ -5856,10 +6452,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBorderColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BorderColor);
             else
                 return series.borderColor != Color.Empty;
@@ -5868,10 +6464,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBorderDashStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BorderDashStyle);
             else
                 return series.borderDashStyle != ChartDashStyle.Solid;
@@ -5880,10 +6476,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBorderWidth()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BorderWidth);
             else
                 return series.borderWidth != 1;
@@ -5892,22 +6488,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeMarkerBorderWidth()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.MarkerBorderWidth);
             else
                 return series.markerBorderWidth != 1;
         }
-        
+
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBackImage()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BackImage);
             else
                 return !String.IsNullOrEmpty(series.backImage);
@@ -5916,10 +6512,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBackImageWrapMode()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BackImageWrapMode);
             else
                 return series.backImageWrapMode != ChartImageWrapMode.Tile;
@@ -5928,11 +6524,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBackImageTransparentColor()
         {
-            if(this.pointCustomProperties)
-                return CheckIfSerializationRequired(CommonCustomProperties.BackImageTransparentColor);
+            if (this.pointCustomProperties)
+                return CheckIfSerializationRequired(
+                    CommonCustomProperties.BackImageTransparentColor
+                );
             else
                 return series.backImageTransparentColor != Color.Empty;
         }
@@ -5943,7 +6541,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         internal bool ShouldSerializeBackImageAlignment()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BackImageAlignment);
             else
                 return series.backImageAlignment != ChartImageAlignmentStyle.TopLeft;
@@ -5952,22 +6550,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBackGradientStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BackGradientStyle);
             else
                 return series.backGradientStyle != GradientStyle.None;
         }
-        
+
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBackSecondaryColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BackSecondaryColor);
             else
                 return series.backSecondaryColor != Color.Empty;
@@ -5976,10 +6574,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeBackHatchStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.BackHatchStyle);
             else
                 return series.backHatchStyle != ChartHatchStyle.None;
@@ -5988,10 +6586,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeFont()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.Font);
             else
             {
@@ -6004,7 +6602,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal bool ShouldSerializeLabelForeColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelForeColor);
             else
                 return series.fontColor != Color.Black;
@@ -6013,10 +6611,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelAngle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelAngle);
             else
                 return series.fontAngle != 0f;
@@ -6025,10 +6623,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeMarkerStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.MarkerStyle);
             else
                 return series.markerStyle != MarkerStyle.None;
@@ -6037,10 +6635,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeMarkerSize()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.MarkerSize);
             else
                 return series.markerSize != 5;
@@ -6049,10 +6647,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeMarkerImage()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.MarkerImage);
             else
                 return !String.IsNullOrEmpty(series.markerImage);
@@ -6061,11 +6659,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeMarkerImageTransparentColor()
         {
-            if(this.pointCustomProperties)
-                return CheckIfSerializationRequired(CommonCustomProperties.MarkerImageTransparentColor);
+            if (this.pointCustomProperties)
+                return CheckIfSerializationRequired(
+                    CommonCustomProperties.MarkerImageTransparentColor
+                );
             else
                 return series.markerImageTransparentColor != Color.Empty;
         }
@@ -6073,22 +6673,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeMarkerColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.MarkerColor);
             else
                 return series.markerColor != Color.Empty;
         }
-        
+
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeMarkerBorderColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.MarkerBorderColor);
             else
                 return series.markerBorderColor != Color.Empty;
@@ -6097,10 +6697,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeToolTip()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.ToolTip);
             else
                 return !String.IsNullOrEmpty(series.toolTip);
@@ -6111,10 +6711,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeUrl()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.Url);
             else
                 return !String.IsNullOrEmpty(series.url);
@@ -6123,10 +6723,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeMapAreaAttributes()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.MapAreaAttributes);
             else
                 return !String.IsNullOrEmpty(series.mapAreaAttributes);
@@ -6146,10 +6746,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLegendUrl()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LegendUrl);
             else
                 return !String.IsNullOrEmpty(series.legendUrl);
@@ -6158,24 +6758,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLegendMapAreaAttributes()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LegendMapAreaAttributes);
             else
                 return !String.IsNullOrEmpty(series.legendMapAreaAttributes);
         }
 
-
-
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelUrl()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelUrl);
             else
                 return !String.IsNullOrEmpty(series.labelUrl);
@@ -6184,38 +6782,35 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelMapAreaAttributes()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelMapAreaAttributes);
             else
                 return !String.IsNullOrEmpty(series.labelMapAreaAttributes);
         }
-
-
-
 #endif //    !Microsoft_CONTROL
 
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeIsVisibleInLegend()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.IsVisibleInLegend);
             else
                 return series.showInLegend != true;
-        }        
+        }
 
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLegendText()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LegendText);
             else
                 return !String.IsNullOrEmpty(series.legendText);
@@ -6224,24 +6819,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLegendToolTip()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LegendToolTip);
             else
                 return !String.IsNullOrEmpty(series.legendToolTip);
         }
 
-
-
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelToolTip()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelToolTip);
             else
                 return !String.IsNullOrEmpty(series.labelToolTip);
@@ -6250,10 +6843,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelBackColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelBackColor);
             else
                 return series.labelBackColor != Color.Empty;
@@ -6262,10 +6855,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelBorderColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelBorderColor);
             else
                 return series.labelBorderColor != Color.Empty;
@@ -6274,10 +6867,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelBorderDashStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelBorderDashStyle);
             else
                 return series.labelBorderDashStyle != ChartDashStyle.Solid;
@@ -6286,23 +6879,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Returns true if property should be serialized.
         /// </summary>
-        
+
         internal bool ShouldSerializeLabelBorderWidth()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 return CheckIfSerializationRequired(CommonCustomProperties.LabelBorderWidth);
             else
                 return series.labelBorderWidth != 1;
         }
 
-
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabel()
+
+        internal void ResetLabel()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.Label);
             else
                 series.label = "";
@@ -6311,10 +6903,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetAxisLabel()
+
+        internal void ResetAxisLabel()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.AxisLabel);
             else
                 series.axisLabel = "";
@@ -6323,10 +6915,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelFormat()
+
+        internal void ResetLabelFormat()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelFormat);
             else
                 series.labelFormat = "";
@@ -6335,22 +6927,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
+
         public void ResetIsValueShownAsLabel()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.IsValueShownAsLabel);
             else
                 series.IsValueShownAsLabel = false;
-        }        
+        }
 
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetColor()
+
+        internal void ResetColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.Color);
             else
                 series.color = Color.Empty;
@@ -6359,10 +6951,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetBorderColor()
+
+        internal void ResetBorderColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.BorderColor);
             else
                 series.borderColor = Color.Empty;
@@ -6371,10 +6963,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetBorderDashStyle()
+
+        internal void ResetBorderDashStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.BorderDashStyle);
             else
                 series.borderDashStyle = ChartDashStyle.Solid;
@@ -6383,38 +6975,34 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetBorderWidth()
+
+        internal void ResetBorderWidth()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.BorderWidth);
             else
                 series.borderWidth = 1;
         }
 
-
-
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetMarkerBorderWidth()
+
+        internal void ResetMarkerBorderWidth()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.MarkerBorderWidth);
             else
                 series.markerBorderWidth = 1;
         }
 
-
-
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetBackImage()
+
+        internal void ResetBackImage()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.BackImage);
             else
                 series.backImage = "";
@@ -6423,10 +7011,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetBackImageWrapMode()
+
+        internal void ResetBackImageWrapMode()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.BackImageWrapMode);
             else
                 series.backImageWrapMode = ChartImageWrapMode.Tile;
@@ -6435,10 +7023,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetBackImageTransparentColor()
+
+        internal void ResetBackImageTransparentColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.BackImageTransparentColor);
             else
                 series.backImageTransparentColor = Color.Empty;
@@ -6447,10 +7035,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetBackSecondaryColor()
+
+        internal void ResetBackSecondaryColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.BackSecondaryColor);
             else
                 series.backSecondaryColor = Color.Empty;
@@ -6459,10 +7047,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetBackHatchStyle()
+
+        internal void ResetBackHatchStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.BackHatchStyle);
             else
                 series.backHatchStyle = ChartHatchStyle.None;
@@ -6471,8 +7059,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetFont()
+
+        internal void ResetFont()
         {
             if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.Font);
@@ -6482,14 +7070,13 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelAngle()
+
+        internal void ResetLabelAngle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelAngle);
             else
                 series.fontAngle = 0;
@@ -6498,10 +7085,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetMarkerStyle()
+
+        internal void ResetMarkerStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.MarkerStyle);
             else
                 series.markerStyle = MarkerStyle.None;
@@ -6510,10 +7097,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetMarkerSize()
+
+        internal void ResetMarkerSize()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.MarkerSize);
             else
                 series.markerSize = 5;
@@ -6522,10 +7109,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetMarkerImage()
+
+        internal void ResetMarkerImage()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.MarkerImage);
             else
                 series.markerImage = "";
@@ -6534,10 +7121,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetMarkerImageTransparentColor()
+
+        internal void ResetMarkerImageTransparentColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.MarkerImageTransparentColor);
             else
                 series.markerImageTransparentColor = Color.Empty;
@@ -6546,22 +7133,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetMarkerColor()
+
+        internal void ResetMarkerColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.MarkerColor);
             else
                 series.markerColor = Color.Empty;
         }
-        
+
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetMarkerBorderColor()
+
+        internal void ResetMarkerBorderColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.MarkerBorderColor);
             else
                 series.markerBorderColor = Color.Empty;
@@ -6570,16 +7157,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetToolTip()
+
+        internal void ResetToolTip()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.ToolTip);
             else
                 series.toolTip = "";
 
 #if Microsoft_CONTROL
-            if(Chart != null && Chart.selection != null)
+            if (Chart != null && Chart.selection != null)
             {
                 Chart.selection.enabledChecked = false;
             }
@@ -6591,10 +7178,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetUrl()
+
+        internal void ResetUrl()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.Url);
             else
                 series.url = "";
@@ -6603,10 +7190,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetMapAreaAttributes()
+
+        internal void ResetMapAreaAttributes()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.MapAreaAttributes);
             else
                 series.mapAreaAttributes = "";
@@ -6626,10 +7213,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLegendUrl()
+
+        internal void ResetLegendUrl()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LegendUrl);
             else
                 series.legendUrl = "";
@@ -6638,24 +7225,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLegendMapAreaAttributes()
+
+        internal void ResetLegendMapAreaAttributes()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LegendMapAreaAttributes);
             else
                 series.legendMapAreaAttributes = "";
         }
 
-
-
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelUrl()
+
+        internal void ResetLabelUrl()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelUrl);
             else
                 series.labelUrl = "";
@@ -6664,37 +7249,35 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelMapAreaAttributes()
+
+        internal void ResetLabelMapAreaAttributes()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelMapAreaAttributes);
             else
                 series.labelMapAreaAttributes = "";
         }
-
-
 #endif // !Microsoft_CONTROL
 
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
+
         public void ResetIsVisibleInLegend()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.IsVisibleInLegend);
             else
                 series.showInLegend = true;
-        }        
+        }
 
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLegendText()
+
+        internal void ResetLegendText()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LegendText);
             else
                 series.legendText = "";
@@ -6703,31 +7286,29 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLegendToolTip()
+
+        internal void ResetLegendToolTip()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LegendToolTip);
             else
                 series.legendToolTip = "";
 
 #if Microsoft_CONTROL
-            if(Chart != null && Chart.selection != null)
+            if (Chart != null && Chart.selection != null)
             {
                 Chart.selection.enabledChecked = false;
             }
 #endif
         }
 
-
-
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelBackColor()
+
+        internal void ResetLabelBackColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelBackColor);
             else
                 series.labelBackColor = Color.Empty;
@@ -6736,10 +7317,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelBorderColor()
+
+        internal void ResetLabelBorderColor()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelBorderColor);
             else
                 series.labelBorderColor = Color.Empty;
@@ -6748,10 +7329,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelBorderDashStyle()
+
+        internal void ResetLabelBorderDashStyle()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelBorderDashStyle);
             else
                 series.labelBorderDashStyle = ChartDashStyle.Solid;
@@ -6760,10 +7341,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelBorderWidth()
+
+        internal void ResetLabelBorderWidth()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelBorderWidth);
             else
                 series.labelBorderWidth = 1;
@@ -6772,23 +7353,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Resets property to its default value.
         /// </summary>
-        
-        internal void  ResetLabelToolTip()
+
+        internal void ResetLabelToolTip()
         {
-            if(this.pointCustomProperties)
+            if (this.pointCustomProperties)
                 ResetProperty(CommonCustomProperties.LabelToolTip);
             else
                 series.labelToolTip = "";
 
 #if Microsoft_CONTROL
-            if(Chart != null && Chart.selection != null)
+            if (Chart != null && Chart.selection != null)
             {
                 Chart.selection.enabledChecked = false;
             }
 #endif
         }
-
-        
 
         #endregion
 
@@ -6798,11 +7377,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Invalidate chart area.
         /// </summary>
         /// <param name="invalidateLegend">Invalidate legend area only.</param>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", Justification = "This parameter is used when compiling for the Microsoft version of Chart")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            Justification = "This parameter is used when compiling for the Microsoft version of Chart"
+        )]
         internal void Invalidate(bool invalidateLegend)
         {
 #if Microsoft_CONTROL
-            if(this.series != null)
+            if (this.series != null)
             {
                 series.Invalidate(true, invalidateLegend);
             }
@@ -6830,52 +7413,52 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Reference to the 2D data point object
         /// </summary>
-        internal    DataPoint    dataPoint = null;
+        internal DataPoint dataPoint = null;
 
         /// <summary>
         /// Data point index.
         /// </summary>
-        internal    int            index = 0;
+        internal int index = 0;
 
         /// <summary>
         /// Point X position in relative coordinates.
         /// </summary>
-        internal    double        xPosition = 0.0;
+        internal double xPosition = 0.0;
 
         /// <summary>
         /// Point Y position in relative coordinates.
         /// </summary>
-        internal    double        yPosition = 0.0;
+        internal double yPosition = 0.0;
 
         /// <summary>
         /// Point X center position in relative coordinates. Used for side-by-side charts.
         /// </summary>
-        internal    double        xCenterVal = 0.0;
+        internal double xCenterVal = 0.0;
 
         /// <summary>
         /// Point Z position in relative coordinates.
         /// </summary>
-        internal    float        zPosition = 0f;
+        internal float zPosition = 0f;
 
         /// <summary>
         /// Point width.
         /// </summary>
-        internal    double        width = 0.0;
+        internal double width = 0.0;
 
         /// <summary>
         /// Point height.
         /// </summary>
-        internal    double        height = 0.0;
+        internal double height = 0.0;
 
         /// <summary>
         /// Point depth.
         /// </summary>
-        internal    float        depth = 0f;
+        internal float depth = 0f;
 
         /// <summary>
         /// Indicates that point belongs to indexed series.
         /// </summary>
-        internal    bool        indexedSeries = false;
+        internal bool indexedSeries = false;
 
         #endregion
     }
@@ -6886,11 +7469,17 @@ namespace System.Web.UI.DataVisualization.Charting
     /// property at design time and supports expandable list
     /// of custom properties.
     /// </summary>
-    [ TypeConverter(typeof(CustomPropertiesTypeConverter)) ]
+    [TypeConverter(typeof(CustomPropertiesTypeConverter))]
     [EditorBrowsable(EditorBrowsableState.Never)]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class CustomProperties
     {
@@ -6918,15 +7507,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
         internal virtual DataPointCustomProperties DataPointCustomProperties
         {
-            get
-            {
-                return this.m_DataPointCustomProperties;
-            }
-            set
-            {
-                this.m_DataPointCustomProperties = value;
-            }
-
+            get { return this.m_DataPointCustomProperties; }
+            set { this.m_DataPointCustomProperties = value; }
         }
 
         #endregion //Properties
@@ -6951,51 +7533,57 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             // Get comma separated string of custom properties
             string customAttribute = this.DataPointCustomProperties.CustomProperties;
-            string    userDefinedCustomAttribute = string.Empty;
+            string userDefinedCustomAttribute = string.Empty;
 
             // Get custom attribute registry
-            CustomPropertyRegistry registry = (CustomPropertyRegistry)this.DataPointCustomProperties.Common.container.GetService(typeof(CustomPropertyRegistry));
+            CustomPropertyRegistry registry = (CustomPropertyRegistry)
+                this.DataPointCustomProperties.Common.container.GetService(
+                    typeof(CustomPropertyRegistry)
+                );
 
             // Replace commas in value string
             customAttribute = customAttribute.Replace("\\,", "\\x45");
             customAttribute = customAttribute.Replace("\\=", "\\x46");
 
             // Split custom properties by commas into individual properties
-            if(customAttribute.Length > 0)
+            if (customAttribute.Length > 0)
             {
-                string[]    nameValueStrings = customAttribute.Split(',');
-                foreach(string nameValue in nameValueStrings)
+                string[] nameValueStrings = customAttribute.Split(',');
+                foreach (string nameValue in nameValueStrings)
                 {
                     string[] values = nameValue.Split('=');
 
                     // Check format
-                    if(values.Length != 2)
+                    if (values.Length != 2)
                     {
-                        throw(new FormatException(SR.ExceptionAttributeInvalidFormat));
+                        throw (new FormatException(SR.ExceptionAttributeInvalidFormat));
                     }
-                        
+
                     // Check for empty name or value
                     values[0] = values[0].Trim();
                     values[1] = values[1].Trim();
-                    if(values[0].Length == 0)
+                    if (values[0].Length == 0)
                     {
-                        throw(new FormatException(SR.ExceptionAttributeInvalidFormat));
+                        throw (new FormatException(SR.ExceptionAttributeInvalidFormat));
                     }
 
                     // Check if attribute is registered or user defined
-                    bool    userDefinedAttribute = true;
-                    foreach(CustomPropertyInfo info in registry.registeredCustomProperties)
+                    bool userDefinedAttribute = true;
+                    foreach (CustomPropertyInfo info in registry.registeredCustomProperties)
                     {
-                        if(string.Compare(info.Name, values[0], StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            string.Compare(info.Name, values[0], StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             userDefinedAttribute = false;
                         }
                     }
 
                     // Copy attribute into the output string
-                    if(userDefinedAttribute == userDefined)
+                    if (userDefinedAttribute == userDefined)
                     {
-                        if(userDefinedCustomAttribute.Length > 0)
+                        if (userDefinedCustomAttribute.Length > 0)
                         {
                             userDefinedCustomAttribute += ", ";
                         }
@@ -7020,10 +7608,10 @@ namespace System.Web.UI.DataVisualization.Charting
             string properties = GetUserDefinedCustomProperties(false);
 
             // Check if new string is empty
-            if(val.Length > 0)
+            if (val.Length > 0)
             {
                 // Add comma at the end
-                if(properties.Length > 0)
+                if (properties.Length > 0)
                 {
                     properties += ", ";
                 }
@@ -7036,9 +7624,6 @@ namespace System.Web.UI.DataVisualization.Charting
             this.DataPointCustomProperties.CustomProperties = properties;
         }
 
-
         #endregion // Methods
     }
 }
-
-

@@ -34,12 +34,12 @@ namespace POS_Server.Models
         public string notes { get; set; }
         public string categoryString { get; set; }
 
-
         // offer item
         public Nullable<decimal> desPrice { get; set; }
         public int isNew { get; set; }
         public int isOffer { get; set; }
         public string forAgent { get; set; }
+
         // unit item
         public decimal price { get; set; }
         public Nullable<decimal> basicPrice { get; set; }
@@ -57,13 +57,12 @@ namespace POS_Server.Models
         public short defaultSale { get; set; }
         public decimal priceTax { get; set; }
         public short defaultPurchase { get; set; }
-        public  int used { get; set; }
+        public int used { get; set; }
         public string parentName { get; set; }
         public string barcode { get; set; }
         public string minUnitName { get; set; }
         public string maxUnitName { get; set; }
         public bool isExpired { get; set; }
         public int alertDays { get; set; }
-      
     }
 }

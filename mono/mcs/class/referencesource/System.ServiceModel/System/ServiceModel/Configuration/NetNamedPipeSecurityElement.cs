@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class NetNamedPipeSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = NetNamedPipeSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = NetNamedPipeSecurity.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(NetNamedPipeSecurityModeHelper))]
         public NetNamedPipeSecurityMode Mode
         {

@@ -3,12 +3,12 @@
 
 class C
 {
-    static void Test ()
+    static void Test()
     {
         char c = 'c';
         switch (c)
         {
-            case 'a': 
+            case 'a':
                 goto case null;
         }
     }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,128 +31,168 @@ namespace System.IdentityModel.Claims
 {
     public static class ClaimTypes
     {
-        public static string Anonymous {
+        public static string Anonymous
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/anonymous"; }
         }
 
-        public static string Authentication {
+        public static string Authentication
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/authentication"; }
         }
 
-        public static string AuthorizationDecision {
-            get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/authorizationdecision"; }
+        public static string AuthorizationDecision
+        {
+            get
+            {
+                return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/authorizationdecision";
+            }
         }
 
-        public static string Country {
+        public static string Country
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/country"; }
         }
 
-        public static string DateOfBirth {
+        public static string DateOfBirth
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/dateofbirth"; }
         }
 
-        public static string DenyOnlySid {
+        public static string DenyOnlySid
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/denyonlysid"; }
         }
 
-        public static string Dns {
+        public static string Dns
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/dns"; }
         }
 
-        public static string Email {
+        public static string Email
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"; }
         }
 
-        public static string Gender {
+        public static string Gender
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/gender"; }
         }
 
-        public static string GivenName {
+        public static string GivenName
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"; }
         }
 
-        public static string Hash {
+        public static string Hash
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/hash"; }
         }
 
-        public static string HomePhone {
+        public static string HomePhone
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/homephone"; }
         }
 
-        public static string Locality {
+        public static string Locality
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/locality"; }
         }
 
-        public static string MobilePhone {
+        public static string MobilePhone
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/mobilephone"; }
         }
 
-        public static string Name {
+        public static string Name
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"; }
         }
 
-        public static string NameIdentifier {
+        public static string NameIdentifier
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"; }
         }
 
-        public static string OtherPhone {
+        public static string OtherPhone
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/otherphone"; }
         }
 
-        public static string PostalCode {
+        public static string PostalCode
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/postalcode"; }
         }
 
-        public static string PPID {
-            get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/privatepersonalidentifier"; }
+        public static string PPID
+        {
+            get
+            {
+                return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/privatepersonalidentifier";
+            }
         }
 
-        public static string Rsa {
+        public static string Rsa
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/rsa"; }
         }
 
-        public static string Sid {
+        public static string Sid
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid"; }
         }
 
-        public static string Spn {
+        public static string Spn
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/spn"; }
         }
 
-        public static string StateOrProvince {
+        public static string StateOrProvince
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/stateorprovince"; }
         }
 
-        public static string StreetAddress {
+        public static string StreetAddress
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/streetaddress"; }
         }
 
-        public static string Surname {
+        public static string Surname
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"; }
         }
 
-        public static string System {
+        public static string System
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/system"; }
         }
 
-        public static string Thumbprint {
+        public static string Thumbprint
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/thumbprint"; }
         }
 
-        public static string Upn {
+        public static string Upn
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"; }
         }
 
-        public static string Uri {
+        public static string Uri
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/uri"; }
         }
 
-        public static string Webpage {
+        public static string Webpage
+        {
             get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/webpage"; }
         }
 
-        public static string X500DistinguishedName {
-            get { return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/x500distinguishedname"; }
+        public static string X500DistinguishedName
+        {
+            get
+            {
+                return "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/x500distinguishedname";
+            }
         }
     }
 }

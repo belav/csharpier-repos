@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,25 +33,28 @@ using System.Text;
 
 namespace System.Web.Script.Services
 {
-    [AttributeUsage (AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Method)]
     public sealed class ScriptMethodAttribute : Attribute
     {
         ResponseFormat _responseFormat = ResponseFormat.Json;
         bool _useHttpGet;
         bool _xmlSerializeString;
-        internal static readonly ScriptMethodAttribute Default = new ScriptMethodAttribute ();
+        internal static readonly ScriptMethodAttribute Default = new ScriptMethodAttribute();
 
-        public ResponseFormat ResponseFormat {
+        public ResponseFormat ResponseFormat
+        {
             get { return _responseFormat; }
             set { _responseFormat = value; }
         }
 
-        public bool UseHttpGet {
+        public bool UseHttpGet
+        {
             get { return _useHttpGet; }
             set { _useHttpGet = value; }
         }
 
-        public bool XmlSerializeString {
+        public bool XmlSerializeString
+        {
             get { return _xmlSerializeString; }
             set { _xmlSerializeString = value; }
         }

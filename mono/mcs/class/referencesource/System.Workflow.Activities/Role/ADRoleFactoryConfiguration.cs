@@ -10,7 +10,9 @@ using System.Configuration;
 
 namespace System.Workflow.Activities.Configuration
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     sealed public class ActiveDirectoryRoleFactoryConfiguration : ConfigurationSection
     {
         private const String _RootPath = "RootPath";

@@ -3,7 +3,7 @@
 // Jonathan Pobst (monkey@jpobst.com)
 // Francis Fisher (frankie@terrorise.me.uk)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,15 +32,17 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class Series : DataPointCustomProperties
     {
-        public Series ()
+        public Series()
         {
-            Points = new DataPointCollection ();
+            Points = new DataPointCollection();
         }
-        public Series (string name)
+
+        public Series(string name)
         {
             Name = name;
         }
-        public Series (string name,int yValues)
+
+        public Series(string name, int yValues)
         {
             Name = name;
             YValuesPerPoint = yValues;
@@ -70,25 +72,26 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         public int YValuesPerPoint { get; set; }
 
-
         [MonoTODO]
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
             throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public void Sort (IComparer<DataPoint> comparer)
+        public void Sort(IComparer<DataPoint> comparer)
         {
             throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public void Sort (PointSortOrder pointSortOrder)
+        public void Sort(PointSortOrder pointSortOrder)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
+
         [MonoTODO]
-        public void Sort (PointSortOrder pointSortOrder,string sortBy)
+        public void Sort(PointSortOrder pointSortOrder, string sortBy)
         {
             throw new NotImplementedException();
         }

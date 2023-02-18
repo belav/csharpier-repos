@@ -26,9 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    internal enum DebugStoreType : uint {
+namespace Mono.Cecil.Binary
+{
+    internal enum DebugStoreType : uint
+    {
         Unknown = 0x00000000,
         COFF = 0x00000001,
         CodeView = 0x00000002,

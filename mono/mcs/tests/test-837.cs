@@ -1,8 +1,6 @@
 namespace TT
 {
-    class GG
-    {
-    }
+    class GG { }
 }
 
 namespace TT
@@ -10,14 +8,14 @@ namespace TT
     namespace A
     {
         using GG = System.DateTime;
-        
+
         namespace X.Y
         {
             class X
             {
-                public static void Main ()
+                public static void Main()
                 {
-                    System.DateTime dt = new GG ();
+                    System.DateTime dt = new GG();
                 }
             }
         }

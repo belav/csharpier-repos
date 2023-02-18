@@ -2,29 +2,24 @@ partial class A<T>
 {
     internal partial class B : A<int>
     {
-        public void Test ()
+        public void Test()
         {
-            Foo (3);
+            Foo(3);
         }
     }
 }
 
-partial class A<T> : X<T>
-{
-
-}
+partial class A<T> : X<T> { }
 
 class X<U>
 {
-    public void Foo (U arg)
-    {
-    }
+    public void Foo(U arg) { }
 }
 
 class M
 {
-    public static void Main ()
+    public static void Main()
     {
-        new A<string>.B ().Test ();
+        new A<string>.B().Test();
     }
 }

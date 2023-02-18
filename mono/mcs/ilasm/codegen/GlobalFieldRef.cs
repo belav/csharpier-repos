@@ -10,38 +10,37 @@
 
 using System;
 
-namespace Mono.ILASM {
+namespace Mono.ILASM
+{
+    public class GlobalFieldRef : IFieldRef
+    {
+        private BaseTypeRef ret_type;
+        private string name;
 
-
-        public class GlobalFieldRef : IFieldRef {
-
-                private BaseTypeRef ret_type;
-                private string name;
-
-                private PEAPI.Field peapi_field;
+        private PEAPI.Field peapi_field;
         private bool is_resolved;
 
-                public GlobalFieldRef (BaseTypeRef ret_type, string name)
-                {
-                        this.ret_type = ret_type;
-                        this.name = name;
+        public GlobalFieldRef(BaseTypeRef ret_type, string name)
+        {
+            this.ret_type = ret_type;
+            this.name = name;
 
             is_resolved = false;
-                }
+        }
 
-                public PEAPI.Field PeapiField {
-                        get { return peapi_field; }
-                }
+        public PEAPI.Field PeapiField
+        {
+            get { return peapi_field; }
+        }
 
-                public void Resolve (CodeGen code_gen)
-                {
+        public void Resolve(CodeGen code_gen)
+        {
             if (is_resolved)
                 return;
 
-                        peapi_field = code_gen.ResolveField (name, ret_type.FullName);
+            peapi_field = code_gen.ResolveField(name, ret_type.FullName);
 
             is_resolved = true;
-                }
         }
+    }
 }
-

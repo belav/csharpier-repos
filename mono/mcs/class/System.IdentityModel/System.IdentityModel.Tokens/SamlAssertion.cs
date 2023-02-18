@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,31 +38,40 @@ namespace System.IdentityModel.Tokens
         bool is_readonly;
         SamlAdvice advice;
         SamlConditions conditions;
-        string assertion_id, issuer;
+        string assertion_id,
+            issuer;
         DateTime issue_instant;
-        int major, minor;
+        int major,
+            minor;
         SigningCredentials signing_credentials;
-        List<SamlStatement> statements = new List<SamlStatement> ();
+        List<SamlStatement> statements = new List<SamlStatement>();
 
-        public SamlAssertion ()
+        public SamlAssertion()
         {
-            assertion_id = "SamlSecurityToken-" + Guid.NewGuid ();
+            assertion_id = "SamlSecurityToken-" + Guid.NewGuid();
             major = 1;
             minor = 1;
-            issue_instant = DateTime.Now.ToUniversalTime ();
+            issue_instant = DateTime.Now.ToUniversalTime();
         }
 
-        public SamlAssertion (string assertionId, string issuer,
-            DateTime issueInstant, SamlConditions samlConditions,
-            SamlAdvice samlAdvice, IEnumerable<SamlStatement> samlStatements)
+        public SamlAssertion(
+            string assertionId,
+            string issuer,
+            DateTime issueInstant,
+            SamlConditions samlConditions,
+            SamlAdvice samlAdvice,
+            IEnumerable<SamlStatement> samlStatements
+        )
         {
-            if (IsInvalidAssertionId (assertionId))
-                throw new ArgumentException (String.Format ("The assertionId '{0}' must be a valid XML NCName.", assertionId));
+            if (IsInvalidAssertionId(assertionId))
+                throw new ArgumentException(
+                    String.Format("The assertionId '{0}' must be a valid XML NCName.", assertionId)
+                );
 
             if (issuer == null || issuer.Length == 0)
-                throw new ArgumentException ("issuer");
+                throw new ArgumentException("issuer");
             if (samlStatements == null)
-                throw new ArgumentNullException ("samlStatements");
+                throw new ArgumentNullException("samlStatements");
 
             major = 1;
             minor = 1;
@@ -72,165 +81,204 @@ namespace System.IdentityModel.Tokens
             issue_instant = issueInstant;
             this.conditions = samlConditions;
             this.advice = samlAdvice;
-            foreach (SamlStatement s in samlStatements) {
+            foreach (SamlStatement s in samlStatements)
+            {
                 if (s == null)
-                    throw new ArgumentException ("statements contain null item.");
-                this.statements.Add (s);
+                    throw new ArgumentException("statements contain null item.");
+                this.statements.Add(s);
             }
             if (this.statements.Count == 0)
-                throw new ArgumentException ("At least one assertion statement is required.");
+                throw new ArgumentException("At least one assertion statement is required.");
         }
 
-        bool IsInvalidAssertionId (string assertionId)
+        bool IsInvalidAssertionId(string assertionId)
         {
             if (assertionId == null || assertionId.Length == 0)
                 return true;
-            try {
-                XmlConvert.VerifyNCName (assertionId);
-            } catch (XmlException) {
+            try
+            {
+                XmlConvert.VerifyNCName(assertionId);
+            }
+            catch (XmlException)
+            {
                 return true;
             }
             return false;
         }
 
-        public SamlAdvice Advice {
+        public SamlAdvice Advice
+        {
             get { return advice; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 advice = value;
             }
         }
 
-        public string AssertionId {
+        public string AssertionId
+        {
             get { return assertion_id; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 assertion_id = value;
             }
         }
 
-        public SamlConditions Conditions {
+        public SamlConditions Conditions
+        {
             get { return conditions; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 conditions = value;
             }
         }
 
-        public DateTime IssueInstant {
+        public DateTime IssueInstant
+        {
             get { return issue_instant; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 issue_instant = value;
             }
         }
 
-        public string Issuer {
+        public string Issuer
+        {
             get { return issuer; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 issuer = value;
             }
         }
 
-        public int MajorVersion {
+        public int MajorVersion
+        {
             get { return major; }
         }
 
-        public int MinorVersion {
+        public int MinorVersion
+        {
             get { return minor; }
         }
 
-        public SigningCredentials SigningCredentials {
+        public SigningCredentials SigningCredentials
+        {
             get { return signing_credentials; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 signing_credentials = value;
             }
         }
 
         [MonoTODO]
-        public SecurityToken SigningToken {
-            get {
+        public SecurityToken SigningToken
+        {
+            get
+            {
                 if (signing_credentials == null)
                     return null;
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        public IList<SamlStatement> Statements {
+        public IList<SamlStatement> Statements
+        {
             get { return statements; }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return is_readonly; }
         }
 
-        private void CheckReadOnly ()
+        private void CheckReadOnly()
         {
             if (is_readonly)
-                throw new InvalidOperationException ("This SAML assertion is read-only.");
+                throw new InvalidOperationException("This SAML assertion is read-only.");
         }
 
-        public void MakeReadOnly ()
+        public void MakeReadOnly()
         {
             is_readonly = true;
         }
 
         [MonoTODO]
-        public virtual void ReadXml (XmlDictionaryReader reader,
+        public virtual void ReadXml(
+            XmlDictionaryReader reader,
             SamlSerializer samlSerializer,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public virtual void WriteXml (XmlDictionaryWriter writer,
+        public virtual void WriteXml(
+            XmlDictionaryWriter writer,
             SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer)
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
             if (writer == null)
-                throw new ArgumentNullException ("writer");
+                throw new ArgumentNullException("writer");
 
             if (Issuer == null || Issuer.Length == 0)
-                throw new SecurityTokenException ("Issuer must not be null or empty.");
+                throw new SecurityTokenException("Issuer must not be null or empty.");
             if (Statements.Count == 0)
-                throw new SecurityTokenException ("At least one assertion statement is required.");
+                throw new SecurityTokenException("At least one assertion statement is required.");
 
             if (samlSerializer == null)
-                throw new ArgumentNullException ("samlSerializer");
+                throw new ArgumentNullException("samlSerializer");
             CultureInfo invariant = CultureInfo.InvariantCulture;
 
-            writer.WriteStartElement ("saml", "Assertion", SamlConstants.Namespace);
-            writer.WriteAttributeString ("MajorVersion", MajorVersion.ToString (invariant));
-            writer.WriteAttributeString ("MinorVersion", MinorVersion.ToString (invariant));
-            writer.WriteAttributeString ("AssertionID", AssertionId);
-            writer.WriteAttributeString ("Issuer", Issuer);
-            writer.WriteAttributeString ("IssueInstant", IssueInstant.ToString (SamlConstants.DateFormat, invariant));
+            writer.WriteStartElement("saml", "Assertion", SamlConstants.Namespace);
+            writer.WriteAttributeString("MajorVersion", MajorVersion.ToString(invariant));
+            writer.WriteAttributeString("MinorVersion", MinorVersion.ToString(invariant));
+            writer.WriteAttributeString("AssertionID", AssertionId);
+            writer.WriteAttributeString("Issuer", Issuer);
+            writer.WriteAttributeString(
+                "IssueInstant",
+                IssueInstant.ToString(SamlConstants.DateFormat, invariant)
+            );
 
-            try {
+            try
+            {
                 if (Conditions != null)
-                    Conditions.WriteXml (writer, samlSerializer, keyInfoSerializer);
+                    Conditions.WriteXml(writer, samlSerializer, keyInfoSerializer);
                 if (Advice != null)
-                    Advice.WriteXml (writer, samlSerializer, keyInfoSerializer);
+                    Advice.WriteXml(writer, samlSerializer, keyInfoSerializer);
                 foreach (SamlStatement statement in Statements)
-                    statement.WriteXml (writer, samlSerializer, keyInfoSerializer);
-            } catch (NotImplementedException) {
-                throw;
-            } catch (Exception ex) { // bad catch, eh?
-                throw new InvalidOperationException ("There is an error on writing assertion statements.", ex);
+                    statement.WriteXml(writer, samlSerializer, keyInfoSerializer);
             }
-            writer.WriteEndElement ();
+            catch (NotImplementedException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            { // bad catch, eh?
+                throw new InvalidOperationException(
+                    "There is an error on writing assertion statements.",
+                    ex
+                );
+            }
+            writer.WriteEndElement();
         }
 
         [MonoTODO]
-        protected void ReadSignature (XmlDictionaryReader reader,
+        protected void ReadSignature(
+            XmlDictionaryReader reader,
             SecurityTokenSerializer keyInfoSerializer,
             SecurityTokenResolver outOfBandTokenResolver,
-            SamlSerializer samlSerializer)
+            SamlSerializer samlSerializer
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

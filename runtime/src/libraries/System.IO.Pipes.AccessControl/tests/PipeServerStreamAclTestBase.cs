@@ -48,17 +48,23 @@ namespace System.IO.Pipes.Tests
             PipeAccessRights.ReadExtendedAttributes | PipeAccessRights.WriteExtendedAttributes
         };
 
-        protected static IEnumerable<PipeAccessRights> s_combinedPipeAccessRights = s_mostRights.Concat(s_bitWisePipeAccessRights);
+        protected static IEnumerable<PipeAccessRights> s_combinedPipeAccessRights =
+            s_mostRights.Concat(s_bitWisePipeAccessRights);
 
         protected PipeSecurity GetBasicPipeSecurity()
         {
             return GetPipeSecurity(
                 WellKnownSidType.BuiltinUsersSid,
                 DefaultAccessRight,
-                AccessControlType.Allow);
+                AccessControlType.Allow
+            );
         }
 
-        protected PipeSecurity GetPipeSecurity(WellKnownSidType sid, PipeAccessRights rights, AccessControlType accessControl)
+        protected PipeSecurity GetPipeSecurity(
+            WellKnownSidType sid,
+            PipeAccessRights rights,
+            AccessControlType accessControl
+        )
         {
             var security = new PipeSecurity();
             SecurityIdentifier identity = new SecurityIdentifier(sid, null);
@@ -67,35 +73,55 @@ namespace System.IO.Pipes.Tests
             return security;
         }
 
-        protected void VerifyPipeSecurity(PipeSecurity expectedSecurity, PipeSecurity actualSecurity)
+        protected void VerifyPipeSecurity(
+            PipeSecurity expectedSecurity,
+            PipeSecurity actualSecurity
+        )
         {
             Assert.Equal(typeof(PipeAccessRights), expectedSecurity.AccessRightType);
             Assert.Equal(typeof(PipeAccessRights), actualSecurity.AccessRightType);
 
-            List<PipeAccessRule> expectedAccessRules = expectedSecurity.GetAccessRules(includeExplicit: true, includeInherited: false, typeof(SecurityIdentifier))
-                .Cast<PipeAccessRule>().ToList();
+            List<PipeAccessRule> expectedAccessRules = expectedSecurity
+                .GetAccessRules(
+                    includeExplicit: true,
+                    includeInherited: false,
+                    typeof(SecurityIdentifier)
+                )
+                .Cast<PipeAccessRule>()
+                .ToList();
 
-            List<PipeAccessRule> actualAccessRules = actualSecurity.GetAccessRules(includeExplicit: true, includeInherited: false, typeof(SecurityIdentifier))
-                .Cast<PipeAccessRule>().ToList();
+            List<PipeAccessRule> actualAccessRules = actualSecurity
+                .GetAccessRules(
+                    includeExplicit: true,
+                    includeInherited: false,
+                    typeof(SecurityIdentifier)
+                )
+                .Cast<PipeAccessRule>()
+                .ToList();
 
             Assert.Equal(expectedAccessRules.Count, actualAccessRules.Count);
             if (expectedAccessRules.Count > 0)
             {
-                Assert.All(expectedAccessRules, actualAccessRule =>
-                {
-                    int count = expectedAccessRules.Count(expectedAccessRule => AreAccessRulesEqual(expectedAccessRule, actualAccessRule));
-                    Assert.True(count > 0);
-                });
+                Assert.All(
+                    expectedAccessRules,
+                    actualAccessRule =>
+                    {
+                        int count = expectedAccessRules.Count(
+                            expectedAccessRule =>
+                                AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
+                        );
+                        Assert.True(count > 0);
+                    }
+                );
             }
         }
 
         protected bool AreAccessRulesEqual(PipeAccessRule expectedRule, PipeAccessRule actualRule)
         {
-            return
-                expectedRule.AccessControlType == actualRule.AccessControlType &&
-                expectedRule.PipeAccessRights  == actualRule.PipeAccessRights &&
-                expectedRule.InheritanceFlags  == actualRule.InheritanceFlags &&
-                expectedRule.PropagationFlags  == actualRule.PropagationFlags;
+            return expectedRule.AccessControlType == actualRule.AccessControlType
+                && expectedRule.PipeAccessRights == actualRule.PipeAccessRights
+                && expectedRule.InheritanceFlags == actualRule.InheritanceFlags
+                && expectedRule.PropagationFlags == actualRule.PropagationFlags;
         }
 
         protected string GetRandomName()

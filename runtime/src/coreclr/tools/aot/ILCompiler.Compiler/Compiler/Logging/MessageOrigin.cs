@@ -34,7 +34,12 @@ namespace ILCompiler.Logging
             ILOffset = null;
         }
 
-        public MessageOrigin(TypeSystemEntity memberDefinition, string? fileName = null, int? sourceLine = 0, int? sourceColumn = 0)
+        public MessageOrigin(
+            TypeSystemEntity memberDefinition,
+            string? fileName = null,
+            int? sourceLine = 0,
+            int? sourceColumn = 0
+        )
         {
             FileName = fileName;
             MemberDefinition = memberDefinition;
@@ -48,7 +53,9 @@ namespace ILCompiler.Logging
             string? document = null;
             int? lineNumber = null;
 
-            IEnumerable<ILSequencePoint>? sequencePoints = methodBody.GetDebugInfo()?.GetSequencePoints();
+            IEnumerable<ILSequencePoint>? sequencePoints = methodBody
+                .GetDebugInfo()
+                ?.GetSequencePoints();
             if (sequencePoints != null)
             {
                 foreach (var sequencePoint in sequencePoints)
@@ -92,11 +99,23 @@ namespace ILCompiler.Logging
         }
 
         public bool Equals(MessageOrigin other) =>
-            (FileName, MemberDefinition, SourceLine, SourceColumn, ILOffset) == (other.FileName, other.MemberDefinition, other.SourceLine, other.SourceColumn, other.ILOffset);
+            (FileName, MemberDefinition, SourceLine, SourceColumn, ILOffset)
+            == (
+                other.FileName,
+                other.MemberDefinition,
+                other.SourceLine,
+                other.SourceColumn,
+                other.ILOffset
+            );
 
-        public override bool Equals(object? obj) => obj is MessageOrigin messageOrigin && Equals(messageOrigin);
-        public override int GetHashCode() => (FileName, MemberDefinition, SourceLine, SourceColumn, ILOffset).GetHashCode();
+        public override bool Equals(object? obj) =>
+            obj is MessageOrigin messageOrigin && Equals(messageOrigin);
+
+        public override int GetHashCode() =>
+            (FileName, MemberDefinition, SourceLine, SourceColumn, ILOffset).GetHashCode();
+
         public static bool operator ==(MessageOrigin lhs, MessageOrigin rhs) => lhs.Equals(rhs);
+
         public static bool operator !=(MessageOrigin lhs, MessageOrigin rhs) => !lhs.Equals(rhs);
 
 #if false

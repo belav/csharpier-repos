@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 class Program
 {
-    static IList<U> Foo<T, U> (T[] arg) where T : U
+    static IList<U> Foo<T, U>(T[] arg)
+        where T : U
     {
         return arg;
     }

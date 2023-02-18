@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.Operation.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,11 +34,10 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Web.Services.Configuration;
 
-namespace System.Web.Services.Description 
+namespace System.Web.Services.Description
 {
-    [XmlFormatExtensionPoint ("Extensions")]
-    public sealed class Operation :
-        NamedItem
+    [XmlFormatExtensionPoint("Extensions")]
+    public sealed class Operation : NamedItem
     {
         #region Fields
 
@@ -51,67 +50,75 @@ namespace System.Web.Services.Description
         #endregion // Fields
 
         #region Constructors
-        
-        public Operation ()
+
+        public Operation()
         {
-            faults = new OperationFaultCollection (this);
-            messages = new OperationMessageCollection (this);
+            faults = new OperationFaultCollection(this);
+            messages = new OperationMessageCollection(this);
             parameterOrder = null;
             portType = null;
-            extensions = new ServiceDescriptionFormatExtensionCollection (this);
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        [XmlElement ("fault")]
-        public OperationFaultCollection Faults {
+        [XmlElement("fault")]
+        public OperationFaultCollection Faults
+        {
             get { return faults; }
         }
 
-        [XmlElement ("output", typeof (OperationOutput))]
-        [XmlElement ("input", typeof (OperationInput))]
-        public OperationMessageCollection Messages {
+        [XmlElement("output", typeof(OperationOutput))]
+        [XmlElement("input", typeof(OperationInput))]
+        public OperationMessageCollection Messages
+        {
             get { return messages; }
         }
 
-
         [XmlIgnore]
-        public string[] ParameterOrder {
+        public string[] ParameterOrder
+        {
             get { return parameterOrder; }
             set { parameterOrder = value; }
         }
 
-        static readonly char [] wsChars = new char [] {' ', '\r', '\n', '\t'};
+        static readonly char[] wsChars = new char[] { ' ', '\r', '\n', '\t' };
 
-        [DefaultValue ("")]
+        [DefaultValue("")]
         // LAMESPEC: it could simply use xs:NMTOKENS
-        [XmlAttribute ("parameterOrder")]
-        public string ParameterOrderString {
-            get { 
+        [XmlAttribute("parameterOrder")]
+        public string ParameterOrderString
+        {
+            get
+            {
                 if (parameterOrder == null)
                     return String.Empty;
-                return String.Join (" ", parameterOrder); 
+                return String.Join(" ", parameterOrder);
             }
-            set {
-                ArrayList al = new ArrayList ();
-                foreach (string s in value.Split (' ')) {
-                    value = s.Trim (wsChars);
+            set
+            {
+                ArrayList al = new ArrayList();
+                foreach (string s in value.Split(' '))
+                {
+                    value = s.Trim(wsChars);
                     if (value.Length > 0)
-                        al.Add (value);
+                        al.Add(value);
                 }
-                ParameterOrder = (string []) al.ToArray (typeof (string));
+                ParameterOrder = (string[])al.ToArray(typeof(string));
             }
         }
 
-//        [XmlIgnore]
-        public PortType PortType {
+        //        [XmlIgnore]
+        public PortType PortType
+        {
             get { return portType; }
         }
 
         [XmlIgnore]
-        public override ServiceDescriptionFormatExtensionCollection Extensions {
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
             get { return extensions; }
         }
 
@@ -119,12 +126,12 @@ namespace System.Web.Services.Description
 
         #region Methods
 
-        public bool IsBoundBy (OperationBinding operationBinding)
+        public bool IsBoundBy(OperationBinding operationBinding)
         {
             return (operationBinding.Name == Name);
         }
 
-        internal void SetParent (PortType portType)
+        internal void SetParent(PortType portType)
         {
             this.portType = portType;
         }

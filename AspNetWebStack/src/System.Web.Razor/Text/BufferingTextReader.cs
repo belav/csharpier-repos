@@ -102,7 +102,9 @@ namespace System.Web.Razor.Text
         {
             if (_backtrackStack.Count == 0)
             {
-                throw new InvalidOperationException(RazorResources.CancelBacktrack_Must_Be_Called_Within_Lookahead);
+                throw new InvalidOperationException(
+                    RazorResources.CancelBacktrack_Must_Be_Called_Within_Lookahead
+                );
             }
             // Just pop the current backtrack context so that when the lookahead ends, it won't be backtracked
             _backtrackStack.Pop();

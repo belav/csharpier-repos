@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>ericeil</OWNER>
@@ -15,12 +15,12 @@
 **
 =============================================================================*/
 
-namespace System.Threading {
-
+namespace System.Threading
+{
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum ApartmentState
-    {   
+    {
         /*=========================================================================
         ** Constants for thread apartment states.
         =========================================================================*/

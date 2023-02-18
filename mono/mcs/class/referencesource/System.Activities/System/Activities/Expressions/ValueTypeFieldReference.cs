@@ -14,23 +14,13 @@ namespace System.Activities.Expressions
         FieldInfo fieldInfo;
 
         public ValueTypeFieldReference()
-            : base()
-        {
-        }
+            : base() { }
 
         [DefaultValue(null)]
-        public string FieldName
-        {
-            get;
-            set;
-        }
+        public string FieldName { get; set; }
 
         [DefaultValue(null)]
-        public InOutArgument<TOperand> OperandLocation
-        {
-            get;
-            set;
-        }
+        public InOutArgument<TOperand> OperandLocation { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -41,11 +31,15 @@ namespace System.Activities.Expressions
             }
             if (typeof(TOperand).IsEnum)
             {
-                metadata.AddValidationError(SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName));
+                metadata.AddValidationError(
+                    SR.TargetTypeCannotBeEnum(this.GetType().Name, this.DisplayName)
+                );
             }
             if (string.IsNullOrEmpty(this.FieldName))
             {
-                metadata.AddValidationError(SR.ActivityPropertyMustBeSet("FieldName", this.DisplayName));
+                metadata.AddValidationError(
+                    SR.ActivityPropertyMustBeSet("FieldName", this.DisplayName)
+                );
             }
             else
             {
@@ -53,15 +47,23 @@ namespace System.Activities.Expressions
                 isRequired = this.fieldInfo != null && !this.fieldInfo.IsStatic;
                 if (this.fieldInfo == null)
                 {
-                    metadata.AddValidationError(SR.MemberNotFound(this.FieldName, typeof(TOperand).Name));
+                    metadata.AddValidationError(
+                        SR.MemberNotFound(this.FieldName, typeof(TOperand).Name)
+                    );
                 }
                 else if (this.fieldInfo.IsInitOnly)
                 {
-                    metadata.AddValidationError(SR.MemberIsReadOnly(this.FieldName, typeof(TOperand).Name));
+                    metadata.AddValidationError(
+                        SR.MemberIsReadOnly(this.FieldName, typeof(TOperand).Name)
+                    );
                 }
             }
 
-            MemberExpressionHelper.AddOperandLocationArgument<TOperand>(metadata, this.OperandLocation, isRequired);
+            MemberExpressionHelper.AddOperandLocationArgument<TOperand>(
+                metadata,
+                this.OperandLocation,
+                isRequired
+            );
         }
 
         protected override Location<TResult> Execute(CodeActivityContext context)
@@ -88,10 +90,7 @@ namespace System.Activities.Expressions
 
             public override TResult Value
             {
-                get
-                {
-                    return (TResult)this.fieldInfo.GetValue(this.ownerLocation.Value);
-                }
+                get { return (TResult)this.fieldInfo.GetValue(this.ownerLocation.Value); }
                 set
                 {
                     object copy = this.ownerLocation.Value;

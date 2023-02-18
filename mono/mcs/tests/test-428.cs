@@ -2,11 +2,13 @@ using globalA = A;
 
 class A { }
 
-class X {
+class X
+{
     class A { }
-    public static void Main ()
+
+    public static void Main()
     {
-        globalA a = new global::A ();
-        System.Console.WriteLine (a.GetType ());
+        globalA a = new global::A();
+        System.Console.WriteLine(a.GetType());
     }
 }

@@ -10,7 +10,5 @@ class B
         public A.C Property { get; set; }
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

@@ -40,9 +40,6 @@ using System.Collections;
 using System.Collections.Specialized;
 using NUnit.Framework;
 
-
-
-
 namespace MonoTests.System.Web.UI.WebControls
 {
     [TestFixture]
@@ -56,19 +53,22 @@ namespace MonoTests.System.Web.UI.WebControls
                 get { return _fieldChanged; }
             }
 
-            protected override DataControlField CreateField ()
+            protected override DataControlField CreateField()
             {
                 throw new NotImplementedException();
             }
-            public Control DoControl ()
+
+            public Control DoControl()
             {
                 return base.Control;
             }
-            public bool DoDesignMode ()
+
+            public bool DoDesignMode()
             {
                 return base.DesignMode;
             }
-            public bool DoIsTrackingViewState ()
+
+            public bool DoIsTrackingViewState()
             {
                 return base.IsTrackingViewState;
             }
@@ -77,117 +77,134 @@ namespace MonoTests.System.Web.UI.WebControls
             {
                 get { return base.ViewState; }
             }
-            
-            public void DoTrackViewState ()
+
+            public void DoTrackViewState()
             {
-                base.TrackViewState ();
-            }
-            
-            public void DoCopyProperties (DataControlField newField)
-            {
-                base.CopyProperties (newField);
-            }
-            public DataControlField DoCloneField ()
-            {
-                return    base.CloneField ();
+                base.TrackViewState();
             }
 
-            protected override void OnFieldChanged ()
+            public void DoCopyProperties(DataControlField newField)
             {
-                base.OnFieldChanged ();
+                base.CopyProperties(newField);
+            }
+
+            public DataControlField DoCloneField()
+            {
+                return base.CloneField();
+            }
+
+            protected override void OnFieldChanged()
+            {
+                base.OnFieldChanged();
                 _fieldChanged = true;
             }
 
-            public object DoSaveViewState ()
+            public object DoSaveViewState()
             {
-                return base.SaveViewState ();
+                return base.SaveViewState();
             }
 
-            public void DoLoadViewState (object savedState)
+            public void DoLoadViewState(object savedState)
             {
-                base.LoadViewState (savedState);
+                base.LoadViewState(savedState);
             }
         }
 
         [Test]
-        public void DataControlField_DefaultProperty ()
+        public void DataControlField_DefaultProperty()
         {
-            DerivedDataControlField field = new DerivedDataControlField ();
-            Assert.AreEqual ("", field.AccessibleHeaderText, "AccessibleHeaderText");
-            Assert.AreEqual ("System.Web.UI.WebControls.Style", field.ControlStyle.ToString (), "ControlStyle");
-            Assert.AreEqual ("System.Web.UI.WebControls.TableItemStyle", field.FooterStyle.ToString (), "FooterStyle");
-            Assert.AreEqual ("", field.FooterText, "FooterText");
-            Assert.AreEqual ("", field.HeaderImageUrl, "HeaderImageUrl");
-            Assert.AreEqual ("System.Web.UI.WebControls.TableItemStyle", field.HeaderStyle.ToString (), "HeaderStyle");
-            Assert.AreEqual ("", field.HeaderText, "HeaderText");
-            Assert.AreEqual (true, field.InsertVisible, "InsertVisible");
-            Assert.AreEqual ("System.Web.UI.WebControls.TableItemStyle", field.ItemStyle.ToString (), "ItemStyle");
-            Assert.AreEqual (true, field.ShowHeader, "ShowHeader");
-            Assert.AreEqual ("", field.SortExpression, "SortExpression");
-            Assert.AreEqual (true, field.Visible, "Visible");
+            DerivedDataControlField field = new DerivedDataControlField();
+            Assert.AreEqual("", field.AccessibleHeaderText, "AccessibleHeaderText");
+            Assert.AreEqual(
+                "System.Web.UI.WebControls.Style",
+                field.ControlStyle.ToString(),
+                "ControlStyle"
+            );
+            Assert.AreEqual(
+                "System.Web.UI.WebControls.TableItemStyle",
+                field.FooterStyle.ToString(),
+                "FooterStyle"
+            );
+            Assert.AreEqual("", field.FooterText, "FooterText");
+            Assert.AreEqual("", field.HeaderImageUrl, "HeaderImageUrl");
+            Assert.AreEqual(
+                "System.Web.UI.WebControls.TableItemStyle",
+                field.HeaderStyle.ToString(),
+                "HeaderStyle"
+            );
+            Assert.AreEqual("", field.HeaderText, "HeaderText");
+            Assert.AreEqual(true, field.InsertVisible, "InsertVisible");
+            Assert.AreEqual(
+                "System.Web.UI.WebControls.TableItemStyle",
+                field.ItemStyle.ToString(),
+                "ItemStyle"
+            );
+            Assert.AreEqual(true, field.ShowHeader, "ShowHeader");
+            Assert.AreEqual("", field.SortExpression, "SortExpression");
+            Assert.AreEqual(true, field.Visible, "Visible");
 
             //protected properties
-            Assert.AreEqual (null, field.DoControl (), "Control");
-            Assert.AreEqual (false, field.DoDesignMode (), "DesignMode");
-            Assert.AreEqual (false, field.DoIsTrackingViewState (), "IsTrackingViewState");
-            Assert.AreEqual ("System.Web.UI.StateBag", field.StateBag.ToString (), "StateBag");
+            Assert.AreEqual(null, field.DoControl(), "Control");
+            Assert.AreEqual(false, field.DoDesignMode(), "DesignMode");
+            Assert.AreEqual(false, field.DoIsTrackingViewState(), "IsTrackingViewState");
+            Assert.AreEqual("System.Web.UI.StateBag", field.StateBag.ToString(), "StateBag");
         }
 
         [Test]
-        public void DataControlField_AssignProperty ()
+        public void DataControlField_AssignProperty()
         {
-            DerivedDataControlField field = new DerivedDataControlField ();
+            DerivedDataControlField field = new DerivedDataControlField();
             field.AccessibleHeaderText = "test";
-            Assert.AreEqual ("test", field.AccessibleHeaderText, "AccessibleHeaderText");
+            Assert.AreEqual("test", field.AccessibleHeaderText, "AccessibleHeaderText");
             field.ControlStyle.BackColor = Color.Red;
-            Assert.AreEqual (Color.Red, field.ControlStyle.BackColor, "ControlStyle");
+            Assert.AreEqual(Color.Red, field.ControlStyle.BackColor, "ControlStyle");
             field.FooterStyle.BackColor = Color.Red;
-            Assert.AreEqual (Color.Red, field.FooterStyle.BackColor, "FooterStyle");
+            Assert.AreEqual(Color.Red, field.FooterStyle.BackColor, "FooterStyle");
             field.FooterText = "test";
-            Assert.AreEqual ("test", field.FooterText, "FooterText");
+            Assert.AreEqual("test", field.FooterText, "FooterText");
             field.HeaderImageUrl = "test";
-            Assert.AreEqual ("test", field.HeaderImageUrl, "HeaderImageUrl");
+            Assert.AreEqual("test", field.HeaderImageUrl, "HeaderImageUrl");
             field.HeaderStyle.BackColor = Color.Red;
-            Assert.AreEqual (Color.Red, field.HeaderStyle.BackColor, "HeaderStyle");
+            Assert.AreEqual(Color.Red, field.HeaderStyle.BackColor, "HeaderStyle");
             field.HeaderText = "test";
-            Assert.AreEqual ("test", field.HeaderText, "HeaderText");
+            Assert.AreEqual("test", field.HeaderText, "HeaderText");
             field.ItemStyle.BackColor = Color.Red;
-            Assert.AreEqual (Color.Red, field.ItemStyle.BackColor, "ItemStyle");
+            Assert.AreEqual(Color.Red, field.ItemStyle.BackColor, "ItemStyle");
             field.ShowHeader = false;
-            Assert.AreEqual (false, field.ShowHeader, "ShowHeader");
+            Assert.AreEqual(false, field.ShowHeader, "ShowHeader");
             field.SortExpression = "test";
-            Assert.AreEqual ("test", field.SortExpression, "SortExpression");
+            Assert.AreEqual("test", field.SortExpression, "SortExpression");
             field.Visible = false;
-            Assert.AreEqual (false, field.Visible, "Visible");
+            Assert.AreEqual(false, field.Visible, "Visible");
         }
 
         [Test]
-        public void DataControlField_Initilize ()
+        public void DataControlField_Initilize()
         {
-            DerivedDataControlField field = new DerivedDataControlField ();
-            bool res = field.Initialize (false, new Control ());
-            Assert.AreEqual (false, res, "Initilize");
+            DerivedDataControlField field = new DerivedDataControlField();
+            bool res = field.Initialize(false, new Control());
+            Assert.AreEqual(false, res, "Initilize");
         }
 
         [Test]
-        public void DataControlField_InitilizeCell ()
+        public void DataControlField_InitilizeCell()
         {
-            DerivedDataControlField field = new DerivedDataControlField ();
+            DerivedDataControlField field = new DerivedDataControlField();
             field.HeaderText = "test";
             field.HeaderStyle.BackColor = Color.Red;
             field.HeaderImageUrl = "test";
-            DataControlFieldCell cell = new DataControlFieldCell (field);
-            field.InitializeCell (cell, DataControlCellType.Header, DataControlRowState.Normal, 1);
-            Assert.AreEqual ("test", cell.ContainingField.HeaderText, "HeaderText");
-            Assert.AreEqual ("test", cell.ContainingField.HeaderImageUrl, "HeaderImageUrl");
-            Assert.AreEqual (Color.Red, cell.ContainingField.HeaderStyle.BackColor, "BackColor");
+            DataControlFieldCell cell = new DataControlFieldCell(field);
+            field.InitializeCell(cell, DataControlCellType.Header, DataControlRowState.Normal, 1);
+            Assert.AreEqual("test", cell.ContainingField.HeaderText, "HeaderText");
+            Assert.AreEqual("test", cell.ContainingField.HeaderImageUrl, "HeaderImageUrl");
+            Assert.AreEqual(Color.Red, cell.ContainingField.HeaderStyle.BackColor, "BackColor");
         }
 
         [Test]
-        public void DataControlField_CopyProperties ()
+        public void DataControlField_CopyProperties()
         {
-            DerivedDataControlField field = new DerivedDataControlField ();
-            DerivedDataControlField newField = new DerivedDataControlField ();
+            DerivedDataControlField field = new DerivedDataControlField();
+            DerivedDataControlField newField = new DerivedDataControlField();
 
             field.AccessibleHeaderText = "test";
             field.ControlStyle.BackColor = Color.Red;
@@ -201,55 +218,55 @@ namespace MonoTests.System.Web.UI.WebControls
             field.ShowHeader = false;
             field.SortExpression = "test";
             field.Visible = false;
-                        
-            field.DoCopyProperties (newField);
-            
-            Assert.AreEqual ("test", newField.AccessibleHeaderText, "AccessibleHeaderText");
-            Assert.AreEqual (Color.Red, newField.ControlStyle.BackColor, "ControlStyle");
-            Assert.AreEqual (Color.Red, newField.FooterStyle.BackColor, "FooterStyle");
-            Assert.AreEqual (Color.Red, newField.HeaderStyle.BackColor, "HeaderStyle");
-            Assert.AreEqual (Color.Red, newField.ItemStyle.BackColor, "ItemStyle");
-            Assert.AreEqual ("test", newField.FooterText, "FooterText"); 
-            Assert.AreEqual ("test", newField.HeaderImageUrl,"HeaderImageUrl");
-            Assert.AreEqual ("test", newField.HeaderText, "HeaderText ");
-            Assert.AreEqual (false, newField.InsertVisible, "InsertVisible");
-            Assert.AreEqual (false, newField.ShowHeader, "ShowHeader");
-            Assert.AreEqual ("test", newField.SortExpression, "SortExpression");
-            Assert.AreEqual (false, newField.Visible, "Visible"); 
+
+            field.DoCopyProperties(newField);
+
+            Assert.AreEqual("test", newField.AccessibleHeaderText, "AccessibleHeaderText");
+            Assert.AreEqual(Color.Red, newField.ControlStyle.BackColor, "ControlStyle");
+            Assert.AreEqual(Color.Red, newField.FooterStyle.BackColor, "FooterStyle");
+            Assert.AreEqual(Color.Red, newField.HeaderStyle.BackColor, "HeaderStyle");
+            Assert.AreEqual(Color.Red, newField.ItemStyle.BackColor, "ItemStyle");
+            Assert.AreEqual("test", newField.FooterText, "FooterText");
+            Assert.AreEqual("test", newField.HeaderImageUrl, "HeaderImageUrl");
+            Assert.AreEqual("test", newField.HeaderText, "HeaderText ");
+            Assert.AreEqual(false, newField.InsertVisible, "InsertVisible");
+            Assert.AreEqual(false, newField.ShowHeader, "ShowHeader");
+            Assert.AreEqual("test", newField.SortExpression, "SortExpression");
+            Assert.AreEqual(false, newField.Visible, "Visible");
         }
 
         [Test]
-        public void DataControlField_Events ()
+        public void DataControlField_Events()
         {
-            DerivedDataControlField field = new DerivedDataControlField ();
-            Assert.AreEqual (false, field.FieldChanged, "BeforeChangingProperty");
+            DerivedDataControlField field = new DerivedDataControlField();
+            Assert.AreEqual(false, field.FieldChanged, "BeforeChangingProperty");
             field.FooterText = "test";
-            Assert.AreEqual (true, field.FieldChanged, "AfterChangingProperty");
+            Assert.AreEqual(true, field.FieldChanged, "AfterChangingProperty");
         }
 
         [Test]
-        public void DataControlField_ViewState ()
+        public void DataControlField_ViewState()
         {
-            DerivedDataControlField field = new DerivedDataControlField ();
-            DerivedDataControlField newField = new DerivedDataControlField ();
-            field.DoTrackViewState ();
+            DerivedDataControlField field = new DerivedDataControlField();
+            DerivedDataControlField newField = new DerivedDataControlField();
+            field.DoTrackViewState();
             field.FooterStyle.BackColor = Color.Red;
             field.ItemStyle.BackColor = Color.Red;
             field.HeaderStyle.BackColor = Color.Red;
             object state = field.DoSaveViewState();
-            newField.DoLoadViewState (state);
-            Assert.AreEqual (Color.Red, newField.HeaderStyle.BackColor, "HeaderStyle");
-            Assert.AreEqual (Color.Red, newField.ItemStyle.BackColor, "ItemStyle");
-            Assert.AreEqual (Color.Red, newField.FooterStyle.BackColor, "FooterStyle");
+            newField.DoLoadViewState(state);
+            Assert.AreEqual(Color.Red, newField.HeaderStyle.BackColor, "HeaderStyle");
+            Assert.AreEqual(Color.Red, newField.ItemStyle.BackColor, "ItemStyle");
+            Assert.AreEqual(Color.Red, newField.FooterStyle.BackColor, "FooterStyle");
         }
 
         [Test]
-        [ExpectedException (typeof(NotImplementedException))]
-        public void DataControlField_CloneField ()
+        [ExpectedException(typeof(NotImplementedException))]
+        public void DataControlField_CloneField()
         {
-            DerivedDataControlField field = new DerivedDataControlField ();
-            DerivedDataControlField newField = new DerivedDataControlField ();
-            newField = (DerivedDataControlField)field.DoCloneField ();
+            DerivedDataControlField field = new DerivedDataControlField();
+            DerivedDataControlField newField = new DerivedDataControlField();
+            newField = (DerivedDataControlField)field.DoCloneField();
         }
     }
 }

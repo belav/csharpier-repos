@@ -3,11 +3,12 @@
 
 using System;
 
-class BaseClass {
-        protected EventHandler value;
+class BaseClass
+{
+    protected EventHandler value;
 }
 
-class DerivedClass: BaseClass {
-        protected override void value() {}
+class DerivedClass : BaseClass
+{
+    protected override void value() { }
 }
-

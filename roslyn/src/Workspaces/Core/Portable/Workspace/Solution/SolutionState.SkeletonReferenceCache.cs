@@ -67,17 +67,20 @@ internal partial class SolutionState
         /// <list type="number">
         /// <item>Project A is referenced by projects B and C (both have a different language than A).</item>
         /// <item>Producing the compilation for 'B' produces the compilation for 'A' which produces the skeleton that 'B' references.</item>
-        /// <item>B's compilation is released and then GC'ed.</item> 
+        /// <item>B's compilation is released and then GC'ed.</item>
         /// <item>Producing the compilation for 'C' needs the skeleton from 'A'</item>
         /// </list>
         /// At this point we would not want to re-emit the assembly metadata for A's compilation.  We already did that
         /// for 'B', and it can be enormously expensive to do so again.  So as long as A's compilation lives, we really
         /// want to keep it's skeleton cache around.
         /// </summary>
-        private static readonly ConditionalWeakTable<Compilation, AsyncLazy<SkeletonReferenceSet?>> s_compilationToSkeletonSet = new();
+        private static readonly ConditionalWeakTable<
+            Compilation,
+            AsyncLazy<SkeletonReferenceSet?>
+        > s_compilationToSkeletonSet = new();
 
         /// <summary>
-        /// Lock around <see cref="_version"/> and <see cref="_skeletonReferenceSet"/> to ensure they are updated/read 
+        /// Lock around <see cref="_version"/> and <see cref="_skeletonReferenceSet"/> to ensure they are updated/read
         /// in an atomic fashion.
         /// </summary>
         private readonly object _stateGate = new();
@@ -94,13 +97,12 @@ internal partial class SolutionState
         private SkeletonReferenceSet? _skeletonReferenceSet;
 
         public SkeletonReferenceCache()
-            : this(version: null, skeletonReferenceSet: null)
-        {
-        }
+            : this(version: null, skeletonReferenceSet: null) { }
 
         private SkeletonReferenceCache(
             VersionStamp? version,
-            SkeletonReferenceSet? skeletonReferenceSet)
+            SkeletonReferenceSet? skeletonReferenceSet
+        )
         {
             _version = version;
             _skeletonReferenceSet = skeletonReferenceSet;
@@ -124,18 +126,27 @@ internal partial class SolutionState
             }
         }
 
-        public MetadataReference? TryGetAlreadyBuiltMetadataReference(MetadataReferenceProperties properties)
-            => _skeletonReferenceSet?.GetOrCreateMetadataReference(properties);
+        public MetadataReference? TryGetAlreadyBuiltMetadataReference(
+            MetadataReferenceProperties properties
+        ) => _skeletonReferenceSet?.GetOrCreateMetadataReference(properties);
 
         public async Task<MetadataReference?> GetOrBuildReferenceAsync(
             ICompilationTracker compilationTracker,
             SolutionState solution,
             MetadataReferenceProperties properties,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var version = await compilationTracker.GetDependentSemanticVersionAsync(solution, cancellationToken).ConfigureAwait(false);
+            var version = await compilationTracker
+                .GetDependentSemanticVersionAsync(solution, cancellationToken)
+                .ConfigureAwait(false);
             var referenceSet = await TryGetOrCreateReferenceSetAsync(
-                compilationTracker, solution, version, cancellationToken).ConfigureAwait(false);
+                    compilationTracker,
+                    solution,
+                    version,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (referenceSet == null)
                 return null;
 
@@ -146,7 +157,8 @@ internal partial class SolutionState
             ICompilationTracker compilationTracker,
             SolutionState solution,
             VersionStamp version,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // First, just see if we have cached a reference set that is complimentary with the version of the project
             // being passed in.  If so, we can just reuse what we already computed before.
@@ -155,7 +167,12 @@ internal partial class SolutionState
 
             // okay, we don't have anything cached with this version. so create one now.
 
-            var currentSkeletonReferenceSet = await CreateSkeletonReferenceSetAsync(compilationTracker, solution, cancellationToken).ConfigureAwait(false);
+            var currentSkeletonReferenceSet = await CreateSkeletonReferenceSetAsync(
+                    compilationTracker,
+                    solution,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             lock (_stateGate)
             {
@@ -175,44 +192,64 @@ internal partial class SolutionState
         private static async Task<SkeletonReferenceSet?> CreateSkeletonReferenceSetAsync(
             ICompilationTracker compilationTracker,
             SolutionState solution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // It's acceptable for this computation to be something that multiple calling threads may hit at once.  The
-            // implementation inside the compilation tracker does an async-wait on a an internal semaphore to ensure 
+            // implementation inside the compilation tracker does an async-wait on a an internal semaphore to ensure
             // only one thread actually does the computation and the rest wait.
-            var compilation = await compilationTracker.GetCompilationAsync(solution, cancellationToken).ConfigureAwait(false);
+            var compilation = await compilationTracker
+                .GetCompilationAsync(solution, cancellationToken)
+                .ConfigureAwait(false);
             var workspace = solution.Workspace;
 
             // note: computing the assembly metadata is actually synchronous.  However, this ensures we don't have N
             // threads blocking on a lazy to compute the work.  Instead, we'll only occupy one thread, while any
             // concurrent requests asynchronously wait for that work to be done.
 
-            var lazy = s_compilationToSkeletonSet.GetValue(compilation,
-                compilation => new AsyncLazy<SkeletonReferenceSet?>(
-                    cancellationToken => Task.FromResult(CreateSkeletonSet(workspace, compilation, cancellationToken)),
-                    cacheResult: true));
+            var lazy = s_compilationToSkeletonSet.GetValue(
+                compilation,
+                compilation =>
+                    new AsyncLazy<SkeletonReferenceSet?>(
+                        cancellationToken =>
+                            Task.FromResult(
+                                CreateSkeletonSet(workspace, compilation, cancellationToken)
+                            ),
+                        cacheResult: true
+                    )
+            );
 
             return await lazy.GetValueAsync(cancellationToken).ConfigureAwait(false);
         }
 
         private static SkeletonReferenceSet? CreateSkeletonSet(
-            Workspace workspace, Compilation compilation, CancellationToken cancellationToken)
+            Workspace workspace,
+            Compilation compilation,
+            CancellationToken cancellationToken
+        )
         {
             var storage = TryCreateMetadataStorage(workspace, compilation, cancellationToken);
             if (storage == null)
                 return null;
 
-            var metadata = AssemblyMetadata.CreateFromStream(storage.ReadStream(cancellationToken), leaveOpen: false);
+            var metadata = AssemblyMetadata.CreateFromStream(
+                storage.ReadStream(cancellationToken),
+                leaveOpen: false
+            );
 
             // read in the stream and pass ownership of it to the metadata object.  When it is disposed it will dispose
             // the stream as well.
             return new SkeletonReferenceSet(
                 metadata,
                 compilation.AssemblyName,
-                new DeferredDocumentationProvider(compilation));
+                new DeferredDocumentationProvider(compilation)
+            );
         }
 
-        private bool TryReadSkeletonReferenceSetAtThisVersion(VersionStamp version, out SkeletonReferenceSet? result)
+        private bool TryReadSkeletonReferenceSetAtThisVersion(
+            VersionStamp version,
+            out SkeletonReferenceSet? result
+        )
         {
             lock (_stateGate)
             {
@@ -229,25 +266,47 @@ internal partial class SolutionState
             return false;
         }
 
-        private static ITemporaryStreamStorageInternal? TryCreateMetadataStorage(Workspace workspace, Compilation compilation, CancellationToken cancellationToken)
+        private static ITemporaryStreamStorageInternal? TryCreateMetadataStorage(
+            Workspace workspace,
+            Compilation compilation,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             try
             {
-                workspace.LogTestMessage(static compilation => $"Beginning to create a skeleton assembly for {compilation.AssemblyName}...", compilation);
+                workspace.LogTestMessage(
+                    static compilation =>
+                        $"Beginning to create a skeleton assembly for {compilation.AssemblyName}...",
+                    compilation
+                );
 
-                using (Logger.LogBlock(FunctionId.Workspace_SkeletonAssembly_EmitMetadataOnlyImage, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Workspace_SkeletonAssembly_EmitMetadataOnlyImage,
+                        cancellationToken
+                    )
+                )
                 {
                     using var stream = SerializableBytes.CreateWritableStream();
 
-                    var emitResult = compilation.Emit(stream, options: s_metadataOnlyEmitOptions, cancellationToken: cancellationToken);
+                    var emitResult = compilation.Emit(
+                        stream,
+                        options: s_metadataOnlyEmitOptions,
+                        cancellationToken: cancellationToken
+                    );
 
                     if (emitResult.Success)
                     {
-                        workspace.LogTestMessage(static compilation => $"Successfully emitted a skeleton assembly for {compilation.AssemblyName}", compilation);
+                        workspace.LogTestMessage(
+                            static compilation =>
+                                $"Successfully emitted a skeleton assembly for {compilation.AssemblyName}",
+                            compilation
+                        );
 
-                        var temporaryStorageService = workspace.Services.GetRequiredService<ITemporaryStorageServiceInternal>();
+                        var temporaryStorageService =
+                            workspace.Services.GetRequiredService<ITemporaryStorageServiceInternal>();
                         var storage = temporaryStorageService.CreateTemporaryStreamStorage();
 
                         stream.Position = 0;
@@ -257,21 +316,33 @@ internal partial class SolutionState
                     }
                     else
                     {
-                        workspace.LogTestMessage(static compilation => $"Failed to create a skeleton assembly for {compilation.AssemblyName}:", compilation);
+                        workspace.LogTestMessage(
+                            static compilation =>
+                                $"Failed to create a skeleton assembly for {compilation.AssemblyName}:",
+                            compilation
+                        );
 
                         foreach (var diagnostic in emitResult.Diagnostics)
                         {
-                            workspace.LogTestMessage(static diagnostic => "  " + diagnostic.GetMessage(), diagnostic);
+                            workspace.LogTestMessage(
+                                static diagnostic => "  " + diagnostic.GetMessage(),
+                                diagnostic
+                            );
                         }
 
                         // log emit failures so that we can improve most common cases
-                        Logger.Log(FunctionId.MetadataOnlyImage_EmitFailure, KeyValueLogMessage.Create(m =>
-                        {
-                            // log errors in the format of
-                            // CS0001:1;CS002:10;...
-                            var groups = emitResult.Diagnostics.GroupBy(d => d.Id).Select(g => $"{g.Key}:{g.Count()}");
-                            m["Errors"] = string.Join(";", groups);
-                        }));
+                        Logger.Log(
+                            FunctionId.MetadataOnlyImage_EmitFailure,
+                            KeyValueLogMessage.Create(m =>
+                            {
+                                // log errors in the format of
+                                // CS0001:1;CS002:10;...
+                                var groups = emitResult.Diagnostics
+                                    .GroupBy(d => d.Id)
+                                    .Select(g => $"{g.Key}:{g.Count()}");
+                                m["Errors"] = string.Join(";", groups);
+                            })
+                        );
 
                         return null;
                     }
@@ -279,7 +350,11 @@ internal partial class SolutionState
             }
             finally
             {
-                workspace.LogTestMessage(static compilation => $"Done trying to create a skeleton assembly for {compilation.AssemblyName}", compilation);
+                workspace.LogTestMessage(
+                    static compilation =>
+                        $"Done trying to create a skeleton assembly for {compilation.AssemblyName}",
+                    compilation
+                );
             }
         }
     }

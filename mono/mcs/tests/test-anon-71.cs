@@ -4,19 +4,25 @@ using System;
 
 class Program
 {
-    private delegate int FdCb (int fd);
-    private static Errno ProcessFile (string path, FdCb cb)
+    private delegate int FdCb(int fd);
+
+    private static Errno ProcessFile(string path, FdCb cb)
     {
         return Errno.Ok;
     }
 
-    protected unsafe Errno OnReadHandle (string path, byte [] buf, long offset)
+    protected unsafe Errno OnReadHandle(string path, byte[] buf, long offset)
     {
-        Errno e = ProcessFile (path, delegate (int fd) {
-            fixed (byte* pb = buf) {
-                return 5;
+        Errno e = ProcessFile(
+            path,
+            delegate(int fd)
+            {
+                fixed (byte* pb = buf)
+                {
+                    return 5;
+                }
             }
-        });
+        );
         return e;
     }
 
@@ -24,9 +30,6 @@ class Program
     {
         Ok = 1
     }
-    
-    public static void Main ()
-    {
-    }
-}
 
+    public static void Main() { }
+}

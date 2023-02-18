@@ -2,7 +2,5 @@ using System;
 
 namespace csharplib
 {
-    public class Class1
-    {
-    }
+    public class Class1 { }
 }

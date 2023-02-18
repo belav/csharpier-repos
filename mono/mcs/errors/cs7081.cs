@@ -6,7 +6,5 @@ using System.Runtime.CompilerServices;
 
 class D
 {
-    void Foo ([CallerMemberName, CallerLineNumber] object o = null)
-    {
-    }
+    void Foo([CallerMemberName, CallerLineNumber] object o = null) { }
 }

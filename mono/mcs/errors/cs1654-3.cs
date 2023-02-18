@@ -5,20 +5,20 @@ using System;
 
 struct Foo : IDisposable
 {
-    public int Property {
+    public int Property
+    {
         set { }
     }
 
-    public void Dispose ()
-    {
-    }
+    public void Dispose() { }
 }
 
 class Bar
 {
-    static void Main ()
+    static void Main()
     {
-        using (var f = new Foo ()) {
+        using (var f = new Foo())
+        {
             f.Property = 0;
         }
     }

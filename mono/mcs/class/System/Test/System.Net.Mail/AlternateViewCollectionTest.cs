@@ -19,32 +19,32 @@ namespace MonoTests.System.Net.Mail
     {
         AlternateViewCollection avc;
         AlternateView av;
-        
+
         [SetUp]
-        public void GetReady ()
+        public void GetReady()
         {
-            avc = new  MailMessage ("foo@bar.com", "foo@bar.com").AlternateViews;
-            av = AlternateView.CreateAlternateViewFromString ("test", new ContentType ("text/plain"));
+            avc = new MailMessage("foo@bar.com", "foo@bar.com").AlternateViews;
+            av = AlternateView.CreateAlternateViewFromString("test", new ContentType("text/plain"));
         }
 
         [Test]
-        public void InitialCount ()
+        public void InitialCount()
         {
-            Assert.IsTrue (avc.Count == 0);
+            Assert.IsTrue(avc.Count == 0);
         }
 
         [Test]
-        public void AddCount ()
+        public void AddCount()
         {
-            avc.Add (av);
-            Assert.IsTrue (avc.Count == 1);
+            avc.Add(av);
+            Assert.IsTrue(avc.Count == 1);
         }
 
         [Test]
-        public void RemoveCount ()
+        public void RemoveCount()
         {
-            avc.Remove (av);
-            Assert.IsTrue (avc.Count == 0);
+            avc.Remove(av);
+            Assert.IsTrue(avc.Count == 0);
         }
     }
 }

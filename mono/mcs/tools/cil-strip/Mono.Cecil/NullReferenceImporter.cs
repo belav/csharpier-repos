@@ -26,23 +26,23 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    sealed class NullReferenceImporter : IImporter
+    {
+        public static readonly NullReferenceImporter Instance = new NullReferenceImporter();
 
-    sealed class NullReferenceImporter : IImporter {
-
-        public static readonly NullReferenceImporter Instance = new NullReferenceImporter ();
-
-        public TypeReference ImportTypeReference (TypeReference type, ImportContext context)
+        public TypeReference ImportTypeReference(TypeReference type, ImportContext context)
         {
             return type;
         }
 
-        public FieldReference ImportFieldReference (FieldReference field, ImportContext context)
+        public FieldReference ImportFieldReference(FieldReference field, ImportContext context)
         {
             return field;
         }
 
-        public MethodReference ImportMethodReference (MethodReference method, ImportContext context)
+        public MethodReference ImportMethodReference(MethodReference method, ImportContext context)
         {
             return method;
         }

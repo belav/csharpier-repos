@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -unsafe
 
-unsafe enum E
-{
-}
+unsafe enum E { }

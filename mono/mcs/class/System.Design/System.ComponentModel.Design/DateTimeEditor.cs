@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,26 +43,31 @@ namespace System.ComponentModel.Design
     {
         private class EditorControl : MonthCalendar
         {
-            public EditorControl ()
+            public EditorControl()
             {
                 MaxSelectionCount = 1;
             }
         }
 
         private IWindowsFormsEditorService editorService;
-        private EditorControl control = new EditorControl ();
+        private EditorControl control = new EditorControl();
         private DateTime editContent;
 
-        public DateTimeEditor ()
+        public DateTimeEditor()
         {
-            control.DateSelected += new DateRangeEventHandler (control_DateSelected);
+            control.DateSelected += new DateRangeEventHandler(control_DateSelected);
         }
 
-        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             if (context != null && provider != null)
             {
-                editorService = (IWindowsFormsEditorService)provider.GetService (typeof (IWindowsFormsEditorService));
+                editorService = (IWindowsFormsEditorService)
+                    provider.GetService(typeof(IWindowsFormsEditorService));
                 if (editorService != null)
                 {
                     if (!(value is DateTime))
@@ -74,21 +79,21 @@ namespace System.ComponentModel.Design
                     else
                         control.SelectionStart = editContent;
 
-                    editorService.DropDownControl (control);
+                    editorService.DropDownControl(control);
 
                     return editContent;
                 }
             }
-            return base.EditValue (context, provider, value);
+            return base.EditValue(context, provider, value);
         }
 
-        void control_DateSelected (object sender, DateRangeEventArgs e)
+        void control_DateSelected(object sender, DateRangeEventArgs e)
         {
             editContent = e.Start;
-            editorService.CloseDropDown ();
+            editorService.CloseDropDown();
         }
 
-        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.DropDown;
         }

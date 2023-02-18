@@ -2,9 +2,9 @@ using System;
 
 class MainClass
 {
-    public static int Main ()
+    public static int Main()
     {
-        var res = XX () | YY();
+        var res = XX() | YY();
         if (!res.Value)
             return 1;
 
@@ -18,20 +18,22 @@ class MainClass
     }
 
     static int xx;
-    static bool XX ()
+
+    static bool XX()
     {
         ++xx;
-        Console.WriteLine ("XX");
+        Console.WriteLine("XX");
         return true;
-    }    
+    }
 
     static int yy;
-    static bool? YY ()
+
+    static bool? YY()
     {
         if (xx == 1)
             ++yy;
-            
-        Console.WriteLine ("YY");
+
+        Console.WriteLine("YY");
         return true;
-    }    
+    }
 }

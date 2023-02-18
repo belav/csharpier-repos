@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,8 @@ using System.Threading;
 
 namespace System.IO
 {
-    class FileStreamAsyncResult : IAsyncResult {
+    class FileStreamAsyncResult : IAsyncResult
+    {
         /* Same structure in the runtime */
         object state;
         bool completed;
@@ -43,77 +44,82 @@ namespace System.IO
         ManualResetEvent wh;
         AsyncCallback cb;
         bool completedSynch;
-        
+
 #pragma warning disable 649
-        public byte [] Buffer;
+        public byte[] Buffer;
         public int Offset;
         public int Count;
         public int OriginalCount;
         public int BytesRead;
-#pragma warning restore 649        
+#pragma warning restore 649
 
         AsyncCallback realcb;
 
-        public FileStreamAsyncResult (AsyncCallback cb, object state)
+        public FileStreamAsyncResult(AsyncCallback cb, object state)
         {
             this.state = state;
             this.realcb = cb;
             if (realcb != null)
-                this.cb = new AsyncCallback (CBWrapper);
-            wh = new ManualResetEvent (false);
+                this.cb = new AsyncCallback(CBWrapper);
+            wh = new ManualResetEvent(false);
         }
 
-        static void CBWrapper (IAsyncResult ares)
+        static void CBWrapper(IAsyncResult ares)
         {
-            FileStreamAsyncResult res = (FileStreamAsyncResult) ares;
-            res.realcb.BeginInvoke (ares, null, null);
+            FileStreamAsyncResult res = (FileStreamAsyncResult)ares;
+            res.realcb.BeginInvoke(ares, null, null);
         }
 
-        public void SetComplete (Exception e)
+        public void SetComplete(Exception e)
         {
             exc = e;
             completed = true;
-            wh.Set ();
+            wh.Set();
             if (cb != null)
-                cb (this);
+                cb(this);
         }
-        
-        public void SetComplete (Exception e, int nbytes)
+
+        public void SetComplete(Exception e, int nbytes)
         {
             this.BytesRead = nbytes;
-            SetComplete (e);
+            SetComplete(e);
         }
 
-        public void SetComplete (Exception e, int nbytes, bool synch)
+        public void SetComplete(Exception e, int nbytes, bool synch)
         {
             completedSynch = synch;
-            SetComplete (e, nbytes);
+            SetComplete(e, nbytes);
         }
 
-        public object AsyncState {
+        public object AsyncState
+        {
             get { return state; }
         }
 
-        public bool CompletedSynchronously {
+        public bool CompletedSynchronously
+        {
             get { return completedSynch; }
         }
 
-        public WaitHandle AsyncWaitHandle {
+        public WaitHandle AsyncWaitHandle
+        {
             get { return wh; }
         }
 
-        public bool IsCompleted {
+        public bool IsCompleted
+        {
             get { return completed; }
         }
 
-        public Exception Exception {
+        public Exception Exception
+        {
             get { return exc; }
         }
 
-        public bool Done {
+        public bool Done
+        {
             get { return done; }
             set { done = value; }
         }
     }
 }
-

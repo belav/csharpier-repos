@@ -36,64 +36,74 @@ namespace Mono.Threading
 
         int rwlock;
 
-        public void EnterReadLock (ref bool taken)
+        public void EnterReadLock(ref bool taken)
         {
             if (taken)
-                throw new ArgumentException ("taken", "taken needs to be set to false");
+                throw new ArgumentException("taken", "taken needs to be set to false");
 
-            SpinWait sw = new SpinWait ();
+            SpinWait sw = new SpinWait();
             bool cont = true;
 
-            do {
+            do
+            {
                 while ((rwlock & (RwWrite | RwWait)) > 0)
-                    sw.SpinOnce ();
+                    sw.SpinOnce();
 
-                try {}
-                finally {
-                    if ((Interlocked.Add (ref rwlock, RwRead) & (RwWait | RwWait)) == 0) {
+                try { }
+                finally
+                {
+                    if ((Interlocked.Add(ref rwlock, RwRead) & (RwWait | RwWait)) == 0)
+                    {
                         taken = true;
                         cont = false;
-                    } else {
-                        Interlocked.Add (ref rwlock, -RwRead);
+                    }
+                    else
+                    {
+                        Interlocked.Add(ref rwlock, -RwRead);
                     }
                 }
             } while (cont);
         }
 
-        public void TryEnterReadLock (ref bool taken)
+        public void TryEnterReadLock(ref bool taken)
         {
             if (taken)
-                throw new ArgumentException ("taken", "taken needs to be set to false");
+                throw new ArgumentException("taken", "taken needs to be set to false");
 
-            try {}
-            finally {
-                if ((Interlocked.Add (ref rwlock, RwRead) & (RwWait | RwWrite)) == 0)
+            try { }
+            finally
+            {
+                if ((Interlocked.Add(ref rwlock, RwRead) & (RwWait | RwWrite)) == 0)
                     taken = true;
                 else
-                    Interlocked.Add (ref rwlock, -RwRead);
+                    Interlocked.Add(ref rwlock, -RwRead);
             }
         }
 
-        public void ExitReadLock ()
+        public void ExitReadLock()
         {
-            Interlocked.Add (ref rwlock, -RwRead);
+            Interlocked.Add(ref rwlock, -RwRead);
         }
 
-        public void EnterWriteLock (ref bool taken)
+        public void EnterWriteLock(ref bool taken)
         {
             if (taken)
-                throw new ArgumentException ("taken", "taken needs to be set to false");
+                throw new ArgumentException("taken", "taken needs to be set to false");
 
-            SpinWait sw = new SpinWait ();
+            SpinWait sw = new SpinWait();
             int state = rwlock;
 
-            try {
-                do {
+            try
+            {
+                do
+                {
                     state = rwlock;
-                    if (state < RwWrite) {
-                        try {}
-                        finally {
-                            if (Interlocked.CompareExchange (ref rwlock, RwWrite, state) == state)
+                    if (state < RwWrite)
+                    {
+                        try { }
+                        finally
+                        {
+                            if (Interlocked.CompareExchange(ref rwlock, RwWrite, state) == state)
                                 taken = true;
                         }
                         if (taken)
@@ -102,40 +112,45 @@ namespace Mono.Threading
                         state = rwlock;
                     }
 
-                    while ((state & RwWait) == 0 && Interlocked.CompareExchange (ref rwlock, state | RwWait, state) != state)
+                    while (
+                        (state & RwWait) == 0
+                        && Interlocked.CompareExchange(ref rwlock, state | RwWait, state) != state
+                    )
                         state = rwlock;
 
                     while (rwlock > RwWait)
-                        sw.SpinOnce ();
+                        sw.SpinOnce();
                 } while (true);
-            } finally {
+            }
+            finally
+            {
                 state = rwlock;
                 if (!taken && (state & RwWait) != 0)
-                    Interlocked.CompareExchange (ref rwlock, state - RwWait, state);
+                    Interlocked.CompareExchange(ref rwlock, state - RwWait, state);
             }
         }
 
-        public void TryEnterWriteLock (ref bool taken)
+        public void TryEnterWriteLock(ref bool taken)
         {
             if (taken)
-                throw new ArgumentException ("taken", "taken needs to be set to false");
+                throw new ArgumentException("taken", "taken needs to be set to false");
 
             int state = rwlock;
 
             if (state >= RwWrite)
                 return;
 
-            try {}
-            finally {
-                if (Interlocked.CompareExchange (ref rwlock, RwWrite, state) == state)
+            try { }
+            finally
+            {
+                if (Interlocked.CompareExchange(ref rwlock, RwWrite, state) == state)
                     taken = true;
             }
         }
 
-        public void ExitWriteLock ()
+        public void ExitWriteLock()
         {
-            Interlocked.Add (ref rwlock, -RwWrite);
+            Interlocked.Add(ref rwlock, -RwWrite);
         }
     }
 }
-

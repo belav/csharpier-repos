@@ -15,14 +15,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpAddAccessibilityModifiersDiagnosticAnalyzer,
-        CSharpAddAccessibilityModifiersCodeFixProvider>;
+        CSharpAddAccessibilityModifiersCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddAccessibilityModifiers)]
     public class AddAccessibilityModifiersTests
     {
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact]
         public async Task TestAllConstructs()
@@ -146,27 +147,32 @@ namespace Outer
             EMember
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRefStructs()
         {
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 namespace Test
 {
     ref struct [|S1|] { }
-}", @"
+}",
+                @"
 namespace Test
 {
     internal ref struct S1 { }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRecords()
         {
-            var source = @"
+            var source =
+                @"
 record [|Record|]
 {
     int [|field|];
@@ -177,7 +183,8 @@ namespace System.Runtime.CompilerServices
     {
     }
 }";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 internal record Record
 {
     private int field;
@@ -202,13 +209,15 @@ namespace System.Runtime.CompilerServices
         [Fact]
         public async Task TestRecordStructs()
         {
-            var source = @"
+            var source =
+                @"
 record struct [|Record|]
 {
     int [|field|];
 }
 ";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 internal record struct Record
 {
     private int field;
@@ -228,15 +237,18 @@ internal record struct Record
         [Fact]
         public async Task TestReadOnlyStructs()
         {
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 namespace Test
 {
     readonly struct [|S1|] { }
-}", @"
+}",
+                @"
 namespace Test
 {
     internal readonly struct S1 { }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -378,7 +390,10 @@ namespace Outer
                 },
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -388,19 +403,24 @@ namespace Outer
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 namespace Test
 {
     internal ref struct [|S1|] { }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace Test
 {
     ref struct S1 { }
 }",
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -410,19 +430,24 @@ namespace Test
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 namespace Test
 {
     internal readonly struct [|S1|] { }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace Test
 {
     readonly struct S1 { }
 }",
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -432,13 +457,18 @@ namespace Test
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 internal class [|C1|] { }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C1 { }",
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -446,7 +476,8 @@ class C1 { }",
         [Fact]
         public async Task TestExternMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -456,7 +487,7 @@ internal class Program
     static extern int [|MessageBox|](IntPtr h, string m, string c, int type);
 }
 ",
-@"
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -465,47 +496,53 @@ internal class Program
     [DllImport(""User32.dll"", CharSet = CharSet.Unicode)]
     private static extern int [|MessageBox|](IntPtr h, string m, string c, int type);
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task TestVolatile()
         {
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 internal class Program
 {
     volatile int [|x|];
 }
 ",
-@"
+                @"
 internal class Program
 {
     private volatile int x;
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(48899, "https://github.com/dotnet/roslyn/issues/48899")]
         public async Task TestAbstractMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 public abstract class TestClass
 {
     abstract string {|CS0621:[|Test|]|} { get; }
 }
 ",
-@"
+                @"
 public abstract class TestClass
 {
     protected abstract string Test { get; }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(48899, "https://github.com/dotnet/roslyn/issues/48899")]
         public async Task TestOverriddenMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync(@"
+            await VerifyCS.VerifyCodeFixAsync(
+                @"
 public abstract class TestClass
 {
     public abstract string Test { get; }
@@ -516,7 +553,7 @@ public class Derived : TestClass
     override string {|CS0507:{|CS0621:[|Test|]|}|} { get; }
 }
 ",
-@"
+                @"
 public abstract class TestClass
 {
     public abstract string Test { get; }
@@ -526,7 +563,8 @@ public class Derived : TestClass
 {
     public override string Test { get; }
 }
-");
+"
+            );
         }
 
         [Fact]
@@ -534,12 +572,14 @@ public class Derived : TestClass
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 namespace Test;
 
 struct [|S1|] { }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 namespace Test;
 
 internal struct S1 { }
@@ -551,7 +591,8 @@ internal struct S1 { }
         [Fact, WorkItem(55703, "https://github.com/dotnet/roslyn/issues/55703")]
         public async Task TestPartial_WithExistingModifier()
         {
-            var source = @"
+            var source =
+                @"
 partial class [|C|]
 {
 }
@@ -560,7 +601,8 @@ public partial class C
 {
 }
 ";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 public partial class C
 {
 }
@@ -583,7 +625,8 @@ public partial class C
         [Fact, WorkItem(58914, "https://github.com/dotnet/roslyn/issues/58914")]
         public async Task TestStaticOperatorInInterface()
         {
-            var source = @"
+            var source =
+                @"
 internal interface I<T> where T : I<T>
 {
     abstract static int operator +(T x);
@@ -677,13 +720,15 @@ internal class C : I<C>
         [Fact, WorkItem(29633, "https://github.com/dotnet/roslyn/issues/29633")]
         public async Task TestTitle1()
         {
-            var source = @"
+            var source =
+                @"
 internal class C
 {
     int [|field|];
 }
 ";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 internal class C
 {
     private int field;
@@ -704,13 +749,15 @@ internal class C
         [Fact, WorkItem(29633, "https://github.com/dotnet/roslyn/issues/29633")]
         public async Task TestTitle2()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     private int [|field|];
 }
 ";
-            var fixedSource = @"
+            var fixedSource =
+                @"
 class C
 {
     int field;
@@ -722,10 +769,15 @@ class C
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.Preview,
-                CodeActionEquivalenceKey = nameof(AnalyzersResources.Remove_accessibility_modifiers),
+                CodeActionEquivalenceKey = nameof(
+                    AnalyzersResources.Remove_accessibility_modifiers
+                ),
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired,AccessibilityModifiersRequired.OmitIfDefault }
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    }
                 }
             };
 

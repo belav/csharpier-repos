@@ -1,7 +1,7 @@
 // CS1540: Cannot access protected member `A.del' via a qualifier of type `A'. The qualifier must be of type `B' or derived from it
 // Line: 16
 
-delegate int D ();
+delegate int D();
 
 class A
 {
@@ -10,9 +10,9 @@ class A
 
 class B : A
 {
-    public static void Main ()
+    public static void Main()
     {
-        A b = new A ();
-        var v = b.del ();
+        A b = new A();
+        var v = b.del();
     }
 }

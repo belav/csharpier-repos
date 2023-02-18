@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
-    internal sealed class CLIHeader : IHeader, IBinaryVisitable {
-
+namespace Mono.Cecil.Binary
+{
+    internal sealed class CLIHeader : IHeader, IBinaryVisitable
+    {
         public uint Cb;
         public ushort MajorRuntimeVersion;
         public ushort MinorRuntimeVersion;
@@ -43,13 +43,11 @@ namespace Mono.Cecil.Binary {
         public DataDirectory ExportAddressTableJumps;
         public DataDirectory ManagedNativeHeader;
 
-        public byte [] ImageHash;
+        public byte[] ImageHash;
 
-        internal CLIHeader ()
-        {
-        }
+        internal CLIHeader() { }
 
-        public void SetDefaultValues ()
+        public void SetDefaultValues()
         {
             Cb = 0x48;
             Flags = RuntimeImage.ILOnly;
@@ -58,9 +56,9 @@ namespace Mono.Cecil.Binary {
             ManagedNativeHeader = DataDirectory.Zero;
         }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitCLIHeader (this);
+            visitor.VisitCLIHeader(this);
         }
     }
 }

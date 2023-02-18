@@ -3,15 +3,13 @@
 
 class Base<T>
 {
-    protected virtual void Foo<U> (U u)
-    {
-    }
+    protected virtual void Foo<U>(U u) { }
 }
 
 class Derived<T> : Base<int>
 {
-    protected override void Foo<U> (U u)
+    protected override void Foo<U>(U u)
     {
-        base.Foo ();
+        base.Foo();
     }
 }

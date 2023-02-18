@@ -30,7 +30,11 @@ public class HstsMiddleware
     /// <param name="next"></param>
     /// <param name="options"></param>
     /// <param name="loggerFactory"></param>
-    public HstsMiddleware(RequestDelegate next, IOptions<HstsOptions> options, ILoggerFactory loggerFactory)
+    public HstsMiddleware(
+        RequestDelegate next,
+        IOptions<HstsOptions> options,
+        ILoggerFactory loggerFactory
+    )
     {
         if (options == null)
         {
@@ -40,11 +44,16 @@ public class HstsMiddleware
         _next = next ?? throw new ArgumentNullException(nameof(next));
 
         var hstsOptions = options.Value;
-        var maxAge = Convert.ToInt64(Math.Floor(hstsOptions.MaxAge.TotalSeconds))
-                        .ToString(CultureInfo.InvariantCulture);
-        var includeSubdomains = hstsOptions.IncludeSubDomains ? IncludeSubDomains : StringSegment.Empty;
+        var maxAge = Convert
+            .ToInt64(Math.Floor(hstsOptions.MaxAge.TotalSeconds))
+            .ToString(CultureInfo.InvariantCulture);
+        var includeSubdomains = hstsOptions.IncludeSubDomains
+            ? IncludeSubDomains
+            : StringSegment.Empty;
         var preload = hstsOptions.Preload ? Preload : StringSegment.Empty;
-        _strictTransportSecurityValue = new StringValues($"max-age={maxAge}{includeSubdomains}{preload}");
+        _strictTransportSecurityValue = new StringValues(
+            $"max-age={maxAge}{includeSubdomains}{preload}"
+        );
         _excludedHosts = hstsOptions.ExcludedHosts;
         _logger = loggerFactory.CreateLogger<HstsMiddleware>();
     }

@@ -4,27 +4,23 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class ArrayWithIndexAssignedToReturnValue
     {
-        public static void Main ()
+        public static void Main()
         {
             IFoo[] arr = new IFoo[5];
-            arr[0] = GetAFoo ();
+            arr[0] = GetAFoo();
         }
 
         [Kept]
-        static Foo GetAFoo ()
+        static Foo GetAFoo()
         {
             return null;
         }
 
         [Kept]
-        [KeptInterface (typeof (IFoo))]
-        class Foo : IFoo
-        {
-        }
+        [KeptInterface(typeof(IFoo))]
+        class Foo : IFoo { }
 
         [Kept]
-        interface IFoo
-        {
-        }
+        interface IFoo { }
     }
 }

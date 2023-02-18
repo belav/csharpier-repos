@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,207 +43,302 @@ using System.Xml;
 namespace MonoTests.System.Runtime.Serialization
 {
     [TestFixture]
-    [Category ("NotWorking")]
+    [Category("NotWorking")]
     public partial class DataContractSerializerTest_FrameworkTypes_System_Data
         : DataContractSerializerTest_FrameworkTypes
     {
         [Test]
-        public void System_Data_AcceptRejectRule () {
-            Test<global::System.Data.AcceptRejectRule> ();
+        public void System_Data_AcceptRejectRule()
+        {
+            Test<global::System.Data.AcceptRejectRule>();
         }
+
         [Test]
-        public void System_Data_CommandBehavior () {
-            Test<global::System.Data.CommandBehavior> ();
+        public void System_Data_CommandBehavior()
+        {
+            Test<global::System.Data.CommandBehavior>();
         }
+
         [Test]
-        public void System_Data_ConnectionState () {
-            Test<global::System.Data.ConnectionState> ();
+        public void System_Data_ConnectionState()
+        {
+            Test<global::System.Data.ConnectionState>();
         }
+
         [Test]
-        public void System_Data_DataException () {
-            Test<global::System.Data.DataException> ();
+        public void System_Data_DataException()
+        {
+            Test<global::System.Data.DataException>();
         }
+
         [Test]
-        public void System_Data_ConstraintException () {
-            Test<global::System.Data.ConstraintException> ();
+        public void System_Data_ConstraintException()
+        {
+            Test<global::System.Data.ConstraintException>();
         }
+
         [Test]
-        public void System_Data_DeletedRowInaccessibleException () {
-            Test<global::System.Data.DeletedRowInaccessibleException> ();
+        public void System_Data_DeletedRowInaccessibleException()
+        {
+            Test<global::System.Data.DeletedRowInaccessibleException>();
         }
+
         [Test]
-        public void System_Data_DuplicateNameException () {
-            Test<global::System.Data.DuplicateNameException> ();
+        public void System_Data_DuplicateNameException()
+        {
+            Test<global::System.Data.DuplicateNameException>();
         }
+
         [Test]
-        public void System_Data_InRowChangingEventException () {
-            Test<global::System.Data.InRowChangingEventException> ();
+        public void System_Data_InRowChangingEventException()
+        {
+            Test<global::System.Data.InRowChangingEventException>();
         }
+
         [Test]
-        public void System_Data_InvalidConstraintException () {
-            Test<global::System.Data.InvalidConstraintException> ();
+        public void System_Data_InvalidConstraintException()
+        {
+            Test<global::System.Data.InvalidConstraintException>();
         }
+
         [Test]
-        public void System_Data_MissingPrimaryKeyException () {
-            Test<global::System.Data.MissingPrimaryKeyException> ();
+        public void System_Data_MissingPrimaryKeyException()
+        {
+            Test<global::System.Data.MissingPrimaryKeyException>();
         }
+
         [Test]
-        public void System_Data_NoNullAllowedException () {
-            Test<global::System.Data.NoNullAllowedException> ();
+        public void System_Data_NoNullAllowedException()
+        {
+            Test<global::System.Data.NoNullAllowedException>();
         }
+
         [Test]
-        public void System_Data_ReadOnlyException () {
-            Test<global::System.Data.ReadOnlyException> ();
+        public void System_Data_ReadOnlyException()
+        {
+            Test<global::System.Data.ReadOnlyException>();
         }
+
         [Test]
-        public void System_Data_RowNotInTableException () {
-            Test<global::System.Data.RowNotInTableException> ();
+        public void System_Data_RowNotInTableException()
+        {
+            Test<global::System.Data.RowNotInTableException>();
         }
+
         [Test]
-        public void System_Data_VersionNotFoundException () {
-            Test<global::System.Data.VersionNotFoundException> ();
+        public void System_Data_VersionNotFoundException()
+        {
+            Test<global::System.Data.VersionNotFoundException>();
         }
+
         [Test]
-        public void System_Data_DataRowAction () {
-            Test<global::System.Data.DataRowAction> ();
+        public void System_Data_DataRowAction()
+        {
+            Test<global::System.Data.DataRowAction>();
         }
+
         [Test]
-        [Category ("NotWorking")]
-        public void System_Data_DataRowState () {
-            Test<global::System.Data.DataRowState> ();
+        [Category("NotWorking")]
+        public void System_Data_DataRowState()
+        {
+            Test<global::System.Data.DataRowState>();
         }
+
         [Test]
-        public void System_Data_SerializationFormat () {
-            Test<global::System.Data.SerializationFormat> ();
+        public void System_Data_SerializationFormat()
+        {
+            Test<global::System.Data.SerializationFormat>();
         }
+
         [Test]
-        public void System_Data_DataSet () {
-            Test<global::System.Data.DataSet> ();
+        public void System_Data_DataSet()
+        {
+            Test<global::System.Data.DataSet>();
         }
+
         [Test]
-        public void System_Data_DataViewRowState () {
-            Test<global::System.Data.DataViewRowState> ();
+        public void System_Data_DataViewRowState()
+        {
+            Test<global::System.Data.DataViewRowState>();
         }
+
         [Test]
-        [Category ("NotWorking")]
-        public void System_Data_DBConcurrencyException () {
-            Test<global::System.Data.DBConcurrencyException> ();
+        [Category("NotWorking")]
+        public void System_Data_DBConcurrencyException()
+        {
+            Test<global::System.Data.DBConcurrencyException>();
         }
+
         [Test]
-        public void System_Data_DbType () {
-            Test<global::System.Data.DbType> ();
+        public void System_Data_DbType()
+        {
+            Test<global::System.Data.DbType>();
         }
+
         [Test]
-        public void System_Data_PropertyCollection () {
-            Test<global::System.Data.PropertyCollection> ();
+        public void System_Data_PropertyCollection()
+        {
+            Test<global::System.Data.PropertyCollection>();
         }
+
         [Test]
-        public void System_Data_Rule () {
-            Test<global::System.Data.Rule> ();
+        public void System_Data_Rule()
+        {
+            Test<global::System.Data.Rule>();
         }
+
         [Test]
-        public void System_Data_SqlDbType () {
-            Test<global::System.Data.SqlDbType> ();
+        public void System_Data_SqlDbType()
+        {
+            Test<global::System.Data.SqlDbType>();
         }
+
         [Test]
-        public void System_Data_StatementType () {
-            Test<global::System.Data.StatementType> ();
+        public void System_Data_StatementType()
+        {
+            Test<global::System.Data.StatementType>();
         }
+
         [Test]
-        public void System_Data_UpdateRowSource () {
-            Test<global::System.Data.UpdateRowSource> ();
+        public void System_Data_UpdateRowSource()
+        {
+            Test<global::System.Data.UpdateRowSource>();
         }
+
         [Test]
-        public void System_Data_UpdateStatus () {
-            Test<global::System.Data.UpdateStatus> ();
+        public void System_Data_UpdateStatus()
+        {
+            Test<global::System.Data.UpdateStatus>();
         }
+
         [Test]
-        public void System_Data_XmlReadMode () {
-            Test<global::System.Data.XmlReadMode> ();
+        public void System_Data_XmlReadMode()
+        {
+            Test<global::System.Data.XmlReadMode>();
         }
+
         [Test]
-        public void System_Data_XmlWriteMode () {
-            Test<global::System.Data.XmlWriteMode> ();
+        public void System_Data_XmlWriteMode()
+        {
+            Test<global::System.Data.XmlWriteMode>();
         }
+
         [Test]
-        public void System_Data_StrongTypingException () {
-            Test<global::System.Data.StrongTypingException> ();
+        public void System_Data_StrongTypingException()
+        {
+            Test<global::System.Data.StrongTypingException>();
         }
+
         [Test]
-        public void System_Data_TypedDataSetGeneratorException () {
-            Test<global::System.Data.TypedDataSetGeneratorException> ();
+        public void System_Data_TypedDataSetGeneratorException()
+        {
+            Test<global::System.Data.TypedDataSetGeneratorException>();
         }
+
         [Test]
-        public void System_Data_KeyRestrictionBehavior () {
-            Test<global::System.Data.KeyRestrictionBehavior> ();
+        public void System_Data_KeyRestrictionBehavior()
+        {
+            Test<global::System.Data.KeyRestrictionBehavior>();
         }
+
         [Test]
-        public void System_Data_Common_GroupByBehavior () {
-            Test<global::System.Data.Common.GroupByBehavior> ();
+        public void System_Data_Common_GroupByBehavior()
+        {
+            Test<global::System.Data.Common.GroupByBehavior>();
         }
+
         [Test]
-        public void System_Data_Common_IdentifierCase () {
-            Test<global::System.Data.Common.IdentifierCase> ();
+        public void System_Data_Common_IdentifierCase()
+        {
+            Test<global::System.Data.Common.IdentifierCase>();
         }
+
         [Test]
-        public void System_Data_Common_SupportedJoinOperators () {
-            Test<global::System.Data.Common.SupportedJoinOperators> ();
+        public void System_Data_Common_SupportedJoinOperators()
+        {
+            Test<global::System.Data.Common.SupportedJoinOperators>();
         }
+
         [Test]
-        public void System_Data_InvalidExpressionException () {
-            Test<global::System.Data.InvalidExpressionException> ();
+        public void System_Data_InvalidExpressionException()
+        {
+            Test<global::System.Data.InvalidExpressionException>();
         }
+
         [Test]
-        public void System_Data_EvaluateException () {
-            Test<global::System.Data.EvaluateException> ();
+        public void System_Data_EvaluateException()
+        {
+            Test<global::System.Data.EvaluateException>();
         }
+
         [Test]
-        public void System_Data_SyntaxErrorException () {
-            Test<global::System.Data.SyntaxErrorException> ();
+        public void System_Data_SyntaxErrorException()
+        {
+            Test<global::System.Data.SyntaxErrorException>();
         }
+
         [Test]
-        public void System_Data_Odbc_OdbcPermission () {
-            Test<global::System.Data.Odbc.OdbcPermission> ();
+        public void System_Data_Odbc_OdbcPermission()
+        {
+            Test<global::System.Data.Odbc.OdbcPermission>();
         }
+
         [Test]
-        public void System_Data_OleDb_OleDbLiteral () {
-            Test<global::System.Data.OleDb.OleDbLiteral> ();
+        public void System_Data_OleDb_OleDbLiteral()
+        {
+            Test<global::System.Data.OleDb.OleDbLiteral>();
         }
+
         [Test]
-        public void System_Data_OleDb_OleDbPermission () {
-            Test<global::System.Data.OleDb.OleDbPermission> ();
+        public void System_Data_OleDb_OleDbPermission()
+        {
+            Test<global::System.Data.OleDb.OleDbPermission>();
         }
+
         [Test]
-        public void System_Data_OleDb_OleDbType () {
-            Test<global::System.Data.OleDb.OleDbType> ();
+        public void System_Data_OleDb_OleDbType()
+        {
+            Test<global::System.Data.OleDb.OleDbType>();
         }
+
         [Test]
-        public void System_Data_PropertyAttributes () {
-            Test<global::System.Data.PropertyAttributes> ();
+        public void System_Data_PropertyAttributes()
+        {
+            Test<global::System.Data.PropertyAttributes>();
         }
+
         //[Test]
         //public void System_Data_SqlClient_SortOrder () {
         //    Test<global::System.Data.SqlClient.SortOrder> ();
         //}
         [Test]
-        public void System_Data_SqlClient_SqlBulkCopyOptions () {
-            Test<global::System.Data.SqlClient.SqlBulkCopyOptions> ();
+        public void System_Data_SqlClient_SqlBulkCopyOptions()
+        {
+            Test<global::System.Data.SqlClient.SqlBulkCopyOptions>();
         }
+
         [Test]
-        public void System_Data_SqlClient_SqlClientPermission () {
-            Test<global::System.Data.SqlClient.SqlClientPermission> ();
+        public void System_Data_SqlClient_SqlClientPermission()
+        {
+            Test<global::System.Data.SqlClient.SqlClientPermission>();
         }
+
         [Test]
-        public void System_Data_SqlClient_SqlNotificationInfo () {
-            Test<global::System.Data.SqlClient.SqlNotificationInfo> ();
+        public void System_Data_SqlClient_SqlNotificationInfo()
+        {
+            Test<global::System.Data.SqlClient.SqlNotificationInfo>();
         }
+
         [Test]
-        public void System_Data_SqlClient_SqlNotificationSource () {
-            Test<global::System.Data.SqlClient.SqlNotificationSource> ();
+        public void System_Data_SqlClient_SqlNotificationSource()
+        {
+            Test<global::System.Data.SqlClient.SqlNotificationSource>();
         }
+
         [Test]
-        public void System_Data_SqlClient_SqlNotificationType () {
-            Test<global::System.Data.SqlClient.SqlNotificationType> ();
+        public void System_Data_SqlClient_SqlNotificationType()
+        {
+            Test<global::System.Data.SqlClient.SqlNotificationType>();
         }
     }
 }

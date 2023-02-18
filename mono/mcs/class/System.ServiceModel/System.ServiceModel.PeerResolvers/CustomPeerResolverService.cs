@@ -1,10 +1,10 @@
-// 
+//
 // CustomPeerResolverService.cs
-// 
-// Author: 
+//
+// Author:
 //     Marcos Cobena (marcoscobena@gmail.com)
 //    Atsushi Enomoto  <atsushi@ximian.com>
-// 
+//
 // Copyright 2007 Marcos Cobena (http://www.youcannoteatbits.org/)
 //
 // Copyright (C) 2009 Novell, Inc (http://www.novell.com)
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,181 +38,244 @@ using System.Timers;
 
 namespace System.ServiceModel.PeerResolvers
 {
-    [MonoTODO ("Implement cleanup and refresh")]
-    [ServiceBehavior (ConcurrencyMode = ConcurrencyMode.Multiple, 
-                      InstanceContextMode = InstanceContextMode.Single,
-                      UseSynchronizationContext = false)]
+    [MonoTODO("Implement cleanup and refresh")]
+    [ServiceBehavior(
+        ConcurrencyMode = ConcurrencyMode.Multiple,
+        InstanceContextMode = InstanceContextMode.Single,
+        UseSynchronizationContext = false
+    )]
     public class CustomPeerResolverService : IPeerResolverContract
     {
         static ServiceHost localhost;
         static int port;
 
-        static void SetupCustomPeerResolverServiceHost ()
+        static void SetupCustomPeerResolverServiceHost()
         {
-            string customPort = Environment.GetEnvironmentVariable ("MONO_CUSTOMPEERRESOLVERSERVICE_PORT");
-            if (customPort == null || !int.TryParse (customPort, out port))
+            string customPort = Environment.GetEnvironmentVariable(
+                "MONO_CUSTOMPEERRESOLVERSERVICE_PORT"
+            );
+            if (customPort == null || !int.TryParse(customPort, out port))
                 port = 8931;
 
             // launch peer resolver service locally only when it does not seem to be running ...
-            var t = new TcpListener (port);
-            try {
-                t.Start ();
-                t.Stop ();
-            } catch {
+            var t = new TcpListener(port);
+            try
+            {
+                t.Start();
+                t.Stop();
+            }
+            catch
+            {
                 return;
             }
-            Console.WriteLine ("WARNING: it is running peer resolver service locally. This means, the node registration is valid only within this application domain...");
-            var host = new ServiceHost (new LocalPeerResolverService (TextWriter.Null));
-            host.Description.Behaviors.Find<ServiceBehaviorAttribute> ().InstanceContextMode = InstanceContextMode.Single;
-            host.AddServiceEndpoint (typeof (ICustomPeerResolverContract), new BasicHttpBinding (), $"http://localhost:{port}");
+            Console.WriteLine(
+                "WARNING: it is running peer resolver service locally. This means, the node registration is valid only within this application domain..."
+            );
+            var host = new ServiceHost(new LocalPeerResolverService(TextWriter.Null));
+            host.Description.Behaviors.Find<ServiceBehaviorAttribute>().InstanceContextMode =
+                InstanceContextMode.Single;
+            host.AddServiceEndpoint(
+                typeof(ICustomPeerResolverContract),
+                new BasicHttpBinding(),
+                $"http://localhost:{port}"
+            );
             localhost = host;
-            host.Open ();
+            host.Open();
         }
 
         ICustomPeerResolverClient client;
-        bool control_shape, opened;
-        TimeSpan refresh_interval, cleanup_interval;
+        bool control_shape,
+            opened;
+        TimeSpan refresh_interval,
+            cleanup_interval;
 
-        public CustomPeerResolverService ()
+        public CustomPeerResolverService()
         {
-            client = ChannelFactory<ICustomPeerResolverClient>.CreateChannel (new BasicHttpBinding (), new EndpointAddress ($"http://localhost:{port}"));
+            client = ChannelFactory<ICustomPeerResolverClient>.CreateChannel(
+                new BasicHttpBinding(),
+                new EndpointAddress($"http://localhost:{port}")
+            );
 
-            refresh_interval = new TimeSpan (0, 10, 0);
-            cleanup_interval = new TimeSpan (0, 1, 0);
+            refresh_interval = new TimeSpan(0, 10, 0);
+            cleanup_interval = new TimeSpan(0, 1, 0);
         }
 
-        public TimeSpan CleanupInterval {
+        public TimeSpan CleanupInterval
+        {
             get { return cleanup_interval; }
-            set { 
+            set
+            {
                 if ((value < TimeSpan.Zero) || (value > TimeSpan.MaxValue))
-                    throw new ArgumentOutOfRangeException (
-                    "The interval is either zero or greater than max value.");
+                    throw new ArgumentOutOfRangeException(
+                        "The interval is either zero or greater than max value."
+                    );
                 if (opened)
-                    throw new InvalidOperationException ("The interval must be set before it is opened");
+                    throw new InvalidOperationException(
+                        "The interval must be set before it is opened"
+                    );
 
                 cleanup_interval = value;
             }
         }
 
-        public bool ControlShape {
+        public bool ControlShape
+        {
             get { return control_shape; }
-            set {
+            set
+            {
                 if (opened)
-                    throw new InvalidOperationException ("The interval must be set before it is opened");
+                    throw new InvalidOperationException(
+                        "The interval must be set before it is opened"
+                    );
                 control_shape = value;
             }
         }
 
-        public TimeSpan RefreshInterval {
+        public TimeSpan RefreshInterval
+        {
             get { return refresh_interval; }
-            set {
+            set
+            {
                 if ((value < TimeSpan.Zero) || (value > TimeSpan.MaxValue))
-                    throw new ArgumentOutOfRangeException (
-                    "The interval is either zero or greater than max value.");
+                    throw new ArgumentOutOfRangeException(
+                        "The interval is either zero or greater than max value."
+                    );
                 if (opened)
-                    throw new InvalidOperationException ("The interval must be set before it is opened");
+                    throw new InvalidOperationException(
+                        "The interval must be set before it is opened"
+                    );
 
                 refresh_interval = value;
             }
         }
 
-        [MonoTODO ("Do we have to unregister nodes here?")]
-        public virtual void Close ()
+        [MonoTODO("Do we have to unregister nodes here?")]
+        public virtual void Close()
         {
-            if (! opened)
-                throw new InvalidOperationException ("The service has never been opened or it was closed by a previous call to this method.");
-            client.Close ();
+            if (!opened)
+                throw new InvalidOperationException(
+                    "The service has never been opened or it was closed by a previous call to this method."
+                );
+            client.Close();
             opened = false;
 
-            if (localhost != null) {
-                localhost.Close ();
+            if (localhost != null)
+            {
+                localhost.Close();
                 localhost = null;
             }
         }
 
-        public virtual ServiceSettingsResponseInfo GetServiceSettings ()
+        public virtual ServiceSettingsResponseInfo GetServiceSettings()
         {
-            if (! opened)
-                throw new InvalidOperationException ("The service has never been opened or it was closed previously.");
-        
-            return client.GetServiceSettings ();
+            if (!opened)
+                throw new InvalidOperationException(
+                    "The service has never been opened or it was closed previously."
+                );
+
+            return client.GetServiceSettings();
         }
 
-        public virtual void Open ()
+        public virtual void Open()
         {
             if (localhost == null)
-                SetupCustomPeerResolverServiceHost ();
+                SetupCustomPeerResolverServiceHost();
 
             if ((CleanupInterval == TimeSpan.Zero) || (RefreshInterval == TimeSpan.Zero))
-                throw new ArgumentException ("Cleanup interval or refresh interval are set to a time span interval of zero.");
+                throw new ArgumentException(
+                    "Cleanup interval or refresh interval are set to a time span interval of zero."
+                );
 
             if (opened)
-                throw new InvalidOperationException ("The service has been started by a previous call to this method.");
-            
+                throw new InvalidOperationException(
+                    "The service has been started by a previous call to this method."
+                );
+
             opened = true;
 
-            client.Open ();
-            client.SetCustomServiceSettings (new PeerServiceSettingsInfo () { ControlMeshShape = control_shape, RefreshInterval = refresh_interval, CleanupInterval = cleanup_interval });
+            client.Open();
+            client.SetCustomServiceSettings(
+                new PeerServiceSettingsInfo()
+                {
+                    ControlMeshShape = control_shape,
+                    RefreshInterval = refresh_interval,
+                    CleanupInterval = cleanup_interval
+                }
+            );
         }
 
-        public virtual RefreshResponseInfo Refresh (RefreshInfo refreshInfo)
+        public virtual RefreshResponseInfo Refresh(RefreshInfo refreshInfo)
         {
             if (refreshInfo == null)
-                throw new ArgumentException ("Refresh info cannot be null.");
-            
-            if (! opened)
-                throw new InvalidOperationException ("The service has never been opened or it was closed previously.");
+                throw new ArgumentException("Refresh info cannot be null.");
 
-            return client.Refresh (refreshInfo);
+            if (!opened)
+                throw new InvalidOperationException(
+                    "The service has never been opened or it was closed previously."
+                );
+
+            return client.Refresh(refreshInfo);
         }
 
-        public virtual RegisterResponseInfo Register (RegisterInfo registerInfo)
+        public virtual RegisterResponseInfo Register(RegisterInfo registerInfo)
         {
             if (registerInfo == null)
-                throw new ArgumentException ("Register info cannot be null.");
-            
-            if (! opened)
-                throw new InvalidOperationException ("The service has never been opened or it was closed previously.");
-            
-            return client.Register (registerInfo);
+                throw new ArgumentException("Register info cannot be null.");
+
+            if (!opened)
+                throw new InvalidOperationException(
+                    "The service has never been opened or it was closed previously."
+                );
+
+            return client.Register(registerInfo);
         }
 
-        public virtual RegisterResponseInfo Register (Guid clientId, string meshId, PeerNodeAddress address)
+        public virtual RegisterResponseInfo Register(
+            Guid clientId,
+            string meshId,
+            PeerNodeAddress address
+        )
         {
-            return Register (new RegisterInfo (clientId, meshId, address));
+            return Register(new RegisterInfo(clientId, meshId, address));
         }
 
-        public virtual ResolveResponseInfo Resolve (ResolveInfo resolveInfo)
+        public virtual ResolveResponseInfo Resolve(ResolveInfo resolveInfo)
         {
             if (resolveInfo == null)
-                throw new ArgumentException ("Resolve info cannot be null.");
-            
-            if (! opened)
-                throw new InvalidOperationException ("The service has never been opened or it was closed previously.");
+                throw new ArgumentException("Resolve info cannot be null.");
 
-            return client.Resolve (resolveInfo);
+            if (!opened)
+                throw new InvalidOperationException(
+                    "The service has never been opened or it was closed previously."
+                );
+
+            return client.Resolve(resolveInfo);
         }
 
-        public virtual void Unregister (UnregisterInfo unregisterInfo)
+        public virtual void Unregister(UnregisterInfo unregisterInfo)
         {
             if (unregisterInfo == null)
-                throw new ArgumentException ("Unregister info cannot be null.");
-            
-            if (! opened)
-                throw new InvalidOperationException ("The service has never been opened or it was closed previously.");
+                throw new ArgumentException("Unregister info cannot be null.");
 
-            client.Unregister (unregisterInfo);
+            if (!opened)
+                throw new InvalidOperationException(
+                    "The service has never been opened or it was closed previously."
+                );
+
+            client.Unregister(unregisterInfo);
         }
 
-        public virtual RegisterResponseInfo Update (UpdateInfo updateInfo)
+        public virtual RegisterResponseInfo Update(UpdateInfo updateInfo)
         {
             if (updateInfo == null)
-                throw new ArgumentException ("Update info cannot be null.");
-            
-            if (! opened)
-                throw new InvalidOperationException ("The service has never been opened or it was closed previously.");
+                throw new ArgumentException("Update info cannot be null.");
 
-            return client.Update (updateInfo);
+            if (!opened)
+                throw new InvalidOperationException(
+                    "The service has never been opened or it was closed previously."
+                );
+
+            return client.Update(updateInfo);
         }
     }
 }

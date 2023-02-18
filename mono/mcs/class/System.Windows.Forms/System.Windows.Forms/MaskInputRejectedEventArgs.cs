@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,8 @@ namespace System.Windows.Forms
         private MaskedTextResultHint rejection_hint;
 
         #region Public Constructors
-        public MaskInputRejectedEventArgs (int position, MaskedTextResultHint rejectionHint) : base ()
+        public MaskInputRejectedEventArgs(int position, MaskedTextResultHint rejectionHint)
+            : base()
         {
             this.position = position;
             this.rejection_hint = rejectionHint;
@@ -45,11 +46,13 @@ namespace System.Windows.Forms
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        public int Position {
+        public int Position
+        {
             get { return this.position; }
         }
 
-        public MaskedTextResultHint RejectionHint {
+        public MaskedTextResultHint RejectionHint
+        {
             get { return this.rejection_hint; }
         }
         #endregion    // Public Instance Properties

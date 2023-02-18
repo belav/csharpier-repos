@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -67,145 +67,183 @@ namespace System.Web
         // Macro names which are used by this fragment. Only the named macros will be
         // replaced in the value passed to ReplaceMacros.
         // It is done this way to avoid parsing the fragment for macro references.
-        public List <string> MacroNames { get; set; }
+        public List<string> MacroNames { get; set; }
 
         // Names of macros which are required to be present in order for the fragment to be
         // visible. If it is null or empty, the macro is always visible.
-        public List <string> RequiredMacros { get; set; }
-        
+        public List<string> RequiredMacros { get; set; }
+
         // Directly specified value of the fragment
         public string Value { get; set; }
 
         // Which page types this fragment is valid for
         public ExceptionPageTemplateType ValidForPageType { get; set; }
 
-        public ExceptionPageTemplateFragment ()
+        public ExceptionPageTemplateFragment()
         {
             ValidForPageType = ExceptionPageTemplateType.Any;
         }
-        
+
         // Must load the value of the fragment and store it in the values collection
-        public virtual void Init (ExceptionPageTemplateValues values)
+        public virtual void Init(ExceptionPageTemplateValues values)
         {
             if (values == null)
-                throw new ArgumentNullException ("values");
+                throw new ArgumentNullException("values");
 
             string tmp = Value;
-            if (tmp != null) {
-                values.Add (Name, tmp);
+            if (tmp != null)
+            {
+                values.Add(Name, tmp);
                 return;
             }
 
             tmp = FilePath;
-            if (!String.IsNullOrEmpty (tmp)) {
-                values.Add (Name, LoadFile (tmp));
+            if (!String.IsNullOrEmpty(tmp))
+            {
+                values.Add(Name, LoadFile(tmp));
                 return;
             }
 
             tmp = ResourceName;
-            if (!String.IsNullOrEmpty (tmp)) {
-                values.Add (Name, LoadResource (tmp));
+            if (!String.IsNullOrEmpty(tmp))
+            {
+                values.Add(Name, LoadResource(tmp));
                 return;
             }
         }
 
-        public virtual bool Visible (ExceptionPageTemplateValues values)
+        public virtual bool Visible(ExceptionPageTemplateValues values)
         {
-            List <string> required = RequiredMacros;
+            List<string> required = RequiredMacros;
             if (required == null || required.Count == 0)
                 return true;
 
             if (values == null || values.Count == 0)
                 return false;
-            
-            foreach (string macro in required) {
-                if (values.Get (macro) == null)
+
+            foreach (string macro in required)
+            {
+                if (values.Get(macro) == null)
                     return false;
             }
 
             return true;
         }
-        
-        public string ReplaceMacros (string value, ExceptionPageTemplateValues values)
+
+        public string ReplaceMacros(string value, ExceptionPageTemplateValues values)
         {
-            if (String.IsNullOrEmpty (value))
+            if (String.IsNullOrEmpty(value))
                 return value;
 
             if (values == null)
-                throw new ArgumentNullException ("values");
+                throw new ArgumentNullException("values");
 
-            List <string> macroNames = MacroNames;
+            List<string> macroNames = MacroNames;
             if (macroNames == null || macroNames.Count == 0)
                 return value;
 
-            var sb = new StringBuilder (value);
+            var sb = new StringBuilder(value);
             string macroValue;
-            
-            foreach (string macro in macroNames) {
-                if (String.IsNullOrEmpty (macro))
+
+            foreach (string macro in macroNames)
+            {
+                if (String.IsNullOrEmpty(macro))
                     continue;
 
-                macroValue = values.Get (macro);
+                macroValue = values.Get(macro);
                 if (macroValue == null)
                     macroValue = String.Empty;
 
-                sb.Replace ("@" + macro + "@", macroValue);
+                sb.Replace("@" + macro + "@", macroValue);
             }
-                
-            return sb.ToString ();
+
+            return sb.ToString();
         }
-        
-        protected virtual string LoadFile (string path)
+
+        protected virtual string LoadFile(string path)
         {
-            if (!File.Exists (path)) {
-                Console.Error.WriteLine ("File '{0}' not found. Required for exception template.", path);
+            if (!File.Exists(path))
+            {
+                Console.Error.WriteLine(
+                    "File '{0}' not found. Required for exception template.",
+                    path
+                );
                 return String.Empty;
             }
 
-            try {
-                return File.ReadAllText (path);
-            } catch (Exception ex) {
-                Console.Error.WriteLine ("Error reading file '{0}'. Required for exception template. Exception {1} has been thrown: {2}",
-                             path, ex.GetType (), ex.Message);
+            try
+            {
+                return File.ReadAllText(path);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(
+                    "Error reading file '{0}'. Required for exception template. Exception {1} has been thrown: {2}",
+                    path,
+                    ex.GetType(),
+                    ex.Message
+                );
                 if (RuntimeHelpers.DebuggingEnabled)
-                    Console.Error.WriteLine (ex.StackTrace);
+                    Console.Error.WriteLine(ex.StackTrace);
                 return String.Empty;
             }
         }
 
-        protected virtual string LoadResource (string resourceName)
+        protected virtual string LoadResource(string resourceName)
         {
             string assemblyName = ResourceAssembly;
             Assembly asm;
-            
-            if (String.IsNullOrEmpty (assemblyName))
-                asm = this.GetType ().Assembly;
-            else {
-                try {
-                    asm = Assembly.Load (assemblyName);
-                } catch (Exception ex) {
-                    Console.Error.WriteLine ("Unable to load assembly '{0}' needed to retrieve an exception template resource '{1}'. Exception {2} has been thrown: {3}",
-                                 assemblyName, resourceName, ex.GetType (), ex.Message);
+
+            if (String.IsNullOrEmpty(assemblyName))
+                asm = this.GetType().Assembly;
+            else
+            {
+                try
+                {
+                    asm = Assembly.Load(assemblyName);
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(
+                        "Unable to load assembly '{0}' needed to retrieve an exception template resource '{1}'. Exception {2} has been thrown: {3}",
+                        assemblyName,
+                        resourceName,
+                        ex.GetType(),
+                        ex.Message
+                    );
                     if (RuntimeHelpers.DebuggingEnabled)
-                        Console.Error.WriteLine (ex.StackTrace);
+                        Console.Error.WriteLine(ex.StackTrace);
                     return String.Empty;
                 }
             }
 
-            try {
-                Stream st = asm.GetManifestResourceStream (resourceName);
-                if (st == null) {
-                    Console.Error.WriteLine ("Manifest resource '{0}' required for exception template not found in assembly '{1}'.", resourceName, assemblyName);
+            try
+            {
+                Stream st = asm.GetManifestResourceStream(resourceName);
+                if (st == null)
+                {
+                    Console.Error.WriteLine(
+                        "Manifest resource '{0}' required for exception template not found in assembly '{1}'.",
+                        resourceName,
+                        assemblyName
+                    );
                     return String.Empty;
                 }
 
-                using (StreamReader sr = new StreamReader (st))
-                    return sr.ReadToEnd ();
-            } catch (Exception ex) {
-                Console.Error.WriteLine ("Error reading manifest resource '{0}' from assembly '{1}', required for exception template. Exception {2} has been thrown: {3}",
-                             resourceName, assemblyName, ex.GetType (), ex.Message);
+                using (StreamReader sr = new StreamReader(st))
+                    return sr.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(
+                    "Error reading manifest resource '{0}' from assembly '{1}', required for exception template. Exception {2} has been thrown: {3}",
+                    resourceName,
+                    assemblyName,
+                    ex.GetType(),
+                    ex.Message
+                );
                 if (RuntimeHelpers.DebuggingEnabled)
-                    Console.Error.WriteLine (ex.StackTrace);
+                    Console.Error.WriteLine(ex.StackTrace);
                 return String.Empty;
             }
         }

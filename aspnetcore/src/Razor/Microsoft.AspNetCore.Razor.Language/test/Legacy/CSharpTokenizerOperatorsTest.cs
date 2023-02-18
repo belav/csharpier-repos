@@ -125,9 +125,11 @@ public class CSharpTokenizerOperatorsTest : CSharpTokenizerTestBase
     [Fact]
     public void LeftShift_Is_Not_Specially_Recognized()
     {
-        TestTokenizer("<<",
+        TestTokenizer(
+            "<<",
             SyntaxFactory.Token(SyntaxKind.LessThan, "<"),
-            SyntaxFactory.Token(SyntaxKind.LessThan, "<"));
+            SyntaxFactory.Token(SyntaxKind.LessThan, "<")
+        );
     }
 
     [Fact]
@@ -283,9 +285,11 @@ public class CSharpTokenizerOperatorsTest : CSharpTokenizerTestBase
     [Fact]
     public void RightShift_Is_Not_Specially_Recognized()
     {
-        TestTokenizer(">>",
+        TestTokenizer(
+            ">>",
             SyntaxFactory.Token(SyntaxKind.GreaterThan, ">"),
-            SyntaxFactory.Token(SyntaxKind.GreaterThan, ">"));
+            SyntaxFactory.Token(SyntaxKind.GreaterThan, ">")
+        );
     }
 
     [Fact]

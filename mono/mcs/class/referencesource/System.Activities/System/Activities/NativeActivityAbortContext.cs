@@ -13,7 +13,11 @@ namespace System.Activities
     {
         Exception reason;
 
-        internal NativeActivityAbortContext(ActivityInstance instance, ActivityExecutor executor, Exception reason)
+        internal NativeActivityAbortContext(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            Exception reason
+        )
             : base(instance, executor)
         {
             this.reason = reason;

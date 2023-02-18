@@ -61,7 +61,15 @@ namespace System.Web.UI.Design.WebControls.Util
                 }
             }
 
-            RTLAwareMessageBox.Show(null, message, Strings.UIHelper_ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 0);
+            RTLAwareMessageBox.Show(
+                null,
+                message,
+                Strings.UIHelper_ErrorCaption,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error,
+                MessageBoxDefaultButton.Button1,
+                0
+            );
         }
 
         public static void ShowWarning(IServiceProvider serviceProvider, string message)
@@ -76,7 +84,15 @@ namespace System.Web.UI.Design.WebControls.Util
                 }
             }
 
-            RTLAwareMessageBox.Show(null, message, Strings.UIHelper_WarningCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, 0);
+            RTLAwareMessageBox.Show(
+                null,
+                message,
+                Strings.UIHelper_WarningCaption,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button1,
+                0
+            );
         }
     }
 }

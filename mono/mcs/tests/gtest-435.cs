@@ -4,15 +4,15 @@ namespace testcase
 {
     public class Program
     {
-        public static int Main ()
+        public static int Main()
         {
             DateTime? dt = null;
-            var res1 = default (DateTime?) == dt;
+            var res1 = default(DateTime?) == dt;
             if (!res1)
                 return 5;
 
-            DateTime? a = default (DateTime?);
-            DateTime? b = default (DateTime?);
+            DateTime? a = default(DateTime?);
+            DateTime? b = default(DateTime?);
             bool res = a == b;
             if (!res)
                 return 4;
@@ -24,15 +24,17 @@ namespace testcase
             decimal? D1 = null;
             decimal? D2 = 7;
 
-            if (D1 == D2) {
-                Console.WriteLine ("null == 7  incorrect");
+            if (D1 == D2)
+            {
+                Console.WriteLine("null == 7  incorrect");
                 return 1;
-            } else if (D1 != D2) {
-                Console.WriteLine ("null != 7  correct");
+            }
+            else if (D1 != D2)
+            {
+                Console.WriteLine("null != 7  correct");
                 return 0;
             }
             return 2;
         }
     }
 }
-

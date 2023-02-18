@@ -7,82 +7,159 @@ using System.Security.Policy;
 
 #if !MONO_FEATURE_SRE
 
-namespace System {
-
-    public partial class AppDomain {
-
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access)
+namespace System
+{
+    public partial class AppDomain
+    {
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, IEnumerable<CustomAttributeBuilder> assemblyAttributes)
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-
-        [Obsolete ("Declarative security for assembly level is no longer enforced")]
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, Evidence evidence)
+        [Obsolete("Declarative security for assembly level is no longer enforced")]
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            Evidence evidence
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, string dir)
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            string dir
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, IEnumerable<CustomAttributeBuilder> assemblyAttributes, SecurityContextSource securityContextSource)
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes,
+            SecurityContextSource securityContextSource
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [Obsolete ("Declarative security for assembly level is no longer enforced")]
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, string dir, Evidence evidence)
+        [Obsolete("Declarative security for assembly level is no longer enforced")]
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            string dir,
+            Evidence evidence
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [Obsolete ("Declarative security for assembly level is no longer enforced")]
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, PermissionSet requiredPermissions, PermissionSet optionalPermissions, PermissionSet refusedPermissions)
+        [Obsolete("Declarative security for assembly level is no longer enforced")]
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, string dir, bool isSynchronized, IEnumerable<CustomAttributeBuilder> assemblyAttributes)
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            string dir,
+            bool isSynchronized,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [Obsolete ("Declarative security for assembly level is no longer enforced")]
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, Evidence evidence, PermissionSet requiredPermissions, PermissionSet optionalPermissions, PermissionSet refusedPermissions)
+        [Obsolete("Declarative security for assembly level is no longer enforced")]
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            Evidence evidence,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [Obsolete ("Declarative security for assembly level is no longer enforced")]
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, string dir, PermissionSet requiredPermissions, PermissionSet optionalPermissions, PermissionSet refusedPermissions)
+        [Obsolete("Declarative security for assembly level is no longer enforced")]
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            string dir,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [Obsolete ("Declarative security for assembly level is no longer enforced")]
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, string dir, Evidence evidence, PermissionSet requiredPermissions, PermissionSet optionalPermissions, PermissionSet refusedPermissions)
+        [Obsolete("Declarative security for assembly level is no longer enforced")]
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            string dir,
+            Evidence evidence,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [Obsolete ("Declarative security for assembly level is no longer enforced")]
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, string dir, Evidence evidence, PermissionSet requiredPermissions, PermissionSet optionalPermissions, PermissionSet refusedPermissions, bool isSynchronized)
+        [Obsolete("Declarative security for assembly level is no longer enforced")]
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            string dir,
+            Evidence evidence,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions,
+            bool isSynchronized
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        [Obsolete ("Declarative security for assembly level is no longer enforced")]
-        public AssemblyBuilder DefineDynamicAssembly (AssemblyName name, AssemblyBuilderAccess access, string dir, Evidence evidence, PermissionSet requiredPermissions, PermissionSet optionalPermissions, PermissionSet refusedPermissions, bool isSynchronized, IEnumerable<CustomAttributeBuilder> assemblyAttributes)
+        [Obsolete("Declarative security for assembly level is no longer enforced")]
+        public AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            string dir,
+            Evidence evidence,
+            PermissionSet requiredPermissions,
+            PermissionSet optionalPermissions,
+            PermissionSet refusedPermissions,
+            bool isSynchronized,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes
+        )
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

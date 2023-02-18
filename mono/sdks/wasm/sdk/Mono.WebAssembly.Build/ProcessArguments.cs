@@ -12,7 +12,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 
-// Reuse of code from https://github.com/Microsoft/workbooks/blob/master/Agents/Xamarin.Interactive/ProcessControl/ProcessArguments.cs 
+// Reuse of code from https://github.com/Microsoft/workbooks/blob/master/Agents/Xamarin.Interactive/ProcessControl/ProcessArguments.cs
 namespace Xamarin.ProcessControl
 {
     /// <summary>
@@ -26,7 +26,8 @@ namespace Xamarin.ProcessControl
             var builder = new StringBuilder();
             var quote = Char.MinValue;
 
-            Action<char, string> appendArg = (q, a) => {
+            Action<char, string> appendArg = (q, a) =>
+            {
                 if (q == Char.MinValue && String.IsNullOrWhiteSpace(a))
                     return;
 
@@ -111,8 +112,8 @@ namespace Xamarin.ProcessControl
             return builder.ToString();
         }
 
-        public static ProcessArguments Create(params string[] arguments)
-            => Create((IEnumerable<string>)arguments);
+        public static ProcessArguments Create(params string[] arguments) =>
+            Create((IEnumerable<string>)arguments);
 
         public static ProcessArguments Create(IEnumerable<string> arguments)
         {
@@ -122,7 +123,10 @@ namespace Xamarin.ProcessControl
             return processArguments;
         }
 
-        public static ProcessArguments FromCommandAndArguments(string command, IEnumerable<string> arguments)
+        public static ProcessArguments FromCommandAndArguments(
+            string command,
+            IEnumerable<string> arguments
+        )
         {
             if (command == null)
                 throw new ArgumentNullException(nameof(command));
@@ -135,12 +139,13 @@ namespace Xamarin.ProcessControl
             return processArguments;
         }
 
-        public static readonly ProcessArguments Empty = new ProcessArguments(ImmutableList<string>.Empty);
+        public static readonly ProcessArguments Empty = new ProcessArguments(
+            ImmutableList<string>.Empty
+        );
 
         readonly ImmutableList<string> arguments;
 
-        ProcessArguments(ImmutableList<string> arguments)
-            => this.arguments = arguments;
+        ProcessArguments(ImmutableList<string> arguments) => this.arguments = arguments;
 
         public int Count => arguments.Count;
 
@@ -151,12 +156,11 @@ namespace Xamarin.ProcessControl
             if (argument == null)
                 throw new ArgumentNullException(nameof(argument));
 
-            return new ProcessArguments(
-                (arguments ?? ImmutableList<string>.Empty).Add(argument));
+            return new ProcessArguments((arguments ?? ImmutableList<string>.Empty).Add(argument));
         }
 
-        public ProcessArguments AddRange(params string[] arguments)
-            => AddRange((IEnumerable<string>)arguments);
+        public ProcessArguments AddRange(params string[] arguments) =>
+            AddRange((IEnumerable<string>)arguments);
 
         public ProcessArguments AddRange(IEnumerable<string> arguments)
         {
@@ -167,7 +171,8 @@ namespace Xamarin.ProcessControl
                 return this;
 
             return new ProcessArguments(
-                (this.arguments ?? ImmutableList<string>.Empty).AddRange(arguments));
+                (this.arguments ?? ImmutableList<string>.Empty).AddRange(arguments)
+            );
         }
 
         public ProcessArguments Insert(int index, string argument)
@@ -176,13 +181,12 @@ namespace Xamarin.ProcessControl
                 throw new ArgumentNullException(nameof(argument));
 
             return new ProcessArguments(
-                (arguments ?? ImmutableList<string>.Empty).Insert(
-                    index,
-                    argument));
+                (arguments ?? ImmutableList<string>.Empty).Insert(index, argument)
+            );
         }
 
-        public ProcessArguments InsertRange(int index, params string[] arguments)
-            => InsertRange(index, (IEnumerable<string>)arguments);
+        public ProcessArguments InsertRange(int index, params string[] arguments) =>
+            InsertRange(index, (IEnumerable<string>)arguments);
 
         public ProcessArguments InsertRange(int index, IEnumerable<string> arguments)
         {
@@ -193,18 +197,14 @@ namespace Xamarin.ProcessControl
                 return this;
 
             return new ProcessArguments(
-                (this.arguments ?? ImmutableList<string>.Empty).InsertRange(
-                    index,
-                    arguments));
+                (this.arguments ?? ImmutableList<string>.Empty).InsertRange(index, arguments)
+            );
         }
 
-        public override string ToString()
-            => string.Join(" ", this.Select(Quote));
+        public override string ToString() => string.Join(" ", this.Select(Quote));
 
-        public IEnumerator<string> GetEnumerator()
-            => arguments.GetEnumerator();
+        public IEnumerator<string> GetEnumerator() => arguments.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

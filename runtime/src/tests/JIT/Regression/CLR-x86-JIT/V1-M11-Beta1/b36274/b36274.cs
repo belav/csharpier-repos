@@ -13,13 +13,12 @@
 // </Description>
 //<Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 
 using System;
 
 public class MyClass
 {
-
     public static int Main()
     {
         long test1 = long.MinValue;
@@ -38,4 +37,4 @@ public class MyClass
         return 1;
     }
 }
-// </Code> 
+// </Code>

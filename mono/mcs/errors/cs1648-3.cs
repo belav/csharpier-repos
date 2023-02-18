@@ -7,20 +7,18 @@ public class Test
 {
     struct Container
     {
-        public int this[int arg] {
-            set {
-            }
+        public int this[int arg]
+        {
+            set { }
         }
     }
-    
+
     readonly Container p;
-    
-    void Foo ()
+
+    void Foo()
     {
         p[0] = 0;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

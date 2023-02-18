@@ -24,7 +24,8 @@ namespace ILLink.Shared.DataFlow
     // virtual interface method. This would avoid the need to pass around multiple generic arguments
     // (TValue and TLattice). However, we can't use static virtual interface methods in the analyzer
     // so the lattice instance provides the Top value.
-    public interface ILattice<TValue> where TValue : IEquatable<TValue>
+    public interface ILattice<TValue>
+        where TValue : IEquatable<TValue>
     {
         // We require that the lattice has a "Top" or maximum element.
         // Top is >= a for every element a of the lattice.
@@ -37,6 +38,6 @@ namespace ILLink.Shared.DataFlow
         // The Meet operation is associative, commutative, and idempotent.
         // This is used in dataflow analysis to iteratively Meet the tracked facts from different control
         // flow paths until the analysis converges to the most specific set of tracked facts.
-        public TValue Meet (TValue left, TValue right);
+        public TValue Meet(TValue left, TValue right);
     }
 }

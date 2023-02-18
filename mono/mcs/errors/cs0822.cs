@@ -4,9 +4,8 @@
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         const var v = 0;
     }
 }
-

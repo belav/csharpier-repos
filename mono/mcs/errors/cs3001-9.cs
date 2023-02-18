@@ -3,13 +3,15 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (A.f)]
+
+[assembly: CLSCompliant(A.f)]
 
 public class A
 {
     public const bool f = true;
 }
 
-public interface I {
-        void Test (ulong arg);
+public interface I
+{
+    void Test(ulong arg);
 }

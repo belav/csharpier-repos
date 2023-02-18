@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,9 +34,7 @@ namespace Castle.Services.Logging.NLogIntegration
             Factory = factory;
         }
 
-        internal NLogLogger()
-        {
-        }
+        internal NLogLogger() { }
 
         /// <summary>
         ///   Determines if messages of priority "trace" will be logged.
@@ -192,7 +190,12 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <param name="formatProvider"> The format provider to use </param>
         /// <param name="format"> Format string for the message to log </param>
         /// <param name="args"> Format arguments for the message to log </param>
-        public void TraceFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void TraceFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             Log(LogLevel.Trace, exception, formatProvider, format, args);
         }
@@ -268,7 +271,12 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <param name="formatProvider"> The format provider to use </param>
         /// <param name="format"> Format string for the message to log </param>
         /// <param name="args"> Format arguments for the message to log </param>
-        public void DebugFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void DebugFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             Log(LogLevel.Debug, exception, formatProvider, format, args);
         }
@@ -344,7 +352,12 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <param name="formatProvider"> The format provider to use </param>
         /// <param name="format"> Format string for the message to log </param>
         /// <param name="args"> Format arguments for the message to log </param>
-        public void ErrorFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void ErrorFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             Log(LogLevel.Error, exception, formatProvider, format, args);
         }
@@ -420,7 +433,12 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <param name="formatProvider"> The format provider to use </param>
         /// <param name="format"> Format string for the message to log </param>
         /// <param name="args"> Format arguments for the message to log </param>
-        public void FatalFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void FatalFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             Log(LogLevel.Fatal, exception, formatProvider, format, args);
         }
@@ -496,7 +514,12 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <param name="formatProvider"> The format provider to use </param>
         /// <param name="format"> Format string for the message to log </param>
         /// <param name="args"> Format arguments for the message to log </param>
-        public void InfoFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void InfoFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             Log(LogLevel.Info, exception, formatProvider, format, args);
         }
@@ -572,7 +595,12 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <param name="formatProvider"> The format provider to use </param>
         /// <param name="format"> Format string for the message to log </param>
         /// <param name="args"> Format arguments for the message to log </param>
-        public void WarnFormat(Exception exception, IFormatProvider formatProvider, string format, params object[] args)
+        public void WarnFormat(
+            Exception exception,
+            IFormatProvider formatProvider,
+            string format,
+            params object[] args
+        )
         {
             Log(LogLevel.Warn, exception, formatProvider, format, args);
         }
@@ -584,46 +612,66 @@ namespace Castle.Services.Logging.NLogIntegration
 
         private void Log(LogLevel logLevel, string format, object[] args)
         {
-            Logger.Log(typeof(NLogLogger), new LogEventInfo(logLevel, Logger.Name, format)
-                {
-                    Parameters = args
-                });
+            Logger.Log(
+                typeof(NLogLogger),
+                new LogEventInfo(logLevel, Logger.Name, format) { Parameters = args }
+            );
         }
 
         private void Log(LogLevel logLevel, string message, Exception exception)
         {
-            Logger.Log(typeof(NLogLogger), new LogEventInfo(logLevel, Logger.Name, message)
-                {
-                    Exception = exception
-                });
+            Logger.Log(
+                typeof(NLogLogger),
+                new LogEventInfo(logLevel, Logger.Name, message) { Exception = exception }
+            );
         }
 
         private void Log(LogLevel logLevel, Exception exception, string format, object[] args)
         {
-            Logger.Log(typeof(NLogLogger), new LogEventInfo(logLevel, Logger.Name, format)
+            Logger.Log(
+                typeof(NLogLogger),
+                new LogEventInfo(logLevel, Logger.Name, format)
                 {
                     Exception = exception,
                     Parameters = args
-                });
+                }
+            );
         }
 
-        private void Log(LogLevel logLevel, IFormatProvider formatProvider, string format, object[] args)
+        private void Log(
+            LogLevel logLevel,
+            IFormatProvider formatProvider,
+            string format,
+            object[] args
+        )
         {
-            Logger.Log(typeof(NLogLogger), new LogEventInfo(logLevel, Logger.Name, format)
+            Logger.Log(
+                typeof(NLogLogger),
+                new LogEventInfo(logLevel, Logger.Name, format)
                 {
                     FormatProvider = formatProvider,
                     Parameters = args
-                });
+                }
+            );
         }
 
-        private void Log(LogLevel logLevel, Exception exceptoin, IFormatProvider formatProvider, string format, object[] args)
+        private void Log(
+            LogLevel logLevel,
+            Exception exceptoin,
+            IFormatProvider formatProvider,
+            string format,
+            object[] args
+        )
         {
-            Logger.Log(typeof(NLogLogger), new LogEventInfo(logLevel, Logger.Name, format)
+            Logger.Log(
+                typeof(NLogLogger),
+                new LogEventInfo(logLevel, Logger.Name, format)
                 {
                     Exception = exceptoin,
                     FormatProvider = formatProvider,
                     Parameters = args
-                });
+                }
+            );
         }
     }
 }

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -73,13 +74,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '1'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       19 (0x13)
   .maxstack  2
@@ -90,10 +97,12 @@ Position GetName for item '2'
   IL_000d:  callvirt   ""void IMoveable.GetName(int)""
   IL_0012:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Call2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call2<T>",
+                @"
 {
   // Code size       45 (0x2d)
   .maxstack  2
@@ -113,14 +122,16 @@ Position GetName for item '2'
   IL_0027:  callvirt   ""void IMoveable.GetName(int)""
   IL_002c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -168,13 +179,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '-1'
 Position GetName for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -185,14 +202,16 @@ Position GetName for item '-2'
   IL_000f:  callvirt   ""void IMoveable.GetName(int)""
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -240,13 +259,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '1'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -261,10 +286,12 @@ Position GetName for item '2'
   IL_0015:  callvirt   ""void IMoveable.GetName(int)""
   IL_001a:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Call2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call2<T>",
+                @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -284,14 +311,16 @@ Position GetName for item '2'
   IL_0025:  callvirt   ""void IMoveable.GetName(int)""
   IL_002a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -339,13 +368,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '-1'
 Position GetName for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       19 (0x13)
   .maxstack  2
@@ -356,14 +391,16 @@ Position GetName for item '-2'
   IL_000d:  callvirt   ""void IMoveable.GetName(int)""
   IL_0012:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -418,13 +455,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '1'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      195 (0xc3)
   .maxstack  3
@@ -510,10 +553,12 @@ Position GetName for item '2'
   IL_00bd:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c2:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Call2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      241 (0xf1)
   .maxstack  3
@@ -613,14 +658,16 @@ Position GetName for item '2'
   IL_00eb:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00f0:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -675,13 +722,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '-1'
 Position GetName for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      172 (0xac)
   .maxstack  3
@@ -760,14 +813,16 @@ Position GetName for item '-2'
   IL_00a6:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ab:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Class_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -824,13 +879,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '1'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      300 (0x12c)
   .maxstack  3
@@ -956,10 +1017,12 @@ Position GetName for item '2'
   IL_0126:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_012b:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Call2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      346 (0x15a)
   .maxstack  3
@@ -1099,14 +1162,16 @@ Position GetName for item '2'
   IL_0154:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0159:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Struct_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1163,13 +1228,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '-1'
 Position GetName for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      277 (0x115)
   .maxstack  3
@@ -1288,14 +1359,16 @@ Position GetName for item '-2'
   IL_010f:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0114:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_InterpolationHandler_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -1363,16 +1436,25 @@ internal ref struct DummyHandler
 ";
 
             var verifier = CompileAndVerify(
-                new[] { source, InterpolatedStringHandlerAttribute, InterpolatedStringHandlerArgumentAttribute },
-                options: TestOptions.ReleaseExe, expectedOutput: @"
+                    new[]
+                    {
+                        source,
+                        InterpolatedStringHandlerAttribute,
+                        InterpolatedStringHandlerArgumentAttribute
+                    },
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position DummyHandler for item '1'
 Position GetName for item '1'
 Position DummyHandler for item '2'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  6
@@ -1400,10 +1482,12 @@ Position GetName for item '2'
   IL_0033:  callvirt   ""void IMoveable.GetName(int, DummyHandler)""
   IL_0038:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Call2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call2<T>",
+                @"
 {
   // Code size       86 (0x56)
   .maxstack  6
@@ -1444,14 +1528,16 @@ Position GetName for item '2'
   IL_0050:  callvirt   ""void IMoveable.GetName(int, DummyHandler)""
   IL_0055:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_InterpolationHandler_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -1519,16 +1605,25 @@ internal ref struct DummyHandler
 ";
 
             var verifier = CompileAndVerify(
-                new[] { source, InterpolatedStringHandlerAttribute, InterpolatedStringHandlerArgumentAttribute },
-                options: TestOptions.ReleaseExe, expectedOutput: @"
+                    new[]
+                    {
+                        source,
+                        InterpolatedStringHandlerAttribute,
+                        InterpolatedStringHandlerArgumentAttribute
+                    },
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position DummyHandler for item '-1'
 Position GetName for item '-1'
 Position DummyHandler for item '-2'
 Position GetName for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  6
@@ -1557,14 +1652,16 @@ Position GetName for item '-2'
   IL_003a:  callvirt   ""void IMoveable.GetName(int, DummyHandler)""
   IL_003f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_InterpolationHandler_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -1632,16 +1729,25 @@ internal ref struct DummyHandler
 ";
 
             var verifier = CompileAndVerify(
-                new[] { source, InterpolatedStringHandlerAttribute, InterpolatedStringHandlerArgumentAttribute },
-                options: TestOptions.ReleaseExe, expectedOutput: @"
+                    new[]
+                    {
+                        source,
+                        InterpolatedStringHandlerAttribute,
+                        InterpolatedStringHandlerArgumentAttribute
+                    },
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position DummyHandler for item '1'
 Position GetName for item '1'
 Position DummyHandler for item '2'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       70 (0x46)
   .maxstack  6
@@ -1674,10 +1780,12 @@ Position GetName for item '2'
   IL_0040:  callvirt   ""void IMoveable.GetName(int, DummyHandler)""
   IL_0045:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Call2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call2<T>",
+                @"
 {
   // Code size       84 (0x54)
   .maxstack  6
@@ -1718,14 +1826,16 @@ Position GetName for item '2'
   IL_004e:  callvirt   ""void IMoveable.GetName(int, DummyHandler)""
   IL_0053:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_InterpolationHandler_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -1793,16 +1903,25 @@ internal ref struct DummyHandler
 ";
 
             var verifier = CompileAndVerify(
-                new[] { source, InterpolatedStringHandlerAttribute, InterpolatedStringHandlerArgumentAttribute },
-                options: TestOptions.ReleaseExe, expectedOutput: @"
+                    new[]
+                    {
+                        source,
+                        InterpolatedStringHandlerAttribute,
+                        InterpolatedStringHandlerArgumentAttribute
+                    },
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position DummyHandler for item '-1'
 Position GetName for item '-1'
 Position DummyHandler for item '-2'
 Position GetName for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       62 (0x3e)
   .maxstack  6
@@ -1831,14 +1950,16 @@ Position GetName for item '-2'
   IL_0038:  callvirt   ""void IMoveable.GetName(int, DummyHandler)""
   IL_003d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Conditional_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -1886,13 +2007,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '1'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  2
@@ -1907,10 +2034,12 @@ Position GetName for item '2'
   IL_0012:  callvirt   ""void IMoveable.GetName(int)""
   IL_0017:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Call2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call2<T>",
+                @"
 {
   // Code size       55 (0x37)
   .maxstack  2
@@ -1935,14 +2064,16 @@ Position GetName for item '2'
   IL_0031:  callvirt   ""void IMoveable.GetName(int)""
   IL_0036:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Conditional_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -1982,16 +2113,22 @@ class Program
 }
 ";
 
-            CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '-1'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Conditional_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -2039,13 +2176,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '1'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -2061,10 +2204,12 @@ Position GetName for item '2'
   IL_0016:  callvirt   ""void IMoveable.GetName(int)""
   IL_001b:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Call2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call2<T>",
+                @"
 {
   // Code size       53 (0x35)
   .maxstack  2
@@ -2089,14 +2234,16 @@ Position GetName for item '2'
   IL_002f:  callvirt   ""void IMoveable.GetName(int)""
   IL_0034:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Conditional_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -2136,16 +2283,22 @@ class Program
 }
 ";
 
-            CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '-1'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Conditional_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -2200,13 +2353,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '1'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      208 (0xd0)
   .maxstack  3
@@ -2296,10 +2455,12 @@ Position GetName for item '2'
   IL_00ca:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00cf:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Call2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      257 (0x101)
   .maxstack  3
@@ -2403,14 +2564,16 @@ Position GetName for item '2'
   IL_00fb:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0100:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Conditional_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -2457,16 +2620,22 @@ class Program
 }
 ";
 
-            CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '-1'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Conditional_Class_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -2523,13 +2692,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '1'
 Position GetName for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      313 (0x139)
   .maxstack  3
@@ -2659,10 +2834,12 @@ Position GetName for item '2'
   IL_0133:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0138:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Call2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      362 (0x16a)
   .maxstack  3
@@ -2806,14 +2983,16 @@ Position GetName for item '2'
   IL_0164:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0169:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Call_Conditional_Struct_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -2861,16 +3040,22 @@ class Program
 }
 ";
 
-            CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position GetName for item '-1'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Property_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -2925,15 +3110,21 @@ class Program
     }
 }
 ";
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       44 (0x2c)
   .maxstack  3
@@ -2955,10 +3146,12 @@ Position set for item '2'
   IL_0026:  callvirt   ""void IMoveable.Position.set""
   IL_002b:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       60 (0x3c)
   .maxstack  3
@@ -2985,14 +3178,16 @@ Position set for item '2'
   IL_0036:  callvirt   ""void IMoveable.Position.set""
   IL_003b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Property_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -3048,15 +3243,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  3
@@ -3071,14 +3272,16 @@ Position set for item '-2'
   IL_001c:  callvirt   ""void IMoveable.Position.set""
   IL_0021:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Property_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -3134,15 +3337,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  3
@@ -3164,10 +3373,12 @@ Position set for item '2'
   IL_0024:  callvirt   ""void IMoveable.Position.set""
   IL_0029:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       58 (0x3a)
   .maxstack  3
@@ -3194,14 +3405,16 @@ Position set for item '2'
   IL_0034:  callvirt   ""void IMoveable.Position.set""
   IL_0039:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Property_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -3257,15 +3470,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       32 (0x20)
   .maxstack  3
@@ -3280,14 +3499,16 @@ Position set for item '-2'
   IL_001a:  callvirt   ""void IMoveable.Position.set""
   IL_001f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Property_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3350,15 +3571,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      229 (0xe5)
   .maxstack  3
@@ -3456,10 +3683,12 @@ Position set for item '2'
   IL_00df:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00e4:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      271 (0x10f)
   .maxstack  3
@@ -3568,14 +3797,16 @@ Position set for item '2'
   IL_0109:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_010e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Property_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3638,15 +3869,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      202 (0xca)
   .maxstack  3
@@ -3734,14 +3971,16 @@ Position set for item '-2'
   IL_00c4:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c9:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Property_Class_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3806,15 +4045,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      334 (0x14e)
   .maxstack  3
@@ -3952,10 +4197,12 @@ Position set for item '2'
   IL_0148:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_014d:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      376 (0x178)
   .maxstack  3
@@ -4104,14 +4351,16 @@ Position set for item '2'
   IL_0172:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0177:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Property_Struct_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4176,15 +4425,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      307 (0x133)
   .maxstack  3
@@ -4312,14 +4567,16 @@ Position set for item '-2'
   IL_012d:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0132:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Property_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -4375,15 +4632,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  3
@@ -4411,10 +4674,12 @@ Position set for item '2'
   IL_002b:  callvirt   ""void IMoveable.Position.set""
   IL_0030:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       78 (0x4e)
   .maxstack  3
@@ -4454,14 +4719,16 @@ Position set for item '2'
   IL_0048:  callvirt   ""void IMoveable.Position.set""
   IL_004d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Property_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -4517,15 +4784,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       47 (0x2f)
   .maxstack  3
@@ -4550,14 +4823,16 @@ Position set for item '-2'
   IL_0029:  callvirt   ""void IMoveable.Position.set""
   IL_002e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Property_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -4613,15 +4888,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       53 (0x35)
   .maxstack  3
@@ -4650,10 +4931,12 @@ Position set for item '2'
   IL_002f:  callvirt   ""void IMoveable.Position.set""
   IL_0034:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       76 (0x4c)
   .maxstack  3
@@ -4693,14 +4976,16 @@ Position set for item '2'
   IL_0046:  callvirt   ""void IMoveable.Position.set""
   IL_004b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Property_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -4756,15 +5041,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       45 (0x2d)
   .maxstack  3
@@ -4789,14 +5080,16 @@ Position set for item '-2'
   IL_0027:  callvirt   ""void IMoveable.Position.set""
   IL_002c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Property_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4859,15 +5152,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      240 (0xf0)
   .maxstack  3
@@ -4971,10 +5270,12 @@ Position set for item '2'
   IL_00ea:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ef:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      304 (0x130)
   .maxstack  3
@@ -5094,14 +5395,16 @@ Position set for item '2'
   IL_012a:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_012f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Property_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -5164,15 +5467,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      206 (0xce)
   .maxstack  3
@@ -5263,14 +5572,16 @@ Position set for item '-2'
   IL_00c8:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00cd:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Property_Class_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -5335,15 +5646,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      342 (0x156)
   .maxstack  3
@@ -5487,10 +5804,12 @@ Position set for item '2'
   IL_0150:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0155:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      406 (0x196)
   .maxstack  3
@@ -5650,14 +5969,16 @@ Position set for item '2'
   IL_0190:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0195:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Property_Struct_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -5722,15 +6043,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      309 (0x135)
   .maxstack  3
@@ -5861,14 +6188,16 @@ Position set for item '-2'
   IL_012f:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0134:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_Index()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -5924,15 +6253,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  4
@@ -5958,10 +6293,12 @@ Position set for item '2'
   IL_0024:  callvirt   ""void IMoveable.this[int].set""
   IL_0029:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       70 (0x46)
   .maxstack  4
@@ -5999,14 +6336,16 @@ Position set for item '2'
   IL_0040:  callvirt   ""void IMoveable.this[int].set""
   IL_0045:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_Index()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -6062,15 +6401,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  4
@@ -6093,14 +6438,16 @@ Position set for item '-2'
   IL_0022:  callvirt   ""void IMoveable.this[int].set""
   IL_0027:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_Index_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -6156,15 +6503,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  4
@@ -6191,10 +6544,12 @@ Position set for item '2'
   IL_0028:  callvirt   ""void IMoveable.this[int].set""
   IL_002d:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       68 (0x44)
   .maxstack  4
@@ -6232,14 +6587,16 @@ Position set for item '2'
   IL_003e:  callvirt   ""void IMoveable.this[int].set""
   IL_0043:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_Index_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -6295,15 +6652,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  4
@@ -6326,14 +6689,16 @@ Position set for item '-2'
   IL_0020:  callvirt   ""void IMoveable.this[int].set""
   IL_0025:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_Index_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -6396,15 +6761,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      217 (0xd9)
   .maxstack  4
@@ -6497,10 +6868,12 @@ Position set for item '2'
   IL_00d3:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00d8:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      285 (0x11d)
   .maxstack  4
@@ -6615,14 +6988,16 @@ Position set for item '2'
   IL_0117:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_011c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_Index_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -6685,15 +7060,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      192 (0xc0)
   .maxstack  4
@@ -6779,14 +7160,16 @@ Position set for item '-2'
   IL_00ba:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00bf:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_Index_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -6851,15 +7234,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      322 (0x142)
   .maxstack  4
@@ -6992,10 +7381,12 @@ Position set for item '2'
   IL_013c:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0141:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      391 (0x187)
   .maxstack  4
@@ -7150,14 +7541,16 @@ Position set for item '2'
   IL_0181:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0186:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_Index_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -7222,15 +7615,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      297 (0x129)
   .maxstack  4
@@ -7356,14 +7755,16 @@ Position set for item '-2'
   IL_0123:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0128:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Increment_Indexer_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -7419,15 +7820,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  4
@@ -7453,10 +7860,12 @@ Position set for item '2'
   IL_0024:  callvirt   ""void IMoveable.this[int].set""
   IL_0029:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       70 (0x46)
   .maxstack  4
@@ -7494,14 +7903,16 @@ Position set for item '2'
   IL_0040:  callvirt   ""void IMoveable.this[int].set""
   IL_0045:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Increment_Indexer_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -7557,15 +7968,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  4
@@ -7588,14 +8005,16 @@ Position set for item '-2'
   IL_0022:  callvirt   ""void IMoveable.this[int].set""
   IL_0027:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Increment_Indexer_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -7651,15 +8070,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  4
@@ -7686,10 +8111,12 @@ Position set for item '2'
   IL_0028:  callvirt   ""void IMoveable.this[int].set""
   IL_002d:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       68 (0x44)
   .maxstack  4
@@ -7727,14 +8154,16 @@ Position set for item '2'
   IL_003e:  callvirt   ""void IMoveable.this[int].set""
   IL_0043:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Increment_Indexer_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -7790,15 +8219,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  4
@@ -7821,14 +8256,16 @@ Position set for item '-2'
   IL_0020:  callvirt   ""void IMoveable.this[int].set""
   IL_0025:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Increment_Indexer_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -7891,15 +8328,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      221 (0xdd)
   .maxstack  4
@@ -7995,10 +8438,12 @@ Position set for item '2'
   IL_00d7:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00dc:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      290 (0x122)
   .maxstack  4
@@ -8116,14 +8561,16 @@ Position set for item '2'
   IL_011c:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0121:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Increment_Indexer_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -8186,15 +8633,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      196 (0xc4)
   .maxstack  4
@@ -8283,14 +8736,16 @@ Position set for item '-2'
   IL_00be:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c3:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Increment_Indexer_Class_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -8355,15 +8810,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      326 (0x146)
   .maxstack  4
@@ -8499,10 +8960,12 @@ Position set for item '2'
   IL_0140:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0145:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      395 (0x18b)
   .maxstack  4
@@ -8660,14 +9123,16 @@ Position set for item '2'
   IL_0185:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_018a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Increment_Indexer_Struct_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -8732,15 +9197,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      301 (0x12d)
   .maxstack  4
@@ -8869,14 +9340,16 @@ Position set for item '-2'
   IL_0127:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_012c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_Index()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -8932,15 +9405,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       73 (0x49)
   .maxstack  4
@@ -8980,10 +9459,12 @@ Position set for item '2'
   IL_0043:  callvirt   ""void IMoveable.this[int].set""
   IL_0048:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      102 (0x66)
   .maxstack  4
@@ -9035,14 +9516,16 @@ Position set for item '2'
   IL_0060:  callvirt   ""void IMoveable.this[int].set""
   IL_0065:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_Index()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -9098,15 +9581,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       68 (0x44)
   .maxstack  4
@@ -9143,14 +9632,16 @@ Position set for item '-2'
   IL_003e:  callvirt   ""void IMoveable.this[int].set""
   IL_0043:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_Index_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -9206,15 +9697,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       77 (0x4d)
   .maxstack  4
@@ -9255,10 +9752,12 @@ Position set for item '2'
   IL_0047:  callvirt   ""void IMoveable.this[int].set""
   IL_004c:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      100 (0x64)
   .maxstack  4
@@ -9310,14 +9809,16 @@ Position set for item '2'
   IL_005e:  callvirt   ""void IMoveable.this[int].set""
   IL_0063:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_Index_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -9373,15 +9874,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       66 (0x42)
   .maxstack  4
@@ -9418,14 +9925,16 @@ Position set for item '-2'
   IL_003c:  callvirt   ""void IMoveable.this[int].set""
   IL_0041:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_Index_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -9488,15 +9997,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      249 (0xf9)
   .maxstack  4
@@ -9603,10 +10118,12 @@ Position set for item '2'
   IL_00f3:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00f8:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      318 (0x13e)
   .maxstack  4
@@ -9735,14 +10252,16 @@ Position set for item '2'
   IL_0138:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_013d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_Index_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -9805,15 +10324,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      227 (0xe3)
   .maxstack  4
@@ -9913,14 +10438,16 @@ Position set for item '-2'
   IL_00dd:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00e2:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_Index_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -9985,15 +10512,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      353 (0x161)
   .maxstack  4
@@ -10140,10 +10673,12 @@ Position set for item '2'
   IL_015b:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0160:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      422 (0x1a6)
   .maxstack  4
@@ -10312,14 +10847,16 @@ Position set for item '2'
   IL_01a0:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_01a5:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_Index_Async_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -10384,15 +10921,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-1'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      331 (0x14b)
   .maxstack  4
@@ -10532,14 +11075,16 @@ Position set for item '-2'
   IL_0145:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_014a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_Value()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -10595,15 +11140,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  4
@@ -10627,10 +11178,12 @@ Position set for item '2'
   IL_0028:  callvirt   ""void IMoveable.this[int].set""
   IL_002d:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       62 (0x3e)
   .maxstack  4
@@ -10659,14 +11212,16 @@ Position set for item '2'
   IL_0038:  callvirt   ""void IMoveable.this[int].set""
   IL_003d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_Value()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -10722,15 +11277,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  4
@@ -10750,14 +11311,16 @@ Position set for item '-2'
   IL_0020:  callvirt   ""void IMoveable.this[int].set""
   IL_0025:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_Value_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -10813,15 +11376,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       44 (0x2c)
   .maxstack  4
@@ -10845,10 +11414,12 @@ Position set for item '2'
   IL_0026:  callvirt   ""void IMoveable.this[int].set""
   IL_002b:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       60 (0x3c)
   .maxstack  4
@@ -10877,14 +11448,16 @@ Position set for item '2'
   IL_0036:  callvirt   ""void IMoveable.this[int].set""
   IL_003b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_Value_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -10940,15 +11513,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       36 (0x24)
   .maxstack  4
@@ -10968,14 +11547,16 @@ Position set for item '-2'
   IL_001e:  callvirt   ""void IMoveable.this[int].set""
   IL_0023:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_Value_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -11038,15 +11619,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      231 (0xe7)
   .maxstack  4
@@ -11146,10 +11733,12 @@ Position set for item '2'
   IL_00e1:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00e6:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      273 (0x111)
   .maxstack  4
@@ -11260,14 +11849,16 @@ Position set for item '2'
   IL_010b:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0110:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_Value_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -11330,15 +11921,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      204 (0xcc)
   .maxstack  4
@@ -11428,14 +12025,16 @@ Position set for item '-2'
   IL_00c6:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00cb:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_IndexAndValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -11491,15 +12090,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       48 (0x30)
   .maxstack  4
@@ -11526,10 +12131,12 @@ Position set for item '2'
   IL_002a:  callvirt   ""void IMoveable.this[int].set""
   IL_002f:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       76 (0x4c)
   .maxstack  4
@@ -11568,14 +12175,16 @@ Position set for item '2'
   IL_0046:  callvirt   ""void IMoveable.this[int].set""
   IL_004b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_IndexAndValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -11631,15 +12240,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  4
@@ -11663,14 +12278,16 @@ Position set for item '-4'
   IL_0028:  callvirt   ""void IMoveable.this[int].set""
   IL_002d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_IndexAndValue_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -11726,15 +12343,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       51 (0x33)
   .maxstack  4
@@ -11762,10 +12385,12 @@ Position set for item '2'
   IL_002d:  callvirt   ""void IMoveable.this[int].set""
   IL_0032:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       73 (0x49)
   .maxstack  4
@@ -11804,14 +12429,16 @@ Position set for item '2'
   IL_0043:  callvirt   ""void IMoveable.this[int].set""
   IL_0048:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_IndexAndValue_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -11867,15 +12494,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       43 (0x2b)
   .maxstack  4
@@ -11899,14 +12532,16 @@ Position set for item '-4'
   IL_0025:  callvirt   ""void IMoveable.this[int].set""
   IL_002a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_IndexAndValue_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -11969,15 +12604,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      263 (0x107)
   .maxstack  4
@@ -12089,10 +12730,12 @@ Position set for item '2'
   IL_0101:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0106:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      327 (0x147)
   .maxstack  4
@@ -12220,14 +12863,16 @@ Position set for item '2'
   IL_0141:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0146:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_IndexAndValue_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -12290,15 +12935,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      230 (0xe6)
   .maxstack  4
@@ -12397,14 +13048,16 @@ Position set for item '-4'
   IL_00e0:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00e5:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_IndexAndValue_Async_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -12467,15 +13120,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      227 (0xe3)
   .maxstack  4
@@ -12570,10 +13229,12 @@ Position set for item '2'
   IL_00dd:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00e2:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      295 (0x127)
   .maxstack  4
@@ -12690,14 +13351,16 @@ Position set for item '2'
   IL_0121:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0126:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_IndexAndValue_Async_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -12760,15 +13423,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      205 (0xcd)
   .maxstack  4
@@ -12856,14 +13525,16 @@ Position set for item '-4'
   IL_00c7:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00cc:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Class_IndexAndValue_Async_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -12926,15 +13597,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      376 (0x178)
   .maxstack  4
@@ -13083,10 +13760,12 @@ Position set for item '2'
   IL_0172:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0177:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      424 (0x1a8)
   .maxstack  4
@@ -13250,14 +13929,16 @@ Position set for item '2'
   IL_01a2:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_01a7:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_Indexer_Struct_IndexAndValue_Async_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -13320,15 +14001,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      327 (0x147)
   .maxstack  4
@@ -13463,14 +14150,16 @@ Position set for item '-4'
   IL_0141:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0146:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_Value()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -13526,15 +14215,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       68 (0x44)
   .maxstack  4
@@ -13571,10 +14266,12 @@ Position set for item '2'
   IL_003e:  callvirt   ""void IMoveable.this[int].set""
   IL_0043:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       99 (0x63)
   .maxstack  4
@@ -13623,14 +14320,16 @@ Position set for item '2'
   IL_005d:  callvirt   ""void IMoveable.this[int].set""
   IL_0062:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_Value()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -13686,15 +14385,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       65 (0x41)
   .maxstack  4
@@ -13728,14 +14433,16 @@ Position set for item '-2'
   IL_003b:  callvirt   ""void IMoveable.this[int].set""
   IL_0040:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_Value_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -13791,15 +14498,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       72 (0x48)
   .maxstack  4
@@ -13837,10 +14550,12 @@ Position set for item '2'
   IL_0042:  callvirt   ""void IMoveable.this[int].set""
   IL_0047:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       97 (0x61)
   .maxstack  4
@@ -13889,14 +14604,16 @@ Position set for item '2'
   IL_005b:  callvirt   ""void IMoveable.this[int].set""
   IL_0060:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_Value_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -13952,15 +14669,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       63 (0x3f)
   .maxstack  4
@@ -13994,14 +14717,16 @@ Position set for item '-2'
   IL_0039:  callvirt   ""void IMoveable.this[int].set""
   IL_003e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_Value_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -14064,15 +14789,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      241 (0xf1)
   .maxstack  4
@@ -14176,10 +14907,12 @@ Position set for item '2'
   IL_00eb:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00f0:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      319 (0x13f)
   .maxstack  4
@@ -14305,14 +15038,16 @@ Position set for item '2'
   IL_0139:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_013e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_Value_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -14375,15 +15110,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '-1'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      219 (0xdb)
   .maxstack  4
@@ -14480,14 +15221,16 @@ Position set for item '-2'
   IL_00d5:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00da:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_IndexAndValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -14543,15 +15286,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
    // Code size       79 (0x4f)
   .maxstack  4
@@ -14592,10 +15341,12 @@ Position set for item '2'
   IL_0049:  callvirt   ""void IMoveable.this[int].set""
   IL_004e:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      108 (0x6c)
   .maxstack  4
@@ -14648,14 +15399,16 @@ Position set for item '2'
   IL_0066:  callvirt   ""void IMoveable.this[int].set""
   IL_006b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_IndexAndValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -14711,15 +15464,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       74 (0x4a)
   .maxstack  4
@@ -14757,14 +15516,16 @@ Position set for item '-4'
   IL_0044:  callvirt   ""void IMoveable.this[int].set""
   IL_0049:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_IndexAndValue_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -14820,15 +15581,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       82 (0x52)
   .maxstack  4
@@ -14870,10 +15637,12 @@ Position set for item '2'
   IL_004c:  callvirt   ""void IMoveable.this[int].set""
   IL_0051:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      105 (0x69)
   .maxstack  4
@@ -14926,14 +15695,16 @@ Position set for item '2'
   IL_0063:  callvirt   ""void IMoveable.this[int].set""
   IL_0068:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_IndexAndValue_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -14989,15 +15760,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       71 (0x47)
   .maxstack  4
@@ -15035,14 +15812,16 @@ Position set for item '-4'
   IL_0041:  callvirt   ""void IMoveable.this[int].set""
   IL_0046:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_IndexAndValue_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -15105,15 +15884,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      274 (0x112)
   .maxstack  4
@@ -15224,10 +16009,12 @@ Position set for item '2'
   IL_010c:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0111:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      346 (0x15a)
   .maxstack  4
@@ -15360,14 +16147,16 @@ Position set for item '2'
   IL_0154:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0159:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_IndexAndValue_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -15430,15 +16219,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      249 (0xf9)
   .maxstack  4
@@ -15542,14 +16337,16 @@ Position set for item '-4'
   IL_00f3:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00f8:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_IndexAndValue_Async_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -15612,15 +16409,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
       // Code size      259 (0x103)
   .maxstack  4
@@ -15729,10 +16532,12 @@ Position set for item '2'
   IL_00fd:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0102:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      328 (0x148)
   .maxstack  4
@@ -15863,14 +16668,16 @@ Position set for item '2'
   IL_0142:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0147:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_IndexAndValue_Async_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -15933,15 +16740,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      237 (0xed)
   .maxstack  4
@@ -16043,14 +16856,16 @@ Position set for item '-4'
   IL_00e7:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ec:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Class_IndexAndValue_Async_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -16113,15 +16928,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '1'
 Position set for item '1'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
    // Code size      376 (0x178)
   .maxstack  4
@@ -16271,10 +17092,12 @@ Position set for item '2'
   IL_0172:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0177:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      448 (0x1c0)
   .maxstack  4
@@ -16446,14 +17269,16 @@ Position set for item '2'
   IL_01ba:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_01bf:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_Indexer_Struct_IndexAndValue_Async_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -16516,15 +17341,21 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position get for item '-1'
 Position set for item '-2'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      354 (0x162)
   .maxstack  4
@@ -16667,14 +17498,16 @@ Position set for item '-4'
   IL_015c:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0161:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_Property_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -16730,13 +17563,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position set for item '1'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -16753,10 +17592,12 @@ Position set for item '2'
   IL_0013:  callvirt   ""void IMoveable.Position.set""
   IL_0018:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       52 (0x34)
   .maxstack  2
@@ -16785,14 +17626,16 @@ Position set for item '2'
   IL_002e:  callvirt   ""void IMoveable.Position.set""
   IL_0033:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_Property_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -16848,13 +17691,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position set for item '-1'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -16868,14 +17717,16 @@ Position set for item '-2'
   IL_0011:  callvirt   ""void IMoveable.Position.set""
   IL_0016:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_Property_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -16931,13 +17782,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position set for item '1'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -16955,10 +17812,12 @@ Position set for item '2'
   IL_0017:  callvirt   ""void IMoveable.Position.set""
   IL_001c:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       50 (0x32)
   .maxstack  2
@@ -16987,14 +17846,16 @@ Position set for item '2'
   IL_002c:  callvirt   ""void IMoveable.Position.set""
   IL_0031:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_Property_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -17050,13 +17911,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position set for item '-1'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -17070,14 +17937,16 @@ Position set for item '-2'
   IL_000f:  callvirt   ""void IMoveable.Position.set""
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_Property_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -17140,13 +18009,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position set for item '1'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      195 (0xc3)
   .maxstack  3
@@ -17232,10 +18107,12 @@ Position set for item '2'
   IL_00bd:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c2:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      241 (0xf1)
   .maxstack  3
@@ -17335,14 +18212,16 @@ Position set for item '2'
   IL_00eb:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00f0:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_Property_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -17405,13 +18284,19 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position set for item '-1'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      172 (0xac)
   .maxstack  3
@@ -17490,14 +18375,16 @@ Position set for item '-2'
   IL_00a6:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ab:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImplicitIndexIndexer_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -17563,15 +18450,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position Length for item '2'
 Position get for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
    // Code size       36 (0x24)
   .maxstack  3
@@ -17593,10 +18487,12 @@ Position get for item '2'
   IL_0022:  pop
   IL_0023:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
    // Code size       69 (0x45)
   .maxstack  3
@@ -17633,14 +18529,16 @@ Position get for item '2'
   IL_0043:  pop
   IL_0044:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImplicitIndexIndexer_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -17706,15 +18604,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       37 (0x25)
   .maxstack  3
@@ -17733,14 +18638,16 @@ Position get for item '-2'
   IL_0023:  pop
   IL_0024:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImplicitIndexIndexer_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -17806,15 +18713,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position Length for item '2'
 Position get for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  3
@@ -17837,10 +18751,12 @@ Position get for item '2'
   IL_0026:  pop
   IL_0027:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  3
@@ -17877,14 +18793,16 @@ Position get for item '2'
   IL_0041:  pop
   IL_0042:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImplicitIndexIndexer_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -17950,15 +18868,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
  // Code size       35 (0x23)
   .maxstack  3
@@ -17977,14 +18902,16 @@ Position get for item '-2'
   IL_0021:  pop
   IL_0022:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImplicitIndexIndexer_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -18057,15 +18984,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position Length for item '2'
 Position get for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      213 (0xd5)
   .maxstack  3
@@ -18157,10 +19091,12 @@ Position get for item '2'
   IL_00cf:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00d4:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      284 (0x11c)
   .maxstack  3
@@ -18274,14 +19210,16 @@ Position get for item '2'
   IL_0116:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_011b:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImplicitIndexIndexer_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -18354,15 +19292,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      191 (0xbf)
   .maxstack  3
@@ -18447,14 +19392,16 @@ Position get for item '-2'
   IL_00b9:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00be:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_Index()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -18520,17 +19467,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       51 (0x33)
   .maxstack  4
@@ -18560,10 +19514,12 @@ Position set for item '2'
   IL_002d:  callvirt   ""void IMoveable.this[int].set""
   IL_0032:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       88 (0x58)
   .maxstack  4
@@ -18608,14 +19564,16 @@ Position set for item '2'
   IL_0052:  callvirt   ""void IMoveable.this[int].set""
   IL_0057:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_Index()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -18681,17 +19639,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       55 (0x37)
   .maxstack  4
@@ -18721,14 +19686,16 @@ Position set for item '-2'
   IL_0031:  callvirt   ""void IMoveable.this[int].set""
   IL_0036:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_Index_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -18794,17 +19761,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       55 (0x37)
   .maxstack  4
@@ -18835,10 +19809,12 @@ Position set for item '2'
   IL_0031:  callvirt   ""void IMoveable.this[int].set""
   IL_0036:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       86 (0x56)
   .maxstack  4
@@ -18883,14 +19859,16 @@ Position set for item '2'
   IL_0050:  callvirt   ""void IMoveable.this[int].set""
   IL_0055:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_Index_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -18956,17 +19934,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       53 (0x35)
   .maxstack  4
@@ -18996,14 +19981,16 @@ Position set for item '-2'
   IL_002f:  callvirt   ""void IMoveable.this[int].set""
   IL_0034:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_Index_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -19076,17 +20063,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      238 (0xee)
   .maxstack  4
@@ -19187,10 +20181,12 @@ Position set for item '2'
   IL_00e8:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ed:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      332 (0x14c)
   .maxstack  4
@@ -19321,14 +20317,16 @@ Position set for item '2'
   IL_0146:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_014b:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_Index_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -19401,17 +20399,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      217 (0xd9)
   .maxstack  4
@@ -19505,14 +20510,16 @@ Position set for item '-2'
   IL_00d3:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00d8:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_Value()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -19578,17 +20585,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  4
@@ -19615,10 +20629,12 @@ Position set for item '2'
   IL_002b:  callvirt   ""void IMoveable.this[int].set""
   IL_0030:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       77 (0x4d)
   .maxstack  4
@@ -19654,14 +20670,16 @@ Position set for item '2'
   IL_0047:  callvirt   ""void IMoveable.this[int].set""
   IL_004c:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_Value()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -19727,17 +20745,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       53 (0x35)
   .maxstack  4
@@ -19764,14 +20789,16 @@ Position set for item '-2'
   IL_002f:  callvirt   ""void IMoveable.this[int].set""
   IL_0034:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_Value_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -19837,17 +20864,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       53 (0x35)
   .maxstack  4
@@ -19875,10 +20909,12 @@ Position set for item '2'
   IL_002f:  callvirt   ""void IMoveable.this[int].set""
   IL_0034:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       75 (0x4b)
   .maxstack  4
@@ -19914,14 +20950,16 @@ Position set for item '2'
   IL_0045:  callvirt   ""void IMoveable.this[int].set""
   IL_004a:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_Value_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -19987,17 +21025,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       51 (0x33)
   .maxstack  4
@@ -20024,14 +21069,16 @@ Position set for item '-2'
   IL_002d:  callvirt   ""void IMoveable.this[int].set""
   IL_0032:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_Value_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -20104,17 +21151,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      254 (0xfe)
   .maxstack  4
@@ -20224,10 +21278,12 @@ Position set for item '2'
   IL_00f8:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00fd:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      311 (0x137)
   .maxstack  4
@@ -20350,14 +21406,16 @@ Position set for item '2'
   IL_0131:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0136:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_Value_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -20430,17 +21488,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      238 (0xee)
   .maxstack  4
@@ -20542,14 +21607,16 @@ Position set for item '-2'
   IL_00e8:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ed:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_IndexAndValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -20615,17 +21682,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  4
@@ -20656,10 +21730,12 @@ Position set for item '2'
   IL_0033:  callvirt   ""void IMoveable.this[int].set""
   IL_0038:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       94 (0x5e)
   .maxstack  4
@@ -20705,14 +21781,16 @@ Position set for item '2'
   IL_0058:  callvirt   ""void IMoveable.this[int].set""
   IL_005d:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_IndexAndValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -20778,17 +21856,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       61 (0x3d)
   .maxstack  4
@@ -20819,14 +21904,16 @@ Position set for item '-4'
   IL_0037:  callvirt   ""void IMoveable.this[int].set""
   IL_003c:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_IndexAndValue_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -20892,17 +21979,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       60 (0x3c)
   .maxstack  4
@@ -20934,10 +22028,12 @@ Position set for item '2'
   IL_0036:  callvirt   ""void IMoveable.this[int].set""
   IL_003b:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       91 (0x5b)
   .maxstack  4
@@ -20983,14 +22079,16 @@ Position set for item '2'
   IL_0055:  callvirt   ""void IMoveable.this[int].set""
   IL_005a:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_IndexAndValue_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -21056,17 +22154,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       58 (0x3a)
   .maxstack  4
@@ -21097,14 +22202,16 @@ Position set for item '-4'
   IL_0034:  callvirt   ""void IMoveable.this[int].set""
   IL_0039:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_IndexAndValue_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -21177,17 +22284,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      271 (0x10f)
   .maxstack  4
@@ -21302,10 +22416,12 @@ Position set for item '2'
   IL_0109:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_010e:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      375 (0x177)
   .maxstack  4
@@ -21449,14 +22565,16 @@ Position set for item '2'
   IL_0171:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0176:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_IndexAndValue_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -21529,17 +22647,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      256 (0x100)
   .maxstack  4
@@ -21646,14 +22771,16 @@ Position set for item '-4'
   IL_00fa:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ff:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_IndexAndValue_Async_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -21726,17 +22853,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      248 (0xf8)
   .maxstack  4
@@ -21839,10 +22973,12 @@ Position set for item '2'
   IL_00f2:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00f7:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      342 (0x156)
   .maxstack  4
@@ -21975,14 +23111,16 @@ Position set for item '2'
   IL_0150:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0155:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_IndexAndValue_Async_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -22055,17 +23193,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      227 (0xe3)
   .maxstack  4
@@ -22161,14 +23306,16 @@ Position set for item '-4'
   IL_00dd:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00e2:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Class_IndexAndValue_Async_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -22241,17 +23388,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      401 (0x191)
   .maxstack  4
@@ -22408,10 +23562,12 @@ Position set for item '2'
   IL_018b:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0190:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      472 (0x1d8)
   .maxstack  4
@@ -22591,14 +23747,16 @@ Position set for item '2'
   IL_01d2:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_01d7:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Compound_ImplicitIndexIndexer_Struct_IndexAndValue_Async_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -22671,17 +23829,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      353 (0x161)
   .maxstack  4
@@ -22824,14 +23989,16 @@ Position set for item '-4'
   IL_015b:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0160:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_Index()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -22897,17 +24064,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       82 (0x52)
   .maxstack  4
@@ -22951,10 +24125,12 @@ Position set for item '2'
   IL_004c:  callvirt   ""void IMoveable.this[int].set""
   IL_0051:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      120 (0x78)
   .maxstack  4
@@ -23013,14 +24189,16 @@ Position set for item '2'
   IL_0072:  callvirt   ""void IMoveable.this[int].set""
   IL_0077:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_Index()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -23086,17 +24264,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       86 (0x56)
   .maxstack  4
@@ -23140,14 +24325,16 @@ Position set for item '-2'
   IL_0050:  callvirt   ""void IMoveable.this[int].set""
   IL_0055:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_Index_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -23213,17 +24400,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       86 (0x56)
   .maxstack  4
@@ -23268,10 +24462,12 @@ Position set for item '2'
   IL_0050:  callvirt   ""void IMoveable.this[int].set""
   IL_0055:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      118 (0x76)
   .maxstack  4
@@ -23330,14 +24526,16 @@ Position set for item '2'
   IL_0070:  callvirt   ""void IMoveable.this[int].set""
   IL_0075:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_Index_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -23403,17 +24601,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       84 (0x54)
   .maxstack  4
@@ -23457,14 +24662,16 @@ Position set for item '-2'
   IL_004e:  callvirt   ""void IMoveable.this[int].set""
   IL_0053:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_Index_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -23537,17 +24744,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      271 (0x10f)
   .maxstack  4
@@ -23662,10 +24876,12 @@ Position set for item '2'
   IL_0109:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_010e:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      366 (0x16e)
   .maxstack  4
@@ -23810,14 +25026,16 @@ Position set for item '2'
   IL_0168:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_016d:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_Index_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -23890,17 +25108,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-1'
 Position Length for item '-2'
 Position get for item '-2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      250 (0xfa)
   .maxstack  4
@@ -24008,14 +25233,16 @@ Position set for item '-2'
   IL_00f4:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00f9:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_Value()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -24081,17 +25308,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       77 (0x4d)
   .maxstack  4
@@ -24132,10 +25366,12 @@ Position set for item '2'
   IL_0047:  callvirt   ""void IMoveable.this[int].set""
   IL_004c:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      115 (0x73)
   .maxstack  4
@@ -24191,14 +25427,16 @@ Position set for item '2'
   IL_006d:  callvirt   ""void IMoveable.this[int].set""
   IL_0072:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_Value()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -24264,17 +25502,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       81 (0x51)
   .maxstack  4
@@ -24315,14 +25560,16 @@ Position set for item '-2'
   IL_004b:  callvirt   ""void IMoveable.this[int].set""
   IL_0050:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_Value_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -24388,17 +25635,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       81 (0x51)
   .maxstack  4
@@ -24440,10 +25694,12 @@ Position set for item '2'
   IL_004b:  callvirt   ""void IMoveable.this[int].set""
   IL_0050:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      113 (0x71)
   .maxstack  4
@@ -24499,14 +25755,16 @@ Position set for item '2'
   IL_006b:  callvirt   ""void IMoveable.this[int].set""
   IL_0070:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_Value_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -24572,17 +25830,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       79 (0x4f)
   .maxstack  4
@@ -24623,14 +25888,16 @@ Position set for item '-2'
   IL_0049:  callvirt   ""void IMoveable.this[int].set""
   IL_004e:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_Value_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -24703,17 +25970,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      281 (0x119)
   .maxstack  4
@@ -24827,10 +26101,12 @@ Position set for item '2'
   IL_0113:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0118:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      378 (0x17a)
   .maxstack  4
@@ -24974,14 +26250,16 @@ Position set for item '2'
   IL_0174:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0179:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_Value_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -25054,17 +26332,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
  // Code size      260 (0x104)
   .maxstack  4
@@ -25171,14 +26456,16 @@ Position set for item '-2'
   IL_00fe:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0103:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_IndexAndValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -25244,17 +26531,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       88 (0x58)
   .maxstack  4
@@ -25299,10 +26593,12 @@ Position set for item '2'
   IL_0052:  callvirt   ""void IMoveable.this[int].set""
   IL_0057:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      126 (0x7e)
   .maxstack  4
@@ -25362,14 +26658,16 @@ Position set for item '2'
   IL_0078:  callvirt   ""void IMoveable.this[int].set""
   IL_007d:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_IndexAndValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -25435,17 +26733,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       92 (0x5c)
   .maxstack  4
@@ -25490,14 +26795,16 @@ Position set for item '-4'
   IL_0056:  callvirt   ""void IMoveable.this[int].set""
   IL_005b:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_IndexAndValue_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -25563,17 +26870,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       91 (0x5b)
   .maxstack  4
@@ -25619,10 +26933,12 @@ Position set for item '2'
   IL_0055:  callvirt   ""void IMoveable.this[int].set""
   IL_005a:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      123 (0x7b)
   .maxstack  4
@@ -25682,14 +26998,16 @@ Position set for item '2'
   IL_0075:  callvirt   ""void IMoveable.this[int].set""
   IL_007a:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_IndexAndValue_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -25755,17 +27073,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       89 (0x59)
   .maxstack  4
@@ -25810,14 +27135,16 @@ Position set for item '-4'
   IL_0053:  callvirt   ""void IMoveable.this[int].set""
   IL_0058:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_IndexAndValue_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -25890,17 +27217,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      296 (0x128)
   .maxstack  4
@@ -26019,10 +27353,12 @@ Position set for item '2'
   IL_0122:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0127:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      394 (0x18a)
   .maxstack  4
@@ -26171,14 +27507,16 @@ Position set for item '2'
   IL_0184:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0189:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_IndexAndValue_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -26251,17 +27589,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      275 (0x113)
   .maxstack  4
@@ -26373,14 +27718,16 @@ Position set for item '-4'
   IL_010d:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0112:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_IndexAndValue_Async_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -26453,17 +27800,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      281 (0x119)
   .maxstack  4
@@ -26580,10 +27934,12 @@ Position set for item '2'
   IL_0113:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0118:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      376 (0x178)
   .maxstack  4
@@ -26730,14 +28086,16 @@ Position set for item '2'
   IL_0172:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0177:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_IndexAndValue_Async_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -26810,17 +28168,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      260 (0x104)
   .maxstack  4
@@ -26930,14 +28295,16 @@ Position set for item '-4'
   IL_00fe:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0103:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Class_IndexAndValue_Async_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -27010,17 +28377,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position get for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position get for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      393 (0x189)
   .maxstack  4
@@ -27175,10 +28549,12 @@ Position set for item '2'
   IL_0183:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0188:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      491 (0x1eb)
   .maxstack  4
@@ -27363,14 +28739,16 @@ Position set for item '2'
   IL_01e5:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_01ea:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Conditional_ImplicitIndexIndexer_Struct_IndexAndValue_Async_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -27443,17 +28821,24 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position get for item '-1'
 Position set for item '-2'
 Position Length for item '-3'
 Position get for item '-3'
 Position set for item '-4'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      372 (0x174)
   .maxstack  4
@@ -27601,14 +28986,16 @@ Position set for item '-4'
   IL_016e:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0173:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_ImplicitIndexIndexer_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -27674,15 +29061,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  3
@@ -27705,10 +29099,12 @@ Position set for item '2'
   IL_0024:  callvirt   ""void IMoveable.this[int].set""
   IL_0029:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       75 (0x4b)
   .maxstack  3
@@ -27746,14 +29142,16 @@ Position set for item '2'
   IL_0045:  callvirt   ""void IMoveable.this[int].set""
   IL_004a:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_ImplicitIndexIndexer_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -27819,15 +29217,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       45 (0x2d)
   .maxstack  3
@@ -27850,14 +29255,16 @@ Position set for item '-2'
   IL_0027:  callvirt   ""void IMoveable.this[int].set""
   IL_002c:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_ImplicitIndexIndexer_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -27923,15 +29330,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  3
@@ -27955,10 +29369,12 @@ Position set for item '2'
   IL_0028:  callvirt   ""void IMoveable.this[int].set""
   IL_002d:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       73 (0x49)
   .maxstack  3
@@ -27996,14 +29412,16 @@ Position set for item '2'
   IL_0043:  callvirt   ""void IMoveable.this[int].set""
   IL_0048:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_ImplicitIndexIndexer_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -28069,15 +29487,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       43 (0x2b)
   .maxstack  3
@@ -28100,14 +29525,16 @@ Position set for item '-2'
   IL_0025:  callvirt   ""void IMoveable.this[int].set""
   IL_002a:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_ImplicitIndexIndexer_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -28180,15 +29607,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position set for item '1'
 Position Length for item '2'
 Position set for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      234 (0xea)
   .maxstack  3
@@ -28288,10 +29722,12 @@ Position set for item '2'
   IL_00e4:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00e9:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      309 (0x135)
   .maxstack  3
@@ -28413,14 +29849,16 @@ Position set for item '2'
   IL_012f:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0134:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_Assignment_Deconstruction_ImplicitIndexIndexer_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -28493,15 +29931,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position set for item '-1'
 Position Length for item '2'
 Position set for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      212 (0xd4)
   .maxstack  3
@@ -28594,14 +30039,16 @@ Position set for item '-2'
   IL_00ce:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00d3:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeExpression_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -28660,15 +30107,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position Slice for item '1'
 Position Length for item '2'
 Position Slice for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       37 (0x25)
   .maxstack  4
@@ -28691,10 +30145,12 @@ Position Slice for item '2'
   IL_0023:  pop
   IL_0024:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       70 (0x46)
   .maxstack  4
@@ -28732,14 +30188,16 @@ Position Slice for item '2'
   IL_0044:  pop
   IL_0045:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeExpression_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -28798,15 +30256,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position Slice for item '-1'
 Position Length for item '-2'
 Position Slice for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  4
@@ -28829,14 +30294,16 @@ Position Slice for item '-2'
   IL_0026:  pop
   IL_0027:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeExpression_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -28895,15 +30362,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position Slice for item '1'
 Position Length for item '2'
 Position Slice for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       41 (0x29)
   .maxstack  4
@@ -28927,10 +30401,12 @@ Position Slice for item '2'
   IL_0027:  pop
   IL_0028:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size       68 (0x44)
   .maxstack  4
@@ -28968,14 +30444,16 @@ Position Slice for item '2'
   IL_0042:  pop
   IL_0043:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeExpression_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -29034,15 +30512,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position Slice for item '-1'
 Position Length for item '-2'
 Position Slice for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  4
@@ -29065,14 +30550,16 @@ Position Slice for item '-2'
   IL_0024:  pop
   IL_0025:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeExpression_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -29138,15 +30625,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position Slice for item '1'
 Position Length for item '2'
 Position Slice for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      217 (0xd9)
   .maxstack  4
@@ -29239,10 +30733,12 @@ Position Slice for item '2'
   IL_00d3:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00d8:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      285 (0x11d)
   .maxstack  4
@@ -29357,14 +30853,16 @@ Position Slice for item '2'
   IL_0117:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_011c:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeExpression_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -29430,15 +30928,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position Slice for item '-1'
 Position Length for item '-2'
 Position Slice for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      192 (0xc0)
   .maxstack  4
@@ -29524,14 +31029,16 @@ Position Slice for item '-2'
   IL_00ba:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00bf:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeValue_Class()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -29590,15 +31097,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position Slice for item '1'
 Position Length for item '2'
 Position Slice for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       73 (0x49)
   .maxstack  3
@@ -29638,10 +31152,12 @@ Position Slice for item '2'
   IL_0047:  pop
   IL_0048:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      111 (0x6f)
   .maxstack  3
@@ -29696,14 +31212,16 @@ Position Slice for item '2'
   IL_006d:  pop
   IL_006e:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeValue_Struct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -29762,15 +31280,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position Slice for item '-1'
 Position Length for item '-2'
 Position Slice for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       76 (0x4c)
   .maxstack  3
@@ -29810,14 +31335,16 @@ Position Slice for item '-2'
   IL_004a:  pop
   IL_004b:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeValue_Class_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -29876,15 +31403,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position Slice for item '1'
 Position Length for item '2'
 Position Slice for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       77 (0x4d)
   .maxstack  3
@@ -29925,10 +31459,12 @@ Position Slice for item '2'
   IL_004b:  pop
   IL_004c:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Shift2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift2<T>",
+                @"
 {
   // Code size      109 (0x6d)
   .maxstack  3
@@ -29983,14 +31519,16 @@ Position Slice for item '2'
   IL_006b:  pop
   IL_006c:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeValue_Struct_Ref()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 interface IMoveable
@@ -30049,15 +31587,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position Slice for item '-1'
 Position Length for item '-2'
 Position Slice for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Shift1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Shift1<T>",
+                @"
 {
   // Code size       74 (0x4a)
   .maxstack  3
@@ -30097,14 +31642,16 @@ Position Slice for item '-2'
   IL_0048:  pop
   IL_0049:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeValue_Class_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -30170,15 +31717,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '1'
 Position Slice for item '1'
 Position Length for item '2'
 Position Slice for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      262 (0x106)
   .maxstack  3
@@ -30291,10 +31845,12 @@ Position Slice for item '2'
   IL_0100:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0105:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift2>d__2<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      331 (0x14b)
   .maxstack  3
@@ -30429,14 +31985,16 @@ Position Slice for item '2'
   IL_0145:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_014a:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(63221, "https://github.com/dotnet/roslyn/issues/63221")]
         public void GenericTypeParameterAsReceiver_ImpicitRangeIndexer_RangeValue_Struct_Async_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -30502,15 +32060,22 @@ class Program
 }
 ";
 
-            var verifier = CompileAndVerify(source, targetFramework: TargetFramework.NetLatest, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    targetFramework: TargetFramework.NetLatest,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Length for item '-1'
 Position Slice for item '-1'
 Position Length for item '-2'
 Position Slice for item '-2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Shift1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      240 (0xf0)
   .maxstack  3
@@ -30616,14 +32181,16 @@ Position Slice for item '-2'
   IL_00ea:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00ef:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(66162, "https://github.com/dotnet/roslyn/issues/66162")]
         public void GenericTypeParameterAsReceiver_Call_Nullable()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 #pragma warning disable CS0659 // 'Item' overrides Object.Equals(object o) but does not override Object.GetHashCode()
@@ -30668,13 +32235,19 @@ class Program
 }
 ";
             // The output doesn't match the expectation, see https://github.com/dotnet/roslyn/issues/66162
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Equals for item '1'
 Position Equals for item '2'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.Call1<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call1<T>",
+                @"
 {
   // Code size       51 (0x33)
   .maxstack  2
@@ -30696,10 +32269,12 @@ Position Equals for item '2'
   IL_0031:  pop
   IL_0032:  ret
 }
-");
+"
+            );
 
-            verifier.VerifyIL("Program.Call2<T>",
-@"
+            verifier.VerifyIL(
+                "Program.Call2<T>",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -30721,14 +32296,16 @@ Position Equals for item '2'
   IL_002f:  pop
   IL_0030:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem(66162, "https://github.com/dotnet/roslyn/issues/66162")]
         public void GenericTypeParameterAsReceiver_Call_Nullable_Async()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -30774,12 +32351,18 @@ class Program
 ";
 
             // The output doesn't match the expectation, see https://github.com/dotnet/roslyn/issues/66162
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    expectedOutput: @"
 Position Equals for item '1'
-").VerifyDiagnostics();
+"
+                )
+                .VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"
+            verifier.VerifyIL(
+                "Program.<Call1>d__1<T>.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      247 (0xf7)
   .maxstack  3
@@ -30881,7 +32464,8 @@ Position Equals for item '1'
   IL_00f1:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00f6:  ret
 }
-");
+"
+            );
         }
     }
 }

@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 {
     internal static class CommonFormattingHelpers
     {
-        public static TextSpan GetFormattingSpan(SyntaxNode root, TextSpan span)
-            => CodeAnalysis.Shared.Utilities.CommonFormattingHelpers.GetFormattingSpan(root, span);
+        public static TextSpan GetFormattingSpan(SyntaxNode root, TextSpan span) =>
+            CodeAnalysis.Shared.Utilities.CommonFormattingHelpers.GetFormattingSpan(root, span);
 
         public static TextSpan GetFormattingSpan(ITextSnapshot snapshot, SnapshotSpan selectedSpan)
         {
@@ -27,15 +27,22 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 return TextSpan.FromBounds(currentLine.Start, endPosition);
             }
 
-            var lastNonNoisyCharPosition = previousLine.GetLastNonWhitespacePosition().GetValueOrDefault();
+            var lastNonNoisyCharPosition = previousLine
+                .GetLastNonWhitespacePosition()
+                .GetValueOrDefault();
             return TextSpan.FromBounds(lastNonNoisyCharPosition, endPosition);
         }
 
-        public static ITextSnapshotLine GetNonEmptyPreviousLine(ITextSnapshot snapshot, ITextSnapshotLine currentLine)
+        public static ITextSnapshotLine GetNonEmptyPreviousLine(
+            ITextSnapshot snapshot,
+            ITextSnapshotLine currentLine
+        )
         {
             do
             {
-                var previousLine = snapshot.GetLineFromLineNumber(Math.Max(currentLine.LineNumber - 1, 0));
+                var previousLine = snapshot.GetLineFromLineNumber(
+                    Math.Max(currentLine.LineNumber - 1, 0)
+                );
 
                 // first line in the file
                 if (previousLine.LineNumber == currentLine.LineNumber)
@@ -51,8 +58,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 }
 
                 return previousLine;
-            }
-            while (true);
+            } while (true);
         }
     }
 }

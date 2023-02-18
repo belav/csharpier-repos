@@ -43,15 +43,13 @@ using NUnit.Framework;
 using MonoTests.stand_alone.WebHarness;
 using System.Threading;
 
-
 namespace MonoTests.System.Web.UI.WebControls
 {
-    
-    class PokerTemplateControl:TemplateControl
+    class PokerTemplateControl : TemplateControl
     {
-        public PokerTemplateControl ()
+        public PokerTemplateControl()
         {
-            TrackViewState ();
+            TrackViewState();
         }
 
         public bool DoSupportAutoEvents
@@ -59,34 +57,32 @@ namespace MonoTests.System.Web.UI.WebControls
             get { return base.SupportAutoEvents; }
         }
 
-        protected override void Construct ()
+        protected override void Construct()
         {
             TemplateControlTest.eventchecker = true;
-            base.Construct ();
+            base.Construct();
         }
 
-        
-        public void DoOnAbortTransaction (EventArgs e)
+        public void DoOnAbortTransaction(EventArgs e)
         {
-            base.OnAbortTransaction (e);
+            base.OnAbortTransaction(e);
         }
 
-        public void DoOnCommitTransaction (EventArgs e)
+        public void DoOnCommitTransaction(EventArgs e)
         {
-            base.OnCommitTransaction (e);
+            base.OnCommitTransaction(e);
         }
 
-        public void DoOnError (EventArgs e)
+        public void DoOnError(EventArgs e)
         {
-            base.OnError (e);
+            base.OnError(e);
         }
 
-        public object DoEval (string str)
+        public object DoEval(string str)
         {
-            return base.Eval (str);
+            return base.Eval(str);
         }
     }
-
 
     [TestFixture]
     public class TemplateControlTest
@@ -95,99 +91,97 @@ namespace MonoTests.System.Web.UI.WebControls
         public string message = "My message text";
 
         [TestFixtureSetUp]
-        public void GridViewInit ()
+        public void GridViewInit()
         {
-            WebTest.CopyResource (GetType (), "TemplateUserControl.ascx", "TemplateUserControl.ascx");
+            WebTest.CopyResource(GetType(), "TemplateUserControl.ascx", "TemplateUserControl.ascx");
         }
 
         [SetUp]
-        public void SetupTestCase ()
+        public void SetupTestCase()
         {
-            Thread.Sleep (100);
+            Thread.Sleep(100);
         }
 
         [Test]
-        public void TemplateControl_DefaultProperty ()
+        public void TemplateControl_DefaultProperty()
         {
-            PokerTemplateControl t = new PokerTemplateControl ();
-            Assert.AreEqual (true, t.EnableTheming, "EnableTheming");
-            Assert.AreEqual (true, t.DoSupportAutoEvents, "SupportAutoEvents");
-        }
-
-
-        [Test]
-        [Category ("NunitWeb")]
-        public void TemplateControl_LoadControl ()
-        {
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad (LoadControlTest));
-            string html = t.Run ();
-            if (html.IndexOf ("TemplateUserControl") < 0)
-                Assert.Fail ("LoadControl failed");
-        }
-
-        public static void LoadControlTest (Page p)
-        {
-            PokerTemplateControl t = new PokerTemplateControl ();
-            p.Form.Controls.Add (t.LoadControl ("TemplateUserControl.ascx"));
+            PokerTemplateControl t = new PokerTemplateControl();
+            Assert.AreEqual(true, t.EnableTheming, "EnableTheming");
+            Assert.AreEqual(true, t.DoSupportAutoEvents, "SupportAutoEvents");
         }
 
         [Test]
-        [Category ("NunitWeb")]
-        public void TemplateControl_LoadTemplate ()
+        [Category("NunitWeb")]
+        public void TemplateControl_LoadControl()
         {
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad (LoadTemplateTest));
-            string html = t.Run ();
-            if (html.IndexOf ("TemplateUserControl") < 0)
-                Assert.Fail ("LoadTemplate failed");
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(LoadControlTest));
+            string html = t.Run();
+            if (html.IndexOf("TemplateUserControl") < 0)
+                Assert.Fail("LoadControl failed");
         }
 
-        public static void LoadTemplateTest (Page p)
+        public static void LoadControlTest(Page p)
         {
-            PokerTemplateControl t = new PokerTemplateControl ();
-            ITemplate tmp = t.LoadTemplate ("TemplateUserControl.ascx");
-            tmp.InstantiateIn (p.Form);
+            PokerTemplateControl t = new PokerTemplateControl();
+            p.Form.Controls.Add(t.LoadControl("TemplateUserControl.ascx"));
         }
 
         [Test]
-        [Category ("NotWorking")]
-        [Category ("NotDotNet")]  // Must be removed after adding AppRelativeVirtualPath property
-        [Category ("NunitWeb")]
-        public void TemplateControl_ParseControl ()
+        [Category("NunitWeb")]
+        public void TemplateControl_LoadTemplate()
         {
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad (ParseControlTest));
-            string html = t.Run ();
-            if (html.IndexOf ("<span id=\"lb\">test</span>") < 0)
-                Assert.Fail ("ParseControl failed");
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(LoadTemplateTest));
+            string html = t.Run();
+            if (html.IndexOf("TemplateUserControl") < 0)
+                Assert.Fail("LoadTemplate failed");
         }
 
-        public static void ParseControlTest (Page p)
+        public static void LoadTemplateTest(Page p)
         {
-            PokerTemplateControl t = new PokerTemplateControl ();
+            PokerTemplateControl t = new PokerTemplateControl();
+            ITemplate tmp = t.LoadTemplate("TemplateUserControl.ascx");
+            tmp.InstantiateIn(p.Form);
+        }
+
+        [Test]
+        [Category("NotWorking")]
+        [Category("NotDotNet")] // Must be removed after adding AppRelativeVirtualPath property
+        [Category("NunitWeb")]
+        public void TemplateControl_ParseControl()
+        {
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(ParseControlTest));
+            string html = t.Run();
+            if (html.IndexOf("<span id=\"lb\">test</span>") < 0)
+                Assert.Fail("ParseControl failed");
+        }
+
+        public static void ParseControlTest(Page p)
+        {
+            PokerTemplateControl t = new PokerTemplateControl();
             //Does not have definition , must be uncommented
             //t.AppRelativeVirtualPath = "~\\";
-            Control c = t.ParseControl ("<asp:label id='lb' runat='server' text='test' />");
+            Control c = t.ParseControl("<asp:label id='lb' runat='server' text='test' />");
             p.Controls.Add(c);
         }
 
         [Test]
-        public void TemplateControl_ReadStringResource ()
+        public void TemplateControl_ReadStringResource()
         {
             // p.s. MSDN
             // The ReadStringResource method is not intended for use from within your code
         }
 
         [Test]
-        [Category ("NotWorking")]
-        [Category ("NunitWeb")]
-        public void TemplateControl_TestDeviceFilter ()
+        [Category("NotWorking")]
+        [Category("NunitWeb")]
+        public void TemplateControl_TestDeviceFilter()
         {
             //Have no definition to TestDeviceFilter
-            WebTest t = new WebTest (PageInvoker.CreateOnLoad (DoTestDeviceFilter));
-            string html = t.Run ();
-            
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(DoTestDeviceFilter));
+            string html = t.Run();
         }
 
-        public static void DoTestDeviceFilter (Page p)
+        public static void DoTestDeviceFilter(Page p)
         {
             //Have no definition to TestDeviceFilter
             // bool res = p.TestDeviceFilter("test");
@@ -198,146 +192,144 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         [Test]
-        public void TemplateControl_Construct ()
+        public void TemplateControl_Construct()
         {
-            eventchecker = false;    
-            PokerTemplateControl t = new PokerTemplateControl ();
-            Assert.AreEqual (true, eventchecker, "Construct Failed");
+            eventchecker = false;
+            PokerTemplateControl t = new PokerTemplateControl();
+            Assert.AreEqual(true, eventchecker, "Construct Failed");
         }
 
         [Test]
-        [Category ("NunitWeb")]
-        public void TemplateControl_Eval ()
+        [Category("NunitWeb")]
+        public void TemplateControl_Eval()
         {
             // In this test aspx page used as template control
-            WebTest.CopyResource (GetType (), "EvalTest.aspx", "EvalTest.aspx");
-            WebTest t = new WebTest ("EvalTest.aspx");
-            PageDelegates pd = new PageDelegates ();
+            WebTest.CopyResource(GetType(), "EvalTest.aspx", "EvalTest.aspx");
+            WebTest t = new WebTest("EvalTest.aspx");
+            PageDelegates pd = new PageDelegates();
             pd.PreRender = _templatePreRender;
-            t.Invoker = new PageInvoker (pd);
-            t.Run ();
-            string html = t.Run ();
-            if (html.IndexOf ("My databind test") < 0)
-                Assert.Fail ("Eval not done fail");
+            t.Invoker = new PageInvoker(pd);
+            t.Run();
+            string html = t.Run();
+            if (html.IndexOf("My databind test") < 0)
+                Assert.Fail("Eval not done fail");
         }
 
-        public static void _templatePreRender (Page p)
+        public static void _templatePreRender(Page p)
         {
-            Repeater rep = p.FindControl ("Repeater1") as Repeater;
+            Repeater rep = p.FindControl("Repeater1") as Repeater;
             if (rep == null)
-                Assert.Fail ("Aspx page not creation failed");
-            Assert.AreEqual (1, rep.Items.Count, "Data items bounding failed");
+                Assert.Fail("Aspx page not creation failed");
+            Assert.AreEqual(1, rep.Items.Count, "Data items bounding failed");
         }
 
         [Test]
-        public void TemplateControl_XPath_XPathSelect ()
+        public void TemplateControl_XPath_XPathSelect()
         {
             //These two method are tested on XmlDataSourceTest.cs
         }
 
         [Test]
-        public void TemplateControl_CreateResourceBasedLiteralControl ()
+        public void TemplateControl_CreateResourceBasedLiteralControl()
         {
-            // The CreateResourceBasedLiteralControl method is not intended 
-            // for use from within your code. 
+            // The CreateResourceBasedLiteralControl method is not intended
+            // for use from within your code.
         }
 
         [Test]
-        public void TemplateControl_SetStringResourcePointer ()
+        public void TemplateControl_SetStringResourcePointer()
         {
-            // The SetStringResourcePointer method is not intended 
-            // for use from within your code. 
+            // The SetStringResourcePointer method is not intended
+            // for use from within your code.
         }
 
         [Test]
-        public void TemplateControl_TemplateControl ()
+        public void TemplateControl_TemplateControl()
         {
-            Assert.IsNull (new Control ().TemplateControl);
-            PokerTemplateControl t = new PokerTemplateControl ();
-            Assert.AreEqual (t, t.TemplateControl);
-        }
-        
-        [Test]
-        public void TemplateControl_WriteUTF8ResourceString ()
-        {
-            //This method supports the .NET Framework infrastructure and is not intended to be used directly from your code. 
-            //Writes a resource string to an HtmlTextWriter control. 
-            //The WriteUTF8ResourceString method is used by generated classes and is not intended for use from within your code. 
+            Assert.IsNull(new Control().TemplateControl);
+            PokerTemplateControl t = new PokerTemplateControl();
+            Assert.AreEqual(t, t.TemplateControl);
         }
 
-        // Events 
+        [Test]
+        public void TemplateControl_WriteUTF8ResourceString()
+        {
+            //This method supports the .NET Framework infrastructure and is not intended to be used directly from your code.
+            //Writes a resource string to an HtmlTextWriter control.
+            //The WriteUTF8ResourceString method is used by generated classes and is not intended for use from within your code.
+        }
+
+        // Events
         bool abortTransaction;
         bool commitTransaction;
         bool error;
 
         [Test]
-        public void TemplateControl_AbortTransaction ()
+        public void TemplateControl_AbortTransaction()
         {
-            PokerTemplateControl t = new PokerTemplateControl ();
-            t.AbortTransaction += new EventHandler (t_AbortTransaction);
-            Assert.AreEqual (false, abortTransaction, "Before transaction aborted");
-            t.DoOnAbortTransaction (new EventArgs ());
-            Assert.AreEqual (true, abortTransaction, "After transaction aborted");
+            PokerTemplateControl t = new PokerTemplateControl();
+            t.AbortTransaction += new EventHandler(t_AbortTransaction);
+            Assert.AreEqual(false, abortTransaction, "Before transaction aborted");
+            t.DoOnAbortTransaction(new EventArgs());
+            Assert.AreEqual(true, abortTransaction, "After transaction aborted");
         }
 
-        void t_AbortTransaction (object sender, EventArgs e)
+        void t_AbortTransaction(object sender, EventArgs e)
         {
             abortTransaction = true;
         }
 
         [Test]
-        public void TemplateControl_CommitTransaction ()
+        public void TemplateControl_CommitTransaction()
         {
-            PokerTemplateControl t = new PokerTemplateControl ();
-            t.CommitTransaction += new EventHandler (t_CommitTransaction);
-            Assert.AreEqual (false, commitTransaction, "Before transaction Commited");
-            t.DoOnCommitTransaction (new EventArgs ());
-            Assert.AreEqual (true, commitTransaction, "After transaction Commited");
+            PokerTemplateControl t = new PokerTemplateControl();
+            t.CommitTransaction += new EventHandler(t_CommitTransaction);
+            Assert.AreEqual(false, commitTransaction, "Before transaction Commited");
+            t.DoOnCommitTransaction(new EventArgs());
+            Assert.AreEqual(true, commitTransaction, "After transaction Commited");
         }
 
-        void t_CommitTransaction (object sender, EventArgs e)
+        void t_CommitTransaction(object sender, EventArgs e)
         {
             commitTransaction = true;
         }
 
         [Test]
-        public void TemplateControl_Error ()
+        public void TemplateControl_Error()
         {
-            PokerTemplateControl t = new PokerTemplateControl ();
-            t.Error += new EventHandler (t_Error);
-            Assert.AreEqual (false, error, "Before error");
-            t.DoOnError (new EventArgs ());
-            Assert.AreEqual (true, error, "After error");
+            PokerTemplateControl t = new PokerTemplateControl();
+            t.Error += new EventHandler(t_Error);
+            Assert.AreEqual(false, error, "Before error");
+            t.DoOnError(new EventArgs());
+            Assert.AreEqual(true, error, "After error");
         }
 
-        void t_Error (object sender, EventArgs e)
+        void t_Error(object sender, EventArgs e)
         {
             error = true;
         }
 
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void TemplateControl_EvalException()
+        {
+            PokerTemplateControl t = new PokerTemplateControl();
+            t.Page = new Page();
+            t.DoEval(null);
+        }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void TemplateControl_EvalException ()
-        {
-            PokerTemplateControl t = new PokerTemplateControl ();
-            t.Page = new Page ();
-            t.DoEval (null);
-        }
-        
-        [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void TemplateControl_LoadControlException()
         {
-            PokerTemplateControl t = new PokerTemplateControl ();
-            t.LoadControl (null);
+            PokerTemplateControl t = new PokerTemplateControl();
+            t.LoadControl(null);
         }
 
-
         [TestFixtureTearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            WebTest.Unload ();
+            WebTest.Unload();
         }
     }
 }

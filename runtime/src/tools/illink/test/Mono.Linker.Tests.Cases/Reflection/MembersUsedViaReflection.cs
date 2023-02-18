@@ -6,110 +6,114 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Reflection
 {
-    [SetupCSharpCompilerToUse ("csc")]
+    [SetupCSharpCompilerToUse("csc")]
     [ExpectedNoWarnings]
     public class MembersUsedViaReflection
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestGetMembers ();
-            TestWithBindingFlags ();
-            TestWithUnknownBindingFlags (BindingFlags.Public);
-            TestNullType ();
-            TestNoValue ();
-            TestDataFlowType ();
-            TestDataFlowWithAnnotation (typeof (MyType));
-            TestIfElse (true);
+            TestGetMembers();
+            TestWithBindingFlags();
+            TestWithUnknownBindingFlags(BindingFlags.Public);
+            TestNullType();
+            TestNoValue();
+            TestDataFlowType();
+            TestDataFlowWithAnnotation(typeof(MyType));
+            TestIfElse(true);
         }
 
         [Kept]
-        static void TestGetMembers ()
+        static void TestGetMembers()
         {
-            var members = typeof (SimpleGetMembers).GetMembers ();
+            var members = typeof(SimpleGetMembers).GetMembers();
         }
 
         [Kept]
-        static void TestWithBindingFlags ()
+        static void TestWithBindingFlags()
         {
-            var members = typeof (MembersBindingFlags).GetMembers (BindingFlags.Public);
+            var members = typeof(MembersBindingFlags).GetMembers(BindingFlags.Public);
         }
 
         [Kept]
-        static void TestWithUnknownBindingFlags (BindingFlags bindingFlags)
+        static void TestWithUnknownBindingFlags(BindingFlags bindingFlags)
         {
             // Since the binding flags are not known linker should mark all members on the type
-            var members = typeof (UnknownBindingFlags).GetMembers (bindingFlags);
+            var members = typeof(UnknownBindingFlags).GetMembers(bindingFlags);
         }
 
         [Kept]
-        static void TestNullType ()
+        static void TestNullType()
         {
             Type type = null;
-            var members = type.GetMembers ();
+            var members = type.GetMembers();
         }
 
         [Kept]
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            var members = noValue.GetMembers ();
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            var members = noValue.GetMembers();
         }
 
         [Kept]
-        static Type FindType ()
+        static Type FindType()
         {
             return null;
         }
 
-        [ExpectedWarning ("IL2075", "FindType", "GetMembers")]
+        [ExpectedWarning("IL2075", "FindType", "GetMembers")]
         [Kept]
-        static void TestDataFlowType ()
+        static void TestDataFlowType()
         {
-            Type type = FindType ();
-            var members = type.GetMembers (BindingFlags.Public);
+            Type type = FindType();
+            var members = type.GetMembers(BindingFlags.Public);
         }
 
         [Kept]
-        private static void TestDataFlowWithAnnotation ([KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicConstructors |
-                                         DynamicallyAccessedMemberTypes.PublicEvents |
-                                         DynamicallyAccessedMemberTypes.PublicFields |
-                                         DynamicallyAccessedMemberTypes.PublicMethods |
-                                         DynamicallyAccessedMemberTypes.PublicProperties |
-                                         DynamicallyAccessedMemberTypes.PublicNestedTypes)] Type type)
+        private static void TestDataFlowWithAnnotation(
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )]
+                Type type
+        )
         {
-            var properties = type.GetMembers (BindingFlags.Public | BindingFlags.Static);
+            var properties = type.GetMembers(BindingFlags.Public | BindingFlags.Static);
         }
 
         [Kept]
-        static void TestIfElse (bool decision)
+        static void TestIfElse(bool decision)
         {
             Type myType;
-            if (decision) {
-                myType = typeof (IfType);
-            } else {
-                myType = typeof (ElseType);
+            if (decision)
+            {
+                myType = typeof(IfType);
             }
-            var members = myType.GetMembers (BindingFlags.Public);
+            else
+            {
+                myType = typeof(ElseType);
+            }
+            var members = myType.GetMembers(BindingFlags.Public);
         }
 
         [Kept]
         private class SimpleGetMembers
         {
             [Kept]
-            public SimpleGetMembers ()
-            { }
+            public SimpleGetMembers() { }
 
-            private SimpleGetMembers (int i)
-            { }
+            private SimpleGetMembers(int i) { }
 
             [Kept]
-            public void PublicMethod ()
-            { }
+            public void PublicMethod() { }
 
-            private void PrivateMethod ()
-            { }
+            private void PrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -125,14 +129,16 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private int _privateField;
 
             [Kept]
-            public int PublicProperty {
+            public int PublicProperty
+            {
                 [Kept]
                 get { return _publicField; }
                 [Kept]
                 set { _publicField = value; }
             }
 
-            private int PrivateProperty {
+            private int PrivateProperty
+            {
                 get { return _privateField; }
                 set { _privateField = value; }
             }
@@ -142,9 +148,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             {
                 [Kept]
                 public static int _nestedPublicField;
+
                 [Kept]
-                public static void NestedPublicMethod ()
-                { }
+                public static void NestedPublicMethod() { }
             }
 
             private static class PrivateNestedType { }
@@ -154,18 +160,14 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class MembersBindingFlags
         {
             [Kept]
-            public MembersBindingFlags ()
-            { }
+            public MembersBindingFlags() { }
 
-            private MembersBindingFlags (int i)
-            { }
+            private MembersBindingFlags(int i) { }
 
             [Kept]
-            public void PublicMethod ()
-            { }
+            public void PublicMethod() { }
 
-            private void PrivateMethod ()
-            { }
+            private void PrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -181,14 +183,16 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private int _privateField;
 
             [Kept]
-            public int PublicProperty {
+            public int PublicProperty
+            {
                 [Kept]
                 get { return _publicField; }
                 [Kept]
                 set { _publicField = value; }
             }
 
-            private int PrivateProperty {
+            private int PrivateProperty
+            {
                 get { return _privateField; }
                 set { _privateField = value; }
             }
@@ -198,9 +202,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             {
                 [Kept]
                 public static int _nestedPublicField;
+
                 [Kept]
-                public static void NestedPublicMethod ()
-                { }
+                public static void NestedPublicMethod() { }
             }
 
             private static class PrivateNestedType { }
@@ -210,20 +214,16 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class UnknownBindingFlags
         {
             [Kept]
-            public UnknownBindingFlags ()
-            { }
+            public UnknownBindingFlags() { }
 
             [Kept]
-            private UnknownBindingFlags (int i)
-            { }
+            private UnknownBindingFlags(int i) { }
 
             [Kept]
-            public void PublicMethod ()
-            { }
+            public void PublicMethod() { }
 
             [Kept]
-            private void PrivateMethod ()
-            { }
+            private void PrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -244,7 +244,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private int _privateField;
 
             [Kept]
-            public int PublicProperty {
+            public int PublicProperty
+            {
                 [Kept]
                 get { return _publicField; }
                 [Kept]
@@ -252,7 +253,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
 
             [Kept]
-            private int PrivateProperty {
+            private int PrivateProperty
+            {
                 [Kept]
                 get { return _privateField; }
                 [Kept]
@@ -264,30 +266,27 @@ namespace Mono.Linker.Tests.Cases.Reflection
             {
                 [Kept]
                 public static int _nestedPublicField;
+
                 [Kept]
-                public static void NestedPublicMethod ()
-                { }
+                public static void NestedPublicMethod() { }
             }
 
             [Kept]
             private static class PrivateNestedType { }
         }
+
         [Kept]
         private class MyType
         {
             [Kept]
-            public MyType ()
-            { }
+            public MyType() { }
 
-            private MyType (int i)
-            { }
+            private MyType(int i) { }
 
             [Kept]
-            public void PublicMethod ()
-            { }
+            public void PublicMethod() { }
 
-            private void PrivateMethod ()
-            { }
+            private void PrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -303,14 +302,16 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private int _privateField;
 
             [Kept]
-            public int PublicProperty {
+            public int PublicProperty
+            {
                 [Kept]
                 get { return _publicField; }
                 [Kept]
                 set { _publicField = value; }
             }
 
-            private int PrivateProperty {
+            private int PrivateProperty
+            {
                 get { return _privateField; }
                 set { _privateField = value; }
             }
@@ -320,9 +321,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             {
                 [Kept]
                 public static int _nestedPublicField;
+
                 [Kept]
-                public static void NestedPublicMethod ()
-                { }
+                public static void NestedPublicMethod() { }
             }
 
             private static class PrivateNestedType { }
@@ -332,18 +333,14 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class IfType
         {
             [Kept]
-            public IfType ()
-            { }
+            public IfType() { }
 
-            private IfType (int i)
-            { }
+            private IfType(int i) { }
 
             [Kept]
-            public void PublicMethod ()
-            { }
+            public void PublicMethod() { }
 
-            private void PrivateMethod ()
-            { }
+            private void PrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -359,14 +356,16 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private int _privateField;
 
             [Kept]
-            public int PublicProperty {
+            public int PublicProperty
+            {
                 [Kept]
                 get { return _publicField; }
                 [Kept]
                 set { _publicField = value; }
             }
 
-            private int PrivateProperty {
+            private int PrivateProperty
+            {
                 get { return _privateField; }
                 set { _privateField = value; }
             }
@@ -376,9 +375,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             {
                 [Kept]
                 public static int _nestedPublicField;
+
                 [Kept]
-                public static void NestedPublicMethod ()
-                { }
+                public static void NestedPublicMethod() { }
             }
 
             private static class PrivateNestedType { }
@@ -388,18 +387,14 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class ElseType
         {
             [Kept]
-            public ElseType ()
-            { }
+            public ElseType() { }
 
-            private ElseType (int i)
-            { }
+            private ElseType(int i) { }
 
             [Kept]
-            public void PublicMethod ()
-            { }
+            public void PublicMethod() { }
 
-            private void PrivateMethod ()
-            { }
+            private void PrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -415,14 +410,16 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private int _privateField;
 
             [Kept]
-            public int PublicProperty {
+            public int PublicProperty
+            {
                 [Kept]
                 get { return _publicField; }
                 [Kept]
                 set { _publicField = value; }
             }
 
-            private int PrivateProperty {
+            private int PrivateProperty
+            {
                 get { return _privateField; }
                 set { _privateField = value; }
             }
@@ -432,9 +429,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
             {
                 [Kept]
                 public static int _nestedPublicField;
+
                 [Kept]
-                public static void NestedPublicMethod ()
-                { }
+                public static void NestedPublicMethod() { }
             }
 
             private static class PrivateNestedType { }

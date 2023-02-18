@@ -3,23 +3,22 @@
 
 using System;
 
-public delegate void EventHandler (object sender, EventArgs e);
+public delegate void EventHandler(object sender, EventArgs e);
 
-public class Button {
-
+public class Button
+{
     public event Blah Click;
 
-    public void Reset ()
+    public void Reset()
     {
         Click = null;
     }
 }
 
-public class Blah {
-
-    public static void Main ()
+public class Blah
+{
+    public static void Main()
     {
-        Blah b = new Blah ();
+        Blah b = new Blah();
     }
-    
 }

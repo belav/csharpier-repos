@@ -11,228 +11,228 @@ namespace ILLink.RoslynAnalyzer.Tests
         protected override string TestSuiteName => "Reflection";
 
         [Fact]
-        public Task ActivatorCreateInstance ()
+        public Task ActivatorCreateInstance()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task AssemblyImportedViaReflectionWithSweptReferences ()
+        public Task AssemblyImportedViaReflectionWithSweptReferences()
         {
-            return RunTest (allowMissingWarnings: true);
+            return RunTest(allowMissingWarnings: true);
         }
 
         [Fact]
-        public Task ConstructorsUsedViaReflection ()
+        public Task ConstructorsUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ConstructorUsedViaReflection ()
+        public Task ConstructorUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task EventUsedViaReflection ()
+        public Task EventUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task EventsUsedViaReflection ()
+        public Task EventsUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ExpressionCallString ()
+        public Task ExpressionCallString()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ExpressionCallStringAndLocals ()
+        public Task ExpressionCallStringAndLocals()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ExpressionFieldString ()
+        public Task ExpressionFieldString()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ExpressionNewType ()
+        public Task ExpressionNewType()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ExpressionPropertyMethodInfo ()
+        public Task ExpressionPropertyMethodInfo()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ExpressionPropertyString ()
+        public Task ExpressionPropertyString()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task FieldUsedViaReflection ()
+        public Task FieldUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task FieldsUsedViaReflection ()
+        public Task FieldsUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task MembersUsedViaReflection ()
+        public Task MembersUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task MemberUsedViaReflection ()
+        public Task MemberUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task MethodUsedViaReflection ()
+        public Task MethodUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task MethodUsedViaReflectionAndLocal ()
+        public Task MethodUsedViaReflectionAndLocal()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task MethodUsedViaReflectionWithDefaultBindingFlags ()
+        public Task MethodUsedViaReflectionWithDefaultBindingFlags()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task MethodsUsedViaReflection ()
+        public Task MethodsUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task NestedTypeUsedViaReflection ()
+        public Task NestedTypeUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task NestedTypesUsedViaReflection ()
+        public Task NestedTypesUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task ObjectGetType ()
+        public Task ObjectGetType()
         {
             // https://github.com/dotnet/linker/issues/2578
-            return RunTest (allowMissingWarnings: true);
+            return RunTest(allowMissingWarnings: true);
         }
 
         [Fact]
-        public Task PropertyUsedViaReflection ()
+        public Task PropertyUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task PropertiesUsedViaReflection ()
+        public Task PropertiesUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task RuntimeReflectionExtensionsCalls ()
+        public Task RuntimeReflectionExtensionsCalls()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task TypeBaseTypeUseViaReflection ()
+        public Task TypeBaseTypeUseViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task TypeDelegator ()
+        public Task TypeDelegator()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task TypeHierarchyReflectionWarnings ()
-        {
-            // https://github.com/dotnet/linker/issues/2578
-            return RunTest (allowMissingWarnings: true);
-        }
-
-        [Fact]
-        public Task TypeHierarchySuppressions ()
+        public Task TypeHierarchyReflectionWarnings()
         {
             // https://github.com/dotnet/linker/issues/2578
-            return RunTest (allowMissingWarnings: true);
+            return RunTest(allowMissingWarnings: true);
         }
 
         [Fact]
-        public Task TypeUsedViaReflection ()
+        public Task TypeHierarchySuppressions()
         {
-            return RunTest ();
+            // https://github.com/dotnet/linker/issues/2578
+            return RunTest(allowMissingWarnings: true);
         }
 
         [Fact]
-        public Task TypeUsedViaReflectionAssemblyDoesntExist ()
+        public Task TypeUsedViaReflection()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task TypeUsedViaReflectionInDifferentAssembly ()
+        public Task TypeUsedViaReflectionAssemblyDoesntExist()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task TypeUsedViaReflectionLdstrIncomplete ()
+        public Task TypeUsedViaReflectionInDifferentAssembly()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task TypeUsedViaReflectionLdstrValidButChanged ()
+        public Task TypeUsedViaReflectionLdstrIncomplete()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task TypeUsedViaReflectionTypeDoesntExist ()
+        public Task TypeUsedViaReflectionLdstrValidButChanged()
         {
-            return RunTest ();
+            return RunTest();
         }
 
         [Fact]
-        public Task TypeUsedViaReflectionTypeNameIsSymbol ()
+        public Task TypeUsedViaReflectionTypeDoesntExist()
         {
-            return RunTest ();
+            return RunTest();
+        }
+
+        [Fact]
+        public Task TypeUsedViaReflectionTypeNameIsSymbol()
+        {
+            return RunTest();
         }
     }
 }

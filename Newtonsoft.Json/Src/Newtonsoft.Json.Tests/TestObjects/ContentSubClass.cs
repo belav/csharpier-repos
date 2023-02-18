@@ -27,9 +27,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 {
     public class ContentSubClass : ContentBaseClass
     {
-        public ContentSubClass()
-        {
-        }
+        public ContentSubClass() { }
 
         public ContentSubClass(string EasyIn)
         {

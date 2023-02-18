@@ -14,7 +14,7 @@ namespace Exchange
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        
+
         static int Main(string[] args)
         {
             int rValue = 0;
@@ -25,15 +25,19 @@ namespace Exchange
                 threads[i] = new Thread(new ThreadStart(tsi.ThreadWorker));
                 threads[i].Start();
             }
-            
+
             tsi.Signal();
 
-            for(int i=0;i<threads.Length;i++)
+            for (int i = 0; i < threads.Length; i++)
                 threads[i].Join();
 
-            if(tsi.Total == tsi.Expected * threads.Length)
+            if (tsi.Total == tsi.Expected * threads.Length)
                 rValue = 100;
-            Console.WriteLine("Test Expected {0}, but found {1}", tsi.Expected * threads.Length, tsi.Total);
+            Console.WriteLine(
+                "Test Expected {0}, but found {1}",
+                tsi.Expected * threads.Length,
+                tsi.Total
+            );
             Console.WriteLine("Test {0}", rValue == 100 ? "Passed" : "Failed");
             return rValue;
         }
@@ -42,10 +46,13 @@ namespace Exchange
     public class ThreadSafe
     {
         ManualResetEvent signal;
-        private int totalValue = 0;        
+        private int totalValue = 0;
         private int numberOfIterations;
         private int valueToAdd;
-        public ThreadSafe(): this(100,100) { }
+
+        public ThreadSafe()
+            : this(100, 100) { }
+
         public ThreadSafe(int loops, int addend)
         {
             signal = new ManualResetEvent(false);
@@ -61,30 +68,32 @@ namespace Exchange
         public void ThreadWorker()
         {
             signal.WaitOne();
-            for(int i=0;i<numberOfIterations;i++)
+            for (int i = 0; i < numberOfIterations; i++)
                 AddToTotal(valueToAdd);
-
         }
+
         public int Expected
         {
-            get
-            {
-                return (numberOfIterations * valueToAdd);
-            }
+            get { return (numberOfIterations * valueToAdd); }
         }
         public int Total
         {
             get { return totalValue; }
         }
+
         private int AddToTotal(int addend)
         {
-            int initialValue, computedValue;
+            int initialValue,
+                computedValue;
             do
             {
                 initialValue = totalValue;
                 computedValue = initialValue + addend;
-            } while (initialValue != Interlocked.CompareExchange(ref totalValue, computedValue, initialValue));
+            } while (
+                initialValue
+                != Interlocked.CompareExchange(ref totalValue, computedValue, initialValue)
+            );
             return computedValue;
         }
-    }    
+    }
 }

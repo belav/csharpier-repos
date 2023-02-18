@@ -26,9 +26,7 @@ namespace System.IO
         // Exists as of the last refresh
         private bool _exists;
 
-        internal static void Initialize(
-            ref FileStatus status,
-            bool isDirectory)
+        internal static void Initialize(ref FileStatus status, bool isDirectory)
         {
             status.InitiallyDirectory = isDirectory;
             status._fileStatusInitialized = -1;
@@ -43,7 +41,8 @@ namespace System.IO
             const Interop.Sys.Permissions readBit = Interop.Sys.Permissions.S_IRUSR;
             const Interop.Sys.Permissions writeBit = Interop.Sys.Permissions.S_IWUSR;
 #else
-            Interop.Sys.Permissions readBit, writeBit;
+            Interop.Sys.Permissions readBit,
+                writeBit;
 
             if (_fileStatus.Uid == Interop.Sys.GetEUid())
             {
@@ -65,8 +64,11 @@ namespace System.IO
             }
 #endif
 
-            return ((_fileStatus.Mode & (int)readBit) != 0 && // has read permission
-                (_fileStatus.Mode & (int)writeBit) == 0);     // but not write permission
+            return (
+                (_fileStatus.Mode & (int)readBit) != 0
+                && // has read permission
+                (_fileStatus.Mode & (int)writeBit) == 0
+            ); // but not write permission
         }
 
         public FileAttributes GetAttributes(ReadOnlySpan<char> path, ReadOnlySpan<char> fileName)
@@ -90,7 +92,14 @@ namespace System.IO
                 attributes |= FileAttributes.Directory;
 
             // If the filename starts with a period or has UF_HIDDEN flag set, it's hidden.
-            if (fileName.Length > 0 && (fileName[0] == '.' || (_fileStatus.UserFlags & (uint)Interop.Sys.UserFlags.UF_HIDDEN) == (uint)Interop.Sys.UserFlags.UF_HIDDEN))
+            if (
+                fileName.Length > 0
+                && (
+                    fileName[0] == '.'
+                    || (_fileStatus.UserFlags & (uint)Interop.Sys.UserFlags.UF_HIDDEN)
+                        == (uint)Interop.Sys.UserFlags.UF_HIDDEN
+                )
+            )
                 attributes |= FileAttributes.Hidden;
 
             return attributes != default ? attributes : FileAttributes.Normal;
@@ -101,12 +110,22 @@ namespace System.IO
             // Validate that only flags from the attribute are being provided.  This is an
             // approximation for the validation done by the Win32 function.
             const FileAttributes allValidFlags =
-                FileAttributes.Archive | FileAttributes.Compressed | FileAttributes.Device |
-                FileAttributes.Directory | FileAttributes.Encrypted | FileAttributes.Hidden |
-                FileAttributes.IntegrityStream | FileAttributes.Normal | FileAttributes.NoScrubData |
-                FileAttributes.NotContentIndexed | FileAttributes.Offline | FileAttributes.ReadOnly |
-                FileAttributes.ReparsePoint | FileAttributes.SparseFile | FileAttributes.System |
-                FileAttributes.Temporary;
+                FileAttributes.Archive
+                | FileAttributes.Compressed
+                | FileAttributes.Device
+                | FileAttributes.Directory
+                | FileAttributes.Encrypted
+                | FileAttributes.Hidden
+                | FileAttributes.IntegrityStream
+                | FileAttributes.Normal
+                | FileAttributes.NoScrubData
+                | FileAttributes.NotContentIndexed
+                | FileAttributes.Offline
+                | FileAttributes.ReadOnly
+                | FileAttributes.ReparsePoint
+                | FileAttributes.SparseFile
+                | FileAttributes.System
+                | FileAttributes.Temporary;
             if ((attributes & ~allValidFlags) != 0)
             {
                 // Using constant string for argument to match historical throw
@@ -125,15 +144,32 @@ namespace System.IO
                     if ((_fileStatus.UserFlags & (uint)Interop.Sys.UserFlags.UF_HIDDEN) == 0)
                     {
                         // If Hidden flag is set and cached file status does not have the flag set then set it
-                        Interop.CheckIo(Interop.Sys.LChflags(path, (_fileStatus.UserFlags | (uint)Interop.Sys.UserFlags.UF_HIDDEN)), path, InitiallyDirectory);
+                        Interop.CheckIo(
+                            Interop.Sys.LChflags(
+                                path,
+                                (_fileStatus.UserFlags | (uint)Interop.Sys.UserFlags.UF_HIDDEN)
+                            ),
+                            path,
+                            InitiallyDirectory
+                        );
                     }
                 }
                 else
                 {
-                    if ((_fileStatus.UserFlags & (uint)Interop.Sys.UserFlags.UF_HIDDEN) == (uint)Interop.Sys.UserFlags.UF_HIDDEN)
+                    if (
+                        (_fileStatus.UserFlags & (uint)Interop.Sys.UserFlags.UF_HIDDEN)
+                        == (uint)Interop.Sys.UserFlags.UF_HIDDEN
+                    )
                     {
                         // If Hidden flag is not set and cached file status does have the flag set then remove it
-                        Interop.CheckIo(Interop.Sys.LChflags(path, (_fileStatus.UserFlags & ~(uint)Interop.Sys.UserFlags.UF_HIDDEN)), path, InitiallyDirectory);
+                        Interop.CheckIo(
+                            Interop.Sys.LChflags(
+                                path,
+                                (_fileStatus.UserFlags & ~(uint)Interop.Sys.UserFlags.UF_HIDDEN)
+                            ),
+                            path,
+                            InitiallyDirectory
+                        );
                     }
                 }
             }
@@ -144,7 +180,11 @@ namespace System.IO
             if ((attributes & FileAttributes.ReadOnly) != 0)
             {
                 // Take away all write permissions from user/group/everyone
-                newMode &= ~(int)(Interop.Sys.Permissions.S_IWUSR | Interop.Sys.Permissions.S_IWGRP | Interop.Sys.Permissions.S_IWOTH);
+                newMode &= ~(int)(
+                    Interop.Sys.Permissions.S_IWUSR
+                    | Interop.Sys.Permissions.S_IWGRP
+                    | Interop.Sys.Permissions.S_IWOTH
+                );
             }
             else if ((newMode & (int)Interop.Sys.Permissions.S_IRUSR) != 0)
             {
@@ -169,7 +209,10 @@ namespace System.IO
             return _exists && InitiallyDirectory == _isDirectory;
         }
 
-        internal DateTimeOffset GetCreationTime(ReadOnlySpan<char> path, bool continueOnError = false)
+        internal DateTimeOffset GetCreationTime(
+            ReadOnlySpan<char> path,
+            bool continueOnError = false
+        )
         {
             EnsureStatInitialized(path, continueOnError);
             if (!_exists)
@@ -179,8 +222,13 @@ namespace System.IO
                 return UnixTimeToDateTimeOffset(_fileStatus.BirthTime, _fileStatus.BirthTimeNsec);
 
             // fall back to the oldest time we have in between change and modify time
-            if (_fileStatus.MTime < _fileStatus.CTime ||
-                (_fileStatus.MTime == _fileStatus.CTime && _fileStatus.MTimeNsec < _fileStatus.CTimeNsec))
+            if (
+                _fileStatus.MTime < _fileStatus.CTime
+                || (
+                    _fileStatus.MTime == _fileStatus.CTime
+                    && _fileStatus.MTimeNsec < _fileStatus.CTimeNsec
+                )
+            )
                 return UnixTimeToDateTimeOffset(_fileStatus.MTime, _fileStatus.MTimeNsec);
 
             return UnixTimeToDateTimeOffset(_fileStatus.CTime, _fileStatus.CTimeNsec);
@@ -200,7 +248,10 @@ namespace System.IO
             SetLastWriteTime(path, time);
         }
 
-        internal DateTimeOffset GetLastAccessTime(ReadOnlySpan<char> path, bool continueOnError = false)
+        internal DateTimeOffset GetLastAccessTime(
+            ReadOnlySpan<char> path,
+            bool continueOnError = false
+        )
         {
             EnsureStatInitialized(path, continueOnError);
             if (!_exists)
@@ -208,9 +259,13 @@ namespace System.IO
             return UnixTimeToDateTimeOffset(_fileStatus.ATime, _fileStatus.ATimeNsec);
         }
 
-        internal void SetLastAccessTime(string path, DateTimeOffset time) => SetAccessOrWriteTime(path, time, isAccessTime: true);
+        internal void SetLastAccessTime(string path, DateTimeOffset time) =>
+            SetAccessOrWriteTime(path, time, isAccessTime: true);
 
-        internal DateTimeOffset GetLastWriteTime(ReadOnlySpan<char> path, bool continueOnError = false)
+        internal DateTimeOffset GetLastWriteTime(
+            ReadOnlySpan<char> path,
+            bool continueOnError = false
+        )
         {
             EnsureStatInitialized(path, continueOnError);
             if (!_exists)
@@ -218,14 +273,22 @@ namespace System.IO
             return UnixTimeToDateTimeOffset(_fileStatus.MTime, _fileStatus.MTimeNsec);
         }
 
-        internal void SetLastWriteTime(string path, DateTimeOffset time) => SetAccessOrWriteTime(path, time, isAccessTime: false);
+        internal void SetLastWriteTime(string path, DateTimeOffset time) =>
+            SetAccessOrWriteTime(path, time, isAccessTime: false);
 
         private DateTimeOffset UnixTimeToDateTimeOffset(long seconds, long nanoseconds)
         {
-            return DateTimeOffset.FromUnixTimeSeconds(seconds).AddTicks(nanoseconds / NanosecondsPerTick).ToLocalTime();
+            return DateTimeOffset
+                .FromUnixTimeSeconds(seconds)
+                .AddTicks(nanoseconds / NanosecondsPerTick)
+                .ToLocalTime();
         }
 
-        private unsafe void SetAccessOrWriteTime(string path, DateTimeOffset time, bool isAccessTime)
+        private unsafe void SetAccessOrWriteTime(
+            string path,
+            DateTimeOffset time,
+            bool isAccessTime
+        )
         {
             // force a refresh so that we have an up-to-date times for values not being overwritten
             _fileStatusInitialized = -1;
@@ -238,7 +301,9 @@ namespace System.IO
 
             const long TicksPerMillisecond = 10000;
             const long TicksPerSecond = TicksPerMillisecond * 1000;
-            long nanoseconds = (time.UtcDateTime.Ticks - DateTimeOffset.UnixEpoch.Ticks - seconds * TicksPerSecond) * NanosecondsPerTick;
+            long nanoseconds =
+                (time.UtcDateTime.Ticks - DateTimeOffset.UnixEpoch.Ticks - seconds * TicksPerSecond)
+                * NanosecondsPerTick;
 
 #if TARGET_BROWSER
             buf[0].TvSec = seconds;
@@ -290,8 +355,10 @@ namespace System.IO
 
                 // This should never set the error if the file can't be found.
                 // (see the Windows refresh passing returnErrorOnNotFound: false).
-                if (errorInfo.Error == Interop.Error.ENOENT
-                    || errorInfo.Error == Interop.Error.ENOTDIR)
+                if (
+                    errorInfo.Error == Interop.Error.ENOENT
+                    || errorInfo.Error == Interop.Error.ENOTDIR
+                )
                 {
                     _fileStatusInitialized = 0;
                     _exists = false;
@@ -306,13 +373,18 @@ namespace System.IO
             _exists = true;
 
             // IMPORTANT: Is directory logic must match the logic in FileSystemEntry
-            _isDirectory = (_fileStatus.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR;
+            _isDirectory =
+                (_fileStatus.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR;
 
             // If we're a symlink, attempt to check the target to see if it is a directory
-            if ((_fileStatus.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFLNK &&
-                Interop.Sys.Stat(path, out Interop.Sys.FileStatus targetStatus) >= 0)
+            if (
+                (_fileStatus.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFLNK
+                && Interop.Sys.Stat(path, out Interop.Sys.FileStatus targetStatus) >= 0
+            )
             {
-                _isDirectory = (targetStatus.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR;
+                _isDirectory =
+                    (targetStatus.Mode & Interop.Sys.FileTypes.S_IFMT)
+                    == Interop.Sys.FileTypes.S_IFDIR;
             }
 
             _fileStatusInitialized = 0;
@@ -329,7 +401,10 @@ namespace System.IO
             {
                 int errno = _fileStatusInitialized;
                 _fileStatusInitialized = -1;
-                throw Interop.GetExceptionForIoErrno(new Interop.ErrorInfo(errno), new string(path));
+                throw Interop.GetExceptionForIoErrno(
+                    new Interop.ErrorInfo(errno),
+                    new string(path)
+                );
             }
         }
     }

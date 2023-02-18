@@ -35,9 +35,11 @@ using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {
-    [TestFixture] public class NoNullAllowedExceptionTest
+    [TestFixture]
+    public class NoNullAllowedExceptionTest
     {
-        [Test] public void Generate()
+        [Test]
+        public void Generate()
         {
             DataTable tbl = DataProvider.CreateParentDataTable();
 
@@ -46,13 +48,16 @@ namespace MonoTests.System.Data
 
             //add new row with null value
             // NoNullAllowedException - Add Row
-            try 
+            try
             {
-                tbl.Rows.Add(new object[] {null,"value","value",new DateTime(0),0.5,true});
+                tbl.Rows.Add(new object[] { null, "value", "value", new DateTime(0), 0.5, true });
                 Assert.Fail("NNAE1: Rows.Add failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE2: Rows.Add wrong exception type. Got: " + exc);
@@ -60,39 +65,61 @@ namespace MonoTests.System.Data
 
             //add new row with DBNull value
             // NoNullAllowedException - Add Row
-            try 
+            try
             {
-                tbl.Rows.Add(new object[] {DBNull.Value,"value","value",new DateTime(0),0.5,true});
+                tbl.Rows.Add(
+                    new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true }
+                );
                 Assert.Fail("NNAE3: Rows.Add failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE4: Rows.Add wrong exception type. Got: " + exc);
             }
 
             // NoNullAllowedException - ItemArray
-            try 
+            try
             {
-                tbl.Rows[0].ItemArray = new object[] {DBNull.Value,"value","value",new DateTime(0),0.5,true};
+                tbl.Rows[0].ItemArray = new object[]
+                {
+                    DBNull.Value,
+                    "value",
+                    "value",
+                    new DateTime(0),
+                    0.5,
+                    true
+                };
                 Assert.Fail("NNAE5: Rows Indexer failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE6: Rows Indexer wrong exception type. Got: " + exc);
             }
 
             // NoNullAllowedException - Add Row - LoadDataRow
-            try 
+            try
             {
-                tbl.LoadDataRow(new object[] {DBNull.Value,"value","value",new DateTime(0),0.5,true},true);
+                tbl.LoadDataRow(
+                    new object[] { DBNull.Value, "value", "value", new DateTime(0), 0.5, true },
+                    true
+                );
                 Assert.Fail("NNAE7: LoadDataRow failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE8: LoadDataRow wrong exception type. Got: " + exc);
@@ -100,14 +127,17 @@ namespace MonoTests.System.Data
 
             // NoNullAllowedException - EndEdit
             tbl.Rows[0].BeginEdit();
-            tbl.Rows[0][0] = DBNull.Value ;
-            try 
+            tbl.Rows[0][0] = DBNull.Value;
+            try
             {
                 tbl.Rows[0].EndEdit();
                 Assert.Fail("NNAE7: Rows Indexer failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE8: Rows Indexer wrong exception type. Got: " + exc);
@@ -115,16 +145,19 @@ namespace MonoTests.System.Data
 
             // ----------- add new column -----------------------
             tbl.Columns[0].AllowDBNull = true;
-            tbl.Columns.Add(new DataColumn("bolCol",typeof(bool)));
+            tbl.Columns.Add(new DataColumn("bolCol", typeof(bool)));
 
             // add new column
-            try 
+            try
             {
-                tbl.Columns[tbl.Columns.Count-1].AllowDBNull = false;
+                tbl.Columns[tbl.Columns.Count - 1].AllowDBNull = false;
                 Assert.Fail("NNAE9: Columns failed to raise DataException.");
             }
-            catch (DataException) {}
-            catch (AssertionException) { throw; }
+            catch (DataException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE10: Columns wrong exception type. Got: " + exc);
@@ -132,18 +165,21 @@ namespace MonoTests.System.Data
 
             //clear table data in order to add the new column
             tbl.Rows.Clear();
-            tbl.Columns[tbl.Columns.Count-1].AllowDBNull = false;
-            tbl.Rows.Add(new object[] {99,"value","value",new DateTime(0),0.5,true,false}); //missing last value - will be null
+            tbl.Columns[tbl.Columns.Count - 1].AllowDBNull = false;
+            tbl.Rows.Add(new object[] { 99, "value", "value", new DateTime(0), 0.5, true, false }); //missing last value - will be null
 
             //add new row with null value
             // NoNullAllowedException - Add Row
-            try 
+            try
             {
-                tbl.Rows.Add(new object[] {99,"value","value",new DateTime(0),0.5,true}); //missing last value - will be null
+                tbl.Rows.Add(new object[] { 99, "value", "value", new DateTime(0), 0.5, true }); //missing last value - will be null
                 Assert.Fail("NNAE11: Rows.Add failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE12: Rows.Add wrong exception type. Got: " + exc);
@@ -151,39 +187,62 @@ namespace MonoTests.System.Data
 
             //add new row with DBNull value
             // NoNullAllowedException - Add Row
-            try 
+            try
             {
-                tbl.Rows.Add(new object[] {1,"value","value",new DateTime(0),0.5,true,DBNull.Value});
+                tbl.Rows.Add(
+                    new object[] { 1, "value", "value", new DateTime(0), 0.5, true, DBNull.Value }
+                );
                 Assert.Fail("NNAE13: Rows.Add failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE14: Rows.Add wrong exception type. Got: " + exc);
             }
 
             // NoNullAllowedException - ItemArray
-            try 
+            try
             {
-                tbl.Rows[0].ItemArray = new object[] {77,"value","value",new DateTime(0),0.5,true,DBNull.Value };
+                tbl.Rows[0].ItemArray = new object[]
+                {
+                    77,
+                    "value",
+                    "value",
+                    new DateTime(0),
+                    0.5,
+                    true,
+                    DBNull.Value
+                };
                 Assert.Fail("NNAE15: Rows Indexer failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE16: Rows Indexer wrong exception type. Got: " + exc);
             }
 
             // NoNullAllowedException - Add Row - LoadDataRow
-            try 
+            try
             {
-                tbl.LoadDataRow(new object[] {66,"value","value",new DateTime(0),0.5,true},true);
+                tbl.LoadDataRow(
+                    new object[] { 66, "value", "value", new DateTime(0), 0.5, true },
+                    true
+                );
                 Assert.Fail("NNAE17: LoadDataRow failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE18: Rows.LoadDataRow wrong exception type. Got: " + exc);
@@ -191,14 +250,17 @@ namespace MonoTests.System.Data
 
             // NoNullAllowedException - EndEdit
             tbl.Rows[0].BeginEdit();
-            tbl.Rows[0][tbl.Columns.Count-1] = DBNull.Value ;
-            try 
+            tbl.Rows[0][tbl.Columns.Count - 1] = DBNull.Value;
+            try
             {
                 tbl.Rows[0].EndEdit();
                 Assert.Fail("NNAE19: Rows[0].EndEdit failed to raise NoNullAllowedException.");
             }
-            catch (NoNullAllowedException) {}
-            catch (AssertionException) { throw; }
+            catch (NoNullAllowedException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("NNAE20: Rows[0].EndEdit wrong exception type. Got: " + exc);

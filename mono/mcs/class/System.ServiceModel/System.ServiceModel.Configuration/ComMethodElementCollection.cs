@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,31 +54,29 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    [ConfigurationCollection (typeof (ComMethodElement),
-         AddItemName = "add",
-         RemoveItemName = "remove",
-         ClearItemsName = "clear",
-         CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [ConfigurationCollection(
+        typeof(ComMethodElement),
+        AddItemName = "add",
+        RemoveItemName = "remove",
+        ClearItemsName = "clear",
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     [MonoTODO]
     public sealed partial class ComMethodElementCollection
-         : ServiceModelEnhancedConfigurationElementCollection<ComMethodElement>,  ICollection,  IEnumerable
+        : ServiceModelEnhancedConfigurationElementCollection<ComMethodElement>,
+            ICollection,
+            IEnumerable
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
 
-        static ComMethodElementCollection ()
+        static ComMethodElementCollection()
         {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
         }
 
-        public ComMethodElementCollection ()
-        {
-        }
-
+        public ComMethodElementCollection() { }
 
         // Properties
-
-
     }
-
 }

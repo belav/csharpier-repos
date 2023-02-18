@@ -18,8 +18,12 @@ namespace System.Web.Http.Controllers
         private readonly IAuthenticationFilter[] _filters;
         private readonly IHttpActionResult _innerResult;
 
-        public AuthenticationFilterResult(HttpActionContext context, ApiController controller,
-            IAuthenticationFilter[] filters, IHttpActionResult innerResult)
+        public AuthenticationFilterResult(
+            HttpActionContext context,
+            ApiController controller,
+            IAuthenticationFilter[] filters,
+            IHttpActionResult innerResult
+        )
         {
             Contract.Assert(context != null);
             Contract.Assert(controller != null);
@@ -36,8 +40,10 @@ namespace System.Web.Http.Controllers
         {
             IHttpActionResult result = _innerResult;
             IPrincipal originalPrincipal = _controller.User;
-            HttpAuthenticationContext authenticationContext = new HttpAuthenticationContext(_context,
-                originalPrincipal);
+            HttpAuthenticationContext authenticationContext = new HttpAuthenticationContext(
+                _context,
+                originalPrincipal
+            );
 
             for (int i = 0; i < _filters.Length; i++)
             {
@@ -64,8 +70,8 @@ namespace System.Web.Http.Controllers
             // Run challenge on all filters (passing the result of each into the next). If a filter failed, the
             // challenges run on the failure result. If no filter failed, the challenges run on the original inner
             // result.
-            HttpAuthenticationChallengeContext challengeContext = new HttpAuthenticationChallengeContext(_context,
-                result);
+            HttpAuthenticationChallengeContext challengeContext =
+                new HttpAuthenticationChallengeContext(_context, result);
 
             for (int i = 0; i < _filters.Length; i++)
             {

@@ -35,7 +35,10 @@ namespace ILCompiler
                 _ => throw new UnreachableException()
             };
         }
-        private static EffectiveVisibility ToEffectiveVisibility(this MethodAttributes typeAttributes)
+
+        private static EffectiveVisibility ToEffectiveVisibility(
+            this MethodAttributes typeAttributes
+        )
         {
             return (typeAttributes & MethodAttributes.MemberAccessMask) switch
             {
@@ -43,7 +46,8 @@ namespace ILCompiler
                 // is only accessible through a MemberDef, not a MemberRef.
                 // As a result, it's only accessible within the current assembly, which is effectively the same rules as
                 // Family for our case.
-                MethodAttributes.PrivateScope => EffectiveVisibility.Assembly,
+                MethodAttributes.PrivateScope
+                    => EffectiveVisibility.Assembly,
                 MethodAttributes.Public => EffectiveVisibility.Public,
                 MethodAttributes.Private => EffectiveVisibility.Private,
                 MethodAttributes.Assembly => EffectiveVisibility.Assembly,
@@ -54,7 +58,10 @@ namespace ILCompiler
             };
         }
 
-        private static EffectiveVisibility ConstrainToVisibility(this EffectiveVisibility visibility, EffectiveVisibility enclosingVisibility)
+        private static EffectiveVisibility ConstrainToVisibility(
+            this EffectiveVisibility visibility,
+            EffectiveVisibility enclosingVisibility
+        )
         {
             return (visibility, enclosingVisibility) switch
             {
@@ -65,29 +72,49 @@ namespace ILCompiler
                 (_, EffectiveVisibility.Public) => visibility,
                 (EffectiveVisibility.FamilyOrAssembly, _) => enclosingVisibility,
                 (_, EffectiveVisibility.FamilyOrAssembly) => visibility,
-                (EffectiveVisibility.Family, EffectiveVisibility.Assembly) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Family, EffectiveVisibility.FamilyAndAssembly) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Assembly, EffectiveVisibility.Family) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.Assembly, EffectiveVisibility.FamilyAndAssembly) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Family) => EffectiveVisibility.FamilyAndAssembly,
-                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Assembly) => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Family, EffectiveVisibility.Assembly)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Family, EffectiveVisibility.FamilyAndAssembly)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Assembly, EffectiveVisibility.Family)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.Assembly, EffectiveVisibility.FamilyAndAssembly)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Family)
+                    => EffectiveVisibility.FamilyAndAssembly,
+                (EffectiveVisibility.FamilyAndAssembly, EffectiveVisibility.Assembly)
+                    => EffectiveVisibility.FamilyAndAssembly,
                 _ => throw new UnreachableException(),
             };
         }
 
-        public static bool IsExposedOutsideOfThisAssembly(this EffectiveVisibility visibility, bool anyInternalsVisibleTo)
+        public static bool IsExposedOutsideOfThisAssembly(
+            this EffectiveVisibility visibility,
+            bool anyInternalsVisibleTo
+        )
         {
             return visibility is EffectiveVisibility.Public or EffectiveVisibility.Family
-                || (anyInternalsVisibleTo && visibility is EffectiveVisibility.Assembly or EffectiveVisibility.FamilyOrAssembly);
+                || (
+                    anyInternalsVisibleTo
+                    && visibility
+                        is EffectiveVisibility.Assembly
+                            or EffectiveVisibility.FamilyOrAssembly
+                );
         }
 
         public static EffectiveVisibility GetEffectiveVisibility(this EcmaMethod method)
         {
             EffectiveVisibility visibility = method.Attributes.ToEffectiveVisibility();
-            
-            for (EcmaType type = (EcmaType)method.OwningType; type is not null; type = (EcmaType)type.ContainingType)
+
+            for (
+                EcmaType type = (EcmaType)method.OwningType;
+                type is not null;
+                type = (EcmaType)type.ContainingType
+            )
             {
-                visibility = visibility.ConstrainToVisibility(type.Attributes.ToEffectiveVisibility());
+                visibility = visibility.ConstrainToVisibility(
+                    type.Attributes.ToEffectiveVisibility()
+                );
             }
             return visibility;
         }

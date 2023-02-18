@@ -26,12 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
+namespace Mono.Cecil.Binary
+{
     using System;
 
-    internal sealed class DebugHeader : IHeader, IBinaryVisitable {
-
+    internal sealed class DebugHeader : IHeader, IBinaryVisitable
+    {
         public uint Characteristics;
         public uint TimeDateStamp;
         public ushort MajorVersion;
@@ -46,11 +46,9 @@ namespace Mono.Cecil.Binary {
         public uint Age;
         public string FileName;
 
-        internal DebugHeader ()
-        {
-        }
+        internal DebugHeader() { }
 
-        public void SetDefaultValues ()
+        public void SetDefaultValues()
         {
             Characteristics = 0;
 
@@ -60,14 +58,14 @@ namespace Mono.Cecil.Binary {
             this.FileName = string.Empty;
         }
 
-        public uint GetSize ()
+        public uint GetSize()
         {
-            return 0x34 + (uint) FileName.Length + 1;
+            return 0x34 + (uint)FileName.Length + 1;
         }
 
-        public void Accept (IBinaryVisitor visitor)
+        public void Accept(IBinaryVisitor visitor)
         {
-            visitor.VisitDebugHeader (this);
+            visitor.VisitDebugHeader(this);
         }
     }
 }

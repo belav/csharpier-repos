@@ -13,4 +13,3 @@ class X
 {
     G.GG.F foo;
 }
-

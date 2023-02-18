@@ -3,7 +3,7 @@
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         object o = -(9223372036854775808);
     }

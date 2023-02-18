@@ -32,216 +32,248 @@ using Microsoft.Build.Tasks.Hosting;
 using Microsoft.Build.Utilities;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.Tasks {
-    public class Csc : ManagedCompiler {
-    
-        public Csc ()
-        {
-        }
+namespace Microsoft.Build.Tasks
+{
+    public class Csc : ManagedCompiler
+    {
+        public Csc() { }
 
-        protected internal override void AddResponseFileCommands (CommandLineBuilderExtension commandLine)
+        protected internal override void AddResponseFileCommands(
+            CommandLineBuilderExtension commandLine
+        )
         {
-            base.AddResponseFileCommands (commandLine);
+            base.AddResponseFileCommands(commandLine);
 
             if (AdditionalLibPaths != null && AdditionalLibPaths.Length > 0)
-                commandLine.AppendSwitchIfNotNull ("/lib:", AdditionalLibPaths, ",");
+                commandLine.AppendSwitchIfNotNull("/lib:", AdditionalLibPaths, ",");
 
-            if (Bag ["AllowUnsafeBlocks"] != null)
+            if (Bag["AllowUnsafeBlocks"] != null)
                 if (AllowUnsafeBlocks)
-                    commandLine.AppendSwitch ("/unsafe+");
+                    commandLine.AppendSwitch("/unsafe+");
                 else
-                    commandLine.AppendSwitch ("/unsafe-");
+                    commandLine.AppendSwitch("/unsafe-");
 
             //baseAddress
-            
-            if (Bag ["CheckForOverflowUnderflow"] != null)
+
+            if (Bag["CheckForOverflowUnderflow"] != null)
                 if (CheckForOverflowUnderflow)
-                    commandLine.AppendSwitch ("/checked+");
+                    commandLine.AppendSwitch("/checked+");
                 else
-                    commandLine.AppendSwitch ("/checked-");
+                    commandLine.AppendSwitch("/checked-");
 
-            if (!String.IsNullOrEmpty (DefineConstants)) {
-                string [] defines = DefineConstants.Split (new char [] {';', ' '},
-                        StringSplitOptions.RemoveEmptyEntries);
+            if (!String.IsNullOrEmpty(DefineConstants))
+            {
+                string[] defines = DefineConstants.Split(
+                    new char[] { ';', ' ' },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 if (defines.Length > 0)
-                    commandLine.AppendSwitchIfNotNull ("/define:",
-                            String.Join (";", defines));
+                    commandLine.AppendSwitchIfNotNull("/define:", String.Join(";", defines));
             }
 
-            if (!String.IsNullOrEmpty (DisabledWarnings)) {
-                string [] defines = DisabledWarnings.Split (new char [] {';', ' ', ','},
-                        StringSplitOptions.RemoveEmptyEntries);
+            if (!String.IsNullOrEmpty(DisabledWarnings))
+            {
+                string[] defines = DisabledWarnings.Split(
+                    new char[] { ';', ' ', ',' },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 if (defines.Length > 0)
-                    commandLine.AppendSwitchIfNotNull ("/nowarn:", defines, ";");
+                    commandLine.AppendSwitchIfNotNull("/nowarn:", defines, ";");
             }
 
-            commandLine.AppendSwitchIfNotNull ("/doc:", DocumentationFile);
+            commandLine.AppendSwitchIfNotNull("/doc:", DocumentationFile);
 
             //errorReport
 
             if (GenerateFullPaths)
-                commandLine.AppendSwitch ("/fullpaths");
+                commandLine.AppendSwitch("/fullpaths");
 
-            commandLine.AppendSwitchIfNotNull ("/langversion:", LangVersion);
+            commandLine.AppendSwitchIfNotNull("/langversion:", LangVersion);
 
-            commandLine.AppendSwitchIfNotNull ("/main:", MainEntryPoint);
+            commandLine.AppendSwitchIfNotNull("/main:", MainEntryPoint);
 
             //moduleAssemblyName
-            
+
             if (NoStandardLib)
-                commandLine.AppendSwitch ("/nostdlib");
+                commandLine.AppendSwitch("/nostdlib");
 
             //platform
-            commandLine.AppendSwitchIfNotNull ("/platform:", Platform);
+            commandLine.AppendSwitchIfNotNull("/platform:", Platform);
             //
             if (References != null)
-                foreach (ITaskItem item in References) {
-                    string aliases = item.GetMetadata ("Aliases");
-                    if (!string.IsNullOrEmpty (aliases)) {
-                        AddAliasesReference (commandLine, aliases, item.ItemSpec);
-                    } else {
-                        commandLine.AppendSwitchIfNotNull ("/reference:", item.ItemSpec);
+                foreach (ITaskItem item in References)
+                {
+                    string aliases = item.GetMetadata("Aliases");
+                    if (!string.IsNullOrEmpty(aliases))
+                    {
+                        AddAliasesReference(commandLine, aliases, item.ItemSpec);
+                    }
+                    else
+                    {
+                        commandLine.AppendSwitchIfNotNull("/reference:", item.ItemSpec);
                     }
                 }
 
             if (ResponseFiles != null)
-                foreach (ITaskItem item in ResponseFiles) 
-                    commandLine.AppendSwitchIfNotNull ("@", item.ItemSpec);
+                foreach (ITaskItem item in ResponseFiles)
+                    commandLine.AppendSwitchIfNotNull("@", item.ItemSpec);
 
-            if (Bag ["WarningLevel"] != null)
-                commandLine.AppendSwitchIfNotNull ("/warn:", WarningLevel.ToString ());
+            if (Bag["WarningLevel"] != null)
+                commandLine.AppendSwitchIfNotNull("/warn:", WarningLevel.ToString());
 
-            commandLine.AppendSwitchIfNotNull ("/warnaserror+:", WarningsAsErrors);
+            commandLine.AppendSwitchIfNotNull("/warnaserror+:", WarningsAsErrors);
 
-            commandLine.AppendSwitchIfNotNull ("/warnaserror-:", WarningsNotAsErrors);
+            commandLine.AppendSwitchIfNotNull("/warnaserror-:", WarningsNotAsErrors);
 
             if (Win32Resource != null)
-                commandLine.AppendSwitchIfNotNull ("/win32res:", Win32Resource);
+                commandLine.AppendSwitchIfNotNull("/win32res:", Win32Resource);
         }
 
-        static void AddAliasesReference (CommandLineBuilderExtension commandLine, string aliases, string reference)
+        static void AddAliasesReference(
+            CommandLineBuilderExtension commandLine,
+            string aliases,
+            string reference
+        )
         {
-            foreach (var alias in aliases.Split (',')) {
-                var a = alias.Trim ();
+            foreach (var alias in aliases.Split(','))
+            {
+                var a = alias.Trim();
                 if (a.Length == null)
                     continue;
 
                 var r = "/reference:";
-                if (!string.Equals (a, "global", StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(a, "global", StringComparison.OrdinalIgnoreCase))
                     r += a + "=";
 
-                commandLine.AppendSwitchIfNotNull (r, reference);
+                commandLine.AppendSwitchIfNotNull(r, reference);
             }
         }
 
         [MonoTODO]
-        protected override bool CallHostObjectToExecute ()
+        protected override bool CallHostObjectToExecute()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override string GenerateFullPathToTool ()
+        protected override string GenerateFullPathToTool()
         {
-            if (!string.IsNullOrEmpty (ToolPath))
-                return Path.Combine (ToolPath, ToolExe);
-            var possibleToolPath = ToolLocationHelper.GetPathToDotNetFrameworkFile (ToolExe, TargetDotNetFrameworkVersion.VersionLatest);
+            if (!string.IsNullOrEmpty(ToolPath))
+                return Path.Combine(ToolPath, ToolExe);
+            var possibleToolPath = ToolLocationHelper.GetPathToDotNetFrameworkFile(
+                ToolExe,
+                TargetDotNetFrameworkVersion.VersionLatest
+            );
             if (!string.IsNullOrEmpty(possibleToolPath))
-                return  possibleToolPath;
+                return possibleToolPath;
 
             return ToolLocationHelper.GetPathToDotNetFrameworkBinFile(ToolExe);
         }
 
         [MonoTODO]
-        protected override HostObjectInitializationStatus InitializeHostObject ()
+        protected override HostObjectInitializationStatus InitializeHostObject()
         {
             return HostObjectInitializationStatus.NoActionReturnSuccess;
         }
 
-        public bool AllowUnsafeBlocks {
-            get { return GetBoolParameterWithDefault ("AllowUnsafeBlocks", false); }
-            set { Bag ["AllowUnsafeBlocks"] = value; }
+        public bool AllowUnsafeBlocks
+        {
+            get { return GetBoolParameterWithDefault("AllowUnsafeBlocks", false); }
+            set { Bag["AllowUnsafeBlocks"] = value; }
         }
 
-        public string BaseAddress {
-            get { return (string) Bag ["BaseAddress"]; }
-            set { Bag ["BaseAddress"] = value; }
+        public string BaseAddress
+        {
+            get { return (string)Bag["BaseAddress"]; }
+            set { Bag["BaseAddress"] = value; }
         }
 
-        public bool CheckForOverflowUnderflow {
-            get { return GetBoolParameterWithDefault ("CheckForOverflowUnderflow", false); }
-            set { Bag ["CheckForOverflowUnderflow"] = value; }
+        public bool CheckForOverflowUnderflow
+        {
+            get { return GetBoolParameterWithDefault("CheckForOverflowUnderflow", false); }
+            set { Bag["CheckForOverflowUnderflow"] = value; }
         }
 
-        public string DisabledWarnings {
-            get { return (string) Bag ["DisabledWarnings"]; }
-            set { Bag ["DisabledWarnings"] = value; }
+        public string DisabledWarnings
+        {
+            get { return (string)Bag["DisabledWarnings"]; }
+            set { Bag["DisabledWarnings"] = value; }
         }
 
-        public string DocumentationFile {
-            get { return (string) Bag ["DocumentationFile"]; }
-            set { Bag ["DocumentationFile"] = value; }
+        public string DocumentationFile
+        {
+            get { return (string)Bag["DocumentationFile"]; }
+            set { Bag["DocumentationFile"] = value; }
         }
 
-        public string ErrorReport {
-            get { return (string) Bag ["ErrorReport"]; }
-            set { Bag ["ErrorReport"] = value; }
+        public string ErrorReport
+        {
+            get { return (string)Bag["ErrorReport"]; }
+            set { Bag["ErrorReport"] = value; }
         }
 
-        public bool GenerateFullPaths {
-            get { return GetBoolParameterWithDefault ("GenerateFullPaths", false); }
-            set { Bag ["GenerateFullPaths"] = value; }
+        public bool GenerateFullPaths
+        {
+            get { return GetBoolParameterWithDefault("GenerateFullPaths", false); }
+            set { Bag["GenerateFullPaths"] = value; }
         }
 
-        public string LangVersion {
-            get { return (string) Bag ["LangVersion"]; }
-            set { Bag ["LangVersion"] = value; }
+        public string LangVersion
+        {
+            get { return (string)Bag["LangVersion"]; }
+            set { Bag["LangVersion"] = value; }
         }
 
-        public string ModuleAssemblyName {
-            get { return (string) Bag ["ModuleAssemblyName"]; }
-            set { Bag ["ModuleAssemblyName"] = value; }
+        public string ModuleAssemblyName
+        {
+            get { return (string)Bag["ModuleAssemblyName"]; }
+            set { Bag["ModuleAssemblyName"] = value; }
         }
 
-        public bool NoStandardLib {
-            get { return GetBoolParameterWithDefault ("NoStandardLib", false); }
-            set { Bag ["NoStandardLib"] = value; }
-        }
-        
-        public string PdbFile {
-            get { return (string) Bag ["PdbFile"]; }
-            set { Bag ["PdbFile"] = value; }
+        public bool NoStandardLib
+        {
+            get { return GetBoolParameterWithDefault("NoStandardLib", false); }
+            set { Bag["NoStandardLib"] = value; }
         }
 
-        public string Platform {
-            get { return (string) Bag ["Platform"]; }
-            set { Bag ["Platform"] = value; }
+        public string PdbFile
+        {
+            get { return (string)Bag["PdbFile"]; }
+            set { Bag["PdbFile"] = value; }
         }
 
-        protected override string ToolName {
-            get {
-                return MSBuildUtils.RunningOnWindows ? "csc.bat" : "csc.exe";
-            }
+        public string Platform
+        {
+            get { return (string)Bag["Platform"]; }
+            set { Bag["Platform"] = value; }
         }
 
-        public bool UseHostCompilerIfAvailable {
-            get { return GetBoolParameterWithDefault ("UseHostCompilerIfAvailable", false); }
-            set { Bag ["UseHostCompilerIfAvailable"] = value; }
+        protected override string ToolName
+        {
+            get { return MSBuildUtils.RunningOnWindows ? "csc.bat" : "csc.exe"; }
         }
 
-        public int WarningLevel {
-            get { return GetIntParameterWithDefault ("WarningLevel", 4); }
-            set { Bag ["WarningLevel"] = value; }
+        public bool UseHostCompilerIfAvailable
+        {
+            get { return GetBoolParameterWithDefault("UseHostCompilerIfAvailable", false); }
+            set { Bag["UseHostCompilerIfAvailable"] = value; }
         }
 
-        public string WarningsAsErrors {
-            get { return (string) Bag ["WarningsAsErrors"]; }
-            set { Bag ["WarningsAsErrors"] = value; }
+        public int WarningLevel
+        {
+            get { return GetIntParameterWithDefault("WarningLevel", 4); }
+            set { Bag["WarningLevel"] = value; }
         }
 
-        public string WarningsNotAsErrors {
-            get { return (string) Bag ["WarningsNotAsErrors"]; }
-            set { Bag ["WarningsNotAsErrors"] = value; }
+        public string WarningsAsErrors
+        {
+            get { return (string)Bag["WarningsAsErrors"]; }
+            set { Bag["WarningsAsErrors"] = value; }
+        }
+
+        public string WarningsNotAsErrors
+        {
+            get { return (string)Bag["WarningsNotAsErrors"]; }
+            set { Bag["WarningsNotAsErrors"] = value; }
         }
     }
 }
-

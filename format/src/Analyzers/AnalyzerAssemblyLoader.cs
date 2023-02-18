@@ -25,7 +25,10 @@ namespace Microsoft.CodeAnalysis
         private readonly Dictionary<string, Assembly> _loadedAssembliesByPath = new();
 
         // maps file name to a full path (lock _guard to read/write):
-        private readonly Dictionary<string, ImmutableHashSet<string>> _knownAssemblyPathsBySimpleName = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<
+            string,
+            ImmutableHashSet<string>
+        > _knownAssemblyPathsBySimpleName = new(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
         /// Implemented by derived types to actually perform the load for an assembly that doesn't have a cached result.

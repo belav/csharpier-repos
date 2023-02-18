@@ -14,7 +14,8 @@ internal class OVFTest
 
     private static sbyte Test_sbyte(sbyte a)
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         checked
         {
 #if OP_DIV
@@ -31,7 +32,8 @@ internal class OVFTest
 
     private static byte Test_byte(byte a)
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         checked
         {
 #if OP_DIV
@@ -48,7 +50,8 @@ internal class OVFTest
 
     private static short Test_short(short a)
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         checked
         {
 #if OP_DIV
@@ -65,7 +68,8 @@ internal class OVFTest
 
     private static ushort Test_ushort(ushort a)
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         checked
         {
 #if OP_DIV
@@ -82,7 +86,8 @@ internal class OVFTest
 
     private static int Test_int(int a)
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         checked
         {
 #if OP_DIV
@@ -99,7 +104,8 @@ internal class OVFTest
 
     private static uint Test_uint(uint a)
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         checked
         {
 #if OP_DIV
@@ -116,7 +122,8 @@ internal class OVFTest
 
     private static long Test_long(long a)
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         checked
         {
 #if OP_DIV
@@ -124,7 +131,7 @@ internal class OVFTest
 #elif OP_ADD
             return a + a;
 #elif OP_SUB
-            return  -1L - a - a;
+            return -1L - a - a;
 #else
             return a * 2;
 #endif
@@ -133,7 +140,8 @@ internal class OVFTest
 
     private static ulong Test_ulong(ulong a)
     {
-        if (!rtv) return 0;
+        if (!rtv)
+            return 0;
         checked
         {
 #if OP_DIV

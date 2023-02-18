@@ -47,6 +47,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
+
             [JsonProperty(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
             public int SnakeRating { get; set; }
         }
@@ -73,11 +74,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""Tom"",
   ""lastName"": ""Riddle"",
   ""snake_rating"": 10
-}", json);
+}",
+                json
+            );
         }
     }
 }

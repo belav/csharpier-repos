@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,38 +29,37 @@
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
     [Serializable]
-    [ComVisible (true)]
-    public sealed class KeyContainerPermissionAccessEntryEnumerator : IEnumerator {
-
+    [ComVisible(true)]
+    public sealed class KeyContainerPermissionAccessEntryEnumerator : IEnumerator
+    {
         private IEnumerator e;
 
-        internal KeyContainerPermissionAccessEntryEnumerator (ArrayList list)
+        internal KeyContainerPermissionAccessEntryEnumerator(ArrayList list)
         {
-            e = list.GetEnumerator ();
+            e = list.GetEnumerator();
         }
 
-
-        public KeyContainerPermissionAccessEntry Current {
-            get { return (KeyContainerPermissionAccessEntry) e.Current; }
+        public KeyContainerPermissionAccessEntry Current
+        {
+            get { return (KeyContainerPermissionAccessEntry)e.Current; }
         }
 
-        object IEnumerator.Current {
+        object IEnumerator.Current
+        {
             get { return e.Current; }
         }
 
-
-        public bool MoveNext ()
+        public bool MoveNext()
         {
-            return e.MoveNext ();
+            return e.MoveNext();
         }
 
-        public void Reset ()
+        public void Reset()
         {
-            e.Reset ();
+            e.Reset();
         }
     }
 }
-

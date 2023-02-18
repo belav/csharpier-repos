@@ -4,17 +4,14 @@ public class C
 {
     public event EventHandler MyDelegate = delegate { };
 
-    internal void DoSomething (bool bValue)
+    internal void DoSomething(bool bValue)
     {
-        if (!bValue) {
+        if (!bValue)
+        {
             // It has to be here to check we are closing correctly top-block
             return;
         }
     }
-    
-    public static void Main ()
-    {
-    }
+
+    public static void Main() { }
 }
-
-

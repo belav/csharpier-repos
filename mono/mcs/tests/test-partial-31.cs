@@ -4,9 +4,9 @@ namespace TestPartialOverride.BaseNamespace
 {
     public abstract class Base
     {
-        protected virtual void OverrideMe ()
+        protected virtual void OverrideMe()
         {
-            Console.Out.WriteLine ("OverrideMe");
+            Console.Out.WriteLine("OverrideMe");
         }
     }
 }
@@ -15,9 +15,9 @@ namespace TestPartialOverride.Outer.Nested.Namespace
 {
     internal partial class Inherits
     {
-        protected override void OverrideMe ()
+        protected override void OverrideMe()
         {
-            Console.Out.WriteLine ("Overridden");
+            Console.Out.WriteLine("Overridden");
         }
     }
 }
@@ -28,18 +28,18 @@ namespace TestPartialOverride.Outer
     {
         internal partial class Inherits : TestPartialOverride.BaseNamespace.Base
         {
-            public void DoesSomethignElse ()
+            public void DoesSomethignElse()
             {
-                OverrideMe ();
+                OverrideMe();
             }
         }
     }
 
     public class C
     {
-        public static void Main ()
+        public static void Main()
         {
-            new TestPartialOverride.Outer.Nested.Namespace.Inherits ().DoesSomethignElse ();
+            new TestPartialOverride.Outer.Nested.Namespace.Inherits().DoesSomethignElse();
         }
     }
 }

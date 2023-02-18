@@ -45,7 +45,6 @@ namespace System.Xml
             return (mPos & 1) != 0;
         }
 
-
         private sealed class CharEntityEncoderFallbackBuffer : EncoderFallbackBuffer
         {
             private readonly CharEntityEncoderFallback _parent;
@@ -58,26 +57,35 @@ namespace System.Xml
                 _parent = parent;
             }
 
-            public override int Remaining => _charEntityIndex == -1 ? 0 : _charEntity.Length - _charEntityIndex;
+            public override int Remaining =>
+                _charEntityIndex == -1 ? 0 : _charEntity.Length - _charEntityIndex;
 
             public override bool Fallback(char charUnknown, int index)
             {
                 // If we are already in fallback, throw, it's probably at the suspect character in charEntity
                 if (_charEntityIndex >= 0)
                 {
-                    (new EncoderExceptionFallback()).CreateFallbackBuffer().Fallback(charUnknown, index);
+                    (new EncoderExceptionFallback())
+                        .CreateFallbackBuffer()
+                        .Fallback(charUnknown, index);
                 }
 
                 // find out if we can replace the character with entity
                 if (_parent.CanReplaceAt(index))
                 {
                     // Create the replacement character entity
-                    _charEntity = string.Create(null, stackalloc char[64], $"&#x{(int)charUnknown:X};");
+                    _charEntity = string.Create(
+                        null,
+                        stackalloc char[64],
+                        $"&#x{(int)charUnknown:X};"
+                    );
                     _charEntityIndex = 0;
                     return true;
                 }
 
-                EncoderFallbackBuffer errorFallbackBuffer = (new EncoderExceptionFallback()).CreateFallbackBuffer();
+                EncoderFallbackBuffer errorFallbackBuffer = (
+                    new EncoderExceptionFallback()
+                ).CreateFallbackBuffer();
                 errorFallbackBuffer.Fallback(charUnknown, index);
                 return false;
             }
@@ -87,24 +95,35 @@ namespace System.Xml
                 // check input surrogate pair
                 if (!char.IsSurrogatePair(charUnknownHigh, charUnknownLow))
                 {
-                    throw XmlConvert.CreateInvalidSurrogatePairException(charUnknownHigh, charUnknownLow);
+                    throw XmlConvert.CreateInvalidSurrogatePairException(
+                        charUnknownHigh,
+                        charUnknownLow
+                    );
                 }
 
                 // If we are already in fallback, throw, it's probably at the suspect character in charEntity
                 if (_charEntityIndex >= 0)
                 {
-                    (new EncoderExceptionFallback()).CreateFallbackBuffer().Fallback(charUnknownHigh, charUnknownLow, index);
+                    (new EncoderExceptionFallback())
+                        .CreateFallbackBuffer()
+                        .Fallback(charUnknownHigh, charUnknownLow, index);
                 }
 
                 if (_parent.CanReplaceAt(index))
                 {
                     // Create the replacement character entity
-                    _charEntity = string.Create(null, stackalloc char[64], $"&#x{SurrogateCharToUtf32(charUnknownHigh, charUnknownLow):X};");
+                    _charEntity = string.Create(
+                        null,
+                        stackalloc char[64],
+                        $"&#x{SurrogateCharToUtf32(charUnknownHigh, charUnknownLow):X};"
+                    );
                     _charEntityIndex = 0;
                     return true;
                 }
 
-                EncoderFallbackBuffer errorFallbackBuffer = (new EncoderExceptionFallback()).CreateFallbackBuffer();
+                EncoderFallbackBuffer errorFallbackBuffer = (
+                    new EncoderExceptionFallback()
+                ).CreateFallbackBuffer();
                 errorFallbackBuffer.Fallback(charUnknownHigh, charUnknownLow, index);
                 return false;
             }

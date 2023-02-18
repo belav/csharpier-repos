@@ -32,10 +32,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         internal CodeMemberProperty CodeMemberProperty
         {
-            get
-            {
-                return this.property;
-            }
+            get { return this.property; }
         }
 
         #region Property Info overrides
@@ -44,10 +41,23 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             get
             {
-                return declaringType.ResolveType(DesignTimeType.GetTypeNameFromCodeTypeReference(this.property.Type, declaringType));
+                return declaringType.ResolveType(
+                    DesignTimeType.GetTypeNameFromCodeTypeReference(
+                        this.property.Type,
+                        declaringType
+                    )
+                );
             }
         }
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
             throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
         }
@@ -73,11 +83,21 @@ namespace System.Workflow.ComponentModel.Compiler
                 this.getMethod = new PropertyMethodInfo(true, accessor, this);
             }
             // now check to see if getMethod is public
-            if (nonPublic || ((this.getMethod != null) && ((this.getMethod.Attributes & MethodAttributes.Public) == MethodAttributes.Public)))
+            if (
+                nonPublic
+                || (
+                    (this.getMethod != null)
+                    && (
+                        (this.getMethod.Attributes & MethodAttributes.Public)
+                        == MethodAttributes.Public
+                    )
+                )
+            )
                 return this.getMethod;
 
             return null;
         }
+
         public override MethodInfo GetSetMethod(bool nonPublic)
         {
             if (this.CanWrite && this.setMethod == null)
@@ -87,11 +107,21 @@ namespace System.Workflow.ComponentModel.Compiler
             }
 
             // now check to see if getMethod is public
-            if (nonPublic || ((this.setMethod != null) && ((this.setMethod.Attributes & MethodAttributes.Public) == MethodAttributes.Public)))
+            if (
+                nonPublic
+                || (
+                    (this.setMethod != null)
+                    && (
+                        (this.setMethod.Attributes & MethodAttributes.Public)
+                        == MethodAttributes.Public
+                    )
+                )
+            )
                 return this.setMethod;
 
             return null;
         }
+
         public override ParameterInfo[] GetIndexParameters()
         {
             int numParams = 0;
@@ -118,60 +148,51 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
             }
 
-            // Now copy over the parameter info's and change their 
+            // Now copy over the parameter info's and change their
             // owning member info to the current property info.
             ParameterInfo[] propParams = new ParameterInfo[numParams];
 
             for (int i = 0; i < numParams; i++)
                 propParams[i] = methParams[i];
 
-            return propParams; // 
+            return propParams; //
         }
+
         public override PropertyAttributes Attributes
         {
-            get
-            {
-                return PropertyAttributes.None;
-            }
+            get { return PropertyAttributes.None; }
         }
         public override bool CanRead
         {
-            get
-            {
-                return this.property.HasGet;
-            }
+            get { return this.property.HasGet; }
         }
         public override bool CanWrite
         {
-            get
-            {
-                return this.property.HasSet;
-            }
+            get { return this.property.HasSet; }
         }
-        public override object GetValue(object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+
+        public override object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
             throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
         }
+
         public override string Name
         {
-            get
-            {
-                return Helper.EnsureTypeName(this.property.Name);
-            }
+            get { return Helper.EnsureTypeName(this.property.Name); }
         }
         public override Type DeclaringType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
         public override Type ReflectedType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
 
         #endregion
@@ -189,7 +210,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("attributeType");
 
             if (this.attributes == null)
-                this.attributes = Helper.LoadCustomAttributes(this.property.CustomAttributes, this.DeclaringType as DesignTimeType);
+                this.attributes = Helper.LoadCustomAttributes(
+                    this.property.CustomAttributes,
+                    this.DeclaringType as DesignTimeType
+                );
 
             return Helper.GetCustomAttributes(attributeType, inherit, this.attributes, this);
         }
@@ -200,7 +224,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("attributeType");
 
             if (this.attributes == null)
-                this.attributes = Helper.LoadCustomAttributes(this.property.CustomAttributes, this.DeclaringType as DesignTimeType);
+                this.attributes = Helper.LoadCustomAttributes(
+                    this.property.CustomAttributes,
+                    this.DeclaringType as DesignTimeType
+                );
 
             if (Helper.IsDefined(attributeType, inherit, attributes, this))
                 return true;
@@ -224,49 +251,49 @@ namespace System.Workflow.ComponentModel.Compiler
                 this.name = name;
                 this.property = property;
             }
-            public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+
+            public override object Invoke(
+                object obj,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object[] parameters,
+                CultureInfo culture
+            )
             {
-                throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
+                throw new NotImplementedException(
+                    TypeSystemSR.GetString("Error_RuntimeNotSupported")
+                );
             }
 
             internal bool IsGetter
             {
-                get
-                {
-                    return this.isGetter;
-                }
+                get { return this.isGetter; }
             }
 
             #region MemberInfo Overrides
             public override string Name
             {
-                get
-                {
-                    return Helper.EnsureTypeName(this.name);
-                }
+                get { return Helper.EnsureTypeName(this.name); }
             }
             public override Type DeclaringType
             {
-                get
-                {
-                    return this.property.declaringType;
-                }
+                get { return this.property.declaringType; }
             }
             public override Type ReflectedType
             {
-                get
-                {
-                    return this.property.declaringType;
-                }
+                get { return this.property.declaringType; }
             }
+
             public override object[] GetCustomAttributes(bool inherit)
             {
                 return GetCustomAttributes(typeof(object), inherit);
             }
+
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
                 return new Object[0];
             }
+
             public override bool IsDefined(Type attributeType, bool inherit)
             {
                 return false;
@@ -276,11 +303,9 @@ namespace System.Workflow.ComponentModel.Compiler
             #region Method Info overrides
             public override ParameterInfo ReturnParameter
             {
-                get
-                {
+                get {
 #pragma warning suppress 56503
-                    throw new NotImplementedException();
-                }
+                    throw new NotImplementedException(); }
             }
 
             public override Type ReturnType
@@ -288,18 +313,22 @@ namespace System.Workflow.ComponentModel.Compiler
                 get
                 {
                     if (this.isGetter)
-                        return ((DesignTimeType)this.DeclaringType).ResolveType(DesignTimeType.GetTypeNameFromCodeTypeReference(this.property.CodeMemberProperty.Type, ((DesignTimeType)this.DeclaringType)));
+                        return ((DesignTimeType)this.DeclaringType).ResolveType(
+                            DesignTimeType.GetTypeNameFromCodeTypeReference(
+                                this.property.CodeMemberProperty.Type,
+                                ((DesignTimeType)this.DeclaringType)
+                            )
+                        );
                     return typeof(void);
                 }
             }
             public override ICustomAttributeProvider ReturnTypeCustomAttributes
             {
-                get
-                {
+                get {
 #pragma warning suppress 56503
-                    throw new NotImplementedException();
-                }
+                    throw new NotImplementedException(); }
             }
+
             public override MethodInfo GetBaseDefinition()
             {
                 throw new NotImplementedException();
@@ -312,43 +341,66 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (this.parameters == null)
                 {
                     // Get the parameters
-                    CodeParameterDeclarationExpressionCollection parameters = this.property.CodeMemberProperty.Parameters;
-                    ParameterInfo[] paramArray = new ParameterInfo[this.IsGetter ? parameters.Count : parameters.Count + 1];
+                    CodeParameterDeclarationExpressionCollection parameters = this.property
+                        .CodeMemberProperty
+                        .Parameters;
+                    ParameterInfo[] paramArray = new ParameterInfo[
+                        this.IsGetter ? parameters.Count : parameters.Count + 1
+                    ];
 
                     for (int index = 0; index < parameters.Count; index++)
                     {
-                        paramArray[index] = new DesignTimeParameterInfo(parameters[index], index, this.property);
+                        paramArray[index] = new DesignTimeParameterInfo(
+                            parameters[index],
+                            index,
+                            this.property
+                        );
                     }
                     if (!this.IsGetter)
                     {
-                        CodeParameterDeclarationExpression valueParameter = new CodeParameterDeclarationExpression(this.property.CodeMemberProperty.Type.BaseType, "value");
+                        CodeParameterDeclarationExpression valueParameter =
+                            new CodeParameterDeclarationExpression(
+                                this.property.CodeMemberProperty.Type.BaseType,
+                                "value"
+                            );
                         valueParameter.Direction = FieldDirection.In;
-                        paramArray[parameters.Count] = new DesignTimeParameterInfo(valueParameter, 0, this.property);
+                        paramArray[parameters.Count] = new DesignTimeParameterInfo(
+                            valueParameter,
+                            0,
+                            this.property
+                        );
                     }
                     this.parameters = paramArray;
                 }
 
-                return this.parameters; // 
+                return this.parameters; //
             }
+
             public override MethodImplAttributes GetMethodImplementationFlags()
             {
                 return MethodImplAttributes.IL;
             }
+
             public override RuntimeMethodHandle MethodHandle
             {
                 get
                 {
                     // not interested in Runtime information
 #pragma warning suppress 56503
-                    throw new NotImplementedException(TypeSystemSR.GetString("Error_RuntimeNotSupported"));
+                    throw new NotImplementedException(
+                        TypeSystemSR.GetString("Error_RuntimeNotSupported")
+                    );
                 }
             }
             public override MethodAttributes Attributes
             {
                 get
                 {
-                    return (Helper.ConvertToMethodAttributes(this.property.CodeMemberProperty.Attributes) |
-                            MethodAttributes.SpecialName);
+                    return (
+                        Helper.ConvertToMethodAttributes(
+                            this.property.CodeMemberProperty.Attributes
+                        ) | MethodAttributes.SpecialName
+                    );
                 }
             }
             #endregion

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,8 +29,7 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-    public interface IClientChannel : IContextChannel, ICommunicationObject,
-        IDisposable
+    public interface IClientChannel : IContextChannel, ICommunicationObject, IDisposable
     {
         // Properties
 
@@ -42,15 +41,13 @@ namespace System.ServiceModel
 
         // Methods
 
-        IAsyncResult BeginDisplayInitializationUI (AsyncCallback callback, object state);
+        IAsyncResult BeginDisplayInitializationUI(AsyncCallback callback, object state);
         void EndDisplayInitializationUI(IAsyncResult result);
 
-        void DisplayInitializationUI ();
+        void DisplayInitializationUI();
 
         // Event
 
-        event EventHandler<UnknownMessageReceivedEventArgs>
-            UnknownMessageReceived;
-
+        event EventHandler<UnknownMessageReceivedEventArgs> UnknownMessageReceived;
     }
 }

@@ -1,23 +1,26 @@
 using System;
 
-public sealed class Thing<TFirst> where TFirst : class
+public sealed class Thing<TFirst>
+    where TFirst : class
 {
-    public static Thing<TFirst> Create<TSecond> (Func<TFirst, TSecond> fn)
+    public static Thing<TFirst> Create<TSecond>(Func<TFirst, TSecond> fn)
         where TSecond : class
     {
-        return new Thing<TFirst> (
-            delegate (TFirst item) {
-                TSecond foo = item == null ? null : fn (item);
-                Console.WriteLine (foo);
-            });
+        return new Thing<TFirst>(
+            delegate(TFirst item)
+            {
+                TSecond foo = item == null ? null : fn(item);
+                Console.WriteLine(foo);
+            }
+        );
     }
 
-    public void SomeAction ()
+    public void SomeAction()
     {
-        _fn (null);
+        _fn(null);
     }
 
-    private Thing (Action<TFirst> fn)
+    private Thing(Action<TFirst> fn)
     {
         _fn = fn;
     }
@@ -27,9 +30,9 @@ public sealed class Thing<TFirst> where TFirst : class
 
 public static class Program
 {
-    public static void Main ()
+    public static void Main()
     {
-        var foo = Thing<object>.Create (x => x);
-        foo.SomeAction ();
+        var foo = Thing<object>.Create(x => x);
+        foo.SomeAction();
     }
 }

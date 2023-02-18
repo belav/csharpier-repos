@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 class C
 {
-    public async Task<int> Test ()
+    public async Task<int> Test()
     {
-        return await Call ();
+        return await Call();
     }
-    
-    Task Call ()
+
+    Task Call()
     {
         return null;
     }

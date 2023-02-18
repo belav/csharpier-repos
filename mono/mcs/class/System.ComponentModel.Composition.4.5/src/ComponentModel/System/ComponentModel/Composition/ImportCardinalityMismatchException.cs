@@ -11,7 +11,7 @@ namespace System.ComponentModel.Composition
 {
     /// <summary>
     ///     The exception that is thrown when the cardinality of a <see cref="ImportDefinition"/>
-    ///     does not match the cardinality of the <see cref="Export"/> objects available in an 
+    ///     does not match the cardinality of the <see cref="Export"/> objects available in an
     ///     <see cref="ExportProvider"/>.
     /// </summary>
     [Serializable]
@@ -23,56 +23,50 @@ namespace System.ComponentModel.Composition
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class.
         /// </summary>
         public ImportCardinalityMismatchException()
-            : this((string)null, (Exception)null)
-        {
-        }
+            : this((string)null, (Exception)null) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class 
+        ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class
         ///     with the specified error message.
         /// </summary>
         /// <param name="message">
-        ///     A <see cref="String"/> containing a message that describes the 
+        ///     A <see cref="String"/> containing a message that describes the
         ///     <see cref="ImportCardinalityMismatchException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         public ImportCardinalityMismatchException(string message)
-            : this(message, (Exception)null)
-        {
-        }
+            : this(message, (Exception)null) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class 
-        ///     with the specified error message and exception that is the cause of the  
+        ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class
+        ///     with the specified error message and exception that is the cause of the
         ///     exception.
         /// </summary>
         /// <param name="message">
-        ///     A <see cref="String"/> containing a message that describes the 
+        ///     A <see cref="String"/> containing a message that describes the
         ///     <see cref="ImportCardinalityMismatchException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
         /// <param name="innerException">
-        ///     The <see cref="Exception"/> that is the underlying cause of the 
+        ///     The <see cref="Exception"/> that is the underlying cause of the
         ///     <see cref="ImportCardinalityMismatchException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
         public ImportCardinalityMismatchException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
 #if FEATURE_SERIALIZATION
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class 
+        ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class
         ///     with the specified serialization data.
         /// </summary>
         /// <param name="info">
-        ///     The <see cref="SerializationInfo"/> that holds the serialized object data about the 
+        ///     The <see cref="SerializationInfo"/> that holds the serialized object data about the
         ///     <see cref="ImportCardinalityMismatchException"/>.
         /// </param>
         /// <param name="context">
-        ///     The <see cref="StreamingContext"/> that contains contextual information about the 
+        ///     The <see cref="StreamingContext"/> that contains contextual information about the
         ///     source or destination.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -85,10 +79,11 @@ namespace System.ComponentModel.Composition
         ///     <paramref name="info"/> contains a value that cannot be cast to the correct type.
         /// </exception>
         [System.Security.SecuritySafeCritical]
-        protected ImportCardinalityMismatchException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected ImportCardinalityMismatchException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
 #endif //FEATURE_SERIALIZATION
     }
 }

@@ -7,25 +7,24 @@ class X
 {
     long field;
 
-    static void Main ()
+    static void Main()
     {
-        var x = new X ();
-        x.Run ();
+        var x = new X();
+        x.Run();
     }
 
-    void Run ()
+    void Run()
     {
-        Test (ref Prop);
+        Test(ref Prop);
     }
 
-    static int Test (ref int y)
+    static int Test(ref int y)
     {
         return y;
     }
 
-    ref long Prop {
-        get {
-            return ref field;
-        }
+    ref long Prop
+    {
+        get { return ref field; }
     }
 }

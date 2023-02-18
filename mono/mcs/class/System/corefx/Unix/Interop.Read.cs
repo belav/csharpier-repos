@@ -13,9 +13,9 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        static Sys ()
+        static Sys()
         {
-            Interop.mono_pal_init ();
+            Interop.mono_pal_init();
         }
 
         /// <summary>
@@ -28,24 +28,27 @@ internal static partial class Interop
         /// Returns the number of bytes read on success; otherwise, -1 is returned
         /// Note - on fail. the position of the stream may change depending on the platform; consult man 2 read for more info
         /// </returns>
-        internal static unsafe int Read (SafeFileHandle fd, byte* buffer, int count)
+        internal static unsafe int Read(SafeFileHandle fd, byte* buffer, int count)
         {
             int bytes_read = -1;
             bool release = false;
-            try {
-                fd.DangerousAddRef (ref release);
-                do {
-                    bytes_read = Read (fd.DangerousGetHandle (), buffer, count);
-                } while (bytes_read < 0 && Marshal.GetLastWin32Error () == (int) Interop.Error.EINTR);
+            try
+            {
+                fd.DangerousAddRef(ref release);
+                do
+                {
+                    bytes_read = Read(fd.DangerousGetHandle(), buffer, count);
+                } while (bytes_read < 0 && Marshal.GetLastWin32Error() == (int)Interop.Error.EINTR);
             }
-            finally {
+            finally
+            {
                 if (release)
-                    fd.DangerousRelease ();
+                    fd.DangerousRelease();
             }
             return bytes_read;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern unsafe int Read (IntPtr fd, byte* buffer, int count);
+        internal static extern unsafe int Read(IntPtr fd, byte* buffer, int count);
     }
 }

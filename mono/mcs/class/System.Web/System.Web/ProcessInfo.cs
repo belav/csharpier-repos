@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.ProcessInfo
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,13 +29,19 @@
 
 using System.Security.Permissions;
 
-namespace System.Web {
-
+namespace System.Web
+{
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public class ProcessInfo {
-
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class ProcessInfo
+    {
         #region Fields
 
         TimeSpan age;
@@ -50,11 +56,17 @@ namespace System.Web {
 
         #region Constructors
 
-        public ProcessInfo ()
-        {
-        }
+        public ProcessInfo() { }
 
-        public ProcessInfo (DateTime startTime, TimeSpan age, int processID, int requestCount, ProcessStatus status, ProcessShutdownReason shutdownReason, int peakMemoryUsed)
+        public ProcessInfo(
+            DateTime startTime,
+            TimeSpan age,
+            int processID,
+            int requestCount,
+            ProcessStatus status,
+            ProcessShutdownReason shutdownReason,
+            int peakMemoryUsed
+        )
         {
             this.age = age;
             this.peakMemoryUsed = peakMemoryUsed;
@@ -69,31 +81,38 @@ namespace System.Web {
 
         #region Properties
 
-        public TimeSpan Age {
+        public TimeSpan Age
+        {
             get { return age; }
         }
 
-        public int PeakMemoryUsed {
+        public int PeakMemoryUsed
+        {
             get { return peakMemoryUsed; }
         }
 
-        public int ProcessID {
+        public int ProcessID
+        {
             get { return processID; }
         }
 
-        public int RequestCount {
+        public int RequestCount
+        {
             get { return requestCount; }
         }
 
-        public ProcessShutdownReason ShutdownReason {
+        public ProcessShutdownReason ShutdownReason
+        {
             get { return shutdownReason; }
         }
 
-        public DateTime StartTime {
+        public DateTime StartTime
+        {
             get { return startTime; }
         }
 
-        public ProcessStatus Status {
+        public ProcessStatus Status
+        {
             get { return status; }
         }
 
@@ -101,7 +120,15 @@ namespace System.Web {
 
         #region Methods
 
-        public void SetAll (DateTime startTime, TimeSpan age, int processID, int requestCount, ProcessStatus status, ProcessShutdownReason shutdownReason, int peakMemoryUsed)
+        public void SetAll(
+            DateTime startTime,
+            TimeSpan age,
+            int processID,
+            int requestCount,
+            ProcessStatus status,
+            ProcessShutdownReason shutdownReason,
+            int peakMemoryUsed
+        )
         {
             this.age = age;
             this.peakMemoryUsed = peakMemoryUsed;

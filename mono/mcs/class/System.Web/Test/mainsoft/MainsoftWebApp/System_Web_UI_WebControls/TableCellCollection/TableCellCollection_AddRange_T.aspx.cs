@@ -35,12 +35,12 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class TableCellCollection_AddRange_T
-        : GHTBaseWeb 
+    public class TableCellCollection_AddRange_T : GHTBaseWeb
     {
         protected GHTWebControls.GHTSubTest GHTSubTest1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,21 +48,20 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
         private void Page_Load(object sender, EventArgs e)
         {
-            base.GHTTestBegin((HtmlForm) (HtmlForm)this.FindControl("Form1"));
+            base.GHTTestBegin((HtmlForm)(HtmlForm)this.FindControl("Form1"));
             Table table1 = new Table();
             int num3 = 3;
             TableCell[] cellArray1 = new TableCell[num3 + 1];
@@ -80,6 +79,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             base.GHTSubTestEnd();
             base.GHTTestEnd();
         }
- 
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,38 +40,38 @@ namespace MonoTests.System.Web.Script.Services
     public class ProxyGeneratorTest
     {
         [Test]
-        public void ScriptGenerator ()
+        public void ScriptGenerator()
         {
-            var s = ProxyGenerator.GetClientProxyScript (typeof (IHogeService), "/js", false);
-            Assert.IsTrue (s.IndexOf ("IHogeService") > 0, "#1");
-            Assert.IsTrue (s.IndexOf ("Join") > 0, "#2");
-            s = ProxyGenerator.GetClientProxyScript (typeof (IHogeService), "/jsdebug", true);
-            Assert.IsTrue (s.IndexOf ("IHogeService") > 0, "#3");
-            Assert.IsTrue (s.IndexOf ("Join") > 0, "#4");
+            var s = ProxyGenerator.GetClientProxyScript(typeof(IHogeService), "/js", false);
+            Assert.IsTrue(s.IndexOf("IHogeService") > 0, "#1");
+            Assert.IsTrue(s.IndexOf("Join") > 0, "#2");
+            s = ProxyGenerator.GetClientProxyScript(typeof(IHogeService), "/jsdebug", true);
+            Assert.IsTrue(s.IndexOf("IHogeService") > 0, "#3");
+            Assert.IsTrue(s.IndexOf("Join") > 0, "#4");
         }
 
         [ServiceContract]
         public interface IHogeService
         {
-//            [WebGet]
+            //            [WebGet]
             [OperationContract]
-            string Echo (string s);
+            string Echo(string s);
 
-//            [WebGet]
+            //            [WebGet]
             [OperationContract]
-            string Join (string s1, string s2);
+            string Join(string s1, string s2);
         }
 
         public class HogeService : IHogeService
         {
-            public string Echo (string s)
+            public string Echo(string s)
             {
                 return "heh, I don't";
             }
 
-            public string Join (string s1, string s2)
+            public string Join(string s1, string s2)
             {
-                Console.WriteLine ("{0} + {1}", s1, s2);
+                Console.WriteLine("{0} + {1}", s1, s2);
                 return s1 + s2;
             }
         }

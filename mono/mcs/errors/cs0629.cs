@@ -3,11 +3,11 @@
 
 interface IFace
 {
-        void Show (int arg);
+    void Show(int arg);
 }
 
-class DerivedClass: IFace
+class DerivedClass : IFace
 {
-        [System.Diagnostics.Conditional("DEBUG")]
-        public void Show (int arg) {}
+    [System.Diagnostics.Conditional("DEBUG")]
+    public void Show(int arg) { }
 }

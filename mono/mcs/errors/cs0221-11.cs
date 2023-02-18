@@ -3,11 +3,13 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
-        unchecked {
-            checked {
-                const char c = (char) -1;
+        unchecked
+        {
+            checked
+            {
+                const char c = (char)-1;
             }
         }
     }

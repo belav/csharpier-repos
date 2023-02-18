@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,154 +29,170 @@
 #if MONO_FEATURE_CONSOLE
 using System.Runtime.InteropServices;
 using System.Text;
-namespace System {
+
+namespace System
+{
     class NullConsoleDriver : IConsoleDriver
     {
-        static readonly ConsoleKeyInfo EmptyConsoleKeyInfo = new ConsoleKeyInfo ('\0', 0, false, false, false);
+        static readonly ConsoleKeyInfo EmptyConsoleKeyInfo = new ConsoleKeyInfo(
+            '\0',
+            0,
+            false,
+            false,
+            false
+        );
 
-        public ConsoleColor BackgroundColor {
+        public ConsoleColor BackgroundColor
+        {
             get { return ConsoleColor.Black; }
-            set {
-            }
+            set { }
         }
 
-        public int BufferHeight {
-            get { return 0; }
-            set {}
-        }
-
-        public int BufferWidth {
-            get { return 0; }
-            set {}
-        }
-
-        public bool CapsLock {
-            get { return false; }
-        }
-
-        public int CursorLeft {
-            get { return 0; }
-            set {}
-        }
-
-        public int CursorSize {
+        public int BufferHeight
+        {
             get { return 0; }
             set { }
         }
 
-        public int CursorTop {
+        public int BufferWidth
+        {
             get { return 0; }
-            set {}
+            set { }
         }
 
-        public bool CursorVisible {
+        public bool CapsLock
+        {
             get { return false; }
-            set {}
         }
 
-        public ConsoleColor ForegroundColor {
+        public int CursorLeft
+        {
+            get { return 0; }
+            set { }
+        }
+
+        public int CursorSize
+        {
+            get { return 0; }
+            set { }
+        }
+
+        public int CursorTop
+        {
+            get { return 0; }
+            set { }
+        }
+
+        public bool CursorVisible
+        {
+            get { return false; }
+            set { }
+        }
+
+        public ConsoleColor ForegroundColor
+        {
             get { return ConsoleColor.Black; }
-            set {}
+            set { }
         }
 
-        public bool KeyAvailable {
+        public bool KeyAvailable
+        {
             get { return false; } // FIXME: throw?
         }
 
-        public bool Initialized {
+        public bool Initialized
+        {
             get { return true; }
         }
 
-        public int LargestWindowHeight {
+        public int LargestWindowHeight
+        {
             get { return 0; }
         }
 
-        public int LargestWindowWidth {
+        public int LargestWindowWidth
+        {
             get { return 0; }
         }
 
-        public bool NumberLock {
+        public bool NumberLock
+        {
             get { return false; }
         }
 
-        public string Title {
+        public string Title
+        {
             get { return ""; }
-            set {}
+            set { }
         }
 
-        public bool TreatControlCAsInput {
+        public bool TreatControlCAsInput
+        {
             get { return false; }
-            set {}
+            set { }
         }
 
-        public int WindowHeight {
-            get { return 0; }
-            set {}
-        }
-
-        public int WindowLeft {
-            get { return 0; }
-            set {}
-        }
-
-        public int WindowTop {
-            get { return 0; }
-            set {}
-        }
-
-        public int WindowWidth {
-            get { return 0; }
-            set {}
-        }
-
-        public void Beep (int frequency, int duration)
+        public int WindowHeight
         {
+            get { return 0; }
+            set { }
         }
 
-        public void Clear ()
+        public int WindowLeft
         {
+            get { return 0; }
+            set { }
         }
 
-        public void MoveBufferArea (int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight,
-                    int targetLeft, int targetTop, Char sourceChar,
-                    ConsoleColor sourceForeColor, ConsoleColor sourceBackColor)
+        public int WindowTop
         {
+            get { return 0; }
+            set { }
         }
 
-        public void Init ()
+        public int WindowWidth
         {
+            get { return 0; }
+            set { }
         }
 
-        public string ReadLine ()
+        public void Beep(int frequency, int duration) { }
+
+        public void Clear() { }
+
+        public void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop,
+            Char sourceChar,
+            ConsoleColor sourceForeColor,
+            ConsoleColor sourceBackColor
+        ) { }
+
+        public void Init() { }
+
+        public string ReadLine()
         {
             return null;
         }
 
-        public ConsoleKeyInfo ReadKey (bool intercept)
+        public ConsoleKeyInfo ReadKey(bool intercept)
         {
             return EmptyConsoleKeyInfo;
         }
 
-        public void ResetColor ()
-        {
-        }
+        public void ResetColor() { }
 
-        public void SetBufferSize (int width, int height)
-        {
-        }
+        public void SetBufferSize(int width, int height) { }
 
-        public void SetCursorPosition (int left, int top)
-        {
-        }
+        public void SetCursorPosition(int left, int top) { }
 
-        public void SetWindowPosition (int left, int top)
-        {
-        }
+        public void SetWindowPosition(int left, int top) { }
 
-        public void SetWindowSize (int width, int height)
-        {
-        }
+        public void SetWindowSize(int width, int height) { }
     }
 }
 #endif
-

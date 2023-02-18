@@ -4,7 +4,7 @@ namespace Primes
 {
     class MainClass
     {
-        public static int Main ()
+        public static int Main()
         {
             const ulong max = 5;
             bool[] numbers = new bool[max];
@@ -18,7 +18,7 @@ namespace Primes
 
             for (ulong i = 0; i < max; i++)
                 if (numbers[i])
-                    Console.WriteLine (i + 1);
+                    Console.WriteLine(i + 1);
 
             return 0;
         }

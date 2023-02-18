@@ -6,8 +6,5 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-
-    internal interface ILspServiceLogger : ILspLogger, ILspService
-    {
-    }
+    internal interface ILspServiceLogger : ILspLogger, ILspService { }
 }

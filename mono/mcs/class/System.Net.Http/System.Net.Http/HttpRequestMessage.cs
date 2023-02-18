@@ -42,17 +42,20 @@ namespace System.Net.Http
         bool is_used;
         bool disposed;
 
-        public HttpRequestMessage ()
+        public HttpRequestMessage()
         {
             this.method = HttpMethod.Get;
         }
 
-        public HttpRequestMessage (HttpMethod method, string requestUri)
-            : this (method, string.IsNullOrEmpty (requestUri) ? (Uri) null : new Uri (requestUri, System.UriKind.RelativeOrAbsolute))
-        {
-        }
+        public HttpRequestMessage(HttpMethod method, string requestUri)
+            : this(
+                method,
+                string.IsNullOrEmpty(requestUri)
+                    ? (Uri)null
+                    : new Uri(requestUri, System.UriKind.RelativeOrAbsolute)
+            ) { }
 
-        public HttpRequestMessage (HttpMethod method, Uri requestUri)
+        public HttpRequestMessage(HttpMethod method, Uri requestUri)
         {
             Method = method;
             RequestUri = requestUri;
@@ -60,43 +63,41 @@ namespace System.Net.Http
 
         public HttpContent Content { get; set; }
 
-        public HttpRequestHeaders Headers {
-            get {
-                return headers ?? (headers = new HttpRequestHeaders ());
-            }
+        public HttpRequestHeaders Headers
+        {
+            get { return headers ?? (headers = new HttpRequestHeaders()); }
         }
 
-        public HttpMethod Method {
-            get {
-                return method;
-            }
-            set {
+        public HttpMethod Method
+        {
+            get { return method; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("method");
+                    throw new ArgumentNullException("method");
 
                 method = value;
             }
         }
 
-        public IDictionary<string, object> Properties {
-            get {
-                return properties ?? (properties = new Dictionary<string, object> ());
-            }
+        public IDictionary<string, object> Properties
+        {
+            get { return properties ?? (properties = new Dictionary<string, object>()); }
         }
 
-        public Uri RequestUri {
-            get {
-                return uri;
-            }
-            set {
-                if (value != null && value.IsAbsoluteUri && !IsAllowedAbsoluteUri (value))
-                    throw new ArgumentException ("Only http or https scheme is allowed");
+        public Uri RequestUri
+        {
+            get { return uri; }
+            set
+            {
+                if (value != null && value.IsAbsoluteUri && !IsAllowedAbsoluteUri(value))
+                    throw new ArgumentException("Only http or https scheme is allowed");
 
                 uri = value;
             }
         }
 
-        static bool IsAllowedAbsoluteUri (Uri uri)
+        static bool IsAllowedAbsoluteUri(Uri uri)
         {
             if (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
                 return true;
@@ -107,40 +108,44 @@ namespace System.Net.Http
 #endif
 
             // Mono URI handling which does not distinguish between file and url absolute paths without scheme
-            if (uri.Scheme == Uri.UriSchemeFile && uri.OriginalString.StartsWith ("/", StringComparison.Ordinal))
+            if (
+                uri.Scheme == Uri.UriSchemeFile
+                && uri.OriginalString.StartsWith("/", StringComparison.Ordinal)
+            )
                 return true;
 
             return false;
         }
 
-        public Version Version {
-            get {
-                return version ?? HttpVersion.Version11;
-            }
-            set {
+        public Version Version
+        {
+            get { return version ?? HttpVersion.Version11; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("Version");
+                    throw new ArgumentNullException("Version");
 
                 version = value;
             }
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
+            Dispose(true);
         }
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (disposing && !disposed) {
+            if (disposing && !disposed)
+            {
                 disposed = true;
 
                 if (Content != null)
-                    Content.Dispose ();
+                    Content.Dispose();
             }
         }
 
-        internal bool SetIsUsed ()
+        internal bool SetIsUsed()
         {
             if (is_used)
                 return true;
@@ -148,20 +153,21 @@ namespace System.Net.Http
             is_used = true;
             return false;
         }
-        
-        public override string ToString ()
+
+        public override string ToString()
         {
-            var sb = new StringBuilder ();
-            sb.Append ("Method: ").Append (method);
-            sb.Append (", RequestUri: '").Append (RequestUri != null ? RequestUri.ToString () : "<null>");
-            sb.Append ("', Version: ").Append (Version);
-            sb.Append (", Content: ").Append (Content != null ? Content.ToString () : "<null>");
-            sb.Append (", Headers:\r\n{\r\n").Append (Headers);
+            var sb = new StringBuilder();
+            sb.Append("Method: ").Append(method);
+            sb.Append(", RequestUri: '")
+                .Append(RequestUri != null ? RequestUri.ToString() : "<null>");
+            sb.Append("', Version: ").Append(Version);
+            sb.Append(", Content: ").Append(Content != null ? Content.ToString() : "<null>");
+            sb.Append(", Headers:\r\n{\r\n").Append(Headers);
             if (Content != null)
-                sb.Append (Content.Headers);
-            sb.Append ("}");
-            
-            return sb.ToString ();
+                sb.Append(Content.Headers);
+            sb.Append("}");
+
+            return sb.ToString();
         }
     }
 }

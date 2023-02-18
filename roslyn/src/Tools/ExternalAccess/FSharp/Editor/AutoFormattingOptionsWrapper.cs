@@ -11,13 +11,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         internal readonly AutoFormattingOptions UnderlyingObject;
         private readonly FormattingOptions2.IndentStyle _indentStyle;
 
-        public AutoFormattingOptionsWrapper(AutoFormattingOptions underlyingObject, FormattingOptions2.IndentStyle indentStyle)
+        public AutoFormattingOptionsWrapper(
+            AutoFormattingOptions underlyingObject,
+            FormattingOptions2.IndentStyle indentStyle
+        )
         {
             UnderlyingObject = underlyingObject;
             _indentStyle = indentStyle;
         }
 
-        public FormattingOptions.IndentStyle IndentStyle
-            => (FormattingOptions.IndentStyle)_indentStyle;
+        public FormattingOptions.IndentStyle IndentStyle =>
+            (FormattingOptions.IndentStyle)_indentStyle;
     }
 }

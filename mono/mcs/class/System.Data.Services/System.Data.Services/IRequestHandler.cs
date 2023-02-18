@@ -31,11 +31,13 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
 
-namespace System.Data.Services {
+namespace System.Data.Services
+{
     [ServiceContract]
-    public interface IRequestHandler {
+    public interface IRequestHandler
+    {
         [OperationContract]
-        [WebInvoke (UriTemplate = "*", Method = "*")]
-        Message ProcessRequestForMessage (Stream messageBody);
+        [WebInvoke(UriTemplate = "*", Method = "*")]
+        Message ProcessRequestForMessage(Stream messageBody);
     }
 }

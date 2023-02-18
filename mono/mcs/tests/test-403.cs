@@ -6,27 +6,27 @@ using System;
 
 unsafe class Foo
 {
-    public static int Main ()
+    public static int Main()
     {
         int a;
-        int *b;
-        int **c;
+        int* b;
+        int** c;
 
         a = 42;
         b = &a;
         c = &b;
-        
-        Console.WriteLine ("*c == b : {0}", *c == b);
-        Console.WriteLine ("**c == a : {0}", **c == a);
+
+        Console.WriteLine("*c == b : {0}", *c == b);
+        Console.WriteLine("**c == a : {0}", **c == a);
 
         if (*c == b && **c == a)
         {
-            Console.WriteLine ("Test passed");
+            Console.WriteLine("Test passed");
             return 0;
         }
         else
         {
-            Console.WriteLine ("Test failed");
+            Console.WriteLine("Test failed");
             return 1;
         }
     }

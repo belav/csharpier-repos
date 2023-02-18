@@ -6,18 +6,19 @@ using System.Runtime.CompilerServices;
 
 class A
 {
-    [IndexerName ("Foo")]
-    public int this [int index] {
+    [IndexerName("Foo")]
+    public int this[int index]
+    {
         get { return index; }
     }
 
-    static int Test (A a)
+    static int Test(A a)
     {
         return a.Foo;
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Test (new A ());
+        Test(new A());
     }
 }

@@ -1,5 +1,5 @@
-// 
-// System.Xml.Serialization.XmlSerializerFactory.cs 
+//
+// System.Xml.Serialization.XmlSerializerFactory.cs
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,88 +33,112 @@ using System;
 using System.Collections;
 using System.Security.Policy;
 
-namespace System.Xml.Serialization 
+namespace System.Xml.Serialization
 {
     public class XmlSerializerFactory
     {
-        static Hashtable serializersBySource = new Hashtable ();
-        
-        public XmlSerializerFactory ()
+        static Hashtable serializersBySource = new Hashtable();
+
+        public XmlSerializerFactory() { }
+
+        public XmlSerializer CreateSerializer(Type type)
         {
+            return CreateSerializer(type, null, null, null, null);
         }
 
-        public XmlSerializer CreateSerializer (Type type)
+        public XmlSerializer CreateSerializer(XmlTypeMapping xmlTypeMapping)
         {
-            return CreateSerializer (type, null, null, null, null);
-        }
-
-        public XmlSerializer CreateSerializer (XmlTypeMapping xmlTypeMapping)
-        {
-            lock (serializersBySource) 
+            lock (serializersBySource)
             {
-                XmlSerializer ser = (XmlSerializer) serializersBySource [xmlTypeMapping.Source];
-                if (ser == null) {
-                    ser = new XmlSerializer (xmlTypeMapping);
-                    serializersBySource [xmlTypeMapping.Source] = ser;
+                XmlSerializer ser = (XmlSerializer)serializersBySource[xmlTypeMapping.Source];
+                if (ser == null)
+                {
+                    ser = new XmlSerializer(xmlTypeMapping);
+                    serializersBySource[xmlTypeMapping.Source] = ser;
                 }
                 return ser;
             }
         }
 
-        public XmlSerializer CreateSerializer (Type type, XmlAttributeOverrides overrides, Type[] extraTypes, XmlRootAttribute root, string defaultNamespace, string location)
+        public XmlSerializer CreateSerializer(
+            Type type,
+            XmlAttributeOverrides overrides,
+            Type[] extraTypes,
+            XmlRootAttribute root,
+            string defaultNamespace,
+            string location
+        )
         {
-            return CreateSerializer (type, overrides, extraTypes, root, defaultNamespace, location, null);
+            return CreateSerializer(
+                type,
+                overrides,
+                extraTypes,
+                root,
+                defaultNamespace,
+                location,
+                null
+            );
         }
 
-        public XmlSerializer CreateSerializer (Type type, string defaultNamespace)
+        public XmlSerializer CreateSerializer(Type type, string defaultNamespace)
         {
-            return CreateSerializer (type, null, null, null, defaultNamespace);
+            return CreateSerializer(type, null, null, null, defaultNamespace);
         }
 
-        public XmlSerializer CreateSerializer (Type type, Type[] extraTypes)
+        public XmlSerializer CreateSerializer(Type type, Type[] extraTypes)
         {
-            return CreateSerializer (type, null, extraTypes, null, null);
+            return CreateSerializer(type, null, extraTypes, null, null);
         }
 
-        public XmlSerializer CreateSerializer (Type type, XmlAttributeOverrides overrides)
+        public XmlSerializer CreateSerializer(Type type, XmlAttributeOverrides overrides)
         {
-            return CreateSerializer (type, overrides, null, null, null);
+            return CreateSerializer(type, overrides, null, null, null);
         }
 
-        public XmlSerializer CreateSerializer (Type type, XmlRootAttribute root)
+        public XmlSerializer CreateSerializer(Type type, XmlRootAttribute root)
         {
-            return CreateSerializer (type, null, null, root, null);
+            return CreateSerializer(type, null, null, root, null);
         }
-        
-        public XmlSerializer CreateSerializer (Type type, 
-            XmlAttributeOverrides overrides, 
-            Type[] extraTypes, 
-            XmlRootAttribute root, 
-            string defaultNamespace)
+
+        public XmlSerializer CreateSerializer(
+            Type type,
+            XmlAttributeOverrides overrides,
+            Type[] extraTypes,
+            XmlRootAttribute root,
+            string defaultNamespace
+        )
         {
-            XmlTypeSerializationSource source = new XmlTypeSerializationSource (type, root, overrides, defaultNamespace, extraTypes);
-            lock (serializersBySource) 
+            XmlTypeSerializationSource source = new XmlTypeSerializationSource(
+                type,
+                root,
+                overrides,
+                defaultNamespace,
+                extraTypes
+            );
+            lock (serializersBySource)
             {
-                XmlSerializer ser = (XmlSerializer) serializersBySource [source];
-                if (ser == null) {
-                    ser = new XmlSerializer (type, overrides, extraTypes, root, defaultNamespace);
-                    serializersBySource [ser.Mapping.Source] = ser;
+                XmlSerializer ser = (XmlSerializer)serializersBySource[source];
+                if (ser == null)
+                {
+                    ser = new XmlSerializer(type, overrides, extraTypes, root, defaultNamespace);
+                    serializersBySource[ser.Mapping.Source] = ser;
                 }
                 return ser;
             }
         }
 
         [MonoTODO]
-        public XmlSerializer CreateSerializer (Type type, 
-            XmlAttributeOverrides overrides, 
-            Type[] extraTypes, 
-            XmlRootAttribute root, 
+        public XmlSerializer CreateSerializer(
+            Type type,
+            XmlAttributeOverrides overrides,
+            Type[] extraTypes,
+            XmlRootAttribute root,
             string defaultNamespace,
             string location,
-            Evidence evidence)
+            Evidence evidence
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

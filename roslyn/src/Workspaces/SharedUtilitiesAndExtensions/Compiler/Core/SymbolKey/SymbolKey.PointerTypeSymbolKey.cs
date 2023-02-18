@@ -10,31 +10,47 @@ namespace Microsoft.CodeAnalysis
         {
             public static readonly PointerTypeSymbolKey Instance = new();
 
-            public sealed override void Create(IPointerTypeSymbol symbol, SymbolKeyWriter visitor)
-                => visitor.WriteSymbolKey(symbol.PointedAtType);
+            public sealed override void Create(
+                IPointerTypeSymbol symbol,
+                SymbolKeyWriter visitor
+            ) => visitor.WriteSymbolKey(symbol.PointedAtType);
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, IPointerTypeSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                IPointerTypeSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
-                var pointedAtTypeResolution = reader.ReadSymbolKey(contextualSymbol?.PointedAtType, out var pointedAtTypeFailureReason);
+                var pointedAtTypeResolution = reader.ReadSymbolKey(
+                    contextualSymbol?.PointedAtType,
+                    out var pointedAtTypeFailureReason
+                );
 
                 if (pointedAtTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(PointerTypeSymbolKey)} {nameof(pointedAtTypeResolution)} failed -> {pointedAtTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(PointerTypeSymbolKey)} {nameof(pointedAtTypeResolution)} failed -> {pointedAtTypeFailureReason})";
                     return default;
                 }
 
                 if (reader.Compilation.Language == LanguageNames.VisualBasic)
                 {
-                    failureReason = $"({nameof(PointerTypeSymbolKey)} is not supported in {LanguageNames.VisualBasic})";
+                    failureReason =
+                        $"({nameof(PointerTypeSymbolKey)} is not supported in {LanguageNames.VisualBasic})";
                     return default;
                 }
 
-                using var result = PooledArrayBuilder<IPointerTypeSymbol>.GetInstance(pointedAtTypeResolution.SymbolCount);
+                using var result = PooledArrayBuilder<IPointerTypeSymbol>.GetInstance(
+                    pointedAtTypeResolution.SymbolCount
+                );
                 foreach (var typeSymbol in pointedAtTypeResolution.OfType<ITypeSymbol>())
                     result.AddIfNotNull(reader.Compilation.CreatePointerTypeSymbol(typeSymbol));
 
-                return CreateResolution(result, $"({nameof(PointerTypeSymbolKey)} could not resolve)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(PointerTypeSymbolKey)} could not resolve)",
+                    out failureReason
+                );
             }
         }
     }

@@ -49,7 +49,8 @@ namespace System.Web
                 // will fail to find foo.b because it will land on foo.bE, then look at foo.a and finally
                 // failing to find the prefix which is actually present in the container (foo.b[0]).
                 // Here we're doing another pass looking specifically for collection prefix.
-                containsPrefix = Array.BinarySearch(_sortedValues, prefix + "[", prefixComparer) > -1;
+                containsPrefix =
+                    Array.BinarySearch(_sortedValues, prefix + "[", prefixComparer) > -1;
             }
             return containsPrefix;
         }
@@ -60,7 +61,9 @@ namespace System.Web
         // - "abc"/"foo[abc]"
         internal IDictionary<string, string> GetKeysFromPrefix(string prefix)
         {
-            IDictionary<string, string> result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            IDictionary<string, string> result = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             foreach (var entry in _originalValues)
             {
@@ -116,7 +119,11 @@ namespace System.Web
             results[key] = key;
         }
 
-        private static void GetKeyFromNonEmptyPrefix(string prefix, string entry, IDictionary<string, string> results)
+        private static void GetKeyFromNonEmptyPrefix(
+            string prefix,
+            string entry,
+            IDictionary<string, string> results
+        )
         {
             string key = null;
             string fullName = null;

@@ -4,25 +4,23 @@ namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses
 {
     public class UnusedAbstractMethodRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            var tmp = new B ();
+            var tmp = new B();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         abstract class Base
         {
-            public abstract void Call ();
+            public abstract void Call();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (Base))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(Base))]
         class B : Base
         {
-            public override void Call ()
-            {
-            }
+            public override void Call() { }
         }
     }
 }

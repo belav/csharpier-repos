@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,49 +35,55 @@ namespace System.ServiceModel.Security.Tokens
     public sealed class RecipientServiceModelSecurityTokenRequirement
         : ServiceModelSecurityTokenRequirement
     {
-        public RecipientServiceModelSecurityTokenRequirement ()
-        {
-        }
+        public RecipientServiceModelSecurityTokenRequirement() { }
 
-        public AuditLogLocation AuditLogLocation {
-            get {
+        public AuditLogLocation AuditLogLocation
+        {
+            get
+            {
                 AuditLogLocation ret;
-                TryGetProperty<AuditLogLocation> (AuditLogLocationProperty, out ret);
+                TryGetProperty<AuditLogLocation>(AuditLogLocationProperty, out ret);
                 return ret;
             }
-            set { Properties [AuditLogLocationProperty] = value; }
+            set { Properties[AuditLogLocationProperty] = value; }
         }
 
-        public Uri ListenUri {
-            get {
-                Uri ret;
-                TryGetProperty<Uri> (ListenUriProperty, out ret);
-                return ret;
-            }
-            set { Properties [ListenUriProperty] = value; }
-        }
-
-        public AuditLevel MessageAuthenticationAuditLevel {
-            get {
-                AuditLevel ret;
-                TryGetProperty<AuditLevel> (MessageAuthenticationAuditLevelProperty, out ret);
-                return ret;
-            }
-            set { Properties [MessageAuthenticationAuditLevelProperty] = value; }
-        }
-
-        public bool SuppressAuditFailure {
-            get {
-                bool ret;
-                TryGetProperty<bool> (SuppressAuditFailureProperty, out ret);
-                return ret;
-            }
-            set { Properties [SuppressAuditFailureProperty] = value; }
-        }
-
-        public override string ToString ()
+        public Uri ListenUri
         {
-            return Dump ();
+            get
+            {
+                Uri ret;
+                TryGetProperty<Uri>(ListenUriProperty, out ret);
+                return ret;
+            }
+            set { Properties[ListenUriProperty] = value; }
+        }
+
+        public AuditLevel MessageAuthenticationAuditLevel
+        {
+            get
+            {
+                AuditLevel ret;
+                TryGetProperty<AuditLevel>(MessageAuthenticationAuditLevelProperty, out ret);
+                return ret;
+            }
+            set { Properties[MessageAuthenticationAuditLevelProperty] = value; }
+        }
+
+        public bool SuppressAuditFailure
+        {
+            get
+            {
+                bool ret;
+                TryGetProperty<bool>(SuppressAuditFailureProperty, out ret);
+                return ret;
+            }
+            set { Properties[SuppressAuditFailureProperty] = value; }
+        }
+
+        public override string ToString()
+        {
+            return Dump();
         }
     }
 }

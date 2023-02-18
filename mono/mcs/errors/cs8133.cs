@@ -3,9 +3,10 @@
 
 class C
 {
-    public static void Test (dynamic d)
+    public static void Test(dynamic d)
     {
-        int x, y;
+        int x,
+            y;
         (x, y) = d;
     }
 }

@@ -7,8 +7,8 @@ public enum E
 
 public class Second
 {
-    public void TestFinal ()
+    public void TestFinal()
     {
-        TestClass.Foo (E.TestField);
+        TestClass.Foo(E.TestField);
     }
 }

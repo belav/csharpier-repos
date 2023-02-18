@@ -17,9 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.Commanding.Commands
     [ExcludeFromCodeCoverage]
     internal class SortAndRemoveUnnecessaryImportsCommandArgs : EditorCommandArgs
     {
-        public SortAndRemoveUnnecessaryImportsCommandArgs(ITextView textView, ITextBuffer subjectBuffer)
-            : base(textView, subjectBuffer)
-        {
-        }
+        public SortAndRemoveUnnecessaryImportsCommandArgs(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
+            : base(textView, subjectBuffer) { }
     }
 }

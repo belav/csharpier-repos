@@ -16,12 +16,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InternalSolutionCrawlerOptionsProvider()
-        {
-        }
+        public InternalSolutionCrawlerOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            InternalSolutionCrawlerOptions.SolutionCrawler,
-            InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                InternalSolutionCrawlerOptions.SolutionCrawler,
+                InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly
+            );
     }
 }

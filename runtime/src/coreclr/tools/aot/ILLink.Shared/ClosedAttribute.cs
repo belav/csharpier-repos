@@ -6,10 +6,10 @@ using System.Diagnostics;
 
 namespace StaticCs
 {
-    [AttributeUsage (AttributeTargets.Enum)]
-    [Conditional ("EMIT_STATICCS_CLOSEDATTRIBUTE")]
+    [AttributeUsage(AttributeTargets.Enum)]
+    [Conditional("EMIT_STATICCS_CLOSEDATTRIBUTE")]
     internal sealed class ClosedAttribute : Attribute
     {
-        public ClosedAttribute () { }
+        public ClosedAttribute() { }
     }
 }

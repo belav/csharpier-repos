@@ -8,7 +8,12 @@ using Xunit;
 
 namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/57506", typeof(PlatformDetection), nameof(PlatformDetection.IsMonoRuntime), nameof(PlatformDetection.IsMariner))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/57506",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMonoRuntime),
+        nameof(PlatformDetection.IsMariner)
+    )]
     [SkipOnPlatform(TestPlatforms.Android, "Android does not support AIA fetching")]
     [SkipOnPlatform(TestPlatforms.Browser, "Browser doesn't support X.509 certificates")]
     public static class AiaTests
@@ -24,7 +29,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 out X509Certificate2 endEntity,
                 intermediateAuthorityCount: 2,
                 pkiOptionsInSubject: false,
-                testName: nameof(EmptyAiaResponseIsIgnored));
+                testName: nameof(EmptyAiaResponseIsIgnored)
+            );
 
             using (responder)
             using (root)
@@ -35,19 +41,24 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             {
                 responder.RespondEmpty = true;
 
-                RetryHelper.Execute(() => {
+                RetryHelper.Execute(() =>
+                {
                     using (ChainHolder holder = new ChainHolder())
                     {
                         X509Chain chain = holder.Chain;
                         chain.ChainPolicy.ExtraStore.Add(intermediate2Cert);
                         chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
                         chain.ChainPolicy.VerificationTime = endEntity.NotBefore.AddMinutes(1);
-                        chain.ChainPolicy.UrlRetrievalTimeout = DynamicRevocationTests.s_urlRetrievalLimit;
+                        chain.ChainPolicy.UrlRetrievalTimeout =
+                            DynamicRevocationTests.s_urlRetrievalLimit;
                         chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
 
                         Assert.False(chain.Build(endEntity));
                         X509ChainStatusFlags chainFlags = chain.AllStatusFlags();
-                        Assert.True(chainFlags.HasFlag(X509ChainStatusFlags.PartialChain), $"expected partial chain flags, got {chainFlags}");
+                        Assert.True(
+                            chainFlags.HasFlag(X509ChainStatusFlags.PartialChain),
+                            $"expected partial chain flags, got {chainFlags}"
+                        );
                         Assert.Equal(2, chain.ChainElements.Count);
                     }
                 });
@@ -65,7 +76,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 out CertificateAuthority intermediate,
                 out X509Certificate2 endEntity,
                 pkiOptionsInSubject: false,
-                testName: nameof(DisableAiaOptionWorks));
+                testName: nameof(DisableAiaOptionWorks)
+            );
 
             using (responder)
             using (root)
@@ -74,9 +86,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             using (X509Certificate2 rootCert = root.CloneIssuerCert())
             using (X509Certificate2 intermediateCert = intermediate.CloneIssuerCert())
             {
-                RetryHelper.Execute(() => {
+                RetryHelper.Execute(() =>
+                {
                     using (ChainHolder holder = new ChainHolder())
-                    using (var cuCaStore = new X509Store(StoreName.CertificateAuthority, StoreLocation.CurrentUser))
+                    using (
+                        var cuCaStore = new X509Store(
+                            StoreName.CertificateAuthority,
+                            StoreLocation.CurrentUser
+                        )
+                    )
                     {
                         cuCaStore.Open(OpenFlags.ReadWrite);
 
@@ -93,9 +111,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                         chain.ChainPolicy.CustomTrustStore.Add(rootCert);
                         chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
                         chain.ChainPolicy.VerificationTime = endEntity.NotBefore.AddMinutes(1);
-                        chain.ChainPolicy.UrlRetrievalTimeout = DynamicRevocationTests.s_urlRetrievalLimit;
+                        chain.ChainPolicy.UrlRetrievalTimeout =
+                            DynamicRevocationTests.s_urlRetrievalLimit;
 
-                        Assert.False(chain.Build(endEntity), "Chain build with no intermediate, AIA disabled");
+                        Assert.False(
+                            chain.Build(endEntity),
+                            "Chain build with no intermediate, AIA disabled"
+                        );
 
                         // If a previous run of this test leaves contamination in the CU\CA store on Windows
                         // the Windows chain engine will match the bad issuer and report NotSignatureValid instead
@@ -119,22 +141,34 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                             holder.DisposeChainElements();
 
                             // Try again, with no caching side effect.
-                            Assert.False(chain.Build(endEntity), "Chain build 2 with no intermediate, AIA disabled");
+                            Assert.False(
+                                chain.Build(endEntity),
+                                "Chain build 2 with no intermediate, AIA disabled"
+                            );
                         }
 
                         Assert.Equal(1, chain.ChainElements.Count);
-                        Assert.Contains(X509ChainStatusFlags.PartialChain, chain.ChainStatus.Select(s => s.Status));
+                        Assert.Contains(
+                            X509ChainStatusFlags.PartialChain,
+                            chain.ChainStatus.Select(s => s.Status)
+                        );
                         holder.DisposeChainElements();
 
                         chain.ChainPolicy.ExtraStore.Add(intermediateCert);
-                        Assert.True(chain.Build(endEntity), "Chain build with intermediate, AIA disabled");
+                        Assert.True(
+                            chain.Build(endEntity),
+                            "Chain build with intermediate, AIA disabled"
+                        );
                         Assert.Equal(3, chain.ChainElements.Count);
                         Assert.Equal(X509ChainStatusFlags.NoError, chain.AllStatusFlags());
                         holder.DisposeChainElements();
 
                         chain.ChainPolicy.DisableCertificateDownloads = false;
                         chain.ChainPolicy.ExtraStore.Clear();
-                        Assert.True(chain.Build(endEntity), "Chain build with no intermediate, AIA enabled");
+                        Assert.True(
+                            chain.Build(endEntity),
+                            "Chain build with no intermediate, AIA enabled"
+                        );
                         Assert.Equal(3, chain.ChainElements.Count);
                         Assert.Equal(X509ChainStatusFlags.NoError, chain.AllStatusFlags());
 

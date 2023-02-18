@@ -4,15 +4,15 @@
 
 using System;
 
-public class Driver 
+public class Driver
 {
-    public static unsafe byte* Frob 
+    public static unsafe byte* Frob
     {
-        get { return (byte *) 0; }
+        get { return (byte*)0; }
     }
-  
-    public static void Main () 
+
+    public static void Main()
     {
-        IntPtr q = (IntPtr) Frob;
+        IntPtr q = (IntPtr)Frob;
     }
 }

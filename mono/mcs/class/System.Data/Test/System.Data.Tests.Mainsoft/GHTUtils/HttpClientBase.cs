@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,7 +32,6 @@ using System.Net;
 using GHTUtils;
 using GHTUtils.Base;
 
-
 namespace CHttpClient
 {
     /// <summary>
@@ -42,6 +41,7 @@ namespace CHttpClient
     {
         protected string _testingUrl = "";
         protected string _proxyAddress = "";
+
         public HttpClientBase()
         {
             _testingUrl = "http://localhost/httpapp/";
@@ -61,11 +61,12 @@ namespace CHttpClient
         {
             return HttpRequestStatusCode(CreateRequest(url));
         }
+
         protected HttpStatusCode HttpRequestStatusCode(HttpWebRequest _request)
         {
             System.Net.HttpWebResponse _response;
             _response = (HttpWebResponse)_request.GetResponse();
-            
+
             HttpStatusCode c = _response.StatusCode;
             _response.Close();
 
@@ -76,6 +77,7 @@ namespace CHttpClient
         {
             return HttpRequestString(CreateRequest(url));
         }
+
         protected string HttpRequestString(HttpWebRequest _request)
         {
             System.Net.HttpWebResponse _response;
@@ -101,17 +103,22 @@ namespace CHttpClient
 
         protected bool ValidateFile(string filename)
         {
-            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-            byte [] buffer = new byte[fs.Length];
+            FileStream fs = new FileStream(
+                filename,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
+            byte[] buffer = new byte[fs.Length];
             fs.Read(buffer, 0, buffer.Length);
             fs.Close();
 
             return ValidateData(buffer);
         }
 
-        protected bool ValidateData(byte [] sdata)
+        protected bool ValidateData(byte[] sdata)
         {
-            for (int i=0; i < sdata.Length; i++)
+            for (int i = 0; i < sdata.Length; i++)
             {
                 if (sdata[i] != (byte)(i % 256))
                     return false;
@@ -119,22 +126,23 @@ namespace CHttpClient
             return true;
         }
 
-        protected byte [] GenerateData(int size)
+        protected byte[] GenerateData(int size)
         {
-            byte [] sdata = new byte[size];
-            for (int i=0; i < sdata.Length; i++)
+            byte[] sdata = new byte[size];
+            for (int i = 0; i < sdata.Length; i++)
             {
                 sdata[i] = (byte)(i % 256);
             }
 
             return sdata;
         }
-        
+
         //===========================================================
         // Test case execution routines
         //===========================================================
 
         protected delegate bool TestCaseDelegate();
+
         protected void ExecuteTestCase(string name, TestCaseDelegate f)
         {
             Exception exp = null;
@@ -143,12 +151,18 @@ namespace CHttpClient
             try
             {
                 BeginCase(name);
-                Compare( f(), true );
-            } 
-            catch(Exception ex){exp = ex;}
-            finally{EndCase(exp); exp = null;}
+                Compare(f(), true);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
             //sub test end
         }
-
     }
 }

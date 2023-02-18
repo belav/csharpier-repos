@@ -10,14 +10,15 @@ namespace System.ServiceModel.Security.Tokens
     class ServiceX509SecurityTokenProvider : X509SecurityTokenProvider
     {
         public ServiceX509SecurityTokenProvider(X509Certificate2 certificate)
-            : base(certificate)
-        {
-        }
+            : base(certificate) { }
 
-        public ServiceX509SecurityTokenProvider(StoreLocation storeLocation, StoreName storeName, X509FindType findType, object findValue)
-            : base(storeLocation, storeName, findType, findValue)
-        {
-        }
+        public ServiceX509SecurityTokenProvider(
+            StoreLocation storeLocation,
+            StoreName storeName,
+            X509FindType findType,
+            object findValue
+        )
+            : base(storeLocation, storeName, findType, findValue) { }
 
         protected override SecurityToken GetTokenCore(TimeSpan timeout)
         {

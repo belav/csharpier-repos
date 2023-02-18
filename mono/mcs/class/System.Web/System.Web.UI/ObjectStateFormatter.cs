@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,345 +55,377 @@ namespace System.Web.UI
         Page page;
         MachineKeySection section;
 
-        public ObjectStateFormatter ()
-        {
-        }
-        
-        internal ObjectStateFormatter (Page page)
+        public ObjectStateFormatter() { }
+
+        internal ObjectStateFormatter(Page page)
         {
             this.page = page;
         }
 
-        bool EnableMac {
-            get {
-                return (page == null) ? (section != null) : page.EnableViewStateMac;
-            }
+        bool EnableMac
+        {
+            get { return (page == null) ? (section != null) : page.EnableViewStateMac; }
         }
 
-        bool NeedViewStateEncryption {
-            get {
-                return (page == null) ? false : page.NeedViewStateEncryption;
-            }
+        bool NeedViewStateEncryption
+        {
+            get { return (page == null) ? false : page.NeedViewStateEncryption; }
         }
 
-        internal MachineKeySection Section {
-            get {
+        internal MachineKeySection Section
+        {
+            get
+            {
                 if (section == null)
-                    section = (MachineKeySection) WebConfigurationManager.GetWebApplicationSection ("system.web/machineKey");
+                    section = (MachineKeySection)
+                        WebConfigurationManager.GetWebApplicationSection("system.web/machineKey");
                 return section;
             }
-            set {
-                section = value;
-            }
+            set { section = value; }
         }
 
         // There's no need to implement encryption support in this overload. Encryption is
         // performed only when ObjectStateFormatter is created in the Page context, and that
         // can happen only internally to System.Web. Since System.Web doesn't use this
         // overload, the encryption code in here would be effectively dead.
-        public object Deserialize (Stream inputStream)
+        public object Deserialize(Stream inputStream)
         {
             if (inputStream == null)
-                throw new ArgumentNullException ("inputStream");
+                throw new ArgumentNullException("inputStream");
 
-            BinaryReader reader = new BinaryReader (inputStream);
-            short magic = reader.ReadInt16 ();
+            BinaryReader reader = new BinaryReader(inputStream);
+            short magic = reader.ReadInt16();
             if (magic != SERIALIZED_STREAM_MAGIC)
-                throw new ArgumentException ("The serialized data is invalid");
+                throw new ArgumentException("The serialized data is invalid");
 
-            return DeserializeObject (reader);
+            return DeserializeObject(reader);
         }
-        
-        public object Deserialize (string inputString)
+
+        public object Deserialize(string inputString)
         {
             if (inputString == null)
-                throw new ArgumentNullException ("inputString");
+                throw new ArgumentNullException("inputString");
             if (inputString.Length == 0)
-                throw new ArgumentNullException ("inputString");
+                throw new ArgumentNullException("inputString");
 
-            byte [] data = Convert.FromBase64String (inputString);
+            byte[] data = Convert.FromBase64String(inputString);
             if (data == null || (data.Length) == 0)
-                throw new ArgumentNullException ("inputString");
+                throw new ArgumentNullException("inputString");
 
-            if (NeedViewStateEncryption) {
-                if (EnableMac) {
-                    data = MachineKeySectionUtils.VerifyDecrypt (Section, data);
-                } else {
-                    data = MachineKeySectionUtils.Decrypt (Section, data);
+            if (NeedViewStateEncryption)
+            {
+                if (EnableMac)
+                {
+                    data = MachineKeySectionUtils.VerifyDecrypt(Section, data);
                 }
-            } else if (EnableMac) {
-                data = MachineKeySectionUtils.Verify (Section, data);
+                else
+                {
+                    data = MachineKeySectionUtils.Decrypt(Section, data);
+                }
+            }
+            else if (EnableMac)
+            {
+                data = MachineKeySectionUtils.Verify(Section, data);
             }
 
             if (data == null)
-                throw new HttpException ("Unable to validate data.");
+                throw new HttpException("Unable to validate data.");
 
-            using (MemoryStream ms = new MemoryStream (data)) {
-                return Deserialize (ms);
+            using (MemoryStream ms = new MemoryStream(data))
+            {
+                return Deserialize(ms);
             }
         }
-        
-        public string Serialize (object stateGraph)
+
+        public string Serialize(object stateGraph)
         {
             if (stateGraph == null)
                 return String.Empty;
 
             byte[] data = null;
-            using (MemoryStream ms = new MemoryStream ()) {
-                Serialize (ms, stateGraph);
-                data = ms.GetBuffer ();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Serialize(ms, stateGraph);
+                data = ms.GetBuffer();
             }
 
-            if (NeedViewStateEncryption) {
-                if (EnableMac) {
-                    data = MachineKeySectionUtils.EncryptSign (Section, data);
-                } else {
-                    data = MachineKeySectionUtils.Encrypt (Section, data);
+            if (NeedViewStateEncryption)
+            {
+                if (EnableMac)
+                {
+                    data = MachineKeySectionUtils.EncryptSign(Section, data);
                 }
-            } else if (EnableMac) {
-                data = MachineKeySectionUtils.Sign (Section, data);
+                else
+                {
+                    data = MachineKeySectionUtils.Encrypt(Section, data);
+                }
             }
-            
-            return Convert.ToBase64String (data, 0, data.Length);
+            else if (EnableMac)
+            {
+                data = MachineKeySectionUtils.Sign(Section, data);
+            }
+
+            return Convert.ToBase64String(data, 0, data.Length);
         }
 
         // There's no need to implement encryption support in this overload. Encryption is
         // performed only when ObjectStateFormatter is created in the Page context, and that
         // can happen only internally to System.Web. Since System.Web doesn't use this
         // overload, the encryption code in here would be effectively dead.
-        public void Serialize (Stream outputStream, object stateGraph)
+        public void Serialize(Stream outputStream, object stateGraph)
         {
             if (outputStream == null)
-                throw new ArgumentNullException ("outputStream");
+                throw new ArgumentNullException("outputStream");
 
             if (stateGraph == null)
-                throw new ArgumentNullException ("stateGraph");
+                throw new ArgumentNullException("stateGraph");
 
-            BinaryWriter writer = new BinaryWriter (outputStream);
-            writer.Write (SERIALIZED_STREAM_MAGIC);
+            BinaryWriter writer = new BinaryWriter(outputStream);
+            writer.Write(SERIALIZED_STREAM_MAGIC);
 
-            SerializeValue (writer, stateGraph);
+            SerializeValue(writer, stateGraph);
         }
-        
-        void SerializeValue (BinaryWriter w, object o)
+
+        void SerializeValue(BinaryWriter w, object o)
         {
-            ObjectFormatter.WriteObject (w, o, new WriterContext ());
+            ObjectFormatter.WriteObject(w, o, new WriterContext());
         }
-        
-        object DeserializeObject (BinaryReader r)
+
+        object DeserializeObject(BinaryReader r)
         {
-            return ObjectFormatter.ReadObject (r, new ReaderContext ());
+            return ObjectFormatter.ReadObject(r, new ReaderContext());
         }
-        
-#region IFormatter
-        
-        object IFormatter.Deserialize (Stream serializationStream)
+
+        #region IFormatter
+
+        object IFormatter.Deserialize(Stream serializationStream)
         {
-            return Deserialize (serializationStream);
+            return Deserialize(serializationStream);
         }
-        
-        void IFormatter.Serialize (Stream serializationStream, object stateGraph)
+
+        void IFormatter.Serialize(Stream serializationStream, object stateGraph)
         {
-            Serialize (serializationStream, stateGraph);
+            Serialize(serializationStream, stateGraph);
         }
-        
-        SerializationBinder IFormatter.Binder {
+
+        SerializationBinder IFormatter.Binder
+        {
             get { return null; }
             set { }
         }
-        
-        StreamingContext IFormatter.Context {
-            get { return new StreamingContext (StreamingContextStates.All); }
+
+        StreamingContext IFormatter.Context
+        {
+            get { return new StreamingContext(StreamingContextStates.All); }
             set { }
         }
-        
-        ISurrogateSelector IFormatter.SurrogateSelector {
+
+        ISurrogateSelector IFormatter.SurrogateSelector
+        {
             get { return null; }
             set { }
         }
-        
-#endregion
 
-#region Object Readers/Writers
-        
+        #endregion
+
+        #region Object Readers/Writers
+
         sealed class WriterContext
         {
             Hashtable cache;
             short nextKey = 0;
             short key = 0;
 
-            public short Key {
+            public short Key
+            {
                 get { return key; }
             }
 
-            public bool RegisterCache (object o)
+            public bool RegisterCache(object o)
             {
                 if (nextKey == short.MaxValue)
                     return false;
 
-                if (cache == null) {
-                    cache = new Hashtable ();
-                    cache.Add (o, key = nextKey++);
+                if (cache == null)
+                {
+                    cache = new Hashtable();
+                    cache.Add(o, key = nextKey++);
                     return false;
                 }
-                
-                object posKey = cache [o];
-                if (posKey == null) {
-                    cache.Add (o, key = nextKey++);
+
+                object posKey = cache[o];
+                if (posKey == null)
+                {
+                    cache.Add(o, key = nextKey++);
                     return false;
                 }
-                
-                key = (short) posKey;
+
+                key = (short)posKey;
                 return true;
             }
         }
-        
+
         sealed class ReaderContext
         {
             ArrayList cache;
-            
-            public void CacheItem (object o)
+
+            public void CacheItem(object o)
             {
                 if (cache == null)
-                    cache = new ArrayList ();
-                
-                cache.Add (o);
+                    cache = new ArrayList();
+
+                cache.Add(o);
             }
-            
-            public object GetCache (short key)
+
+            public object GetCache(short key)
             {
-                return cache [key];
+                return cache[key];
             }
         }
-        
+
         abstract class ObjectFormatter
         {
-            static readonly Hashtable writeMap = new Hashtable ();
-            static ObjectFormatter [] readMap = new ObjectFormatter [256];
+            static readonly Hashtable writeMap = new Hashtable();
+            static ObjectFormatter[] readMap = new ObjectFormatter[256];
             static BinaryObjectFormatter binaryObjectFormatter;
             static TypeFormatter typeFormatter;
             static EnumFormatter enumFormatter;
             static SingleRankArrayFormatter singleRankArrayFormatter;
             static TypeConverterFormatter typeConverterFormatter;
-            
-            static ObjectFormatter ()
-            {            
-                new StringFormatter ().Register ();
-                new Int64Formatter ().Register ();
-                new Int32Formatter ().Register ();
-                new Int16Formatter ().Register ();
-                new ByteFormatter ().Register ();
-                new BooleanFormatter ().Register ();
-                new CharFormatter ().Register ();
-                new DateTimeFormatter ().Register ();
-                new PairFormatter ().Register ();
-                new TripletFormatter ().Register ();
-                new ArrayListFormatter ().Register ();
-                new HashtableFormatter ().Register ();
-                new ObjectArrayFormatter ().Register ();
-                new UnitFormatter ().Register ();
-                new FontUnitFormatter ().Register ();
-                new IndexedStringFormatter ().Register ();
-                new ColorFormatter ().Register ();
 
-                enumFormatter = new EnumFormatter ();
-                enumFormatter.Register ();
+            static ObjectFormatter()
+            {
+                new StringFormatter().Register();
+                new Int64Formatter().Register();
+                new Int32Formatter().Register();
+                new Int16Formatter().Register();
+                new ByteFormatter().Register();
+                new BooleanFormatter().Register();
+                new CharFormatter().Register();
+                new DateTimeFormatter().Register();
+                new PairFormatter().Register();
+                new TripletFormatter().Register();
+                new ArrayListFormatter().Register();
+                new HashtableFormatter().Register();
+                new ObjectArrayFormatter().Register();
+                new UnitFormatter().Register();
+                new FontUnitFormatter().Register();
+                new IndexedStringFormatter().Register();
+                new ColorFormatter().Register();
 
-                typeFormatter = new TypeFormatter ();
-                typeFormatter.Register ();
+                enumFormatter = new EnumFormatter();
+                enumFormatter.Register();
 
-                singleRankArrayFormatter = new SingleRankArrayFormatter ();
-                singleRankArrayFormatter.Register ();
+                typeFormatter = new TypeFormatter();
+                typeFormatter.Register();
 
-                typeConverterFormatter = new TypeConverterFormatter ();
-                typeConverterFormatter.Register ();
+                singleRankArrayFormatter = new SingleRankArrayFormatter();
+                singleRankArrayFormatter.Register();
 
-                binaryObjectFormatter = new BinaryObjectFormatter ();
-                binaryObjectFormatter.Register ();
+                typeConverterFormatter = new TypeConverterFormatter();
+                typeConverterFormatter.Register();
+
+                binaryObjectFormatter = new BinaryObjectFormatter();
+                binaryObjectFormatter.Register();
             }
-        
+
             // 0 == null
             static byte nextId = 1;
-            
-            public ObjectFormatter ()
+
+            public ObjectFormatter()
             {
-                PrimaryId = nextId ++;
+                PrimaryId = nextId++;
                 if (NumberOfIds == 1)
                     return;
-                
-                SecondaryId = nextId ++;
+
+                SecondaryId = nextId++;
                 if (NumberOfIds == 2)
                     return;
-                
-                TertiaryId = nextId ++;
+
+                TertiaryId = nextId++;
                 if (NumberOfIds == 3)
                     return;
-                
-                throw new Exception ();
+
+                throw new Exception();
             }
-            
-            protected readonly byte PrimaryId, SecondaryId = 255, TertiaryId = 255;
-            
-            protected abstract void Write (BinaryWriter w, object o, WriterContext ctx);
-            protected abstract object Read (byte token, BinaryReader r, ReaderContext ctx);
+
+            protected readonly byte PrimaryId,
+                SecondaryId = 255,
+                TertiaryId = 255;
+
+            protected abstract void Write(BinaryWriter w, object o, WriterContext ctx);
+            protected abstract object Read(byte token, BinaryReader r, ReaderContext ctx);
             protected abstract Type Type { get; }
-            protected virtual int NumberOfIds { get { return 1; } }
-            
-            public virtual void Register ()
+            protected virtual int NumberOfIds
             {
-                writeMap [Type] = this;
-                readMap [PrimaryId] = this;
-                if (SecondaryId != 255) {
-                    readMap [SecondaryId] = this;
+                get { return 1; }
+            }
+
+            public virtual void Register()
+            {
+                writeMap[Type] = this;
+                readMap[PrimaryId] = this;
+                if (SecondaryId != 255)
+                {
+                    readMap[SecondaryId] = this;
                     if (TertiaryId != 255)
-                        readMap [TertiaryId] = this;
+                        readMap[TertiaryId] = this;
                 }
             }
-            
-            public static void WriteObject (BinaryWriter w, object o, WriterContext ctx)
+
+            public static void WriteObject(BinaryWriter w, object o, WriterContext ctx)
             {
 #if TRACE
-                if (o != null) {
-                    Trace.WriteLine (String.Format ("Writing {0} (type: {1})", o, o.GetType ()));
-                    Trace.Indent ();
-                } else {
-                    Trace.WriteLine ("Writing null");
+                if (o != null)
+                {
+                    Trace.WriteLine(String.Format("Writing {0} (type: {1})", o, o.GetType()));
+                    Trace.Indent();
+                }
+                else
+                {
+                    Trace.WriteLine("Writing null");
                 }
                 long pos = w.BaseStream.Position;
 #endif
-                
-                if (o == null) {
-                    w.Write ((byte) 0);
+                if (o == null)
+                {
+                    w.Write((byte)0);
                     return;
                 }
-                
-                Type t = o.GetType ();
+
+                Type t = o.GetType();
 #if TRACE
-                Trace.WriteLine (String.Format ("Looking up formatter for type {0}", t));
+                Trace.WriteLine(String.Format("Looking up formatter for type {0}", t));
 #endif
 
-                ObjectFormatter fmt = writeMap [t] as ObjectFormatter;
+                ObjectFormatter fmt = writeMap[t] as ObjectFormatter;
 #if TRACE
-                Trace.WriteLine (String.Format ("Formatter from writeMap: '{0}'", fmt));
+                Trace.WriteLine(String.Format("Formatter from writeMap: '{0}'", fmt));
 #endif
-                if (fmt == null) {
+                if (fmt == null)
+                {
                     // Handle abstract types here
-                    
+
                     if (o is Type)
                         fmt = typeFormatter;
                     else if (t.IsEnum)
                         fmt = enumFormatter;
-                    else if (t.IsArray && ((Array) o).Rank == 1)
+                    else if (t.IsArray && ((Array)o).Rank == 1)
                         fmt = singleRankArrayFormatter;
-                    else {
+                    else
+                    {
                         TypeConverter converter;
-                        converter = TypeDescriptor.GetConverter (o);
+                        converter = TypeDescriptor.GetConverter(o);
 #if TRACE
-                        Trace.WriteLine (String.Format ("Type converter: '{0}' (to string: {1}; from {2}: {3})",
-                                        converter,
-                                        converter != null ? converter.CanConvertTo (typeof (string)) : false,
-                                        t,
-                                        converter != null ? converter.CanConvertFrom (t) : false));
+                        Trace.WriteLine(
+                            String.Format(
+                                "Type converter: '{0}' (to string: {1}; from {2}: {3})",
+                                converter,
+                                converter != null ? converter.CanConvertTo(typeof(string)) : false,
+                                t,
+                                converter != null ? converter.CanConvertFrom(t) : false
+                            )
+                        );
 #endif
                         // Do not use the converter if it's an instance of
                         // TypeConverter itself - it reports it is able to
@@ -401,10 +433,15 @@ namespace System.Web.UI
                         // consisting of a call to ToString() with no
                         // reverse conversion supported. This leads to
                         // problems when deserializing the object.
-                        if (converter == null || converter.GetType () == typeof (TypeConverter) ||
-                            !converter.CanConvertTo (typeof (string)) || !converter.CanConvertFrom (typeof (string)))
+                        if (
+                            converter == null
+                            || converter.GetType() == typeof(TypeConverter)
+                            || !converter.CanConvertTo(typeof(string))
+                            || !converter.CanConvertFrom(typeof(string))
+                        )
                             fmt = binaryObjectFormatter;
-                        else {
+                        else
+                        {
                             typeConverterFormatter.Converter = converter;
                             fmt = typeConverterFormatter;
                         }
@@ -412,582 +449,642 @@ namespace System.Web.UI
                 }
 
 #if TRACE
-                Trace.WriteLine (String.Format ("Writing with formatter '{0}'", fmt.GetType ()));
+                Trace.WriteLine(String.Format("Writing with formatter '{0}'", fmt.GetType()));
 #endif
-                fmt.Write (w, o, ctx);
+                fmt.Write(w, o, ctx);
 #if TRACE
-                Trace.Unindent ();
-                Trace.WriteLine (String.Format ("Wrote {0} (type: {1}) {2} bytes", o, o.GetType (), w.BaseStream.Position - pos));
+                Trace.Unindent();
+                Trace.WriteLine(
+                    String.Format(
+                        "Wrote {0} (type: {1}) {2} bytes",
+                        o,
+                        o.GetType(),
+                        w.BaseStream.Position - pos
+                    )
+                );
 #endif
             }
-            
-            public static object ReadObject (BinaryReader r, ReaderContext ctx)
+
+            public static object ReadObject(BinaryReader r, ReaderContext ctx)
             {
-                byte sig = r.ReadByte ();
-                
+                byte sig = r.ReadByte();
+
                 if (sig == 0)
                     return null;
-                
-                return readMap [sig].Read (sig, r, ctx);
+
+                return readMap[sig].Read(sig, r, ctx);
             }
-            
-            protected void Write7BitEncodedInt (BinaryWriter w, int value)
+
+            protected void Write7BitEncodedInt(BinaryWriter w, int value)
             {
-                do {
+                do
+                {
                     int high = (value >> 7) & 0x01ffffff;
                     byte b = (byte)(value & 0x7f);
-    
+
                     if (high != 0)
                         b = (byte)(b | 0x80);
-    
+
                     w.Write(b);
                     value = high;
-                } while(value != 0);
+                } while (value != 0);
             }
-            
-            protected int Read7BitEncodedInt (BinaryReader r)
+
+            protected int Read7BitEncodedInt(BinaryReader r)
             {
                 int ret = 0;
                 int shift = 0;
                 byte b;
-    
-                do {
+
+                do
+                {
                     b = r.ReadByte();
-                    
+
                     ret = ret | ((b & 0x7f) << shift);
                     shift += 7;
                 } while ((b & 0x80) == 0x80);
-    
+
                 return ret;
             }
         }
-        
-#region Primitive Formatters
+
+        #region Primitive Formatters
         class StringFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                if (ctx.RegisterCache (o)) {
-                    w.Write (SecondaryId);
-                    w.Write (ctx.Key);
-                } else {
-                    w.Write (PrimaryId);
-                    w.Write ((string)o);
+                if (ctx.RegisterCache(o))
+                {
+                    w.Write(SecondaryId);
+                    w.Write(ctx.Key);
+                }
+                else
+                {
+                    w.Write(PrimaryId);
+                    w.Write((string)o);
                 }
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                if (token == PrimaryId) {
-                    string s = r.ReadString ();
-                    ctx.CacheItem (s);
+                if (token == PrimaryId)
+                {
+                    string s = r.ReadString();
+                    ctx.CacheItem(s);
                     return s;
-                } else {
-                    return ctx.GetCache (r.ReadInt16 ());
+                }
+                else
+                {
+                    return ctx.GetCache(r.ReadInt16());
                 }
             }
-            protected override Type Type {
-                get { return typeof (string); }
+
+            protected override Type Type
+            {
+                get { return typeof(string); }
             }
-            
-            protected override int NumberOfIds {
+
+            protected override int NumberOfIds
+            {
                 get { return 2; }
             }
         }
 
         class IndexedStringFormatter : StringFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
                 IndexedString s = o as IndexedString;
 
                 if (s == null)
-                    throw new InvalidOperationException ("object is not of the IndexedString type");
-                
-                base.Write (w, s.Value, ctx);
+                    throw new InvalidOperationException("object is not of the IndexedString type");
+
+                base.Write(w, s.Value, ctx);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                string s = base.Read (token, r, ctx) as string;
-                if (String.IsNullOrEmpty (s))
-                    throw new InvalidOperationException ("string must not be null or empty.");
-                
-                return new IndexedString (s);
+                string s = base.Read(token, r, ctx) as string;
+                if (String.IsNullOrEmpty(s))
+                    throw new InvalidOperationException("string must not be null or empty.");
+
+                return new IndexedString(s);
             }
-            
-            protected override Type Type {
-                get { return typeof (IndexedString); }
+
+            protected override Type Type
+            {
+                get { return typeof(IndexedString); }
             }
-            
-            protected override int NumberOfIds {
+
+            protected override int NumberOfIds
+            {
                 get { return 2; }
             }
         }
-        
+
         class Int64Formatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                w.Write (PrimaryId);
-                w.Write ((long)o);
+                w.Write(PrimaryId);
+                w.Write((long)o);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                return r.ReadInt64 ();
+                return r.ReadInt64();
             }
-            protected override Type Type {
-                get { return typeof (long); }
+
+            protected override Type Type
+            {
+                get { return typeof(long); }
             }
         }
-        
+
         class Int32Formatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                int i = (int) o;
-                if ((int)(byte) i == i) {
-                    w.Write (SecondaryId);
-                    w.Write ((byte) i);
-                } else {
-                    w.Write (PrimaryId);
-                    w.Write (i);
+                int i = (int)o;
+                if ((int)(byte)i == i)
+                {
+                    w.Write(SecondaryId);
+                    w.Write((byte)i);
+                }
+                else
+                {
+                    w.Write(PrimaryId);
+                    w.Write(i);
                 }
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
                 if (token == PrimaryId)
-                    return r.ReadInt32 ();
+                    return r.ReadInt32();
                 else
-                    return (int) r.ReadByte ();
+                    return (int)r.ReadByte();
             }
-            
-            protected override Type Type {
-                get { return typeof (int); }
+
+            protected override Type Type
+            {
+                get { return typeof(int); }
             }
-            
-            protected override int NumberOfIds {
+
+            protected override int NumberOfIds
+            {
                 get { return 2; }
             }
         }
-        
+
         class Int16Formatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                w.Write (PrimaryId);
-                w.Write ((short)o);
-            }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
-            {
-                return r.ReadInt16 ();
+                w.Write(PrimaryId);
+                w.Write((short)o);
             }
 
-            protected override Type Type {
-                get { return typeof (short); }
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
+            {
+                return r.ReadInt16();
+            }
+
+            protected override Type Type
+            {
+                get { return typeof(short); }
             }
         }
-        
+
         class ByteFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                w.Write (PrimaryId);
-                w.Write ((byte)o);
-            }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
-            {
-                return r.ReadByte ();
+                w.Write(PrimaryId);
+                w.Write((byte)o);
             }
 
-            protected override Type Type {
-                get { return typeof (byte); }
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
+            {
+                return r.ReadByte();
+            }
+
+            protected override Type Type
+            {
+                get { return typeof(byte); }
             }
         }
-        
+
         class BooleanFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
                 if ((bool)o == true)
-                    w.Write (PrimaryId);
+                    w.Write(PrimaryId);
                 else
-                    w.Write (SecondaryId);
+                    w.Write(SecondaryId);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
                 return token == PrimaryId;
             }
-            
-            protected override Type Type {
-                get { return typeof (bool); }
+
+            protected override Type Type
+            {
+                get { return typeof(bool); }
             }
-            
-            protected override int NumberOfIds {
+
+            protected override int NumberOfIds
+            {
                 get { return 2; }
             }
         }
-        
+
         class CharFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                w.Write (PrimaryId);
-                w.Write ((char) o);
+                w.Write(PrimaryId);
+                w.Write((char)o);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                return r.ReadChar ();
+                return r.ReadChar();
             }
-            
-            protected override Type Type {
-                get { return typeof (char); }
+
+            protected override Type Type
+            {
+                get { return typeof(char); }
             }
         }
-        
+
         class DateTimeFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                w.Write (PrimaryId);
-                w.Write (((DateTime) o).Ticks);
+                w.Write(PrimaryId);
+                w.Write(((DateTime)o).Ticks);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                return new DateTime (r.ReadInt64 ());
+                return new DateTime(r.ReadInt64());
             }
-            
-            protected override Type Type {
-                get { return typeof (DateTime); }
+
+            protected override Type Type
+            {
+                get { return typeof(DateTime); }
             }
         }
-        
+
         class PairFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                Pair p = (Pair) o;
-                w.Write (PrimaryId);
-                WriteObject (w, p.First, ctx);
-                WriteObject (w, p.Second, ctx);
+                Pair p = (Pair)o;
+                w.Write(PrimaryId);
+                WriteObject(w, p.First, ctx);
+                WriteObject(w, p.Second, ctx);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                Pair p = new Pair ();
-                p.First = ReadObject (r, ctx);
-                p.Second = ReadObject (r, ctx);
+                Pair p = new Pair();
+                p.First = ReadObject(r, ctx);
+                p.Second = ReadObject(r, ctx);
                 return p;
             }
-            
-            protected override Type Type {
-                get { return typeof (Pair); }
+
+            protected override Type Type
+            {
+                get { return typeof(Pair); }
             }
         }
-        
+
         class TripletFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                Triplet t = (Triplet) o;
-                w.Write (PrimaryId);
-                WriteObject (w, t.First, ctx);
-                WriteObject (w, t.Second, ctx);
-                WriteObject (w, t.Third, ctx);
+                Triplet t = (Triplet)o;
+                w.Write(PrimaryId);
+                WriteObject(w, t.First, ctx);
+                WriteObject(w, t.Second, ctx);
+                WriteObject(w, t.Third, ctx);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                Triplet t = new Triplet ();
-                t.First = ReadObject (r, ctx);
-                t.Second = ReadObject (r, ctx);
-                t.Third = ReadObject (r, ctx);
+                Triplet t = new Triplet();
+                t.First = ReadObject(r, ctx);
+                t.Second = ReadObject(r, ctx);
+                t.Third = ReadObject(r, ctx);
                 return t;
             }
-            
-            protected override Type Type {
-                get { return typeof (Triplet); }
+
+            protected override Type Type
+            {
+                get { return typeof(Triplet); }
             }
         }
-        
+
         class ArrayListFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                ArrayList l = (ArrayList) o;
-                
-                w.Write (PrimaryId);
-                Write7BitEncodedInt (w, l.Count);
+                ArrayList l = (ArrayList)o;
+
+                w.Write(PrimaryId);
+                Write7BitEncodedInt(w, l.Count);
                 for (int i = 0; i < l.Count; i++)
-                    WriteObject (w, l [i], ctx);
+                    WriteObject(w, l[i], ctx);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                int len = Read7BitEncodedInt (r);
-                ArrayList l = new ArrayList (len);
-                
+                int len = Read7BitEncodedInt(r);
+                ArrayList l = new ArrayList(len);
+
                 for (int i = 0; i < len; i++)
-                    l.Add (ReadObject (r, ctx));
-                
+                    l.Add(ReadObject(r, ctx));
+
                 return l;
             }
-            
-            protected override Type Type {
-                get { return typeof (ArrayList); }
+
+            protected override Type Type
+            {
+                get { return typeof(ArrayList); }
             }
         }
-        
+
         class HashtableFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                Hashtable ht = (Hashtable) o;
-                
-                w.Write (PrimaryId);
-                Write7BitEncodedInt (w, ht.Count);
-                foreach (DictionaryEntry de in ht) {
-                    WriteObject (w, de.Key, ctx);
-                    WriteObject (w, de.Value, ctx);
+                Hashtable ht = (Hashtable)o;
+
+                w.Write(PrimaryId);
+                Write7BitEncodedInt(w, ht.Count);
+                foreach (DictionaryEntry de in ht)
+                {
+                    WriteObject(w, de.Key, ctx);
+                    WriteObject(w, de.Value, ctx);
                 }
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                int len = Read7BitEncodedInt (r);
-                Hashtable ht = new Hashtable (len);
-                
-                for (int i = 0; i < len; i++) {
-                    object key = ReadObject (r, ctx);
-                    object val = ReadObject (r, ctx);
-                    
-                    ht.Add (key, val);
+                int len = Read7BitEncodedInt(r);
+                Hashtable ht = new Hashtable(len);
+
+                for (int i = 0; i < len; i++)
+                {
+                    object key = ReadObject(r, ctx);
+                    object val = ReadObject(r, ctx);
+
+                    ht.Add(key, val);
                 }
-                
+
                 return ht;
             }
-            
-            protected override Type Type {
-                get { return typeof (Hashtable); }
+
+            protected override Type Type
+            {
+                get { return typeof(Hashtable); }
             }
         }
-        
+
         class ObjectArrayFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                object [] val = (object []) o;
-                
-                w.Write (PrimaryId);
-                Write7BitEncodedInt (w, val.Length);
+                object[] val = (object[])o;
+
+                w.Write(PrimaryId);
+                Write7BitEncodedInt(w, val.Length);
                 for (int i = 0; i < val.Length; i++)
-                    WriteObject (w, val [i], ctx);
+                    WriteObject(w, val[i], ctx);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                int len = Read7BitEncodedInt (r);
-                object [] ret = new object [len];
-                
+                int len = Read7BitEncodedInt(r);
+                object[] ret = new object[len];
+
                 for (int i = 0; i < len; i++)
-                    ret [i] = ReadObject (r, ctx);
-                
+                    ret[i] = ReadObject(r, ctx);
+
                 return ret;
             }
-            
-            protected override Type Type {
-                get { return typeof (object []); }
+
+            protected override Type Type
+            {
+                get { return typeof(object[]); }
             }
         }
-        
-#endregion
-        
-#region System.Web Optimizations
+
+        #endregion
+
+        #region System.Web Optimizations
         class ColorFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                Color c = (Color) o;
-                
-                if (c.IsEmpty || c.IsKnownColor) {
-                    w.Write (SecondaryId);
+                Color c = (Color)o;
+
+                if (c.IsEmpty || c.IsKnownColor)
+                {
+                    w.Write(SecondaryId);
                     if (c.IsEmpty)
-                        w.Write (-1); //isempty marker
+                        w.Write(-1); //isempty marker
                     else
-                        w.Write ((int) c.ToKnownColor ());
-                } else {
-                    w.Write (PrimaryId);
-                    w.Write (c.ToArgb ());
+                        w.Write((int)c.ToKnownColor());
+                }
+                else
+                {
+                    w.Write(PrimaryId);
+                    w.Write(c.ToArgb());
                 }
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                int value = r.ReadInt32 ();
+                int value = r.ReadInt32();
                 if (token == PrimaryId)
-                    return Color.FromArgb (value);
-                else {
+                    return Color.FromArgb(value);
+                else
+                {
                     if (value == -1) //isempty marker
                         return Color.Empty;
-                    return Color.FromKnownColor ((KnownColor)value);
+                    return Color.FromKnownColor((KnownColor)value);
                 }
             }
-            
-            protected override Type Type {
-                get { return typeof (Color); }
+
+            protected override Type Type
+            {
+                get { return typeof(Color); }
             }
-            
-            protected override int NumberOfIds {
+
+            protected override int NumberOfIds
+            {
                 get { return 2; }
             }
         }
-        
-#endregion
-        
-#region Special Formatters
+
+        #endregion
+
+        #region Special Formatters
         class EnumFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                object value = Convert.ChangeType (o, ((Enum) o).GetTypeCode ());
-                w.Write (PrimaryId);
-                WriteObject (w, o.GetType (), ctx);
-                WriteObject (w, value, ctx);
-            }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
-            {
-                Type t = (Type) ReadObject (r, ctx);
-                object value = ReadObject (r, ctx);
-                
-                return Enum.ToObject (t, value);
+                object value = Convert.ChangeType(o, ((Enum)o).GetTypeCode());
+                w.Write(PrimaryId);
+                WriteObject(w, o.GetType(), ctx);
+                WriteObject(w, value, ctx);
             }
 
-            protected override Type Type {
-                get { return typeof (Enum); }
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
+            {
+                Type t = (Type)ReadObject(r, ctx);
+                object value = ReadObject(r, ctx);
+
+                return Enum.ToObject(t, value);
+            }
+
+            protected override Type Type
+            {
+                get { return typeof(Enum); }
             }
         }
-        
+
         class TypeFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                if (ctx.RegisterCache (o)) {
-                    w.Write (SecondaryId);
-                    w.Write (ctx.Key);
-                } else {
-                    w.Write (PrimaryId);
-                    w.Write (((Type) o).FullName);
+                if (ctx.RegisterCache(o))
+                {
+                    w.Write(SecondaryId);
+                    w.Write(ctx.Key);
+                }
+                else
+                {
+                    w.Write(PrimaryId);
+                    w.Write(((Type)o).FullName);
 
                     // We should cache the name of the assembly
-                    w.Write (((Type) o).Assembly.FullName);
+                    w.Write(((Type)o).Assembly.FullName);
                 }
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                if (token == PrimaryId) {
-                    string type = r.ReadString ();
-                    string assembly = r.ReadString ();
-                    Type t = Assembly.Load (assembly).GetType (type);
-                    ctx.CacheItem (t);
+                if (token == PrimaryId)
+                {
+                    string type = r.ReadString();
+                    string assembly = r.ReadString();
+                    Type t = Assembly.Load(assembly).GetType(type);
+                    ctx.CacheItem(t);
                     return t;
-                } else {
-                    return ctx.GetCache (r.ReadInt16 ());
+                }
+                else
+                {
+                    return ctx.GetCache(r.ReadInt16());
                 }
             }
-            
-            protected override Type Type {
-                get { return typeof (Type); }
+
+            protected override Type Type
+            {
+                get { return typeof(Type); }
             }
-            
-            protected override int NumberOfIds {
+
+            protected override int NumberOfIds
+            {
                 get { return 2; }
             }
         }
-        
+
         class SingleRankArrayFormatter : ObjectFormatter
         {
-            readonly BinaryFormatter _binaryFormatter = new BinaryFormatter ();
+            readonly BinaryFormatter _binaryFormatter = new BinaryFormatter();
 
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                Array val = (Array) o;
-                if (val.GetType ().GetElementType ().IsPrimitive) {
-                    w.Write (SecondaryId);
-                    _binaryFormatter.Serialize (w.BaseStream, o);
+                Array val = (Array)o;
+                if (val.GetType().GetElementType().IsPrimitive)
+                {
+                    w.Write(SecondaryId);
+                    _binaryFormatter.Serialize(w.BaseStream, o);
                     return;
                 }
-                
-                w.Write (PrimaryId);
-                WriteObject (w, val.GetType ().GetElementType (), ctx);
-                
-                Write7BitEncodedInt (w, val.Length);
+
+                w.Write(PrimaryId);
+                WriteObject(w, val.GetType().GetElementType(), ctx);
+
+                Write7BitEncodedInt(w, val.Length);
                 for (int i = 0; i < val.Length; i++)
-                    WriteObject (w, val.GetValue (i), ctx);
-            }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
-            {
-                if (token == SecondaryId)
-                    return _binaryFormatter.Deserialize (r.BaseStream);
-                Type t = (Type) ReadObject (r, ctx);
-                int len = Read7BitEncodedInt (r);
-                Array val = Array.CreateInstance (t, len);
-                
-                for (int i = 0; i < len; i++)
-                    val.SetValue (ReadObject (r, ctx), i);
-                
-                return val;
-            }
-            
-            protected override Type Type {
-                get { return typeof (Array); }
+                    WriteObject(w, val.GetValue(i), ctx);
             }
 
-            protected override int NumberOfIds {
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
+            {
+                if (token == SecondaryId)
+                    return _binaryFormatter.Deserialize(r.BaseStream);
+                Type t = (Type)ReadObject(r, ctx);
+                int len = Read7BitEncodedInt(r);
+                Array val = Array.CreateInstance(t, len);
+
+                for (int i = 0; i < len; i++)
+                    val.SetValue(ReadObject(r, ctx), i);
+
+                return val;
+            }
+
+            protected override Type Type
+            {
+                get { return typeof(Array); }
+            }
+
+            protected override int NumberOfIds
+            {
                 get { return 2; }
             }
         }
-        
+
         class FontUnitFormatter : StringFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                base.Write (w, o.ToString (), ctx);
+                base.Write(w, o.ToString(), ctx);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                return FontUnit.Parse ((string) base.Read (token, r, ctx));
+                return FontUnit.Parse((string)base.Read(token, r, ctx));
             }
-            
-            protected override Type Type {
-                get { return typeof (FontUnit); }
+
+            protected override Type Type
+            {
+                get { return typeof(FontUnit); }
             }
         }
 
         class UnitFormatter : StringFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                base.Write (w, o.ToString (), ctx);
+                base.Write(w, o.ToString(), ctx);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                return Unit.Parse ((string) base.Read (token, r, ctx));
+                return Unit.Parse((string)base.Read(token, r, ctx));
             }
-            
-            protected override Type Type {
-                get { return typeof (Unit); }
+
+            protected override Type Type
+            {
+                get { return typeof(Unit); }
             }
         }
 
@@ -995,64 +1092,67 @@ namespace System.Web.UI
         {
             TypeConverter converter;
 
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                w.Write (PrimaryId);
-                ObjectFormatter.WriteObject (w, o.GetType (), ctx);
-                string v = (string) converter.ConvertTo (null, Helpers.InvariantCulture,
-                                     o, typeof (string));
-                base.Write (w, v, ctx);
-            }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
-            {
-                Type t = (Type) ObjectFormatter.ReadObject (r, ctx);
-                converter = TypeDescriptor.GetConverter (t);
-                token = r.ReadByte ();
-                string v = (string) base.Read (token, r, ctx);
-                return converter.ConvertFrom (null, Helpers.InvariantCulture, v);
-            }
-            
-            protected override Type Type {
-                get { return typeof (TypeConverter); }
+                w.Write(PrimaryId);
+                ObjectFormatter.WriteObject(w, o.GetType(), ctx);
+                string v = (string)
+                    converter.ConvertTo(null, Helpers.InvariantCulture, o, typeof(string));
+                base.Write(w, v, ctx);
             }
 
-            public TypeConverter Converter {
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
+            {
+                Type t = (Type)ObjectFormatter.ReadObject(r, ctx);
+                converter = TypeDescriptor.GetConverter(t);
+                token = r.ReadByte();
+                string v = (string)base.Read(token, r, ctx);
+                return converter.ConvertFrom(null, Helpers.InvariantCulture, v);
+            }
+
+            protected override Type Type
+            {
+                get { return typeof(TypeConverter); }
+            }
+
+            public TypeConverter Converter
+            {
                 set { converter = value; }
             }
         }
 
         class BinaryObjectFormatter : ObjectFormatter
         {
-            protected override void Write (BinaryWriter w, object o, WriterContext ctx)
+            protected override void Write(BinaryWriter w, object o, WriterContext ctx)
             {
-                w.Write (PrimaryId);
-                
-                MemoryStream ms = new MemoryStream (128);
-                new BinaryFormatter ().Serialize (ms, o);
-                
-                byte [] buf = ms.GetBuffer ();
-                Write7BitEncodedInt (w, buf.Length);
-                w.Write (buf, 0, buf.Length);
+                w.Write(PrimaryId);
+
+                MemoryStream ms = new MemoryStream(128);
+                new BinaryFormatter().Serialize(ms, o);
+
+                byte[] buf = ms.GetBuffer();
+                Write7BitEncodedInt(w, buf.Length);
+                w.Write(buf, 0, buf.Length);
             }
-            
-            protected override object Read (byte token, BinaryReader r, ReaderContext ctx)
+
+            protected override object Read(byte token, BinaryReader r, ReaderContext ctx)
             {
-                int len = Read7BitEncodedInt (r);
-                byte [] buf = r.ReadBytes (len);
+                int len = Read7BitEncodedInt(r);
+                byte[] buf = r.ReadBytes(len);
                 if (buf.Length != len)
-                    throw new Exception ();
-                
-                return new BinaryFormatter ().Deserialize (new MemoryStream (buf));
+                    throw new Exception();
+
+                return new BinaryFormatter().Deserialize(new MemoryStream(buf));
             }
-            
-            protected override Type Type {
-                get { return typeof (object); }
+
+            protected override Type Type
+            {
+                get { return typeof(object); }
             }
         }
-        
-#endregion
-        
-#endregion
+
+        #endregion
+
+        #endregion
     }
 }

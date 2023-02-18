@@ -22,14 +22,10 @@ public class Program
         // Consoler logger has a major impact on perf results, so do not use
         // default builder.
 
-        var hostBuilder = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseTestServer()
-                        .UseConfiguration(config);
-                });
+        var hostBuilder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder.UseKestrel().UseTestServer().UseConfiguration(config);
+        });
 
         var scenario = config["scenarios"]?.ToLowerInvariant();
         if (scenario == "plaintextdispatcher" || scenario == "plaintextendpointrouting")
@@ -55,7 +51,8 @@ public class Program
         else
         {
             throw new InvalidOperationException(
-                $"Invalid scenario '{scenario}'. Allowed scenarios are PlaintextEndpointRouting and PlaintextRouter");
+                $"Invalid scenario '{scenario}'. Allowed scenarios are PlaintextEndpointRouting and PlaintextRouter"
+            );
         }
 
         return hostBuilder;

@@ -23,10 +23,11 @@
 //    Jackson Harper (jackson@ximian.com)
 
 
-namespace System.Windows.Forms {
-
+namespace System.Windows.Forms
+{
     [Flags]
-    public enum DrawItemState {
+    public enum DrawItemState
+    {
         None = 0,
         Selected = 1,
         Grayed = 2,
@@ -41,4 +42,3 @@ namespace System.Windows.Forms {
         ComboBoxEdit = 4096
     }
 }
-

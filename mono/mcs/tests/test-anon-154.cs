@@ -2,39 +2,43 @@ using System;
 
 public class Class
 {
-    string Property { get { return " Property"; } }
+    string Property
+    {
+        get { return " Property"; }
+    }
 
-    string Method ()
+    string Method()
     {
         string methodVariable = "method variable";
 
-        Func<string> outerAction = () => {
+        Func<string> outerAction = () =>
+        {
             // If methodVariable is not accessed here, the compiler does not crash
             string unused = methodVariable;
 
             string innerVariable = "inner variable";
 
-            Func<string, string> middleAction = lambdaParameter => {
+            Func<string, string> middleAction = lambdaParameter =>
+            {
                 // If any of the variables referenced are removed, the compiler does not crash.
                 Func<string> innerFunc = () => lambdaParameter + innerVariable + Property;
-                return innerFunc ();
+                return innerFunc();
             };
 
-            return middleAction ("> ");
+            return middleAction("> ");
         };
 
-        return outerAction ();
+        return outerAction();
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        Class c = new Class ();
-        string s = c.Method ();
-        Console.WriteLine (s);
+        Class c = new Class();
+        string s = c.Method();
+        Console.WriteLine(s);
         if (s != "> inner variable Property")
             return 1;
 
         return 0;
     }
 }
-

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,7 +37,8 @@ using NUnit.Framework;
 using System.ComponentModel.Design;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace MonoTests.System.Resources {
+namespace MonoTests.System.Resources
+{
     [TestFixture]
     public class ResXDataNodeTest : ResourcesTestHelper
     {
@@ -45,349 +46,362 @@ namespace MonoTests.System.Resources {
         string _otherTempDirectory;
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorEx1 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorEx1()
         {
-            ResXDataNode d = new ResXDataNode (null, (object)null);
+            ResXDataNode d = new ResXDataNode(null, (object)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorEx2A ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorEx2A()
         {
-            ResXDataNode d = new ResXDataNode (null, new ResXFileRef ("filename", "typename"));
+            ResXDataNode d = new ResXDataNode(null, new ResXFileRef("filename", "typename"));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorEx2B ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorEx2B()
         {
-            ResXDataNode d = new ResXDataNode ("aname", (ResXFileRef) null);
+            ResXDataNode d = new ResXDataNode("aname", (ResXFileRef)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ConstructorEx3 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorEx3()
         {
-            ResXDataNode d = new ResXDataNode ("", (object) null);
+            ResXDataNode d = new ResXDataNode("", (object)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorEx4 ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorEx4()
         {
-            ResXDataNode d = new ResXDataNode ("", (ResXFileRef) null);
+            ResXDataNode d = new ResXDataNode("", (ResXFileRef)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ConstructorEx5 ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorEx5()
         {
-            ResXDataNode d = new ResXDataNode ("", new ResXFileRef ("filename", "typename"));
+            ResXDataNode d = new ResXDataNode("", new ResXFileRef("filename", "typename"));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorEx6 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorEx6()
         {
-            ResXDataNode d = new ResXDataNode ("name", new notserializable ());
+            ResXDataNode d = new ResXDataNode("name", new notserializable());
         }
 
         [Test]
-        public void Name ()
+        public void Name()
         {
-            ResXDataNode node = new ResXDataNode ("startname", (object) null);
-            Assert.AreEqual ("startname", node.Name, "#A1");
+            ResXDataNode node = new ResXDataNode("startname", (object)null);
+            Assert.AreEqual("startname", node.Name, "#A1");
             node.Name = "newname";
-            Assert.AreEqual ("newname", node.Name, "#A2");
+            Assert.AreEqual("newname", node.Name, "#A2");
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void NameCantBeNull ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void NameCantBeNull()
         {
-            ResXDataNode node = new ResXDataNode ("startname", (object) null);
+            ResXDataNode node = new ResXDataNode("startname", (object)null);
             node.Name = null;
         }
-    
-        [Test, ExpectedException (typeof (ArgumentException))]
-        public void NameCantBeEmpty ()
+
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void NameCantBeEmpty()
         {
-            ResXDataNode node = new ResXDataNode ("name", (object) null);
+            ResXDataNode node = new ResXDataNode("name", (object)null);
             node.Name = "";
         }
 
         [Test]
-        public void FileRef ()
+        public void FileRef()
         {
-            ResXFileRef fileRef = new ResXFileRef ("fileName", "Type.Name");
-            ResXDataNode node = new ResXDataNode ("name", fileRef);
-            Assert.AreEqual (fileRef, node.FileRef, "#A1");
+            ResXFileRef fileRef = new ResXFileRef("fileName", "Type.Name");
+            ResXDataNode node = new ResXDataNode("name", fileRef);
+            Assert.AreEqual(fileRef, node.FileRef, "#A1");
         }
 
         [Test]
-        public void Comment ()
+        public void Comment()
         {
-            ResXDataNode node = new ResXDataNode ("name", (object) null);
+            ResXDataNode node = new ResXDataNode("name", (object)null);
             node.Comment = "acomment";
-            Assert.AreEqual ("acomment", node.Comment, "#A1");
+            Assert.AreEqual("acomment", node.Comment, "#A1");
         }
 
         [Test]
-        public void CommentNullToStringEmpty ()
+        public void CommentNullToStringEmpty()
         {
-            ResXDataNode node = new ResXDataNode ("name", (object) null);
+            ResXDataNode node = new ResXDataNode("name", (object)null);
             node.Comment = null;
-            Assert.AreEqual (String.Empty, node.Comment, "#A1");
+            Assert.AreEqual(String.Empty, node.Comment, "#A1");
         }
 
         [Test]
-        public void WriteRead1 ()
+        public void WriteRead1()
         {
-            serializable ser = new serializable ("aaaaa", "bbbbb");
-            ResXDataNode dn = new ResXDataNode ("test", ser);
+            serializable ser = new serializable("aaaaa", "bbbbb");
+            ResXDataNode dn = new ResXDataNode("test", ser);
             dn.Comment = "comment";
 
-            string resXFile = GetResXFileWithNode (dn, "resx.resx");
+            string resXFile = GetResXFileWithNode(dn, "resx.resx");
 
             bool found = false;
-            ResXResourceReader rr = new ResXResourceReader (resXFile);
+            ResXResourceReader rr = new ResXResourceReader(resXFile);
             rr.UseResXDataNodes = true;
-            IDictionaryEnumerator en = rr.GetEnumerator ();
-            while (en.MoveNext ()) {
+            IDictionaryEnumerator en = rr.GetEnumerator();
+            while (en.MoveNext())
+            {
                 ResXDataNode node = ((DictionaryEntry)en.Current).Value as ResXDataNode;
                 if (node == null)
                     break;
-                serializable o = node.GetValue ((AssemblyName []) null) as serializable;
-                if (o != null) {
+                serializable o = node.GetValue((AssemblyName[])null) as serializable;
+                if (o != null)
+                {
                     found = true;
-                    Assert.AreEqual (ser, o, "#A1");
-                    Assert.AreEqual ("comment", node.Comment, "#A3");
+                    Assert.AreEqual(ser, o, "#A1");
+                    Assert.AreEqual("comment", node.Comment, "#A3");
                 }
-
             }
-            rr.Close ();
+            rr.Close();
 
-            Assert.IsTrue (found, "#A2 - Serialized object not found on resx");
+            Assert.IsTrue(found, "#A2 - Serialized object not found on resx");
         }
-        
+
         [Test]
         public void ConstructorResXFileRef()
         {
-            ResXDataNode node = GetNodeFileRefToIcon ();
-            Assert.IsNotNull (node.FileRef, "#A1");
-            Assert.AreEqual (typeof (Icon).AssemblyQualifiedName, node.FileRef.TypeName, "#A2");
-            Assert.AreEqual ("test", node.Name, "#A3");
+            ResXDataNode node = GetNodeFileRefToIcon();
+            Assert.IsNotNull(node.FileRef, "#A1");
+            Assert.AreEqual(typeof(Icon).AssemblyQualifiedName, node.FileRef.TypeName, "#A2");
+            Assert.AreEqual("test", node.Name, "#A3");
         }
 
         [Test]
-        public void NullObjectGetValueTypeNameIsNull ()
+        public void NullObjectGetValueTypeNameIsNull()
         {
-            ResXDataNode node = new ResXDataNode ("aname", (object) null);
-            Assert.IsNull (node.GetValueTypeName ((AssemblyName []) null), "#A1");
+            ResXDataNode node = new ResXDataNode("aname", (object)null);
+            Assert.IsNull(node.GetValueTypeName((AssemblyName[])null), "#A1");
         }
 
         [Test]
-        public void NullObjectWrittenToResXOK ()
+        public void NullObjectWrittenToResXOK()
         {
-            ResXDataNode node = new ResXDataNode ("aname", (object) null);
-            ResXDataNode returnedNode = GetNodeFromResXReader (node);
-            Assert.IsNotNull (returnedNode, "#A1");
-            Assert.IsNull (returnedNode.GetValue ((AssemblyName []) null), "#A2");
+            ResXDataNode node = new ResXDataNode("aname", (object)null);
+            ResXDataNode returnedNode = GetNodeFromResXReader(node);
+            Assert.IsNotNull(returnedNode, "#A1");
+            Assert.IsNull(returnedNode.GetValue((AssemblyName[])null), "#A2");
         }
 
         [Test]
-        public void NullObjectReturnedFromResXGetValueTypeNameReturnsObject ()
+        public void NullObjectReturnedFromResXGetValueTypeNameReturnsObject()
         {
-            ResXDataNode node = new ResXDataNode ("aname", (object) null);
-            ResXDataNode returnedNode = GetNodeFromResXReader (node);
-            Assert.IsNotNull (returnedNode, "#A1");
-            Assert.IsNull (returnedNode.GetValue ((AssemblyName []) null), "#A2");
-            string type = returnedNode.GetValueTypeName ((AssemblyName []) null);
-            Assert.AreEqual (typeof (object).AssemblyQualifiedName, type, "#A3");
+            ResXDataNode node = new ResXDataNode("aname", (object)null);
+            ResXDataNode returnedNode = GetNodeFromResXReader(node);
+            Assert.IsNotNull(returnedNode, "#A1");
+            Assert.IsNull(returnedNode.GetValue((AssemblyName[])null), "#A2");
+            string type = returnedNode.GetValueTypeName((AssemblyName[])null);
+            Assert.AreEqual(typeof(object).AssemblyQualifiedName, type, "#A3");
         }
 
         [Test]
-        public void DoesNotRequireResXFileToBeOpen_Serializable ()
+        public void DoesNotRequireResXFileToBeOpen_Serializable()
         {
-            serializable ser = new serializable ("aaaaa", "bbbbb");
-            ResXDataNode dn = new ResXDataNode ("test", ser);
-            
-            string resXFile = GetResXFileWithNode (dn,"resx.resx");
+            serializable ser = new serializable("aaaaa", "bbbbb");
+            ResXDataNode dn = new ResXDataNode("test", ser);
 
-            ResXResourceReader rr = new ResXResourceReader (resXFile);
+            string resXFile = GetResXFileWithNode(dn, "resx.resx");
+
+            ResXResourceReader rr = new ResXResourceReader(resXFile);
             rr.UseResXDataNodes = true;
-            IDictionaryEnumerator en = rr.GetEnumerator ();
-            en.MoveNext (); 
+            IDictionaryEnumerator en = rr.GetEnumerator();
+            en.MoveNext();
 
-            ResXDataNode node = ((DictionaryEntry) en.Current).Value as ResXDataNode;
-            rr.Close ();
+            ResXDataNode node = ((DictionaryEntry)en.Current).Value as ResXDataNode;
+            rr.Close();
 
-            Assert.IsNotNull (node,"#A1");
+            Assert.IsNotNull(node, "#A1");
 
-            serializable o = node.GetValue ((AssemblyName []) null) as serializable;
-            Assert.IsNotNull (o, "#A2");
+            serializable o = node.GetValue((AssemblyName[])null) as serializable;
+            Assert.IsNotNull(o, "#A2");
         }
 
         [Test]
-        public void DoesNotRequireResXFileToBeOpen_TypeConverter ()
+        public void DoesNotRequireResXFileToBeOpen_TypeConverter()
         {
-            ResXDataNode dn = new ResXDataNode ("test", 34L);
-            string resXFile = GetResXFileWithNode (dn,"resx.resx");
+            ResXDataNode dn = new ResXDataNode("test", 34L);
+            string resXFile = GetResXFileWithNode(dn, "resx.resx");
 
-            ResXResourceReader rr = new ResXResourceReader (resXFile);
+            ResXResourceReader rr = new ResXResourceReader(resXFile);
             rr.UseResXDataNodes = true;
-            IDictionaryEnumerator en = rr.GetEnumerator ();
-            en.MoveNext ();
+            IDictionaryEnumerator en = rr.GetEnumerator();
+            en.MoveNext();
 
-            ResXDataNode node = ((DictionaryEntry) en.Current).Value as ResXDataNode;
-            rr.Close ();
+            ResXDataNode node = ((DictionaryEntry)en.Current).Value as ResXDataNode;
+            rr.Close();
 
-            Assert.IsNotNull (node, "#A1");
+            Assert.IsNotNull(node, "#A1");
 
-            object o = node.GetValue ((AssemblyName []) null);
-            Assert.IsInstanceOfType (typeof (long), o, "#A2");
-            Assert.AreEqual (34L, o, "#A3");
+            object o = node.GetValue((AssemblyName[])null);
+            Assert.IsInstanceOfType(typeof(long), o, "#A2");
+            Assert.AreEqual(34L, o, "#A3");
         }
 
-        [Test,ExpectedException (typeof(TypeLoadException))]
-        public void AssemblyNamesPassedToResourceReaderDoesNotAffectResXDataNode_TypeConverter ()
+        [Test, ExpectedException(typeof(TypeLoadException))]
+        public void AssemblyNamesPassedToResourceReaderDoesNotAffectResXDataNode_TypeConverter()
         {
             string aName = "DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
-            AssemblyName [] assemblyNames = new AssemblyName [] { new AssemblyName (aName) };
-            
-            string resXFile = GetFileFromString ("test.resx", convertableResXWithoutAssemblyName);
+            AssemblyName[] assemblyNames = new AssemblyName[] { new AssemblyName(aName) };
 
-            using (ResXResourceReader rr = new ResXResourceReader (resXFile, assemblyNames)) {
+            string resXFile = GetFileFromString("test.resx", convertableResXWithoutAssemblyName);
+
+            using (ResXResourceReader rr = new ResXResourceReader(resXFile, assemblyNames))
+            {
                 rr.UseResXDataNodes = true;
-                IDictionaryEnumerator en = rr.GetEnumerator ();
-                en.MoveNext ();
+                IDictionaryEnumerator en = rr.GetEnumerator();
+                en.MoveNext();
 
-                ResXDataNode node = ((DictionaryEntry) en.Current).Value as ResXDataNode;
-                
-                Assert.IsNotNull (node, "#A1");
+                ResXDataNode node = ((DictionaryEntry)en.Current).Value as ResXDataNode;
 
-                //should raise exception 
-                object o = node.GetValue ((AssemblyName []) null);
+                Assert.IsNotNull(node, "#A1");
+
+                //should raise exception
+                object o = node.GetValue((AssemblyName[])null);
             }
         }
 
         [Test]
-        public void ITRSPassedToResourceReaderDoesNotAffectResXDataNode_TypeConverter ()
+        public void ITRSPassedToResourceReaderDoesNotAffectResXDataNode_TypeConverter()
         {
-            ResXDataNode dn = new ResXDataNode ("test", 34L);
-            
-            string resXFile = GetResXFileWithNode (dn,"resx.resx");
+            ResXDataNode dn = new ResXDataNode("test", 34L);
 
-            ResXResourceReader rr = new ResXResourceReader (resXFile, new ReturnIntITRS ());
+            string resXFile = GetResXFileWithNode(dn, "resx.resx");
+
+            ResXResourceReader rr = new ResXResourceReader(resXFile, new ReturnIntITRS());
             rr.UseResXDataNodes = true;
-            IDictionaryEnumerator en = rr.GetEnumerator ();
-            en.MoveNext ();
+            IDictionaryEnumerator en = rr.GetEnumerator();
+            en.MoveNext();
 
-            ResXDataNode node = ((DictionaryEntry) en.Current).Value as ResXDataNode;
-            
-            Assert.IsNotNull (node, "#A1");
+            ResXDataNode node = ((DictionaryEntry)en.Current).Value as ResXDataNode;
 
-            object o = node.GetValue ((AssemblyName []) null);
+            Assert.IsNotNull(node, "#A1");
 
-            Assert.IsInstanceOfType (typeof (long), o, "#A2");
-            Assert.AreEqual (34L, o, "#A3");
+            object o = node.GetValue((AssemblyName[])null);
 
-            rr.Close ();
+            Assert.IsInstanceOfType(typeof(long), o, "#A2");
+            Assert.AreEqual(34L, o, "#A3");
+
+            rr.Close();
         }
 
         [Test]
-        public void ITRSPassedToResourceReaderDoesNotAffectResXDataNode_Serializable ()
+        public void ITRSPassedToResourceReaderDoesNotAffectResXDataNode_Serializable()
         {
-            serializable ser = new serializable ("aaaaa", "bbbbb");
-            ResXDataNode dn = new ResXDataNode ("test", ser);
-            
-            string resXFile = GetResXFileWithNode (dn,"resx.resx");
+            serializable ser = new serializable("aaaaa", "bbbbb");
+            ResXDataNode dn = new ResXDataNode("test", ser);
 
-            ResXResourceReader rr = new ResXResourceReader (resXFile, new ReturnSerializableSubClassITRS ());
+            string resXFile = GetResXFileWithNode(dn, "resx.resx");
+
+            ResXResourceReader rr = new ResXResourceReader(
+                resXFile,
+                new ReturnSerializableSubClassITRS()
+            );
             rr.UseResXDataNodes = true;
-            IDictionaryEnumerator en = rr.GetEnumerator ();
-            en.MoveNext ();
+            IDictionaryEnumerator en = rr.GetEnumerator();
+            en.MoveNext();
 
-            ResXDataNode node = ((DictionaryEntry) en.Current).Value as ResXDataNode;
+            ResXDataNode node = ((DictionaryEntry)en.Current).Value as ResXDataNode;
 
-            Assert.IsNotNull (node, "#A1");
+            Assert.IsNotNull(node, "#A1");
 
-            object o = node.GetValue ((AssemblyName []) null);
+            object o = node.GetValue((AssemblyName[])null);
 
-            AssertHelper.IsNotInstanceOfType (typeof (serializableSubClass), o, "#A2");
-            Assert.IsInstanceOfType (typeof (serializable), o, "#A3");
-            rr.Close ();
+            AssertHelper.IsNotInstanceOfType(typeof(serializableSubClass), o, "#A2");
+            Assert.IsInstanceOfType(typeof(serializable), o, "#A3");
+            rr.Close();
         }
 
         [Test]
-        public void BasePathSetOnResXResourceReaderDoesAffectResXDataNode ()
+        public void BasePathSetOnResXResourceReaderDoesAffectResXDataNode()
         {
-            ResXFileRef fileRef = new ResXFileRef ("file.name", "type.name");
+            ResXFileRef fileRef = new ResXFileRef("file.name", "type.name");
             ResXDataNode node = new ResXDataNode("anode", fileRef);
-            string resXFile = GetResXFileWithNode (node, "afilename.xxx");
+            string resXFile = GetResXFileWithNode(node, "afilename.xxx");
 
-            using (ResXResourceReader rr = new ResXResourceReader (resXFile)) {
+            using (ResXResourceReader rr = new ResXResourceReader(resXFile))
+            {
                 rr.BasePath = "basePath";
                 rr.UseResXDataNodes = true;
-                IDictionaryEnumerator en = rr.GetEnumerator ();
-                en.MoveNext ();
+                IDictionaryEnumerator en = rr.GetEnumerator();
+                en.MoveNext();
 
-                ResXDataNode returnedNode = ((DictionaryEntry) en.Current).Value as ResXDataNode;
+                ResXDataNode returnedNode = ((DictionaryEntry)en.Current).Value as ResXDataNode;
 
-                Assert.IsNotNull (node, "#A1");
-                Assert.AreEqual (Path.Combine ("basePath", "file.name"), returnedNode.FileRef.FileName, "#A2");
+                Assert.IsNotNull(node, "#A1");
+                Assert.AreEqual(
+                    Path.Combine("basePath", "file.name"),
+                    returnedNode.FileRef.FileName,
+                    "#A2"
+                );
             }
         }
 
         [TearDown]
-        protected override void TearDown ()
+        protected override void TearDown()
         {
             //teardown
-            if (Directory.Exists (_tempDirectory))
-                Directory.Delete (_tempDirectory, true);
+            if (Directory.Exists(_tempDirectory))
+                Directory.Delete(_tempDirectory, true);
 
-            base.TearDown ();
+            base.TearDown();
         }
 
-        string GetResXFileWithNode (ResXDataNode node, string filename)
+        string GetResXFileWithNode(ResXDataNode node, string filename)
         {
             string fullfileName;
 
-            _tempDirectory = Path.Combine (Path.GetTempPath (), "ResXDataNodeTest");
-            _otherTempDirectory = Path.Combine (_tempDirectory, "in");
-            if (!Directory.Exists (_otherTempDirectory)) {
-                Directory.CreateDirectory (_otherTempDirectory);
+            _tempDirectory = Path.Combine(Path.GetTempPath(), "ResXDataNodeTest");
+            _otherTempDirectory = Path.Combine(_tempDirectory, "in");
+            if (!Directory.Exists(_otherTempDirectory))
+            {
+                Directory.CreateDirectory(_otherTempDirectory);
             }
 
-            fullfileName = Path.Combine (_tempDirectory, filename);
+            fullfileName = Path.Combine(_tempDirectory, filename);
 
-            using (ResXResourceWriter writer = new ResXResourceWriter (fullfileName)) {
-                writer.AddResource (node);
+            using (ResXResourceWriter writer = new ResXResourceWriter(fullfileName))
+            {
+                writer.AddResource(node);
             }
 
             return fullfileName;
         }
 
-        private string GetFileFromString (string filename, string filecontents)
+        private string GetFileFromString(string filename, string filecontents)
         {
-            _tempDirectory = Path.Combine (Path.GetTempPath (), "ResXDataNodeTest");
-            _otherTempDirectory = Path.Combine (_tempDirectory, "in");
-            if (!Directory.Exists (_otherTempDirectory)) {
-                Directory.CreateDirectory (_otherTempDirectory);
+            _tempDirectory = Path.Combine(Path.GetTempPath(), "ResXDataNodeTest");
+            _otherTempDirectory = Path.Combine(_tempDirectory, "in");
+            if (!Directory.Exists(_otherTempDirectory))
+            {
+                Directory.CreateDirectory(_otherTempDirectory);
             }
 
-            string filepath = Path.Combine (_tempDirectory, filename);
-            
-            StreamWriter writer = new StreamWriter(filepath,false);
+            string filepath = Path.Combine(_tempDirectory, filename);
 
-            writer.Write (filecontents);
-            writer.Close ();
+            StreamWriter writer = new StreamWriter(filepath, false);
+
+            writer.Write(filecontents);
+            writer.Close();
 
             return filepath;
         }
 
         static string convertableResXWithoutAssemblyName =
-@"<?xml version=""1.0"" encoding=""utf-8""?>
+            @"<?xml version=""1.0"" encoding=""utf-8""?>
 <root>
   
   <resheader name=""resmimetype"">
@@ -407,8 +421,5 @@ namespace MonoTests.System.Resources {
     <value>im a name    im a value</value>
   </data>
 </root>";
-
     }
-    
 }
-

@@ -29,10 +29,9 @@ public class Test
     }
 
     public static void Main()
-    {        
+    {
         new C();
         new D<string, string>();
         new E<string>();
     }
 }
-

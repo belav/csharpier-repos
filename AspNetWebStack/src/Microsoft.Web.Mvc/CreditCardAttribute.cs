@@ -19,7 +19,10 @@ namespace Microsoft.Web.Mvc
             ErrorMessage = MvcResources.CreditCardAttribute_Invalid;
         }
 
-        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             yield return new ModelClientValidationRule
             {

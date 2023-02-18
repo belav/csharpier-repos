@@ -3,8 +3,6 @@
 class C : B
 {
     public override event TestDelegate TestEvent;
-    
-    public static void Main ()
-    {
-    }
+
+    public static void Main() { }
 }

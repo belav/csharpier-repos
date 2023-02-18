@@ -3,7 +3,7 @@
 
 public class Foo
 {
-    public string Test<T> ()
+    public string Test<T>()
     {
         return null;
     }
@@ -11,8 +11,8 @@ public class Foo
 
 public static class Driver
 {
-    static object UseBrokenType ()
+    static object UseBrokenType()
     {
-        return Foo<int> ().Test ();
+        return Foo<int>().Test();
     }
 }

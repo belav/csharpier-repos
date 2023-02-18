@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Xml;
-using WrappedPair = System.Json.NGenWrapper<System.Collections.Generic.KeyValuePair<string, System.Json.JsonValue>>;
+using WrappedPair = System.Json.NGenWrapper<System.Collections.Generic.KeyValuePair<
+    string,
+    System.Json.JsonValue
+>>;
 
 namespace System.Json
 {
@@ -15,13 +18,18 @@ namespace System.Json
     /// <remarks>A JsonObject is an unordered collection of zero or more key/value pairs,
     /// where each key is a String and each value is a <see cref="System.Json.JsonValue"/>, which can be a
     /// <see cref="System.Json.JsonPrimitive"/>, a <see cref="System.Json.JsonArray"/>, or a JsonObject.</remarks>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "Object in the context of JSON already conveys the meaning of dictionary")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "Object in the context of JSON already conveys the meaning of dictionary"
+    )]
     [DataContract]
     public sealed class JsonObject : JsonValue, IDictionary<string, JsonValue>
     {
         [DataMember]
-        private Dictionary<string, JsonValue> values = new Dictionary<string, JsonValue>(StringComparer.Ordinal);
+        private Dictionary<string, JsonValue> values = new Dictionary<string, JsonValue>(
+            StringComparer.Ordinal
+        );
 
         private List<WrappedPair> indexedPairs;
         private int instanceSaveCount;
@@ -38,8 +46,11 @@ namespace System.Json
         /// <exception cref="System.ArgumentException">If any of the values in the collection
         /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/> property of
         /// value <see cref="F:System.Json.JsonType.Default"/>.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "There's no complexity using this design because nested generic type is atomic type not another collection")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "There's no complexity using this design because nested generic type is atomic type not another collection"
+        )]
         public JsonObject(IEnumerable<KeyValuePair<string, JsonValue>> items)
         {
             AddRange(items);
@@ -121,12 +132,14 @@ namespace System.Json
 
                 return values[key];
             }
-
             set
             {
                 if (value != null && value.JsonType == JsonType.Default)
                 {
-                    throw new ArgumentNullException("value", Properties.Resources.UseOfDefaultNotAllowed);
+                    throw new ArgumentNullException(
+                        "value",
+                        Properties.Resources.UseOfDefaultNotAllowed
+                    );
                 }
 
                 if (key == null)
@@ -159,7 +172,7 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Safe string indexer for the <see cref="System.Json.JsonValue"/> type. 
+        /// Safe string indexer for the <see cref="System.Json.JsonValue"/> type.
         /// </summary>
         /// <param name="key">The key of the element to get.</param>
         /// <returns>If this instance contains the given key and the value corresponding to
@@ -184,8 +197,11 @@ namespace System.Json
         /// <exception cref="System.ArgumentException">If the value of any of the items in the collection
         /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/> property of
         /// value <see cref="F:System.Json.JsonType.Default"/>.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "There's no complexity using this design because nested generic type is atomic type not another collection")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "There's no complexity using this design because nested generic type is atomic type not another collection"
+        )]
         public void AddRange(IEnumerable<KeyValuePair<string, JsonValue>> items)
         {
             if (items == null)
@@ -205,7 +221,10 @@ namespace System.Json
             {
                 if (item.Value != null && item.Value.JsonType == JsonType.Default)
                 {
-                    throw new ArgumentNullException("items", Properties.Resources.UseOfDefaultNotAllowed);
+                    throw new ArgumentNullException(
+                        "items",
+                        Properties.Resources.UseOfDefaultNotAllowed
+                    );
                 }
 
                 values.Add(item.Key, item.Value);
@@ -226,7 +245,7 @@ namespace System.Json
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
@@ -246,7 +265,10 @@ namespace System.Json
         {
             if (value != null && value.JsonType == JsonType.Default)
             {
-                throw new ArgumentNullException("value", Properties.Resources.UseOfDefaultNotAllowed);
+                throw new ArgumentNullException(
+                    "value",
+                    Properties.Resources.UseOfDefaultNotAllowed
+                );
             }
 
             RaiseItemChanging(value, JsonValueChange.Add, key);
@@ -330,7 +352,9 @@ namespace System.Json
             RaiseItemChanged(null, JsonValueChange.Clear, null);
         }
 
-        bool ICollection<KeyValuePair<string, JsonValue>>.Contains(KeyValuePair<string, JsonValue> item)
+        bool ICollection<KeyValuePair<string, JsonValue>>.Contains(
+            KeyValuePair<string, JsonValue> item
+        )
         {
             return ((ICollection<KeyValuePair<string, JsonValue>>)values).Contains(item);
         }
@@ -348,11 +372,16 @@ namespace System.Json
             ((ICollection<KeyValuePair<string, JsonValue>>)values).CopyTo(array, arrayIndex);
         }
 
-        bool ICollection<KeyValuePair<string, JsonValue>>.Remove(KeyValuePair<string, JsonValue> item)
+        bool ICollection<KeyValuePair<string, JsonValue>>.Remove(
+            KeyValuePair<string, JsonValue> item
+        )
         {
             if (ChangingListenersCount > 0)
             {
-                if (ContainsKey(item.Key) && EqualityComparer<JsonValue>.Default.Equals(item.Value, values[item.Key]))
+                if (
+                    ContainsKey(item.Key)
+                    && EqualityComparer<JsonValue>.Default.Equals(item.Value, values[item.Key])
+                )
                 {
                     RaiseItemChanging(item.Value, JsonValueChange.Remove, item.Key);
                 }
@@ -419,7 +448,10 @@ namespace System.Json
         /// <param name="jsonWriter">The JXML writer used to write JSON.</param>
         internal override void WriteAttributeString(XmlDictionaryWriter jsonWriter)
         {
-            jsonWriter.WriteAttributeString(JXmlToJsonValueConverter.TypeAttributeName, JXmlToJsonValueConverter.ObjectAttributeValue);
+            jsonWriter.WriteAttributeString(
+                JXmlToJsonValueConverter.TypeAttributeName,
+                JXmlToJsonValueConverter.ObjectAttributeValue
+            );
         }
 
         /// <summary>
@@ -429,7 +461,10 @@ namespace System.Json
         /// <param name="jsonWriter">The JXML writer used to write JSON.</param>
         /// <param name="currentIndex">The index within this collection.</param>
         /// <returns>The next item in the collection, or null of there are no more items.</returns>
-        internal override JsonValue WriteStartElementAndGetNext(XmlDictionaryWriter jsonWriter, int currentIndex)
+        internal override JsonValue WriteStartElementAndGetNext(
+            XmlDictionaryWriter jsonWriter,
+            int currentIndex
+        )
         {
             KeyValuePair<string, JsonValue> currentPair = indexedPairs[currentIndex];
             string currentKey = currentPair.Key;
@@ -437,8 +472,14 @@ namespace System.Json
             if (currentKey.Length == 0)
             {
                 // special case in JXML world
-                jsonWriter.WriteStartElement(JXmlToJsonValueConverter.ItemElementName, JXmlToJsonValueConverter.ItemElementName);
-                jsonWriter.WriteAttributeString(JXmlToJsonValueConverter.ItemElementName, String.Empty);
+                jsonWriter.WriteStartElement(
+                    JXmlToJsonValueConverter.ItemElementName,
+                    JXmlToJsonValueConverter.ItemElementName
+                );
+                jsonWriter.WriteAttributeString(
+                    JXmlToJsonValueConverter.ItemElementName,
+                    String.Empty
+                );
             }
             else
             {
@@ -448,7 +489,11 @@ namespace System.Json
             return currentPair.Value;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", Justification = "Context is required by CLR for this to work.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            Justification = "Context is required by CLR for this to work."
+        )]
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {

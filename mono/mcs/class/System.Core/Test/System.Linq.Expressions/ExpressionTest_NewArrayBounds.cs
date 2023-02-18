@@ -33,93 +33,94 @@ using System.Linq.Expressions;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Linq.Expressions {
-
+namespace MonoTests.System.Linq.Expressions
+{
     [TestFixture]
     [Category("SRE")]
-    public class ExpressionTest_NewArrayBounds {
-
+    public class ExpressionTest_NewArrayBounds
+    {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ArgTypeNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgTypeNull()
         {
-            Expression.NewArrayBounds (null, new Expression [0]);
+            Expression.NewArrayBounds(null, new Expression[0]);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ArgBoundsNull ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgBoundsNull()
         {
-            Expression.NewArrayBounds (typeof (int), null);
+            Expression.NewArrayBounds(typeof(int), null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ArgBoundsContainsExpressionTypeNotInteger ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ArgBoundsContainsExpressionTypeNotInteger()
         {
-            Expression.NewArrayBounds (typeof (int), 1.ToConstant (), "2".ToConstant ());
+            Expression.NewArrayBounds(typeof(int), 1.ToConstant(), "2".ToConstant());
         }
 
         [Test]
-        [Category ("NotDotNet")]
-        [ExpectedException (typeof (ArgumentException))]
-        public void NewVoid ()
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void NewVoid()
         {
-            Expression.NewArrayBounds (typeof (void), 1.ToConstant ());
+            Expression.NewArrayBounds(typeof(void), 1.ToConstant());
         }
 
         [Test]
-        public void TestArrayBounds ()
+        public void TestArrayBounds()
         {
-            var ab = Expression.NewArrayBounds (typeof (int), 1.ToConstant (), 2.ToConstant ());
-            Assert.AreEqual (typeof (int [,]), ab.Type);
-            Assert.AreEqual (2, ab.Expressions.Count);
-            Assert.AreEqual ("new System.Int32[,](1, 2)", ab.ToString ());
+            var ab = Expression.NewArrayBounds(typeof(int), 1.ToConstant(), 2.ToConstant());
+            Assert.AreEqual(typeof(int[,]), ab.Type);
+            Assert.AreEqual(2, ab.Expressions.Count);
+            Assert.AreEqual("new System.Int32[,](1, 2)", ab.ToString());
         }
 
-        static Func<object> CreateNewArrayFactory<T> (params int [] bounds)
+        static Func<object> CreateNewArrayFactory<T>(params int[] bounds)
         {
-            return Expression.Lambda<Func<object>> (
-                Expression.NewArrayBounds (
-                    typeof (T),
-                    (from bound in bounds select bound.ToConstant ()).ToArray ())).Compile ();
-        }
-
-        [Test]
-        public void TestArrayAssignability ()
-        {
-            Expression.Lambda<Func<int []>> (
-                Expression.NewArrayBounds (
-                    typeof (int),
-                    4.ToConstant ()));
+            return Expression
+                .Lambda<Func<object>>(
+                    Expression.NewArrayBounds(
+                        typeof(T),
+                        (from bound in bounds select bound.ToConstant()).ToArray()
+                    )
+                )
+                .Compile();
         }
 
         [Test]
-        public void CompileNewArraySingleDimensional ()
+        public void TestArrayAssignability()
         {
-            var factory = CreateNewArrayFactory<int> (3);
-
-            var array = (int []) factory ();
-            var type = array.GetType ();
-
-            Assert.IsNotNull (array);
-            Assert.AreEqual (3, array.Length);
-            Assert.IsTrue (type.IsArray);
-            Assert.AreEqual (1, type.GetArrayRank ());
+            Expression.Lambda<Func<int[]>>(Expression.NewArrayBounds(typeof(int), 4.ToConstant()));
         }
 
         [Test]
-        public void CompileNewArrayMultiDimensional ()
+        public void CompileNewArraySingleDimensional()
         {
-            var factory = CreateNewArrayFactory<int> (3, 3);
+            var factory = CreateNewArrayFactory<int>(3);
 
-            var array = (int [,]) factory ();
-            var type = array.GetType ();
+            var array = (int[])factory();
+            var type = array.GetType();
 
-            Assert.IsNotNull (array);
-            Assert.IsTrue (type.IsArray);
-            Assert.AreEqual (2, type.GetArrayRank ());
-            Assert.AreEqual (9, array.Length);
+            Assert.IsNotNull(array);
+            Assert.AreEqual(3, array.Length);
+            Assert.IsTrue(type.IsArray);
+            Assert.AreEqual(1, type.GetArrayRank());
+        }
+
+        [Test]
+        public void CompileNewArrayMultiDimensional()
+        {
+            var factory = CreateNewArrayFactory<int>(3, 3);
+
+            var array = (int[,])factory();
+            var type = array.GetType();
+
+            Assert.IsNotNull(array);
+            Assert.IsTrue(type.IsArray);
+            Assert.AreEqual(2, type.GetArrayRank());
+            Assert.AreEqual(9, array.Length);
         }
     }
 }

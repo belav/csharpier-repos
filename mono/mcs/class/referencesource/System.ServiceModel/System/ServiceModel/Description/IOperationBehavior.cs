@@ -12,8 +12,17 @@ namespace System.ServiceModel.Description
     public interface IOperationBehavior
     {
         void Validate(OperationDescription operationDescription);
-        void ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation);
-        void ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation);
-        void AddBindingParameters(OperationDescription operationDescription, BindingParameterCollection bindingParameters);
+        void ApplyDispatchBehavior(
+            OperationDescription operationDescription,
+            DispatchOperation dispatchOperation
+        );
+        void ApplyClientBehavior(
+            OperationDescription operationDescription,
+            ClientOperation clientOperation
+        );
+        void AddBindingParameters(
+            OperationDescription operationDescription,
+            BindingParameterCollection bindingParameters
+        );
     }
 }

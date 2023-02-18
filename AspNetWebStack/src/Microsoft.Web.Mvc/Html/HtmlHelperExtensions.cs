@@ -39,43 +39,98 @@ namespace Microsoft.Web.Mvc.Html
     {
         // ChildActionExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString Action(this HtmlHelper htmlHelper, string actionName, string controllerName = null, object routeValues = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString Action(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName = null,
+            object routeValues = null
+        )
         {
             return ChildActionExtensions.Action(
                 htmlHelper,
                 actionName,
                 controllerName,
-                routeValues as IDictionary<string, object> ?? new RouteValueDictionary(routeValues));
+                routeValues as IDictionary<string, object> ?? new RouteValueDictionary(routeValues)
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static void RenderAction(this HtmlHelper htmlHelper, string actionName, string controllerName = null, object routeValues = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static void RenderAction(
+            this HtmlHelper htmlHelper,
+            string actionName,
+            string controllerName = null,
+            object routeValues = null
+        )
         {
             ChildActionExtensions.RenderAction(
                 htmlHelper,
                 actionName,
                 controllerName,
-                routeValues as IDictionary<string, object> ?? new RouteValueDictionary(routeValues));
+                routeValues as IDictionary<string, object> ?? new RouteValueDictionary(routeValues)
+            );
         }
 
         // DisplayExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString Display(this HtmlHelper htmlHelper, string expression, string templateName = null, string htmlFieldName = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString Display(
+            this HtmlHelper htmlHelper,
+            string expression,
+            string templateName = null,
+            string htmlFieldName = null
+        )
         {
             return DisplayExtensions.Display(htmlHelper, expression, templateName, htmlFieldName);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString DisplayFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString DisplayFor<TModel, TValue>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TValue>> expression,
+            string templateName = null,
+            string htmlFieldName = null
+        )
         {
-            return DisplayExtensions.DisplayFor(htmlHelper, expression, templateName, htmlFieldName);
+            return DisplayExtensions.DisplayFor(
+                htmlHelper,
+                expression,
+                templateName,
+                htmlFieldName
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString DisplayForModel(this HtmlHelper htmlHelper, string templateName = null, string htmlFieldName = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString DisplayForModel(
+            this HtmlHelper htmlHelper,
+            string templateName = null,
+            string htmlFieldName = null
+        )
         {
             return DisplayExtensions.DisplayForModel(htmlHelper, templateName, htmlFieldName);
         }
@@ -87,54 +142,154 @@ namespace Microsoft.Web.Mvc.Html
             return DisplayTextExtensions.DisplayText(htmlHelper, name);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString DisplayTextFor<TModel, TResult>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TResult>> expression)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString DisplayTextFor<TModel, TResult>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TResult>> expression
+        )
         {
             return DisplayTextExtensions.DisplayTextFor(htmlHelper, expression);
         }
 
         // EditorExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString Editor(this HtmlHelper htmlHelper, string expression, string templateName = null, string htmlFieldName = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString Editor(
+            this HtmlHelper htmlHelper,
+            string expression,
+            string templateName = null,
+            string htmlFieldName = null
+        )
         {
             return EditorExtensions.Editor(htmlHelper, expression, templateName, htmlFieldName);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString EditorFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString EditorFor<TModel, TValue>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TValue>> expression,
+            string templateName = null,
+            string htmlFieldName = null
+        )
         {
             return EditorExtensions.EditorFor(htmlHelper, expression, templateName, htmlFieldName);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString EditorForModel(this HtmlHelper htmlHelper, string templateName = null, string htmlFieldName = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString EditorForModel(
+            this HtmlHelper htmlHelper,
+            string templateName = null,
+            string htmlFieldName = null
+        )
         {
             return EditorExtensions.EditorForModel(htmlHelper, templateName, htmlFieldName);
         }
 
         // FormExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcForm BeginForm(this HtmlHelper htmlHelper, string actionName = null, string controllerName = null, object routeValues = null, FormMethod method = FormMethod.Post, string accept = null, string acceptCharset = null, string cssClass = null, string dir = null, string encType = null, string id = null, string lang = null, string name = null, string style = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcForm BeginForm(
+            this HtmlHelper htmlHelper,
+            string actionName = null,
+            string controllerName = null,
+            object routeValues = null,
+            FormMethod method = FormMethod.Post,
+            string accept = null,
+            string acceptCharset = null,
+            string cssClass = null,
+            string dir = null,
+            string encType = null,
+            string id = null,
+            string lang = null,
+            string name = null,
+            string style = null,
+            string title = null
+        )
         {
             return htmlHelper.BeginForm(
                 actionName,
                 controllerName,
                 routeValues as RouteValueDictionary ?? new RouteValueDictionary(routeValues),
                 method,
-                FormAttributes(accept, acceptCharset, cssClass, dir, encType, id, lang, name, style, title));
+                FormAttributes(
+                    accept,
+                    acceptCharset,
+                    cssClass,
+                    dir,
+                    encType,
+                    id,
+                    lang,
+                    name,
+                    style,
+                    title
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcForm BeginRouteForm(this HtmlHelper htmlHelper, string routeName, RouteValueDictionary routeValues = null, FormMethod method = FormMethod.Post, string accept = null, string acceptCharset = null, string cssClass = null, string dir = null, string encType = null, string id = null, string lang = null, string name = null, string style = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcForm BeginRouteForm(
+            this HtmlHelper htmlHelper,
+            string routeName,
+            RouteValueDictionary routeValues = null,
+            FormMethod method = FormMethod.Post,
+            string accept = null,
+            string acceptCharset = null,
+            string cssClass = null,
+            string dir = null,
+            string encType = null,
+            string id = null,
+            string lang = null,
+            string name = null,
+            string style = null,
+            string title = null
+        )
         {
             return htmlHelper.BeginRouteForm(
                 routeName,
                 routeValues ?? new RouteValueDictionary(routeValues),
                 method,
-                FormAttributes(accept, acceptCharset, cssClass, dir, encType, id, lang, name, style, title));
+                FormAttributes(
+                    accept,
+                    acceptCharset,
+                    cssClass,
+                    dir,
+                    encType,
+                    id,
+                    lang,
+                    name,
+                    style,
+                    title
+                )
+            );
         }
 
         public static void EndForm(this HtmlHelper htmlHelper)
@@ -144,92 +299,385 @@ namespace Microsoft.Web.Mvc.Html
 
         // InputExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString CheckBox(this HtmlHelper htmlHelper, string name, bool? isChecked = null, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? maxLength = null, bool readOnly = false, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString CheckBox(
+            this HtmlHelper htmlHelper,
+            string name,
+            bool? isChecked = null,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? maxLength = null,
+            bool readOnly = false,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
-            var htmlAttributes = InputAttributes(cssClass, dir, disabled, id, lang, maxLength, readOnly, size, style, tabIndex, title);
+            var htmlAttributes = InputAttributes(
+                cssClass,
+                dir,
+                disabled,
+                id,
+                lang,
+                maxLength,
+                readOnly,
+                size,
+                style,
+                tabIndex,
+                title
+            );
 
             return isChecked.HasValue
-                       ? htmlHelper.CheckBox(name, isChecked.Value, htmlAttributes)
-                       : htmlHelper.CheckBox(name, htmlAttributes);
+                ? htmlHelper.CheckBox(name, isChecked.Value, htmlAttributes)
+                : htmlHelper.CheckBox(name, htmlAttributes);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString CheckBoxFor<TModel>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> expression, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? maxLength = null, bool readOnly = false, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString CheckBoxFor<TModel>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, bool>> expression,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? maxLength = null,
+            bool readOnly = false,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.CheckBoxFor(
                 expression,
-                InputAttributes(cssClass, dir, disabled, id, lang, maxLength, readOnly, size, style, tabIndex, title));
+                InputAttributes(
+                    cssClass,
+                    dir,
+                    disabled,
+                    id,
+                    lang,
+                    maxLength,
+                    readOnly,
+                    size,
+                    style,
+                    tabIndex,
+                    title
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString Hidden(this HtmlHelper htmlHelper, string name, object value = null, string cssClass = null, string id = null, string style = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString Hidden(
+            this HtmlHelper htmlHelper,
+            string name,
+            object value = null,
+            string cssClass = null,
+            string id = null,
+            string style = null
+        )
         {
             return htmlHelper.Hidden(name, value, Attributes(cssClass, id, style));
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString HiddenFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string cssClass = null, string id = null, string style = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString HiddenFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string cssClass = null,
+            string id = null,
+            string style = null
+        )
         {
             return htmlHelper.HiddenFor(expression, Attributes(cssClass, id, style));
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString Password(this HtmlHelper htmlHelper, string name, object value = null, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? maxLength = null, bool readOnly = false, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString Password(
+            this HtmlHelper htmlHelper,
+            string name,
+            object value = null,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? maxLength = null,
+            bool readOnly = false,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.Password(
                 name,
                 value,
-                InputAttributes(cssClass, dir, disabled, id, lang, maxLength, readOnly, size, style, tabIndex, title));
+                InputAttributes(
+                    cssClass,
+                    dir,
+                    disabled,
+                    id,
+                    lang,
+                    maxLength,
+                    readOnly,
+                    size,
+                    style,
+                    tabIndex,
+                    title
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString PasswordFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string cssClass = null, bool disabled = false, string dir = null, string id = null, string lang = null, int? maxLength = null, bool readOnly = false, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString PasswordFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string cssClass = null,
+            bool disabled = false,
+            string dir = null,
+            string id = null,
+            string lang = null,
+            int? maxLength = null,
+            bool readOnly = false,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.PasswordFor(
                 expression,
-                InputAttributes(cssClass, dir, disabled, id, lang, maxLength, readOnly, size, style, tabIndex, title));
+                InputAttributes(
+                    cssClass,
+                    dir,
+                    disabled,
+                    id,
+                    lang,
+                    maxLength,
+                    readOnly,
+                    size,
+                    style,
+                    tabIndex,
+                    title
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString RadioButton(this HtmlHelper htmlHelper, string name, object value, bool? isChecked = null, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? maxLength = null, bool readOnly = false, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString RadioButton(
+            this HtmlHelper htmlHelper,
+            string name,
+            object value,
+            bool? isChecked = null,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? maxLength = null,
+            bool readOnly = false,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
-            var htmlAttributes = InputAttributes(cssClass, dir, disabled, id, lang, maxLength, readOnly, size, style, tabIndex, title);
+            var htmlAttributes = InputAttributes(
+                cssClass,
+                dir,
+                disabled,
+                id,
+                lang,
+                maxLength,
+                readOnly,
+                size,
+                style,
+                tabIndex,
+                title
+            );
 
             return isChecked.HasValue
-                       ? htmlHelper.RadioButton(name, value, isChecked.Value, htmlAttributes)
-                       : htmlHelper.RadioButton(name, value, htmlAttributes);
+                ? htmlHelper.RadioButton(name, value, isChecked.Value, htmlAttributes)
+                : htmlHelper.RadioButton(name, value, htmlAttributes);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString RadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object value, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? maxLength = null, bool readOnly = false, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString RadioButtonFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            object value,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? maxLength = null,
+            bool readOnly = false,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.RadioButtonFor(
                 expression,
                 value,
-                InputAttributes(cssClass, dir, disabled, id, lang, maxLength, readOnly, size, style, tabIndex, title));
+                InputAttributes(
+                    cssClass,
+                    dir,
+                    disabled,
+                    id,
+                    lang,
+                    maxLength,
+                    readOnly,
+                    size,
+                    style,
+                    tabIndex,
+                    title
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString TextBox(this HtmlHelper htmlHelper, string name, object value = null, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? maxLength = null, bool readOnly = false, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString TextBox(
+            this HtmlHelper htmlHelper,
+            string name,
+            object value = null,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? maxLength = null,
+            bool readOnly = false,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.TextBox(
                 name,
                 value,
-                InputAttributes(cssClass, dir, disabled, id, lang, maxLength, readOnly, size, style, tabIndex, title));
+                InputAttributes(
+                    cssClass,
+                    dir,
+                    disabled,
+                    id,
+                    lang,
+                    maxLength,
+                    readOnly,
+                    size,
+                    style,
+                    tabIndex,
+                    title
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString TextBoxFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? maxLength = null, bool readOnly = false, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString TextBoxFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? maxLength = null,
+            bool readOnly = false,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.TextBoxFor(
                 expression,
-                InputAttributes(cssClass, dir, disabled, id, lang, maxLength, readOnly, size, style, tabIndex, title));
+                InputAttributes(
+                    cssClass,
+                    dir,
+                    disabled,
+                    id,
+                    lang,
+                    maxLength,
+                    readOnly,
+                    size,
+                    style,
+                    tabIndex,
+                    title
+                )
+            );
         }
 
         // LabelExtensions
@@ -239,8 +687,15 @@ namespace Microsoft.Web.Mvc.Html
             return LabelExtensions.Label(htmlHelper, expression);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString LabelFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString LabelFor<TModel, TValue>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TValue>> expression
+        )
         {
             return LabelExtensions.LabelFor(htmlHelper, expression);
         }
@@ -252,8 +707,36 @@ namespace Microsoft.Web.Mvc.Html
 
         // LinkExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString ActionLink(this HtmlHelper htmlHelper, string linkText, string actionName, string controllerName = null, string protocol = null, string hostName = null, string fragment = null, object routeValues = null, string accessKey = null, string charset = null, string coords = null, string cssClass = null, string dir = null, string hrefLang = null, string id = null, string lang = null, string name = null, string rel = null, string rev = null, string shape = null, string style = null, string target = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString ActionLink(
+            this HtmlHelper htmlHelper,
+            string linkText,
+            string actionName,
+            string controllerName = null,
+            string protocol = null,
+            string hostName = null,
+            string fragment = null,
+            object routeValues = null,
+            string accessKey = null,
+            string charset = null,
+            string coords = null,
+            string cssClass = null,
+            string dir = null,
+            string hrefLang = null,
+            string id = null,
+            string lang = null,
+            string name = null,
+            string rel = null,
+            string rev = null,
+            string shape = null,
+            string style = null,
+            string target = null,
+            string title = null
+        )
         {
             return htmlHelper.ActionLink(
                 linkText,
@@ -263,11 +746,55 @@ namespace Microsoft.Web.Mvc.Html
                 hostName,
                 fragment,
                 routeValues as RouteValueDictionary ?? new RouteValueDictionary(routeValues),
-                AnchorAttributes(accessKey, charset, coords, cssClass, dir, hrefLang, id, lang, name, rel, rev, shape, style, target, title));
+                AnchorAttributes(
+                    accessKey,
+                    charset,
+                    coords,
+                    cssClass,
+                    dir,
+                    hrefLang,
+                    id,
+                    lang,
+                    name,
+                    rel,
+                    rev,
+                    shape,
+                    style,
+                    target,
+                    title
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString RouteLink(this HtmlHelper htmlHelper, string linkText, string routeName, string protocol = null, string hostName = null, string fragment = null, object routeValues = null, string accessKey = null, string charset = null, string coords = null, string cssClass = null, string dir = null, string hrefLang = null, string id = null, string lang = null, string name = null, string rel = null, string rev = null, string shape = null, string style = null, string target = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString RouteLink(
+            this HtmlHelper htmlHelper,
+            string linkText,
+            string routeName,
+            string protocol = null,
+            string hostName = null,
+            string fragment = null,
+            object routeValues = null,
+            string accessKey = null,
+            string charset = null,
+            string coords = null,
+            string cssClass = null,
+            string dir = null,
+            string hrefLang = null,
+            string id = null,
+            string lang = null,
+            string name = null,
+            string rel = null,
+            string rev = null,
+            string shape = null,
+            string style = null,
+            string target = null,
+            string title = null
+        )
         {
             return htmlHelper.RouteLink(
                 linkText,
@@ -276,93 +803,283 @@ namespace Microsoft.Web.Mvc.Html
                 hostName,
                 fragment,
                 routeValues as RouteValueDictionary ?? new RouteValueDictionary(routeValues),
-                AnchorAttributes(accessKey, charset, coords, cssClass, dir, hrefLang, id, lang, name, rel, rev, shape, style, target, title));
+                AnchorAttributes(
+                    accessKey,
+                    charset,
+                    coords,
+                    cssClass,
+                    dir,
+                    hrefLang,
+                    id,
+                    lang,
+                    name,
+                    rel,
+                    rev,
+                    shape,
+                    style,
+                    target,
+                    title
+                )
+            );
         }
 
         // PartialExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString Partial(this HtmlHelper htmlHelper, string partialViewName, object model = null, ViewDataDictionary viewData = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString Partial(
+            this HtmlHelper htmlHelper,
+            string partialViewName,
+            object model = null,
+            ViewDataDictionary viewData = null
+        )
         {
             return PartialExtensions.Partial(
                 htmlHelper,
                 partialViewName,
                 model,
-                viewData ?? htmlHelper.ViewData);
+                viewData ?? htmlHelper.ViewData
+            );
         }
 
         // RenderPartialExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static void RenderPartial(this HtmlHelper htmlHelper, string partialViewName, object model = null, ViewDataDictionary viewData = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static void RenderPartial(
+            this HtmlHelper htmlHelper,
+            string partialViewName,
+            object model = null,
+            ViewDataDictionary viewData = null
+        )
         {
             RenderPartialExtensions.RenderPartial(
                 htmlHelper,
                 partialViewName,
                 model,
-                viewData ?? htmlHelper.ViewData);
+                viewData ?? htmlHelper.ViewData
+            );
         }
 
         // SelectExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString DropDownList(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> selectList = null, string optionLabel = null, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString DropDownList(
+            this HtmlHelper htmlHelper,
+            string name,
+            IEnumerable<SelectListItem> selectList = null,
+            string optionLabel = null,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.DropDownList(
                 name,
                 selectList,
                 optionLabel,
-                SelectAttributes(cssClass, dir, disabled, id, lang, size, style, tabIndex, title));
+                SelectAttributes(cssClass, dir, disabled, id, lang, size, style, tabIndex, title)
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList = null, string optionLabel = null, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString DropDownListFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            IEnumerable<SelectListItem> selectList = null,
+            string optionLabel = null,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.DropDownListFor(
                 expression,
                 selectList,
                 optionLabel,
-                SelectAttributes(cssClass, dir, disabled, id, lang, size, style, tabIndex, title));
+                SelectAttributes(cssClass, dir, disabled, id, lang, size, style, tabIndex, title)
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString ListBox(this HtmlHelper htmlHelper, string name, IEnumerable<SelectListItem> selectList = null, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString ListBox(
+            this HtmlHelper htmlHelper,
+            string name,
+            IEnumerable<SelectListItem> selectList = null,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.ListBox(
                 name,
                 selectList,
-                SelectAttributes(cssClass, dir, disabled, id, lang, size, style, tabIndex, title));
+                SelectAttributes(cssClass, dir, disabled, id, lang, size, style, tabIndex, title)
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString ListBoxFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> selectList = null, string cssClass = null, string dir = null, bool disabled = false, string id = null, string lang = null, int? size = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString ListBoxFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            IEnumerable<SelectListItem> selectList = null,
+            string cssClass = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            int? size = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.ListBoxFor(
                 expression,
                 selectList,
-                SelectAttributes(cssClass, dir, disabled, id, lang, size, style, tabIndex, title));
+                SelectAttributes(cssClass, dir, disabled, id, lang, size, style, tabIndex, title)
+            );
         }
 
         // TextAreaExtensions
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString TextArea(this HtmlHelper htmlHelper, string name, string value = null, string accessKey = null, string cssClass = null, int? cols = null, string dir = null, bool disabled = false, string id = null, string lang = null, bool readOnly = false, int? rows = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString TextArea(
+            this HtmlHelper htmlHelper,
+            string name,
+            string value = null,
+            string accessKey = null,
+            string cssClass = null,
+            int? cols = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            bool readOnly = false,
+            int? rows = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.TextArea(
                 name,
                 value,
-                TextAreaAttributes(accessKey, cssClass, cols, dir, disabled, id, lang, readOnly, rows, style, tabIndex, title));
+                TextAreaAttributes(
+                    accessKey,
+                    cssClass,
+                    cols,
+                    dir,
+                    disabled,
+                    id,
+                    lang,
+                    readOnly,
+                    rows,
+                    style,
+                    tabIndex,
+                    title
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString TextAreaFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string accessKey = null, string cssClass = null, int? cols = null, string dir = null, bool disabled = false, string id = null, string lang = null, bool readOnly = false, int? rows = null, string style = null, int? tabIndex = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString TextAreaFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string accessKey = null,
+            string cssClass = null,
+            int? cols = null,
+            string dir = null,
+            bool disabled = false,
+            string id = null,
+            string lang = null,
+            bool readOnly = false,
+            int? rows = null,
+            string style = null,
+            int? tabIndex = null,
+            string title = null
+        )
         {
             return htmlHelper.TextAreaFor(
                 expression,
-                TextAreaAttributes(accessKey, cssClass, cols, dir, disabled, id, lang, readOnly, rows, style, tabIndex, title));
+                TextAreaAttributes(
+                    accessKey,
+                    cssClass,
+                    cols,
+                    dir,
+                    disabled,
+                    id,
+                    lang,
+                    readOnly,
+                    rows,
+                    style,
+                    tabIndex,
+                    title
+                )
+            );
         }
 
         // ValidationExtensions
@@ -372,44 +1089,109 @@ namespace Microsoft.Web.Mvc.Html
             ValidationExtensions.Validate(htmlHelper, modelName);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static void ValidateFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static void ValidateFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression
+        )
         {
             ValidationExtensions.ValidateFor(htmlHelper, expression);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "2#", Justification = "This API has already shipped.")]
-        public static MvcHtmlString ValidationMessage(this HtmlHelper htmlHelper, string modelName, string validationMessage = null, string cssClass = null, string dir = null, string id = null, string lang = null, string style = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            MessageId = "2#",
+            Justification = "This API has already shipped."
+        )]
+        public static MvcHtmlString ValidationMessage(
+            this HtmlHelper htmlHelper,
+            string modelName,
+            string validationMessage = null,
+            string cssClass = null,
+            string dir = null,
+            string id = null,
+            string lang = null,
+            string style = null,
+            string title = null
+        )
         {
             return htmlHelper.ValidationMessage(
                 modelName,
                 validationMessage,
-                SpanAttributes(cssClass, dir, id, lang, style, title));
+                SpanAttributes(cssClass, dir, id, lang, style, title)
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, string validationMessage = null, string cssClass = null, string dir = null, string id = null, string lang = null, string style = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString ValidationMessageFor<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression,
+            string validationMessage = null,
+            string cssClass = null,
+            string dir = null,
+            string id = null,
+            string lang = null,
+            string style = null,
+            string title = null
+        )
         {
             return htmlHelper.ValidationMessageFor(
                 expression,
                 validationMessage,
-                SpanAttributes(cssClass, dir, id, lang, style, title));
+                SpanAttributes(cssClass, dir, id, lang, style, title)
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "The purpose of these helpers is to use default parameters to simplify common usage.")]
-        public static MvcHtmlString ValidationSummary(this HtmlHelper htmlHelper, string message = null, bool excludePropertyErrors = false, string cssClass = null, string dir = null, string id = null, string lang = null, string style = null, string title = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "The purpose of these helpers is to use default parameters to simplify common usage."
+        )]
+        public static MvcHtmlString ValidationSummary(
+            this HtmlHelper htmlHelper,
+            string message = null,
+            bool excludePropertyErrors = false,
+            string cssClass = null,
+            string dir = null,
+            string id = null,
+            string lang = null,
+            string style = null,
+            string title = null
+        )
         {
             return htmlHelper.ValidationSummary(
                 excludePropertyErrors,
                 message,
-                SpanAttributes(cssClass, dir, id, lang, style, title));
+                SpanAttributes(cssClass, dir, id, lang, style, title)
+            );
         }
 
         // Helper methods
 
-        private static void AddOptional(this IDictionary<string, object> dictionary, string key, bool value)
+        private static void AddOptional(
+            this IDictionary<string, object> dictionary,
+            string key,
+            bool value
+        )
         {
             if (value)
             {
@@ -417,7 +1199,11 @@ namespace Microsoft.Web.Mvc.Html
             }
         }
 
-        private static void AddOptional(this IDictionary<string, object> dictionary, string key, object value)
+        private static void AddOptional(
+            this IDictionary<string, object> dictionary,
+            string key,
+            object value
+        )
         {
             if (value != null)
             {
@@ -425,7 +1211,11 @@ namespace Microsoft.Web.Mvc.Html
             }
         }
 
-        private static IDictionary<string, object> Attributes(string cssClass, string id, string style)
+        private static IDictionary<string, object> Attributes(
+            string cssClass,
+            string id,
+            string style
+        )
         {
             var htmlAttributes = new RouteValueDictionary();
 
@@ -436,7 +1226,23 @@ namespace Microsoft.Web.Mvc.Html
             return htmlAttributes;
         }
 
-        private static IDictionary<string, object> AnchorAttributes(string accessKey, string charset, string coords, string cssClass, string dir, string hrefLang, string id, string lang, string name, string rel, string rev, string shape, string style, string target, string title)
+        private static IDictionary<string, object> AnchorAttributes(
+            string accessKey,
+            string charset,
+            string coords,
+            string cssClass,
+            string dir,
+            string hrefLang,
+            string id,
+            string lang,
+            string name,
+            string rel,
+            string rev,
+            string shape,
+            string style,
+            string target,
+            string title
+        )
         {
             var htmlAttributes = Attributes(cssClass, id, style);
 
@@ -456,7 +1262,18 @@ namespace Microsoft.Web.Mvc.Html
             return htmlAttributes;
         }
 
-        private static IDictionary<string, object> FormAttributes(string accept, string acceptCharset, string cssClass, string dir, string encType, string id, string lang, string name, string style, string title)
+        private static IDictionary<string, object> FormAttributes(
+            string accept,
+            string acceptCharset,
+            string cssClass,
+            string dir,
+            string encType,
+            string id,
+            string lang,
+            string name,
+            string style,
+            string title
+        )
         {
             var htmlAttributes = Attributes(cssClass, id, style);
 
@@ -471,7 +1288,19 @@ namespace Microsoft.Web.Mvc.Html
             return htmlAttributes;
         }
 
-        private static IDictionary<string, object> InputAttributes(string cssClass, string dir, bool disabled, string id, string lang, int? maxLength, bool readOnly, int? size, string style, int? tabIndex, string title)
+        private static IDictionary<string, object> InputAttributes(
+            string cssClass,
+            string dir,
+            bool disabled,
+            string id,
+            string lang,
+            int? maxLength,
+            bool readOnly,
+            int? size,
+            string style,
+            int? tabIndex,
+            string title
+        )
         {
             var htmlAttributes = Attributes(cssClass, id, style);
 
@@ -487,7 +1316,17 @@ namespace Microsoft.Web.Mvc.Html
             return htmlAttributes;
         }
 
-        private static IDictionary<string, object> SelectAttributes(string cssClass, string dir, bool disabled, string id, string lang, int? size, string style, int? tabIndex, string title)
+        private static IDictionary<string, object> SelectAttributes(
+            string cssClass,
+            string dir,
+            bool disabled,
+            string id,
+            string lang,
+            int? size,
+            string style,
+            int? tabIndex,
+            string title
+        )
         {
             var htmlAttributes = Attributes(cssClass, id, style);
 
@@ -501,7 +1340,14 @@ namespace Microsoft.Web.Mvc.Html
             return htmlAttributes;
         }
 
-        private static IDictionary<string, object> SpanAttributes(string cssClass, string dir, string id, string lang, string style, string title)
+        private static IDictionary<string, object> SpanAttributes(
+            string cssClass,
+            string dir,
+            string id,
+            string lang,
+            string style,
+            string title
+        )
         {
             var htmlAttributes = Attributes(cssClass, id, style);
 
@@ -512,7 +1358,20 @@ namespace Microsoft.Web.Mvc.Html
             return htmlAttributes;
         }
 
-        private static IDictionary<string, object> TextAreaAttributes(string accessKey, string cssClass, int? cols, string dir, bool disabled, string id, string lang, bool readOnly, int? rows, string style, int? tabIndex, string title)
+        private static IDictionary<string, object> TextAreaAttributes(
+            string accessKey,
+            string cssClass,
+            int? cols,
+            string dir,
+            bool disabled,
+            string id,
+            string lang,
+            bool readOnly,
+            int? rows,
+            string style,
+            int? tabIndex,
+            string title
+        )
         {
             var htmlAttributes = Attributes(cssClass, id, style);
 

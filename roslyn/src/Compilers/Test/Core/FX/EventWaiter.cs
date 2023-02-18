@@ -23,13 +23,13 @@ namespace Roslyn.Test.Utilities
 
         /// <summary>
         /// Returns the lambda given with method calls to this class inserted of the form:
-        /// 
+        ///
         /// try
         ///     execute given lambda.
-        ///     
+        ///
         /// catch
         ///     capture exception.
-        ///     
+        ///
         /// finally
         ///     signal async operation has completed.
         /// </summary>

@@ -10,10 +10,12 @@ namespace MonoTests.Common
     {
         MyHttpRequestWrapper request;
 
-        public override HttpRequestBase Request {
-            get {
+        public override HttpRequestBase Request
+        {
+            get
+            {
                 if (request == null)
-                    request = new MyHttpRequestWrapper ();
+                    request = new MyHttpRequestWrapper();
 
                 return request;
             }

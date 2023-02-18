@@ -3,7 +3,8 @@
 
 public class Blah
 {
-    public enum MyEnum : byte {
+    public enum MyEnum : byte
+    {
         Foo = 255,
         Bar
     }

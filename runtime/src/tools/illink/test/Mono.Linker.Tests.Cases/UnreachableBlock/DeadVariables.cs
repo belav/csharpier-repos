@@ -4,71 +4,81 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBlock
 {
-    [SetupCSharpCompilerToUse ("csc")]
-    [SetupCompileArgument ("/optimize+")]
-    [SetupLinkerArgument ("--enable-opt", "ipconstprop")]
+    [SetupCSharpCompilerToUse("csc")]
+    [SetupCompileArgument("/optimize+")]
+    [SetupLinkerArgument("--enable-opt", "ipconstprop")]
     public class DeadVariables
     {
-        public static void Main ()
+        public static void Main()
         {
-            Test_1 ();
-            Test_2 (4);
-            Test_3 ();
+            Test_1();
+            Test_2(4);
+            Test_3();
         }
 
         [Kept]
         [ExpectBodyModified]
-        [ExpectedLocalsSequence (new string[0])]
-        static void Test_1 ()
+        [ExpectedLocalsSequence(new string[0])]
+        static void Test_1()
         {
-            if (!AlwaysTrue) {
+            if (!AlwaysTrue)
+            {
                 int var = 1;
-                Console.WriteLine (var);
+                Console.WriteLine(var);
             }
         }
 
         [Kept]
         [ExpectBodyModified]
-        [ExpectedLocalsSequence (new string[] { "System.Object", "System.Int32" })]
-        static int Test_2 (int arg)
+        [ExpectedLocalsSequence(new string[] { "System.Object", "System.Int32" })]
+        static int Test_2(int arg)
         {
-            if (!AlwaysTrue) {
+            if (!AlwaysTrue)
+            {
                 long var = 3;
-                Console.WriteLine (var++);
-                return (int) var;
+                Console.WriteLine(var++);
+                return (int)var;
             }
 
             {
                 int b = arg;
-                Console.WriteLine (b++);
+                Console.WriteLine(b++);
                 return b;
             }
         }
 
         [Kept]
         [ExpectBodyModified]
-        [ExpectedLocalsSequence (new string[] { "System.Int32", "System.DateTime", "System.DateTimeOffset", "System.DateTimeOffset" })]
-        static int Test_3 ()
+        [ExpectedLocalsSequence(
+            new string[]
+            {
+                "System.Int32",
+                "System.DateTime",
+                "System.DateTimeOffset",
+                "System.DateTimeOffset"
+            }
+        )]
+        static int Test_3()
         {
             var b = 3;
-            var c = new DateTime ();
-            var d = new DateTimeOffset ();
-            var e = new DateTimeOffset ();
+            var c = new DateTime();
+            var d = new DateTimeOffset();
+            var e = new DateTimeOffset();
 
-            if (!AlwaysTrue) {
+            if (!AlwaysTrue)
+            {
                 int a = b;
                 ref int var = ref a;
             }
 
-            Console.WriteLine (b.ToString (), c, d, e);
+            Console.WriteLine(b.ToString(), c, d, e);
 
             return 2;
         }
 
-        static bool AlwaysTrue {
-            get {
-                return true;
-            }
+        static bool AlwaysTrue
+        {
+            get { return true; }
         }
     }
 }

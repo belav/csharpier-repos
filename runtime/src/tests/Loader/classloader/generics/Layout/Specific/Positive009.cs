@@ -4,26 +4,38 @@
 using System;
 using System.Runtime.InteropServices;
 
-
-[StructLayout(LayoutKind.Sequential, Pack=8)]    
+[StructLayout(LayoutKind.Sequential, Pack = 8)]
 public struct GenStruct<T>
 {
     T t;
-    
-    T Dummy(T t) { this.t = t;  return t;}
+
+    T Dummy(T t)
+    {
+        this.t = t;
+        return t;
+    }
 }
 
-[StructLayout(LayoutKind.Explicit, Pack=8)]
-public class NonGen 
+[StructLayout(LayoutKind.Explicit, Pack = 8)]
+public class NonGen
 {
-    [FieldOffset(0)] 
+    [FieldOffset(0)]
     GenStruct<int> genStruct;
 
-    [FieldOffset(0)] 
+    [FieldOffset(0)]
     int u;
-    
-    GenStruct<int> Dummy(GenStruct<int> t) { this.genStruct = t;  return t;}
-    int Dummy(int u) { this.u= u; return u;}    
+
+    GenStruct<int> Dummy(GenStruct<int> t)
+    {
+        this.genStruct = t;
+        return t;
+    }
+
+    int Dummy(int u)
+    {
+        this.u = u;
+        return u;
+    }
 }
 
 public class GenTest
@@ -37,6 +49,7 @@ public class GenTest
     {
         InternalTest();
     }
+
     public bool Test_Positive009()
     {
         try
@@ -44,8 +57,7 @@ public class GenTest
             IndirectTest();
             return true;
         }
-        
-        catch(Exception E)
+        catch (Exception E)
         {
             Console.WriteLine("Test caught unexpected Exception " + E);
             return false;
@@ -57,6 +69,7 @@ public class Test_Positive009
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -65,14 +78,12 @@ public class Test_Positive009
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-
         Eval(new GenTest().Test_Positive009());
-        
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -85,14 +96,3 @@ public class Test_Positive009
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

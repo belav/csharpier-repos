@@ -3,15 +3,13 @@
 
 public class A
 {
-    public A (int arg)
-    {
-    }
+    public A(int arg) { }
 }
 
 public class Test : A
 {
     int prop = 1;
 
-    public extern Test ()
-        : base (1);
+    public extern Test()
+        : base(1);
 }

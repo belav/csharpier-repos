@@ -11,57 +11,57 @@ namespace ILLink.RoslynAnalyzer.Tests.Inheritance.Interfaces
         protected override string TestSuiteName => "Inheritance.Interfaces.StaticInterfaceMethods";
 
         [Fact]
-        public Task BaseProvidesInterfaceMethod ()
+        public Task BaseProvidesInterfaceMethod()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
 
         [Fact]
-        public Task StaticAbstractInterfaceMethods ()
+        public Task StaticAbstractInterfaceMethods()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
 
         [Fact]
-        public Task StaticAbstractInterfaceMethodsLibrary ()
+        public Task StaticAbstractInterfaceMethodsLibrary()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
 
         [Fact]
-        public Task StaticInterfaceMethodsInPreservedScope ()
+        public Task StaticInterfaceMethodsInPreservedScope()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
 
         [Fact]
-        public Task StaticVirtualInterfaceMethodsInPreservedScope ()
+        public Task StaticVirtualInterfaceMethodsInPreservedScope()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
 
         [Fact]
-        public Task StaticVirtualInterfaceMethodsInPreservedScopeLibrary ()
+        public Task StaticVirtualInterfaceMethodsInPreservedScopeLibrary()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
 
         [Fact]
-        public Task StaticVirtualInterfaceMethodsLibrary ()
+        public Task StaticVirtualInterfaceMethodsLibrary()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
 
         [Fact]
-        public Task UnusedInterfacesInPreservedScope ()
+        public Task UnusedInterfacesInPreservedScope()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
 
         [Fact]
-        public Task UnusedStaticInterfaceMethods ()
+        public Task UnusedStaticInterfaceMethods()
         {
-            return RunTest (allowMissingWarnings: false);
+            return RunTest(allowMissingWarnings: false);
         }
     }
 }

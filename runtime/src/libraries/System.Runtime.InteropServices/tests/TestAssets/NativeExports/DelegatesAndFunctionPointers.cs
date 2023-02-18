@@ -35,11 +35,15 @@ namespace NativeExports
             }
 
             // If the corresponding Delegate was collected, the runtime will rudely abort.
-            ((delegate*<void>)fptr)();
+            ((delegate* <void>)fptr)();
         }
 
         [UnmanagedCallersOnly(EntryPoint = "invoke_callback_blittable_args")]
-        public static int InvokeCallbackWithBlittableArgument(delegate* unmanaged<int, int, int> fptr, int a, int b)
+        public static int InvokeCallbackWithBlittableArgument(
+            delegate* unmanaged<int, int, int> fptr,
+            int a,
+            int b
+        )
         {
             return fptr(a, b);
         }
@@ -47,7 +51,7 @@ namespace NativeExports
         [UnmanagedCallersOnly(EntryPoint = "invoke_managed_callback_blittable_args")]
         public static int InvokeManagedCallbackWithBlittableArgument(void* fptr, int a, int b)
         {
-            return ((delegate*<int, int, int>)fptr)(a, b);
+            return ((delegate* <int, int, int>)fptr)(a, b);
         }
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,42 +54,49 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class DataContractSerializerElement
-         : BehaviorExtensionElement
+    public sealed class DataContractSerializerElement : BehaviorExtensionElement
     {
         // Properties
 
-        public override Type BehaviorType {
-            get { return typeof (DataContractSerializerServiceBehavior); }
+        public override Type BehaviorType
+        {
+            get { return typeof(DataContractSerializerServiceBehavior); }
         }
 
-        [ConfigurationProperty ("ignoreExtensionDataObject",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool IgnoreExtensionDataObject {
-            get { return (bool) base ["ignoreExtensionDataObject"]; }
-            set { base ["ignoreExtensionDataObject"] = value; }
+        [ConfigurationProperty(
+            "ignoreExtensionDataObject",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool IgnoreExtensionDataObject
+        {
+            get { return (bool)base["ignoreExtensionDataObject"]; }
+            set { base["ignoreExtensionDataObject"] = value; }
         }
 
-        [ConfigurationProperty ("maxItemsInObjectGraph",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "65536")]
-        [IntegerValidator (MinValue = 0,
-            MaxValue = int.MaxValue,
-            ExcludeRange = false)]
-        public int MaxItemsInObjectGraph {
-            get { return (int) base ["maxItemsInObjectGraph"]; }
-            set { base ["maxItemsInObjectGraph"] = value; }
+        [ConfigurationProperty(
+            "maxItemsInObjectGraph",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "65536"
+        )]
+        [IntegerValidator(MinValue = 0, MaxValue = int.MaxValue, ExcludeRange = false)]
+        public int MaxItemsInObjectGraph
+        {
+            get { return (int)base["maxItemsInObjectGraph"]; }
+            set { base["maxItemsInObjectGraph"] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return base.Properties; }
         }
 
-        protected internal override object CreateBehavior () {
-            return new DataContractSerializerServiceBehavior (IgnoreExtensionDataObject, MaxItemsInObjectGraph);
+        protected internal override object CreateBehavior()
+        {
+            return new DataContractSerializerServiceBehavior(
+                IgnoreExtensionDataObject,
+                MaxItemsInObjectGraph
+            );
         }
-
     }
-
 }

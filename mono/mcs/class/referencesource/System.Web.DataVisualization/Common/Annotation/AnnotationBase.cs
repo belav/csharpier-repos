@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,10 +11,10 @@
 //
 //    Classes:    Annotation, AnnotationPositionChangingEventArgs
 //
-//  Purpose:    Base class for all anotation objects. Provides 
+//  Purpose:    Base class for all anotation objects. Provides
 //                basic set of properties and methods.
 //
-//    Reviewed:    
+//    Reviewed:
 //
 //===================================================================
 
@@ -37,11 +37,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 using System.Windows.Forms;
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Windows.Forms.DataVisualization.Charting.Data;
-    using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-    using System.Windows.Forms.DataVisualization.Charting.Utilities;
-    using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
 using System.Web;
 using System.Web.UI;
@@ -52,10 +52,9 @@ using System.Web.UI.DataVisualization.Charting.Utilities;
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     #region Enumerations
@@ -91,70 +90,84 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Top Left selection handle is used.
         /// </summary>
         TopLeftHandle = 0,
+
         /// <summary>
         /// Top selection handle is used.
         /// </summary>
         TopHandle = 1,
+
         /// <summary>
         /// Top Right selection handle is used.
         /// </summary>
         TopRightHandle = 2,
+
         /// <summary>
         /// Right selection handle is used.
         /// </summary>
         RightHandle = 3,
+
         /// <summary>
         /// Bottom Right selection handle is used.
         /// </summary>
         BottomRightHandle = 4,
+
         /// <summary>
         /// Bottom selection handle is used.
         /// </summary>
         BottomHandle = 5,
+
         /// <summary>
         /// Bottom Left selection handle is used.
         /// </summary>
         BottomLeftHandle = 6,
+
         /// <summary>
         /// Left selection handle is used.
         /// </summary>
         LeftHandle = 7,
+
         /// <summary>
         /// Anchor selection handle is used.
         /// </summary>
         AnchorHandle = 8,
+
         /// <summary>
         /// No selection handles used - moving mode.
         /// </summary>
         Moving = 16,
+
         /// <summary>
         /// Moving points of the annotation path.
         /// </summary>
         MovingPathPoints = 32,
+
         /// <summary>
         /// No moving or resizing.
         /// </summary>
         None = 64,
     }
 
-#endregion
+    #endregion
 
     /// <summary>
-    /// <b>Annotation</b> is an abstract class that defines properties and methods 
+    /// <b>Annotation</b> is an abstract class that defines properties and methods
     /// common to all annotations.
     /// </summary>
     /// <remarks>
-    /// All annotations are derived from the <b>Annotation</b> class, which can be 
-    /// used to set properties common to all annotation objects (e.g. color, position, 
-    /// anchoring and others). 
+    /// All annotations are derived from the <b>Annotation</b> class, which can be
+    /// used to set properties common to all annotation objects (e.g. color, position,
+    /// anchoring and others).
     /// </remarks>
-    [
-    SRDescription("DescriptionAttributeAnnotation_Annotation"),
-    DefaultProperty("Name"),
-    ]
+    [SRDescription("DescriptionAttributeAnnotation_Annotation"), DefaultProperty("Name"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
 #if !Microsoft_CONTROL
     public abstract class Annotation : ChartNamedElement, IChartMapArea
@@ -166,119 +179,122 @@ namespace System.Web.UI.DataVisualization.Charting
 
 
         // Name of the chart area the annotation is clipped to
-        private        string                    _clipToChartArea = Constants.NotSetValue;
+        private string _clipToChartArea = Constants.NotSetValue;
 
         // Indicates that annotation is selected
-        private        bool                    _isSelected = false;
+        private bool _isSelected = false;
 
         // Indicates that annotation size is defined in relative chart coordinates
-        private        bool                    _isSizeAlwaysRelative = true;
-        
+        private bool _isSizeAlwaysRelative = true;
+
         // Position attribute fields
-        private        double                    _x = double.NaN;
-        private        double                    _y = double.NaN;
-        private        double                    _width = double.NaN;
-        private        double                    _height = double.NaN;
+        private double _x = double.NaN;
+        private double _y = double.NaN;
+        private double _width = double.NaN;
+        private double _height = double.NaN;
 
         // Annotation axes attaching fields
-        private        string                    _axisXName = String.Empty;
-        private        string                    _axisYName = String.Empty;
-        private        Axis                    _axisX = null;
-        private        Axis                    _axisY = null;
+        private string _axisXName = String.Empty;
+        private string _axisYName = String.Empty;
+        private Axis _axisX = null;
+        private Axis _axisY = null;
 
         // Visual attribute fields
-        private        bool                    _visible = true;
-        private        ContentAlignment        _alignment = ContentAlignment.MiddleCenter;
-        private        Color                    _foreColor = Color.Black;
-        private     FontCache               _fontCache = new FontCache();
-        private     Font                    _textFont;
-        private     TextStyle               _textStyle = TextStyle.Default;
-        internal    Color                    lineColor = Color.Black;
-        private        int                        _lineWidth = 1;
-        private        ChartDashStyle            _lineDashStyle = ChartDashStyle.Solid;
-        private        Color                    _backColor = Color.Empty;
-        private        ChartHatchStyle            _backHatchStyle = ChartHatchStyle.None;
-        private        GradientStyle            _backGradientStyle = GradientStyle.None;
-        private        Color                    _backSecondaryColor = Color.Empty;
-        private        Color                    _shadowColor = Color.FromArgb(128, 0, 0, 0);
-        private        int                        _shadowOffset = 0;
+        private bool _visible = true;
+        private ContentAlignment _alignment = ContentAlignment.MiddleCenter;
+        private Color _foreColor = Color.Black;
+        private FontCache _fontCache = new FontCache();
+        private Font _textFont;
+        private TextStyle _textStyle = TextStyle.Default;
+        internal Color lineColor = Color.Black;
+        private int _lineWidth = 1;
+        private ChartDashStyle _lineDashStyle = ChartDashStyle.Solid;
+        private Color _backColor = Color.Empty;
+        private ChartHatchStyle _backHatchStyle = ChartHatchStyle.None;
+        private GradientStyle _backGradientStyle = GradientStyle.None;
+        private Color _backSecondaryColor = Color.Empty;
+        private Color _shadowColor = Color.FromArgb(128, 0, 0, 0);
+        private int _shadowOffset = 0;
 
         // Anchor position attribute fields
-        private        string                    _anchorDataPointName = String.Empty;
-        private        DataPoint                _anchorDataPoint = null;
-        private        DataPoint                _anchorDataPoint2 = null;
-        private        double                    _anchorX = double.NaN;
-        private        double                    _anchorY = double.NaN;
-        internal    double                    anchorOffsetX = 0.0;
-        internal    double                  anchorOffsetY = 0.0;
-        internal    ContentAlignment        anchorAlignment = ContentAlignment.BottomCenter;
+        private string _anchorDataPointName = String.Empty;
+        private DataPoint _anchorDataPoint = null;
+        private DataPoint _anchorDataPoint2 = null;
+        private double _anchorX = double.NaN;
+        private double _anchorY = double.NaN;
+        internal double anchorOffsetX = 0.0;
+        internal double anchorOffsetY = 0.0;
+        internal ContentAlignment anchorAlignment = ContentAlignment.BottomCenter;
 
         // Selection handles position (starting top-left and moving clockwise)
-        internal    RectangleF[]            selectionRects = null;
+        internal RectangleF[] selectionRects = null;
 
         // Annotation tooltip
-        private        string                    _tooltip = String.Empty;
+        private string _tooltip = String.Empty;
 
         // Selection handles size
-        internal const int                    selectionMarkerSize = 6;
+        internal const int selectionMarkerSize = 6;
 
         // Pre calculated relative position of annotation and anchor point
-        internal    RectangleF                currentPositionRel = new RectangleF(float.NaN, float.NaN, float.NaN, float.NaN);
-        internal    PointF                    currentAnchorLocationRel = new PointF(float.NaN, float.NaN);
+        internal RectangleF currentPositionRel = new RectangleF(
+            float.NaN,
+            float.NaN,
+            float.NaN,
+            float.NaN
+        );
+        internal PointF currentAnchorLocationRel = new PointF(float.NaN, float.NaN);
 
-        // Smart labels style        
-        private        AnnotationSmartLabelStyle    _smartLabelStyle = null;
+        // Smart labels style
+        private AnnotationSmartLabelStyle _smartLabelStyle = null;
 
         // Index of last selected point in the annotation path
-        internal    int                        currentPathPointIndex = -1;
+        internal int currentPathPointIndex = -1;
 
         // Group this annotation belongs too
-        internal    AnnotationGroup            annotationGroup = null;
+        internal AnnotationGroup annotationGroup = null;
 
 #if Microsoft_CONTROL
 
         // Selection and editing permissions
-        private     bool                    _allowSelecting = false;
-        private     bool                    _allowMoving = false;
-        private     bool                    _allowAnchorMoving = false;
-        private     bool                    _allowResizing = false;
-        private     bool                    _allowTextEditing = false;
-        private     bool                    _allowPathEditing = false;
+        private bool _allowSelecting = false;
+        private bool _allowMoving = false;
+        private bool _allowAnchorMoving = false;
+        private bool _allowResizing = false;
+        private bool _allowTextEditing = false;
+        private bool _allowPathEditing = false;
 
 #endif //Microsoft_CONTROL
 
 #if Microsoft_CONTROL
 
         // Indicates that annotation position was changed. Flag used to fire events.
-        internal    bool                    positionChanged = false;
+        internal bool positionChanged = false;
 
         // Relative location of last placement position
-        internal    PointF                    lastPlacementPosition = PointF.Empty;
+        internal PointF lastPlacementPosition = PointF.Empty;
 
         // Relative location of annotation anchor, when it's started to move
-        internal    PointF                    startMoveAnchorLocationRel = PointF.Empty;
-
+        internal PointF startMoveAnchorLocationRel = PointF.Empty;
 #endif // Microsoft_CONTROL
 
         // Relative position of annotation, when it's started to move/resize
-        internal    RectangleF                startMovePositionRel = RectangleF.Empty;
+        internal RectangleF startMovePositionRel = RectangleF.Empty;
 
         // Relative position of annotation, when it's started to move/resize
-        internal    GraphicsPath            startMovePathRel = null;
+        internal GraphicsPath startMovePathRel = null;
 
 #if !Microsoft_CONTROL
 
         // Annotation map area attributes
-        private        string                    _url = String.Empty;
-        private        string                    _mapAreaAttributes = String.Empty;
-        private     string                  _postbackValue = String.Empty;
-
+        private string _url = String.Empty;
+        private string _mapAreaAttributes = String.Empty;
+        private string _postbackValue = String.Empty;
 #endif    // !Microsoft_CONTROL
 
         /// <summary>
         /// Limit of annotation width and height.
         /// </summary>
-        internal static  double             WidthHightLimit = 290000000;
+        internal static double WidthHightLimit = 290000000;
 
         #endregion
 
@@ -286,17 +302,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Initializes a new instance of the <see cref="Annotation"/> class.
         /// </summary>
-        protected Annotation() 
+        protected Annotation()
         {
             _textFont = _fontCache.DefaultFont;
-        } 
+        }
 
         #endregion
 
         #region Properties
 
         #region Miscellaneous
-        
+
         /// <summary>
         /// Gets or sets an annotation's unique name.
         /// </summary>
@@ -304,21 +320,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <b>string</b> that represents an annotation's unique name.
         /// </value>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeName4"),
-        ParenthesizePropertyNameAttribute(true),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeName4"),
+            ParenthesizePropertyNameAttribute(true),
         ]
         public override string Name
         {
-            get
-            {
-                return base.Name;
-            }
-            set
-            {
-                base.Name = value;
-            }
+            get { return base.Name; }
+            set { base.Name = value; }
         }
 
         /// <summary>
@@ -326,25 +336,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <remarks>
         /// This property is used to get the name of each annotation Style
-        /// (e.g. Line, Rectangle, Ellipse). 
+        /// (e.g. Line, Rectangle, Ellipse).
         /// <para>
         /// This property is for internal use and is hidden at design and run time.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAnnotation_AnnotationType"),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAnnotation_AnnotationType"),
         ]
-        public abstract string AnnotationType
-        {
-            get;
-        }
-
+        public abstract string AnnotationType { get; }
 
         /// <summary>
         /// Gets or sets the name of the chart area which an annotation is clipped to.
@@ -353,25 +359,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A string which represents the name of an existing chart area.
         /// </value>
         /// <remarks>
-        /// If the chart area name is specified, an annotation will only be drawn inside the 
-        /// plotting area of the chart area specified.  All parts of the annotation 
+        /// If the chart area name is specified, an annotation will only be drawn inside the
+        /// plotting area of the chart area specified.  All parts of the annotation
         /// outside of the plotting area will be clipped.
         /// <para>
         /// To disable chart area clipping, set the property to "NotSet" or an empty string.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(Constants.NotSetValue),
-        SRDescription("DescriptionAttributeAnnotationClipToChartArea"),
-        TypeConverter(typeof(LegendAreaNameConverter))
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(Constants.NotSetValue),
+            SRDescription("DescriptionAttributeAnnotationClipToChartArea"),
+            TypeConverter(typeof(LegendAreaNameConverter))
         ]
         virtual public string ClipToChartArea
         {
-            get
-            {
-                return _clipToChartArea;
-            }
+            get { return _clipToChartArea; }
             set
             {
                 if (value != _clipToChartArea)
@@ -393,30 +396,29 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
         /// <summary>
         /// Gets or sets the smart labels style of an annotation.
         /// </summary>
         /// <value>
-        /// An <see cref="AnnotationSmartLabelStyle"/> object that represents an annotation's 
+        /// An <see cref="AnnotationSmartLabelStyle"/> object that represents an annotation's
         /// smart labels style properties.
         /// </value>
         /// <remarks>
-        /// Smart labels are used to prevent an annotation from overlapping data point labels 
+        /// Smart labels are used to prevent an annotation from overlapping data point labels
         /// and other annotations.
         /// <para>
         /// Note that data point labels must also have smart labels enabled.
         /// </para>
         /// </remarks>
         [
-        Browsable(true),
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        SRDescription("DescriptionAttributeSmartLabels"),
+            Browsable(true),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeSmartLabels"),
 #if Microsoft_CONTROL
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content), 
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
 #else
-        PersistenceMode(PersistenceMode.InnerProperty),
+            PersistenceMode(PersistenceMode.InnerProperty),
 #endif
         ]
         public AnnotationSmartLabelStyle SmartLabelStyle
@@ -441,9 +443,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets the group, if any, the annotation belongs to.
         /// </summary>
         [
-        Browsable(false),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            Browsable(false),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
         ]
         public AnnotationGroup AnnotationGroup
         {
@@ -455,35 +457,32 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Position
 
         /// <summary>
-        /// Gets or sets a flag that specifies whether the size of an annotation is always 
+        /// Gets or sets a flag that specifies whether the size of an annotation is always
         /// defined in relative chart coordinates.
         /// <seealso cref="Width"/>
         /// <seealso cref="Height"/>
         /// </summary>
         /// <value>
-        /// <b>True</b> if an annotation's <see cref="Width"/> and <see cref="Height"/> are always 
+        /// <b>True</b> if an annotation's <see cref="Width"/> and <see cref="Height"/> are always
         /// in chart relative coordinates, <b>false</b> otherwise.
         /// </value>
         /// <remarks>
-        /// An annotation's width and height may be set in relative chart or axes coordinates. 
+        /// An annotation's width and height may be set in relative chart or axes coordinates.
         /// By default, relative chart coordinates are used.
         /// <para>
-        /// To use axes coordinates for size set the <b>IsSizeAlwaysRelative</b> property to 
-        /// <b>false</b> and either anchor the annotation to a data point or set the 
+        /// To use axes coordinates for size set the <b>IsSizeAlwaysRelative</b> property to
+        /// <b>false</b> and either anchor the annotation to a data point or set the
         /// <see cref="AxisX"/> or <see cref="AxisY"/> properties.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(true),
-        SRDescription("DescriptionAttributeSizeAlwaysRelative"),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(true),
+            SRDescription("DescriptionAttributeSizeAlwaysRelative"),
         ]
         virtual public bool IsSizeAlwaysRelative
         {
-            get
-            {
-                return _isSizeAlwaysRelative;
-            }
+            get { return _isSizeAlwaysRelative; }
             set
             {
                 _isSizeAlwaysRelative = value;
@@ -501,33 +500,34 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A Double value that represents the X coordinate of an annotation.
         /// </value>
         /// <remarks>
-        /// The X coordinate of an annotation is in relative chart coordinates or axes coordinates. Chart 
+        /// The X coordinate of an annotation is in relative chart coordinates or axes coordinates. Chart
         /// relative coordinates are used by default.
         /// <para>
-        /// To use axes coordinates, anchor 
-        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or 
+        /// To use axes coordinates, anchor
+        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or
         /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties.
         /// </para>
         /// <para>
-        /// Set the X position to Double.NaN ("NotSet") to achieve automatic position calculation 
-        /// when the annotation is anchored using the <see cref="AnchorDataPoint"/> property or 
+        /// Set the X position to Double.NaN ("NotSet") to achieve automatic position calculation
+        /// when the annotation is anchored using the <see cref="AnchorDataPoint"/> property or
         /// the <see cref="AnchorX"/> and <see cref="AnchorY"/> properties.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(double.NaN),
-        SRDescription("DescriptionAttributeAnnotationBaseX"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        TypeConverter(typeof(DoubleNanValueConverter)),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(double.NaN),
+            SRDescription("DescriptionAttributeAnnotationBaseX"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+            TypeConverter(typeof(DoubleNanValueConverter)),
         ]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "X")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "X"
+        )]
         virtual public double X
         {
-            get
-            {
-                return _x;
-            }
+            get { return _x; }
             set
             {
                 _x = value;
@@ -545,33 +545,34 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A Double value that represents the Y coordinate of an annotation.
         /// </value>
         /// <remarks>
-        /// The Y coordinate of an annotation is in relative chart coordinates or axes coordinates. Chart 
+        /// The Y coordinate of an annotation is in relative chart coordinates or axes coordinates. Chart
         /// relative coordinates are used by default.
         /// <para>
-        /// To use axes coordinates, anchor 
-        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or 
+        /// To use axes coordinates, anchor
+        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or
         /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties.
         /// </para>
         /// <para>
-        /// Set the Y position to Double.NaN ("NotSet") to achieve automatic position calculation 
-        /// when the annotation is anchored using the <see cref="AnchorDataPoint"/> property or 
+        /// Set the Y position to Double.NaN ("NotSet") to achieve automatic position calculation
+        /// when the annotation is anchored using the <see cref="AnchorDataPoint"/> property or
         /// the <see cref="AnchorX"/> and <see cref="AnchorY"/> properties.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(double.NaN),
-        SRDescription("DescriptionAttributeAnnotationBaseY"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        TypeConverter(typeof(DoubleNanValueConverter)),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(double.NaN),
+            SRDescription("DescriptionAttributeAnnotationBaseY"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+            TypeConverter(typeof(DoubleNanValueConverter)),
         ]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Y")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Y"
+        )]
         virtual public double Y
         {
-            get
-            {
-                return _y;
-            }
+            get { return _y; }
             set
             {
                 _y = value;
@@ -589,42 +590,45 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A Double value that represents an annotation's width.
         /// </value>
         /// <remarks>
-        /// An annotation's width can be a negative value, in which case the annotation orientation 
+        /// An annotation's width can be a negative value, in which case the annotation orientation
         /// is switched.
         /// <para>
-        /// Annotation width can be in relative chart or axes coordinates. Chart 
+        /// Annotation width can be in relative chart or axes coordinates. Chart
         /// relative coordinates are used by default.
         /// </para>
         /// <para>
-        /// To use axes coordinates, anchor 
-        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or 
-        /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties 
+        /// To use axes coordinates, anchor
+        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or
+        /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties
         /// and set the <see cref="IsSizeAlwaysRelative"/> property to <b>false</b>.
         /// </para>
         /// <para>
-        /// Set the width to Double.NaN ("NotSet") to achieve automatic size calculation for 
-        /// annotations with text. The size will automatically be calculated based on 
+        /// Set the width to Double.NaN ("NotSet") to achieve automatic size calculation for
+        /// annotations with text. The size will automatically be calculated based on
         /// the annotation text and font size.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(double.NaN),
-        SRDescription("DescriptionAttributeAnnotationWidth"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        TypeConverter(typeof(DoubleNanValueConverter)),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(double.NaN),
+            SRDescription("DescriptionAttributeAnnotationWidth"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+            TypeConverter(typeof(DoubleNanValueConverter)),
         ]
         virtual public double Width
         {
-            get
-            {
-                return _width;
-            }
+            get { return _width; }
             set
             {
                 if (value < -WidthHightLimit || value > WidthHightLimit)
                 {
-                    throw new ArgumentException(SR.ExceptionValueMustBeInRange("Width", (-WidthHightLimit).ToString(CultureInfo.CurrentCulture), WidthHightLimit.ToString(CultureInfo.CurrentCulture)));
+                    throw new ArgumentException(
+                        SR.ExceptionValueMustBeInRange(
+                            "Width",
+                            (-WidthHightLimit).ToString(CultureInfo.CurrentCulture),
+                            WidthHightLimit.ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
                 }
                 _width = value;
                 this.ResetCurrentRelativePosition();
@@ -641,42 +645,45 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A Double value that represents an annotation's height.
         /// </value>
         /// <remarks>
-        /// An annotation's height can be a negative value, in which case the annotation orientation 
+        /// An annotation's height can be a negative value, in which case the annotation orientation
         /// is switched.
         /// <para>
-        /// Annotation height can be in relative chart or axes coordinates. Chart 
+        /// Annotation height can be in relative chart or axes coordinates. Chart
         /// relative coordinates are used by default.
         /// </para>
         /// <para>
-        /// To use axes coordinates, anchor 
-        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or 
-        /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties 
+        /// To use axes coordinates, anchor
+        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or
+        /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties
         /// and set the <see cref="IsSizeAlwaysRelative"/> property to <b>false</b>.
         /// </para>
         /// <para>
-        /// Set the height to Double.NaN ("NotSet") to achieve automatic size calculation for 
-        /// annotations with text. The size will automatically be calculated based on 
+        /// Set the height to Double.NaN ("NotSet") to achieve automatic size calculation for
+        /// annotations with text. The size will automatically be calculated based on
         /// the annotation text and font size.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(double.NaN),
-        SRDescription("DescriptionAttributeAnnotationHeight"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        TypeConverter(typeof(DoubleNanValueConverter)),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(double.NaN),
+            SRDescription("DescriptionAttributeAnnotationHeight"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+            TypeConverter(typeof(DoubleNanValueConverter)),
         ]
         virtual public double Height
         {
-            get
-            {
-                return _height;
-            }
+            get { return _height; }
             set
             {
                 if (value < -WidthHightLimit || value > WidthHightLimit)
                 {
-                    throw new ArgumentException(SR.ExceptionValueMustBeInRange("Height", (-WidthHightLimit).ToString(CultureInfo.CurrentCulture), WidthHightLimit.ToString(CultureInfo.CurrentCulture)));
+                    throw new ArgumentException(
+                        SR.ExceptionValueMustBeInRange(
+                            "Height",
+                            (-WidthHightLimit).ToString(CultureInfo.CurrentCulture),
+                            WidthHightLimit.ToString(CultureInfo.CurrentCulture)
+                        )
+                    );
                 }
                 _height = value;
                 this.ResetCurrentRelativePosition();
@@ -693,27 +700,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A Double value that represents the position of an annotation's right boundary.
         /// </value>
         /// <remarks>
-        /// To use axes coordinates, anchor 
-        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or 
-        /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties 
+        /// To use axes coordinates, anchor
+        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or
+        /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties
         /// and set the <see cref="IsSizeAlwaysRelative"/> property to <b>false</b>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(double.NaN),
-        SRDescription("DescriptionAttributeRight3"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        Browsable(false),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        TypeConverter(typeof(DoubleNanValueConverter)),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(double.NaN),
+            SRDescription("DescriptionAttributeRight3"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+            Browsable(false),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            TypeConverter(typeof(DoubleNanValueConverter)),
         ]
         virtual public double Right
         {
-            get
-            {
-                return _x + _width;
-            }
+            get { return _x + _width; }
             set
             {
                 _width = value - _x;
@@ -731,27 +735,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A Double value that represents the position of an annotation's bottom boundary.
         /// </value>
         /// <remarks>
-        /// To use axes coordinates, anchor 
-        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or 
-        /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties 
+        /// To use axes coordinates, anchor
+        /// an annotation to a data point using the <see cref="AnchorDataPoint"/> property, or
+        /// set the annotation axes using the <see cref="AxisX"/> or <see cref="AxisY"/> properties
         /// and set the <see cref="IsSizeAlwaysRelative"/> property to <b>false</b>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(double.NaN),
-        SRDescription("DescriptionAttributeBottom"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        Browsable(false),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        TypeConverter(typeof(DoubleNanValueConverter)),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(double.NaN),
+            SRDescription("DescriptionAttributeBottom"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+            Browsable(false),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            TypeConverter(typeof(DoubleNanValueConverter)),
         ]
         virtual public double Bottom
         {
-            get
-            {
-                return _y + _height;
-            }
+            get { return _y + _height; }
             set
             {
                 _height = value - _y;
@@ -781,17 +782,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </value>
 #endif // Microsoft_CONTROL
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(false),
-        Browsable(false),
-        SRDescription("DescriptionAttributeSelected"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(false),
+            Browsable(false),
+            SRDescription("DescriptionAttributeSelected"),
         ]
         virtual public bool IsSelected
         {
-            get
-            {
-                return _isSelected;
-            }
+            get { return _isSelected; }
             set
             {
                 _isSelected = value;
@@ -810,21 +808,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(SelectionPointsStyle.Rectangle),
-        ParenthesizePropertyNameAttribute(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeSelectionPointsStyle"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(SelectionPointsStyle.Rectangle),
+            ParenthesizePropertyNameAttribute(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeSelectionPointsStyle"),
         ]
         virtual internal SelectionPointsStyle SelectionPointsStyle
         {
-            get
-            {
-                return SelectionPointsStyle.Rectangle;
-            }
+            get { return SelectionPointsStyle.Rectangle; }
         }
 
         /// <summary>
@@ -834,17 +829,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <b>True</b> if the annotation is visible, <b>false</b> otherwise.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(true),
-        SRDescription("DescriptionAttributeVisible"),
-        ParenthesizePropertyNameAttribute(true),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(true),
+            SRDescription("DescriptionAttributeVisible"),
+            ParenthesizePropertyNameAttribute(true),
         ]
         virtual public bool Visible
         {
-            get
-            {
-                return _visible;
-            }
+            get { return _visible; }
             set
             {
                 _visible = value;
@@ -859,21 +851,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ContentAlignment"/> value that represents the content alignment.
         /// </value>
         /// <remarks>
-        /// This property is used to align text for <see cref="TextAnnotation"/>, <see cref="RectangleAnnotation"/>,  
-        /// <see cref="EllipseAnnotation"/> and <see cref="CalloutAnnotation"/> objects, and to align 
+        /// This property is used to align text for <see cref="TextAnnotation"/>, <see cref="RectangleAnnotation"/>,
+        /// <see cref="EllipseAnnotation"/> and <see cref="CalloutAnnotation"/> objects, and to align
         /// a non-scaled image inside an <see cref="ImageAnnotation"/> object.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(ContentAlignment), "MiddleCenter"),
-        SRDescription("DescriptionAttributeAlignment"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(ContentAlignment), "MiddleCenter"),
+            SRDescription("DescriptionAttributeAlignment"),
         ]
         virtual public ContentAlignment Alignment
         {
-            get
-            {
-                return _alignment;
-            }
+            get { return _alignment; }
             set
             {
                 _alignment = value;
@@ -889,18 +878,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Color"/> value used for the text color of an annotation.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(Color), "Black"),
-        SRDescription("DescriptionAttributeForeColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(Color), "Black"),
+            SRDescription("DescriptionAttributeForeColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         virtual public Color ForeColor
         {
-            get
-            {
-                return _foreColor;
-            }
+            get { return _foreColor; }
             set
             {
                 _foreColor = value;
@@ -916,20 +902,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Font"/> object used for an annotation's text.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(Font), "Microsoft Sans Serif, 8pt"),
-        SRDescription("DescriptionAttributeTextFont"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(Font), "Microsoft Sans Serif, 8pt"),
+            SRDescription("DescriptionAttributeTextFont"),
         ]
         virtual public Font Font
         {
-            get
-            {
-                return _textFont;
-            }
+            get { return _textFont; }
             set
             {
                 _textFont = value;
-                this.Invalidate(); 
+                this.Invalidate();
             }
         }
 
@@ -942,16 +925,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="TextStyle"/> value used to draw an annotation's text.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(TextStyle), "Default"),
-        SRDescription("DescriptionAttributeTextStyle"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(TextStyle), "Default"),
+            SRDescription("DescriptionAttributeTextStyle"),
         ]
         virtual public TextStyle TextStyle
         {
-            get
-            {
-                return _textStyle;
-            }
+            get { return _textStyle; }
             set
             {
                 _textStyle = value;
@@ -968,18 +948,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Color"/> value used to draw an annotation line.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(Color), "Black"),
-        SRDescription("DescriptionAttributeLineColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(Color), "Black"),
+            SRDescription("DescriptionAttributeLineColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         virtual public Color LineColor
         {
-            get
-            {
-                return lineColor;
-            }
+            get { return lineColor; }
             set
             {
                 lineColor = value;
@@ -996,21 +973,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// An integer value defining the width of an annotation line in pixels.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(1),
-        SRDescription("DescriptionAttributeLineWidth"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(1),
+            SRDescription("DescriptionAttributeLineWidth"),
         ]
         virtual public int LineWidth
         {
-            get
-            {
-                return _lineWidth;
-            }
+            get { return _lineWidth; }
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionAnnotationLineWidthIsNegative));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAnnotationLineWidthIsNegative
+                        )
+                    );
                 }
                 _lineWidth = value;
                 Invalidate();
@@ -1026,16 +1005,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ChartDashStyle"/> value used to draw an annotation line.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(ChartDashStyle.Solid),
-        SRDescription("DescriptionAttributeLineDashStyle"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(ChartDashStyle.Solid),
+            SRDescription("DescriptionAttributeLineDashStyle"),
         ]
         virtual public ChartDashStyle LineDashStyle
         {
-            get
-            {
-                return _lineDashStyle;
-            }
+            get { return _lineDashStyle; }
             set
             {
                 _lineDashStyle = value;
@@ -1053,19 +1029,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Color"/> value used for the background of an annotation.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(Color), ""),
-        SRDescription("DescriptionAttributeBackColor"),
-        NotifyParentPropertyAttribute(true),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(Color), ""),
+            SRDescription("DescriptionAttributeBackColor"),
+            NotifyParentPropertyAttribute(true),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         virtual public Color BackColor
         {
-            get
-            {
-                return _backColor;
-            }
+            get { return _backColor; }
             set
             {
                 _backColor = value;
@@ -1086,24 +1059,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Two colors are used to draw the hatching, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(ChartHatchStyle.None),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeBackHatchStyle"),
-        Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(ChartHatchStyle.None),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeBackHatchStyle"),
+            Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
         ]
         virtual public ChartHatchStyle BackHatchStyle
         {
-            get
-            {
-                return _backHatchStyle;
-            }
+            get { return _backHatchStyle; }
             set
             {
                 _backHatchStyle = value;
                 Invalidate();
             }
         }
+
         /// <summary>
         /// Gets or sets the background gradient style of an annotation.
         /// <seealso cref="BackSecondaryColor"/>
@@ -1117,18 +1088,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Two colors are used to draw the gradient, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(GradientStyle.None),
-        NotifyParentPropertyAttribute(true),
-           SRDescription("DescriptionAttributeBackGradientStyle"),
-        Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
-        ]        
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(GradientStyle.None),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeBackGradientStyle"),
+            Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
+        ]
         virtual public GradientStyle BackGradientStyle
         {
-            get
-            {
-                return _backGradientStyle;
-            }
+            get { return _backGradientStyle; }
             set
             {
                 _backGradientStyle = value;
@@ -1143,7 +1111,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <seealso cref="BackGradientStyle"/>
         /// </summary>
         /// <value>
-        /// A <see cref="Color"/> value used for the secondary color of an annotation background with 
+        /// A <see cref="Color"/> value used for the secondary color of an annotation background with
         /// hatching or gradient fill.
         /// </value>
         /// <remarks>
@@ -1151,19 +1119,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <see cref="BackGradientStyle"/> are used.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(Color), ""),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeBackSecondaryColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
-        ] 
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(Color), ""),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeBackSecondaryColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+        ]
         virtual public Color BackSecondaryColor
         {
-            get
-            {
-                return _backSecondaryColor;
-            }
+            get { return _backSecondaryColor; }
             set
             {
                 _backSecondaryColor = value;
@@ -1179,18 +1144,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Color"/> value used to draw an annotation's shadow.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(typeof(Color), "128,0,0,0"),
-        SRDescription("DescriptionAttributeShadowColor"),
-        TypeConverter(typeof(ColorConverter)), 
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(typeof(Color), "128,0,0,0"),
+            SRDescription("DescriptionAttributeShadowColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         virtual public Color ShadowColor
         {
-            get
-            {
-                return _shadowColor;
-            }
+            get { return _shadowColor; }
             set
             {
                 _shadowColor = value;
@@ -1206,16 +1168,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// An integer value that represents the offset between an annotation and its shadow.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(0),
-        SRDescription("DescriptionAttributeShadowOffset"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(0),
+            SRDescription("DescriptionAttributeShadowOffset"),
         ]
         virtual public int ShadowOffset
         {
-            get
-            {
-                return _shadowOffset;
-            }
+            get { return _shadowOffset; }
             set
             {
                 _shadowOffset = value;
@@ -1238,18 +1197,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchorAxes"),
-        DefaultValue(""),
-        Browsable(false),
-        Bindable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        SRDescription("DescriptionAttributeAxisXName"),
+            SRCategory("CategoryAttributeAnchorAxes"),
+            DefaultValue(""),
+            Browsable(false),
+            Bindable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            SRDescription("DescriptionAttributeAxisXName"),
         ]
-        virtual public string  AxisXName
+        virtual public string AxisXName
         {
             get
             {
-                if(_axisXName.Length == 0 && _axisX != null)
+                if (_axisXName.Length == 0 && _axisX != null)
                 {
                     _axisXName = GetAxisName(_axisX);
                 }
@@ -1262,7 +1221,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.ResetCurrentRelativePosition();
                 Invalidate();
             }
-        }        
+        }
 
         /// <summary>
         /// Gets or sets the name of the Y axis which an annotation is attached to.
@@ -1275,15 +1234,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchorAxes"),
-        Browsable(false),
-        Bindable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DefaultValue(""),
-        SRDescription("DescriptionAttributeAxisYName"),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRCategory("CategoryAttributeAnchorAxes"),
+            Browsable(false),
+            Bindable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DefaultValue(""),
+            SRDescription("DescriptionAttributeAxisYName"),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
         ]
-        virtual public string  AxisYName
+        virtual public string AxisYName
         {
             get
             {
@@ -1291,17 +1250,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 // "YAxisName" property will be used instead.
                 return string.Empty;
             }
-            set
-            {
-                this.YAxisName = value;
-            }
-        }        
-
+            set { this.YAxisName = value; }
+        }
 
         /// <summary>
         /// Gets or sets the name of the Y axis which an annotation is attached to.
         /// NOTE: "AxisYName" property was used before but the name was changed to solve the
-        /// duplicated hash value during the serialization with the "TitleSeparator" property. 
+        /// duplicated hash value during the serialization with the "TitleSeparator" property.
         /// </summary>
         /// <value>
         /// A string value that represents the name of the Y axis which an annotation
@@ -1311,18 +1266,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchorAxes"),
-        Browsable(false),
-        Bindable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DefaultValue(""),
-        SRDescription("DescriptionAttributeAxisYName"),
+            SRCategory("CategoryAttributeAnchorAxes"),
+            Browsable(false),
+            Bindable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DefaultValue(""),
+            SRDescription("DescriptionAttributeAxisYName"),
         ]
-        virtual public string  YAxisName
+        virtual public string YAxisName
         {
             get
             {
-                if(_axisYName.Length == 0 && _axisY != null)
+                if (_axisYName.Length == 0 && _axisY != null)
                 {
                     _axisYName = GetAxisName(_axisY);
                 }
@@ -1335,7 +1290,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.ResetCurrentRelativePosition();
                 Invalidate();
             }
-        }        
+        }
 
         /// <summary>
         /// Gets or sets the X axis which an annotation is attached to.
@@ -1346,27 +1301,30 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <see cref="Axis"/> object which an annotation is attached to.
         /// </value>
         /// <remarks>
-        /// When an annotation is attached to an axis, its X position is always in 
-        /// axis coordinates. To define an annotation's size in axis coordinates as well, 
+        /// When an annotation is attached to an axis, its X position is always in
+        /// axis coordinates. To define an annotation's size in axis coordinates as well,
         /// make sure the <see cref="IsSizeAlwaysRelative"/> property is set to <b>false</b>.
         /// <para>
         /// Set this value to <b>null</b> or <b>nothing</b> to disable attachment to the axis.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchorAxes"),
-        DefaultValue(null),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAxisX"),
-        Editor(Editors.AnnotationAxisUITypeEditor.Editor, Editors.AnnotationAxisUITypeEditor.Base),
-        TypeConverter(typeof(AnnotationAxisValueConverter)),
+            SRCategory("CategoryAttributeAnchorAxes"),
+            DefaultValue(null),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAxisX"),
+            Editor(
+                Editors.AnnotationAxisUITypeEditor.Editor,
+                Editors.AnnotationAxisUITypeEditor.Base
+            ),
+            TypeConverter(typeof(AnnotationAxisValueConverter)),
         ]
         virtual public Axis AxisX
         {
             get
             {
-                if(_axisX == null && _axisXName.Length > 0)
+                if (_axisX == null && _axisXName.Length > 0)
                 {
                     _axisX = GetAxisByName(_axisXName);
                 }
@@ -1379,7 +1337,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.ResetCurrentRelativePosition();
                 Invalidate();
             }
-        }        
+        }
 
         /// <summary>
         /// Gets or sets the Y axis which an annotation is attached to.
@@ -1390,27 +1348,30 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <see cref="Axis"/> object which an annotation is attached to.
         /// </value>
         /// <remarks>
-        /// When an annotation is attached to an axis, its Y position is always in 
-        /// axis coordinates. To define an annotation's size in axis coordinates as well, 
+        /// When an annotation is attached to an axis, its Y position is always in
+        /// axis coordinates. To define an annotation's size in axis coordinates as well,
         /// make sure <see cref="IsSizeAlwaysRelative"/> property is set to <b>false</b>.
         /// <para>
         /// Set this value to <b>null</b> or <b>nothing</b> to disable annotation attachment to an axis.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchorAxes"),
-        DefaultValue(null),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAxisY"),
-        Editor(Editors.AnnotationAxisUITypeEditor.Editor, Editors.AnnotationAxisUITypeEditor.Base),
-        TypeConverter(typeof(AnnotationAxisValueConverter)),
+            SRCategory("CategoryAttributeAnchorAxes"),
+            DefaultValue(null),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAxisY"),
+            Editor(
+                Editors.AnnotationAxisUITypeEditor.Editor,
+                Editors.AnnotationAxisUITypeEditor.Base
+            ),
+            TypeConverter(typeof(AnnotationAxisValueConverter)),
         ]
         virtual public Axis AxisY
         {
             get
             {
-                if(_axisY == null && _axisYName.Length > 0)
+                if (_axisY == null && _axisYName.Length > 0)
                 {
                     _axisY = GetAxisByName(_axisYName);
                 }
@@ -1423,7 +1384,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.ResetCurrentRelativePosition();
                 Invalidate();
             }
-        }        
+        }
 
         #endregion
 
@@ -1433,25 +1394,25 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets the name of a data point which an annotation is anchored to.
         /// </summary>
         /// <value>
-        /// A string value that represents the name of the data point which an 
+        /// A string value that represents the name of the data point which an
         /// annotation is anchored to.
         /// </value>
         /// <remarks>
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        Browsable(false),
-        Bindable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DefaultValue(""),
-        SRDescription("DescriptionAttributeAnchorDataPointName"),
+            SRCategory("CategoryAttributeAnchor"),
+            Browsable(false),
+            Bindable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DefaultValue(""),
+            SRDescription("DescriptionAttributeAnchorDataPointName"),
         ]
-        virtual public string  AnchorDataPointName
+        virtual public string AnchorDataPointName
         {
             get
             {
-                if(_anchorDataPointName.Length == 0 && _anchorDataPoint != null)
+                if (_anchorDataPointName.Length == 0 && _anchorDataPoint != null)
                 {
                     _anchorDataPointName = GetDataPointName(_anchorDataPoint);
                 }
@@ -1464,7 +1425,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.ResetCurrentRelativePosition();
                 Invalidate();
             }
-        }        
+        }
 
         /// <summary>
         /// Gets or sets the data point an annotation is anchored to.
@@ -1480,17 +1441,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="DataPoint"/> object an annotation is anchored to.
         /// </value>
         /// <remarks>
-        /// The annotation is anchored to the X and Y values of the specified data point, 
+        /// The annotation is anchored to the X and Y values of the specified data point,
         /// and automatically uses the same axes coordinates as the data point.
         /// <para>
-        /// To automatically position an annotation relative to an anchor point, make sure 
+        /// To automatically position an annotation relative to an anchor point, make sure
         /// its <see cref="X"/> and <see cref="Y"/> properties are set to <b>Double.NaN</b>.
-        /// The <see cref="AnchorAlignment"/> property may be used to change an annotation's 
-        /// automatic position alignment to an anchor point. The <see cref="AnchorOffsetX"/> and 
+        /// The <see cref="AnchorAlignment"/> property may be used to change an annotation's
+        /// automatic position alignment to an anchor point. The <see cref="AnchorOffsetX"/> and
         /// <see cref="AnchorOffsetY"/> properties may be used to add extra spacing.
         /// </para>
         /// <para>
-        /// When using this property, make sure the <see cref="AnchorX"/> and <see cref="AnchorY"/> 
+        /// When using this property, make sure the <see cref="AnchorX"/> and <see cref="AnchorY"/>
         /// properties are set to <b>Double.NaN</b> (they have precedence).
         /// </para>
         /// <para>
@@ -1498,19 +1459,19 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        DefaultValue(null),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAnchorDataPoint"),
-        Editor(Editors.AnchorPointUITypeEditor.Editor, Editors.AnchorPointUITypeEditor.Base),
-        TypeConverter(typeof(AnchorPointValueConverter)),
+            SRCategory("CategoryAttributeAnchor"),
+            DefaultValue(null),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAnchorDataPoint"),
+            Editor(Editors.AnchorPointUITypeEditor.Editor, Editors.AnchorPointUITypeEditor.Base),
+            TypeConverter(typeof(AnchorPointValueConverter)),
         ]
         virtual public DataPoint AnchorDataPoint
         {
             get
             {
-                if(_anchorDataPoint == null && _anchorDataPointName.Length > 0)
+                if (_anchorDataPoint == null && _anchorDataPointName.Length > 0)
                 {
                     _anchorDataPoint = GetDataPointByName(_anchorDataPointName);
                 }
@@ -1537,13 +1498,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A double value that represents the X coordinate which an annotation is anchored to.
         /// </value>
         /// <remarks>
-        /// The annotation is anchored to the X coordinate specified in relative or axis coordinates, 
+        /// The annotation is anchored to the X coordinate specified in relative or axis coordinates,
         /// depending on the <see cref="AxisX"/> property value.
         /// <para>
-        /// To automatically position an annotation relative to an anchor point, make sure 
+        /// To automatically position an annotation relative to an anchor point, make sure
         /// its <see cref="X"/> property is set to <b>Double.NaN</b>.
-        /// The <see cref="AnchorAlignment"/> property may be used to change the annotation's 
-        /// automatic position alignment to the anchor point. The <see cref="AnchorOffsetX"/> and 
+        /// The <see cref="AnchorAlignment"/> property may be used to change the annotation's
+        /// automatic position alignment to the anchor point. The <see cref="AnchorOffsetX"/> and
         /// <see cref="AnchorOffsetY"/> properties may be used to add extra spacing.
         /// </para>
         /// <para>
@@ -1554,18 +1515,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        DefaultValue(double.NaN),
-        SRDescription("DescriptionAttributeAnchorX"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        TypeConverter(typeof(DoubleNanValueConverter)),
+            SRCategory("CategoryAttributeAnchor"),
+            DefaultValue(double.NaN),
+            SRDescription("DescriptionAttributeAnchorX"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+            TypeConverter(typeof(DoubleNanValueConverter)),
         ]
         virtual public double AnchorX
         {
-            get
-            {
-                return _anchorX;
-            }
+            get { return _anchorX; }
             set
             {
                 _anchorX = value;
@@ -1586,13 +1544,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A double value that represents the Y coordinate which an annotation is anchored to.
         /// </value>
         /// <remarks>
-        /// The annotation is anchored to the Y coordinate specified in relative or axis coordinates, 
+        /// The annotation is anchored to the Y coordinate specified in relative or axis coordinates,
         /// depending on the <see cref="AxisX"/> property value.
         /// <para>
-        /// To automatically position an annotation relative to an anchor point, make sure 
+        /// To automatically position an annotation relative to an anchor point, make sure
         /// its <see cref="Y"/> property is set to <b>Double.NaN</b>.
-        /// The <see cref="AnchorAlignment"/> property may be used to change the annotation's 
-        /// automatic position alignment to the anchor point. The <see cref="AnchorOffsetX"/> and 
+        /// The <see cref="AnchorAlignment"/> property may be used to change the annotation's
+        /// automatic position alignment to the anchor point. The <see cref="AnchorOffsetX"/> and
         /// <see cref="AnchorOffsetY"/> properties may be used to add extra spacing.
         /// </para>
         /// <para>
@@ -1603,18 +1561,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        DefaultValue(double.NaN),
-        SRDescription("DescriptionAttributeAnchorY"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
-        TypeConverter(typeof(DoubleNanValueConverter)),
+            SRCategory("CategoryAttributeAnchor"),
+            DefaultValue(double.NaN),
+            SRDescription("DescriptionAttributeAnchorY"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
+            TypeConverter(typeof(DoubleNanValueConverter)),
         ]
         virtual public double AnchorY
         {
-            get
-            {
-                return _anchorY;
-            }
+            get { return _anchorY; }
             set
             {
                 _anchorY = value;
@@ -1634,27 +1589,29 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A double value that represents the x-coordinate offset between the positions of an annotation and its anchor point.
         /// </value>
         /// <remarks>
-        /// The annotation must be anchored using the <see cref="AnchorDataPoint"/> or 
-        /// <see cref="AnchorX"/> properties, and its <see cref="X"/> property must be set 
+        /// The annotation must be anchored using the <see cref="AnchorDataPoint"/> or
+        /// <see cref="AnchorX"/> properties, and its <see cref="X"/> property must be set
         /// to <b>Double.NaN</b>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        DefaultValue(0.0),
-        SRDescription("DescriptionAttributeAnchorOffsetX3"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
+            SRCategory("CategoryAttributeAnchor"),
+            DefaultValue(0.0),
+            SRDescription("DescriptionAttributeAnchorOffsetX3"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
         ]
         virtual public double AnchorOffsetX
         {
-            get
-            {
-                return anchorOffsetX;
-            }
+            get { return anchorOffsetX; }
             set
             {
-                if(value > 100.0 || value < -100.0)
+                if (value > 100.0 || value < -100.0)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionAnnotationAnchorOffsetInvalid));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAnnotationAnchorOffsetInvalid
+                        )
+                    );
                 }
                 anchorOffsetX = value;
                 this.ResetCurrentRelativePosition();
@@ -1673,27 +1630,29 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A double value that represents the y-coordinate offset between the positions of an annotation and its anchor point.
         /// </value>
         /// <remarks>
-        /// Annotation must be anchored using <see cref="Annotation.AnchorDataPoint"/> or 
+        /// Annotation must be anchored using <see cref="Annotation.AnchorDataPoint"/> or
         /// <see cref="Annotation.AnchorY"/> properties and it's <see cref="Annotation.Y"/> property must be set
         /// to <b>Double.NaN</b>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        DefaultValue(0.0),
-        SRDescription("DescriptionAttributeAnchorOffsetY3"),
-        RefreshPropertiesAttribute(RefreshProperties.All),
+            SRCategory("CategoryAttributeAnchor"),
+            DefaultValue(0.0),
+            SRDescription("DescriptionAttributeAnchorOffsetY3"),
+            RefreshPropertiesAttribute(RefreshProperties.All),
         ]
         virtual public double AnchorOffsetY
         {
-            get
-            {
-                return anchorOffsetY;
-            }
+            get { return anchorOffsetY; }
             set
             {
-                if(value > 100.0 || value < -100.0)
+                if (value > 100.0 || value < -100.0)
                 {
-                    throw (new ArgumentOutOfRangeException("value", SR.ExceptionAnnotationAnchorOffsetInvalid));
+                    throw (
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.ExceptionAnnotationAnchorOffsetInvalid
+                        )
+                    );
                 }
                 anchorOffsetY = value;
                 this.ResetCurrentRelativePosition();
@@ -1710,25 +1669,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <seealso cref="AnchorOffsetY"/>
         /// </summary>
         /// <value>
-        /// A <see cref="ContentAlignment"/> value that represents the annotation's alignment to 
+        /// A <see cref="ContentAlignment"/> value that represents the annotation's alignment to
         /// the anchor point.
         /// </value>
         /// <remarks>
-        /// The annotation must be anchored using either <see cref="AnchorDataPoint"/>, or the <see cref="AnchorX"/> 
-        /// and <see cref="AnchorY"/> properties. Its <see cref="X"/> and <see cref="Y"/> 
+        /// The annotation must be anchored using either <see cref="AnchorDataPoint"/>, or the <see cref="AnchorX"/>
+        /// and <see cref="AnchorY"/> properties. Its <see cref="X"/> and <see cref="Y"/>
         /// properties must be set to <b>Double.NaN</b>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAnchor"),
-        DefaultValue(typeof(ContentAlignment), "BottomCenter"),
-        SRDescription("DescriptionAttributeAnchorAlignment"),
+            SRCategory("CategoryAttributeAnchor"),
+            DefaultValue(typeof(ContentAlignment), "BottomCenter"),
+            SRDescription("DescriptionAttributeAnchorAlignment"),
         ]
         virtual public ContentAlignment AnchorAlignment
         {
-            get
-            {
-                return anchorAlignment;
-            }
+            get { return anchorAlignment; }
             set
             {
                 anchorAlignment = value;
@@ -1744,149 +1700,113 @@ namespace System.Web.UI.DataVisualization.Charting
 #if Microsoft_CONTROL
 
         /// <summary>
-        /// Gets or sets a flag that specifies whether an annotation may be selected 
+        /// Gets or sets a flag that specifies whether an annotation may be selected
         /// with a mouse by the end user.
         /// </summary>
         /// <value>
         /// <b>True</b> if the annotation may be selected, <b>false</b> otherwise.
         /// </value>
         [
-        SRCategory("CategoryAttributeEditing"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeAllowSelecting"),
+            SRCategory("CategoryAttributeEditing"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeAllowSelecting"),
         ]
         virtual public bool AllowSelecting
         {
-            get
-            {
-                return _allowSelecting;
-            }
-            set
-            {
-                _allowSelecting = value;
-            }
+            get { return _allowSelecting; }
+            set { _allowSelecting = value; }
         }
 
         /// <summary>
-        /// Gets or sets a flag that specifies whether an annotation may be moved 
+        /// Gets or sets a flag that specifies whether an annotation may be moved
         /// with a mouse by the end user.
         /// </summary>
         /// <value>
         /// <b>True</b> if the annotation may be moved, <b>false</b> otherwise.
         /// </value>
         [
-        SRCategory("CategoryAttributeEditing"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeAllowMoving"),
+            SRCategory("CategoryAttributeEditing"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeAllowMoving"),
         ]
         virtual public bool AllowMoving
         {
-            get
-            {
-                return _allowMoving;
-            }
-            set
-            {
-                _allowMoving = value;
-            }
+            get { return _allowMoving; }
+            set { _allowMoving = value; }
         }
 
         /// <summary>
-        /// Gets or sets a flag that specifies whether an annotation anchor may be moved 
+        /// Gets or sets a flag that specifies whether an annotation anchor may be moved
         /// with a mouse by the end user.
         /// </summary>
         /// <value>
         /// <b>True</b> if the annotation anchor may be moved, <b>false</b> otherwise.
         /// </value>
         [
-        SRCategory("CategoryAttributeEditing"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeAllowAnchorMoving3"),
+            SRCategory("CategoryAttributeEditing"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeAllowAnchorMoving3"),
         ]
         virtual public bool AllowAnchorMoving
         {
-            get
-            {
-                return _allowAnchorMoving;
-            }
-            set
-            {
-                _allowAnchorMoving = value;
-            }
-        }        
+            get { return _allowAnchorMoving; }
+            set { _allowAnchorMoving = value; }
+        }
 
         /// <summary>
-        /// Gets or sets a flag that specifies whether an annotation may be resized 
+        /// Gets or sets a flag that specifies whether an annotation may be resized
         /// with a mouse by the end user.
         /// </summary>
         /// <value>
         /// <b>True</b> if the annotation may be resized, <b>false</b> otherwise.
         /// </value>
         [
-        SRCategory("CategoryAttributeEditing"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeAllowResizing"),
+            SRCategory("CategoryAttributeEditing"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeAllowResizing"),
         ]
         virtual public bool AllowResizing
         {
-            get
-            {
-                return _allowResizing;
-            }
-            set
-            {
-                _allowResizing = value;
-            }
+            get { return _allowResizing; }
+            set { _allowResizing = value; }
         }
 
         /// <summary>
-        /// Gets or sets a flag that specifies whether an annotation's text may be edited 
+        /// Gets or sets a flag that specifies whether an annotation's text may be edited
         /// when the end user double clicks on the text.
         /// </summary>
         /// <value>
         /// <b>True</b> if the annotation text may be edited, <b>false</b> otherwise.
         /// </value>
         [
-        SRCategory("CategoryAttributeEditing"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeAllowTextEditing"),
+            SRCategory("CategoryAttributeEditing"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeAllowTextEditing"),
         ]
         virtual public bool AllowTextEditing
         {
-            get
-            {
-                return _allowTextEditing;
-            }
-            set
-            {
-                _allowTextEditing = value;
-            }
+            get { return _allowTextEditing; }
+            set { _allowTextEditing = value; }
         }
 
         /// <summary>
-        /// Gets or sets a flag that specifies whether a polygon annotation's points 
+        /// Gets or sets a flag that specifies whether a polygon annotation's points
         /// may be moved with a mouse by the end user.
         /// </summary>
         /// <value>
         /// <b>True</b> if the polygon annotation's points may be moved, <b>false</b> otherwise.
         /// </value>
         [
-        SRCategory("CategoryAttributeEditing"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeAllowPathEditing3"),
+            SRCategory("CategoryAttributeEditing"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeAllowPathEditing3"),
         ]
         virtual public bool AllowPathEditing
         {
-            get
-            {
-                return _allowPathEditing;
-            }
-            set
-            {
-                _allowPathEditing = value;
-            }
+            get { return _allowPathEditing; }
+            set { _allowPathEditing = value; }
         }
-        
+
 #endif // Microsoft_CONTROL
 
         #endregion
@@ -1900,27 +1820,19 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A string value.
         /// </value>
         /// <remarks>
-        /// Special keywords can be used in the text when an annotation is anchored to 
-        /// a data point using the <see cref="AnchorDataPoint"/> property.  For a listing of 
+        /// Special keywords can be used in the text when an annotation is anchored to
+        /// a data point using the <see cref="AnchorDataPoint"/> property.  For a listing of
         /// these keywords, refer to the "Annotations" help topic.
         /// </remarks>
         [
-
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(""),
-        SRDescription("DescriptionAttributeToolTip"),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(""),
+            SRDescription("DescriptionAttributeToolTip"),
         ]
-        virtual public string  ToolTip
+        virtual public string ToolTip
         {
-            get
-            {
-                return _tooltip;
-            }
-            set
-            {
-                _tooltip = value;
-
-            }
+            get { return _tooltip; }
+            set { _tooltip = value; }
         }
 
 #if !Microsoft_CONTROL
@@ -1932,27 +1844,20 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A string value.
         /// </value>
         /// <remarks>
-        /// Special keywords can be used when an annotation is anchored to 
-        /// a data point using the <see cref="AnchorDataPoint"/> property.  For a listing of 
+        /// Special keywords can be used when an annotation is anchored to
+        /// a data point using the <see cref="AnchorDataPoint"/> property.  For a listing of
         /// these keywords, refer to the "Annotations" help topic.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(""),
-        SRDescription("DescriptionAttributeUrl"),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(""),
+            SRDescription("DescriptionAttributeUrl"),
         ]
-        virtual public string  Url
+        virtual public string Url
         {
-            get
-            {
-                return _url;
-            }
-            set
-            {
-                _url = value;
-
-            }
-        }    
+            get { return _url; }
+            set { _url = value; }
+        }
 
         /// <summary>
         /// Gets or sets an annotation's map area attributes.
@@ -1964,27 +1869,20 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This string will be added to the attributes of the image map generated
         /// for the annotation.
         /// <para>
-        /// Special keywords can be used when an annotation is anchored to 
-        /// a data point using the <see cref="AnchorDataPoint"/> property.  For a listing of 
+        /// Special keywords can be used when an annotation is anchored to
+        /// a data point using the <see cref="AnchorDataPoint"/> property.  For a listing of
         /// these keywords, refer to the "Annotations" help topic.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(""),
-        SRDescription("DescriptionAttributeMapAreaAttributes"),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(""),
+            SRDescription("DescriptionAttributeMapAreaAttributes"),
         ]
-        virtual public string  MapAreaAttributes
+        virtual public string MapAreaAttributes
         {
-            get
-            {
-                return _mapAreaAttributes;
-            }
-            set
-            {
-                _mapAreaAttributes = value;
-
-            }
+            get { return _mapAreaAttributes; }
+            set { _mapAreaAttributes = value; }
         }
 
         /// <summary>
@@ -1994,18 +1892,11 @@ namespace System.Web.UI.DataVisualization.Charting
         [DefaultValue("")]
         [SRCategory(SR.Keys.CategoryAttributeMapArea)]
         [SRDescription(SR.Keys.DescriptionAttributePostBackValue)]
-        public string PostBackValue 
-        { 
-            get 
-            { 
-                return this._postbackValue; 
-            } 
-            set 
-            { 
-                this._postbackValue = value;
-            } 
+        public string PostBackValue
+        {
+            get { return this._postbackValue; }
+            set { this._postbackValue = value; }
         }
-
 
 #endif // !Microsoft_CONTROL
 
@@ -2034,18 +1925,21 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="chartGraphics">Chart graphics used for painting.</param>
         /// <param name="rect">Selection rectangle.</param>
         /// <param name="path">Selection path.</param>
-        virtual internal void PaintSelectionHandles(ChartGraphics chartGraphics, RectangleF rect, GraphicsPath path)
+        virtual internal void PaintSelectionHandles(
+            ChartGraphics chartGraphics,
+            RectangleF rect,
+            GraphicsPath path
+        )
         {
             // Define markers appearance style
-            Color    markerBorderColor = Color.Black;
-            Color    markerColor = Color.FromArgb(200, 255, 255, 255);
+            Color markerBorderColor = Color.Black;
+            Color markerColor = Color.FromArgb(200, 255, 255, 255);
             MarkerStyle markerStyle = MarkerStyle.Square;
             int markerSize = selectionMarkerSize;
             Boolean selected = this.IsSelected;
 
             SizeF markerSizeRel = chartGraphics.GetRelativeSize(new SizeF(markerSize, markerSize));
-            if (this.Common.ProcessModePaint &&
-                !this.Common.ChartPicture.isPrinting)
+            if (this.Common.ProcessModePaint && !this.Common.ChartPicture.isPrinting)
             {
                 // Clear selection rectangles
                 this.selectionRects = null;
@@ -2057,20 +1951,21 @@ namespace System.Web.UI.DataVisualization.Charting
                     this.selectionRects = new RectangleF[9];
 
                     // Draw selection handles for single dimension annotations like line.
-                    if(this.SelectionPointsStyle == SelectionPointsStyle.TwoPoints)
+                    if (this.SelectionPointsStyle == SelectionPointsStyle.TwoPoints)
                     {
                         // Save selection handles position in array elements 0 and 4
                         this.selectionRects[(int)ResizingMode.TopLeftHandle] = new RectangleF(
-                            rect.X - markerSizeRel.Width/2f,
-                            rect.Y - markerSizeRel.Height/2f,
+                            rect.X - markerSizeRel.Width / 2f,
+                            rect.Y - markerSizeRel.Height / 2f,
                             markerSizeRel.Width,
-                            markerSizeRel.Height);
+                            markerSizeRel.Height
+                        );
                         this.selectionRects[(int)ResizingMode.BottomRightHandle] = new RectangleF(
-                            rect.Right - markerSizeRel.Width/2f,
-                            rect.Bottom - markerSizeRel.Height/2f,
+                            rect.Right - markerSizeRel.Width / 2f,
+                            rect.Bottom - markerSizeRel.Height / 2f,
                             markerSizeRel.Width,
-                            markerSizeRel.Height);
-
+                            markerSizeRel.Height
+                        );
 
                         // Draw selection handle
                         chartGraphics.DrawMarkerRel(
@@ -2084,7 +1979,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             Color.Empty,
                             0,
                             Color.FromArgb(128, 0, 0, 0),
-                            RectangleF.Empty);
+                            RectangleF.Empty
+                        );
 
                         chartGraphics.DrawMarkerRel(
                             new PointF(rect.Right, rect.Bottom),
@@ -2097,15 +1993,16 @@ namespace System.Web.UI.DataVisualization.Charting
                             Color.Empty,
                             0,
                             Color.FromArgb(128, 0, 0, 0),
-                            RectangleF.Empty);
+                            RectangleF.Empty
+                        );
                     }
-                    else if(this.SelectionPointsStyle == SelectionPointsStyle.Rectangle)
+                    else if (this.SelectionPointsStyle == SelectionPointsStyle.Rectangle)
                     {
-                        for(int index = 0; index < 8; index++)
+                        for (int index = 0; index < 8; index++)
                         {
                             // Get handle position
-                            PointF    handlePosition = PointF.Empty;
-                            switch((ResizingMode)index)
+                            PointF handlePosition = PointF.Empty;
+                            switch ((ResizingMode)index)
                             {
                                 case ResizingMode.TopLeftHandle:
                                     handlePosition = rect.Location;
@@ -2117,13 +2014,19 @@ namespace System.Web.UI.DataVisualization.Charting
                                     handlePosition = new PointF(rect.Right, rect.Y);
                                     break;
                                 case ResizingMode.RightHandle:
-                                    handlePosition = new PointF(rect.Right, rect.Y + rect.Height / 2f);
+                                    handlePosition = new PointF(
+                                        rect.Right,
+                                        rect.Y + rect.Height / 2f
+                                    );
                                     break;
                                 case ResizingMode.BottomRightHandle:
                                     handlePosition = new PointF(rect.Right, rect.Bottom);
                                     break;
                                 case ResizingMode.BottomHandle:
-                                    handlePosition = new PointF(rect.X + rect.Width / 2f, rect.Bottom);
+                                    handlePosition = new PointF(
+                                        rect.X + rect.Width / 2f,
+                                        rect.Bottom
+                                    );
                                     break;
                                 case ResizingMode.BottomLeftHandle:
                                     handlePosition = new PointF(rect.X, rect.Bottom);
@@ -2135,10 +2038,11 @@ namespace System.Web.UI.DataVisualization.Charting
 
                             // Save selection handles position in array elements 0 and 4
                             this.selectionRects[index] = new RectangleF(
-                                handlePosition.X - markerSizeRel.Width/2f,
-                                handlePosition.Y - markerSizeRel.Height/2f,
+                                handlePosition.X - markerSizeRel.Width / 2f,
+                                handlePosition.Y - markerSizeRel.Height / 2f,
                                 markerSizeRel.Width,
-                                markerSizeRel.Height);
+                                markerSizeRel.Height
+                            );
 
                             // Draw selection handle
                             chartGraphics.DrawMarkerRel(
@@ -2152,54 +2056,56 @@ namespace System.Web.UI.DataVisualization.Charting
                                 Color.Empty,
                                 0,
                                 Color.FromArgb(128, 0, 0, 0),
-                                RectangleF.Empty);
+                                RectangleF.Empty
+                            );
                         }
                     }
-
 
                     //********************************************************************
                     //** Draw anchor selection handle
                     //********************************************************************
 
                     // Get vertical and horizontal axis
-                    Axis    vertAxis = null;
-                    Axis    horizAxis = null;
+                    Axis vertAxis = null;
+                    Axis horizAxis = null;
                     GetAxes(ref vertAxis, ref horizAxis);
 
                     // Get anchor position
-                    double    anchorX = double.NaN;
-                    double    anchorY = double.NaN;
-                    bool    relativeX = false;
-                    bool    relativeY = false;
+                    double anchorX = double.NaN;
+                    double anchorY = double.NaN;
+                    bool relativeX = false;
+                    bool relativeY = false;
                     this.GetAnchorLocation(ref anchorX, ref anchorY, ref relativeX, ref relativeY);
 
                     // Convert anchor location to relative coordinates
-                    if(!double.IsNaN(anchorX) && !double.IsNaN(anchorY))
+                    if (!double.IsNaN(anchorX) && !double.IsNaN(anchorY))
                     {
-                        if( !relativeX && horizAxis != null )
+                        if (!relativeX && horizAxis != null)
                         {
                             anchorX = horizAxis.ValueToPosition(anchorX);
                         }
-                        if( !relativeY && vertAxis != null )
+                        if (!relativeY && vertAxis != null)
                         {
                             anchorY = vertAxis.ValueToPosition(anchorY);
                         }
 
                         // Apply 3D transforamtion if required
-                        ChartArea    chartArea = null;
-                        if(horizAxis != null && horizAxis.ChartArea != null)
+                        ChartArea chartArea = null;
+                        if (horizAxis != null && horizAxis.ChartArea != null)
                         {
                             chartArea = horizAxis.ChartArea;
                         }
-                        if(vertAxis != null && vertAxis.ChartArea != null)
+                        if (vertAxis != null && vertAxis.ChartArea != null)
                         {
                             chartArea = vertAxis.ChartArea;
                         }
-                        if(chartArea != null && 
-                            chartArea.Area3DStyle.Enable3D == true &&
-                            !chartArea.chartAreaIsCurcular &&
-                            chartArea.requireAxes &&
-                            chartArea.matrix3D.IsInitialized())
+                        if (
+                            chartArea != null
+                            && chartArea.Area3DStyle.Enable3D == true
+                            && !chartArea.chartAreaIsCurcular
+                            && chartArea.requireAxes
+                            && chartArea.matrix3D.IsInitialized()
+                        )
                         {
                             // Get anotation Z coordinate (use scene depth or anchored point Z position)
                             float positionZ = chartArea.areaSceneDepth;
@@ -2209,13 +2115,18 @@ namespace System.Web.UI.DataVisualization.Charting
                                 chartArea.GetSeriesZPositionAndDepth(
                                     this.AnchorDataPoint.series,
                                     out depth,
-                                    out positionZ);
+                                    out positionZ
+                                );
                                 positionZ += depth / 2f;
                             }
 
                             // Define 3D points of annotation object
                             Point3D[] annot3DPoints = new Point3D[1];
-                            annot3DPoints[0] = new Point3D((float)anchorX, (float)anchorY, positionZ);
+                            annot3DPoints[0] = new Point3D(
+                                (float)anchorX,
+                                (float)anchorY,
+                                positionZ
+                            );
 
                             // Tranform cube coordinates
                             chartArea.matrix3D.TransformPoints(annot3DPoints);
@@ -2227,10 +2138,11 @@ namespace System.Web.UI.DataVisualization.Charting
 
                         // Save selection handles position in array elements 0 and 4
                         this.selectionRects[(int)ResizingMode.AnchorHandle] = new RectangleF(
-                            (float)anchorX - markerSizeRel.Width/2f,
-                            (float)anchorY - markerSizeRel.Height/2f,
+                            (float)anchorX - markerSizeRel.Width / 2f,
+                            (float)anchorY - markerSizeRel.Height / 2f,
                             markerSizeRel.Width,
-                            markerSizeRel.Height);
+                            markerSizeRel.Height
+                        );
 
                         // Draw circular selection handle
                         chartGraphics.DrawMarkerRel(
@@ -2244,7 +2156,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             Color.Empty,
                             0,
                             Color.FromArgb(128, 0, 0, 0),
-                            RectangleF.Empty);
+                            RectangleF.Empty
+                        );
                     }
 
 #if Microsoft_CONTROL
@@ -2252,31 +2165,34 @@ namespace System.Web.UI.DataVisualization.Charting
                     //********************************************************************
                     //** Draw path selection handles
                     //********************************************************************
-                    if(path != null && AllowPathEditing)
+                    if (path != null && AllowPathEditing)
                     {
                         // Create selection rectangles for each point
-                        PointF[]    pathPoints = path.PathPoints;
+                        PointF[] pathPoints = path.PathPoints;
                         RectangleF[] newSelectionRects = new RectangleF[pathPoints.Length + 9];
 
                         // Copy previous rectangles (first nine elements)
-                        for(int index = 0; index < this.selectionRects.Length; index++)
+                        for (int index = 0; index < this.selectionRects.Length; index++)
                         {
                             newSelectionRects[index] = this.selectionRects[index];
                         }
                         this.selectionRects = newSelectionRects;
 
                         // Loop through all points
-                        for(int index = 0; index < pathPoints.Length; index++)
+                        for (int index = 0; index < pathPoints.Length; index++)
                         {
                             // Get handle position
-                            PointF    handlePosition = chartGraphics.GetRelativePoint(pathPoints[index]);
+                            PointF handlePosition = chartGraphics.GetRelativePoint(
+                                pathPoints[index]
+                            );
 
                             // Save selection handles position in array elements 0 and 4
                             this.selectionRects[9 + index] = new RectangleF(
-                                handlePosition.X - markerSizeRel.Width/2f,
-                                handlePosition.Y - markerSizeRel.Height/2f,
+                                handlePosition.X - markerSizeRel.Width / 2f,
+                                handlePosition.Y - markerSizeRel.Height / 2f,
                                 markerSizeRel.Width,
-                                markerSizeRel.Height);
+                                markerSizeRel.Height
+                            );
 
                             // Draw selection handle
                             chartGraphics.DrawMarkerRel(
@@ -2290,12 +2206,12 @@ namespace System.Web.UI.DataVisualization.Charting
                                 Color.Empty,
                                 0,
                                 Color.FromArgb(128, 0, 0, 0),
-                                RectangleF.Empty);
+                                RectangleF.Empty
+                            );
                         }
                     }
 
 #endif // Microsoft_CONTROL
-
                 }
             }
         }
@@ -2308,18 +2224,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Resizes an annotation according to its content size.
         /// </summary>
         /// <remarks>
-        /// Sets the annotation width and height to fit the specified text. This method applies to 
+        /// Sets the annotation width and height to fit the specified text. This method applies to
         /// <see cref="TextAnnotation"/>, <see cref="RectangleAnnotation"/>, <see cref="EllipseAnnotation"/>
         /// and <see cref="CalloutAnnotation"/> objects only.
         /// </remarks>
         virtual public void ResizeToContent()
         {
             RectangleF position = GetContentPosition();
-            if(!double.IsNaN(position.Width))
+            if (!double.IsNaN(position.Width))
             {
                 this.Width = position.Width;
             }
-            if(!double.IsNaN(position.Height))
+            if (!double.IsNaN(position.Height))
             {
                 this.Height = position.Height;
             }
@@ -2341,34 +2257,45 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="anchorY">Returns the anchor Y coordinate.</param>
         /// <param name="inRelativeAnchorX">Indicates if X coordinate is in relative chart coordinates.</param>
         /// <param name="inRelativeAnchorY">Indicates if Y coordinate is in relative chart coordinates.</param>
-        private void GetAnchorLocation(ref double anchorX, ref double anchorY, ref bool inRelativeAnchorX, ref bool inRelativeAnchorY)
+        private void GetAnchorLocation(
+            ref double anchorX,
+            ref double anchorY,
+            ref bool inRelativeAnchorX,
+            ref bool inRelativeAnchorY
+        )
         {
             anchorX = this.AnchorX;
             anchorY = this.AnchorY;
 
-            if(this.AnchorDataPoint != null &&
-                this.AnchorDataPoint.series != null &&
-                this.Chart != null &&
-                this.Chart.chartPicture != null)
+            if (
+                this.AnchorDataPoint != null
+                && this.AnchorDataPoint.series != null
+                && this.Chart != null
+                && this.Chart.chartPicture != null
+            )
             {
                 // Anchor data point is not allowed for gropped annotations
-                if(this.AnnotationGroup != null)
+                if (this.AnnotationGroup != null)
                 {
-                    throw (new InvalidOperationException(SR.ExceptionAnnotationGroupedAnchorDataPointMustBeEmpty));
+                    throw (
+                        new InvalidOperationException(
+                            SR.ExceptionAnnotationGroupedAnchorDataPointMustBeEmpty
+                        )
+                    );
                 }
 
                 // Get data point relative coordinate
-                if( double.IsNaN(anchorX) || double.IsNaN(anchorY))
+                if (double.IsNaN(anchorX) || double.IsNaN(anchorY))
                 {
                     // Get X value from data point
-                    if( double.IsNaN(anchorX) )
+                    if (double.IsNaN(anchorX))
                     {
                         anchorX = this.AnchorDataPoint.positionRel.X;
                         inRelativeAnchorX = true;
                     }
 
                     // Get Y value from data point
-                    if( double.IsNaN(anchorY) )
+                    if (double.IsNaN(anchorY))
                     {
                         anchorY = this.AnchorDataPoint.positionRel.Y;
                         inRelativeAnchorY = true;
@@ -2376,21 +2303,25 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
             }
         }
-    
+
         /// <summary>
         /// Gets annotation object position in relative coordinates.
         /// </summary>
         /// <param name="location">Returns annotation location.</param>
         /// <param name="size">Returns annotation size.</param>
         /// <param name="anchorLocation">Returns annotation anchor point location.</param>
-        virtual internal void GetRelativePosition(out PointF location, out SizeF size, out PointF anchorLocation)
+        virtual internal void GetRelativePosition(
+            out PointF location,
+            out SizeF size,
+            out PointF anchorLocation
+        )
         {
-            bool    saveCurrentPosition = true;
+            bool saveCurrentPosition = true;
 
             //***********************************************************************
             //** Check if position was precalculated
             //***********************************************************************
-            if(!double.IsNaN(currentPositionRel.X) && !double.IsNaN(currentPositionRel.X))
+            if (!double.IsNaN(currentPositionRel.X) && !double.IsNaN(currentPositionRel.X))
             {
                 location = currentPositionRel.Location;
                 size = currentPositionRel.Size;
@@ -2401,48 +2332,52 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************************
             //** Get vertical and horizontal axis
             //***********************************************************************
-            Axis    vertAxis = null;
-            Axis    horizAxis = null;
+            Axis vertAxis = null;
+            Axis horizAxis = null;
             GetAxes(ref vertAxis, ref horizAxis);
 
             //***********************************************************************
             //** Check if annotation was anchored to 2 points.
             //***********************************************************************
-            if(this._anchorDataPoint != null &&
-                this._anchorDataPoint2 != null)
+            if (this._anchorDataPoint != null && this._anchorDataPoint2 != null)
             {
                 // Annotation size is in axis coordinates
                 this.IsSizeAlwaysRelative = false;
- 
+
                 // Set annotation size
-                this.Height = 
-                    vertAxis.PositionToValue(this._anchorDataPoint2.positionRel.Y, false) - 
-                    vertAxis.PositionToValue(this._anchorDataPoint.positionRel.Y, false);
-                this.Width = 
-                    horizAxis.PositionToValue(this._anchorDataPoint2.positionRel.X, false) - 
-                    horizAxis.PositionToValue(this._anchorDataPoint.positionRel.X, false);
+                this.Height =
+                    vertAxis.PositionToValue(this._anchorDataPoint2.positionRel.Y, false)
+                    - vertAxis.PositionToValue(this._anchorDataPoint.positionRel.Y, false);
+                this.Width =
+                    horizAxis.PositionToValue(this._anchorDataPoint2.positionRel.X, false)
+                    - horizAxis.PositionToValue(this._anchorDataPoint.positionRel.X, false);
 
                 // Reset second anchor point after setting width and height
                 this._anchorDataPoint2 = null;
             }
 
             //***********************************************************************
-            //** Flags which indicate that coordinate was already transformed 
+            //** Flags which indicate that coordinate was already transformed
             //** into chart relative coordinate system.
             //***********************************************************************
-            bool    inRelativeX = false;
-            bool    inRelativeY = false;
-            bool    inRelativeWidth = (_isSizeAlwaysRelative) ? true : false;
-            bool    inRelativeHeight = (_isSizeAlwaysRelative) ? true : false;
-            bool    inRelativeAnchorX = false;
-            bool    inRelativeAnchorY = false;
-            
+            bool inRelativeX = false;
+            bool inRelativeY = false;
+            bool inRelativeWidth = (_isSizeAlwaysRelative) ? true : false;
+            bool inRelativeHeight = (_isSizeAlwaysRelative) ? true : false;
+            bool inRelativeAnchorX = false;
+            bool inRelativeAnchorY = false;
+
             //***********************************************************************
             //** Get anchoring coordinates from anchored Data Point.
             //***********************************************************************
-            double    anchorX = this.AnchorX;
-            double    anchorY = this.AnchorY;
-            GetAnchorLocation(ref anchorX, ref anchorY, ref inRelativeAnchorX, ref inRelativeAnchorY);
+            double anchorX = this.AnchorX;
+            double anchorY = this.AnchorY;
+            GetAnchorLocation(
+                ref anchorX,
+                ref anchorY,
+                ref inRelativeAnchorX,
+                ref inRelativeAnchorY
+            );
 
             //***********************************************************************
             //** Calculate scaling and translation for the annotations in the group.
@@ -2451,7 +2386,7 @@ namespace System.Web.UI.DataVisualization.Charting
             PointF groupLocation = PointF.Empty;
             double groupScaleX = 1.0;
             double groupScaleY = 1.0;
-            if(group != null)
+            if (group != null)
             {
                 // Do not save relative position of annotations inside the group
                 saveCurrentPosition = false;
@@ -2459,25 +2394,28 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Take relative position of the group
                 SizeF groupSize = SizeF.Empty;
                 PointF groupAnchorLocation = PointF.Empty;
-                group.GetRelativePosition(out groupLocation, out groupSize, out groupAnchorLocation);
+                group.GetRelativePosition(
+                    out groupLocation,
+                    out groupSize,
+                    out groupAnchorLocation
+                );
 
                 // Calculate Scale
                 groupScaleX = groupSize.Width / 100.0;
                 groupScaleY = groupSize.Height / 100.0;
             }
 
-
             //***********************************************************************
             //** Get annotation automatic size.
             //***********************************************************************
-            double    relativeWidth = this._width;
-            double    relativeHeight = this._height;
+            double relativeWidth = this._width;
+            double relativeHeight = this._height;
 
             // Get annotation content position
-            RectangleF    contentPosition = GetContentPosition();
+            RectangleF contentPosition = GetContentPosition();
 
             // Set annotation size if not set to custom value
-            if( double.IsNaN(relativeWidth) )
+            if (double.IsNaN(relativeWidth))
             {
                 relativeWidth = contentPosition.Width;
                 inRelativeWidth = true;
@@ -2486,30 +2424,29 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 relativeWidth *= groupScaleX;
             }
-            if( double.IsNaN(relativeHeight) )
+            if (double.IsNaN(relativeHeight))
             {
                 relativeHeight = contentPosition.Height;
                 inRelativeHeight = true;
             }
             else
             {
-                relativeHeight *= groupScaleY;   
+                relativeHeight *= groupScaleY;
             }
 
             //***********************************************************************
             //** Provide "dummy" size at design time
             //***********************************************************************
-            if(this.Chart != null && this.Chart.IsDesignMode())
+            if (this.Chart != null && this.Chart.IsDesignMode())
             {
-                if(this.IsSizeAlwaysRelative ||
-                    (vertAxis == null && horizAxis == null) )
+                if (this.IsSizeAlwaysRelative || (vertAxis == null && horizAxis == null))
                 {
-                    if(double.IsNaN(relativeWidth))
+                    if (double.IsNaN(relativeWidth))
                     {
                         relativeWidth = 20.0;
                         saveCurrentPosition = false;
                     }
-                    if(double.IsNaN(relativeHeight))
+                    if (double.IsNaN(relativeHeight))
                     {
                         relativeHeight = 20.0;
                         saveCurrentPosition = false;
@@ -2520,59 +2457,65 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************************
             //** Get annotation location.
             //***********************************************************************
-            double    relativeX = this.X;
-            double    relativeY = this.Y;
-            
+            double relativeX = this.X;
+            double relativeY = this.Y;
+
             // Check if annotation location Y coordinate is defined
-            if( double.IsNaN(relativeY) && !double.IsNaN(anchorY) )
+            if (double.IsNaN(relativeY) && !double.IsNaN(anchorY))
             {
                 inRelativeY = true;
-                double    relativeAnchorY = anchorY;
-                if(!inRelativeAnchorY && vertAxis != null)
+                double relativeAnchorY = anchorY;
+                if (!inRelativeAnchorY && vertAxis != null)
                 {
                     relativeAnchorY = vertAxis.ValueToPosition(anchorY);
                 }
-                if(this.AnchorAlignment == ContentAlignment.TopCenter ||
-                    this.AnchorAlignment == ContentAlignment.TopLeft ||
-                    this.AnchorAlignment == ContentAlignment.TopRight)
+                if (
+                    this.AnchorAlignment == ContentAlignment.TopCenter
+                    || this.AnchorAlignment == ContentAlignment.TopLeft
+                    || this.AnchorAlignment == ContentAlignment.TopRight
+                )
                 {
                     relativeY = relativeAnchorY + this.AnchorOffsetY;
                     relativeY *= groupScaleY;
                 }
-                else if(this.AnchorAlignment == ContentAlignment.BottomCenter ||
-                    this.AnchorAlignment == ContentAlignment.BottomLeft ||
-                    this.AnchorAlignment == ContentAlignment.BottomRight)
+                else if (
+                    this.AnchorAlignment == ContentAlignment.BottomCenter
+                    || this.AnchorAlignment == ContentAlignment.BottomLeft
+                    || this.AnchorAlignment == ContentAlignment.BottomRight
+                )
                 {
                     relativeY = relativeAnchorY - this.AnchorOffsetY;
                     relativeY *= groupScaleY;
-                    if(relativeHeight != 0f && !double.IsNaN(relativeHeight))
+                    if (relativeHeight != 0f && !double.IsNaN(relativeHeight))
                     {
-                        if(inRelativeHeight)
+                        if (inRelativeHeight)
                         {
                             relativeY -= relativeHeight;
                         }
-                        else if(vertAxis != null)
+                        else if (vertAxis != null)
                         {
                             float yValue = (float)vertAxis.PositionToValue(relativeY);
-                            float bottomRel = (float)vertAxis.ValueToPosition(yValue + relativeHeight);
+                            float bottomRel = (float)
+                                vertAxis.ValueToPosition(yValue + relativeHeight);
                             relativeY -= bottomRel - relativeY;
                         }
                     }
                 }
-                else 
+                else
                 {
                     relativeY = relativeAnchorY + this.AnchorOffsetY;
                     relativeY *= groupScaleY;
-                    if(relativeHeight != 0f && !double.IsNaN(relativeHeight))
+                    if (relativeHeight != 0f && !double.IsNaN(relativeHeight))
                     {
-                        if(inRelativeHeight)
+                        if (inRelativeHeight)
                         {
-                            relativeY -= relativeHeight/2f;
+                            relativeY -= relativeHeight / 2f;
                         }
-                        else if(vertAxis != null)
+                        else if (vertAxis != null)
                         {
                             float yValue = (float)vertAxis.PositionToValue(relativeY);
-                            float bottomRel = (float)vertAxis.ValueToPosition(yValue + relativeHeight);
+                            float bottomRel = (float)
+                                vertAxis.ValueToPosition(yValue + relativeHeight);
                             relativeY -= (bottomRel - relativeY) / 2f;
                         }
                     }
@@ -2584,54 +2527,61 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Check if annotation location X coordinate is defined
-            if( double.IsNaN(relativeX) && !double.IsNaN(anchorX) )
+            if (double.IsNaN(relativeX) && !double.IsNaN(anchorX))
             {
                 inRelativeX = true;
-                double    relativeAnchorX = anchorX;
-                if(!inRelativeAnchorX && horizAxis != null)
+                double relativeAnchorX = anchorX;
+                if (!inRelativeAnchorX && horizAxis != null)
                 {
                     relativeAnchorX = horizAxis.ValueToPosition(anchorX);
                 }
-                if(this.AnchorAlignment == ContentAlignment.BottomLeft ||
-                    this.AnchorAlignment == ContentAlignment.MiddleLeft ||
-                    this.AnchorAlignment == ContentAlignment.TopLeft)
+                if (
+                    this.AnchorAlignment == ContentAlignment.BottomLeft
+                    || this.AnchorAlignment == ContentAlignment.MiddleLeft
+                    || this.AnchorAlignment == ContentAlignment.TopLeft
+                )
                 {
                     relativeX = relativeAnchorX + this.AnchorOffsetX;
                     relativeX *= groupScaleX;
                 }
-                else if(this.AnchorAlignment == ContentAlignment.BottomRight ||
-                    this.AnchorAlignment == ContentAlignment.MiddleRight ||
-                    this.AnchorAlignment == ContentAlignment.TopRight)
+                else if (
+                    this.AnchorAlignment == ContentAlignment.BottomRight
+                    || this.AnchorAlignment == ContentAlignment.MiddleRight
+                    || this.AnchorAlignment == ContentAlignment.TopRight
+                )
                 {
                     relativeX = relativeAnchorX - this.AnchorOffsetX;
                     relativeX *= groupScaleX;
-                    if(relativeWidth != 0f && !double.IsNaN(relativeWidth))
+                    if (relativeWidth != 0f && !double.IsNaN(relativeWidth))
                     {
-                        if(inRelativeWidth)
+                        if (inRelativeWidth)
                         {
                             relativeX -= relativeWidth;
                         }
-                        else if(horizAxis != null)
+                        else if (horizAxis != null)
                         {
                             float xValue = (float)horizAxis.PositionToValue(relativeX);
-                            relativeX -= horizAxis.ValueToPosition(xValue + relativeWidth) - relativeX;
+                            relativeX -=
+                                horizAxis.ValueToPosition(xValue + relativeWidth) - relativeX;
                         }
                     }
                 }
-                else 
+                else
                 {
                     relativeX = relativeAnchorX + this.AnchorOffsetX;
                     relativeX *= groupScaleX;
-                    if(relativeWidth != 0f && !double.IsNaN(relativeWidth))
+                    if (relativeWidth != 0f && !double.IsNaN(relativeWidth))
                     {
-                        if(inRelativeWidth)
+                        if (inRelativeWidth)
                         {
-                            relativeX -= relativeWidth/2f;
+                            relativeX -= relativeWidth / 2f;
                         }
-                        else if(horizAxis != null)
+                        else if (horizAxis != null)
                         {
                             float xValue = (float)horizAxis.PositionToValue(relativeX);
-                            relativeX -= (horizAxis.ValueToPosition(xValue + relativeWidth) - relativeX) / 2f;
+                            relativeX -=
+                                (horizAxis.ValueToPosition(xValue + relativeWidth) - relativeX)
+                                / 2f;
                         }
                     }
                 }
@@ -2650,12 +2600,12 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************************
 
             // Set annotation size if not set to custom value
-            if( double.IsNaN(relativeX) )
+            if (double.IsNaN(relativeX))
             {
                 relativeX = contentPosition.X * groupScaleX;
                 inRelativeX = true;
             }
-            if( double.IsNaN(relativeY) )
+            if (double.IsNaN(relativeY))
             {
                 relativeY = contentPosition.Y * groupScaleY;
                 inRelativeY = true;
@@ -2666,84 +2616,95 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************************
 
             // Check if values are set in axis values
-            if(horizAxis != null)
+            if (horizAxis != null)
             {
-                if(!inRelativeX)
+                if (!inRelativeX)
                 {
                     relativeX = horizAxis.ValueToPosition(relativeX);
                 }
-                if(!inRelativeAnchorX)
+                if (!inRelativeAnchorX)
                 {
                     anchorX = horizAxis.ValueToPosition(anchorX);
                 }
-                if(!inRelativeWidth)
+                if (!inRelativeWidth)
                 {
-                    relativeWidth = horizAxis.ValueToPosition(
-                        horizAxis.PositionToValue(relativeX, false) + relativeWidth) - relativeX;
+                    relativeWidth =
+                        horizAxis.ValueToPosition(
+                            horizAxis.PositionToValue(relativeX, false) + relativeWidth
+                        ) - relativeX;
                 }
             }
-            if(vertAxis != null)
+            if (vertAxis != null)
             {
-                if(!inRelativeY)
+                if (!inRelativeY)
                 {
                     relativeY = vertAxis.ValueToPosition(relativeY);
                 }
-                if(!inRelativeAnchorY)
+                if (!inRelativeAnchorY)
                 {
                     anchorY = vertAxis.ValueToPosition(anchorY);
                 }
-                if(!inRelativeHeight)
+                if (!inRelativeHeight)
                 {
-                    relativeHeight = vertAxis.ValueToPosition(
-                        vertAxis.PositionToValue(relativeY, false) + relativeHeight) - relativeY;
+                    relativeHeight =
+                        vertAxis.ValueToPosition(
+                            vertAxis.PositionToValue(relativeY, false) + relativeHeight
+                        ) - relativeY;
                 }
             }
             bool isTextAnnotation = this is TextAnnotation;
             //***********************************************************************
             //** Apply 3D transforamtion if required
             //***********************************************************************
-            ChartArea    chartArea = null;
-            if(horizAxis != null && horizAxis.ChartArea != null)
+            ChartArea chartArea = null;
+            if (horizAxis != null && horizAxis.ChartArea != null)
             {
                 chartArea = horizAxis.ChartArea;
             }
-            if(vertAxis != null && vertAxis.ChartArea != null)
+            if (vertAxis != null && vertAxis.ChartArea != null)
             {
                 chartArea = vertAxis.ChartArea;
             }
-            if(chartArea != null && 
-                chartArea.Area3DStyle.Enable3D == true &&
-                !chartArea.chartAreaIsCurcular &&
-                chartArea.requireAxes &&
-                chartArea.matrix3D.IsInitialized())
+            if (
+                chartArea != null
+                && chartArea.Area3DStyle.Enable3D == true
+                && !chartArea.chartAreaIsCurcular
+                && chartArea.requireAxes
+                && chartArea.matrix3D.IsInitialized()
+            )
             {
                 // Get anotation Z coordinate (use scene depth or anchored point Z position)
-                float            positionZ = chartArea.areaSceneDepth;    
-                if(this.AnchorDataPoint != null && this.AnchorDataPoint.series != null)
+                float positionZ = chartArea.areaSceneDepth;
+                if (this.AnchorDataPoint != null && this.AnchorDataPoint.series != null)
                 {
                     float depth = 0f;
                     chartArea.GetSeriesZPositionAndDepth(
                         this.AnchorDataPoint.series,
                         out depth,
-                        out positionZ);
+                        out positionZ
+                    );
                     positionZ += depth / 2f;
                 }
 
                 // Define 3D points of annotation object
-                Point3D[]        annot3DPoints = new Point3D[3];
+                Point3D[] annot3DPoints = new Point3D[3];
                 annot3DPoints[0] = new Point3D((float)relativeX, (float)relativeY, positionZ);
-                annot3DPoints[1] = new Point3D((float)(relativeX + relativeWidth), (float)(relativeY + relativeHeight), positionZ);
+                annot3DPoints[1] = new Point3D(
+                    (float)(relativeX + relativeWidth),
+                    (float)(relativeY + relativeHeight),
+                    positionZ
+                );
                 annot3DPoints[2] = new Point3D((float)anchorX, (float)anchorY, positionZ);
 
                 // Tranform cube coordinates
-                chartArea.matrix3D.TransformPoints( annot3DPoints );
+                chartArea.matrix3D.TransformPoints(annot3DPoints);
 
                 // Get transformed coordinates
                 relativeX = annot3DPoints[0].X;
                 relativeY = annot3DPoints[0].Y;
                 anchorX = annot3DPoints[2].X;
                 anchorY = annot3DPoints[2].Y;
-                
+
                 // Don't adjust size for text annotation
                 if (!(isTextAnnotation && this.IsSizeAlwaysRelative))
                 {
@@ -2755,24 +2716,24 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************************
             //** Provide "dummy" position at design time
             //***********************************************************************
-            if(this.Chart != null && this.Chart.IsDesignMode())
+            if (this.Chart != null && this.Chart.IsDesignMode())
             {
-                if(double.IsNaN(relativeX))
+                if (double.IsNaN(relativeX))
                 {
                     relativeX = groupLocation.X;
                     saveCurrentPosition = false;
                 }
-                if(double.IsNaN(relativeY))
+                if (double.IsNaN(relativeY))
                 {
                     relativeY = groupLocation.Y;
                     saveCurrentPosition = false;
                 }
-                if(double.IsNaN(relativeWidth))
+                if (double.IsNaN(relativeWidth))
                 {
                     relativeWidth = 20.0 * groupScaleX;
                     saveCurrentPosition = false;
                 }
-                if(double.IsNaN(relativeHeight))
+                if (double.IsNaN(relativeHeight))
                 {
                     relativeHeight = 20.0 * groupScaleY;
                     saveCurrentPosition = false;
@@ -2782,55 +2743,64 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************************
             //** Initialize returned values
             //***********************************************************************
-            location = new PointF( (float)relativeX, (float)relativeY );
-            size = new SizeF( (float)relativeWidth, (float)relativeHeight );
-            anchorLocation = new PointF( (float)anchorX, (float)anchorY );
+            location = new PointF((float)relativeX, (float)relativeY);
+            size = new SizeF((float)relativeWidth, (float)relativeHeight);
+            anchorLocation = new PointF((float)anchorX, (float)anchorY);
 
             //***********************************************************************
             //** Adjust text based annotaion position using SmartLabelStyle.
             //***********************************************************************
             // Check if smart labels are enabled
-            if (this.SmartLabelStyle.Enabled && isTextAnnotation &&
-                group == null)
+            if (this.SmartLabelStyle.Enabled && isTextAnnotation && group == null)
             {
                 // Anchor point must be set
-                if(!double.IsNaN(anchorX) && !double.IsNaN(anchorY) &&
-                    double.IsNaN(this.X) && double.IsNaN(this.Y))
+                if (
+                    !double.IsNaN(anchorX)
+                    && !double.IsNaN(anchorY)
+                    && double.IsNaN(this.X)
+                    && double.IsNaN(this.Y)
+                )
                 {
-                    if(this.Chart != null && 
-                        this.Chart.chartPicture != null)
+                    if (this.Chart != null && this.Chart.chartPicture != null)
                     {
                         // Remember old movement distance restriction
                         double oldMinMovingDistance = this.SmartLabelStyle.MinMovingDistance;
                         double oldMaxMovingDistance = this.SmartLabelStyle.MaxMovingDistance;
 
                         // Increase annotation moving restrictions according to the anchor offset
-                        PointF anchorOffsetAbs = this.GetGraphics().GetAbsolutePoint(
-                            new PointF((float)this.AnchorOffsetX, (float)this.AnchorOffsetY));
+                        PointF anchorOffsetAbs = this.GetGraphics()
+                            .GetAbsolutePoint(
+                                new PointF((float)this.AnchorOffsetX, (float)this.AnchorOffsetY)
+                            );
                         float maxAnchorOffsetAbs = Math.Max(anchorOffsetAbs.X, anchorOffsetAbs.Y);
-                        if(maxAnchorOffsetAbs > 0.0)
+                        if (maxAnchorOffsetAbs > 0.0)
                         {
                             this.SmartLabelStyle.MinMovingDistance += maxAnchorOffsetAbs;
                             this.SmartLabelStyle.MaxMovingDistance += maxAnchorOffsetAbs;
                         }
 
                         // Adjust label position using SmartLabelStyle algorithm
-                        LabelAlignmentStyles    labelAlignment = LabelAlignmentStyles.Bottom;
+                        LabelAlignmentStyles labelAlignment = LabelAlignmentStyles.Bottom;
                         using (StringFormat format = new StringFormat())
                         {
-                            SizeF markerSizeRel = new SizeF((float)this.AnchorOffsetX, (float)this.AnchorOffsetY);
-                            PointF newlocation = this.Chart.chartPicture.annotationSmartLabel.AdjustSmartLabelPosition(
-                                this.Common,
-                                this.Chart.chartPicture.ChartGraph,
-                                chartArea,
-                                this.SmartLabelStyle,
-                                location,
-                                size,
-                                format,
-                                anchorLocation,
-                                markerSizeRel,
-                                labelAlignment,
-                                (this is CalloutAnnotation));
+                            SizeF markerSizeRel = new SizeF(
+                                (float)this.AnchorOffsetX,
+                                (float)this.AnchorOffsetY
+                            );
+                            PointF newlocation =
+                                this.Chart.chartPicture.annotationSmartLabel.AdjustSmartLabelPosition(
+                                    this.Common,
+                                    this.Chart.chartPicture.ChartGraph,
+                                    chartArea,
+                                    this.SmartLabelStyle,
+                                    location,
+                                    size,
+                                    format,
+                                    anchorLocation,
+                                    markerSizeRel,
+                                    labelAlignment,
+                                    (this is CalloutAnnotation)
+                                );
 
                             // Restore old movement distance restriction
                             this.SmartLabelStyle.MinMovingDistance = oldMinMovingDistance;
@@ -2844,12 +2814,14 @@ namespace System.Web.UI.DataVisualization.Charting
                             else
                             {
                                 // Get new position using alignment in format
-                                RectangleF newPosition = this.Chart.chartPicture.annotationSmartLabel.GetLabelPosition(
-                                    this.Chart.chartPicture.ChartGraph,
-                                    newlocation,
-                                    size,
-                                    format,
-                                    false);
+                                RectangleF newPosition =
+                                    this.Chart.chartPicture.annotationSmartLabel.GetLabelPosition(
+                                        this.Chart.chartPicture.ChartGraph,
+                                        newlocation,
+                                        size,
+                                        format,
+                                        false
+                                    );
 
                                 // Set new location
                                 location = newPosition.Location;
@@ -2866,7 +2838,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             this.Chart.chartPicture.ChartGraph,
                             location,
                             size,
-                            format);
+                            format
+                        );
                     }
                 }
             }
@@ -2874,7 +2847,7 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************************
             //** Save calculated position
             //***********************************************************************
-            if(saveCurrentPosition)
+            if (saveCurrentPosition)
             {
                 currentPositionRel = new RectangleF(location, size);
                 currentAnchorLocationRel = new PointF(anchorLocation.X, anchorLocation.Y);
@@ -2903,14 +2876,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="userInput">Indicates if position changing was a result of the user input.</param>
         internal void SetPositionRelative(RectangleF position, PointF anchorPoint, bool userInput)
         {
-            double    newX = position.X;
-            double    newY = position.Y;
-            double    newRight = position.Right;
-            double    newBottom = position.Bottom;
-            double    newWidth = position.Width;
-            double    newHeight = position.Height;
-            double    newAnchorX = anchorPoint.X;
-            double    newAnchorY = anchorPoint.Y;
+            double newX = position.X;
+            double newY = position.Y;
+            double newRight = position.Right;
+            double newBottom = position.Bottom;
+            double newWidth = position.Width;
+            double newHeight = position.Height;
+            double newAnchorX = anchorPoint.X;
+            double newAnchorY = anchorPoint.Y;
 
             //***********************************************************************
             //** Set pre calculated position and anchor location
@@ -2921,32 +2894,40 @@ namespace System.Web.UI.DataVisualization.Charting
             //***********************************************************************
             //** Get vertical and horizontal axis
             //***********************************************************************
-            Axis    vertAxis = null;
-            Axis    horizAxis = null;
+            Axis vertAxis = null;
+            Axis horizAxis = null;
             GetAxes(ref vertAxis, ref horizAxis);
 
             //***********************************************************************
             //** Disable anchoring to point and axes in 3D
             //** This is done due to the issues of moving elements in 3D space.
             //***********************************************************************
-            ChartArea    chartArea = null;
-            if(horizAxis != null && horizAxis.ChartArea != null)
+            ChartArea chartArea = null;
+            if (horizAxis != null && horizAxis.ChartArea != null)
             {
                 chartArea = horizAxis.ChartArea;
             }
-            if(vertAxis != null && vertAxis.ChartArea != null)
+            if (vertAxis != null && vertAxis.ChartArea != null)
             {
                 chartArea = vertAxis.ChartArea;
             }
-            if(chartArea != null && chartArea.Area3DStyle.Enable3D == true)
+            if (chartArea != null && chartArea.Area3DStyle.Enable3D == true)
             {
                 // If anchor point was set - get its relative position and use it as an anchor point
-                if(this.AnchorDataPoint != null)
+                if (this.AnchorDataPoint != null)
                 {
-                    bool    inRelativeCoordX = true;
-                    bool    inRelativeCoordY = true;
-                    this.GetAnchorLocation(ref newAnchorX, ref newAnchorY, ref inRelativeCoordX, ref inRelativeCoordY);
-                    this.currentAnchorLocationRel = new PointF((float)newAnchorX, (float)newAnchorY);
+                    bool inRelativeCoordX = true;
+                    bool inRelativeCoordY = true;
+                    this.GetAnchorLocation(
+                        ref newAnchorX,
+                        ref newAnchorY,
+                        ref inRelativeCoordX,
+                        ref inRelativeCoordY
+                    );
+                    this.currentAnchorLocationRel = new PointF(
+                        (float)newAnchorX,
+                        (float)newAnchorY
+                    );
                 }
 
                 // In 3D always use relative annotation coordinates
@@ -2958,90 +2939,96 @@ namespace System.Web.UI.DataVisualization.Charting
                 vertAxis = null;
             }
 
-
             //***********************************************************************
             //** Convert relative coordinates to axis values
             //***********************************************************************
-            if(horizAxis != null)
+            if (horizAxis != null)
             {
                 newX = horizAxis.PositionToValue(newX, false);
-                if(!double.IsNaN(newAnchorX))
+                if (!double.IsNaN(newAnchorX))
                 {
                     newAnchorX = horizAxis.PositionToValue(newAnchorX, false);
                 }
 
                 // Adjust for the IsLogarithmic axis
-                if( horizAxis.IsLogarithmic ) 
+                if (horizAxis.IsLogarithmic)
                 {
-                    newX = Math.Pow( horizAxis.logarithmBase, newX );
-                    if(!double.IsNaN(newAnchorX))
+                    newX = Math.Pow(horizAxis.logarithmBase, newX);
+                    if (!double.IsNaN(newAnchorX))
                     {
-                        newAnchorX = Math.Pow( horizAxis.logarithmBase, newAnchorX );
+                        newAnchorX = Math.Pow(horizAxis.logarithmBase, newAnchorX);
                     }
                 }
 
-                if(!this.IsSizeAlwaysRelative)
+                if (!this.IsSizeAlwaysRelative)
                 {
-                    if(float.IsNaN(position.Right) && 
-                        !float.IsNaN(position.Width) && 
-                        !float.IsNaN(anchorPoint.X) )
+                    if (
+                        float.IsNaN(position.Right)
+                        && !float.IsNaN(position.Width)
+                        && !float.IsNaN(anchorPoint.X)
+                    )
                     {
                         newRight = horizAxis.PositionToValue(anchorPoint.X + position.Width, false);
-                        if( horizAxis.IsLogarithmic ) 
+                        if (horizAxis.IsLogarithmic)
                         {
-                            newRight = Math.Pow( horizAxis.logarithmBase, newRight );
+                            newRight = Math.Pow(horizAxis.logarithmBase, newRight);
                         }
                         newWidth = newRight - newAnchorX;
                     }
                     else
                     {
                         newRight = horizAxis.PositionToValue(position.Right, false);
-                        if( horizAxis.IsLogarithmic ) 
+                        if (horizAxis.IsLogarithmic)
                         {
-                            newRight = Math.Pow( horizAxis.logarithmBase, newRight );
+                            newRight = Math.Pow(horizAxis.logarithmBase, newRight);
                         }
                         newWidth = newRight - newX;
                     }
                 }
             }
-            if(vertAxis != null)
+            if (vertAxis != null)
             {
                 newY = vertAxis.PositionToValue(newY, false);
-                if(!double.IsNaN(newAnchorY))
+                if (!double.IsNaN(newAnchorY))
                 {
                     newAnchorY = vertAxis.PositionToValue(newAnchorY, false);
                 }
 
                 // NOTE: Fixes issue #4113
                 // Adjust for the IsLogarithmic axis
-                if( vertAxis.IsLogarithmic ) 
+                if (vertAxis.IsLogarithmic)
                 {
-                    newY = Math.Pow( vertAxis.logarithmBase, newY );
-                    if(!double.IsNaN(newAnchorY))
+                    newY = Math.Pow(vertAxis.logarithmBase, newY);
+                    if (!double.IsNaN(newAnchorY))
                     {
-                        newAnchorY = Math.Pow( vertAxis.logarithmBase, newAnchorY );
+                        newAnchorY = Math.Pow(vertAxis.logarithmBase, newAnchorY);
                     }
                 }
 
-                if(!this.IsSizeAlwaysRelative)
+                if (!this.IsSizeAlwaysRelative)
                 {
-                    if(float.IsNaN(position.Bottom) && 
-                        !float.IsNaN(position.Height) && 
-                        !float.IsNaN(anchorPoint.Y) )
+                    if (
+                        float.IsNaN(position.Bottom)
+                        && !float.IsNaN(position.Height)
+                        && !float.IsNaN(anchorPoint.Y)
+                    )
                     {
-                        newBottom = vertAxis.PositionToValue(anchorPoint.Y + position.Height, false);
-                        if( vertAxis.IsLogarithmic ) 
+                        newBottom = vertAxis.PositionToValue(
+                            anchorPoint.Y + position.Height,
+                            false
+                        );
+                        if (vertAxis.IsLogarithmic)
                         {
-                            newBottom = Math.Pow( vertAxis.logarithmBase, newBottom );
+                            newBottom = Math.Pow(vertAxis.logarithmBase, newBottom);
                         }
                         newHeight = newBottom - newAnchorY;
                     }
                     else
                     {
                         newBottom = vertAxis.PositionToValue(position.Bottom, false);
-                        if( vertAxis.IsLogarithmic ) 
+                        if (vertAxis.IsLogarithmic)
                         {
-                            newBottom = Math.Pow( vertAxis.logarithmBase, newBottom );
+                            newBottom = Math.Pow(vertAxis.logarithmBase, newBottom);
                         }
                         newHeight = newBottom - newY;
                     }
@@ -3049,16 +3036,17 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Fire position changing event when position changed by user.
-            if(userInput)
+            if (userInput)
             {
 #if Microsoft_CONTROL
                 // Set flag that annotation position was changed
                 this.positionChanged = true;
 
                 // Fire position changing event
-                if(this.Chart != null)
+                if (this.Chart != null)
                 {
-                    AnnotationPositionChangingEventArgs args = new AnnotationPositionChangingEventArgs();
+                    AnnotationPositionChangingEventArgs args =
+                        new AnnotationPositionChangingEventArgs();
                     args.NewLocationX = newX;
                     args.NewLocationY = newY;
                     args.NewSizeWidth = newWidth;
@@ -3067,7 +3055,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     args.NewAnchorLocationY = newAnchorY;
                     args.Annotation = this;
 
-                    if(this.Chart.OnAnnotationPositionChanging(ref args))
+                    if (this.Chart.OnAnnotationPositionChanging(ref args))
                     {
                         // Get user changed position/anchor
                         newX = args.NewLocationX;
@@ -3094,6 +3082,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
             return;
         }
+
         /// <summary>
         /// Adjust annotation location and\or size as a result of user action.
         /// </summary>
@@ -3110,7 +3099,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="movingDistance">Distance to resize/move the annotation.</param>
         /// <param name="resizeMode">Resizing mode.</param>
         /// <param name="pixelCoord">Distance is in pixels, otherwise relative.</param>
-        virtual internal void AdjustLocationSize(SizeF movingDistance, ResizingMode resizeMode, bool pixelCoord)
+        virtual internal void AdjustLocationSize(
+            SizeF movingDistance,
+            ResizingMode resizeMode,
+            bool pixelCoord
+        )
         {
             AdjustLocationSize(movingDistance, resizeMode, pixelCoord, false);
         }
@@ -3122,12 +3115,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="resizeMode">Resizing mode.</param>
         /// <param name="pixelCoord">Distance is in pixels, otherwise relative.</param>
         /// <param name="userInput">Indicates if position changing was a result of the user input.</param>
-        virtual internal void AdjustLocationSize(SizeF movingDistance, ResizingMode resizeMode, bool pixelCoord, bool userInput)
+        virtual internal void AdjustLocationSize(
+            SizeF movingDistance,
+            ResizingMode resizeMode,
+            bool pixelCoord,
+            bool userInput
+        )
         {
-            if(!movingDistance.IsEmpty)
+            if (!movingDistance.IsEmpty)
             {
-                // Convert pixel coordinates into relative 
-                if(pixelCoord)
+                // Convert pixel coordinates into relative
+                if (pixelCoord)
                 {
                     movingDistance = Chart.chartPicture.ChartGraph.GetRelativeSize(movingDistance);
                 }
@@ -3136,13 +3134,15 @@ namespace System.Web.UI.DataVisualization.Charting
                 PointF firstPoint = PointF.Empty;
                 PointF anchorPoint = PointF.Empty;
                 SizeF size = SizeF.Empty;
-                if(userInput)
+                if (userInput)
                 {
 #if Microsoft_CONTROL
-                    if(this.startMovePositionRel.X == 0f &&
-                        this.startMovePositionRel.Y == 0f &&
-                        this.startMovePositionRel.Width == 0f &&
-                        this.startMovePositionRel.Height == 0f)
+                    if (
+                        this.startMovePositionRel.X == 0f
+                        && this.startMovePositionRel.Y == 0f
+                        && this.startMovePositionRel.Width == 0f
+                        && this.startMovePositionRel.Height == 0f
+                    )
                     {
                         GetRelativePosition(out firstPoint, out size, out anchorPoint);
                         this.startMovePositionRel = new RectangleF(firstPoint, size);
@@ -3154,92 +3154,91 @@ namespace System.Web.UI.DataVisualization.Charting
 #else // Microsoft_CONTROL
                     GetRelativePosition(out firstPoint, out size, out anchorPoint);
 #endif // Microsoft_CONTROL
-                    
                 }
                 else
                 {
                     GetRelativePosition(out firstPoint, out size, out anchorPoint);
                 }
 
-                if(resizeMode == ResizingMode.TopLeftHandle)
+                if (resizeMode == ResizingMode.TopLeftHandle)
                 {
                     firstPoint.X -= movingDistance.Width;
                     firstPoint.Y -= movingDistance.Height;
                     size.Width += movingDistance.Width;
                     size.Height += movingDistance.Height;
                 }
-                else if(resizeMode == ResizingMode.TopHandle)
+                else if (resizeMode == ResizingMode.TopHandle)
                 {
                     firstPoint.Y -= movingDistance.Height;
                     size.Height += movingDistance.Height;
                 }
-                else if(resizeMode == ResizingMode.TopRightHandle)
+                else if (resizeMode == ResizingMode.TopRightHandle)
                 {
                     firstPoint.Y -= movingDistance.Height;
                     size.Width -= movingDistance.Width;
                     size.Height += movingDistance.Height;
                 }
-                else if(resizeMode == ResizingMode.RightHandle)
+                else if (resizeMode == ResizingMode.RightHandle)
                 {
                     size.Width -= movingDistance.Width;
                 }
-                else if(resizeMode == ResizingMode.BottomRightHandle)
+                else if (resizeMode == ResizingMode.BottomRightHandle)
                 {
                     size.Width -= movingDistance.Width;
                     size.Height -= movingDistance.Height;
                 }
-                else if(resizeMode == ResizingMode.BottomHandle)
+                else if (resizeMode == ResizingMode.BottomHandle)
                 {
                     size.Height -= movingDistance.Height;
                 }
-                else if(resizeMode == ResizingMode.BottomLeftHandle)
+                else if (resizeMode == ResizingMode.BottomLeftHandle)
                 {
                     firstPoint.X -= movingDistance.Width;
                     size.Width += movingDistance.Width;
                     size.Height -= movingDistance.Height;
                 }
-                else if(resizeMode == ResizingMode.LeftHandle)
+                else if (resizeMode == ResizingMode.LeftHandle)
                 {
                     firstPoint.X -= movingDistance.Width;
                     size.Width += movingDistance.Width;
                 }
-                else if(resizeMode == ResizingMode.AnchorHandle)
+                else if (resizeMode == ResizingMode.AnchorHandle)
                 {
                     anchorPoint.X -= movingDistance.Width;
                     anchorPoint.Y -= movingDistance.Height;
                 }
-                else if(resizeMode == ResizingMode.Moving)
+                else if (resizeMode == ResizingMode.Moving)
                 {
                     firstPoint.X -= movingDistance.Width;
                     firstPoint.Y -= movingDistance.Height;
                 }
 
                 // Make sure we do not override automatic Width and Heigth
-                if(resizeMode == ResizingMode.Moving)
+                if (resizeMode == ResizingMode.Moving)
                 {
-                    if( double.IsNaN(this.Width) )
+                    if (double.IsNaN(this.Width))
                     {
                         size.Width = float.NaN;
                     }
-                    if( double.IsNaN(this.Height) )
+                    if (double.IsNaN(this.Height))
                     {
                         size.Height = float.NaN;
                     }
                 }
 
                 // Make sure we do not override automatic X and Y
-                if(resizeMode == ResizingMode.AnchorHandle)
+                if (resizeMode == ResizingMode.AnchorHandle)
                 {
-                    if( double.IsNaN(this.X) )
+                    if (double.IsNaN(this.X))
                     {
                         firstPoint.X = float.NaN;
                     }
-                    if( double.IsNaN(this.Y) )
+                    if (double.IsNaN(this.Y))
                     {
                         firstPoint.Y = float.NaN;
                     }
                 }
-                else if(double.IsNaN(this.AnchorX) || double.IsNaN(this.AnchorY) )
+                else if (double.IsNaN(this.AnchorX) || double.IsNaN(this.AnchorY))
                 {
                     anchorPoint = new PointF(float.NaN, float.NaN);
                 }
@@ -3282,13 +3281,20 @@ namespace System.Web.UI.DataVisualization.Charting
                     string pointIndex = dataPointName.Substring(separatorIndex + 2);
 
                     int index;
-                    if (int.TryParse(pointIndex, NumberStyles.Any, CultureInfo.InvariantCulture, out index))
+                    if (
+                        int.TryParse(
+                            pointIndex,
+                            NumberStyles.Any,
+                            CultureInfo.InvariantCulture,
+                            out index
+                        )
+                    )
                     {
                         dataPoint = Chart.Series[seriesName].Points[index];
                     }
                 }
             }
-            
+
             return dataPoint;
         }
 
@@ -3339,7 +3345,7 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 axis = null;
             }
-                
+
             return axis;
         }
 
@@ -3351,14 +3357,15 @@ namespace System.Web.UI.DataVisualization.Charting
         internal string GetDataPointName(DataPoint dataPoint)
         {
             string name = String.Empty;
-            if(dataPoint.series != null)
+            if (dataPoint.series != null)
             {
                 int pointIndex = dataPoint.series.Points.IndexOf(dataPoint);
-                if(pointIndex >= 0)
+                if (pointIndex >= 0)
                 {
-                    name = dataPoint.series.Name + 
-                        "\\r" + 
-                        pointIndex.ToString(CultureInfo.InvariantCulture);
+                    name =
+                        dataPoint.series.Name
+                        + "\\r"
+                        + pointIndex.ToString(CultureInfo.InvariantCulture);
                 }
             }
             return name;
@@ -3372,11 +3379,9 @@ namespace System.Web.UI.DataVisualization.Charting
         private string GetAxisName(Axis axis)
         {
             string name = String.Empty;
-            if(axis.ChartArea != null)
+            if (axis.ChartArea != null)
             {
-                name = axis.ChartArea.Name + 
-                    "\\r" + 
-                    axis.AxisName.ToString();
+                name = axis.ChartArea.Name + "\\r" + axis.AxisName.ToString();
             }
             return name;
         }
@@ -3393,23 +3398,23 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             // Find collection of annotation objects this annotation belongs too
             AnnotationCollection collection = null;
-            if(Chart != null)
+            if (Chart != null)
             {
                 collection = Chart.Annotations;
             }
 
             // Check if annotation belongs to the group
             AnnotationGroup group = AnnotationGroup;
-            if(group != null)
+            if (group != null)
             {
                 collection = group.Annotations;
             }
 
             // Check if annotation is found
-            if(collection != null)
+            if (collection != null)
             {
                 Annotation annot = collection.FindByName(this.Name);
-                if(annot != null)
+                if (annot != null)
                 {
                     // Reinsert annotation at the beginning of the collection
                     collection.Remove(annot);
@@ -3426,23 +3431,23 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             // Find collection of annotation objects this annotation belongs too
             AnnotationCollection collection = null;
-            if(Chart != null)
+            if (Chart != null)
             {
                 collection = Chart.Annotations;
             }
 
             // Check if annotation belongs to the group
             AnnotationGroup group = AnnotationGroup;
-            if(group != null)
+            if (group != null)
             {
                 collection = group.Annotations;
             }
 
             // Check if annotation is found
-            if(collection != null)
+            if (collection != null)
             {
                 Annotation annot = collection.FindByName(this.Name);
-                if(annot != null)
+                if (annot != null)
                 {
                     // Reinsert annotation at the end of the collection
                     collection.Remove(annot);
@@ -3463,69 +3468,72 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Adds anchor position to the list. Used to check SmartLabelStyle overlapping.
         /// </summary>
         /// <param name="list">List to add to.</param>
-        internal void AddSmartLabelMarkerPositions(ArrayList list)        
+        internal void AddSmartLabelMarkerPositions(ArrayList list)
         {
             // Anchor position is added to the list of non-overlapped markers
-            if(this.Visible && this.IsAnchorDrawn())
+            if (this.Visible && this.IsAnchorDrawn())
             {
                 // Get vertical and horizontal axis
-                Axis    vertAxis = null;
-                Axis    horizAxis = null;
+                Axis vertAxis = null;
+                Axis horizAxis = null;
                 GetAxes(ref vertAxis, ref horizAxis);
 
                 // Get anchor position
-                double    anchorX = double.NaN;
-                double    anchorY = double.NaN;
-                bool    relativeX = false;
-                bool    relativeY = false;
+                double anchorX = double.NaN;
+                double anchorY = double.NaN;
+                bool relativeX = false;
+                bool relativeY = false;
                 this.GetAnchorLocation(ref anchorX, ref anchorY, ref relativeX, ref relativeY);
 
                 // Convert anchor location to relative coordinates
-                if(!double.IsNaN(anchorX) && !double.IsNaN(anchorY))
+                if (!double.IsNaN(anchorX) && !double.IsNaN(anchorY))
                 {
-                    if( !relativeX && horizAxis != null )
+                    if (!relativeX && horizAxis != null)
                     {
                         anchorX = horizAxis.ValueToPosition(anchorX);
                     }
-                    if( !relativeY && vertAxis != null )
+                    if (!relativeY && vertAxis != null)
                     {
                         anchorY = vertAxis.ValueToPosition(anchorY);
                     }
 
                     // Apply 3D transforamtion if required
-                    ChartArea    chartArea = null;
-                    if(horizAxis != null && horizAxis.ChartArea != null)
+                    ChartArea chartArea = null;
+                    if (horizAxis != null && horizAxis.ChartArea != null)
                     {
                         chartArea = horizAxis.ChartArea;
                     }
-                    if(vertAxis != null && vertAxis.ChartArea != null)
+                    if (vertAxis != null && vertAxis.ChartArea != null)
                     {
                         chartArea = vertAxis.ChartArea;
                     }
-                    if(chartArea != null && 
-                        chartArea.Area3DStyle.Enable3D == true &&
-                        !chartArea.chartAreaIsCurcular &&
-                        chartArea.requireAxes &&
-                        chartArea.matrix3D.IsInitialized())
+                    if (
+                        chartArea != null
+                        && chartArea.Area3DStyle.Enable3D == true
+                        && !chartArea.chartAreaIsCurcular
+                        && chartArea.requireAxes
+                        && chartArea.matrix3D.IsInitialized()
+                    )
                     {
                         // Get anotation Z coordinate (use scene depth or anchored point Z position)
-                        float            positionZ = chartArea.areaSceneDepth;    
-                        if(this.AnchorDataPoint != null && this.AnchorDataPoint.series != null)
+                        float positionZ = chartArea.areaSceneDepth;
+                        if (this.AnchorDataPoint != null && this.AnchorDataPoint.series != null)
                         {
                             float depth = 0f;
                             chartArea.GetSeriesZPositionAndDepth(
                                 this.AnchorDataPoint.series,
                                 out depth,
-                                out positionZ);
+                                out positionZ
+                            );
                             positionZ += depth / 2f;
                         }
 
                         // Define 3D points of annotation object
-                        Point3D[]        annot3DPoints = new Point3D[1];
+                        Point3D[] annot3DPoints = new Point3D[1];
                         annot3DPoints[0] = new Point3D((float)anchorX, (float)anchorY, positionZ);
 
                         // Tranform cube coordinates
-                        chartArea.matrix3D.TransformPoints( annot3DPoints );
+                        chartArea.matrix3D.TransformPoints(annot3DPoints);
 
                         // Get transformed coordinates
                         anchorX = annot3DPoints[0].X;
@@ -3533,15 +3541,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
 
                     // Save selection handles position in array elements 0 and 4
-                    if(this.GetGraphics() != null)
+                    if (this.GetGraphics() != null)
                     {
-                        SizeF    markerSizeRel = this.GetGraphics().GetRelativeSize(
-                            new SizeF(1f, 1f));
+                        SizeF markerSizeRel = this.GetGraphics().GetRelativeSize(new SizeF(1f, 1f));
                         RectangleF anchorRect = new RectangleF(
-                            (float)anchorX - markerSizeRel.Width/2f,
-                            (float)anchorY - markerSizeRel.Height/2f,
+                            (float)anchorX - markerSizeRel.Width / 2f,
+                            (float)anchorY - markerSizeRel.Height / 2f,
                             markerSizeRel.Width,
-                            markerSizeRel.Height);
+                            markerSizeRel.Height
+                        );
 
                         list.Add(anchorRect);
                     }
@@ -3583,7 +3591,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Second anchor <see cref="DataPoint"/>.
         /// </param>
         /// <remarks>
-        /// Anchors an annotation's top/left and bottom/right corners to the 
+        /// Anchors an annotation's top/left and bottom/right corners to the
         /// specified data points.
         /// </remarks>
         public void SetAnchor(DataPoint dataPoint1, DataPoint dataPoint2)
@@ -3600,12 +3608,12 @@ namespace System.Web.UI.DataVisualization.Charting
             this.AnchorDataPoint = dataPoint1;
 
             // Get vertical and horizontal axis
-            Axis    vertAxis = null;
-            Axis    horizAxis = null;
+            Axis vertAxis = null;
+            Axis horizAxis = null;
             GetAxes(ref vertAxis, ref horizAxis);
 
             // Set Width and Height in axis coordinates
-            if(dataPoint2 != null && dataPoint1 != null)
+            if (dataPoint2 != null && dataPoint1 != null)
             {
                 this._anchorDataPoint2 = dataPoint2;
             }
@@ -3624,47 +3632,50 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Begins end user placement of an annotation using the mouse.
         /// </summary>
         /// <remarks>
-        /// When this method is called, the end user is allowed to place an annotation using the 
+        /// When this method is called, the end user is allowed to place an annotation using the
         /// mouse.
         /// <para>
-        /// Placement will finish when the end user specifies all required points, or 
+        /// Placement will finish when the end user specifies all required points, or
         /// the <see cref="EndPlacement"/> method is called.</para>
         /// </remarks>
         virtual public void BeginPlacement()
         {
             // Can't place annotations inside the group
-            if(this.AnnotationGroup != null)
+            if (this.AnnotationGroup != null)
             {
-                throw (new InvalidOperationException(SR.ExceptionAnnotationGroupedUnableToStartPlacement));
+                throw (
+                    new InvalidOperationException(
+                        SR.ExceptionAnnotationGroupedUnableToStartPlacement
+                    )
+                );
             }
 
-            if(this.Chart != null)
+            if (this.Chart != null)
             {
-                // Set the annotation object which is currently placed 
+                // Set the annotation object which is currently placed
                 this.Chart.Annotations.placingAnnotation = this;
             }
             else
             {
                 throw (new InvalidOperationException(SR.ExceptionAnnotationNotInCollection));
             }
-
         }
 
         /// <summary>
         /// Ends user placement of an annotation.
         /// </summary>
         /// <remarks>
-        /// Ends an annotation placement operation previously started by a 
+        /// Ends an annotation placement operation previously started by a
         /// <see cref="BeginPlacement"/> method call.
         /// <para>
         /// Calling this method is not required, since placement will automatically
-        /// end when an end user enters all required points. However, it is useful when an annotation 
+        /// end when an end user enters all required points. However, it is useful when an annotation
         /// placement operation needs to be aborted for some reason.
         /// </para>
         /// </remarks>
         virtual public void EndPlacement()
         {
-            if(this.Chart != null)
+            if (this.Chart != null)
             {
                 // Reset currently placed annotation object
                 this.Chart.Annotations.placingAnnotation = null;
@@ -3687,15 +3698,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="buttons">Mouse button down.</param>
         internal virtual void PlacementMouseDown(PointF point, MouseButtons buttons)
         {
-            if(buttons == MouseButtons.Right)
+            if (buttons == MouseButtons.Right)
             {
                 // Stop any pacement
                 this.EndPlacement();
             }
-            if(buttons == MouseButtons.Left &&
-                IsValidPlacementPosition(point.X, point.Y))
+            if (buttons == MouseButtons.Left && IsValidPlacementPosition(point.X, point.Y))
             {
-                if(this.lastPlacementPosition.IsEmpty)
+                if (this.lastPlacementPosition.IsEmpty)
                 {
                     // Remeber position where mouse was clicked
                     this.lastPlacementPosition = this.GetGraphics().GetRelativePoint(point);
@@ -3707,55 +3717,51 @@ namespace System.Web.UI.DataVisualization.Charting
                     this.GetRelativePosition(out firstPoint, out size, out anchorPoint);
 
                     // Set annotation X, Y coordinate
-                    if(this.AllowMoving)
+                    if (this.AllowMoving)
                     {
                         firstPoint = this.GetGraphics().GetRelativePoint(point);
 
                         // Do not change default position
-                        if(double.IsNaN(this.AnchorX))
+                        if (double.IsNaN(this.AnchorX))
                         {
                             anchorPoint.X = float.NaN;
                         }
-                        if(double.IsNaN(this.AnchorY))
+                        if (double.IsNaN(this.AnchorY))
                         {
                             anchorPoint.Y = float.NaN;
                         }
-
                     }
-                    else if(this.AllowAnchorMoving)
+                    else if (this.AllowAnchorMoving)
                     {
                         anchorPoint = this.GetGraphics().GetRelativePoint(point);
 
                         // Do not change default position
-                        if(double.IsNaN(this.X))
+                        if (double.IsNaN(this.X))
                         {
                             firstPoint.X = float.NaN;
                         }
-                        if(double.IsNaN(this.Y))
+                        if (double.IsNaN(this.Y))
                         {
                             firstPoint.Y = float.NaN;
                         }
                     }
 
                     // Do not change default size
-                    if(double.IsNaN(this.Width))
+                    if (double.IsNaN(this.Width))
                     {
                         size.Width = float.NaN;
                     }
-                    if(double.IsNaN(this.Height))
+                    if (double.IsNaN(this.Height))
                     {
                         size.Height = float.NaN;
                     }
 
                     // Set annotation position
                     this.positionChanged = true;
-                    this.SetPositionRelative(
-                        new RectangleF(firstPoint, size), 
-                        anchorPoint, 
-                        true);
+                    this.SetPositionRelative(new RectangleF(firstPoint, size), anchorPoint, true);
 
                     // Invalidate and update the chart
-                    if(Chart != null)
+                    if (Chart != null)
                     {
                         Invalidate();
                         Chart.UpdateAnnotations();
@@ -3773,7 +3779,7 @@ namespace System.Web.UI.DataVisualization.Charting
         internal virtual bool PlacementMouseUp(PointF point, MouseButtons buttons)
         {
             bool result = false;
-            if(buttons == MouseButtons.Left)
+            if (buttons == MouseButtons.Left)
             {
                 // Get annotation position in relative coordinates
                 PointF firstPoint = PointF.Empty;
@@ -3781,60 +3787,58 @@ namespace System.Web.UI.DataVisualization.Charting
                 SizeF size = SizeF.Empty;
                 this.GetRelativePosition(out firstPoint, out size, out anchorPoint);
 
-                if(this.AllowResizing)
+                if (this.AllowResizing)
                 {
                     PointF pointRel = this.GetGraphics().GetRelativePoint(point);
                     size = new SizeF(
-                        pointRel.X - this.lastPlacementPosition.X, 
-                        pointRel.Y - this.lastPlacementPosition.Y);
+                        pointRel.X - this.lastPlacementPosition.X,
+                        pointRel.Y - this.lastPlacementPosition.Y
+                    );
                 }
                 else
                 {
                     // Do not change default size
-                    if(double.IsNaN(this.Width))
+                    if (double.IsNaN(this.Width))
                     {
                         size.Width = float.NaN;
                     }
-                    if(double.IsNaN(this.Height))
+                    if (double.IsNaN(this.Height))
                     {
                         size.Height = float.NaN;
                     }
                 }
 
                 // Do not change default position
-                if(double.IsNaN(this.X))
+                if (double.IsNaN(this.X))
                 {
                     firstPoint.X = float.NaN;
                 }
-                if(double.IsNaN(this.Y))
+                if (double.IsNaN(this.Y))
                 {
                     firstPoint.Y = float.NaN;
                 }
-                if(double.IsNaN(this.AnchorX))
+                if (double.IsNaN(this.AnchorX))
                 {
                     anchorPoint.X = float.NaN;
                 }
-                if(double.IsNaN(this.AnchorY))
+                if (double.IsNaN(this.AnchorY))
                 {
                     anchorPoint.Y = float.NaN;
                 }
 
                 // Set annotation position
                 this.positionChanged = true;
-                this.SetPositionRelative(
-                    new RectangleF(firstPoint, size), 
-                    anchorPoint, 
-                    true);
+                this.SetPositionRelative(new RectangleF(firstPoint, size), anchorPoint, true);
 
                 // End placement
-                if(!size.IsEmpty || !this.AllowResizing)
+                if (!size.IsEmpty || !this.AllowResizing)
                 {
                     result = true;
                     this.EndPlacement();
                 }
 
                 // Invalidate and update the chart
-                if(Chart != null)
+                if (Chart != null)
                 {
                     Invalidate();
                     Chart.UpdateAnnotations();
@@ -3851,8 +3855,7 @@ namespace System.Web.UI.DataVisualization.Charting
         internal virtual void PlacementMouseMove(PointF point)
         {
             // Check if annotation was moved
-            if( this.GetGraphics() != null &&
-                !this.lastPlacementPosition.IsEmpty)
+            if (this.GetGraphics() != null && !this.lastPlacementPosition.IsEmpty)
             {
                 // Get annotation position in relative coordinates
                 PointF firstPoint = PointF.Empty;
@@ -3860,41 +3863,39 @@ namespace System.Web.UI.DataVisualization.Charting
                 SizeF size = SizeF.Empty;
                 this.GetRelativePosition(out firstPoint, out size, out anchorPoint);
 
-                if(this.AllowResizing)
+                if (this.AllowResizing)
                 {
                     PointF pointRel = this.GetGraphics().GetRelativePoint(point);
                     size = new SizeF(
-                        pointRel.X - this.lastPlacementPosition.X, 
-                        pointRel.Y - this.lastPlacementPosition.Y);
+                        pointRel.X - this.lastPlacementPosition.X,
+                        pointRel.Y - this.lastPlacementPosition.Y
+                    );
                 }
 
                 // Do not change default position
-                if(double.IsNaN(this.X))
+                if (double.IsNaN(this.X))
                 {
                     firstPoint.X = float.NaN;
                 }
-                if(double.IsNaN(this.Y))
+                if (double.IsNaN(this.Y))
                 {
                     firstPoint.Y = float.NaN;
                 }
-                if(double.IsNaN(this.AnchorX))
+                if (double.IsNaN(this.AnchorX))
                 {
                     anchorPoint.X = float.NaN;
                 }
-                if(double.IsNaN(this.AnchorY))
+                if (double.IsNaN(this.AnchorY))
                 {
                     anchorPoint.Y = float.NaN;
                 }
 
                 // Set annotation position
                 this.positionChanged = true;
-                this.SetPositionRelative(
-                    new RectangleF(firstPoint, size), 
-                    anchorPoint, 
-                    true);
+                this.SetPositionRelative(new RectangleF(firstPoint, size), anchorPoint, true);
 
                 // Invalidate and update the chart
-                if(this.Chart != null)
+                if (this.Chart != null)
                 {
                     Invalidate();
                     this.Chart.UpdateAnnotations();
@@ -3910,20 +3911,20 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>True if annotation can be placed at specified coordinates.</returns>
         virtual internal bool IsValidPlacementPosition(float x, float y)
         {
-            if(this.Chart != null &&
-                this.GetGraphics() != null)
+            if (this.Chart != null && this.GetGraphics() != null)
             {
                 // Check if cursor is over the area where placement allowed
                 // If so - change cursor to cross
-                RectangleF    placementRect = new RectangleF(0f, 0f, 100f, 100f);
-                if(this.ClipToChartArea.Length > 0 &&
-                    this.ClipToChartArea != Constants.NotSetValue)
+                RectangleF placementRect = new RectangleF(0f, 0f, 100f, 100f);
+                if (
+                    this.ClipToChartArea.Length > 0 && this.ClipToChartArea != Constants.NotSetValue
+                )
                 {
                     ChartArea area = Chart.ChartAreas[this.ClipToChartArea];
                     placementRect = area.PlotAreaPosition.ToRectangleF();
                 }
                 placementRect = this.GetGraphics().GetAbsoluteRectangle(placementRect);
-                if(placementRect.Contains(x, y))
+                if (placementRect.Contains(x, y))
                 {
                     return true;
                 }
@@ -3943,49 +3944,54 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>True if annotation is visible.</returns>
         internal bool IsVisible()
         {
-            if(this.Visible)
+            if (this.Visible)
             {
-                if(this.Chart != null)
+                if (this.Chart != null)
                 {
                     // Check if annotation is anchored to the data point
                     ChartArea area = null;
-                    if(this.AnchorDataPoint != null && 
-                        this.AnchorDataPoint.series != null)
+                    if (this.AnchorDataPoint != null && this.AnchorDataPoint.series != null)
                     {
-                        if(this.Chart.ChartAreas.IndexOf(this.AnchorDataPoint.series.ChartArea) >= 0)
+                        if (
+                            this.Chart.ChartAreas.IndexOf(this.AnchorDataPoint.series.ChartArea)
+                            >= 0
+                        )
                         {
                             area = this.Chart.ChartAreas[this.AnchorDataPoint.series.ChartArea];
                         }
                     }
-                    if(area == null &&
-                        this._anchorDataPoint2 != null && 
-                        this._anchorDataPoint2.series != null)
+                    if (
+                        area == null
+                        && this._anchorDataPoint2 != null
+                        && this._anchorDataPoint2.series != null
+                    )
                     {
-                        if(this.Chart.ChartAreas.IndexOf(this._anchorDataPoint2.series.ChartArea) >= 0)
+                        if (
+                            this.Chart.ChartAreas.IndexOf(this._anchorDataPoint2.series.ChartArea)
+                            >= 0
+                        )
                         {
                             area = this.Chart.ChartAreas[this._anchorDataPoint2.series.ChartArea];
                         }
                     }
 
                     // Check if annotation uses chart area axis values
-                    if(area == null && this.AxisX != null)
+                    if (area == null && this.AxisX != null)
                     {
                         area = this.AxisX.ChartArea;
                     }
-                    if(area == null && this.AxisY != null)
+                    if (area == null && this.AxisY != null)
                     {
                         area = this.AxisY.ChartArea;
                     }
 
                     // Check if associated area is visible
-                    if(area != null &&
-                        !area.Visible)
+                    if (area != null && !area.Visible)
                     {
                         return false;
                     }
                 }
-            
-                    
+
                 return true;
             }
             return false;
@@ -4008,7 +4014,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Modified string.</returns>
         internal string ReplaceKeywords(string strOriginal)
         {
-            if(this.AnchorDataPoint != null)
+            if (this.AnchorDataPoint != null)
             {
                 return this.AnchorDataPoint.ReplaceKeywords(strOriginal);
             }
@@ -4022,52 +4028,57 @@ namespace System.Web.UI.DataVisualization.Charting
         internal bool IsAnchorVisible()
         {
             // Get axes objects
-            Axis    vertAxis = null;
-            Axis    horizAxis = null;
+            Axis vertAxis = null;
+            Axis horizAxis = null;
             GetAxes(ref vertAxis, ref horizAxis);
 
             // Get anchor position
-            bool    inRelativeAnchorX = false;
-            bool    inRelativeAnchorY = false;
-            double    anchorX = this.AnchorX;
-            double    anchorY = this.AnchorY;
-            GetAnchorLocation(ref anchorX, ref anchorY, ref inRelativeAnchorX, ref inRelativeAnchorY);
+            bool inRelativeAnchorX = false;
+            bool inRelativeAnchorY = false;
+            double anchorX = this.AnchorX;
+            double anchorY = this.AnchorY;
+            GetAnchorLocation(
+                ref anchorX,
+                ref anchorY,
+                ref inRelativeAnchorX,
+                ref inRelativeAnchorY
+            );
 
             // Check if anchor is set
-            if( !double.IsNaN(anchorX) && !double.IsNaN(anchorY) )
+            if (!double.IsNaN(anchorX) && !double.IsNaN(anchorY))
             {
                 // Check if anchor is in axes coordinates
-                if(this.AnchorDataPoint != null || 
-                    this.AxisX != null ||
-                    this.AxisY != null)
+                if (this.AnchorDataPoint != null || this.AxisX != null || this.AxisY != null)
                 {
                     // Convert anchor point to relative coordinates
-                    if(!inRelativeAnchorX && horizAxis != null)
+                    if (!inRelativeAnchorX && horizAxis != null)
                     {
                         anchorX = horizAxis.ValueToPosition(anchorX);
                     }
-                    if(!inRelativeAnchorY && vertAxis != null)
+                    if (!inRelativeAnchorY && vertAxis != null)
                     {
                         anchorY = vertAxis.ValueToPosition(anchorY);
                     }
 
                     // Get chart area
                     ChartArea chartArea = null;
-                    if(horizAxis != null)
+                    if (horizAxis != null)
                     {
                         chartArea = horizAxis.ChartArea;
                     }
-                    if(chartArea == null && vertAxis != null)
+                    if (chartArea == null && vertAxis != null)
                     {
                         chartArea = vertAxis.ChartArea;
                     }
 
                     // Apply 3D transforamtion if required
-                    if(chartArea != null && chartArea.Area3DStyle.Enable3D == true)
+                    if (chartArea != null && chartArea.Area3DStyle.Enable3D == true)
                     {
-                        if(!chartArea.chartAreaIsCurcular &&
-                            chartArea.requireAxes &&
-                            chartArea.matrix3D.IsInitialized())
+                        if (
+                            !chartArea.chartAreaIsCurcular
+                            && chartArea.requireAxes
+                            && chartArea.matrix3D.IsInitialized()
+                        )
                         {
                             // Get anotation Z coordinate (use scene depth or anchored point Z position)
                             float positionZ = chartArea.areaSceneDepth;
@@ -4077,13 +4088,18 @@ namespace System.Web.UI.DataVisualization.Charting
                                 chartArea.GetSeriesZPositionAndDepth(
                                     this.AnchorDataPoint.series,
                                     out depth,
-                                    out positionZ);
+                                    out positionZ
+                                );
                                 positionZ += depth / 2f;
                             }
 
                             // Define 3D points of annotation object
                             Point3D[] annot3DPoints = new Point3D[1];
-                            annot3DPoints[0] = new Point3D((float)anchorX, (float)anchorY, positionZ);
+                            annot3DPoints[0] = new Point3D(
+                                (float)anchorX,
+                                (float)anchorY,
+                                positionZ
+                            );
 
                             // Tranform cube coordinates
                             chartArea.matrix3D.TransformPoints(annot3DPoints);
@@ -4094,13 +4110,13 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                     }
 
-                    // Get plot rectangle position and inflate it slightly 
+                    // Get plot rectangle position and inflate it slightly
                     // to solve any float rounding issues.
                     RectangleF rect = chartArea.PlotAreaPosition.ToRectangleF();
                     rect.Inflate(0.00001f, 0.00001f);
 
                     // Check if anchor point is in the plotting area
-                    if(!rect.Contains((float)anchorX, (float)anchorY))
+                    if (!rect.Contains((float)anchorX, (float)anchorY))
                     {
                         return false;
                     }
@@ -4122,9 +4138,10 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             return null;
         }
+
 #if Microsoft_CONTROL
         /// <summary>
-        /// Checks if provided pixel coordinate is contained in one of the 
+        /// Checks if provided pixel coordinate is contained in one of the
         /// selection handles rectangle.
         /// </summary>
         /// <param name="point">Coordinate in pixels.</param>
@@ -4133,21 +4150,22 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             ResizingMode resizingMode = ResizingMode.None;
 
-            if( this.Common != null &&
-                this.Common.graph != null)
+            if (this.Common != null && this.Common.graph != null)
             {
                 // Convert point to relative coordinates
                 point = this.Common.graph.GetRelativePoint(point);
 
                 // Check if point is in one of the selection handles
-                if(this.selectionRects != null)
+                if (this.selectionRects != null)
                 {
-                    for(int index = 0; index < this.selectionRects.Length; index++)
+                    for (int index = 0; index < this.selectionRects.Length; index++)
                     {
-                        if(!this.selectionRects[index].IsEmpty && 
-                            this.selectionRects[index].Contains(point))
+                        if (
+                            !this.selectionRects[index].IsEmpty
+                            && this.selectionRects[index].Contains(point)
+                        )
                         {
-                            if(index > (int)ResizingMode.AnchorHandle)
+                            if (index > (int)ResizingMode.AnchorHandle)
                             {
                                 resizingMode = ResizingMode.MovingPathPoints;
                                 this.currentPathPointIndex = index - 9;
@@ -4164,6 +4182,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return resizingMode;
         }
 #endif //Microsoft_CONTROL
+
         /// <summary>
         /// Gets data point X or Y axis.
         /// </summary>
@@ -4178,14 +4197,24 @@ namespace System.Web.UI.DataVisualization.Charting
                 ChartArea chartArea = Chart.ChartAreas[dataPoint.series.ChartArea];
 
                 // Get point X axis
-                if ((axisName == AxisName.X || axisName == AxisName.X2) &&
-                    !chartArea.switchValueAxes)
+                if (
+                    (axisName == AxisName.X || axisName == AxisName.X2)
+                    && !chartArea.switchValueAxes
+                )
                 {
-                    return chartArea.GetAxis(axisName, dataPoint.series.XAxisType, dataPoint.series.XSubAxisName);
+                    return chartArea.GetAxis(
+                        axisName,
+                        dataPoint.series.XAxisType,
+                        dataPoint.series.XSubAxisName
+                    );
                 }
                 else
                 {
-                    return chartArea.GetAxis(axisName, dataPoint.series.YAxisType, dataPoint.series.YSubAxisName);
+                    return chartArea.GetAxis(
+                        axisName,
+                        dataPoint.series.YAxisType,
+                        dataPoint.series.YSubAxisName
+                    );
                 }
             }
             return null;
@@ -4201,9 +4230,9 @@ namespace System.Web.UI.DataVisualization.Charting
             vertAxis = null;
             horizAxis = null;
 
-            if(this.AxisX != null && this.AxisX.ChartArea != null)
+            if (this.AxisX != null && this.AxisX.ChartArea != null)
             {
-                if(this.AxisX.ChartArea.switchValueAxes)
+                if (this.AxisX.ChartArea.switchValueAxes)
                 {
                     vertAxis = this.AxisX;
                 }
@@ -4212,9 +4241,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     horizAxis = this.AxisX;
                 }
             }
-            if(this.AxisY != null && this.AxisY.ChartArea != null)
+            if (this.AxisY != null && this.AxisY.ChartArea != null)
             {
-                if(this.AxisY.ChartArea.switchValueAxes)
+                if (this.AxisY.ChartArea.switchValueAxes)
                 {
                     horizAxis = this.AxisY;
                 }
@@ -4225,24 +4254,32 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Get axes from attached data point
-            if(this.AnchorDataPoint != null)
+            if (this.AnchorDataPoint != null)
             {
-                if(horizAxis == null)
+                if (horizAxis == null)
                 {
                     horizAxis = GetDataPointAxis(this.AnchorDataPoint, AxisName.X);
 
                     // For chart types like Bar, RangeBar and others, position of X and Y axes are flipped
-                    if (horizAxis != null && horizAxis.ChartArea != null && horizAxis.ChartArea.switchValueAxes)
+                    if (
+                        horizAxis != null
+                        && horizAxis.ChartArea != null
+                        && horizAxis.ChartArea.switchValueAxes
+                    )
                     {
                         horizAxis = GetDataPointAxis(this.AnchorDataPoint, AxisName.Y);
                     }
                 }
-                if(vertAxis == null)
+                if (vertAxis == null)
                 {
                     vertAxis = GetDataPointAxis(this.AnchorDataPoint, AxisName.Y);
 
                     // For chart types like Bar, RangeBar and others, position of X and Y axes are flipped
-                    if (vertAxis != null && vertAxis.ChartArea != null && vertAxis.ChartArea.switchValueAxes)
+                    if (
+                        vertAxis != null
+                        && vertAxis.ChartArea != null
+                        && vertAxis.ChartArea.switchValueAxes
+                    )
                     {
                         vertAxis = GetDataPointAxis(this.AnchorDataPoint, AxisName.X);
                     }
@@ -4250,11 +4287,13 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // No axes coordinate system for grouped annotations
-            if(vertAxis != null || horizAxis != null)
+            if (vertAxis != null || horizAxis != null)
             {
-                if(this.AnnotationGroup != null)
+                if (this.AnnotationGroup != null)
                 {
-                    throw (new InvalidOperationException(SR.ExceptionAnnotationGroupedAxisMustBeEmpty));
+                    throw (
+                        new InvalidOperationException(SR.ExceptionAnnotationGroupedAxisMustBeEmpty)
+                    );
                 }
             }
         }
@@ -4262,17 +4301,17 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
 
         #endregion
-    
+
         #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected override void Dispose(bool disposing) 
+        protected override void Dispose(bool disposing)
         {
-            if (disposing) 
-            {   
+            if (disposing)
+            {
                 //Free managed resources
                 if (_fontCache != null)
                 {
@@ -4283,7 +4322,6 @@ namespace System.Web.UI.DataVisualization.Charting
             base.Dispose(disposing);
         }
 
-
         #endregion
     }
 
@@ -4293,21 +4331,22 @@ namespace System.Web.UI.DataVisualization.Charting
     /// This class is used to stores position changing event data for an annotation.
     /// </summary>
     /// <remarks>
-    /// Provides additional data like the new annotation and anchor position when an end user 
+    /// Provides additional data like the new annotation and anchor position when an end user
     /// is moving the annotation with the mouse.
     /// <para>
-    /// Can be used to restrict annotation movement, or snap the annotation position to 
+    /// Can be used to restrict annotation movement, or snap the annotation position to
     /// specific points.
     /// </para>
     /// </remarks>
-    [
-    SRDescription("DescriptionAttributeAnnotationPositionChangingEventArgs_AnnotationPositionChangingEventArgs"),
-    ]
+    [SRDescription(
+        "DescriptionAttributeAnnotationPositionChangingEventArgs_AnnotationPositionChangingEventArgs"
+    ),]
     public class AnnotationPositionChangingEventArgs : EventArgs
     {
-        #region Fields
+    #region Fields
 
         private Annotation _Annotation = null;
+
         /// <summary>
         /// Gets or sets the annotation the event is fired for.
         /// </summary>
@@ -4318,6 +4357,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private double _NewLocationX = 0.0;
+
         /// <summary>
         /// Gets or sets the new X location of the annotation.
         /// </summary>
@@ -4328,6 +4368,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private double _NewLocationY = 0.0;
+
         /// <summary>
         /// Gets or sets the new Y location of the annotation.
         /// </summary>
@@ -4338,6 +4379,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private double _NewSizeWidth = 0.0;
+
         /// <summary>
         /// Gets or sets the new width of the annotation.
         /// </summary>
@@ -4348,6 +4390,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private double _NewSizeHeight = 0.0;
+
         /// <summary>
         /// Gets or sets the new height of the annotation.
         /// </summary>
@@ -4358,6 +4401,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private double _NewAnchorLocationX = 0.0;
+
         /// <summary>
         /// Gets or sets the new annotation anchor point X location.
         /// </summary>
@@ -4368,6 +4412,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private double _NewAnchorLocationY = 0.0;
+
         /// <summary>
         /// Gets or sets the new annotation anchor point Y location.
         /// </summary>
@@ -4377,19 +4422,16 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _NewAnchorLocationY = value; }
         }
 
-        #endregion // Fields
+    #endregion // Fields
 
-        #region Properties
+    #region Properties
 
 
         /// <summary>
         /// Gets or sets the new location and size of the annotation.
         /// </summary>
-        [
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        ]
-        public RectangleF NewPosition 
+        [Browsable(false), EditorBrowsableAttribute(EditorBrowsableState.Never),]
+        public RectangleF NewPosition
         {
             get
             {
@@ -4397,7 +4439,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     (float)this.NewLocationX,
                     (float)this.NewLocationY,
                     (float)this.NewSizeWidth,
-                    (float)this.NewSizeHeight);
+                    (float)this.NewSizeHeight
+                );
             }
             set
             {
@@ -4411,17 +4454,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets or sets the new anchor location of the annotation.
         /// </summary>
-        [
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        ]
+        [Browsable(false), EditorBrowsableAttribute(EditorBrowsableState.Never),]
         public PointF NewAnchorLocation
         {
             get
             {
-                return new PointF(
-                    (float)this.NewAnchorLocationX,
-                    (float)this.NewAnchorLocationY);
+                return new PointF((float)this.NewAnchorLocationX, (float)this.NewAnchorLocationY);
             }
             set
             {
@@ -4430,7 +4468,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-        #endregion // Properties
+    #endregion // Properties
     }
 
 #endif //Microsoft_CONTROL

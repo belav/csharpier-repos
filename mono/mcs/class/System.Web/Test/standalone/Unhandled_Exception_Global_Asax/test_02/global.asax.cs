@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -9,11 +8,11 @@ namespace TestWebApp
 {
     public partial class Global : System.Web.HttpApplication
     {
-        protected virtual void Application_Error (Object sender, EventArgs e)
+        protected virtual void Application_Error(Object sender, EventArgs e)
         {
-            Console.WriteLine (Environment.StackTrace);
-            Console.WriteLine ("Handling apperror:");
-            Console.WriteLine (HttpContext.Current.Error);
+            Console.WriteLine(Environment.StackTrace);
+            Console.WriteLine("Handling apperror:");
+            Console.WriteLine(HttpContext.Current.Error);
         }
     }
 }

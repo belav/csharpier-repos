@@ -8,28 +8,30 @@ namespace Commons.Xml.Nvdl
 {
     public class NvdlConfig
     {
-        XmlResolver resolver = new XmlUrlResolver ();
-        ArrayList providers = new ArrayList ();
+        XmlResolver resolver = new XmlUrlResolver();
+        ArrayList providers = new ArrayList();
 
-        public NvdlConfig ()
+        public NvdlConfig()
         {
-            providers.Add (new NvdlBuiltInValidationProvider ());
+            providers.Add(new NvdlBuiltInValidationProvider());
         }
 
-        public void AddProvider (NvdlValidationProvider provider)
+        public void AddProvider(NvdlValidationProvider provider)
         {
-            providers.Add (provider);
+            providers.Add(provider);
         }
 
-        internal XmlResolver XmlResolverInternal {
+        internal XmlResolver XmlResolverInternal
+        {
             get { return resolver; }
         }
 
-        public XmlResolver XmlResolver {
+        public XmlResolver XmlResolver
+        {
             set { resolver = value; }
         }
 
-        public NvdlValidatorGenerator GetGenerator (NvdlValidate validate, string inheritSchemaType)
+        public NvdlValidatorGenerator GetGenerator(NvdlValidate validate, string inheritSchemaType)
         {
             this.resolver = this.XmlResolverInternal;
 
@@ -39,14 +41,20 @@ namespace Commons.Xml.Nvdl
             if (schemaType == null)
                 schemaType = "application/xml";
 
-            foreach (NvdlValidationProvider p in providers) {
-                NvdlValidatorGenerator g =
-                    p.CreateGenerator (validate, schemaType, this);
+            foreach (NvdlValidationProvider p in providers)
+            {
+                NvdlValidatorGenerator g = p.CreateGenerator(validate, schemaType, this);
                 if (g != null)
                     return g;
             }
 
-            throw new NvdlCompileException (String.Format ("Either schema type '{0}' or the target schema document is not supported in this configuration. Add custom provider that supports this schema type.", schemaType), validate);
+            throw new NvdlCompileException(
+                String.Format(
+                    "Either schema type '{0}' or the target schema document is not supported in this configuration. Add custom provider that supports this schema type.",
+                    schemaType
+                ),
+                validate
+            );
         }
     }
 }

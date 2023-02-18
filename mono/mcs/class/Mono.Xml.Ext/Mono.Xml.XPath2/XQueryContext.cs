@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,19 +46,25 @@ namespace Mono.Xml.XPath2
         XmlArgumentList args;
         XmlResolver extDocResolver;
 
-        Stack<XQueryContext> contextStack = new Stack<XQueryContext> ();
+        Stack<XQueryContext> contextStack = new Stack<XQueryContext>();
         XQueryContext currentContext;
 #if SEEMS_CONTEXT_FOR_CURRENT_REQURED
 #else
-        Stack<XPathSequence> contextSequenceStack = new Stack<XPathSequence> ();
+        Stack<XPathSequence> contextSequenceStack = new Stack<XPathSequence>();
 #endif
         XmlWriter currentWriter;
         XPathItem input; // source input item(node)
         XPathSequence currentSequence;
         XmlNamespaceManager namespaceManager;
-        Hashtable localCollationCache = new Hashtable ();
+        Hashtable localCollationCache = new Hashtable();
 
-        internal XQueryContextManager (XQueryStaticContext ctx, XPathItem input, XmlWriter writer, XmlResolver resolver, XmlArgumentList args)
+        internal XQueryContextManager(
+            XQueryStaticContext ctx,
+            XPathItem input,
+            XmlWriter writer,
+            XmlResolver resolver,
+            XmlArgumentList args
+        )
         {
             this.input = input;
             this.staticContext = ctx;
@@ -66,110 +72,123 @@ namespace Mono.Xml.XPath2
             currentWriter = writer;
             this.extDocResolver = resolver;
 
-            namespaceManager = new XmlNamespaceManager (ctx.NameTable);
-            foreach (DictionaryEntry de in ctx.NSResolver.GetNamespacesInScope (XmlNamespaceScope.ExcludeXml))
-                namespaceManager.AddNamespace (de.Key.ToString (), de.Value.ToString ());
-            namespaceManager.PushScope ();
+            namespaceManager = new XmlNamespaceManager(ctx.NameTable);
+            foreach (
+                DictionaryEntry de in ctx.NSResolver.GetNamespacesInScope(
+                    XmlNamespaceScope.ExcludeXml
+                )
+            )
+                namespaceManager.AddNamespace(de.Key.ToString(), de.Value.ToString());
+            namespaceManager.PushScope();
 
-            currentContext = new XQueryContext (this, null, new Hashtable ());
-            if (input != null) {
-                currentSequence = new SingleItemIterator (input, currentContext);
-                currentSequence.MoveNext ();
+            currentContext = new XQueryContext(this, null, new Hashtable());
+            if (input != null)
+            {
+                currentSequence = new SingleItemIterator(input, currentContext);
+                currentSequence.MoveNext();
             }
-            currentContext = new XQueryContext (this, currentSequence, new Hashtable ());
+            currentContext = new XQueryContext(this, currentSequence, new Hashtable());
         }
 
-        public bool Initialized {
+        public bool Initialized
+        {
             get { return currentContext != null; }
         }
 
-        public XmlResolver ExtDocResolver {
+        public XmlResolver ExtDocResolver
+        {
             get { return extDocResolver; }
         }
 
-        public XmlArgumentList Arguments {
+        public XmlArgumentList Arguments
+        {
             get { return args; }
         }
 
-        public XmlWriter Writer {
+        public XmlWriter Writer
+        {
             get { return currentWriter; }
             // FIXME: might be better avoid setter as public
             set { currentWriter = value; }
         }
 
-        internal XQueryContext CurrentContext {
+        internal XQueryContext CurrentContext
+        {
             get { return currentContext; }
         }
 
-        internal XQueryStaticContext StaticContext {
+        internal XQueryStaticContext StaticContext
+        {
             get { return staticContext; }
         }
 
-        internal CultureInfo GetCulture (string collation)
+        internal CultureInfo GetCulture(string collation)
         {
-            CultureInfo ci = staticContext.GetCulture (collation);
+            CultureInfo ci = staticContext.GetCulture(collation);
             if (ci == null)
-                ci = (CultureInfo) localCollationCache [collation];
+                ci = (CultureInfo)localCollationCache[collation];
             if (ci != null)
                 return ci;
-            ci = new CultureInfo (collation);
-            localCollationCache [collation] = ci;
+            ci = new CultureInfo(collation);
+            localCollationCache[collation] = ci;
             return ci;
         }
 
-        public void PushCurrentSequence (XPathSequence sequence)
+        public void PushCurrentSequence(XPathSequence sequence)
         {
             if (sequence == null)
-                throw new ArgumentNullException ();
-//            sequence = sequence.Clone ();
+                throw new ArgumentNullException();
+            //            sequence = sequence.Clone ();
 #if SEEMS_CONTEXT_FOR_CURRENT_REQURED
-            contextStack.Push (currentContext);
+            contextStack.Push(currentContext);
             currentsequence = sequence;
-            currentContext = new XQueryContext (this);
+            currentContext = new XQueryContext(this);
 #else
-            contextSequenceStack.Push (currentSequence);
+            contextSequenceStack.Push(currentSequence);
             currentSequence = sequence;
 #endif
         }
 
-        public void PopCurrentSequence ()
+        public void PopCurrentSequence()
         {
 #if SEEMS_CONTEXT_FOR_CURRENT_REQURED
-            PopContext ();
+            PopContext();
 #else
-            currentSequence = contextSequenceStack.Pop ();
+            currentSequence = contextSequenceStack.Pop();
 #endif
             if (currentSequence == null)
-                throw new SystemException ("XQuery error: should not happen.");
+                throw new SystemException("XQuery error: should not happen.");
         }
 
-        internal void PushContext ()
+        internal void PushContext()
         {
-            contextStack.Push (currentContext);
-            currentContext = new XQueryContext (this);
+            contextStack.Push(currentContext);
+            currentContext = new XQueryContext(this);
         }
 
-        internal void PopContext ()
+        internal void PopContext()
         {
-            currentContext = contextStack.Pop ();
+            currentContext = contextStack.Pop();
         }
 
-        internal void PushVariable (XmlQualifiedName name, object iter)
+        internal void PushVariable(XmlQualifiedName name, object iter)
         {
-            PushContext ();
-            CurrentContext.SetVariable (name, iter);
+            PushContext();
+            CurrentContext.SetVariable(name, iter);
         }
 
-        internal void PopVariable ()
+        internal void PopVariable()
         {
-            PopContext ();
+            PopContext();
         }
 
-        internal XmlNamespaceManager NSManager {
+        internal XmlNamespaceManager NSManager
+        {
             get { return namespaceManager; }
         }
 
-        internal XPathSequence CurrentSequence {
+        internal XPathSequence CurrentSequence
+        {
             get { return currentSequence; }
         }
     }
@@ -180,137 +199,155 @@ namespace Mono.Xml.XPath2
         Hashtable currentVariables;
         XPathSequence currentSequence;
 
-        internal XQueryContext (XQueryContextManager manager)
-            : this (manager,
+        internal XQueryContext(XQueryContextManager manager)
+            : this(
+                manager,
                 manager.CurrentSequence,
-                (Hashtable) manager.CurrentContext.currentVariables.Clone ())
-        {
-        }
+                (Hashtable)manager.CurrentContext.currentVariables.Clone()
+            ) { }
 
-        internal XQueryContext (XQueryContextManager manager, XPathSequence currentSequence, Hashtable currentVariables)
+        internal XQueryContext(
+            XQueryContextManager manager,
+            XPathSequence currentSequence,
+            Hashtable currentVariables
+        )
         {
             contextManager = manager;
             this.currentSequence = currentSequence;
-/*
-            if (manager.CurrentContext != null)
-                currentVariables = (Hashtable) manager.CurrentContext.currentVariables.Clone ();
-            else
-                currentVariables = new Hashtable ();
-*/
+            /*
+                        if (manager.CurrentContext != null)
+                            currentVariables = (Hashtable) manager.CurrentContext.currentVariables.Clone ();
+                        else
+                            currentVariables = new Hashtable ();
+            */
             this.currentVariables = currentVariables;
         }
 
-        internal XmlWriter Writer {
+        internal XmlWriter Writer
+        {
             get { return contextManager.Writer; }
             // FIXME: might be better avoid public setter.
             set { contextManager.Writer = value; }
         }
 
-        internal XQueryStaticContext StaticContext {
+        internal XQueryStaticContext StaticContext
+        {
             get { return contextManager.StaticContext; }
         }
 
-        internal CultureInfo DefaultCollation {
+        internal CultureInfo DefaultCollation
+        {
             get { return StaticContext.DefaultCollation; }
         }
 
-        internal XQueryContextManager ContextManager {
+        internal XQueryContextManager ContextManager
+        {
             get { return contextManager; }
         }
 
-        public XPathItem CurrentItem {
-            get {
+        public XPathItem CurrentItem
+        {
+            get
+            {
                 if (currentSequence == null)
-                    throw new XmlQueryException ("This XQuery dynamic context has no context item.");
+                    throw new XmlQueryException("This XQuery dynamic context has no context item.");
                 return CurrentSequence.Current;
             }
         }
 
-        public XPathNavigator CurrentNode {
+        public XPathNavigator CurrentNode
+        {
             get { return CurrentItem as XPathNavigator; }
         }
 
-        public XPathSequence CurrentSequence {
+        public XPathSequence CurrentSequence
+        {
             get { return currentSequence; }
         }
 
-        internal CultureInfo GetCulture (string collation)
+        internal CultureInfo GetCulture(string collation)
         {
-            return contextManager.GetCulture (collation);
+            return contextManager.GetCulture(collation);
         }
 
-        internal void PushVariable (XmlQualifiedName name, object iter)
+        internal void PushVariable(XmlQualifiedName name, object iter)
         {
-            contextManager.PushVariable (name, iter);
+            contextManager.PushVariable(name, iter);
         }
 
         // FIXME: Hmm... this design is annoying.
-        internal void SetVariable (XmlQualifiedName name, object iter)
+        internal void SetVariable(XmlQualifiedName name, object iter)
         {
-            currentVariables [name] = iter;
+            currentVariables[name] = iter;
         }
 
-        internal void PopVariable ()
+        internal void PopVariable()
         {
-            contextManager.PopVariable ();
+            contextManager.PopVariable();
         }
 
-        internal XPathSequence ResolveVariable (XmlQualifiedName name)
+        internal XPathSequence ResolveVariable(XmlQualifiedName name)
         {
-            object obj = currentVariables [name];
+            object obj = currentVariables[name];
             if (obj == null && contextManager.Arguments != null)
-                obj = contextManager.Arguments.GetParameter (name.Name, name.Namespace);
+                obj = contextManager.Arguments.GetParameter(name.Name, name.Namespace);
             if (obj == null)
-                return new XPathEmptySequence (this);
+                return new XPathEmptySequence(this);
             XPathSequence seq = obj as XPathSequence;
             if (seq != null)
                 return seq;
             XPathItem item = obj as XPathItem;
             if (item == null)
-                item = new XPathAtomicValue (obj, InternalPool.GetBuiltInType (InternalPool.XmlTypeCodeFromRuntimeType (obj.GetType (), true)));
-            return new SingleItemIterator (item, this);
+                item = new XPathAtomicValue(
+                    obj,
+                    InternalPool.GetBuiltInType(
+                        InternalPool.XmlTypeCodeFromRuntimeType(obj.GetType(), true)
+                    )
+                );
+            return new SingleItemIterator(item, this);
         }
 
-        internal XPathSequence ResolveCollection (string name)
+        internal XPathSequence ResolveCollection(string name)
         {
             // FIXME: support later.
-            return new XPathEmptySequence (currentSequence.Context);
+            return new XPathEmptySequence(currentSequence.Context);
         }
 
-        public IXmlNamespaceResolver NSResolver {
+        public IXmlNamespaceResolver NSResolver
+        {
             get { return contextManager.NSManager; }
         }
 
         #region IXmlNamespaceResolver implementation
-        public XmlNameTable NameTable {
+        public XmlNameTable NameTable
+        {
             get { return contextManager.NSManager.NameTable; }
         }
 
-        public string LookupPrefix (string ns)
+        public string LookupPrefix(string ns)
         {
-            return contextManager.NSManager.LookupPrefix (ns);
+            return contextManager.NSManager.LookupPrefix(ns);
         }
 
-        public string LookupPrefix (string ns, bool atomized)
+        public string LookupPrefix(string ns, bool atomized)
         {
-            return contextManager.NSManager.LookupPrefix (ns, atomized);
+            return contextManager.NSManager.LookupPrefix(ns, atomized);
         }
 
-        public string LookupNamespace (string prefix)
+        public string LookupNamespace(string prefix)
         {
-            return contextManager.NSManager.LookupNamespace (prefix);
+            return contextManager.NSManager.LookupNamespace(prefix);
         }
 
-        public string LookupNamespace (string prefix, bool atomized)
+        public string LookupNamespace(string prefix, bool atomized)
         {
-            return contextManager.NSManager.LookupNamespace (prefix, atomized);
+            return contextManager.NSManager.LookupNamespace(prefix, atomized);
         }
 
-        public IDictionary GetNamespacesInScope (XmlNamespaceScope scope)
+        public IDictionary GetNamespacesInScope(XmlNamespaceScope scope)
         {
-            return contextManager.NSManager.GetNamespacesInScope (scope);
+            return contextManager.NSManager.GetNamespacesInScope(scope);
         }
         #endregion
     }
 }
-

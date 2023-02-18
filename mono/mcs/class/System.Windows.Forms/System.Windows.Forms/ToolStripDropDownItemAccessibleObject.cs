@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,29 +35,29 @@ namespace System.Windows.Forms
     public class ToolStripDropDownItemAccessibleObject : ToolStripItem.ToolStripItemAccessibleObject
     {
         #region Public Constructor
-        public ToolStripDropDownItemAccessibleObject (ToolStripDropDownItem item) : base (item)
-        {
-        }
+        public ToolStripDropDownItemAccessibleObject(ToolStripDropDownItem item)
+            : base(item) { }
         #endregion
 
         #region Public Properties
-        public override AccessibleRole Role {
+        public override AccessibleRole Role
+        {
             get { return base.Role; }
         }
         #endregion
 
         #region Public Methods
-        public override void DoDefaultAction ()
+        public override void DoDefaultAction()
         {
-            base.DoDefaultAction ();
+            base.DoDefaultAction();
         }
 
-        public override AccessibleObject GetChild (int index)
+        public override AccessibleObject GetChild(int index)
         {
             return (owner_item as ToolStripDropDownItem).DropDownItems[index].AccessibilityObject;
         }
 
-        public override int GetChildCount ()
+        public override int GetChildCount()
         {
             return (owner_item as ToolStripDropDownItem).DropDownItems.Count;
         }

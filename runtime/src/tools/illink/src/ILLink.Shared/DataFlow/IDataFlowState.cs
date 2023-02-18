@@ -8,11 +8,12 @@ using System;
 
 namespace ILLink.Shared.DataFlow
 {
-    public sealed class Box<T> where T : struct
+    public sealed class Box<T>
+        where T : struct
     {
-        public Box (T value) => Value = value;
-        public T Value { get; set; }
+        public Box(T value) => Value = value;
 
+        public T Value { get; set; }
     }
 
     public interface IDataFlowState<TValue, TValueLattice>

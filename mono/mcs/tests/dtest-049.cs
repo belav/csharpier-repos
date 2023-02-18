@@ -1,25 +1,21 @@
 public class A
 {
-    public class N : B.N
-    {
-    }
+    public class N : B.N { }
 }
 
 public class B
 {
     public class N
     {
-        public void Test ()
-        {
-        }
+        public void Test() { }
     }
 }
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        dynamic n = new A.N ();
-        n.Test ();
+        dynamic n = new A.N();
+        n.Test();
     }
 }

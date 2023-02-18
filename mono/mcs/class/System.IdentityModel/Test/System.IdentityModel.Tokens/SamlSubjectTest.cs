@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,103 +40,116 @@ namespace MonoTests.System.IdentityModel.Tokens
     [TestFixture]
     public class SamlSubjectTest
     {
-        XmlDictionaryWriter CreateWriter (StringWriter sw)
+        XmlDictionaryWriter CreateWriter(StringWriter sw)
         {
-            return XmlDictionaryWriter.CreateDictionaryWriter (XmlWriter.Create (sw));
+            return XmlDictionaryWriter.CreateDictionaryWriter(XmlWriter.Create(sw));
         }
 
-        XmlDictionaryReader CreateReader (string xml)
+        XmlDictionaryReader CreateReader(string xml)
         {
-            return XmlDictionaryReader.CreateDictionaryReader (XmlReader.Create (new StringReader (xml)));
-        }
-
-        [Test]
-        public void DefaultValues ()
-        {
-            SamlSubject a = new SamlSubject ();
-            Assert.IsNull (a.NameFormat, "#1");
-            Assert.IsNull (a.NameQualifier, "#2");
-            Assert.IsNull (a.Name, "#3");
+            return XmlDictionaryReader.CreateDictionaryReader(
+                XmlReader.Create(new StringReader(xml))
+            );
         }
 
         [Test]
-        public void ConstructorNullFormat ()
+        public void DefaultValues()
         {
-            new SamlSubject (null, "myQ", "myName");
+            SamlSubject a = new SamlSubject();
+            Assert.IsNull(a.NameFormat, "#1");
+            Assert.IsNull(a.NameQualifier, "#2");
+            Assert.IsNull(a.Name, "#3");
         }
 
         [Test]
-        public void ConstructorNullQualifier ()
+        public void ConstructorNullFormat()
         {
-            new SamlSubject ("myF", null, "myName");
+            new SamlSubject(null, "myQ", "myName");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ConstructorNullName ()
+        public void ConstructorNullQualifier()
         {
-            new SamlSubject ("myF", "myQ", null);
+            new SamlSubject("myF", null, "myName");
         }
 
         [Test]
-        public void SetFormatEmpty ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorNullName()
         {
-            SamlSubject a = new SamlSubject ();
+            new SamlSubject("myF", "myQ", null);
+        }
+
+        [Test]
+        public void SetFormatEmpty()
+        {
+            SamlSubject a = new SamlSubject();
             a.NameFormat = String.Empty;
         }
 
         [Test]
-        public void SetQualifierEmpty ()
+        public void SetQualifierEmpty()
         {
-            SamlSubject a = new SamlSubject ();
+            SamlSubject a = new SamlSubject();
             a.NameQualifier = String.Empty;
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void SetNameEmpty ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void SetNameEmpty()
         {
-            SamlSubject a = new SamlSubject ();
+            SamlSubject a = new SamlSubject();
             a.Name = String.Empty;
         }
 
         [Test]
-        [ExpectedException (typeof (SecurityTokenException))]
-        public void WriteXmlNoFormat ()
+        [ExpectedException(typeof(SecurityTokenException))]
+        public void WriteXmlNoFormat()
         {
-            SamlSubject a = new SamlSubject ();
+            SamlSubject a = new SamlSubject();
 
-            StringWriter sw = new StringWriter ();
-            using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-                a.WriteXml (dw, new SamlSerializer (), null);
+            StringWriter sw = new StringWriter();
+            using (XmlDictionaryWriter dw = CreateWriter(sw))
+            {
+                a.WriteXml(dw, new SamlSerializer(), null);
             }
         }
 
         [Test]
-        public void WriteXml1 ()
+        public void WriteXml1()
         {
-            SamlSubject a = new SamlSubject ("myFormat", "myQualifier", "myName");
+            SamlSubject a = new SamlSubject("myFormat", "myQualifier", "myName");
 
-            StringWriter sw = new StringWriter ();
-            using (XmlDictionaryWriter dw = CreateWriter (sw)) {
-                a.WriteXml (dw, new SamlSerializer (), null);
+            StringWriter sw = new StringWriter();
+            using (XmlDictionaryWriter dw = CreateWriter(sw))
+            {
+                a.WriteXml(dw, new SamlSerializer(), null);
             }
-            Assert.AreEqual (String.Format ("<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:Subject xmlns:saml=\"{0}\"><saml:NameIdentifier Format=\"myFormat\" NameQualifier=\"myQualifier\">myName</saml:NameIdentifier></saml:Subject>", SamlConstants.Namespace), sw.ToString ());
+            Assert.AreEqual(
+                String.Format(
+                    "<?xml version=\"1.0\" encoding=\"utf-16\"?><saml:Subject xmlns:saml=\"{0}\"><saml:NameIdentifier Format=\"myFormat\" NameQualifier=\"myQualifier\">myName</saml:NameIdentifier></saml:Subject>",
+                    SamlConstants.Namespace
+                ),
+                sw.ToString()
+            );
         }
 
         [Test]
-        public void ReadXml1 ()
+        public void ReadXml1()
         {
-            SamlSerializer ser = new SamlSerializer ();
-            string xml = String.Format ("<saml:Subject xmlns:saml=\"{0}\"><saml:NameIdentifier Format=\"myFormat\" NameQualifier=\"myQualifier\">myName</saml:NameIdentifier></saml:Subject>", SamlConstants.Namespace);
-            XmlDictionaryReader reader = CreateReader (xml);
-            reader.MoveToContent ();
+            SamlSerializer ser = new SamlSerializer();
+            string xml = String.Format(
+                "<saml:Subject xmlns:saml=\"{0}\"><saml:NameIdentifier Format=\"myFormat\" NameQualifier=\"myQualifier\">myName</saml:NameIdentifier></saml:Subject>",
+                SamlConstants.Namespace
+            );
+            XmlDictionaryReader reader = CreateReader(xml);
+            reader.MoveToContent();
 
-            SamlSubject s = new SamlSubject ();
-            s.ReadXml (reader, ser, null, null);
-            Assert.AreEqual ("myFormat", s.NameFormat, "#1");
-            Assert.AreEqual ("myQualifier", s.NameQualifier, "#2");
-            Assert.AreEqual ("myName", s.Name, "#3");
+            SamlSubject s = new SamlSubject();
+            s.ReadXml(reader, ser, null, null);
+            Assert.AreEqual("myFormat", s.NameFormat, "#1");
+            Assert.AreEqual("myQualifier", s.NameQualifier, "#2");
+            Assert.AreEqual("myName", s.Name, "#3");
         }
     }
 }

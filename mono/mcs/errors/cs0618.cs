@@ -6,25 +6,20 @@ using System;
 
 namespace Name
 {
-    public class A
-    {
-    }
-    
+    public class A { }
+
     public class Feat
     {
         #region Constructors
 
-        [Obsolete ("AaA")]
-        public Feat(string name, string description, int arg, params object[] featReqs)
-        {}
+        [Obsolete("AaA")]
+        public Feat(string name, string description, int arg, params object[] featReqs) { }
 
         public Feat(string name, string description)
-            : this(name, description, 4)
-        {}
+            : this(name, description, 4) { }
 
         public Feat(string name)
-            : this(name, string.Empty)
-        {}
+            : this(name, string.Empty) { }
 
         #endregion
     }

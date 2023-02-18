@@ -1,15 +1,15 @@
 class C
 {
     public static void Main()
-    {    
-        try {
-            Test ();
-        } catch
+    {
+        try
         {
+            Test();
         }
+        catch { }
     }
-    
-    static void Test ()
+
+    static void Test()
     {
         try
         {
@@ -21,10 +21,7 @@ class C
             {
                 throw;
             }
-            finally
-            {
-                
-            }
+            finally { }
         }
     }
 }

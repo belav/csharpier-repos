@@ -10,13 +10,11 @@ class X
     {
         public long b;
 
-        public Y ()
+        public Y()
         {
-            Console.WriteLine (a);
+            Console.WriteLine(a);
         }
     }
 
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }

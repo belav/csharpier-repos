@@ -14,11 +14,7 @@ namespace System.ServiceModel
     {
         static public bool IsDefined(OperationFormatStyle x)
         {
-            return
-                x == OperationFormatStyle.Document ||
-                x == OperationFormatStyle.Rpc ||
-                false;
+            return x == OperationFormatStyle.Document || x == OperationFormatStyle.Rpc || false;
         }
     }
-
 }

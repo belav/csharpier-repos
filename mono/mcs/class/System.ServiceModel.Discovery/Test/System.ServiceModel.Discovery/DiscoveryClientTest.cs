@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,26 +39,26 @@ namespace MonoTests.System.ServiceModel.Discovery
     public class DiscoveryClientTest
     {
         [Test]
-        public void ContractInterfaceManaged ()
+        public void ContractInterfaceManaged()
         {
-            var client = new DiscoveryClient (new DiscoveryEndpoint ());
+            var client = new DiscoveryClient(new DiscoveryEndpoint());
             var v11 = client.ChannelFactory.Endpoint;
-            Assert.IsNotNull (v11, "v11");
-            Assert.AreEqual ("DiscoveryProxy", v11.Name, "v11.Name");
-            Assert.AreEqual (2, v11.Contract.Operations.Count, "v11.Operations.Count");
-            Assert.IsNull (v11.Contract.CallbackContractType, "v11.CallbackContractType");
+            Assert.IsNotNull(v11, "v11");
+            Assert.AreEqual("DiscoveryProxy", v11.Name, "v11.Name");
+            Assert.AreEqual(2, v11.Contract.Operations.Count, "v11.Operations.Count");
+            Assert.IsNull(v11.Contract.CallbackContractType, "v11.CallbackContractType");
         }
 
         [Test]
-        public void ContractInterfaceAdhoc ()
+        public void ContractInterfaceAdhoc()
         {
-            var client = new DiscoveryClient (new UdpDiscoveryEndpoint ());
+            var client = new DiscoveryClient(new UdpDiscoveryEndpoint());
             var v11 = client.ChannelFactory.Endpoint;
-var cd = ContractDescription.GetContract (v11.Contract.ContractType);
-            Assert.IsNotNull (v11, "v11");
-            Assert.AreEqual ("CustomBinding_TargetService", v11.Name, "v11.Name");
-            Assert.AreEqual (5, v11.Contract.Operations.Count, "v11.Operations.Count");
-            Assert.IsNotNull (v11.Contract.CallbackContractType, "v11.CallbackContractType");
+            var cd = ContractDescription.GetContract(v11.Contract.ContractType);
+            Assert.IsNotNull(v11, "v11");
+            Assert.AreEqual("CustomBinding_TargetService", v11.Name, "v11.Name");
+            Assert.AreEqual(5, v11.Contract.Operations.Count, "v11.Operations.Count");
+            Assert.IsNotNull(v11.Contract.CallbackContractType, "v11.CallbackContractType");
         }
     }
 }

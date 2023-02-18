@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,50 +34,54 @@ namespace Mono.Mozilla.DOM
 {
     internal class DOMObject : IDisposable
     {
-        private EventHandlerList event_handlers;        
+        private EventHandlerList event_handlers;
         protected WebBrowser control;
         internal HandleRef storage;
         protected bool disposed = false;
         protected Hashtable resources;
 
-        internal DOMObject (WebBrowser control)
+        internal DOMObject(WebBrowser control)
         {
             this.control = control;
-            IntPtr p = Base.StringInit ();
-            storage = new HandleRef (this, p);
-            resources = new Hashtable ();
+            IntPtr p = Base.StringInit();
+            storage = new HandleRef(this, p);
+            resources = new Hashtable();
             event_handlers = null;
         }
 
-        ~DOMObject ()
+        ~DOMObject()
         {
-            Dispose (false);
+            Dispose(false);
         }
 
         #region IDisposable Members
 
-        protected virtual void Dispose (bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (!disposed) {
-                if (disposing) {
-                    Base.StringFinish (storage);
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    Base.StringFinish(storage);
                 }
                 disposed = true;
             }
         }
 
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion
 
-        protected EventHandlerList Events {
-            get {
+        protected EventHandlerList Events
+        {
+            get
+            {
                 // Note: space vs. time tradeoff
-                // We create the object here if it's never be accessed before.  This potentially 
+                // We create the object here if it's never be accessed before.  This potentially
                 // saves space. However, we must check each time the propery is accessed to
                 // determine whether we need to create the object, which increases overhead.
                 // We could put the creation in the contructor, but that would waste space
@@ -88,50 +92,56 @@ namespace Mono.Mozilla.DOM
                 return event_handlers;
             }
         }
-        
-#region Private
-        internal Mono.WebBrowser.DOM.INode GetTypedNode (nsIDOMNode obj) 
+
+        #region Private
+        internal Mono.WebBrowser.DOM.INode GetTypedNode(nsIDOMNode obj)
         {
             if (obj == null)
                 return null;
-            obj.getLocalName (storage);
+            obj.getLocalName(storage);
             ushort type;
-            obj.getNodeType (out type);
-            switch (type) {
+            obj.getNodeType(out type);
+            switch (type)
+            {
                 case (ushort)NodeType.Element:
-#if DEBUG                    
-                    Console.Write (Base.StringGet (storage) + ":Getting typed object from NodeType.Element:");
+#if DEBUG
+                    Console.Write(
+                        Base.StringGet(storage) + ":Getting typed object from NodeType.Element:"
+                    );
 #endif
-                    if (obj is Mono.Mozilla.nsIDOMHTMLBodyElement) {
-#if DEBUG                    
-                        Console.WriteLine ("HTMLElement-nsIDOMHTMLBodyElement");
+                    if (obj is Mono.Mozilla.nsIDOMHTMLBodyElement)
+                    {
+#if DEBUG
+                        Console.WriteLine("HTMLElement-nsIDOMHTMLBodyElement");
 #endif
-                        return new HTMLElement (control, obj as nsIDOMHTMLBodyElement);
+                        return new HTMLElement(control, obj as nsIDOMHTMLBodyElement);
                     }
-                    else if (obj is Mono.Mozilla.nsIDOMHTMLStyleElement) {
-#if DEBUG                    
-                        Console.WriteLine ("HTMLElement-nsIDOMHTMLStyleElement");
+                    else if (obj is Mono.Mozilla.nsIDOMHTMLStyleElement)
+                    {
+#if DEBUG
+                        Console.WriteLine("HTMLElement-nsIDOMHTMLStyleElement");
 #endif
-                        return new HTMLElement (control, obj as nsIDOMHTMLStyleElement);
+                        return new HTMLElement(control, obj as nsIDOMHTMLStyleElement);
                     }
-                    else if (obj is nsIDOMHTMLElement) {
-#if DEBUG                    
-                        Console.WriteLine ("HTMLElement-nsIDOMHTMLElement");
+                    else if (obj is nsIDOMHTMLElement)
+                    {
+#if DEBUG
+                        Console.WriteLine("HTMLElement-nsIDOMHTMLElement");
 #endif
-                        return new HTMLElement (control, obj as nsIDOMHTMLElement);
+                        return new HTMLElement(control, obj as nsIDOMHTMLElement);
                     }
-#if DEBUG                    
-                    Console.WriteLine ("HTMLElement-nsIDOMHTMLElement");
+#if DEBUG
+                    Console.WriteLine("HTMLElement-nsIDOMHTMLElement");
 #endif
-                    return new Element (control, obj as nsIDOMElement);
+                    return new Element(control, obj as nsIDOMElement);
                     break;
                 case (ushort)NodeType.Attribute:
-                    return new Attribute (control, obj as nsIDOMAttr);
+                    return new Attribute(control, obj as nsIDOMAttr);
                     break;
                 case (ushort)NodeType.Document:
                     if (obj is nsIDOMHTMLDocument)
-                        return new Document (control, obj as nsIDOMHTMLDocument);
-                    return new Document (control, obj as nsIDOMDocument);
+                        return new Document(control, obj as nsIDOMHTMLDocument);
+                    return new Document(control, obj as nsIDOMDocument);
                     break;
                 case (ushort)NodeType.Text:
                 case (ushort)NodeType.CDataSection:
@@ -141,14 +151,12 @@ namespace Mono.Mozilla.DOM
                 case (ushort)NodeType.Comment:
                 case (ushort)NodeType.DocumentType:
                 case (ushort)NodeType.DocumentFragment:
-                case (ushort)NodeType.Notation:                
+                case (ushort)NodeType.Notation:
                 default:
-                    return new Node (control, obj);
+                    return new Node(control, obj);
                     break;
             }
         }
-#endregion
-        
-
+        #endregion
     }
 }

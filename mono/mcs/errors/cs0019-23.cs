@@ -3,8 +3,8 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        bool b = delegate () {} == delegate () {};
+        bool b = delegate() { } == delegate() { };
     }
 }

@@ -9,8 +9,6 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies
     public class DynamicDependencyFromAttributeXmlOnNonReferencedAssemblyLibrary_Field
 #endif
     {
-        public static void Method ()
-        {
-        }
+        public static void Method() { }
     }
 }

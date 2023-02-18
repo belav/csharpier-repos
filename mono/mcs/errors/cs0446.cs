@@ -3,12 +3,10 @@
 
 class C
 {
-    static void M ()
+    static void M()
     {
-        foreach (int i in Test)
-        {
-        }
+        foreach (int i in Test) { }
     }
 
-    static void Test () { }
+    static void Test() { }
 }

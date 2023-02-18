@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,49 +31,51 @@
 
 using System.Collections;
 
-namespace System.Security.Cryptography.X509Certificates {
-
-    public sealed class X509Certificate2Enumerator : IEnumerator {
-
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509Certificate2Enumerator : IEnumerator
+    {
         private IEnumerator enumerator;
 
-        internal X509Certificate2Enumerator (X509Certificate2Collection collection) 
+        internal X509Certificate2Enumerator(X509Certificate2Collection collection)
         {
-            enumerator = ((IEnumerable) collection).GetEnumerator ();
+            enumerator = ((IEnumerable)collection).GetEnumerator();
         }
 
         // properties
 
-        public X509Certificate2 Current {
-            get { return (X509Certificate2) enumerator.Current; }
+        public X509Certificate2 Current
+        {
+            get { return (X509Certificate2)enumerator.Current; }
         }
 
         // methods
 
-        public bool MoveNext () 
+        public bool MoveNext()
         {
-            return enumerator.MoveNext ();
+            return enumerator.MoveNext();
         }
 
-        public void Reset ()
+        public void Reset()
         {
-            enumerator.Reset ();
+            enumerator.Reset();
         }
 
         // IEnumerator
 
-        object IEnumerator.Current {
+        object IEnumerator.Current
+        {
             get { return enumerator.Current; }
         }
 
-        bool IEnumerator.MoveNext ()
+        bool IEnumerator.MoveNext()
         {
-            return enumerator.MoveNext ();
+            return enumerator.MoveNext();
         }
 
-        void IEnumerator.Reset ()
+        void IEnumerator.Reset()
         {
-            enumerator.Reset ();
+            enumerator.Reset();
         }
     }
 }

@@ -14,10 +14,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         [DataMember(Order = 0)]
         internal RemoteServiceCallbackId UnderlyingObject { get; }
 
-        public RazorRemoteServiceCallbackIdWrapper(RemoteServiceCallbackId underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public RazorRemoteServiceCallbackIdWrapper(RemoteServiceCallbackId underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
-        public static implicit operator RazorRemoteServiceCallbackIdWrapper(RemoteServiceCallbackId id)
-            => new(id);
+        public static implicit operator RazorRemoteServiceCallbackIdWrapper(
+            RemoteServiceCallbackId id
+        ) => new(id);
     }
 }

@@ -24,8 +24,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The entity types found.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use IMutableEntityType.FindEntityTypes")]
-        public static IEnumerable<IMutableEntityType> GetEntityTypes(this IMutableModel model, Type type)
-            => model.FindEntityTypes(type);
+        public static IEnumerable<IMutableEntityType> GetEntityTypes(
+            this IMutableModel model,
+            Type type
+        ) => model.FindEntityTypes(type);
 
         /// <summary>
         ///     Gets the entity types matching the given name.
@@ -35,7 +37,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns>The entity types found.</returns>
         [DebuggerStepThrough]
         [Obsolete("Use FindEntityTypes(Type) or FindEntityType(string)")]
-        public static IReadOnlyCollection<IMutableEntityType> GetEntityTypes(this IMutableModel model, string name)
-            => ((Model)model).GetEntityTypes(name);
+        public static IReadOnlyCollection<IMutableEntityType> GetEntityTypes(
+            this IMutableModel model,
+            string name
+        ) => ((Model)model).GetEntityTypes(name);
     }
 }

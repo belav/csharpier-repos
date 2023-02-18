@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact]
         public void ServiceTest1()
         {
-            var markupCode = @"class A
+            var markupCode =
+                @"class A
 {
     /* test */ [|public|] void Test(int i, int b, int c)
     {
@@ -43,15 +44,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             var rootWithAnnotation = result.Root;
 
             // find token to replace
-            var publicToken = rootWithAnnotation.DescendantTokens().First(t => t.Kind() == SyntaxKind.PublicKeyword);
+            var publicToken = rootWithAnnotation
+                .DescendantTokens()
+                .First(t => t.Kind() == SyntaxKind.PublicKeyword);
 
             // replace the token with new one
-            var newRoot = rootWithAnnotation.ReplaceToken(publicToken, SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
+            var newRoot = rootWithAnnotation.ReplaceToken(
+                publicToken,
+                SyntaxFactory.Token(SyntaxKind.PrivateKeyword)
+            );
 
             // restore trivia around it
             var rootWithTriviaRestored = result.RestoreTrivia(newRoot);
 
-            var expected = @"class A
+            var expected =
+                @"class A
 {
     /* test */ private void Test(int i, int b, int c)
     {
@@ -65,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact]
         public void ServiceTest2()
         {
-            var markupCode = @"class A
+            var markupCode =
+                @"class A
 {
 
 #if true
@@ -84,15 +92,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             var rootWithAnnotation = result.Root;
 
             // find token to replace
-            var publicToken = rootWithAnnotation.DescendantTokens().First(t => t.Kind() == SyntaxKind.PublicKeyword);
+            var publicToken = rootWithAnnotation
+                .DescendantTokens()
+                .First(t => t.Kind() == SyntaxKind.PublicKeyword);
 
             // replace the token with new one
-            var newRoot = rootWithAnnotation.ReplaceToken(publicToken, SyntaxFactory.Token(SyntaxKind.PrivateKeyword));
+            var newRoot = rootWithAnnotation.ReplaceToken(
+                publicToken,
+                SyntaxFactory.Token(SyntaxKind.PrivateKeyword)
+            );
 
             // restore trivia around it
             var rootWithTriviaRestored = result.RestoreTrivia(newRoot);
 
-            var expected = @"class A
+            var expected =
+                @"class A
 {
 
 #if true
@@ -110,25 +124,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [WpfFact]
         public void TestExtractMethodCommandHandlerErrorMessage()
         {
-            var markupCode = @"class A
+            var markupCode =
+                @"class A
 {
     [|void Method() {}|]
 }";
 
-            using var workspace = TestWorkspace.CreateCSharp(markupCode, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateCSharp(
+                markupCode,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var testDocument = workspace.Documents.Single();
 
             var view = testDocument.GetTextView();
-            view.Selection.Select(new SnapshotSpan(
-                view.TextBuffer.CurrentSnapshot, testDocument.SelectedSpans[0].Start, testDocument.SelectedSpans[0].Length), isReversed: false);
+            view.Selection.Select(
+                new SnapshotSpan(
+                    view.TextBuffer.CurrentSnapshot,
+                    testDocument.SelectedSpans[0].Start,
+                    testDocument.SelectedSpans[0].Length
+                ),
+                isReversed: false
+            );
 
-            var callBackService = workspace.Services.GetService<INotificationService>() as INotificationServiceCallback;
+            var callBackService =
+                workspace.Services.GetService<INotificationService>()
+                as INotificationServiceCallback;
             var called = false;
             callBackService.NotificationCallback = (t, m, s) => called = true;
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(PredefinedCommandHandlerNames.ExtractMethod, ContentTypeNames.CSharpContentType);
+            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(
+                PredefinedCommandHandlerNames.ExtractMethod,
+                ContentTypeNames.CSharpContentType
+            );
 
-            handler.ExecuteCommand(new ExtractMethodCommandArgs(view, view.TextBuffer), TestCommandExecutionContext.Create());
+            handler.ExecuteCommand(
+                new ExtractMethodCommandArgs(view, view.TextBuffer),
+                TestCommandExecutionContext.Create()
+            );
 
             Assert.True(called);
         }

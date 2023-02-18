@@ -1,23 +1,24 @@
 using System;
 using System.Threading.Tasks;
 
-public delegate T ActualValueDelegate<T> ();
+public delegate T ActualValueDelegate<T>();
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        Matches (async () => await Throw());
+        Matches(async () => await Throw());
     }
 
-    static bool Matches<T>(ActualValueDelegate<T> del) where T : Task
+    static bool Matches<T>(ActualValueDelegate<T> del)
+        where T : Task
     {
-        del ().Wait ();
+        del().Wait();
         return true;
     }
 
     static async Task Throw()
     {
-        await Task.Delay (1);
+        await Task.Delay(1);
     }
 }

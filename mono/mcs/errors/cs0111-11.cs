@@ -3,11 +3,12 @@
 
 public interface I
 {
-    void M ();
+    void M();
 }
 
-public class Blah: I
+public class Blah : I
 {
-        void I.M () {}
-        void I.M () {}
+    void I.M() { }
+
+    void I.M() { }
 }

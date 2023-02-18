@@ -6,8 +6,8 @@ class CustomSubStep : BaseSubStep
 {
     public override SubStepTargets Targets => SubStepTargets.Field;
 
-    public override void ProcessField (FieldDefinition field)
+    public override void ProcessField(FieldDefinition field)
     {
-        Annotations.Mark (field);
+        Annotations.Mark(field);
     }
 }

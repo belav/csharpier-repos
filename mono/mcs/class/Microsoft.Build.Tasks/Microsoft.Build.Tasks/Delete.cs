@@ -32,88 +32,100 @@ using System.IO;
 using System.Security;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-    public sealed class Delete : TaskExtension {
-    
-        ITaskItem []    deletedFiles;
-        ITaskItem []    files;
-        bool        treatErrorsAsWarnings;
-        
-        public Delete ()
+namespace Microsoft.Build.Tasks
+{
+    public sealed class Delete : TaskExtension
+    {
+        ITaskItem[] deletedFiles;
+        ITaskItem[] files;
+        bool treatErrorsAsWarnings;
+
+        public Delete()
         {
             treatErrorsAsWarnings = false;
         }
 
-        public override bool Execute ()
+        public override bool Execute()
         {
             if (files.Length == 0)
                 return true;
 
-            List <ITaskItem> temporaryDeletedFiles = new List <ITaskItem> ();
-        
-            foreach (ITaskItem file in files) {
-                string path = file.GetMetadata ("FullPath");
-                if (path == null || !File.Exists (path))
+            List<ITaskItem> temporaryDeletedFiles = new List<ITaskItem>();
+
+            foreach (ITaskItem file in files)
+            {
+                string path = file.GetMetadata("FullPath");
+                if (path == null || !File.Exists(path))
                     //skip
                     continue;
 
-                try {
-                    File.Delete (path);
-                    Log.LogMessage (MessageImportance.Normal, "Deleting file '{0}'", path);
-                    temporaryDeletedFiles.Add (file);
+                try
+                {
+                    File.Delete(path);
+                    Log.LogMessage(MessageImportance.Normal, "Deleting file '{0}'", path);
+                    temporaryDeletedFiles.Add(file);
                 }
-                catch (ArgumentException ex) {
-                    LogException (ex);
+                catch (ArgumentException ex)
+                {
+                    LogException(ex);
                 }
-                catch (DirectoryNotFoundException ex) {
-                    LogException (ex);
+                catch (DirectoryNotFoundException ex)
+                {
+                    LogException(ex);
                 }
-                catch (SecurityException ex) {
-                    LogException (ex);
+                catch (SecurityException ex)
+                {
+                    LogException(ex);
                 }
-                catch (UnauthorizedAccessException ex) {
-                    LogException (ex);
+                catch (UnauthorizedAccessException ex)
+                {
+                    LogException(ex);
                 }
-                catch (PathTooLongException ex) {
-                    LogException (ex);
+                catch (PathTooLongException ex)
+                {
+                    LogException(ex);
                 }
-                catch (IOException ex) {
-                    LogException (ex);
+                catch (IOException ex)
+                {
+                    LogException(ex);
                 }
-                catch (Exception ex) {
-                    LogException (ex);
+                catch (Exception ex)
+                {
+                    LogException(ex);
                 }
             }
-            
-            deletedFiles = temporaryDeletedFiles.ToArray ();
-            
+
+            deletedFiles = temporaryDeletedFiles.ToArray();
+
             return true;
         }
-        
-        void LogException (Exception ex)
+
+        void LogException(Exception ex)
         {
             if (treatErrorsAsWarnings)
-                Log.LogWarningFromException (ex);
+                Log.LogWarningFromException(ex);
             else
-                Log.LogErrorFromException (ex);
+                Log.LogErrorFromException(ex);
         }
 
         [Output]
-        public ITaskItem [] DeletedFiles {
+        public ITaskItem[] DeletedFiles
+        {
             get { return deletedFiles; }
             set { deletedFiles = value; }
         }
 
         [Required]
-        public ITaskItem [] Files {
+        public ITaskItem[] Files
+        {
             get { return files; }
             set { files = value; }
         }
 
-        public bool TreatErrorsAsWarnings {
+        public bool TreatErrorsAsWarnings
+        {
             get { return treatErrorsAsWarnings; }
             set { treatErrorsAsWarnings = value; }
         }
     }
 }
-

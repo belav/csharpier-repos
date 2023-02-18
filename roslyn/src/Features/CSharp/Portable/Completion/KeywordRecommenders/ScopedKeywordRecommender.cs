@@ -14,18 +14,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class ScopedKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public ScopedKeywordRecommender()
-            : base(SyntaxKind.ScopedKeyword)
-        {
-        }
+            : base(SyntaxKind.ScopedKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                syntaxTree.IsParameterModifierContext(position, context.LeftToken, includeOperators: true, out _, out _) ||
-                syntaxTree.IsAnonymousMethodParameterModifierContext(position, context.LeftToken) ||
-                syntaxTree.IsPossibleLambdaParameterModifierContext(position, context.LeftToken, cancellationToken) ||
-                IsValidScopedLocalContext(context);
+            return syntaxTree.IsParameterModifierContext(
+                    position,
+                    context.LeftToken,
+                    includeOperators: true,
+                    out _,
+                    out _
+                )
+                || syntaxTree.IsAnonymousMethodParameterModifierContext(position, context.LeftToken)
+                || syntaxTree.IsPossibleLambdaParameterModifierContext(
+                    position,
+                    context.LeftToken,
+                    cancellationToken
+                )
+                || IsValidScopedLocalContext(context);
         }
 
         private static bool IsValidScopedLocalContext(CSharpSyntaxContext context)

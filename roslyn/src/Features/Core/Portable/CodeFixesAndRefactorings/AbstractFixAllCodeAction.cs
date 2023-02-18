@@ -23,8 +23,7 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 
         public IFixAllState FixAllState { get; }
 
-        protected AbstractFixAllCodeAction(
-            IFixAllState fixAllState, bool showPreviewChangesDialog)
+        protected AbstractFixAllCodeAction(IFixAllState fixAllState, bool showPreviewChangesDialog)
         {
             FixAllState = fixAllState;
             _showPreviewChangesDialog = showPreviewChangesDialog;
@@ -38,10 +37,14 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         /// <summary>
         /// Creates a new <see cref="IFixAllContext"/> with the given parameters.
         /// </summary>
-        protected abstract IFixAllContext CreateFixAllContext(IFixAllState fixAllState, IProgressTracker progressTracker, CancellationToken cancellationToken);
+        protected abstract IFixAllContext CreateFixAllContext(
+            IFixAllState fixAllState,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        );
 
-        public override string Title
-            => this.FixAllState.Scope switch
+        public override string Title =>
+            this.FixAllState.Scope switch
             {
                 FixAllScope.Document => FeaturesResources.Document,
                 FixAllScope.Project => FeaturesResources.Project,
@@ -51,56 +54,73 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 _ => throw ExceptionUtilities.UnexpectedValue(this.FixAllState.Scope),
             };
 
-        internal override string Message => FeaturesResources.Computing_fix_all_occurrences_code_fix;
+        internal override string Message =>
+            FeaturesResources.Computing_fix_all_occurrences_code_fix;
 
-        protected sealed override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(CancellationToken cancellationToken)
-            => await ComputeOperationsAsync(new ProgressTracker(), cancellationToken).ConfigureAwait(false);
+        protected sealed override async Task<
+            IEnumerable<CodeActionOperation>
+        > ComputeOperationsAsync(CancellationToken cancellationToken) =>
+            await ComputeOperationsAsync(new ProgressTracker(), cancellationToken)
+                .ConfigureAwait(false);
 
         internal sealed override Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(
-            IProgressTracker progressTracker, CancellationToken cancellationToken)
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             FixAllLogger.LogState(FixAllState, IsInternalProvider(FixAllState));
 
-            var service = FixAllState.Project.Solution.Services.GetRequiredService<IFixAllGetFixesService>();
+            var service =
+                FixAllState.Project.Solution.Services.GetRequiredService<IFixAllGetFixesService>();
 
-            var fixAllContext = CreateFixAllContext(FixAllState, progressTracker, cancellationToken);
+            var fixAllContext = CreateFixAllContext(
+                FixAllState,
+                progressTracker,
+                cancellationToken
+            );
             progressTracker.Description = fixAllContext.GetDefaultFixAllTitle();
 
             return service.GetFixAllOperationsAsync(fixAllContext, _showPreviewChangesDialog);
         }
 
         internal sealed override Task<Solution?> GetChangedSolutionAsync(
-            IProgressTracker progressTracker, CancellationToken cancellationToken)
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             FixAllLogger.LogState(FixAllState, IsInternalProvider(FixAllState));
 
-            var service = FixAllState.Project.Solution.Services.GetRequiredService<IFixAllGetFixesService>();
+            var service =
+                FixAllState.Project.Solution.Services.GetRequiredService<IFixAllGetFixesService>();
 
-            var fixAllContext = CreateFixAllContext(FixAllState, progressTracker, cancellationToken);
+            var fixAllContext = CreateFixAllContext(
+                FixAllState,
+                progressTracker,
+                cancellationToken
+            );
             progressTracker.Description = fixAllContext.GetDefaultFixAllTitle();
 
             return service.GetFixAllChangedSolutionAsync(fixAllContext);
         }
 
         // internal for testing purposes.
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         // internal for testing purposes.
         internal readonly struct TestAccessor
         {
             private readonly AbstractFixAllCodeAction _fixAllCodeAction;
 
-            internal TestAccessor(AbstractFixAllCodeAction fixAllCodeAction)
-                => _fixAllCodeAction = fixAllCodeAction;
+            internal TestAccessor(AbstractFixAllCodeAction fixAllCodeAction) =>
+                _fixAllCodeAction = fixAllCodeAction;
 
             /// <summary>
             /// Gets a reference to <see cref="_showPreviewChangesDialog"/>, which can be read or written by test code.
             /// </summary>
-            public ref bool ShowPreviewChangesDialog
-                => ref _fixAllCodeAction._showPreviewChangesDialog;
+            public ref bool ShowPreviewChangesDialog =>
+                ref _fixAllCodeAction._showPreviewChangesDialog;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace System.Activities.Core.Presentation.Themes
     sealed partial class DesignerStylesDictionary
     {
         static DesignerStylesDictionary instance;
-        
+
         internal DesignerStylesDictionary()
         {
             InitializeComponent();
@@ -44,6 +44,5 @@ namespace System.Activities.Core.Presentation.Themes
                 return style;
             }
         }
-
     }
 }

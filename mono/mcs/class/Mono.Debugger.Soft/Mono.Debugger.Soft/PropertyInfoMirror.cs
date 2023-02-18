@@ -9,19 +9,29 @@ using C = Mono.Cecil;
 
 namespace Mono.Debugger.Soft
 {
-    public class PropertyInfoMirror : Mirror {
-
+    public class PropertyInfoMirror : Mirror
+    {
         TypeMirror parent;
         string name;
         PropertyAttributes attrs;
-        MethodMirror get_method, set_method;
+        MethodMirror get_method,
+            set_method;
         CustomAttributeDataMirror[] cattrs;
 
 #if ENABLE_CECIL
         C.PropertyDefinition meta;
 #endif
 
-        public PropertyInfoMirror (TypeMirror parent, long id, string name, MethodMirror get_method, MethodMirror set_method, PropertyAttributes attrs) : base (parent.VirtualMachine, id) {
+        public PropertyInfoMirror(
+            TypeMirror parent,
+            long id,
+            string name,
+            MethodMirror get_method,
+            MethodMirror set_method,
+            PropertyAttributes attrs
+        )
+            : base(parent.VirtualMachine, id)
+        {
             this.parent = parent;
             this.name = name;
             this.attrs = attrs;
@@ -29,46 +39,47 @@ namespace Mono.Debugger.Soft
             this.set_method = set_method;
         }
 
-        public TypeMirror DeclaringType {
-            get {
-                return parent;
-            }
+        public TypeMirror DeclaringType
+        {
+            get { return parent; }
         }
 
-        public string Name {
-            get {
-                return name;
-            }
+        public string Name
+        {
+            get { return name; }
         }
 
-        public TypeMirror PropertyType {
-            get {
+        public TypeMirror PropertyType
+        {
+            get
+            {
                 if (get_method != null)
                     return get_method.ReturnType;
-                else {
-                    ParameterInfoMirror[] parameters = set_method.GetParameters ();
-                    
-                    return parameters [parameters.Length - 1].ParameterType;
+                else
+                {
+                    ParameterInfoMirror[] parameters = set_method.GetParameters();
+
+                    return parameters[parameters.Length - 1].ParameterType;
                 }
             }
         }
 
-        public PropertyAttributes Attributes {
-            get {
-                return attrs;
-            }
-        }
-
-        public bool IsSpecialName {
-            get {return (Attributes & PropertyAttributes.SpecialName) != 0;}
-        }
-
-        public MethodMirror GetGetMethod ()
+        public PropertyAttributes Attributes
         {
-            return GetGetMethod (false);
+            get { return attrs; }
         }
 
-        public MethodMirror GetGetMethod (bool nonPublic)
+        public bool IsSpecialName
+        {
+            get { return (Attributes & PropertyAttributes.SpecialName) != 0; }
+        }
+
+        public MethodMirror GetGetMethod()
+        {
+            return GetGetMethod(false);
+        }
+
+        public MethodMirror GetGetMethod(bool nonPublic)
         {
             if (get_method != null && (nonPublic || get_method.IsPublic))
                 return get_method;
@@ -76,12 +87,12 @@ namespace Mono.Debugger.Soft
                 return null;
         }
 
-        public MethodMirror GetSetMethod ()
+        public MethodMirror GetSetMethod()
         {
-            return GetSetMethod (false);
+            return GetSetMethod(false);
         }
 
-        public MethodMirror GetSetMethod (bool nonPublic)
+        public MethodMirror GetSetMethod(bool nonPublic)
         {
             if (set_method != null && (nonPublic || set_method.IsPublic))
                 return set_method;
@@ -92,58 +103,72 @@ namespace Mono.Debugger.Soft
         public ParameterInfoMirror[] GetIndexParameters()
         {
             if (get_method != null)
-                return get_method.GetParameters ();
-            return new ParameterInfoMirror [0];
+                return get_method.GetParameters();
+            return new ParameterInfoMirror[0];
         }
 
 #if ENABLE_CECIL
-        public C.PropertyDefinition Metadata {        
-            get {
+        public C.PropertyDefinition Metadata
+        {
+            get
+            {
                 if (parent.Metadata == null)
                     return null;
                 // FIXME: Speed this up
-                foreach (var def in parent.Metadata.Properties) {
-                    if (def.Name == Name) {
+                foreach (var def in parent.Metadata.Properties)
+                {
+                    if (def.Name == Name)
+                    {
                         meta = def;
                         break;
                     }
                 }
                 if (meta == null)
                     /* Shouldn't happen */
-                    throw new NotImplementedException ();
+                    throw new NotImplementedException();
                 return meta;
             }
         }
 #endif
 
-        public CustomAttributeDataMirror[] GetCustomAttributes (bool inherit) {
-            return GetCAttrs (null, inherit);
+        public CustomAttributeDataMirror[] GetCustomAttributes(bool inherit)
+        {
+            return GetCAttrs(null, inherit);
         }
 
-        public CustomAttributeDataMirror[] GetCustomAttributes (TypeMirror attributeType, bool inherit) {
+        public CustomAttributeDataMirror[] GetCustomAttributes(
+            TypeMirror attributeType,
+            bool inherit
+        )
+        {
             if (attributeType == null)
-                throw new ArgumentNullException ("attributeType");
-            return GetCAttrs (attributeType, inherit);
+                throw new ArgumentNullException("attributeType");
+            return GetCAttrs(attributeType, inherit);
         }
 
-        CustomAttributeDataMirror[] GetCAttrs (TypeMirror type, bool inherit) {
-
+        CustomAttributeDataMirror[] GetCAttrs(TypeMirror type, bool inherit)
+        {
 #if ENABLE_CECIL
             if (cattrs == null && Metadata != null && !Metadata.HasCustomAttributes)
-                cattrs = new CustomAttributeDataMirror [0];
+                cattrs = new CustomAttributeDataMirror[0];
 #endif
 
             // FIXME: Handle inherit
-            if (cattrs == null) {
-                CattrInfo[] info = vm.conn.Type_GetPropertyCustomAttributes (DeclaringType.Id, id, 0, false);
-                cattrs = CustomAttributeDataMirror.Create (vm, info);
+            if (cattrs == null)
+            {
+                CattrInfo[] info = vm.conn.Type_GetPropertyCustomAttributes(
+                    DeclaringType.Id,
+                    id,
+                    0,
+                    false
+                );
+                cattrs = CustomAttributeDataMirror.Create(vm, info);
             }
-            var res = new List<CustomAttributeDataMirror> ();
+            var res = new List<CustomAttributeDataMirror>();
             foreach (var attr in cattrs)
                 if (type == null || attr.Constructor.DeclaringType == type)
-                    res.Add (attr);
-            return res.ToArray ();
+                    res.Add(attr);
+            return res.ToArray();
         }
     }
 }
-

@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,55 +35,55 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
-    [XmlSchemaProvider ("GetSchema")]
+    [XmlSchemaProvider("GetSchema")]
     public class FindCriteriaCD1 : IXmlSerializable
     {
-        public static FindCriteriaCD1 FromFindCriteria (FindCriteria findCriteria)
+        public static FindCriteriaCD1 FromFindCriteria(FindCriteria findCriteria)
         {
-            return new FindCriteriaCD1 (findCriteria);
+            return new FindCriteriaCD1(findCriteria);
         }
 
         static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscoveryCD1;
-        static XmlSchema schema = FindCriteria.BuildSchema (version);
+        static XmlSchema schema = FindCriteria.BuildSchema(version);
 
-        public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
+        public static XmlQualifiedName GetSchema(XmlSchemaSet schemaSet)
         {
-            schemaSet.Add (schema);
-            return new XmlQualifiedName ("ProbeType", version.Namespace);
+            schemaSet.Add(schema);
+            return new XmlQualifiedName("ProbeType", version.Namespace);
         }
-        
+
         // for deserialization
-        FindCriteriaCD1 ()
-        {
-        }
-        
-        internal FindCriteriaCD1 (FindCriteria source)
+        FindCriteriaCD1() { }
+
+        internal FindCriteriaCD1(FindCriteria source)
         {
             this.source = source;
         }
 
         FindCriteria source;
 
-        public XmlSchema GetSchema ()
+        public XmlSchema GetSchema()
         {
             return null;
         }
 
-        public void ReadXml (XmlReader reader)
+        public void ReadXml(XmlReader reader)
         {
-            source = FindCriteria.ReadXml (reader, version);
+            source = FindCriteria.ReadXml(reader, version);
         }
 
-        public FindCriteria ToFindCriteria ()
+        public FindCriteria ToFindCriteria()
         {
             if (source == null)
-                throw new InvalidOperationException ("Call ReadXml method before calling this method.");
+                throw new InvalidOperationException(
+                    "Call ReadXml method before calling this method."
+                );
             return source;
         }
 
-        public void WriteXml (XmlWriter writer)
+        public void WriteXml(XmlWriter writer)
         {
-            source.WriteXml (writer, version);
+            source.WriteXml(writer, version);
         }
     }
 }

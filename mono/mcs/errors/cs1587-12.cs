@@ -6,8 +6,10 @@ using System;
 
 namespace TopNS
 {
-    enum Enum3 {
-        Foo /** invalid comment between enum identifier and comma */,
+    enum Enum3
+    {
+        Foo
+        /** invalid comment between enum identifier and comma */,
         Bar
     }
 }

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,22 +32,20 @@
 
 using System.Collections;
 
-namespace System.Runtime.Remoting.Messaging {
-
+namespace System.Runtime.Remoting.Messaging
+{
     [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public class Header {
-        public Header (string _Name, object _Value) :
-            this (_Name, _Value, true)
-        {
-        }
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class Header
+    {
+        public Header(string _Name, object _Value)
+            : this(_Name, _Value, true) { }
 
-        public Header (string _Name, object _Value, bool _MustUnderstand) :
-            this (_Name, _Value, _MustUnderstand, null)
-        {
-        }
+        public Header(string _Name, object _Value, bool _MustUnderstand)
+            : this(_Name, _Value, _MustUnderstand, null) { }
 
-        public Header (string _Name, object _Value, bool _MustUnderstand, string _HeaderNamespace) {
+        public Header(string _Name, object _Value, bool _MustUnderstand, string _HeaderNamespace)
+        {
             this.Name = _Name;
             this.Value = _Value;
             this.MustUnderstand = _MustUnderstand;

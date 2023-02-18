@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -42,13 +42,13 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void SByte_Roundtrip()
         {
-            TestSimpleSerializer((sbyte) 42, "42");
+            TestSimpleSerializer((sbyte)42, "42");
         }
 
         [Test]
         public void Int16_Roundtrip()
         {
-            TestSimpleSerializer((short) 42, "42");
+            TestSimpleSerializer((short)42, "42");
         }
 
         [Test]
@@ -66,13 +66,13 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Byte_Roundtrip()
         {
-            TestSimpleSerializer((byte) 42, "42");
+            TestSimpleSerializer((byte)42, "42");
         }
 
         [Test]
         public void UInt16_Roundtrip()
         {
-            TestSimpleSerializer((ushort) 42, "42");
+            TestSimpleSerializer((ushort)42, "42");
         }
 
         [Test]
@@ -123,9 +123,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void TimeSpan_Roundtrip()
         {
-            TestSimpleSerializer(
-                new TimeSpan(1, 2, 3, 4, 567),
-                "P1DT2H3M4.567S");
+            TestSimpleSerializer(new TimeSpan(1, 2, 3, 4, 567), "P1DT2H3M4.567S");
         }
 
         [Test]
@@ -133,7 +131,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             TestSimpleSerializer(
                 new DateTime(2011, 9, 5, 15, 14, 31, 123, DateTimeKind.Utc),
-                "2011-09-05T15:14:31.123Z");
+                "2011-09-05T15:14:31.123Z"
+            );
         }
 
         [Test]
@@ -141,7 +140,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             TestSimpleSerializer(
                 new DateTimeOffset(2011, 9, 5, 15, 14, 31, 123, new TimeSpan(-5, 0, 0)),
-                "2011-09-05T15:14:31.123-05:00");
+                "2011-09-05T15:14:31.123-05:00"
+            );
         }
 
         [Test]

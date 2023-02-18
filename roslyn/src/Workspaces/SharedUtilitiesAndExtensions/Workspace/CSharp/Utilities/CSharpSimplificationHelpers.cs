@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal static class CSharpSimplificationHelpers
     {
-        public static SyntaxToken TryEscapeIdentifierToken(SyntaxToken syntaxToken, SyntaxNode parentOfToken)
+        public static SyntaxToken TryEscapeIdentifierToken(
+            SyntaxToken syntaxToken,
+            SyntaxNode parentOfToken
+        )
         {
             // do not escape an already escaped identifier
             if (syntaxToken.IsVerbatimIdentifier())
@@ -20,12 +23,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 return syntaxToken;
             }
 
-            if (SyntaxFacts.GetKeywordKind(syntaxToken.ValueText) == SyntaxKind.None && SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText) == SyntaxKind.None)
+            if (
+                SyntaxFacts.GetKeywordKind(syntaxToken.ValueText) == SyntaxKind.None
+                && SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText) == SyntaxKind.None
+            )
             {
                 return syntaxToken;
             }
 
-            if (SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText) == SyntaxKind.UnderscoreToken)
+            if (
+                SyntaxFacts.GetContextualKeywordKind(syntaxToken.ValueText)
+                == SyntaxKind.UnderscoreToken
+            )
             {
                 return syntaxToken;
             }
@@ -38,35 +47,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             }
 
             // do not escape global in a namespace qualified name
-            if (parent.Kind() == SyntaxKind.AliasQualifiedName &&
-                syntaxToken.ValueText == "global")
+            if (parent.Kind() == SyntaxKind.AliasQualifiedName && syntaxToken.ValueText == "global")
             {
                 return syntaxToken;
             }
 
             // safe to escape identifier
-            return syntaxToken.CopyAnnotationsTo(
-                SyntaxFactory.VerbatimIdentifier(
-                    syntaxToken.LeadingTrivia,
-                    syntaxToken.ToString(),
-                    syntaxToken.ValueText,
-                    syntaxToken.TrailingTrivia))
-                        .WithAdditionalAnnotations(Simplifier.Annotation);
+            return syntaxToken
+                .CopyAnnotationsTo(
+                    SyntaxFactory.VerbatimIdentifier(
+                        syntaxToken.LeadingTrivia,
+                        syntaxToken.ToString(),
+                        syntaxToken.ValueText,
+                        syntaxToken.TrailingTrivia
+                    )
+                )
+                .WithAdditionalAnnotations(Simplifier.Annotation);
         }
 
-        public static T AppendElasticTriviaIfNecessary<T>(T rewrittenNode, T originalNode) where T : SyntaxNode
+        public static T AppendElasticTriviaIfNecessary<T>(T rewrittenNode, T originalNode)
+            where T : SyntaxNode
         {
             var firstRewrittenToken = rewrittenNode.GetFirstToken(true, false, true, true);
             var firstOriginalToken = originalNode.GetFirstToken(true, false, true, true);
-            if (TryAddLeadingElasticTriviaIfNecessary(firstRewrittenToken, firstOriginalToken, out var rewrittenTokenWithLeadingElasticTrivia))
+            if (
+                TryAddLeadingElasticTriviaIfNecessary(
+                    firstRewrittenToken,
+                    firstOriginalToken,
+                    out var rewrittenTokenWithLeadingElasticTrivia
+                )
+            )
             {
-                return rewrittenNode.ReplaceToken(firstRewrittenToken, rewrittenTokenWithLeadingElasticTrivia);
+                return rewrittenNode.ReplaceToken(
+                    firstRewrittenToken,
+                    rewrittenTokenWithLeadingElasticTrivia
+                );
             }
 
             return rewrittenNode;
         }
 
-        public static bool TryAddLeadingElasticTriviaIfNecessary(SyntaxToken token, SyntaxToken originalToken, out SyntaxToken tokenWithLeadingWhitespace)
+        public static bool TryAddLeadingElasticTriviaIfNecessary(
+            SyntaxToken token,
+            SyntaxToken originalToken,
+            out SyntaxToken tokenWithLeadingWhitespace
+        )
         {
             tokenWithLeadingWhitespace = default;
 
@@ -82,7 +107,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 return false;
             }
 
-            tokenWithLeadingWhitespace = token.WithLeadingTrivia(SyntaxFactory.ElasticMarker).WithAdditionalAnnotations(Formatter.Annotation);
+            tokenWithLeadingWhitespace = token
+                .WithLeadingTrivia(SyntaxFactory.ElasticMarker)
+                .WithAdditionalAnnotations(Formatter.Annotation);
             return true;
         }
     }

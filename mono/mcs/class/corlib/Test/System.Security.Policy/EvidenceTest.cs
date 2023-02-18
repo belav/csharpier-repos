@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,159 +35,190 @@ using System.Reflection;
 using System.Security.Policy;
 using NUnit.Framework;
 
-namespace MonoTests.System.Security.Policy {
-
+namespace MonoTests.System.Security.Policy
+{
     [TestFixture]
-    public class EvidenceTest  {
-        
+    public class EvidenceTest
+    {
         [Test]
-        public void DefaultConstructor ()
+        public void DefaultConstructor()
         {
-            Evidence evidence = new Evidence ();
-            
-            Assert.AreEqual (evidence.Count, 0, "Default constructor count should be zero");
-            Assert.AreEqual (evidence.GetHostEnumerator().MoveNext(), false, 
-                "Default constructor host enumerator MoveNext() should be false");
-                
-            Assert.AreEqual (evidence.GetAssemblyEnumerator().MoveNext(), false, 
-                          "Default constructor assembly enumerator MoveNext() should be false");
-                
-            Assert.AreEqual (evidence.GetEnumerator().MoveNext(), false,
-                          "Default constructor enumerator MoveNext() should be false");
+            Evidence evidence = new Evidence();
+
+            Assert.AreEqual(evidence.Count, 0, "Default constructor count should be zero");
+            Assert.AreEqual(
+                evidence.GetHostEnumerator().MoveNext(),
+                false,
+                "Default constructor host enumerator MoveNext() should be false"
+            );
+
+            Assert.AreEqual(
+                evidence.GetAssemblyEnumerator().MoveNext(),
+                false,
+                "Default constructor assembly enumerator MoveNext() should be false"
+            );
+
+            Assert.AreEqual(
+                evidence.GetEnumerator().MoveNext(),
+                false,
+                "Default constructor enumerator MoveNext() should be false"
+            );
         }
 
         [Test]
-        public void MultipleConstructor ()
+        public void MultipleConstructor()
         {
             object[] hostarray = new object[10];
             object[] assemarray = new object[10];
-            Evidence evidence = new Evidence ( hostarray, assemarray );
+            Evidence evidence = new Evidence(hostarray, assemarray);
 
-            Assert.AreEqual (evidence.Count, 20,
-                          "Count of multiple arg constructor should equal 20");
+            Assert.AreEqual(
+                evidence.Count,
+                20,
+                "Count of multiple arg constructor should equal 20"
+            );
         }
 
         [Test]
-        public void CopyConstructor ()
+        public void CopyConstructor()
         {
             object[] hostlist = { "host-1", "host-2", "host-3", "host-4" };
             object[] asmblist = { "asmb-1", "asmb-2", "asmb-3", "asmb-4" };
-            Evidence evidence1 = new Evidence (hostlist, asmblist);
-            Evidence evidence2 = new Evidence (evidence1);
-            
-            Assert.AreEqual(evidence1.Count, evidence2.Count, "Copy constructor counts do not match");
+            Evidence evidence1 = new Evidence(hostlist, asmblist);
+            Evidence evidence2 = new Evidence(evidence1);
+
+            Assert.AreEqual(
+                evidence1.Count,
+                evidence2.Count,
+                "Copy constructor counts do not match"
+            );
         }
 
         [Test]
-        public void Constructor_Null ()
+        public void Constructor_Null()
         {
-            Evidence e = new Evidence (null);
-            Assert.AreEqual (0, e.Count, "Count-Empty");
+            Evidence e = new Evidence(null);
+            Assert.AreEqual(0, e.Count, "Count-Empty");
         }
 
         [Test]
-        public void Constructor_NullNull ()
+        public void Constructor_NullNull()
         {
-            Evidence e = new Evidence (null, null);
-            Assert.AreEqual (0, e.Count, "Count-Empty");
+            Evidence e = new Evidence(null, null);
+            Assert.AreEqual(0, e.Count, "Count-Empty");
         }
 
         [Test]
-        public void AddAssembly ()
+        public void AddAssembly()
         {
-            Evidence evidence = new Evidence ();
+            Evidence evidence = new Evidence();
             object[] comparray = new object[100];
             string obj;
 
-            for (int i=0; i<100; i++) {
-                obj = String.Format ("asmb-{0}", i+1);
+            for (int i = 0; i < 100; i++)
+            {
+                obj = String.Format("asmb-{0}", i + 1);
                 comparray[i] = obj;
-                evidence.AddAssembly (obj);
-                Assert.AreEqual (evidence.Count, i+1);
+                evidence.AddAssembly(obj);
+                Assert.AreEqual(evidence.Count, i + 1);
             }
-            
+
             int index = 0;
-            foreach (object compobj in evidence) {
-                Assert.AreEqual (comparray[index++], compobj, "Comparison object does not equal evidence assembly object");
+            foreach (object compobj in evidence)
+            {
+                Assert.AreEqual(
+                    comparray[index++],
+                    compobj,
+                    "Comparison object does not equal evidence assembly object"
+                );
             }
         }
 
         [Test]
-        public void AddHost ()
+        public void AddHost()
         {
-            Evidence evidence = new Evidence ();
+            Evidence evidence = new Evidence();
             object[] comparray = new object[100];
             string obj;
 
-            for (int i=0; i<100; i++) {
-                obj = String.Format ("asmb-{0}", i+1);
+            for (int i = 0; i < 100; i++)
+            {
+                obj = String.Format("asmb-{0}", i + 1);
                 comparray[i] = obj;
-                evidence.AddAssembly ( obj );
-                Assert.AreEqual (evidence.Count, i+1);
+                evidence.AddAssembly(obj);
+                Assert.AreEqual(evidence.Count, i + 1);
             }
 
             int index = 0;
-            foreach (object compobj in evidence) {
-                Assert.AreEqual (comparray[index++], compobj, "Comparison object does not equal evidence host object");
-                    
+            foreach (object compobj in evidence)
+            {
+                Assert.AreEqual(
+                    comparray[index++],
+                    compobj,
+                    "Comparison object does not equal evidence host object"
+                );
             }
         }
 
         [Test]
-        public void MultiArgConstructorForEach ()
+        public void MultiArgConstructorForEach()
         {
             object[] hostarray = { "host-1", "host-2", "host-3", "host-4" };
             object[] asmbarray = { "asmb-1", "asmb-2", "asmb-3", "asmb-4" };
-            ArrayList compare = new ArrayList (); 
-            Evidence evidence = new Evidence (hostarray, asmbarray);
-        
-            compare.AddRange (hostarray);
-            compare.AddRange (asmbarray);
-    
-            int i = 0;        
-            foreach (object obj in evidence) {
-                Assert.AreEqual (obj, compare[i++]);
-            }
-        }
+            ArrayList compare = new ArrayList();
+            Evidence evidence = new Evidence(hostarray, asmbarray);
 
-        [Test]
-        public void EnumeratorReset ()
-        {
-            object[] hostarray = { "host-1", "host-2", "host-3", "host-4" };
-            object[] asmbarray = { "asmb-1", "asmb-2", "asmb-3", "asmb-4" };
-            ArrayList compare = new ArrayList (); 
-            Evidence evidence = new Evidence (hostarray, asmbarray);
-            compare.AddRange (hostarray);
-            compare.AddRange (asmbarray);
+            compare.AddRange(hostarray);
+            compare.AddRange(asmbarray);
 
             int i = 0;
-            IEnumerator enumerator = evidence.GetEnumerator ();    
-            while (enumerator.MoveNext ()) {
-                Assert.AreEqual (enumerator.Current, compare[i++]);
-            }
-
-            enumerator.Reset ();
-            i = 0;
-            while (enumerator.MoveNext ()) {
-                Assert.AreEqual (enumerator.Current, compare[i++]);
+            foreach (object obj in evidence)
+            {
+                Assert.AreEqual(obj, compare[i++]);
             }
         }
 
         [Test]
-        public void GetHostEnumerator ()
+        public void EnumeratorReset()
+        {
+            object[] hostarray = { "host-1", "host-2", "host-3", "host-4" };
+            object[] asmbarray = { "asmb-1", "asmb-2", "asmb-3", "asmb-4" };
+            ArrayList compare = new ArrayList();
+            Evidence evidence = new Evidence(hostarray, asmbarray);
+            compare.AddRange(hostarray);
+            compare.AddRange(asmbarray);
+
+            int i = 0;
+            IEnumerator enumerator = evidence.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                Assert.AreEqual(enumerator.Current, compare[i++]);
+            }
+
+            enumerator.Reset();
+            i = 0;
+            while (enumerator.MoveNext())
+            {
+                Assert.AreEqual(enumerator.Current, compare[i++]);
+            }
+        }
+
+        [Test]
+        public void GetHostEnumerator()
         {
             object[] hostarray = { "host-1", "host-2", "host-3", "host-4" };
             object[] asmbarray = { "asmb-1", "asmb-2" };
-            Evidence evidence = new Evidence (hostarray, asmbarray);
-            IEnumerator enumerator = evidence.GetHostEnumerator ();
+            Evidence evidence = new Evidence(hostarray, asmbarray);
+            IEnumerator enumerator = evidence.GetHostEnumerator();
             int i = 0;
-            while (enumerator.MoveNext ()) {
-                           Assert.AreEqual (enumerator.Current, hostarray[i++]);
+            while (enumerator.MoveNext())
+            {
+                Assert.AreEqual(enumerator.Current, hostarray[i++]);
             }
         }
 
         [Test]
-        public void GetHostAssemblyEnumerator ()
+        public void GetHostAssemblyEnumerator()
         {
             object[] hostarray = { "host-1", "host-2", "host-3", "host-4" };
             object[] asmbarray = { "asmb-1", "asmb-2", "asmb-3", "asmb-4" };
@@ -195,157 +226,167 @@ namespace MonoTests.System.Security.Policy {
             IEnumerator enumerator;
             int i;
 
-            evidence = new Evidence (hostarray, asmbarray);
-            enumerator = evidence.GetAssemblyEnumerator ();
-            
+            evidence = new Evidence(hostarray, asmbarray);
+            enumerator = evidence.GetAssemblyEnumerator();
+
             i = 0;
-            while (enumerator.MoveNext()) {
-                        Assert.AreEqual (enumerator.Current, asmbarray[i++]);
+            while (enumerator.MoveNext())
+            {
+                Assert.AreEqual(enumerator.Current, asmbarray[i++]);
             }
         }
 
         [Test]
-        public void Count ()
+        public void Count()
         {
             object[] hostarray = { "host-1", "host-2", "host-3", "host-4" };
             object[] asmbarray = { "asmb-1", "asmb-2", "asmb-3", "asmb-4" };
-            Evidence evidence = new Evidence (hostarray, asmbarray);
-            Assert.AreEqual (evidence.Count, 8);
+            Evidence evidence = new Evidence(hostarray, asmbarray);
+            Assert.AreEqual(evidence.Count, 8);
 
-            for( int i=0; i<100; i++ ) {
-                if ( 0 == i%2 ) {
-                    evidence.AddHost (String.Format ("host-{0}", i + 5) );
-                } else {
-                    evidence.AddAssembly (String.Format ("asmb-{0}", i + 5));
+            for (int i = 0; i < 100; i++)
+            {
+                if (0 == i % 2)
+                {
+                    evidence.AddHost(String.Format("host-{0}", i + 5));
                 }
-                Assert.AreEqual (evidence.Count, 9 + i);
+                else
+                {
+                    evidence.AddAssembly(String.Format("asmb-{0}", i + 5));
+                }
+                Assert.AreEqual(evidence.Count, 9 + i);
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void NullCopyToException() 
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullCopyToException()
         {
-            Evidence evidence = new Evidence ();
-            evidence.AddHost ("host-1");
-            evidence.CopyTo (null, 100);
+            Evidence evidence = new Evidence();
+            evidence.AddHost("host-1");
+            evidence.CopyTo(null, 100);
         }
 
         /// <summary>
         ///    No Exception will be generated because the copy won't run because the evidence list is empty
         /// </summary>
         [Test]
-        public void CopyToNoException() 
+        public void CopyToNoException()
         {
-            Evidence evidence = new Evidence ();
-            evidence.CopyTo (null, 100);
+            Evidence evidence = new Evidence();
+            evidence.CopyTo(null, 100);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void ArgOutOfRangeCopyToException() 
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ArgOutOfRangeCopyToException()
         {
-            Evidence evidence = new Evidence (new object[10], new object[10]);
-            evidence.CopyTo (new object[10], -100);
+            Evidence evidence = new Evidence(new object[10], new object[10]);
+            evidence.CopyTo(new object[10], -100);
         }
 
         /// <summary>
         ///    No Exception will be generated because the copy won't run because the evidence list is empty
         /// </summary>
         [Test]
-        public void ArgOutOfRangeCopyToNoException() 
+        public void ArgOutOfRangeCopyToNoException()
         {
-            Evidence evidence = new Evidence ();
-            evidence.CopyTo (new object[10], -100);
+            Evidence evidence = new Evidence();
+            evidence.CopyTo(new object[10], -100);
         }
 
         [Test]
-        public void BadMerge ()
+        public void BadMerge()
         {
-            Evidence evidence = new Evidence (null, null);
-            Evidence evidence2 = new Evidence ();
-            evidence2.Merge (evidence);
-            Assert.AreEqual (evidence.Count, evidence2.Count, "Count");
+            Evidence evidence = new Evidence(null, null);
+            Evidence evidence2 = new Evidence();
+            evidence2.Merge(evidence);
+            Assert.AreEqual(evidence.Count, evidence2.Count, "Count");
         }
 
         [Test]
-        public void Merge ()
+        public void Merge()
         {
-            Evidence evidence = new Evidence (new object[10], new object[10]);
-              Evidence evidence2 = new Evidence ();
-            evidence2.Merge (evidence);
-            Assert.AreEqual (evidence.Count, evidence2.Count, "Count");
+            Evidence evidence = new Evidence(new object[10], new object[10]);
+            Evidence evidence2 = new Evidence();
+            evidence2.Merge(evidence);
+            Assert.AreEqual(evidence.Count, evidence2.Count, "Count");
         }
 
         [Test]
-        public void Merge_Null ()
+        public void Merge_Null()
         {
-            Evidence evidence = new Evidence ();
-            evidence.Merge (null);
+            Evidence evidence = new Evidence();
+            evidence.Merge(null);
             // no exception!
-            Assert.AreEqual (0, evidence.Count, "Count");
+            Assert.AreEqual(0, evidence.Count, "Count");
         }
 
         [Test]
-        public void DefaultProperties () 
+        public void DefaultProperties()
         {
-            Evidence e = new Evidence ();
-            Assert.AreEqual (0, e.Count, "Count");
-            Assert.IsTrue (!e.IsReadOnly, "IsReadOnly");
-            Assert.IsTrue (!e.IsSynchronized, "IsSynchronized");
-            Assert.IsTrue (!e.Locked, "Locked");
-            Assert.IsNotNull (e.SyncRoot, "SyncRoot");
+            Evidence e = new Evidence();
+            Assert.AreEqual(0, e.Count, "Count");
+            Assert.IsTrue(!e.IsReadOnly, "IsReadOnly");
+            Assert.IsTrue(!e.IsSynchronized, "IsSynchronized");
+            Assert.IsTrue(!e.Locked, "Locked");
+            Assert.IsNotNull(e.SyncRoot, "SyncRoot");
         }
 
-
         [Test]
-        public void Clear () 
+        public void Clear()
         {
-            Evidence e = new Evidence ();
-            Assert.AreEqual (0, e.Count, "Count-Empty");
-            e.AddAssembly (new object ());
-            Assert.AreEqual (1, e.Count, "Count+Assembly");
-            e.AddHost (new object ());
-            Assert.AreEqual (2, e.Count, "Count+Host");
-            e.Clear ();
-            Assert.AreEqual (0, e.Count, "Count-Cleared");
+            Evidence e = new Evidence();
+            Assert.AreEqual(0, e.Count, "Count-Empty");
+            e.AddAssembly(new object());
+            Assert.AreEqual(1, e.Count, "Count+Assembly");
+            e.AddHost(new object());
+            Assert.AreEqual(2, e.Count, "Count+Host");
+            e.Clear();
+            Assert.AreEqual(0, e.Count, "Count-Cleared");
         }
 
-        [Category ("NotWorking")]
+        [Category("NotWorking")]
         [Test]
-        public void RemoveType ()
+        public void RemoveType()
         {
-            Evidence e = new Evidence ();
-            Assert.AreEqual (0, e.Count, "Count-Empty");
-            e.AddAssembly (new object ());
-            e.AddHost (new object ());
-            Assert.AreEqual (2, e.Count, "Count");
-            e.RemoveType (typeof (object));
-            Assert.AreEqual (0, e.Count, "Count-RemoveType(object)");
+            Evidence e = new Evidence();
+            Assert.AreEqual(0, e.Count, "Count-Empty");
+            e.AddAssembly(new object());
+            e.AddHost(new object());
+            Assert.AreEqual(2, e.Count, "Count");
+            e.RemoveType(typeof(object));
+            Assert.AreEqual(0, e.Count, "Count-RemoveType(object)");
         }
 
         [Test]
-        public void AppDomain_NoPermissionRequestEvidence ()
+        public void AppDomain_NoPermissionRequestEvidence()
         {
             // PermissionRequestEvidence is only used druing policy resolution
             // and can't be accessed using the Evidence property
             Evidence e = AppDomain.CurrentDomain.Evidence;
-            foreach (object o in e) {
+            foreach (object o in e)
+            {
                 if (o is PermissionRequestEvidence)
-                    Assert.Fail ("Found PermissionRequestEvidence in AppDomain.CurrentDomain.Evidence");
+                    Assert.Fail(
+                        "Found PermissionRequestEvidence in AppDomain.CurrentDomain.Evidence"
+                    );
             }
         }
 
         [Test]
-        [Category ("MobileNotWorking")]
-        public void Assembly_NoPermissionRequestEvidence ()
+        [Category("MobileNotWorking")]
+        public void Assembly_NoPermissionRequestEvidence()
         {
             // PermissionRequestEvidence is only used druing policy resolution
             // and can't be accessed using the Evidence property
-            Evidence e = Assembly.GetExecutingAssembly ().Evidence;
-            foreach (object o in e) {
+            Evidence e = Assembly.GetExecutingAssembly().Evidence;
+            foreach (object o in e)
+            {
                 if (o is PermissionRequestEvidence)
-                    Assert.Fail ("Found PermissionRequestEvidence in Assembly.GetExecutingAssembly.Evidence");
+                    Assert.Fail(
+                        "Found PermissionRequestEvidence in Assembly.GetExecutingAssembly.Evidence"
+                    );
             }
         }
     }

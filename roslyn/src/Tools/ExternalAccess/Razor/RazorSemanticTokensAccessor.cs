@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     internal class RazorSemanticTokensAccessor
     {
-        public static ImmutableArray<string> RoslynTokenTypes => SemanticTokensHelpers.AllTokenTypes;
+        public static ImmutableArray<string> RoslynTokenTypes =>
+            SemanticTokensHelpers.AllTokenTypes;
     }
 }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,7 +51,13 @@ namespace Castle.Components.DictionaryAdapter
             PropertyDescriptor descriptor;
             if (This.Properties.TryGetValue(propertyName, out descriptor))
             {
-                var propertyValue = descriptor.GetPropertyValue(this, propertyName, null, This.Descriptor, ifExists);
+                var propertyValue = descriptor.GetPropertyValue(
+                    this,
+                    propertyName,
+                    null,
+                    This.Descriptor,
+                    ifExists
+                );
                 if (propertyValue is IEditableObject)
                 {
                     AddEditDependency((IEditableObject)propertyValue);
@@ -73,7 +79,8 @@ namespace Castle.Components.DictionaryAdapter
             if (GetEditedProperty(key, out propertyValue) == false)
             {
                 var dictionary = GetDictionary(This.Dictionary, ref key);
-                if (dictionary != null) propertyValue = dictionary[key];
+                if (dictionary != null)
+                    propertyValue = dictionary[key];
             }
             return propertyValue;
         }
@@ -87,7 +94,12 @@ namespace Castle.Components.DictionaryAdapter
             {
                 if (ShouldNotify == false)
                 {
-                    stored = descriptor.SetPropertyValue(this, propertyName, ref value, This.Descriptor);
+                    stored = descriptor.SetPropertyValue(
+                        this,
+                        propertyName,
+                        ref value,
+                        This.Descriptor
+                    );
                     Invalidate();
                     return stored;
                 }
@@ -100,7 +112,12 @@ namespace Castle.Components.DictionaryAdapter
 
                 var trackPropertyChange = TrackPropertyChange(descriptor, existingValue, value);
 
-                stored = descriptor.SetPropertyValue(this, propertyName, ref value, This.Descriptor);
+                stored = descriptor.SetPropertyValue(
+                    this,
+                    propertyName,
+                    ref value,
+                    This.Descriptor
+                );
 
                 if (stored && trackPropertyChange != null)
                 {
@@ -116,7 +133,8 @@ namespace Castle.Components.DictionaryAdapter
             if (property == null || EditProperty(property, key, value) == false)
             {
                 var dictionary = GetDictionary(This.Dictionary, ref key);
-                if (dictionary != null)    dictionary[key] = value;
+                if (dictionary != null)
+                    dictionary[key] = value;
             }
         }
 
@@ -126,14 +144,18 @@ namespace Castle.Components.DictionaryAdapter
             if (property == null || ClearEditProperty(property, key) == false)
             {
                 var dictionary = GetDictionary(This.Dictionary, ref key);
-                if (dictionary != null) dictionary.Remove(key);
-            }    
+                if (dictionary != null)
+                    dictionary.Remove(key);
+            }
         }
 
         public bool ShouldClearProperty(PropertyDescriptor property, object value)
         {
-            return property == null ||
-                property.Setters.OfType<RemoveIfAttribute>().Where(remove => remove.ShouldRemove(value)).Any();
+            return property == null
+                || property.Setters
+                    .OfType<RemoveIfAttribute>()
+                    .Where(remove => remove.ShouldRemove(value))
+                    .Any();
         }
 
         public override bool Equals(object obj)
@@ -148,7 +170,7 @@ namespace Castle.Components.DictionaryAdapter
             if (ReferenceEquals(this, obj))
             {
                 return true;
-            }    
+            }
 
             if (Meta.Type != other.Meta.Type)
             {
@@ -171,8 +193,10 @@ namespace Castle.Components.DictionaryAdapter
             }
 
             int hashCode;
-            if (This.EqualityHashCodeStrategy == null ||
-                This.EqualityHashCodeStrategy.GetHashCode(this, out hashCode) == false)
+            if (
+                This.EqualityHashCodeStrategy == null
+                || This.EqualityHashCodeStrategy.GetHashCode(this, out hashCode) == false
+            )
             {
                 hashCode = base.GetHashCode();
             }
@@ -184,7 +208,7 @@ namespace Castle.Components.DictionaryAdapter
         protected void Initialize()
         {
             var metaBehaviors = Meta.Behaviors;
-            var initializers  = This.Initializers;
+            var initializers = This.Initializers;
 
             foreach (var initializer in initializers)
             {
@@ -206,7 +230,8 @@ namespace Castle.Components.DictionaryAdapter
                 for (var i = 0; i < parts.Length - 1; ++i)
                 {
                     dictionary = dictionary[parts[i]] as IDictionary;
-                    if (dictionary == null) return null;
+                    if (dictionary == null)
+                        return null;
                 }
                 key = parts[parts.Length - 1];
             }

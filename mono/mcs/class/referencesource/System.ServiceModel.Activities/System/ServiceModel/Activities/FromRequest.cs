@@ -11,22 +11,14 @@ namespace System.ServiceModel.Activities
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
     using SR2 = System.ServiceModel.Activities.SR;
-    
+
     class FromRequest : NativeActivity
     {
         Collection<OutArgument> parameters;
 
-        public InOutArgument<Message> Message
-        {
-            get;
-            set;
-        }
+        public InOutArgument<Message> Message { get; set; }
 
-        public IDispatchMessageFormatter Formatter
-        {
-            get;
-            set;
-        }
+        public IDispatchMessageFormatter Formatter { get; set; }
 
         public Collection<OutArgument> Parameters
         {
@@ -39,22 +31,19 @@ namespace System.ServiceModel.Activities
                 return this.parameters;
             }
         }
-        
-        public InArgument<NoPersistHandle> NoPersistHandle
-        {
-            get;
-            set;
-        }
 
-        internal bool CloseMessage
-        {
-            get;
-            set;
-        }
-        
+        public InArgument<NoPersistHandle> NoPersistHandle { get; set; }
+
+        internal bool CloseMessage { get; set; }
+
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument messageArgument = new RuntimeArgument(Constants.Message, Constants.MessageType, ArgumentDirection.InOut, true);
+            RuntimeArgument messageArgument = new RuntimeArgument(
+                Constants.Message,
+                Constants.MessageType,
+                ArgumentDirection.InOut,
+                true
+            );
             metadata.Bind(this.Message, messageArgument);
             metadata.AddArgument(messageArgument);
 
@@ -63,13 +52,21 @@ namespace System.ServiceModel.Activities
                 int count = 0;
                 foreach (OutArgument parameter in this.parameters)
                 {
-                    RuntimeArgument parameterArgument = new RuntimeArgument(Constants.Parameter + count++, parameter.ArgumentType, ArgumentDirection.Out);
+                    RuntimeArgument parameterArgument = new RuntimeArgument(
+                        Constants.Parameter + count++,
+                        parameter.ArgumentType,
+                        ArgumentDirection.Out
+                    );
                     metadata.Bind(parameter, parameterArgument);
                     metadata.AddArgument(parameterArgument);
                 }
             }
 
-            RuntimeArgument noPersistHandleArgument = new RuntimeArgument(Constants.NoPersistHandle, Constants.NoPersistHandleType, ArgumentDirection.In);
+            RuntimeArgument noPersistHandleArgument = new RuntimeArgument(
+                Constants.NoPersistHandle,
+                Constants.NoPersistHandleType,
+                ArgumentDirection.In
+            );
             metadata.Bind(this.NoPersistHandle, noPersistHandleArgument);
             metadata.AddArgument(noPersistHandleArgument);
         }
@@ -97,7 +94,10 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    Fx.Assert(this.parameters == null, "There shouldn't be any parameters to be deserialized");
+                    Fx.Assert(
+                        this.parameters == null,
+                        "There shouldn't be any parameters to be deserialized"
+                    );
                 }
 
                 if (this.parameters != null)
@@ -110,7 +110,9 @@ namespace System.ServiceModel.Activities
                         object obj = outObjects[i];
                         if (obj == null)
                         {
-                            obj = ProxyOperationRuntime.GetDefaultParameterValue(outArgument.ArgumentType);
+                            obj = ProxyOperationRuntime.GetDefaultParameterValue(
+                                outArgument.ArgumentType
+                            );
                         }
 
                         outArgument.Set(context, obj);
@@ -129,7 +131,8 @@ namespace System.ServiceModel.Activities
                 bool useNoPersistHandle = UseNoPersistHandle(context);
                 if (useNoPersistHandle)
                 {
-                    NoPersistHandle handle = (this.NoPersistHandle == null) ? null : this.NoPersistHandle.Get(context);
+                    NoPersistHandle handle =
+                        (this.NoPersistHandle == null) ? null : this.NoPersistHandle.Get(context);
                     if (handle != null)
                     {
                         handle.Exit(context);
@@ -140,11 +143,12 @@ namespace System.ServiceModel.Activities
 
         static bool UseNoPersistHandle(NativeActivityContext executionContext)
         {
-            // Default is set to true because we want NoPersistHandle to be 
+            // Default is set to true because we want NoPersistHandle to be
             // used if the SendReceiveExtension is not available.
             bool result = true;
 
-            SendReceiveExtension sendReceiveExtension = executionContext.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension =
+                executionContext.GetExtension<SendReceiveExtension>();
             if (sendReceiveExtension != null)
             {
                 result = sendReceiveExtension.HostSettings.UseNoPersistHandle;
@@ -152,6 +156,5 @@ namespace System.ServiceModel.Activities
 
             return result;
         }
-
     }
 }

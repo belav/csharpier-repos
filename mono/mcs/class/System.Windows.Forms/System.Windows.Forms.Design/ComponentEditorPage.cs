@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,8 +29,8 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms.Design
 {
-    [ClassInterfaceAttribute (ClassInterfaceType.AutoDispatch)]
-    [ComVisible (true)]
+    [ClassInterfaceAttribute(ClassInterfaceType.AutoDispatch)]
+    [ComVisible(true)]
     public abstract class ComponentEditorPage : Panel
     {
         private bool commitOnDeactivate = false;
@@ -41,14 +41,13 @@ namespace System.Windows.Forms.Design
         private bool loadRequired = false;
         private IComponentEditorPageSite pageSite;
 
-        public ComponentEditorPage ()
-        {
-        }
+        public ComponentEditorPage() { }
 
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        new public virtual bool AutoSize {
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        new public virtual bool AutoSize
+        {
             get { return base.AutoSize; }
             set { base.AutoSize = value; }
         }
@@ -59,148 +58,149 @@ namespace System.Windows.Forms.Design
             set { commitOnDeactivate = value; }
         }
 
-        protected IComponent Component {
+        protected IComponent Component
+        {
             get { return component; }
             set { component = value; }
         }
 
-        [MonoTODO ("Find out what this does.")]
-        protected override CreateParams CreateParams {
-            get {
-                throw new NotImplementedException ();
-            }
+        [MonoTODO("Find out what this does.")]
+        protected override CreateParams CreateParams
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        protected bool FirstActivate {
+        protected bool FirstActivate
+        {
             get { return firstActivate; }
             set { firstActivate = value; }
         }
 
-        public Icon Icon {
+        public Icon Icon
+        {
             get { return icon; }
             set { icon = value; }
         }
 
-        protected int Loading {
+        protected int Loading
+        {
             get { return loading; }
             set { loading = value; }
         }
 
-        protected bool LoadRequired {
+        protected bool LoadRequired
+        {
             get { return loadRequired; }
             set { loadRequired = value; }
         }
 
-        protected IComponentEditorPageSite PageSite {
+        protected IComponentEditorPageSite PageSite
+        {
             get { return pageSite; }
             set { pageSite = value; }
         }
 
-        public virtual string Title {
+        public virtual string Title
+        {
             get { return base.Text; }
         }
 
-        public virtual void Activate ()
+        public virtual void Activate()
         {
             Visible = true;
             firstActivate = false;
-            if (loadRequired) {
-                EnterLoadingMode ();
-                LoadComponent ();
-                ExitLoadingMode ();
+            if (loadRequired)
+            {
+                EnterLoadingMode();
+                LoadComponent();
+                ExitLoadingMode();
             }
         }
 
-        public virtual void ApplyChanges ()
+        public virtual void ApplyChanges()
         {
-            SaveComponent ();
+            SaveComponent();
         }
 
-        public virtual void Deactivate ()
+        public virtual void Deactivate()
         {
             Visible = false;
         }
 
-        protected void EnterLoadingMode ()
+        protected void EnterLoadingMode()
         {
             loading++;
         }
 
-        protected void ExitLoadingMode ()
+        protected void ExitLoadingMode()
         {
             loading--;
         }
 
-        public virtual Control GetControl ()
+        public virtual Control GetControl()
         {
             return this;
         }
 
-        protected IComponent GetSelectedComponent ()
+        protected IComponent GetSelectedComponent()
         {
             return component;
         }
 
-        protected bool IsFirstActivate ()
+        protected bool IsFirstActivate()
         {
             return firstActivate;
         }
 
-        protected bool IsLoading ()
+        protected bool IsLoading()
         {
             return (loading != 0);
         }
 
-        public virtual bool IsPageMessage (ref Message msg)
+        public virtual bool IsPageMessage(ref Message msg)
         {
-            return PreProcessMessage (ref msg);
+            return PreProcessMessage(ref msg);
         }
 
-        protected abstract void LoadComponent ();
+        protected abstract void LoadComponent();
 
-        [MonoTODO ("Find out what this does.")]
-        public virtual void OnApplyComplete ()
-        {
-        }
+        [MonoTODO("Find out what this does.")]
+        public virtual void OnApplyComplete() { }
 
-        protected virtual void ReloadComponent ()
+        protected virtual void ReloadComponent()
         {
             loadRequired = true;
         }
 
-        protected abstract void SaveComponent ();
+        protected abstract void SaveComponent();
 
-        public virtual void SetComponent (IComponent component)
+        public virtual void SetComponent(IComponent component)
         {
             this.component = component;
-            ReloadComponent ();
+            ReloadComponent();
         }
 
-        [MonoTODO ("Find out what this does.")]
-        protected virtual void SetDirty ()
-        {
-        }
+        [MonoTODO("Find out what this does.")]
+        protected virtual void SetDirty() { }
 
-        public virtual void SetSite (IComponentEditorPageSite site)
+        public virtual void SetSite(IComponentEditorPageSite site)
         {
             pageSite = site;
-            pageSite.GetControl ().Controls.Add (this);
-
+            pageSite.GetControl().Controls.Add(this);
         }
 
-        public virtual void ShowHelp ()
-        {
-        }
+        public virtual void ShowHelp() { }
 
-        public virtual bool SupportsHelp ()
+        public virtual bool SupportsHelp()
         {
             return false;
         }
 
         #region Public Events
-        [Browsable (false)]
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public new event EventHandler AutoSizeChanged {
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler AutoSizeChanged
+        {
             add { base.AutoSizeChanged += value; }
             remove { base.AutoSizeChanged -= value; }
         }

@@ -16,7 +16,8 @@ public class LocalTests : SemanticModelTestBase
     [Fact]
     public void ForEach()
     {
-        var sourceCode = @"
+        var sourceCode =
+            @"
 class C
 {
     void M()
@@ -42,7 +43,8 @@ class C
     [Fact]
     public void ForEachVisualBasic()
     {
-        var sourceCode = @"
+        var sourceCode =
+            @"
 Module M1
     Class C
         Sub S() As Object
@@ -56,8 +58,10 @@ End Module
 ";
         var compilation = CreateVisualBasicCompilation(sourceCode);
         var tree = compilation.SyntaxTrees[0];
-        var expressionSyntax = tree.GetRoot().DescendantNodes().
-            OfType<VisualBasic.Syntax.IdentifierNameSyntax>().Last();
+        var expressionSyntax = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<VisualBasic.Syntax.IdentifierNameSyntax>()
+            .Last();
         Assert.Equal("x", expressionSyntax.ToString());
         var model = compilation.GetSemanticModel(tree);
         var local = (ILocalSymbol)model.GetSymbolInfo(expressionSyntax).Symbol!;
@@ -70,7 +74,8 @@ End Module
     [Fact]
     public void ForEachAwait()
     {
-        var sourceCode = @"
+        var sourceCode =
+            @"
 class C
 {
     void M()
@@ -95,7 +100,8 @@ class C
     [Fact]
     public void UsingBlock()
     {
-        var sourceCode = @"
+        var sourceCode =
+            @"
 using System.IO;
 class C
 {
@@ -120,7 +126,8 @@ class C
     [Fact]
     public void UsingBlockAwait()
     {
-        var sourceCode = @"
+        var sourceCode =
+            @"
 using System.IO;
 class C
 {
@@ -145,7 +152,8 @@ class C
     [Fact]
     public void UsingDeclaration()
     {
-        var sourceCode = @"
+        var sourceCode =
+            @"
 using System.IO;
 class C
 {

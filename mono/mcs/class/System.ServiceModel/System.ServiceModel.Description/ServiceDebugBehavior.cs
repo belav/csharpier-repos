@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@ namespace System.ServiceModel.Description
 {
     public class ServiceDebugBehavior : IServiceBehavior
     {
-        public ServiceDebugBehavior ()
+        public ServiceDebugBehavior()
         {
             HttpHelpPageEnabled = true;
             HttpsHelpPageEnabled = true;
@@ -54,22 +54,27 @@ namespace System.ServiceModel.Description
 
         public Binding HttpsHelpPageBinding { get; set; }
 
-        void IServiceBehavior.AddBindingParameters (
+        void IServiceBehavior.AddBindingParameters(
             ServiceDescription description,
             ServiceHostBase serviceHostBase,
             Collection<ServiceEndpoint> endpoints,
-            BindingParameterCollection parameters)
+            BindingParameterCollection parameters
+        )
         {
             // do nothing
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior (
+        void IServiceBehavior.ApplyDispatchBehavior(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
+            ServiceHostBase serviceHostBase
+        )
         {
-            ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension (serviceHostBase);
+            ServiceMetadataExtension sme = ServiceMetadataExtension.EnsureServiceMetadataExtension(
+                serviceHostBase
+            );
 
-            foreach (var dispatcherBase in serviceHostBase.ChannelDispatchers) {
+            foreach (var dispatcherBase in serviceHostBase.ChannelDispatchers)
+            {
                 var dispatcher = dispatcherBase as ChannelDispatcher;
                 if (dispatcher == null) // non-ChannelDispatcher ChannelDispatcherBase instance.
                     continue;
@@ -77,24 +82,25 @@ namespace System.ServiceModel.Description
                     dispatcher.IncludeExceptionDetailInFaults = true;
             }
 
-            if (HttpHelpPageEnabled) {
-                Uri uri = serviceHostBase.CreateUri ("http", HttpHelpPageUrl);
+            if (HttpHelpPageEnabled)
+            {
+                Uri uri = serviceHostBase.CreateUri("http", HttpHelpPageUrl);
                 if (uri != null)
-                    sme.EnsureChannelDispatcher (false, "http", uri, HttpHelpPageBinding);
+                    sme.EnsureChannelDispatcher(false, "http", uri, HttpHelpPageBinding);
             }
 
-            if (HttpsHelpPageEnabled) {
-                Uri uri = serviceHostBase.CreateUri ("https", HttpsHelpPageUrl);
+            if (HttpsHelpPageEnabled)
+            {
+                Uri uri = serviceHostBase.CreateUri("https", HttpsHelpPageUrl);
                 if (uri != null)
-                    sme.EnsureChannelDispatcher (false, "https", uri, HttpsHelpPageBinding);
+                    sme.EnsureChannelDispatcher(false, "https", uri, HttpsHelpPageBinding);
             }
         }
 
         [MonoTODO]
-        void IServiceBehavior.Validate (
+        void IServiceBehavior.Validate(
             ServiceDescription description,
-            ServiceHostBase serviceHostBase)
-        {
-        }
+            ServiceHostBase serviceHostBase
+        ) { }
     }
 }

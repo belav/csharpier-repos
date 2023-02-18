@@ -12,7 +12,8 @@ namespace ILLink.RoslynAnalyzer.DataFlow
         where TValueLattice : ILattice<TValue>
     {
         LocalState<TValue> current;
-        public LocalState<TValue> Current {
+        public LocalState<TValue> Current
+        {
             get => current;
             set => current = value;
         }
@@ -21,14 +22,14 @@ namespace ILLink.RoslynAnalyzer.DataFlow
 
         public LocalStateLattice<TValue, TValueLattice> Lattice { get; init; }
 
-        public void Set (LocalKey key, TValue value)
+        public void Set(LocalKey key, TValue value)
         {
-            current.Set (key, value);
+            current.Set(key, value);
             if (Exception != null)
                 // TODO: optimize this to not meet the whole value, but just modify one value without copying.
-                Exception.Value = Lattice.Meet (Exception.Value, current);
+                Exception.Value = Lattice.Meet(Exception.Value, current);
         }
 
-        public TValue Get (LocalKey key) => current.Get (key);
+        public TValue Get(LocalKey key) => current.Get(key);
     }
 }

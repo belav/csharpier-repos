@@ -1,30 +1,29 @@
 class Foo<T>
 {
-    public Foo ()
-    { }
+    public Foo() { }
 
-    public void Hello (T t)
+    public void Hello(T t)
     {
         // We're boxing the type parameter `T' to an object here.
-        Whatever (t);
+        Whatever(t);
     }
 
-    public void Whatever (object o)
+    public void Whatever(object o)
     {
-        System.Console.WriteLine (o.GetType ());
+        System.Console.WriteLine(o.GetType());
     }
 }
 
 class X
 {
-    static void Test (Foo<int> foo)
+    static void Test(Foo<int> foo)
     {
-        foo.Hello (4);
+        foo.Hello(4);
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Foo<int> foo = new Foo<int> ();
-        Test (foo);
+        Foo<int> foo = new Foo<int>();
+        Test(foo);
     }
 }

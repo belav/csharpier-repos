@@ -31,37 +31,38 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Utilities {
+namespace MonoTests.Microsoft.Build.Utilities
+{
+    class LoggerExtension : Logger
+    {
+        public LoggerExtension()
+            : base() { }
 
-    class LoggerExtension : Logger {
-        public LoggerExtension () : base () { }
-
-        public override void Initialize (IEventSource eventSource)
-        {
-        }
+        public override void Initialize(IEventSource eventSource) { }
     }
 
     [TestFixture]
-    public class LoggerTest {
+    public class LoggerTest
+    {
         [Test]
-        public void TestAssignment ()
+        public void TestAssignment()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
 
-            Assert.IsNull (le.Parameters, "A1");
-            Assert.AreEqual (LoggerVerbosity.Quiet, le.Verbosity, "A2");
+            Assert.IsNull(le.Parameters, "A1");
+            Assert.AreEqual(LoggerVerbosity.Quiet, le.Verbosity, "A2");
 
             le.Parameters = "a;b";
             le.Verbosity = LoggerVerbosity.Detailed;
 
-            Assert.AreEqual ("a;b", le.Parameters, "A3");
-            Assert.AreEqual (LoggerVerbosity.Detailed, le.Verbosity, "A4");
+            Assert.AreEqual("a;b", le.Parameters, "A3");
+            Assert.AreEqual(LoggerVerbosity.Detailed, le.Verbosity, "A4");
         }
 
         [Test]
-        public void TestFormatErrorEvent1 ()
+        public void TestFormatErrorEvent1()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -73,17 +74,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file(1,2,3,4): subcategory error code: message", le.FormatErrorEvent (beea), "A1");
+            Assert.AreEqual(
+                "file(1,2,3,4): subcategory error code: message",
+                le.FormatErrorEvent(beea),
+                "A1"
+            );
         }
 
         [Test]
-        public void TestFormatErrorEvent2 ()
+        public void TestFormatErrorEvent2()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -95,17 +109,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file(1): subcategory error code: message", le.FormatErrorEvent (beea), "A1");
+            Assert.AreEqual(
+                "file(1): subcategory error code: message",
+                le.FormatErrorEvent(beea),
+                "A1"
+            );
         }
 
         [Test]
-        public void TestFormatErrorEvent3 ()
+        public void TestFormatErrorEvent3()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -117,17 +144,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file(1,2): subcategory error code: message", le.FormatErrorEvent (beea), "A1");
+            Assert.AreEqual(
+                "file(1,2): subcategory error code: message",
+                le.FormatErrorEvent(beea),
+                "A1"
+            );
         }
 
         [Test]
-        public void TestFormatErrorEvent4 ()
+        public void TestFormatErrorEvent4()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -139,17 +179,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file : subcategory error code: message", le.FormatErrorEvent (beea), "A1");
+            Assert.AreEqual(
+                "file : subcategory error code: message",
+                le.FormatErrorEvent(beea),
+                "A1"
+            );
         }
 
         [Test]
-        public void TestFormatErrorEvent5 ()
+        public void TestFormatErrorEvent5()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -161,16 +214,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file : subcategory error code: message", le.FormatErrorEvent (beea), "A1");
+            Assert.AreEqual(
+                "file : subcategory error code: message",
+                le.FormatErrorEvent(beea),
+                "A1"
+            );
         }
+
         [Test]
-        public void TestFormatErrorEvent6 ()
+        public void TestFormatErrorEvent6()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -182,16 +249,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file : subcategory error code: message", le.FormatErrorEvent (beea), "A1");
+            Assert.AreEqual(
+                "file : subcategory error code: message",
+                le.FormatErrorEvent(beea),
+                "A1"
+            );
         }
+
         [Test]
-        public void TestFormatErrorEvent7 ()
+        public void TestFormatErrorEvent7()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -203,17 +284,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildErrorEventArgs beea = new BuildErrorEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildErrorEventArgs beea = new BuildErrorEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file : subcategory error code: message", le.FormatErrorEvent (beea), "A1");
+            Assert.AreEqual(
+                "file : subcategory error code: message",
+                le.FormatErrorEvent(beea),
+                "A1"
+            );
         }
 
         [Test]
-        public void TestFormatWarningEvent1 ()
+        public void TestFormatWarningEvent1()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -225,16 +319,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildWarningEventArgs beea = new BuildWarningEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildWarningEventArgs beea = new BuildWarningEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file(1,2,3,4): subcategory warning code: message", le.FormatWarningEvent (beea), "A1");
+            Assert.AreEqual(
+                "file(1,2,3,4): subcategory warning code: message",
+                le.FormatWarningEvent(beea),
+                "A1"
+            );
         }
+
         [Test]
-        public void TestFormatWarningEvent2 ()
+        public void TestFormatWarningEvent2()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -246,16 +354,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildWarningEventArgs beea = new BuildWarningEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildWarningEventArgs beea = new BuildWarningEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file(1): subcategory warning code: message", le.FormatWarningEvent (beea), "A1");
+            Assert.AreEqual(
+                "file(1): subcategory warning code: message",
+                le.FormatWarningEvent(beea),
+                "A1"
+            );
         }
+
         [Test]
-        public void TestFormatWarningEvent3 ()
+        public void TestFormatWarningEvent3()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -267,16 +389,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildWarningEventArgs beea = new BuildWarningEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildWarningEventArgs beea = new BuildWarningEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file(1,2): subcategory warning code: message", le.FormatWarningEvent (beea), "A1");
+            Assert.AreEqual(
+                "file(1,2): subcategory warning code: message",
+                le.FormatWarningEvent(beea),
+                "A1"
+            );
         }
+
         [Test]
-        public void TestFormatWarningEvent4 ()
+        public void TestFormatWarningEvent4()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -288,16 +424,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildWarningEventArgs beea = new BuildWarningEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildWarningEventArgs beea = new BuildWarningEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file : subcategory warning code: message", le.FormatWarningEvent (beea), "A1");
+            Assert.AreEqual(
+                "file : subcategory warning code: message",
+                le.FormatWarningEvent(beea),
+                "A1"
+            );
         }
+
         [Test]
-        public void TestFormatWarningEvent5 ()
+        public void TestFormatWarningEvent5()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -309,16 +459,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildWarningEventArgs beea = new BuildWarningEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildWarningEventArgs beea = new BuildWarningEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file : subcategory warning code: message", le.FormatWarningEvent (beea), "A1");
+            Assert.AreEqual(
+                "file : subcategory warning code: message",
+                le.FormatWarningEvent(beea),
+                "A1"
+            );
         }
+
         [Test]
-        public void TestFormatWarningEvent6 ()
+        public void TestFormatWarningEvent6()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -330,16 +494,30 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildWarningEventArgs beea = new BuildWarningEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildWarningEventArgs beea = new BuildWarningEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file : subcategory warning code: message", le.FormatWarningEvent (beea), "A1");
+            Assert.AreEqual(
+                "file : subcategory warning code: message",
+                le.FormatWarningEvent(beea),
+                "A1"
+            );
         }
+
         [Test]
-        public void TestFormatWarningEvent7 ()
+        public void TestFormatWarningEvent7()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
             string subcategory = "subcategory";
             string code = "code";
             string file = "file";
@@ -351,33 +529,46 @@ namespace MonoTests.Microsoft.Build.Utilities {
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
 
-            BuildWarningEventArgs beea = new BuildWarningEventArgs (
-                subcategory, code, file, lineNumber, columnNumber,
-                endLineNumber, endColumnNumber, message, helpKeyword, senderName);
+            BuildWarningEventArgs beea = new BuildWarningEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
 
-            Assert.AreEqual ("file : subcategory warning code: message", le.FormatWarningEvent (beea), "A1");
+            Assert.AreEqual(
+                "file : subcategory warning code: message",
+                le.FormatWarningEvent(beea),
+                "A1"
+            );
         }
 
         [Test]
-        public void TestIsVerbosityAtLeast ()
+        public void TestIsVerbosityAtLeast()
         {
-            LoggerExtension le = new LoggerExtension ();
+            LoggerExtension le = new LoggerExtension();
 
             le.Verbosity = LoggerVerbosity.Quiet;
-            Assert.IsTrue (le.IsVerbosityAtLeast (LoggerVerbosity.Quiet), "A1");
-            Assert.IsFalse (le.IsVerbosityAtLeast (LoggerVerbosity.Minimal), "A2");
+            Assert.IsTrue(le.IsVerbosityAtLeast(LoggerVerbosity.Quiet), "A1");
+            Assert.IsFalse(le.IsVerbosityAtLeast(LoggerVerbosity.Minimal), "A2");
 
             le.Verbosity = LoggerVerbosity.Minimal;
-            Assert.IsTrue (le.IsVerbosityAtLeast (LoggerVerbosity.Minimal), "A3");
-            Assert.IsFalse (le.IsVerbosityAtLeast (LoggerVerbosity.Normal), "A4");
+            Assert.IsTrue(le.IsVerbosityAtLeast(LoggerVerbosity.Minimal), "A3");
+            Assert.IsFalse(le.IsVerbosityAtLeast(LoggerVerbosity.Normal), "A4");
 
             le.Verbosity = LoggerVerbosity.Normal;
-            Assert.IsTrue (le.IsVerbosityAtLeast (LoggerVerbosity.Normal), "A5");
-            Assert.IsFalse (le.IsVerbosityAtLeast (LoggerVerbosity.Detailed), "A6");
+            Assert.IsTrue(le.IsVerbosityAtLeast(LoggerVerbosity.Normal), "A5");
+            Assert.IsFalse(le.IsVerbosityAtLeast(LoggerVerbosity.Detailed), "A6");
 
             le.Verbosity = LoggerVerbosity.Detailed;
-            Assert.IsTrue (le.IsVerbosityAtLeast (LoggerVerbosity.Detailed), "A7");
-            Assert.IsFalse (le.IsVerbosityAtLeast (LoggerVerbosity.Diagnostic), "A8");
+            Assert.IsTrue(le.IsVerbosityAtLeast(LoggerVerbosity.Detailed), "A7");
+            Assert.IsFalse(le.IsVerbosityAtLeast(LoggerVerbosity.Diagnostic), "A8");
         }
     }
 }

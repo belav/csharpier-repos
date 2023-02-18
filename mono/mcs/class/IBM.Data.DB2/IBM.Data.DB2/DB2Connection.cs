@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,8 +27,6 @@ using System.Text;
 
 namespace IBM.Data.DB2
 {
-
-    
     public class DB2Connection : System.ComponentModel.Component, IDbConnection, ICloneable
     {
         #region private data members
@@ -48,30 +45,21 @@ namespace IBM.Data.DB2
         public DB2Connection()
         {
             connectionTimeout = 15;
-            
         }
-        
+
         public DB2Connection(string conString)
         {
-            
             SetConnectionString(conString);
         }
 
-
         #endregion
-        
+
         #region ConnectionString property
 
-        public string ConnectionString 
+        public string ConnectionString
         {
-            get
-            {
-                return connectionSettings.ConnectionString;
-            }
-            set
-            {
-                SetConnectionString(value);
-            }
+            get { return connectionSettings.ConnectionString; }
+            set { SetConnectionString(value); }
         }
         #endregion
 
@@ -79,34 +67,25 @@ namespace IBM.Data.DB2
         #region ConnectionTimeout property
         public int ConnectionTimeout
         {
-            get
-            {
-                return connectionTimeout;
-            }
-            set
-            {
-                connectionTimeout = value;
-            }
+            get { return connectionTimeout; }
+            set { connectionTimeout = value; }
         }
         #endregion
 
         #region Database property
         public string Database
         {
-            get
-            {
-                return connectionSettings.DatabaseAlias;
-            }
+            get { return connectionSettings.DatabaseAlias; }
         }
         #endregion
-    
+
         #region State property
 
 
         unsafe public ConnectionState State
         {
             get
-            {   
+            {
                 //if ((long)dbHandle.ToPointer() == DB2Constants.SQL_NULL_HANDLE)
                 if (openConnection == null)
                     return ConnectionState.Closed;
@@ -122,35 +101,33 @@ namespace IBM.Data.DB2
 
         internal void OnInfoMessage(short handleType, IntPtr handle)
         {
-            if(InfoMessage != null)
+            if (InfoMessage != null)
             {
                 // Don't get error information until we know for sure someone is listening
                 try
                 {
-                    InfoMessage(this,
-                        new DB2InfoMessageEventArgs(new DB2ErrorCollection(handleType, handle)));
+                    InfoMessage(
+                        this,
+                        new DB2InfoMessageEventArgs(new DB2ErrorCollection(handleType, handle))
+                    );
                 }
-                catch(Exception)
-                {}
+                catch (Exception) { }
             }
         }
 
         private void OnStateChange(StateChangeEventArgs args)
         {
-            if(StateChange != null)
+            if (StateChange != null)
                 StateChange(this, args);
         }
 
         #endregion
-        
+
         #region DBHandle
 
         internal IntPtr DBHandle
         {
-            get
-            {
-                return (openConnection == null) ? IntPtr.Zero : openConnection.DBHandle;
-            }
+            get { return (openConnection == null) ? IntPtr.Zero : openConnection.DBHandle; }
         }
         #endregion
 
@@ -175,12 +152,12 @@ namespace IBM.Data.DB2
         {
             if ((refTransaction != null) && (refTransaction.IsAlive))
                 throw new InvalidOperationException("Cannot open another transaction");
-            if(State != ConnectionState.Open)
+            if (State != ConnectionState.Open)
                 throw new InvalidOperationException("BeginTransaction needs an open connection");
 
-            if(refTransaction != null)
+            if (refTransaction != null)
             {
-                if(refTransaction.IsAlive)
+                if (refTransaction.IsAlive)
                     throw new InvalidOperationException("Parallel transactions not supported");
 
                 openConnection.RollbackDeadTransaction();
@@ -193,17 +170,22 @@ namespace IBM.Data.DB2
         }
 
         #endregion
-        
+
         #region ChangeDatabase
         unsafe public void ChangeDatabase(string newDBName)
         {
-            if(connectionSettings == null)
+            if (connectionSettings == null)
             {
                 throw new InvalidOperationException("No connection string");
             }
             this.Close();
 
-            SetConnectionString(connectionSettings.ConnectionString.Replace(connectionSettings.DatabaseAlias, newDBName));
+            SetConnectionString(
+                connectionSettings.ConnectionString.Replace(
+                    connectionSettings.DatabaseAlias,
+                    newDBName
+                )
+            );
 
             this.Open();
         }
@@ -215,39 +197,39 @@ namespace IBM.Data.DB2
             DB2Environment.Instance.Dispose();
         }
         #endregion
-        
+
         #region Close
         public void Close()
         {
             DB2Transaction transaction = null;
-            if(refTransaction != null)
+            if (refTransaction != null)
                 transaction = (DB2Transaction)refTransaction.Target;
-            if((transaction != null) && refTransaction.IsAlive)
+            if ((transaction != null) && refTransaction.IsAlive)
             {
                 transaction.Dispose();
             }
-            if(refCommands != null)
+            if (refCommands != null)
             {
-                for(int i = 0; i < refCommands.Count; i++)
+                for (int i = 0; i < refCommands.Count; i++)
                 {
                     DB2Command command = null;
-                    if(refCommands[i] != null)
+                    if (refCommands[i] != null)
                     {
                         command = (DB2Command)((WeakReference)refCommands[i]).Target;
                     }
-                    if((command != null) && ((WeakReference)refCommands[i]).IsAlive)
+                    if ((command != null) && ((WeakReference)refCommands[i]).IsAlive)
                     {
                         try
                         {
                             command.ConnectionClosed();
                         }
-                        catch{}
+                        catch { }
                     }
                     //?? refCommands[i] = null;
                 }
             }
 
-            if(openConnection != null)
+            if (openConnection != null)
             {
                 openConnection.Close();
                 openConnection = null;
@@ -255,7 +237,7 @@ namespace IBM.Data.DB2
         }
 
         #endregion
-        
+
         #region CreateCommand
         IDbCommand IDbConnection.CreateCommand()
         {
@@ -268,17 +250,22 @@ namespace IBM.Data.DB2
             return new DB2Command(null, this);
         }
         #endregion
-        
+
         #region Open
 
         unsafe public void Open()
         {
-            if(disposed)
+            if (disposed)
             {
                 throw new ObjectDisposedException("DB2Connection");
             }
 
-            if (this.State == ConnectionState.Open || this.State == ConnectionState.Connecting || this.State == ConnectionState.Executing || this.State == ConnectionState.Fetching)
+            if (
+                this.State == ConnectionState.Open
+                || this.State == ConnectionState.Connecting
+                || this.State == ConnectionState.Executing
+                || this.State == ConnectionState.Fetching
+            )
             {
                 throw new InvalidOperationException("Connection already open");
             }
@@ -294,7 +281,7 @@ namespace IBM.Data.DB2
             }
         }
         #endregion
-        
+
         #region Dispose
         public new void Dispose()
         {
@@ -304,9 +291,9 @@ namespace IBM.Data.DB2
 
         protected override void Dispose(bool disposing)
         {
-            if(!disposed) 
+            if (!disposed)
             {
-                if(disposing)
+                if (disposing)
                 {
                     // dispose managed resources
                     Close();
@@ -315,7 +302,6 @@ namespace IBM.Data.DB2
             base.Dispose(disposing);
             disposed = true;
         }
-
 
         ~DB2Connection()
         {
@@ -329,7 +315,7 @@ namespace IBM.Data.DB2
                 throw new InvalidOperationException("Connection is currently closed.");
         }
 
-        void SetConnectionString (string connectionString) 
+        void SetConnectionString(string connectionString)
         {
             if (State != ConnectionState.Closed)
                 throw new InvalidOperationException("Connection is not closed.");
@@ -339,42 +325,34 @@ namespace IBM.Data.DB2
 
         internal WeakReference WeakRefTransaction
         {
-            get
-            {
-                return refTransaction;
-            }
-            set
-            {
-                refTransaction = value;
-            }
-
+            get { return refTransaction; }
+            set { refTransaction = value; }
         }
 
         internal void AddCommand(DB2Command command)
         {
-            if(refCommands == null)
+            if (refCommands == null)
             {
                 refCommands = new ArrayList();
             }
-            for(int i = 0; i < refCommands.Count; i++)
+            for (int i = 0; i < refCommands.Count; i++)
             {
                 WeakReference reference = (WeakReference)refCommands[i];
-                if((reference == null) || !reference.IsAlive)
+                if ((reference == null) || !reference.IsAlive)
                 {
                     refCommands[i] = new WeakReference(command);
                     return;
                 }
             }
             refCommands.Add(new WeakReference(command));
-
         }
 
         internal void RemoveCommand(DB2Command command)
         {
-            for(int i = 0; i < refCommands.Count; i++)
+            for (int i = 0; i < refCommands.Count; i++)
             {
                 WeakReference reference = (WeakReference)refCommands[i];
-                if(object.ReferenceEquals(reference, command))
+                if (object.ReferenceEquals(reference, command))
                 {
                     refCommands[i] = null;
                     return;
@@ -390,12 +368,10 @@ namespace IBM.Data.DB2
 
             clone.connectionSettings = connectionSettings;
             clone.connectionTimeout = connectionTimeout;
-            
+
             return clone;
         }
 
         #endregion
-
     }
 }
-

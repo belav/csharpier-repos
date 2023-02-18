@@ -36,86 +36,84 @@ namespace Mono.Btls
     {
         internal class BoringX509ChainHandle : MonoBtlsHandle
         {
-            public BoringX509ChainHandle (IntPtr handle)
-                : base (handle, true)
-            {
-            }
+            public BoringX509ChainHandle(IntPtr handle)
+                : base(handle, true) { }
 
-            protected override bool ReleaseHandle ()
+            protected override bool ReleaseHandle()
             {
-                mono_btls_x509_chain_free (handle);
+                mono_btls_x509_chain_free(handle);
                 return true;
             }
         }
 
-        new internal BoringX509ChainHandle Handle {
+        new internal BoringX509ChainHandle Handle
+        {
             get { return (BoringX509ChainHandle)base.Handle; }
         }
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_chain_new ();
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_x509_chain_new();
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_chain_get_count (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_chain_get_count(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_chain_get_cert (IntPtr Handle, int index);
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_x509_chain_get_cert(IntPtr Handle, int index);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static int mono_btls_x509_chain_add_cert (IntPtr chain, IntPtr x509);
+        [DllImport(BTLS_DYLIB)]
+        extern static int mono_btls_x509_chain_add_cert(IntPtr chain, IntPtr x509);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static IntPtr mono_btls_x509_chain_up_ref (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static IntPtr mono_btls_x509_chain_up_ref(IntPtr handle);
 
-        [DllImport (BTLS_DYLIB)]
-        extern static void mono_btls_x509_chain_free (IntPtr handle);
+        [DllImport(BTLS_DYLIB)]
+        extern static void mono_btls_x509_chain_free(IntPtr handle);
 
-        public MonoBtlsX509Chain ()
-            : base (new BoringX509ChainHandle (mono_btls_x509_chain_new ()))
+        public MonoBtlsX509Chain()
+            : base(new BoringX509ChainHandle(mono_btls_x509_chain_new())) { }
+
+        internal MonoBtlsX509Chain(BoringX509ChainHandle handle)
+            : base(handle) { }
+
+        public int Count
         {
+            get { return mono_btls_x509_chain_get_count(Handle.DangerousGetHandle()); }
         }
 
-        internal MonoBtlsX509Chain (BoringX509ChainHandle handle)
-            : base (handle)
-        {
-        }
-
-        public int Count {
-            get { return mono_btls_x509_chain_get_count (Handle.DangerousGetHandle ()); }
-        }
-
-        public MonoBtlsX509 GetCertificate (int index)
+        public MonoBtlsX509 GetCertificate(int index)
         {
             if (index >= Count)
-                throw new IndexOutOfRangeException ();
-            var handle = mono_btls_x509_chain_get_cert (
-                Handle.DangerousGetHandle (), index);
-            CheckError (handle != IntPtr.Zero);
-            return new MonoBtlsX509 (new MonoBtlsX509.BoringX509Handle (handle));
+                throw new IndexOutOfRangeException();
+            var handle = mono_btls_x509_chain_get_cert(Handle.DangerousGetHandle(), index);
+            CheckError(handle != IntPtr.Zero);
+            return new MonoBtlsX509(new MonoBtlsX509.BoringX509Handle(handle));
         }
 
-        public void Dump ()
+        public void Dump()
         {
-            Console.Error.WriteLine ("CHAIN: {0:x} {1}", Handle, Count);
-            for (int i = 0; i < Count; i++) {
-                using (var cert = GetCertificate (i)) {
-                    Console.Error.WriteLine ("  CERT #{0}: {1}", i, cert.GetSubjectNameString ());
+            Console.Error.WriteLine("CHAIN: {0:x} {1}", Handle, Count);
+            for (int i = 0; i < Count; i++)
+            {
+                using (var cert = GetCertificate(i))
+                {
+                    Console.Error.WriteLine("  CERT #{0}: {1}", i, cert.GetSubjectNameString());
                 }
             }
         }
 
-        public void AddCertificate (MonoBtlsX509 x509)
+        public void AddCertificate(MonoBtlsX509 x509)
         {
-            mono_btls_x509_chain_add_cert (
-                Handle.DangerousGetHandle (),
-                x509.Handle.DangerousGetHandle ());
+            mono_btls_x509_chain_add_cert(
+                Handle.DangerousGetHandle(),
+                x509.Handle.DangerousGetHandle()
+            );
         }
 
-        internal MonoBtlsX509Chain Copy ()
+        internal MonoBtlsX509Chain Copy()
         {
-            var copy = mono_btls_x509_chain_up_ref (Handle.DangerousGetHandle ());
-            CheckError (copy != IntPtr.Zero);
-            return new MonoBtlsX509Chain (new BoringX509ChainHandle (copy));
+            var copy = mono_btls_x509_chain_up_ref(Handle.DangerousGetHandle());
+            CheckError(copy != IntPtr.Zero);
+            return new MonoBtlsX509Chain(new BoringX509ChainHandle(copy));
         }
     }
 }

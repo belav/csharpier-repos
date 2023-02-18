@@ -1,32 +1,24 @@
-
-delegate void EventHandler (object sender);
-delegate void EventHandler<T> (T sender);
+delegate void EventHandler(object sender);
+delegate void EventHandler<T>(T sender);
 
 class T
 {
-    void Test ()
+    void Test()
     {
-        Attach (OnClick);
+        Attach(OnClick);
     }
 
-    void Attach (EventHandler handler)
+    void Attach(EventHandler handler)
     {
         throw null;
     }
 
-    void Attach (EventHandler<string> handler)
-    {
-    }
+    void Attach(EventHandler<string> handler) { }
 
-    void OnClick (string sender)
-    {
-    }
+    void OnClick(string sender) { }
 
-    public static void Main ()
+    public static void Main()
     {
-        new T ().Test ();
+        new T().Test();
     }
 }
-
-
-

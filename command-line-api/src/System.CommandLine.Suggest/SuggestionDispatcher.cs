@@ -16,24 +16,32 @@ namespace System.CommandLine.Suggest
         private readonly ISuggestionRegistration _suggestionRegistration;
         private readonly ISuggestionStore _suggestionStore;
 
-        public SuggestionDispatcher(ISuggestionRegistration suggestionRegistration, ISuggestionStore suggestionStore = null)
+        public SuggestionDispatcher(
+            ISuggestionRegistration suggestionRegistration,
+            ISuggestionStore suggestionStore = null
+        )
         {
-            _suggestionRegistration = suggestionRegistration ?? throw new ArgumentNullException(nameof(suggestionRegistration));
+            _suggestionRegistration =
+                suggestionRegistration
+                ?? throw new ArgumentNullException(nameof(suggestionRegistration));
 
             _suggestionStore = suggestionStore ?? new SuggestionStore();
 
-            var shellTypeArgument = new Argument<ShellType>
-            {
-                Name = nameof(ShellType)
-            };
+            var shellTypeArgument = new Argument<ShellType> { Name = nameof(ShellType) };
 
-            CompleteScriptCommand = new Command("script", "Print complete script for specific shell")
+            CompleteScriptCommand = new Command(
+                "script",
+                "Print complete script for specific shell"
+            )
             {
                 shellTypeArgument
             };
             CompleteScriptCommand.SetHandler(context =>
             {
-                SuggestionShellScriptHandler.Handle(context.Console, context.ParseResult.GetValue(shellTypeArgument));
+                SuggestionShellScriptHandler.Handle(
+                    context.Console,
+                    context.ParseResult.GetValue(shellTypeArgument)
+                );
             });
 
             ListCommand = new Command("list")
@@ -53,12 +61,18 @@ namespace System.CommandLine.Suggest
             };
             GetCommand.SetHandler(context => Get(context));
 
-            var commandPathOption = new Option<string>("--command-path", "The path to the command for which to register suggestions");
+            var commandPathOption = new Option<string>(
+                "--command-path",
+                "The path to the command for which to register suggestions"
+            );
 
             RegisterCommand = new Command("register", "Registers an app for suggestions")
             {
                 commandPathOption,
-                new Option<string>("--suggestion-command", "The command to invoke to retrieve suggestions")
+                new Option<string>(
+                    "--suggestion-command",
+                    "The command to invoke to retrieve suggestions"
+                )
             };
 
             RegisterCommand.SetHandler(context =>
@@ -76,13 +90,13 @@ namespace System.CommandLine.Suggest
             };
             root.TreatUnmatchedTokensAsErrors = false;
             Parser = new CommandLineBuilder(root)
-                     .UseVersionOption()
-                     .UseHelp()
-                     .UseParseDirective()
-                     .UseSuggestDirective()
-                     .UseParseErrorReporting()
-                     .UseExceptionHandler()
-                     .Build();
+                .UseVersionOption()
+                .UseHelp()
+                .UseParseDirective()
+                .UseSuggestDirective()
+                .UseParseErrorReporting()
+                .UseExceptionHandler()
+                .Build();
         }
 
         private Command CompleteScriptCommand { get; }
@@ -93,7 +107,10 @@ namespace System.CommandLine.Suggest
 
         private static Option<FileInfo> GetExecutableOption()
         {
-            var option = new Option<FileInfo>(new[] { "-e", "--executable" }, "The executable to call for suggestions");
+            var option = new Option<FileInfo>(
+                new[] { "-e", "--executable" },
+                "The executable to call for suggestions"
+            );
             option.AcceptLegalFilePathsOnly();
 
             return option;
@@ -101,9 +118,12 @@ namespace System.CommandLine.Suggest
 
         private Command ListCommand { get; }
 
-        private Option<int> PositionOption { get; } = new(new[] { "-p", "--position" },
-                                                          description: "The current character position on the command line",
-                                                          defaultValueFactory: () => short.MaxValue);
+        private Option<int> PositionOption { get; } =
+            new(
+                new[] { "-p", "--position" },
+                description: "The current character position on the command line",
+                defaultValueFactory: () => short.MaxValue
+            );
 
         private Command RegisterCommand { get; }
 
@@ -114,16 +134,15 @@ namespace System.CommandLine.Suggest
         public Task<int> InvokeAsync(string[] args, IConsole console = null) =>
             Parser.InvokeAsync(args, console);
 
-        private void Register(
-            string commandPath,
-            IConsole console)
+        private void Register(string commandPath, IConsole console)
         {
-            var existingRegistration = _suggestionRegistration.FindRegistration(new FileInfo(commandPath));
+            var existingRegistration = _suggestionRegistration.FindRegistration(
+                new FileInfo(commandPath)
+            );
 
             if (existingRegistration is null)
             {
-                _suggestionRegistration.AddSuggestionRegistration(
-                    new Registration(commandPath));
+                _suggestionRegistration.AddSuggestionRegistration(new Registration(commandPath));
 
                 console.Out.WriteLine($"Registered {commandPath}");
             }
@@ -161,22 +180,20 @@ namespace System.CommandLine.Suggest
 
             var targetExePath = suggestionRegistration.ExecutablePath;
 
-            string targetArgs = FormatSuggestionArguments(
-                parseResult,
-                position,
-                targetExePath);
+            string targetArgs = FormatSuggestionArguments(parseResult, position, targetExePath);
 
 #if DEBUG
             Program.LogDebug($"dotnet-suggest sending: {targetArgs}");
 #endif
 
-            string completions = _suggestionStore.GetCompletions(
-                targetExePath,
-                targetArgs,
-                Timeout).Trim();
+            string completions = _suggestionStore
+                .GetCompletions(targetExePath, targetArgs, Timeout)
+                .Trim();
 
 #if DEBUG
-            Program.LogDebug($"dotnet-suggest returning: \"{completions.Replace("\r", "\\r").Replace("\n", "\\n")}\"");
+            Program.LogDebug(
+                $"dotnet-suggest returning: \"{completions.Replace("\r", "\\r").Replace("\n", "\\n")}\""
+            );
 #endif
 
             context.Console.Out.Write(completions);
@@ -184,8 +201,7 @@ namespace System.CommandLine.Suggest
             return Task.FromResult(0);
         }
 
-        private static string ShellPrefixesToMatch(
-            ISuggestionRegistration suggestionProvider)
+        private static string ShellPrefixesToMatch(ISuggestionRegistration suggestionProvider)
         {
             var registrations = suggestionProvider.FindAllRegistrations();
 
@@ -195,13 +211,19 @@ namespace System.CommandLine.Suggest
             {
                 foreach (var r in registrations)
                 {
-                    var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(r.ExecutablePath);
+                    var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(
+                        r.ExecutablePath
+                    );
 
                     yield return fileNameWithoutExtension;
 
-                    if (fileNameWithoutExtension?.StartsWith("dotnet-", StringComparison.Ordinal) == true)
+                    if (
+                        fileNameWithoutExtension?.StartsWith("dotnet-", StringComparison.Ordinal)
+                        == true
+                    )
                     {
-                        yield return "dotnet " + fileNameWithoutExtension.Substring("dotnet-".Length);
+                        yield return "dotnet "
+                            + fileNameWithoutExtension.Substring("dotnet-".Length);
                     }
                 }
             }
@@ -210,7 +232,8 @@ namespace System.CommandLine.Suggest
         public static string FormatSuggestionArguments(
             ParseResult parseResult,
             int position,
-            string targetExeName)
+            string targetExeName
+        )
         {
             var tokens = parseResult.UnmatchedTokens;
 
@@ -222,7 +245,7 @@ namespace System.CommandLine.Suggest
 
             if (targetExeName == "dotnet")
             {
-                // e.g. 
+                // e.g.
                 int? endOfWhitespace = null;
                 int? endOfSecondtoken = null;
 

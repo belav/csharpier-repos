@@ -18,25 +18,29 @@ namespace recursivetype_1238911
     {
         static int Main(string[] args)
         {
-            try {
+            try
+            {
                 TestBody();
-            } catch (TypeLoadException) {
+            }
+            catch (TypeLoadException)
+            {
                 return 0;
             }
             return 1;
         }
 
-        [MethodImpl (MethodImplOptions.NoInlining)]
-        static void TestBody ()
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        static void TestBody()
         {
             Type info = typeof(DecentStruct1);
-            TestBody2 (info);
+            TestBody2(info);
         }
 
-        [MethodImpl (MethodImplOptions.NoInlining)]
+        [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestBody2(Type info)
         {
-            FineStruct2 fs = (FineStruct2)info.Assembly.CreateInstance("recursivetype_1238911.FineStruct2");
+            FineStruct2 fs = (FineStruct2)
+                info.Assembly.CreateInstance("recursivetype_1238911.FineStruct2");
         }
     }
 }

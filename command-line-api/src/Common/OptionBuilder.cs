@@ -29,7 +29,12 @@ internal static class OptionBuilder
         return option;
     }
 
-    public static Option CreateOption(string name, Type valueType, string description, Func<object> defaultValueFactory)
+    public static Option CreateOption(
+        string name,
+        Type valueType,
+        string description,
+        Func<object> defaultValueFactory
+    )
     {
         if (defaultValueFactory == null)
         {
@@ -38,7 +43,9 @@ internal static class OptionBuilder
 
         var optionType = typeof(Bridge<>).MakeGenericType(valueType);
 
-        var ctor = optionType.GetConstructor(new[] { typeof(string), typeof(Func<object>), typeof(string) });
+        var ctor = optionType.GetConstructor(
+            new[] { typeof(string), typeof(Func<object>), typeof(string) }
+        );
 
         var option = (Option)ctor.Invoke(new object[] { name, defaultValueFactory, description });
 
@@ -48,10 +55,10 @@ internal static class OptionBuilder
     private class Bridge<T> : Option<T>
     {
         public Bridge(string name, Func<object> defaultValueFactory, string description)
-            : base(name, 
-                  () => (T)defaultValueFactory(), // this type exists only for an easy Func<object> => Func<T> transformation
-                  description)
-        {
-        }
+            : base(
+                name,
+                () => (T)defaultValueFactory(), // this type exists only for an easy Func<object> => Func<T> transformation
+                description
+            ) { }
     }
 }

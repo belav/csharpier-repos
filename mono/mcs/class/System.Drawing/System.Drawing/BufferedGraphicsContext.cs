@@ -37,47 +37,46 @@ namespace System.Drawing
     {
         private Size max_buffer;
 
-        public BufferedGraphicsContext ()
+        public BufferedGraphicsContext()
         {
             max_buffer = Size.Empty;
         }
 
-        ~BufferedGraphicsContext ()
+        ~BufferedGraphicsContext() { }
+
+        public BufferedGraphics Allocate(Graphics targetGraphics, Rectangle targetRectangle)
         {
+            BufferedGraphics graphics = new BufferedGraphics(targetGraphics, targetRectangle);
+            return graphics;
         }
 
-        public BufferedGraphics Allocate (Graphics targetGraphics, Rectangle targetRectangle)
+        [MonoTODO("The targetDC parameter has no equivalent in libgdiplus.")]
+        public BufferedGraphics Allocate(IntPtr targetDC, Rectangle targetRectangle)
         {
-            BufferedGraphics graphics = new BufferedGraphics (targetGraphics, targetRectangle);
-            return graphics;            
+            throw new NotImplementedException();
         }
 
-        [MonoTODO ("The targetDC parameter has no equivalent in libgdiplus.")]
-        public BufferedGraphics Allocate (IntPtr targetDC, Rectangle targetRectangle)
+        public void Dispose()
         {
-            throw new NotImplementedException ();
+            System.GC.SuppressFinalize(this);
         }
 
-        public void Dispose ()
-        {            
-            System.GC.SuppressFinalize (this);
-        }
+        public void Invalidate() { }
 
-        public void Invalidate ()
+        public Size MaximumBuffer
         {
-        }
-
-        public Size MaximumBuffer {
-            get {return max_buffer; }
-            set {
-                if (value.Width <= 0 || value.Height <= 0) {
-                    throw new ArgumentException ("The height or width of the size is less than or equal to zero.");
+            get { return max_buffer; }
+            set
+            {
+                if (value.Width <= 0 || value.Height <= 0)
+                {
+                    throw new ArgumentException(
+                        "The height or width of the size is less than or equal to zero."
+                    );
                 }
 
                 max_buffer = value;
             }
         }
-
     }
 }
-

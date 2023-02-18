@@ -11,18 +11,17 @@ using System;
 using NUnit.Framework;
 using Mono.Security.Cryptography;
 
-namespace MonoTests.Security.Cryptography {
-
+namespace MonoTests.Security.Cryptography
+{
     [TestFixture]
-    public class SHA1CryptoServiceProviderTest : SHA1Test {
-
+    public class SHA1CryptoServiceProviderTest : SHA1Test
+    {
         [SetUp]
-        public void Setup () 
+        public void Setup()
         {
-            hash = new SHA1CryptoServiceProvider ();
+            hash = new SHA1CryptoServiceProvider();
         }
 
         // this will run ALL tests defined in SHA1Test.cs with the SHA1CryptoServiceProvider implementation
     }
-
 }

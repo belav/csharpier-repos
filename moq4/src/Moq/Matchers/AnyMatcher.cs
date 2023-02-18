@@ -10,9 +10,7 @@ namespace Moq.Matchers
     {
         public static AnyMatcher Instance { get; } = new AnyMatcher();
 
-        private AnyMatcher()
-        {
-        }
+        private AnyMatcher() { }
 
         public bool Matches(object argument, Type parameterType) => true;
 

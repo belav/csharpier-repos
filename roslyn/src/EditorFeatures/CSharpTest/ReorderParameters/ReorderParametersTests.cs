@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReorderParameters
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderMethodParameters()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class MyClass
 {
@@ -22,7 +23,8 @@ class MyClass
     }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 using System;
 class MyClass
 {
@@ -31,13 +33,19 @@ class MyClass
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderMethodParametersAndArguments()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class MyClass
 {
@@ -47,7 +55,8 @@ class MyClass
     }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 using System;
 class MyClass
 {
@@ -57,13 +66,19 @@ class MyClass
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderMethodParametersAndArgumentsOfNestedCalls()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class MyClass
 {
@@ -73,7 +88,8 @@ class MyClass
     }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 using System;
 class MyClass
 {
@@ -83,13 +99,19 @@ class MyClass
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderConstructorParametersAndArguments()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 class MyClass2 : MyClass
@@ -111,7 +133,8 @@ class MyClass
     }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 using System;
 
 class MyClass2 : MyClass
@@ -133,13 +156,19 @@ class MyClass
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderAttributeConstructorParametersAndArguments()
         {
-            var markup = @"
+            var markup =
+                @"
 [My(""test"", 8)]
 class MyClass
 {
@@ -152,7 +181,8 @@ class MyAttribute : System.Attribute
     }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 [My(8, ""test"")]
 class MyClass
 {
@@ -165,13 +195,19 @@ class MyAttribute : System.Attribute
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderExtensionMethodParametersAndArguments_StaticCall()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     static void Main(string[] args)
@@ -186,7 +222,8 @@ public static class CExt
     { }
 }";
             var permutation = new[] { 0, 2, 1, 5, 4, 3 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     static void Main(string[] args)
@@ -201,13 +238,19 @@ public static class CExt
     { }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderExtensionMethodParametersAndArguments_ExtensionCall()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     static void Main(string[] args)
@@ -222,7 +265,8 @@ public static class CExt
     { }
 }";
             var permutation = new[] { 0, 2, 1, 5, 4, 3 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     static void Main(string[] args)
@@ -237,13 +281,19 @@ public static class CExt
     { }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamsMethodParametersAndArguments_ParamsAsArray()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     void $$M(int x, int y, params int[] p)
@@ -252,7 +302,8 @@ public class C
     }
 }";
             var permutation = new[] { 1, 0, 2 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     void M(int y, int x, params int[] p)
@@ -261,13 +312,19 @@ public class C
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamsMethodParametersAndArguments_ParamsExpanded()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     void $$M(int x, int y, params int[] p)
@@ -276,7 +333,8 @@ public class C
     }
 }";
             var permutation = new[] { 1, 0, 2 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     void M(int y, int x, params int[] p)
@@ -285,13 +343,19 @@ public class C
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderExtensionAndParamsMethodParametersAndArguments_VariedCallsites()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     static void Main(string[] args)
@@ -309,7 +373,8 @@ public static class CExt
     { }
 }";
             var permutation = new[] { 0, 2, 1, 5, 4, 3, 6 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     static void Main(string[] args)
@@ -327,13 +392,19 @@ public static class CExt
     { }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderIndexerParametersAndArguments()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void M()
@@ -349,7 +420,8 @@ class Program
     }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class Program
 {
     void M()
@@ -365,13 +437,22 @@ class Program
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
-        [Fact(Skip = "Not Yet Implemented"), Trait(Traits.Feature, Traits.Features.ReorderParameters)]
+        [
+            Fact(Skip = "Not Yet Implemented"),
+            Trait(Traits.Feature, Traits.Features.ReorderParameters)
+        ]
         public void ReorderCollectionInitializerAddMethodParametersAndArguments()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 using System.Collections;
 
@@ -396,7 +477,8 @@ class Program : IEnumerable
     }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 using System;
 using System.Collections;
 
@@ -421,13 +503,19 @@ class Program : IEnumerable
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_SingleLineDocComments_OnIndividualLines()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -439,7 +527,8 @@ public class C
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""c""></param>
@@ -451,13 +540,19 @@ public class C
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_SingleLineDocComments_OnSameLine()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a"">a is fun</param><param name=""b"">b is fun</param><param name=""c"">c is fun</param>
@@ -467,7 +562,8 @@ public class C
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""c"">c is fun</param><param name=""b"">b is fun</param><param name=""a"">a is fun</param>
@@ -477,13 +573,19 @@ public class C
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_SingleLineDocComments_MixedLineDistribution()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a""></param><param name=""b""></param>
@@ -498,7 +600,8 @@ public class C
     }
 }";
             var permutation = new[] { 5, 4, 3, 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""f""></param><param name=""e"">Comments spread
@@ -513,13 +616,19 @@ public class C
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_SingleLineDocComments_MixedWithRegularComments()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a""></param><param name=""b""></param>
@@ -531,7 +640,8 @@ public class C
     }
 }";
             var permutation = new[] { 4, 3, 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""e""></param><param name=""d""></param>
@@ -543,13 +653,19 @@ public class C
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_MultiLineDocComments_OnSeparateLines1()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     /**
@@ -562,7 +678,8 @@ class Program
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class Program
 {
     /**
@@ -575,13 +692,19 @@ class Program
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_MultiLineDocComments_OnSingleLine()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     /** <param name=""x"">x!</param><param name=""y"">y!</param><param name=""z"">z!</param> */
@@ -590,7 +713,8 @@ class Program
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class Program
 {
     /** <param name=""z"">z!</param><param name=""y"">y!</param><param name=""x"">x!</param> */
@@ -599,13 +723,19 @@ class Program
     }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_IncorrectOrder_MaintainsOrder()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -617,7 +747,8 @@ public class C
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -628,13 +759,19 @@ public class C
 
     }
 }";
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_WrongNames_MaintainsOrder()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a2""></param>
@@ -646,7 +783,8 @@ public class C
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""a2""></param>
@@ -657,13 +795,19 @@ public class C
 
     }
 }";
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_InsufficientTags_MaintainsOrder()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -674,7 +818,8 @@ public class C
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -684,13 +829,19 @@ public class C
 
     }
 }";
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_ExcessiveTags_MaintainsOrder()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -703,7 +854,8 @@ public class C
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -715,13 +867,19 @@ public class C
 
     }
 }";
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_OnConstructors()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -733,7 +891,8 @@ public class C
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""c""></param>
@@ -744,13 +903,19 @@ public class C
 
     }
 }";
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParamTagsInDocComments_OnIndexers()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     /// <param name=""a""></param>
@@ -763,7 +928,8 @@ public class C
     }
 }";
             var permutation = new[] { 2, 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 public class C
 {
     /// <param name=""c""></param>
@@ -775,13 +941,19 @@ public class C
         set { }
     }
 }";
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParametersInCrefs()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     /// <summary>
@@ -791,7 +963,8 @@ class C
     { }
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 class C
 {
     /// <summary>
@@ -801,13 +974,19 @@ class C
     { }
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParametersInMethodThatImplementsInterfaceMethodOnlyThroughADerivedType1()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     $$void M(int x, string y);
@@ -824,7 +1003,8 @@ class D : C, I
 {
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 interface I
 {
     void M(string y, int x);
@@ -841,13 +1021,19 @@ class D : C, I
 {
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ReorderParameters)]
         public void ReorderParametersInMethodThatImplementsInterfaceMethodOnlyThroughADerivedType2()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     void M(int x, string y);
@@ -864,7 +1050,8 @@ class D : C, I
 {
 }";
             var permutation = new[] { 1, 0 };
-            var updatedCode = @"
+            var updatedCode =
+                @"
 interface I
 {
     void M(string y, int x);
@@ -881,7 +1068,12 @@ class D : C, I
 {
 }";
 
-            TestReorderParameters(LanguageNames.CSharp, markup, permutation: permutation, expectedUpdatedInvocationDocumentCode: updatedCode);
+            TestReorderParameters(
+                LanguageNames.CSharp,
+                markup,
+                permutation: permutation,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
     }
 }

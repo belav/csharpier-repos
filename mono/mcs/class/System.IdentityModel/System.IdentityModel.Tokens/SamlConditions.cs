@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,94 +37,117 @@ namespace System.IdentityModel.Tokens
 {
     public class SamlConditions
     {
-        DateTime not_before = DateTime.SpecifyKind (DateTime.MinValue.AddDays (1), DateTimeKind.Utc);
-        DateTime not_on_after = DateTime.SpecifyKind (DateTime.MaxValue.AddDays (-1), DateTimeKind.Utc);
-        bool is_readonly, has_not_before, has_not_on_after;
-        List<SamlCondition> conditions = new List<SamlCondition> ();
+        DateTime not_before = DateTime.SpecifyKind(DateTime.MinValue.AddDays(1), DateTimeKind.Utc);
+        DateTime not_on_after = DateTime.SpecifyKind(
+            DateTime.MaxValue.AddDays(-1),
+            DateTimeKind.Utc
+        );
+        bool is_readonly,
+            has_not_before,
+            has_not_on_after;
+        List<SamlCondition> conditions = new List<SamlCondition>();
 
-        public SamlConditions ()
-        {
-        }
+        public SamlConditions() { }
 
-        public SamlConditions (DateTime notBefore, DateTime notOnOrAfter)
+        public SamlConditions(DateTime notBefore, DateTime notOnOrAfter)
         {
             this.NotBefore = notBefore;
             this.NotOnOrAfter = notOnOrAfter;
         }
 
-        public SamlConditions (DateTime notBefore, DateTime notOnOrAfter,
-            IEnumerable<SamlCondition> conditions)
-            : this (notBefore, notOnOrAfter)
+        public SamlConditions(
+            DateTime notBefore,
+            DateTime notOnOrAfter,
+            IEnumerable<SamlCondition> conditions
+        )
+            : this(notBefore, notOnOrAfter)
         {
-            if (conditions != null) {
+            if (conditions != null)
+            {
                 foreach (SamlCondition cond in conditions)
-                    this.conditions.Add (cond);
+                    this.conditions.Add(cond);
             }
         }
 
-        public IList<SamlCondition> Conditions {
+        public IList<SamlCondition> Conditions
+        {
             get { return conditions; }
         }
 
-        public DateTime NotBefore {
+        public DateTime NotBefore
+        {
             get { return not_before; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 not_before = value;
                 has_not_before = true;
             }
         }
 
-        public DateTime NotOnOrAfter {
+        public DateTime NotOnOrAfter
+        {
             get { return not_on_after; }
-            set {
-                CheckReadOnly ();
+            set
+            {
+                CheckReadOnly();
                 not_on_after = value;
                 has_not_on_after = true;
             }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return is_readonly; }
         }
 
-        private void CheckReadOnly ()
+        private void CheckReadOnly()
         {
             if (is_readonly)
-                throw new InvalidOperationException ("This SAML 'Conditions' is read-only.");
+                throw new InvalidOperationException("This SAML 'Conditions' is read-only.");
         }
 
-        public void MakeReadOnly ()
+        public void MakeReadOnly()
         {
             is_readonly = true;
         }
 
         [MonoTODO]
-        public virtual void ReadXml (XmlDictionaryReader reader,
+        public virtual void ReadXml(
+            XmlDictionaryReader reader,
             SamlSerializer samlSerializer,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public virtual void WriteXml (XmlDictionaryWriter writer,
+        public virtual void WriteXml(
+            XmlDictionaryWriter writer,
             SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer)
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
             if (writer == null)
-                throw new ArgumentNullException ("writer");
+                throw new ArgumentNullException("writer");
             if (samlSerializer == null)
-                throw new ArgumentNullException ("samlSerializer");
-            writer.WriteStartElement ("saml", "Conditions", SamlConstants.Namespace);
+                throw new ArgumentNullException("samlSerializer");
+            writer.WriteStartElement("saml", "Conditions", SamlConstants.Namespace);
             CultureInfo invariant = CultureInfo.InvariantCulture;
             if (has_not_before)
-                writer.WriteAttributeString ("NotBefore", NotBefore.ToString (SamlConstants.DateFormat, invariant));
+                writer.WriteAttributeString(
+                    "NotBefore",
+                    NotBefore.ToString(SamlConstants.DateFormat, invariant)
+                );
             if (has_not_on_after)
-                writer.WriteAttributeString ("NotOnOrAfter", NotOnOrAfter.ToString (SamlConstants.DateFormat, invariant));
+                writer.WriteAttributeString(
+                    "NotOnOrAfter",
+                    NotOnOrAfter.ToString(SamlConstants.DateFormat, invariant)
+                );
             foreach (SamlCondition cond in Conditions)
-                cond.WriteXml (writer, samlSerializer, keyInfoSerializer);
-            writer.WriteEndElement ();
+                cond.WriteXml(writer, samlSerializer, keyInfoSerializer);
+            writer.WriteEndElement();
         }
     }
 }

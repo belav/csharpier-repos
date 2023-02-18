@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,112 +42,117 @@ namespace System.ServiceModel
         int privacy_notice_ver;
         bool allow_cookies;
 
-        public WSFederationHttpBinding ()
-            : this (WSFederationHttpSecurityMode.Message)
-        {
-        }
+        public WSFederationHttpBinding()
+            : this(WSFederationHttpSecurityMode.Message) { }
 
-        public WSFederationHttpBinding (
-            WSFederationHttpSecurityMode securityMode)
-            : this (securityMode, true)
-        {
-        }
+        public WSFederationHttpBinding(WSFederationHttpSecurityMode securityMode)
+            : this(securityMode, true) { }
 
-        public WSFederationHttpBinding (
+        public WSFederationHttpBinding(
             WSFederationHttpSecurityMode securityMode,
-            bool reliableSessionEnabled)
+            bool reliableSessionEnabled
+        )
         {
-            security = new WSFederationHttpSecurity (securityMode);
+            security = new WSFederationHttpSecurity(securityMode);
         }
 
         [MonoTODO]
-        public WSFederationHttpBinding (string configName)
+        public WSFederationHttpBinding(string configName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public bool AllowCookies {
+        public bool AllowCookies
+        {
             get { return allow_cookies; }
             set { allow_cookies = value; }
         }
 
         [MonoTODO]
-        public Uri PrivacyNoticeAt {
+        public Uri PrivacyNoticeAt
+        {
             get { return privacy_notice_at; }
             set { privacy_notice_at = value; }
         }
 
         [MonoTODO]
-        public int PrivacyNoticeVersion {
+        public int PrivacyNoticeVersion
+        {
             get { return privacy_notice_ver; }
             set { privacy_notice_ver = value; }
         }
 
         [MonoTODO]
-        public WSFederationHttpSecurity Security {
+        public WSFederationHttpSecurity Security
+        {
             get { return security; }
         }
 
         [MonoTODO]
-            public override BindingElementCollection CreateBindingElements ()
+        public override BindingElementCollection CreateBindingElements()
         {
-            return base.CreateBindingElements ();
+            return base.CreateBindingElements();
         }
 
         [MonoTODO]
-        protected override SecurityBindingElement CreateMessageSecurity ()
+        protected override SecurityBindingElement CreateMessageSecurity()
         {
-            SymmetricSecurityBindingElement element =
-                new SymmetricSecurityBindingElement ();
+            SymmetricSecurityBindingElement element = new SymmetricSecurityBindingElement();
 
-            element.MessageSecurityVersion = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+            element.MessageSecurityVersion =
+                MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
 
-//            if (!Security.Message.EstablishSecurityContext)
-//                element.SetKeyDerivation (false);
+            //            if (!Security.Message.EstablishSecurityContext)
+            //                element.SetKeyDerivation (false);
 
-            IssuedSecurityTokenParameters istp =
-                new IssuedSecurityTokenParameters ();
+            IssuedSecurityTokenParameters istp = new IssuedSecurityTokenParameters();
             // FIXME: issuer binding must be secure.
-            istp.IssuerBinding = new CustomBinding (
-                new TextMessageEncodingBindingElement (),
-                GetTransport ());
-            element.EndpointSupportingTokenParameters.Endorsing.Add (istp);
+            istp.IssuerBinding = new CustomBinding(
+                new TextMessageEncodingBindingElement(),
+                GetTransport()
+            );
+            element.EndpointSupportingTokenParameters.Endorsing.Add(istp);
 
-            if (Security.Message.NegotiateServiceCredential) {
+            if (Security.Message.NegotiateServiceCredential)
+            {
                 element.ProtectionTokenParameters =
-                    // FIXME: fill proper parameters
-                    new SslSecurityTokenParameters (false, true);
-            } else {
-                element.ProtectionTokenParameters =
-                    new X509SecurityTokenParameters ();
+                // FIXME: fill proper parameters
+                new SslSecurityTokenParameters(false, true);
+            }
+            else
+            {
+                element.ProtectionTokenParameters = new X509SecurityTokenParameters();
             }
 
-//            if (!Security.Message.EstablishSecurityContext)
-//                return element;
+            //            if (!Security.Message.EstablishSecurityContext)
+            //                return element;
 
             // SecureConversation enabled
 
-            ChannelProtectionRequirements reqs =
-                new ChannelProtectionRequirements ();
+            ChannelProtectionRequirements reqs = new ChannelProtectionRequirements();
             // FIXME: fill the reqs
 
             // FIXME: for TransportWithMessageCredential mode,
             // return TransportSecurityBindingElement.
 
-            return SecurityBindingElement.CreateSecureConversationBindingElement (
+            return SecurityBindingElement.CreateSecureConversationBindingElement(
                 // FIXME: requireCancellation
-                element, true, reqs);
+                element,
+                true,
+                reqs
+            );
         }
 
         [MonoTODO]
-        protected override TransportBindingElement GetTransport ()
+        protected override TransportBindingElement GetTransport()
         {
-            switch (Security.Mode) {
-            case WSFederationHttpSecurityMode.TransportWithMessageCredential:
-                return new HttpsTransportBindingElement ();
-            default:
-                return new HttpTransportBindingElement ();
+            switch (Security.Mode)
+            {
+                case WSFederationHttpSecurityMode.TransportWithMessageCredential:
+                    return new HttpsTransportBindingElement();
+                default:
+                    return new HttpTransportBindingElement();
             }
         }
     }

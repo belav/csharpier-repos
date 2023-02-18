@@ -13,130 +13,133 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 {
     public class ComplexTypeHandling
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestArray ();
-            TestArrayOnGeneric ();
-            TestGenericArray ();
-            TestGenericArrayOnGeneric ();
-            TestArrayGetTypeFromMethodParam ();
-            TestArrayGetTypeFromField ();
-            TestArrayTypeGetType ();
-            TestArrayCreateInstanceByName ();
-            TestArrayInAttributeParameter ();
+            TestArray();
+            TestArrayOnGeneric();
+            TestGenericArray();
+            TestGenericArrayOnGeneric();
+            TestArrayGetTypeFromMethodParam();
+            TestArrayGetTypeFromField();
+            TestArrayTypeGetType();
+            TestArrayCreateInstanceByName();
+            TestArrayInAttributeParameter();
         }
 
         [Kept]
         class ArrayElementType
         {
-            public ArrayElementType () { }
+            public ArrayElementType() { }
 
-            public void PublicMethod () { }
+            public void PublicMethod() { }
 
             private int _privateField;
         }
 
         [Kept]
-        static void TestArray ()
+        static void TestArray()
         {
-            RequirePublicMethods (typeof (ArrayElementType[]));
+            RequirePublicMethods(typeof(ArrayElementType[]));
         }
 
         [Kept]
-        static void TestGenericArray ()
+        static void TestGenericArray()
         {
-            RequirePublicMethodsOnArrayOfGeneric<ArrayElementType> ();
+            RequirePublicMethodsOnArrayOfGeneric<ArrayElementType>();
         }
 
         [Kept]
-        static void RequirePublicMethodsOnArrayOfGeneric<T> ()
+        static void RequirePublicMethodsOnArrayOfGeneric<T>()
         {
-            RequirePublicMethods (typeof (T[]));
+            RequirePublicMethods(typeof(T[]));
         }
 
         [Kept]
         class ArrayElementInGenericType
         {
-            public ArrayElementInGenericType () { }
+            public ArrayElementInGenericType() { }
 
-            public void PublicMethod () { }
+            public void PublicMethod() { }
 
             private int _privateField;
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class RequirePublicMethodsGeneric<
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
-        [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-        T>
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                T
+        > { }
+
+        [Kept]
+        static void TestArrayOnGeneric()
         {
+            _ = new RequirePublicMethodsGeneric<ArrayElementInGenericType[]>();
         }
 
         [Kept]
-        static void TestArrayOnGeneric ()
+        static void TestGenericArrayOnGeneric()
         {
-            _ = new RequirePublicMethodsGeneric<ArrayElementInGenericType[]> ();
+            RequirePublicMethodsOnArrayOfGenericParameter<ArrayElementInGenericType>();
         }
 
         [Kept]
-        static void TestGenericArrayOnGeneric ()
+        static void RequirePublicMethodsOnArrayOfGenericParameter<T>()
         {
-            RequirePublicMethodsOnArrayOfGenericParameter<ArrayElementInGenericType> ();
-        }
-
-        [Kept]
-        static void RequirePublicMethodsOnArrayOfGenericParameter<T> ()
-        {
-            _ = new RequirePublicMethodsGeneric<T[]> ();
+            _ = new RequirePublicMethodsGeneric<T[]>();
         }
 
         [Kept]
         sealed class ArrayGetTypeFromMethodParamElement
         {
             // This method should not be marked, instead Array.* should be marked
-            public void PublicMethod () { }
+            public void PublicMethod() { }
         }
 
         [Kept]
-        static void TestArrayGetTypeFromMethodParamHelper (ArrayGetTypeFromMethodParamElement[] p)
+        static void TestArrayGetTypeFromMethodParamHelper(ArrayGetTypeFromMethodParamElement[] p)
         {
-            RequirePublicMethods (p.GetType ());
+            RequirePublicMethods(p.GetType());
         }
 
         [Kept]
-        static void TestArrayGetTypeFromMethodParam ()
+        static void TestArrayGetTypeFromMethodParam()
         {
-            TestArrayGetTypeFromMethodParamHelper (null);
+            TestArrayGetTypeFromMethodParamHelper(null);
         }
 
         [Kept]
         sealed class ArrayGetTypeFromFieldElement
         {
             // This method should not be marked, instead Array.* should be marked
-            public void PublicMethod () { }
+            public void PublicMethod() { }
         }
 
         [Kept]
         static ArrayGetTypeFromFieldElement[] _arrayGetTypeFromField;
 
         [Kept]
-        static void TestArrayGetTypeFromField ()
+        static void TestArrayGetTypeFromField()
         {
-            RequirePublicMethods (_arrayGetTypeFromField.GetType ());
+            RequirePublicMethods(_arrayGetTypeFromField.GetType());
         }
 
         [Kept]
         sealed class ArrayTypeGetTypeElement
         {
             // This method should not be marked, instead Array.* should be marked
-            public void PublicMethod () { }
+            public void PublicMethod() { }
         }
 
         [Kept]
-        static void TestArrayTypeGetType ()
+        static void TestArrayTypeGetType()
         {
-            RequirePublicMethods (Type.GetType ("Mono.Linker.Tests.Cases.DataFlow.ComplexTypeHandling+ArrayTypeGetTypeElement[]"));
+            RequirePublicMethods(
+                Type.GetType(
+                    "Mono.Linker.Tests.Cases.DataFlow.ComplexTypeHandling+ArrayTypeGetTypeElement[]"
+                )
+            );
         }
 
         // Technically there's no reason to mark this type since it's only used as an array element type and CreateInstance
@@ -146,51 +149,47 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         class ArrayCreateInstanceByNameElement
         {
-            public ArrayCreateInstanceByNameElement ()
-            {
-            }
+            public ArrayCreateInstanceByNameElement() { }
         }
 
         [Kept]
-        static void TestArrayCreateInstanceByName ()
+        static void TestArrayCreateInstanceByName()
         {
-            Activator.CreateInstance ("test", "Mono.Linker.Tests.Cases.DataFlow.ComplexTypeHandling+ArrayCreateInstanceByNameElement[]");
+            Activator.CreateInstance(
+                "test",
+                "Mono.Linker.Tests.Cases.DataFlow.ComplexTypeHandling+ArrayCreateInstanceByNameElement[]"
+            );
         }
 
         [Kept]
         class ArrayInAttributeParamElement
         {
             // This method should not be marked, instead Array.* should be marked
-            public void PublicMethod () { }
+            public void PublicMethod() { }
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (RequiresPublicMethodAttribute))]
-        [RequiresPublicMethod (typeof (ArrayInAttributeParamElement[]))]
-        static void TestArrayInAttributeParameter ()
-        {
-        }
-
+        [KeptAttributeAttribute(typeof(RequiresPublicMethodAttribute))]
+        [RequiresPublicMethod(typeof(ArrayInAttributeParamElement[]))]
+        static void TestArrayInAttributeParameter() { }
 
         [Kept]
-        private static void RequirePublicMethods (
+        private static void RequirePublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            Type type)
-        {
-        }
+                Type type
+        ) { }
 
         [Kept]
-        [KeptBaseType (typeof (Attribute))]
+        [KeptBaseType(typeof(Attribute))]
         class RequiresPublicMethodAttribute : Attribute
         {
             [Kept]
-            public RequiresPublicMethodAttribute (
+            public RequiresPublicMethodAttribute(
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type t)
-            {
-            }
+                    Type t
+            ) { }
         }
     }
 }

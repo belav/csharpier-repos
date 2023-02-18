@@ -56,7 +56,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             //do not have to verify consistency with any other method.
             for (int i = 0; i < list.Count; ++i)
             {
-                Assert.True(list[i] == null ? expectedItems[i] == null : list[i].Equals(expectedItems[i]));
+                Assert.True(
+                    list[i] == null ? expectedItems[i] == null : list[i].Equals(expectedItems[i])
+                );
             }
         }
 

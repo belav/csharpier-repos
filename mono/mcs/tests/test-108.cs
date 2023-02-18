@@ -1,10 +1,11 @@
-class X {
-
-    public static int Main ()
+class X
+{
+    public static int Main()
     {
         int i = 0;
-        
-        if (false){
+
+        if (false)
+        {
             i = 1;
             return 1;
         }
@@ -16,14 +17,16 @@ class X {
 
         if (i != 2)
             return 5;
-        
-        while (true){
+
+        while (true)
+        {
             i++;
             if (i == 10)
                 break;
         }
 
-        while (false){
+        while (false)
+        {
             i--;
             return 3;
         }
@@ -31,14 +34,15 @@ class X {
         if (i != 10)
             return 2;
 
-        do {
+        do
+        {
             if (i++ == 20)
                 break;
         } while (true);
 
         if (i != 21)
             return 4;
-        
+
         return 0;
     }
 }

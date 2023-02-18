@@ -34,12 +34,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            mock.Setup(x => x.Echo(It.Is<int>(value => value < 5 && value > 0)))
-                .Returns(1);
-            mock.Setup(x => x.Echo(It.Is<int>(value => value <= 0)))
-                .Returns(0);
-            mock.Setup(x => x.Echo(It.Is<int>(value => value >= 5)))
-                .Returns(2);
+            mock.Setup(x => x.Echo(It.Is<int>(value => value < 5 && value > 0))).Returns(1);
+            mock.Setup(x => x.Echo(It.Is<int>(value => value <= 0))).Returns(0);
+            mock.Setup(x => x.Echo(It.Is<int>(value => value >= 5))).Returns(2);
 
             Assert.Equal(1, mock.Object.Echo(3));
             Assert.Equal(0, mock.Object.Echo(0));
@@ -88,8 +85,10 @@ namespace Moq.Tests
 
             var mock = new Mock<IFoo>();
 
-            mock.Setup(x => x.Execute(It.IsIn(acceptableArgs, StringComparer.OrdinalIgnoreCase))).Returns("foo");
-            mock.Setup(x => x.Execute(It.IsIn(unacceptableArgs, StringComparer.OrdinalIgnoreCase))).Returns("bar");
+            mock.Setup(x => x.Execute(It.IsIn(acceptableArgs, StringComparer.OrdinalIgnoreCase)))
+                .Returns("foo");
+            mock.Setup(x => x.Execute(It.IsIn(unacceptableArgs, StringComparer.OrdinalIgnoreCase)))
+                .Returns("bar");
 
             Assert.Equal("foo", mock.Object.Execute("foo"));
             Assert.Equal("foo", mock.Object.Execute("FOO"));
@@ -138,7 +137,8 @@ namespace Moq.Tests
 
             var mock = new Mock<IFoo>();
 
-            mock.Setup(x => x.Execute(It.IsNotIn(acceptableArgs, StringComparer.OrdinalIgnoreCase))).Returns("foo");
+            mock.Setup(x => x.Execute(It.IsNotIn(acceptableArgs, StringComparer.OrdinalIgnoreCase)))
+                .Returns("foo");
 
             Assert.Equal("foo", mock.Object.Execute("baz"));
             Assert.Equal("foo", mock.Object.Execute("alpha"));
@@ -271,10 +271,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            mock.Setup(foo => foo.DoTypeOverload(It.IsAny<Bar>()))
-                .Returns(true);
-            mock.Setup(foo => foo.DoTypeOverload(It.IsAny<Baz>()))
-                .Returns(false);
+            mock.Setup(foo => foo.DoTypeOverload(It.IsAny<Bar>())).Returns(true);
+            mock.Setup(foo => foo.DoTypeOverload(It.IsAny<Baz>())).Returns(false);
 
             bool bar = mock.Object.DoTypeOverload(new Bar());
             bool baz = mock.Object.DoTypeOverload(new Baz());
@@ -389,7 +387,9 @@ namespace Moq.Tests
             var setupInvocationCount = 0;
 
             var mock = new Mock<HasProtectedMethods>();
-            mock.Protected().Setup("DoImpl", ItExpr.Ref<int>.IsAny).Callback(() => ++setupInvocationCount);
+            mock.Protected()
+                .Setup("DoImpl", ItExpr.Ref<int>.IsAny)
+                .Callback(() => ++setupInvocationCount);
 
             var anyValue = new Random().Next();
             var anyDifferentValue = unchecked(anyValue + 1);
@@ -406,6 +406,7 @@ namespace Moq.Tests
         }
 
         public class Bar { }
+
         public class Baz { }
 
         public interface IFoo

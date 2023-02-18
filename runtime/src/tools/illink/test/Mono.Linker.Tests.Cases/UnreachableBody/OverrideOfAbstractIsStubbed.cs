@@ -3,17 +3,17 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
     public class OverrideOfAbstractIsStubbed
     {
-        public static void Main ()
+        public static void Main()
         {
-            Base b = HelperToMarkFooAndRequireBase ();
-            b.Method ();
+            Base b = HelperToMarkFooAndRequireBase();
+            b.Method();
         }
 
         [Kept]
-        static Foo HelperToMarkFooAndRequireBase ()
+        static Foo HelperToMarkFooAndRequireBase()
         {
             return null;
         }
@@ -22,23 +22,21 @@ namespace Mono.Linker.Tests.Cases.UnreachableBody
         abstract class Base
         {
             [Kept]
-            public abstract void Method ();
+            public abstract void Method();
         }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
+        [KeptBaseType(typeof(Base))]
         class Foo : Base
         {
             [Kept]
             [ExpectBodyModified]
-            public override void Method ()
+            public override void Method()
             {
-                UsedByOverride ();
+                UsedByOverride();
             }
 
-            void UsedByOverride ()
-            {
-            }
+            void UsedByOverride() { }
         }
     }
 }

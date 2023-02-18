@@ -11,11 +11,12 @@ using System.ComponentModel;
 using System.Collections;
 using System.Runtime.Serialization;
 
-namespace System.Configuration {
-
-    public enum PropertyValueOrigin {
-        Default = 0,   // Default is retrieved
+namespace System.Configuration
+{
+    public enum PropertyValueOrigin
+    {
+        Default = 0, // Default is retrieved
         Inherited = 1, // It is inherited
-        SetHere = 2    // It was set here
+        SetHere = 2 // It was set here
     }
 }

@@ -3,46 +3,44 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.CoreLink
 {
-    [SetupLinkerTrimMode ("link")]
+    [SetupLinkerTrimMode("link")]
     // Need to skip due to `Runtime critical type System.Reflection.CustomAttributeData not found` failure
-    [SkipPeVerify (SkipPeVerifyForToolchian.Pedump)]
+    [SkipPeVerify(SkipPeVerifyForToolchian.Pedump)]
     public class InstantiatedTypeWithOverridesFromObject
     {
-        public static void Main ()
+        public static void Main()
         {
-            var f = new Foo ();
+            var f = new Foo();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Foo
         {
             [Kept]
-            ~Foo ()
+            ~Foo()
             {
                 // Finalize shouldn't be empty
-                DoCleanupStuff ();
+                DoCleanupStuff();
             }
 
             [Kept]
-            void DoCleanupStuff ()
-            {
-            }
+            void DoCleanupStuff() { }
 
             [Kept]
-            public override bool Equals (object obj)
+            public override bool Equals(object obj)
             {
                 return false;
             }
 
             [Kept]
-            public override string ToString ()
+            public override string ToString()
             {
                 return null;
             }
 
             [Kept]
-            public override int GetHashCode ()
+            public override int GetHashCode()
             {
                 return 0;
             }

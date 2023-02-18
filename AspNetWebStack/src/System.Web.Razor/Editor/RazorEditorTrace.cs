@@ -23,12 +23,20 @@ namespace System.Web.Razor.Editor
             if (_enabled == null)
             {
                 bool enabled;
-                if (Boolean.TryParse(Environment.GetEnvironmentVariable("RAZOR_EDITOR_TRACE"), out enabled))
+                if (
+                    Boolean.TryParse(
+                        Environment.GetEnvironmentVariable("RAZOR_EDITOR_TRACE"),
+                        out enabled
+                    )
+                )
                 {
-                    Trace.WriteLine(String.Format(
-                        CultureInfo.CurrentCulture,
-                        RazorResources.Trace_Startup,
-                        enabled ? RazorResources.Trace_Enabled : RazorResources.Trace_Disabled));
+                    Trace.WriteLine(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            RazorResources.Trace_Startup,
+                            enabled ? RazorResources.Trace_Enabled : RazorResources.Trace_Disabled
+                        )
+                    );
                     _enabled = enabled;
                 }
                 else
@@ -44,10 +52,13 @@ namespace System.Web.Razor.Editor
         {
             if (IsEnabled())
             {
-                Trace.WriteLine(String.Format(
-                    CultureInfo.CurrentCulture,
-                    RazorResources.Trace_Format,
-                    String.Format(CultureInfo.CurrentCulture, format, args)));
+                Trace.WriteLine(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        RazorResources.Trace_Format,
+                        String.Format(CultureInfo.CurrentCulture, format, args)
+                    )
+                );
             }
         }
     }

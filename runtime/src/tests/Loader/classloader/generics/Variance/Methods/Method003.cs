@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// This test tests constraints on method type parameters 
+// This test tests constraints on method type parameters
 // for generic methods of generic variant interfaces
 
 // POSITIVE tests
@@ -9,21 +9,21 @@
 using System;
 
 public class C : IMinusT<int> { }
+
 public class D : IMinusT<string[]> { }
+
 public class E : IMinusT<object> { }
-
-
 
 public class A5 : Test001PlusT<int>
 {
-    public void method1<M>(IMinusT<int> t) where M : IMinusT<int>
-    {
-    }
+    public void method1<M>(IMinusT<int> t)
+        where M : IMinusT<int> { }
 }
 
 public class A6 : Test002PlusT<string>
 {
-    public string[] method2<M>(IMinusT<string[]> t) where M : IMinusT<string[]>
+    public string[] method2<M>(IMinusT<string[]> t)
+        where M : IMinusT<string[]>
     {
         return new string[10];
     }
@@ -31,12 +31,12 @@ public class A6 : Test002PlusT<string>
 
 public class A7 : Test001MinusT<object>
 {
-    public IMinusT<object[]> method1<M>(object t) where M : IPlusT<object>
+    public IMinusT<object[]> method1<M>(object t)
+        where M : IPlusT<object>
     {
         return (IMinusT<object[]>)new E();
     }
 }
-
 
 public class TestClass
 {
@@ -54,13 +54,12 @@ public class TestClass
             Console.WriteLine("Test Failed at location: {0} @ count {1} ", location, iTestCount);
         }
     }
-    
 
     public static void LoadTypeInternal(string testType)
     {
         switch (testType)
         {
-            case "Test001PlusT": 
+            case "Test001PlusT":
             {
                 // positive test
                 // return type: void
@@ -84,7 +83,7 @@ public class TestClass
                 break;
             }
 
-                case "Test001MinusT":
+            case "Test001MinusT":
             {
                 // positive test
                 // return type: covariant
@@ -95,9 +94,9 @@ public class TestClass
                 IMinusT<object[]> obj = test.method1<IPlusT<object>>(new object());
                 break;
             }
-    
 
-            default: throw new Exception("Unexpected testType");
+            default:
+                throw new Exception("Unexpected testType");
         }
     }
 
@@ -132,7 +131,6 @@ public class TestClass
             {
                 return true;
             }
-
         }
         catch (TypeLoadException)
         {
@@ -162,7 +160,9 @@ public class TestClass
 
         if (iErrorCount > 0)
         {
-            Console.WriteLine("Total test cases: " + iTestCount + "  Failed test cases: " + iErrorCount);
+            Console.WriteLine(
+                "Total test cases: " + iTestCount + "  Failed test cases: " + iErrorCount
+            );
             return false;
         }
         else
@@ -174,7 +174,6 @@ public class TestClass
 
     public static int Main()
     {
-
         if (RunTests())
         {
             iExitCode = 100;
@@ -187,5 +186,4 @@ public class TestClass
         }
         return iExitCode;
     }
-
 }

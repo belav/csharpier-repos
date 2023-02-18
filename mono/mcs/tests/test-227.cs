@@ -19,7 +19,8 @@ namespace A
             B
         }
 
-        public static void Main() {
+        public static void Main()
+        {
             Mat c;
             c = Mat.A;
         }

@@ -23,59 +23,67 @@ namespace System.Web.Configuration
     using System.Security.Permissions;
 
     [ConfigurationCollection(typeof(String))]
-    public sealed class PartialTrustVisibleAssemblyCollection : ConfigurationElementCollection {
+    public sealed class PartialTrustVisibleAssemblyCollection : ConfigurationElementCollection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        static PartialTrustVisibleAssemblyCollection() {
+        static PartialTrustVisibleAssemblyCollection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        public PartialTrustVisibleAssembly this[int index] {
-            get {
-                return (PartialTrustVisibleAssembly)BaseGet(index);
-            }
-            set {
-                if (BaseGet(index) != null) {
+        public PartialTrustVisibleAssembly this[int index]
+        {
+            get { return (PartialTrustVisibleAssembly)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                {
                     BaseRemoveAt(index);
                 }
                 BaseAdd(index, value);
             }
         }
 
-        public void Add(PartialTrustVisibleAssembly partialTrustVisibleAssembly) {
+        public void Add(PartialTrustVisibleAssembly partialTrustVisibleAssembly)
+        {
             BaseAdd(partialTrustVisibleAssembly);
         }
 
-        public void Remove(String key) {
+        public void Remove(String key)
+        {
             BaseRemove(key);
         }
 
-        public void RemoveAt(int index) {
+        public void RemoveAt(int index)
+        {
             BaseRemoveAt(index);
         }
 
-        protected override ConfigurationElement CreateNewElement() {
+        protected override ConfigurationElement CreateNewElement()
+        {
             return new PartialTrustVisibleAssembly();
         }
 
-        public void Clear() {
+        public void Clear()
+        {
             BaseClear();
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) {
+        protected override Object GetElementKey(ConfigurationElement element)
+        {
             return ((PartialTrustVisibleAssembly)element).AssemblyName;
         }
 
-        internal bool IsRemoved(string key) {
+        internal bool IsRemoved(string key)
+        {
             return BaseIsRemoved(key);
         }
     }
 }
-

@@ -7,7 +7,7 @@ namespace System.Activities.Debugger
     using System.Collections.Generic;
     using System.IO;
 
-    // 
+    //
     internal partial class CharacterSpottingTextReader : TextReader
     {
         // These 'special characters' couple with the fact that we are working on XML.
@@ -29,7 +29,10 @@ namespace System.Activities.Debugger
 
         public CharacterSpottingTextReader(TextReader underlyingReader)
         {
-            UnitTestUtility.Assert(underlyingReader != null, "underlyingReader should not be null and should be ensured by caller.");
+            UnitTestUtility.Assert(
+                underlyingReader != null,
+                "underlyingReader should not be null and should be ensured by caller."
+            );
             this.underlyingReader = underlyingReader;
             this.currentLine = 1;
             this.currentPosition = 1;
@@ -41,28 +44,25 @@ namespace System.Activities.Debugger
         }
 
         // CurrentLocation consists of the current line number and the current position on the line.
-        // 
+        //
         // The current position is like a cursor moving along the line. For example, a string "abc" ending with "\r\n":
-        // 
+        //
         //    abc\r\n
-        // 
+        //
         // the current position, depicted as | below, moves from char to char:
-        // 
+        //
         //    |a|b|c|\r|\n
-        // 
-        // When we are at the beginning of the line, the current position is 1. After we read the first char, 
+        //
+        // When we are at the beginning of the line, the current position is 1. After we read the first char,
         // we advance the current position to 2, and so on:
-        // 
-        //    1 2 3 4 
+        //
+        //    1 2 3 4
         //    |a|b|c|\r|\n
-        // 
+        //
         // As we reach the end-of-line character on the line, which can be \r, \r\n or \n, we move to the next line and reset the current position to 1.
         private DocumentLocation CurrentLocation
         {
-            get
-            {
-                return new DocumentLocation(this.currentLine, this.currentPosition);
-            }
+            get { return new DocumentLocation(this.currentLine, this.currentPosition); }
         }
 
         public override void Close()
@@ -90,11 +90,17 @@ namespace System.Activities.Debugger
         internal DocumentLocation FindCharacterStrictlyAfter(char c, DocumentLocation afterLocation)
         {
             List<DocumentLocation> locationList = this.GetLocationList(c);
-            UnitTestUtility.Assert(locationList != null, "We should always find character for special characters only");
+            UnitTestUtility.Assert(
+                locationList != null,
+                "We should always find character for special characters only"
+            );
 
             // Note that this 'nextLocation' may not represent a real document location (we could hit an end line character here so that there is no next line
             // position. This is merely used for the search algorithm below:
-            DocumentLocation nextLocation = new DocumentLocation(afterLocation.LineNumber, new OneBasedCounter(afterLocation.LinePosition.Value + 1));
+            DocumentLocation nextLocation = new DocumentLocation(
+                afterLocation.LineNumber,
+                new OneBasedCounter(afterLocation.LinePosition.Value + 1)
+            );
             BinarySearchResult result = locationList.MyBinarySearch(nextLocation);
             if (result.IsFound)
             {
@@ -113,10 +119,16 @@ namespace System.Activities.Debugger
             }
         }
 
-        internal DocumentLocation FindCharacterStrictlyBefore(char c, DocumentLocation documentLocation)
+        internal DocumentLocation FindCharacterStrictlyBefore(
+            char c,
+            DocumentLocation documentLocation
+        )
         {
             List<DocumentLocation> locationList = this.GetLocationList(c);
-            UnitTestUtility.Assert(locationList != null, "We should always find character for special characters only");
+            UnitTestUtility.Assert(
+                locationList != null,
+                "We should always find character for special characters only"
+            );
 
             BinarySearchResult result = locationList.MyBinarySearch(documentLocation);
             if (result.IsFound)

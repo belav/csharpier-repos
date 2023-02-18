@@ -21,7 +21,5 @@ public class BodyTagHelper : TagHelperComponentTagHelper
     /// of <see cref="ITagHelperComponent"/>s.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public BodyTagHelper(ITagHelperComponentManager manager, ILoggerFactory loggerFactory)
-        : base(manager, loggerFactory)
-    {
-    }
+        : base(manager, loggerFactory) { }
 }

@@ -15,7 +15,8 @@ namespace System.Runtime.InteropServices.JavaScript
         public IntPtr JSHandle => handle;
         public bool IsDisposed { get; private set; }
 
-        public JSObject() : base(true)
+        public JSObject()
+            : base(true)
         {
             InFlight = null;
             InFlightCounter = 0;
@@ -24,7 +25,8 @@ namespace System.Runtime.InteropServices.JavaScript
             SetHandle(jsHandle);
         }
 
-        public JSObject(string typeName, params object[] _params) : base(true)
+        public JSObject(string typeName, params object[] _params)
+            : base(true)
         {
             InFlight = null;
             InFlightCounter = 0;
@@ -33,7 +35,8 @@ namespace System.Runtime.InteropServices.JavaScript
             SetHandle(jsHandle);
         }
 
-        internal JSObject(IntPtr jsHandle) : base(true)
+        internal JSObject(IntPtr jsHandle)
+            : base(true)
         {
             SetHandle(jsHandle);
             InFlight = null;
@@ -80,13 +83,17 @@ namespace System.Runtime.InteropServices.JavaScript
         internal void AssertNotDisposed()
 #endif
         {
-            if (IsDisposed) throw new ObjectDisposedException($"Cannot access a disposed {GetType().Name}.");
+            if (IsDisposed)
+                throw new ObjectDisposedException($"Cannot access a disposed {GetType().Name}.");
         }
 
 #if DEBUG
         public void AssertInFlight(int expectedInFlightCount)
         {
-            if (InFlightCounter != expectedInFlightCount) throw new InvalidProgramException($"Invalid InFlightCounter for JSObject {JSHandle}, expected: {expectedInFlightCount}, actual: {InFlightCounter}");
+            if (InFlightCounter != expectedInFlightCount)
+                throw new InvalidProgramException(
+                    $"Invalid InFlightCounter for JSObject {JSHandle}, expected: {expectedInFlightCount}, actual: {InFlightCounter}"
+                );
         }
 #endif
 
@@ -98,7 +105,8 @@ namespace System.Runtime.InteropServices.JavaScript
             return true;
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is JSObject other && JSHandle == other.JSHandle;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is JSObject other && JSHandle == other.JSHandle;
 
         public override int GetHashCode() => (int)JSHandle;
 

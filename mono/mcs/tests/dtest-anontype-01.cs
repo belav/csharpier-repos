@@ -1,20 +1,16 @@
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        var a = new {
-            Field = Factory ()
-        };
-        
-        a.Field.Test ();
+        var a = new { Field = Factory() };
+
+        a.Field.Test();
     }
-    
-    void Test ()
+
+    void Test() { }
+
+    static dynamic Factory()
     {
-    }
-    
-    static dynamic Factory ()
-    {
-        return new C ();
+        return new C();
     }
 }

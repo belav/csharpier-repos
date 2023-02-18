@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         [Fact, WorkItem(16167, "https://github.com/dotnet/roslyn/issues/16167")]
         public void CompileXmlAsSource()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;

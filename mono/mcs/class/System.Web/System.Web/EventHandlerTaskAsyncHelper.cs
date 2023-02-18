@@ -36,27 +36,34 @@ namespace System.Web
         readonly BeginEventHandler beginEventHandler;
         static readonly EndEventHandler endEventHandler = TaskAsyncResult.Wait;
 
-        public BeginEventHandler BeginEventHandler {
+        public BeginEventHandler BeginEventHandler
+        {
             get { return beginEventHandler; }
         }
 
-        public EndEventHandler EndEventHandler {
+        public EndEventHandler EndEventHandler
+        {
             get { return endEventHandler; }
         }
 
-        public EventHandlerTaskAsyncHelper (TaskEventHandler handler)
+        public EventHandlerTaskAsyncHelper(TaskEventHandler handler)
         {
             if (handler == null)
-                throw new ArgumentNullException ("handler");
+                throw new ArgumentNullException("handler");
 
             taskEventHandler = handler;
             beginEventHandler = GetAsyncResult;
         }
 
-        IAsyncResult GetAsyncResult (object sender, EventArgs e, AsyncCallback callback, object state)
+        IAsyncResult GetAsyncResult(
+            object sender,
+            EventArgs e,
+            AsyncCallback callback,
+            object state
+        )
         {
-            Task task = taskEventHandler (sender, e);
-            return TaskAsyncResult.GetAsyncResult (task, callback, state);
+            Task task = taskEventHandler(sender, e);
+            return TaskAsyncResult.GetAsyncResult(task, callback, state);
         }
     }
 }

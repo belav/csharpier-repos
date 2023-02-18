@@ -3,7 +3,11 @@
 
 namespace System.Web.Mvc
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     public sealed class ChildActionOnlyAttribute : FilterAttribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationContext filterContext)
@@ -15,7 +19,9 @@ namespace System.Web.Mvc
 
             if (!filterContext.IsChildAction)
             {
-                throw Error.ChildActionOnlyAttribute_MustBeInChildRequest(filterContext.ActionDescriptor);
+                throw Error.ChildActionOnlyAttribute_MustBeInChildRequest(
+                    filterContext.ActionDescriptor
+                );
             }
         }
     }

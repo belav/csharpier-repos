@@ -4,7 +4,6 @@ namespace Microsoft.Build.Framework
 {
     public interface IEventRedirector
     {
-        void ForwardEvent (BuildEventArgs buildEvent);
+        void ForwardEvent(BuildEventArgs buildEvent);
     }
 }
-

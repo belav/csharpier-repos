@@ -45,9 +45,12 @@ namespace System.Text.Json.SourceGeneration
 
         public JsonSourceGenerationMode GenerationMode { get; set; }
 
-        public bool GenerateMetadata => GenerationModeIsSpecified(JsonSourceGenerationMode.Metadata);
+        public bool GenerateMetadata =>
+            GenerationModeIsSpecified(JsonSourceGenerationMode.Metadata);
 
-        public bool GenerateSerializationLogic => GenerationModeIsSpecified(JsonSourceGenerationMode.Serialization) && FastPathIsSupported();
+        public bool GenerateSerializationLogic =>
+            GenerationModeIsSpecified(JsonSourceGenerationMode.Serialization)
+            && FastPathIsSupported();
 
         public Type Type { get; private init; }
 
@@ -104,11 +107,15 @@ namespace System.Text.Json.SourceGeneration
 
                 if (CollectionType == CollectionType.ImmutableDictionary)
                 {
-                    builderName = Type.GetImmutableDictionaryConstructingTypeName(sourceGenType: true);
+                    builderName = Type.GetImmutableDictionaryConstructingTypeName(
+                        sourceGenType: true
+                    );
                 }
                 else if (CollectionType == CollectionType.ImmutableEnumerable)
                 {
-                    builderName = Type.GetImmutableEnumerableConstructingTypeName(sourceGenType: true);
+                    builderName = Type.GetImmutableEnumerableConstructingTypeName(
+                        sourceGenType: true
+                    );
                 }
                 else
                 {
@@ -139,7 +146,8 @@ namespace System.Text.Json.SourceGeneration
             bool hasTypeFactoryConverter,
             bool canContainNullableReferenceAnnotations,
             bool hasPropertyFactoryConverters,
-            bool isPolymorphic)
+            bool isPolymorphic
+        )
         {
             GenerationMode = generationMode;
             ClassType = classType;
@@ -164,9 +172,11 @@ namespace System.Text.Json.SourceGeneration
         }
 
         public bool TryFilterSerializableProps(
-                JsonSourceGenerationOptionsAttribute options,
-                [NotNullWhen(true)] out Dictionary<string, PropertyGenerationSpec>? serializableProperties,
-                out bool castingRequiredForProps)
+            JsonSourceGenerationOptionsAttribute options,
+            [NotNullWhen(true)]
+                out Dictionary<string, PropertyGenerationSpec>? serializableProperties,
+            out bool castingRequiredForProps
+        )
         {
             Debug.Assert(PropertyGenSpecList != null);
 
@@ -179,7 +189,10 @@ namespace System.Text.Json.SourceGeneration
                 PropertyGenerationSpec propGenSpec = PropertyGenSpecList[i];
                 JsonIgnoreCondition? ignoreCondition = propGenSpec.DefaultIgnoreCondition;
 
-                if (ignoreCondition == JsonIgnoreCondition.WhenWritingNull && !propGenSpec.TypeGenerationSpec.CanBeNull)
+                if (
+                    ignoreCondition == JsonIgnoreCondition.WhenWritingNull
+                    && !propGenSpec.TypeGenerationSpec.CanBeNull
+                )
                 {
                     goto ReturnFalse;
                 }
@@ -187,7 +200,10 @@ namespace System.Text.Json.SourceGeneration
                 // In case of JsonInclude fail if either:
                 // 1. the getter is not accessible by the source generator or
                 // 2. neither getter or setter methods are public.
-                if (propGenSpec.HasJsonInclude && (!propGenSpec.CanUseGetter || !propGenSpec.IsPublic))
+                if (
+                    propGenSpec.HasJsonInclude
+                    && (!propGenSpec.CanUseGetter || !propGenSpec.IsPublic)
+                )
                 {
                     goto ReturnFalse;
                 }
@@ -198,7 +214,9 @@ namespace System.Text.Json.SourceGeneration
                     continue;
                 }
 
-                if (!propGenSpec.IsProperty && !propGenSpec.HasJsonInclude && !options.IncludeFields)
+                if (
+                    !propGenSpec.IsProperty && !propGenSpec.HasJsonInclude && !options.IncludeFields
+                )
                 {
                     continue;
                 }
@@ -212,7 +230,9 @@ namespace System.Text.Json.SourceGeneration
                 // The JsonPropertyNameAttribute or naming policy resulted in a collision.
                 if (!serializableProperties.TryAdd(propGenSpec.RuntimePropertyName, propGenSpec))
                 {
-                    PropertyGenerationSpec other = serializableProperties[propGenSpec.RuntimePropertyName]!;
+                    PropertyGenerationSpec other = serializableProperties[
+                        propGenSpec.RuntimePropertyName
+                    ]!;
 
                     if (other.DefaultIgnoreCondition == JsonIgnoreCondition.Always)
                     {
@@ -227,10 +247,12 @@ namespace System.Text.Json.SourceGeneration
                         {
                             ignoreCurrentProperty =
                                 // Does the current property have `JsonIgnoreAttribute`?
-                                propGenSpec.DefaultIgnoreCondition == JsonIgnoreCondition.Always ||
+                                propGenSpec.DefaultIgnoreCondition == JsonIgnoreCondition.Always
+                                ||
                                 // Is the current property hidden by the previously cached property
                                 // (with `new` keyword, or by overriding)?
-                                other.ClrName == memberName ||
+                                other.ClrName == memberName
+                                ||
                                 // Was a property with the same CLR name ignored? That property hid the current property,
                                 // thus, if it was ignored, the current property should be ignored too.
                                 ignoredMembers?.ContainsKey(memberName) == true;
@@ -246,7 +268,8 @@ namespace System.Text.Json.SourceGeneration
                             // adding support for DIMs in the future, however that would require adding more APIs
                             // for the case of source gen.
 
-                            ignoreCurrentProperty = propGenSpec.DefaultIgnoreCondition == JsonIgnoreCondition.Always;
+                            ignoreCurrentProperty =
+                                propGenSpec.DefaultIgnoreCondition == JsonIgnoreCondition.Always;
                         }
 
                         if (!ignoreCurrentProperty)
@@ -267,7 +290,7 @@ namespace System.Text.Json.SourceGeneration
             castingRequiredForProps |= PropertyGenSpecList.Count > serializableProperties.Count;
             return true;
 
-        ReturnFalse:
+            ReturnFalse:
             serializableProperties = null;
             castingRequiredForProps = false;
             return false;
@@ -291,10 +314,13 @@ namespace System.Text.Json.SourceGeneration
 
                 foreach (PropertyGenerationSpec property in PropertyGenSpecList)
                 {
-                    if (property.TypeGenerationSpec.Type.IsObjectType() ||
-                        property.NumberHandling == JsonNumberHandling.AllowNamedFloatingPointLiterals ||
-                        property.NumberHandling == JsonNumberHandling.WriteAsString ||
-                        property.ConverterInstantiationLogic is not null)
+                    if (
+                        property.TypeGenerationSpec.Type.IsObjectType()
+                        || property.NumberHandling
+                            == JsonNumberHandling.AllowNamedFloatingPointLiterals
+                        || property.NumberHandling == JsonNumberHandling.WriteAsString
+                        || property.ConverterInstantiationLogic is not null
+                    )
                     {
                         return false;
                     }
@@ -313,13 +339,15 @@ namespace System.Text.Json.SourceGeneration
                 case CollectionType.ImmutableDictionary:
                 case CollectionType.IDictionaryOfTKeyTValue:
                 case CollectionType.IReadOnlyDictionary:
-                    return CollectionKeyTypeMetadata!.Type.IsStringType() && !CollectionValueTypeMetadata!.Type.IsObjectType();
+                    return CollectionKeyTypeMetadata!.Type.IsStringType()
+                        && !CollectionValueTypeMetadata!.Type.IsObjectType();
                 default:
                     // Non-dictionary collections
                     return !CollectionValueTypeMetadata!.Type.IsObjectType();
             }
         }
 
-        private bool GenerationModeIsSpecified(JsonSourceGenerationMode mode) => GenerationMode == JsonSourceGenerationMode.Default || (mode & GenerationMode) != 0;
+        private bool GenerationModeIsSpecified(JsonSourceGenerationMode mode) =>
+            GenerationMode == JsonSourceGenerationMode.Default || (mode & GenerationMode) != 0;
     }
 }

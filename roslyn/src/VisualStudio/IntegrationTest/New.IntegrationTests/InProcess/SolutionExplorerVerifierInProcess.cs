@@ -22,18 +22,29 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         public async Task ActiveDocumentIsSavedAsync(CancellationToken cancellationToken)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var activeDocument = await TestServices.Editor.GetActiveTextViewAsync(cancellationToken);
-            var editorAdaptersFactoryService = await GetComponentModelServiceAsync<IVsEditorAdaptersFactoryService>(cancellationToken);
+            var activeDocument = await TestServices.Editor.GetActiveTextViewAsync(
+                cancellationToken
+            );
+            var editorAdaptersFactoryService =
+                await GetComponentModelServiceAsync<IVsEditorAdaptersFactoryService>(
+                    cancellationToken
+                );
 
-            var runningDocumentTable = await GetRequiredGlobalServiceAsync<SVsRunningDocumentTable, IVsRunningDocumentTable4>(cancellationToken);
+            var runningDocumentTable = await GetRequiredGlobalServiceAsync<
+                SVsRunningDocumentTable,
+                IVsRunningDocumentTable4
+            >(cancellationToken);
 
             foreach (var cookie in runningDocumentTable.GetRunningDocuments())
             {
                 if (!runningDocumentTable.IsDocumentInitialized(cookie))
                     continue;
 
-                if (runningDocumentTable.GetDocumentData(cookie) is not IVsTextLines docData
-                    || editorAdaptersFactoryService.GetDocumentBuffer(docData) != activeDocument.TextDataModel.DocumentBuffer)
+                if (
+                    runningDocumentTable.GetDocumentData(cookie) is not IVsTextLines docData
+                    || editorAdaptersFactoryService.GetDocumentBuffer(docData)
+                        != activeDocument.TextDataModel.DocumentBuffer
+                )
                 {
                     continue;
                 }
@@ -45,16 +56,23 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     return;
                 }
 
-                throw new InvalidOperationException($"Failed to save the active document: {runningDocumentTable.GetDocumentMoniker(cookie)}");
+                throw new InvalidOperationException(
+                    $"Failed to save the active document: {runningDocumentTable.GetDocumentMoniker(cookie)}"
+                );
             }
 
-            throw new InvalidOperationException("Failed to locate running document table cookie for the active document");
+            throw new InvalidOperationException(
+                "Failed to locate running document table cookie for the active document"
+            );
         }
 
         public async Task AllDocumentsAreSavedAsync(CancellationToken cancellationToken)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var runningDocumentTable = await GetRequiredGlobalServiceAsync<SVsRunningDocumentTable, IVsRunningDocumentTable4>(cancellationToken);
+            var runningDocumentTable = await GetRequiredGlobalServiceAsync<
+                SVsRunningDocumentTable,
+                IVsRunningDocumentTable4
+            >(cancellationToken);
 
             var unsavedFiles = new List<string>();
             foreach (var cookie in runningDocumentTable.GetRunningDocuments())
@@ -66,19 +84,40 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 }
             }
 
-            AssertEx.EqualOrDiff("", string.Join(Environment.NewLine, unsavedFiles), "Unexpected dirty documents after failed Save All");
+            AssertEx.EqualOrDiff(
+                "",
+                string.Join(Environment.NewLine, unsavedFiles),
+                "Unexpected dirty documents after failed Save All"
+            );
         }
 
-        public async Task AssemblyReferencePresentAsync(string projectName, string assemblyName, string assemblyVersion, string assemblyPublicKeyToken, CancellationToken cancellationToken)
+        public async Task AssemblyReferencePresentAsync(
+            string projectName,
+            string assemblyName,
+            string assemblyVersion,
+            string assemblyPublicKeyToken,
+            CancellationToken cancellationToken
+        )
         {
-            var assemblyReferences = await TestServices.SolutionExplorer.GetAssemblyReferencesAsync(projectName, cancellationToken);
-            var expectedAssemblyReference = assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
+            var assemblyReferences = await TestServices.SolutionExplorer.GetAssemblyReferencesAsync(
+                projectName,
+                cancellationToken
+            );
+            var expectedAssemblyReference =
+                assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
             Assert.Contains(expectedAssemblyReference, assemblyReferences);
         }
 
-        public async Task ProjectReferencePresentAsync(string projectName, string referencedProjectName, CancellationToken cancellationToken)
+        public async Task ProjectReferencePresentAsync(
+            string projectName,
+            string referencedProjectName,
+            CancellationToken cancellationToken
+        )
         {
-            var projectReferences = await TestServices.SolutionExplorer.GetProjectReferencesAsync(projectName, cancellationToken);
+            var projectReferences = await TestServices.SolutionExplorer.GetProjectReferencesAsync(
+                projectName,
+                cancellationToken
+            );
             Assert.Contains(referencedProjectName, projectReferences);
         }
     }

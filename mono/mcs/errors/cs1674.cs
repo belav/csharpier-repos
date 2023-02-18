@@ -3,10 +3,8 @@
 
 class C
 {
-    void Method (int arg)
+    void Method(int arg)
     {
-    using (arg)
-    {
-    }
+        using (arg) { }
     }
 }

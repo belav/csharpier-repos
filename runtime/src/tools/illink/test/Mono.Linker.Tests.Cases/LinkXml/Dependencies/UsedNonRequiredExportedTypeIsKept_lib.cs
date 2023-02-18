@@ -1,13 +1,10 @@
-
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
     public class UsedNonRequiredExportedTypeIsKept_Used1
     {
         public int field;
 
-        public void Method ()
-        {
-        }
+        public void Method() { }
 
         public int Property { get; set; }
     }
@@ -16,9 +13,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
     {
         public int field;
 
-        public void Method ()
-        {
-        }
+        public void Method() { }
 
         public int Property { get; set; }
     }
@@ -27,9 +22,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
     {
         public int field;
 
-        public void Method ()
-        {
-        }
+        public void Method() { }
 
         public int Property { get; set; }
     }

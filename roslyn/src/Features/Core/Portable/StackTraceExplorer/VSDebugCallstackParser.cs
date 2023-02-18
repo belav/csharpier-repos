@@ -13,7 +13,10 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal sealed class VSDebugCallstackParser : IStackFrameParser
     {
-        public bool TryParseLine(VirtualCharSequence line, [NotNullWhen(true)] out ParsedFrame? parsedFrame)
+        public bool TryParseLine(
+            VirtualCharSequence line,
+            [NotNullWhen(true)] out ParsedFrame? parsedFrame
+        )
         {
             // Example line:
             // ConsoleApp4.dll!ConsoleApp4.MyClass.ThrowAtOne() Line 19    C#

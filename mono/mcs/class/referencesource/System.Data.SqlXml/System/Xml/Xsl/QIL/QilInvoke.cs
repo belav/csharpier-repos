@@ -9,13 +9,13 @@ using System.Diagnostics;
 using System.Xml.Schema;
 using System.Xml.Xsl;
 
-namespace System.Xml.Xsl.Qil {
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// A function invocation node which represents a call to a Qil functions.
     /// </summary>
-    internal class QilInvoke : QilBinary {
-
+    internal class QilInvoke : QilBinary
+    {
         //-----------------------------------------------
         // Constructor
         //-----------------------------------------------
@@ -23,21 +23,22 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilInvoke(QilNodeType nodeType, QilNode function, QilNode arguments) : base(nodeType, function, arguments) {
-        }
-
+        public QilInvoke(QilNodeType nodeType, QilNode function, QilNode arguments)
+            : base(nodeType, function, arguments) { }
 
         //-----------------------------------------------
         // QilInvoke methods
         //-----------------------------------------------
 
-        public QilFunction Function {
-            get { return (QilFunction) Left; }
+        public QilFunction Function
+        {
+            get { return (QilFunction)Left; }
             set { Left = value; }
         }
 
-        public QilList Arguments {
-            get { return (QilList) Right; }
+        public QilList Arguments
+        {
+            get { return (QilList)Right; }
             set { Right = value; }
         }
     }

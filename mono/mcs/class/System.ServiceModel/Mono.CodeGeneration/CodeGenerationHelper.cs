@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,39 +31,65 @@ namespace Mono.CodeGeneration
 {
     public class CodeGenerationHelper
     {
-        public static void GenerateMethodCall (ILGenerator gen, CodeExpression target, MethodBase method, params CodeExpression[] parameters)
+        public static void GenerateMethodCall(
+            ILGenerator gen,
+            CodeExpression target,
+            MethodBase method,
+            params CodeExpression[] parameters
+        )
         {
             Type[] ptypes = Type.EmptyTypes;
             // It could raise an error since GetParameters() on MethodBuilder is not supported.
-            if (parameters.Length > 0) {
-                ParameterInfo[] pars = method.GetParameters ();
+            if (parameters.Length > 0)
+            {
+                ParameterInfo[] pars = method.GetParameters();
                 ptypes = new Type[pars.Length];
-                for (int n=0; n<ptypes.Length; n++) ptypes[n] = pars[n].ParameterType;
+                for (int n = 0; n < ptypes.Length; n++)
+                    ptypes[n] = pars[n].ParameterType;
             }
-            GenerateMethodCall (gen, target, method, ptypes, parameters);
+            GenerateMethodCall(gen, target, method, ptypes, parameters);
         }
-        
-        public static void GenerateMethodCall (ILGenerator gen, CodeExpression target, CodeMethod method, params CodeExpression[] parameters)
+
+        public static void GenerateMethodCall(
+            ILGenerator gen,
+            CodeExpression target,
+            CodeMethod method,
+            params CodeExpression[] parameters
+        )
         {
-            GenerateMethodCall (gen, target, method.MethodBase, method.ParameterTypes, parameters);
+            GenerateMethodCall(gen, target, method.MethodBase, method.ParameterTypes, parameters);
         }
-        
-        static void GenerateMethodCall (ILGenerator gen, CodeExpression target, MethodBase method, Type[] parameterTypes, params CodeExpression[] parameters)
+
+        static void GenerateMethodCall(
+            ILGenerator gen,
+            CodeExpression target,
+            MethodBase method,
+            Type[] parameterTypes,
+            params CodeExpression[] parameters
+        )
         {
             OpCode callOp;
-            
+
             if (parameterTypes.Length != parameters.Length)
-                throw GetMethodException (method, "Invalid number of parameters, expected " + parameterTypes.Length + ", found " + parameters.Length + ".");  
-            
-            if (!object.ReferenceEquals (target, null)) 
+                throw GetMethodException(
+                    method,
+                    "Invalid number of parameters, expected "
+                        + parameterTypes.Length
+                        + ", found "
+                        + parameters.Length
+                        + "."
+                );
+
+            if (!object.ReferenceEquals(target, null))
             {
-                target.Generate (gen);
-                
+                target.Generate(gen);
+
                 Type targetType = target.GetResultType();
-                if (targetType.IsValueType) {
-                    LocalBuilder lb = gen.DeclareLocal (targetType);
-                    gen.Emit (OpCodes.Stloc, lb);
-                    gen.Emit (OpCodes.Ldloca, lb);
+                if (targetType.IsValueType)
+                {
+                    LocalBuilder lb = gen.DeclareLocal(targetType);
+                    gen.Emit(OpCodes.Stloc, lb);
+                    gen.Emit(OpCodes.Ldloca, lb);
                     callOp = OpCodes.Call;
                 }
                 else
@@ -72,120 +98,137 @@ namespace Mono.CodeGeneration
             else
                 callOp = OpCodes.Call;
 
-            for (int n=0; n<parameterTypes.Length; n++) {
-                try {
+            for (int n = 0; n < parameterTypes.Length; n++)
+            {
+                try
+                {
                     CodeExpression par = parameters[n];
-                    par.Generate (gen);
-                    GenerateSafeConversion (gen, parameterTypes[n], par.GetResultType());
+                    par.Generate(gen);
+                    GenerateSafeConversion(gen, parameterTypes[n], par.GetResultType());
                 }
-                catch (InvalidOperationException ex) {
-                    throw GetMethodException (method, "Parameter " + n + ". " + ex.Message);  
+                catch (InvalidOperationException ex)
+                {
+                    throw GetMethodException(method, "Parameter " + n + ". " + ex.Message);
                 }
             }
-            
+
             if (method is MethodInfo)
-                gen.Emit (callOp, (MethodInfo)method);
+                gen.Emit(callOp, (MethodInfo)method);
             else if (method is ConstructorInfo)
-                gen.Emit (callOp, (ConstructorInfo)method);
+                gen.Emit(callOp, (ConstructorInfo)method);
         }
-        
-        public static Exception GetMethodException (MethodBase method, string msg)
+
+        public static Exception GetMethodException(MethodBase method, string msg)
         {
-            return new InvalidOperationException ("Call to method " + method.DeclaringType + "." + method.Name + ": " + msg);  
+            return new InvalidOperationException(
+                "Call to method " + method.DeclaringType + "." + method.Name + ": " + msg
+            );
         }
-        
-        public static void GenerateSafeConversion (ILGenerator gen, Type targetType, Type sourceType)
+
+        public static void GenerateSafeConversion(ILGenerator gen, Type targetType, Type sourceType)
         {
-            if (!targetType.IsAssignableFrom (sourceType)) {
-                throw new InvalidOperationException ("Invalid type conversion. Found '" + sourceType + "', expected '" + targetType + "'.");
+            if (!targetType.IsAssignableFrom(sourceType))
+            {
+                throw new InvalidOperationException(
+                    "Invalid type conversion. Found '"
+                        + sourceType
+                        + "', expected '"
+                        + targetType
+                        + "'."
+                );
             }
-            
-            if (targetType == typeof(object) && sourceType.IsValueType) {
-                gen.Emit (OpCodes.Box, sourceType);
+
+            if (targetType == typeof(object) && sourceType.IsValueType)
+            {
+                gen.Emit(OpCodes.Box, sourceType);
             }
         }
 
-        public static void LoadFromPtr (ILGenerator ig, Type t)
+        public static void LoadFromPtr(ILGenerator ig, Type t)
         {
             if (t == typeof(int))
-                ig.Emit (OpCodes.Ldind_I4);
+                ig.Emit(OpCodes.Ldind_I4);
             else if (t == typeof(uint))
-                ig.Emit (OpCodes.Ldind_U4);
+                ig.Emit(OpCodes.Ldind_U4);
             else if (t == typeof(short))
-                ig.Emit (OpCodes.Ldind_I2);
+                ig.Emit(OpCodes.Ldind_I2);
             else if (t == typeof(ushort))
-                ig.Emit (OpCodes.Ldind_U2);
+                ig.Emit(OpCodes.Ldind_U2);
             else if (t == typeof(char))
-                ig.Emit (OpCodes.Ldind_U2);
+                ig.Emit(OpCodes.Ldind_U2);
             else if (t == typeof(byte))
-                ig.Emit (OpCodes.Ldind_U1);
+                ig.Emit(OpCodes.Ldind_U1);
             else if (t == typeof(sbyte))
-                ig.Emit (OpCodes.Ldind_I1);
+                ig.Emit(OpCodes.Ldind_I1);
             else if (t == typeof(ulong))
-                ig.Emit (OpCodes.Ldind_I8);
+                ig.Emit(OpCodes.Ldind_I8);
             else if (t == typeof(long))
-                ig.Emit (OpCodes.Ldind_I8);
+                ig.Emit(OpCodes.Ldind_I8);
             else if (t == typeof(float))
-                ig.Emit (OpCodes.Ldind_R4);
+                ig.Emit(OpCodes.Ldind_R4);
             else if (t == typeof(double))
-                ig.Emit (OpCodes.Ldind_R8);
+                ig.Emit(OpCodes.Ldind_R8);
             else if (t == typeof(bool))
-                ig.Emit (OpCodes.Ldind_I1);
+                ig.Emit(OpCodes.Ldind_I1);
             else if (t == typeof(IntPtr))
-                ig.Emit (OpCodes.Ldind_I);
-            else if (t.IsEnum) {
+                ig.Emit(OpCodes.Ldind_I);
+            else if (t.IsEnum)
+            {
                 if (t == typeof(Enum))
-                    ig.Emit (OpCodes.Ldind_Ref);
+                    ig.Emit(OpCodes.Ldind_Ref);
                 else
-                    LoadFromPtr (ig, System.Enum.GetUnderlyingType (t));
-            } else if (t.IsValueType)
-                ig.Emit (OpCodes.Ldobj, t);
+                    LoadFromPtr(ig, System.Enum.GetUnderlyingType(t));
+            }
+            else if (t.IsValueType)
+                ig.Emit(OpCodes.Ldobj, t);
             else
-                ig.Emit (OpCodes.Ldind_Ref);
+                ig.Emit(OpCodes.Ldind_Ref);
         }
 
-        public static void SaveToPtr (ILGenerator ig, Type t)
+        public static void SaveToPtr(ILGenerator ig, Type t)
         {
             if (t == typeof(int))
-                ig.Emit (OpCodes.Stind_I4);
+                ig.Emit(OpCodes.Stind_I4);
             else if (t == typeof(uint))
-                ig.Emit (OpCodes.Stind_I4);
+                ig.Emit(OpCodes.Stind_I4);
             else if (t == typeof(short))
-                ig.Emit (OpCodes.Stind_I2);
+                ig.Emit(OpCodes.Stind_I2);
             else if (t == typeof(ushort))
-                ig.Emit (OpCodes.Stind_I2);
+                ig.Emit(OpCodes.Stind_I2);
             else if (t == typeof(char))
-                ig.Emit (OpCodes.Stind_I2);
+                ig.Emit(OpCodes.Stind_I2);
             else if (t == typeof(byte))
-                ig.Emit (OpCodes.Stind_I1);
+                ig.Emit(OpCodes.Stind_I1);
             else if (t == typeof(sbyte))
-                ig.Emit (OpCodes.Stind_I1);
+                ig.Emit(OpCodes.Stind_I1);
             else if (t == typeof(ulong))
-                ig.Emit (OpCodes.Stind_I8);
+                ig.Emit(OpCodes.Stind_I8);
             else if (t == typeof(long))
-                ig.Emit (OpCodes.Stind_I8);
+                ig.Emit(OpCodes.Stind_I8);
             else if (t == typeof(float))
-                ig.Emit (OpCodes.Stind_R4);
+                ig.Emit(OpCodes.Stind_R4);
             else if (t == typeof(double))
-                ig.Emit (OpCodes.Stind_R8);
+                ig.Emit(OpCodes.Stind_R8);
             else if (t == typeof(bool))
-                ig.Emit (OpCodes.Stind_I1);
+                ig.Emit(OpCodes.Stind_I1);
             else if (t == typeof(IntPtr))
-                ig.Emit (OpCodes.Stind_I);
-            else if (t.IsEnum) {
+                ig.Emit(OpCodes.Stind_I);
+            else if (t.IsEnum)
+            {
                 if (t == typeof(Enum))
-                    ig.Emit (OpCodes.Stind_Ref);
+                    ig.Emit(OpCodes.Stind_Ref);
                 else
-                    SaveToPtr (ig, System.Enum.GetUnderlyingType (t));
-            } else if (t.IsValueType)
-                ig.Emit (OpCodes.Stobj, t);
+                    SaveToPtr(ig, System.Enum.GetUnderlyingType(t));
+            }
+            else if (t.IsValueType)
+                ig.Emit(OpCodes.Stobj, t);
             else
-                ig.Emit (OpCodes.Stind_Ref);
+                ig.Emit(OpCodes.Stind_Ref);
         }
 
-        public static bool IsNumber (Type t)
+        public static bool IsNumber(Type t)
         {
-            switch (Type.GetTypeCode (t))
+            switch (Type.GetTypeCode(t))
             {
                 case TypeCode.Byte:
                 case TypeCode.Double:
@@ -202,10 +245,8 @@ namespace Mono.CodeGeneration
                     return false;
             }
         }
-        
-        public static void GeneratePrimitiveValue ()
-        {
-        }
+
+        public static void GeneratePrimitiveValue() { }
     }
 }
 #endif

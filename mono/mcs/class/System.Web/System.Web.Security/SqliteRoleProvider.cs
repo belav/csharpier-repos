@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -20,7 +20,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-// Copyright © 2006, 2007 Nauck IT KG        http://www.nauck-it.de
+// Copyright ï¿½ 2006, 2007 Nauck IT KG        http://www.nauck-it.de
 //
 // Author:
 //    Daniel Nauck        <d.nauck(at)nauck-it.de>
@@ -50,26 +50,31 @@ namespace System.Web.Security
         const string m_UserInRolesTableName = "UsersInRoles";
         string m_ConnectionString = string.Empty;
 
-        DbParameter AddParameter (DbCommand command, string parameterName)
+        DbParameter AddParameter(DbCommand command, string parameterName)
         {
-            return AddParameter (command, parameterName, null);
+            return AddParameter(command, parameterName, null);
         }
-        
-        DbParameter AddParameter (DbCommand command, string parameterName, object parameterValue)
-        {
-            return AddParameter (command, parameterName, ParameterDirection.Input, parameterValue);
-                }
 
-                DbParameter AddParameter (DbCommand command, string parameterName, ParameterDirection direction, object parameterValue)
-                {
-                        DbParameter dbp = command.CreateParameter ();
-                        dbp.ParameterName = parameterName;
-                        dbp.Value = parameterValue;
-                        dbp.Direction = direction;
-                        command.Parameters.Add (dbp);
-                        return dbp;
-                }
-        
+        DbParameter AddParameter(DbCommand command, string parameterName, object parameterValue)
+        {
+            return AddParameter(command, parameterName, ParameterDirection.Input, parameterValue);
+        }
+
+        DbParameter AddParameter(
+            DbCommand command,
+            string parameterName,
+            ParameterDirection direction,
+            object parameterValue
+        )
+        {
+            DbParameter dbp = command.CreateParameter();
+            dbp.ParameterName = parameterName;
+            dbp.Value = parameterValue;
+            dbp.Direction = direction;
+            command.Parameters.Add(dbp);
+            return dbp;
+        }
+
         /// <summary>
         /// System.Configuration.Provider.ProviderBase.Initialize Method
         /// </summary>
@@ -91,22 +96,34 @@ namespace System.Web.Security
             // Initialize the abstract base class.
             base.Initialize(name, config);
 
-            m_ApplicationName = GetConfigValue(config["applicationName"], HostingEnvironment.ApplicationVirtualPath);
+            m_ApplicationName = GetConfigValue(
+                config["applicationName"],
+                HostingEnvironment.ApplicationVirtualPath
+            );
 
             // Get connection string.
             string connStrName = config["connectionStringName"];
 
             if (string.IsNullOrEmpty(connStrName))
             {
-                throw new ArgumentOutOfRangeException("ConnectionStringName", Properties.Resources.ErrArgumentNullOrEmpty);
+                throw new ArgumentOutOfRangeException(
+                    "ConnectionStringName",
+                    Properties.Resources.ErrArgumentNullOrEmpty
+                );
             }
             else
             {
-                ConnectionStringSettings ConnectionStringSettings = ConfigurationManager.ConnectionStrings[connStrName];
+                ConnectionStringSettings ConnectionStringSettings =
+                    ConfigurationManager.ConnectionStrings[connStrName];
 
-                if (ConnectionStringSettings == null || string.IsNullOrEmpty(ConnectionStringSettings.ConnectionString.Trim()))
+                if (
+                    ConnectionStringSettings == null
+                    || string.IsNullOrEmpty(ConnectionStringSettings.ConnectionString.Trim())
+                )
                 {
-                    throw new ProviderException(Properties.Resources.ErrConnectionStringNullOrEmpty);
+                    throw new ProviderException(
+                        Properties.Resources.ErrConnectionStringNullOrEmpty
+                    );
                 }
 
                 m_ConnectionString = ConnectionStringSettings.ConnectionString;
@@ -140,7 +157,9 @@ namespace System.Web.Security
             {
                 if (!RoleExists(rolename))
                 {
-                    throw new ProviderException(string.Format(Properties.Resources.ErrRoleNotExist, rolename));
+                    throw new ProviderException(
+                        string.Format(Properties.Resources.ErrRoleNotExist, rolename)
+                    );
                 }
             }
 
@@ -150,7 +169,13 @@ namespace System.Web.Security
                 {
                     if (IsUserInRole(username, rolename))
                     {
-                        throw new ProviderException(string.Format(Properties.Resources.ErrUserAlreadyInRole, username, rolename));
+                        throw new ProviderException(
+                            string.Format(
+                                Properties.Resources.ErrUserAlreadyInRole,
+                                username,
+                                rolename
+                            )
+                        );
                     }
                 }
             }
@@ -159,11 +184,14 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("INSERT INTO \"{0}\" (\"Username\", \"Rolename\", \"ApplicationName\") Values (@Username, @Rolename, @ApplicationName)", m_UserInRolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "INSERT INTO \"{0}\" (\"Username\", \"Rolename\", \"ApplicationName\") Values (@Username, @Rolename, @ApplicationName)",
+                        m_UserInRolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Username");
-                    AddParameter (dbCommand, "@Rolename");
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Username");
+                    AddParameter(dbCommand, "@Rolename");
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     SqliteTransaction dbTrans = null;
 
@@ -222,17 +250,22 @@ namespace System.Web.Security
         {
             if (RoleExists(roleName))
             {
-                throw new ProviderException(string.Format(Properties.Resources.ErrRoleAlreadyExist, roleName));
+                throw new ProviderException(
+                    string.Format(Properties.Resources.ErrRoleAlreadyExist, roleName)
+                );
             }
 
             using (SqliteConnection dbConn = new SqliteConnection(m_ConnectionString))
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("INSERT INTO \"{0}\" (\"Rolename\", \"ApplicationName\") Values (@Rolename, @ApplicationName)", m_RolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "INSERT INTO \"{0}\" (\"Rolename\", \"ApplicationName\") Values (@Rolename, @ApplicationName)",
+                        m_RolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Rolename", roleName);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Rolename", roleName);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     try
                     {
@@ -262,7 +295,9 @@ namespace System.Web.Security
         {
             if (!RoleExists(roleName))
             {
-                throw new ProviderException(string.Format(Properties.Resources.ErrRoleNotExist, roleName));
+                throw new ProviderException(
+                    string.Format(Properties.Resources.ErrRoleNotExist, roleName)
+                );
             }
 
             if (throwOnPopulatedRole && GetUsersInRole(roleName).Length > 0)
@@ -274,10 +309,13 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("DELETE FROM \"{0}\" WHERE \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName", m_RolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "DELETE FROM \"{0}\" WHERE \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName",
+                        m_RolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Rolename", roleName);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Rolename", roleName);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     SqliteTransaction dbTrans = null;
 
@@ -335,11 +373,14 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("SELECT \"Username\" FROM \"{0}\" WHERE \"Username\" LIKE @Username AND \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName ORDER BY \"Username\" ASC", m_UserInRolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "SELECT \"Username\" FROM \"{0}\" WHERE \"Username\" LIKE @Username AND \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName ORDER BY \"Username\" ASC",
+                        m_UserInRolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Username", usernameToMatch);
-                    AddParameter (dbCommand, "@Rolename", roleName);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Username", usernameToMatch);
+                    AddParameter(dbCommand, "@Rolename", roleName);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     try
                     {
@@ -384,9 +425,12 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("SELECT \"Rolename\" FROM \"{0}\" WHERE \"ApplicationName\" = @ApplicationName ORDER BY \"Rolename\" ASC", m_RolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "SELECT \"Rolename\" FROM \"{0}\" WHERE \"ApplicationName\" = @ApplicationName ORDER BY \"Rolename\" ASC",
+                        m_RolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     try
                     {
@@ -399,7 +443,7 @@ namespace System.Web.Security
                             {
                                 rolesList.Add(reader.GetString(0));
                             }
-                        }                        
+                        }
                     }
                     catch (SqliteException e)
                     {
@@ -428,10 +472,13 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("SELECT \"Rolename\" FROM \"{0}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName ORDER BY \"Rolename\" ASC", m_UserInRolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "SELECT \"Rolename\" FROM \"{0}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName ORDER BY \"Rolename\" ASC",
+                        m_UserInRolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Username", username);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Username", username);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     try
                     {
@@ -476,10 +523,13 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("SELECT \"Username\" FROM \"{0}\" WHERE \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName ORDER BY \"Username\" ASC", m_UserInRolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "SELECT \"Username\" FROM \"{0}\" WHERE \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName ORDER BY \"Username\" ASC",
+                        m_UserInRolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Rolename", roleName);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Rolename", roleName);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     try
                     {
@@ -522,11 +572,14 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("SELECT COUNT(*) FROM \"{0}\" WHERE \"Username\" = @Username AND \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName", m_UserInRolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "SELECT COUNT(*) FROM \"{0}\" WHERE \"Username\" = @Username AND \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName",
+                        m_UserInRolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Username", userName);
-                    AddParameter (dbCommand, "@Rolename", roleName);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Username", userName);
+                    AddParameter(dbCommand, "@Rolename", roleName);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     try
                     {
@@ -564,7 +617,9 @@ namespace System.Web.Security
             {
                 if (!RoleExists(rolename))
                 {
-                    throw new ProviderException(string.Format(Properties.Resources.ErrRoleNotExist, rolename));
+                    throw new ProviderException(
+                        string.Format(Properties.Resources.ErrRoleNotExist, rolename)
+                    );
                 }
             }
 
@@ -574,7 +629,13 @@ namespace System.Web.Security
                 {
                     if (!IsUserInRole(username, rolename))
                     {
-                        throw new ProviderException(string.Format(Properties.Resources.ErrUserIsNotInRole, username, rolename));
+                        throw new ProviderException(
+                            string.Format(
+                                Properties.Resources.ErrUserIsNotInRole,
+                                username,
+                                rolename
+                            )
+                        );
                     }
                 }
             }
@@ -583,11 +644,14 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("DELETE FROM \"{0}\" WHERE \"Username\" = @Username AND \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName", m_UserInRolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "DELETE FROM \"{0}\" WHERE \"Username\" = @Username AND \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName",
+                        m_UserInRolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Username");
-                    AddParameter (dbCommand, "@Rolename");
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Username");
+                    AddParameter(dbCommand, "@Rolename");
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     SqliteTransaction dbTrans = null;
 
@@ -648,10 +712,13 @@ namespace System.Web.Security
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("SELECT COUNT(*) FROM \"{0}\" WHERE \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName", m_RolesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "SELECT COUNT(*) FROM \"{0}\" WHERE \"Rolename\" = @Rolename AND \"ApplicationName\" = @ApplicationName",
+                        m_RolesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Rolename", roleName);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Rolename", roleName);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     try
                     {
@@ -695,6 +762,6 @@ namespace System.Web.Security
 
             return configValue;
         }
-        #endregion    
+        #endregion
     }
 }

@@ -10,7 +10,12 @@ namespace Internal.Cryptography
 {
     internal static partial class CngCommon
     {
-        public static byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+        public static byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             // The classes that call us are sealed and their base class has checked this already.
             Debug.Assert(data != null);
@@ -25,7 +30,12 @@ namespace Internal.Cryptography
             }
         }
 
-        public static bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten)
+        public static bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            HashAlgorithmName hashAlgorithm,
+            out int bytesWritten
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
 

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,37 +31,39 @@
 
 using System.Collections;
 
-namespace System.Security.Cryptography.X509Certificates {
-
-    public sealed class X509ExtensionEnumerator : IEnumerator {
-
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509ExtensionEnumerator : IEnumerator
+    {
         private IEnumerator enumerator;
 
-        internal X509ExtensionEnumerator (ArrayList list)
+        internal X509ExtensionEnumerator(ArrayList list)
         {
-            enumerator = list.GetEnumerator ();
+            enumerator = list.GetEnumerator();
         }
 
         // properties
 
-        public X509Extension Current {
-            get { return (X509Extension) enumerator.Current; }
+        public X509Extension Current
+        {
+            get { return (X509Extension)enumerator.Current; }
         }
 
-        object IEnumerator.Current {
+        object IEnumerator.Current
+        {
             get { return enumerator.Current; }
         }
 
         // methods
 
-        public bool MoveNext () 
+        public bool MoveNext()
         {
-            return enumerator.MoveNext ();
+            return enumerator.MoveNext();
         }
 
-        public void Reset ()
+        public void Reset()
         {
-            enumerator.Reset ();
+            enumerator.Reset();
         }
     }
 }

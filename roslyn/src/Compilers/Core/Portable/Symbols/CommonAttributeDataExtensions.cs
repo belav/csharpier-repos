@@ -6,7 +6,10 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class CommonAttributeDataExtensions
     {
-        public static bool TryGetGuidAttributeValue(this AttributeData attrData, out string? guidString)
+        public static bool TryGetGuidAttributeValue(
+            this AttributeData attrData,
+            out string? guidString
+        )
         {
             if (attrData.CommonConstructorArguments.Length == 1)
             {

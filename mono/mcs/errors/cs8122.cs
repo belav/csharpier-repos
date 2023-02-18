@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         object o = 1;
         Expression<Func<bool>> e = () => o is int y;

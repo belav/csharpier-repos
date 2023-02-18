@@ -15,11 +15,8 @@ namespace System.ServiceModel.Configuration
     public abstract class MexBindingElement<TStandardBinding> : StandardBindingElement
         where TStandardBinding : Binding
     {
-
         protected MexBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         protected override Type BindingElementType
         {

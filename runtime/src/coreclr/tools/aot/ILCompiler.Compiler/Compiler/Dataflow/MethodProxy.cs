@@ -20,17 +20,22 @@ namespace ILLink.Shared.TypeSystemProxy
 
         public readonly MethodDesc Method;
 
-        public string Name { get => Method.Name; }
+        public string Name
+        {
+            get => Method.Name;
+        }
 
         public string GetDisplayName() => Method.GetDisplayName();
 
-        internal partial bool IsDeclaredOnType(string fullTypeName) => Method.IsDeclaredOnType(fullTypeName);
+        internal partial bool IsDeclaredOnType(string fullTypeName) =>
+            Method.IsDeclaredOnType(fullTypeName);
 
         internal partial bool HasParameters() => Method.Signature.Length > 0;
 
         internal partial int GetParametersCount() => Method.Signature.Length;
 
-        internal partial bool HasParameterOfType(int parameterIndex, string fullTypeName) => Method.HasParameterOfType(parameterIndex, fullTypeName);
+        internal partial bool HasParameterOfType(int parameterIndex, string fullTypeName) =>
+            Method.HasParameterOfType(parameterIndex, fullTypeName);
 
         internal partial string GetParameterDisplayName(int parameterIndex) =>
             (Method is EcmaMethod ecmaMethod)
@@ -39,7 +44,8 @@ namespace ILLink.Shared.TypeSystemProxy
 
         internal partial bool HasGenericParameters() => Method.HasInstantiation;
 
-        internal partial bool HasGenericParametersCount(int genericParameterCount) => Method.Instantiation.Length == genericParameterCount;
+        internal partial bool HasGenericParametersCount(int genericParameterCount) =>
+            Method.Instantiation.Length == genericParameterCount;
 
         internal partial ImmutableArray<GenericParameterProxy> GetGenericParameters()
         {
@@ -48,7 +54,9 @@ namespace ILLink.Shared.TypeSystemProxy
             if (!methodDef.HasInstantiation)
                 return ImmutableArray<GenericParameterProxy>.Empty;
 
-            var builder = ImmutableArray.CreateBuilder<GenericParameterProxy>(methodDef.Instantiation.Length);
+            var builder = ImmutableArray.CreateBuilder<GenericParameterProxy>(
+                methodDef.Instantiation.Length
+            );
             foreach (var genericParameter in methodDef.Instantiation)
             {
                 builder.Add(new GenericParameterProxy((GenericParameterDesc)genericParameter));
@@ -63,7 +71,8 @@ namespace ILLink.Shared.TypeSystemProxy
 
         public override string ToString() => Method.ToString();
 
-        public ReferenceKind ParameterReferenceKind(int index) => Method.ParameterReferenceKind(Method.Signature.IsStatic ? index : index + 1);
+        public ReferenceKind ParameterReferenceKind(int index) =>
+            Method.ParameterReferenceKind(Method.Signature.IsStatic ? index : index + 1);
 
         public bool Equals(MethodProxy other) => Method.Equals(other.Method);
 

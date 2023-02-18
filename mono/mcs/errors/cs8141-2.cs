@@ -8,12 +8,9 @@ public interface I<T>
 
 public class C : I<(int a, int b)>
 {
-    public int this[(int c, int d) arg] {
-        get {
-            return 1;
-        }
-        set {
-
-        }
+    public int this[(int c, int d) arg]
+    {
+        get { return 1; }
+        set { }
     }
 }

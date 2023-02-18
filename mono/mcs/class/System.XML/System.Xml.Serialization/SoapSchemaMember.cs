@@ -1,5 +1,5 @@
-// 
-// System.Xml.Serialization.SoapSchemaMember 
+//
+// System.Xml.Serialization.SoapSchemaMember
 //
 // Author:
 //   Tim Coleman (tim@timcoleman.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,9 +30,10 @@
 
 using System.Xml;
 
-namespace System.Xml.Serialization {
-    public class SoapSchemaMember {
-
+namespace System.Xml.Serialization
+{
+    public class SoapSchemaMember
+    {
         #region Fields
 
         private string memberName;
@@ -42,17 +43,18 @@ namespace System.Xml.Serialization {
 
         #region Constructors
 
-        public SoapSchemaMember ()
-        {
-        }
+        public SoapSchemaMember() { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public string MemberName {
-            get {
-                if (memberName == null) {
+        public string MemberName
+        {
+            get
+            {
+                if (memberName == null)
+                {
                     return string.Empty;
                 }
                 return memberName;
@@ -60,7 +62,8 @@ namespace System.Xml.Serialization {
             set { memberName = value; }
         }
 
-        public XmlQualifiedName MemberType {
+        public XmlQualifiedName MemberType
+        {
             get { return memberType; }
             set { memberType = value; }
         }

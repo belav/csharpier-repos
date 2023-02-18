@@ -8,7 +8,14 @@ namespace System.Reflection.Runtime.General.NativeFormat
 {
     internal static class DefaultValueParser
     {
-        public static bool GetDefaultValueIfAny(MetadataReader reader, Handle constantHandle, Type declaredType, IEnumerable<CustomAttributeData> customAttributes, bool raw, out object? defaultValue)
+        public static bool GetDefaultValueIfAny(
+            MetadataReader reader,
+            Handle constantHandle,
+            Type declaredType,
+            IEnumerable<CustomAttributeData> customAttributes,
+            bool raw,
+            out object? defaultValue
+        )
         {
             if (!(constantHandle.IsNull(reader)))
             {
@@ -18,7 +25,9 @@ namespace System.Reflection.Runtime.General.NativeFormat
                 return true;
             }
 
-            if (Helpers.GetCustomAttributeDefaultValueIfAny(customAttributes, raw, out defaultValue))
+            if (
+                Helpers.GetCustomAttributeDefaultValueIfAny(customAttributes, raw, out defaultValue)
+            )
                 return true;
 
             defaultValue = null;

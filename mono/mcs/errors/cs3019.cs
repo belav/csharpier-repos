@@ -3,8 +3,8 @@
 // Compiler options: -warnaserror -warn:2
 
 using System;
-[assembly:CLSCompliant (true)]
 
-[CLSCompliant (true)]
-class CLSClass {
-}
+[assembly: CLSCompliant(true)]
+
+[CLSCompliant(true)]
+class CLSClass { }

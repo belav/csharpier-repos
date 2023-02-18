@@ -76,7 +76,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'DisplayName': 'John Smith',
               'SAMAccountName': 'contoso\\johns'
             }";

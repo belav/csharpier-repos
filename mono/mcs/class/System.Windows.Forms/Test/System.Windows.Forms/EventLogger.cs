@@ -23,150 +23,188 @@ namespace MonoTests.System.Windows.Forms
         public class EventLog : ArrayList
         {
             public bool PrintAdds = false;
-            
-            new public int Add (object obj)
+
+            new public int Add(object obj)
             {
                 if (PrintAdds)
-                    Console.WriteLine ("{1} EventLog: {0}", obj, DateTime.Now.ToLongTimeString ());
-                return base.Add (obj);
+                    Console.WriteLine("{1} EventLog: {0}", obj, DateTime.Now.ToLongTimeString());
+                return base.Add(obj);
             }
         }
-    
+
         private EventLog log;
         private object instance;
 
-        public bool PrintAdds {
+        public bool PrintAdds
+        {
             get { return log.PrintAdds; }
             set { log.PrintAdds = value; }
         }
 
         // Tests if all the names in Names are in log with the order given in Names.
-        public bool ContainsEventsOrdered (params string [] Names) 
+        public bool ContainsEventsOrdered(params string[] Names)
         {
             if (Names.Length == 0)
                 return true;
-        
+
             int n = 0;
-            for (int i = 0; i < log.Count; i++) {
-                if ((string) log [i] == Names [n]) {
+            for (int i = 0; i < log.Count; i++)
+            {
+                if ((string)log[i] == Names[n])
+                {
                     n++;
                     if (n == Names.Length)
                         return true;
                 }
             }
-            
-            if (n == Names.Length) {
+
+            if (n == Names.Length)
+            {
                 return true;
-            } else {
-                Console.WriteLine ("ContainsEventsOrdered: logged events '" + EventsJoined () + "' didn't match correct events '" + string.Join (";", Names) + "'");
+            }
+            else
+            {
+                Console.WriteLine(
+                    "ContainsEventsOrdered: logged events '"
+                        + EventsJoined()
+                        + "' didn't match correct events '"
+                        + string.Join(";", Names)
+                        + "'"
+                );
                 return false;
             }
         }
-        
-        public int CountEvents (string Name)
+
+        public int CountEvents(string Name)
         {
             int count = 0;
-            foreach (string str in log) {
-                if (Name.Equals (str)) {
-                    count++;    
+            foreach (string str in log)
+            {
+                if (Name.Equals(str))
+                {
+                    count++;
                 }
             }
             return count;
         }
-        
-        public bool EventRaised (string Name) 
+
+        public bool EventRaised(string Name)
         {
-            return log.Contains (Name);
-        }
-        
-        public int EventsRaised {
-            get {
-                return log.Count;
-            }
+            return log.Contains(Name);
         }
 
-        public string EventsJoined ()
+        public int EventsRaised
         {
-            return EventsJoined (";");
+            get { return log.Count; }
         }
-        
-        public string EventsJoined (string separator)
+
+        public string EventsJoined()
         {
-            return string.Join (";", ToArray ());
+            return EventsJoined(";");
         }
-        
-        public void Clear ()
+
+        public string EventsJoined(string separator)
         {
-            log.Clear ();
+            return string.Join(";", ToArray());
         }
-        
-        public string [] ToArray ()
+
+        public void Clear()
         {
-            string [] result = new string [log.Count];
-            log.CopyTo (result);
+            log.Clear();
+        }
+
+        public string[] ToArray()
+        {
+            string[] result = new string[log.Count];
+            log.CopyTo(result);
             return result;
         }
-        
-        public EventLogger (object item)
+
+        public EventLogger(object item)
         {
-            if (item == null) {
-                throw new ArgumentNullException ("item");
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
             }
 
-            log = new EventLog ();
-            
-            Type itemType = item.GetType ();
-            AssemblyName name = new AssemblyName ();
+            log = new EventLog();
+
+            Type itemType = item.GetType();
+            AssemblyName name = new AssemblyName();
             name.Name = "EventLoggerAssembly";
-            AssemblyBuilder assembly = AppDomain.CurrentDomain.DefineDynamicAssembly (name, AssemblyBuilderAccess.RunAndSave);
-            ModuleBuilder module = assembly.DefineDynamicModule ("EventLoggerAssembly", "EventLoggerAssembly.dll");
-            
-            Type ListType = log.GetType ();
-            
-            TypeBuilder logType = module.DefineType ("Logger");
-            FieldBuilder logField = logType.DefineField ("log", ListType, FieldAttributes.Public);
-            ConstructorBuilder logCtor = logType.DefineConstructor (MethodAttributes.Public, CallingConventions.HasThis, new Type [] {ListType, itemType});
-            logCtor.DefineParameter (1, ParameterAttributes.None, "test");
-            logCtor.DefineParameter (2, ParameterAttributes.None, "obj");
-            ILGenerator logIL = logCtor.GetILGenerator ();
+            AssemblyBuilder assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
+                name,
+                AssemblyBuilderAccess.RunAndSave
+            );
+            ModuleBuilder module = assembly.DefineDynamicModule(
+                "EventLoggerAssembly",
+                "EventLoggerAssembly.dll"
+            );
 
-            logIL.Emit (OpCodes.Ldarg_0);
-            logIL.Emit (OpCodes.Call, typeof (object).GetConstructor (Type.EmptyTypes));
+            Type ListType = log.GetType();
 
-            logIL.Emit (OpCodes.Ldarg_0);
-            logIL.Emit (OpCodes.Ldarg_1);
-            logIL.Emit (OpCodes.Stfld, logField);
+            TypeBuilder logType = module.DefineType("Logger");
+            FieldBuilder logField = logType.DefineField("log", ListType, FieldAttributes.Public);
+            ConstructorBuilder logCtor = logType.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.HasThis,
+                new Type[] { ListType, itemType }
+            );
+            logCtor.DefineParameter(1, ParameterAttributes.None, "test");
+            logCtor.DefineParameter(2, ParameterAttributes.None, "obj");
+            ILGenerator logIL = logCtor.GetILGenerator();
 
-            
-            foreach (EventInfo Event in itemType.GetEvents ()) {
+            logIL.Emit(OpCodes.Ldarg_0);
+            logIL.Emit(OpCodes.Call, typeof(object).GetConstructor(Type.EmptyTypes));
+
+            logIL.Emit(OpCodes.Ldarg_0);
+            logIL.Emit(OpCodes.Ldarg_1);
+            logIL.Emit(OpCodes.Stfld, logField);
+
+            foreach (EventInfo Event in itemType.GetEvents())
+            {
                 ILGenerator il;
 
-                MethodInfo invoke = Event.EventHandlerType.GetMethod ("Invoke");
-                MethodBuilder method = logType.DefineMethod (Event.Name, MethodAttributes.Public, null, new Type [] { invoke.GetParameters () [0].ParameterType, invoke.GetParameters () [1].ParameterType });
-                method.DefineParameter (1, ParameterAttributes.None, "test");
-                method.DefineParameter (2, ParameterAttributes.None, "test2");
-                il = method.GetILGenerator ();
-                il.Emit (OpCodes.Ldarg_0);
-                il.Emit (OpCodes.Ldfld, logField);
-                il.Emit (OpCodes.Ldstr, Event.Name);
-                il.Emit (OpCodes.Callvirt, ListType.GetMethod ("Add"));
-                il.Emit (OpCodes.Pop);
-                il.Emit (OpCodes.Ret);
-                
-                logIL.Emit (OpCodes.Ldarg_2);
-                logIL.Emit (OpCodes.Ldarg_0);
-                logIL.Emit (OpCodes.Dup);
-                logIL.Emit (OpCodes.Ldvirtftn, method);
-                logIL.Emit (OpCodes.Newobj, Event.EventHandlerType.GetConstructor (new Type [] {typeof(object), typeof(IntPtr)}));
-                logIL.Emit (OpCodes.Call, Event.GetAddMethod ());
+                MethodInfo invoke = Event.EventHandlerType.GetMethod("Invoke");
+                MethodBuilder method = logType.DefineMethod(
+                    Event.Name,
+                    MethodAttributes.Public,
+                    null,
+                    new Type[]
+                    {
+                        invoke.GetParameters()[0].ParameterType,
+                        invoke.GetParameters()[1].ParameterType
+                    }
+                );
+                method.DefineParameter(1, ParameterAttributes.None, "test");
+                method.DefineParameter(2, ParameterAttributes.None, "test2");
+                il = method.GetILGenerator();
+                il.Emit(OpCodes.Ldarg_0);
+                il.Emit(OpCodes.Ldfld, logField);
+                il.Emit(OpCodes.Ldstr, Event.Name);
+                il.Emit(OpCodes.Callvirt, ListType.GetMethod("Add"));
+                il.Emit(OpCodes.Pop);
+                il.Emit(OpCodes.Ret);
+
+                logIL.Emit(OpCodes.Ldarg_2);
+                logIL.Emit(OpCodes.Ldarg_0);
+                logIL.Emit(OpCodes.Dup);
+                logIL.Emit(OpCodes.Ldvirtftn, method);
+                logIL.Emit(
+                    OpCodes.Newobj,
+                    Event.EventHandlerType.GetConstructor(
+                        new Type[] { typeof(object), typeof(IntPtr) }
+                    )
+                );
+                logIL.Emit(OpCodes.Call, Event.GetAddMethod());
             }
 
-            logIL.Emit (OpCodes.Ret);        
-            Type builtLogType = logType.CreateType ();
-            
-            instance = builtLogType.GetConstructors () [0].Invoke (new object [] { log, item });
-            TestHelper.RemoveWarning (instance);
-            
+            logIL.Emit(OpCodes.Ret);
+            Type builtLogType = logType.CreateType();
+
+            instance = builtLogType.GetConstructors()[0].Invoke(new object[] { log, item });
+            TestHelper.RemoveWarning(instance);
+
             //assembly.Save ("EventLoggerAssembly.dll");
         }
     }

@@ -1,14 +1,13 @@
-class X {
-    enum A : byte {
-        x, y, z
+class X
+{
+    enum A : byte
+    {
+        x,
+        y,
+        z
     }
+
     const A foo = A.x | A.y;
-    
-    public static void Main () {}
+
+    public static void Main() { }
 }
-
-
-
-
-
-

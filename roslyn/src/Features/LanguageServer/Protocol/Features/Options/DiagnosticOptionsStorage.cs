@@ -8,10 +8,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal sealed class DiagnosticOptionsStorage
     {
-        public static readonly Option2<bool> LspPullDiagnosticsFeatureFlag = new(
-            "DiagnosticOptions_LspPullDiagnosticsFeatureFlag", defaultValue: false);
+        public static readonly Option2<bool> LspPullDiagnosticsFeatureFlag =
+            new("DiagnosticOptions_LspPullDiagnosticsFeatureFlag", defaultValue: false);
 
-        public static readonly Option2<bool> LogTelemetryForBackgroundAnalyzerExecution = new(
-            "DiagnosticOptions_LogTelemetryForBackgroundAnalyzerExecution", defaultValue: false);
+        public static readonly Option2<bool> LogTelemetryForBackgroundAnalyzerExecution =
+            new(
+                "DiagnosticOptions_LogTelemetryForBackgroundAnalyzerExecution",
+                defaultValue: false
+            );
     }
 }

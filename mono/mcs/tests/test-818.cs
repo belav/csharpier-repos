@@ -1,7 +1,14 @@
 using System;
 
-namespace A { class CAttribute : Attribute { } }
-namespace B { class CAttribute : Attribute { } }
+namespace A
+{
+    class CAttribute : Attribute { }
+}
+
+namespace B
+{
+    class CAttribute : Attribute { }
+}
 
 namespace Foo
 {
@@ -13,8 +20,6 @@ namespace Foo
     [C]
     class Foo
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }

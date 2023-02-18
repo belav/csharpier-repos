@@ -11,8 +11,9 @@ namespace System.Runtime.InteropServices
     class MissingInteropDataException : Exception
     {
         public Type MissingType { get; private set; }
-        public MissingInteropDataException(string resourceFormat, Type pertainantType):
-            base(SR.Format(resourceFormat, pertainantType.ToString()))
+
+        public MissingInteropDataException(string resourceFormat, Type pertainantType)
+            : base(SR.Format(resourceFormat, pertainantType.ToString()))
         {
             MissingType = pertainantType;
         }

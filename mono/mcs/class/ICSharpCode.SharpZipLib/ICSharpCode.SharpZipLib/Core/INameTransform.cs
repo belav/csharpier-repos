@@ -20,7 +20,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -38,7 +38,9 @@ namespace ICSharpCode.SharpZipLib.Core
     /// <summary>
     /// INameTransform defines how file system names are transformed for use with archives.
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public interface INameTransform
     {
         /// <summary>
@@ -47,7 +49,7 @@ namespace ICSharpCode.SharpZipLib.Core
         /// <param name="name">The name to transform.</param>
         /// <returns>The transformed name.</returns>
         string TransformFile(string name);
-        
+
         /// <summary>
         /// Given a directory name determine the transformed equivalent.
         /// </summary>

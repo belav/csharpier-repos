@@ -3,8 +3,8 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        var s = Main () ?? throw null;
+        var s = Main() ?? throw null;
     }
 }

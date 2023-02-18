@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,15 +40,18 @@ namespace MonoTests.System.ComponentModel.Design
     public class DesignerActionMethodItemTest
     {
         [Test]
-        public void Constructor ()
+        public void Constructor()
         {
-            DesignerActionMethodItem item = new DesignerActionMethodItem (new DesignerActionList (new Component ()),
-                "myMember", "myDisplay");
-            Assert.AreEqual ("myMember", item.MemberName, "#1");
-            Assert.AreEqual ("myDisplay", item.DisplayName, "#2");
-            Assert.IsNull (item.Category, "#3");
-            Assert.IsNull (item.Description, "#4");
-            Assert.IsFalse (item.IncludeAsDesignerVerb, "#5");
+            DesignerActionMethodItem item = new DesignerActionMethodItem(
+                new DesignerActionList(new Component()),
+                "myMember",
+                "myDisplay"
+            );
+            Assert.AreEqual("myMember", item.MemberName, "#1");
+            Assert.AreEqual("myDisplay", item.DisplayName, "#2");
+            Assert.IsNull(item.Category, "#3");
+            Assert.IsNull(item.Description, "#4");
+            Assert.IsFalse(item.IncludeAsDesignerVerb, "#5");
         }
     }
 }

@@ -27,10 +27,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor.Implement
             _service = service;
         }
 
-        public async Task<DebugDataTipInfo> GetDataTipInfoAsync(Document document, int position, CancellationToken cancellationToken)
-            => (await _service.GetDataTipInfoAsync(document, position, cancellationToken).ConfigureAwait(false)).UnderlyingObject;
+        public async Task<DebugDataTipInfo> GetDataTipInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            (
+                await _service
+                    .GetDataTipInfoAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false)
+            ).UnderlyingObject;
 
-        public async Task<DebugLocationInfo> GetLocationInfoAsync(Document document, int position, CancellationToken cancellationToken)
-            => (await _service.GetLocationInfoAsync(document, position, cancellationToken).ConfigureAwait(false)).UnderlyingObject;
+        public async Task<DebugLocationInfo> GetLocationInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            (
+                await _service
+                    .GetLocationInfoAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false)
+            ).UnderlyingObject;
     }
 }

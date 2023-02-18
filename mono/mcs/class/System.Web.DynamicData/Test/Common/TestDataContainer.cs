@@ -10,40 +10,43 @@ using MonoTests.ModelProviders;
 
 namespace MonoTests.Common
 {
-    public class TestDataContainer <TContext>: DynamicDataContainer<TContext> where TContext: ITestDataContext
+    public class TestDataContainer<TContext> : DynamicDataContainer<TContext>
+        where TContext : ITestDataContext
     {
-        public TestDataContainer ()
-        { }
+        public TestDataContainer() { }
 
-        public TestDataContainer (string tableName)
-        : base (tableName)
-        { }
+        public TestDataContainer(string tableName)
+            : base(tableName) { }
 
-        public override int Update (IDictionary keys, IDictionary values, IDictionary oldValues)
+        public override int Update(IDictionary keys, IDictionary values, IDictionary oldValues)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override int Insert (IDictionary values)
+        public override int Insert(IDictionary values)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override int Delete (IDictionary keys, IDictionary oldValues)
+        public override int Delete(IDictionary keys, IDictionary oldValues)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override IEnumerable Select (DataSourceSelectArguments args, string where, ParameterCollection whereParams)
+        public override IEnumerable Select(
+            DataSourceSelectArguments args,
+            string where,
+            ParameterCollection whereParams
+        )
         {
             TContext contextInstance = ContainedTypeInstance;
-            return ContainedTypeInstance.GetTableData (TableName, args, where, whereParams);
+            return ContainedTypeInstance.GetTableData(TableName, args, where, whereParams);
         }
 
-        public override List<DynamicDataTable> GetTables ()
+        public override List<DynamicDataTable> GetTables()
         {
-            var data = Activator.CreateInstance<TContext> ();
-            return data.GetTables ();
+            var data = Activator.CreateInstance<TContext>();
+            return data.GetTables();
         }
     }
 }

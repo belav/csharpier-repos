@@ -18,7 +18,9 @@ namespace System.CommandLine.Invocation
                 Path.Combine(
                     Path.GetTempPath(),
                     "system-commandline-sentinel-files",
-                    $"{featureName}-{_assemblyName}"));
+                    $"{featureName}-{_assemblyName}"
+                )
+            );
         }
 
         public async Task EnsureRegistered(Func<Task<string>> onInitialize)
@@ -34,9 +36,7 @@ namespace System.CommandLine.Invocation
                 {
                     var message = await onInitialize();
 
-                    File.WriteAllText(
-                        _sentinelFile.FullName,
-                        message);
+                    File.WriteAllText(_sentinelFile.FullName, message);
                 }
                 catch (Exception)
                 {

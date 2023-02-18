@@ -4,39 +4,33 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     class InterfaceMethodImplementedOnBaseClassDoesNotGetStripped
     {
-        public static void Main ()
+        public static void Main()
         {
-            I1 i1 = new Derived ();
-            i1.Used ();
+            I1 i1 = new Derived();
+            i1.Used();
         }
 
         public interface I1
         {
-            void Unused ();
+            void Unused();
 
             [Kept]
-            void Used ();
+            void Used();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         public class Base
         {
-            public void Unused ()
-            {
-            }
+            public void Unused() { }
 
             [Kept]
-            public void Used ()
-            {
-            }
+            public void Used() { }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (Base))]
-        [KeptInterface (typeof (I1))]
-        public class Derived : Base, I1
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(Base))]
+        [KeptInterface(typeof(I1))]
+        public class Derived : Base, I1 { }
     }
 }

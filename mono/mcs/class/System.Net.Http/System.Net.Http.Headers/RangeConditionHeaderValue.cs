@@ -32,106 +32,104 @@ namespace System.Net.Http.Headers
 {
     public class RangeConditionHeaderValue : ICloneable
     {
-        public RangeConditionHeaderValue (DateTimeOffset date)
+        public RangeConditionHeaderValue(DateTimeOffset date)
         {
             Date = date;
         }
 
-        public RangeConditionHeaderValue (EntityTagHeaderValue entityTag)
+        public RangeConditionHeaderValue(EntityTagHeaderValue entityTag)
         {
             if (entityTag == null)
-                throw new ArgumentNullException ("entityTag");
+                throw new ArgumentNullException("entityTag");
 
             EntityTag = entityTag;
         }
 
-        public RangeConditionHeaderValue (string entityTag)
-            : this (new EntityTagHeaderValue (entityTag))
-        {
-        }
+        public RangeConditionHeaderValue(string entityTag)
+            : this(new EntityTagHeaderValue(entityTag)) { }
 
         public DateTimeOffset? Date { get; private set; }
         public EntityTagHeaderValue EntityTag { get; private set; }
 
-        object ICloneable.Clone ()
+        object ICloneable.Clone()
         {
-            return MemberwiseClone ();
+            return MemberwiseClone();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var source = obj as RangeConditionHeaderValue;
             if (source == null)
                 return false;
 
-            return EntityTag != null ?
-                EntityTag.Equals (source.EntityTag) :
-                Date == source.Date;
+            return EntityTag != null ? EntityTag.Equals(source.EntityTag) : Date == source.Date;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return EntityTag != null ? EntityTag.GetHashCode () : Date.GetHashCode ();
+            return EntityTag != null ? EntityTag.GetHashCode() : Date.GetHashCode();
         }
 
-        public static RangeConditionHeaderValue Parse (string input)
+        public static RangeConditionHeaderValue Parse(string input)
         {
             RangeConditionHeaderValue value;
-            if (TryParse (input, out value))
+            if (TryParse(input, out value))
                 return value;
 
-            throw new FormatException (input);
+            throw new FormatException(input);
         }
 
-        public static bool TryParse (string input, out RangeConditionHeaderValue parsedValue)
+        public static bool TryParse(string input, out RangeConditionHeaderValue parsedValue)
         {
             parsedValue = null;
 
-            var lexer = new Lexer (input);
-            var t = lexer.Scan ();
+            var lexer = new Lexer(input);
+            var t = lexer.Scan();
             bool is_weak;
 
-            if (t == Token.Type.Token) {
-                if (lexer.GetStringValue (t) != "W") {
+            if (t == Token.Type.Token)
+            {
+                if (lexer.GetStringValue(t) != "W")
+                {
                     DateTimeOffset date;
-                    if (!Lexer.TryGetDateValue (input, out date))
+                    if (!Lexer.TryGetDateValue(input, out date))
                         return false;
 
-                    parsedValue = new RangeConditionHeaderValue (date);
+                    parsedValue = new RangeConditionHeaderValue(date);
                     return true;
                 }
 
-                if (lexer.PeekChar () != '/')
+                if (lexer.PeekChar() != '/')
                     return false;
 
                 is_weak = true;
-                lexer.EatChar ();
-                t = lexer.Scan ();
-            } else {
+                lexer.EatChar();
+                t = lexer.Scan();
+            }
+            else
+            {
                 is_weak = false;
             }
 
             if (t != Token.Type.QuotedString)
                 return false;
 
-            if (lexer.Scan () != Token.Type.End)
+            if (lexer.Scan() != Token.Type.End)
                 return false;
 
-            parsedValue = new RangeConditionHeaderValue (
-                new EntityTagHeaderValue () {
-                    Tag = lexer.GetStringValue (t),
-                    IsWeak = is_weak
-                });
+            parsedValue = new RangeConditionHeaderValue(
+                new EntityTagHeaderValue() { Tag = lexer.GetStringValue(t), IsWeak = is_weak }
+            );
 
             return true;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (EntityTag != null)
-                return EntityTag.ToString ();
+                return EntityTag.ToString();
 
-            return Date.Value.ToString ("r", CultureInfo.InvariantCulture);
+            return Date.Value.ToString("r", CultureInfo.InvariantCulture);
         }
     }
 }

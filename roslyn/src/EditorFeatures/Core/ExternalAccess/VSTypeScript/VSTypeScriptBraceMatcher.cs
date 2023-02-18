@@ -25,10 +25,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             _impl = impl;
         }
 
-        public async Task<BraceMatchingResult?> FindBracesAsync(Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken)
+        public async Task<BraceMatchingResult?> FindBracesAsync(
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var result = await _impl.FindBracesAsync(document, position, cancellationToken).ConfigureAwait(false);
-            return result.HasValue ? new BraceMatchingResult(result.Value.LeftSpan, result.Value.RightSpan) : null;
+            var result = await _impl
+                .FindBracesAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
+            return result.HasValue
+                ? new BraceMatchingResult(result.Value.LeftSpan, result.Value.RightSpan)
+                : null;
         }
     }
 }

@@ -5,7 +5,7 @@ class X
 {
     static int P { get; set; }
 
-    static void Main ()
+    static void Main()
     {
         ref int rl = ref P;
     }

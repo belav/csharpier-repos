@@ -11,11 +11,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class RemoveKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public RemoveKeywordRecommender()
-            : base(SyntaxKind.RemoveKeyword)
-        {
-        }
+            : base(SyntaxKind.RemoveKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.TargetToken.IsAccessorDeclarationContext<EventDeclarationSyntax>(position, SyntaxKind.RemoveKeyword);
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) =>
+            context.TargetToken.IsAccessorDeclarationContext<EventDeclarationSyntax>(
+                position,
+                SyntaxKind.RemoveKeyword
+            );
     }
 }

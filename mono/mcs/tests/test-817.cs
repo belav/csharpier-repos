@@ -7,9 +7,9 @@ namespace System
 
     class Program
     {
-        public static void Main ()
+        public static void Main()
         {
-            Int32 a = new Int32 ();
+            Int32 a = new Int32();
             a.Value = 6;
         }
     }

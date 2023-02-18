@@ -20,8 +20,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public bool Equals(LocalSlotDebugInfo other)
         {
-            return this.SynthesizedKind == other.SynthesizedKind
-                && this.Id.Equals(other.Id);
+            return this.SynthesizedKind == other.SynthesizedKind && this.Id.Equals(other.Id);
         }
 
         public override bool Equals(object? obj)

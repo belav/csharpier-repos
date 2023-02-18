@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,11 +30,13 @@
 
 using System;
 
-namespace Mono.Security.Cryptography {
+namespace Mono.Security.Cryptography
+{
     /// <summary>
     /// Defines the different Diffie-Hellman key generation methods.
     /// </summary>
-    public enum DHKeyGeneration {
+    public enum DHKeyGeneration
+    {
         /// <summary>
         /// [TODO] you first randomly select a prime Q of size 160 bits, then choose P randomly among numbers like
         /// Q*R+1 with R random. Then you go along with finding a generator G which has order exactly Q. The private
@@ -48,6 +50,7 @@ namespace Mono.Security.Cryptography {
         /// this method does not ensure that the selected prime offers an adequate security level.
         /// </summary>
         Random,
+
         /// <summary>
         /// Returns dynamically generated values for P and G. P is a Sophie Germain prime, which has some interesting
         /// security features when used with Diffie Hellman.

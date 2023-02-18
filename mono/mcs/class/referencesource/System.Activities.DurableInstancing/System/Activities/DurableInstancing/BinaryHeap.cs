@@ -9,17 +9,16 @@ namespace System.Activities.DurableInstancing
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
 
-    sealed class BinaryHeap<TKey, TValue> where TKey : IComparable<TKey>
+    sealed class BinaryHeap<TKey, TValue>
+        where TKey : IComparable<TKey>
     {
         const int defaultCapacity = 128;
         readonly KeyValuePair<TKey, TValue> EmptyItem = new KeyValuePair<TKey, TValue>();
         KeyValuePair<TKey, TValue>[] items;
         int itemCount;
 
-        public BinaryHeap() :
-            this(defaultCapacity)
-        {
-        }
+        public BinaryHeap()
+            : this(defaultCapacity) { }
 
         public BinaryHeap(int capacity)
         {
@@ -96,10 +95,18 @@ namespace System.Activities.DurableInstancing
             return this.items[0];
         }
 
-        [SuppressMessage(FxCop.Category.Design, "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "This is an internal only API.")]
-        [SuppressMessage(FxCop.Category.MSInternal, "CA908:UseApprovedGenericsForPrecompiledAssemblies")]
-        public ICollection<KeyValuePair<TKey, TValue>> RemoveAll(Predicate<KeyValuePair<TKey, TValue>> func)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an internal only API."
+        )]
+        [SuppressMessage(
+            FxCop.Category.MSInternal,
+            "CA908:UseApprovedGenericsForPrecompiledAssemblies"
+        )]
+        public ICollection<KeyValuePair<TKey, TValue>> RemoveAll(
+            Predicate<KeyValuePair<TKey, TValue>> func
+        )
         {
             ICollection<KeyValuePair<TKey, TValue>> result = new List<KeyValuePair<TKey, TValue>>();
 
@@ -140,15 +147,23 @@ namespace System.Activities.DurableInstancing
             if (this.items.Length > defaultCapacity && this.itemCount < (this.items.Length >> 1))
             {
                 int newSize = Math.Max(
-                    defaultCapacity, (((this.itemCount / defaultCapacity) + 1) * defaultCapacity));
+                    defaultCapacity,
+                    (((this.itemCount / defaultCapacity) + 1) * defaultCapacity)
+                );
 
                 this.ResizeItemStore(newSize);
             }
         }
 
-        [SuppressMessage("Microsoft.MSInternal", "CA908:UseApprovedGenericsForPrecompiledAssemblies")]
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
-            Justification = "This is an internal only API.")]
+        [SuppressMessage(
+            "Microsoft.MSInternal",
+            "CA908:UseApprovedGenericsForPrecompiledAssemblies"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an internal only API."
+        )]
         public ICollection<KeyValuePair<TKey, TValue>> TakeWhile(Predicate<TKey> func)
         {
             ICollection<KeyValuePair<TKey, TValue>> result = new List<KeyValuePair<TKey, TValue>>();
@@ -187,7 +202,10 @@ namespace System.Activities.DurableInstancing
 
                 if (leftChildPosition < itemCount)
                 {
-                    if (this.items[currentPosition].Key.CompareTo(this.items[leftChildPosition].Key) > 0)
+                    if (
+                        this.items[currentPosition].Key.CompareTo(this.items[leftChildPosition].Key)
+                        > 0
+                    )
                     {
                         swapPosition = leftChildPosition;
                     }
@@ -199,7 +217,10 @@ namespace System.Activities.DurableInstancing
 
                 if (rightChildPosition < itemCount)
                 {
-                    if (this.items[swapPosition].Key.CompareTo(this.items[rightChildPosition].Key) > 0)
+                    if (
+                        this.items[swapPosition].Key.CompareTo(this.items[rightChildPosition].Key)
+                        > 0
+                    )
                     {
                         swapPosition = rightChildPosition;
                     }

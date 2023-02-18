@@ -4,7 +4,7 @@
 
 class C
 {
-    public static void Main ()
+    public static void Main()
     {
         int i = 44;
         i <<= null;

@@ -24,13 +24,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         public async Task TestIfFormatting1()
         {
             await TestAsync(
-@"class C {
+                @"class C {
   void M() {
     if (true) {
     }
   }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -38,21 +38,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIfFormatting2()
         {
             await TestAsync(
-@"class C {
+                @"class C {
   void M() {
     if (true) {
     }
     return;
   }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -62,14 +63,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIfFormatting3()
         {
             await TestAsync(
-@"class C {
+                @"class C {
   void M() {
     if (true) {
     } else {
@@ -77,7 +79,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
 }
   }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -89,14 +91,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTryCatchFinally()
         {
             await TestAsync(
-@"class C {
+                @"class C {
   void M() {
     try {
     } catch {
@@ -104,7 +107,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
     }
   }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -118,20 +121,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDoWhile()
         {
             await TestAsync(
-@"class C {
+                @"class C {
   void M() {
     do {
     } while(true);
   }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -139,14 +143,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
         } while (true);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNestedIf()
         {
             await TestAsync(
-@"class C {
+                @"class C {
   void M() {
     if (true) {
         if (true) {
@@ -154,7 +159,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
     }
   }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -165,14 +170,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestBraces()
         {
             await TestAsync(
-@"class C {
+                @"class C {
   void M() {
     if (true) {
     }
@@ -189,7 +195,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
     }
   }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -220,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
         {
         }
     }
-}");
+}"
+            );
         }
 
         private static async Task TestAsync(string input, string expected)
@@ -228,7 +235,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DecompiledSource
             using var workspace = TestWorkspace.CreateCSharp(input);
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
 
-            var formatted = await CSharpDecompiledSourceService.FormatDocumentAsync(document, CSharpSyntaxFormattingOptions.Default, CancellationToken.None);
+            var formatted = await CSharpDecompiledSourceService.FormatDocumentAsync(
+                document,
+                CSharpSyntaxFormattingOptions.Default,
+                CancellationToken.None
+            );
             var test = await formatted.GetTextAsync();
 
             AssertEx.Equal(expected, test.ToString());

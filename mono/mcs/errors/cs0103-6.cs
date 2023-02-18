@@ -5,7 +5,7 @@ class C
 {
     public readonly object A = owner.Foo;
 
-    public C ()
+    public C()
     {
         int owner = 1;
     }

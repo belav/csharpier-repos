@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Used to devirtualize ConcurrentDictionary for EqualityComparer{T}.Default and ReferenceEquals
-    /// 
+    ///
     /// This type is to enable fast-path devirtualization in the Jit. Dictionary{K, V}, HashTable{T}
     /// and ConcurrentDictionary{K, V} will devirtualize (and potentially inline) the IEquatable{T}.Equals
     /// method for a struct when the Comparer is unspecified in .NET Core, .NET 5; whereas specifying

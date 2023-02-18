@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,185 +32,205 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 
-namespace System.Messaging 
+namespace System.Messaging
 {
-    [TypeConverter (typeof(ExpandableObjectConverter))]
-    public class DefaultPropertiesToSend 
+    [TypeConverter(typeof(ExpandableObjectConverter))]
+    public class DefaultPropertiesToSend
     {
         [MonoTODO]
-        public DefaultPropertiesToSend()
+        public DefaultPropertiesToSend() { }
+
+        [DefaultValue(AcknowledgeTypes.None)]
+        [MessagingDescription("MsgAcknowledgeType")]
+        public AcknowledgeTypes AcknowledgeType
         {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (AcknowledgeTypes.None)]
-        [MessagingDescription ("MsgAcknowledgeType")]
-        public AcknowledgeTypes AcknowledgeType {
+        [DefaultValue(null)]
+        [MessagingDescription("MsgAdministrationQueue")]
+        public MessageQueue AdministrationQueue
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (null)]
-        [MessagingDescription ("MsgAdministrationQueue")]
-        public MessageQueue AdministrationQueue {
+        [DefaultValue(0)]
+        [MessagingDescription("MsgAppSpecific")]
+        public int AppSpecific
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (0)]
-        [MessagingDescription ("MsgAppSpecific")]
-        public int AppSpecific {
+        [DefaultValue(true)]
+        [MessagingDescription("MsgAttachSenderId")]
+        public bool AttachSenderId
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (true)]
-        [MessagingDescription ("MsgAttachSenderId")]
-        public bool AttachSenderId {
+        [DefaultValue(EncryptionAlgorithm.Rc2)]
+        [MessagingDescription("MsgEncryptionAlgorithm")]
+        public EncryptionAlgorithm EncryptionAlgorithm
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (EncryptionAlgorithm.Rc2)]
-        [MessagingDescription ("MsgEncryptionAlgorithm")]
-        public EncryptionAlgorithm EncryptionAlgorithm {
+        [Editor(
+            "System.ComponentModel.Design.ArrayEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [MessagingDescription("MsgExtension")]
+        public byte[] Extension
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [Editor ("System.ComponentModel.Design.ArrayEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [MessagingDescription ("MsgExtension")]
-        public byte[] Extension {
+        [DefaultValue(HashAlgorithm.Md5)]
+        [MessagingDescription("MsgHashAlgorithm")]
+        public HashAlgorithm HashAlgorithm
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (HashAlgorithm.Md5)]
-        [MessagingDescription ("MsgHashAlgorithm")]
-        public HashAlgorithm HashAlgorithm {
+        [DefaultValue("")]
+        [MessagingDescription("MsgLabel")]
+        public string Label
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue ("")]
-        [MessagingDescription ("MsgLabel")]
-        public string Label {
+        [DefaultValue(MessagePriority.Normal)]
+        [MessagingDescription("MsgPriority")]
+        public MessagePriority Priority
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (MessagePriority.Normal)]
-        [MessagingDescription ("MsgPriority")]
-        public MessagePriority Priority {
+        [DefaultValue(false)]
+        [MessagingDescription("MsgRecoverable")]
+        public bool Recoverable
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgRecoverable")]
-        public bool Recoverable {
+        [DefaultValue(null)]
+        [MessagingDescription("MsgResponseQueue")]
+        public MessageQueue ResponseQueue
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (null)]
-        [MessagingDescription ("MsgResponseQueue")]
-        public MessageQueue ResponseQueue {
+        [TypeConverter(typeof(TimeoutConverter))]
+        [MessagingDescription("MsgTimeToBeReceived")]
+        public TimeSpan TimeToBeReceived
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [TypeConverter (typeof(TimeoutConverter))]
-        [MessagingDescription ("MsgTimeToBeReceived")]
-        public TimeSpan TimeToBeReceived {
+        [TypeConverter(typeof(TimeoutConverter))]
+        [MessagingDescription("MsgTimeToReachQueue")]
+        public TimeSpan TimeToReachQueue
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [TypeConverter (typeof(TimeoutConverter))]
-        [MessagingDescription ("MsgTimeToReachQueue")]
-        public TimeSpan TimeToReachQueue {
+        [DefaultValue(null)]
+        [MessagingDescription("MsgTransactionStatusQueue")]
+        public MessageQueue TransactionStatusQueue
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (null)]
-        [MessagingDescription ("MsgTransactionStatusQueue")]
-        public MessageQueue TransactionStatusQueue {
+        [DefaultValue(false)]
+        [MessagingDescription("MsgUseAuthentication")]
+        public bool UseAuthentication
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgUseAuthentication")]
-        public bool UseAuthentication {
+        [DefaultValue(false)]
+        [MessagingDescription("MsgUseDeadLetterQueue")]
+        public bool UseDeadLetterQueue
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgUseDeadLetterQueue")]
-        public bool UseDeadLetterQueue {
+        [DefaultValue(false)]
+        [MessagingDescription("MsgUseEncryption")]
+        public bool UseEncryption
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgUseEncryption")]
-        public bool UseEncryption {
+        [DefaultValue(false)]
+        [MessagingDescription("MsgUseJournalQueue")]
+        public bool UseJournalQueue
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
 
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgUseJournalQueue")]
-        public bool UseJournalQueue {
+        [DefaultValue(false)]
+        [MessagingDescription("MsgUseTracing")]
+        public bool UseTracing
+        {
             [MonoTODO]
-            get {throw new NotImplementedException();}
+            get { throw new NotImplementedException(); }
             [MonoTODO]
-            set {throw new NotImplementedException();}
-        }
-
-        [DefaultValue (false)]
-        [MessagingDescription ("MsgUseTracing")]
-        public bool UseTracing {
-            [MonoTODO]
-            get {throw new NotImplementedException();}
-            [MonoTODO]
-            set {throw new NotImplementedException();}
+            set { throw new NotImplementedException(); }
         }
     }
 }

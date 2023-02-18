@@ -19,7 +19,12 @@ namespace Microsoft.Interop
         private readonly int _falseValue;
         private readonly bool _compareToTrue;
 
-        protected BoolMarshallerBase(ManagedTypeInfo nativeType, int trueValue, int falseValue, bool compareToTrue)
+        protected BoolMarshallerBase(
+            ManagedTypeInfo nativeType,
+            int trueValue,
+            int falseValue,
+            bool compareToTrue
+        )
         {
             _nativeType = nativeType;
             _trueValue = trueValue;
@@ -37,10 +42,15 @@ namespace Microsoft.Interop
 
         public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info)
         {
-            return info.IsByRef ? SignatureBehavior.PointerToNativeType : SignatureBehavior.NativeType;
+            return info.IsByRef
+                ? SignatureBehavior.PointerToNativeType
+                : SignatureBehavior.NativeType;
         }
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             if (info.IsByRef)
             {
@@ -52,7 +62,10 @@ namespace Microsoft.Interop
 
         public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
         {
-            MarshalDirection elementMarshalDirection = MarshallerHelpers.GetMarshalDirection(info, context);
+            MarshalDirection elementMarshalDirection = MarshallerHelpers.GetMarshalDirection(
+                info,
+                context
+            );
             (string managedIdentifier, string nativeIdentifier) = context.GetIdentifiers(info);
             switch (context.CurrentStage)
             {
@@ -60,7 +73,11 @@ namespace Microsoft.Interop
                     break;
                 case StubCodeContext.Stage.Marshal:
                     // <nativeIdentifier> = (<nativeType>)(<managedIdentifier> ? _trueValue : _falseValue);
-                    if (elementMarshalDirection is MarshalDirection.ManagedToUnmanaged or MarshalDirection.Bidirectional)
+                    if (
+                        elementMarshalDirection
+                        is MarshalDirection.ManagedToUnmanaged
+                            or MarshalDirection.Bidirectional
+                    )
                     {
                         yield return ExpressionStatement(
                             AssignmentExpression(
@@ -69,19 +86,37 @@ namespace Microsoft.Interop
                                 CastExpression(
                                     AsNativeType(info).Syntax,
                                     ParenthesizedExpression(
-                                        ConditionalExpression(IdentifierName(managedIdentifier),
-                                            LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(_trueValue)),
-                                            LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(_falseValue)))))));
+                                        ConditionalExpression(
+                                            IdentifierName(managedIdentifier),
+                                            LiteralExpression(
+                                                SyntaxKind.NumericLiteralExpression,
+                                                Literal(_trueValue)
+                                            ),
+                                            LiteralExpression(
+                                                SyntaxKind.NumericLiteralExpression,
+                                                Literal(_falseValue)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        );
                     }
 
                     break;
                 case StubCodeContext.Stage.Unmarshal:
-                    if (elementMarshalDirection is MarshalDirection.UnmanagedToManaged or MarshalDirection.Bidirectional)
+                    if (
+                        elementMarshalDirection
+                        is MarshalDirection.UnmanagedToManaged
+                            or MarshalDirection.Bidirectional
+                    )
                     {
                         // <managedIdentifier> = <nativeIdentifier> == _trueValue;
                         //   or
                         // <managedIdentifier> = <nativeIdentifier> != _falseValue;
-                        (SyntaxKind binaryOp, int comparand) = _compareToTrue ? (SyntaxKind.EqualsExpression, _trueValue) : (SyntaxKind.NotEqualsExpression, _falseValue);
+                        (SyntaxKind binaryOp, int comparand) = _compareToTrue
+                            ? (SyntaxKind.EqualsExpression, _trueValue)
+                            : (SyntaxKind.NotEqualsExpression, _falseValue);
 
                         yield return ExpressionStatement(
                             AssignmentExpression(
@@ -90,7 +125,13 @@ namespace Microsoft.Interop
                                 BinaryExpression(
                                     binaryOp,
                                     IdentifierName(nativeIdentifier),
-                                    LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(comparand)))));
+                                    LiteralExpression(
+                                        SyntaxKind.NumericLiteralExpression,
+                                        Literal(comparand)
+                                    )
+                                )
+                            )
+                        );
                     }
                     break;
                 default:
@@ -100,7 +141,10 @@ namespace Microsoft.Interop
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => true;
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
     }
 
     /// <summary>
@@ -120,9 +164,16 @@ namespace Microsoft.Interop
         /// </summary>
         /// <param name="signed">True if the byte should be signed, otherwise false</param>
         public ByteBoolMarshaller(bool signed)
-            : base(new SpecialTypeInfo(signed ? "sbyte" : "byte", signed ? "sbyte" : "byte", signed ? SpecialType.System_SByte : SpecialType.System_Byte), trueValue: 1, falseValue: 0, compareToTrue: false)
-        {
-        }
+            : base(
+                new SpecialTypeInfo(
+                    signed ? "sbyte" : "byte",
+                    signed ? "sbyte" : "byte",
+                    signed ? SpecialType.System_SByte : SpecialType.System_Byte
+                ),
+                trueValue: 1,
+                falseValue: 0,
+                compareToTrue: false
+            ) { }
     }
 
     /// <summary>
@@ -138,9 +189,16 @@ namespace Microsoft.Interop
         /// </summary>
         /// <param name="signed">True if the int should be signed, otherwise false</param>
         public WinBoolMarshaller(bool signed)
-            : base(new SpecialTypeInfo(signed ? "int" : "uint", signed ? "int" : "uint", signed ? SpecialType.System_Int32 : SpecialType.System_UInt32), trueValue: 1, falseValue: 0, compareToTrue: false)
-        {
-        }
+            : base(
+                new SpecialTypeInfo(
+                    signed ? "int" : "uint",
+                    signed ? "int" : "uint",
+                    signed ? SpecialType.System_Int32 : SpecialType.System_UInt32
+                ),
+                trueValue: 1,
+                falseValue: 0,
+                compareToTrue: false
+            ) { }
     }
 
     /// <summary>
@@ -150,9 +208,13 @@ namespace Microsoft.Interop
     {
         private const short VARIANT_TRUE = -1;
         private const short VARIANT_FALSE = 0;
+
         public VariantBoolMarshaller()
-            : base(new SpecialTypeInfo("short", "short", SpecialType.System_Int16), trueValue: VARIANT_TRUE, falseValue: VARIANT_FALSE, compareToTrue: true)
-        {
-        }
+            : base(
+                new SpecialTypeInfo("short", "short", SpecialType.System_Int16),
+                trueValue: VARIANT_TRUE,
+                falseValue: VARIANT_FALSE,
+                compareToTrue: true
+            ) { }
     }
 }

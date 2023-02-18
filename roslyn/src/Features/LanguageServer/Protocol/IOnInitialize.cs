@@ -10,5 +10,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer;
 
 internal interface IOnInitialized
 {
-    Task OnInitializedAsync(ClientCapabilities clientCapabilities, CancellationToken cancellationToken);
+    Task OnInitializedAsync(
+        ClientCapabilities clientCapabilities,
+        CancellationToken cancellationToken
+    );
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,64 +55,70 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class ComPersistableTypeElement
-         : ConfigurationElement
+    public sealed partial class ComPersistableTypeElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty i_d;
         static ConfigurationProperty name;
 
-        static ComPersistableTypeElement ()
+        static ComPersistableTypeElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            i_d = new ConfigurationProperty ("ID",
-                typeof (string), null, new StringConverter (), null,
-                ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+            properties = new ConfigurationPropertyCollection();
+            i_d = new ConfigurationProperty(
+                "ID",
+                typeof(string),
+                null,
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-            name = new ConfigurationProperty ("name",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+            name = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (i_d);
-            properties.Add (name);
+            properties.Add(i_d);
+            properties.Add(name);
         }
 
-        public ComPersistableTypeElement ()
-        {
-        }
-
+        public ComPersistableTypeElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("ID",
-             Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+        [ConfigurationProperty(
+            "ID",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
             IsRequired = true,
-            IsKey = true)]
-        [StringValidator ( MinLength = 1,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string ID {
-            get { return (string) base [i_d]; }
-            set { base [i_d] = value; }
+            IsKey = true
+        )]
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string ID
+        {
+            get { return (string)base[i_d]; }
+            set { base[i_d] = value; }
         }
 
-        [ConfigurationProperty ("name",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string Name {
-            get { return (string) base [name]; }
-            set { base [name] = value; }
+        [ConfigurationProperty(
+            "name",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = ""
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string Name
+        {
+            get { return (string)base[name]; }
+            set { base[name] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
-
     }
-
 }

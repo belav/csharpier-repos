@@ -35,33 +35,35 @@ using System.Linq;
 
 namespace Microsoft.Build.Execution
 {
-    public
-    sealed class ProjectTargetInstance
+    public sealed class ProjectTargetInstance
     {
-        internal ProjectTargetInstance (ProjectTargetElement xml)
+        internal ProjectTargetInstance(ProjectTargetElement xml)
         {
             FullPath = xml.ContainingProject.FullPath;
-            Children = xml.Children.Select<ProjectElement,ProjectTargetInstanceChild> (c => {
-                if (c is ProjectOnErrorElement)
-                    return new ProjectOnErrorInstance ((ProjectOnErrorElement) c);
-                if (c is ProjectItemGroupElement)
-                    return new ProjectItemGroupTaskInstance ((ProjectItemGroupElement) c);
-                if (c is ProjectPropertyGroupElement)
-                    return new ProjectPropertyGroupTaskInstance ((ProjectPropertyGroupElement) c);
-                if (c is ProjectTaskElement)
-                    return new ProjectTaskInstance ((ProjectTaskElement) c);
-                throw new NotSupportedException ();
-            }).ToArray ();
+            Children = xml.Children
+                .Select<ProjectElement, ProjectTargetInstanceChild>(c =>
+                {
+                    if (c is ProjectOnErrorElement)
+                        return new ProjectOnErrorInstance((ProjectOnErrorElement)c);
+                    if (c is ProjectItemGroupElement)
+                        return new ProjectItemGroupTaskInstance((ProjectItemGroupElement)c);
+                    if (c is ProjectPropertyGroupElement)
+                        return new ProjectPropertyGroupTaskInstance((ProjectPropertyGroupElement)c);
+                    if (c is ProjectTaskElement)
+                        return new ProjectTaskInstance((ProjectTaskElement)c);
+                    throw new NotSupportedException();
+                })
+                .ToArray();
             Condition = xml.Condition;
             DependsOnTargets = xml.DependsOnTargets;
             //FullPath = fullPath;
             Inputs = xml.Inputs;
             KeepDuplicateOutputs = xml.KeepDuplicateOutputs;
             Name = xml.Name;
-            OnErrorChildren = xml.OnErrors.Select (c => new ProjectOnErrorInstance (c)).ToArray ();
+            OnErrorChildren = xml.OnErrors.Select(c => new ProjectOnErrorInstance(c)).ToArray();
             Outputs = xml.Outputs;
             Returns = xml.Returns;
-            Tasks = xml.Tasks.Select (t => new ProjectTaskInstance (t)).ToArray ();
+            Tasks = xml.Tasks.Select(t => new ProjectTaskInstance(t)).ToArray();
             AfterTargetsLocation = xml.AfterTargetsLocation;
             BeforeTargetsLocation = xml.BeforeTargetsLocation;
             ConditionLocation = xml.ConditionLocation;
@@ -95,4 +97,3 @@ namespace Microsoft.Build.Execution
         public ICollection<ProjectTaskInstance> Tasks { get; private set; }
     }
 }
-

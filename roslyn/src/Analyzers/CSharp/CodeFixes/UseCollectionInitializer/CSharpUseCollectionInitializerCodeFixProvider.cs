@@ -17,9 +17,15 @@ using Microsoft.CodeAnalysis.UseCollectionInitializer;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseCollectionInitializer), Shared]
-    internal class CSharpUseCollectionInitializerCodeFixProvider :
-        AbstractUseCollectionInitializerCodeFixProvider<
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseCollectionInitializer
+        ),
+        Shared
+    ]
+    internal class CSharpUseCollectionInitializerCodeFixProvider
+        : AbstractUseCollectionInitializerCodeFixProvider<
             SyntaxKind,
             ExpressionSyntax,
             StatementSyntax,
@@ -27,35 +33,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
             MemberAccessExpressionSyntax,
             InvocationExpressionSyntax,
             ExpressionStatementSyntax,
-            VariableDeclaratorSyntax>
+            VariableDeclaratorSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseCollectionInitializerCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseCollectionInitializerCodeFixProvider() { }
 
         protected override StatementSyntax GetNewStatement(
             StatementSyntax statement,
             BaseObjectCreationExpressionSyntax objectCreation,
-            ImmutableArray<ExpressionStatementSyntax> matches)
+            ImmutableArray<ExpressionStatementSyntax> matches
+        )
         {
             return statement.ReplaceNode(
                 objectCreation,
-                GetNewObjectCreation(objectCreation, matches));
+                GetNewObjectCreation(objectCreation, matches)
+            );
         }
 
         private static BaseObjectCreationExpressionSyntax GetNewObjectCreation(
             BaseObjectCreationExpressionSyntax objectCreation,
-            ImmutableArray<ExpressionStatementSyntax> matches)
+            ImmutableArray<ExpressionStatementSyntax> matches
+        )
         {
             return UseInitializerHelpers.GetNewObjectCreation(
-                objectCreation, CreateExpressions(objectCreation, matches));
+                objectCreation,
+                CreateExpressions(objectCreation, matches)
+            );
         }
 
         private static SeparatedSyntaxList<ExpressionSyntax> CreateExpressions(
             BaseObjectCreationExpressionSyntax objectCreation,
-            ImmutableArray<ExpressionStatementSyntax> matches)
+            ImmutableArray<ExpressionStatementSyntax> matches
+        )
         {
             using var _ = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(out var nodesAndTokens);
 
@@ -75,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 if (i < matches.Length - 1)
                 {
                     nodesAndTokens.Add(newExpression);
-                    var commaToken = SyntaxFactory.Token(SyntaxKind.CommaToken)
+                    var commaToken = SyntaxFactory
+                        .Token(SyntaxKind.CommaToken)
                         .WithTriviaFrom(expressionStatement.SemicolonToken);
 
                     nodesAndTokens.Add(commaToken);
@@ -83,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 else
                 {
                     newExpression = newExpression.WithTrailingTrivia(
-                        expressionStatement.GetTrailingTrivia());
+                        expressionStatement.GetTrailingTrivia()
+                    );
                     nodesAndTokens.Add(newExpression);
                 }
             }
@@ -109,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
         {
             var elementAccess = (ElementAccessExpressionSyntax)assignment.Left;
             return assignment.WithLeft(
-                SyntaxFactory.ImplicitElementAccess(elementAccess.ArgumentList));
+                SyntaxFactory.ImplicitElementAccess(elementAccess.ArgumentList)
+            );
         }
 
         private static ExpressionSyntax ConvertInvocation(InvocationExpressionSyntax invocation)
@@ -118,7 +136,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 
             if (arguments.Count == 1)
             {
-                // Assignment expressions in a collection initializer will cause the compiler to 
+                // Assignment expressions in a collection initializer will cause the compiler to
                 // report an error.  This is because { a = b } is the form for an object initializer,
                 // and the two forms are not allowed to mix/match.  Parenthesize the assignment to
                 // avoid the ambiguity.
@@ -133,8 +151,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 SyntaxFactory.Token(SyntaxKind.OpenBraceToken).WithoutTrivia(),
                 SyntaxFactory.SeparatedList(
                     arguments.Select(a => a.Expression),
-                    arguments.GetSeparators()),
-                SyntaxFactory.Token(SyntaxKind.CloseBraceToken).WithoutTrivia());
+                    arguments.GetSeparators()
+                ),
+                SyntaxFactory.Token(SyntaxKind.CloseBraceToken).WithoutTrivia()
+            );
         }
     }
 }

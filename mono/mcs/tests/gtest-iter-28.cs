@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 class A
 {
-    public IEnumerable<string> Test (B b)
+    public IEnumerable<string> Test(B b)
     {
         string s = "s";
 
@@ -11,27 +11,24 @@ class A
         {
             string stringValue = "two";
 
-            Console.WriteLine (b.ToString ());
+            Console.WriteLine(b.ToString());
             {
-                Action a = () => {
-                    Console.WriteLine (s + c.GetType () + stringValue);
+                Action a = () =>
+                {
+                    Console.WriteLine(s + c.GetType() + stringValue);
                 };
 
-                a ();
+                a();
             }
         }
     }
 
-    C c = new C ();
+    C c = new C();
 }
 
-class B
-{
-}
+class B { }
 
 class C
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

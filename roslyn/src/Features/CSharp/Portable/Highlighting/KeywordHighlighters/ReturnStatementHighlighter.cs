@@ -23,16 +23,17 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ReturnStatementHighlighter()
-        {
-        }
+        public ReturnStatementHighlighter() { }
 
         protected override void AddHighlights(
-            ReturnStatementSyntax returnStatement, List<TextSpan> spans, CancellationToken cancellationToken)
+            ReturnStatementSyntax returnStatement,
+            List<TextSpan> spans,
+            CancellationToken cancellationToken
+        )
         {
             var parent = returnStatement
-                             .GetAncestorsOrThis<SyntaxNode>()
-                             .FirstOrDefault(n => n.IsReturnableConstructOrTopLevelCompilationUnit());
+                .GetAncestorsOrThis<SyntaxNode>()
+                .FirstOrDefault(n => n.IsReturnableConstructOrTopLevelCompilationUnit());
 
             if (parent == null)
             {

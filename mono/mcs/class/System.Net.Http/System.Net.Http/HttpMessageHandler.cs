@@ -33,15 +33,16 @@ namespace System.Net.Http
 {
     public abstract class HttpMessageHandler : IDisposable
     {
-        public void Dispose ()
+        public void Dispose()
         {
-            Dispose (true);
+            Dispose(true);
         }
 
-        protected virtual void Dispose (bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
-        protected internal abstract Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken);
+        protected internal abstract Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,46 +34,51 @@ namespace System.Web
     {
         bool? headerCheckingEnabled;
 
-        public HttpHeaderCollection () : base (StringComparer.OrdinalIgnoreCase)
-        {
-        }
+        public HttpHeaderCollection()
+            : base(StringComparer.OrdinalIgnoreCase) { }
 
-        bool HeaderCheckingEnabled {
-            get {
+        bool HeaderCheckingEnabled
+        {
+            get
+            {
                 if (headerCheckingEnabled == null)
                     headerCheckingEnabled = HttpRuntime.Section.EnableHeaderChecking;
 
                 return (bool)headerCheckingEnabled;
             }
         }
-                
-        public override void Add (string name, string value)
+
+        public override void Add(string name, string value)
         {
-            EncodeAndSetHeader (name, value, false);
+            EncodeAndSetHeader(name, value, false);
         }
 
-        public override void Set (string name, string value)
+        public override void Set(string name, string value)
         {
-            EncodeAndSetHeader (name, value, true);
+            EncodeAndSetHeader(name, value, true);
         }
 
-        void EncodeAndSetHeader (string name, string value, bool replaceExisting)
+        void EncodeAndSetHeader(string name, string value, bool replaceExisting)
         {
-            if (String.IsNullOrEmpty (name) || String.IsNullOrEmpty (value))
+            if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(value))
                 return;
 
-            string encName, encValue;
-            if (HeaderCheckingEnabled) {
-                HttpEncoder.Current.HeaderNameValueEncode (name, value, out encName, out encValue);
-            } else {
+            string encName,
+                encValue;
+            if (HeaderCheckingEnabled)
+            {
+                HttpEncoder.Current.HeaderNameValueEncode(name, value, out encName, out encValue);
+            }
+            else
+            {
                 encName = name;
                 encValue = value;
             }
 
             if (replaceExisting)
-                base.Set (encName, encValue);
+                base.Set(encName, encValue);
             else
-                base.Add (encName, encValue);
+                base.Add(encName, encValue);
         }
     }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,21 +37,25 @@ namespace System.Web.UI
         readonly UpdatePanel _updatePanel;
         readonly string _script;
 
-        internal RegisteredDisposeScript (Control control, string script, UpdatePanel updatePanel) {
+        internal RegisteredDisposeScript(Control control, string script, UpdatePanel updatePanel)
+        {
             _control = control;
             _script = script;
             _updatePanel = updatePanel;
         }
 
-        public Control Control {
+        public Control Control
+        {
             get { return _control; }
         }
 
-        public string Script {
+        public string Script
+        {
             get { return _script; }
         }
 
-        internal UpdatePanel UpdatePanel {
+        internal UpdatePanel UpdatePanel
+        {
             get { return _updatePanel; }
         }
     }

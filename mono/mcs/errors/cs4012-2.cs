@@ -6,10 +6,10 @@ using System.Collections;
 
 class C
 {
-    public IEnumerable Iter ()
+    public IEnumerable Iter()
     {
         int i = 2;
-        TypedReference tr = __makeref (i);
+        TypedReference tr = __makeref(i);
         yield return 1;
     }
 }

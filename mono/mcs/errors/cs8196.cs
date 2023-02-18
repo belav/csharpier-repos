@@ -3,12 +3,12 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        Test (out var x1, out x1);
+        Test(out var x1, out x1);
     }
 
-    static void Test (out int x, out int x2)
+    static void Test(out int x, out int x2)
     {
         x = 1;
         x2 = 2;

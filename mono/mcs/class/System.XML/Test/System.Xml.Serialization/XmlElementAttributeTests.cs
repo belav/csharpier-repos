@@ -18,51 +18,51 @@ namespace MonoTests.System.XmlSerialization
     public class XmlElementAttributeTests
     {
         [Test]
-        public void DataTypeDefault ()
+        public void DataTypeDefault()
         {
-            XmlElementAttribute attr = new XmlElementAttribute ();
-            Assert.AreEqual (string.Empty, attr.DataType, "#1");
+            XmlElementAttribute attr = new XmlElementAttribute();
+            Assert.AreEqual(string.Empty, attr.DataType, "#1");
 
             attr.DataType = null;
-            Assert.AreEqual (string.Empty, attr.DataType, "#2");
+            Assert.AreEqual(string.Empty, attr.DataType, "#2");
         }
 
         [Test]
-        public void ElementNameDefault ()
+        public void ElementNameDefault()
         {
-            XmlElementAttribute attr = new XmlElementAttribute ();
-            Assert.AreEqual (string.Empty, attr.ElementName, "#1");
+            XmlElementAttribute attr = new XmlElementAttribute();
+            Assert.AreEqual(string.Empty, attr.ElementName, "#1");
 
             attr.ElementName = null;
-            Assert.AreEqual (string.Empty, attr.ElementName, "#2");
+            Assert.AreEqual(string.Empty, attr.ElementName, "#2");
         }
 
         [Test]
-        public void FormDefault ()
+        public void FormDefault()
         {
-            XmlElementAttribute attr = new XmlElementAttribute ();
-            Assert.AreEqual (XmlSchemaForm.None, attr.Form);
+            XmlElementAttribute attr = new XmlElementAttribute();
+            Assert.AreEqual(XmlSchemaForm.None, attr.Form);
         }
 
         [Test]
-        public void IsNullableDefault ()
+        public void IsNullableDefault()
         {
-            XmlElementAttribute attr = new XmlElementAttribute ();
-            Assert.AreEqual (false, attr.IsNullable);
+            XmlElementAttribute attr = new XmlElementAttribute();
+            Assert.AreEqual(false, attr.IsNullable);
         }
 
         [Test]
-        public void NamespaceDefault ()
+        public void NamespaceDefault()
         {
-            XmlElementAttribute attr = new XmlElementAttribute ();
-            Assert.IsNull (attr.Namespace);
+            XmlElementAttribute attr = new XmlElementAttribute();
+            Assert.IsNull(attr.Namespace);
         }
 
         [Test]
-        public void TypeDefault ()
+        public void TypeDefault()
         {
-            XmlElementAttribute attr = new XmlElementAttribute ();
-            Assert.IsNull (attr.Type);
+            XmlElementAttribute attr = new XmlElementAttribute();
+            Assert.IsNull(attr.Type);
         }
     }
 }

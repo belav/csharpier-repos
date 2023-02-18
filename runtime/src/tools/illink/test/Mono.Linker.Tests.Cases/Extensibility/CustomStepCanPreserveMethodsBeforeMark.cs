@@ -3,26 +3,33 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Extensibility
 {
-    [SetupCompileBefore ("CustomStepBeforeMark.dll", new[] { "Dependencies/PreserveMethodsSubStep.cs" }, new[] { "illink.dll", "Mono.Cecil.dll", "netstandard.dll" })]
-    [SetupLinkerArgument ("--custom-step", "-MarkStep:PreserveMethodsSubStep,CustomStepBeforeMark.dll")]
+    [SetupCompileBefore(
+        "CustomStepBeforeMark.dll",
+        new[] { "Dependencies/PreserveMethodsSubStep.cs" },
+        new[] { "illink.dll", "Mono.Cecil.dll", "netstandard.dll" }
+    )]
+    [SetupLinkerArgument(
+        "--custom-step",
+        "-MarkStep:PreserveMethodsSubStep,CustomStepBeforeMark.dll"
+    )]
     public class CustomStepCanPreserveMethodsBeforeMark
     {
-        public static void Main ()
+        public static void Main()
         {
-            UsedType.UsedMethod ();
+            UsedType.UsedMethod();
         }
 
         [Kept]
         static class UsedType
         {
             [Kept]
-            public static void UsedMethod () { }
+            public static void UsedMethod() { }
 
             [Kept]
-            public static void PreservedForType () { }
+            public static void PreservedForType() { }
 
             [Kept]
-            public static void PreservedForMethod_UsedMethod () { }
+            public static void PreservedForMethod_UsedMethod() { }
         }
 
         // Annotations.Mark in a CustomStep before MarkStep will keep a method,
@@ -31,8 +38,7 @@ namespace Mono.Linker.Tests.Cases.Extensibility
         static class UnusedType
         {
             [Kept]
-            public static void MarkedMethod () { }
+            public static void MarkedMethod() { }
         }
-
     }
 }

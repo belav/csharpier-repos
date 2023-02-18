@@ -10,25 +10,28 @@ namespace FLMID.Bugs.ParametersOne
             System.Console.WriteLine("OK");
         }
     }
+
     public class Test
     {
-    
-        public static void Main(string [] args)
+        public static void Main(string[] args)
         {
             Class<string> instance = new Class<string>();
-            
+
             MethodInfo _method = null;
-            
-            foreach(MethodInfo method in
-typeof(Class<string>).GetMethods(BindingFlags.Instance | BindingFlags.Public))
+
+            foreach (
+                MethodInfo method in typeof(Class<string>).GetMethods(
+                    BindingFlags.Instance | BindingFlags.Public
+                )
+            )
             {
-                if(method.Name.Equals("Add") && method.GetParameters().Length==1)
+                if (method.Name.Equals("Add") && method.GetParameters().Length == 1)
                 {
                     _method = method;
                     break;
                 }
             }
-            _method.Invoke(instance , new object[]{"1"});
+            _method.Invoke(instance, new object[] { "1" });
         }
     }
 }

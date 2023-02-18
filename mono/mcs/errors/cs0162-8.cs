@@ -4,11 +4,11 @@
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         if (true == false)
             return 1;
-        
+
         return 2;
     }
 }

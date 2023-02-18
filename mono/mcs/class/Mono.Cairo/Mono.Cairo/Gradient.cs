@@ -29,38 +29,36 @@
 
 using System;
 
-namespace Cairo {
-
+namespace Cairo
+{
     public class Gradient : Pattern
     {
-        protected Gradient (IntPtr handle, bool owned) : base (handle, owned)
-        {
-        }
+        protected Gradient(IntPtr handle, bool owned)
+            : base(handle, owned) { }
 
         [Obsolete]
-        protected Gradient ()
-        {
-        }
+        protected Gradient() { }
 
-        public int ColorStopCount {
-            get {
+        public int ColorStopCount
+        {
+            get
+            {
                 int cnt;
-                NativeMethods.cairo_pattern_get_color_stop_count (Handle, out cnt);
+                NativeMethods.cairo_pattern_get_color_stop_count(Handle, out cnt);
                 return cnt;
             }
         }
 
-        public Status AddColorStop (double offset, Color c)
+        public Status AddColorStop(double offset, Color c)
         {
-            NativeMethods.cairo_pattern_add_color_stop_rgba (Handle, offset, c.R, c.G, c.B, c.A);
+            NativeMethods.cairo_pattern_add_color_stop_rgba(Handle, offset, c.R, c.G, c.B, c.A);
             return Status;
         }
 
-        public Status AddColorStopRgb (double offset, Color c)
+        public Status AddColorStopRgb(double offset, Color c)
         {
-            NativeMethods.cairo_pattern_add_color_stop_rgb (Handle, offset, c.R, c.G, c.B);
+            NativeMethods.cairo_pattern_add_color_stop_rgb(Handle, offset, c.R, c.G, c.B);
             return Status;
         }
     }
 }
-

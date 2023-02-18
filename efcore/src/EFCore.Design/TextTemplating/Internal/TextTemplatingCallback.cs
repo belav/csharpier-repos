@@ -25,8 +25,7 @@ public class TextTemplatingCallback : ITextTemplatingCallback
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Extension
-        => _extension;
+    public virtual string Extension => _extension;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,8 +33,7 @@ public class TextTemplatingCallback : ITextTemplatingCallback
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual CompilerErrorCollection Errors
-        => _errors ??= new CompilerErrorCollection();
+    public virtual CompilerErrorCollection Errors => _errors ??= new CompilerErrorCollection();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,14 +41,11 @@ public class TextTemplatingCallback : ITextTemplatingCallback
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Encoding OutputEncoding
-        => _outputEncoding;
+    public virtual Encoding OutputEncoding => _outputEncoding;
 
-    void ITextTemplatingCallback.ErrorCallback(CompilerError error)
-        => Errors.Add(error);
+    void ITextTemplatingCallback.ErrorCallback(CompilerError error) => Errors.Add(error);
 
-    void ITextTemplatingCallback.SetFileExtension(string extension)
-        => _extension = extension;
+    void ITextTemplatingCallback.SetFileExtension(string extension) => _extension = extension;
 
     void ITextTemplatingCallback.SetOutputEncoding(Encoding? encoding, bool fromOutputDirective)
     {

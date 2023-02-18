@@ -36,39 +36,42 @@ using System.Drawing;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_MergeStyle_S
-        : GHTWebControlBase
+    public class WebControl_MergeStyle_S : GHTWebControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) {
+        override protected void OnInit(EventArgs e)
+        {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             //
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-#region "Data members"
-        Style [] m_styles = new Style[3];
-        enum EStyledescription 
+        #region "Data members"
+        Style[] m_styles = new Style[3];
+
+        enum EStyledescription
         {
             blank = 0,
             nonBlankOld,
             nonBlankNew
         }
-#endregion
+        #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             try
             {
@@ -87,7 +90,12 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 // ProjectData.SetProjectError(exception2);
                 Exception exception1 = exception2;
                 this.GHTSubTestBegin();
-                this.GHTSubTestAddResult("Failed to initialize styles needed for the test. Caught " + exception1.GetType().ToString() + " - " + exception1.Message);
+                this.GHTSubTestAddResult(
+                    "Failed to initialize styles needed for the test. Caught "
+                        + exception1.GetType().ToString()
+                        + " - "
+                        + exception1.Message
+                );
                 this.GHTSubTestEnd();
                 // ProjectData.ClearProjectError();
                 return;
@@ -154,8 +162,6 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 return;
             }
         }
- 
-
 
         private void InitStyles()
         {
@@ -176,7 +182,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             info2.Bold = false;
             info2.Italic = false;
             info2.Name = "Arial";
-            string[] textArray1 = new string[] { "Arial", "verdana" } ;
+            string[] textArray1 = new string[] { "Arial", "verdana" };
             info2.Names = textArray1;
             info2.Overline = false;
             info2.Size = FontUnit.Small;
@@ -200,7 +206,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             info1.Bold = true;
             info1.Italic = true;
             info1.Name = "Courier";
-            textArray1 = new string[] { "Courier", "David" } ;
+            textArray1 = new string[] { "Courier", "David" };
             info1.Names = textArray1;
             info1.Overline = true;
             info1.Size = FontUnit.XXLarge;
@@ -209,7 +215,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             info1 = null;
             style1 = null;
         }
- 
-
     }
 }

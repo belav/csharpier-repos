@@ -16,10 +16,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc = CreateInProcComponent<StartPage_InProc>(visualStudioInstance);
         }
 
-        public void SetEnabled(bool enabled)
-            => _inProc.SetEnabled(enabled);
+        public void SetEnabled(bool enabled) => _inProc.SetEnabled(enabled);
 
-        public bool CloseWindow()
-            => _inProc.CloseWindow();
+        public bool CloseWindow() => _inProc.CloseWindow();
     }
 }

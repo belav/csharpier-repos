@@ -3,18 +3,17 @@
 
 class A
 {
-    public int this [int i] {
-        get {
-            return i;
-        }
+    public int this[int i]
+    {
+        get { return i; }
     }
 }
 
 class B : A
 {
-    public void Test ()
+    public void Test()
     {
         dynamic d = null;
-        var r = base [d];
+        var r = base[d];
     }
 }

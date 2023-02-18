@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,7 +41,16 @@ namespace System.Web.UI
         readonly Type _type;
         readonly string _url;
 
-        internal RegisteredScript (Control control, Type type, string key, string script, string url, bool addScriptTag, RegisteredScriptType scriptType) {
+        internal RegisteredScript(
+            Control control,
+            Type type,
+            string key,
+            string script,
+            string url,
+            bool addScriptTag,
+            RegisteredScriptType scriptType
+        )
+        {
             _control = control;
             _type = type;
             _script = script;
@@ -51,31 +60,38 @@ namespace System.Web.UI
             _key = key;
         }
 
-        public bool AddScriptTags {
+        public bool AddScriptTags
+        {
             get { return _addScriptTags; }
         }
 
-        public Control Control {
+        public Control Control
+        {
             get { return _control; }
         }
 
-        public string Key {
+        public string Key
+        {
             get { return _key; }
         }
 
-        public string Script {
+        public string Script
+        {
             get { return _script; }
         }
 
-        public RegisteredScriptType ScriptType {
+        public RegisteredScriptType ScriptType
+        {
             get { return _scriptType; }
         }
 
-        public Type Type {
+        public Type Type
+        {
             get { return _type; }
         }
 
-        public string Url {
+        public string Url
+        {
             get { return _url; }
         }
     }

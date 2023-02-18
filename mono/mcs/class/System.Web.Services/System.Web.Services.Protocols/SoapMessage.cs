@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapMessage.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,9 +35,10 @@ using System.ComponentModel;
 using System.IO;
 using System.Web.Services;
 
-namespace System.Web.Services.Protocols {
-    public abstract class SoapMessage {
-
+namespace System.Web.Services.Protocols
+{
+    public abstract class SoapMessage
+    {
         #region Fields
 
         string content_type = "text/xml";
@@ -48,187 +49,191 @@ namespace System.Web.Services.Protocols {
         Stream stream;
         object[] inParameters;
         object[] outParameters;
-        
+
         SoapProtocolVersion soapVersion;
 
         #endregion // Fields
 
         #region Constructors
 
-        internal SoapMessage ()
+        internal SoapMessage()
         {
-            headers = new SoapHeaderCollection ();
+            headers = new SoapHeaderCollection();
         }
 
-        internal SoapMessage (Stream stream, SoapException exception)
+        internal SoapMessage(Stream stream, SoapException exception)
         {
             this.exception = exception;
             this.stream = stream;
-            headers = new SoapHeaderCollection ();
+            headers = new SoapHeaderCollection();
         }
 
         #endregion
 
         #region Properties
 
-        internal object[] InParameters 
+        internal object[] InParameters
         {
             get { return inParameters; }
             set { inParameters = value; }
         }
 
-        internal object[] OutParameters 
+        internal object[] OutParameters
         {
             get { return outParameters; }
             set { outParameters = value; }
         }
 
-        public abstract string Action 
-        {
-            get;
-        }
+        public abstract string Action { get; }
 
-        public string ContentType {
+        public string ContentType
+        {
             get { return content_type; }
             set { content_type = value; }
         }
 
-        public SoapException Exception {
+        public SoapException Exception
+        {
             get { return exception; }
             set { exception = value; }
         }
 
-        public SoapHeaderCollection Headers {
+        public SoapHeaderCollection Headers
+        {
             get { return headers; }
         }
 
-        public abstract LogicalMethodInfo MethodInfo {
-            get;
-        }
+        public abstract LogicalMethodInfo MethodInfo { get; }
 
-        public abstract bool OneWay {
-            get;
-        }
+        public abstract bool OneWay { get; }
 
-        public SoapMessageStage Stage {
+        public SoapMessageStage Stage
+        {
             get { return stage; }
         }
 
-        internal void SetStage (SoapMessageStage stage)
+        internal void SetStage(SoapMessageStage stage)
         {
             this.stage = stage;
         }
-        
-        public Stream Stream {
-            get {
-                return stream;
-            }
+
+        public Stream Stream
+        {
+            get { return stream; }
         }
 
-        public abstract string Url {
-            get;
-        }
-        
+        public abstract string Url { get; }
+
         public string ContentEncoding
         {
             get { return content_encoding; }
             set { content_encoding = value; }
         }
 
-        internal bool IsSoap12 {
-            get {
-                return SoapVersion == SoapProtocolVersion.Soap12;
-            }
+        internal bool IsSoap12
+        {
+            get { return SoapVersion == SoapProtocolVersion.Soap12; }
         }
 
         [System.Runtime.InteropServices.ComVisible(false)]
-        [DefaultValue (SoapProtocolVersion.Default)]
-        public virtual SoapProtocolVersion SoapVersion {
+        [DefaultValue(SoapProtocolVersion.Default)]
+        public virtual SoapProtocolVersion SoapVersion
+        {
             get { return soapVersion; }
         }
- 
-        internal Stream InternalStream 
-        { 
+
+        internal Stream InternalStream
+        {
             // for getter use public stream property
-            set {
-                stream = value;
-            }
+            set { stream = value; }
         }
 
         #endregion Properties
 
         #region Methods
 
-        protected abstract void EnsureInStage ();
-        protected abstract void EnsureOutStage ();
+        protected abstract void EnsureInStage();
+        protected abstract void EnsureOutStage();
 
-        protected void EnsureStage (SoapMessageStage stage) 
+        protected void EnsureStage(SoapMessageStage stage)
         {
-            if ((((int) stage) & ((int) Stage)) == 0)
-                throw new InvalidOperationException ("The current SoapMessageStage is not the asserted stage or stages.");
+            if ((((int)stage) & ((int)Stage)) == 0)
+                throw new InvalidOperationException(
+                    "The current SoapMessageStage is not the asserted stage or stages."
+                );
         }
 
-        public object GetInParameterValue (int index) 
+        public object GetInParameterValue(int index)
         {
-            return inParameters [index];
+            return inParameters[index];
         }
 
-        public object GetOutParameterValue (int index) 
+        public object GetOutParameterValue(int index)
         {
-            if (MethodInfo.IsVoid) return outParameters [index];
-            else return outParameters [index + 1];
+            if (MethodInfo.IsVoid)
+                return outParameters[index];
+            else
+                return outParameters[index + 1];
         }
 
-        public object GetReturnValue ()
+        public object GetReturnValue()
         {
-            if (!MethodInfo.IsVoid && exception == null) return outParameters [0];
-            else return null;
+            if (!MethodInfo.IsVoid && exception == null)
+                return outParameters[0];
+            else
+                return null;
         }
 
-        internal void SetHeaders (SoapHeaderCollection headers)
+        internal void SetHeaders(SoapHeaderCollection headers)
         {
             this.headers = headers;
         }
 
-        internal void SetException (SoapException ex)
+        internal void SetException(SoapException ex)
         {
             exception = ex;
         }
 
-        internal void CollectHeaders (object target, HeaderInfo[] headers, SoapHeaderDirection direction)
+        internal void CollectHeaders(
+            object target,
+            HeaderInfo[] headers,
+            SoapHeaderDirection direction
+        )
         {
-            Headers.Clear ();
-            foreach (HeaderInfo hi in headers) 
+            Headers.Clear();
+            foreach (HeaderInfo hi in headers)
             {
-                if ((hi.Direction & direction) != 0 && !hi.Custom) 
+                if ((hi.Direction & direction) != 0 && !hi.Custom)
                 {
-                    SoapHeader headerVal = hi.GetHeaderValue (target) as SoapHeader;
+                    SoapHeader headerVal = hi.GetHeaderValue(target) as SoapHeader;
                     if (headerVal != null)
-                        Headers.Add (headerVal);
+                        Headers.Add(headerVal);
                 }
             }
         }
 
-        internal void UpdateHeaderValues (object target, HeaderInfo[] headersInfo)
+        internal void UpdateHeaderValues(object target, HeaderInfo[] headersInfo)
         {
             foreach (SoapHeader header in Headers)
             {
-                HeaderInfo hinfo = FindHeader (headersInfo, header.GetType ());
-                if (hinfo != null) {
-                    hinfo.SetHeaderValue (target, header);
+                HeaderInfo hinfo = FindHeader(headersInfo, header.GetType());
+                if (hinfo != null)
+                {
+                    hinfo.SetHeaderValue(target, header);
                     header.DidUnderstand = !hinfo.Custom;
                 }
             }
         }
 
-        HeaderInfo FindHeader (HeaderInfo[] headersInfo, Type headerType)
+        HeaderInfo FindHeader(HeaderInfo[] headersInfo, Type headerType)
         {
             HeaderInfo unknownHeaderInfo = null;
-        
-            foreach (HeaderInfo headerInfo in headersInfo) {
+
+            foreach (HeaderInfo headerInfo in headersInfo)
+            {
                 if (headerInfo.HeaderType == headerType)
                     return headerInfo;
-                else if (headerInfo.Custom) 
+                else if (headerInfo.Custom)
                     unknownHeaderInfo = headerInfo;
             }
             return unknownHeaderInfo;

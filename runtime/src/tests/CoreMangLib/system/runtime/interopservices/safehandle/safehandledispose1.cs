@@ -4,15 +4,11 @@ using System.Security;
 using System;
 using System.Runtime.InteropServices; // For SafeHanlde
 
-
-
 [SecurityCritical]
 public class MySafeValidHandle : SafeHandle
 {
     public MySafeValidHandle()
-        : base(IntPtr.Zero, true)
-    {
-    }
+        : base(IntPtr.Zero, true) { }
 
     public MySafeValidHandle(IntPtr handleValue)
         : base(IntPtr.Zero, true)
@@ -37,9 +33,7 @@ public class MySafeValidHandle : SafeHandle
 public class MySafeInValidHandle : SafeHandle
 {
     public MySafeInValidHandle()
-        : base(IntPtr.Zero, true)
-    {
-    }
+        : base(IntPtr.Zero, true) { }
 
     public MySafeInValidHandle(IntPtr handleValue)
         : base(IntPtr.Zero, true)
@@ -91,7 +85,9 @@ public class SafeHandleDispose1
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest1: call Dispose on valid SafeHandle instance");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: call Dispose on valid SafeHandle instance"
+        );
 
         try
         {
@@ -105,7 +101,9 @@ public class SafeHandleDispose1
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("001", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
@@ -113,14 +111,15 @@ public class SafeHandleDispose1
         return retVal;
     }
 
-
     [SecuritySafeCritical]
     public bool PosTest2()
     {
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: call Dispose on an invalid SafeHandle instance");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: call Dispose on an invalid SafeHandle instance"
+        );
 
         try
         {
@@ -134,7 +133,9 @@ public class SafeHandleDispose1
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("002", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
@@ -142,14 +143,15 @@ public class SafeHandleDispose1
         return retVal;
     }
 
-
     [SecuritySafeCritical]
     public bool PosTest3()
     {
         bool retVal = true;
         int randValue = 0;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest3: call Dispose through IDispose interface");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest3: call Dispose through IDispose interface"
+        );
 
         try
         {
@@ -174,7 +176,9 @@ public class SafeHandleDispose1
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("003", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }
@@ -203,7 +207,9 @@ public class SafeHandleDispose1
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("101", "Unexpected exception: " + e);
-            TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] randValue = " + randValue);
+            TestLibrary.TestFramework.LogInformation(
+                "WARNING: [LOCAL VARIABLES] randValue = " + randValue
+            );
             TestLibrary.TestFramework.LogInformation(e.StackTrace);
             retVal = false;
         }

@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,13 +32,11 @@ using System.Xml;
 namespace GHTUtils.Xml
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class XmlUtils
     {
-        public XmlUtils()
-        {
-        }
+        public XmlUtils() { }
 
         /// <summary>
         /// lecsicographic sorting of the XmlNodes child elements and attributes.
@@ -83,17 +81,16 @@ namespace GHTUtils.Xml
             while (l_change)
             {
                 l_change = false;
-                for (int i=1; i<a_toSort.Count; i++)
+                for (int i = 1; i < a_toSort.Count; i++)
                 {
-                    if (String.Compare(a_toSort[i].Name, a_toSort[i-1].Name, true) < 0)
+                    if (String.Compare(a_toSort[i].Name, a_toSort[i - 1].Name, true) < 0)
                     {
                         //Replace
-                        a_toSort.InsertBefore(a_toSort[i], a_toSort[i-1]);
+                        a_toSort.InsertBefore(a_toSort[i], a_toSort[i - 1]);
                         l_change = true;
                     }
                 }
             }
-            
         }
 
         /// <summary>
@@ -107,12 +104,18 @@ namespace GHTUtils.Xml
             while (l_change)
             {
                 l_change = false;
-                for (int i=1; i<a_toSort.ChildNodes.Count; i++)
+                for (int i = 1; i < a_toSort.ChildNodes.Count; i++)
                 {
-                    if ( String.Compare(a_toSort.ChildNodes[i].Name, a_toSort.ChildNodes[i-1].Name, true) < 0)
+                    if (
+                        String.Compare(
+                            a_toSort.ChildNodes[i].Name,
+                            a_toSort.ChildNodes[i - 1].Name,
+                            true
+                        ) < 0
+                    )
                     {
                         //Replace:
-                        a_toSort.InsertBefore(a_toSort.ChildNodes[i], a_toSort.ChildNodes[i-1]);
+                        a_toSort.InsertBefore(a_toSort.ChildNodes[i], a_toSort.ChildNodes[i - 1]);
                         l_change = true;
                     }
                 }

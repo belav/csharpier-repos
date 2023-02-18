@@ -3,9 +3,8 @@
 
 class C
 {
-    static void Main ()
+    static void Main()
     {
         int i = new int(1);
     }
 }
-

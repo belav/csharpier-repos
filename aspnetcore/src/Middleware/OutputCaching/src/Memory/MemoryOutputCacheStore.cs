@@ -69,7 +69,13 @@ internal sealed class MemoryOutputCacheStore : IOutputCacheStore
     }
 
     /// <inheritdoc />
-    public ValueTask SetAsync(string key, byte[] value, string[]? tags, TimeSpan validFor, CancellationToken cancellationToken)
+    public ValueTask SetAsync(
+        string key,
+        byte[] value,
+        string[]? tags,
+        TimeSpan validFor,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(key);
         ArgumentNullException.ThrowIfNull(value);

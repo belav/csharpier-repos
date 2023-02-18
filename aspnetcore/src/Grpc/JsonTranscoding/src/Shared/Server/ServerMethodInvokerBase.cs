@@ -56,7 +56,8 @@ internal abstract class ServerMethodInvokerBase<TService, TRequest, TResponse>
     private protected ServerMethodInvokerBase(
         Method<TRequest, TResponse> method,
         MethodOptions options,
-        IGrpcServiceActivator<TService> serviceActivator)
+        IGrpcServiceActivator<TService> serviceActivator
+    )
     {
         Method = method;
         Options = options;

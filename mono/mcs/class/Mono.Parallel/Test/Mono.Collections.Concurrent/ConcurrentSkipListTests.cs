@@ -63,7 +63,7 @@ namespace MonoTests.Mono.Collections.Concurrent
         {
             Assert.IsFalse(skiplist.Remove(2), "#1");
             Assert.IsFalse(skiplist.Remove(3), "#2");
-            
+
             AddStuff();
             int count = skiplist.Count;
             Assert.IsTrue(skiplist.Remove(1), "#3");
@@ -71,7 +71,7 @@ namespace MonoTests.Mono.Collections.Concurrent
             Assert.IsTrue(skiplist.Remove(4), "#5");
             Assert.AreEqual(count - 2, skiplist.Count, "#6");
         }
-        
+
         [Test]
         public void ContainsTestCase()
         {
@@ -86,7 +86,7 @@ namespace MonoTests.Mono.Collections.Concurrent
         public void EnumerateTestCase()
         {
             AddStuff();
-            
+
             string s = string.Empty;
             foreach (int i in skiplist)
                 s += i.ToString();
@@ -106,6 +106,5 @@ namespace MonoTests.Mono.Collections.Concurrent
             skiplist.CopyTo(array, 0);
             CollectionAssert.AreEqual(expected, array, "#2");
         }
-         
     }
 }

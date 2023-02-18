@@ -28,9 +28,7 @@ public class BufferedReadStream : Stream
     /// <param name="inner">The stream to wrap.</param>
     /// <param name="bufferSize">Size of buffer in bytes.</param>
     public BufferedReadStream(Stream inner, int bufferSize)
-        : this(inner, bufferSize, ArrayPool<byte>.Shared)
-    {
-    }
+        : this(inner, bufferSize, ArrayPool<byte>.Shared) { }
 
     /// <summary>
     /// Creates a new stream.
@@ -96,7 +94,11 @@ public class BufferedReadStream : Stream
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "Position must be positive.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "Position must be positive."
+                );
             }
             if (value == Position)
             {
@@ -190,13 +192,21 @@ public class BufferedReadStream : Stream
     }
 
     /// <inheritdoc/>
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         return _inner.WriteAsync(buffer, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _inner.WriteAsync(buffer, offset, count, cancellationToken);
     }
@@ -220,13 +230,21 @@ public class BufferedReadStream : Stream
     }
 
     /// <inheritdoc/>
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
     }
 
     /// <inheritdoc/>
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         // Drain buffer
         if (_bufferCount > 0)
@@ -283,7 +301,11 @@ public class BufferedReadStream : Stream
     {
         if (minCount > _buffer.Length)
         {
-            throw new ArgumentOutOfRangeException(nameof(minCount), minCount, "The value must be smaller than the buffer size: " + _buffer.Length);
+            throw new ArgumentOutOfRangeException(
+                nameof(minCount),
+                minCount,
+                "The value must be smaller than the buffer size: " + _buffer.Length
+            );
         }
         while (_bufferCount < minCount)
         {
@@ -296,7 +318,11 @@ public class BufferedReadStream : Stream
                 }
                 _bufferOffset = 0;
             }
-            int read = _inner.Read(_buffer, _bufferOffset + _bufferCount, _buffer.Length - _bufferCount - _bufferOffset);
+            int read = _inner.Read(
+                _buffer,
+                _bufferOffset + _bufferCount,
+                _buffer.Length - _bufferCount - _bufferOffset
+            );
             _bufferCount += read;
             if (read == 0)
             {
@@ -316,7 +342,11 @@ public class BufferedReadStream : Stream
     {
         if (minCount > _buffer.Length)
         {
-            throw new ArgumentOutOfRangeException(nameof(minCount), minCount, "The value must be smaller than the buffer size: " + _buffer.Length);
+            throw new ArgumentOutOfRangeException(
+                nameof(minCount),
+                minCount,
+                "The value must be smaller than the buffer size: " + _buffer.Length
+            );
         }
         while (_bufferCount < minCount)
         {
@@ -329,7 +359,13 @@ public class BufferedReadStream : Stream
                 }
                 _bufferOffset = 0;
             }
-            int read = await _inner.ReadAsync(_buffer.AsMemory(_bufferOffset + _bufferCount, _buffer.Length - _bufferCount - _bufferOffset), cancellationToken);
+            int read = await _inner.ReadAsync(
+                _buffer.AsMemory(
+                    _bufferOffset + _bufferCount,
+                    _buffer.Length - _bufferCount - _bufferOffset
+                ),
+                cancellationToken
+            );
             _bufferCount += read;
             if (read == 0)
             {
@@ -351,7 +387,8 @@ public class BufferedReadStream : Stream
         CheckDisposed();
         using (var builder = new MemoryStream(200))
         {
-            bool foundCR = false, foundCRLF = false;
+            bool foundCR = false,
+                foundCRLF = false;
 
             while (!foundCRLF && EnsureBuffered())
             {
@@ -379,7 +416,8 @@ public class BufferedReadStream : Stream
         CheckDisposed();
         using (var builder = new MemoryStream(200))
         {
-            bool foundCR = false, foundCRLF = false;
+            bool foundCR = false,
+                foundCRLF = false;
 
             while (!foundCRLF && await EnsureBufferedAsync(cancellationToken))
             {

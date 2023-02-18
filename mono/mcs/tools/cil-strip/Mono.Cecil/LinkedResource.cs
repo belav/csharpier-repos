@@ -26,32 +26,34 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
-    internal sealed class LinkedResource : Resource {
-
-        byte [] m_hash;
+namespace Mono.Cecil
+{
+    internal sealed class LinkedResource : Resource
+    {
+        byte[] m_hash;
         string m_file;
 
-        public byte [] Hash {
+        public byte[] Hash
+        {
             get { return m_hash; }
             set { m_hash = value; }
         }
 
-        public string File {
+        public string File
+        {
             get { return m_file; }
             set { m_file = value; }
         }
 
-        public LinkedResource (string name, ManifestResourceAttributes flags, string file) :
-            base (name, flags)
+        public LinkedResource(string name, ManifestResourceAttributes flags, string file)
+            : base(name, flags)
         {
             m_file = file;
         }
 
-        public override void Accept (IReflectionStructureVisitor visitor)
+        public override void Accept(IReflectionStructureVisitor visitor)
         {
-            visitor.VisitLinkedResource (this);
+            visitor.VisitLinkedResource(this);
         }
     }
 }

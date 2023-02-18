@@ -3,24 +3,24 @@ using System.Collections.Generic;
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        foreach (var x in Test1 ("2"))
+        foreach (var x in Test1("2"))
         {
-            Console.WriteLine (x);
+            Console.WriteLine(x);
             return 1;
         }
 
-        foreach (var x in Test2 (2))
+        foreach (var x in Test2(2))
         {
-            Console.WriteLine (x);
+            Console.WriteLine(x);
             return 2;
         }
 
         return 0;
     }
 
-    public static IEnumerable<object> Test1 (object expr)
+    public static IEnumerable<object> Test1(object expr)
     {
         if (expr is short list)
         {
@@ -28,7 +28,7 @@ class X
         }
     }
 
-    public static IEnumerable<object> Test2 (object expr)
+    public static IEnumerable<object> Test2(object expr)
     {
         if (expr is string list)
         {

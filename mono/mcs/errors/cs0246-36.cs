@@ -3,7 +3,7 @@
 
 class Crashy
 {
-    void Call (System.Action<object> action) { }
+    void Call(System.Action<object> action) { }
 
-    public void DoCrash () => Call (f => f as Foo);
+    public void DoCrash() => Call(f => f as Foo);
 }

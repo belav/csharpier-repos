@@ -9,7 +9,7 @@ using Xunit;
 namespace WinRT
 {
     [WindowsRuntimeImport]
-    interface I {}
+    interface I { }
 
     class Program
     {
@@ -31,4 +31,3 @@ namespace WinRT
         }
     }
 }
-

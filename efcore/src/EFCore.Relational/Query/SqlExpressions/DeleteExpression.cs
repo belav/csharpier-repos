@@ -19,11 +19,13 @@ public sealed class DeleteExpression : Expression, IPrintableExpression
     /// <param name="table">A table on which the delete operation is being applied.</param>
     /// <param name="selectExpression">A select expression which is used to determine which rows to delete.</param>
     public DeleteExpression(TableExpression table, SelectExpression selectExpression)
-        : this(table, selectExpression, new HashSet<string>())
-    {
-    }
+        : this(table, selectExpression, new HashSet<string>()) { }
 
-    private DeleteExpression(TableExpression table, SelectExpression selectExpression, ISet<string> tags)
+    private DeleteExpression(
+        TableExpression table,
+        SelectExpression selectExpression,
+        ISet<string> tags
+    )
     {
         Table = table;
         SelectExpression = selectExpression;
@@ -49,16 +51,13 @@ public sealed class DeleteExpression : Expression, IPrintableExpression
     ///     Applies a given set of tags.
     /// </summary>
     /// <param name="tags">A list of tags to apply.</param>
-    public DeleteExpression ApplyTags(ISet<string> tags)
-        => new(Table, SelectExpression, tags);
+    public DeleteExpression ApplyTags(ISet<string> tags) => new(Table, SelectExpression, tags);
 
     /// <inheritdoc />
-    public override Type Type
-        => typeof(object);
+    public override Type Type => typeof(object);
 
     /// <inheritdoc />
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -74,8 +73,8 @@ public sealed class DeleteExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="selectExpression">The <see cref="SelectExpression" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public DeleteExpression Update(SelectExpression selectExpression)
-        => selectExpression != SelectExpression
+    public DeleteExpression Update(SelectExpression selectExpression) =>
+        selectExpression != SelectExpression
             ? new DeleteExpression(Table, selectExpression, Tags)
             : this;
 
@@ -93,17 +92,16 @@ public sealed class DeleteExpression : Expression, IPrintableExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is DeleteExpression deleteExpression
-                && Equals(deleteExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is DeleteExpression deleteExpression && Equals(deleteExpression)
+        );
 
-    private bool Equals(DeleteExpression deleteExpression)
-        => Table == deleteExpression.Table
-            && SelectExpression == deleteExpression.SelectExpression;
+    private bool Equals(DeleteExpression deleteExpression) =>
+        Table == deleteExpression.Table && SelectExpression == deleteExpression.SelectExpression;
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(Table, SelectExpression);
+    public override int GetHashCode() => HashCode.Combine(Table, SelectExpression);
 }

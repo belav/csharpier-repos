@@ -11,7 +11,8 @@ namespace ILCompiler.DependencyAnalysis
     class DeferredTillPhaseNode : DependencyNodeCore<NodeFactory>
     {
         private readonly int _phase;
-        private readonly List<DependencyNodeCore<NodeFactory>> _dependencies = new List<DependencyNodeCore<NodeFactory>>();
+        private readonly List<DependencyNodeCore<NodeFactory>> _dependencies =
+            new List<DependencyNodeCore<NodeFactory>>();
         private bool _dependenciesNoLongerMutable;
 
         public DeferredTillPhaseNode(int phase)
@@ -42,15 +43,27 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => _dependenciesNoLongerMutable;
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context)
         {
             foreach (var dependencyNode in _dependencies)
             {
-                yield return new DependencyNodeCore<NodeFactory>.DependencyListEntry(dependencyNode, "DeferredDependency");
+                yield return new DependencyNodeCore<NodeFactory>.DependencyListEntry(
+                    dependencyNode,
+                    "DeferredDependency"
+                );
             }
         }
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => throw new NotImplementedException();
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => throw new NotImplementedException();
+
         protected override string GetName(NodeFactory context) => $"DeferredTillPhaseNode {_phase}";
 
         public override int DependencyPhaseForDeferredStaticComputation => _phase;

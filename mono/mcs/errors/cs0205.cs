@@ -5,19 +5,19 @@ using System;
 
 public abstract class A
 {
-        public abstract void Foobar ();
+    public abstract void Foobar();
 }
 
-public class B: A
+public class B : A
 {
-        public override void Foobar ()
-        {
-                base.Foobar ();
-        }
+    public override void Foobar()
+    {
+        base.Foobar();
+    }
 
-        static void Main ()
-        {
-                B b = new B ();
-                b.Foobar ();
-        }
+    static void Main()
+    {
+        B b = new B();
+        b.Foobar();
+    }
 }

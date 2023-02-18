@@ -2,7 +2,7 @@
 // Line: 7
 class Test<T>
 {
-    public T Null ()
+    public T Null()
     {
         return null;
     }
@@ -10,6 +10,5 @@ class Test<T>
 
 class X
 {
-    static void Main ()
-    { }
+    static void Main() { }
 }

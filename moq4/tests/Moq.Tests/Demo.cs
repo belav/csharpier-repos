@@ -38,8 +38,12 @@ namespace Moq.Tests
             var mock = new Mock<IWarehouse>();
 
             //setup - expectations
-            mock.Setup(x => x.HasInventory(It.IsAny<string>(), It.IsInRange(0, 100, Range.Inclusive))).Returns(false);
-            mock.Setup(x => x.Remove(It.IsAny<string>(), It.IsAny<int>())).Throws(new InvalidOperationException());
+            mock.Setup(
+                    x => x.HasInventory(It.IsAny<string>(), It.IsInRange(0, 100, Range.Inclusive))
+                )
+                .Returns(false);
+            mock.Setup(x => x.Remove(It.IsAny<string>(), It.IsAny<int>()))
+                .Throws(new InvalidOperationException());
 
             //exercise
             order.Fill(mock.Object);
@@ -58,7 +62,10 @@ namespace Moq.Tests
             Assert.Null(presenter.SelectedOrder);
 
             // Finally raise the event with a specific arguments data
-            mockView.Raise(mv => mv.OrderSelected += null, new OrderEventArgs { Order = new Order("moq", 500) });
+            mockView.Raise(
+                mv => mv.OrderSelected += null,
+                new OrderEventArgs { Order = new Order("moq", 500) }
+            );
 
             // Now the presenter reacted to the event, and we have a selected order
             Assert.NotNull(presenter.SelectedOrder);

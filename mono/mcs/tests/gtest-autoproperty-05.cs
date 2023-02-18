@@ -1,6 +1,4 @@
-partial class Test
-{
-}
+partial class Test { }
 
 abstract partial class Test
 {
@@ -9,7 +7,5 @@ abstract partial class Test
 
 class M
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

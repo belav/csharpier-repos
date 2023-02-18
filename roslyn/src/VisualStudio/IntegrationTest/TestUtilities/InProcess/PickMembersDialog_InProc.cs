@@ -16,18 +16,22 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class PickMembersDialog_InProc : InProcComponent
     {
-        private PickMembersDialog_InProc()
-        {
-        }
+        private PickMembersDialog_InProc() { }
 
-        public static PickMembersDialog_InProc Create()
-            => new PickMembersDialog_InProc();
+        public static PickMembersDialog_InProc Create() => new PickMembersDialog_InProc();
 
         public bool CloseWindow()
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
-                if (JoinableTaskFactory.Run(() => TryGetDialogAsync(cancellationTokenSource.Token)) is null)
+                if (
+                    JoinableTaskFactory.Run(() => TryGetDialogAsync(cancellationTokenSource.Token))
+                    is null
+                )
                 {
                     return false;
                 }
@@ -39,25 +43,42 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void ClickCancel()
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
-                JoinableTaskFactory.Run(() => ClickAsync(testAccessor => testAccessor.CancelButton, cancellationTokenSource.Token));
+                JoinableTaskFactory.Run(
+                    () =>
+                        ClickAsync(
+                            testAccessor => testAccessor.CancelButton,
+                            cancellationTokenSource.Token
+                        )
+                );
             }
         }
 
-        private static async Task<PickMembersDialog> GetDialogAsync(CancellationToken cancellationToken)
+        private static async Task<PickMembersDialog> GetDialogAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             return Application.Current.Windows.OfType<PickMembersDialog>().Single();
         }
 
-        private static async Task<PickMembersDialog> TryGetDialogAsync(CancellationToken cancellationToken)
+        private static async Task<PickMembersDialog> TryGetDialogAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             return Application.Current.Windows.OfType<PickMembersDialog>().SingleOrDefault();
         }
 
-        private static async Task ClickAsync(Func<PickMembersDialog.TestAccessor, ButtonBase> buttonSelector, CancellationToken cancellationToken)
+        private static async Task ClickAsync(
+            Func<PickMembersDialog.TestAccessor, ButtonBase> buttonSelector,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             var dialog = await GetDialogAsync(cancellationToken);

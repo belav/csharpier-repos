@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,63 +36,104 @@ using System.Web.Util;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public abstract class BaseCompareValidator : BaseValidator
     {
-        protected BaseCompareValidator ()
-        {
-        }
+        protected BaseCompareValidator() { }
 
-        protected override void AddAttributesToRender (HtmlTextWriter writer)
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
         {
-            if (RenderUplevel) {
-                if (Page != null) {
-                    RegisterExpandoAttribute (ClientID, "type", Type.ToString ());
+            if (RenderUplevel)
+            {
+                if (Page != null)
+                {
+                    RegisterExpandoAttribute(ClientID, "type", Type.ToString());
 
-                    switch (Type) {
+                    switch (Type)
+                    {
                         case ValidationDataType.Date:
-                            DateTimeFormatInfo dateTimeFormat = CultureInfo.CurrentCulture.DateTimeFormat;
+                            DateTimeFormatInfo dateTimeFormat = CultureInfo
+                                .CurrentCulture
+                                .DateTimeFormat;
                             string pattern = dateTimeFormat.ShortDatePattern;
-                            string dateorder = (pattern.StartsWith ("y", true, Helpers.InvariantCulture) ? "ymd" : (pattern.StartsWith ("m", true, Helpers.InvariantCulture) ? "mdy" : "dmy"));
-                            RegisterExpandoAttribute (ClientID, "dateorder", dateorder);
-                            RegisterExpandoAttribute (ClientID, "cutoffyear", dateTimeFormat.Calendar.TwoDigitYearMax.ToString ());
+                            string dateorder = (
+                                pattern.StartsWith("y", true, Helpers.InvariantCulture)
+                                    ? "ymd"
+                                    : (
+                                        pattern.StartsWith("m", true, Helpers.InvariantCulture)
+                                            ? "mdy"
+                                            : "dmy"
+                                    )
+                            );
+                            RegisterExpandoAttribute(ClientID, "dateorder", dateorder);
+                            RegisterExpandoAttribute(
+                                ClientID,
+                                "cutoffyear",
+                                dateTimeFormat.Calendar.TwoDigitYearMax.ToString()
+                            );
                             break;
                         case ValidationDataType.Currency:
                             NumberFormatInfo numberFormat = CultureInfo.CurrentCulture.NumberFormat;
-                            RegisterExpandoAttribute (ClientID, "decimalchar", numberFormat.CurrencyDecimalSeparator, true);
-                            RegisterExpandoAttribute (ClientID, "groupchar", numberFormat.CurrencyGroupSeparator, true);
-                            RegisterExpandoAttribute (ClientID, "digits", numberFormat.CurrencyDecimalDigits.ToString());
-                            RegisterExpandoAttribute (ClientID, "groupsize", numberFormat.CurrencyGroupSizes [0].ToString ());
+                            RegisterExpandoAttribute(
+                                ClientID,
+                                "decimalchar",
+                                numberFormat.CurrencyDecimalSeparator,
+                                true
+                            );
+                            RegisterExpandoAttribute(
+                                ClientID,
+                                "groupchar",
+                                numberFormat.CurrencyGroupSeparator,
+                                true
+                            );
+                            RegisterExpandoAttribute(
+                                ClientID,
+                                "digits",
+                                numberFormat.CurrencyDecimalDigits.ToString()
+                            );
+                            RegisterExpandoAttribute(
+                                ClientID,
+                                "groupsize",
+                                numberFormat.CurrencyGroupSizes[0].ToString()
+                            );
                             break;
                     }
                 }
             }
 
-            base.AddAttributesToRender (writer);
+            base.AddAttributesToRender(writer);
         }
 
-        public static bool CanConvert (string text,
-                           ValidationDataType type)
+        public static bool CanConvert(string text, ValidationDataType type)
         {
             object value;
 
-            return Convert (text, type, out value);
+            return Convert(text, type, out value);
         }
 
-        protected static bool Convert (string text,
-                           ValidationDataType type,
-                           out object value)
+        protected static bool Convert(string text, ValidationDataType type, out object value)
         {
-                    return BaseCompareValidator.Convert(text, type, false, out value);
+            return BaseCompareValidator.Convert(text, type, false, out value);
         }
 
-        protected static bool Compare (string leftText, string rightText, ValidationCompareOperator op, ValidationDataType type)
+        protected static bool Compare(
+            string leftText,
+            string rightText,
+            ValidationCompareOperator op,
+            ValidationDataType type
+        )
         {
-                    return BaseCompareValidator.Compare(leftText, false, rightText, false, op, type);    
+            return BaseCompareValidator.Compare(leftText, false, rightText, false, op, type);
         }
 
-        protected override bool DetermineRenderUplevel ()
+        protected override bool DetermineRenderUplevel()
         {
             /* presumably the CompareValidator client side
              * code makes use of newer dom/js stuff than
@@ -103,7 +144,7 @@ namespace System.Web.UI.WebControls
             return base.DetermineRenderUplevel();
         }
 
-        protected static string GetDateElementOrder ()
+        protected static string GetDateElementOrder()
         {
             // I hope there's a better way to implement this...
             string pattern = Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern;
@@ -112,29 +153,38 @@ namespace System.Web.UI.WebControls
             bool seen_year = false;
             bool seen_month = false;
 
-            pattern = pattern.ToLower (Helpers.InvariantCulture);
+            pattern = pattern.ToLower(Helpers.InvariantCulture);
 
-            for (int i = 0; i < pattern.Length; i ++) {
-                char c = pattern[ i ];
+            for (int i = 0; i < pattern.Length; i++)
+            {
+                char c = pattern[i];
                 if (c != 'm' && c != 'd' && c != 'y')
                     continue;
 
-                if (c == 'm') {
-                    if (!seen_month) order.Append ("m");
+                if (c == 'm')
+                {
+                    if (!seen_month)
+                        order.Append("m");
                     seen_month = true;
-                } else if (c == 'y') {
-                    if (!seen_year) order.Append ("y");
+                }
+                else if (c == 'y')
+                {
+                    if (!seen_year)
+                        order.Append("y");
                     seen_year = true;
-                } else /* (c == 'd') */ {
-                    if (!seen_date) order.Append ("d");
+                }
+                else /* (c == 'd') */
+                {
+                    if (!seen_date)
+                        order.Append("d");
                     seen_date = true;
                 }
             }
 
-            return order.ToString ();
+            return order.ToString();
         }
 
-        protected static int GetFullYear (int shortYear)
+        protected static int GetFullYear(int shortYear)
         {
             /* This is an implementation that matches the
              * docs on msdn, but MS doesn't seem to go by
@@ -148,41 +198,51 @@ namespace System.Web.UI.WebControls
                 return cutoff - twodigitcutoff - 100 + shortYear;
         }
 
-        [DefaultValue (false)]
-        [Themeable (false)]
-        public bool CultureInvariantValues {
-            get { return ViewState.GetBool ("CultureInvariantValues", false); }
-            set { ViewState ["CultureInvariantValues"] = value; }
+        [DefaultValue(false)]
+        [Themeable(false)]
+        public bool CultureInvariantValues
+        {
+            get { return ViewState.GetBool("CultureInvariantValues", false); }
+            set { ViewState["CultureInvariantValues"] = value; }
         }
-        
-            protected static int CutoffYear {
+
+        protected static int CutoffYear
+        {
             get { return CultureInfo.CurrentCulture.Calendar.TwoDigitYearMax; }
         }
 
-
         [DefaultValue(ValidationDataType.String)]
-        [Themeable (false)]
+        [Themeable(false)]
         [WebSysDescription("")]
         [WebCategory("Behavior")]
-        public ValidationDataType Type {
-            get { return ViewState ["Type"] == null ? ValidationDataType.String : (ValidationDataType) ViewState ["Type"]; }
-            set { ViewState ["Type"] = value; }
+        public ValidationDataType Type
+        {
+            get
+            {
+                return ViewState["Type"] == null
+                    ? ValidationDataType.String
+                    : (ValidationDataType)ViewState["Type"];
+            }
+            set { ViewState["Type"] = value; }
         }
 
-        public static bool CanConvert (string text, ValidationDataType type, bool cultureInvariant)
+        public static bool CanConvert(string text, ValidationDataType type, bool cultureInvariant)
         {
-                    object value;
-                    return Convert(text, type, cultureInvariant, out value);
+            object value;
+            return Convert(text, type, cultureInvariant, out value);
         }
 
-        protected static bool Compare (string leftText, 
-                           bool cultureInvariantLeftText, 
-                           string rightText, 
-                           bool cultureInvariantRightText, 
-                           ValidationCompareOperator op, 
-                           ValidationDataType type)
+        protected static bool Compare(
+            string leftText,
+            bool cultureInvariantLeftText,
+            string rightText,
+            bool cultureInvariantRightText,
+            ValidationCompareOperator op,
+            ValidationDataType type
+        )
         {
-            object lo, ro;
+            object lo,
+                ro;
 
             if (!Convert(leftText, type, cultureInvariantLeftText, out lo))
                 return false;
@@ -200,7 +260,8 @@ namespace System.Web.UI.WebControls
 
             int comp = ((IComparable)lo).CompareTo((IComparable)ro);
 
-            switch (op) {
+            switch (op)
+            {
                 case ValidationCompareOperator.Equal:
                     return comp == 0;
                 case ValidationCompareOperator.NotEqual:
@@ -218,37 +279,52 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        protected static bool Convert (string text, ValidationDataType type, bool cultureInvariant,out object value)
+        protected static bool Convert(
+            string text,
+            ValidationDataType type,
+            bool cultureInvariant,
+            out object value
+        )
         {
-            try {
-                switch (type) {
+            try
+            {
+                switch (type)
+                {
                     case ValidationDataType.String:
                         value = text;
                         return value != null;
 
                     case ValidationDataType.Integer:
-                        IFormatProvider intFormatProvider = (cultureInvariant) ? NumberFormatInfo.InvariantInfo :
-                        NumberFormatInfo.CurrentInfo;
+                        IFormatProvider intFormatProvider =
+                            (cultureInvariant)
+                                ? NumberFormatInfo.InvariantInfo
+                                : NumberFormatInfo.CurrentInfo;
                         value = Int32.Parse(text, intFormatProvider);
                         return true;
 
                     case ValidationDataType.Double:
-                        IFormatProvider doubleFormatProvider = (cultureInvariant) ? NumberFormatInfo.InvariantInfo :
-                        NumberFormatInfo.CurrentInfo;
+                        IFormatProvider doubleFormatProvider =
+                            (cultureInvariant)
+                                ? NumberFormatInfo.InvariantInfo
+                                : NumberFormatInfo.CurrentInfo;
                         value = Double.Parse(text, doubleFormatProvider);
                         return true;
 
                     case ValidationDataType.Date:
-                        
-                        IFormatProvider dateFormatProvider = (cultureInvariant) ? DateTimeFormatInfo.InvariantInfo :
-                        DateTimeFormatInfo.CurrentInfo;
+
+                        IFormatProvider dateFormatProvider =
+                            (cultureInvariant)
+                                ? DateTimeFormatInfo.InvariantInfo
+                                : DateTimeFormatInfo.CurrentInfo;
 
                         value = DateTime.Parse(text, dateFormatProvider);
                         return true;
 
                     case ValidationDataType.Currency:
-                        IFormatProvider currencyFormatProvider = (cultureInvariant) ? NumberFormatInfo.InvariantInfo :
-                        NumberFormatInfo.CurrentInfo;
+                        IFormatProvider currencyFormatProvider =
+                            (cultureInvariant)
+                                ? NumberFormatInfo.InvariantInfo
+                                : NumberFormatInfo.CurrentInfo;
                         value = Decimal.Parse(text, NumberStyles.Currency, currencyFormatProvider);
                         return true;
 
@@ -256,17 +332,12 @@ namespace System.Web.UI.WebControls
                         value = null;
                         return false;
                 }
-            } catch {
+            }
+            catch
+            {
                 value = null;
                 return false;
             }
         }
     }
 }
-
-
-
-
-
-
-

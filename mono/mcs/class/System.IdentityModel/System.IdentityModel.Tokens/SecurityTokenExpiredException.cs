@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,19 +34,15 @@ namespace System.IdentityModel.Tokens
     public class SecurityTokenExpiredException : SecurityTokenValidationException
     {
         public SecurityTokenExpiredException()
-            : base("ID4181: The security token has expired.")
-        { }
+            : base("ID4181: The security token has expired.") { }
 
         public SecurityTokenExpiredException(string message)
-            : base(message)
-        { }
+            : base(message) { }
 
         public SecurityTokenExpiredException(string message, Exception inner)
-            : base(message, inner)
-        { }
+            : base(message, inner) { }
 
         public SecurityTokenExpiredException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        { }
+            : base(info, context) { }
     }
 }

@@ -5,7 +5,7 @@ struct S
 {
     int i;
 
-    ref int M ()
+    ref int M()
     {
         ref int r = ref i;
         return ref r;

@@ -32,7 +32,9 @@ namespace System.IO.Enumeration
                         {
                             sb[sb.Length - 1] = '<'; // DOS_STAR (ends in *.)
                         }
-                        else if (i < length - 1 && (expression[i + 1] == '?' || expression[i + 1] == '*'))
+                        else if (
+                            i < length - 1 && (expression[i + 1] == '?' || expression[i + 1] == '*')
+                        )
                         {
                             sb.Append('\"'); // DOS_DOT
                         }
@@ -61,7 +63,11 @@ namespace System.IO.Enumeration
         /// <returns><see langword="true" /> if the given expression matches the given name; otherwise, <see langword="false" />.</returns>
         /// <remarks>The syntax of the <paramref name="expression" /> parameter is based on the syntax used by FileSystemWatcher, which is based on [RtlIsNameInExpression](/windows/win32/devnotes/rtlisnameinexpression), which defines the rules for matching DOS wildcards (`'*'`, `'?'`, `'&lt;'`, `'&gt;'`, `'"'`).
         /// Matching will not correspond to Win32 behavior unless you transform the expression using <see cref="FileSystemName.TranslateWin32Expression(string)" />.</remarks>
-        public static bool MatchesWin32Expression(ReadOnlySpan<char> expression, ReadOnlySpan<char> name, bool ignoreCase = true)
+        public static bool MatchesWin32Expression(
+            ReadOnlySpan<char> expression,
+            ReadOnlySpan<char> name,
+            bool ignoreCase = true
+        )
         {
             return MatchPattern(expression, name, ignoreCase, useExtendedWildcards: true);
         }
@@ -71,7 +77,11 @@ namespace System.IO.Enumeration
         /// <param name="name">The name to check against the expression.</param>
         /// <param name="ignoreCase"><see langword="true" /> to ignore case (default); <see langword="false" /> if the match should be case-sensitive.</param>
         /// <returns><see langword="true" /> if the given expression matches the given name; otherwise, <see langword="false" />.</returns>
-        public static bool MatchesSimpleExpression(ReadOnlySpan<char> expression, ReadOnlySpan<char> name, bool ignoreCase = true)
+        public static bool MatchesSimpleExpression(
+            ReadOnlySpan<char> expression,
+            ReadOnlySpan<char> name,
+            bool ignoreCase = true
+        )
         {
             return MatchPattern(expression, name, ignoreCase, useExtendedWildcards: false);
         }
@@ -132,7 +142,12 @@ namespace System.IO.Enumeration
         //           set of contiguous DOS_QMs.
         //       DOS_DOT matches either a . or zero characters beyond name string.
 
-        private static bool MatchPattern(ReadOnlySpan<char> expression, ReadOnlySpan<char> name, bool ignoreCase, bool useExtendedWildcards)
+        private static bool MatchPattern(
+            ReadOnlySpan<char> expression,
+            ReadOnlySpan<char> name,
+            bool ignoreCase,
+            bool useExtendedWildcards
+        )
         {
             // The idea behind the algorithm is pretty simple. We keep track of all possible locations
             // in the regular expression that are matching the name. When the name has been exhausted,
@@ -152,9 +167,12 @@ namespace System.IO.Enumeration
 
                 // [MS - FSA] 2.1.4.4 Algorithm for Determining if a FileName Is in an Expression
                 // https://msdn.microsoft.com/en-us/library/ff469270.aspx
-                bool hasWildcards = (useExtendedWildcards ?
-                    expressionEnd.IndexOfAny("\"<>*?") :
-                    expressionEnd.IndexOfAny('*', '?')) >= 0;
+                bool hasWildcards =
+                    (
+                        useExtendedWildcards
+                            ? expressionEnd.IndexOfAny("\"<>*?")
+                            : expressionEnd.IndexOfAny('*', '?')
+                    ) >= 0;
                 if (!hasWildcards)
                 {
                     // Handle the special case of a single starting *, which essentially means "ends with"
@@ -164,7 +182,10 @@ namespace System.IO.Enumeration
                         return false;
 
                     // See if we end with the expression
-                    return name.EndsWith(expressionEnd, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                    return name.EndsWith(
+                        expressionEnd,
+                        ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+                    );
                 }
             }
 
@@ -341,16 +362,20 @@ namespace System.IO.Enumeration
 
                                 // From this point on a name character is required to even
                                 // continue, let alone make a match.
-                                if (nameFinished) goto ExpressionFinished;
+                                if (nameFinished)
+                                    goto ExpressionFinished;
 
                                 if (expressionChar == '?')
                                 {
                                     // If this expression was a '?' we can match it once.
                                     currentMatches[currentMatch++] = currentState;
                                 }
-                                else if (ignoreCase
-                                    ? char.ToUpperInvariant(expressionChar) == char.ToUpperInvariant(nameChar)
-                                    : expressionChar == nameChar)
+                                else if (
+                                    ignoreCase
+                                        ? char.ToUpperInvariant(expressionChar)
+                                            == char.ToUpperInvariant(nameChar)
+                                        : expressionChar == nameChar
+                                )
                                 {
                                     // Matched a non-wildcard character
                                     currentMatches[currentMatch++] = currentState;
@@ -361,12 +386,12 @@ namespace System.IO.Enumeration
                         }
 
                         MatchZeroOrMore:
-                            currentMatches[currentMatch++] = currentState;
+                        currentMatches[currentMatch++] = currentState;
                         MatchZero:
-                            currentMatches[currentMatch++] = currentState + 1;
+                        currentMatches[currentMatch++] = currentState + 1;
                         NextExpressionCharacter:
-                            if (++expressionOffset == expression.Length)
-                                currentMatches[currentMatch++] = maxState;
+                        if (++expressionOffset == expression.Length)
+                            currentMatches[currentMatch++] = maxState;
                     } // while (expressionOffset < expression.Length)
 
                     ExpressionFinished:
@@ -382,7 +407,10 @@ namespace System.IO.Enumeration
                         while (priorMatchCount < currentMatch)
                         {
                             int previousLength = priorMatches.Length;
-                            while ((priorMatch < previousLength) && (priorMatches[priorMatch] < currentMatches[priorMatchCount]))
+                            while (
+                                (priorMatch < previousLength)
+                                && (priorMatches[priorMatch] < currentMatches[priorMatchCount])
+                            )
                             {
                                 priorMatch++;
                             }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,7 +36,7 @@ namespace System.ServiceModel
 {
     public abstract class PeerNode : IOnlineStatus
     {
-        internal PeerNode (string meshId, int port)
+        internal PeerNode(string meshId, int port)
         {
             MeshId = meshId;
             Port = port;
@@ -51,7 +51,8 @@ namespace System.ServiceModel
 
         internal ulong NodeId { get; set; }
 
-        internal bool IsOpen {
+        internal bool IsOpen
+        {
             get { return RegisteredId != null; }
         }
 
@@ -61,27 +62,32 @@ namespace System.ServiceModel
 
         public abstract PeerMessagePropagationFilter MessagePropagationFilter { get; set; }
 
-        public void RefreshConnection ()
+        public void RefreshConnection() { }
+
+        public override string ToString()
         {
+            return String.Format(
+                "MeshId: {0}, Node ID: {1}, Online: {2}, Opened:{3}, Port: {4}",
+                MeshId,
+                NodeId,
+                IsOnline,
+                IsOpen,
+                Port
+            );
         }
 
-        public override string ToString ()
-        {
-            return String.Format ("MeshId: {0}, Node ID: {1}, Online: {2}, Opened:{3}, Port: {4}", MeshId, NodeId, IsOnline, IsOpen, Port);
-        }
-
-        internal void SetOnline ()
+        internal void SetOnline()
         {
             IsOnline = true;
             if (Online != null)
-                Online (this, EventArgs.Empty);
+                Online(this, EventArgs.Empty);
         }
 
-        internal void SetOffline ()
+        internal void SetOffline()
         {
             IsOnline = false;
             if (Offline != null)
-                Offline (this, EventArgs.Empty);
+                Offline(this, EventArgs.Empty);
         }
     }
 
@@ -93,8 +99,8 @@ namespace System.ServiceModel
             public PeerNodeAddress Address { get; set; }
         }
 
-        internal PeerNodeImpl (string meshId, IPAddress fixedListenAddress, int port)
-            : base (meshId, port)
+        internal PeerNodeImpl(string meshId, IPAddress fixedListenAddress, int port)
+            : base(meshId, port)
         {
             this.listen_address = fixedListenAddress ?? IPAddress.Any;
         }

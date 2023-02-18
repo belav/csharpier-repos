@@ -15,38 +15,41 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         private readonly List<MessageContainer> _messageContainers;
 
-        public TestLogWriter ()
+        public TestLogWriter()
         {
-            _infoStringWriter = new StringWriter ();
-            _infoWriter = TextWriter.Synchronized (_infoStringWriter);
-            _messageContainers = new List<MessageContainer> ();
+            _infoStringWriter = new StringWriter();
+            _infoWriter = TextWriter.Synchronized(_infoStringWriter);
+            _messageContainers = new List<MessageContainer>();
         }
 
         public TextWriter Writer => _infoWriter;
 
-        public List<MessageContainer> GetLoggedMessages ()
+        public List<MessageContainer> GetLoggedMessages()
         {
             return _messageContainers;
         }
 
-        public void WriteError (MessageContainer error)
+        public void WriteError(MessageContainer error)
         {
-            lock (_messageContainers) {
-                _messageContainers.Add (error);
+            lock (_messageContainers)
+            {
+                _messageContainers.Add(error);
             }
         }
 
-        public void WriteMessage (MessageContainer message)
+        public void WriteMessage(MessageContainer message)
         {
-            lock (_messageContainers) {
-                _messageContainers.Add (message);
+            lock (_messageContainers)
+            {
+                _messageContainers.Add(message);
             }
         }
 
-        public void WriteWarning (MessageContainer warning)
+        public void WriteWarning(MessageContainer warning)
         {
-            lock (_messageContainers) {
-                _messageContainers.Add (warning);
+            lock (_messageContainers)
+            {
+                _messageContainers.Add(warning);
             }
         }
     }

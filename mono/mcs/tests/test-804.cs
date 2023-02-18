@@ -22,22 +22,34 @@ interface IC : IB_2, IB_1
 
 class A : IA
 {
-    public int Foo { get { return 3; } }
+    public int Foo
+    {
+        get { return 3; }
+    }
 }
 
 class B : A, IB_1
 {
-    public new string Foo { get { return "1"; } }
+    public new string Foo
+    {
+        get { return "1"; }
+    }
 }
 
 class C : B, IC
 {
-    char IB_2.Foo { get { return 'a'; } }
-    
-    public new byte Foo { get { return 2; } }
-    
-    public static void Main ()
+    char IB_2.Foo
     {
-        new C ();
+        get { return 'a'; }
+    }
+
+    public new byte Foo
+    {
+        get { return 2; }
+    }
+
+    public static void Main()
+    {
+        new C();
     }
 }

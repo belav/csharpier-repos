@@ -16,8 +16,13 @@ namespace System
     {
         [DebuggerGuidedStepThrough]
         public static object CreateInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type, bool nonPublic)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type,
+            bool nonPublic
+        )
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -28,7 +33,13 @@ namespace System
             BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
             if (nonPublic)
                 bindingFlags |= BindingFlags.NonPublic;
-            ConstructorInfo constructor = type.GetConstructor(bindingFlags, null, CallingConventions.Any, Array.Empty<Type>(), null);
+            ConstructorInfo constructor = type.GetConstructor(
+                bindingFlags,
+                null,
+                CallingConventions.Any,
+                Array.Empty<Type>(),
+                null
+            );
             if (constructor == null)
             {
                 if (type.IsValueType)
@@ -43,8 +54,17 @@ namespace System
 
         [DebuggerGuidedStepThrough]
         public static object CreateInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type, BindingFlags bindingAttr, Binder binder, object[] args, CultureInfo culture, object[] activationAttributes)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type,
+            BindingFlags bindingAttr,
+            Binder binder,
+            object[] args,
+            CultureInfo culture,
+            object[] activationAttributes
+        )
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -52,7 +72,8 @@ namespace System
             // If they didn't specify a lookup, then we will provide the default lookup.
             const BindingFlags LookupMask = (BindingFlags)0x000000FF;
             if ((bindingAttr & LookupMask) == 0)
-                bindingAttr |= BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance;
+                bindingAttr |=
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance;
 
             if (activationAttributes != null && activationAttributes.Length > 0)
                 throw new PlatformNotSupportedException(SR.NotSupported_ActivAttr);
@@ -74,7 +95,13 @@ namespace System
             ListBuilder<MethodBase> matches = new ListBuilder<MethodBase>(candidates.Length);
             for (int i = 0; i < candidates.Length; i++)
             {
-                if (candidates[i].QualifiesBasedOnParameterCount(bindingAttr, CallingConventions.Any, argTypes))
+                if (
+                    candidates[i].QualifiesBasedOnParameterCount(
+                        bindingAttr,
+                        CallingConventions.Any,
+                        argTypes
+                    )
+                )
                     matches.Add(candidates[i]);
             }
             if (matches.Count == 0)
@@ -88,13 +115,23 @@ namespace System
             if (binder == null)
                 binder = Type.DefaultBinder;
 
-            MethodBase invokeMethod = binder.BindToMethod(bindingAttr, matches.ToArray(), ref args, null, culture, null, out object state);
+            MethodBase invokeMethod = binder.BindToMethod(
+                bindingAttr,
+                matches.ToArray(),
+                ref args,
+                null,
+                culture,
+                null,
+                out object state
+            );
             if (invokeMethod.GetParametersNoCopy().Length == 0)
             {
                 if (args.Length != 0)
                 {
-
-                    Debug.Assert((invokeMethod.CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs);
+                    Debug.Assert(
+                        (invokeMethod.CallingConvention & CallingConventions.VarArgs)
+                            == CallingConventions.VarArgs
+                    );
                     throw new NotSupportedException(SR.NotSupported_CallToVarArg);
                 }
 
@@ -109,7 +146,12 @@ namespace System
                 state = null;
             }
 
-            object result = ((ConstructorInfo)invokeMethod).Invoke(bindingAttr, binder, args, culture);
+            object result = ((ConstructorInfo)invokeMethod).Invoke(
+                bindingAttr,
+                binder,
+                args,
+                culture
+            );
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             if (state != null)
                 binder.ReorderArgumentArray(ref args, state);
@@ -122,7 +164,9 @@ namespace System
                 throw new ArgumentException(SR.Arg_MustBeType, nameof(type));
 
             if (type.IsAbstract)
-                throw new MissingMethodException(type.IsInterface ? SR.Acc_CreateInterface : SR.Acc_CreateAbst);  // Strange but compatible exception.
+                throw new MissingMethodException(
+                    type.IsInterface ? SR.Acc_CreateInterface : SR.Acc_CreateAbst
+                ); // Strange but compatible exception.
 
             if (type.ContainsGenericParameters)
                 throw new ArgumentException(SR.Format(SR.Acc_CreateGenericEx, type));

@@ -7,8 +7,6 @@ namespace Mono.Linker.Tests.Cases.Expectations.Assertions
     /// documentation signature.
     public class ExpectGeneratedDocumentationSignatureAttribute : BaseMemberAssertionAttribute
     {
-        public ExpectGeneratedDocumentationSignatureAttribute (string expected)
-        {
-        }
+        public ExpectGeneratedDocumentationSignatureAttribute(string expected) { }
     }
 }

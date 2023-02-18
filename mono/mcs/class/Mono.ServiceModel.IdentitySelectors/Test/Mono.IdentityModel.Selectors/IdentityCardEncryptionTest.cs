@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,30 +38,33 @@ namespace MonoTests.Mono.ServiceModel.IdentitySelectors
     public class IdentityCardEncryptionTest
     {
         [Test]
-        public void Import ()
+        public void Import()
         {
-            string encxml = new StreamReader ("Test/resources/rupert.crds").ReadToEnd ();
-            string xml = new IdentityCardEncryption ().Decrypt (
-                encxml, "monkeydance");
-            XmlDocument doc = new XmlDocument ();
-            doc.LoadXml (xml);
+            string encxml = new StreamReader("Test/resources/rupert.crds").ReadToEnd();
+            string xml = new IdentityCardEncryption().Decrypt(encxml, "monkeydance");
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
         }
 
         [Test]
-        public void Export ()
+        public void Export()
         {
-            byte [] salt = Convert.FromBase64String ("ofkHGOy0pioOd7++N2a52w==");
-            byte [] iv = Convert.FromBase64String ("OzFSoAlrfj11g246TM4How==");
-            XmlDocument doc = new XmlDocument ();
-            doc.Load ("Test/resources/rupert.xml");
-            doc.RemoveChild (doc.FirstChild);
-            byte [] result = new IdentityCardEncryption ().Encrypt (doc.OuterXml, "monkeydance", salt, iv);
-            string resultText = Encoding.UTF8.GetString (result);
+            byte[] salt = Convert.FromBase64String("ofkHGOy0pioOd7++N2a52w==");
+            byte[] iv = Convert.FromBase64String("OzFSoAlrfj11g246TM4How==");
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Test/resources/rupert.xml");
+            doc.RemoveChild(doc.FirstChild);
+            byte[] result = new IdentityCardEncryption().Encrypt(
+                doc.OuterXml,
+                "monkeydance",
+                salt,
+                iv
+            );
+            string resultText = Encoding.UTF8.GetString(result);
 
-            string roundtrip = new IdentityCardEncryption ().Decrypt (resultText, "monkeydance");
-            doc = new XmlDocument ();
-            doc.LoadXml (roundtrip);
+            string roundtrip = new IdentityCardEncryption().Decrypt(resultText, "monkeydance");
+            doc = new XmlDocument();
+            doc.LoadXml(roundtrip);
         }
     }
 }
-

@@ -21,8 +21,15 @@ namespace System.Activities.Core.Presentation
         public static void RegisterMetadata(AttributeTableBuilder builder)
         {
             Type type = typeof(NoPersistScope);
-            builder.AddCustomAttributes(type, new DesignerAttribute(typeof(NoPersistScopeDesigner)));
-            builder.AddCustomAttributes(type, type.GetProperty(NoPersistScopeDesigner.BodyPropertyName), BrowsableAttribute.No);
+            builder.AddCustomAttributes(
+                type,
+                new DesignerAttribute(typeof(NoPersistScopeDesigner))
+            );
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty(NoPersistScopeDesigner.BodyPropertyName),
+                BrowsableAttribute.No
+            );
         }
     }
 }

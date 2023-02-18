@@ -3,14 +3,11 @@
 
 using System;
 
-interface IFoo {
-}
+interface IFoo { }
 
-public interface IBar : IFoo {
-}
+public interface IBar : IFoo { }
 
-class ErrorCS0061 {
-    public static void Main () {
-    }
+class ErrorCS0061
+{
+    public static void Main() { }
 }
-

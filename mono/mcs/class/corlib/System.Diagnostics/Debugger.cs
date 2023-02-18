@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,10 +39,9 @@ namespace System.Diagnostics
     /// <summary>
     /// Enables communication with a debugger.
     /// </summary>
-    [ComVisible (true)]
+    [ComVisible(true)]
     public sealed class Debugger
     {
-
         /// <summary>
         /// Represents the default category of a message with a constant.
         /// </summary>
@@ -56,14 +55,11 @@ namespace System.Diagnostics
         /// </value>
         public static bool IsAttached
         {
-            get
-            {
-                return IsAttached_internal ();
-            }
+            get { return IsAttached_internal(); }
         }
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static bool IsAttached_internal ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern static bool IsAttached_internal();
 
         /// <summary>
         /// Causes a breakpoint to be signaled to an attached debugger.
@@ -100,29 +96,25 @@ namespace System.Diagnostics
         /// A string representing the message to show.
         /// </param>
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern void Log_icall (int level, ref string category, ref string message);
+        static extern void Log_icall(int level, ref string category, ref string message);
 
-        public static void Log (int level, string category, string message)
+        public static void Log(int level, string category, string message)
         {
-            Log_icall (level, ref category, ref message);
+            Log_icall(level, ref category, ref message);
         }
 
-        public static void NotifyOfCrossThreadDependency ()
-        {
-        }
+        public static void NotifyOfCrossThreadDependency() { }
 
         [ObsoleteAttribute("Call the static methods directly on this type", true)]
-        public Debugger()
-        {
-        }
+        public Debugger() { }
 
 #if MONODROID
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private extern static void Mono_UnhandledException_internal (Exception ex);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private extern static void Mono_UnhandledException_internal(Exception ex);
 
-        internal static void Mono_UnhandledException (Exception ex)
+        internal static void Mono_UnhandledException(Exception ex)
         {
-            Mono_UnhandledException_internal (ex);
+            Mono_UnhandledException_internal(ex);
         }
 #endif
     }

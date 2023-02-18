@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,171 +32,177 @@ using System;
 using System.Security;
 using System.Security.Policy;
 
-namespace MonoTests.System.Security.Policy {
-
+namespace MonoTests.System.Security.Policy
+{
     [TestFixture]
-    public class GacMembershipConditionTest    {
-
+    public class GacMembershipConditionTest
+    {
         [Test]
-        public void Constructor ()
+        public void Constructor()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            Assert.IsNotNull (gac);
+            GacMembershipCondition gac = new GacMembershipCondition();
+            Assert.IsNotNull(gac);
         }
 
         [Test]
-        public void Check ()
+        public void Check()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
+            GacMembershipCondition gac = new GacMembershipCondition();
             Evidence e = null;
-            Assert.IsFalse (gac.Check (e), "Check (null)");
-            e = new Evidence ();
-            Assert.IsFalse (gac.Check (e), "Check (empty)");
-            e.AddHost (new Zone (SecurityZone.MyComputer));
-            Assert.IsFalse (gac.Check (e), "Check (zone)");
-            GacInstalled g = new GacInstalled ();
-            e.AddAssembly (g);
-            Assert.IsFalse (gac.Check (e), "Check (gac-assembly)");
-            e.AddHost (g);
-            Assert.IsTrue (gac.Check (e), "Check (gac-host)");
+            Assert.IsFalse(gac.Check(e), "Check (null)");
+            e = new Evidence();
+            Assert.IsFalse(gac.Check(e), "Check (empty)");
+            e.AddHost(new Zone(SecurityZone.MyComputer));
+            Assert.IsFalse(gac.Check(e), "Check (zone)");
+            GacInstalled g = new GacInstalled();
+            e.AddAssembly(g);
+            Assert.IsFalse(gac.Check(e), "Check (gac-assembly)");
+            e.AddHost(g);
+            Assert.IsTrue(gac.Check(e), "Check (gac-host)");
         }
 
         [Test]
-        public void Copy ()
+        public void Copy()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            GacMembershipCondition copy = (GacMembershipCondition) gac.Copy ();
-            Assert.AreEqual (gac, copy, "Equals");
-            Assert.IsFalse (Object.ReferenceEquals (gac, copy), "ReferenceEquals");
+            GacMembershipCondition gac = new GacMembershipCondition();
+            GacMembershipCondition copy = (GacMembershipCondition)gac.Copy();
+            Assert.AreEqual(gac, copy, "Equals");
+            Assert.IsFalse(Object.ReferenceEquals(gac, copy), "ReferenceEquals");
         }
 
         [Test]
-        public void Equals ()
+        public void Equals()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            Assert.IsFalse (gac.Equals (null), "Equals(null)");
-            GacMembershipCondition g2 = new GacMembershipCondition ();
-            Assert.IsTrue (gac.Equals (g2), "Equals(g2)");
-            Assert.IsTrue (g2.Equals (gac), "Equals(gac)");
+            GacMembershipCondition gac = new GacMembershipCondition();
+            Assert.IsFalse(gac.Equals(null), "Equals(null)");
+            GacMembershipCondition g2 = new GacMembershipCondition();
+            Assert.IsTrue(gac.Equals(g2), "Equals(g2)");
+            Assert.IsTrue(g2.Equals(gac), "Equals(gac)");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void FromXml_Null () 
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromXml_Null()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            gac.FromXml (null);
+            GacMembershipCondition gac = new GacMembershipCondition();
+            gac.FromXml(null);
         }
 
         [Test]
-        public void FromXml ()
+        public void FromXml()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            SecurityElement se = gac.ToXml ();
-            gac.FromXml (se);
+            GacMembershipCondition gac = new GacMembershipCondition();
+            SecurityElement se = gac.ToXml();
+            gac.FromXml(se);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void FromXml_InvalidTag ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_InvalidTag()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            SecurityElement se = gac.ToXml ();
+            GacMembershipCondition gac = new GacMembershipCondition();
+            SecurityElement se = gac.ToXml();
             se.Tag = "IMonoship";
-            gac.FromXml (se);
+            gac.FromXml(se);
         }
 
         [Test]
-        public void FromXml_InvalidClass ()
+        public void FromXml_InvalidClass()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            SecurityElement se = gac.ToXml ();
-            se.Attributes ["class"] = "Hello world";
-            gac.FromXml (se);
+            GacMembershipCondition gac = new GacMembershipCondition();
+            SecurityElement se = gac.ToXml();
+            se.Attributes["class"] = "Hello world";
+            gac.FromXml(se);
         }
 
         [Test]
-        public void FromXml_NoClass ()
+        public void FromXml_NoClass()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            SecurityElement se = gac.ToXml ();
+            GacMembershipCondition gac = new GacMembershipCondition();
+            SecurityElement se = gac.ToXml();
 
-            SecurityElement w = new SecurityElement (se.Tag);
-            w.AddAttribute ("version", se.Attribute ("version"));
-            gac.FromXml (w);
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("version", se.Attribute("version"));
+            gac.FromXml(w);
             // doesn't even care of the class attribute presence
         }
 
         [Test]
-        public void FromXml_InvalidVersion ()
+        public void FromXml_InvalidVersion()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            SecurityElement se = gac.ToXml ();
+            GacMembershipCondition gac = new GacMembershipCondition();
+            SecurityElement se = gac.ToXml();
 
-            SecurityElement w = new SecurityElement (se.Tag);
-            w.AddAttribute ("class", se.Attribute ("class"));
-            w.AddAttribute ("version", "2");
-            gac.FromXml (w);
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("class", se.Attribute("class"));
+            w.AddAttribute("version", "2");
+            gac.FromXml(w);
         }
 
         [Test]
-        public void FromXml_NoVersion ()
+        public void FromXml_NoVersion()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            SecurityElement se = gac.ToXml ();
+            GacMembershipCondition gac = new GacMembershipCondition();
+            SecurityElement se = gac.ToXml();
 
-            SecurityElement w = new SecurityElement (se.Tag);
-            w.AddAttribute ("class", se.Attribute ("class"));
-            gac.FromXml (w);
-        }
-
-        [Test]
-#if MOBILE
-        [Ignore]
-#endif
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void FromXml_SecurityElementNull ()
-        {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            gac.FromXml (null, PolicyLevel.CreateAppDomainLevel ());
-        }
-
-        [Test]
-        public void FromXml_PolicyLevelNull ()
-        {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            SecurityElement se = gac.ToXml ();
-            gac.FromXml (se, null);
-        }
-
-        [Test]
-        public void GetHashCode_ ()
-        {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            Assert.AreEqual (0, gac.GetHashCode ());
-        }
-
-        [Test]
-        public void ToString_ ()
-        {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            Assert.AreEqual ("GAC", gac.ToString ());
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("class", se.Attribute("class"));
+            gac.FromXml(w);
         }
 
         [Test]
 #if MOBILE
         [Ignore]
 #endif
-        public void ToXml ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromXml_SecurityElementNull()
         {
-            GacMembershipCondition gac = new GacMembershipCondition ();
-            SecurityElement se = gac.ToXml ();
-            Assert.AreEqual ("IMembershipCondition", se.Tag, "Tag");
-            Assert.IsTrue (se.Attribute ("class").StartsWith ("System.Security.Policy.GacMembershipCondition"), "class");
-            Assert.AreEqual ("1", se.Attribute ("version"), "version");
-            Assert.AreEqual (se.ToString (), gac.ToXml (null).ToString (), "ToXml(null)");
-            Assert.AreEqual (se.ToString (), gac.ToXml (PolicyLevel.CreateAppDomainLevel ()).ToString (), "ToXml(PolicyLevel)");
+            GacMembershipCondition gac = new GacMembershipCondition();
+            gac.FromXml(null, PolicyLevel.CreateAppDomainLevel());
+        }
+
+        [Test]
+        public void FromXml_PolicyLevelNull()
+        {
+            GacMembershipCondition gac = new GacMembershipCondition();
+            SecurityElement se = gac.ToXml();
+            gac.FromXml(se, null);
+        }
+
+        [Test]
+        public void GetHashCode_()
+        {
+            GacMembershipCondition gac = new GacMembershipCondition();
+            Assert.AreEqual(0, gac.GetHashCode());
+        }
+
+        [Test]
+        public void ToString_()
+        {
+            GacMembershipCondition gac = new GacMembershipCondition();
+            Assert.AreEqual("GAC", gac.ToString());
+        }
+
+        [Test]
+#if MOBILE
+        [Ignore]
+#endif
+        public void ToXml()
+        {
+            GacMembershipCondition gac = new GacMembershipCondition();
+            SecurityElement se = gac.ToXml();
+            Assert.AreEqual("IMembershipCondition", se.Tag, "Tag");
+            Assert.IsTrue(
+                se.Attribute("class").StartsWith("System.Security.Policy.GacMembershipCondition"),
+                "class"
+            );
+            Assert.AreEqual("1", se.Attribute("version"), "version");
+            Assert.AreEqual(se.ToString(), gac.ToXml(null).ToString(), "ToXml(null)");
+            Assert.AreEqual(
+                se.ToString(),
+                gac.ToXml(PolicyLevel.CreateAppDomainLevel()).ToString(),
+                "ToXml(PolicyLevel)"
+            );
         }
     }
 }
-

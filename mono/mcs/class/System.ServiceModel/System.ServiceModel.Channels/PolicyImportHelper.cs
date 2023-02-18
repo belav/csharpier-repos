@@ -30,139 +30,178 @@ using System.ServiceModel.Description;
 
 using QName = System.Xml.XmlQualifiedName;
 
-namespace System.ServiceModel.Channels {
-
-    internal static class PolicyImportHelper {
-
-        internal const string SecurityPolicyNS = "http://schemas.xmlsoap.org/ws/2005/07/securitypolicy";
+namespace System.ServiceModel.Channels
+{
+    internal static class PolicyImportHelper
+    {
+        internal const string SecurityPolicyNS =
+            "http://schemas.xmlsoap.org/ws/2005/07/securitypolicy";
         internal const string PolicyNS = "http://schemas.xmlsoap.org/ws/2004/09/policy";
-        internal const string MimeSerializationNS = "http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization";
+        internal const string MimeSerializationNS =
+            "http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization";
         internal const string HttpAuthNS = "http://schemas.microsoft.com/ws/06/2004/policy/http";
 
-        internal const string FramingPolicyNS = "http://schemas.microsoft.com/ws/2006/05/framing/policy";
-        internal const string NetBinaryEncodingNS = "http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1";
+        internal const string FramingPolicyNS =
+            "http://schemas.microsoft.com/ws/2006/05/framing/policy";
+        internal const string NetBinaryEncodingNS =
+            "http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1";
 
-        internal const string WSSecurityNS = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
+        internal const string WSSecurityNS =
+            "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
 
-        internal static XmlElement GetTransportBindingPolicy (PolicyAssertionCollection collection)
+        internal static XmlElement GetTransportBindingPolicy(PolicyAssertionCollection collection)
         {
-            return FindAndRemove (collection, "TransportBinding", SecurityPolicyNS);
-        }
-            
-        internal static XmlElement GetStreamedMessageFramingPolicy (PolicyAssertionCollection collection)
-        {
-            return FindAndRemove (collection, "Streamed", FramingPolicyNS);    
+            return FindAndRemove(collection, "TransportBinding", SecurityPolicyNS);
         }
 
-        internal static XmlElement GetBinaryMessageEncodingPolicy (PolicyAssertionCollection collection)
+        internal static XmlElement GetStreamedMessageFramingPolicy(
+            PolicyAssertionCollection collection
+        )
         {
-            return FindAndRemove (collection, "BinaryEncoding", NetBinaryEncodingNS);
+            return FindAndRemove(collection, "Streamed", FramingPolicyNS);
         }
 
-        internal static XmlElement GetMtomMessageEncodingPolicy (PolicyAssertionCollection collection)
+        internal static XmlElement GetBinaryMessageEncodingPolicy(
+            PolicyAssertionCollection collection
+        )
         {
-            return FindAndRemove (collection, "OptimizedMimeSerialization", MimeSerializationNS);
+            return FindAndRemove(collection, "BinaryEncoding", NetBinaryEncodingNS);
         }
 
-        static XmlElement FindAndRemove (PolicyAssertionCollection collection, string name, string ns)
+        internal static XmlElement GetMtomMessageEncodingPolicy(
+            PolicyAssertionCollection collection
+        )
         {
-            var element = collection.Find (name, ns);
+            return FindAndRemove(collection, "OptimizedMimeSerialization", MimeSerializationNS);
+        }
+
+        static XmlElement FindAndRemove(
+            PolicyAssertionCollection collection,
+            string name,
+            string ns
+        )
+        {
+            var element = collection.Find(name, ns);
             if (element != null)
-                collection.Remove (element);
+                collection.Remove(element);
             return element;
         }
 
-        internal static List<XmlElement> FindAssertionByNS (
-            PolicyAssertionCollection collection, string ns)
+        internal static List<XmlElement> FindAssertionByNS(
+            PolicyAssertionCollection collection,
+            string ns
+        )
         {
-            var list = new List<XmlElement> ();
-            foreach (var assertion in collection) {
-                if (assertion.NamespaceURI.Equals (ns))
-                    list.Add (assertion);
+            var list = new List<XmlElement>();
+            foreach (var assertion in collection)
+            {
+                if (assertion.NamespaceURI.Equals(ns))
+                    list.Add(assertion);
             }
             return list;
         }
 
-        internal static List<XmlElement> GetPolicyElements (XmlElement root, out bool error)
+        internal static List<XmlElement> GetPolicyElements(XmlElement root, out bool error)
         {
             XmlElement policy = null;
-            var list = new List<XmlElement> ();
+            var list = new List<XmlElement>();
 
-            foreach (var node in root.ChildNodes) {
+            foreach (var node in root.ChildNodes)
+            {
                 var e = node as XmlElement;
                 if (e == null)
                     continue;
-                if (!PolicyNS.Equals (e.NamespaceURI) || !e.LocalName.Equals ("Policy")) {
+                if (!PolicyNS.Equals(e.NamespaceURI) || !e.LocalName.Equals("Policy"))
+                {
                     error = true;
                     return list;
                 }
-                if (policy != null) {
+                if (policy != null)
+                {
                     error = true;
                     return list;
                 }
                 policy = e;
             }
 
-            if (policy == null) {
+            if (policy == null)
+            {
                 error = true;
                 return list;
             }
 
-            foreach (var node in policy.ChildNodes) {
+            foreach (var node in policy.ChildNodes)
+            {
                 var e = node as XmlElement;
                 if (e != null)
-                    list.Add (e);
+                    list.Add(e);
             }
 
             error = false;
             return list;
         }
 
-        internal static bool FindPolicyElement (MetadataImporter importer, XmlElement root,
-                                                QName name, bool required, bool removeWhenFound,
-                                                out XmlElement element)
+        internal static bool FindPolicyElement(
+            MetadataImporter importer,
+            XmlElement root,
+            QName name,
+            bool required,
+            bool removeWhenFound,
+            out XmlElement element
+        )
         {
-            if (!FindPolicyElement (root, name, removeWhenFound, out element)) {
-                importer.AddWarning ("Invalid policy element: {0}", root.OuterXml);
+            if (!FindPolicyElement(root, name, removeWhenFound, out element))
+            {
+                importer.AddWarning("Invalid policy element: {0}", root.OuterXml);
                 return false;
             }
-            if (required && (element == null)) {
-                importer.AddWarning ("Did not find policy element `{0}'.", name);
+            if (required && (element == null))
+            {
+                importer.AddWarning("Did not find policy element `{0}'.", name);
                 return false;
             }
             return true;
         }
 
-        internal static bool FindPolicyElement (XmlElement root, QName name,
-                                                bool removeWhenFound, out XmlElement element)
+        internal static bool FindPolicyElement(
+            XmlElement root,
+            QName name,
+            bool removeWhenFound,
+            out XmlElement element
+        )
         {
             XmlElement policy = null;
-            foreach (var node in root.ChildNodes) {
+            foreach (var node in root.ChildNodes)
+            {
                 var e = node as XmlElement;
                 if (e == null)
                     continue;
-                if (!PolicyNS.Equals (e.NamespaceURI) || !e.LocalName.Equals ("Policy")) {
+                if (!PolicyNS.Equals(e.NamespaceURI) || !e.LocalName.Equals("Policy"))
+                {
                     element = null;
                     return false;
                 }
-                if (policy != null) {
+                if (policy != null)
+                {
                     element = null;
                     return false;
                 }
                 policy = e;
             }
 
-            if (policy == null) {
+            if (policy == null)
+            {
                 element = null;
                 return true;
             }
 
             element = null;
-            foreach (var node in policy.ChildNodes) {
+            foreach (var node in policy.ChildNodes)
+            {
                 var e = node as XmlElement;
                 if (e == null)
                     continue;
-                if (!name.Namespace.Equals (e.NamespaceURI) || !name.Name.Equals (e.LocalName))
+                if (!name.Namespace.Equals(e.NamespaceURI) || !name.Name.Equals(e.LocalName))
                     continue;
 
                 element = e;
@@ -172,92 +211,108 @@ namespace System.ServiceModel.Channels {
             if (!removeWhenFound || (element == null))
                 return true;
 
-            policy.RemoveChild (element);
+            policy.RemoveChild(element);
 
             bool foundAnother = false;
-            foreach (var node in policy.ChildNodes) {
+            foreach (var node in policy.ChildNodes)
+            {
                 var e = node as XmlElement;
-                if (e != null) {
+                if (e != null)
+                {
                     foundAnother = true;
                     break;
                 }
             }
 
             if (!foundAnother)
-                root.RemoveChild (policy);
+                root.RemoveChild(policy);
             return true;
         }
 
-        internal static XmlElement GetElement (MetadataImporter importer,
-                                               XmlElement root, string name, string ns)
+        internal static XmlElement GetElement(
+            MetadataImporter importer,
+            XmlElement root,
+            string name,
+            string ns
+        )
         {
-            return GetElement (importer, root, name, ns, false);
+            return GetElement(importer, root, name, ns, false);
         }
 
-        internal static XmlElement GetElement (MetadataImporter importer,
-                                               XmlElement root, string name, string ns,
-                                               bool required)
+        internal static XmlElement GetElement(
+            MetadataImporter importer,
+            XmlElement root,
+            string name,
+            string ns,
+            bool required
+        )
         {
-            return GetElement (importer, root, new QName (name, ns), required);
+            return GetElement(importer, root, new QName(name, ns), required);
         }
 
-        internal static XmlElement GetElement (MetadataImporter importer,
-                                               XmlElement root, QName name, bool required)
+        internal static XmlElement GetElement(
+            MetadataImporter importer,
+            XmlElement root,
+            QName name,
+            bool required
+        )
         {
-            var list = root.GetElementsByTagName (name.Name, name.Namespace);
-            if (list.Count < 1) {
+            var list = root.GetElementsByTagName(name.Name, name.Namespace);
+            if (list.Count < 1)
+            {
                 if (required)
-                    importer.AddWarning ("Did not find required policy element `{0}'", name);
+                    importer.AddWarning("Did not find required policy element `{0}'", name);
                 return null;
             }
 
-            if (list.Count > 1) {
-                importer.AddWarning ("Found duplicate policy element `{0}'", name);
+            if (list.Count > 1)
+            {
+                importer.AddWarning("Found duplicate policy element `{0}'", name);
                 return null;
             }
 
-            var element = list [0] as XmlElement;
+            var element = list[0] as XmlElement;
             if (required && (element == null))
-                importer.AddWarning ("Did not find required policy element `{0}'", name);
+                importer.AddWarning("Did not find required policy element `{0}'", name);
             return element;
         }
 
-        internal static XmlElement WrapPolicy (XmlElement element)
+        internal static XmlElement WrapPolicy(XmlElement element)
         {
-            var policy = element.OwnerDocument.CreateElement ("wsp", "Policy", PolicyNS);
-            policy.AppendChild (element);
+            var policy = element.OwnerDocument.CreateElement("wsp", "Policy", PolicyNS);
+            policy.AppendChild(element);
             return policy;
         }
 
         //
         // Add a single element, wrapping it inside <wsp:Policy>
         //
-        internal static void AddWrappedPolicyElement (XmlElement root, XmlElement element)
+        internal static void AddWrappedPolicyElement(XmlElement root, XmlElement element)
         {
             if (root.OwnerDocument != element.OwnerDocument)
-                element = (XmlElement)root.OwnerDocument.ImportNode (element, true);
-            if (!element.NamespaceURI.Equals (PolicyNS) || !element.LocalName.Equals ("Policy"))
-                element = WrapPolicy (element);
-            root.AppendChild (element);
+                element = (XmlElement)root.OwnerDocument.ImportNode(element, true);
+            if (!element.NamespaceURI.Equals(PolicyNS) || !element.LocalName.Equals("Policy"))
+                element = WrapPolicy(element);
+            root.AppendChild(element);
         }
 
         //
         // Add multiple elements, wrapping them inside a single <wsp:Policy>
         //
-        internal static void AddWrappedPolicyElements (XmlElement root, params XmlElement[] elements)
+        internal static void AddWrappedPolicyElements(XmlElement root, params XmlElement[] elements)
         {
-            var policy = root.OwnerDocument.CreateElement ("wsp", "Policy", PolicyNS);
-            root.AppendChild (policy);
+            var policy = root.OwnerDocument.CreateElement("wsp", "Policy", PolicyNS);
+            root.AppendChild(policy);
 
-            foreach (var element in elements) {
+            foreach (var element in elements)
+            {
                 XmlElement imported;
                 if (root.OwnerDocument != element.OwnerDocument)
-                    imported = (XmlElement)root.OwnerDocument.ImportNode (element, true);
+                    imported = (XmlElement)root.OwnerDocument.ImportNode(element, true);
                 else
                     imported = element;
-                policy.AppendChild (element);
+                policy.AppendChild(element);
             }
         }
     }
 }
-

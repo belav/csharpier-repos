@@ -6,133 +6,151 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Reflection
 {
-    [SetupCSharpCompilerToUse ("csc")]
+    [SetupCSharpCompilerToUse("csc")]
     [ExpectedNoWarnings]
     public class MemberUsedViaReflection
     {
-        public static void Main ()
+        public static void Main()
         {
             // Normally calls to GetMember use prefix lookup to match multiple values, we took a conservative approach
             // and preserve not based on the string passed but on the binding flags requirements
-            TestWithName ();
-            TestWithNullName ();
-            TestWithEmptyName ();
-            TestWithNoValueName ();
-            TestWithPrefixLookup ();
-            TestWithBindingFlags ();
-            TestWithUnknownBindingFlags (BindingFlags.Public);
-            TestWithMemberTypes ();
-            TestNullType ();
-            TestNoValue ();
-            TestDataFlowType ();
-            TestDataFlowWithAnnotation (typeof (MyType));
-            TestIfElse (true);
+            TestWithName();
+            TestWithNullName();
+            TestWithEmptyName();
+            TestWithNoValueName();
+            TestWithPrefixLookup();
+            TestWithBindingFlags();
+            TestWithUnknownBindingFlags(BindingFlags.Public);
+            TestWithMemberTypes();
+            TestNullType();
+            TestNoValue();
+            TestDataFlowType();
+            TestDataFlowWithAnnotation(typeof(MyType));
+            TestIfElse(true);
         }
 
         [Kept]
-        static void TestWithName ()
+        static void TestWithName()
         {
-            var members = typeof (SimpleType).GetMember ("memberKept");
+            var members = typeof(SimpleType).GetMember("memberKept");
         }
 
         [Kept]
-        public static void TestWithNullName ()
+        public static void TestWithNullName()
         {
-            var members = typeof (SimpleType).GetMember (null);
+            var members = typeof(SimpleType).GetMember(null);
         }
 
         [Kept]
-        static void TestWithEmptyName ()
+        static void TestWithEmptyName()
         {
-            var members = typeof (SimpleType).GetMember (string.Empty);
+            var members = typeof(SimpleType).GetMember(string.Empty);
         }
 
         [Kept]
-        static void TestWithNoValueName ()
+        static void TestWithNoValueName()
         {
             Type t = null;
             string noValue = t.AssemblyQualifiedName;
-            var members = typeof (SimpleType).GetMember (noValue);
+            var members = typeof(SimpleType).GetMember(noValue);
         }
 
         [Kept]
-        static void TestWithPrefixLookup ()
+        static void TestWithPrefixLookup()
         {
-            var members = typeof (PrefixLookupType).GetMember ("PrefixLookup*");
+            var members = typeof(PrefixLookupType).GetMember("PrefixLookup*");
         }
 
         [Kept]
-        static void TestWithBindingFlags ()
+        static void TestWithBindingFlags()
         {
-            var members = typeof (BindingFlagsType).GetMember ("PrefixLookup*", BindingFlags.Public | BindingFlags.NonPublic);
+            var members = typeof(BindingFlagsType).GetMember(
+                "PrefixLookup*",
+                BindingFlags.Public | BindingFlags.NonPublic
+            );
         }
 
         [Kept]
-        static void TestWithUnknownBindingFlags (BindingFlags bindingFlags)
+        static void TestWithUnknownBindingFlags(BindingFlags bindingFlags)
         {
             // Since the binding flags are not known linker should mark all members on the type
-            var members = typeof (UnknownBindingFlags).GetMember ("PrefixLookup*", bindingFlags);
+            var members = typeof(UnknownBindingFlags).GetMember("PrefixLookup*", bindingFlags);
         }
 
         [Kept]
-        static void TestWithMemberTypes ()
+        static void TestWithMemberTypes()
         {
             // Here we took the same conservative approach, instead of understanding MemberTypes we only use
             // the information in the binding flags requirements and keep all the MemberTypes
-            var members = typeof (TestMemberTypes).GetMember ("PrefixLookup*", MemberTypes.Method, BindingFlags.Public);
+            var members = typeof(TestMemberTypes).GetMember(
+                "PrefixLookup*",
+                MemberTypes.Method,
+                BindingFlags.Public
+            );
         }
 
         [Kept]
-        static void TestNullType ()
+        static void TestNullType()
         {
             Type type = null;
-            var constructor = type.GetMember ("PrefixLookup*");
+            var constructor = type.GetMember("PrefixLookup*");
         }
 
         [Kept]
-        static void TestNoValue ()
+        static void TestNoValue()
         {
             Type t = null;
-            Type noValue = Type.GetTypeFromHandle (t.TypeHandle);
-            var members = noValue.GetMember ("PrefixLookup*");
+            Type noValue = Type.GetTypeFromHandle(t.TypeHandle);
+            var members = noValue.GetMember("PrefixLookup*");
         }
 
         [Kept]
-        static Type FindType ()
+        static Type FindType()
         {
             return null;
         }
 
-        [ExpectedWarning ("IL2075", "FindType", "GetMember")]
+        [ExpectedWarning("IL2075", "FindType", "GetMember")]
         [Kept]
-        static void TestDataFlowType ()
+        static void TestDataFlowType()
         {
-            Type type = FindType ();
-            var members = type.GetMember ("PrefixLookup*");
+            Type type = FindType();
+            var members = type.GetMember("PrefixLookup*");
         }
 
         [Kept]
-        private static void TestDataFlowWithAnnotation ([KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicConstructors |
-                                         DynamicallyAccessedMemberTypes.PublicEvents |
-                                         DynamicallyAccessedMemberTypes.PublicFields |
-                                         DynamicallyAccessedMemberTypes.PublicMethods |
-                                         DynamicallyAccessedMemberTypes.PublicProperties |
-                                         DynamicallyAccessedMemberTypes.PublicNestedTypes)] Type type)
+        private static void TestDataFlowWithAnnotation(
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.PublicEvents
+                    | DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+                    | DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )]
+                Type type
+        )
         {
-            var members = type.GetMember ("PrefixLookup*", BindingFlags.Public | BindingFlags.Static);
+            var members = type.GetMember(
+                "PrefixLookup*",
+                BindingFlags.Public | BindingFlags.Static
+            );
         }
 
         [Kept]
-        static void TestIfElse (bool decision)
+        static void TestIfElse(bool decision)
         {
             Type myType;
-            if (decision) {
-                myType = typeof (IfMember);
-            } else {
-                myType = typeof (ElseMember);
+            if (decision)
+            {
+                myType = typeof(IfMember);
             }
-            var members = myType.GetMember ("PrefixLookup*", BindingFlags.Public);
+            else
+            {
+                myType = typeof(ElseMember);
+            }
+            var members = myType.GetMember("PrefixLookup*", BindingFlags.Public);
         }
 
         [Kept]
@@ -142,7 +160,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static int field;
 
             [Kept]
-            public int memberKept {
+            public int memberKept
+            {
                 [Kept]
                 get { return field; }
                 [Kept]
@@ -150,22 +169,19 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
 
             [Kept]
-            public SimpleType ()
-            { }
+            public SimpleType() { }
 
             [Kept]
-            public void someMethod () { }
+            public void someMethod() { }
         }
 
         [Kept]
         private class PrefixLookupType
         {
             [Kept]
-            public PrefixLookupType ()
-            { }
+            public PrefixLookupType() { }
 
-            private PrefixLookupType (int i)
-            { }
+            private PrefixLookupType(int i) { }
 
             [Kept]
             public static int PrefixLookup_field;
@@ -173,22 +189,24 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static int PrefixLookup_privatefield;
 
             [Kept]
-            public int PrefixLookupProperty {
+            public int PrefixLookupProperty
+            {
                 [Kept]
                 get { return PrefixLookup_field; }
                 [Kept]
                 set { PrefixLookup_field = value; }
             }
 
-            private int PrefixLookupPrivateProperty {
+            private int PrefixLookupPrivateProperty
+            {
                 get { return PrefixLookup_privatefield; }
                 set { PrefixLookup_privatefield = value; }
             }
 
             [Kept]
-            public void PrefixLookupMethod () { }
+            public void PrefixLookupMethod() { }
 
-            private void PrefixLookupPrivateMethod () { }
+            private void PrefixLookupPrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -208,12 +226,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class BindingFlagsType
         {
             [Kept]
-            public BindingFlagsType ()
-            { }
+            public BindingFlagsType() { }
 
             [Kept]
-            private BindingFlagsType (int i)
-            { }
+            private BindingFlagsType(int i) { }
 
             [Kept]
             public static int PrefixLookup_field;
@@ -222,7 +238,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static int PrefixLookup_privatefield;
 
             [Kept]
-            public int PrefixLookupProperty {
+            public int PrefixLookupProperty
+            {
                 [Kept]
                 get { return PrefixLookup_field; }
                 [Kept]
@@ -230,7 +247,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
 
             [Kept]
-            private int PrefixLookupPrivateProperty {
+            private int PrefixLookupPrivateProperty
+            {
                 [Kept]
                 get { return PrefixLookup_privatefield; }
                 [Kept]
@@ -238,10 +256,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
 
             [Kept]
-            public void PrefixLookupMethod () { }
+            public void PrefixLookupMethod() { }
 
             [Kept]
-            private void PrefixLookupPrivateMethod () { }
+            private void PrefixLookupPrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -266,12 +284,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class UnknownBindingFlags
         {
             [Kept]
-            public UnknownBindingFlags ()
-            { }
+            public UnknownBindingFlags() { }
 
             [Kept]
-            private UnknownBindingFlags (int i)
-            { }
+            private UnknownBindingFlags(int i) { }
 
             [Kept]
             public static int PrefixLookup_field;
@@ -280,7 +296,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static int PrefixLookup_privatefield;
 
             [Kept]
-            public int PrefixLookupProperty {
+            public int PrefixLookupProperty
+            {
                 [Kept]
                 get { return PrefixLookup_field; }
                 [Kept]
@@ -288,7 +305,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
 
             [Kept]
-            private int PrefixLookupPrivateProperty {
+            private int PrefixLookupPrivateProperty
+            {
                 [Kept]
                 get { return PrefixLookup_privatefield; }
                 [Kept]
@@ -296,10 +314,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
 
             [Kept]
-            public void PrefixLookupMethod () { }
+            public void PrefixLookupMethod() { }
 
             [Kept]
-            private void PrefixLookupPrivateMethod () { }
+            private void PrefixLookupPrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -324,11 +342,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class TestMemberTypes
         {
             [Kept]
-            public TestMemberTypes ()
-            { }
+            public TestMemberTypes() { }
 
-            private TestMemberTypes (int i)
-            { }
+            private TestMemberTypes(int i) { }
 
             [Kept]
             public static int PrefixLookup_field;
@@ -336,22 +352,24 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static int PrefixLookup_privatefield;
 
             [Kept]
-            public int PrefixLookupProperty {
+            public int PrefixLookupProperty
+            {
                 [Kept]
                 get { return PrefixLookup_field; }
                 [Kept]
                 set { PrefixLookup_field = value; }
             }
 
-            private int PrefixLookupPrivateProperty {
+            private int PrefixLookupPrivateProperty
+            {
                 get { return PrefixLookup_privatefield; }
                 set { PrefixLookup_privatefield = value; }
             }
 
             [Kept]
-            public void PrefixLookupMethod () { }
+            public void PrefixLookupMethod() { }
 
-            private void PrefixLookupPrivateMethod () { }
+            private void PrefixLookupPrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -371,11 +389,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class MyType
         {
             [Kept]
-            public MyType ()
-            { }
+            public MyType() { }
 
-            private MyType (int i)
-            { }
+            private MyType(int i) { }
 
             [Kept]
             public static int PrefixLookup_field;
@@ -383,22 +399,24 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static int PrefixLookup_privatefield;
 
             [Kept]
-            public int PrefixLookupProperty {
+            public int PrefixLookupProperty
+            {
                 [Kept]
                 get { return PrefixLookup_field; }
                 [Kept]
                 set { PrefixLookup_field = value; }
             }
 
-            private int PrefixLookupPrivateProperty {
+            private int PrefixLookupPrivateProperty
+            {
                 get { return PrefixLookup_privatefield; }
                 set { PrefixLookup_privatefield = value; }
             }
 
             [Kept]
-            public void PrefixLookupMethod () { }
+            public void PrefixLookupMethod() { }
 
-            private void PrefixLookupPrivateMethod () { }
+            private void PrefixLookupPrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -418,11 +436,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class IfMember
         {
             [Kept]
-            public IfMember ()
-            { }
+            public IfMember() { }
 
-            private IfMember (int i)
-            { }
+            private IfMember(int i) { }
 
             [Kept]
             public static int PrefixLookup_field;
@@ -430,22 +446,24 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static int PrefixLookup_privatefield;
 
             [Kept]
-            public int PrefixLookupProperty {
+            public int PrefixLookupProperty
+            {
                 [Kept]
                 get { return PrefixLookup_field; }
                 [Kept]
                 set { PrefixLookup_field = value; }
             }
 
-            private int PrefixLookupPrivateProperty {
+            private int PrefixLookupPrivateProperty
+            {
                 get { return PrefixLookup_privatefield; }
                 set { PrefixLookup_privatefield = value; }
             }
 
             [Kept]
-            public void PrefixLookupMethod () { }
+            public void PrefixLookupMethod() { }
 
-            private void PrefixLookupPrivateMethod () { }
+            private void PrefixLookupPrivateMethod() { }
 
             [Kept]
             [KeptBackingField]
@@ -465,11 +483,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private class ElseMember
         {
             [Kept]
-            public ElseMember ()
-            { }
+            public ElseMember() { }
 
-            private ElseMember (int i)
-            { }
+            private ElseMember(int i) { }
 
             [Kept]
             public static int PrefixLookup_field;
@@ -477,22 +493,24 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static int PrefixLookup_privatefield;
 
             [Kept]
-            public int PrefixLookupProperty {
+            public int PrefixLookupProperty
+            {
                 [Kept]
                 get { return PrefixLookup_field; }
                 [Kept]
                 set { PrefixLookup_field = value; }
             }
 
-            private int PrefixLookupPrivateProperty {
+            private int PrefixLookupPrivateProperty
+            {
                 get { return PrefixLookup_privatefield; }
                 set { PrefixLookup_privatefield = value; }
             }
 
             [Kept]
-            public void PrefixLookupMethod () { }
+            public void PrefixLookupMethod() { }
 
-            private void PrefixLookupPrivateMethod () { }
+            private void PrefixLookupPrivateMethod() { }
 
             [Kept]
             [KeptBackingField]

@@ -22,7 +22,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -37,16 +37,17 @@
 
 using System;
 
-namespace ICSharpCode.SharpZipLib.Zip 
+namespace ICSharpCode.SharpZipLib.Zip
 {
-    
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public enum CompressionMethod
     {
-        Stored   = 0,
+        Stored = 0,
         Deflated = 8,
     }
-    
+
     /// <summary>
     /// This class represents a member of a zip archive.  ZipFile and
     /// ZipInputStream will give you instances of this class as information
@@ -55,72 +56,67 @@ namespace ICSharpCode.SharpZipLib.Zip
     ///
     /// author of the original java version : Jochen Hoenicke
     /// </summary>
-    [System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
     public class ZipEntry : ICloneable
     {
-        static int KNOWN_SIZE   = 1;
-        static int KNOWN_CSIZE  = 2;
-        static int KNOWN_CRC    = 4;
-        static int KNOWN_TIME   = 8;
-        
+        static int KNOWN_SIZE = 1;
+        static int KNOWN_CSIZE = 2;
+        static int KNOWN_CRC = 4;
+        static int KNOWN_TIME = 8;
+
         string name;
-        uint   size;
+        uint size;
         ushort version;
-        uint   compressedSize;
-        uint   crc;
-        uint   dosTime;
-        
+        uint compressedSize;
+        uint crc;
+        uint dosTime;
+
         ushort known = 0;
-        CompressionMethod  method = CompressionMethod.Deflated;
+        CompressionMethod method = CompressionMethod.Deflated;
         byte[] extra = null;
         string comment = null;
-        bool   isCrypted;
-        
-        int zipFileIndex = -1;  /* used by ZipFile */
-        int flags;              /* used by ZipOutputStream */
-        int offset;             /* used by ZipFile and ZipOutputStream */
-        
-        public bool IsEncrypted {
-            get {
-                return (flags & 1) != 0; 
-            }
-            set {
-                if (value) {
+        bool isCrypted;
+
+        int zipFileIndex = -1; /* used by ZipFile */
+        int flags; /* used by ZipOutputStream */
+        int offset; /* used by ZipFile and ZipOutputStream */
+
+        public bool IsEncrypted
+        {
+            get { return (flags & 1) != 0; }
+            set
+            {
+                if (value)
+                {
                     flags |= 1;
-                } else {
+                }
+                else
+                {
                     flags &= ~1;
                 }
             }
         }
-        
-        public int ZipFileIndex {
-            get {
-                return zipFileIndex;
-            }
-            set {
-                zipFileIndex = value;
-            }
+
+        public int ZipFileIndex
+        {
+            get { return zipFileIndex; }
+            set { zipFileIndex = value; }
         }
-        
-        public int Offset {
-            get {
-                return offset;
-            }
-            set {
-                offset = value;
-            }
+
+        public int Offset
+        {
+            get { return offset; }
+            set { offset = value; }
         }
-        
-        public int Flags {                                // Stops having two things represent same concept in class (flag isCrypted removed)
-            get { 
-                return flags; 
-            }
-            set {
-                flags = value; 
-            }
+
+        public int Flags
+        { // Stops having two things represent same concept in class (flag isCrypted removed)
+            get { return flags; }
+            set { flags = value; }
         }
-        
-        
+
         /// <summary>
         /// Creates a zip entry with the given name.
         /// </summary>
@@ -129,13 +125,14 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// </param>
         public ZipEntry(string name)
         {
-            if (name == null)  {
+            if (name == null)
+            {
                 throw new System.ArgumentNullException("name");
             }
-            this.DateTime  = System.DateTime.Now;
+            this.DateTime = System.DateTime.Now;
             this.name = name;
         }
-        
+
         /// <summary>
         /// Creates a copy of the given zip entry.
         /// </summary>
@@ -144,74 +141,86 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// </param>
         public ZipEntry(ZipEntry e)
         {
-            name           = e.name;
-            known          = e.known;
-            size           = e.size;
+            name = e.name;
+            known = e.known;
+            size = e.size;
             compressedSize = e.compressedSize;
-            crc            = e.crc;
-            dosTime        = e.dosTime;
-            method         = e.method;
-            extra          = e.extra;
-            comment        = e.comment;
+            crc = e.crc;
+            dosTime = e.dosTime;
+            method = e.method;
+            extra = e.extra;
+            comment = e.comment;
         }
-        
-        public int Version {
-            get {
-                return version;
-            }
-            set {
-                version = (ushort)value;
-            }
+
+        public int Version
+        {
+            get { return version; }
+            set { version = (ushort)value; }
         }
-        
-        public long DosTime {
-            get {
-                if ((known & KNOWN_TIME) == 0) {
+
+        public long DosTime
+        {
+            get
+            {
+                if ((known & KNOWN_TIME) == 0)
+                {
                     return 0;
-                } else {
+                }
+                else
+                {
                     return dosTime;
                 }
             }
-            set {
+            set
+            {
                 this.dosTime = (uint)value;
                 known |= (ushort)KNOWN_TIME;
             }
         }
-        
-        
+
         /// <summary>
         /// Gets/Sets the time of last modification of the entry.
         /// </summary>
-        public DateTime DateTime {
-            get {
-                uint sec  = 2 * (dosTime & 0x1f);
-                uint min  = (dosTime >> 5) & 0x3f;
-                uint hrs  = (dosTime >> 11) & 0x1f;
-                uint day  = (dosTime >> 16) & 0x1f;
-                uint mon  = ((dosTime >> 21) & 0xf);
+        public DateTime DateTime
+        {
+            get
+            {
+                uint sec = 2 * (dosTime & 0x1f);
+                uint min = (dosTime >> 5) & 0x3f;
+                uint hrs = (dosTime >> 11) & 0x1f;
+                uint day = (dosTime >> 16) & 0x1f;
+                uint mon = ((dosTime >> 21) & 0xf);
                 uint year = ((dosTime >> 25) & 0x7f) + 1980; /* since 1900 */
-                return new System.DateTime((int)year, (int)mon, (int)day, (int)hrs, (int)min, (int)sec);
+                return new System.DateTime(
+                    (int)year,
+                    (int)mon,
+                    (int)day,
+                    (int)hrs,
+                    (int)min,
+                    (int)sec
+                );
             }
-            set {
-                DosTime = ((uint)value.Year - 1980 & 0x7f) << 25 | 
-                          ((uint)value.Month) << 21 |
-                          ((uint)value.Day) << 16 |
-                          ((uint)value.Hour) << 11 |
-                          ((uint)value.Minute) << 5 |
-                          ((uint)value.Second) >> 1;
+            set
+            {
+                DosTime =
+                    ((uint)value.Year - 1980 & 0x7f) << 25
+                    | ((uint)value.Month) << 21
+                    | ((uint)value.Day) << 16
+                    | ((uint)value.Hour) << 11
+                    | ((uint)value.Minute) << 5
+                    | ((uint)value.Second) >> 1;
             }
         }
-        
+
         /// <summary>
         /// Returns the entry name.  The path components in the entry are
         /// always separated by slashes ('/').
         /// </summary>
-        public string Name {
-            get {
-                return name;
-            }
+        public string Name
+        {
+            get { return name; }
         }
-        
+
         //        /// <summary>
         //        /// Gets/Sets the time of last modification of the entry.
         //        /// </summary>
@@ -227,7 +236,7 @@ namespace ICSharpCode.SharpZipLib.Zip
         //                this.known |= (ushort)KNOWN_TIME;
         //            }
         //        }
-        
+
         /// <summary>
         /// Gets/Sets the size of the uncompressed data.
         /// </summary>
@@ -237,19 +246,20 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// <returns>
         /// the size or -1 if unknown.
         /// </returns>
-        public long Size {
-            get {
-                return (known & KNOWN_SIZE) != 0 ? (long)size : -1L;
-            }
-            set  {
-                if (((ulong)value & 0xFFFFFFFF00000000L) != 0) {
+        public long Size
+        {
+            get { return (known & KNOWN_SIZE) != 0 ? (long)size : -1L; }
+            set
+            {
+                if (((ulong)value & 0xFFFFFFFF00000000L) != 0)
+                {
                     throw new ArgumentOutOfRangeException("size");
                 }
-                this.size  = (uint)value;
+                this.size = (uint)value;
                 this.known |= (ushort)KNOWN_SIZE;
             }
         }
-        
+
         /// <summary>
         /// Gets/Sets the size of the compressed data.
         /// </summary>
@@ -259,19 +269,20 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// <returns>
         /// the size or -1 if unknown.
         /// </returns>
-        public long CompressedSize {
-            get {
-                return (known & KNOWN_CSIZE) != 0 ? (long)compressedSize : -1L;
-            }
-            set {
-                if (((ulong)value & 0xffffffff00000000L) != 0) {
+        public long CompressedSize
+        {
+            get { return (known & KNOWN_CSIZE) != 0 ? (long)compressedSize : -1L; }
+            set
+            {
+                if (((ulong)value & 0xffffffff00000000L) != 0)
+                {
                     throw new ArgumentOutOfRangeException();
                 }
                 this.compressedSize = (uint)value;
                 this.known |= (ushort)KNOWN_CSIZE;
             }
         }
-        
+
         /// <summary>
         /// Gets/Sets the crc of the uncompressed data.
         /// </summary>
@@ -281,12 +292,12 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// <returns>
         /// the crc or -1 if unknown.
         /// </returns>
-        public long Crc {
-            get {
-                return (known & KNOWN_CRC) != 0 ? crc & 0xffffffffL : -1L;
-            }
-            set {
-                if (((ulong)crc & 0xffffffff00000000L) != 0) 
+        public long Crc
+        {
+            get { return (known & KNOWN_CRC) != 0 ? crc & 0xffffffffL : -1L; }
+            set
+            {
+                if (((ulong)crc & 0xffffffff00000000L) != 0)
                 {
                     throw new Exception();
                 }
@@ -294,7 +305,7 @@ namespace ICSharpCode.SharpZipLib.Zip
                 this.known |= (ushort)KNOWN_CRC;
             }
         }
-        
+
         /// <summary>
         /// Gets/Sets the compression method. Only DEFLATED and STORED are supported.
         /// </summary>
@@ -306,15 +317,12 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// </returns>
         /// <see cref="ZipOutputStream.DEFLATED"/>
         /// <see cref="ZipOutputStream.STORED"/>
-        public CompressionMethod CompressionMethod {
-            get {
-                return method;
-            }
-            set {
-                this.method = value;
-            }
+        public CompressionMethod CompressionMethod
+        {
+            get { return method; }
+            set { this.method = value; }
         }
-        
+
         /// <summary>
         /// Gets/Sets the extra data.
         /// </summary>
@@ -324,47 +332,60 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// <returns>
         /// the extra data or null if not set.
         /// </returns>
-        public byte[] ExtraData {
-            get {
-                return extra;
-            }
-            set {
-                if (value == null) {
+        public byte[] ExtraData
+        {
+            get { return extra; }
+            set
+            {
+                if (value == null)
+                {
                     this.extra = null;
                     return;
                 }
-                
-                if (value.Length > 0xffff) {
+
+                if (value.Length > 0xffff)
+                {
                     throw new System.ArgumentOutOfRangeException();
                 }
                 this.extra = value;
-                try {
+                try
+                {
                     int pos = 0;
-                    while (pos < extra.Length) {
+                    while (pos < extra.Length)
+                    {
                         int sig = (extra[pos++] & 0xff) | (extra[pos++] & 0xff) << 8;
                         int len = (extra[pos++] & 0xff) | (extra[pos++] & 0xff) << 8;
-                        if (sig == 0x5455) {
+                        if (sig == 0x5455)
+                        {
                             /* extended time stamp, unix format by Rainer Prem <Rainer@Prem.de> */
                             int flags = extra[pos];
-                            if ((flags & 1) != 0) {
-                                int iTime = ((extra[pos+1] & 0xff) |
-                                    (extra[pos+2] & 0xff) << 8 |
-                                    (extra[pos+3] & 0xff) << 16 |
-                                    (extra[pos+4] & 0xff) << 24);
-                                
-                                DateTime = (new DateTime ( 1970, 1, 1, 0, 0, 0 ) + new TimeSpan ( 0, 0, 0, iTime, 0 )).ToLocalTime ();
+                            if ((flags & 1) != 0)
+                            {
+                                int iTime = (
+                                    (extra[pos + 1] & 0xff)
+                                    | (extra[pos + 2] & 0xff) << 8
+                                    | (extra[pos + 3] & 0xff) << 16
+                                    | (extra[pos + 4] & 0xff) << 24
+                                );
+
+                                DateTime = (
+                                    new DateTime(1970, 1, 1, 0, 0, 0)
+                                    + new TimeSpan(0, 0, 0, iTime, 0)
+                                ).ToLocalTime();
                                 known |= (ushort)KNOWN_TIME;
                             }
                         }
                         pos += len;
                     }
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     /* be lenient */
                     return;
                 }
             }
         }
-        
+
         /// <summary>
         /// Gets/Sets the entry comment.
         /// </summary>
@@ -374,42 +395,41 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// <returns>
         /// the comment or null if not set.
         /// </returns>
-        public string Comment {
-            get {
-                return comment;
-            }
-            set {
-                if (value.Length > 0xffff) 
+        public string Comment
+        {
+            get { return comment; }
+            set
+            {
+                if (value.Length > 0xffff)
                 {
                     throw new ArgumentOutOfRangeException();
                 }
                 this.comment = value;
             }
         }
-        
+
         /// <summary>
         /// Gets true, if the entry is a directory.  This is solely
         /// determined by the name, a trailing slash '/' marks a directory.
         /// </summary>
-        public bool IsDirectory {
-            get {
+        public bool IsDirectory
+        {
+            get
+            {
                 int nlen = name.Length;
                 return nlen > 0 && name[nlen - 1] == '/';
             }
         }
-        
+
         /// <value>
         /// True, if the entry is encrypted.
         /// </value>
-        public bool IsCrypted {
-            get {
-                return isCrypted;
-            }
-            set {
-                isCrypted = value;
-            }
+        public bool IsCrypted
+        {
+            get { return isCrypted; }
+            set { isCrypted = value; }
         }
-        
+
         /// <summary>
         /// Creates a copy of this zip entry.
         /// </summary>
@@ -417,7 +437,7 @@ namespace ICSharpCode.SharpZipLib.Zip
         {
             return this.MemberwiseClone();
         }
-        
+
         /// <summary>
         /// Gets the string representation of this ZipEntry.  This is just
         /// the name as returned by getName().

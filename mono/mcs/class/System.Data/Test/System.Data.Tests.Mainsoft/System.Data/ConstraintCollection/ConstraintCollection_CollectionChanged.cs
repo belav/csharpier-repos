@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,19 +35,23 @@ using GHTUtils.Base;
 
 namespace tests.system_data_dll.System_Data
 {
-    [TestFixture] public class ConstraintCollection_CollectionChanged : GHTBase
+    [TestFixture]
+    public class ConstraintCollection_CollectionChanged : GHTBase
     {
-        public bool CollectionChanged=false;
-        [Test] public void Main()
+        public bool CollectionChanged = false;
+
+        [Test]
+        public void Main()
         {
-            ConstraintCollection_CollectionChanged tc = new ConstraintCollection_CollectionChanged();
+            ConstraintCollection_CollectionChanged tc =
+                new ConstraintCollection_CollectionChanged();
             Exception exp = null;
             try
             {
                 tc.BeginTest("ConstraintCollection_CollectionChanged");
                 tc.run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
@@ -55,7 +59,6 @@ namespace tests.system_data_dll.System_Data
             {
                 tc.EndTest(exp);
             }
-    
         }
 
         //Activate This Construntor to log All To Standard output
@@ -72,29 +75,36 @@ namespace tests.system_data_dll.System_Data
 
         public void run()
         {
-            Exception exp=null;
+            Exception exp = null;
             try
             {
-
                 BeginCase("ConstraintCollection_CollectionChanged");
                 DataTable dt = GHTUtils.DataProvider.CreateParentDataTable();
-                dt.Constraints.CollectionChanged+=new System.ComponentModel.CollectionChangeEventHandler(Constraints_CollectionChanged);    
+                dt.Constraints.CollectionChanged +=
+                    new System.ComponentModel.CollectionChangeEventHandler(
+                        Constraints_CollectionChanged
+                    );
                 dt = GHTUtils.DataProvider.CreateUniqueConstraint(dt);
                 Thread.Sleep(2000); //In order to get the event asnyc
-                Compare(CollectionChanged,true); 
-
+                Compare(CollectionChanged, true);
             }
-            catch(Exception ex) {exp = ex;}
-            finally    
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
             {
                 EndCase(exp);
-                exp = null;    }
+                exp = null;
+            }
         }
 
-        private void Constraints_CollectionChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
+        private void Constraints_CollectionChanged(
+            object sender,
+            System.ComponentModel.CollectionChangeEventArgs e
+        )
         {
             CollectionChanged = true;
-
         }
     }
 }

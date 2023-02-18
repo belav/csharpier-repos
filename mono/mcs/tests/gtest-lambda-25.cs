@@ -9,24 +9,24 @@ namespace MonoBugs
 
     public static class Bar
     {
-        public static void DoStuff<T> (T item, Action<T> fn)
+        public static void DoStuff<T>(T item, Action<T> fn)
         {
-            throw new ApplicationException ("failed");
+            throw new ApplicationException("failed");
         }
 
-        public static void DoStuff<T> (T? item, Action<T> fn)
+        public static void DoStuff<T>(T? item, Action<T> fn)
             where T : struct
         {
-            fn (item.Value);
+            fn(item.Value);
         }
     }
 
     public static class Program
     {
-        public static void Main ()
+        public static void Main()
         {
             Foo<int>? value = new Foo<int> { Item = 3 };
-            Bar.DoStuff (value, x => Console.WriteLine (x.Item));
+            Bar.DoStuff(value, x => Console.WriteLine(x.Item));
         }
     }
 }

@@ -7,18 +7,25 @@ class T1
     {
         try
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             AppSettingsSection sect = (AppSettingsSection)config.GetSection("appSettings");
 
-            Console.WriteLine (sect.SectionInformation.GetRawXml ());
+            Console.WriteLine(sect.SectionInformation.GetRawXml());
 
-            foreach (string key in sect.Settings.AllKeys) {
-                Console.WriteLine ("settings[{0}] = {1}", sect.Settings[key].Key, sect.Settings[key].Value);
+            foreach (string key in sect.Settings.AllKeys)
+            {
+                Console.WriteLine(
+                    "settings[{0}] = {1}",
+                    sect.Settings[key].Key,
+                    sect.Settings[key].Value
+                );
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine ("Exception raised: {0}", e);
+            Console.WriteLine("Exception raised: {0}", e);
         }
     }
 }

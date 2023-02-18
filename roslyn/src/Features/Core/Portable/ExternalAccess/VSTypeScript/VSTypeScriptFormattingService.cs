@@ -22,15 +22,23 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptFormattingService([Import(AllowDefault = true)] IVSTypeScriptFormattingServiceImplementation impl)
-            => _impl = impl ?? throw new ArgumentNullException(nameof(impl));
+        public VSTypeScriptFormattingService(
+            [Import(AllowDefault = true)] IVSTypeScriptFormattingServiceImplementation impl
+        ) => _impl = impl ?? throw new ArgumentNullException(nameof(impl));
 
-        public Task<Document> FormatAsync(Document document, IEnumerable<TextSpan>? spans, LineFormattingOptions lineFormattingOptions, SyntaxFormattingOptions? syntaxFormattingOptions, CancellationToken cancellationToken)
+        public Task<Document> FormatAsync(
+            Document document,
+            IEnumerable<TextSpan>? spans,
+            LineFormattingOptions lineFormattingOptions,
+            SyntaxFormattingOptions? syntaxFormattingOptions,
+            CancellationToken cancellationToken
+        )
         {
             var tsOptions = new VSTypeScriptIndentationOptions(
                 UseSpaces: !lineFormattingOptions.UseTabs,
                 TabSize: lineFormattingOptions.TabSize,
-                IndentSize: lineFormattingOptions.IndentationSize);
+                IndentSize: lineFormattingOptions.IndentationSize
+            );
 
             return _impl.FormatAsync(document, spans, tsOptions, cancellationToken);
         }

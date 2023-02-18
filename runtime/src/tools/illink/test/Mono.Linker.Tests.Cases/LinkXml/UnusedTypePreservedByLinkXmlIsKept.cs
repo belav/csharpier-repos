@@ -3,17 +3,13 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [SetupLinkerDescriptorFile ("UnusedTypePreservedByLinkXmlIsKept.xml")]
+    [SetupLinkerDescriptorFile("UnusedTypePreservedByLinkXmlIsKept.xml")]
     class UnusedTypePreservedByLinkXmlIsKept
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
-    class UnusedTypePreservedByLinkXmlIsKeptUnusedType
-    {
-    }
+    [KeptMember(".ctor()")]
+    class UnusedTypePreservedByLinkXmlIsKeptUnusedType { }
 }

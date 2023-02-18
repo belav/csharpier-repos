@@ -6,8 +6,6 @@ namespace MicroFocus.MONO.Bugs
     {
         private static readonly Type[] _argTypes = { typeof(object[]) };
 
-        public static void Main()
-        {
-        }
+        public static void Main() { }
     }
 }

@@ -33,27 +33,32 @@ namespace System.Web
 {
     public abstract class HttpTaskAsyncHandler : IHttpAsyncHandler, IHttpHandler
     {
-        public virtual bool IsReusable {
+        public virtual bool IsReusable
+        {
             get { return false; }
         }
 
-        [EditorBrowsable (EditorBrowsableState.Never)]
-        public virtual void ProcessRequest (HttpContext context)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public virtual void ProcessRequest(HttpContext context)
         {
-            throw new NotSupportedException ("This handler cannot be executed synchronously.");
+            throw new NotSupportedException("This handler cannot be executed synchronously.");
         }
 
-        public abstract Task ProcessRequestAsync (HttpContext context);
+        public abstract Task ProcessRequestAsync(HttpContext context);
 
-        IAsyncResult IHttpAsyncHandler.BeginProcessRequest (HttpContext context, AsyncCallback cb, object extraData)
+        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(
+            HttpContext context,
+            AsyncCallback cb,
+            object extraData
+        )
         {
-            Task task = ProcessRequestAsync (context);
-            return TaskAsyncResult.GetAsyncResult (task, cb, extraData);
+            Task task = ProcessRequestAsync(context);
+            return TaskAsyncResult.GetAsyncResult(task, cb, extraData);
         }
 
-        void IHttpAsyncHandler.EndProcessRequest (IAsyncResult result)
+        void IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
         {
-            TaskAsyncResult.Wait (result);
+            TaskAsyncResult.Wait(result);
         }
     }
 }

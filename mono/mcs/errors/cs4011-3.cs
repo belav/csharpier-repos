@@ -3,21 +3,20 @@
 
 static class S
 {
-    public static A GetAwaiter (this int i)
+    public static A GetAwaiter(this int i)
     {
-        return new A ();
+        return new A();
     }
 }
 
 class A
 {
-    int IsCompleted {
-        get {
-            return 1;
-        }
+    int IsCompleted
+    {
+        get { return 1; }
     }
-    
-    static async void Test ()
+
+    static async void Test()
     {
         await 9;
     }

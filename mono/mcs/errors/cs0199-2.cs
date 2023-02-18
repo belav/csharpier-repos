@@ -5,7 +5,7 @@ class X
 {
     static readonly int f = 0;
 
-    public static void Main ()
+    public static void Main()
     {
         ref int j = ref f;
     }

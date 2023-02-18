@@ -2,18 +2,18 @@
 // Line: 9
 
 using System;
-interface X {
-    void Hola (ref string name);
+
+interface X
+{
+    void Hola(ref string name);
 }
 
-class Test : X {
-    static void Main ()
-    {
-    }
+class Test : X
+{
+    static void Main() { }
 
-    public void Hola (out string name)
+    public void Hola(out string name)
     {
         name = null;
     }
 }
-

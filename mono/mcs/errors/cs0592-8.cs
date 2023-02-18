@@ -6,8 +6,7 @@ using System;
 public class C
 {
     [return: Obsolete]
-    public void Test (int a)
-    {
-    }
-    static public void Main () {}
+    public void Test(int a) { }
+
+    static public void Main() { }
 }

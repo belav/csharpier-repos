@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapHeaderAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,10 +28,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Protocols {
-    [AttributeUsage (AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public sealed class SoapHeaderAttribute : Attribute {
-
+namespace System.Web.Services.Protocols
+{
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    public sealed class SoapHeaderAttribute : Attribute
+    {
         #region Fields
 
         SoapHeaderDirection direction;
@@ -42,7 +43,7 @@ namespace System.Web.Services.Protocols {
 
         #region Constructors
 
-        public SoapHeaderAttribute (string memberName) 
+        public SoapHeaderAttribute(string memberName)
         {
             direction = SoapHeaderDirection.In;
             this.memberName = memberName;
@@ -53,20 +54,26 @@ namespace System.Web.Services.Protocols {
 
         #region Properties
 
-        public SoapHeaderDirection Direction {
+        public SoapHeaderDirection Direction
+        {
             get { return direction; }
             set { direction = value; }
         }
 
-        public string MemberName {    
+        public string MemberName
+        {
             get { return memberName; }
             set { memberName = value; }
         }
 
-               [Obsolete ("This property will be removed from a future"
-                       + " version. The presence of a particular header"
-                       + " in a SOAP message is no longer enforced", false)]
-        public bool Required {
+        [Obsolete(
+            "This property will be removed from a future"
+                + " version. The presence of a particular header"
+                + " in a SOAP message is no longer enforced",
+            false
+        )]
+        public bool Required
+        {
             get { return required; }
             set { required = value; }
         }

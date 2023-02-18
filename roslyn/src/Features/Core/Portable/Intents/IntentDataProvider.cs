@@ -13,15 +13,16 @@ namespace Microsoft.CodeAnalysis.Features.Intents
 {
     internal sealed class IntentDataProvider
     {
-        private static readonly Lazy<JsonSerializerOptions> s_serializerOptions = new Lazy<JsonSerializerOptions>(() =>
-        {
-            var serializerOptions = new JsonSerializerOptions
+        private static readonly Lazy<JsonSerializerOptions> s_serializerOptions =
+            new Lazy<JsonSerializerOptions>(() =>
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            };
-            serializerOptions.Converters.Add(new JsonStringEnumConverter());
-            return serializerOptions;
-        });
+                var serializerOptions = new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                };
+                serializerOptions.Converters.Add(new JsonStringEnumConverter());
+                return serializerOptions;
+            });
 
         public readonly CleanCodeGenerationOptionsProvider FallbackOptions;
 
@@ -29,23 +30,26 @@ namespace Microsoft.CodeAnalysis.Features.Intents
 
         public IntentDataProvider(
             string? serializedIntentData,
-            CleanCodeGenerationOptionsProvider fallbackOptions)
+            CleanCodeGenerationOptionsProvider fallbackOptions
+        )
         {
             _serializedIntentData = serializedIntentData;
             FallbackOptions = fallbackOptions;
         }
 
-        public T? GetIntentData<T>() where T : class
+        public T? GetIntentData<T>()
+            where T : class
         {
             if (_serializedIntentData != null)
             {
                 try
                 {
-                    return JsonSerializer.Deserialize<T>(_serializedIntentData, s_serializerOptions.Value);
+                    return JsonSerializer.Deserialize<T>(
+                        _serializedIntentData,
+                        s_serializerOptions.Value
+                    );
                 }
-                catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.General))
-                {
-                }
+                catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.General)) { }
             }
 
             return null;

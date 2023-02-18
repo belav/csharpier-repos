@@ -9,12 +9,12 @@ public class Test<T>
 {
     public static int Count;
 
-    public void Foo ()
+    public void Foo()
     {
         Count++;
     }
 
-    public int GetCount ()
+    public int GetCount()
     {
         return Count;
     }
@@ -22,24 +22,24 @@ public class Test<T>
 
 class X
 {
-    static int DoTheTest<T> ()
+    static int DoTheTest<T>()
     {
-        Test<T> test = new Test<T> ();
+        Test<T> test = new Test<T>();
 
-        test.Foo ();
-        if (test.GetCount () != 1)
+        test.Foo();
+        if (test.GetCount() != 1)
             return 1;
         if (Test<T>.Count != 1)
             return 2;
 
-        test.Foo ();
-        if (test.GetCount () != 2)
+        test.Foo();
+        if (test.GetCount() != 2)
             return 3;
         if (Test<T>.Count != 2)
             return 4;
 
-        test.Foo ();
-        if (test.GetCount () != 3)
+        test.Foo();
+        if (test.GetCount() != 3)
             return 5;
         if (Test<T>.Count != 3)
             return 6;
@@ -47,20 +47,20 @@ class X
         return 0;
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        int result = DoTheTest<int> ();
+        int result = DoTheTest<int>();
         if (result != 0)
             return result;
 
-        result = DoTheTest<long> () + 10;
+        result = DoTheTest<long>() + 10;
         if (result != 10)
             return result;
 
         Test<int>.Count = 0;
         ++Test<long>.Count;
 
-        result = DoTheTest<int> () + 20;
+        result = DoTheTest<int>() + 20;
         if (result != 20)
             return result;
 

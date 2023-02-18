@@ -1,5 +1,5 @@
-// 
-//  ____  _     __  __      _        _ 
+//
+//  ____  _     __  __      _        _
 // |  _ \| |__ |  \/  | ___| |_ __ _| |
 // | | | | '_ \| |\/| |/ _ \ __/ _` | |
 // | |_| | |_) | |  | |  __/ || (_| | |
@@ -16,196 +16,166 @@ namespace nwind
     using System.Data.Linq;
     using System.Data.Linq.Mapping;
     using System.Diagnostics;
-    
-    
+
     public partial class Northwind : DataContext
     {
-        
         #region Extensibility Method Declarations
         partial void OnCreated();
         #endregion
-        
-        
-        public Northwind(string connectionString) : 
-                base(connectionString)
+
+
+        public Northwind(string connectionString)
+            : base(connectionString)
         {
             this.OnCreated();
         }
-        
-        public Northwind(IDbConnection connection) : 
-                base(connection)
+
+        public Northwind(IDbConnection connection)
+            : base(connection)
         {
             this.OnCreated();
         }
-        
-        public Northwind(string connection, MappingSource mappingSource) : 
-                base(connection, mappingSource)
+
+        public Northwind(string connection, MappingSource mappingSource)
+            : base(connection, mappingSource)
         {
             this.OnCreated();
         }
-        
-        public Northwind(IDbConnection connection, MappingSource mappingSource) : 
-                base(connection, mappingSource)
+
+        public Northwind(IDbConnection connection, MappingSource mappingSource)
+            : base(connection, mappingSource)
         {
             this.OnCreated();
         }
-        
+
         public Table<Category> Categories
         {
-            get
-            {
-                return this.GetTable<Category>();
-            }
+            get { return this.GetTable<Category>(); }
         }
-        
+
         public Table<Customer> Customers
         {
-            get
-            {
-                return this.GetTable<Customer>();
-            }
+            get { return this.GetTable<Customer>(); }
         }
-        
+
         public Table<CustomerCustomerDemo> CustomerCustomerDemo
         {
-            get
-            {
-                return this.GetTable<CustomerCustomerDemo>();
-            }
+            get { return this.GetTable<CustomerCustomerDemo>(); }
         }
-        
+
         public Table<CustomerDemographic> CustomerDemographics
         {
-            get
-            {
-                return this.GetTable<CustomerDemographic>();
-            }
+            get { return this.GetTable<CustomerDemographic>(); }
         }
-        
+
         public Table<Employee> Employees
         {
-            get
-            {
-                return this.GetTable<Employee>();
-            }
+            get { return this.GetTable<Employee>(); }
         }
-        
+
         public Table<EmployeeTerritory> EmployeeTerritories
         {
-            get
-            {
-                return this.GetTable<EmployeeTerritory>();
-            }
+            get { return this.GetTable<EmployeeTerritory>(); }
         }
-        
+
         public Table<Order> Orders
         {
-            get
-            {
-                return this.GetTable<Order>();
-            }
+            get { return this.GetTable<Order>(); }
         }
-        
+
         public Table<OrderDetail> OrderDetails
         {
-            get
-            {
-                return this.GetTable<OrderDetail>();
-            }
+            get { return this.GetTable<OrderDetail>(); }
         }
-        
+
         public Table<Product> Products
         {
-            get
-            {
-                return this.GetTable<Product>();
-            }
+            get { return this.GetTable<Product>(); }
         }
-        
+
         public Table<Region> Regions
         {
-            get
-            {
-                return this.GetTable<Region>();
-            }
+            get { return this.GetTable<Region>(); }
         }
-        
+
         public Table<Shipper> Shippers
         {
-            get
-            {
-                return this.GetTable<Shipper>();
-            }
+            get { return this.GetTable<Shipper>(); }
         }
-        
+
         public Table<Supplier> Suppliers
         {
-            get
-            {
-                return this.GetTable<Supplier>();
-            }
+            get { return this.GetTable<Supplier>(); }
         }
-        
+
         public Table<Territory> Territories
         {
-            get
-            {
-                return this.GetTable<Territory>();
-            }
+            get { return this.GetTable<Territory>(); }
         }
     }
-    
-    [Table(Name="main.Categories")]
-    public partial class Category : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Category>
+
+    [Table(Name = "main.Categories")]
+    public partial class Category
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Category>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private int _categoryID;
-        
+
         private string _categoryName;
-        
+
         private string _description;
-        
+
         private byte[] _picture;
-        
+
         private EntitySet<Product> _products;
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnCategoryIDChanged();
-        
+
         partial void OnCategoryIDChanging(int value);
-        
+
         partial void OnCategoryNameChanged();
-        
+
         partial void OnCategoryNameChanging(string value);
-        
+
         partial void OnDescriptionChanged();
-        
+
         partial void OnDescriptionChanging(string value);
-        
+
         partial void OnPictureChanged();
-        
+
         partial void OnPictureChanging(byte[] value);
         #endregion
-        
-        
+
+
         public Category()
         {
-            _products = new EntitySet<Product>(new Action<Product>(this.Products_Attach), new Action<Product>(this.Products_Detach));
+            _products = new EntitySet<Product>(
+                new Action<Product>(this.Products_Attach),
+                new Action<Product>(this.Products_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_categoryID", Name="CategoryID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_categoryID",
+            Name = "CategoryID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int CategoryID
         {
-            get
-            {
-                return this._categoryID;
-            }
+            get { return this._categoryID; }
             set
             {
                 if ((_categoryID != value))
@@ -218,19 +188,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_categoryName", Name="CategoryName", DbType="nvarchar (15)", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_categoryName",
+            Name = "CategoryName",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string CategoryName
         {
-            get
-            {
-                return this._categoryName;
-            }
+            get { return this._categoryName; }
             set
             {
-                if (((_categoryName == value) 
-                            == false))
+                if (((_categoryName == value) == false))
                 {
                     this.OnCategoryNameChanging(value);
                     this.SendPropertyChanging();
@@ -240,19 +212,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_description", Name="Description", DbType="ntext", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_description",
+            Name = "Description",
+            DbType = "ntext",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Description
         {
-            get
-            {
-                return this._description;
-            }
+            get { return this._description; }
             set
             {
-                if (((_description == value) 
-                            == false))
+                if (((_description == value) == false))
                 {
                     this.OnDescriptionChanging(value);
                     this.SendPropertyChanging();
@@ -262,19 +235,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_picture", Name="Picture", DbType="image", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_picture",
+            Name = "Picture",
+            DbType = "image",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public byte[] Picture
         {
-            get
-            {
-                return this._picture;
-            }
+            get { return this._picture; }
             set
             {
-                if (((_picture == value) 
-                            == false))
+                if (((_picture == value) == false))
                 {
                     this.OnPictureChanging(value);
                     this.SendPropertyChanging();
@@ -284,27 +258,26 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_products", OtherKey="CategoryID", ThisKey="CategoryID", Name="fk_Products_1")]
+        [Association(
+            Storage = "_products",
+            OtherKey = "CategoryID",
+            ThisKey = "CategoryID",
+            Name = "fk_Products_1"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<Product> Products
         {
-            get
-            {
-                return this._products;
-            }
-            set
-            {
-                this._products = value;
-            }
+            get { return this._products; }
+            set { this._products = value; }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -313,7 +286,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -322,46 +295,47 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_categoryID.GetHashCode() * 1));
+            hc = (hc | (_categoryID.GetHashCode() * 1));
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Category other = ((Category)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Category value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._categoryID, value._categoryID);
+            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                this._categoryID,
+                value._categoryID
+            );
         }
-        
+
         #region Attachment handlers
         private void Products_Attach(Product entity)
         {
             this.SendPropertyChanging();
             entity.Category = this;
         }
-        
+
         private void Products_Detach(Product entity)
         {
             this.SendPropertyChanging();
@@ -369,107 +343,117 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.Customers")]
-    public partial class Customer : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Customer>
+
+    [Table(Name = "main.Customers")]
+    public partial class Customer
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Customer>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private string _address;
-        
+
         private string _city;
-        
+
         private string _companyName;
-        
+
         private string _contactName;
-        
+
         private string _contactTitle;
-        
+
         private string _country;
-        
+
         private string _customerID;
-        
+
         private string _fax;
-        
+
         private string _phone;
-        
+
         private string _postalCode;
-        
+
         private string _region;
-        
+
         private EntitySet<CustomerCustomerDemo> _customerCustomerDemo;
-        
+
         private EntitySet<Order> _orders;
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnAddressChanged();
-        
+
         partial void OnAddressChanging(string value);
-        
+
         partial void OnCityChanged();
-        
+
         partial void OnCityChanging(string value);
-        
+
         partial void OnCompanyNameChanged();
-        
+
         partial void OnCompanyNameChanging(string value);
-        
+
         partial void OnContactNameChanged();
-        
+
         partial void OnContactNameChanging(string value);
-        
+
         partial void OnContactTitleChanged();
-        
+
         partial void OnContactTitleChanging(string value);
-        
+
         partial void OnCountryChanged();
-        
+
         partial void OnCountryChanging(string value);
-        
+
         partial void OnCustomerIDChanged();
-        
+
         partial void OnCustomerIDChanging(string value);
-        
+
         partial void OnFaxChanged();
-        
+
         partial void OnFaxChanging(string value);
-        
+
         partial void OnPhoneChanged();
-        
+
         partial void OnPhoneChanging(string value);
-        
+
         partial void OnPostalCodeChanged();
-        
+
         partial void OnPostalCodeChanging(string value);
-        
+
         partial void OnRegionChanged();
-        
+
         partial void OnRegionChanging(string value);
         #endregion
-        
-        
+
+
         public Customer()
         {
-            _customerCustomerDemo = new EntitySet<CustomerCustomerDemo>(new Action<CustomerCustomerDemo>(this.CustomerCustomerDemo_Attach), new Action<CustomerCustomerDemo>(this.CustomerCustomerDemo_Detach));
-            _orders = new EntitySet<Order>(new Action<Order>(this.Orders_Attach), new Action<Order>(this.Orders_Detach));
+            _customerCustomerDemo = new EntitySet<CustomerCustomerDemo>(
+                new Action<CustomerCustomerDemo>(this.CustomerCustomerDemo_Attach),
+                new Action<CustomerCustomerDemo>(this.CustomerCustomerDemo_Detach)
+            );
+            _orders = new EntitySet<Order>(
+                new Action<Order>(this.Orders_Attach),
+                new Action<Order>(this.Orders_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_address", Name="Address", DbType="nvarchar (60)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_address",
+            Name = "Address",
+            DbType = "nvarchar (60)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Address
         {
-            get
-            {
-                return this._address;
-            }
+            get { return this._address; }
             set
             {
-                if (((_address == value) 
-                            == false))
+                if (((_address == value) == false))
                 {
                     this.OnAddressChanging(value);
                     this.SendPropertyChanging();
@@ -479,19 +463,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_city", Name="City", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_city",
+            Name = "City",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string City
         {
-            get
-            {
-                return this._city;
-            }
+            get { return this._city; }
             set
             {
-                if (((_city == value) 
-                            == false))
+                if (((_city == value) == false))
                 {
                     this.OnCityChanging(value);
                     this.SendPropertyChanging();
@@ -501,19 +486,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_companyName", Name="CompanyName", DbType="nvarchar (40)", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_companyName",
+            Name = "CompanyName",
+            DbType = "nvarchar (40)",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string CompanyName
         {
-            get
-            {
-                return this._companyName;
-            }
+            get { return this._companyName; }
             set
             {
-                if (((_companyName == value) 
-                            == false))
+                if (((_companyName == value) == false))
                 {
                     this.OnCompanyNameChanging(value);
                     this.SendPropertyChanging();
@@ -523,19 +510,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_contactName", Name="ContactName", DbType="nvarchar (30)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_contactName",
+            Name = "ContactName",
+            DbType = "nvarchar (30)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ContactName
         {
-            get
-            {
-                return this._contactName;
-            }
+            get { return this._contactName; }
             set
             {
-                if (((_contactName == value) 
-                            == false))
+                if (((_contactName == value) == false))
                 {
                     this.OnContactNameChanging(value);
                     this.SendPropertyChanging();
@@ -545,19 +533,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_contactTitle", Name="ContactTitle", DbType="nvarchar (30)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_contactTitle",
+            Name = "ContactTitle",
+            DbType = "nvarchar (30)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ContactTitle
         {
-            get
-            {
-                return this._contactTitle;
-            }
+            get { return this._contactTitle; }
             set
             {
-                if (((_contactTitle == value) 
-                            == false))
+                if (((_contactTitle == value) == false))
                 {
                     this.OnContactTitleChanging(value);
                     this.SendPropertyChanging();
@@ -567,19 +556,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_country", Name="Country", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_country",
+            Name = "Country",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Country
         {
-            get
-            {
-                return this._country;
-            }
+            get { return this._country; }
             set
             {
-                if (((_country == value) 
-                            == false))
+                if (((_country == value) == false))
                 {
                     this.OnCountryChanging(value);
                     this.SendPropertyChanging();
@@ -589,19 +579,22 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_customerID", Name="CustomerID", DbType="nchar (5)", IsPrimaryKey=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_customerID",
+            Name = "CustomerID",
+            DbType = "nchar (5)",
+            IsPrimaryKey = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string CustomerID
         {
-            get
-            {
-                return this._customerID;
-            }
+            get { return this._customerID; }
             set
             {
-                if (((_customerID == value) 
-                            == false))
+                if (((_customerID == value) == false))
                 {
                     this.OnCustomerIDChanging(value);
                     this.SendPropertyChanging();
@@ -611,19 +604,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_fax", Name="Fax", DbType="nvarchar (24)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_fax",
+            Name = "Fax",
+            DbType = "nvarchar (24)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Fax
         {
-            get
-            {
-                return this._fax;
-            }
+            get { return this._fax; }
             set
             {
-                if (((_fax == value) 
-                            == false))
+                if (((_fax == value) == false))
                 {
                     this.OnFaxChanging(value);
                     this.SendPropertyChanging();
@@ -633,19 +627,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_phone", Name="Phone", DbType="nvarchar (24)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_phone",
+            Name = "Phone",
+            DbType = "nvarchar (24)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Phone
         {
-            get
-            {
-                return this._phone;
-            }
+            get { return this._phone; }
             set
             {
-                if (((_phone == value) 
-                            == false))
+                if (((_phone == value) == false))
                 {
                     this.OnPhoneChanging(value);
                     this.SendPropertyChanging();
@@ -655,19 +650,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_postalCode", Name="PostalCode", DbType="nvarchar (10)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_postalCode",
+            Name = "PostalCode",
+            DbType = "nvarchar (10)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string PostalCode
         {
-            get
-            {
-                return this._postalCode;
-            }
+            get { return this._postalCode; }
             set
             {
-                if (((_postalCode == value) 
-                            == false))
+                if (((_postalCode == value) == false))
                 {
                     this.OnPostalCodeChanging(value);
                     this.SendPropertyChanging();
@@ -677,19 +673,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_region", Name="Region", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_region",
+            Name = "Region",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Region
         {
-            get
-            {
-                return this._region;
-            }
+            get { return this._region; }
             set
             {
-                if (((_region == value) 
-                            == false))
+                if (((_region == value) == false))
                 {
                     this.OnRegionChanging(value);
                     this.SendPropertyChanging();
@@ -699,41 +696,39 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_customerCustomerDemo", OtherKey="CustomerID", ThisKey="CustomerID", Name="fk_CustomerCustomerDemo_0")]
+        [Association(
+            Storage = "_customerCustomerDemo",
+            OtherKey = "CustomerID",
+            ThisKey = "CustomerID",
+            Name = "fk_CustomerCustomerDemo_0"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<CustomerCustomerDemo> CustomerCustomerDemo
         {
-            get
-            {
-                return this._customerCustomerDemo;
-            }
-            set
-            {
-                this._customerCustomerDemo = value;
-            }
+            get { return this._customerCustomerDemo; }
+            set { this._customerCustomerDemo = value; }
         }
-        
-        [Association(Storage="_orders", OtherKey="CustomerID", ThisKey="CustomerID", Name="fk_Orders_2")]
+
+        [Association(
+            Storage = "_orders",
+            OtherKey = "CustomerID",
+            ThisKey = "CustomerID",
+            Name = "fk_Orders_2"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<Order> Orders
         {
-            get
-            {
-                return this._orders;
-            }
-            set
-            {
-                this._orders = value;
-            }
+            get { return this._orders; }
+            set { this._orders = value; }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -742,7 +737,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -751,61 +746,62 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
             if ((_customerID != null))
             {
-                hc = (hc 
-                            | (_customerID.GetHashCode() * 1));
+                hc = (hc | (_customerID.GetHashCode() * 1));
             }
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Customer other = ((Customer)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Customer value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(this._customerID, value._customerID);
+            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(
+                this._customerID,
+                value._customerID
+            );
         }
-        
+
         #region Attachment handlers
         private void CustomerCustomerDemo_Attach(CustomerCustomerDemo entity)
         {
             this.SendPropertyChanging();
             entity.Customer = this;
         }
-        
+
         private void CustomerCustomerDemo_Detach(CustomerCustomerDemo entity)
         {
             this.SendPropertyChanging();
             entity.Customer = null;
         }
-        
+
         private void Orders_Attach(Order entity)
         {
             this.SendPropertyChanging();
             entity.Customer = this;
         }
-        
+
         private void Orders_Detach(Order entity)
         {
             this.SendPropertyChanging();
@@ -813,51 +809,58 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.CustomerCustomerDemo")]
-    public partial class CustomerCustomerDemo : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<CustomerCustomerDemo>
+
+    [Table(Name = "main.CustomerCustomerDemo")]
+    public partial class CustomerCustomerDemo
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<CustomerCustomerDemo>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private string _customerID;
-        
+
         private string _customerTypeID;
-        
+
         private EntityRef<Customer> _customer = new EntityRef<Customer>();
-        
-        private EntityRef<CustomerDemographic> _customerDemographic = new EntityRef<CustomerDemographic>();
-        
+
+        private EntityRef<CustomerDemographic> _customerDemographic =
+            new EntityRef<CustomerDemographic>();
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnCustomerIDChanged();
-        
+
         partial void OnCustomerIDChanging(string value);
-        
+
         partial void OnCustomerTypeIDChanged();
-        
+
         partial void OnCustomerTypeIDChanging(string value);
         #endregion
-        
-        
+
+
         public CustomerCustomerDemo()
         {
             this.OnCreated();
         }
-        
-        [Column(Storage="_customerID", Name="CustomerID", DbType="nchar (5)", IsPrimaryKey=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_customerID",
+            Name = "CustomerID",
+            DbType = "nchar (5)",
+            IsPrimaryKey = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string CustomerID
         {
-            get
-            {
-                return this._customerID;
-            }
+            get { return this._customerID; }
             set
             {
-                if (((_customerID == value) 
-                            == false))
+                if (((_customerID == value) == false))
                 {
                     if (_customer.HasLoadedOrAssignedValue)
                     {
@@ -871,19 +874,22 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_customerTypeID", Name="CustomerTypeID", DbType="nchar", IsPrimaryKey=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_customerTypeID",
+            Name = "CustomerTypeID",
+            DbType = "nchar",
+            IsPrimaryKey = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string CustomerTypeID
         {
-            get
-            {
-                return this._customerTypeID;
-            }
+            get { return this._customerTypeID; }
             set
             {
-                if (((_customerTypeID == value) 
-                            == false))
+                if (((_customerTypeID == value) == false))
                 {
                     if (_customerDemographic.HasLoadedOrAssignedValue)
                     {
@@ -897,20 +903,22 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Parents
-        [Association(Storage="_customer", OtherKey="CustomerID", ThisKey="CustomerID", Name="fk_CustomerCustomerDemo_0", IsForeignKey=true)]
+        [Association(
+            Storage = "_customer",
+            OtherKey = "CustomerID",
+            ThisKey = "CustomerID",
+            Name = "fk_CustomerCustomerDemo_0",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Customer Customer
         {
-            get
-            {
-                return this._customer.Entity;
-            }
+            get { return this._customer.Entity; }
             set
             {
-                if (((this._customer.Entity == value) 
-                            == false))
+                if (((this._customer.Entity == value) == false))
                 {
                     if ((this._customer.Entity != null))
                     {
@@ -931,23 +939,26 @@ namespace nwind
                 }
             }
         }
-        
-        [Association(Storage="_customerDemographic", OtherKey="CustomerTypeID", ThisKey="CustomerTypeID", Name="fk_CustomerCustomerDemo_1", IsForeignKey=true)]
+
+        [Association(
+            Storage = "_customerDemographic",
+            OtherKey = "CustomerTypeID",
+            ThisKey = "CustomerTypeID",
+            Name = "fk_CustomerCustomerDemo_1",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public CustomerDemographic CustomerDemographic
         {
-            get
-            {
-                return this._customerDemographic.Entity;
-            }
+            get { return this._customerDemographic.Entity; }
             set
             {
-                if (((this._customerDemographic.Entity == value) 
-                            == false))
+                if (((this._customerDemographic.Entity == value) == false))
                 {
                     if ((this._customerDemographic.Entity != null))
                     {
-                        CustomerDemographic previousCustomerDemographic = this._customerDemographic.Entity;
+                        CustomerDemographic previousCustomerDemographic =
+                            this._customerDemographic.Entity;
                         this._customerDemographic.Entity = null;
                         previousCustomerDemographic.CustomerCustomerDemo.Remove(this);
                     }
@@ -965,11 +976,11 @@ namespace nwind
             }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -978,7 +989,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -987,91 +998,104 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
             if ((_customerID != null))
             {
-                hc = (hc 
-                            | (_customerID.GetHashCode() * 1));
+                hc = (hc | (_customerID.GetHashCode() * 1));
             }
             if ((_customerTypeID != null))
             {
-                hc = (hc 
-                            | (_customerTypeID.GetHashCode() * 65536));
+                hc = (hc | (_customerTypeID.GetHashCode() * 65536));
             }
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             CustomerCustomerDemo other = ((CustomerCustomerDemo)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(CustomerCustomerDemo value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return (System.Collections.Generic.EqualityComparer<string>.Default.Equals(this._customerID, value._customerID) && System.Collections.Generic.EqualityComparer<string>.Default.Equals(this._customerTypeID, value._customerTypeID));
+            return (
+                System.Collections.Generic.EqualityComparer<string>.Default.Equals(
+                    this._customerID,
+                    value._customerID
+                )
+                && System.Collections.Generic.EqualityComparer<string>.Default.Equals(
+                    this._customerTypeID,
+                    value._customerTypeID
+                )
+            );
         }
     }
-    
-    [Table(Name="main.CustomerDemographics")]
-    public partial class CustomerDemographic : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<CustomerDemographic>
+
+    [Table(Name = "main.CustomerDemographics")]
+    public partial class CustomerDemographic
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<CustomerDemographic>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private string _customerDesc;
-        
+
         private string _customerTypeID;
-        
+
         private EntitySet<CustomerCustomerDemo> _customerCustomerDemo;
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnCustomerDescChanged();
-        
+
         partial void OnCustomerDescChanging(string value);
-        
+
         partial void OnCustomerTypeIDChanged();
-        
+
         partial void OnCustomerTypeIDChanging(string value);
         #endregion
-        
-        
+
+
         public CustomerDemographic()
         {
-            _customerCustomerDemo = new EntitySet<CustomerCustomerDemo>(new Action<CustomerCustomerDemo>(this.CustomerCustomerDemo_Attach), new Action<CustomerCustomerDemo>(this.CustomerCustomerDemo_Detach));
+            _customerCustomerDemo = new EntitySet<CustomerCustomerDemo>(
+                new Action<CustomerCustomerDemo>(this.CustomerCustomerDemo_Attach),
+                new Action<CustomerCustomerDemo>(this.CustomerCustomerDemo_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_customerDesc", Name="CustomerDesc", DbType="ntext", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_customerDesc",
+            Name = "CustomerDesc",
+            DbType = "ntext",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string CustomerDesc
         {
-            get
-            {
-                return this._customerDesc;
-            }
+            get { return this._customerDesc; }
             set
             {
-                if (((_customerDesc == value) 
-                            == false))
+                if (((_customerDesc == value) == false))
                 {
                     this.OnCustomerDescChanging(value);
                     this.SendPropertyChanging();
@@ -1081,19 +1105,22 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_customerTypeID", Name="CustomerTypeID", DbType="nchar", IsPrimaryKey=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_customerTypeID",
+            Name = "CustomerTypeID",
+            DbType = "nchar",
+            IsPrimaryKey = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string CustomerTypeID
         {
-            get
-            {
-                return this._customerTypeID;
-            }
+            get { return this._customerTypeID; }
             set
             {
-                if (((_customerTypeID == value) 
-                            == false))
+                if (((_customerTypeID == value) == false))
                 {
                     this.OnCustomerTypeIDChanging(value);
                     this.SendPropertyChanging();
@@ -1103,27 +1130,26 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_customerCustomerDemo", OtherKey="CustomerTypeID", ThisKey="CustomerTypeID", Name="fk_CustomerCustomerDemo_1")]
+        [Association(
+            Storage = "_customerCustomerDemo",
+            OtherKey = "CustomerTypeID",
+            ThisKey = "CustomerTypeID",
+            Name = "fk_CustomerCustomerDemo_1"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<CustomerCustomerDemo> CustomerCustomerDemo
         {
-            get
-            {
-                return this._customerCustomerDemo;
-            }
-            set
-            {
-                this._customerCustomerDemo = value;
-            }
+            get { return this._customerCustomerDemo; }
+            set { this._customerCustomerDemo = value; }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -1132,7 +1158,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -1141,49 +1167,50 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
             if ((_customerTypeID != null))
             {
-                hc = (hc 
-                            | (_customerTypeID.GetHashCode() * 1));
+                hc = (hc | (_customerTypeID.GetHashCode() * 1));
             }
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             CustomerDemographic other = ((CustomerDemographic)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(CustomerDemographic value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(this._customerTypeID, value._customerTypeID);
+            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(
+                this._customerTypeID,
+                value._customerTypeID
+            );
         }
-        
+
         #region Attachment handlers
         private void CustomerCustomerDemo_Attach(CustomerCustomerDemo entity)
         {
             this.SendPropertyChanging();
             entity.CustomerDemographic = this;
         }
-        
+
         private void CustomerCustomerDemo_Detach(CustomerCustomerDemo entity)
         {
             this.SendPropertyChanging();
@@ -1191,154 +1218,167 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.Employees")]
-    public partial class Employee : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Employee>
+
+    [Table(Name = "main.Employees")]
+    public partial class Employee
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Employee>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private string _address;
-        
+
         private System.Nullable<System.DateTime> _birthDate;
-        
+
         private string _city;
-        
+
         private string _country;
-        
+
         private int _employeeID;
-        
+
         private string _extension;
-        
+
         private string _firstName;
-        
+
         private System.Nullable<System.DateTime> _hireDate;
-        
+
         private string _homePhone;
-        
+
         private string _lastName;
-        
+
         private string _notes;
-        
+
         private byte[] _photo;
-        
+
         private string _photoPath;
-        
+
         private string _postalCode;
-        
+
         private string _region;
-        
+
         private System.Nullable<int> _reportsTo;
-        
+
         private string _title;
-        
+
         private string _titleOfCourtesy;
-        
+
         private EntitySet<EmployeeTerritory> _employeeTerritories;
-        
+
         private EntitySet<Employee> _employees;
-        
+
         private EntitySet<Order> _orders;
-        
+
         private EntityRef<Employee> _reportsToEmployee = new EntityRef<Employee>();
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnAddressChanged();
-        
+
         partial void OnAddressChanging(string value);
-        
+
         partial void OnBirthDateChanged();
-        
+
         partial void OnBirthDateChanging(System.Nullable<System.DateTime> value);
-        
+
         partial void OnCityChanged();
-        
+
         partial void OnCityChanging(string value);
-        
+
         partial void OnCountryChanged();
-        
+
         partial void OnCountryChanging(string value);
-        
+
         partial void OnEmployeeIDChanged();
-        
+
         partial void OnEmployeeIDChanging(int value);
-        
+
         partial void OnExtensionChanged();
-        
+
         partial void OnExtensionChanging(string value);
-        
+
         partial void OnFirstNameChanged();
-        
+
         partial void OnFirstNameChanging(string value);
-        
+
         partial void OnHireDateChanged();
-        
+
         partial void OnHireDateChanging(System.Nullable<System.DateTime> value);
-        
+
         partial void OnHomePhoneChanged();
-        
+
         partial void OnHomePhoneChanging(string value);
-        
+
         partial void OnLastNameChanged();
-        
+
         partial void OnLastNameChanging(string value);
-        
+
         partial void OnNotesChanged();
-        
+
         partial void OnNotesChanging(string value);
-        
+
         partial void OnPhotoChanged();
-        
+
         partial void OnPhotoChanging(byte[] value);
-        
+
         partial void OnPhotoPathChanged();
-        
+
         partial void OnPhotoPathChanging(string value);
-        
+
         partial void OnPostalCodeChanged();
-        
+
         partial void OnPostalCodeChanging(string value);
-        
+
         partial void OnRegionChanged();
-        
+
         partial void OnRegionChanging(string value);
-        
+
         partial void OnReportsToChanged();
-        
+
         partial void OnReportsToChanging(System.Nullable<int> value);
-        
+
         partial void OnTitleChanged();
-        
+
         partial void OnTitleChanging(string value);
-        
+
         partial void OnTitleOfCourtesyChanged();
-        
+
         partial void OnTitleOfCourtesyChanging(string value);
         #endregion
-        
-        
+
+
         public Employee()
         {
-            _employeeTerritories = new EntitySet<EmployeeTerritory>(new Action<EmployeeTerritory>(this.EmployeeTerritories_Attach), new Action<EmployeeTerritory>(this.EmployeeTerritories_Detach));
-            _employees = new EntitySet<Employee>(new Action<Employee>(this.Employees_Attach), new Action<Employee>(this.Employees_Detach));
-            _orders = new EntitySet<Order>(new Action<Order>(this.Orders_Attach), new Action<Order>(this.Orders_Detach));
+            _employeeTerritories = new EntitySet<EmployeeTerritory>(
+                new Action<EmployeeTerritory>(this.EmployeeTerritories_Attach),
+                new Action<EmployeeTerritory>(this.EmployeeTerritories_Detach)
+            );
+            _employees = new EntitySet<Employee>(
+                new Action<Employee>(this.Employees_Attach),
+                new Action<Employee>(this.Employees_Detach)
+            );
+            _orders = new EntitySet<Order>(
+                new Action<Order>(this.Orders_Attach),
+                new Action<Order>(this.Orders_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_address", Name="Address", DbType="nvarchar (60)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_address",
+            Name = "Address",
+            DbType = "nvarchar (60)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Address
         {
-            get
-            {
-                return this._address;
-            }
+            get { return this._address; }
             set
             {
-                if (((_address == value) 
-                            == false))
+                if (((_address == value) == false))
                 {
                     this.OnAddressChanging(value);
                     this.SendPropertyChanging();
@@ -1348,15 +1388,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_birthDate", Name="BirthDate", DbType="datetime", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_birthDate",
+            Name = "BirthDate",
+            DbType = "datetime",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<System.DateTime> BirthDate
         {
-            get
-            {
-                return this._birthDate;
-            }
+            get { return this._birthDate; }
             set
             {
                 if ((_birthDate != value))
@@ -1369,19 +1411,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_city", Name="City", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_city",
+            Name = "City",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string City
         {
-            get
-            {
-                return this._city;
-            }
+            get { return this._city; }
             set
             {
-                if (((_city == value) 
-                            == false))
+                if (((_city == value) == false))
                 {
                     this.OnCityChanging(value);
                     this.SendPropertyChanging();
@@ -1391,19 +1434,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_country", Name="Country", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_country",
+            Name = "Country",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Country
         {
-            get
-            {
-                return this._country;
-            }
+            get { return this._country; }
             set
             {
-                if (((_country == value) 
-                            == false))
+                if (((_country == value) == false))
                 {
                     this.OnCountryChanging(value);
                     this.SendPropertyChanging();
@@ -1413,15 +1457,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_employeeID", Name="EmployeeID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_employeeID",
+            Name = "EmployeeID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int EmployeeID
         {
-            get
-            {
-                return this._employeeID;
-            }
+            get { return this._employeeID; }
             set
             {
                 if ((_employeeID != value))
@@ -1434,19 +1483,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_extension", Name="Extension", DbType="nvarchar (4)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_extension",
+            Name = "Extension",
+            DbType = "nvarchar (4)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Extension
         {
-            get
-            {
-                return this._extension;
-            }
+            get { return this._extension; }
             set
             {
-                if (((_extension == value) 
-                            == false))
+                if (((_extension == value) == false))
                 {
                     this.OnExtensionChanging(value);
                     this.SendPropertyChanging();
@@ -1456,19 +1506,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_firstName", Name="FirstName", DbType="nvarchar (10)", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_firstName",
+            Name = "FirstName",
+            DbType = "nvarchar (10)",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string FirstName
         {
-            get
-            {
-                return this._firstName;
-            }
+            get { return this._firstName; }
             set
             {
-                if (((_firstName == value) 
-                            == false))
+                if (((_firstName == value) == false))
                 {
                     this.OnFirstNameChanging(value);
                     this.SendPropertyChanging();
@@ -1478,15 +1530,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_hireDate", Name="HireDate", DbType="datetime", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_hireDate",
+            Name = "HireDate",
+            DbType = "datetime",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<System.DateTime> HireDate
         {
-            get
-            {
-                return this._hireDate;
-            }
+            get { return this._hireDate; }
             set
             {
                 if ((_hireDate != value))
@@ -1499,19 +1553,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_homePhone", Name="HomePhone", DbType="nvarchar (24)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_homePhone",
+            Name = "HomePhone",
+            DbType = "nvarchar (24)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string HomePhone
         {
-            get
-            {
-                return this._homePhone;
-            }
+            get { return this._homePhone; }
             set
             {
-                if (((_homePhone == value) 
-                            == false))
+                if (((_homePhone == value) == false))
                 {
                     this.OnHomePhoneChanging(value);
                     this.SendPropertyChanging();
@@ -1521,19 +1576,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_lastName", Name="LastName", DbType="nvarchar (20)", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_lastName",
+            Name = "LastName",
+            DbType = "nvarchar (20)",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string LastName
         {
-            get
-            {
-                return this._lastName;
-            }
+            get { return this._lastName; }
             set
             {
-                if (((_lastName == value) 
-                            == false))
+                if (((_lastName == value) == false))
                 {
                     this.OnLastNameChanging(value);
                     this.SendPropertyChanging();
@@ -1543,19 +1600,15 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_notes", Name="Notes", DbType="ntext", AutoSync=AutoSync.Never)]
+
+        [Column(Storage = "_notes", Name = "Notes", DbType = "ntext", AutoSync = AutoSync.Never)]
         [DebuggerNonUserCode()]
         public string Notes
         {
-            get
-            {
-                return this._notes;
-            }
+            get { return this._notes; }
             set
             {
-                if (((_notes == value) 
-                            == false))
+                if (((_notes == value) == false))
                 {
                     this.OnNotesChanging(value);
                     this.SendPropertyChanging();
@@ -1565,19 +1618,15 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_photo", Name="Photo", DbType="image", AutoSync=AutoSync.Never)]
+
+        [Column(Storage = "_photo", Name = "Photo", DbType = "image", AutoSync = AutoSync.Never)]
         [DebuggerNonUserCode()]
         public byte[] Photo
         {
-            get
-            {
-                return this._photo;
-            }
+            get { return this._photo; }
             set
             {
-                if (((_photo == value) 
-                            == false))
+                if (((_photo == value) == false))
                 {
                     this.OnPhotoChanging(value);
                     this.SendPropertyChanging();
@@ -1587,19 +1636,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_photoPath", Name="PhotoPath", DbType="nvarchar (255)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_photoPath",
+            Name = "PhotoPath",
+            DbType = "nvarchar (255)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string PhotoPath
         {
-            get
-            {
-                return this._photoPath;
-            }
+            get { return this._photoPath; }
             set
             {
-                if (((_photoPath == value) 
-                            == false))
+                if (((_photoPath == value) == false))
                 {
                     this.OnPhotoPathChanging(value);
                     this.SendPropertyChanging();
@@ -1609,19 +1659,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_postalCode", Name="PostalCode", DbType="nvarchar (10)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_postalCode",
+            Name = "PostalCode",
+            DbType = "nvarchar (10)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string PostalCode
         {
-            get
-            {
-                return this._postalCode;
-            }
+            get { return this._postalCode; }
             set
             {
-                if (((_postalCode == value) 
-                            == false))
+                if (((_postalCode == value) == false))
                 {
                     this.OnPostalCodeChanging(value);
                     this.SendPropertyChanging();
@@ -1631,19 +1682,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_region", Name="Region", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_region",
+            Name = "Region",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Region
         {
-            get
-            {
-                return this._region;
-            }
+            get { return this._region; }
             set
             {
-                if (((_region == value) 
-                            == false))
+                if (((_region == value) == false))
                 {
                     this.OnRegionChanging(value);
                     this.SendPropertyChanging();
@@ -1653,15 +1705,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_reportsTo", Name="ReportsTo", DbType="INTEGER", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_reportsTo",
+            Name = "ReportsTo",
+            DbType = "INTEGER",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<int> ReportsTo
         {
-            get
-            {
-                return this._reportsTo;
-            }
+            get { return this._reportsTo; }
             set
             {
                 if ((_reportsTo != value))
@@ -1678,19 +1732,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_title", Name="Title", DbType="nvarchar (30)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_title",
+            Name = "Title",
+            DbType = "nvarchar (30)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Title
         {
-            get
-            {
-                return this._title;
-            }
+            get { return this._title; }
             set
             {
-                if (((_title == value) 
-                            == false))
+                if (((_title == value) == false))
                 {
                     this.OnTitleChanging(value);
                     this.SendPropertyChanging();
@@ -1700,19 +1755,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_titleOfCourtesy", Name="TitleOfCourtesy", DbType="nvarchar (25)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_titleOfCourtesy",
+            Name = "TitleOfCourtesy",
+            DbType = "nvarchar (25)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string TitleOfCourtesy
         {
-            get
-            {
-                return this._titleOfCourtesy;
-            }
+            get { return this._titleOfCourtesy; }
             set
             {
-                if (((_titleOfCourtesy == value) 
-                            == false))
+                if (((_titleOfCourtesy == value) == false))
                 {
                     this.OnTitleOfCourtesyChanging(value);
                     this.SendPropertyChanging();
@@ -1722,64 +1778,63 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_employeeTerritories", OtherKey="EmployeeID", ThisKey="EmployeeID", Name="fk_EmployeeTerritories_1")]
+        [Association(
+            Storage = "_employeeTerritories",
+            OtherKey = "EmployeeID",
+            ThisKey = "EmployeeID",
+            Name = "fk_EmployeeTerritories_1"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<EmployeeTerritory> EmployeeTerritories
         {
-            get
-            {
-                return this._employeeTerritories;
-            }
-            set
-            {
-                this._employeeTerritories = value;
-            }
+            get { return this._employeeTerritories; }
+            set { this._employeeTerritories = value; }
         }
-        
-        [Association(Storage="_employees", OtherKey="ReportsTo", ThisKey="EmployeeID", Name="fk_Employees_0")]
+
+        [Association(
+            Storage = "_employees",
+            OtherKey = "ReportsTo",
+            ThisKey = "EmployeeID",
+            Name = "fk_Employees_0"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<Employee> Employees
         {
-            get
-            {
-                return this._employees;
-            }
-            set
-            {
-                this._employees = value;
-            }
+            get { return this._employees; }
+            set { this._employees = value; }
         }
-        
-        [Association(Storage="_orders", OtherKey="EmployeeID", ThisKey="EmployeeID", Name="fk_Orders_1")]
+
+        [Association(
+            Storage = "_orders",
+            OtherKey = "EmployeeID",
+            ThisKey = "EmployeeID",
+            Name = "fk_Orders_1"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<Order> Orders
         {
-            get
-            {
-                return this._orders;
-            }
-            set
-            {
-                this._orders = value;
-            }
+            get { return this._orders; }
+            set { this._orders = value; }
         }
         #endregion
-        
+
         #region Parents
-        [Association(Storage="_reportsToEmployee", OtherKey="EmployeeID", ThisKey="ReportsTo", Name="fk_Employees_0", IsForeignKey=true)]
+        [Association(
+            Storage = "_reportsToEmployee",
+            OtherKey = "EmployeeID",
+            ThisKey = "ReportsTo",
+            Name = "fk_Employees_0",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Employee ReportsToEmployee
         {
-            get
-            {
-                return this._reportsToEmployee.Entity;
-            }
+            get { return this._reportsToEmployee.Entity; }
             set
             {
-                if (((this._reportsToEmployee.Entity == value) 
-                            == false))
+                if (((this._reportsToEmployee.Entity == value) == false))
                 {
                     if ((this._reportsToEmployee.Entity != null))
                     {
@@ -1801,11 +1856,11 @@ namespace nwind
             }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -1814,7 +1869,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -1823,70 +1878,71 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_employeeID.GetHashCode() * 1));
+            hc = (hc | (_employeeID.GetHashCode() * 1));
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Employee other = ((Employee)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Employee value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._employeeID, value._employeeID);
+            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                this._employeeID,
+                value._employeeID
+            );
         }
-        
+
         #region Attachment handlers
         private void EmployeeTerritories_Attach(EmployeeTerritory entity)
         {
             this.SendPropertyChanging();
             entity.Employee = this;
         }
-        
+
         private void EmployeeTerritories_Detach(EmployeeTerritory entity)
         {
             this.SendPropertyChanging();
             entity.Employee = null;
         }
-        
+
         private void Employees_Attach(Employee entity)
         {
             this.SendPropertyChanging();
             entity.ReportsToEmployee = this;
         }
-        
+
         private void Employees_Detach(Employee entity)
         {
             this.SendPropertyChanging();
             entity.ReportsToEmployee = null;
         }
-        
+
         private void Orders_Attach(Order entity)
         {
             this.SendPropertyChanging();
             entity.Employee = this;
         }
-        
+
         private void Orders_Detach(Order entity)
         {
             this.SendPropertyChanging();
@@ -1894,47 +1950,55 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.EmployeeTerritories")]
-    public partial class EmployeeTerritory : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<EmployeeTerritory>
+
+    [Table(Name = "main.EmployeeTerritories")]
+    public partial class EmployeeTerritory
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<EmployeeTerritory>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private int _employeeID;
-        
+
         private string _territoryID;
-        
+
         private EntityRef<Territory> _territory = new EntityRef<Territory>();
-        
+
         private EntityRef<Employee> _employee = new EntityRef<Employee>();
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnEmployeeIDChanged();
-        
+
         partial void OnEmployeeIDChanging(int value);
-        
+
         partial void OnTerritoryIDChanged();
-        
+
         partial void OnTerritoryIDChanging(string value);
         #endregion
-        
-        
+
+
         public EmployeeTerritory()
         {
             this.OnCreated();
         }
-        
-        [Column(Storage="_employeeID", Name="EmployeeID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_employeeID",
+            Name = "EmployeeID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int EmployeeID
         {
-            get
-            {
-                return this._employeeID;
-            }
+            get { return this._employeeID; }
             set
             {
                 if ((_employeeID != value))
@@ -1951,19 +2015,22 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_territoryID", Name="TerritoryID", DbType="nvarchar", IsPrimaryKey=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_territoryID",
+            Name = "TerritoryID",
+            DbType = "nvarchar",
+            IsPrimaryKey = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string TerritoryID
         {
-            get
-            {
-                return this._territoryID;
-            }
+            get { return this._territoryID; }
             set
             {
-                if (((_territoryID == value) 
-                            == false))
+                if (((_territoryID == value) == false))
                 {
                     if (_territory.HasLoadedOrAssignedValue)
                     {
@@ -1977,20 +2044,22 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Parents
-        [Association(Storage="_territory", OtherKey="TerritoryID", ThisKey="TerritoryID", Name="fk_EmployeeTerritories_0", IsForeignKey=true)]
+        [Association(
+            Storage = "_territory",
+            OtherKey = "TerritoryID",
+            ThisKey = "TerritoryID",
+            Name = "fk_EmployeeTerritories_0",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Territory Territory
         {
-            get
-            {
-                return this._territory.Entity;
-            }
+            get { return this._territory.Entity; }
             set
             {
-                if (((this._territory.Entity == value) 
-                            == false))
+                if (((this._territory.Entity == value) == false))
                 {
                     if ((this._territory.Entity != null))
                     {
@@ -2011,19 +2080,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Association(Storage="_employee", OtherKey="EmployeeID", ThisKey="EmployeeID", Name="fk_EmployeeTerritories_1", IsForeignKey=true)]
+
+        [Association(
+            Storage = "_employee",
+            OtherKey = "EmployeeID",
+            ThisKey = "EmployeeID",
+            Name = "fk_EmployeeTerritories_1",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Employee Employee
         {
-            get
-            {
-                return this._employee.Entity;
-            }
+            get { return this._employee.Entity; }
             set
             {
-                if (((this._employee.Entity == value) 
-                            == false))
+                if (((this._employee.Entity == value) == false))
                 {
                     if ((this._employee.Entity != null))
                     {
@@ -2045,11 +2116,11 @@ namespace nwind
             }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -2058,7 +2129,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -2067,166 +2138,179 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_employeeID.GetHashCode() * 1));
+            hc = (hc | (_employeeID.GetHashCode() * 1));
             if ((_territoryID != null))
             {
-                hc = (hc 
-                            | (_territoryID.GetHashCode() * 65536));
+                hc = (hc | (_territoryID.GetHashCode() * 65536));
             }
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             EmployeeTerritory other = ((EmployeeTerritory)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(EmployeeTerritory value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return (System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._employeeID, value._employeeID) && System.Collections.Generic.EqualityComparer<string>.Default.Equals(this._territoryID, value._territoryID));
+            return (
+                System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                    this._employeeID,
+                    value._employeeID
+                )
+                && System.Collections.Generic.EqualityComparer<string>.Default.Equals(
+                    this._territoryID,
+                    value._territoryID
+                )
+            );
         }
     }
-    
-    [Table(Name="main.Orders")]
-    public partial class Order : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Order>
+
+    [Table(Name = "main.Orders")]
+    public partial class Order
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Order>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private string _customerID;
-        
+
         private System.Nullable<int> _employeeID;
-        
+
         private System.Nullable<decimal> _freight;
-        
+
         private System.Nullable<System.DateTime> _orderDate;
-        
+
         private int _orderID;
-        
+
         private System.Nullable<System.DateTime> _requiredDate;
-        
+
         private string _shipAddress;
-        
+
         private string _shipCity;
-        
+
         private string _shipCountry;
-        
+
         private string _shipName;
-        
+
         private System.Nullable<System.DateTime> _shippedDate;
-        
+
         private string _shipPostalCode;
-        
+
         private string _shipRegion;
-        
+
         private System.Nullable<int> _shipVia;
-        
+
         private EntitySet<OrderDetail> _orderDetails;
-        
+
         private EntityRef<Shipper> _shipper = new EntityRef<Shipper>();
-        
+
         private EntityRef<Employee> _employee = new EntityRef<Employee>();
-        
+
         private EntityRef<Customer> _customer = new EntityRef<Customer>();
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnCustomerIDChanged();
-        
+
         partial void OnCustomerIDChanging(string value);
-        
+
         partial void OnEmployeeIDChanged();
-        
+
         partial void OnEmployeeIDChanging(System.Nullable<int> value);
-        
+
         partial void OnFreightChanged();
-        
+
         partial void OnFreightChanging(System.Nullable<decimal> value);
-        
+
         partial void OnOrderDateChanged();
-        
+
         partial void OnOrderDateChanging(System.Nullable<System.DateTime> value);
-        
+
         partial void OnOrderIDChanged();
-        
+
         partial void OnOrderIDChanging(int value);
-        
+
         partial void OnRequiredDateChanged();
-        
+
         partial void OnRequiredDateChanging(System.Nullable<System.DateTime> value);
-        
+
         partial void OnShipAddressChanged();
-        
+
         partial void OnShipAddressChanging(string value);
-        
+
         partial void OnShipCityChanged();
-        
+
         partial void OnShipCityChanging(string value);
-        
+
         partial void OnShipCountryChanged();
-        
+
         partial void OnShipCountryChanging(string value);
-        
+
         partial void OnShipNameChanged();
-        
+
         partial void OnShipNameChanging(string value);
-        
+
         partial void OnShippedDateChanged();
-        
+
         partial void OnShippedDateChanging(System.Nullable<System.DateTime> value);
-        
+
         partial void OnShipPostalCodeChanged();
-        
+
         partial void OnShipPostalCodeChanging(string value);
-        
+
         partial void OnShipRegionChanged();
-        
+
         partial void OnShipRegionChanging(string value);
-        
+
         partial void OnShipViaChanged();
-        
+
         partial void OnShipViaChanging(System.Nullable<int> value);
         #endregion
-        
-        
+
+
         public Order()
         {
-            _orderDetails = new EntitySet<OrderDetail>(new Action<OrderDetail>(this.OrderDetails_Attach), new Action<OrderDetail>(this.OrderDetails_Detach));
+            _orderDetails = new EntitySet<OrderDetail>(
+                new Action<OrderDetail>(this.OrderDetails_Attach),
+                new Action<OrderDetail>(this.OrderDetails_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_customerID", Name="CustomerID", DbType="nchar (5)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_customerID",
+            Name = "CustomerID",
+            DbType = "nchar (5)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string CustomerID
         {
-            get
-            {
-                return this._customerID;
-            }
+            get { return this._customerID; }
             set
             {
-                if (((_customerID == value) 
-                            == false))
+                if (((_customerID == value) == false))
                 {
                     if (_customer.HasLoadedOrAssignedValue)
                     {
@@ -2240,15 +2324,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_employeeID", Name="EmployeeID", DbType="INTEGER", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_employeeID",
+            Name = "EmployeeID",
+            DbType = "INTEGER",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<int> EmployeeID
         {
-            get
-            {
-                return this._employeeID;
-            }
+            get { return this._employeeID; }
             set
             {
                 if ((_employeeID != value))
@@ -2265,15 +2351,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_freight", Name="Freight", DbType="money", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_freight",
+            Name = "Freight",
+            DbType = "money",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<decimal> Freight
         {
-            get
-            {
-                return this._freight;
-            }
+            get { return this._freight; }
             set
             {
                 if ((_freight != value))
@@ -2286,15 +2374,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_orderDate", Name="OrderDate", DbType="datetime", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_orderDate",
+            Name = "OrderDate",
+            DbType = "datetime",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<System.DateTime> OrderDate
         {
-            get
-            {
-                return this._orderDate;
-            }
+            get { return this._orderDate; }
             set
             {
                 if ((_orderDate != value))
@@ -2307,15 +2397,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_orderID", Name="OrderID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_orderID",
+            Name = "OrderID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int OrderID
         {
-            get
-            {
-                return this._orderID;
-            }
+            get { return this._orderID; }
             set
             {
                 if ((_orderID != value))
@@ -2328,15 +2423,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_requiredDate", Name="RequiredDate", DbType="datetime", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_requiredDate",
+            Name = "RequiredDate",
+            DbType = "datetime",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<System.DateTime> RequiredDate
         {
-            get
-            {
-                return this._requiredDate;
-            }
+            get { return this._requiredDate; }
             set
             {
                 if ((_requiredDate != value))
@@ -2349,19 +2446,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shipAddress", Name="ShipAddress", DbType="nvarchar (60)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_shipAddress",
+            Name = "ShipAddress",
+            DbType = "nvarchar (60)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ShipAddress
         {
-            get
-            {
-                return this._shipAddress;
-            }
+            get { return this._shipAddress; }
             set
             {
-                if (((_shipAddress == value) 
-                            == false))
+                if (((_shipAddress == value) == false))
                 {
                     this.OnShipAddressChanging(value);
                     this.SendPropertyChanging();
@@ -2371,19 +2469,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shipCity", Name="ShipCity", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_shipCity",
+            Name = "ShipCity",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ShipCity
         {
-            get
-            {
-                return this._shipCity;
-            }
+            get { return this._shipCity; }
             set
             {
-                if (((_shipCity == value) 
-                            == false))
+                if (((_shipCity == value) == false))
                 {
                     this.OnShipCityChanging(value);
                     this.SendPropertyChanging();
@@ -2393,19 +2492,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shipCountry", Name="ShipCountry", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_shipCountry",
+            Name = "ShipCountry",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ShipCountry
         {
-            get
-            {
-                return this._shipCountry;
-            }
+            get { return this._shipCountry; }
             set
             {
-                if (((_shipCountry == value) 
-                            == false))
+                if (((_shipCountry == value) == false))
                 {
                     this.OnShipCountryChanging(value);
                     this.SendPropertyChanging();
@@ -2415,19 +2515,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shipName", Name="ShipName", DbType="nvarchar (40)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_shipName",
+            Name = "ShipName",
+            DbType = "nvarchar (40)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ShipName
         {
-            get
-            {
-                return this._shipName;
-            }
+            get { return this._shipName; }
             set
             {
-                if (((_shipName == value) 
-                            == false))
+                if (((_shipName == value) == false))
                 {
                     this.OnShipNameChanging(value);
                     this.SendPropertyChanging();
@@ -2437,15 +2538,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shippedDate", Name="ShippedDate", DbType="datetime", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_shippedDate",
+            Name = "ShippedDate",
+            DbType = "datetime",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<System.DateTime> ShippedDate
         {
-            get
-            {
-                return this._shippedDate;
-            }
+            get { return this._shippedDate; }
             set
             {
                 if ((_shippedDate != value))
@@ -2458,19 +2561,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shipPostalCode", Name="ShipPostalCode", DbType="nvarchar (10)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_shipPostalCode",
+            Name = "ShipPostalCode",
+            DbType = "nvarchar (10)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ShipPostalCode
         {
-            get
-            {
-                return this._shipPostalCode;
-            }
+            get { return this._shipPostalCode; }
             set
             {
-                if (((_shipPostalCode == value) 
-                            == false))
+                if (((_shipPostalCode == value) == false))
                 {
                     this.OnShipPostalCodeChanging(value);
                     this.SendPropertyChanging();
@@ -2480,19 +2584,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shipRegion", Name="ShipRegion", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_shipRegion",
+            Name = "ShipRegion",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ShipRegion
         {
-            get
-            {
-                return this._shipRegion;
-            }
+            get { return this._shipRegion; }
             set
             {
-                if (((_shipRegion == value) 
-                            == false))
+                if (((_shipRegion == value) == false))
                 {
                     this.OnShipRegionChanging(value);
                     this.SendPropertyChanging();
@@ -2502,15 +2607,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shipVia", Name="ShipVia", DbType="INTEGER", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_shipVia",
+            Name = "ShipVia",
+            DbType = "INTEGER",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<int> ShipVia
         {
-            get
-            {
-                return this._shipVia;
-            }
+            get { return this._shipVia; }
             set
             {
                 if ((_shipVia != value))
@@ -2527,36 +2634,37 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_orderDetails", OtherKey="OrderID", ThisKey="OrderID", Name="fk_Order Details_1")]
+        [Association(
+            Storage = "_orderDetails",
+            OtherKey = "OrderID",
+            ThisKey = "OrderID",
+            Name = "fk_Order Details_1"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<OrderDetail> OrderDetails
         {
-            get
-            {
-                return this._orderDetails;
-            }
-            set
-            {
-                this._orderDetails = value;
-            }
+            get { return this._orderDetails; }
+            set { this._orderDetails = value; }
         }
         #endregion
-        
+
         #region Parents
-        [Association(Storage="_shipper", OtherKey="ShipperID", ThisKey="ShipVia", Name="fk_Orders_0", IsForeignKey=true)]
+        [Association(
+            Storage = "_shipper",
+            OtherKey = "ShipperID",
+            ThisKey = "ShipVia",
+            Name = "fk_Orders_0",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Shipper Shipper
         {
-            get
-            {
-                return this._shipper.Entity;
-            }
+            get { return this._shipper.Entity; }
             set
             {
-                if (((this._shipper.Entity == value) 
-                            == false))
+                if (((this._shipper.Entity == value) == false))
                 {
                     if ((this._shipper.Entity != null))
                     {
@@ -2577,19 +2685,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Association(Storage="_employee", OtherKey="EmployeeID", ThisKey="EmployeeID", Name="fk_Orders_1", IsForeignKey=true)]
+
+        [Association(
+            Storage = "_employee",
+            OtherKey = "EmployeeID",
+            ThisKey = "EmployeeID",
+            Name = "fk_Orders_1",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Employee Employee
         {
-            get
-            {
-                return this._employee.Entity;
-            }
+            get { return this._employee.Entity; }
             set
             {
-                if (((this._employee.Entity == value) 
-                            == false))
+                if (((this._employee.Entity == value) == false))
                 {
                     if ((this._employee.Entity != null))
                     {
@@ -2610,19 +2720,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Association(Storage="_customer", OtherKey="CustomerID", ThisKey="CustomerID", Name="fk_Orders_2", IsForeignKey=true)]
+
+        [Association(
+            Storage = "_customer",
+            OtherKey = "CustomerID",
+            ThisKey = "CustomerID",
+            Name = "fk_Orders_2",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Customer Customer
         {
-            get
-            {
-                return this._customer.Entity;
-            }
+            get { return this._customer.Entity; }
             set
             {
-                if (((this._customer.Entity == value) 
-                            == false))
+                if (((this._customer.Entity == value) == false))
                 {
                     if ((this._customer.Entity != null))
                     {
@@ -2644,11 +2756,11 @@ namespace nwind
             }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -2657,7 +2769,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -2666,46 +2778,47 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_orderID.GetHashCode() * 1));
+            hc = (hc | (_orderID.GetHashCode() * 1));
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Order other = ((Order)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Order value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._orderID, value._orderID);
+            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                this._orderID,
+                value._orderID
+            );
         }
-        
+
         #region Attachment handlers
         private void OrderDetails_Attach(OrderDetail entity)
         {
             this.SendPropertyChanging();
             entity.Order = this;
         }
-        
+
         private void OrderDetails_Detach(OrderDetail entity)
         {
             this.SendPropertyChanging();
@@ -2713,65 +2826,71 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.Order Details")]
-    public partial class OrderDetail : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<OrderDetail>
+
+    [Table(Name = "main.Order Details")]
+    public partial class OrderDetail
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<OrderDetail>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private float _discount;
-        
+
         private int _orderID;
-        
+
         private int _productID;
-        
+
         private short _quantity;
-        
+
         private decimal _unitPrice;
-        
+
         private EntityRef<Product> _product = new EntityRef<Product>();
-        
+
         private EntityRef<Order> _order = new EntityRef<Order>();
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnDiscountChanged();
-        
+
         partial void OnDiscountChanging(float value);
-        
+
         partial void OnOrderIDChanged();
-        
+
         partial void OnOrderIDChanging(int value);
-        
+
         partial void OnProductIDChanged();
-        
+
         partial void OnProductIDChanging(int value);
-        
+
         partial void OnQuantityChanged();
-        
+
         partial void OnQuantityChanging(short value);
-        
+
         partial void OnUnitPriceChanged();
-        
+
         partial void OnUnitPriceChanging(decimal value);
         #endregion
-        
-        
+
+
         public OrderDetail()
         {
             this.OnCreated();
         }
-        
-        [Column(Storage="_discount", Name="Discount", DbType="real", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_discount",
+            Name = "Discount",
+            DbType = "real",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public float Discount
         {
-            get
-            {
-                return this._discount;
-            }
+            get { return this._discount; }
             set
             {
                 if ((_discount != value))
@@ -2784,15 +2903,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_orderID", Name="OrderID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_orderID",
+            Name = "OrderID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int OrderID
         {
-            get
-            {
-                return this._orderID;
-            }
+            get { return this._orderID; }
             set
             {
                 if ((_orderID != value))
@@ -2809,15 +2933,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_productID", Name="ProductID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_productID",
+            Name = "ProductID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int ProductID
         {
-            get
-            {
-                return this._productID;
-            }
+            get { return this._productID; }
             set
             {
                 if ((_productID != value))
@@ -2834,15 +2963,18 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_quantity", Name="Quantity", DbType="smallint", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_quantity",
+            Name = "Quantity",
+            DbType = "smallint",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public short Quantity
         {
-            get
-            {
-                return this._quantity;
-            }
+            get { return this._quantity; }
             set
             {
                 if ((_quantity != value))
@@ -2855,15 +2987,18 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_unitPrice", Name="UnitPrice", DbType="money", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_unitPrice",
+            Name = "UnitPrice",
+            DbType = "money",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public decimal UnitPrice
         {
-            get
-            {
-                return this._unitPrice;
-            }
+            get { return this._unitPrice; }
             set
             {
                 if ((_unitPrice != value))
@@ -2876,20 +3011,22 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Parents
-        [Association(Storage="_product", OtherKey="ProductID", ThisKey="ProductID", Name="fk_Order Details_0", IsForeignKey=true)]
+        [Association(
+            Storage = "_product",
+            OtherKey = "ProductID",
+            ThisKey = "ProductID",
+            Name = "fk_Order Details_0",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Product Product
         {
-            get
-            {
-                return this._product.Entity;
-            }
+            get { return this._product.Entity; }
             set
             {
-                if (((this._product.Entity == value) 
-                            == false))
+                if (((this._product.Entity == value) == false))
                 {
                     if ((this._product.Entity != null))
                     {
@@ -2910,19 +3047,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Association(Storage="_order", OtherKey="OrderID", ThisKey="OrderID", Name="fk_Order Details_1", IsForeignKey=true)]
+
+        [Association(
+            Storage = "_order",
+            OtherKey = "OrderID",
+            ThisKey = "OrderID",
+            Name = "fk_Order Details_1",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Order Order
         {
-            get
-            {
-                return this._order.Entity;
-            }
+            get { return this._order.Entity; }
             set
             {
-                if (((this._order.Entity == value) 
-                            == false))
+                if (((this._order.Entity == value) == false))
                 {
                     if ((this._order.Entity != null))
                     {
@@ -2944,11 +3083,11 @@ namespace nwind
             }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -2957,7 +3096,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -2966,133 +3105,147 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_orderID.GetHashCode() * 1));
-            hc = (hc 
-                        | (_productID.GetHashCode() * 65536));
+            hc = (hc | (_orderID.GetHashCode() * 1));
+            hc = (hc | (_productID.GetHashCode() * 65536));
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             OrderDetail other = ((OrderDetail)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(OrderDetail value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return (System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._orderID, value._orderID) && System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._productID, value._productID));
+            return (
+                System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                    this._orderID,
+                    value._orderID
+                )
+                && System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                    this._productID,
+                    value._productID
+                )
+            );
         }
     }
-    
-    [Table(Name="main.Products")]
-    public partial class Product : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Product>
+
+    [Table(Name = "main.Products")]
+    public partial class Product
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Product>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private System.Nullable<int> _categoryID;
-        
+
         private bool _discontinued;
-        
+
         private int _productID;
-        
+
         private string _productName;
-        
+
         private string _quantityPerUnit;
-        
+
         private System.Nullable<short> _reorderLevel;
-        
+
         private System.Nullable<int> _supplierID;
-        
+
         private System.Nullable<decimal> _unitPrice;
-        
+
         private System.Nullable<short> _unitsInStock;
-        
+
         private System.Nullable<short> _unitsOnOrder;
-        
+
         private EntitySet<OrderDetail> _orderDetails;
-        
+
         private EntityRef<Supplier> _supplier = new EntityRef<Supplier>();
-        
+
         private EntityRef<Category> _category = new EntityRef<Category>();
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnCategoryIDChanged();
-        
+
         partial void OnCategoryIDChanging(System.Nullable<int> value);
-        
+
         partial void OnDiscontinuedChanged();
-        
+
         partial void OnDiscontinuedChanging(bool value);
-        
+
         partial void OnProductIDChanged();
-        
+
         partial void OnProductIDChanging(int value);
-        
+
         partial void OnProductNameChanged();
-        
+
         partial void OnProductNameChanging(string value);
-        
+
         partial void OnQuantityPerUnitChanged();
-        
+
         partial void OnQuantityPerUnitChanging(string value);
-        
+
         partial void OnReorderLevelChanged();
-        
+
         partial void OnReorderLevelChanging(System.Nullable<short> value);
-        
+
         partial void OnSupplierIDChanged();
-        
+
         partial void OnSupplierIDChanging(System.Nullable<int> value);
-        
+
         partial void OnUnitPriceChanged();
-        
+
         partial void OnUnitPriceChanging(System.Nullable<decimal> value);
-        
+
         partial void OnUnitsInStockChanged();
-        
+
         partial void OnUnitsInStockChanging(System.Nullable<short> value);
-        
+
         partial void OnUnitsOnOrderChanged();
-        
+
         partial void OnUnitsOnOrderChanging(System.Nullable<short> value);
         #endregion
-        
-        
+
+
         public Product()
         {
-            _orderDetails = new EntitySet<OrderDetail>(new Action<OrderDetail>(this.OrderDetails_Attach), new Action<OrderDetail>(this.OrderDetails_Detach));
+            _orderDetails = new EntitySet<OrderDetail>(
+                new Action<OrderDetail>(this.OrderDetails_Attach),
+                new Action<OrderDetail>(this.OrderDetails_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_categoryID", Name="CategoryID", DbType="INTEGER", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_categoryID",
+            Name = "CategoryID",
+            DbType = "INTEGER",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<int> CategoryID
         {
-            get
-            {
-                return this._categoryID;
-            }
+            get { return this._categoryID; }
             set
             {
                 if ((_categoryID != value))
@@ -3109,15 +3262,18 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_discontinued", Name="Discontinued", DbType="bit", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_discontinued",
+            Name = "Discontinued",
+            DbType = "bit",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public bool Discontinued
         {
-            get
-            {
-                return this._discontinued;
-            }
+            get { return this._discontinued; }
             set
             {
                 if ((_discontinued != value))
@@ -3130,15 +3286,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_productID", Name="ProductID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_productID",
+            Name = "ProductID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int ProductID
         {
-            get
-            {
-                return this._productID;
-            }
+            get { return this._productID; }
             set
             {
                 if ((_productID != value))
@@ -3151,19 +3312,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_productName", Name="ProductName", DbType="nvarchar (40)", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_productName",
+            Name = "ProductName",
+            DbType = "nvarchar (40)",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string ProductName
         {
-            get
-            {
-                return this._productName;
-            }
+            get { return this._productName; }
             set
             {
-                if (((_productName == value) 
-                            == false))
+                if (((_productName == value) == false))
                 {
                     this.OnProductNameChanging(value);
                     this.SendPropertyChanging();
@@ -3173,19 +3336,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_quantityPerUnit", Name="QuantityPerUnit", DbType="nvarchar (20)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_quantityPerUnit",
+            Name = "QuantityPerUnit",
+            DbType = "nvarchar (20)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string QuantityPerUnit
         {
-            get
-            {
-                return this._quantityPerUnit;
-            }
+            get { return this._quantityPerUnit; }
             set
             {
-                if (((_quantityPerUnit == value) 
-                            == false))
+                if (((_quantityPerUnit == value) == false))
                 {
                     this.OnQuantityPerUnitChanging(value);
                     this.SendPropertyChanging();
@@ -3195,15 +3359,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_reorderLevel", Name="ReorderLevel", DbType="smallint", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_reorderLevel",
+            Name = "ReorderLevel",
+            DbType = "smallint",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<short> ReorderLevel
         {
-            get
-            {
-                return this._reorderLevel;
-            }
+            get { return this._reorderLevel; }
             set
             {
                 if ((_reorderLevel != value))
@@ -3216,15 +3382,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_supplierID", Name="SupplierID", DbType="INTEGER", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_supplierID",
+            Name = "SupplierID",
+            DbType = "INTEGER",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<int> SupplierID
         {
-            get
-            {
-                return this._supplierID;
-            }
+            get { return this._supplierID; }
             set
             {
                 if ((_supplierID != value))
@@ -3241,15 +3409,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_unitPrice", Name="UnitPrice", DbType="money", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_unitPrice",
+            Name = "UnitPrice",
+            DbType = "money",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<decimal> UnitPrice
         {
-            get
-            {
-                return this._unitPrice;
-            }
+            get { return this._unitPrice; }
             set
             {
                 if ((_unitPrice != value))
@@ -3262,15 +3432,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_unitsInStock", Name="UnitsInStock", DbType="smallint", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_unitsInStock",
+            Name = "UnitsInStock",
+            DbType = "smallint",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<short> UnitsInStock
         {
-            get
-            {
-                return this._unitsInStock;
-            }
+            get { return this._unitsInStock; }
             set
             {
                 if ((_unitsInStock != value))
@@ -3283,15 +3455,17 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_unitsOnOrder", Name="UnitsOnOrder", DbType="smallint", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_unitsOnOrder",
+            Name = "UnitsOnOrder",
+            DbType = "smallint",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public System.Nullable<short> UnitsOnOrder
         {
-            get
-            {
-                return this._unitsOnOrder;
-            }
+            get { return this._unitsOnOrder; }
             set
             {
                 if ((_unitsOnOrder != value))
@@ -3304,36 +3478,37 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_orderDetails", OtherKey="ProductID", ThisKey="ProductID", Name="fk_Order Details_0")]
+        [Association(
+            Storage = "_orderDetails",
+            OtherKey = "ProductID",
+            ThisKey = "ProductID",
+            Name = "fk_Order Details_0"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<OrderDetail> OrderDetails
         {
-            get
-            {
-                return this._orderDetails;
-            }
-            set
-            {
-                this._orderDetails = value;
-            }
+            get { return this._orderDetails; }
+            set { this._orderDetails = value; }
         }
         #endregion
-        
+
         #region Parents
-        [Association(Storage="_supplier", OtherKey="SupplierID", ThisKey="SupplierID", Name="fk_Products_0", IsForeignKey=true)]
+        [Association(
+            Storage = "_supplier",
+            OtherKey = "SupplierID",
+            ThisKey = "SupplierID",
+            Name = "fk_Products_0",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Supplier Supplier
         {
-            get
-            {
-                return this._supplier.Entity;
-            }
+            get { return this._supplier.Entity; }
             set
             {
-                if (((this._supplier.Entity == value) 
-                            == false))
+                if (((this._supplier.Entity == value) == false))
                 {
                     if ((this._supplier.Entity != null))
                     {
@@ -3354,19 +3529,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Association(Storage="_category", OtherKey="CategoryID", ThisKey="CategoryID", Name="fk_Products_1", IsForeignKey=true)]
+
+        [Association(
+            Storage = "_category",
+            OtherKey = "CategoryID",
+            ThisKey = "CategoryID",
+            Name = "fk_Products_1",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Category Category
         {
-            get
-            {
-                return this._category.Entity;
-            }
+            get { return this._category.Entity; }
             set
             {
-                if (((this._category.Entity == value) 
-                            == false))
+                if (((this._category.Entity == value) == false))
                 {
                     if ((this._category.Entity != null))
                     {
@@ -3388,11 +3565,11 @@ namespace nwind
             }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -3401,7 +3578,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -3410,46 +3587,47 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_productID.GetHashCode() * 1));
+            hc = (hc | (_productID.GetHashCode() * 1));
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Product other = ((Product)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Product value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._productID, value._productID);
+            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                this._productID,
+                value._productID
+            );
         }
-        
+
         #region Attachment handlers
         private void OrderDetails_Attach(OrderDetail entity)
         {
             this.SendPropertyChanging();
             entity.Product = this;
         }
-        
+
         private void OrderDetails_Detach(OrderDetail entity)
         {
             this.SendPropertyChanging();
@@ -3457,50 +3635,58 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.Region")]
-    public partial class Region : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Region>
+
+    [Table(Name = "main.Region")]
+    public partial class Region
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Region>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private string _regionDescription;
-        
+
         private int _regionID;
-        
+
         private EntitySet<Territory> _territories;
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnRegionDescriptionChanged();
-        
+
         partial void OnRegionDescriptionChanging(string value);
-        
+
         partial void OnRegionIDChanged();
-        
+
         partial void OnRegionIDChanging(int value);
         #endregion
-        
-        
+
+
         public Region()
         {
-            _territories = new EntitySet<Territory>(new Action<Territory>(this.Territories_Attach), new Action<Territory>(this.Territories_Detach));
+            _territories = new EntitySet<Territory>(
+                new Action<Territory>(this.Territories_Attach),
+                new Action<Territory>(this.Territories_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_regionDescription", Name="RegionDescription", DbType="nchar", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_regionDescription",
+            Name = "RegionDescription",
+            DbType = "nchar",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string RegionDescription
         {
-            get
-            {
-                return this._regionDescription;
-            }
+            get { return this._regionDescription; }
             set
             {
-                if (((_regionDescription == value) 
-                            == false))
+                if (((_regionDescription == value) == false))
                 {
                     this.OnRegionDescriptionChanging(value);
                     this.SendPropertyChanging();
@@ -3510,15 +3696,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_regionID", Name="RegionID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_regionID",
+            Name = "RegionID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int RegionID
         {
-            get
-            {
-                return this._regionID;
-            }
+            get { return this._regionID; }
             set
             {
                 if ((_regionID != value))
@@ -3531,27 +3722,26 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_territories", OtherKey="RegionID", ThisKey="RegionID", Name="fk_Territories_0")]
+        [Association(
+            Storage = "_territories",
+            OtherKey = "RegionID",
+            ThisKey = "RegionID",
+            Name = "fk_Territories_0"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<Territory> Territories
         {
-            get
-            {
-                return this._territories;
-            }
-            set
-            {
-                this._territories = value;
-            }
+            get { return this._territories; }
+            set { this._territories = value; }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -3560,7 +3750,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -3569,46 +3759,47 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_regionID.GetHashCode() * 1));
+            hc = (hc | (_regionID.GetHashCode() * 1));
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Region other = ((Region)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Region value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._regionID, value._regionID);
+            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                this._regionID,
+                value._regionID
+            );
         }
-        
+
         #region Attachment handlers
         private void Territories_Attach(Territory entity)
         {
             this.SendPropertyChanging();
             entity.Region = this;
         }
-        
+
         private void Territories_Detach(Territory entity)
         {
             this.SendPropertyChanging();
@@ -3616,56 +3807,64 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.Shippers")]
-    public partial class Shipper : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Shipper>
+
+    [Table(Name = "main.Shippers")]
+    public partial class Shipper
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Shipper>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private string _companyName;
-        
+
         private string _phone;
-        
+
         private int _shipperID;
-        
+
         private EntitySet<Order> _orders;
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnCompanyNameChanged();
-        
+
         partial void OnCompanyNameChanging(string value);
-        
+
         partial void OnPhoneChanged();
-        
+
         partial void OnPhoneChanging(string value);
-        
+
         partial void OnShipperIDChanged();
-        
+
         partial void OnShipperIDChanging(int value);
         #endregion
-        
-        
+
+
         public Shipper()
         {
-            _orders = new EntitySet<Order>(new Action<Order>(this.Orders_Attach), new Action<Order>(this.Orders_Detach));
+            _orders = new EntitySet<Order>(
+                new Action<Order>(this.Orders_Attach),
+                new Action<Order>(this.Orders_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_companyName", Name="CompanyName", DbType="nvarchar (40)", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_companyName",
+            Name = "CompanyName",
+            DbType = "nvarchar (40)",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string CompanyName
         {
-            get
-            {
-                return this._companyName;
-            }
+            get { return this._companyName; }
             set
             {
-                if (((_companyName == value) 
-                            == false))
+                if (((_companyName == value) == false))
                 {
                     this.OnCompanyNameChanging(value);
                     this.SendPropertyChanging();
@@ -3675,19 +3874,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_phone", Name="Phone", DbType="nvarchar (24)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_phone",
+            Name = "Phone",
+            DbType = "nvarchar (24)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Phone
         {
-            get
-            {
-                return this._phone;
-            }
+            get { return this._phone; }
             set
             {
-                if (((_phone == value) 
-                            == false))
+                if (((_phone == value) == false))
                 {
                     this.OnPhoneChanging(value);
                     this.SendPropertyChanging();
@@ -3697,15 +3897,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_shipperID", Name="ShipperID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_shipperID",
+            Name = "ShipperID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int ShipperID
         {
-            get
-            {
-                return this._shipperID;
-            }
+            get { return this._shipperID; }
             set
             {
                 if ((_shipperID != value))
@@ -3718,27 +3923,26 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_orders", OtherKey="ShipVia", ThisKey="ShipperID", Name="fk_Orders_0")]
+        [Association(
+            Storage = "_orders",
+            OtherKey = "ShipVia",
+            ThisKey = "ShipperID",
+            Name = "fk_Orders_0"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<Order> Orders
         {
-            get
-            {
-                return this._orders;
-            }
-            set
-            {
-                this._orders = value;
-            }
+            get { return this._orders; }
+            set { this._orders = value; }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -3747,7 +3951,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -3756,46 +3960,47 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_shipperID.GetHashCode() * 1));
+            hc = (hc | (_shipperID.GetHashCode() * 1));
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Shipper other = ((Shipper)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Shipper value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._shipperID, value._shipperID);
+            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                this._shipperID,
+                value._shipperID
+            );
         }
-        
+
         #region Attachment handlers
         private void Orders_Attach(Order entity)
         {
             this.SendPropertyChanging();
             entity.Shipper = this;
         }
-        
+
         private void Orders_Detach(Order entity)
         {
             this.SendPropertyChanging();
@@ -3803,110 +4008,117 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.Suppliers")]
-    public partial class Supplier : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Supplier>
+
+    [Table(Name = "main.Suppliers")]
+    public partial class Supplier
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Supplier>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private string _address;
-        
+
         private string _city;
-        
+
         private string _companyName;
-        
+
         private string _contactName;
-        
+
         private string _contactTitle;
-        
+
         private string _country;
-        
+
         private string _fax;
-        
+
         private string _homePage;
-        
+
         private string _phone;
-        
+
         private string _postalCode;
-        
+
         private string _region;
-        
+
         private int _supplierID;
-        
+
         private EntitySet<Product> _products;
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnAddressChanged();
-        
+
         partial void OnAddressChanging(string value);
-        
+
         partial void OnCityChanged();
-        
+
         partial void OnCityChanging(string value);
-        
+
         partial void OnCompanyNameChanged();
-        
+
         partial void OnCompanyNameChanging(string value);
-        
+
         partial void OnContactNameChanged();
-        
+
         partial void OnContactNameChanging(string value);
-        
+
         partial void OnContactTitleChanged();
-        
+
         partial void OnContactTitleChanging(string value);
-        
+
         partial void OnCountryChanged();
-        
+
         partial void OnCountryChanging(string value);
-        
+
         partial void OnFaxChanged();
-        
+
         partial void OnFaxChanging(string value);
-        
+
         partial void OnHomePageChanged();
-        
+
         partial void OnHomePageChanging(string value);
-        
+
         partial void OnPhoneChanged();
-        
+
         partial void OnPhoneChanging(string value);
-        
+
         partial void OnPostalCodeChanged();
-        
+
         partial void OnPostalCodeChanging(string value);
-        
+
         partial void OnRegionChanged();
-        
+
         partial void OnRegionChanging(string value);
-        
+
         partial void OnSupplierIDChanged();
-        
+
         partial void OnSupplierIDChanging(int value);
         #endregion
-        
-        
+
+
         public Supplier()
         {
-            _products = new EntitySet<Product>(new Action<Product>(this.Products_Attach), new Action<Product>(this.Products_Detach));
+            _products = new EntitySet<Product>(
+                new Action<Product>(this.Products_Attach),
+                new Action<Product>(this.Products_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_address", Name="Address", DbType="nvarchar (60)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_address",
+            Name = "Address",
+            DbType = "nvarchar (60)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Address
         {
-            get
-            {
-                return this._address;
-            }
+            get { return this._address; }
             set
             {
-                if (((_address == value) 
-                            == false))
+                if (((_address == value) == false))
                 {
                     this.OnAddressChanging(value);
                     this.SendPropertyChanging();
@@ -3916,19 +4128,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_city", Name="City", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_city",
+            Name = "City",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string City
         {
-            get
-            {
-                return this._city;
-            }
+            get { return this._city; }
             set
             {
-                if (((_city == value) 
-                            == false))
+                if (((_city == value) == false))
                 {
                     this.OnCityChanging(value);
                     this.SendPropertyChanging();
@@ -3938,19 +4151,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_companyName", Name="CompanyName", DbType="nvarchar (40)", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_companyName",
+            Name = "CompanyName",
+            DbType = "nvarchar (40)",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string CompanyName
         {
-            get
-            {
-                return this._companyName;
-            }
+            get { return this._companyName; }
             set
             {
-                if (((_companyName == value) 
-                            == false))
+                if (((_companyName == value) == false))
                 {
                     this.OnCompanyNameChanging(value);
                     this.SendPropertyChanging();
@@ -3960,19 +4175,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_contactName", Name="ContactName", DbType="nvarchar (30)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_contactName",
+            Name = "ContactName",
+            DbType = "nvarchar (30)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ContactName
         {
-            get
-            {
-                return this._contactName;
-            }
+            get { return this._contactName; }
             set
             {
-                if (((_contactName == value) 
-                            == false))
+                if (((_contactName == value) == false))
                 {
                     this.OnContactNameChanging(value);
                     this.SendPropertyChanging();
@@ -3982,19 +4198,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_contactTitle", Name="ContactTitle", DbType="nvarchar (30)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_contactTitle",
+            Name = "ContactTitle",
+            DbType = "nvarchar (30)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string ContactTitle
         {
-            get
-            {
-                return this._contactTitle;
-            }
+            get { return this._contactTitle; }
             set
             {
-                if (((_contactTitle == value) 
-                            == false))
+                if (((_contactTitle == value) == false))
                 {
                     this.OnContactTitleChanging(value);
                     this.SendPropertyChanging();
@@ -4004,19 +4221,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_country", Name="Country", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_country",
+            Name = "Country",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Country
         {
-            get
-            {
-                return this._country;
-            }
+            get { return this._country; }
             set
             {
-                if (((_country == value) 
-                            == false))
+                if (((_country == value) == false))
                 {
                     this.OnCountryChanging(value);
                     this.SendPropertyChanging();
@@ -4026,19 +4244,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_fax", Name="Fax", DbType="nvarchar (24)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_fax",
+            Name = "Fax",
+            DbType = "nvarchar (24)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Fax
         {
-            get
-            {
-                return this._fax;
-            }
+            get { return this._fax; }
             set
             {
-                if (((_fax == value) 
-                            == false))
+                if (((_fax == value) == false))
                 {
                     this.OnFaxChanging(value);
                     this.SendPropertyChanging();
@@ -4048,19 +4267,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_homePage", Name="HomePage", DbType="ntext", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_homePage",
+            Name = "HomePage",
+            DbType = "ntext",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string HomePage
         {
-            get
-            {
-                return this._homePage;
-            }
+            get { return this._homePage; }
             set
             {
-                if (((_homePage == value) 
-                            == false))
+                if (((_homePage == value) == false))
                 {
                     this.OnHomePageChanging(value);
                     this.SendPropertyChanging();
@@ -4070,19 +4290,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_phone", Name="Phone", DbType="nvarchar (24)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_phone",
+            Name = "Phone",
+            DbType = "nvarchar (24)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Phone
         {
-            get
-            {
-                return this._phone;
-            }
+            get { return this._phone; }
             set
             {
-                if (((_phone == value) 
-                            == false))
+                if (((_phone == value) == false))
                 {
                     this.OnPhoneChanging(value);
                     this.SendPropertyChanging();
@@ -4092,19 +4313,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_postalCode", Name="PostalCode", DbType="nvarchar (10)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_postalCode",
+            Name = "PostalCode",
+            DbType = "nvarchar (10)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string PostalCode
         {
-            get
-            {
-                return this._postalCode;
-            }
+            get { return this._postalCode; }
             set
             {
-                if (((_postalCode == value) 
-                            == false))
+                if (((_postalCode == value) == false))
                 {
                     this.OnPostalCodeChanging(value);
                     this.SendPropertyChanging();
@@ -4114,19 +4336,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_region", Name="Region", DbType="nvarchar (15)", AutoSync=AutoSync.Never)]
+
+        [Column(
+            Storage = "_region",
+            Name = "Region",
+            DbType = "nvarchar (15)",
+            AutoSync = AutoSync.Never
+        )]
         [DebuggerNonUserCode()]
         public string Region
         {
-            get
-            {
-                return this._region;
-            }
+            get { return this._region; }
             set
             {
-                if (((_region == value) 
-                            == false))
+                if (((_region == value) == false))
                 {
                     this.OnRegionChanging(value);
                     this.SendPropertyChanging();
@@ -4136,15 +4359,20 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_supplierID", Name="SupplierID", DbType="INTEGER", IsPrimaryKey=true, IsDbGenerated=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_supplierID",
+            Name = "SupplierID",
+            DbType = "INTEGER",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int SupplierID
         {
-            get
-            {
-                return this._supplierID;
-            }
+            get { return this._supplierID; }
             set
             {
                 if ((_supplierID != value))
@@ -4157,27 +4385,26 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_products", OtherKey="SupplierID", ThisKey="SupplierID", Name="fk_Products_0")]
+        [Association(
+            Storage = "_products",
+            OtherKey = "SupplierID",
+            ThisKey = "SupplierID",
+            Name = "fk_Products_0"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<Product> Products
         {
-            get
-            {
-                return this._products;
-            }
-            set
-            {
-                this._products = value;
-            }
+            get { return this._products; }
+            set { this._products = value; }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -4186,7 +4413,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -4195,46 +4422,47 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
-            hc = (hc 
-                        | (_supplierID.GetHashCode() * 1));
+            hc = (hc | (_supplierID.GetHashCode() * 1));
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Supplier other = ((Supplier)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Supplier value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(this._supplierID, value._supplierID);
+            return System.Collections.Generic.EqualityComparer<int>.Default.Equals(
+                this._supplierID,
+                value._supplierID
+            );
         }
-        
+
         #region Attachment handlers
         private void Products_Attach(Product entity)
         {
             this.SendPropertyChanging();
             entity.Supplier = this;
         }
-        
+
         private void Products_Detach(Product entity)
         {
             this.SendPropertyChanging();
@@ -4242,54 +4470,63 @@ namespace nwind
         }
         #endregion
     }
-    
-    [Table(Name="main.Territories")]
-    public partial class Territory : System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged, System.IEquatable<Territory>
+
+    [Table(Name = "main.Territories")]
+    public partial class Territory
+        : System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IEquatable<Territory>
     {
-        
-        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs = new System.ComponentModel.PropertyChangingEventArgs("");
-        
+        private static System.ComponentModel.PropertyChangingEventArgs emptyChangingEventArgs =
+            new System.ComponentModel.PropertyChangingEventArgs("");
+
         private int _regionID;
-        
+
         private string _territoryDescription;
-        
+
         private string _territoryID;
-        
+
         private EntitySet<EmployeeTerritory> _employeeTerritories;
-        
+
         private EntityRef<Region> _region = new EntityRef<Region>();
-        
+
         #region Extensibility Method Declarations
         partial void OnCreated();
-        
+
         partial void OnRegionIDChanged();
-        
+
         partial void OnRegionIDChanging(int value);
-        
+
         partial void OnTerritoryDescriptionChanged();
-        
+
         partial void OnTerritoryDescriptionChanging(string value);
-        
+
         partial void OnTerritoryIDChanged();
-        
+
         partial void OnTerritoryIDChanging(string value);
         #endregion
-        
-        
+
+
         public Territory()
         {
-            _employeeTerritories = new EntitySet<EmployeeTerritory>(new Action<EmployeeTerritory>(this.EmployeeTerritories_Attach), new Action<EmployeeTerritory>(this.EmployeeTerritories_Detach));
+            _employeeTerritories = new EntitySet<EmployeeTerritory>(
+                new Action<EmployeeTerritory>(this.EmployeeTerritories_Attach),
+                new Action<EmployeeTerritory>(this.EmployeeTerritories_Detach)
+            );
             this.OnCreated();
         }
-        
-        [Column(Storage="_regionID", Name="RegionID", DbType="INTEGER", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_regionID",
+            Name = "RegionID",
+            DbType = "INTEGER",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public int RegionID
         {
-            get
-            {
-                return this._regionID;
-            }
+            get { return this._regionID; }
             set
             {
                 if ((_regionID != value))
@@ -4306,19 +4543,21 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_territoryDescription", Name="TerritoryDescription", DbType="nchar", AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_territoryDescription",
+            Name = "TerritoryDescription",
+            DbType = "nchar",
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string TerritoryDescription
         {
-            get
-            {
-                return this._territoryDescription;
-            }
+            get { return this._territoryDescription; }
             set
             {
-                if (((_territoryDescription == value) 
-                            == false))
+                if (((_territoryDescription == value) == false))
                 {
                     this.OnTerritoryDescriptionChanging(value);
                     this.SendPropertyChanging();
@@ -4328,19 +4567,22 @@ namespace nwind
                 }
             }
         }
-        
-        [Column(Storage="_territoryID", Name="TerritoryID", DbType="nvarchar", IsPrimaryKey=true, AutoSync=AutoSync.Never, CanBeNull=false)]
+
+        [Column(
+            Storage = "_territoryID",
+            Name = "TerritoryID",
+            DbType = "nvarchar",
+            IsPrimaryKey = true,
+            AutoSync = AutoSync.Never,
+            CanBeNull = false
+        )]
         [DebuggerNonUserCode()]
         public string TerritoryID
         {
-            get
-            {
-                return this._territoryID;
-            }
+            get { return this._territoryID; }
             set
             {
-                if (((_territoryID == value) 
-                            == false))
+                if (((_territoryID == value) == false))
                 {
                     this.OnTerritoryIDChanging(value);
                     this.SendPropertyChanging();
@@ -4350,36 +4592,37 @@ namespace nwind
                 }
             }
         }
-        
+
         #region Children
-        [Association(Storage="_employeeTerritories", OtherKey="TerritoryID", ThisKey="TerritoryID", Name="fk_EmployeeTerritories_0")]
+        [Association(
+            Storage = "_employeeTerritories",
+            OtherKey = "TerritoryID",
+            ThisKey = "TerritoryID",
+            Name = "fk_EmployeeTerritories_0"
+        )]
         [DebuggerNonUserCode()]
         public EntitySet<EmployeeTerritory> EmployeeTerritories
         {
-            get
-            {
-                return this._employeeTerritories;
-            }
-            set
-            {
-                this._employeeTerritories = value;
-            }
+            get { return this._employeeTerritories; }
+            set { this._employeeTerritories = value; }
         }
         #endregion
-        
+
         #region Parents
-        [Association(Storage="_region", OtherKey="RegionID", ThisKey="RegionID", Name="fk_Territories_0", IsForeignKey=true)]
+        [Association(
+            Storage = "_region",
+            OtherKey = "RegionID",
+            ThisKey = "RegionID",
+            Name = "fk_Territories_0",
+            IsForeignKey = true
+        )]
         [DebuggerNonUserCode()]
         public Region Region
         {
-            get
-            {
-                return this._region.Entity;
-            }
+            get { return this._region.Entity; }
             set
             {
-                if (((this._region.Entity == value) 
-                            == false))
+                if (((this._region.Entity == value) == false))
                 {
                     if ((this._region.Entity != null))
                     {
@@ -4401,11 +4644,11 @@ namespace nwind
             }
         }
         #endregion
-        
+
         public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
         protected virtual void SendPropertyChanging()
         {
             System.ComponentModel.PropertyChangingEventHandler h = this.PropertyChanging;
@@ -4414,7 +4657,7 @@ namespace nwind
                 h(this, emptyChangingEventArgs);
             }
         }
-        
+
         protected virtual void SendPropertyChanged(string propertyName)
         {
             System.ComponentModel.PropertyChangedEventHandler h = this.PropertyChanged;
@@ -4423,49 +4666,50 @@ namespace nwind
                 h(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
         public override int GetHashCode()
         {
             int hc = 0;
             if ((_territoryID != null))
             {
-                hc = (hc 
-                            | (_territoryID.GetHashCode() * 1));
+                hc = (hc | (_territoryID.GetHashCode() * 1));
             }
             return hc;
         }
-        
+
         public override bool Equals(object value)
         {
             if ((value == null))
             {
                 return false;
             }
-            if (((value.GetType() == this.GetType()) 
-                        == false))
+            if (((value.GetType() == this.GetType()) == false))
             {
                 return false;
             }
             Territory other = ((Territory)(value));
             return this.Equals(other);
         }
-        
+
         public virtual bool Equals(Territory value)
         {
             if ((value == null))
             {
                 return false;
             }
-            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(this._territoryID, value._territoryID);
+            return System.Collections.Generic.EqualityComparer<string>.Default.Equals(
+                this._territoryID,
+                value._territoryID
+            );
         }
-        
+
         #region Attachment handlers
         private void EmployeeTerritories_Attach(EmployeeTerritory entity)
         {
             this.SendPropertyChanging();
             entity.Territory = this;
         }
-        
+
         private void EmployeeTerritories_Detach(EmployeeTerritory entity)
         {
             this.SendPropertyChanging();

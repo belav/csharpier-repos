@@ -8,7 +8,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api;
 
-internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider : IUnitTestingIncrementalAnalyzerProvider
+internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider
+    : IUnitTestingIncrementalAnalyzerProvider
 {
     private readonly string? _workspaceKind;
     private readonly SolutionServices _services;
@@ -19,7 +20,8 @@ internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider : IUnitT
     private NewUnitTestingIncrementalAnalyzerProvider(
         string? workspaceKind,
         SolutionServices services,
-        INewUnitTestingIncrementalAnalyzerProviderImplementation incrementalAnalyzerProvider)
+        INewUnitTestingIncrementalAnalyzerProviderImplementation incrementalAnalyzerProvider
+    )
     {
         _workspaceKind = workspaceKind;
         _services = services;
@@ -30,33 +32,52 @@ internal sealed partial class NewUnitTestingIncrementalAnalyzerProvider : IUnitT
     //       analyzers returned when calling this method twice would pass a reference equality check.
     //       One instance should be created by SolutionCrawler, another one by us, when calling the
     //       UnitTestingSolutionCrawlerServiceAccessor.Reanalyze method.
-    public IUnitTestingIncrementalAnalyzer CreateIncrementalAnalyzer()
-        => _lazyAnalyzer ??= new NewUnitTestingIncrementalAnalyzer(_incrementalAnalyzerProvider.CreateIncrementalAnalyzer());
+    public IUnitTestingIncrementalAnalyzer CreateIncrementalAnalyzer() =>
+        _lazyAnalyzer ??= new NewUnitTestingIncrementalAnalyzer(
+            _incrementalAnalyzerProvider.CreateIncrementalAnalyzer()
+        );
 
     public void Reanalyze()
     {
         var solutionCrawlerService = _services.GetService<IUnitTestingSolutionCrawlerService>();
         solutionCrawlerService?.Reanalyze(
-            _workspaceKind, _services, this.CreateIncrementalAnalyzer(), projectIds: null, documentIds: null, highPriority: false);
+            _workspaceKind,
+            _services,
+            this.CreateIncrementalAnalyzer(),
+            projectIds: null,
+            documentIds: null,
+            highPriority: false
+        );
     }
 
-    public static NewUnitTestingIncrementalAnalyzerProvider? TryRegister(string? workspaceKind, SolutionServices services, string analyzerName, INewUnitTestingIncrementalAnalyzerProviderImplementation provider)
+    public static NewUnitTestingIncrementalAnalyzerProvider? TryRegister(
+        string? workspaceKind,
+        SolutionServices services,
+        string analyzerName,
+        INewUnitTestingIncrementalAnalyzerProviderImplementation provider
+    )
     {
         Contract.ThrowIfNull(workspaceKind);
-        var solutionCrawlerRegistrationService = services.GetService<IUnitTestingSolutionCrawlerRegistrationService>();
+        var solutionCrawlerRegistrationService =
+            services.GetService<IUnitTestingSolutionCrawlerRegistrationService>();
         if (solutionCrawlerRegistrationService == null)
         {
             return null;
         }
 
-        var analyzerProvider = new NewUnitTestingIncrementalAnalyzerProvider(workspaceKind, services, provider);
+        var analyzerProvider = new NewUnitTestingIncrementalAnalyzerProvider(
+            workspaceKind,
+            services,
+            provider
+        );
 
         var metadata = new UnitTestingIncrementalAnalyzerProviderMetadata(
             analyzerName,
 #if false // Not used in unit testing crawling
             highPriorityForActiveFile: false,
 #endif
-            new[] { workspaceKind });
+            new[] { workspaceKind }
+        );
 
         solutionCrawlerRegistrationService.AddAnalyzerProvider(analyzerProvider, metadata);
         return analyzerProvider;

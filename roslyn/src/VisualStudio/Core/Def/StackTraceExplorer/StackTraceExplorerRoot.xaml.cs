@@ -39,16 +39,16 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             DataObject.AddPastingHandler(this, OnPaste);
         }
 
-        private void CommandBinding_OnPaste(object sender, ExecutedRoutedEventArgs e)
-            => ViewModel.DoPasteAsync(default).Start();
+        private void CommandBinding_OnPaste(object sender, ExecutedRoutedEventArgs e) =>
+            ViewModel.DoPasteAsync(default).Start();
 
         internal void OnClear()
         {
             ViewModel.SelectedTab?.Content.OnClear();
         }
 
-        private void OnPaste(object sender, DataObjectPastingEventArgs e)
-            => ViewModel.DoPasteAsync(default).Start();
+        private void OnPaste(object sender, DataObjectPastingEventArgs e) =>
+            ViewModel.DoPasteAsync(default).Start();
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -58,7 +58,6 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
         }
 
-        private void Clear_Click(object sender, RoutedEventArgs e)
-            => OnClear();
+        private void Clear_Click(object sender, RoutedEventArgs e) => OnClear();
     }
 }

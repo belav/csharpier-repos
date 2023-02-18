@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,88 +28,96 @@
 
 using System.Collections;
 using System.Collections.Generic;
-namespace System.Net {
-    public class HttpListenerPrefixCollection : ICollection<string>, IEnumerable<string>, IEnumerable {
-        List<string> prefixes = new List<string> ();
+
+namespace System.Net
+{
+    public class HttpListenerPrefixCollection
+        : ICollection<string>,
+            IEnumerable<string>,
+            IEnumerable
+    {
+        List<string> prefixes = new List<string>();
         HttpListener listener;
 
-        internal HttpListenerPrefixCollection (HttpListener listener)
+        internal HttpListenerPrefixCollection(HttpListener listener)
         {
             this.listener = listener;
         }
 
-        public int Count {
+        public int Count
+        {
             get { return prefixes.Count; }
         }
 
-        public bool IsReadOnly {
-            get { return false; }
-        }
-
-        public bool IsSynchronized {
-            get { return false; }
-        }
-
-        public void Add (string uriPrefix)
+        public bool IsReadOnly
         {
-            listener.CheckDisposed ();
-            ListenerPrefix.CheckUri (uriPrefix);
-            if (prefixes.Contains (uriPrefix))
+            get { return false; }
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        public void Add(string uriPrefix)
+        {
+            listener.CheckDisposed();
+            ListenerPrefix.CheckUri(uriPrefix);
+            if (prefixes.Contains(uriPrefix))
                 return;
 
-            prefixes.Add (uriPrefix);
+            prefixes.Add(uriPrefix);
             if (listener.IsListening)
-                EndPointManager.AddPrefix (uriPrefix, listener);
+                EndPointManager.AddPrefix(uriPrefix, listener);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            listener.CheckDisposed ();
-            prefixes.Clear ();
+            listener.CheckDisposed();
+            prefixes.Clear();
             if (listener.IsListening)
-                EndPointManager.RemoveListener (listener);
+                EndPointManager.RemoveListener(listener);
         }
 
-        public bool Contains (string uriPrefix)
+        public bool Contains(string uriPrefix)
         {
-            listener.CheckDisposed ();
-            return prefixes.Contains (uriPrefix);
+            listener.CheckDisposed();
+            return prefixes.Contains(uriPrefix);
         }
 
-        public void CopyTo (string [] array, int offset)
+        public void CopyTo(string[] array, int offset)
         {
-            listener.CheckDisposed ();
-            prefixes.CopyTo (array, offset);
+            listener.CheckDisposed();
+            prefixes.CopyTo(array, offset);
         }
 
-        public void CopyTo (Array array, int offset)
+        public void CopyTo(Array array, int offset)
         {
-            listener.CheckDisposed ();
-            ((ICollection) prefixes).CopyTo (array, offset);
+            listener.CheckDisposed();
+            ((ICollection)prefixes).CopyTo(array, offset);
         }
 
-        public IEnumerator<string> GetEnumerator ()
+        public IEnumerator<string> GetEnumerator()
         {
-            return prefixes.GetEnumerator ();
-        }
-    
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return prefixes.GetEnumerator ();
+            return prefixes.GetEnumerator();
         }
 
-        public bool Remove (string uriPrefix)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            listener.CheckDisposed ();
+            return prefixes.GetEnumerator();
+        }
+
+        public bool Remove(string uriPrefix)
+        {
+            listener.CheckDisposed();
             if (uriPrefix == null)
-                throw new ArgumentNullException ("uriPrefix");
+                throw new ArgumentNullException("uriPrefix");
 
-            bool result = prefixes.Remove (uriPrefix);
+            bool result = prefixes.Remove(uriPrefix);
             if (result && listener.IsListening)
-                EndPointManager.RemovePrefix (uriPrefix, listener);
+                EndPointManager.RemovePrefix(uriPrefix, listener);
 
             return result;
         }
     }
 }
-

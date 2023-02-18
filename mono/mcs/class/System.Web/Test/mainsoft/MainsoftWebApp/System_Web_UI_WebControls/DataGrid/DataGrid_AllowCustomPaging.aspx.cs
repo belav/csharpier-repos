@@ -37,8 +37,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGrid_AllowCustomPaging
-        : GHTBaseWeb 
+    public class DataGrid_AllowCustomPaging : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -50,8 +49,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest4;
         protected System.Web.UI.WebControls.DataGrid DataGrid5;
         protected GHTWebControls.GHTSubTest GHTSubTest5;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -59,43 +59,46 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
             GHTTestBegin(frm);
 
-            GHTActiveSubTest = GHTSubTest1;;
-            try 
+            GHTActiveSubTest = GHTSubTest1;
+            ;
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(1, 1);
                 DataGrid1.AllowPaging = true;
                 DataGrid1.AllowCustomPaging = true;
                 DataGrid1.VirtualItemCount = 5;
                 DataGrid1.PagerStyle.Mode = PagerMode.NumericPages;
-                DataGrid1.DataBind();;;
+                DataGrid1.DataBind();
+                ;
+                ;
                 GHTSubTestAddResult(DataGrid1.AllowCustomPaging.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
-            GHTActiveSubTest = GHTSubTest2;;
-            try 
+            GHTActiveSubTest = GHTSubTest2;
+            ;
+            try
             {
                 DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(1, 1);
                 DataGrid2.AllowPaging = true;
@@ -103,16 +106,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid2.VirtualItemCount = 7;
                 DataGrid2.PagerStyle.Mode = PagerMode.NumericPages;
                 DataGrid2.PageSize = 7;
-                DataGrid2.DataBind();;;
+                DataGrid2.DataBind();
+                ;
+                ;
                 GHTSubTestAddResult(DataGrid2.AllowCustomPaging.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
-            GHTActiveSubTest = GHTSubTest3;;
-            try 
+            GHTActiveSubTest = GHTSubTest3;
+            ;
+            try
             {
                 DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(1, 1);
                 DataGrid3.AllowPaging = true;
@@ -120,16 +126,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid3.VirtualItemCount = 30;
                 DataGrid3.PagerStyle.Mode = PagerMode.NumericPages;
                 DataGrid3.PageSize = 9;
-                DataGrid3.DataBind();;;
+                DataGrid3.DataBind();
+                ;
+                ;
                 GHTSubTestAddResult(DataGrid3.AllowCustomPaging.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
-            GHTActiveSubTest = GHTSubTest4;;
-            try 
+            GHTActiveSubTest = GHTSubTest4;
+            ;
+            try
             {
                 DataGrid4.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid4.AllowPaging = true;
@@ -137,16 +146,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid4.VirtualItemCount = 30;
                 DataGrid4.PagerStyle.Mode = PagerMode.NumericPages;
                 DataGrid4.PageSize = 9;
-                DataGrid4.DataBind();;;
+                DataGrid4.DataBind();
+                ;
+                ;
                 GHTSubTestAddResult(DataGrid4.AllowCustomPaging.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
-            GHTActiveSubTest = GHTSubTest5;;
-            try 
+            GHTActiveSubTest = GHTSubTest5;
+            ;
+            try
             {
                 DataGrid5.DataSource = GHTTests.GHDataSources.DSDataTable(1, 1);
                 DataGrid5.AllowPaging = true;
@@ -154,10 +166,11 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid5.VirtualItemCount = 70;
                 DataGrid5.PagerStyle.Mode = PagerMode.NumericPages;
                 DataGrid5.PageSize = 9;
-                DataGrid5.DataBind();;
+                DataGrid5.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid5.AllowCustomPaging.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

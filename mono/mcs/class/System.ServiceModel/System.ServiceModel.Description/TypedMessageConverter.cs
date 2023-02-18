@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,25 +42,24 @@ namespace System.ServiceModel.Description
     {
         IClientMessageFormatter formatter;
 
-        public DefaultTypedMessageConverter (IClientMessageFormatter formatter)
+        public DefaultTypedMessageConverter(IClientMessageFormatter formatter)
         {
             this.formatter = formatter;
         }
 
-        public override object FromMessage (Message message)
+        public override object FromMessage(Message message)
         {
-            return formatter.DeserializeReply (message, null);
+            return formatter.DeserializeReply(message, null);
         }
 
-        public override Message ToMessage (object typedMessage)
+        public override Message ToMessage(object typedMessage)
         {
-            return ToMessage (typedMessage, MessageVersion.Default);
+            return ToMessage(typedMessage, MessageVersion.Default);
         }
 
-        public override Message ToMessage (
-            object typedMessage, MessageVersion version)
+        public override Message ToMessage(object typedMessage, MessageVersion version)
         {
-            return formatter.SerializeRequest (version, new object [] {typedMessage});
+            return formatter.SerializeRequest(version, new object[] { typedMessage });
         }
     }
 
@@ -68,77 +67,121 @@ namespace System.ServiceModel.Description
     {
         internal const string TempUri = "http://tempuri.org/";
 
-        protected TypedMessageConverter ()
+        protected TypedMessageConverter() { }
+
+        public static TypedMessageConverter Create(Type messageContract, string action)
         {
+            return Create(messageContract, action, TempUri);
         }
 
-        public static TypedMessageConverter Create (
-            Type messageContract, string action)
-        {
-            return Create (messageContract, action, TempUri);
-        }
-
-        public static TypedMessageConverter Create (
-            Type messageContract, string action,
-            string defaultNamespace)
-        {
-            return Create (messageContract, action, defaultNamespace, (DataContractFormatAttribute)null);
-        }
-
-        public static TypedMessageConverter Create (
-            Type messageContract, string action,
-            DataContractFormatAttribute formatterAttribute)
-        {
-            return Create (messageContract, action, TempUri, formatterAttribute);
-        }
-
-        public static TypedMessageConverter Create (
+        public static TypedMessageConverter Create(
             Type messageContract,
-            string action, string defaultNamespace,
-            DataContractFormatAttribute formatterAttribute)
+            string action,
+            string defaultNamespace
+        )
         {
-            return new DefaultTypedMessageConverter (
-                new DataContractMessagesFormatter (
-                    MessageContractToMessagesDescription (messageContract, defaultNamespace, action),
-                    formatterAttribute));
+            return Create(
+                messageContract,
+                action,
+                defaultNamespace,
+                (DataContractFormatAttribute)null
+            );
         }
 
-        public static TypedMessageConverter Create (
-            Type messageContract, string action,
-            XmlSerializerFormatAttribute formatterAttribute)
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            string action,
+            DataContractFormatAttribute formatterAttribute
+        )
         {
-            return Create (messageContract, action, TempUri, formatterAttribute);
+            return Create(messageContract, action, TempUri, formatterAttribute);
         }
 
-        public static TypedMessageConverter Create (
-            Type messageContract, string action, string defaultNamespace,
-            XmlSerializerFormatAttribute formatterAttribute)
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            string action,
+            string defaultNamespace,
+            DataContractFormatAttribute formatterAttribute
+        )
         {
-            return new DefaultTypedMessageConverter (
-                new XmlMessagesFormatter (
-                    MessageContractToMessagesDescription (messageContract, defaultNamespace, action),
-                    formatterAttribute));
+            return new DefaultTypedMessageConverter(
+                new DataContractMessagesFormatter(
+                    MessageContractToMessagesDescription(messageContract, defaultNamespace, action),
+                    formatterAttribute
+                )
+            );
         }
 
-        public abstract object FromMessage (Message message);
-
-        public abstract Message ToMessage (object typedMessage);
-
-        public abstract Message ToMessage (object typedMessage, MessageVersion version);
-
-        static MessageDescriptionCollection MessageContractToMessagesDescription (
-            Type src, string defaultNamespace, string action)
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            string action,
+            XmlSerializerFormatAttribute formatterAttribute
+        )
         {
-            MessageContractAttribute mca =
-                ContractDescriptionGenerator.GetMessageContractAttribute (src);
+            return Create(messageContract, action, TempUri, formatterAttribute);
+        }
+
+        public static TypedMessageConverter Create(
+            Type messageContract,
+            string action,
+            string defaultNamespace,
+            XmlSerializerFormatAttribute formatterAttribute
+        )
+        {
+            return new DefaultTypedMessageConverter(
+                new XmlMessagesFormatter(
+                    MessageContractToMessagesDescription(messageContract, defaultNamespace, action),
+                    formatterAttribute
+                )
+            );
+        }
+
+        public abstract object FromMessage(Message message);
+
+        public abstract Message ToMessage(object typedMessage);
+
+        public abstract Message ToMessage(object typedMessage, MessageVersion version);
+
+        static MessageDescriptionCollection MessageContractToMessagesDescription(
+            Type src,
+            string defaultNamespace,
+            string action
+        )
+        {
+            MessageContractAttribute mca = ContractDescriptionGenerator.GetMessageContractAttribute(
+                src
+            );
 
             if (mca == null)
-                throw new ArgumentException (String.Format ("Type {0} and its ancestor types do not have MessageContract attribute.", src));
+                throw new ArgumentException(
+                    String.Format(
+                        "Type {0} and its ancestor types do not have MessageContract attribute.",
+                        src
+                    )
+                );
 
-            MessageDescriptionCollection messages = new MessageDescriptionCollection ();
+            MessageDescriptionCollection messages = new MessageDescriptionCollection();
             // FIXME: not sure if isDirectionInput arguments are ignorable (and can be dummy) here...
-            messages.Add (ContractDescriptionGenerator.CreateMessageDescription (src, defaultNamespace, action, true, false, mca));
-            messages.Add (ContractDescriptionGenerator.CreateMessageDescription (src, defaultNamespace, action, false, false, mca));
+            messages.Add(
+                ContractDescriptionGenerator.CreateMessageDescription(
+                    src,
+                    defaultNamespace,
+                    action,
+                    true,
+                    false,
+                    mca
+                )
+            );
+            messages.Add(
+                ContractDescriptionGenerator.CreateMessageDescription(
+                    src,
+                    defaultNamespace,
+                    action,
+                    false,
+                    false,
+                    mca
+                )
+            );
             return messages;
         }
     }

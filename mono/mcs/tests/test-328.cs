@@ -1,12 +1,23 @@
-namespace X {
-    enum Z { x };
+namespace X
+{
+    enum Z
+    {
+        x
+    };
 }
-namespace A {
+
+namespace A
+{
     using Y = X;
-    namespace B {
+
+    namespace B
+    {
         using Y;
-        class Tester {
+
+        class Tester
+        {
             internal static Z z = Z.x;
+
             public static void Main() { }
         }
     }

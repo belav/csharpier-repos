@@ -97,7 +97,10 @@ namespace System.Drawing.Tests
         public void Color_SetImmutable_ThrowsArgumentException()
         {
             SolidBrush brush = Assert.IsType<SolidBrush>(SystemBrushes.ActiveBorder);
-            AssertExtensions.Throws<ArgumentException>(null, () => brush.Color = Color.AntiqueWhite);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => brush.Color = Color.AntiqueWhite
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]

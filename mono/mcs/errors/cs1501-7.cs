@@ -7,13 +7,13 @@ using System;
 class TestA
 {
     public string value;
-    
-    public TestA (string value)
+
+    public TestA(string value)
     {
         this.value = value;
     }
-    
-    public string Select (int i, Func<TestA, TestA> f)
+
+    public string Select(int i, Func<TestA, TestA> f)
     {
         return value;
     }
@@ -21,9 +21,9 @@ class TestA
 
 public class M
 {
-    static void Main ()
+    static void Main()
     {
-        var v = new TestA ("Oh yes");
+        var v = new TestA("Oh yes");
         string foo = from a in v select a;
     }
 }

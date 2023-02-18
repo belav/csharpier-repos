@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,14 +23,20 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Drawing;
+
 namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class CustomLabel : ChartNamedElement
     {
-        public CustomLabel ()
-        {
-        }
-        public CustomLabel (double fromPosition, double toPosition, string text, int labelRow, LabelMarkStyle markStyle)
+        public CustomLabel() { }
+
+        public CustomLabel(
+            double fromPosition,
+            double toPosition,
+            string text,
+            int labelRow,
+            LabelMarkStyle markStyle
+        )
         {
             FromPosition = fromPosition;
             ToPosition = toPosition;
@@ -38,7 +44,15 @@ namespace System.Windows.Forms.DataVisualization.Charting
             RowIndex = labelRow;
             LabelMark = markStyle;
         }
-        public CustomLabel (double fromPosition, double toPosition, string text, int labelRow, LabelMarkStyle markStyle, GridTickTypes gridTick)
+
+        public CustomLabel(
+            double fromPosition,
+            double toPosition,
+            string text,
+            int labelRow,
+            LabelMarkStyle markStyle,
+            GridTickTypes gridTick
+        )
         {
             FromPosition = fromPosition;
             ToPosition = toPosition;
@@ -48,7 +62,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
             GridTicks = gridTick;
         }
 
-        public Axis Axis { get; private set; } 
+        public Axis Axis { get; private set; }
         public Color ForeColor { get; set; }
         public double FromPosition { get; set; }
         public GridTickTypes GridTicks { get; set; }
@@ -63,9 +77,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         public double ToPosition { get; set; }
 
         [MonoTODO]
-        public CustomLabel Clone ()
+        public CustomLabel Clone()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

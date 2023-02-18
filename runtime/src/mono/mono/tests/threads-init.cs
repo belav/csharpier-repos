@@ -3,13 +3,17 @@ using System.Threading;
 
 class Driver
 {
-    public static void Main ()
+    public static void Main()
     {
-        Thread t1 = new Thread(() => {
-            for (int i = 0; i < 10; ++i) {
-                Thread t2 = new Thread(() => {
-                    while (true) {
-                        Thread t3 = new Thread(() => {});
+        Thread t1 = new Thread(() =>
+        {
+            for (int i = 0; i < 10; ++i)
+            {
+                Thread t2 = new Thread(() =>
+                {
+                    while (true)
+                    {
+                        Thread t3 = new Thread(() => { });
                         t3.IsBackground = true;
                         t3.Start();
                         t3.Join();
@@ -17,13 +21,13 @@ class Driver
                 });
 
                 t2.IsBackground = true;
-                t2.Start ();
+                t2.Start();
             }
         });
 
         t1.IsBackground = true;
-        t1.Start ();
+        t1.Start();
 
-        Thread.Sleep (100);
+        Thread.Sleep(100);
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-delegate void D<in T> ();
+delegate void D<in T>();
 
 interface I<out T>
 {
@@ -10,15 +10,15 @@ interface I<out T>
 class D : I<string>
 {
     public event D<string> field;
-    
-    public static int Main ()
+
+    public static int Main()
     {
-        D<object> dd = () => {};
-        
-        D d = new D ();
+        D<object> dd = () => { };
+
+        D d = new D();
         d.field += dd;
-        d.field ();
-        
+        d.field();
+
         return 0;
     }
 }

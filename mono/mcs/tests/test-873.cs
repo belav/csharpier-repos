@@ -2,19 +2,21 @@ using System;
 
 class Program
 {
-    static int Main ()
+    static int Main()
     {
         int foo = 9;
 
-        switch (foo) {
-        case 1:
-            gotoTarget: 
+        switch (foo)
+        {
+            case 1:
+                gotoTarget:
+                {
+                    return 0;
+                }
+            default:
             {
-                return 0;
-            }
-        default:
-            {
-                if (foo != 0) {
+                if (foo != 0)
+                {
                     goto gotoTarget;
                 }
 
@@ -25,4 +27,3 @@ class Program
         return 1;
     }
 }
-

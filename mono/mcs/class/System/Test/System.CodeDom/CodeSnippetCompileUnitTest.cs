@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,87 +39,87 @@ namespace MonoTests.System.CodeDom
     public class CodeSnippetCompileUnitTest
     {
         [Test]
-        public void Constructor0 ()
+        public void Constructor0()
         {
-            CodeSnippetCompileUnit cscu = new CodeSnippetCompileUnit ();
-            Assert.IsNull (cscu.LinePragma, "#1");
+            CodeSnippetCompileUnit cscu = new CodeSnippetCompileUnit();
+            Assert.IsNull(cscu.LinePragma, "#1");
 
-            Assert.IsNotNull (cscu.Value, "#2");
-            Assert.AreEqual (string.Empty, cscu.Value, "#3");
+            Assert.IsNotNull(cscu.Value, "#2");
+            Assert.AreEqual(string.Empty, cscu.Value, "#3");
 
-            Assert.IsNotNull (cscu.AssemblyCustomAttributes, "#4");
-            Assert.AreEqual (0, cscu.AssemblyCustomAttributes.Count, "#5");
+            Assert.IsNotNull(cscu.AssemblyCustomAttributes, "#4");
+            Assert.AreEqual(0, cscu.AssemblyCustomAttributes.Count, "#5");
 
-            Assert.IsNotNull (cscu.EndDirectives, "#6");
-            Assert.AreEqual (0, cscu.EndDirectives.Count, "#7");
+            Assert.IsNotNull(cscu.EndDirectives, "#6");
+            Assert.AreEqual(0, cscu.EndDirectives.Count, "#7");
 
-            Assert.IsNotNull (cscu.Namespaces, "#8");
-            Assert.AreEqual (0, cscu.Namespaces.Count, "#9");
+            Assert.IsNotNull(cscu.Namespaces, "#8");
+            Assert.AreEqual(0, cscu.Namespaces.Count, "#9");
 
-            Assert.IsNotNull (cscu.ReferencedAssemblies, "#10");
-            Assert.AreEqual (0, cscu.ReferencedAssemblies.Count, "#11");
+            Assert.IsNotNull(cscu.ReferencedAssemblies, "#10");
+            Assert.AreEqual(0, cscu.ReferencedAssemblies.Count, "#11");
 
-            Assert.IsNotNull (cscu.StartDirectives, "#12");
-            Assert.AreEqual (0, cscu.StartDirectives.Count, "#13");
+            Assert.IsNotNull(cscu.StartDirectives, "#12");
+            Assert.AreEqual(0, cscu.StartDirectives.Count, "#13");
 
-            Assert.IsNotNull (cscu.UserData, "#14");
-            Assert.AreEqual (typeof(ListDictionary), cscu.UserData.GetType (), "#15");
-            Assert.AreEqual (0, cscu.UserData.Count, "#16");
-            
+            Assert.IsNotNull(cscu.UserData, "#14");
+            Assert.AreEqual(typeof(ListDictionary), cscu.UserData.GetType(), "#15");
+            Assert.AreEqual(0, cscu.UserData.Count, "#16");
+
             cscu.Value = null;
-            Assert.IsNotNull (cscu.Value, "#17");
-            Assert.AreEqual (string.Empty, cscu.Value, "#18");
+            Assert.IsNotNull(cscu.Value, "#17");
+            Assert.AreEqual(string.Empty, cscu.Value, "#18");
 
-            CodeLinePragma clp = new CodeLinePragma ("mono", 10);
+            CodeLinePragma clp = new CodeLinePragma("mono", 10);
             cscu.LinePragma = clp;
-            Assert.IsNotNull (cscu.LinePragma, "#19");
-            Assert.AreSame (clp, cscu.LinePragma, "#20");
+            Assert.IsNotNull(cscu.LinePragma, "#19");
+            Assert.AreSame(clp, cscu.LinePragma, "#20");
         }
 
         [Test]
-        public void Constructor1 ()
+        public void Constructor1()
         {
             string value = "mono";
 
-            CodeSnippetCompileUnit cscu = new CodeSnippetCompileUnit (value);
-            Assert.IsNull (cscu.LinePragma, "#1");
+            CodeSnippetCompileUnit cscu = new CodeSnippetCompileUnit(value);
+            Assert.IsNull(cscu.LinePragma, "#1");
 
-            Assert.IsNotNull (cscu.Value, "#2");
-            Assert.AreEqual (value, cscu.Value, "#3");
-            Assert.AreSame (value, cscu.Value, "#4"); 
+            Assert.IsNotNull(cscu.Value, "#2");
+            Assert.AreEqual(value, cscu.Value, "#3");
+            Assert.AreSame(value, cscu.Value, "#4");
 
-            Assert.IsNotNull (cscu.AssemblyCustomAttributes, "#5");
-            Assert.AreEqual (0, cscu.AssemblyCustomAttributes.Count, "#6");
+            Assert.IsNotNull(cscu.AssemblyCustomAttributes, "#5");
+            Assert.AreEqual(0, cscu.AssemblyCustomAttributes.Count, "#6");
 
-            Assert.IsNotNull (cscu.Namespaces, "#7");
-            Assert.AreEqual (0, cscu.Namespaces.Count, "#8");
+            Assert.IsNotNull(cscu.Namespaces, "#7");
+            Assert.AreEqual(0, cscu.Namespaces.Count, "#8");
 
-            Assert.IsNotNull (cscu.ReferencedAssemblies, "#9");
-            Assert.AreEqual (0, cscu.ReferencedAssemblies.Count, "#10");
+            Assert.IsNotNull(cscu.ReferencedAssemblies, "#9");
+            Assert.AreEqual(0, cscu.ReferencedAssemblies.Count, "#10");
 
-            Assert.IsNotNull (cscu.StartDirectives, "#11");
-            Assert.AreEqual (0, cscu.StartDirectives.Count, "#12");
+            Assert.IsNotNull(cscu.StartDirectives, "#11");
+            Assert.AreEqual(0, cscu.StartDirectives.Count, "#12");
 
-            Assert.IsNotNull (cscu.EndDirectives, "#13");
-            Assert.AreEqual (0, cscu.EndDirectives.Count, "#14");
+            Assert.IsNotNull(cscu.EndDirectives, "#13");
+            Assert.AreEqual(0, cscu.EndDirectives.Count, "#14");
 
-            Assert.IsNotNull (cscu.UserData, "#15");
-            Assert.AreEqual (typeof(ListDictionary), cscu.UserData.GetType (), "#16");
-            Assert.AreEqual (0, cscu.UserData.Count, "#17");
-            
+            Assert.IsNotNull(cscu.UserData, "#15");
+            Assert.AreEqual(typeof(ListDictionary), cscu.UserData.GetType(), "#16");
+            Assert.AreEqual(0, cscu.UserData.Count, "#17");
+
             cscu.Value = null;
-            Assert.IsNotNull (cscu.Value, "#18");
-            Assert.AreEqual (string.Empty, cscu.Value, "#19");
+            Assert.IsNotNull(cscu.Value, "#18");
+            Assert.AreEqual(string.Empty, cscu.Value, "#19");
 
-            CodeLinePragma clp = new CodeLinePragma ("mono", 10);
+            CodeLinePragma clp = new CodeLinePragma("mono", 10);
             cscu.LinePragma = clp;
-            Assert.IsNotNull (cscu.LinePragma, "#20");
-            Assert.AreSame (clp, cscu.LinePragma, "#21");
+            Assert.IsNotNull(cscu.LinePragma, "#20");
+            Assert.AreSame(clp, cscu.LinePragma, "#21");
 
-            cscu = new CodeSnippetCompileUnit ((string) null);
+            cscu = new CodeSnippetCompileUnit((string)null);
 
-            Assert.IsNotNull (cscu.Value, "#22");
-            Assert.AreEqual (string.Empty, cscu.Value, "#23");
+            Assert.IsNotNull(cscu.Value, "#22");
+            Assert.AreEqual(string.Empty, cscu.Value, "#23");
         }
     }
 }

@@ -33,19 +33,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             string displayContent,
             ImageMoniker imageMoniker,
             DetachedDefinitionItem definitionItem,
-            ImageMoniker languageMoniker) : base(displayContent, imageMoniker, definitionItem)
+            ImageMoniker languageMoniker
+        )
+            : base(displayContent, imageMoniker, definitionItem)
         {
             LanguageMoniker = languageMoniker;
         }
 
         public static DisambiguousTargetMenuItemViewModel CreateWithSourceLanguageGlyph(
-            InheritanceTargetItem target)
+            InheritanceTargetItem target
+        )
         {
             return new(
                 target.DisplayName,
                 target.Glyph.GetImageMoniker(),
                 target.DefinitionItem,
-                target.LanguageGlyph.GetImageMoniker());
+                target.LanguageGlyph.GetImageMoniker()
+            );
         }
     }
 }

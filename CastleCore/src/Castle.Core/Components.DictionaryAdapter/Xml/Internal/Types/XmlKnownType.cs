@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -20,7 +20,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         private readonly XmlName name;
         private readonly XmlName xsiType;
-        private readonly Type    clrType;
+        private readonly Type clrType;
 
         public XmlKnownType(XmlName name, XmlName xsiType, Type clrType)
         {
@@ -29,19 +29,23 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (clrType == null)
                 throw Error.ArgumentNull(nameof(clrType));
 
-            this.name    = name;
+            this.name = name;
             this.xsiType = xsiType;
             this.clrType = clrType;
         }
 
-        public XmlKnownType(string nameLocalName, string nameNamespaceUri, string xsiTypeLocalName, string xsiTypeNamespaceUri, Type clrType)
-            : this
-            (
-                new XmlName(nameLocalName,    nameNamespaceUri),
+        public XmlKnownType(
+            string nameLocalName,
+            string nameNamespaceUri,
+            string xsiTypeLocalName,
+            string xsiTypeNamespaceUri,
+            Type clrType
+        )
+            : this(
+                new XmlName(nameLocalName, nameNamespaceUri),
                 new XmlName(xsiTypeLocalName, xsiTypeNamespaceUri),
                 clrType
-            )
-        { }
+            ) { }
 
         public XmlName Name
         {

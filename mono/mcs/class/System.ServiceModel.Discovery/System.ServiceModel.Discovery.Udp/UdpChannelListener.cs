@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,110 +34,128 @@ namespace System.ServiceModel.Discovery.Udp
 {
     internal class UdpChannelListener : ChannelListenerBase<IDuplexChannel>
     {
-        public UdpChannelListener (UdpTransportBindingElement source, BindingContext context)
+        public UdpChannelListener(UdpTransportBindingElement source, BindingContext context)
         {
             Source = source;
             Context = context;
-            listen_uri = context.ListenUriRelativeAddress != null ?
-                new Uri (context.ListenUriBaseAddress, context.ListenUriRelativeAddress) :
-                context.ListenUriBaseAddress;
-        }
-        
-        Uri listen_uri;
-        UdpDuplexChannel channel;
-        ManualResetEvent accept_wait_handle = new ManualResetEvent (true);
-        
-        public override Uri Uri {
-            get { return listen_uri; }
-        }
-        
-        protected override void OnOpen (TimeSpan timeout)
-        {
-        }
-        
-        protected override void OnClose (TimeSpan timeout)
-        {
-            if (channel != null)
-                channel.Close (timeout);
-        }
-        
-        protected override void OnAbort ()
-        {
-            if (channel != null)
-                channel.Abort ();
-        }
-        
-        Action<TimeSpan> open_delegate, close_delegate;
-        
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            if (open_delegate == null)
-                open_delegate = new Action<TimeSpan> (OnOpen);
-            return open_delegate.BeginInvoke (timeout, callback, state);
-        }
-        
-        protected override void OnEndOpen (IAsyncResult result)
-        {
-            open_delegate.EndInvoke (result);
-        }
-        
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-        {
-            if (close_delegate == null)
-                close_delegate = new Action<TimeSpan> (OnClose);
-            return close_delegate.BeginInvoke (timeout, callback, state);
-        }
-        
-        protected override void OnEndClose (IAsyncResult result)
-        {
-            close_delegate.EndInvoke (result);
+            listen_uri =
+                context.ListenUriRelativeAddress != null
+                    ? new Uri(context.ListenUriBaseAddress, context.ListenUriRelativeAddress)
+                    : context.ListenUriBaseAddress;
         }
 
-        protected override IDuplexChannel OnAcceptChannel (TimeSpan timeout)
+        Uri listen_uri;
+        UdpDuplexChannel channel;
+        ManualResetEvent accept_wait_handle = new ManualResetEvent(true);
+
+        public override Uri Uri
         {
-            if (!accept_wait_handle.WaitOne (timeout))
-                throw new TimeoutException ();
-            accept_wait_handle.Reset ();
+            get { return listen_uri; }
+        }
+
+        protected override void OnOpen(TimeSpan timeout) { }
+
+        protected override void OnClose(TimeSpan timeout)
+        {
+            if (channel != null)
+                channel.Close(timeout);
+        }
+
+        protected override void OnAbort()
+        {
+            if (channel != null)
+                channel.Abort();
+        }
+
+        Action<TimeSpan> open_delegate,
+            close_delegate;
+
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            if (open_delegate == null)
+                open_delegate = new Action<TimeSpan>(OnOpen);
+            return open_delegate.BeginInvoke(timeout, callback, state);
+        }
+
+        protected override void OnEndOpen(IAsyncResult result)
+        {
+            open_delegate.EndInvoke(result);
+        }
+
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            if (close_delegate == null)
+                close_delegate = new Action<TimeSpan>(OnClose);
+            return close_delegate.BeginInvoke(timeout, callback, state);
+        }
+
+        protected override void OnEndClose(IAsyncResult result)
+        {
+            close_delegate.EndInvoke(result);
+        }
+
+        protected override IDuplexChannel OnAcceptChannel(TimeSpan timeout)
+        {
+            if (!accept_wait_handle.WaitOne(timeout))
+                throw new TimeoutException();
+            accept_wait_handle.Reset();
             if (State != CommunicationState.Opened)
                 return null; // happens during Close() or Abort().
-            channel = new UdpDuplexChannel (this);
-            channel.Closed += delegate {
-                accept_wait_handle.Set ();
+            channel = new UdpDuplexChannel(this);
+            channel.Closed += delegate
+            {
+                accept_wait_handle.Set();
             };
             return channel;
         }
-        
-        protected override bool OnWaitForChannel (TimeSpan timeout)
+
+        protected override bool OnWaitForChannel(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        Func<TimeSpan,IDuplexChannel> accept_delegate;
-        
-        protected override IAsyncResult OnBeginAcceptChannel (TimeSpan timeout, AsyncCallback callback, object state)
+
+        Func<TimeSpan, IDuplexChannel> accept_delegate;
+
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (accept_delegate == null)
-                accept_delegate = new Func<TimeSpan,IDuplexChannel> (OnAcceptChannel);
-            return accept_delegate.BeginInvoke (timeout, callback, state);
+                accept_delegate = new Func<TimeSpan, IDuplexChannel>(OnAcceptChannel);
+            return accept_delegate.BeginInvoke(timeout, callback, state);
         }
-        
-        protected override IDuplexChannel OnEndAcceptChannel (IAsyncResult result)
+
+        protected override IDuplexChannel OnEndAcceptChannel(IAsyncResult result)
         {
-            return accept_delegate.EndInvoke (result);
+            return accept_delegate.EndInvoke(result);
         }
-        
-        Func<TimeSpan,bool> wait_for_channel_delegate;
-        
-        protected override IAsyncResult OnBeginWaitForChannel (TimeSpan timeout, AsyncCallback callback, object state)
+
+        Func<TimeSpan, bool> wait_for_channel_delegate;
+
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (wait_for_channel_delegate == null)
-                wait_for_channel_delegate = new Func<TimeSpan,bool> (OnWaitForChannel);
-            return wait_for_channel_delegate.BeginInvoke (timeout, callback, state);
+                wait_for_channel_delegate = new Func<TimeSpan, bool>(OnWaitForChannel);
+            return wait_for_channel_delegate.BeginInvoke(timeout, callback, state);
         }
-        
-        protected override bool OnEndWaitForChannel (IAsyncResult result)
+
+        protected override bool OnEndWaitForChannel(IAsyncResult result)
         {
-            return wait_for_channel_delegate.EndInvoke (result);
+            return wait_for_channel_delegate.EndInvoke(result);
         }
 
         public UdpTransportBindingElement Source { get; private set; }

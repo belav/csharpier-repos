@@ -11,107 +11,117 @@ using System.Threading;
 
 namespace System.ServiceModel
 {
-    public class EndpointIdentity {}
+    public class EndpointIdentity { }
+
     public class InstanceContext : CommunicationObject, IExtensibleObject<InstanceContext>
     {
         protected internal override TimeSpan DefaultCloseTimeout
         {
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
         protected internal override TimeSpan DefaultOpenTimeout
         {
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
         public IExtensionCollection<InstanceContext> Extensions
         {
-            get { throw new NotImplementedException (); }
+            get { throw new NotImplementedException(); }
         }
 
-        public SynchronizationContext SynchronizationContext {
-            get { throw new NotImplementedException (); }
-            set { throw new NotImplementedException (); }
-        }
-
-        public InstanceContext (object implementation)
+        public SynchronizationContext SynchronizationContext
         {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public object GetServiceInstance (Message message)
+        public InstanceContext(object implementation) { }
+
+        public object GetServiceInstance(Message message)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnAbort ()
+        protected override void OnAbort()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClose (TimeSpan timeout)
+        protected override void OnClose(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnClosed ()
+        protected override void OnClosed()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnFaulted ()
+        protected override void OnFaulted()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnOpen (TimeSpan timeout)
+        protected override void OnOpen(TimeSpan timeout)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnOpened ()
+        protected override void OnOpened()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnOpening ()
+        protected override void OnOpening()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
+
     // introduced for silverlight sdk compatibility
     internal class OperationFormatStyleHelper
     {
-        public static bool IsDefined (OperationFormatStyle style)
+        public static bool IsDefined(OperationFormatStyle style)
         {
-            switch (style) {
-            case OperationFormatStyle.Document:
-            case OperationFormatStyle.Rpc:
-                return true;
+            switch (style)
+            {
+                case OperationFormatStyle.Document:
+                case OperationFormatStyle.Rpc:
+                    return true;
             }
             return false;
         }
     }
-    
+
     [FriendAccessAllowed]
     internal interface IDispatchOperation
     {
@@ -121,50 +131,64 @@ namespace System.ServiceModel
         bool SerializeReply { get; set; }
     }
 }
+
 namespace System.ServiceModel.Channels
 {
-    public interface ITransportTokenAssertionProvider {}
-    public static class UrlUtility {
-        public static string UrlEncode (string s, Encoding e)
+    public interface ITransportTokenAssertionProvider { }
+
+    public static class UrlUtility
+    {
+        public static string UrlEncode(string s, Encoding e)
         {
             return s;
         }
 
-        public static string UrlDecode (string s, Encoding e)
+        public static string UrlDecode(string s, Encoding e)
         {
             return s;
         }
     }
 }
-namespace System.ServiceModel.Channels.Http
-{
-}
-namespace System.ServiceModel.Channels.Security
-{
-}
+
+namespace System.ServiceModel.Channels.Http { }
+
+namespace System.ServiceModel.Channels.Security { }
+
 namespace System.ServiceModel.Configuration
 {
-    class Dummy {}
+    class Dummy { }
 }
+
 namespace System.ServiceModel.Description
 {
-    public interface IPolicyExportExtension {}
-    public interface IPolicyImportExtension {}
-    public interface IWsdlExportExtension {}
-    public interface IWsdlImportExtension {}
+    public interface IPolicyExportExtension { }
+
+    public interface IPolicyImportExtension { }
+
+    public interface IWsdlExportExtension { }
+
+    public interface IWsdlImportExtension { }
 
     // introduced for silverlight sdk compatibility
     internal class ServiceReflector
     {
-        public static T GetSingleAttribute<T> (ICustomAttributeProvider p, Type [] types)
+        public static T GetSingleAttribute<T>(ICustomAttributeProvider p, Type[] types)
         {
-            T ret = default (T);
-            foreach (Type t in types) {
-                foreach (object att in p.GetCustomAttributes (t, false)) {
-                    if (att is T) {
+            T ret = default(T);
+            foreach (Type t in types)
+            {
+                foreach (object att in p.GetCustomAttributes(t, false))
+                {
+                    if (att is T)
+                    {
                         if (ret != null)
-                            throw new InvalidOperationException (String.Format ("More than one {0} attributes are found in the argument types", typeof (T)));
-                        ret = (T) att;
+                            throw new InvalidOperationException(
+                                String.Format(
+                                    "More than one {0} attributes are found in the argument types",
+                                    typeof(T)
+                                )
+                            );
+                        ret = (T)att;
                     }
                 }
             }
@@ -172,6 +196,7 @@ namespace System.ServiceModel.Description
         }
     }
 }
+
 namespace System.ServiceModel
 {
     // introduced for silverlight sdk compatibility
@@ -181,27 +206,31 @@ namespace System.ServiceModel
     {
         internal static class ExceptionUtility
         {
-            internal static ArgumentException ThrowHelperArgument (string message)
+            internal static ArgumentException ThrowHelperArgument(string message)
             {
-                return (ArgumentException)ThrowHelperError (new ArgumentException (message));
+                return (ArgumentException)ThrowHelperError(new ArgumentException(message));
             }
 
-            internal static ArgumentException ThrowHelperArgument (string paramName, string message)
+            internal static ArgumentException ThrowHelperArgument(string paramName, string message)
             {
-                return (ArgumentException)ThrowHelperError (new ArgumentException (message, paramName));
+                return (ArgumentException)ThrowHelperError(
+                    new ArgumentException(message, paramName)
+                );
             }
 
-            internal static ArgumentNullException ThrowHelperArgumentNull (string paramName)
+            internal static ArgumentNullException ThrowHelperArgumentNull(string paramName)
             {
-                return (ArgumentNullException)ThrowHelperError (new ArgumentNullException (paramName));
+                return (ArgumentNullException)ThrowHelperError(
+                    new ArgumentNullException(paramName)
+                );
             }
 
-            internal static Exception ThrowHelperError (Exception exception)
+            internal static Exception ThrowHelperError(Exception exception)
             {
                 return exception;
             }
 
-            internal static Exception ThrowHelperWarning (Exception exception)
+            internal static Exception ThrowHelperWarning(Exception exception)
             {
                 return exception;
             }
@@ -213,46 +242,90 @@ namespace System.ServiceModel.Dispatcher
 {
     public sealed class EndpointDispatcher
     {
-        internal EndpointDispatcher ()
-        {
-        }
+        internal EndpointDispatcher() { }
     }
 
     internal class FaultFormatter : IClientFaultFormatter
     {
-        internal FaultFormatter (Type[] detailTypes) { throw new NotImplementedException (); }
-        internal FaultFormatter (SynchronizedCollection<FaultContractInfo> faultContractInfoCollection) { throw new NotImplementedException (); }
-        protected virtual FaultException CreateFaultException (MessageFault messageFault, string action) { throw new NotImplementedException (); }
-        protected FaultException CreateFaultException (MessageFault messageFault, string action, object detailObj, Type detailType, XmlDictionaryReader detailReader) { throw new NotImplementedException (); }
-        public FaultException Deserialize (MessageFault messageFault, string action) { throw new NotImplementedException (); }
-        protected virtual XmlObjectSerializer GetSerializer (Type detailType, string faultExceptionAction, out string action) { throw new NotImplementedException (); }
+        internal FaultFormatter(Type[] detailTypes)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal FaultFormatter(
+            SynchronizedCollection<FaultContractInfo> faultContractInfoCollection
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual FaultException CreateFaultException(
+            MessageFault messageFault,
+            string action
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        protected FaultException CreateFaultException(
+            MessageFault messageFault,
+            string action,
+            object detailObj,
+            Type detailType,
+            XmlDictionaryReader detailReader
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public FaultException Deserialize(MessageFault messageFault, string action)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual XmlObjectSerializer GetSerializer(
+            Type detailType,
+            string faultExceptionAction,
+            out string action
+        )
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal interface IClientFaultFormatter
     {
-        FaultException Deserialize (MessageFault messageFault, string action);
+        FaultException Deserialize(MessageFault messageFault, string action);
     }
 }
+
 namespace System.ServiceModel.Security
 {
-    class Dummy {}
+    class Dummy { }
 }
+
 #if !MOBILE
 namespace System.Net.Security
 {
-    public enum ProtectionLevel {None}
+    public enum ProtectionLevel
+    {
+        None
+    }
 }
+
 namespace System.Xml.Serialization
 {
-    public class XmlTypeMapping {}
+    public class XmlTypeMapping { }
 }
+
 namespace System.Xml.XPath
 {
-    class Dummy {}
+    class Dummy { }
 }
+
 namespace Mono.Xml.XPath
 {
-    class Dummy {}
+    class Dummy { }
 }
 #endif
 #endif

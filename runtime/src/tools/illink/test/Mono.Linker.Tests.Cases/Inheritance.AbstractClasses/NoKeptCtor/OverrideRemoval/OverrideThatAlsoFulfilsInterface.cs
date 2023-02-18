@@ -4,24 +4,24 @@ namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses.NoKeptCtor.Overrid
 {
     public class OverrideThatAlsoFulfilsInterface
     {
-        public static void Main ()
+        public static void Main()
         {
-            Base b = HelperToMarkFooAndRequireBase ();
-            b.Method ();
+            Base b = HelperToMarkFooAndRequireBase();
+            b.Method();
 
-            MethodToUseTheInterface ();
+            MethodToUseTheInterface();
         }
 
         [Kept]
-        static void MethodToUseTheInterface ()
+        static void MethodToUseTheInterface()
         {
             // Now use the interface method so that it is kept
-            IFoo f = new Bar ();
-            f.Method ();
+            IFoo f = new Bar();
+            f.Method();
         }
 
         [Kept]
-        static Foo HelperToMarkFooAndRequireBase ()
+        static Foo HelperToMarkFooAndRequireBase()
         {
             return null;
         }
@@ -30,36 +30,30 @@ namespace Mono.Linker.Tests.Cases.Inheritance.AbstractClasses.NoKeptCtor.Overrid
         class Base
         {
             [Kept]
-            public virtual void Method ()
-            {
-            }
+            public virtual void Method() { }
         }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Method ();
+            void Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IFoo))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IFoo))]
         class Bar : IFoo
         {
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (Base))]
+        [KeptBaseType(typeof(Base))]
         class Foo : Base, IFoo
         {
-            public override void Method ()
-            {
-            }
+            public override void Method() { }
         }
     }
 }

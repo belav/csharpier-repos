@@ -21,7 +21,8 @@ internal sealed class ConfigureApiResources : IConfigureOptions<ApiAuthorization
     public ConfigureApiResources(
         IConfiguration configuration,
         IIdentityServerJwtDescriptor localApiDescriptor,
-        ILogger<ConfigureApiResources> logger)
+        ILogger<ConfigureApiResources> logger
+    )
     {
         _configuration = configuration;
         _localApiDescriptor = localApiDescriptor;
@@ -39,14 +40,17 @@ internal sealed class ConfigureApiResources : IConfigureOptions<ApiAuthorization
 
     internal IEnumerable<ApiResource> GetApiResources()
     {
-        var data = _configuration
-            .Get<Dictionary<string, ResourceDefinition>>();
+        var data = _configuration.Get<Dictionary<string, ResourceDefinition>>();
 
         if (data != null)
         {
             foreach (var kvp in data)
             {
-                _logger.LogInformation(LoggerEventIds.ConfiguringAPIResource, "Configuring API resource '{ApiResourceName}'.", kvp.Key);
+                _logger.LogInformation(
+                    LoggerEventIds.ConfiguringAPIResource,
+                    "Configuring API resource '{ApiResourceName}'.",
+                    kvp.Key
+                );
                 yield return GetResource(kvp.Key, kvp.Value);
             }
         }
@@ -56,7 +60,11 @@ internal sealed class ConfigureApiResources : IConfigureOptions<ApiAuthorization
         {
             foreach (var kvp in localResources)
             {
-                _logger.LogInformation(LoggerEventIds.ConfiguringLocalAPIResource, "Configuring local API resource '{ApiResourceName}'.", kvp.Key);
+                _logger.LogInformation(
+                    LoggerEventIds.ConfiguringLocalAPIResource,
+                    "Configuring local API resource '{ApiResourceName}'.",
+                    kvp.Key
+                );
                 yield return GetResource(kvp.Key, kvp.Value);
             }
         }
@@ -71,7 +79,9 @@ internal sealed class ConfigureApiResources : IConfigureOptions<ApiAuthorization
             case ApplicationProfiles.IdentityServerJwt:
                 return GetLocalAPI(name, definition);
             default:
-                throw new InvalidOperationException($"Type '{definition.Profile}' is not supported.");
+                throw new InvalidOperationException(
+                    $"Type '{definition.Profile}' is not supported."
+                );
         }
     }
 
@@ -92,14 +102,16 @@ internal sealed class ConfigureApiResources : IConfigureOptions<ApiAuthorization
     }
 
     private static ApiResource GetAPI(string name, ResourceDefinition definition) =>
-        ApiResourceBuilder.ApiResource(name)
+        ApiResourceBuilder
+            .ApiResource(name)
             .FromConfiguration()
             .WithAllowedClients(ApplicationProfilesPropertyValues.AllowAllApplications)
             .ReplaceScopes(ParseScopes(definition.Scopes) ?? new[] { name })
             .Build();
 
     private static ApiResource GetLocalAPI(string name, ResourceDefinition definition) =>
-        ApiResourceBuilder.IdentityServerJwt(name)
+        ApiResourceBuilder
+            .IdentityServerJwt(name)
             .FromConfiguration()
             .WithAllowedClients(ApplicationProfilesPropertyValues.AllowAllApplications)
             .ReplaceScopes(ParseScopes(definition.Scopes) ?? new[] { name })

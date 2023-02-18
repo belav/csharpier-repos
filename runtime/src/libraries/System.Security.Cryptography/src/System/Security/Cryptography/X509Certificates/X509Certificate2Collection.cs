@@ -11,11 +11,11 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    public class X509Certificate2Collection : X509CertificateCollection, IEnumerable<X509Certificate2>
+    public class X509Certificate2Collection
+        : X509CertificateCollection,
+            IEnumerable<X509Certificate2>
     {
-        public X509Certificate2Collection()
-        {
-        }
+        public X509Certificate2Collection() { }
 
         public X509Certificate2Collection(X509Certificate2 certificate)
         {
@@ -34,14 +34,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         public new X509Certificate2 this[int index]
         {
-            get
-            {
-                return (X509Certificate2)(base[index]);
-            }
-            set
-            {
-                base[index] = value;
-            }
+            get { return (X509Certificate2)(base[index]); }
+            set { base[index] = value; }
         }
 
         public int Add(X509Certificate2 certificate)
@@ -118,7 +112,11 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        public X509Certificate2Collection Find(X509FindType findType, object findValue, bool validOnly)
+        public X509Certificate2Collection Find(
+            X509FindType findType,
+            object findValue,
+            bool validOnly
+        )
         {
             ArgumentNullException.ThrowIfNull(findValue);
 
@@ -130,7 +128,8 @@ namespace System.Security.Cryptography.X509Certificates
             return new X509Certificate2Enumerator(this);
         }
 
-        IEnumerator<X509Certificate2> IEnumerable<X509Certificate2>.GetEnumerator() => GetEnumerator();
+        IEnumerator<X509Certificate2> IEnumerable<X509Certificate2>.GetEnumerator() =>
+            GetEnumerator();
 
         public void Import(byte[] rawData)
         {
@@ -150,7 +149,11 @@ namespace System.Security.Cryptography.X509Certificates
             Import(rawData, password: null, keyStorageFlags: X509KeyStorageFlags.DefaultKeySet);
         }
 
-        public void Import(byte[] rawData, string? password, X509KeyStorageFlags keyStorageFlags = 0)
+        public void Import(
+            byte[] rawData,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags = 0
+        )
         {
             ArgumentNullException.ThrowIfNull(rawData);
 
@@ -169,7 +172,11 @@ namespace System.Security.Cryptography.X509Certificates
         /// <param name="keyStorageFlags">
         ///   A bitwise combination of the enumeration values that control where and how to import the certificate.
         /// </param>
-        public void Import(ReadOnlySpan<byte> rawData, string? password, X509KeyStorageFlags keyStorageFlags = 0)
+        public void Import(
+            ReadOnlySpan<byte> rawData,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags = 0
+        )
         {
             Import(rawData, password.AsSpan(), keyStorageFlags);
         }
@@ -186,12 +193,22 @@ namespace System.Security.Cryptography.X509Certificates
         /// <param name="keyStorageFlags">
         ///   A bitwise combination of the enumeration values that control where and how to import the certificate.
         /// </param>
-        public void Import(ReadOnlySpan<byte> rawData, ReadOnlySpan<char> password, X509KeyStorageFlags keyStorageFlags = 0)
+        public void Import(
+            ReadOnlySpan<byte> rawData,
+            ReadOnlySpan<char> password,
+            X509KeyStorageFlags keyStorageFlags = 0
+        )
         {
             X509Certificate.ValidateKeyStorageFlags(keyStorageFlags);
 
             using (var safePasswordHandle = new SafePasswordHandle(password))
-            using (ILoaderPal storePal = StorePal.FromBlob(rawData, safePasswordHandle, keyStorageFlags))
+            using (
+                ILoaderPal storePal = StorePal.FromBlob(
+                    rawData,
+                    safePasswordHandle,
+                    keyStorageFlags
+                )
+            )
             {
                 storePal.MoveTo(this);
             }
@@ -202,14 +219,24 @@ namespace System.Security.Cryptography.X509Certificates
             Import(fileName, password: null, keyStorageFlags: X509KeyStorageFlags.DefaultKeySet);
         }
 
-        public void Import(string fileName, string? password, X509KeyStorageFlags keyStorageFlags = 0)
+        public void Import(
+            string fileName,
+            string? password,
+            X509KeyStorageFlags keyStorageFlags = 0
+        )
         {
             ArgumentNullException.ThrowIfNull(fileName);
 
             X509Certificate.ValidateKeyStorageFlags(keyStorageFlags);
 
             using (var safePasswordHandle = new SafePasswordHandle(password))
-            using (ILoaderPal storePal = StorePal.FromFile(fileName, safePasswordHandle, keyStorageFlags))
+            using (
+                ILoaderPal storePal = StorePal.FromFile(
+                    fileName,
+                    safePasswordHandle,
+                    keyStorageFlags
+                )
+            )
             {
                 storePal.MoveTo(this);
             }
@@ -227,14 +254,24 @@ namespace System.Security.Cryptography.X509Certificates
         /// <param name="keyStorageFlags">
         ///   A bitwise combination of the enumeration values that control where and how to import the certificate.
         /// </param>
-        public void Import(string fileName, ReadOnlySpan<char> password, X509KeyStorageFlags keyStorageFlags = 0)
+        public void Import(
+            string fileName,
+            ReadOnlySpan<char> password,
+            X509KeyStorageFlags keyStorageFlags = 0
+        )
         {
             ArgumentNullException.ThrowIfNull(fileName);
 
             X509Certificate.ValidateKeyStorageFlags(keyStorageFlags);
 
             using (var safePasswordHandle = new SafePasswordHandle(password))
-            using (ILoaderPal storePal = StorePal.FromFile(fileName, safePasswordHandle, keyStorageFlags))
+            using (
+                ILoaderPal storePal = StorePal.FromFile(
+                    fileName,
+                    safePasswordHandle,
+                    keyStorageFlags
+                )
+            )
             {
                 storePal.MoveTo(this);
             }
@@ -355,19 +392,31 @@ namespace System.Security.Cryptography.X509Certificates
 
             try
             {
-                foreach ((ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(certPem))
+                foreach (
+                    (ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(certPem)
+                )
                 {
                     ReadOnlySpan<char> label = contents[fields.Label];
 
                     if (label.SequenceEqual(PemLabels.X509Certificate))
                     {
                         // We verify below that every byte is written to.
-                        byte[] certBytes = GC.AllocateUninitializedArray<byte>(fields.DecodedDataLength);
+                        byte[] certBytes = GC.AllocateUninitializedArray<byte>(
+                            fields.DecodedDataLength
+                        );
 
-                        if (!Convert.TryFromBase64Chars(contents[fields.Base64Data], certBytes, out int bytesWritten)
-                            || bytesWritten != fields.DecodedDataLength)
+                        if (
+                            !Convert.TryFromBase64Chars(
+                                contents[fields.Base64Data],
+                                certBytes,
+                                out int bytesWritten
+                            )
+                            || bytesWritten != fields.DecodedDataLength
+                        )
                         {
-                            Debug.Fail("The contents should have already been validated by the PEM reader.");
+                            Debug.Fail(
+                                "The contents should have already been validated by the PEM reader."
+                            );
                             throw new CryptographicException(SR.Cryptography_X509_NoPemCertificate);
                         }
 
@@ -444,7 +493,12 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new CryptographicException(SR.Cryptography_X509_ExportFailed);
             }
 
-            return PemEncoding.TryWrite(PemLabels.Pkcs7Certificate, pkcs7, destination, out charsWritten);
+            return PemEncoding.TryWrite(
+                PemLabels.Pkcs7Certificate,
+                pkcs7,
+                destination,
+                out charsWritten
+            );
         }
 
         /// <summary>
@@ -477,14 +531,21 @@ namespace System.Security.Cryptography.X509Certificates
         {
             int size = GetCertificatePemsSize();
 
-            return string.Create(size, this, static (destination, col) => {
-                if (!col.TryExportCertificatePems(destination, out int charsWritten) ||
-                    charsWritten != destination.Length)
+            return string.Create(
+                size,
+                this,
+                static (destination, col) =>
                 {
-                    Debug.Fail("Pre-allocated buffer was not the correct size.");
-                    throw new CryptographicException();
+                    if (
+                        !col.TryExportCertificatePems(destination, out int charsWritten)
+                        || charsWritten != destination.Length
+                    )
+                    {
+                        Debug.Fail("Pre-allocated buffer was not the correct size.");
+                        throw new CryptographicException();
+                    }
                 }
-            });
+            );
         }
 
         /// <summary>
@@ -521,7 +582,10 @@ namespace System.Security.Cryptography.X509Certificates
             for (int i = 0; i < Count; i++)
             {
                 ReadOnlyMemory<byte> certData = this[i].RawDataMemory;
-                int certSize = PemEncoding.GetEncodedSize(PemLabels.X509Certificate.Length, certData.Length);
+                int certSize = PemEncoding.GetEncodedSize(
+                    PemLabels.X509Certificate.Length,
+                    certData.Length
+                );
 
                 // If we ran out of space in the destination, return false. It's okay
                 // that we may have successfully written data to the destination
@@ -533,8 +597,15 @@ namespace System.Security.Cryptography.X509Certificates
                     return false;
                 }
 
-                if (!PemEncoding.TryWrite(PemLabels.X509Certificate, certData.Span, buffer, out int certWritten) ||
-                    certWritten != certSize)
+                if (
+                    !PemEncoding.TryWrite(
+                        PemLabels.X509Certificate,
+                        certData.Span,
+                        buffer,
+                        out int certWritten
+                    )
+                    || certWritten != certSize
+                )
                 {
                     Debug.Fail("Presized buffer is too small or did not write the correct amount.");
                     throw new CryptographicException();
@@ -572,7 +643,10 @@ namespace System.Security.Cryptography.X509Certificates
 
                 for (int i = 0; i < Count; i++)
                 {
-                    size += PemEncoding.GetEncodedSize(PemLabels.X509Certificate.Length, this[i].RawDataMemory.Length);
+                    size += PemEncoding.GetEncodedSize(
+                        PemLabels.X509Certificate.Length,
+                        this[i].RawDataMemory.Length
+                    );
 
                     // Add a \n character between each certificate, except the last one.
                     if (i < Count - 1)

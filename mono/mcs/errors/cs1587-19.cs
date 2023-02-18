@@ -8,9 +8,13 @@ namespace TopNS
 {
     class Foo
     {
-        string this [string bar] {
+        string this[string bar]
+        {
             get { return ""; }
-            set { /** incorrect */ }
+            set
+            {
+                /** incorrect */
+            }
         }
     }
 }

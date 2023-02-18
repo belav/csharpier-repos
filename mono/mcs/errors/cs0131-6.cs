@@ -3,12 +3,12 @@
 
 class X
 {
-    void Test ()
+    void Test()
     {
-        Foo () = 1;
+        Foo() = 1;
     }
 
-    static int Foo ()
+    static int Foo()
     {
         return 1;
     }

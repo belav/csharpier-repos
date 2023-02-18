@@ -30,7 +30,6 @@ namespace System.ComponentModel
     public interface IEditableCollectionViewAddNewItem : IEditableCollectionView
     {
         bool CanAddNewItem { get; }
-        object AddNewItem (object newItem);
+        object AddNewItem(object newItem);
     }
 }
-

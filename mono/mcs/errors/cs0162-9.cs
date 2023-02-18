@@ -4,14 +4,15 @@
 
 class Error
 {
-    void Test ()
+    void Test()
     {
-        if (1 == 0) {
-            try {
-            } catch (System.Net.Sockets.SocketException sex) {
+        if (1 == 0)
+        {
+            try { }
+            catch (System.Net.Sockets.SocketException sex)
+            {
                 int x = (int)sex.SocketErrorCode;
             }
         }
     }
-
 }

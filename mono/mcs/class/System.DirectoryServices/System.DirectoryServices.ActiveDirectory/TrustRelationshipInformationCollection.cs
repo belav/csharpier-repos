@@ -26,25 +26,24 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class TrustRelationshipInformationCollection : ReadOnlyCollectionBase
     {
-        public TrustRelationshipInformation this [int index] {
-            get {
-                throw new NotImplementedException ();
-            }
+        public TrustRelationshipInformation this[int index]
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public bool Contains (TrustRelationshipInformation information)
+        public bool Contains(TrustRelationshipInformation information)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public int IndexOf (TrustRelationshipInformation information)
+        public int IndexOf(TrustRelationshipInformation information)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void CopyTo (TrustRelationshipInformation[] array, int index)
+        public void CopyTo(TrustRelationshipInformation[] array, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

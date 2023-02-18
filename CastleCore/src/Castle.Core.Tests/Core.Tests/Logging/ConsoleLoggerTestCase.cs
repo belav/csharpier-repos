@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -61,14 +61,18 @@ namespace Castle.Core.Logging.Tests
             log.Warn("Some warn message");
 
             string logcontents = outWriter.GetStringBuilder().ToString();
-            
+
             StringWriter expected = new StringWriter();
             expected.WriteLine("[Info] 'Logger' Some info message");
             expected.WriteLine("[Error] 'Logger' Some error message");
             expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
             expected.WriteLine("[Warn] 'Logger' Some warn message");
-            
-            Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
+
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
         }
 
         [Test]
@@ -84,7 +88,7 @@ namespace Castle.Core.Logging.Tests
             log.Warn("Some warn message");
 
             string logcontents = outWriter.GetStringBuilder().ToString();
-            
+
             StringWriter expected = new StringWriter();
             expected.WriteLine("[Debug] 'Logger' Some debug message");
             expected.WriteLine("[Info] 'Logger' Some info message");
@@ -92,7 +96,11 @@ namespace Castle.Core.Logging.Tests
             expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
             expected.WriteLine("[Warn] 'Logger' Some warn message");
 
-            Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
         }
 
         [Test]
@@ -117,7 +125,11 @@ namespace Castle.Core.Logging.Tests
             expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
             expected.WriteLine("[Warn] 'Logger' Some warn message");
 
-            Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
         }
 
         [Test]
@@ -133,13 +145,17 @@ namespace Castle.Core.Logging.Tests
             log.Warn("Some warn message");
 
             string logcontents = outWriter.GetStringBuilder().ToString();
-            
+
             StringWriter expected = new StringWriter();
             expected.WriteLine("[Error] 'Logger' Some error message");
             expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
             expected.WriteLine("[Warn] 'Logger' Some warn message");
 
-            Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
         }
 
         [Test]
@@ -150,12 +166,16 @@ namespace Castle.Core.Logging.Tests
             log.Debug("Some debug message", new Exception("Some exception message"));
 
             string logcontents = outWriter.GetStringBuilder().ToString();
-            
+
             StringWriter expected = new StringWriter();
             expected.WriteLine("[Debug] 'Logger' Some debug message");
             expected.WriteLine("[Debug] 'Logger' System.Exception: Some exception message ");
 
-            Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
         }
     }
 }

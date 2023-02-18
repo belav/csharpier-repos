@@ -35,7 +35,10 @@ namespace Microsoft.AspNetCore.Testing;
 /// </item>
 /// </list>
 /// </example>
-[TraitDiscoverer("Microsoft.AspNetCore.Testing." + nameof(QuarantinedTestTraitDiscoverer), "Microsoft.AspNetCore.Testing")]
+[TraitDiscoverer(
+    "Microsoft.AspNetCore.Testing." + nameof(QuarantinedTestTraitDiscoverer),
+    "Microsoft.AspNetCore.Testing"
+)]
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
 public sealed class QuarantinedTestAttribute : Attribute, ITraitAttribute
 {

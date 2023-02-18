@@ -10,8 +10,13 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
-    [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.MiscellaneousFiles), Shared]
-    internal sealed class MiscSolutionCrawlerWorkspaceEventListener : IEventListener<object>, IEventListenerStoppable
+    [
+        ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.MiscellaneousFiles),
+        Shared
+    ]
+    internal sealed class MiscSolutionCrawlerWorkspaceEventListener
+        : IEventListener<object>,
+            IEventListenerStoppable
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -28,7 +33,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 DiagnosticProvider.Enable(workspace);
         }
 
-        public void StopListening(Workspace workspace)
-            => DiagnosticProvider.Disable(workspace);
+        public void StopListening(Workspace workspace) => DiagnosticProvider.Disable(workspace);
     }
 }

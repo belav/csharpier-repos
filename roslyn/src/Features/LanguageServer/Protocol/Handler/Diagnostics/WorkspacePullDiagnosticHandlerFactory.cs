@@ -23,14 +23,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         public WorkspacePullDiagnosticHandlerFactory(
             IDiagnosticAnalyzerService analyzerService,
             EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _analyzerService = analyzerService;
             _editAndContinueDiagnosticUpdateSource = editAndContinueDiagnosticUpdateSource;
             _globalOptions = globalOptions;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
-            => new WorkspacePullDiagnosticHandler(_analyzerService, _editAndContinueDiagnosticUpdateSource, _globalOptions);
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        ) =>
+            new WorkspacePullDiagnosticHandler(
+                _analyzerService,
+                _editAndContinueDiagnosticUpdateSource,
+                _globalOptions
+            );
     }
 }

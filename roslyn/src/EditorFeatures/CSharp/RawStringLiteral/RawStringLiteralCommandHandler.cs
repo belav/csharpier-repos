@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             IGlobalOptionService globalOptions,
             IEditorOperationsFactoryService editorOperationsFactoryService,
             EditorOptionsService editorOptionsService,
-            IIndentationManagerService indentationManager)
+            IIndentationManagerService indentationManager
+        )
         {
             _undoHistoryRegistry = undoHistoryRegistry;
             _globalOptions = globalOptions;

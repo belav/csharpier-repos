@@ -22,15 +22,23 @@ internal struct FakeArraySegment
 [StructLayout(LayoutKind.Explicit)]
 internal struct ArraySegmentWrapper
 {
-    [FieldOffset(0)] public ArraySegment<byte> Actual;
-    [FieldOffset(0)] public FakeArraySegment Fake;
+    [FieldOffset(0)]
+    public ArraySegment<byte> Actual;
+
+    [FieldOffset(0)]
+    public FakeArraySegment Fake;
 }
 
 public class Test_ExplicitLayoutWithArraySegment
 {
     private void Run()
     {
-        var fakeArraySegment = new FakeArraySegment() { Array = new byte[10], Offset = 0, Count = 10 };
+        var fakeArraySegment = new FakeArraySegment()
+        {
+            Array = new byte[10],
+            Offset = 0,
+            Count = 10
+        };
         ArraySegment<byte> internalBuffer = fakeArraySegment.ToActual();
     }
 

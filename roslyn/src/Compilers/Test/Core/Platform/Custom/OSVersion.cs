@@ -11,7 +11,6 @@ namespace Roslyn.Test.Utilities
         /// <summary>
         /// True when the operating system is at least Windows version 8
         /// </summary>
-        public static bool IsWin8 =>
-            System.Environment.OSVersion.Version.Build >= 9200;
+        public static bool IsWin8 => System.Environment.OSVersion.Version.Build >= 9200;
     }
 }

@@ -3,21 +3,17 @@
 
 using static A;
 
-class A : B
-{
-}
+class A : B { }
 
 class P
 {
-    public class N<T>
-    {
-    }
+    public class N<T> { }
 }
 
 class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        var n = default (N<int>);
+        var n = default(N<int>);
     }
 }

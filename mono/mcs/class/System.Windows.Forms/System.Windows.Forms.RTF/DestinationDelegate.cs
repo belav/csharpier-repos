@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,8 +26,8 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms.RTF {
-
+namespace System.Windows.Forms.RTF
+{
 #if RTF_LIB
     public
 #else
@@ -40,21 +40,19 @@ namespace System.Windows.Forms.RTF {
 #else
     internal
 #endif
-    class DestinationCallback {
-        DestinationDelegate[]    callbacks;
+    class DestinationCallback
+    {
+        DestinationDelegate[] callbacks;
 
-        public DestinationCallback() {
+        public DestinationCallback()
+        {
             callbacks = new DestinationDelegate[Enum.GetValues(typeof(Minor)).Length];
         }
 
-        public DestinationDelegate this[Minor c] {
-            get {
-                return callbacks[(int)c];
-            }
-
-            set {
-                callbacks[(int)c] = value;
-            }
+        public DestinationDelegate this[Minor c]
+        {
+            get { return callbacks[(int)c]; }
+            set { callbacks[(int)c] = value; }
         }
     }
 }

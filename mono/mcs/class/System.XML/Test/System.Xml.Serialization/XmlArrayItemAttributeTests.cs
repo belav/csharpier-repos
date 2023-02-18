@@ -18,58 +18,58 @@ namespace MonoTests.System.XmlSerialization
     public class XmlArrayItemAttributeTests
     {
         [Test]
-        public void DataTypeDefault ()
+        public void DataTypeDefault()
         {
-            XmlArrayItemAttribute attr = new XmlArrayItemAttribute ();
-            Assert.AreEqual (string.Empty, attr.DataType, "#1");
+            XmlArrayItemAttribute attr = new XmlArrayItemAttribute();
+            Assert.AreEqual(string.Empty, attr.DataType, "#1");
 
             attr.DataType = null;
-            Assert.AreEqual (string.Empty, attr.DataType, "#2");
+            Assert.AreEqual(string.Empty, attr.DataType, "#2");
         }
 
         [Test]
-        public void ElementNameDefault ()
+        public void ElementNameDefault()
         {
-            XmlArrayItemAttribute attr = new XmlArrayItemAttribute ();
-            Assert.AreEqual (string.Empty, attr.ElementName, "#1");
+            XmlArrayItemAttribute attr = new XmlArrayItemAttribute();
+            Assert.AreEqual(string.Empty, attr.ElementName, "#1");
 
             attr.ElementName = null;
-            Assert.AreEqual (string.Empty, attr.ElementName, "#2");
+            Assert.AreEqual(string.Empty, attr.ElementName, "#2");
         }
 
         [Test]
-        public void FormDefault ()
+        public void FormDefault()
         {
-            XmlArrayItemAttribute attr = new XmlArrayItemAttribute ();
-            Assert.AreEqual (XmlSchemaForm.None, attr.Form);
+            XmlArrayItemAttribute attr = new XmlArrayItemAttribute();
+            Assert.AreEqual(XmlSchemaForm.None, attr.Form);
         }
 
         [Test]
-        public void IsNullableDefault ()
+        public void IsNullableDefault()
         {
-            XmlArrayItemAttribute attr = new XmlArrayItemAttribute ();
-            Assert.AreEqual (false, attr.IsNullable);
+            XmlArrayItemAttribute attr = new XmlArrayItemAttribute();
+            Assert.AreEqual(false, attr.IsNullable);
         }
 
         [Test]
-        public void NamespaceDefault ()
+        public void NamespaceDefault()
         {
-            XmlArrayItemAttribute attr = new XmlArrayItemAttribute ();
-            Assert.IsNull (attr.Namespace);
+            XmlArrayItemAttribute attr = new XmlArrayItemAttribute();
+            Assert.IsNull(attr.Namespace);
         }
 
         [Test]
-        public void NestingLevelDefault ()
+        public void NestingLevelDefault()
         {
-            XmlArrayItemAttribute attr = new XmlArrayItemAttribute ();
-            Assert.AreEqual (0, attr.NestingLevel);
+            XmlArrayItemAttribute attr = new XmlArrayItemAttribute();
+            Assert.AreEqual(0, attr.NestingLevel);
         }
 
         [Test]
-        public void TypeDefault ()
+        public void TypeDefault()
         {
-            XmlArrayItemAttribute attr = new XmlArrayItemAttribute ();
-            Assert.IsNull (attr.Type);
+            XmlArrayItemAttribute attr = new XmlArrayItemAttribute();
+            Assert.IsNull(attr.Type);
         }
     }
 }

@@ -50,12 +50,25 @@ namespace System.Text.Encodings.Web.Tests
         public void Ctor_WithUnicodeRanges()
         {
             // Arrange
-            HtmlEncoder encoder = HtmlEncoder.Create(UnicodeRanges.Latin1Supplement, UnicodeRanges.MiscellaneousSymbols);
+            HtmlEncoder encoder = HtmlEncoder.Create(
+                UnicodeRanges.Latin1Supplement,
+                UnicodeRanges.MiscellaneousSymbols
+            );
 
             // Act & assert
             Assert.Equal("&#x61;", encoder.Encode("a"));
-            Assert.Equal("\u00E9", encoder.Encode("\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */));
-            Assert.Equal("\u2601", encoder.Encode("\u2601" /* CLOUD */));
+            Assert.Equal(
+                "\u00E9",
+                encoder.Encode(
+                    "\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */
+                )
+            );
+            Assert.Equal(
+                "\u2601",
+                encoder.Encode(
+                    "\u2601" /* CLOUD */
+                )
+            );
         }
 
         [Fact]
@@ -66,8 +79,18 @@ namespace System.Text.Encodings.Web.Tests
 
             // Act & assert
             Assert.Equal("a", encoder.Encode("a"));
-            Assert.Equal("&#xE9;", encoder.Encode("\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */));
-            Assert.Equal("&#x2601;", encoder.Encode("\u2601" /* CLOUD */));
+            Assert.Equal(
+                "&#xE9;",
+                encoder.Encode(
+                    "\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */
+                )
+            );
+            Assert.Equal(
+                "&#x2601;",
+                encoder.Encode(
+                    "\u2601" /* CLOUD */
+                )
+            );
         }
 
         [Fact]
@@ -95,7 +118,10 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData("'", "&#x27;")]
         [InlineData("\"", "&quot;")]
         [InlineData("+", "&#x2B;")]
-        public void HtmlEncode_AllRangesAllowed_StillEncodesForbiddenChars_Simple(string input, string expected)
+        public void HtmlEncode_AllRangesAllowed_StillEncodesForbiddenChars_Simple(
+            string input,
+            string expected
+        )
         {
             // Arrange
             HtmlEncoder encoder = HtmlEncoder.Create(UnicodeRanges.All);
@@ -124,10 +150,22 @@ namespace System.Text.Encodings.Web.Tests
                 }
                 else
                 {
-                    if (input == "<") { expected = "&lt;"; }
-                    else if (input == ">") { expected = "&gt;"; }
-                    else if (input == "&") { expected = "&amp;"; }
-                    else if (input == "\"") { expected = "&quot;"; }
+                    if (input == "<")
+                    {
+                        expected = "&lt;";
+                    }
+                    else if (input == ">")
+                    {
+                        expected = "&gt;";
+                    }
+                    else if (input == "&")
+                    {
+                        expected = "&amp;";
+                    }
+                    else if (input == "\"")
+                    {
+                        expected = "&quot;";
+                    }
                     else
                     {
                         bool mustEncode = false;
@@ -177,7 +215,8 @@ namespace System.Text.Encodings.Web.Tests
 
             // "a<unpaired leading>b<unpaired trailing>c<trailing before leading>d<unpaired trailing><valid>e<high at end of string>"
             const string input = "a\uD800b\uDFFFc\uDFFF\uD800d\uDFFF\uD800\uDFFFe\uD800";
-            const string expected = "a&#xFFFD;b&#xFFFD;c&#xFFFD;&#xFFFD;d&#xFFFD;&#x103FF;e&#xFFFD;";
+            const string expected =
+                "a&#xFFFD;b&#xFFFD;c&#xFFFD;&#xFFFD;d&#xFFFD;&#x103FF;e&#xFFFD;";
 
             // Act
             string retVal = encoder.Encode(input);
@@ -212,7 +251,10 @@ namespace System.Text.Encodings.Web.Tests
         {
             // Arrange
             HtmlEncoder encoder = HtmlEncoder.Default;
-            Assert.Throws<ArgumentNullException>(() => { encoder.Encode(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]

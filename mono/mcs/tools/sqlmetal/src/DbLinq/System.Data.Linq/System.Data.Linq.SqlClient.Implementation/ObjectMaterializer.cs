@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,7 +35,8 @@ using System.Linq;
 
 namespace System.Data.Linq.SqlClient.Implementation
 {
-    public abstract class ObjectMaterializer<TDataReader> where TDataReader : DbDataReader
+    public abstract class ObjectMaterializer<TDataReader>
+        where TDataReader : DbDataReader
     {
         [MonoTODO]
         public ObjectMaterializer()
@@ -44,33 +45,38 @@ namespace System.Data.Linq.SqlClient.Implementation
         }
 
         [MonoTODO]
-        public static IEnumerable<TOutput> Convert<TOutput> (IEnumerable source)
+        public static IEnumerable<TOutput> Convert<TOutput>(IEnumerable source)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static IGrouping<TKey, TElement> CreateGroup<TKey, TElement> (TKey key, IEnumerable<TElement> items)
+        public static IGrouping<TKey, TElement> CreateGroup<TKey, TElement>(
+            TKey key,
+            IEnumerable<TElement> items
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static IOrderedEnumerable<TElement> CreateOrderedEnumerable<TElement> (IEnumerable<TElement> items)
+        public static IOrderedEnumerable<TElement> CreateOrderedEnumerable<TElement>(
+            IEnumerable<TElement> items
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static Exception ErrorAssignmentToNull (Type type)
+        public static Exception ErrorAssignmentToNull(Type type)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         // instance members
 
         [MonoTODO]
-        public object [] Arguments;
+        public object[] Arguments;
 
         [MonoTODO]
         public DbDataReader BufferReader;
@@ -79,10 +85,10 @@ namespace System.Data.Linq.SqlClient.Implementation
         public TDataReader DataReader;
 
         [MonoTODO]
-        public object [] Globals;
+        public object[] Globals;
 
         [MonoTODO]
-        public object [] Locals;
+        public object[] Locals;
 
         [MonoTODO]
         public int[] Ordinals;
@@ -90,11 +96,19 @@ namespace System.Data.Linq.SqlClient.Implementation
         [MonoTODO]
         public abstract bool CanDeferLoad { get; }
 
-        public abstract IEnumerable ExecuteSubQuery (int iSubQuery, object [] args);
-        public abstract IEnumerable<T> GetLinkSource<T> (int globalLink, int localFactory, object [] keyValues);
-        public abstract IEnumerable<T> GetNestedLinkSource<T> (int globalLink, int localFactory, object instance);
-        public abstract object InsertLookup (int globalMetaType, object instance);
-        public abstract bool Read ();
-        public abstract void SendEntityMaterialized (int globalMetaType, object instance);
+        public abstract IEnumerable ExecuteSubQuery(int iSubQuery, object[] args);
+        public abstract IEnumerable<T> GetLinkSource<T>(
+            int globalLink,
+            int localFactory,
+            object[] keyValues
+        );
+        public abstract IEnumerable<T> GetNestedLinkSource<T>(
+            int globalLink,
+            int localFactory,
+            object instance
+        );
+        public abstract object InsertLookup(int globalMetaType, object instance);
+        public abstract bool Read();
+        public abstract void SendEntityMaterialized(int globalMetaType, object instance);
     }
 }

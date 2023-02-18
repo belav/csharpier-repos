@@ -4,7 +4,7 @@ using System;
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         Span<int> stackSpan = stackalloc int[100];
 
@@ -16,7 +16,5 @@ class X
     }
 
     // Disables verifier
-    unsafe void Foo ()
-    {
-    }
+    unsafe void Foo() { }
 }

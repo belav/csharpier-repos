@@ -20,5 +20,6 @@ public interface IPropertyRemovedConvention : IConvention
     void ProcessPropertyRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionProperty property,
-        IConventionContext<IConventionProperty> context);
+        IConventionContext<IConventionProperty> context
+    );
 }

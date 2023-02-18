@@ -1,17 +1,16 @@
 // CS0619: `A' is obsolete: `'
 // Line: 13
 
-[System.Obsolete ("", true)]
-class A
-{
-}
+[System.Obsolete("", true)]
+class A { }
 
 class AA
 {
-        public AA ()
+    public AA()
+    {
+        for (A aa = null; aa != null; )
         {
-                for (A aa = null; aa != null;) {
-                        System.Console.WriteLine (aa);
-                }
+            System.Console.WriteLine(aa);
         }
+    }
 }

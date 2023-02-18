@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,13 +38,12 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 
-namespace System.Diagnostics {
-
+namespace System.Diagnostics
+{
     // must be safe for multithreaded operations
-    [InstallerType (typeof (PerformanceCounterInstaller))]
-    public sealed class PerformanceCounter : Component, ISupportInitialize 
+    [InstallerType(typeof(PerformanceCounterInstaller))]
+    public sealed class PerformanceCounter : Component, ISupportInitialize
     {
-
         private string categoryName;
         private string counterName;
         private string instanceName;
@@ -62,7 +61,7 @@ namespace System.Diagnostics {
         public static int DefaultFileMappingSize = 524288;
 
         // set catname, countname, instname to "", machname to "."
-        public PerformanceCounter ()
+        public PerformanceCounter()
         {
             categoryName = counterName = instanceName = "";
             machineName = ".";
@@ -71,43 +70,33 @@ namespace System.Diagnostics {
         // throws: InvalidOperationException (if catName or countName
         // is ""); ArgumentNullException if either is null
         // sets instName to "", machname to "."
-        public PerformanceCounter (String categoryName, 
-            string counterName)
-            : this (categoryName, counterName, false)
-        {
-        }
+        public PerformanceCounter(String categoryName, string counterName)
+            : this(categoryName, counterName, false) { }
 
-        public PerformanceCounter (string categoryName, 
-            string counterName,
-            bool readOnly)
-            : this (categoryName, counterName, "", readOnly)
-        {
-        }
+        public PerformanceCounter(string categoryName, string counterName, bool readOnly)
+            : this(categoryName, counterName, "", readOnly) { }
 
-        public PerformanceCounter (string categoryName,
-            string counterName,
-            string instanceName)
-            : this (categoryName, counterName, instanceName, false)
-        {
-        }
+        public PerformanceCounter(string categoryName, string counterName, string instanceName)
+            : this(categoryName, counterName, instanceName, false) { }
 
-        public PerformanceCounter (string categoryName,
+        public PerformanceCounter(
+            string categoryName,
             string counterName,
             string instanceName,
-            bool readOnly)
+            bool readOnly
+        )
         {
-
             if (categoryName == null)
-                throw new ArgumentNullException ("categoryName");
+                throw new ArgumentNullException("categoryName");
             if (counterName == null)
-                throw new ArgumentNullException ("counterName");
+                throw new ArgumentNullException("counterName");
             if (instanceName == null)
-                throw new ArgumentNullException ("instanceName");
+                throw new ArgumentNullException("instanceName");
             CategoryName = categoryName;
             CounterName = counterName;
 
             if (categoryName == "" || counterName == "")
-                throw new InvalidOperationException ();
+                throw new InvalidOperationException();
 
             InstanceName = instanceName;
             this.instanceName = instanceName;
@@ -116,43 +105,66 @@ namespace System.Diagnostics {
             changed = true;
         }
 
-        public PerformanceCounter (string categoryName,
+        public PerformanceCounter(
+            string categoryName,
             string counterName,
             string instanceName,
-            string machineName)
-            : this (categoryName, counterName, instanceName, false)
+            string machineName
+        )
+            : this(categoryName, counterName, instanceName, false)
         {
             this.machineName = machineName;
         }
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        static private unsafe extern IntPtr GetImpl_icall (char *category, int category_length,
-            char *counter, int counter_length, char *instance, int instance_length,
-            out PerformanceCounterType ctype, out bool custom);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static private unsafe extern IntPtr GetImpl_icall(
+            char* category,
+            int category_length,
+            char* counter,
+            int counter_length,
+            char* instance,
+            int instance_length,
+            out PerformanceCounterType ctype,
+            out bool custom
+        );
 
-        static unsafe IntPtr GetImpl (string category, string counter,
-                string instance, out PerformanceCounterType ctype, out bool custom)
+        static unsafe IntPtr GetImpl(
+            string category,
+            string counter,
+            string instance,
+            out PerformanceCounterType ctype,
+            out bool custom
+        )
         {
-            fixed (char* fixed_category = category,
-                     fixed_counter = counter,
-                     fixed_instance = instance) {
-                return GetImpl_icall (fixed_category, category?.Length ?? 0,
-                    fixed_counter, counter?.Length ?? 0,
-                    fixed_instance, instance?.Length ?? 0,
-                    out ctype, out custom);
+            fixed (
+                char* fixed_category = category,
+                    fixed_counter = counter,
+                    fixed_instance = instance
+            )
+            {
+                return GetImpl_icall(
+                    fixed_category,
+                    category?.Length ?? 0,
+                    fixed_counter,
+                    counter?.Length ?? 0,
+                    fixed_instance,
+                    instance?.Length ?? 0,
+                    out ctype,
+                    out custom
+                );
             }
         }
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        static extern bool GetSample (IntPtr impl, bool only_value, out CounterSample sample);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern bool GetSample(IntPtr impl, bool only_value, out CounterSample sample);
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        static extern long UpdateValue (IntPtr impl, bool do_incr, long value);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern long UpdateValue(IntPtr impl, bool do_incr, long value);
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        static extern void FreeData (IntPtr impl);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern void FreeData(IntPtr impl);
 
-        static bool IsValidMachine (string machine)
+        static bool IsValidMachine(string machine)
         { // no support for counters on other machines
             return machine == ".";
         }
@@ -160,14 +172,14 @@ namespace System.Diagnostics {
         /* the perf counter has changed, ensure it's valid and setup it to
          * be able to collect/update data
          */
-        void UpdateInfo ()
+        void UpdateInfo()
         {
             // need to free the previous info
             if (impl != IntPtr.Zero)
-                Close ();
+                Close();
 
-            if (IsValidMachine (machineName))
-                impl = GetImpl (categoryName, counterName, instanceName, out type, out is_custom);
+            if (IsValidMachine(machineName))
+                impl = GetImpl(categoryName, counterName, instanceName, out type, out is_custom);
             // system counters are always readonly
             if (!is_custom)
                 readOnly = true;
@@ -180,14 +192,18 @@ namespace System.Diagnostics {
         }
 
         // may throw ArgumentNullException
-        [DefaultValue (""), ReadOnly (true), SettingsBindable (true)]
-        [TypeConverter ("System.Diagnostics.Design.CategoryValueConverter, " + Consts.AssemblySystem_Design)]
-        [SRDescription ("The category name for this performance counter.")]
-        public string CategoryName {
-            get {return categoryName;}
-            set {
+        [DefaultValue(""), ReadOnly(true), SettingsBindable(true)]
+        [TypeConverter(
+            "System.Diagnostics.Design.CategoryValueConverter, " + Consts.AssemblySystem_Design
+        )]
+        [SRDescription("The category name for this performance counter.")]
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("categoryName");
+                    throw new ArgumentNullException("categoryName");
                 categoryName = value;
                 changed = true;
             }
@@ -195,52 +211,63 @@ namespace System.Diagnostics {
 
         // may throw InvalidOperationException
         [MonoTODO]
-        [ReadOnly (true), DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MonitoringDescription ("A description describing the counter.")]
-        public string CounterHelp {
-            get {return "";}
+        [ReadOnly(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MonitoringDescription("A description describing the counter.")]
+        public string CounterHelp
+        {
+            get { return ""; }
         }
 
         // may throw ArgumentNullException
-        [DefaultValue (""), ReadOnly (true), SettingsBindable (true)]
-        [TypeConverter ("System.Diagnostics.Design.CounterNameConverter, " + Consts.AssemblySystem_Design)]
-        [SRDescription ("The name of this performance counter.")]
-        public string CounterName 
+        [DefaultValue(""), ReadOnly(true), SettingsBindable(true)]
+        [TypeConverter(
+            "System.Diagnostics.Design.CounterNameConverter, " + Consts.AssemblySystem_Design
+        )]
+        [SRDescription("The name of this performance counter.")]
+        public string CounterName
+        {
+            get { return counterName; }
+            set
             {
-            get {return counterName;}
-            set {
                 if (value == null)
-                    throw new ArgumentNullException ("counterName");
+                    throw new ArgumentNullException("counterName");
                 counterName = value;
                 changed = true;
             }
         }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MonitoringDescription ("The type of the counter.")]
-        public PerformanceCounterType CounterType {
-            get {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MonitoringDescription("The type of the counter.")]
+        public PerformanceCounterType CounterType
+        {
+            get
+            {
                 if (changed)
-                    UpdateInfo ();
+                    UpdateInfo();
                 return type;
             }
         }
 
         [MonoTODO]
-        [DefaultValue (PerformanceCounterInstanceLifetime.Global)]
-        public PerformanceCounterInstanceLifetime InstanceLifetime {
+        [DefaultValue(PerformanceCounterInstanceLifetime.Global)]
+        public PerformanceCounterInstanceLifetime InstanceLifetime
+        {
             get { return lifetime; }
             set { lifetime = value; }
         }
 
-        [DefaultValue (""), ReadOnly (true), SettingsBindable (true)]
-        [TypeConverter ("System.Diagnostics.Design.InstanceNameConverter, " + Consts.AssemblySystem_Design)]
-        [SRDescription ("The instance name for this performance counter.")]
-        public string InstanceName {
-            get {return instanceName;}
-            set {
+        [DefaultValue(""), ReadOnly(true), SettingsBindable(true)]
+        [TypeConverter(
+            "System.Diagnostics.Design.InstanceNameConverter, " + Consts.AssemblySystem_Design
+        )]
+        [SRDescription("The instance name for this performance counter.")]
+        public string InstanceName
+        {
+            get { return instanceName; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
+                    throw new ArgumentNullException("value");
                 instanceName = value;
                 changed = true;
             }
@@ -248,128 +275,136 @@ namespace System.Diagnostics {
 
         // may throw ArgumentException if machine name format is wrong
         [MonoTODO("What's the machine name format?")]
-        [DefaultValue ("."), Browsable (false), SettingsBindable (true)]
-        [SRDescription ("The machine where this performance counter resides.")]
-        public string MachineName {
-            get {return machineName;}
-            set {
+        [DefaultValue("."), Browsable(false), SettingsBindable(true)]
+        [SRDescription("The machine where this performance counter resides.")]
+        public string MachineName
+        {
+            get { return machineName; }
+            set
+            {
                 if (value == null)
-                    throw new ArgumentNullException ("value");
-                if (value == "" || value == ".") {
+                    throw new ArgumentNullException("value");
+                if (value == "" || value == ".")
+                {
                     machineName = ".";
                     changed = true;
                     return;
                 }
-                throw new PlatformNotSupportedException ();
+                throw new PlatformNotSupportedException();
             }
         }
 
         // may throw InvalidOperationException, Win32Exception
-        [Browsable (false), DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        [MonitoringDescription ("The raw value of the counter.")]
-        public long RawValue {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [MonitoringDescription("The raw value of the counter.")]
+        public long RawValue
+        {
+            get
+            {
                 CounterSample sample;
                 if (changed)
-                    UpdateInfo ();
-                GetSample (impl, true, out sample);
+                    UpdateInfo();
+                GetSample(impl, true, out sample);
                 // should this update old_sample as well?
                 return sample.RawValue;
             }
-            set {
+            set
+            {
                 if (changed)
-                    UpdateInfo ();
+                    UpdateInfo();
                 if (readOnly)
-                    throw new InvalidOperationException ();
-                UpdateValue (impl, false, value);
+                    throw new InvalidOperationException();
+                UpdateValue(impl, false, value);
             }
         }
 
-        [Browsable (false), DefaultValue (true)]
-        [MonitoringDescription ("The accessability level of the counter.")]
-        public bool ReadOnly {
-            get {return readOnly;}
-            set {readOnly = value;}
+        [Browsable(false), DefaultValue(true)]
+        [MonitoringDescription("The accessability level of the counter.")]
+        public bool ReadOnly
+        {
+            get { return readOnly; }
+            set { readOnly = value; }
         }
 
-        public void BeginInit ()
+        public void BeginInit()
         {
             // we likely don't need to do anything significant here
         }
 
-        public void EndInit ()
+        public void EndInit()
         {
             // we likely don't need to do anything significant here
         }
 
-        public void Close ()
+        public void Close()
         {
             IntPtr p = impl;
             impl = IntPtr.Zero;
             if (p != IntPtr.Zero)
-                FreeData (p);
+                FreeData(p);
         }
 
-        public static void CloseSharedResources ()
+        public static void CloseSharedResources()
         {
             // we likely don't need to do anything significant here
         }
 
         // may throw InvalidOperationException, Win32Exception
-        public long Decrement ()
+        public long Decrement()
         {
-            return IncrementBy (-1);
+            return IncrementBy(-1);
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            Close ();
-        }
-
-        // may throw InvalidOperationException, Win32Exception
-        public long Increment ()
-        {
-            return IncrementBy (1);
+            Close();
         }
 
         // may throw InvalidOperationException, Win32Exception
-        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.MayFail)]
-        public long IncrementBy (long value)
+        public long Increment()
+        {
+            return IncrementBy(1);
+        }
+
+        // may throw InvalidOperationException, Win32Exception
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+        public long IncrementBy(long value)
         {
             if (changed)
-                UpdateInfo ();
-            if (readOnly) {
+                UpdateInfo();
+            if (readOnly)
+            {
                 // FIXME: This should really throw, but by now set this workaround in place.
                 //throw new InvalidOperationException ();
                 return 0;
             }
-            return UpdateValue (impl, true, value);
+            return UpdateValue(impl, true, value);
         }
 
         // may throw InvalidOperationException, Win32Exception
-        public CounterSample NextSample ()
+        public CounterSample NextSample()
         {
             CounterSample sample;
             if (changed)
-                UpdateInfo ();
-            GetSample (impl, false, out sample);
+                UpdateInfo();
+            GetSample(impl, false, out sample);
             valid_old = true;
             old_sample = sample;
             return sample;
         }
 
         // may throw InvalidOperationException, Win32Exception
-        public float NextValue ()
+        public float NextValue()
         {
             CounterSample sample;
             if (changed)
-                UpdateInfo ();
-            GetSample (impl, false, out sample);
+                UpdateInfo();
+            GetSample(impl, false, out sample);
             float val;
             if (valid_old)
-                val = CounterSampleCalculator.ComputeCounterValue (old_sample, sample);
+                val = CounterSampleCalculator.ComputeCounterValue(old_sample, sample);
             else
-                val = CounterSampleCalculator.ComputeCounterValue (sample);
+                val = CounterSampleCalculator.ComputeCounterValue(sample);
             valid_old = true;
             old_sample = sample;
             return val;
@@ -377,11 +412,10 @@ namespace System.Diagnostics {
 
         // may throw InvalidOperationException, Win32Exception
         [MonoTODO]
-        [ReliabilityContract (Consistency.WillNotCorruptState, Cer.MayFail)]
-        public void RemoveInstance ()
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+        public void RemoveInstance()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

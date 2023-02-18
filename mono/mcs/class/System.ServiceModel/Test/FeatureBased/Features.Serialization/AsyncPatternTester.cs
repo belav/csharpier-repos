@@ -11,12 +11,17 @@ using System.Threading;
 namespace MonoTests.Features.Serialization
 {
     [TestFixture]
-    public class AsyncPatternTest : TestFixtureBase<AsyncPatternClient, AsyncPatternServer, MonoTests.Features.Contracts.IAsyncPattern>
+    public class AsyncPatternTest
+        : TestFixtureBase<
+            AsyncPatternClient,
+            AsyncPatternServer,
+            MonoTests.Features.Contracts.IAsyncPattern
+        >
     {
-
         [Test]
-        public void TestAsync () {
-            Assert.AreEqual (ClientProxy.AsyncMethod (), 3, "Called method with AsyncPattern=true");
+        public void TestAsync()
+        {
+            Assert.AreEqual(ClientProxy.AsyncMethod(), 3, "Called method with AsyncPattern=true");
         }
     }
 }

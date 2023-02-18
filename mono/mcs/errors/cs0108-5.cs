@@ -2,14 +2,15 @@
 // Line: 10
 // Compiler options: -warnaserror -warn:2
 
-class Base {
+class Base
+{
     public bool Prop = false;
 }
 
-class Derived : Base {
-    public int Prop {
-            get {
-                return 0;
-            }
-        }
+class Derived : Base
+{
+    public int Prop
+    {
+        get { return 0; }
+    }
 }

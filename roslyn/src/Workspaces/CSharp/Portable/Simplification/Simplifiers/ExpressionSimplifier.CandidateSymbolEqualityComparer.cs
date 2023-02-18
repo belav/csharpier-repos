@@ -15,11 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
         /// </summary>
         private sealed class CandidateSymbolEqualityComparer : IEqualityComparer<ISymbol>
         {
-            public static CandidateSymbolEqualityComparer Instance { get; } = new CandidateSymbolEqualityComparer();
+            public static CandidateSymbolEqualityComparer Instance { get; } =
+                new CandidateSymbolEqualityComparer();
 
-            private CandidateSymbolEqualityComparer()
-            {
-            }
+            private CandidateSymbolEqualityComparer() { }
 
             public bool Equals(ISymbol x, ISymbol y)
             {
@@ -31,8 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return x.OriginalDefinition.Equals(y.OriginalDefinition);
             }
 
-            public int GetHashCode(ISymbol obj)
-                => obj?.OriginalDefinition.GetHashCode() ?? 0;
+            public int GetHashCode(ISymbol obj) => obj?.OriginalDefinition.GetHashCode() ?? 0;
         }
     }
 }

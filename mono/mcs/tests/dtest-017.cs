@@ -1,35 +1,23 @@
 using System;
 using System.Collections.Generic;
 
-class B<U>
-{
-}
+class B<U> { }
 
-class C<T> : B<T>
-{
-}
+class C<T> : B<T> { }
 
-interface I<T> : IA<T>
-{
-}
+interface I<T> : IA<T> { }
 
-interface IA<U>
-{
-}
+interface IA<U> { }
 
-struct S<T>
-{
-}
+struct S<T> { }
 
-delegate dynamic D (dynamic d);
+delegate dynamic D(dynamic d);
 
 class DynamicAssignments
 {
-    static void Foo (IA<object> o)
-    {
-    }
-    
-    public static int Main ()
+    static void Foo(IA<object> o) { }
+
+    public static int Main()
     {
         dynamic d1 = null;
         dynamic d2 = null;
@@ -45,7 +33,7 @@ class DynamicAssignments
         B<B<dynamic>> g_n2 = null;
         g_n1 = g_n2;
         g_n2 = g_n1;
-        
+
         object[] o = null;
         dynamic[] d = o;
 
@@ -56,26 +44,27 @@ class DynamicAssignments
 
         I<object> io = null;
         IA<dynamic> id = io;
-        
+
         IA<object> ia_o = null;
         IA<dynamic> ia_d = ia_o;
-        
-        S<dynamic> s_d = new S<dynamic> ();
+
+        S<dynamic> s_d = new S<dynamic>();
         S<object> s_o = s_d;
         S<object>? s_o_n = s_d;
-        
-        D del = delegate (object del_arg) {
-             return (object) null;
+
+        D del = delegate(object del_arg)
+        {
+            return (object)null;
         };
-        
+
         Action<IA<dynamic>> del2 = Foo;
-        
+
         Action<object> del31 = null;
         Action<dynamic> del32 = del31;
-        
+
         I<dynamic>[] a20 = null;
         I<object>[] b20 = a20;
-        
+
         dynamic[] d40 = null;
         IEnumerable<object> d41 = d40;
 

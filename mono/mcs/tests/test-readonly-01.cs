@@ -10,7 +10,5 @@ readonly struct S
     static event Action e;
     static int Prop { get; set; }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

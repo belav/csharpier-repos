@@ -22,9 +22,7 @@ namespace Roslyn.Utilities
             {
                 public static new readonly List<T> Instance = new();
 
-                protected List()
-                {
-                }
+                protected List() { }
 
                 public int IndexOf(T item)
                 {
@@ -43,15 +41,8 @@ namespace Roslyn.Utilities
 
                 public T this[int index]
                 {
-                    get
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(index));
-                    }
-
-                    set
-                    {
-                        throw new NotSupportedException();
-                    }
+                    get { throw new ArgumentOutOfRangeException(nameof(index)); }
+                    set { throw new NotSupportedException(); }
                 }
             }
         }

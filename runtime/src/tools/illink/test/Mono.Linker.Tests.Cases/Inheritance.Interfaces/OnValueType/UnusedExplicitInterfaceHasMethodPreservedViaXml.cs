@@ -3,44 +3,40 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnValueType
 {
-    [SetupLinkerDescriptorFile ("UnusedExplicitInterfaceHasMethodPreservedViaXml.xml")]
+    [SetupLinkerDescriptorFile("UnusedExplicitInterfaceHasMethodPreservedViaXml.xml")]
     public class UnusedExplicitInterfaceHasMethodPreservedViaXml
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo i = new A ();
-            i.Foo ();
+            IFoo i = new A();
+            i.Foo();
         }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
         interface IBar
         {
             [Kept]
-            void Bar ();
+            void Bar();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IFoo))]
-        [KeptInterface (typeof (IBar))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IFoo))]
+        [KeptInterface(typeof(IBar))]
         struct A : IBar, IFoo
         {
             [Kept]
-            void IFoo.Foo ()
-            {
-            }
+            void IFoo.Foo() { }
 
             [Kept]
-            void IBar.Bar ()
-            {
-            }
+            void IBar.Bar() { }
         }
     }
 }

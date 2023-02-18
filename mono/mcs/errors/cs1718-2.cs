@@ -4,10 +4,10 @@
 
 class A
 {
-    delegate void D ();
+    delegate void D();
     D d = null;
-    
-    public A ()
+
+    public A()
     {
         bool b = d == d;
     }

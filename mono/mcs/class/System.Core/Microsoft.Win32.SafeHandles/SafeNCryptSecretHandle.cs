@@ -30,13 +30,11 @@ namespace Microsoft.Win32.SafeHandles
 {
     public sealed class SafeNCryptSecretHandle : SafeNCryptHandle
     {
-        public SafeNCryptSecretHandle ()
-        {
-        }
+        public SafeNCryptSecretHandle() { }
 
-        protected override bool ReleaseNativeHandle ()
+        protected override bool ReleaseNativeHandle()
         {
             return false;
         }
     }
-}    
+}

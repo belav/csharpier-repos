@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 {
     internal abstract class AbstractFormattingCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.FormattingDiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.FormattingDiagnosticId);
 
         protected abstract ISyntaxFormatting SyntaxFormatting { get; }
 
@@ -31,27 +31,60 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     CodeAction.Create(
                         AnalyzersResources.Fix_formatting,
                         c => FixOneAsync(context, diagnostic, c),
-                        nameof(AbstractFormattingCodeFixProvider)),
-                    diagnostic);
+                        nameof(AbstractFormattingCodeFixProvider)
+                    ),
+                    diagnostic
+                );
             }
 
             return Task.CompletedTask;
         }
 
-        private async Task<Document> FixOneAsync(CodeFixContext context, Diagnostic diagnostic, CancellationToken cancellationToken)
+        private async Task<Document> FixOneAsync(
+            CodeFixContext context,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
-            var options = await context.Document.GetCodeFixOptionsAsync(context.GetOptionsProvider(), cancellationToken).ConfigureAwait(false);
+            var options = await context.Document
+                .GetCodeFixOptionsAsync(context.GetOptionsProvider(), cancellationToken)
+                .ConfigureAwait(false);
             var formattingOptions = options.GetFormattingOptions(SyntaxFormatting);
-            var tree = await context.Document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var updatedTree = await FormattingCodeFixHelper.FixOneAsync(tree, SyntaxFormatting, formattingOptions, diagnostic, cancellationToken).ConfigureAwait(false);
-            return context.Document.WithText(await updatedTree.GetTextAsync(cancellationToken).ConfigureAwait(false));
+            var tree = await context.Document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var updatedTree = await FormattingCodeFixHelper
+                .FixOneAsync(
+                    tree,
+                    SyntaxFormatting,
+                    formattingOptions,
+                    diagnostic,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return context.Document.WithText(
+                await updatedTree.GetTextAsync(cancellationToken).ConfigureAwait(false)
+            );
         }
 
-        protected override async Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        protected override async Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var options = await document.GetCodeFixOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetCodeFixOptionsAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             var formattingOptions = options.GetFormattingOptions(SyntaxFormatting);
-            var updatedRoot = Formatter.Format(editor.OriginalRoot, SyntaxFormatting, formattingOptions, cancellationToken);
+            var updatedRoot = Formatter.Format(
+                editor.OriginalRoot,
+                SyntaxFormatting,
+                formattingOptions,
+                cancellationToken
+            );
             editor.ReplaceNode(editor.OriginalRoot, updatedRoot);
         }
     }

@@ -6,12 +6,10 @@ using System.Runtime.InteropServices;
 
 public class C
 {
-    public static void Foo ([DefaultParameterValue(null)] string s)
-    {
-    }
+    public static void Foo([DefaultParameterValue(null)] string s) { }
 
-    public static void Main ()
+    public static void Main()
     {
-        Foo ();
+        Foo();
     }
 }

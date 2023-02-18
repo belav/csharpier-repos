@@ -15,9 +15,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="suggestionSources">The list of suggestion sources to add to.</param>
         /// <param name="suggest">The delegate to be called when calculating suggestions.</param>
-        public static void Add(
-            this SuggestionSourceList suggestionSources,
-            SuggestDelegate suggest)
+        public static void Add(this SuggestionSourceList suggestionSources, SuggestDelegate suggest)
         {
             if (suggestionSources is null)
             {
@@ -39,7 +37,8 @@ namespace System.CommandLine
         /// <param name="suggestions">A list of strings to be suggested.</param>
         public static void Add(
             this SuggestionSourceList suggestionSources,
-            params string[] suggestions)
+            params string[] suggestions
+        )
         {
             if (suggestionSources is null)
             {

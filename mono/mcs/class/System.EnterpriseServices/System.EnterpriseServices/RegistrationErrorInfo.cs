@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.RegistrationErrorInfo.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,10 +30,11 @@
 
 using System;
 
-namespace System.EnterpriseServices {
+namespace System.EnterpriseServices
+{
     [Serializable]
-    public sealed class RegistrationErrorInfo {
-
+    public sealed class RegistrationErrorInfo
+    {
         #region Fields
 #pragma warning disable 649
         int errorCode;
@@ -48,7 +49,7 @@ namespace System.EnterpriseServices {
         #region Constructors
 
         [MonoTODO]
-        internal RegistrationErrorInfo (string name, string majorRef, string minorRef, int errorCode) 
+        internal RegistrationErrorInfo(string name, string majorRef, string minorRef, int errorCode)
         {
             this.name = name;
             this.majorRef = majorRef;
@@ -60,23 +61,28 @@ namespace System.EnterpriseServices {
 
         #region Properties
 
-        public int ErrorCode {
+        public int ErrorCode
+        {
             get { return errorCode; }
         }
 
-        public string ErrorString {
+        public string ErrorString
+        {
             get { return errorString; }
         }
 
-        public string MajorRef {
+        public string MajorRef
+        {
             get { return majorRef; }
         }
 
-        public string MinorRef {
+        public string MinorRef
+        {
             get { return minorRef; }
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 

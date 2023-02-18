@@ -1,4 +1,4 @@
- // 
+//
 // System.Web.Services.WebMethodAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,15 +32,22 @@
 using System.EnterpriseServices;
 #endif
 
-namespace System.Web.Services {
-
+namespace System.Web.Services
+{
 #if MOBILE
-    public enum TransactionOption {Disabled , NotSupported , Required , RequiresNew , Supported }
+    public enum TransactionOption
+    {
+        Disabled,
+        NotSupported,
+        Required,
+        RequiresNew,
+        Supported
+    }
 #endif
 
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
-    public sealed class WebMethodAttribute : Attribute {
-
+    public sealed class WebMethodAttribute : Attribute
+    {
         #region Fields
 
         bool bufferResponse;
@@ -54,27 +61,28 @@ namespace System.Web.Services {
 
         #region Constructors
 
-        public WebMethodAttribute ()
-            : this (false, TransactionOption.Disabled, 0, true)
-        {
-        }
+        public WebMethodAttribute()
+            : this(false, TransactionOption.Disabled, 0, true) { }
 
-        public WebMethodAttribute (bool enableSession)
-            : this (enableSession, TransactionOption.Disabled, 0, true)
-        {
-        }
+        public WebMethodAttribute(bool enableSession)
+            : this(enableSession, TransactionOption.Disabled, 0, true) { }
 
-        public WebMethodAttribute (bool enableSession, TransactionOption transactionOption)
-            : this (enableSession, transactionOption, 0, true)
-        {
-        }
+        public WebMethodAttribute(bool enableSession, TransactionOption transactionOption)
+            : this(enableSession, transactionOption, 0, true) { }
 
-        public WebMethodAttribute (bool enableSession, TransactionOption transactionOption, int cacheDuration)
-            : this (enableSession, transactionOption, cacheDuration, true)
-        {
-        }
+        public WebMethodAttribute(
+            bool enableSession,
+            TransactionOption transactionOption,
+            int cacheDuration
+        )
+            : this(enableSession, transactionOption, cacheDuration, true) { }
 
-        public WebMethodAttribute (bool enableSession, TransactionOption transactionOption, int cacheDuration, bool bufferResponse)
+        public WebMethodAttribute(
+            bool enableSession,
+            TransactionOption transactionOption,
+            int cacheDuration,
+            bool bufferResponse
+        )
         {
             this.bufferResponse = bufferResponse;
             this.cacheDuration = cacheDuration;
@@ -84,37 +92,43 @@ namespace System.Web.Services {
             this.description = String.Empty;
             this.messageName = String.Empty;
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        public bool BufferResponse {
+        public bool BufferResponse
+        {
             get { return bufferResponse; }
             set { bufferResponse = value; }
         }
 
-        public int CacheDuration {
+        public int CacheDuration
+        {
             get { return cacheDuration; }
             set { cacheDuration = value; }
         }
 
-        public string Description { 
+        public string Description
+        {
             get { return description; }
             set { description = value; }
         }
 
-        public bool EnableSession {
+        public bool EnableSession
+        {
             get { return enableSession; }
             set { enableSession = value; }
         }
 
-        public string MessageName {
+        public string MessageName
+        {
             get { return messageName; }
             set { messageName = value; }
         }
 
-        public TransactionOption TransactionOption {
+        public TransactionOption TransactionOption
+        {
             get { return transactionOption; }
             set { transactionOption = value; }
         }

@@ -21,7 +21,8 @@ public sealed class SqlQueryRootExpression : QueryRootExpression
         IAsyncQueryProvider queryProvider,
         Type elementType,
         string sql,
-        Expression argument)
+        Expression argument
+    )
         : base(queryProvider, elementType)
     {
         Sql = sql;
@@ -34,10 +35,7 @@ public sealed class SqlQueryRootExpression : QueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlQueryRootExpression(
-        Type elementType,
-        string sql,
-        Expression argument)
+    public SqlQueryRootExpression(Type elementType, string sql, Expression argument)
         : base(elementType)
     {
         Sql = sql;
@@ -66,8 +64,8 @@ public sealed class SqlQueryRootExpression : QueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Expression DetachQueryProvider()
-        => new SqlQueryRootExpression(ElementType, Sql, Argument);
+    public override Expression DetachQueryProvider() =>
+        new SqlQueryRootExpression(ElementType, Sql, Argument);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -79,9 +77,7 @@ public sealed class SqlQueryRootExpression : QueryRootExpression
     {
         var argument = visitor.Visit(Argument);
 
-        return argument != Argument
-            ? new SqlQueryRootExpression(ElementType, Sql, argument)
-            : this;
+        return argument != Argument ? new SqlQueryRootExpression(ElementType, Sql, argument) : this;
     }
 
     /// <summary>
@@ -103,16 +99,18 @@ public sealed class SqlQueryRootExpression : QueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is SqlQueryRootExpression sqlQueryRootExpression
-                && Equals(sqlQueryRootExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is SqlQueryRootExpression sqlQueryRootExpression
+                && Equals(sqlQueryRootExpression)
+        );
 
-    private bool Equals(SqlQueryRootExpression sqlQueryRootExpression)
-        => base.Equals(sqlQueryRootExpression)
-            && Sql == sqlQueryRootExpression.Sql
-            && ExpressionEqualityComparer.Instance.Equals(Argument, sqlQueryRootExpression.Argument);
+    private bool Equals(SqlQueryRootExpression sqlQueryRootExpression) =>
+        base.Equals(sqlQueryRootExpression)
+        && Sql == sqlQueryRootExpression.Sql
+        && ExpressionEqualityComparer.Instance.Equals(Argument, sqlQueryRootExpression.Argument);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -120,6 +118,10 @@ public sealed class SqlQueryRootExpression : QueryRootExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Sql, ExpressionEqualityComparer.Instance.GetHashCode(Argument));
+    public override int GetHashCode() =>
+        HashCode.Combine(
+            base.GetHashCode(),
+            Sql,
+            ExpressionEqualityComparer.Instance.GetHashCode(Argument)
+        );
 }

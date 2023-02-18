@@ -42,30 +42,31 @@ namespace MonoTests.Common
         public byte[,] ByteMultiArray_Column { get; set; }
         public bool[] BoolArray_Column { get; set; }
 
-        [DynamicDataStringLength (Int32.MaxValue)]
+        [DynamicDataStringLength(Int32.MaxValue)]
         public string MaximumLength_Column1 { get; set; }
 
-        [DynamicDataStringLength (Int32.MinValue)]
+        [DynamicDataStringLength(Int32.MinValue)]
         public string MaximumLength_Column2 { get; set; }
 
         // This is the highest length at which string is considered to be short
-        [DynamicDataStringLength ((Int32.MaxValue / 2) - 5)]
+        [DynamicDataStringLength((Int32.MaxValue / 2) - 5)]
         public string MaximumLength_Column3 { get; set; }
 
         // This is the lowest length at which string is considered to be long
-        [DynamicDataStringLength ((Int32.MaxValue / 2) - 4)]
+        [DynamicDataStringLength((Int32.MaxValue / 2) - 4)]
         public string MaximumLength_Column4 { get; set; }
 
-        [StringLength (255)]
-        [DynamicDataStringLength (512)]
+        [StringLength(255)]
+        [DynamicDataStringLength(512)]
         public string MaximumLength_Column5 { get; set; }
 
-        public BazDataTypeDefaultTypes () : this (false)
-        {}
+        public BazDataTypeDefaultTypes()
+            : this(false) { }
 
-        public BazDataTypeDefaultTypes (bool fillValues)
+        public BazDataTypeDefaultTypes(bool fillValues)
         {
-            if (fillValues) {
+            if (fillValues)
+            {
                 Char_Column = 'a';
                 String_Column = "string";
             }

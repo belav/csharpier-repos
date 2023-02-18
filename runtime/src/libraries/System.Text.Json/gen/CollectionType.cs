@@ -10,12 +10,14 @@ namespace System.Text.Json.SourceGeneration
     internal enum CollectionType
     {
         NotApplicable,
+
         // Dictionary types
         IDictionary,
         Dictionary,
         ImmutableDictionary,
         IDictionaryOfTKeyTValue,
         IReadOnlyDictionary,
+
         // Non-dictionary types
         Array,
         List,

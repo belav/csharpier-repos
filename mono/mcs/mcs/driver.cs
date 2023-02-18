@@ -31,77 +31,101 @@ namespace Mono.CSharp
     {
         readonly CompilerContext ctx;
 
-        public Driver (CompilerContext ctx)
+        public Driver(CompilerContext ctx)
         {
             this.ctx = ctx;
         }
 
-        Report Report {
-            get {
-                return ctx.Report;
-            }
+        Report Report
+        {
+            get { return ctx.Report; }
         }
 
-        void tokenize_file (SourceFile sourceFile, ModuleContainer module, ParserSession session)
+        void tokenize_file(SourceFile sourceFile, ModuleContainer module, ParserSession session)
         {
             Stream input = null;
             SeekableStreamReader reader = null;
 
-            try {
-                if (sourceFile.GetInputStream != null) {
-                    reader = sourceFile.GetInputStream (sourceFile);
-                    if (reader == null) {
-                        throw new FileNotFoundException ("Delegate returned null", sourceFile.Name);
+            try
+            {
+                if (sourceFile.GetInputStream != null)
+                {
+                    reader = sourceFile.GetInputStream(sourceFile);
+                    if (reader == null)
+                    {
+                        throw new FileNotFoundException("Delegate returned null", sourceFile.Name);
                     }
-                } else {
-                    input = File.OpenRead (sourceFile.Name);
                 }
-            } catch {
-                Report.Error (2001, "Source file `" + sourceFile.Name + "' could not be found");
+                else
+                {
+                    input = File.OpenRead(sourceFile.Name);
+                }
+            }
+            catch
+            {
+                Report.Error(2001, "Source file `" + sourceFile.Name + "' could not be found");
                 return;
             }
 
-            if (reader == null) {
-                using (input) {
-                    reader = new SeekableStreamReader (input, ctx.Settings.Encoding);
-                    DoTokenize (sourceFile, module, session, reader);
+            if (reader == null)
+            {
+                using (input)
+                {
+                    reader = new SeekableStreamReader(input, ctx.Settings.Encoding);
+                    DoTokenize(sourceFile, module, session, reader);
                 }
-            } else {
-                DoTokenize (sourceFile, module, session, reader);
+            }
+            else
+            {
+                DoTokenize(sourceFile, module, session, reader);
             }
         }
 
-        void DoTokenize (SourceFile sourceFile, ModuleContainer module, ParserSession session, SeekableStreamReader reader) {
-            var file = new CompilationSourceFile (module, sourceFile);
+        void DoTokenize(
+            SourceFile sourceFile,
+            ModuleContainer module,
+            ParserSession session,
+            SeekableStreamReader reader
+        )
+        {
+            var file = new CompilationSourceFile(module, sourceFile);
 
-            Tokenizer lexer = new Tokenizer (reader, file, session, ctx.Report);
-            int token, tokens = 0, errors = 0;
+            Tokenizer lexer = new Tokenizer(reader, file, session, ctx.Report);
+            int token,
+                tokens = 0,
+                errors = 0;
 
-            while ((token = lexer.token ()) != Token.EOF) {
+            while ((token = lexer.token()) != Token.EOF)
+            {
                 tokens++;
                 if (token == Token.ERROR)
                     errors++;
             }
-            Console.WriteLine ("Tokenized: " + tokens + " found " + errors + " errors");
+            Console.WriteLine("Tokenized: " + tokens + " found " + errors + " errors");
         }
 
-        void Parse (ModuleContainer module)
+        void Parse(ModuleContainer module)
         {
             bool tokenize_only = module.Compiler.Settings.TokenizeOnly;
             var sources = module.Compiler.SourceFiles;
 
-            Location.Initialize (sources);
+            Location.Initialize(sources);
 
-            var session = new ParserSession {
+            var session = new ParserSession
+            {
                 UseJayGlobalArrays = true,
                 LocatedTokens = new LocatedToken[15000]
             };
 
-            for (int i = 0; i < sources.Count; ++i) {
-                if (tokenize_only) {
-                    tokenize_file (sources[i], module, session);
-                } else {
-                    Parse (sources[i], module, session, Report);
+            for (int i = 0; i < sources.Count; ++i)
+            {
+                if (tokenize_only)
+                {
+                    tokenize_file(sources[i], module, session);
+                }
+                else
+                {
+                    Parse(sources[i], module, session, Report);
                 }
             }
         }
@@ -141,142 +165,191 @@ namespace Mono.CSharp
         }
 #endif
 
-        public void Parse (SourceFile file, ModuleContainer module, ParserSession session, Report report)
+        public void Parse(
+            SourceFile file,
+            ModuleContainer module,
+            ParserSession session,
+            Report report
+        )
         {
             Stream input = null;
             SeekableStreamReader reader = null;
 
-            try {
-                if (file.GetInputStream != null) {
-                    reader = file.GetInputStream (file);
-                    if (reader == null) {
-                        throw new FileNotFoundException ("Delegate returned null", file.Name);
+            try
+            {
+                if (file.GetInputStream != null)
+                {
+                    reader = file.GetInputStream(file);
+                    if (reader == null)
+                    {
+                        throw new FileNotFoundException("Delegate returned null", file.Name);
                     }
-                } else {
-                    input = File.OpenRead (file.Name);
                 }
-            } catch {
-                report.Error (2001, "Source file `{0}' could not be found", file.Name);
+                else
+                {
+                    input = File.OpenRead(file.Name);
+                }
+            }
+            catch
+            {
+                report.Error(2001, "Source file `{0}' could not be found", file.Name);
                 return;
             }
 
-            if (reader == null) {
-                using (input) {
+            if (reader == null)
+            {
+                using (input)
+                {
                     // Check 'MZ' header
-                    if (input.ReadByte () == 77 && input.ReadByte () == 90) {
-
-                        report.Error (2015, "Source file `{0}' is a binary file and not a text file", file.Name);
+                    if (input.ReadByte() == 77 && input.ReadByte() == 90)
+                    {
+                        report.Error(
+                            2015,
+                            "Source file `{0}' is a binary file and not a text file",
+                            file.Name
+                        );
                         return;
                     }
 
                     input.Position = 0;
-                    reader = new SeekableStreamReader (input, ctx.Settings.Encoding, session.StreamReaderBuffer);
+                    reader = new SeekableStreamReader(
+                        input,
+                        ctx.Settings.Encoding,
+                        session.StreamReaderBuffer
+                    );
 
-                    DoParse (file, module, session, report, reader);
+                    DoParse(file, module, session, report, reader);
                 }
-            } else {
-                DoParse (file, module, session, report, reader);
+            }
+            else
+            {
+                DoParse(file, module, session, report, reader);
             }
         }
 
-        void DoParse (SourceFile file, ModuleContainer module, ParserSession session, Report report, SeekableStreamReader reader) {
-            Parse (reader, file, module, session, report);
+        void DoParse(
+            SourceFile file,
+            ModuleContainer module,
+            ParserSession session,
+            Report report,
+            SeekableStreamReader reader
+        )
+        {
+            Parse(reader, file, module, session, report);
 
-            if (ctx.Settings.GenerateDebugInfo && report.Errors == 0 && !file.HasChecksum) {
+            if (ctx.Settings.GenerateDebugInfo && report.Errors == 0 && !file.HasChecksum)
+            {
                 reader.Stream.Position = 0;
-                var checksum = session.GetChecksumAlgorithm ();
-                file.SetChecksum (checksum.ComputeHash (reader.Stream));
+                var checksum = session.GetChecksumAlgorithm();
+                file.SetChecksum(checksum.ComputeHash(reader.Stream));
             }
         }
 
-        public static void Parse (SeekableStreamReader reader, SourceFile sourceFile, ModuleContainer module, ParserSession session, Report report)
+        public static void Parse(
+            SeekableStreamReader reader,
+            SourceFile sourceFile,
+            ModuleContainer module,
+            ParserSession session,
+            Report report
+        )
         {
-            var file = new CompilationSourceFile (module, sourceFile);
-            module.AddTypeContainer (file);
+            var file = new CompilationSourceFile(module, sourceFile);
+            module.AddTypeContainer(file);
 
-            CSharpParser parser = new CSharpParser (reader, file, report, session);
-            parser.parse ();
+            CSharpParser parser = new CSharpParser(reader, file, report, session);
+            parser.parse();
         }
-        
-        public static int Main (string[] args)
-        {
-            Location.InEmacs = Environment.GetEnvironmentVariable ("EMACS") == "t";
 
-            CommandLineParser cmd = new CommandLineParser (Console.Out);
-            var settings = cmd.ParseArguments (args);
+        public static int Main(string[] args)
+        {
+            Location.InEmacs = Environment.GetEnvironmentVariable("EMACS") == "t";
+
+            CommandLineParser cmd = new CommandLineParser(Console.Out);
+            var settings = cmd.ParseArguments(args);
             if (settings == null)
                 return 1;
 
             if (cmd.HasBeenStopped)
                 return 0;
 
-            Driver d = new Driver (new CompilerContext (settings, new ConsoleReportPrinter ()));
+            Driver d = new Driver(new CompilerContext(settings, new ConsoleReportPrinter()));
 
-            if (d.Compile () && d.Report.Errors == 0) {
-                if (d.Report.Warnings > 0) {
-                    Console.WriteLine ("Compilation succeeded - {0} warning(s)", d.Report.Warnings);
+            if (d.Compile() && d.Report.Errors == 0)
+            {
+                if (d.Report.Warnings > 0)
+                {
+                    Console.WriteLine("Compilation succeeded - {0} warning(s)", d.Report.Warnings);
                 }
-                Environment.Exit (0);
+                Environment.Exit(0);
                 return 0;
             }
-            
-            
-            Console.WriteLine("Compilation failed: {0} error(s), {1} warnings",
-                d.Report.Errors, d.Report.Warnings);
-            Environment.Exit (1);
+
+            Console.WriteLine(
+                "Compilation failed: {0} error(s), {1} warnings",
+                d.Report.Errors,
+                d.Report.Warnings
+            );
+            Environment.Exit(1);
             return 1;
         }
 
-        public static string GetPackageFlags (string packages, Report report)
+        public static string GetPackageFlags(string packages, Report report)
         {
 #if MONO_FEATURE_PROCESS_START
-            ProcessStartInfo pi = new ProcessStartInfo ();
+            ProcessStartInfo pi = new ProcessStartInfo();
             pi.FileName = "pkg-config";
             pi.RedirectStandardOutput = true;
             pi.UseShellExecute = false;
             pi.Arguments = "--libs " + packages;
             Process p = null;
-            try {
-                p = Process.Start (pi);
-            } catch (Exception e) {
+            try
+            {
+                p = Process.Start(pi);
+            }
+            catch (Exception e)
+            {
                 if (report == null)
                     throw;
 
-                report.Error (-27, "Couldn't run pkg-config: " + e.Message);
+                report.Error(-27, "Couldn't run pkg-config: " + e.Message);
                 return null;
             }
-            
-            if (p.StandardOutput == null) {
+
+            if (p.StandardOutput == null)
+            {
                 if (report == null)
-                    throw new ApplicationException ("Specified package did not return any information");
+                    throw new ApplicationException(
+                        "Specified package did not return any information"
+                    );
 
-                report.Warning (-27, 1, "Specified package did not return any information");
-                p.Close ();
+                report.Warning(-27, 1, "Specified package did not return any information");
+                p.Close();
                 return null;
             }
 
-            string pkgout = p.StandardOutput.ReadToEnd ();
-            p.WaitForExit ();
-            if (p.ExitCode != 0) {
+            string pkgout = p.StandardOutput.ReadToEnd();
+            p.WaitForExit();
+            if (p.ExitCode != 0)
+            {
                 if (report == null)
-                    throw new ApplicationException (pkgout);
+                    throw new ApplicationException(pkgout);
 
-                report.Error (-27, "Error running pkg-config. Check the above output.");
-                p.Close ();
+                report.Error(-27, "Error running pkg-config. Check the above output.");
+                p.Close();
                 return null;
             }
 
-            p.Close ();
+            p.Close();
             return pkgout;
 #else
-            throw new NotSupportedException ("Process.Start is not supported on this platform.");
+            throw new NotSupportedException("Process.Start is not supported on this platform.");
 #endif // MONO_FEATURE_PROCESS_START
         }
 
         //
         // Main compilation method
         //
-        public bool Compile ()
+        public bool Compile()
         {
             var settings = ctx.Settings;
 
@@ -284,164 +357,197 @@ namespace Mono.CSharp
             // If we are an exe, require a source file for the entry point or
             // if there is nothing to put in the assembly, and we are not a library
             //
-            if (settings.FirstSourceFile == null &&
-                ((settings.Target == Target.Exe || settings.Target == Target.WinExe || settings.Target == Target.Module) ||
-                settings.Resources == null)) {
-                Report.Error (2008, "No files to compile were specified");
+            if (
+                settings.FirstSourceFile == null
+                && (
+                    (
+                        settings.Target == Target.Exe
+                        || settings.Target == Target.WinExe
+                        || settings.Target == Target.Module
+                    )
+                    || settings.Resources == null
+                )
+            )
+            {
+                Report.Error(2008, "No files to compile were specified");
                 return false;
             }
 
-            if (settings.Platform == Platform.AnyCPU32Preferred && (settings.Target == Target.Library || settings.Target == Target.Module)) {
-                Report.Error (4023, "Platform option `anycpu32bitpreferred' is valid only for executables");
+            if (
+                settings.Platform == Platform.AnyCPU32Preferred
+                && (settings.Target == Target.Library || settings.Target == Target.Module)
+            )
+            {
+                Report.Error(
+                    4023,
+                    "Platform option `anycpu32bitpreferred' is valid only for executables"
+                );
                 return false;
             }
 
-            TimeReporter tr = new TimeReporter (settings.Timestamps);
+            TimeReporter tr = new TimeReporter(settings.Timestamps);
             ctx.TimeReporter = tr;
-            tr.StartTotal ();
+            tr.StartTotal();
 
-            var module = new ModuleContainer (ctx);
+            var module = new ModuleContainer(ctx);
             RootContext.ToplevelTypes = module;
 
-            tr.Start (TimeReporter.TimerType.ParseTotal);
-            Parse (module);
-            tr.Stop (TimeReporter.TimerType.ParseTotal);
+            tr.Start(TimeReporter.TimerType.ParseTotal);
+            Parse(module);
+            tr.Stop(TimeReporter.TimerType.ParseTotal);
 
             if (Report.Errors > 0)
                 return false;
 
-            if (settings.TokenizeOnly || settings.ParseOnly) {
-                tr.StopTotal ();
-                tr.ShowStats ();
+            if (settings.TokenizeOnly || settings.ParseOnly)
+            {
+                tr.StopTotal();
+                tr.ShowStats();
                 return true;
             }
 
             var output_file = settings.OutputFile;
             string output_file_name;
-            if (output_file == null) {
+            if (output_file == null)
+            {
                 var source_file = settings.FirstSourceFile;
 
-                if (source_file == null) {
-                    Report.Error (1562, "If no source files are specified you must specify the output file with -out:");
+                if (source_file == null)
+                {
+                    Report.Error(
+                        1562,
+                        "If no source files are specified you must specify the output file with -out:"
+                    );
                     return false;
                 }
 
                 output_file_name = source_file.Name;
-                int pos = output_file_name.LastIndexOf ('.');
+                int pos = output_file_name.LastIndexOf('.');
 
                 if (pos > 0)
-                    output_file_name = output_file_name.Substring (0, pos);
-                
+                    output_file_name = output_file_name.Substring(0, pos);
+
                 output_file_name += settings.TargetExt;
                 output_file = output_file_name;
-            } else {
-                output_file_name = Path.GetFileName (output_file);
+            }
+            else
+            {
+                output_file_name = Path.GetFileName(output_file);
 
-                if (string.IsNullOrEmpty (Path.GetFileNameWithoutExtension (output_file_name)) ||
-                    output_file_name.IndexOfAny (Path.GetInvalidFileNameChars ()) >= 0) {
-                    Report.Error (2021, "Output file name is not valid");
+                if (
+                    string.IsNullOrEmpty(Path.GetFileNameWithoutExtension(output_file_name))
+                    || output_file_name.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0
+                )
+                {
+                    Report.Error(2021, "Output file name is not valid");
                     return false;
                 }
             }
 
 #if STATIC
-            var importer = new StaticImporter (module);
-            var references_loader = new StaticLoader (importer, ctx);
+            var importer = new StaticImporter(module);
+            var references_loader = new StaticLoader(importer, ctx);
 
-            tr.Start (TimeReporter.TimerType.AssemblyBuilderSetup);
-            var assembly = new AssemblyDefinitionStatic (module, references_loader, output_file_name, output_file);
-            assembly.Create (references_loader.Domain);
-            tr.Stop (TimeReporter.TimerType.AssemblyBuilderSetup);
+            tr.Start(TimeReporter.TimerType.AssemblyBuilderSetup);
+            var assembly = new AssemblyDefinitionStatic(
+                module,
+                references_loader,
+                output_file_name,
+                output_file
+            );
+            assembly.Create(references_loader.Domain);
+            tr.Stop(TimeReporter.TimerType.AssemblyBuilderSetup);
 
             // Create compiler types first even before any referenced
             // assembly is loaded to allow forward referenced types from
             // loaded assembly into compiled builder to be resolved
             // correctly
-            tr.Start (TimeReporter.TimerType.CreateTypeTotal);
-            module.CreateContainer ();
-            importer.AddCompiledAssembly (assembly);
+            tr.Start(TimeReporter.TimerType.CreateTypeTotal);
+            module.CreateContainer();
+            importer.AddCompiledAssembly(assembly);
             references_loader.CompiledAssembly = assembly;
-            tr.Stop (TimeReporter.TimerType.CreateTypeTotal);
+            tr.Stop(TimeReporter.TimerType.CreateTypeTotal);
 
-            references_loader.LoadReferences (module);
+            references_loader.LoadReferences(module);
 
-            tr.Start (TimeReporter.TimerType.PredefinedTypesInit);
-            if (!ctx.BuiltinTypes.CheckDefinitions (module))
+            tr.Start(TimeReporter.TimerType.PredefinedTypesInit);
+            if (!ctx.BuiltinTypes.CheckDefinitions(module))
                 return false;
 
-            tr.Stop (TimeReporter.TimerType.PredefinedTypesInit);
+            tr.Stop(TimeReporter.TimerType.PredefinedTypesInit);
 
-            references_loader.LoadModules (assembly, module.GlobalRootNamespace);
+            references_loader.LoadModules(assembly, module.GlobalRootNamespace);
 #else
-            var assembly = new AssemblyDefinitionDynamic (module, output_file_name, output_file);
-            module.SetDeclaringAssembly (assembly);
+            var assembly = new AssemblyDefinitionDynamic(module, output_file_name, output_file);
+            module.SetDeclaringAssembly(assembly);
 
-            var importer = new ReflectionImporter (module, ctx.BuiltinTypes);
+            var importer = new ReflectionImporter(module, ctx.BuiltinTypes);
             assembly.Importer = importer;
 
-            var loader = new DynamicLoader (importer, ctx);
-            loader.LoadReferences (module);
+            var loader = new DynamicLoader(importer, ctx);
+            loader.LoadReferences(module);
 
-            if (!ctx.BuiltinTypes.CheckDefinitions (module))
+            if (!ctx.BuiltinTypes.CheckDefinitions(module))
                 return false;
 
-            if (!assembly.Create (AppDomain.CurrentDomain, AssemblyBuilderAccess.Save))
+            if (!assembly.Create(AppDomain.CurrentDomain, AssemblyBuilderAccess.Save))
                 return false;
 
-            module.CreateContainer ();
+            module.CreateContainer();
 
-            loader.LoadModules (assembly, module.GlobalRootNamespace);
+            loader.LoadModules(assembly, module.GlobalRootNamespace);
 #endif
-            module.InitializePredefinedTypes ();
+            module.InitializePredefinedTypes();
 
             if (settings.GetResourceStrings != null)
-                module.LoadGetResourceStrings (settings.GetResourceStrings);
+                module.LoadGetResourceStrings(settings.GetResourceStrings);
 
-            tr.Start (TimeReporter.TimerType.ModuleDefinitionTotal);
-            module.Define ();
-            tr.Stop (TimeReporter.TimerType.ModuleDefinitionTotal);
+            tr.Start(TimeReporter.TimerType.ModuleDefinitionTotal);
+            module.Define();
+            tr.Stop(TimeReporter.TimerType.ModuleDefinitionTotal);
 
             if (Report.Errors > 0)
                 return false;
 
-            if (settings.DocumentationFile != null) {
-                var doc = new DocumentationBuilder (module);
-                doc.OutputDocComment (output_file, settings.DocumentationFile);
+            if (settings.DocumentationFile != null)
+            {
+                var doc = new DocumentationBuilder(module);
+                doc.OutputDocComment(output_file, settings.DocumentationFile);
             }
 
-            assembly.Resolve ();
-            
+            assembly.Resolve();
+
             if (Report.Errors > 0)
                 return false;
 
+            tr.Start(TimeReporter.TimerType.EmitTotal);
+            assembly.Emit();
+            tr.Stop(TimeReporter.TimerType.EmitTotal);
 
-            tr.Start (TimeReporter.TimerType.EmitTotal);
-            assembly.Emit ();
-            tr.Stop (TimeReporter.TimerType.EmitTotal);
-
-            if (Report.Errors > 0){
+            if (Report.Errors > 0)
+            {
                 return false;
             }
 
-            tr.Start (TimeReporter.TimerType.CloseTypes);
-            module.CloseContainer ();
-            tr.Stop (TimeReporter.TimerType.CloseTypes);
+            tr.Start(TimeReporter.TimerType.CloseTypes);
+            module.CloseContainer();
+            tr.Stop(TimeReporter.TimerType.CloseTypes);
 
-            tr.Start (TimeReporter.TimerType.Resouces);
+            tr.Start(TimeReporter.TimerType.Resouces);
             if (!settings.WriteMetadataOnly)
-                assembly.EmbedResources ();
-            tr.Stop (TimeReporter.TimerType.Resouces);
+                assembly.EmbedResources();
+            tr.Stop(TimeReporter.TimerType.Resouces);
 
             if (Report.Errors > 0)
                 return false;
 
-            assembly.Save ();
+            assembly.Save();
 
 #if STATIC
-            references_loader.Dispose ();
+            references_loader.Dispose();
 #endif
-            tr.StopTotal ();
-            tr.ShowStats ();
+            tr.StopTotal();
+            tr.ShowStats();
 
             return Report.Errors == 0;
         }
@@ -450,47 +556,50 @@ namespace Mono.CSharp
     //
     // This is the only public entry point
     //
-    public class CompilerCallableEntryPoint : MarshalByRefObject {
-        public static bool InvokeCompiler (string [] args, TextWriter error)
+    public class CompilerCallableEntryPoint : MarshalByRefObject
+    {
+        public static bool InvokeCompiler(string[] args, TextWriter error)
         {
-            try {
-                CommandLineParser cmd = new CommandLineParser (error);
-                var setting = cmd.ParseArguments (args);
+            try
+            {
+                CommandLineParser cmd = new CommandLineParser(error);
+                var setting = cmd.ParseArguments(args);
                 if (setting == null)
                     return false;
 
-                var d = new Driver (new CompilerContext (setting, new StreamReportPrinter (error)));
-                return d.Compile ();
-            } finally {
-                Reset ();
+                var d = new Driver(new CompilerContext(setting, new StreamReportPrinter(error)));
+                return d.Compile();
+            }
+            finally
+            {
+                Reset();
             }
         }
 
-        public static int[] AllWarningNumbers {
-            get {
-                return Report.AllWarnings;
-            }
+        public static int[] AllWarningNumbers
+        {
+            get { return Report.AllWarnings; }
         }
 
-        public static void Reset ()
+        public static void Reset()
         {
-            Reset (true);
+            Reset(true);
         }
 
-        public static void PartialReset ()
+        public static void PartialReset()
         {
-            Reset (false);
+            Reset(false);
         }
-        
-        public static void Reset (bool full_flag)
+
+        public static void Reset(bool full_flag)
         {
-            Location.Reset ();
-            
+            Location.Reset();
+
             if (!full_flag)
                 return;
 
-            Linq.QueryBlock.TransparentParameter.Reset ();
-            TypeInfo.Reset ();
+            Linq.QueryBlock.TransparentParameter.Reset();
+            TypeInfo.Reset();
         }
     }
 }

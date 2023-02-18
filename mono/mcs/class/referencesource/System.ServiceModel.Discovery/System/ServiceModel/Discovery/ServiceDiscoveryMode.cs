@@ -9,7 +9,11 @@ namespace System.ServiceModel.Discovery
 
     public enum ServiceDiscoveryMode
     {
-        [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldBeSpelledCorrectly, Justification = "Adhoc is a valid name.")]
+        [SuppressMessage(
+            FxCop.Category.Naming,
+            FxCop.Rule.IdentifiersShouldBeSpelledCorrectly,
+            Justification = "Adhoc is a valid name."
+        )]
         Adhoc,
         Managed
     };

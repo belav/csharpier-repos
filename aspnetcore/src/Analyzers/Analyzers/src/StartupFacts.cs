@@ -30,7 +30,10 @@ internal static class StartupFacts
         var members = type.GetMembers();
         for (var i = 0; i < members.Length; i++)
         {
-            if (members[i] is IMethodSymbol method && (IsConfigureServices(symbols, method) || IsConfigure(symbols, method)))
+            if (
+                members[i] is IMethodSymbol method
+                && (IsConfigureServices(symbols, method) || IsConfigure(symbols, method))
+            )
             {
                 return true;
             }
@@ -62,9 +65,17 @@ internal static class StartupFacts
             return false;
         }
 
-        if (symbol.Name == null ||
-            !symbol.Name.StartsWith(SymbolNames.ConfigureServicesMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
-            !symbol.Name.EndsWith(SymbolNames.ConfigureServicesMethodSuffix, StringComparison.OrdinalIgnoreCase))
+        if (
+            symbol.Name == null
+            || !symbol.Name.StartsWith(
+                SymbolNames.ConfigureServicesMethodPrefix,
+                StringComparison.OrdinalIgnoreCase
+            )
+            || !symbol.Name.EndsWith(
+                SymbolNames.ConfigureServicesMethodSuffix,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             return false;
         }
@@ -74,7 +85,10 @@ internal static class StartupFacts
             return false;
         }
 
-        return SymbolEqualityComparer.Default.Equals(symbol.Parameters[0].Type, symbols.IServiceCollection);
+        return SymbolEqualityComparer.Default.Equals(
+            symbol.Parameters[0].Type,
+            symbols.IServiceCollection
+        );
     }
 
     // Based on StartupLoader. The philosophy is that we want to do analysis only on things
@@ -100,8 +114,13 @@ internal static class StartupFacts
             return false;
         }
 
-        if (symbol.Name == null ||
-            !symbol.Name.StartsWith(SymbolNames.ConfigureMethodPrefix, StringComparison.OrdinalIgnoreCase))
+        if (
+            symbol.Name == null
+            || !symbol.Name.StartsWith(
+                SymbolNames.ConfigureMethodPrefix,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             return false;
         }
@@ -109,7 +128,12 @@ internal static class StartupFacts
         // IApplicationBuilder can appear in any parameter, but must appear.
         for (var i = 0; i < symbol.Parameters.Length; i++)
         {
-            if (SymbolEqualityComparer.Default.Equals(symbol.Parameters[i].Type, symbols.IApplicationBuilder))
+            if (
+                SymbolEqualityComparer.Default.Equals(
+                    symbol.Parameters[i].Type,
+                    symbols.IApplicationBuilder
+                )
+            )
             {
                 return true;
             }
@@ -135,9 +159,23 @@ internal static class StartupFacts
 
         // UseSignalR has been removed in 5.0, but we should probably still check for it in this analyzer in case the user
         // installs it into a pre-5.0 app.
-        if (string.Equals(symbol.Name, SymbolNames.SignalRAppBuilderExtensions.UseSignalRMethodName, StringComparison.Ordinal) ||
-            string.Equals(symbol.Name, SymbolNames.HubEndpointRouteBuilderExtensions.MapHubMethodName, StringComparison.Ordinal) ||
-            string.Equals(symbol.Name, SymbolNames.ComponentEndpointRouteBuilderExtensions.MapBlazorHubMethodName, StringComparison.Ordinal))
+        if (
+            string.Equals(
+                symbol.Name,
+                SymbolNames.SignalRAppBuilderExtensions.UseSignalRMethodName,
+                StringComparison.Ordinal
+            )
+            || string.Equals(
+                symbol.Name,
+                SymbolNames.HubEndpointRouteBuilderExtensions.MapHubMethodName,
+                StringComparison.Ordinal
+            )
+            || string.Equals(
+                symbol.Name,
+                SymbolNames.ComponentEndpointRouteBuilderExtensions.MapBlazorHubMethodName,
+                StringComparison.Ordinal
+            )
+        )
         {
             return true;
         }

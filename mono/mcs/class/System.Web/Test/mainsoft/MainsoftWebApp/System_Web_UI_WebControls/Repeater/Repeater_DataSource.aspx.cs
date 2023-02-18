@@ -37,8 +37,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class Repeater_DataSource
-        : GHTBaseWeb 
+    public class Repeater_DataSource : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.Repeater Repeater1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -52,8 +51,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest Ghtsubtest5;
         protected System.Web.UI.WebControls.Repeater Repeater6;
         protected GHTWebControls.GHTSubTest GHTSubTest6;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -61,19 +61,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -81,36 +80,36 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 Repeater1.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater1.DataBind();
 
                 GHTSubTestAddResult(Repeater1.DataSource.GetType().ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest2;
-            try 
+            try
             {
                 Repeater2.DataBind();
                 GHTSubTestAddResult(Repeater2.DataSource.GetType().ToString());
                 GHTSubTestExpectedExceptionNotCaught("NullReferenceException");
             }
-            catch (NullReferenceException eex) 
+            catch (NullReferenceException eex)
             {
-                GHTSubTestExpectedExceptionCaught(eex); 
+                GHTSubTestExpectedExceptionCaught(eex);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest3;
-            try 
+            try
             {
                 Repeater3.DataSource = 123;
                 Repeater3.DataBind();
@@ -118,49 +117,47 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 GHTSubTestAddResult(Repeater3.DataSource.GetType().ToString());
                 GHTSubTestExpectedExceptionNotCaught("ArgumentException");
             }
-            catch (ArgumentException eex) 
+            catch (ArgumentException eex)
             {
-                GHTSubTestExpectedExceptionCaught(eex); 
+                GHTSubTestExpectedExceptionCaught(eex);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest4;
-            try 
+            try
             {
                 Repeater4.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest5;
-            try 
+            try
             {
                 ArrayList a = new ArrayList();
                 Repeater5.DataSource = a;
                 Repeater5.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
-
             GHTActiveSubTest = GHTSubTest6;
-            try 
+            try
             {
                 Repeater6.DataSource = null;
                 Repeater6.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
-
 
             GHTTestEnd();
         }

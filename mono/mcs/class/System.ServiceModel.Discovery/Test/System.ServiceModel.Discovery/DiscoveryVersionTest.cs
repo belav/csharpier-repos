@@ -14,32 +14,32 @@ namespace MonoTests.System.ServiceModel.Discovery
     public class DiscoveryVersionTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void NullName ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullName()
         {
-            DiscoveryVersion.FromName (null);
+            DiscoveryVersion.FromName(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void EmptyName ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void EmptyName()
         {
-            DiscoveryVersion.FromName (String.Empty);
+            DiscoveryVersion.FromName(String.Empty);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void InvalidName ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void InvalidName()
         {
-            DiscoveryVersion.FromName ("foobar");
+            DiscoveryVersion.FromName("foobar");
         }
 
         [Test]
-        public void ValidName ()
+        public void ValidName()
         {
-            DiscoveryVersion.FromName ("WSDiscovery11");
-            DiscoveryVersion.FromName ("WSDiscoveryApril2005");
-            DiscoveryVersion.FromName ("WSDiscoveryCD1");
+            DiscoveryVersion.FromName("WSDiscovery11");
+            DiscoveryVersion.FromName("WSDiscoveryApril2005");
+            DiscoveryVersion.FromName("WSDiscoveryCD1");
         }
     }
 }

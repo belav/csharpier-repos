@@ -40,17 +40,15 @@ namespace Microsoft.Build.Execution
 {
     public class BuildParameters
     {
-        public BuildParameters ()
-            : this (new ProjectCollection ())
-        {
-        }
+        public BuildParameters()
+            : this(new ProjectCollection()) { }
 
-        public BuildParameters (ProjectCollection projectCollection)
+        public BuildParameters(ProjectCollection projectCollection)
         {
             if (projectCollection == null)
-                throw new ArgumentNullException ("projectCollection");
+                throw new ArgumentNullException("projectCollection");
             projects = projectCollection;
-            
+
             EnableNodeReuse = true;
             Culture = CultureInfo.CurrentCulture;
             UICulture = CultureInfo.CurrentUICulture;
@@ -60,32 +58,36 @@ namespace Microsoft.Build.Execution
             this.DefaultToolsVersion = projectCollection.DefaultToolsVersion;
             this.ToolsetDefinitionLocations = projectCollection.ToolsetLocations;
             this.GlobalProperties = projectCollection.GlobalProperties;
-            environment_properties = new Dictionary<string,string> ();
-            foreach (DictionaryEntry p in Environment.GetEnvironmentVariables ())
-                environment_properties [(string) p.Key] = (string) p.Value;
+            environment_properties = new Dictionary<string, string>();
+            foreach (DictionaryEntry p in Environment.GetEnvironmentVariables())
+                environment_properties[(string)p.Key] = (string)p.Value;
         }
 
         readonly ProjectCollection projects;
-        Dictionary<string,string> environment_properties;
-        
-        internal ProjectCollection ProjectCollection {
+        Dictionary<string, string> environment_properties;
+
+        internal ProjectCollection ProjectCollection
+        {
             get { return projects; }
         }
 
-        public BuildParameters Clone ()
+        public BuildParameters Clone()
         {
-            var ret = (BuildParameters) MemberwiseClone ();
-            ret.ForwardingLoggers = ForwardingLoggers == null ? null : ForwardingLoggers.ToArray ();
-            ret.GlobalProperties = GlobalProperties == null ? null : GlobalProperties.ToDictionary (p => p.Key, p => p.Value);
-            ret.Loggers = Loggers == null ? null : new List<ILogger> (Loggers);
-            ret.environment_properties = new Dictionary<string, string> (environment_properties);
+            var ret = (BuildParameters)MemberwiseClone();
+            ret.ForwardingLoggers = ForwardingLoggers == null ? null : ForwardingLoggers.ToArray();
+            ret.GlobalProperties =
+                GlobalProperties == null
+                    ? null
+                    : GlobalProperties.ToDictionary(p => p.Key, p => p.Value);
+            ret.Loggers = Loggers == null ? null : new List<ILogger>(Loggers);
+            ret.environment_properties = new Dictionary<string, string>(environment_properties);
             return ret;
         }
 
-        public Toolset GetToolset (string toolsVersion)
+        public Toolset GetToolset(string toolsVersion)
         {
             // can return null.
-            return projects.Toolsets.FirstOrDefault (t => t.ToolsVersion == toolsVersion);
+            return projects.Toolsets.FirstOrDefault(t => t.ToolsVersion == toolsVersion);
         }
 
         [MonoTODO]
@@ -102,7 +104,8 @@ namespace Microsoft.Build.Execution
         public bool EnableNodeReuse { get; set; }
 
         [MonoTODO]
-        public IDictionary<string, string> EnvironmentProperties {
+        public IDictionary<string, string> EnvironmentProperties
+        {
             get { return environment_properties; }
         }
 
@@ -142,7 +145,8 @@ namespace Microsoft.Build.Execution
         public ToolsetDefinitionLocations ToolsetDefinitionLocations { get; set; }
 
         [MonoTODO]
-        public ICollection<Toolset> Toolsets {
+        public ICollection<Toolset> Toolsets
+        {
             get { return projects.Toolsets; }
         }
 
@@ -153,4 +157,3 @@ namespace Microsoft.Build.Execution
         public bool UseSynchronousLogging { get; set; }
     }
 }
-

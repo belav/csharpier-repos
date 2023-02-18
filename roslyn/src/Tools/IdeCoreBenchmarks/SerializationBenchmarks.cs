@@ -26,7 +26,9 @@ namespace IdeCoreBenchmarks
         [GlobalSetup]
         public void GlobalSetup()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             var csFilePath = Path.Combine(roslynRoot, @"src\Compilers\CSharp\Portable\Parser");
 
             var files = Directory.GetFiles(csFilePath);
@@ -40,7 +42,9 @@ namespace IdeCoreBenchmarks
                 }
 
                 var text = File.ReadAllText(file);
-                var tree = SyntaxFactory.ParseSyntaxTree(SourceText.From(text, encoding: null, SourceHashAlgorithms.Default));
+                var tree = SyntaxFactory.ParseSyntaxTree(
+                    SourceText.From(text, encoding: null, SourceHashAlgorithms.Default)
+                );
                 _rootList.Add(tree.GetCompilationUnitRoot());
             }
         }

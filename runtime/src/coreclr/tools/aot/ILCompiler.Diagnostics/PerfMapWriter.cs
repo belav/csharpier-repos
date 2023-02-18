@@ -27,7 +27,13 @@ namespace ILCompiler.Diagnostics
             _writer = writer;
         }
 
-        public static void Write(string perfMapFileName, int perfMapFormatVersion, IEnumerable<MethodInfo> methods, IEnumerable<AssemblyInfo> inputAssemblies, TargetDetails details)
+        public static void Write(
+            string perfMapFileName,
+            int perfMapFormatVersion,
+            IEnumerable<MethodInfo> methods,
+            IEnumerable<AssemblyInfo> inputAssemblies,
+            TargetDetails details
+        )
         {
             if (perfMapFormatVersion > CurrentFormatVersion)
             {
@@ -36,7 +42,6 @@ namespace ILCompiler.Diagnostics
 
             using (TextWriter writer = new StreamWriter(perfMapFileName))
             {
-
                 PerfMapWriter perfMapWriter = new PerfMapWriter(writer);
                 byte[] signature = PerfMapV1SignatureHelper(inputAssemblies, details);
                 WritePerfMapV1Header(inputAssemblies, details, perfMapWriter);
@@ -45,17 +50,29 @@ namespace ILCompiler.Diagnostics
                 {
                     if (methodInfo.HotRVA != 0 && methodInfo.HotLength != 0)
                     {
-                        perfMapWriter.WriteLine(methodInfo.Name, methodInfo.HotRVA, methodInfo.HotLength);
+                        perfMapWriter.WriteLine(
+                            methodInfo.Name,
+                            methodInfo.HotRVA,
+                            methodInfo.HotLength
+                        );
                     }
                     if (methodInfo.ColdRVA != 0 && methodInfo.ColdLength != 0)
                     {
-                        perfMapWriter.WriteLine(methodInfo.Name, methodInfo.ColdRVA, methodInfo.ColdLength);
+                        perfMapWriter.WriteLine(
+                            methodInfo.Name,
+                            methodInfo.ColdRVA,
+                            methodInfo.ColdLength
+                        );
                     }
                 }
             }
         }
 
-        private static void WritePerfMapV1Header(IEnumerable<AssemblyInfo> inputAssemblies, TargetDetails details, PerfMapWriter perfMapWriter)
+        private static void WritePerfMapV1Header(
+            IEnumerable<AssemblyInfo> inputAssemblies,
+            TargetDetails details,
+            PerfMapWriter perfMapWriter
+        )
         {
             byte[] signature = PerfMapV1SignatureHelper(inputAssemblies, details);
 
@@ -65,16 +82,42 @@ namespace ILCompiler.Diagnostics
 
             PerfmapTokensForTarget targetTokens = TranslateTargetDetailsToPerfmapConstants(details);
 
-            perfMapWriter.WriteLine(signatureFormatted, (uint)PerfMapPseudoRVAToken.OutputSignature, HeaderEntriesPseudoLength);
-            perfMapWriter.WriteLine(CurrentFormatVersion.ToString(), (uint)PerfMapPseudoRVAToken.FormatVersion, HeaderEntriesPseudoLength);
-            perfMapWriter.WriteLine(((uint)targetTokens.OperatingSystem).ToString(), (uint)PerfMapPseudoRVAToken.TargetOS, HeaderEntriesPseudoLength);
-            perfMapWriter.WriteLine(((uint)targetTokens.Architecture).ToString(), (uint)PerfMapPseudoRVAToken.TargetArchitecture, HeaderEntriesPseudoLength);
-            perfMapWriter.WriteLine(((uint)targetTokens.Abi).ToString(), (uint)PerfMapPseudoRVAToken.TargetABI, HeaderEntriesPseudoLength);
+            perfMapWriter.WriteLine(
+                signatureFormatted,
+                (uint)PerfMapPseudoRVAToken.OutputSignature,
+                HeaderEntriesPseudoLength
+            );
+            perfMapWriter.WriteLine(
+                CurrentFormatVersion.ToString(),
+                (uint)PerfMapPseudoRVAToken.FormatVersion,
+                HeaderEntriesPseudoLength
+            );
+            perfMapWriter.WriteLine(
+                ((uint)targetTokens.OperatingSystem).ToString(),
+                (uint)PerfMapPseudoRVAToken.TargetOS,
+                HeaderEntriesPseudoLength
+            );
+            perfMapWriter.WriteLine(
+                ((uint)targetTokens.Architecture).ToString(),
+                (uint)PerfMapPseudoRVAToken.TargetArchitecture,
+                HeaderEntriesPseudoLength
+            );
+            perfMapWriter.WriteLine(
+                ((uint)targetTokens.Abi).ToString(),
+                (uint)PerfMapPseudoRVAToken.TargetABI,
+                HeaderEntriesPseudoLength
+            );
         }
 
-        public static byte[] PerfMapV1SignatureHelper(IEnumerable<AssemblyInfo> inputAssemblies, TargetDetails details)
+        public static byte[] PerfMapV1SignatureHelper(
+            IEnumerable<AssemblyInfo> inputAssemblies,
+            TargetDetails details
+        )
         {
-            IEnumerable<AssemblyInfo> orderedInputs = inputAssemblies.OrderBy(asm => asm.Name, StringComparer.OrdinalIgnoreCase);
+            IEnumerable<AssemblyInfo> orderedInputs = inputAssemblies.OrderBy(
+                asm => asm.Name,
+                StringComparer.OrdinalIgnoreCase
+            );
             List<byte> inputHash = new List<byte>();
             foreach (AssemblyInfo inputAssembly in orderedInputs)
             {
@@ -84,9 +127,20 @@ namespace ILCompiler.Diagnostics
             PerfmapTokensForTarget targetTokens = TranslateTargetDetailsToPerfmapConstants(details);
 
             byte[] buffer = new byte[12];
-            if (!BitConverter.TryWriteBytes(buffer.AsSpan(0, sizeof(uint)), (uint)targetTokens.OperatingSystem)
-                || !BitConverter.TryWriteBytes(buffer.AsSpan(4, sizeof(uint)), (uint)targetTokens.Architecture)
-                || !BitConverter.TryWriteBytes(buffer.AsSpan(8, sizeof(uint)), (uint)targetTokens.Abi))
+            if (
+                !BitConverter.TryWriteBytes(
+                    buffer.AsSpan(0, sizeof(uint)),
+                    (uint)targetTokens.OperatingSystem
+                )
+                || !BitConverter.TryWriteBytes(
+                    buffer.AsSpan(4, sizeof(uint)),
+                    (uint)targetTokens.Architecture
+                )
+                || !BitConverter.TryWriteBytes(
+                    buffer.AsSpan(8, sizeof(uint)),
+                    (uint)targetTokens.Abi
+                )
+            )
             {
                 throw new InvalidOperationException();
             }
@@ -104,9 +158,15 @@ namespace ILCompiler.Diagnostics
             return hash;
         }
 
-        internal record struct PerfmapTokensForTarget(PerfMapOSToken OperatingSystem, PerfMapArchitectureToken Architecture, PerfMapAbiToken Abi);
+        internal record struct PerfmapTokensForTarget(
+            PerfMapOSToken OperatingSystem,
+            PerfMapArchitectureToken Architecture,
+            PerfMapAbiToken Abi
+        );
 
-        private static PerfmapTokensForTarget TranslateTargetDetailsToPerfmapConstants(TargetDetails details)
+        private static PerfmapTokensForTarget TranslateTargetDetailsToPerfmapConstants(
+            TargetDetails details
+        )
         {
             PerfMapOSToken osToken = details.OperatingSystem switch
             {

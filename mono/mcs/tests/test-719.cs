@@ -12,7 +12,5 @@ public unsafe struct B
 
 public class C
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

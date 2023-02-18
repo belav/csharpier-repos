@@ -5,10 +5,10 @@ using System;
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         ulong aa = 10;
         ulong bb = 3;
-        Console.WriteLine("bug here --> "+aa-bb);
+        Console.WriteLine("bug here --> " + aa - bb);
     }
 }

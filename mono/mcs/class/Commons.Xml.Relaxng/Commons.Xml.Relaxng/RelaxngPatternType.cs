@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -50,19 +50,19 @@ namespace Commons.Xml.Relaxng
         OneOrMore = 7,
         List = 8,
         Data = 9,
-        DataExcept = 10,    // only use in derivative
+        DataExcept = 10, // only use in derivative
         Value = 11,
         Attribute = 12,
         Element = 13,
-        After = 14,        // only use in derivative
-        Ref = 15,        // no use in derivative
-        Grammar = 16,        // no use in derivative
-        ZeroOrMore = 17,    // no use in derivative
-        Mixed = 18,        // no use in derivative
-        Optional = 19,        // no use in derivative
-//        Include = 20,        // no use in derivative
-        ExternalRef = 21,    // no use in derivative
-        ParentRef = 22,        // no use in derivative
+        After = 14, // only use in derivative
+        Ref = 15, // no use in derivative
+        Grammar = 16, // no use in derivative
+        ZeroOrMore = 17, // no use in derivative
+        Mixed = 18, // no use in derivative
+        Optional = 19, // no use in derivative
+
+        //        Include = 20,        // no use in derivative
+        ExternalRef = 21, // no use in derivative
+        ParentRef = 22, // no use in derivative
     }
 }
-

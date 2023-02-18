@@ -3,242 +3,231 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBlock
 {
-    [SetupLinkerSubstitutionFile ("InstanceMethodSubstitutions.xml")]
-    [SetupCSharpCompilerToUse ("csc")]
-    [SetupCompileArgument ("/optimize+")]
-    [SetupLinkerArgument ("--enable-opt", "ipconstprop")]
+    [SetupLinkerSubstitutionFile("InstanceMethodSubstitutions.xml")]
+    [SetupCSharpCompilerToUse("csc")]
+    [SetupCompileArgument("/optimize+")]
+    [SetupLinkerArgument("--enable-opt", "ipconstprop")]
     public class InstanceMethodSubstitutions
     {
         [Kept]
-        private InstanceMethodSubstitutions ()
-        {
-        }
+        private InstanceMethodSubstitutions() { }
 
-        public static void Main ()
+        public static void Main()
         {
-            var instance = new InstanceMethodSubstitutions ();
-            instance.TestSimpleCallsite ();
-            instance.TestCallOnInstance ();
-            instance.TestCallOnInstanceMulti ();
-            instance.TestInstanceMethodWithoutSubstitution ();
-            instance.TestPropagation ();
-            instance.TestStaticPropagation ();
-            instance.TestVirtualMethod ();
+            var instance = new InstanceMethodSubstitutions();
+            instance.TestSimpleCallsite();
+            instance.TestCallOnInstance();
+            instance.TestCallOnInstanceMulti();
+            instance.TestInstanceMethodWithoutSubstitution();
+            instance.TestPropagation();
+            instance.TestStaticPropagation();
+            instance.TestVirtualMethod();
         }
 
         bool _isEnabledField;
 
         [Kept]
         [ExpectBodyModified]
-        bool IsEnabled ()
+        bool IsEnabled()
         {
             return _isEnabledField;
         }
 
-        InstanceMethodSubstitutions GetInstance ()
+        InstanceMethodSubstitutions GetInstance()
         {
             return null;
         }
 
-        static bool PropFalse { get { return false; } }
-
-        [Kept]
-        [ExpectedInstructionSequence (new[] {
-            "nop",
-            "ldnull",
-            "callvirt System.Boolean Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::IsEnabled()",
-            "brfalse.s il_9",
-            "ldarg.0",
-            "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::CallOnInstance_Reached()",
-            "ret",
-        })]
-        void TestCallOnInstance ()
+        static bool PropFalse
         {
-
-            if (GetInstance ().IsEnabled ())
-                CallOnInstance_NeverReached ();
-            else
-                CallOnInstance_Reached ();
+            get { return false; }
         }
 
         [Kept]
-        [ExpectedInstructionSequence (new[] {
-            "ldc.i4.0",
-            "brfalse.s il_3",
-            "ldc.i4.1",
-            "ret"
-        })]
-        int TestCallOnInstanceMulti ()
+        [ExpectedInstructionSequence(
+            new[]
+            {
+                "nop",
+                "ldnull",
+                "callvirt System.Boolean Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::IsEnabled()",
+                "brfalse.s il_9",
+                "ldarg.0",
+                "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::CallOnInstance_Reached()",
+                "ret",
+            }
+        )]
+        void TestCallOnInstance()
         {
-            if (PropFalse && GetInstance ().IsEnabled ())
+            if (GetInstance().IsEnabled())
+                CallOnInstance_NeverReached();
+            else
+                CallOnInstance_Reached();
+        }
+
+        [Kept]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "brfalse.s il_3", "ldc.i4.1", "ret" })]
+        int TestCallOnInstanceMulti()
+        {
+            if (PropFalse && GetInstance().IsEnabled())
                 return 3;
             else
                 return 1;
         }
 
-        void CallOnInstance_NeverReached ()
-        {
-        }
+        void CallOnInstance_NeverReached() { }
 
         [Kept]
-        void CallOnInstance_Reached ()
-        {
-        }
+        void CallOnInstance_Reached() { }
 
         [Kept]
         [ExpectBodyModified]
-        void TestSimpleCallsite ()
+        void TestSimpleCallsite()
         {
-            if (IsEnabled ())
-                SimpleCallsite_NeverReached ();
+            if (IsEnabled())
+                SimpleCallsite_NeverReached();
             else
-                SimpleCallsite_Reached ();
+                SimpleCallsite_Reached();
         }
 
-        void SimpleCallsite_NeverReached ()
-        {
-        }
+        void SimpleCallsite_NeverReached() { }
 
         [Kept]
-        void SimpleCallsite_Reached ()
-        {
-        }
+        void SimpleCallsite_Reached() { }
 
         [Kept]
-        [ExpectedInstructionSequence (new[] {
-            "nop",
-            "ldc.i4.1",
-            "pop",
-            "ldarg.0",
-            "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::InstanceMethodWithoutSubstitution_Reached1()",
-            "ret",
-            })]
-        void TestInstanceMethodWithoutSubstitution ()
+        [ExpectedInstructionSequence(
+            new[]
+            {
+                "nop",
+                "ldc.i4.1",
+                "pop",
+                "ldarg.0",
+                "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::InstanceMethodWithoutSubstitution_Reached1()",
+                "ret",
+            }
+        )]
+        void TestInstanceMethodWithoutSubstitution()
         {
             InstanceMethodSubstitutions ims = this;
-            if (ims.InstanceMethodWithoutSubstitution ())
-                InstanceMethodWithoutSubstitution_Reached1 ();
+            if (ims.InstanceMethodWithoutSubstitution())
+                InstanceMethodWithoutSubstitution_Reached1();
             else
-                InstanceMethodWithoutSubstitution_Reached2 ();
+                InstanceMethodWithoutSubstitution_Reached2();
         }
 
-        bool InstanceMethodWithoutSubstitution ()
+        bool InstanceMethodWithoutSubstitution()
         {
             return true;
         }
 
         [Kept]
-        void InstanceMethodWithoutSubstitution_Reached1 ()
-        {
-        }
+        void InstanceMethodWithoutSubstitution_Reached1() { }
 
-        void InstanceMethodWithoutSubstitution_Reached2 ()
-        {
-        }
+        void InstanceMethodWithoutSubstitution_Reached2() { }
 
         [Kept]
-        [ExpectedInstructionSequence (new[] {
-            "nop",
-            "ldc.i4.0",
-            "brfalse.s il_4",
-            "ldarg.0",
-            "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::Propagation_Reached2()",
-            "ret",
-        })]
-        void TestPropagation ()
+        [ExpectedInstructionSequence(
+            new[]
+            {
+                "nop",
+                "ldc.i4.0",
+                "brfalse.s il_4",
+                "ldarg.0",
+                "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::Propagation_Reached2()",
+                "ret",
+            }
+        )]
+        void TestPropagation()
         {
-            if (PropagateIsEnabled ())
-                Propagation_Reached1 ();
+            if (PropagateIsEnabled())
+                Propagation_Reached1();
             else
-                Propagation_Reached2 ();
+                Propagation_Reached2();
         }
 
-        bool PropagateIsEnabled ()
+        bool PropagateIsEnabled()
         {
-            return IsEnabled ();
+            return IsEnabled();
         }
 
-        void Propagation_Reached1 ()
-        {
-        }
+        void Propagation_Reached1() { }
 
         [Kept]
-        void Propagation_Reached2 ()
-        {
-        }
+        void Propagation_Reached2() { }
 
         [Kept]
-        [ExpectedInstructionSequence (new[] {
-            "call System.Boolean Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::PropagateStaticIsEnabled()",
-            "brfalse.s il_7",
-            "ldarg.0",
-            "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::StaticPropagation_Reached2()",
-            "ret",
-        })]
-        void TestStaticPropagation ()
+        [ExpectedInstructionSequence(
+            new[]
+            {
+                "call System.Boolean Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::PropagateStaticIsEnabled()",
+                "brfalse.s il_7",
+                "ldarg.0",
+                "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.InstanceMethodSubstitutions::StaticPropagation_Reached2()",
+                "ret",
+            }
+        )]
+        void TestStaticPropagation()
         {
-            if (PropagateStaticIsEnabled ())
-                StaticPropagation_Reached1 ();
+            if (PropagateStaticIsEnabled())
+                StaticPropagation_Reached1();
             else
-                StaticPropagation_Reached2 ();
+                StaticPropagation_Reached2();
         }
 
         [Kept]
         private static InstanceMethodSubstitutions _staticInstance;
 
         [Kept]
-        static bool PropagateStaticIsEnabled ()
+        static bool PropagateStaticIsEnabled()
         {
-            return _staticInstance.IsEnabled ();
+            return _staticInstance.IsEnabled();
         }
 
-        void StaticPropagation_Reached1 ()
-        {
-        }
+        void StaticPropagation_Reached1() { }
 
         [Kept]
-        void StaticPropagation_Reached2 ()
-        {
-        }
+        void StaticPropagation_Reached2() { }
 
         [Kept]
-        void TestVirtualMethod ()
+        void TestVirtualMethod()
         {
-            TestVirtualMethodBase instance = new TestVirtualMethodType ();
+            TestVirtualMethodBase instance = new TestVirtualMethodType();
             // Virtual method return value inlining not supported
-            if (instance.IsEnabled ())
-                VirtualMethod_Reached1 ();
+            if (instance.IsEnabled())
+                VirtualMethod_Reached1();
             else
-                VirtualMethod_Reached2 ();
+                VirtualMethod_Reached2();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class TestVirtualMethodBase
         {
             [Kept]
             [ExpectBodyModified]
-            public virtual bool IsEnabled () { return false; }
+            public virtual bool IsEnabled()
+            {
+                return false;
+            }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (TestVirtualMethodBase))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(TestVirtualMethodBase))]
         class TestVirtualMethodType : TestVirtualMethodBase
         {
             [Kept]
             [ExpectBodyModified]
-            public override bool IsEnabled () { return false; }
+            public override bool IsEnabled()
+            {
+                return false;
+            }
         }
 
         [Kept]
-        void VirtualMethod_Reached1 ()
-        {
-        }
+        void VirtualMethod_Reached1() { }
 
         [Kept]
-        void VirtualMethod_Reached2 ()
-        {
-        }
+        void VirtualMethod_Reached2() { }
     }
 }

@@ -43,20 +43,27 @@ namespace System.Text.Encodings.Web
         [Fact]
         public void HtmlEncode_CreateNullRanges()
         {
-            Assert.Throws<ArgumentNullException>("allowedRanges", () => HtmlEncoder.Create(default(UnicodeRange[])));
+            Assert.Throws<ArgumentNullException>(
+                "allowedRanges",
+                () => HtmlEncoder.Create(default(UnicodeRange[]))
+            );
         }
 
         [Fact]
         public void HtmlEncode_CreateNullSettings()
         {
-            Assert.Throws<ArgumentNullException>("settings", () => HtmlEncoder.Create(default(TextEncoderSettings)));
+            Assert.Throws<ArgumentNullException>(
+                "settings",
+                () => HtmlEncoder.Create(default(TextEncoderSettings))
+            );
         }
-
 
         [Fact]
         public unsafe void TryEncodeUnicodeScalar_NegativeLengthBuffer()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => HtmlEncoder.Default.TryEncodeUnicodeScalar(2, null, -1, out int _));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => HtmlEncoder.Default.TryEncodeUnicodeScalar(2, null, -1, out int _)
+            );
         }
 
         [Fact]
@@ -64,7 +71,9 @@ namespace System.Text.Encodings.Web
         {
             char* buffer = stackalloc char[1];
             int numberWritten;
-            Assert.False(HtmlEncoder.Default.TryEncodeUnicodeScalar(0x10000, buffer, 1, out numberWritten));
+            Assert.False(
+                HtmlEncoder.Default.TryEncodeUnicodeScalar(0x10000, buffer, 1, out numberWritten)
+            );
             Assert.Equal(0, numberWritten);
         }
 

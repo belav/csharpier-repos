@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,8 @@ using MonoTests.System.Data.Utils;
 
 namespace MonoTests.System.Data
 {
-    [TestFixture] public class RowNotInTableExceptionTest
+    [TestFixture]
+    public class RowNotInTableExceptionTest
     {
         [Test]
         public void Generate()
@@ -41,7 +42,9 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet();
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
-            ds.Relations.Add(new DataRelation("myRelation",ds.Tables[0].Columns[0],ds.Tables[1].Columns[0]));
+            ds.Relations.Add(
+                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+            );
 
             DataRow drParent = ds.Tables[0].Rows[0];
             DataRow drChild = ds.Tables[1].Rows[0];
@@ -55,8 +58,11 @@ namespace MonoTests.System.Data
                 drParent.AcceptChanges();
                 Assert.Fail("RNT1: AcceptChanges failed to raise (RowNotInTableException.");
             }
-            catch (RowNotInTableException) {}
-            catch (AssertionException) { throw; }
+            catch (RowNotInTableException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("RNT2: AcceptChanges wrong exception type. Got: " + exc);
@@ -68,8 +74,11 @@ namespace MonoTests.System.Data
                 drParent.GetChildRows("myRelation");
                 Assert.Fail("RNT1: GetChildRows failed to raise (RowNotInTableException.");
             }
-            catch (RowNotInTableException) {}
-            catch (AssertionException) { throw; }
+            catch (RowNotInTableException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("RNT2: GetChildRows wrong exception type. Got: " + exc);
@@ -79,11 +88,14 @@ namespace MonoTests.System.Data
             object[] o = null;
             try
             {
-                o = drParent.ItemArray ;
+                o = drParent.ItemArray;
                 Assert.Fail("RNT1: ItemArray failed to raise (RowNotInTableException.");
             }
-            catch (RowNotInTableException) {}
-            catch (AssertionException) { throw; }
+            catch (RowNotInTableException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("RNT2: ItemArray wrong exception type. Got: " + exc);
@@ -94,7 +106,7 @@ namespace MonoTests.System.Data
             //        try
             //        {
             //            DataRow dr = null;
-            //            dr = drChild.GetParentRow("myRelation"); 
+            //            dr = drChild.GetParentRow("myRelation");
             //            Assert.Fail("RNT1: GetParentRow failed to raise (RowNotInTableException.");
             //        }
             //        catch (RowNotInTableException) {}
@@ -108,11 +120,14 @@ namespace MonoTests.System.Data
             DataRow[] dr = null;
             try
             {
-                dr = drChild.GetParentRows("myRelation"); 
+                dr = drChild.GetParentRows("myRelation");
                 Assert.Fail("RNT1: GetParentRows failed to raise (RowNotInTableException.");
             }
-            catch (RowNotInTableException) {}
-            catch (AssertionException) { throw; }
+            catch (RowNotInTableException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("RNT2: GetParentRows wrong exception type. Got: " + exc);
@@ -124,8 +139,11 @@ namespace MonoTests.System.Data
                 drParent.RejectChanges();
                 Assert.Fail("RNT1: RejectChanges failed to raise (RowNotInTableException.");
             }
-            catch (RowNotInTableException) {}
-            catch (AssertionException) { throw; }
+            catch (RowNotInTableException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("RNT2: RejectChanges wrong exception type. Got: " + exc);
@@ -137,8 +155,11 @@ namespace MonoTests.System.Data
                 drChild.SetParentRow(ds.Tables[0].Rows[1]);
                 Assert.Fail("RNT1: SetParentRow failed to raise (RowNotInTableException.");
             }
-            catch (RowNotInTableException) {}
-            catch (AssertionException) { throw; }
+            catch (RowNotInTableException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
             catch (Exception exc)
             {
                 Assert.Fail("RNT2: SetParentRow wrong exception type. Got: " + exc);

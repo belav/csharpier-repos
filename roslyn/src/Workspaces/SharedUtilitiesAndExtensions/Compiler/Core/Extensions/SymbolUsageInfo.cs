@@ -26,7 +26,10 @@ namespace Microsoft.CodeAnalysis
         public TypeOrNamespaceUsageInfo? TypeOrNamespaceUsageInfoOpt { get; }
 
         // Must be public since it's used for deserialization.
-        public SymbolUsageInfo(ValueUsageInfo? valueUsageInfoOpt, TypeOrNamespaceUsageInfo? typeOrNamespaceUsageInfoOpt)
+        public SymbolUsageInfo(
+            ValueUsageInfo? valueUsageInfoOpt,
+            TypeOrNamespaceUsageInfo? typeOrNamespaceUsageInfoOpt
+        )
         {
             Debug.Assert(valueUsageInfoOpt.HasValue ^ typeOrNamespaceUsageInfoOpt.HasValue);
 
@@ -34,40 +37,43 @@ namespace Microsoft.CodeAnalysis
             TypeOrNamespaceUsageInfoOpt = typeOrNamespaceUsageInfoOpt;
         }
 
-        public static SymbolUsageInfo Create(ValueUsageInfo valueUsageInfo)
-            => new(valueUsageInfo, typeOrNamespaceUsageInfoOpt: null);
+        public static SymbolUsageInfo Create(ValueUsageInfo valueUsageInfo) =>
+            new(valueUsageInfo, typeOrNamespaceUsageInfoOpt: null);
 
-        public static SymbolUsageInfo Create(TypeOrNamespaceUsageInfo typeOrNamespaceUsageInfo)
-            => new(valueUsageInfoOpt: null, typeOrNamespaceUsageInfo);
+        public static SymbolUsageInfo Create(TypeOrNamespaceUsageInfo typeOrNamespaceUsageInfo) =>
+            new(valueUsageInfoOpt: null, typeOrNamespaceUsageInfo);
 
-        public bool IsReadFrom()
-            => ValueUsageInfoOpt.HasValue && ValueUsageInfoOpt.Value.IsReadFrom();
+        public bool IsReadFrom() =>
+            ValueUsageInfoOpt.HasValue && ValueUsageInfoOpt.Value.IsReadFrom();
 
-        public bool IsWrittenTo()
-            => ValueUsageInfoOpt.HasValue && ValueUsageInfoOpt.Value.IsWrittenTo();
+        public bool IsWrittenTo() =>
+            ValueUsageInfoOpt.HasValue && ValueUsageInfoOpt.Value.IsWrittenTo();
 
-        public bool IsNameOnly()
-            => ValueUsageInfoOpt.HasValue && ValueUsageInfoOpt.Value.IsNameOnly();
+        public bool IsNameOnly() =>
+            ValueUsageInfoOpt.HasValue && ValueUsageInfoOpt.Value.IsNameOnly();
 
-        public override bool Equals(object? obj)
-            => obj is SymbolUsageInfo && Equals((SymbolUsageInfo)obj);
+        public override bool Equals(object? obj) =>
+            obj is SymbolUsageInfo && Equals((SymbolUsageInfo)obj);
 
         public bool Equals(SymbolUsageInfo other)
         {
             if (ValueUsageInfoOpt.HasValue)
             {
-                return other.ValueUsageInfoOpt.HasValue &&
-                    ValueUsageInfoOpt.Value == other.ValueUsageInfoOpt.Value;
+                return other.ValueUsageInfoOpt.HasValue
+                    && ValueUsageInfoOpt.Value == other.ValueUsageInfoOpt.Value;
             }
             else
             {
                 RoslynDebug.Assert(TypeOrNamespaceUsageInfoOpt.HasValue);
-                return other.TypeOrNamespaceUsageInfoOpt.HasValue &&
-                    TypeOrNamespaceUsageInfoOpt.Value == other.TypeOrNamespaceUsageInfoOpt.Value;
+                return other.TypeOrNamespaceUsageInfoOpt.HasValue
+                    && TypeOrNamespaceUsageInfoOpt.Value == other.TypeOrNamespaceUsageInfoOpt.Value;
             }
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(((int?)ValueUsageInfoOpt)?.GetHashCode() ?? 0, ((int?)TypeOrNamespaceUsageInfoOpt)?.GetHashCode() ?? 0);
+        public override int GetHashCode() =>
+            Hash.Combine(
+                ((int?)ValueUsageInfoOpt)?.GetHashCode() ?? 0,
+                ((int?)TypeOrNamespaceUsageInfoOpt)?.GetHashCode() ?? 0
+            );
     }
 }

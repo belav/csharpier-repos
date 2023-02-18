@@ -5,9 +5,9 @@ using System;
 
 class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
         Enum e = null;
-        int i = (int) e;
+        int i = (int)e;
     }
 }

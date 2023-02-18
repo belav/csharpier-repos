@@ -5,13 +5,12 @@
 using System.Runtime.CompilerServices;
 using System;
 
-[assembly: CLSCompliant (true)]
+[assembly: CLSCompliant(true)]
 
-public interface I {
-    [IndexerName ("blah")]
-    int this [int a] {
-            get;
-    }
+public interface I
+{
+    [IndexerName("blah")]
+    int this[int a] { get; }
 
-     int BLAH { get; }
+    int BLAH { get; }
 }

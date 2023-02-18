@@ -2,19 +2,15 @@ using System;
 
 class A
 {
-    public static void Foo (int x, int y)
-    {
-    }
+    public static void Foo(int x, int y) { }
 }
 
 sealed class B : A
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo (1, 2);
+        Foo(1, 2);
     }
-    
-    void Foo (int i)
-    {
-    }
+
+    void Foo(int i) { }
 }

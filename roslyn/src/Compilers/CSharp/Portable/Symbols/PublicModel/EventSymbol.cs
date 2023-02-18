@@ -28,29 +28,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyType, _underlying.TypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        _underlying.TypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyType;
             }
         }
 
-        CodeAnalysis.NullableAnnotation IEventSymbol.NullableAnnotation => _underlying.TypeWithAnnotations.ToPublicAnnotation();
+        CodeAnalysis.NullableAnnotation IEventSymbol.NullableAnnotation =>
+            _underlying.TypeWithAnnotations.ToPublicAnnotation();
 
         IMethodSymbol? IEventSymbol.AddMethod
         {
-            get
-            {
-                return _underlying.AddMethod.GetPublicSymbol();
-            }
+            get { return _underlying.AddMethod.GetPublicSymbol(); }
         }
 
         IMethodSymbol? IEventSymbol.RemoveMethod
         {
-            get
-            {
-                return _underlying.RemoveMethod.GetPublicSymbol();
-            }
+            get { return _underlying.RemoveMethod.GetPublicSymbol(); }
         }
 
         IMethodSymbol? IEventSymbol.RaiseMethod
@@ -64,26 +63,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         IEventSymbol IEventSymbol.OriginalDefinition
         {
-            get
-            {
-                return _underlying.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return _underlying.OriginalDefinition.GetPublicSymbol(); }
         }
 
         IEventSymbol? IEventSymbol.OverriddenEvent
         {
-            get
-            {
-                return _underlying.OverriddenEvent.GetPublicSymbol();
-            }
+            get { return _underlying.OverriddenEvent.GetPublicSymbol(); }
         }
 
         ImmutableArray<IEventSymbol> IEventSymbol.ExplicitInterfaceImplementations
         {
-            get
-            {
-                return _underlying.ExplicitInterfaceImplementations.GetPublicSymbols();
-            }
+            get { return _underlying.ExplicitInterfaceImplementations.GetPublicSymbols(); }
         }
 
         bool IEventSymbol.IsWindowsRuntimeEvent => _underlying.IsWindowsRuntimeEvent;
@@ -101,7 +91,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitEvent(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitEvent(this, argument);
         }

@@ -1,13 +1,13 @@
 //
 // System.Drawing.Design.FontEditor.cs
-// 
+//
 // Authors:
 //  Martin Willemoes Hansen (mwh@sysrq.dk)
 //  Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-// 
+//
 // (C) 2003 Martin Willemoes Hansen
 // (C) 2003 Andreas Nahr
-// 
+//
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,20 +41,21 @@ namespace System.Drawing.Design
     {
         private FontDialog fontEdit;
 
-        public FontEditor()
-        {
-        }
+        public FontEditor() { }
 
-        public override object EditValue (ITypeDescriptorContext context,
-            IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
-            fontEdit = new FontDialog ();
+            fontEdit = new FontDialog();
 
             if (value is Font)
-                fontEdit.Font = (Font) value;
+                fontEdit.Font = (Font)value;
             else
                 // Set default
-                fontEdit.Font = new Drawing.Font (FontFamily.GenericSansSerif, 12);
+                fontEdit.Font = new Drawing.Font(FontFamily.GenericSansSerif, 12);
 
             fontEdit.FontMustExist = true;
             DialogResult result = fontEdit.ShowDialog();
@@ -65,7 +66,7 @@ namespace System.Drawing.Design
                 return value;
         }
 
-        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.Modal;
         }

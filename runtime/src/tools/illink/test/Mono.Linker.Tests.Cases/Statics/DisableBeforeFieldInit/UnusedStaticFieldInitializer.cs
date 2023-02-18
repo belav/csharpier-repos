@@ -3,24 +3,22 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Statics.DisableBeforeFieldInit
 {
-    [SetupLinkerArgument ("--disable-opt", "BeforeFieldInit", "test")]
+    [SetupLinkerArgument("--disable-opt", "BeforeFieldInit", "test")]
     public class UnusedStaticFieldInitializer
     {
-        public static void Main ()
+        public static void Main()
         {
-            C.Foo ();
+            C.Foo();
         }
 
-        [KeptMember (".cctor()")]
+        [KeptMember(".cctor()")]
         static class C
         {
             [Kept]
-            public static object o = new object ();
+            public static object o = new object();
 
             [Kept]
-            public static void Foo ()
-            {
-            }
+            public static void Foo() { }
         }
     }
 }

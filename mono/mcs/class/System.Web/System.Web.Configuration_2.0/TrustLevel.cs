@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,54 +32,70 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
-
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     public sealed class TrustLevel : ConfigurationElement
     {
         static ConfigurationProperty nameProp;
         static ConfigurationProperty policyFileProp;
         static ConfigurationPropertyCollection properties;
 
-        static TrustLevel ()
+        static TrustLevel()
         {
-            nameProp = new ConfigurationProperty ("name", typeof (string), "Full",
-                                  TypeDescriptor.GetConverter (typeof (string)),
-                                  PropertyHelper.NonEmptyStringValidator,
-                                  ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-            policyFileProp = new ConfigurationProperty ("policyFile", typeof (string), "internal", ConfigurationPropertyOptions.IsRequired);
-            properties = new ConfigurationPropertyCollection ();
+            nameProp = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                "Full",
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            policyFileProp = new ConfigurationProperty(
+                "policyFile",
+                typeof(string),
+                "internal",
+                ConfigurationPropertyOptions.IsRequired
+            );
+            properties = new ConfigurationPropertyCollection();
 
-            properties.Add (nameProp);
-            properties.Add (policyFileProp);
+            properties.Add(nameProp);
+            properties.Add(policyFileProp);
         }
 
-        internal TrustLevel ()
-        {
-        }
+        internal TrustLevel() { }
 
-        public TrustLevel (string name, string policyFile)
+        public TrustLevel(string name, string policyFile)
         {
             this.Name = name;
             this.PolicyFile = policyFile;
         }
 
-        [StringValidator (MinLength = 1)]
-        [ConfigurationProperty ("name", DefaultValue = "Full", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-        public string Name {
-            get { return (string) base [nameProp];}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = "Full",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Name
+        {
+            get { return (string)base[nameProp]; }
             set { base[nameProp] = value; }
         }
 
-        [ConfigurationProperty ("policyFile", DefaultValue = "internal", Options = ConfigurationPropertyOptions.IsRequired)]
-        public string PolicyFile {
-            get { return (string) base [policyFileProp];}
+        [ConfigurationProperty(
+            "policyFile",
+            DefaultValue = "internal",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string PolicyFile
+        {
+            get { return (string)base[policyFileProp]; }
             set { base[policyFileProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
     }
 }
-

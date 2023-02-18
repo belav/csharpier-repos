@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ApplicationIDAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,11 +32,12 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-    [AttributeUsage (AttributeTargets.Assembly)]
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Assembly)]
     [ComVisible(false)]
-    public sealed class ApplicationIDAttribute : Attribute, IConfigurationAttribute {
-
+    public sealed class ApplicationIDAttribute : Attribute, IConfigurationAttribute
+    {
         #region Fields
 
         Guid guid;
@@ -45,26 +46,26 @@ namespace System.EnterpriseServices {
 
         #region Constructors
 
-        public ApplicationIDAttribute (string guid)
+        public ApplicationIDAttribute(string guid)
         {
-            this.guid = new Guid (guid);
+            this.guid = new Guid(guid);
         }
 
         #endregion // Constructors
 
         #region Implementation of IConfigurationAttribute
 
-        bool IConfigurationAttribute.AfterSaveChanges (Hashtable info)
+        bool IConfigurationAttribute.AfterSaveChanges(Hashtable info)
         {
             return false;
         }
 
-        bool IConfigurationAttribute.Apply (Hashtable cache)
+        bool IConfigurationAttribute.Apply(Hashtable cache)
         {
             return false;
         }
 
-        bool IConfigurationAttribute.IsValidTarget (string s)
+        bool IConfigurationAttribute.IsValidTarget(string s)
         {
             return (s == "Application");
         }
@@ -73,7 +74,8 @@ namespace System.EnterpriseServices {
 
         #region Properties
 
-        public Guid Value {    
+        public Guid Value
+        {
             get { return guid; }
         }
 

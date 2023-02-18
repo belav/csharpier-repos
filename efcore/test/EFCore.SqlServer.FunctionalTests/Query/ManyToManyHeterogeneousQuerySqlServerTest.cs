@@ -5,17 +5,17 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class ManyToManyHeterogeneousQuerySqlServerTest : ManyToManyHeterogeneousQueryRelationalTestBase
+public class ManyToManyHeterogeneousQuerySqlServerTest
+    : ManyToManyHeterogeneousQueryRelationalTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     public override async Task Many_to_many_load_works_when_join_entity_has_custom_key(bool async)
     {
         await base.Many_to_many_load_works_when_join_entity_has_custom_key(async);
 
         AssertSql(
-"""
+            """
 @__p_0='1'
 
 SELECT TOP(1) [m].[Id]
@@ -23,7 +23,7 @@ FROM [ManyM_DB] AS [m]
 WHERE [m].[Id] = @__p_0
 """,
             //
-"""
+            """
 @__p_0='1'
 
 SELECT [t].[Id], [m].[Id], [t].[Id0], [t0].[Id], [t0].[ManyM_Id], [t0].[ManyN_Id], [t0].[Id0]
@@ -43,7 +43,7 @@ WHERE [m].[Id] = @__p_0
 ORDER BY [m].[Id], [t].[Id0], [t].[Id], [t0].[Id]
 """,
             //
-"""
+            """
 @__p_0='1'
 
 SELECT TOP(1) [m].[Id]
@@ -51,7 +51,7 @@ FROM [ManyN_DB] AS [m]
 WHERE [m].[Id] = @__p_0
 """,
             //
-"""
+            """
 @__p_0='1'
 
 SELECT [t].[Id], [m].[Id], [t].[Id0], [t0].[Id], [t0].[ManyM_Id], [t0].[ManyN_Id], [t0].[Id0]
@@ -69,6 +69,7 @@ LEFT JOIN (
 ) AS [t0] ON [t].[Id] = [t0].[ManyM_Id]
 WHERE [m].[Id] = @__p_0
 ORDER BY [m].[Id], [t].[Id0], [t].[Id], [t0].[Id]
-""");
+"""
+        );
     }
 }

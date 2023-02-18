@@ -10,6 +10,7 @@ namespace Testing
     public enum Foo
     {
         Foo,
+
         /// required for all enum members
         Bar
     }

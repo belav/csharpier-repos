@@ -12,7 +12,8 @@ internal class NullableTest
         return ((ValueType)(object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)(object)(ValueType)o) == null;
     }
@@ -37,5 +38,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

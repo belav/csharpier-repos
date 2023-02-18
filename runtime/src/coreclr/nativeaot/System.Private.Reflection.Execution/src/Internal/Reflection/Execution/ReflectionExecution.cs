@@ -53,7 +53,10 @@ namespace Internal.Reflection.Execution
 
             // Initialize our two-way communication with System.Private.CoreLib.
             ExecutionDomain executionDomain = ReflectionCoreExecution.ExecutionDomain;
-            var runtimeCallbacks = new ReflectionExecutionDomainCallbacksImplementation(executionDomain, executionEnvironment);
+            var runtimeCallbacks = new ReflectionExecutionDomainCallbacksImplementation(
+                executionDomain,
+                executionEnvironment
+            );
             RuntimeAugments.Initialize(runtimeCallbacks);
 
             ExecutionEnvironment = executionEnvironment;
@@ -63,24 +66,55 @@ namespace Internal.Reflection.Execution
         // This entry is targeted by the ILTransformer to implement Type.GetType()'s ability to detect the calling assembly and use it as
         // a default assembly name.
         //
-        public static Type GetType(string typeName, string callingAssemblyName, bool throwOnError, bool ignoreCase)
+        public static Type GetType(
+            string typeName,
+            string callingAssemblyName,
+            bool throwOnError,
+            bool ignoreCase
+        )
         {
-            return ExtensibleGetType(typeName, callingAssemblyName, null, null, throwOnError: throwOnError, ignoreCase: ignoreCase);
+            return ExtensibleGetType(
+                typeName,
+                callingAssemblyName,
+                null,
+                null,
+                throwOnError: throwOnError,
+                ignoreCase: ignoreCase
+            );
         }
 
         //
         // This entry is targeted by the ILTransformer to implement Type.GetType()'s ability to detect the calling assembly and use it as
         // a default assembly name.
         //
-        public static Type ExtensibleGetType(string typeName, string callingAssemblyName, Func<AssemblyName, Assembly> assemblyResolver, Func<Assembly, string, bool, Type> typeResolver, bool throwOnError, bool ignoreCase)
+        public static Type ExtensibleGetType(
+            string typeName,
+            string callingAssemblyName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, bool, Type> typeResolver,
+            bool throwOnError,
+            bool ignoreCase
+        )
         {
             LowLevelListWithIList<string> defaultAssemblies = new LowLevelListWithIList<string>();
             defaultAssemblies.Add(callingAssemblyName);
             defaultAssemblies.Add(AssemblyBinder.DefaultAssemblyNameForGetType);
-            return ReflectionCoreExecution.ExecutionDomain.GetType(typeName, assemblyResolver, typeResolver, throwOnError, ignoreCase, defaultAssemblies);
+            return ReflectionCoreExecution.ExecutionDomain.GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                defaultAssemblies
+            );
         }
 
-        public static bool TryGetMethodMetadataFromStartAddress(IntPtr methodStartAddress, out MetadataReader reader, out TypeDefinitionHandle typeHandle, out MethodHandle methodHandle)
+        public static bool TryGetMethodMetadataFromStartAddress(
+            IntPtr methodStartAddress,
+            out MetadataReader reader,
+            out TypeDefinitionHandle typeHandle,
+            out MethodHandle methodHandle
+        )
         {
             reader = null;
             typeHandle = default(TypeDefinitionHandle);
@@ -91,18 +125,30 @@ namespace Internal.Reflection.Execution
                 return false;
 
             RuntimeTypeHandle declaringTypeHandle = default(RuntimeTypeHandle);
-            if (!ExecutionEnvironment.TryGetMethodForStartAddress(methodStartAddress,
-                ref declaringTypeHandle, out QMethodDefinition qMethodDefinition))
+            if (
+                !ExecutionEnvironment.TryGetMethodForStartAddress(
+                    methodStartAddress,
+                    ref declaringTypeHandle,
+                    out QMethodDefinition qMethodDefinition
+                )
+            )
                 return false;
 
             if (!qMethodDefinition.IsNativeFormatMetadataBased)
                 return false;
 
-            if (!ExecutionEnvironment.TryGetMetadataForNamedType(declaringTypeHandle, out QTypeDefinition qTypeDefinition))
+            if (
+                !ExecutionEnvironment.TryGetMetadataForNamedType(
+                    declaringTypeHandle,
+                    out QTypeDefinition qTypeDefinition
+                )
+            )
                 return false;
 
             Debug.Assert(qTypeDefinition.IsNativeFormatMetadataBased);
-            Debug.Assert(qTypeDefinition.NativeFormatReader == qMethodDefinition.NativeFormatReader);
+            Debug.Assert(
+                qTypeDefinition.NativeFormatReader == qMethodDefinition.NativeFormatReader
+            );
 
             reader = qTypeDefinition.NativeFormatReader;
             typeHandle = qTypeDefinition.NativeFormatHandle;
@@ -111,6 +157,10 @@ namespace Internal.Reflection.Execution
             return true;
         }
 
-        internal static ExecutionEnvironmentImplementation ExecutionEnvironment { get; private set; }
+        internal static ExecutionEnvironmentImplementation ExecutionEnvironment
+        {
+            get;
+            private set;
+        }
     }
 }

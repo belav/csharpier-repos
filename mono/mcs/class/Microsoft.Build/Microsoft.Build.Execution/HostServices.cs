@@ -13,7 +13,7 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
@@ -42,79 +42,100 @@ namespace Microsoft.Build.Execution
             public string TaskName { get; set; }
             public ITaskHost HostObject { get; set; }
         }
-        
-        readonly List<HostObjectRegistration> hosts = new List<HostObjectRegistration> ();
-        readonly Dictionary<string,NodeAffinity> node_affinities = new Dictionary<string, NodeAffinity> ();
-        
-        HostObjectRegistration GetHostRegistration (string projectFile, string targetName, string taskName)
+
+        readonly List<HostObjectRegistration> hosts = new List<HostObjectRegistration>();
+        readonly Dictionary<string, NodeAffinity> node_affinities =
+            new Dictionary<string, NodeAffinity>();
+
+        HostObjectRegistration GetHostRegistration(
+            string projectFile,
+            string targetName,
+            string taskName
+        )
         {
             if (projectFile == null)
-                throw new ArgumentNullException ("projectFile");
+                throw new ArgumentNullException("projectFile");
             if (targetName == null)
-                throw new ArgumentNullException ("targetName");
+                throw new ArgumentNullException("targetName");
             if (taskName == null)
-                throw new ArgumentNullException ("taskName");
-            return hosts.FirstOrDefault (h =>
-                string.Equals (projectFile, h.ProjectFile, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals (targetName, h.TargetName, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals (taskName, h.TaskName, StringComparison.OrdinalIgnoreCase));
+                throw new ArgumentNullException("taskName");
+            return hosts.FirstOrDefault(
+                h =>
+                    string.Equals(projectFile, h.ProjectFile, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(targetName, h.TargetName, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(taskName, h.TaskName, StringComparison.OrdinalIgnoreCase)
+            );
         }
-        
-        public ITaskHost GetHostObject (string projectFile, string targetName, string taskName)
+
+        public ITaskHost GetHostObject(string projectFile, string targetName, string taskName)
         {
-            var reg = GetHostRegistration (projectFile, targetName, taskName);
+            var reg = GetHostRegistration(projectFile, targetName, taskName);
             return reg != null ? reg.HostObject : null;
         }
 
-        public NodeAffinity GetNodeAffinity (string projectFile)
+        public NodeAffinity GetNodeAffinity(string projectFile)
         {
             if (projectFile == null)
-                throw new ArgumentNullException ("projectFile");
+                throw new ArgumentNullException("projectFile");
             NodeAffinity na;
-            return node_affinities.TryGetValue (projectFile, out na) ? na : NodeAffinity.Any;
-        }
-        
-        IEnumerable<HostObjectRegistration> GetRegistrationsByProject (string project)
-        {
-            return hosts.Where (h => string.Equals (project, h.ProjectFile, StringComparison.OrdinalIgnoreCase));
+            return node_affinities.TryGetValue(projectFile, out na) ? na : NodeAffinity.Any;
         }
 
-        public void OnRenameProject (string oldFullPath, string newFullPath)
+        IEnumerable<HostObjectRegistration> GetRegistrationsByProject(string project)
+        {
+            return hosts.Where(
+                h => string.Equals(project, h.ProjectFile, StringComparison.OrdinalIgnoreCase)
+            );
+        }
+
+        public void OnRenameProject(string oldFullPath, string newFullPath)
         {
             if (oldFullPath == null)
-                throw new ArgumentNullException ("oldFullPath");
+                throw new ArgumentNullException("oldFullPath");
             if (newFullPath == null)
-                throw new ArgumentNullException ("newFullPath");
-            foreach (var reg in GetRegistrationsByProject (oldFullPath))
+                throw new ArgumentNullException("newFullPath");
+            foreach (var reg in GetRegistrationsByProject(oldFullPath))
                 reg.ProjectFile = newFullPath;
         }
 
-        public void RegisterHostObject (string projectFile, string targetName, string taskName, ITaskHost hostObject)
+        public void RegisterHostObject(
+            string projectFile,
+            string targetName,
+            string taskName,
+            ITaskHost hostObject
+        )
         {
             if (hostObject == null)
-                throw new ArgumentNullException ("hostObject");
-            var reg = GetHostRegistration (projectFile, targetName, taskName);
+                throw new ArgumentNullException("hostObject");
+            var reg = GetHostRegistration(projectFile, targetName, taskName);
             if (reg != null)
                 reg.HostObject = hostObject;
             else
-                hosts.Add (new HostObjectRegistration () { ProjectFile = projectFile, TargetName = targetName, TaskName = taskName, HostObject = hostObject });
+                hosts.Add(
+                    new HostObjectRegistration()
+                    {
+                        ProjectFile = projectFile,
+                        TargetName = targetName,
+                        TaskName = taskName,
+                        HostObject = hostObject
+                    }
+                );
         }
 
-        public void SetNodeAffinity (string projectFile, NodeAffinity nodeAffinity)
+        public void SetNodeAffinity(string projectFile, NodeAffinity nodeAffinity)
         {
             if (projectFile == null)
-                throw new ArgumentNullException ("projectFile");
-            node_affinities [projectFile] = nodeAffinity;
+                throw new ArgumentNullException("projectFile");
+            node_affinities[projectFile] = nodeAffinity;
         }
 
-        public void UnregisterProject (string projectFullPath)
+        public void UnregisterProject(string projectFullPath)
         {
             if (projectFullPath == null)
-                throw new ArgumentNullException ("projectFullPath");
-            var removed = GetRegistrationsByProject (projectFullPath).ToArray ();
+                throw new ArgumentNullException("projectFullPath");
+            var removed = GetRegistrationsByProject(projectFullPath).ToArray();
             foreach (var r in removed)
-                hosts.Remove (r);
+                hosts.Remove(r);
         }
     }
 }
-

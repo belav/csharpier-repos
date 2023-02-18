@@ -1,5 +1,5 @@
 //
-// RC2 CFB Unit Tests 
+// RC2 CFB Unit Tests
 //
 // Author:
 //    Sebastien Pouliot  <sebastien@xamarin.com>
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,23 +32,24 @@ using System.Security.Cryptography;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography {
-    
+namespace MonoTests.System.Security.Cryptography
+{
     [TestFixture]
-    public class Rc2CfbTests : LimitedCfbTests {
-        
-        protected override SymmetricAlgorithm GetInstance ()
+    public class Rc2CfbTests : LimitedCfbTests
+    {
+        protected override SymmetricAlgorithm GetInstance()
         {
-            return RC2.Create ();
-        }
-        
-        [Test]
-        public void Roundtrip ()
-        {
-            ProcessBlockSizes (GetInstance ());
+            return RC2.Create();
         }
 
-        static Dictionary<int, string> test_vectors = new Dictionary<int, string> () {
+        [Test]
+        public void Roundtrip()
+        {
+            ProcessBlockSizes(GetInstance());
+        }
+
+        static Dictionary<int, string> test_vectors = new Dictionary<int, string>()
+        {
             // padding None : Length of the data to encrypt is invalid.
             // block size: 64, key size: 40, padding: PKCS7, feedback: 8
             { 1076363784, "3F-B2-FC-4A-44-A6-47-31" },
@@ -158,13 +159,13 @@ namespace MonoTests.System.Security.Cryptography {
             // block size: 64, key size: 128, padding: ISO10126, feedback: 8
             { 1082131720, "7E-B2-6D-A9-60-A9-CC-05" },
         };
-        
-        protected override string GetExpectedResult (SymmetricAlgorithm algo, byte [] encryptedData)
+
+        protected override string GetExpectedResult(SymmetricAlgorithm algo, byte[] encryptedData)
         {
 #if false
             return base.GetExpectedResult (algo, encryptedData);
 #else
-            return test_vectors [GetId (algo)];
+            return test_vectors[GetId(algo)];
 #endif
         }
     }

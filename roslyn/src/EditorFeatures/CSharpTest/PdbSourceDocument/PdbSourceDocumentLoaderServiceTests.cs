@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
         [Fact]
         public async Task ReturnsSourceFileFromSourceLink()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public event System.EventHandler [|E|] { add { } remove { } }
@@ -32,20 +33,41 @@ public class C
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 // Move the source file to a path that only our fake debugger service knows about
                 var sourceFilePath = Path.Combine(path, "SourceLink.cs");
                 File.Move(GetSourceFilePath(path), sourceFilePath);
 
-                var sourceLinkService = new Lazy<ISourceLinkService>(() => new TestSourceLinkService(sourceFilePath: sourceFilePath));
+                var sourceLinkService = new Lazy<ISourceLinkService>(
+                    () => new TestSourceLinkService(sourceFilePath: sourceFilePath)
+                );
                 var service = new PdbSourceDocumentLoaderService(sourceLinkService, logger: null);
 
                 using var hash = SHA256.Create();
                 var fileHash = hash.ComputeHash(File.ReadAllBytes(sourceFilePath));
 
-                var sourceDocument = new SourceDocument("goo.cs", Text.SourceHashAlgorithms.Default, fileHash.ToImmutableArray(), null, "https://sourcelink");
-                var result = await service.LoadSourceDocumentAsync(path, sourceDocument, Encoding.UTF8, new TelemetryMessage(CancellationToken.None), useExtendedTimeout: false, CancellationToken.None);
+                var sourceDocument = new SourceDocument(
+                    "goo.cs",
+                    Text.SourceHashAlgorithms.Default,
+                    fileHash.ToImmutableArray(),
+                    null,
+                    "https://sourcelink"
+                );
+                var result = await service.LoadSourceDocumentAsync(
+                    path,
+                    sourceDocument,
+                    Encoding.UTF8,
+                    new TelemetryMessage(CancellationToken.None),
+                    useExtendedTimeout: false,
+                    CancellationToken.None
+                );
 
                 Assert.NotNull(result);
                 Assert.Equal(sourceFilePath, result!.FilePath);
@@ -56,7 +78,8 @@ public class C
         [Fact]
         public async Task NoUrlFoundReturnsNull()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public event System.EventHandler [|E|] { add { } remove { } }
@@ -66,17 +89,38 @@ public class C
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 // Move the source file to a path that only our fake debugger service knows about
                 var sourceFilePath = Path.Combine(path, "SourceLink.cs");
                 File.Move(GetSourceFilePath(path), sourceFilePath);
 
-                var sourceLinkService = new Lazy<ISourceLinkService>(() => new TestSourceLinkService(sourceFilePath: sourceFilePath));
+                var sourceLinkService = new Lazy<ISourceLinkService>(
+                    () => new TestSourceLinkService(sourceFilePath: sourceFilePath)
+                );
                 var service = new PdbSourceDocumentLoaderService(sourceLinkService, logger: null);
 
-                var sourceDocument = new SourceDocument("goo.cs", Text.SourceHashAlgorithm.None, default, null, SourceLinkUrl: null);
-                var result = await service.LoadSourceDocumentAsync(path, sourceDocument, Encoding.UTF8, new TelemetryMessage(CancellationToken.None), useExtendedTimeout: false, CancellationToken.None);
+                var sourceDocument = new SourceDocument(
+                    "goo.cs",
+                    Text.SourceHashAlgorithm.None,
+                    default,
+                    null,
+                    SourceLinkUrl: null
+                );
+                var result = await service.LoadSourceDocumentAsync(
+                    path,
+                    sourceDocument,
+                    Encoding.UTF8,
+                    new TelemetryMessage(CancellationToken.None),
+                    useExtendedTimeout: false,
+                    CancellationToken.None
+                );
 
                 Assert.Null(result);
             });

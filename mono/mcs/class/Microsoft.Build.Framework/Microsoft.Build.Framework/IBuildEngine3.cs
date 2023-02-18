@@ -7,7 +7,7 @@ namespace Microsoft.Build.Framework
     [MonoTODO]
     public interface IBuildEngine3 : IBuildEngine2
     {
-        BuildEngineResult BuildProjectFilesInParallel (
+        BuildEngineResult BuildProjectFilesInParallel(
             string[] projectFileNames,
             string[] targetNames,
             IDictionary[] globalProperties,
@@ -15,8 +15,7 @@ namespace Microsoft.Build.Framework
             string[] toolsVersion,
             bool returnTargetOutputs
         );
-        void Reacquire ();
-        void Yield ();
+        void Reacquire();
+        void Yield();
     }
 }
-

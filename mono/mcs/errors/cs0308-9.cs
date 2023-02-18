@@ -3,12 +3,10 @@
 
 public class Test
 {
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
-        NonGeneric dummy = new NonGeneric<string> ();
+        NonGeneric dummy = new NonGeneric<string>();
     }
 
-    internal class NonGeneric
-    {
-    }
+    internal class NonGeneric { }
 }

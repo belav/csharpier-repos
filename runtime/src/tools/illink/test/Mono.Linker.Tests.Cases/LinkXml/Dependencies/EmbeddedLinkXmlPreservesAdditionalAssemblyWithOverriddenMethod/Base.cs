@@ -2,8 +2,6 @@ namespace Mono.Linker.Tests.Cases.LinkXml.Dependencies.EmbeddedLinkXmlPreservesA
 {
     public class Base
     {
-        public virtual void VirtualMethodFromBase ()
-        {
-        }
+        public virtual void VirtualMethodFromBase() { }
     }
 }

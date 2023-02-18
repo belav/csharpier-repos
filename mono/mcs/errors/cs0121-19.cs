@@ -5,13 +5,9 @@ using System;
 
 class C
 {
-    static void M (Func<byte,int> arg)
-    {
-    }
-    
-    static void M (Action<int> arg)
-    {
-    }
+    static void M(Func<byte, int> arg) { }
+
+    static void M(Action<int> arg) { }
 
     static void Main()
     {

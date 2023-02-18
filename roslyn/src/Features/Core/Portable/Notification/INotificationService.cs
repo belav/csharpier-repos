@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Notification
         void SendNotification(
             string message,
             string title = null,
-            NotificationSeverity severity = NotificationSeverity.Warning);
+            NotificationSeverity severity = NotificationSeverity.Warning
+        );
 
         /// <summary>
         /// Displays a message box with a yes/no question to the user.
@@ -31,6 +32,7 @@ namespace Microsoft.CodeAnalysis.Notification
         bool ConfirmMessageBox(
             string message,
             string title = null,
-            NotificationSeverity severity = NotificationSeverity.Warning);
+            NotificationSeverity severity = NotificationSeverity.Warning
+        );
     }
 }

@@ -6,9 +6,12 @@ namespace Bug
     {
         static partial class Core
         {
-            internal static bool A () { return true; }
+            internal static bool A()
+            {
+                return true;
+            }
         }
-        
+
         /*internal static partial class Bar
         {
             internal static bool A () { return true; }
@@ -17,16 +20,14 @@ namespace Bug
 
     partial class GL
     {
-        public static void Main ()
+        public static void Main()
         {
-            Core.A ();
+            Core.A();
             //Bar.A ();
         }
 
-        internal partial class Core
-        {
-        }
-        
+        internal partial class Core { }
+
         /*partial class Bar
         {
         }*/

@@ -25,7 +25,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             this.HighPriorityForActiveFile = false;
         }
 
-        public ExportIncrementalAnalyzerProviderAttribute(bool highPriorityForActiveFile, string name, string[] workspaceKinds)
+        public ExportIncrementalAnalyzerProviderAttribute(
+            bool highPriorityForActiveFile,
+            string name,
+            string[] workspaceKinds
+        )
             : this(name, workspaceKinds)
         {
             this.HighPriorityForActiveFile = highPriorityForActiveFile;

@@ -6,19 +6,19 @@ using System;
 
 public struct Point
 {
-        public void Error () {}
+    public void Error() { }
 }
 
 public class A : MarshalByRefObject
 {
-   public Point point = new Point ();
+    public Point point = new Point();
 }
 
 public class Test
 {
-   public static void Main ()
-   {
-        A a = new A ();
-        a.point.Error ();
-   }
+    public static void Main()
+    {
+        A a = new A();
+        a.point.Error();
+    }
 }

@@ -3,20 +3,21 @@
 
 public class Test
 {
-    public static void Foo (__arglist)
+    public static void Foo(__arglist)
     {
         System.RuntimeArgumentHandle o;
         {
-            System.Action a = delegate () {
-                o = __arglist; 
+            System.Action a = delegate()
+            {
+                o = __arglist;
             };
-            
-            a ();
+
+            a();
         }
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        Foo (__arglist ());
+        Foo(__arglist());
     }
 }

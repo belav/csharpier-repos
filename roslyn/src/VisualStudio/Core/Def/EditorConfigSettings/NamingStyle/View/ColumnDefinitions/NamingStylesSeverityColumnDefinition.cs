@@ -23,9 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NamingStylesSeverityColumnDefinition()
-        {
-        }
+        public NamingStylesSeverityColumnDefinition() { }
 
         public override string Name => Severity;
         public override string DisplayName => ServicesVSResources.Severity;
@@ -33,7 +31,12 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         public override bool IsSortable => false;
         public override double MinWidth => 120;
 
-        public override bool TryCreateStringContent(ITableEntryHandle entry, bool truncatedText, bool singleColumnView, out string? content)
+        public override bool TryCreateStringContent(
+            ITableEntryHandle entry,
+            bool truncatedText,
+            bool singleColumnView,
+            out string? content
+        )
         {
             if (!entry.TryGetValue(Type, out NamingStyleSetting setting))
             {
@@ -44,8 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
             content = GetSeverityString(setting.Severity);
             return true;
 
-            static string GetSeverityString(ReportDiagnostic severity)
-                => severity switch
+            static string GetSeverityString(ReportDiagnostic severity) =>
+                severity switch
                 {
                     ReportDiagnostic.Hidden => ServicesVSResources.Disabled,
                     ReportDiagnostic.Info => ServicesVSResources.Suggestion,
@@ -55,7 +58,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
                 };
         }
 
-        public override bool TryCreateColumnContent(ITableEntryHandle entry, bool singleColumnView, out FrameworkElement? content)
+        public override bool TryCreateColumnContent(
+            ITableEntryHandle entry,
+            bool singleColumnView,
+            out FrameworkElement? content
+        )
         {
             if (!entry.TryGetValue(Severity, out NamingStyleSetting setting))
             {

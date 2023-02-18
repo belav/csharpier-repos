@@ -19,6 +19,6 @@ namespace ILLink.Shared.DataFlow
         // Note: Since immutability is relatively tricky to determine, we require all values
         //       to explicitly implement the DeepCopy, even though the expectation is that
         //       most values will just "return this".
-        public abstract SingleValue DeepCopy ();
+        public abstract SingleValue DeepCopy();
     }
 }

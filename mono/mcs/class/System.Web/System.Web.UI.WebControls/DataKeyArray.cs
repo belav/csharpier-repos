@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,45 +40,50 @@ namespace System.Web.UI.WebControls
         IList keys;
         bool trackViewState;
 
-        internal DataKeyArray (IList keys)
+        internal DataKeyArray(IList keys)
         {
             this.keys = keys;
         }
-        
-        public DataKeyArray (ArrayList keys)
+
+        public DataKeyArray(ArrayList keys)
         {
             this.keys = keys;
         }
-        
-        public int Count {
+
+        public int Count
+        {
             get { return keys.Count; }
         }
 
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return false; }
         }
 
-        public bool IsSynchronized {
+        public bool IsSynchronized
+        {
             get { return false; }
         }
 
-        public DataKey this [int index] {
-            get { return (DataKey) keys [index]; }
+        public DataKey this[int index]
+        {
+            get { return (DataKey)keys[index]; }
         }
 
-        public object SyncRoot {
+        public object SyncRoot
+        {
             get { return this; }
         }
 
-        public void CopyTo (DataKey[] array, int index)
+        public void CopyTo(DataKey[] array, int index)
         {
             foreach (DataKey current in this)
-                array [index++] = current;
+                array[index++] = current;
         }
 
         void ICollection.CopyTo(Array array, int index)
         {
-            foreach(object current in this)
+            foreach (object current in this)
                 array.SetValue(current, index++);
         }
 
@@ -87,33 +92,35 @@ namespace System.Web.UI.WebControls
             return keys.GetEnumerator();
         }
 
-        void IStateManager.LoadViewState (object savedState)
+        void IStateManager.LoadViewState(object savedState)
         {
-            if (savedState == null) return;
-            object[] data = (object[]) savedState;
-            for (int n=0; n<data.Length && n<keys.Count; n++)
-                ((IStateManager)keys[n]).LoadViewState (data [n]);
+            if (savedState == null)
+                return;
+            object[] data = (object[])savedState;
+            for (int n = 0; n < data.Length && n < keys.Count; n++)
+                ((IStateManager)keys[n]).LoadViewState(data[n]);
         }
-        
-        object IStateManager.SaveViewState ()
+
+        object IStateManager.SaveViewState()
         {
-            if (keys.Count == 0) return null;
-            object[] data = new object [keys.Count];
-            for (int n=0; n<keys.Count; n++)
-                data [n] = ((IStateManager)keys[n]).SaveViewState ();
+            if (keys.Count == 0)
+                return null;
+            object[] data = new object[keys.Count];
+            for (int n = 0; n < keys.Count; n++)
+                data[n] = ((IStateManager)keys[n]).SaveViewState();
             return data;
         }
-        
-        void IStateManager.TrackViewState ()
+
+        void IStateManager.TrackViewState()
         {
             trackViewState = true;
             foreach (IStateManager k in keys)
-                k.TrackViewState ();
+                k.TrackViewState();
         }
-        
-        bool IStateManager.IsTrackingViewState {
+
+        bool IStateManager.IsTrackingViewState
+        {
             get { return trackViewState; }
         }
     }
 }
-

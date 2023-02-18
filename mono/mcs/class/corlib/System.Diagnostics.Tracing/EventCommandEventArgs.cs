@@ -33,32 +33,26 @@ namespace System.Diagnostics.Tracing
 {
     public class EventCommandEventArgs : EventArgs
     {
-        private EventCommandEventArgs ()
-        {            
+        private EventCommandEventArgs() { }
+
+        public IDictionary<string, string> Arguments
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public IDictionary<string, string> Arguments {
-            get {
-                throw new NotImplementedException ();
-            }            
+        public EventCommand Command
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public EventCommand Command {
-            get {
-                throw new NotImplementedException ();
-            }
-        }
-
-        public bool DisableEvent (int eventId)
+        public bool DisableEvent(int eventId)
         {
             return true;
         }
 
-        public bool EnableEvent (int eventId)
+        public bool EnableEvent(int eventId)
         {
             return true;
         }
-
     }
 }
-

@@ -4,7 +4,9 @@
 class X
 {
     static int y;
-    static void Main () {
+
+    static void Main()
+    {
         y = 10;
         int y = 5;
     }

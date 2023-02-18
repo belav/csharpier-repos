@@ -4,8 +4,8 @@ using static Constants;
 
 static class Program
 {
-    static void Main ()
+    static void Main()
     {
-        System.Console.WriteLine (One);
+        System.Console.WriteLine(One);
     }
 }

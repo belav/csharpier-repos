@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 class C
 {
-    public void Test ()
+    public void Test()
     {
-        Action a = () => await Task.FromResult (1);
+        Action a = () => await Task.FromResult(1);
     }
 }

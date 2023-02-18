@@ -18,20 +18,27 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureSeverity
 {
-    public abstract partial class MultipleCodeStyleOptionBasedSeverityConfigurationTests : AbstractSuppressionDiagnosticTest
+    public abstract partial class MultipleCodeStyleOptionBasedSeverityConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         protected internal override string GetLanguage() => LanguageNames.CSharp;
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace)
         {
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                        new CSharpUseInferredMemberNameDiagnosticAnalyzer(), new ConfigureSeverityLevelCodeFixProvider());
+                new CSharpUseInferredMemberNameDiagnosticAnalyzer(),
+                new ConfigureSeverityLevelCodeFixProvider()
+            );
         }
 
         [Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
-        public class ErrorConfigurationTests : MultipleCodeStyleOptionBasedSeverityConfigurationTests
+        public class ErrorConfigurationTests
+            : MultipleCodeStyleOptionBasedSeverityConfigurationTests
         {
             protected override int CodeActionIndex => 4;
 
@@ -39,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_Empty_Error()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -69,7 +77,8 @@ namespace ConsoleApp5
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -110,7 +119,8 @@ dotnet_diagnostic.IDE0037.severity = error
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_BothRulesExist_Error()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -147,7 +157,8 @@ dotnet_style_prefer_inferred_tuple_names = true:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -194,7 +205,8 @@ dotnet_diagnostic.IDE0037.severity = error
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_OneRuleExists_Error()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -228,7 +240,8 @@ dotnet_style_prefer_inferred_anonymous_type_member_names = true:warning
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -272,7 +285,8 @@ dotnet_diagnostic.IDE0037.severity = error
             [ConditionalFact(typeof(IsEnglishLocal))]
             public async Task ConfigureEditorconfig_AllPossibleEntriesExist_Error()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -312,7 +326,8 @@ dotnet_diagnostic.IDE0037.severity = silent
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,32 +36,34 @@ namespace System.ServiceProcess.Design
     [MonoTODO]
     public class ServiceInstallerDialog : Form
     {
-        string username, password;
+        string username,
+            password;
         const ServiceInstallerDialogResult result = 0;
 
-        public ServiceInstallerDialog ()
-        {
-        }
+        public ServiceInstallerDialog() { }
 
         [STAThread]
         [MonoTODO]
-        public static void Main ()
+        public static void Main()
         {
-            Application.Run (new ServiceInstallerDialog ());
+            Application.Run(new ServiceInstallerDialog());
         }
 
-        public string Username {
+        public string Username
+        {
             get { return username; }
             set { username = value; }
         }
 
-        public string Password {
+        public string Password
+        {
             get { return password; }
             set { password = value; }
         }
 
         [MonoTODO]
-        public ServiceInstallerDialogResult Result {
+        public ServiceInstallerDialogResult Result
+        {
             get { return result; }
         }
     }

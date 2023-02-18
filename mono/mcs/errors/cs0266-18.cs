@@ -7,18 +7,17 @@ class A : I { }
 
 class B
 {
-    public static explicit operator A (B from)
+    public static explicit operator A(B from)
     {
-        return new A ();
+        return new A();
     }
 }
 
 class App
 {
-    public static void Main ()
+    public static void Main()
     {
-        B b = new B ();
+        B b = new B();
         I i = b;
     }
 }
-

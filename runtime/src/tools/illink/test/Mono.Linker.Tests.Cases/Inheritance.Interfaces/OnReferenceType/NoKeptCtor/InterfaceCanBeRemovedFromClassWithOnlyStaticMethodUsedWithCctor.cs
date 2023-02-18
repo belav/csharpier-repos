@@ -4,53 +4,45 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 {
     public class InterfaceCanBeRemovedFromClassWithOnlyStaticMethodUsedWithCctor
     {
-        public static void Main ()
+        public static void Main()
         {
-            IUsedInterface p = new UsedClass ();
-            StaticMethodOnlyUsed.StaticMethod ();
-            p.Foo ();
+            IUsedInterface p = new UsedClass();
+            StaticMethodOnlyUsed.StaticMethod();
+            p.Foo();
         }
 
         [Kept]
         interface IUsedInterface
         {
             [Kept]
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IUsedInterface))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IUsedInterface))]
         class UsedClass : IUsedInterface
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
         }
 
         [Kept]
         class StaticMethodOnlyUsed : IUsedInterface
         {
             [Kept]
-            static StaticMethodOnlyUsed ()
+            static StaticMethodOnlyUsed()
             {
-                UsedByStaticCctor ();
+                UsedByStaticCctor();
             }
 
             [Kept]
-            static void UsedByStaticCctor ()
-            {
-            }
+            static void UsedByStaticCctor() { }
 
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
 
             [Kept]
-            public static void StaticMethod ()
-            {
-            }
+            public static void StaticMethod() { }
         }
     }
 }

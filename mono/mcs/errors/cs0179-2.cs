@@ -3,12 +3,13 @@
 
 using System;
 
-public delegate void FooHandler ();
+public delegate void FooHandler();
 
-class Bar {
-    extern event FooHandler OnFoo {
+class Bar
+{
+    extern event FooHandler OnFoo
+    {
         add { }
         remove { }
     }
 }
-

@@ -4,4 +4,4 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: TypeForwardedTo(typeof (int[]))]
+[assembly: TypeForwardedTo(typeof(int[]))]

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MimeContentBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,11 +32,17 @@ using System.ComponentModel;
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-    [XmlFormatExtensionPrefix ("mime", "http://schemas.xmlsoap.org/wsdl/mime/")]
-    [XmlFormatExtension ("content", "http://schemas.xmlsoap.org/wsdl/mime/", typeof (InputBinding), typeof (OutputBinding))]
-    public sealed class MimeContentBinding : ServiceDescriptionFormatExtension {
-
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtensionPrefix("mime", "http://schemas.xmlsoap.org/wsdl/mime/")]
+    [XmlFormatExtension(
+        "content",
+        "http://schemas.xmlsoap.org/wsdl/mime/",
+        typeof(InputBinding),
+        typeof(OutputBinding)
+    )]
+    public sealed class MimeContentBinding : ServiceDescriptionFormatExtension
+    {
         #region Fields
 
         public const string Namespace = "http://schemas.xmlsoap.org/wsdl/mime/";
@@ -46,25 +52,27 @@ namespace System.Web.Services.Description {
         #endregion // Fields
 
         #region Constructors
-        
-        public MimeContentBinding ()
+
+        public MimeContentBinding()
         {
             part = String.Empty;
             type = String.Empty;
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        [XmlAttribute ("part")]
-        public string Part {
+        [XmlAttribute("part")]
+        public string Part
+        {
             get { return part; }
             set { part = value; }
         }
 
-        [XmlAttribute ("type")]
-        public string Type {
+        [XmlAttribute("type")]
+        public string Type
+        {
             get { return type; }
             set { type = value; }
         }

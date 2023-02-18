@@ -73,7 +73,10 @@ namespace Moq.Linq
 
         public override string ToString()
         {
-            if (this.Expression.NodeType == ExpressionType.Constant && ((ConstantExpression)this.Expression).Value == this)
+            if (
+                this.Expression.NodeType == ExpressionType.Constant
+                && ((ConstantExpression)this.Expression).Value == this
+            )
             {
                 return "Query(" + typeof(T) + ")";
             }

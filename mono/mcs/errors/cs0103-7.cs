@@ -4,9 +4,9 @@
 
 class C
 {
-    delegate void WithOutParam (string value);
+    delegate void WithOutParam(string value);
 
-    static void Main() 
+    static void Main()
     {
         WithOutParam o = (s) => Console.WriteLine();
     }

@@ -3,11 +3,7 @@
 
 using System;
 
-abstract class AbstractAttribute: Attribute
-{
-}
+abstract class AbstractAttribute : Attribute { }
 
 [Abstract]
-class TestClass
-{
-}
+class TestClass { }

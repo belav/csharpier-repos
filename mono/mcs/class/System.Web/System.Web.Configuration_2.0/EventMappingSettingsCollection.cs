@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,84 +31,90 @@
 using System;
 using System.Configuration;
 
-
-namespace System.Web.Configuration {
-
-    [ConfigurationCollection (typeof (EventMappingSettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+namespace System.Web.Configuration
+{
+    [ConfigurationCollection(
+        typeof(EventMappingSettings),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed class EventMappingSettingsCollection : ConfigurationElementCollection
     {
         static ConfigurationPropertyCollection properties;
 
-        static EventMappingSettingsCollection ()
+        static EventMappingSettingsCollection()
         {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
         }
 
-        public void Add (EventMappingSettings eventMappingSettings)
+        public void Add(EventMappingSettings eventMappingSettings)
         {
-            BaseAdd (eventMappingSettings);
+            BaseAdd(eventMappingSettings);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        public bool Contains (string name)
+        public bool Contains(string name)
         {
-            return BaseGet (name) != null;
+            return BaseGet(name) != null;
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new EventMappingSettings ();
+            return new EventMappingSettings();
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
             return ((EventMappingSettings)element).Name;
         }
 
-        public int IndexOf (string name)
+        public int IndexOf(string name)
         {
-            EventMappingSettings settings = (EventMappingSettings)BaseGet (name);
+            EventMappingSettings settings = (EventMappingSettings)BaseGet(name);
             if (settings == null)
                 return -1; /* XXX */
             else
-                return BaseIndexOf (settings);
+                return BaseIndexOf(settings);
         }
 
-        [MonoTODO ("why did they use 'Insert' and not 'Add' as other collections do?")]
-        public void Insert (int index, EventMappingSettings eventMappingSettings)
+        [MonoTODO("why did they use 'Insert' and not 'Add' as other collections do?")]
+        public void Insert(int index, EventMappingSettings eventMappingSettings)
         {
-            BaseAdd (index, eventMappingSettings);
+            BaseAdd(index, eventMappingSettings);
         }
 
-        public void Remove (string name)
+        public void Remove(string name)
         {
-            BaseRemove (name);
+            BaseRemove(name);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
 
-        public EventMappingSettings this [int index] {
-            get { return (EventMappingSettings) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+        public EventMappingSettings this[int index]
+        {
+            get { return (EventMappingSettings)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
         }
 
-        public new EventMappingSettings this [string key] {
-            get { return (EventMappingSettings) BaseGet (key); }
+        public new EventMappingSettings this[string key]
+        {
+            get { return (EventMappingSettings)BaseGet(key); }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
     }
-
 }
-
-

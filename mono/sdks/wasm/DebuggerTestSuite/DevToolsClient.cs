@@ -39,7 +39,11 @@ namespace Microsoft.WebAssembly.Diagnostics
         public async Task Close(CancellationToken cancellationToken)
         {
             if (socket.State == WebSocketState.Open)
-                await socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Closing", cancellationToken);
+                await socket.CloseOutputAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "Closing",
+                    cancellationToken
+                );
         }
 
         protected virtual void Dispose(bool disposing)
@@ -58,7 +62,12 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             if (pending_writes.Count > 0)
             {
-                current_write = socket.SendAsync(new ArraySegment<byte>(pending_writes[0]), WebSocketMessageType.Text, true, token);
+                current_write = socket.SendAsync(
+                    new ArraySegment<byte>(pending_writes[0]),
+                    WebSocketMessageType.Text,
+                    true,
+                    token
+                );
                 return current_write;
             }
             return null;
@@ -94,14 +103,24 @@ namespace Microsoft.WebAssembly.Diagnostics
             if (pending_writes.Count == 1)
             {
                 if (current_write != null)
-                    throw new Exception("Internal state is bad. current_write must be null if there are no pending writes");
+                    throw new Exception(
+                        "Internal state is bad. current_write must be null if there are no pending writes"
+                    );
 
-                current_write = socket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, token);
+                current_write = socket.SendAsync(
+                    new ArraySegment<byte>(bytes),
+                    WebSocketMessageType.Text,
+                    true,
+                    token
+                );
                 pending_ops.Add(current_write);
             }
         }
 
-        async Task MarkCompleteAfterward(Func<CancellationToken, Task> send, CancellationToken token)
+        async Task MarkCompleteAfterward(
+            Func<CancellationToken, Task> send,
+            CancellationToken token
+        )
         {
             try
             {
@@ -118,9 +137,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             Uri uri,
             Func<string, CancellationToken, Task> receive,
             Func<CancellationToken, Task> send,
-            CancellationToken token)
+            CancellationToken token
+        )
         {
-
             logger.LogDebug("connecting to {0}", uri);
             this.socket = new ClientWebSocket();
             this.socket.Options.KeepAliveInterval = Timeout.InfiniteTimeSpan;

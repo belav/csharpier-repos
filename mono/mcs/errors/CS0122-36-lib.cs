@@ -1,6 +1,4 @@
 namespace N
 {
-    internal struct S
-    {
-    }
+    internal struct S { }
 }

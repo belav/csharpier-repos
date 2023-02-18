@@ -14,129 +14,138 @@ using NUnit.Framework;
 using System;
 using System.Security.Cryptography;
 
-namespace MonoTests.System.Security.Cryptography {
-
+namespace MonoTests.System.Security.Cryptography
+{
     [TestFixture]
-    public class ProtectedMemoryTest {
-
-        private bool IsEmpty (byte[] array)
+    public class ProtectedMemoryTest
+    {
+        private bool IsEmpty(byte[] array)
         {
             int total = 0;
             for (int i = 0; i < array.Length; i++)
-                total += array [i];
+                total += array[i];
             return (total == 0);
         }
 
-        private void ProtectUnprotect (MemoryProtectionScope scope) 
+        private void ProtectUnprotect(MemoryProtectionScope scope)
         {
-            try {
-                byte[] data = new byte [16];
-                ProtectedMemory.Protect (data, scope);
-                Assert.IsFalse (IsEmpty (data), "Protect");
+            try
+            {
+                byte[] data = new byte[16];
+                ProtectedMemory.Protect(data, scope);
+                Assert.IsFalse(IsEmpty(data), "Protect");
 
-                ProtectedMemory.Unprotect (data, scope);
-                Assert.IsTrue (IsEmpty (data), "Unprotect");
+                ProtectedMemory.Unprotect(data, scope);
+                Assert.IsTrue(IsEmpty(data), "Unprotect");
             }
-            catch (PlatformNotSupportedException) {
-                Assert.Ignore ("Only supported under Windows 2000 SP3 and later");
+            catch (PlatformNotSupportedException)
+            {
+                Assert.Ignore("Only supported under Windows 2000 SP3 and later");
             }
         }
 
         [Test]
-        public void ProtectSameProcess () 
+        public void ProtectSameProcess()
         {
             // we're testing the MemoryProtectionScope definition but
             // not if it's really limited to the scope specified
-            ProtectUnprotect (MemoryProtectionScope.SameProcess);
+            ProtectUnprotect(MemoryProtectionScope.SameProcess);
         }
 
         [Test]
-        public void ProtectSameLogon () 
+        public void ProtectSameLogon()
         {
             // we're testing the MemoryProtectionScope definition but
             // not if it's really limited to the scope specified
-            ProtectUnprotect (MemoryProtectionScope.SameLogon);
+            ProtectUnprotect(MemoryProtectionScope.SameLogon);
         }
 
         [Test]
-        public void ProtectCrossProcess () 
+        public void ProtectCrossProcess()
         {
             // we're testing the MemoryProtectionScope definition but
             // not if it's really limited to the scope specified
-            ProtectUnprotect (MemoryProtectionScope.CrossProcess);
+            ProtectUnprotect(MemoryProtectionScope.CrossProcess);
         }
 
         [Test]
-        public void MemoryProtectionScope_All ()
+        public void MemoryProtectionScope_All()
         {
             byte[] data = new byte[16];
-            try {
-                foreach (MemoryProtectionScope mps in Enum.GetValues (typeof (MemoryProtectionScope))) {
-                    ProtectedMemory.Protect (data, mps);
-                    Assert.IsFalse (IsEmpty (data), "Protect");
-                    ProtectedMemory.Unprotect (data, mps);
-                    Assert.IsTrue (IsEmpty (data), "Unprotect");
+            try
+            {
+                foreach (MemoryProtectionScope mps in Enum.GetValues(typeof(MemoryProtectionScope)))
+                {
+                    ProtectedMemory.Protect(data, mps);
+                    Assert.IsFalse(IsEmpty(data), "Protect");
+                    ProtectedMemory.Unprotect(data, mps);
+                    Assert.IsTrue(IsEmpty(data), "Unprotect");
                 }
             }
-            catch (PlatformNotSupportedException) {
-                Assert.Ignore ("Only supported under Windows 2000 SP3 and later");
+            catch (PlatformNotSupportedException)
+            {
+                Assert.Ignore("Only supported under Windows 2000 SP3 and later");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Protect_InvalidMemoryProtectionScope ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Protect_InvalidMemoryProtectionScope()
         {
             byte[] data = new byte[16];
-            ProtectedMemory.Protect (data, (MemoryProtectionScope) Int32.MinValue);
+            ProtectedMemory.Protect(data, (MemoryProtectionScope)Int32.MinValue);
         }
 
         [Test]
-        [ExpectedException (typeof (CryptographicException))]
-        public void ProtectBadDataLength () 
+        [ExpectedException(typeof(CryptographicException))]
+        public void ProtectBadDataLength()
         {
-            byte[] data = new byte [15];
-            try {
-                ProtectedMemory.Protect (data, MemoryProtectionScope.SameProcess);
+            byte[] data = new byte[15];
+            try
+            {
+                ProtectedMemory.Protect(data, MemoryProtectionScope.SameProcess);
             }
-            catch (PlatformNotSupportedException) {
-                Assert.Ignore ("Only supported under Windows 2000 SP3 and later");
+            catch (PlatformNotSupportedException)
+            {
+                Assert.Ignore("Only supported under Windows 2000 SP3 and later");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ProtectNull () 
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ProtectNull()
         {
-            ProtectedMemory.Protect (null, MemoryProtectionScope.SameProcess);
+            ProtectedMemory.Protect(null, MemoryProtectionScope.SameProcess);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void Unprotect_InvalidMemoryProtectionScope ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void Unprotect_InvalidMemoryProtectionScope()
         {
             byte[] data = new byte[16];
-            ProtectedMemory.Unprotect (data, (MemoryProtectionScope) Int32.MinValue);
+            ProtectedMemory.Unprotect(data, (MemoryProtectionScope)Int32.MinValue);
         }
 
         [Test]
-        [ExpectedException (typeof (CryptographicException))]
-        public void UnprotectBadDataLength () 
+        [ExpectedException(typeof(CryptographicException))]
+        public void UnprotectBadDataLength()
         {
-            byte[] data = new byte [15];
-            try {
-                ProtectedMemory.Unprotect (data, MemoryProtectionScope.SameProcess);
+            byte[] data = new byte[15];
+            try
+            {
+                ProtectedMemory.Unprotect(data, MemoryProtectionScope.SameProcess);
             }
-            catch (PlatformNotSupportedException) {
-                Assert.Ignore ("Only supported under Windows 2000 SP3 and later");
+            catch (PlatformNotSupportedException)
+            {
+                Assert.Ignore("Only supported under Windows 2000 SP3 and later");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void UnprotectNull () 
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void UnprotectNull()
         {
-            ProtectedMemory.Unprotect (null, MemoryProtectionScope.SameProcess);
+            ProtectedMemory.Unprotect(null, MemoryProtectionScope.SameProcess);
         }
     }
 }

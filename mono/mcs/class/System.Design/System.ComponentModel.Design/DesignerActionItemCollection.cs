@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,54 +37,48 @@ namespace System.ComponentModel.Design
         //
         // Constructors
         //
-        public DesignerActionItemCollection ()
-        {
-        }
+        public DesignerActionItemCollection() { }
 
         //
         // Properties
         //
-        public DesignerActionItem this [int index]
+        public DesignerActionItem this[int index]
         {
-            get {
-                return (DesignerActionItem) List [index];
-            }
-            set {
-                List [index] = value;
-            }
+            get { return (DesignerActionItem)List[index]; }
+            set { List[index] = value; }
         }
 
         //
         // Methods
         //
-        public int Add (DesignerActionItem value)
+        public int Add(DesignerActionItem value)
         {
-            return List.Add (value); 
+            return List.Add(value);
         }
 
-        public bool Contains (DesignerActionItem value)
+        public bool Contains(DesignerActionItem value)
         {
-            return List.Contains (value);
-        }
-        
-        public void CopyTo (DesignerActionItem[] array, int index)
-        {
-            List.CopyTo (array, index);
+            return List.Contains(value);
         }
 
-        public int IndexOf (DesignerActionItem value)
+        public void CopyTo(DesignerActionItem[] array, int index)
         {
-            return List.IndexOf (value);
+            List.CopyTo(array, index);
         }
 
-        public void Insert (int index, DesignerActionItem value)
+        public int IndexOf(DesignerActionItem value)
         {
-            List.Insert (index, value);
+            return List.IndexOf(value);
         }
 
-        public void Remove (DesignerActionItem value)
+        public void Insert(int index, DesignerActionItem value)
         {
-            List.Remove (value);
+            List.Insert(index, value);
+        }
+
+        public void Remove(DesignerActionItem value)
+        {
+            List.Remove(value);
         }
     }
 }

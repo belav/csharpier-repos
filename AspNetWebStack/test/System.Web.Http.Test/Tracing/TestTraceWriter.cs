@@ -15,9 +15,17 @@ namespace System.Web.Http.Tracing
 
         public Func<HttpRequestMessage, string, TraceLevel, bool> TraceSelector { get; set; }
 
-        public IList<TraceRecord> Traces { get { return _traceRecords;  } }
+        public IList<TraceRecord> Traces
+        {
+            get { return _traceRecords; }
+        }
 
-        public void Trace(HttpRequestMessage request, string category, TraceLevel level, Action<TraceRecord> traceAction)
+        public void Trace(
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            Action<TraceRecord> traceAction
+        )
         {
             if (TraceSelector == null || TraceSelector(request, category, level))
             {

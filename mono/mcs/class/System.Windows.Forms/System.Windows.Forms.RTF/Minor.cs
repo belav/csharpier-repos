@@ -5,10 +5,10 @@
 // , , and/or sell copies of the , and to
 // permit persons to whom the Software is furnished to do , subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY ,
 // EXPRESS OR , INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // , FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,9 +26,10 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms.RTF {
-
-    internal enum Minor {
+namespace System.Windows.Forms.RTF
+{
+    internal enum Minor
+    {
         Undefined,
 
         Skip,
@@ -133,7 +134,7 @@ namespace System.Windows.Forms.RTF {
         Blue,
 
         // Major.SpecialChar
-        IIntVersion,    
+        IIntVersion,
         ICreateTime,
         IRevisionTime,
         IPrintTime,
@@ -547,7 +548,7 @@ namespace System.Windows.Forms.RTF {
 
         // Major.BookmarkAttr
         BookmarkFirstCol,
-        BookmarkLastCol ,
+        BookmarkLastCol,
 
         // Major.NeXTGrAttr
         NeXTGWidth,
@@ -763,10 +764,9 @@ namespace System.Windows.Forms.RTF {
 
         // Major.Unicode
         UnicodeCharBytes,
-        UnicodeChar,            
+        UnicodeChar,
         UnicodeDestination,
         UnicodeDualDestination,
-        UnicodeAnsiCodepage    
-
+        UnicodeAnsiCodepage
     }
 }

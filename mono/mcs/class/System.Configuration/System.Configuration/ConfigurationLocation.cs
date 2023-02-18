@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,80 +30,100 @@
 using System.Xml;
 using System.IO;
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     public class ConfigurationLocation
     {
         static readonly char[] pathTrimChars = { '/' };
-        
+
         string path;
         Configuration configuration;
         Configuration parent;
         string xmlContent;
         bool parentResolved;
         bool allowOverride;
-        
-        internal ConfigurationLocation()
+
+        internal ConfigurationLocation() { }
+
+        internal ConfigurationLocation(
+            string path,
+            string xmlContent,
+            Configuration parent,
+            bool allowOverride
+        )
         {
-        }
-        
-        internal ConfigurationLocation (string path, string xmlContent, Configuration parent, bool allowOverride)
-        {
-            if (!String.IsNullOrEmpty (path)) {
-                switch (path [0]) {
+            if (!String.IsNullOrEmpty(path))
+            {
+                switch (path[0])
+                {
                     case ' ':
                     case '.':
                     case '/':
                     case '\\':
-                        throw new ConfigurationErrorsException ("<location> path attribute must be a relative virtual path.  It cannot start with any of ' ' '.' '/' or '\\'.");
+                        throw new ConfigurationErrorsException(
+                            "<location> path attribute must be a relative virtual path.  It cannot start with any of ' ' '.' '/' or '\\'."
+                        );
                 }
 
-                path = path.TrimEnd (pathTrimChars);
+                path = path.TrimEnd(pathTrimChars);
             }
-            
+
             this.path = path;
             this.xmlContent = xmlContent;
             this.parent = parent;
             this.allowOverride = allowOverride;
         }
-        
-        public string Path {
+
+        public string Path
+        {
             get { return path; }
         }
-        
-        internal bool AllowOverride {
+
+        internal bool AllowOverride
+        {
             get { return allowOverride; }
         }
-        
-        internal string XmlContent {
+
+        internal string XmlContent
+        {
             get { return xmlContent; }
         }
-        
-        internal Configuration OpenedConfiguration {
+
+        internal Configuration OpenedConfiguration
+        {
             get { return configuration; }
         }
 
-        public Configuration OpenConfiguration ()
+        public Configuration OpenConfiguration()
         {
-            if (configuration == null) {
-                if (!parentResolved) {
-                    Configuration parentFile = parent.GetParentWithFile ();
-                    if (parentFile != null) {
-                        string parentRelativePath = parent.ConfigHost.GetConfigPathFromLocationSubPath (parent.LocationConfigPath, path);
-                        parent = parentFile.FindLocationConfiguration (parentRelativePath, parent);
+            if (configuration == null)
+            {
+                if (!parentResolved)
+                {
+                    Configuration parentFile = parent.GetParentWithFile();
+                    if (parentFile != null)
+                    {
+                        string parentRelativePath =
+                            parent.ConfigHost.GetConfigPathFromLocationSubPath(
+                                parent.LocationConfigPath,
+                                path
+                            );
+                        parent = parentFile.FindLocationConfiguration(parentRelativePath, parent);
                     }
                 }
-                
-                configuration = new Configuration (parent, path);
-                using (XmlTextReader tr = new ConfigXmlTextReader (new StringReader (xmlContent), path))
-                    configuration.ReadData (tr, allowOverride);
+
+                configuration = new Configuration(parent, path);
+                using (
+                    XmlTextReader tr = new ConfigXmlTextReader(new StringReader(xmlContent), path)
+                )
+                    configuration.ReadData(tr, allowOverride);
 
                 xmlContent = null;
             }
             return configuration;
         }
-        
-        internal void SetParentConfiguration (Configuration parent)
+
+        internal void SetParentConfiguration(Configuration parent)
         {
             if (parentResolved)
                 return;
@@ -115,4 +135,3 @@ namespace System.Configuration {
         }
     }
 }
-

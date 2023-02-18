@@ -3,51 +3,50 @@ using System.Threading.Tasks;
 
 class A
 {
-    public Task<int> GetValue (int b)
+    public Task<int> GetValue(int b)
     {
-        return Task.FromResult (b);
+        return Task.FromResult(b);
     }
 }
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
-        var c = new C ();
-        return c.Foo ().Result;
+        var c = new C();
+        return c.Foo().Result;
     }
 
     public A Instance
     {
-        get
-        {
-            return new A ();
-        }
+        get { return new A(); }
     }
 
-    async Task<int> Foo ()
+    async Task<int> Foo()
     {
         int value = 1;
 
         {
-            await Test (value,
-                async () => {
+            await Test(
+                value,
+                async () =>
+                {
                     int b = value;
-                    await Instance.GetValue (Bar () + b);
-                });
+                    await Instance.GetValue(Bar() + b);
+                }
+            );
         }
 
         return 0;
     }
 
-    int Bar ()
+    int Bar()
     {
         return 1;
     }
 
-    T Test<T> (int arg, Func<T> func)
+    T Test<T>(int arg, Func<T> func)
     {
-        return func ();
+        return func();
     }
 }
-

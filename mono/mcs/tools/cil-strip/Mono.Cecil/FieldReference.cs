@@ -26,42 +26,44 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using Mono.Cecil;
 
-    internal class FieldReference : MemberReference {
-
+    internal class FieldReference : MemberReference
+    {
         TypeReference m_fieldType;
 
-        public TypeReference FieldType {
+        public TypeReference FieldType
+        {
             get { return m_fieldType; }
             set { m_fieldType = value; }
         }
 
-        internal FieldReference (string name, TypeReference fieldType) : base (name)
+        internal FieldReference(string name, TypeReference fieldType)
+            : base(name)
         {
             m_fieldType = fieldType;
         }
 
-        public FieldReference (string name, TypeReference declaringType, TypeReference fieldType) :
-            this (name, fieldType)
+        public FieldReference(string name, TypeReference declaringType, TypeReference fieldType)
+            : this(name, fieldType)
         {
             this.DeclaringType = declaringType;
         }
 
-        public virtual FieldDefinition Resolve ()
+        public virtual FieldDefinition Resolve()
         {
             TypeReference declaringType = DeclaringType;
             if (declaringType == null)
                 return null;
 
-            return declaringType.Module.Resolver.Resolve (this);
+            return declaringType.Module.Resolver.Resolve(this);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return string.Concat (m_fieldType.FullName, " ", base.ToString ());
+            return string.Concat(m_fieldType.FullName, " ", base.ToString());
         }
     }
 }

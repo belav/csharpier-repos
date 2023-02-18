@@ -15,103 +15,58 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void Parsing()
         {
             // Method name only.
-            VerifySignature("F",
-                SignatureNameOnly(
-                    Name("F")));
+            VerifySignature("F", SignatureNameOnly(Name("F")));
             // Method name and empty parameters.
-            VerifySignature("F()",
-                Signature(
-                    Name("F")));
+            VerifySignature("F()", Signature(Name("F")));
             // Method name and parameters.
-            VerifySignature("F(A, B)",
-                Signature(
-                    Name("F"),
-                    Identifier("A"),
-                    Identifier("B")));
+            VerifySignature("F(A, B)", Signature(Name("F"), Identifier("A"), Identifier("B")));
             // Type and method name.
-            VerifySignature("C.F",
-                SignatureNameOnly(
-                    Qualified(Name("C"), "F")));
+            VerifySignature("C.F", SignatureNameOnly(Qualified(Name("C"), "F")));
             // Qualified type and method name.
-            VerifySignature("A.B.F",
-                SignatureNameOnly(
-                    Qualified(
-                        Qualified(
-                            Name("A"),
-                            "B"),
-                        "F")));
+            VerifySignature("A.B.F", SignatureNameOnly(Qualified(Qualified(Name("A"), "B"), "F")));
             // Generic types and method names.
-            VerifySignature("A<T>.B<U>.F<V>",
+            VerifySignature(
+                "A<T>.B<U>.F<V>",
                 SignatureNameOnly(
                     Generic(
-                        Qualified(
-                            Generic(
-                                Qualified(
-                                    Generic(
-                                        Name("A"),
-                                        "T"),
-                                    "B"),
-                                "U"),
-                            "F"),
-                        "V")));
+                        Qualified(Generic(Qualified(Generic(Name("A"), "T"), "B"), "U"), "F"),
+                        "V"
+                    )
+                )
+            );
         }
 
         [Fact]
         public void Spaces()
         {
-            VerifySignature(" \tC . F ( System.Object\t,object) ",
+            VerifySignature(
+                " \tC . F ( System.Object\t,object) ",
                 Signature(
                     Qualified(Name("C"), "F"),
                     Qualified("System", "Object"),
-                    Qualified("System", "Object")));
+                    Qualified("System", "Object")
+                )
+            );
         }
 
         [Fact]
         public void ArraysAndPointers()
         {
-            VerifySignature("F(C*)",
-                Signature(
-                    Name("F"),
-                    Pointer(
-                        Identifier("C"))));
-            VerifySignature("F(C**)",
-                Signature(
-                    Name("F"),
-                    Pointer(
-                        Pointer(
-                            Identifier("C")))));
-            VerifySignature("F(C*[,,,])",
-                Signature(
-                    Name("F"),
-                    Array(
-                        Pointer(
-                            Identifier("C")),
-                        4)));
-            VerifySignature("F(C[,][]*)",
-                Signature(
-                    Name("F"),
-                    Pointer(
-                        Array(
-                            Array(
-                                Identifier("C"),
-                                2),
-                            1))));
-            VerifySignature("F(C<T>*)",
-                Signature(
-                    Name("F"),
-                    Pointer(
-                        Generic(
-                            Identifier("C"),
-                            Identifier("T")))));
-            VerifySignature("F(C<T[,]*>)",
-                Signature(
-                    Name("F"),
-                    Generic(
-                        Identifier("C"),
-                        Pointer(
-                            Array(
-                                Identifier("T"),
-                                2)))));
+            VerifySignature("F(C*)", Signature(Name("F"), Pointer(Identifier("C"))));
+            VerifySignature("F(C**)", Signature(Name("F"), Pointer(Pointer(Identifier("C")))));
+            VerifySignature("F(C*[,,,])", Signature(Name("F"), Array(Pointer(Identifier("C")), 4)));
+            VerifySignature(
+                "F(C[,][]*)",
+                Signature(Name("F"), Pointer(Array(Array(Identifier("C"), 2), 1)))
+            );
+            VerifySignature(
+                "F(C<T>*)",
+                Signature(Name("F"), Pointer(Generic(Identifier("C"), Identifier("T"))))
+            );
+            VerifySignature(
+                "F(C<T[,]*>)",
+                Signature(Name("F"), Generic(Identifier("C"), Pointer(Array(Identifier("T"), 2))))
+            );
         }
 
         [Fact]
@@ -161,11 +116,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         [Fact]
         public void ByRef()
         {
-            VerifySignature("F(ref A, out B)",
-                Signature(
-                    Name("F"),
-                    Identifier("A"),
-                    Identifier("B")));
+            VerifySignature(
+                "F(ref A, out B)",
+                Signature(Name("F"), Identifier("A"), Identifier("B"))
+            );
             Assert.Null(MemberSignatureParser.Parse("F(ref out C)"));
             Assert.Null(MemberSignatureParser.Parse("F(ref)"));
             Assert.Null(MemberSignatureParser.Parse("F<out>"));
@@ -182,17 +136,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             // Method name only.
             Assert.Null(MemberSignatureParser.Parse("int"));
             Assert.Null(MemberSignatureParser.Parse("params"));
-            VerifySignature("@int",
-                SignatureNameOnly(
-                    Name("int")));
+            VerifySignature("@int", SignatureNameOnly(Name("int")));
             // Type and method name.
             Assert.Null(MemberSignatureParser.Parse("@object.int"));
             Assert.Null(MemberSignatureParser.Parse("@public.private"));
-            VerifySignature("@object.@int",
-                SignatureNameOnly(
-                    Qualified(
-                        Name("object"),
-                        "int")));
+            VerifySignature("@object.@int", SignatureNameOnly(Qualified(Name("object"), "int")));
             // Type parameters.
             Assert.Null(MemberSignatureParser.Parse("F<void>"));
             Assert.Null(MemberSignatureParser.Parse("F<bool>"));
@@ -201,25 +149,30 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             Assert.Null(MemberSignatureParser.Parse("F<byte>"));
             Assert.Null(MemberSignatureParser.Parse("F<short>"));
             Assert.Null(MemberSignatureParser.Parse("F<ushort>"));
-            VerifySignature("F<@void, @bool, @char, @sbyte, @byte, @short, @ushort, @int, @uint, @long, @ulong, @float, @double, @string, @object, @decimal>()",
+            VerifySignature(
+                "F<@void, @bool, @char, @sbyte, @byte, @short, @ushort, @int, @uint, @long, @ulong, @float, @double, @string, @object, @decimal>()",
                 Signature(
-                    Generic(Name("F"),
-                    "void",
-                    "bool",
-                    "char",
-                    "sbyte",
-                    "byte",
-                    "short",
-                    "ushort",
-                    "int",
-                    "uint",
-                    "long",
-                    "ulong",
-                    "float",
-                    "double",
-                    "string",
-                    "object",
-                    "decimal")));
+                    Generic(
+                        Name("F"),
+                        "void",
+                        "bool",
+                        "char",
+                        "sbyte",
+                        "byte",
+                        "short",
+                        "ushort",
+                        "int",
+                        "uint",
+                        "long",
+                        "ulong",
+                        "float",
+                        "double",
+                        "string",
+                        "object",
+                        "decimal"
+                    )
+                )
+            );
         }
 
         // Special types are recognized in type references.
@@ -227,7 +180,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         public void SpecialTypes_TypeReferences()
         {
             // Parameters.
-            VerifySignature("F(void, bool, char, sbyte, byte, short, ushort, int, uint, long, ulong, float, double, string, object, decimal)",
+            VerifySignature(
+                "F(void, bool, char, sbyte, byte, short, ushort, int, uint, long, ulong, float, double, string, object, decimal)",
                 Signature(
                     Name("F"),
                     Qualified("System", "Void"),
@@ -245,9 +199,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                     Qualified("System", "Double"),
                     Qualified("System", "String"),
                     Qualified("System", "Object"),
-                    Qualified("System", "Decimal")));
+                    Qualified("System", "Decimal")
+                )
+            );
             // Type arguments.
-            VerifySignature("F(C<void, int, string, object>)",
+            VerifySignature(
+                "F(C<void, int, string, object>)",
                 Signature(
                     Name("F"),
                     Generic(
@@ -255,71 +212,59 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                         Qualified("System", "Void"),
                         Qualified("System", "Int32"),
                         Qualified("System", "String"),
-                        Qualified("System", "Object"))));
+                        Qualified("System", "Object")
+                    )
+                )
+            );
             // Not special types.
-            VerifySignature("F(Void, Int32, @string, @object)",
+            VerifySignature(
+                "F(Void, Int32, @string, @object)",
                 Signature(
                     Name("F"),
                     Identifier("Void"),
                     Identifier("Int32"),
                     Identifier("string"),
-                    Identifier("object")));
+                    Identifier("object")
+                )
+            );
             // dynamic is not special.
-            VerifySignature("F(dynamic)",
-                Signature(
-                    Name("F"),
-                    Identifier("dynamic")));
+            VerifySignature("F(dynamic)", Signature(Name("F"), Identifier("dynamic")));
         }
 
         [Fact]
         public void EscapedNames()
         {
-            VerifySignature("@F",
-                SignatureNameOnly(
-                    Name("F")));
-            VerifySignature("@_",
-                SignatureNameOnly(
-                    Name("_")));
-            VerifySignature("@int",
-                SignatureNameOnly(
-                    Name("int")));
-            VerifySignature("A.B.@int",
-                SignatureNameOnly(
-                    Qualified(
-                        Qualified(
-                            Name("A"),
-                            "B"),
-                        "int")));
-            VerifySignature("F(@int)",
-                Signature(
-                    Name("F"),
-                    Identifier("int")));
-            VerifySignature("F(System.@int)",
-                Signature(
-                    Name("F"),
-                    Qualified(
-                        Identifier("System"),
-                        "int")));
-            VerifySignature("A<@object>.B<@int>.F<@void>",
+            VerifySignature("@F", SignatureNameOnly(Name("F")));
+            VerifySignature("@_", SignatureNameOnly(Name("_")));
+            VerifySignature("@int", SignatureNameOnly(Name("int")));
+            VerifySignature(
+                "A.B.@int",
+                SignatureNameOnly(Qualified(Qualified(Name("A"), "B"), "int"))
+            );
+            VerifySignature("F(@int)", Signature(Name("F"), Identifier("int")));
+            VerifySignature(
+                "F(System.@int)",
+                Signature(Name("F"), Qualified(Identifier("System"), "int"))
+            );
+            VerifySignature(
+                "A<@object>.B<@int>.F<@void>",
                 SignatureNameOnly(
                     Generic(
                         Qualified(
-                            Generic(
-                                Qualified(
-                                    Generic(
-                                        Name("A"),
-                                        "object"),
-                                    "B"),
-                                "int"),
-                            "F"),
-                        "void")));
-            VerifySignature("F(C<int, @void>)",
+                            Generic(Qualified(Generic(Name("A"), "object"), "B"), "int"),
+                            "F"
+                        ),
+                        "void"
+                    )
+                )
+            );
+            VerifySignature(
+                "F(C<int, @void>)",
                 Signature(
                     Name("F"),
-                    Generic(
-                        Identifier("C"),
-                        Qualified("System", "Int32"),
-                        Identifier("void"))));
+                    Generic(Identifier("C"), Qualified("System", "Int32"), Identifier("void"))
+                )
+            );
             Assert.Null(MemberSignatureParser.Parse("@"));
             Assert.Null(MemberSignatureParser.Parse("@1"));
             Assert.Null(MemberSignatureParser.Parse("@@F"));

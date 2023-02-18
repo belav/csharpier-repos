@@ -37,14 +37,14 @@ using System.Collections;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class Repeater_ItemDataBound
-        : GHTBaseWeb 
+    public class Repeater_ItemDataBound : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.Repeater Repeater1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
         protected System.Web.UI.WebControls.HyperLink HyperLink1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -52,20 +52,19 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
             this.Repeater1.ItemDataBound += new RepeaterItemEventHandler(Repeater1_ItemDataBound);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -73,15 +72,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
-                ( (HyperLink)frm.FindControl("HyperLink1") ).Text = "changed text";
+                ((HyperLink)frm.FindControl("HyperLink1")).Text = "changed text";
 
                 Repeater1.DataSource = GHTTests.GHDataSources.DSArrayList();
                 Repeater1.DataBind();
                 GHTSubTestAddResult(Repeater1.DataMember);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -89,11 +88,16 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestEnd();
         }
 
-        private void Repeater1_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
+        private void Repeater1_ItemDataBound(
+            object sender,
+            System.Web.UI.WebControls.RepeaterItemEventArgs e
+        )
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-                ( (HyperLink)e.Item.FindControl("hl_name") ).Text = "hehe";
-
+            if (
+                e.Item.ItemType == ListItemType.Item
+                || e.Item.ItemType == ListItemType.AlternatingItem
+            )
+                ((HyperLink)e.Item.FindControl("hl_name")).Text = "hehe";
         }
     }
 }

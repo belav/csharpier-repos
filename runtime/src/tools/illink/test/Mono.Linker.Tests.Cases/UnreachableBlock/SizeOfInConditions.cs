@@ -5,46 +5,44 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.UnreachableBlock
 {
 #if NETCOREAPP
-    [SetupLinkerSubstitutionFile ("SizeOfInConditions.netcore.xml")]
+    [SetupLinkerSubstitutionFile("SizeOfInConditions.netcore.xml")]
 #else
-    [SetupLinkerSubstitutionFile ("SizeOfInConditions.net_4_x.xml")]
+    [SetupLinkerSubstitutionFile("SizeOfInConditions.net_4_x.xml")]
 #endif
-    [SetupCompileArgument ("/unsafe")]
-    [SetupLinkerArgument ("--enable-opt", "ipconstprop")]
+    [SetupCompileArgument("/unsafe")]
+    [SetupLinkerArgument("--enable-opt", "ipconstprop")]
     public unsafe class SizeOfInConditions
     {
-        public static void Main ()
+        public static void Main()
         {
-            TestIntPtr ();
-            TestUIntPtr ();
+            TestIntPtr();
+            TestUIntPtr();
         }
 
         [Kept]
         [ExpectBodyModified]
-        static void TestIntPtr ()
+        static void TestIntPtr()
         {
-            if (sizeof (IntPtr) != 4) {
-            } else {
-                Reached_1 ();
+            if (sizeof(IntPtr) != 4) { }
+            else
+            {
+                Reached_1();
             }
         }
 
         [Kept]
         [ExpectBodyModified]
-        static void TestUIntPtr ()
+        static void TestUIntPtr()
         {
-            if (sizeof (UIntPtr) != 8) {
-            } else {
-                Reached_2 ();
+            if (sizeof(UIntPtr) != 8) { }
+            else
+            {
+                Reached_2();
             }
         }
 
-        static void Reached_1 ()
-        {
-        }
+        static void Reached_1() { }
 
-        static void Reached_2 ()
-        {
-        }
+        static void Reached_2() { }
     }
 }

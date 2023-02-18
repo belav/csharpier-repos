@@ -54,66 +54,78 @@ namespace Mono.Btls
         static string userUntrustedPath;
 #endif
 
-        static void Initialize ()
+        static void Initialize()
         {
             if (initialized)
                 return;
 
-            try {
-                DoInitialize ();
-            } catch (Exception ex) {
-                Console.Error.WriteLine ("MonoBtlsX509StoreManager.Initialize() threw exception: {0}", ex);
-            } finally {
+            try
+            {
+                DoInitialize();
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(
+                    "MonoBtlsX509StoreManager.Initialize() threw exception: {0}",
+                    ex
+                );
+            }
+            finally
+            {
                 initialized = true;
             }
         }
 
-        static void DoInitialize ()
+        static void DoInitialize()
         {
 #if !MONODROID
             var userPath = MX.X509StoreManager.NewCurrentUserPath;
-            userTrustedRootPath = Path.Combine (userPath, MX.X509Stores.Names.TrustedRoot);
-            userIntermediateCAPath = Path.Combine (userPath, MX.X509Stores.Names.IntermediateCA);
-            userUntrustedPath = Path.Combine (userPath, MX.X509Stores.Names.Untrusted);
+            userTrustedRootPath = Path.Combine(userPath, MX.X509Stores.Names.TrustedRoot);
+            userIntermediateCAPath = Path.Combine(userPath, MX.X509Stores.Names.IntermediateCA);
+            userUntrustedPath = Path.Combine(userPath, MX.X509Stores.Names.Untrusted);
 
             var machinePath = MX.X509StoreManager.NewLocalMachinePath;
-            machineTrustedRootPath = Path.Combine (machinePath, MX.X509Stores.Names.TrustedRoot);
-            machineIntermediateCAPath = Path.Combine (machinePath, MX.X509Stores.Names.IntermediateCA);
-            machineUntrustedPath = Path.Combine (machinePath, MX.X509Stores.Names.Untrusted);
+            machineTrustedRootPath = Path.Combine(machinePath, MX.X509Stores.Names.TrustedRoot);
+            machineIntermediateCAPath = Path.Combine(
+                machinePath,
+                MX.X509Stores.Names.IntermediateCA
+            );
+            machineUntrustedPath = Path.Combine(machinePath, MX.X509Stores.Names.Untrusted);
 #endif
         }
 
-        public static bool HasStore (MonoBtlsX509StoreType type)
+        public static bool HasStore(MonoBtlsX509StoreType type)
         {
 #if MONODROID
             return false;
 #else
-            var path = GetStorePath (type);
-            return path != null && Directory.Exists (path);
+            var path = GetStorePath(type);
+            return path != null && Directory.Exists(path);
 #endif
         }
 
-        public static string GetStorePath (MonoBtlsX509StoreType type)
+        public static string GetStorePath(MonoBtlsX509StoreType type)
         {
 #if MONODROID
             throw new NotSupportedException ();
 #else
-            Initialize ();
-            switch (type) {
-            case MonoBtlsX509StoreType.MachineTrustedRoots:
-                return machineTrustedRootPath;
-            case MonoBtlsX509StoreType.MachineIntermediateCA:
-                return machineIntermediateCAPath;
-            case MonoBtlsX509StoreType.MachineUntrusted:
-                return machineUntrustedPath;
-            case MonoBtlsX509StoreType.UserTrustedRoots:
-                return userTrustedRootPath;
-            case MonoBtlsX509StoreType.UserIntermediateCA:
-                return userIntermediateCAPath;
-            case MonoBtlsX509StoreType.UserUntrusted:
-                return userUntrustedPath;
-            default:
-                throw new NotSupportedException ();
+            Initialize();
+            switch (type)
+            {
+                case MonoBtlsX509StoreType.MachineTrustedRoots:
+                    return machineTrustedRootPath;
+                case MonoBtlsX509StoreType.MachineIntermediateCA:
+                    return machineIntermediateCAPath;
+                case MonoBtlsX509StoreType.MachineUntrusted:
+                    return machineUntrustedPath;
+                case MonoBtlsX509StoreType.UserTrustedRoots:
+                    return userTrustedRootPath;
+                case MonoBtlsX509StoreType.UserIntermediateCA:
+                    return userIntermediateCAPath;
+                case MonoBtlsX509StoreType.UserUntrusted:
+                    return userUntrustedPath;
+                default:
+                    throw new NotSupportedException();
             }
 #endif
         }

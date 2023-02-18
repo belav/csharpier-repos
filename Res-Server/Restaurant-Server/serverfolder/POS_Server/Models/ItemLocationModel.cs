@@ -21,10 +21,9 @@ namespace POS_Server.Models
         public Nullable<long> invoiceId { get; set; }
 
         public int sequence { get; set; }
-       
+
         public Nullable<long> sectionId { get; set; }
-      
-     
+
         public string itemName { get; set; }
         public string location { get; set; }
         public string section { get; set; }
@@ -34,6 +33,5 @@ namespace POS_Server.Models
         public Nullable<byte> isFreeZone { get; set; }
 
         public string invNumber { get; set; }
-
     }
 }

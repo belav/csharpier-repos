@@ -1,6 +1,6 @@
 // DbDataReaderMock.cs - Helper class for DbDataReader tests
 //
-// Author: 
+// Author:
 //    Mika Aalto (mika@aalto.pro)
 //
 // Copyright (C) 2014 Mika Aalto
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,186 +38,206 @@ namespace MonoTests.System.Data.Common
         int currentRowIndex = -1;
         DataTable testDataTable;
 
-        public DbDataReaderMock ()
+        public DbDataReaderMock()
         {
-            testDataTable = new DataTable ();
+            testDataTable = new DataTable();
         }
 
-        public DbDataReaderMock (DataTable testData)
+        public DbDataReaderMock(DataTable testData)
         {
-            if (testData == null) {
-                throw new ArgumentNullException ("testData");
+            if (testData == null)
+            {
+                throw new ArgumentNullException("testData");
             }
 
             testDataTable = testData;
         }
 
-        public override void Close ()
+        public override void Close()
         {
-            testDataTable.Clear ();
+            testDataTable.Clear();
         }
 
-        public override int Depth {
-            get { throw new NotImplementedException (); }
-        }
-
-        public override int FieldCount {
-            get { throw new NotImplementedException (); }
-        }
-
-        public override bool GetBoolean (int ordinal)
+        public override int Depth
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override byte GetByte (int ordinal)
+        public override int FieldCount
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override long GetBytes (int ordinal, long dataOffset, byte[] buffer, int bufferOffset, int length)
+        public override bool GetBoolean(int ordinal)
         {
-            object value = GetValue (ordinal);
-            if (value == DBNull.Value) {
+            throw new NotImplementedException();
+        }
+
+        public override byte GetByte(int ordinal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override long GetBytes(
+            int ordinal,
+            long dataOffset,
+            byte[] buffer,
+            int bufferOffset,
+            int length
+        )
+        {
+            object value = GetValue(ordinal);
+            if (value == DBNull.Value)
+            {
                 return 0;
             }
 
             byte[] data = (byte[])value;
-            long bytesToRead = Math.Min (data.Length - dataOffset, length);
-            Buffer.BlockCopy (data, (int)dataOffset, buffer, bufferOffset, (int)bytesToRead);
+            long bytesToRead = Math.Min(data.Length - dataOffset, length);
+            Buffer.BlockCopy(data, (int)dataOffset, buffer, bufferOffset, (int)bytesToRead);
             return bytesToRead;
         }
 
-        public override char GetChar (int ordinal)
+        public override char GetChar(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override long GetChars (int ordinal, long dataOffset, char[] buffer, int bufferOffset, int length)
+        public override long GetChars(
+            int ordinal,
+            long dataOffset,
+            char[] buffer,
+            int bufferOffset,
+            int length
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override string GetDataTypeName (int ordinal)
+        public override string GetDataTypeName(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override DateTime GetDateTime (int ordinal)
+        public override DateTime GetDateTime(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override decimal GetDecimal (int ordinal)
+        public override decimal GetDecimal(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override double GetDouble (int ordinal)
+        public override double GetDouble(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override global::System.Collections.IEnumerator GetEnumerator ()
+        public override global::System.Collections.IEnumerator GetEnumerator()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override Type GetFieldType (int ordinal)
+        public override Type GetFieldType(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override float GetFloat (int ordinal)
+        public override float GetFloat(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override Guid GetGuid (int ordinal)
+        public override Guid GetGuid(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override short GetInt16 (int ordinal)
+        public override short GetInt16(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override int GetInt32 (int ordinal)
+        public override int GetInt32(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override long GetInt64 (int ordinal)
+        public override long GetInt64(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override string GetName (int ordinal)
+        public override string GetName(int ordinal)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override int GetOrdinal (string name)
+        public override int GetOrdinal(string name)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override DataTable GetSchemaTable ()
+        public override DataTable GetSchemaTable()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override string GetString (int ordinal)
+        public override string GetString(int ordinal)
         {
-            return (string)testDataTable.Rows [currentRowIndex] [ordinal];
+            return (string)testDataTable.Rows[currentRowIndex][ordinal];
         }
 
-        public override object GetValue (int ordinal)
+        public override object GetValue(int ordinal)
         {
-            return testDataTable.Rows [currentRowIndex] [ordinal];
+            return testDataTable.Rows[currentRowIndex][ordinal];
         }
 
-        public override int GetValues (object[] values)
+        public override int GetValues(object[] values)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool HasRows {
-            get { throw new NotImplementedException (); }
-        }
-
-        public override bool IsClosed {
-            get { throw new NotImplementedException (); }
-        }
-
-        public override bool IsDBNull (int ordinal)
+        public override bool HasRows
         {
-            return testDataTable.Rows [currentRowIndex] [ordinal] == DBNull.Value;
+            get { throw new NotImplementedException(); }
         }
 
-        public override bool NextResult ()
+        public override bool IsClosed
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override bool Read ()
+        public override bool IsDBNull(int ordinal)
+        {
+            return testDataTable.Rows[currentRowIndex][ordinal] == DBNull.Value;
+        }
+
+        public override bool NextResult()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Read()
         {
             currentRowIndex++;
             return currentRowIndex < testDataTable.Rows.Count;
         }
 
-        public override int RecordsAffected {
-            get { throw new NotImplementedException (); }
+        public override int RecordsAffected
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public override object this [string name] {
-            get { throw new NotImplementedException (); }
+        public override object this[string name]
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public override object this [int ordinal] {
-            get { throw new NotImplementedException (); }
+        public override object this[int ordinal]
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }
-

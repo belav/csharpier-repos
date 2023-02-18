@@ -3,11 +3,9 @@
 
 public class Test
 {
-    static void Error ()
-    {
-    }
-    
-    static void Main ()
+    static void Error() { }
+
+    static void Main()
     {
         var v = new { Value = Error };
     }

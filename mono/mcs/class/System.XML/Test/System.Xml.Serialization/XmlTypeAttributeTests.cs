@@ -17,27 +17,27 @@ namespace MonoTests.System.XmlSerialization
     public class XmlTypeAttributeTests
     {
         [Test]
-        public void IncludeInSchemaDefault ()
+        public void IncludeInSchemaDefault()
         {
-            XmlTypeAttribute attr = new XmlTypeAttribute ();
-            Assert.AreEqual (true, attr.IncludeInSchema);
+            XmlTypeAttribute attr = new XmlTypeAttribute();
+            Assert.AreEqual(true, attr.IncludeInSchema);
         }
 
         [Test]
-        public void NamespaceDefault ()
+        public void NamespaceDefault()
         {
-            XmlTypeAttribute attr = new XmlTypeAttribute ();
-            Assert.IsNull (attr.Namespace);
+            XmlTypeAttribute attr = new XmlTypeAttribute();
+            Assert.IsNull(attr.Namespace);
         }
 
         [Test]
-        public void TypeNameDefault ()
+        public void TypeNameDefault()
         {
-            XmlTypeAttribute attr = new XmlTypeAttribute ();
-            Assert.AreEqual (string.Empty, attr.TypeName, "#1");
+            XmlTypeAttribute attr = new XmlTypeAttribute();
+            Assert.AreEqual(string.Empty, attr.TypeName, "#1");
 
             attr.TypeName = null;
-            Assert.AreEqual (string.Empty, attr.TypeName, "#2");
+            Assert.AreEqual(string.Empty, attr.TypeName, "#2");
         }
     }
 }

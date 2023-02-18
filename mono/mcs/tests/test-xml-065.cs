@@ -4,11 +4,7 @@
 public class Test
 {
     /// Start
-    unsafe Test (byte* o)
-    {
-    }
+    unsafe Test(byte* o) { }
 
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }

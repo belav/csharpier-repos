@@ -17,8 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             ParameterListSyntax parameterList,
             ConstructorInitializerSyntax initializer,
             BlockSyntax body,
-            SyntaxToken semicolonToken)
-            => Update(
+            SyntaxToken semicolonToken
+        ) =>
+            Update(
                 attributeLists,
                 modifiers,
                 identifier,
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 initializer,
                 body,
                 expressionBody: null,
-                semicolonToken);
+                semicolonToken
+            );
     }
 }
 
@@ -40,8 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxToken identifier,
             ParameterListSyntax parameterList,
             ConstructorInitializerSyntax? initializer,
-            BlockSyntax body)
-            => ConstructorDeclaration(
+            BlockSyntax body
+        ) =>
+            ConstructorDeclaration(
                 attributeLists,
                 modifiers,
                 identifier,
@@ -49,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 initializer,
                 body,
                 expressionBody: null,
-                default(SyntaxToken));
+                default(SyntaxToken)
+            );
 
         public static ConstructorDeclarationSyntax ConstructorDeclaration(
             SyntaxList<AttributeListSyntax> attributeLists,
@@ -58,8 +62,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterListSyntax parameterList,
             ConstructorInitializerSyntax? initializer,
             BlockSyntax? body,
-            SyntaxToken semicolonToken)
-            => ConstructorDeclaration(
+            SyntaxToken semicolonToken
+        ) =>
+            ConstructorDeclaration(
                 attributeLists,
                 modifiers,
                 identifier,
@@ -67,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 initializer,
                 body,
                 expressionBody: null,
-                semicolonToken);
+                semicolonToken
+            );
 
         public static ConstructorDeclarationSyntax ConstructorDeclaration(
             SyntaxList<AttributeListSyntax> attributeLists,
@@ -75,8 +81,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxToken identifier,
             ParameterListSyntax parameterList,
             ConstructorInitializerSyntax initializer,
-            ArrowExpressionClauseSyntax expressionBody)
-            => ConstructorDeclaration(
+            ArrowExpressionClauseSyntax expressionBody
+        ) =>
+            ConstructorDeclaration(
                 attributeLists,
                 modifiers,
                 identifier,
@@ -84,7 +91,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 initializer,
                 body: null,
                 expressionBody,
-                default(SyntaxToken));
+                default(SyntaxToken)
+            );
 
         public static ConstructorDeclarationSyntax ConstructorDeclaration(
             SyntaxList<AttributeListSyntax> attributeLists,
@@ -93,8 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             ParameterListSyntax parameterList,
             ConstructorInitializerSyntax initializer,
             ArrowExpressionClauseSyntax expressionBody,
-            SyntaxToken semicolonToken)
-            => ConstructorDeclaration(
+            SyntaxToken semicolonToken
+        ) =>
+            ConstructorDeclaration(
                 attributeLists,
                 modifiers,
                 identifier,
@@ -102,7 +111,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 initializer,
                 body: null,
                 expressionBody,
-                semicolonToken);
-
+                semicolonToken
+            );
     }
 }

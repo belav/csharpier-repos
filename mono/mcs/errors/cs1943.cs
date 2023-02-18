@@ -5,10 +5,8 @@ using System.Linq;
 
 class Test
 {
-    static void Main ()
+    static void Main()
     {
-        var e = from a in "abcd"
-                from b in new Test ()
-                select b;
+        var e = from a in "abcd" from b in new Test() select b;
     }
 }

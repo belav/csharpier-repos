@@ -9,7 +9,9 @@ namespace System.Collections
     // A DictionaryEntry holds a key and a value from a dictionary.
     // It is returned by IDictionaryEnumerator::GetEntry().
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public struct DictionaryEntry
     {
         private object _key; // Do not rename (binary serialization)
@@ -42,7 +44,6 @@ namespace System.Collections
             value = Value;
         }
 
-        public override string ToString() =>
-            KeyValuePair.PairToString(_key, _value);
+        public override string ToString() => KeyValuePair.PairToString(_key, _value);
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -52,7 +52,7 @@ namespace System.ServiceModel.Channels.Security
         Message msg;
         MessageBuffer source_request;
 
-        public SecurityRequestContext (SecurityReplyChannel channel, RequestContext source)
+        public SecurityRequestContext(SecurityReplyChannel channel, RequestContext source)
         {
             this.source = source;
             this.channel = channel;
@@ -60,70 +60,91 @@ namespace System.ServiceModel.Channels.Security
             security = channel.Source.SecuritySupport;
         }
 
-        public override Message RequestMessage {
-            get {
+        public override Message RequestMessage
+        {
+            get
+            {
                 if (msg == null)
-                    msg = new RecipientSecureMessageDecryptor (source.RequestMessage, security).DecryptMessage ();
-                return msg; 
+                    msg = new RecipientSecureMessageDecryptor(
+                        source.RequestMessage,
+                        security
+                    ).DecryptMessage();
+                return msg;
             }
         }
 
-        public override void Abort ()
+        public override void Abort()
         {
-            source.Abort ();
+            source.Abort();
         }
 
-        public override IAsyncResult BeginReply (Message message, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return BeginReply (message, channel.Listener.DefaultSendTimeout, callback, state);
+            return BeginReply(message, channel.Listener.DefaultSendTimeout, callback, state);
         }
 
-        public override IAsyncResult BeginReply (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             // FIXME: implement
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override void Close ()
+        public override void Close()
         {
-            Close (channel.Listener.DefaultCloseTimeout);
+            Close(channel.Listener.DefaultCloseTimeout);
         }
 
-        public override void Close (TimeSpan timeout)
+        public override void Close(TimeSpan timeout)
         {
-            source.Close (timeout);
+            source.Close(timeout);
         }
 
-        public override void EndReply (IAsyncResult result)
+        public override void EndReply(IAsyncResult result)
         {
             // FIXME: implement
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override void Reply (Message message)
+        public override void Reply(Message message)
         {
-            Reply (message, channel.Listener.DefaultSendTimeout);
+            Reply(message, channel.Listener.DefaultSendTimeout);
         }
 
-        public override void Reply (Message message, TimeSpan timeout)
+        public override void Reply(Message message, TimeSpan timeout)
         {
-            try {
+            try
+            {
                 if (!message.IsFault && message.Headers.Action != Constants.WstIssueReplyAction)
-                    message = SecureMessage (message);
-                source.Reply (message, timeout);
-            } catch (Exception ex) {
-                FaultConverter fc = FaultConverter.GetDefaultFaultConverter (msg.Version);
+                    message = SecureMessage(message);
+                source.Reply(message, timeout);
+            }
+            catch (Exception ex)
+            {
+                FaultConverter fc = FaultConverter.GetDefaultFaultConverter(msg.Version);
                 Message fault;
-                if (fc.TryCreateFaultMessage (ex, out fault))
-                    source.Reply (fault, timeout);
+                if (fc.TryCreateFaultMessage(ex, out fault))
+                    source.Reply(fault, timeout);
                 else
                     throw;
             }
         }
 
-        Message SecureMessage (Message input)
+        Message SecureMessage(Message input)
         {
-            return new RecipientMessageSecurityGenerator (input, RequestMessage.Properties.Security, security).SecureMessage ();
+            return new RecipientMessageSecurityGenerator(
+                input,
+                RequestMessage.Properties.Security,
+                security
+            ).SecureMessage();
         }
     }
 }

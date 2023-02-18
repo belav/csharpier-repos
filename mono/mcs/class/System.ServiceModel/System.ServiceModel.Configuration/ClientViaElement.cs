@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,30 +54,30 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed class ClientViaElement
-         : BehaviorExtensionElement
+    public sealed class ClientViaElement : BehaviorExtensionElement
     {
         // Properties
 
-        public override Type BehaviorType {
-            get { return typeof (ClientViaBehavior); }
+        public override Type BehaviorType
+        {
+            get { return typeof(ClientViaBehavior); }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return base.Properties; }
         }
 
-        [ConfigurationProperty ("viaUri",
-             Options = ConfigurationPropertyOptions.None)]
-        public Uri ViaUri {
-            get { return (Uri) base ["viaUri"]; }
-            set { base ["viaUri"] = value; }
+        [ConfigurationProperty("viaUri", Options = ConfigurationPropertyOptions.None)]
+        public Uri ViaUri
+        {
+            get { return (Uri)base["viaUri"]; }
+            set { base["viaUri"] = value; }
         }
 
-        protected internal override object CreateBehavior () {
-            return new ClientViaBehavior (ViaUri);
+        protected internal override object CreateBehavior()
+        {
+            return new ClientViaBehavior(ViaUri);
         }
-
     }
-
 }

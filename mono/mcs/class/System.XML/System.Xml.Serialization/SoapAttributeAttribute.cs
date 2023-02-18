@@ -1,5 +1,5 @@
 //
-// SoapAttributeAttribute.cs: 
+// SoapAttributeAttribute.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,63 +36,64 @@ namespace System.Xml.Serialization
     /// <summary>
     /// Summary description for SoapAttributeAttribute.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field
-         | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    [AttributeUsage(
+        AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
     public class SoapAttributeAttribute : Attribute
     {
         private string attrName;
         private string dataType;
         private string ns;
 
-        public SoapAttributeAttribute ()
-        {
-        }
+        public SoapAttributeAttribute() { }
 
-        public SoapAttributeAttribute (string attributeName) 
+        public SoapAttributeAttribute(string attributeName)
         {
             this.attrName = attributeName;
         }
 
-        public string AttributeName {
-            get {
-                if (attrName == null) {
+        public string AttributeName
+        {
+            get
+            {
+                if (attrName == null)
+                {
                     return string.Empty;
                 }
                 return attrName;
-            } 
-            set {
-                attrName = value;
             }
+            set { attrName = value; }
         }
 
-        public string DataType {
-            get {
-                if (dataType == null) {
+        public string DataType
+        {
+            get
+            {
+                if (dataType == null)
+                {
                     return string.Empty;
                 }
                 return dataType;
-            } 
-            set {
-                dataType = value;
             }
+            set { dataType = value; }
         }
 
-        public string Namespace {
-            get {
-                return ns;
-            } 
-            set {
-                ns = value;
-            }
-        }
-        
-        internal void AddKeyHash (System.Text.StringBuilder sb)
+        public string Namespace
         {
-            sb.Append ("SAA ");
-            KeyHelper.AddField (sb, 1, attrName);
-            KeyHelper.AddField (sb, 2, dataType);
-            KeyHelper.AddField (sb, 3, ns);
-            sb.Append ("|");
+            get { return ns; }
+            set { ns = value; }
+        }
+
+        internal void AddKeyHash(System.Text.StringBuilder sb)
+        {
+            sb.Append("SAA ");
+            KeyHelper.AddField(sb, 1, attrName);
+            KeyHelper.AddField(sb, 2, dataType);
+            KeyHelper.AddField(sb, 3, ns);
+            sb.Append("|");
         }
     }
 }

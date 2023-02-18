@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,60 +31,65 @@
 using System;
 using System.Configuration;
 
-
-namespace System.Web.Configuration {
-
-    [ConfigurationCollectionAttribute (typeof (TransformerInfo), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+namespace System.Web.Configuration
+{
+    [ConfigurationCollectionAttribute(
+        typeof(TransformerInfo),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     public sealed class TransformerInfoCollection : ConfigurationElementCollection
     {
         static ConfigurationPropertyCollection properties;
 
-        static TransformerInfoCollection ()
+        static TransformerInfoCollection()
         {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
         }
 
-        public void Add (TransformerInfo transformerInfo)
+        public void Add(TransformerInfo transformerInfo)
         {
-            BaseAdd (transformerInfo);
+            BaseAdd(transformerInfo);
         }
 
-        public void Clear ()
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement ()
+        protected override ConfigurationElement CreateNewElement()
         {
-            return new TransformerInfo ("", "");
+            return new TransformerInfo("", "");
         }
 
-        protected override object GetElementKey (ConfigurationElement element)
+        protected override object GetElementKey(ConfigurationElement element)
         {
             return ((TransformerInfo)element).Name;
         }
 
-        public void Remove (string s)
+        public void Remove(string s)
         {
-            BaseRemove (s);
+            BaseRemove(s);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
 
-        public TransformerInfo this [int index] {
-            get { return (TransformerInfo) BaseGet (index); }
-            set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
+        public TransformerInfo this[int index]
+        {
+            get { return (TransformerInfo)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
     }
-
 }
-
-

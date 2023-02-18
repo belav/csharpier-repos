@@ -7,30 +7,32 @@ namespace Mono.Linker.Tests.Cases.Attributes.Csc
     /// <summary>
     /// This explicit csc test exists to ensure that csc adds references in this scenario
     /// </summary>
-    [SetupCSharpCompilerToUse ("csc")]
-    [SetupCompileBefore ("LibraryWithType.dll", new[] { typeof (TypeDefinedInReference) })]
-    [SetupCompileBefore ("LibraryWithAttribute.dll", new[] { typeof (AttributeDefinedInReference) })]
-    [KeptTypeInAssembly ("LibraryWithType.dll", typeof (TypeDefinedInReference))]
-    [RemovedMemberInAssembly ("LibraryWithType.dll", typeof (TypeDefinedInReference), "Unused()")]
-    [KeptMemberInAssembly ("LibraryWithAttribute.dll", typeof (AttributeDefinedInReference), ".ctor(System.Type)")]
+    [SetupCSharpCompilerToUse("csc")]
+    [SetupCompileBefore("LibraryWithType.dll", new[] { typeof(TypeDefinedInReference) })]
+    [SetupCompileBefore("LibraryWithAttribute.dll", new[] { typeof(AttributeDefinedInReference) })]
+    [KeptTypeInAssembly("LibraryWithType.dll", typeof(TypeDefinedInReference))]
+    [RemovedMemberInAssembly("LibraryWithType.dll", typeof(TypeDefinedInReference), "Unused()")]
+    [KeptMemberInAssembly(
+        "LibraryWithAttribute.dll",
+        typeof(AttributeDefinedInReference),
+        ".ctor(System.Type)"
+    )]
     public class OnlyTypeUsedInAssemblyIsTypeOnAttributeCtorOnMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            var foo = new Foo ();
-            foo.Method ();
+            var foo = new Foo();
+            foo.Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Foo
         {
             [Kept]
-            [KeptAttributeAttribute (typeof (AttributeDefinedInReference))]
-            [AttributeDefinedInReference (typeof (TypeDefinedInReference))]
-            public void Method ()
-            {
-            }
+            [KeptAttributeAttribute(typeof(AttributeDefinedInReference))]
+            [AttributeDefinedInReference(typeof(TypeDefinedInReference))]
+            public void Method() { }
         }
     }
 }

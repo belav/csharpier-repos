@@ -174,7 +174,8 @@ internal class SyntaxSerializer
                 Write($"[{node.GetContent()}]");
             }
 
-            var annotation = node.GetAnnotations().FirstOrDefault(a => a.Kind == SyntaxConstants.SpanContextKind);
+            var annotation = node.GetAnnotations()
+                .FirstOrDefault(a => a.Kind == SyntaxConstants.SpanContextKind);
             if (annotation != null && annotation.Data is SpanContext context)
             {
                 WriteSpanContext(context);
@@ -207,7 +208,10 @@ internal class SyntaxSerializer
             if (diagnostics.Length > 0)
             {
                 builder.Append(" [");
-                var ids = string.Join(", ", diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}"));
+                var ids = string.Join(
+                    ", ",
+                    diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}")
+                );
                 builder.Append(ids);
                 builder.Append(']');
             }
@@ -249,7 +253,8 @@ internal class SyntaxSerializer
             WriteIndent();
             var content = token.IsMissing ? "<Missing>" : token.Content;
             var diagnostics = token.GetDiagnostics();
-            var tokenString = $"{token.Kind};[{content}];{string.Join(", ", diagnostics.Select(diagnostic => diagnostic.Id + diagnostic.Span))}";
+            var tokenString =
+                $"{token.Kind};[{content}];{string.Join(", ", diagnostics.Select(diagnostic => diagnostic.Id + diagnostic.Span))}";
             Write(tokenString);
         }
 
@@ -301,22 +306,22 @@ internal class SyntaxSerializer
 
         private static bool ShouldDisplayNodeContent(SyntaxNode node)
         {
-            return node.Kind == SyntaxKind.MarkupTextLiteral ||
-                node.Kind == SyntaxKind.MarkupEphemeralTextLiteral ||
-                node.Kind == SyntaxKind.MarkupStartTag ||
-                node.Kind == SyntaxKind.MarkupEndTag ||
-                node.Kind == SyntaxKind.MarkupTagHelperStartTag ||
-                node.Kind == SyntaxKind.MarkupTagHelperEndTag ||
-                node.Kind == SyntaxKind.MarkupAttributeBlock ||
-                node.Kind == SyntaxKind.MarkupMinimizedAttributeBlock ||
-                node.Kind == SyntaxKind.MarkupTagHelperAttribute ||
-                node.Kind == SyntaxKind.MarkupMinimizedTagHelperAttribute ||
-                node.Kind == SyntaxKind.MarkupLiteralAttributeValue ||
-                node.Kind == SyntaxKind.MarkupDynamicAttributeValue ||
-                node.Kind == SyntaxKind.CSharpStatementLiteral ||
-                node.Kind == SyntaxKind.CSharpExpressionLiteral ||
-                node.Kind == SyntaxKind.CSharpEphemeralTextLiteral ||
-                node.Kind == SyntaxKind.UnclassifiedTextLiteral;
+            return node.Kind == SyntaxKind.MarkupTextLiteral
+                || node.Kind == SyntaxKind.MarkupEphemeralTextLiteral
+                || node.Kind == SyntaxKind.MarkupStartTag
+                || node.Kind == SyntaxKind.MarkupEndTag
+                || node.Kind == SyntaxKind.MarkupTagHelperStartTag
+                || node.Kind == SyntaxKind.MarkupTagHelperEndTag
+                || node.Kind == SyntaxKind.MarkupAttributeBlock
+                || node.Kind == SyntaxKind.MarkupMinimizedAttributeBlock
+                || node.Kind == SyntaxKind.MarkupTagHelperAttribute
+                || node.Kind == SyntaxKind.MarkupMinimizedTagHelperAttribute
+                || node.Kind == SyntaxKind.MarkupLiteralAttributeValue
+                || node.Kind == SyntaxKind.MarkupDynamicAttributeValue
+                || node.Kind == SyntaxKind.CSharpStatementLiteral
+                || node.Kind == SyntaxKind.CSharpExpressionLiteral
+                || node.Kind == SyntaxKind.CSharpEphemeralTextLiteral
+                || node.Kind == SyntaxKind.UnclassifiedTextLiteral;
         }
     }
 }

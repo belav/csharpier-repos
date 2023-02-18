@@ -10,11 +10,10 @@ namespace Microsoft.CodeAnalysis.SignatureHelp;
 [DataContract]
 internal readonly record struct SignatureHelpOptions
 {
-    [DataMember] public bool HideAdvancedMembers { get; init; } = CompletionOptions.Default.HideAdvancedMembers;
+    [DataMember]
+    public bool HideAdvancedMembers { get; init; } = CompletionOptions.Default.HideAdvancedMembers;
 
-    public SignatureHelpOptions()
-    {
-    }
+    public SignatureHelpOptions() { }
 
     public static readonly SignatureHelpOptions Default = new();
 }

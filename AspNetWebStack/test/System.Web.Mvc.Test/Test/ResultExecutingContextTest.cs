@@ -17,7 +17,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ResultExecutingContext(controllerContext, result); }, "controllerContext");
+                delegate
+                {
+                    new ResultExecutingContext(controllerContext, result);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -29,7 +34,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ResultExecutingContext(controllerContext, result); }, "result");
+                delegate
+                {
+                    new ResultExecutingContext(controllerContext, result);
+                },
+                "result"
+            );
         }
 
         [Fact]
@@ -40,7 +50,10 @@ namespace System.Web.Mvc.Test
             ActionResult result = new ViewResult();
 
             // Act
-            ResultExecutingContext resultExecutingContext = new ResultExecutingContext(controllerContext, result);
+            ResultExecutingContext resultExecutingContext = new ResultExecutingContext(
+                controllerContext,
+                result
+            );
 
             // Assert
             Assert.Equal(result, resultExecutingContext.Result);

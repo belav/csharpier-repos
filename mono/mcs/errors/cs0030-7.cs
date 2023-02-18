@@ -8,7 +8,7 @@ enum E
 
 struct S
 {
-    public static explicit operator int (S val)
+    public static explicit operator int(S val)
     {
         return 1;
     }
@@ -16,13 +16,11 @@ struct S
 
 class C
 {
-    E Foo ()
+    E Foo()
     {
-        S s = new S ();
-        return (E) s;
+        S s = new S();
+        return (E)s;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

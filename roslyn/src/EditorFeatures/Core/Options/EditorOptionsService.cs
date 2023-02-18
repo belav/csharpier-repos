@@ -23,7 +23,11 @@ internal sealed class EditorOptionsService
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public EditorOptionsService(IGlobalOptionService globalOptions, IEditorOptionsFactoryService factory, IIndentationManagerService indentationManager)
+    public EditorOptionsService(
+        IGlobalOptionService globalOptions,
+        IEditorOptionsFactoryService factory,
+        IIndentationManagerService indentationManager
+    )
     {
         GlobalOptions = globalOptions;
         Factory = factory;

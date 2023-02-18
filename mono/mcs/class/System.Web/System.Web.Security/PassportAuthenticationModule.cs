@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,33 +33,37 @@ using System.Security.Permissions;
 namespace System.Web.Security
 {
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete ("This type is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "This type is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID."
+    )]
     public sealed class PassportAuthenticationModule : IHttpModule
     {
-        static readonly object authenticateEvent = new object ();
+        static readonly object authenticateEvent = new object();
 
-        EventHandlerList events = new EventHandlerList ();
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public PassportAuthenticationModule ()
+        EventHandlerList events = new EventHandlerList();
+
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public PassportAuthenticationModule() { }
+
+        public event PassportAuthenticationEventHandler Authenticate
         {
+            add { events.AddHandler(authenticateEvent, value); }
+            remove { events.RemoveHandler(authenticateEvent, value); }
         }
 
-        public event PassportAuthenticationEventHandler Authenticate {
-            add { events.AddHandler (authenticateEvent, value); }
-            remove { events.RemoveHandler (authenticateEvent, value); }
-        }
-
-        public void Dispose ()
+        public void Dispose()
         {
-            events.Dispose ();
+            events.Dispose();
         }
 
         [MonoTODO("Will we ever implement this? :-)")]
-        public void Init (HttpApplication app)
+        public void Init(HttpApplication app)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }
-

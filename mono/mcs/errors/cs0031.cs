@@ -5,7 +5,8 @@ public class Test
 {
     public static void Main()
     {
-        unchecked {
+        unchecked
+        {
             byte b = 1024 - 2;
         }
     }

@@ -21,9 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioNavigateToLinkService()
-        {
-        }
+        public VisualStudioNavigateToLinkService() { }
 
         public Task<bool> TryNavigateToLinkAsync(Uri uri, CancellationToken cancellationToken)
         {
@@ -41,10 +39,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             return SpecializedTasks.True;
         }
 
-        public static void StartBrowser(string uri)
-            => VsShellUtilities.OpenSystemBrowser(uri);
+        public static void StartBrowser(string uri) => VsShellUtilities.OpenSystemBrowser(uri);
 
-        public static void StartBrowser(Uri uri)
-            => VsShellUtilities.OpenSystemBrowser(uri.AbsoluteUri);
+        public static void StartBrowser(Uri uri) =>
+            VsShellUtilities.OpenSystemBrowser(uri.AbsoluteUri);
     }
 }

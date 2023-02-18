@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,40 +32,54 @@ namespace MonoTests.System.Xaml
     public class AttachablePropertyServicesTest
     {
         [Test]
-        public void NullArgument ()
+        public void NullArgument()
         {
             // null is not rejected
-            AttachablePropertyServices.GetAttachedPropertyCount (null);
-            AttachablePropertyServices.CopyPropertiesTo (null, null, 0);
+            AttachablePropertyServices.GetAttachedPropertyCount(null);
+            AttachablePropertyServices.CopyPropertiesTo(null, null, 0);
         }
 
         [Test]
-        public void NonStoreArgument ()
+        public void NonStoreArgument()
         {
             // non-store object either.
-            AttachablePropertyServices.GetAttachedPropertyCount (new object ());
+            AttachablePropertyServices.GetAttachedPropertyCount(new object());
         }
 
         [Test]
-        public void NonStoreGetSet ()
+        public void NonStoreGetSet()
         {
-            var a = new object ();
-            AttachablePropertyServices.SetProperty (a, Attachable.FooIdentifier, "x");
+            var a = new object();
+            AttachablePropertyServices.SetProperty(a, Attachable.FooIdentifier, "x");
             string v;
-            Assert.IsTrue (AttachablePropertyServices.TryGetProperty<string> (a, Attachable.FooIdentifier, out v), "#1");
-            Assert.AreEqual ("x", v, "#2");
+            Assert.IsTrue(
+                AttachablePropertyServices.TryGetProperty<string>(
+                    a,
+                    Attachable.FooIdentifier,
+                    out v
+                ),
+                "#1"
+            );
+            Assert.AreEqual("x", v, "#2");
         }
 
         [Test]
-        public void StoreGetSet ()
+        public void StoreGetSet()
         {
-            var a = new AttachedWrapper2 ();
-            AttachedWrapper2.SetFoo (a, "x");
+            var a = new AttachedWrapper2();
+            AttachedWrapper2.SetFoo(a, "x");
             string v;
-            Assert.IsFalse (AttachablePropertyServices.TryGetProperty<string> (a, AttachedWrapper2.FooIdentifier, out v), "#1");
-            Assert.AreEqual ("x", AttachedWrapper2.GetFoo (a), "#2");
+            Assert.IsFalse(
+                AttachablePropertyServices.TryGetProperty<string>(
+                    a,
+                    AttachedWrapper2.FooIdentifier,
+                    out v
+                ),
+                "#1"
+            );
+            Assert.AreEqual("x", AttachedWrapper2.GetFoo(a), "#2");
 
-            Assert.AreEqual (1, AttachedWrapper2.PropertyCount, "#3");
+            Assert.AreEqual(1, AttachedWrapper2.PropertyCount, "#3");
         }
     }
 }

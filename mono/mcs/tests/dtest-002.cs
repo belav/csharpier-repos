@@ -1,22 +1,22 @@
 public interface I
 {
-    dynamic D ();
-    object D2 ();
+    dynamic D();
+    object D2();
 }
 
 public class C : I
 {
-    public object D ()
+    public object D()
     {
         return null;
     }
-    
-    public dynamic D2 ()
+
+    public dynamic D2()
     {
         return null;
     }
-    
-    public static int Main ()
+
+    public static int Main()
     {
         return 0;
     }
@@ -29,7 +29,5 @@ abstract class AC
 
 class BC : AC
 {
-    public override void Foo(params object[] d)
-    {
-    }
+    public override void Foo(params object[] d) { }
 }

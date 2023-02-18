@@ -31,45 +31,60 @@ using Formatter = Microsoft.CodeAnalysis.Formatting.Formatter;
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
 {
     [ExportLanguageService(typeof(IRemoveUnnecessaryImportsService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpRemoveUnnecessaryImportsService :
-        AbstractRemoveUnnecessaryImportsService<UsingDirectiveSyntax>
+    internal partial class CSharpRemoveUnnecessaryImportsService
+        : AbstractRemoveUnnecessaryImportsService<UsingDirectiveSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRemoveUnnecessaryImportsService()
-        {
-        }
+        public CSharpRemoveUnnecessaryImportsService() { }
 
 #if CODE_STYLE
-        private static ISyntaxFormatting GetSyntaxFormatting()
-            => CSharpSyntaxFormatting.Instance;
+        private static ISyntaxFormatting GetSyntaxFormatting() => CSharpSyntaxFormatting.Instance;
 #endif
 
-        protected override IUnnecessaryImportsProvider<UsingDirectiveSyntax> UnnecessaryImportsProvider
-            => CSharpUnnecessaryImportsProvider.Instance;
+        protected override IUnnecessaryImportsProvider<UsingDirectiveSyntax> UnnecessaryImportsProvider =>
+            CSharpUnnecessaryImportsProvider.Instance;
 
         public override async Task<Document> RemoveUnnecessaryImportsAsync(
             Document document,
             Func<SyntaxNode, bool>? predicate,
             SyntaxFormattingOptions? formattingOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(formattingOptions);
 
             predicate ??= Functions<SyntaxNode>.True;
-            using (Logger.LogBlock(FunctionId.Refactoring_RemoveUnnecessaryImports_CSharp, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Refactoring_RemoveUnnecessaryImports_CSharp,
+                    cancellationToken
+                )
+            )
             {
                 var unnecessaryImports = await GetCommonUnnecessaryImportsOfAllContextAsync(
-                    document, predicate, cancellationToken).ConfigureAwait(false);
-                if (unnecessaryImports == null || unnecessaryImports.Any(import => import.OverlapsHiddenPosition(cancellationToken)))
+                        document,
+                        predicate,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                if (
+                    unnecessaryImports == null
+                    || unnecessaryImports.Any(
+                        import => import.OverlapsHiddenPosition(cancellationToken)
+                    )
+                )
                 {
                     return document;
                 }
 
-                var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document
+                    .GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 var oldRoot = (CompilationUnitSyntax)root;
-                var newRoot = (CompilationUnitSyntax)new Rewriter(unnecessaryImports, cancellationToken).Visit(oldRoot);
+                var newRoot = (CompilationUnitSyntax)
+                    new Rewriter(unnecessaryImports, cancellationToken).Visit(oldRoot);
 
                 cancellationToken.ThrowIfCancellationRequested();
 #if CODE_STYLE
@@ -79,7 +94,14 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
 #endif
                 var spans = new List<TextSpan>();
                 AddFormattingSpans(newRoot, spans, cancellationToken);
-                var formattedRoot = Formatter.Format(newRoot, spans, provider, formattingOptions, rules: null, cancellationToken);
+                var formattedRoot = Formatter.Format(
+                    newRoot,
+                    spans,
+                    provider,
+                    formattingOptions,
+                    rules: null,
+                    cancellationToken
+                );
 
                 return document.WithSyntaxRoot(formattedRoot);
             }
@@ -88,28 +110,43 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
         private void AddFormattingSpans(
             CompilationUnitSyntax compilationUnit,
             List<TextSpan> spans,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
-            spans.Add(TextSpan.FromBounds(0, GetEndPosition(compilationUnit, compilationUnit.Members)));
+            spans.Add(
+                TextSpan.FromBounds(0, GetEndPosition(compilationUnit, compilationUnit.Members))
+            );
 
-            foreach (var @namespace in compilationUnit.Members.OfType<BaseNamespaceDeclarationSyntax>())
+            foreach (
+                var @namespace in compilationUnit.Members.OfType<BaseNamespaceDeclarationSyntax>()
+            )
                 AddFormattingSpans(@namespace, spans, cancellationToken);
         }
 
         private void AddFormattingSpans(
             BaseNamespaceDeclarationSyntax namespaceMember,
             List<TextSpan> spans,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
-            spans.Add(TextSpan.FromBounds(namespaceMember.SpanStart, GetEndPosition(namespaceMember, namespaceMember.Members)));
+            spans.Add(
+                TextSpan.FromBounds(
+                    namespaceMember.SpanStart,
+                    GetEndPosition(namespaceMember, namespaceMember.Members)
+                )
+            );
 
-            foreach (var @namespace in namespaceMember.Members.OfType<BaseNamespaceDeclarationSyntax>())
+            foreach (
+                var @namespace in namespaceMember.Members.OfType<BaseNamespaceDeclarationSyntax>()
+            )
                 AddFormattingSpans(@namespace, spans, cancellationToken);
         }
 
-        private static int GetEndPosition(SyntaxNode container, SyntaxList<MemberDeclarationSyntax> list)
-            => list.Count > 0 ? list[0].SpanStart : container.Span.End;
+        private static int GetEndPosition(
+            SyntaxNode container,
+            SyntaxList<MemberDeclarationSyntax> list
+        ) => list.Count > 0 ? list[0].SpanStart : container.Span.End;
     }
 }

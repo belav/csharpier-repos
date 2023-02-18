@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 using System.Data;
+
 static class Program
 {
     static void Main()
@@ -29,6 +30,3 @@ class Frm : Form
         table.Columns.Add("another hidden column");
     }
 }
-
-
-

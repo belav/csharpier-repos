@@ -46,7 +46,6 @@ internal class LocallocTest
             }
         }
 
-
         if (!Global.verifyStack("intArray1", intArray1, size, 1000))
         {
             return 1;

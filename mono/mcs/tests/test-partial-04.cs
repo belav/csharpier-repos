@@ -4,14 +4,13 @@ namespace A
 {
     interface IFoo
     {
-        void Hello (IFoo foo);
+        void Hello(IFoo foo);
     }
 }
 
 namespace B
 {
-    partial class Test
-    { }
+    partial class Test { }
 }
 
 namespace B
@@ -20,13 +19,11 @@ namespace B
 
     partial class Test : IFoo
     {
-        void IFoo.Hello (IFoo foo)
-        { }
+        void IFoo.Hello(IFoo foo) { }
     }
 }
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

@@ -1,5 +1,5 @@
 //
-// System.Web.HttpResponseHeader.cs 
+// System.Web.HttpResponseHeader.cs
 //
 // Author:
 //    Chris Toshok (toshok@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,72 +38,78 @@ namespace System.Web
     abstract class BaseResponseHeader
     {
         string headerValue;
-        
-        public string Value {
+
+        public string Value
+        {
             get { return headerValue; }
-            set {
-                string hname, hvalue;
-                HttpEncoder.Current.HeaderNameValueEncode (null, value, out hname, out hvalue);
+            set
+            {
+                string hname,
+                    hvalue;
+                HttpEncoder.Current.HeaderNameValueEncode(null, value, out hname, out hvalue);
                 headerValue = hvalue;
             }
         }
-/*      
-        static bool headerCheckingEnabled;
-        
-        static BaseResponseHeader ()
-        {
-            HttpRuntimeSection section = HttpRuntime.Section;
-            headerCheckingEnabled = section == null || section.EnableHeaderChecking;
-        }
-*/
 
-        internal BaseResponseHeader (string val)
+        /*
+                static bool headerCheckingEnabled;
+                
+                static BaseResponseHeader ()
+                {
+                    HttpRuntimeSection section = HttpRuntime.Section;
+                    headerCheckingEnabled = section == null || section.EnableHeaderChecking;
+                }
+        */
+
+        internal BaseResponseHeader(string val)
         {
             Value = val;
         }
-        
-        internal abstract void SendContent (HttpWorkerRequest wr);
+
+        internal abstract void SendContent(HttpWorkerRequest wr);
     }
 
     internal sealed class KnownResponseHeader : BaseResponseHeader
     {
         public int ID;
 
-        internal KnownResponseHeader (int ID, string val) : base (val)
+        internal KnownResponseHeader(int ID, string val)
+            : base(val)
         {
             this.ID = ID;
         }
 
-        internal override void SendContent (HttpWorkerRequest wr)
+        internal override void SendContent(HttpWorkerRequest wr)
         {
-            wr.SendKnownResponseHeader (ID, Value);
+            wr.SendKnownResponseHeader(ID, Value);
         }
     }
 
     internal sealed class UnknownResponseHeader : BaseResponseHeader
     {
         string headerName;
-        
-        public string Name {
+
+        public string Name
+        {
             get { return headerName; }
-            set {
-                string hname, hvalue;
-                HttpEncoder.Current.HeaderNameValueEncode (value, null, out hname, out hvalue);
+            set
+            {
+                string hname,
+                    hvalue;
+                HttpEncoder.Current.HeaderNameValueEncode(value, null, out hname, out hvalue);
                 headerName = hname;
             }
         }
-        
 
-        public UnknownResponseHeader (string name, string val) : base (val)
+        public UnknownResponseHeader(string name, string val)
+            : base(val)
         {
             Name = name;
         }
-    
-        internal override void SendContent (HttpWorkerRequest wr)
+
+        internal override void SendContent(HttpWorkerRequest wr)
         {
-            wr.SendUnknownResponseHeader (Name, Value);
+            wr.SendUnknownResponseHeader(Name, Value);
         }
-        
     }
 }
-

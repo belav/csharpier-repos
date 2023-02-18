@@ -1,5 +1,5 @@
 //
-// XmlTypeMapping.cs: 
+// XmlTypeMapping.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -53,14 +53,19 @@ namespace System.Xml.Serialization
 
         ArrayList _derivedTypes = new ArrayList();
 
-        internal XmlTypeMapping(string elementName, string ns, TypeData typeData, string xmlType, string xmlTypeNamespace)
-        : base (elementName, ns)
+        internal XmlTypeMapping(
+            string elementName,
+            string ns,
+            TypeData typeData,
+            string xmlType,
+            string xmlTypeNamespace
+        )
+            : base(elementName, ns)
         {
             this.type = typeData;
             this.xmlType = xmlType;
             this.xmlTypeNamespace = xmlTypeNamespace;
         }
-
 
         public string TypeFullName
         {
@@ -139,7 +144,7 @@ namespace System.Xml.Serialization
             get { return includeInSchema; }
             set { includeInSchema = value; }
         }
-        
+
         internal bool IsNullable
         {
             get { return isNullable; }
@@ -152,40 +157,45 @@ namespace System.Xml.Serialization
             set { isAny = value; }
         }
 
-        internal XmlTypeMapping GetRealTypeMap (Type objectType)
+        internal XmlTypeMapping GetRealTypeMap(Type objectType)
         {
             if (TypeData.SchemaType == SchemaTypes.Enum)
                 return this;
 
             // Returns the map for a subtype of this map's type
-            if (TypeData.Type == objectType) return this;
-            for (int n=0; n<_derivedTypes.Count; n++) {
-                XmlTypeMapping map = (XmlTypeMapping) _derivedTypes[n];
-                if (map.TypeData.Type == objectType) return map;
+            if (TypeData.Type == objectType)
+                return this;
+            for (int n = 0; n < _derivedTypes.Count; n++)
+            {
+                XmlTypeMapping map = (XmlTypeMapping)_derivedTypes[n];
+                if (map.TypeData.Type == objectType)
+                    return map;
             }
-            
+
             return null;
         }
 
-        internal XmlTypeMapping GetRealElementMap (string name, string ens)
+        internal XmlTypeMapping GetRealElementMap(string name, string ens)
         {
-            if (xmlType == name && XmlTypeNamespace == ens) return this;
+            if (xmlType == name && XmlTypeNamespace == ens)
+                return this;
             foreach (XmlTypeMapping map in _derivedTypes)
-                if (map.xmlType == name && map.XmlTypeNamespace == ens) return map;
-            
+                if (map.xmlType == name && map.XmlTypeNamespace == ens)
+                    return map;
+
             return null;
         }
-        
-        internal void UpdateRoot (XmlQualifiedName qname)
+
+        internal void UpdateRoot(XmlQualifiedName qname)
         {
-            if (qname != null) {
+            if (qname != null)
+            {
                 this._elementName = qname.Name;
                 this._namespace = qname.Namespace;
             }
         }
     }
 
- 
     // Mapping info for XmlSerializable
     internal class XmlSerializableMapping : XmlTypeMapping
     {
@@ -193,72 +203,120 @@ namespace System.Xml.Serialization
         XmlSchemaComplexType _schemaType;
         XmlQualifiedName _schemaTypeName;
 
-        internal XmlSerializableMapping(XmlRootAttribute root, string elementName, string ns, TypeData typeData, string xmlType, string xmlTypeNamespace)
+        internal XmlSerializableMapping(
+            XmlRootAttribute root,
+            string elementName,
+            string ns,
+            TypeData typeData,
+            string xmlType,
+            string xmlTypeNamespace
+        )
             : base(elementName, ns, typeData, xmlType, xmlTypeNamespace)
         {
-            XmlSchemaProviderAttribute schemaProvider = (XmlSchemaProviderAttribute) Attribute.GetCustomAttribute (typeData.Type, typeof (XmlSchemaProviderAttribute));
+            XmlSchemaProviderAttribute schemaProvider = (XmlSchemaProviderAttribute)
+                Attribute.GetCustomAttribute(typeData.Type, typeof(XmlSchemaProviderAttribute));
 
-            if (schemaProvider != null) {
+            if (schemaProvider != null)
+            {
                 _schemaTypeName = XmlQualifiedName.Empty;
 
-                if (schemaProvider.IsAny) {
+                if (schemaProvider.IsAny)
+                {
                     IsAny = true;
                     return;
                 }
 
                 string method = schemaProvider.MethodName;
-                MethodInfo mi = typeData.Type.GetMethod (method, BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+                MethodInfo mi = typeData.Type.GetMethod(
+                    method,
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy
+                );
                 if (mi == null)
-                    throw new InvalidOperationException (String.Format ("Type '{0}' must implement public static method '{1}'", typeData.Type, method));
-                if (!typeof (XmlQualifiedName).IsAssignableFrom (mi.ReturnType) &&
+                    throw new InvalidOperationException(
+                        String.Format(
+                            "Type '{0}' must implement public static method '{1}'",
+                            typeData.Type,
+                            method
+                        )
+                    );
+                if (
+                    !typeof(XmlQualifiedName).IsAssignableFrom(mi.ReturnType)
+                    &&
                     // LAMESPEC: it is undocumented. (We don't have to tell users about it in the error message.)
                     // Also do not add such a silly compatibility test to assert that it does not raise an error.
-                    !typeof (XmlSchemaComplexType).IsAssignableFrom (mi.ReturnType))
-                    throw new InvalidOperationException (String.Format ("Method '{0}' indicated by XmlSchemaProviderAttribute must have its return type as XmlQualifiedName", method));
-                XmlSchemaSet xs = new XmlSchemaSet ();
-                object retVal = mi.Invoke (null, new object [] { xs });
+                    !typeof(XmlSchemaComplexType).IsAssignableFrom(mi.ReturnType)
+                )
+                    throw new InvalidOperationException(
+                        String.Format(
+                            "Method '{0}' indicated by XmlSchemaProviderAttribute must have its return type as XmlQualifiedName",
+                            method
+                        )
+                    );
+                XmlSchemaSet xs = new XmlSchemaSet();
+                object retVal = mi.Invoke(null, new object[] { xs });
                 if (retVal == null)
                     return;
 
-                if (retVal is XmlSchemaComplexType) {
-                    _schemaType = (XmlSchemaComplexType) retVal;
+                if (retVal is XmlSchemaComplexType)
+                {
+                    _schemaType = (XmlSchemaComplexType)retVal;
                     if (!_schemaType.QualifiedName.IsEmpty)
                         _schemaTypeName = _schemaType.QualifiedName;
                     else
-                        _schemaTypeName = new XmlQualifiedName (xmlType, xmlTypeNamespace);
+                        _schemaTypeName = new XmlQualifiedName(xmlType, xmlTypeNamespace);
                 }
-                else if (retVal is XmlQualifiedName) {
+                else if (retVal is XmlQualifiedName)
+                {
                     _schemaTypeName = (XmlQualifiedName)retVal;
                 }
                 else
-                    throw new InvalidOperationException (
-                        String.Format ("Method {0}.{1}() specified by XmlSchemaProviderAttribute has invalid signature: return type must be compatible with System.Xml.XmlQualifiedName.", typeData.Type.Name, method));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            "Method {0}.{1}() specified by XmlSchemaProviderAttribute has invalid signature: return type must be compatible with System.Xml.XmlQualifiedName.",
+                            typeData.Type.Name,
+                            method
+                        )
+                    );
 
                 // defaultNamespace at XmlReflectionImporter takes precedence for Namespace, but not for XsdTypeNamespace.
-                UpdateRoot (new XmlQualifiedName (root != null ? root.ElementName : _schemaTypeName.Name, root != null ? root.Namespace : Namespace ?? _schemaTypeName.Namespace));
+                UpdateRoot(
+                    new XmlQualifiedName(
+                        root != null ? root.ElementName : _schemaTypeName.Name,
+                        root != null ? root.Namespace : Namespace ?? _schemaTypeName.Namespace
+                    )
+                );
                 XmlTypeNamespace = _schemaTypeName.Namespace;
                 XmlType = _schemaTypeName.Name;
 
-                if (!_schemaTypeName.IsEmpty && xs.Count > 0) {
-                    XmlSchema [] schemas = new XmlSchema [xs.Count];
-                    xs.CopyTo (schemas, 0);
-                    _schema = schemas [0];
+                if (!_schemaTypeName.IsEmpty && xs.Count > 0)
+                {
+                    XmlSchema[] schemas = new XmlSchema[xs.Count];
+                    xs.CopyTo(schemas, 0);
+                    _schema = schemas[0];
                 }
 
                 return;
             }
 
-            IXmlSerializable serializable = (IXmlSerializable)Activator.CreateInstance (typeData.Type, true);
-            try {
+            IXmlSerializable serializable = (IXmlSerializable)
+                Activator.CreateInstance(typeData.Type, true);
+            try
+            {
                 _schema = serializable.GetSchema();
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 // LAMESPEC: .NET has a bad exception catch and swallows it silently.
             }
 
-            if (_schema != null) 
+            if (_schema != null)
             {
-                if (_schema.Id == null || _schema.Id.Length == 0) 
-                    throw new InvalidOperationException("Schema Id is missing. The schema returned from " + typeData.Type.FullName + ".GetSchema() must have an Id.");
+                if (_schema.Id == null || _schema.Id.Length == 0)
+                    throw new InvalidOperationException(
+                        "Schema Id is missing. The schema returned from "
+                            + typeData.Type.FullName
+                            + ".GetSchema() must have an Id."
+                    );
             }
         }
 
@@ -267,27 +325,28 @@ namespace System.Xml.Serialization
             get { return _schema; }
         }
 
-        internal XmlSchemaType SchemaType {
+        internal XmlSchemaType SchemaType
+        {
             get { return _schemaType; }
         }
 
-        internal XmlQualifiedName SchemaTypeName {
+        internal XmlQualifiedName SchemaTypeName
+        {
             get { return _schemaTypeName; }
         }
     }
- 
 
     // Mapping info for classes and structs
 
-    internal class ClassMap: ObjectMap
+    internal class ClassMap : ObjectMap
     {
-        Hashtable _elements = new Hashtable ();
+        Hashtable _elements = new Hashtable();
         ArrayList _elementMembers;
         Hashtable _attributeMembers;
         XmlTypeMapMemberAttribute[] _attributeMembersArray;
         XmlTypeMapElementInfo[] _elementsByIndex;
         ArrayList _flatLists;
-        ArrayList _allMembers = new ArrayList ();
+        ArrayList _allMembers = new ArrayList();
         ArrayList _membersWithDefault;
         ArrayList _listMembers;
         XmlTypeMapMemberAnyElement _defaultAnyElement;
@@ -299,94 +358,126 @@ namespace System.Xml.Serialization
         bool _canBeSimpleType = true;
         bool? _isOrderDependentMap;
 
-        public void AddMember (XmlTypeMapMember member)
+        public void AddMember(XmlTypeMapMember member)
         {
             // If GlobalIndex has not been set, set it now
             if (member.GlobalIndex == -1)
                 member.GlobalIndex = _allMembers.Count;
-            
-            _allMembers.Add (member);
-            
-            if (!(member.DefaultValue is System.DBNull) && member.DefaultValue != null) {
-                if (_membersWithDefault == null) _membersWithDefault = new ArrayList ();
-                _membersWithDefault.Add (member);
+
+            _allMembers.Add(member);
+
+            if (!(member.DefaultValue is System.DBNull) && member.DefaultValue != null)
+            {
+                if (_membersWithDefault == null)
+                    _membersWithDefault = new ArrayList();
+                _membersWithDefault.Add(member);
             }
-            
+
             if (member.IsReturnValue)
                 _returnMember = member;
-            
+
             if (member is XmlTypeMapMemberAttribute)
             {
                 XmlTypeMapMemberAttribute atm = (XmlTypeMapMemberAttribute)member;
-                if (_attributeMembers == null) _attributeMembers = new Hashtable();
-                string key = BuildKey (atm.AttributeName, atm.Namespace, -1);
-                if (_attributeMembers.ContainsKey (key))
-                    throw new InvalidOperationException ("The XML attribute named '" + atm.AttributeName + "' from namespace '" + atm.Namespace + "' is already present in the current scope. Use XML attributes to specify another XML name or namespace for the attribute.");
+                if (_attributeMembers == null)
+                    _attributeMembers = new Hashtable();
+                string key = BuildKey(atm.AttributeName, atm.Namespace, -1);
+                if (_attributeMembers.ContainsKey(key))
+                    throw new InvalidOperationException(
+                        "The XML attribute named '"
+                            + atm.AttributeName
+                            + "' from namespace '"
+                            + atm.Namespace
+                            + "' is already present in the current scope. Use XML attributes to specify another XML name or namespace for the attribute."
+                    );
                 member.Index = _attributeMembers.Count;
-                _attributeMembers.Add (key, member);
+                _attributeMembers.Add(key, member);
                 return;
             }
             else if (member is XmlTypeMapMemberFlatList)
             {
-                RegisterFlatList ((XmlTypeMapMemberFlatList)member);
+                RegisterFlatList((XmlTypeMapMemberFlatList)member);
             }
             else if (member is XmlTypeMapMemberAnyElement)
             {
-                XmlTypeMapMemberAnyElement mem = (XmlTypeMapMemberAnyElement) member;
-                if (mem.IsDefaultAny) _defaultAnyElement = mem;
-                if (mem.TypeData.IsListType) RegisterFlatList (mem);
+                XmlTypeMapMemberAnyElement mem = (XmlTypeMapMemberAnyElement)member;
+                if (mem.IsDefaultAny)
+                    _defaultAnyElement = mem;
+                if (mem.TypeData.IsListType)
+                    RegisterFlatList(mem);
             }
             else if (member is XmlTypeMapMemberAnyAttribute)
             {
-                _defaultAnyAttribute = (XmlTypeMapMemberAnyAttribute) member;
+                _defaultAnyAttribute = (XmlTypeMapMemberAnyAttribute)member;
                 return;
             }
             else if (member is XmlTypeMapMemberNamespaces)
             {
-                _namespaceDeclarations = (XmlTypeMapMemberNamespaces) member;
+                _namespaceDeclarations = (XmlTypeMapMemberNamespaces)member;
                 return;
             }
 
-            if (member is XmlTypeMapMemberElement && ((XmlTypeMapMemberElement)member).IsXmlTextCollector)
+            if (
+                member is XmlTypeMapMemberElement
+                && ((XmlTypeMapMemberElement)member).IsXmlTextCollector
+            )
             {
-                if (_xmlTextCollector != null) throw new InvalidOperationException ("XmlTextAttribute can only be applied once in a class");
+                if (_xmlTextCollector != null)
+                    throw new InvalidOperationException(
+                        "XmlTextAttribute can only be applied once in a class"
+                    );
                 _xmlTextCollector = member;
             }
 
-            if (_elementMembers == null) {
+            if (_elementMembers == null)
+            {
                 _elementMembers = new ArrayList();
                 _elements = new Hashtable();
             }
 
             member.Index = _elementMembers.Count;
-            _elementMembers.Add (member);
+            _elementMembers.Add(member);
 
             ICollection elemsInfo = ((XmlTypeMapMemberElement)member).ElementInfo;
             foreach (XmlTypeMapElementInfo elem in elemsInfo)
             {
-                string key = BuildKey (elem.ElementName, elem.Namespace, elem.ExplicitOrder);
-                if (_elements.ContainsKey (key)) 
-                    throw new InvalidOperationException ("The XML element named '" + elem.ElementName + "' from namespace '" + elem.Namespace + "' is already present in the current scope. Use XML attributes to specify another XML name or namespace for the element.");
-                _elements.Add (key, elem);
+                string key = BuildKey(elem.ElementName, elem.Namespace, elem.ExplicitOrder);
+                if (_elements.ContainsKey(key))
+                    throw new InvalidOperationException(
+                        "The XML element named '"
+                            + elem.ElementName
+                            + "' from namespace '"
+                            + elem.Namespace
+                            + "' is already present in the current scope. Use XML attributes to specify another XML name or namespace for the element."
+                    );
+                _elements.Add(key, elem);
             }
-            
-            if (member.TypeData.IsListType && member.TypeData.Type != null && !member.TypeData.Type.IsArray) {
-                if (_listMembers == null) _listMembers = new ArrayList ();
-                _listMembers.Add (member);
+
+            if (
+                member.TypeData.IsListType
+                && member.TypeData.Type != null
+                && !member.TypeData.Type.IsArray
+            )
+            {
+                if (_listMembers == null)
+                    _listMembers = new ArrayList();
+                _listMembers.Add(member);
             }
         }
 
-        void RegisterFlatList (XmlTypeMapMemberExpandable member)
+        void RegisterFlatList(XmlTypeMapMemberExpandable member)
         {
-            if (_flatLists == null) _flatLists = new ArrayList ();
+            if (_flatLists == null)
+                _flatLists = new ArrayList();
             member.FlatArrayIndex = _flatLists.Count;
-            _flatLists.Add (member);
+            _flatLists.Add(member);
         }
 
-        public XmlTypeMapMemberAttribute GetAttribute (string name, string ns)
+        public XmlTypeMapMemberAttribute GetAttribute(string name, string ns)
         {
-            if (_attributeMembers == null) return null;
-            return (XmlTypeMapMemberAttribute)_attributeMembers [BuildKey (name,ns, -1)];
+            if (_attributeMembers == null)
+                return null;
+            return (XmlTypeMapMemberAttribute)_attributeMembers[BuildKey(name, ns, -1)];
         }
 
         public XmlTypeMapElementInfo GetElement(string name, string ns, int minimalOrder)
@@ -395,12 +486,15 @@ namespace System.Xml.Serialization
                 return null;
 
             XmlTypeMapElementInfo selected = null;
-            foreach (XmlTypeMapElementInfo info in _elements.Values) {
-                if (info.ElementName == name && info.Namespace == ns) {
+            foreach (XmlTypeMapElementInfo info in _elements.Values)
+            {
+                if (info.ElementName == name && info.Namespace == ns)
+                {
                     if (info.ExplicitOrder < minimalOrder)
                         continue;
 
-                    if (selected == null || selected.ExplicitOrder > info.ExplicitOrder) {
+                    if (selected == null || selected.ExplicitOrder > info.ExplicitOrder)
+                    {
                         selected = info;
                     }
                 }
@@ -411,7 +505,8 @@ namespace System.Xml.Serialization
 
         public XmlTypeMapElementInfo GetElement(string name, string ns)
         {
-            if (_elements == null) return null;
+            if (_elements == null)
+                return null;
 
             foreach (XmlTypeMapElementInfo info in _elements.Values)
                 if (info.ElementName == name && info.Namespace == ns)
@@ -419,63 +514,72 @@ namespace System.Xml.Serialization
 
             return null;
         }
-        
-        public XmlTypeMapElementInfo GetElement (int index)
+
+        public XmlTypeMapElementInfo GetElement(int index)
         {
-            if (_elements == null) return null;
-            
+            if (_elements == null)
+                return null;
+
             if (_elementsByIndex == null)
             {
-                _elementsByIndex = new XmlTypeMapElementInfo [_elementMembers.Count];
+                _elementsByIndex = new XmlTypeMapElementInfo[_elementMembers.Count];
                 foreach (XmlTypeMapMemberElement mem in _elementMembers)
                 {
-                    if (mem.ElementInfo.Count != 1) 
-                        throw new InvalidOperationException ("Read by order only possible for encoded/bare format");
-                        
-                    _elementsByIndex [mem.Index] = (XmlTypeMapElementInfo) mem.ElementInfo [0];
+                    if (mem.ElementInfo.Count != 1)
+                        throw new InvalidOperationException(
+                            "Read by order only possible for encoded/bare format"
+                        );
+
+                    _elementsByIndex[mem.Index] = (XmlTypeMapElementInfo)mem.ElementInfo[0];
                 }
             }
             if (index >= _elementMembers.Count)
                 return null;
-            return _elementsByIndex [index];
+            return _elementsByIndex[index];
         }
-        
-        private string BuildKey (string name, string ns, int explicitOrder)
+
+        private string BuildKey(string name, string ns, int explicitOrder)
         {
-            if (_ignoreMemberNamespace) return name;
-            else return name + " / " + ns + (explicitOrder < 0 ? "" : "/" + explicitOrder);
+            if (_ignoreMemberNamespace)
+                return name;
+            else
+                return name + " / " + ns + (explicitOrder < 0 ? "" : "/" + explicitOrder);
         }
-        
+
         public ICollection AllElementInfos
         {
             get { return _elements.Values; }
         }
-        
-        
+
         public bool IgnoreMemberNamespace
         {
             get { return _ignoreMemberNamespace; }
             set { _ignoreMemberNamespace = value; }
         }
 
-        public bool IsOrderDependentMap {
-            get {
-                if (_isOrderDependentMap == null) {
+        public bool IsOrderDependentMap
+        {
+            get
+            {
+                if (_isOrderDependentMap == null)
+                {
                     _isOrderDependentMap = false;
                     foreach (XmlTypeMapElementInfo ei in _elements.Values)
-                        if (ei.ExplicitOrder >= 0) {
+                        if (ei.ExplicitOrder >= 0)
+                        {
                             _isOrderDependentMap = true;
                             break;
                         }
                 }
-                return (bool) _isOrderDependentMap;
+                return (bool)_isOrderDependentMap;
             }
         }
 
-        public XmlTypeMapMember FindMember (string name)
+        public XmlTypeMapMember FindMember(string name)
         {
-            for (int n=0; n<_allMembers.Count; n++)
-                if (((XmlTypeMapMember)_allMembers[n]).Name == name) return (XmlTypeMapMember)_allMembers[n];
+            for (int n = 0; n < _allMembers.Count; n++)
+                if (((XmlTypeMapMember)_allMembers[n]).Name == name)
+                    return (XmlTypeMapMember)_allMembers[n];
             return null;
         }
 
@@ -496,14 +600,16 @@ namespace System.Xml.Serialization
 
         public ICollection AttributeMembers
         {
-            get 
+            get
             {
-                if (_attributeMembers == null) return null;
-                if (_attributeMembersArray != null) return _attributeMembersArray;
-                
+                if (_attributeMembers == null)
+                    return null;
+                if (_attributeMembersArray != null)
+                    return _attributeMembersArray;
+
                 _attributeMembersArray = new XmlTypeMapMemberAttribute[_attributeMembers.Count];
                 foreach (XmlTypeMapMemberAttribute mem in _attributeMembers.Values)
-                    _attributeMembersArray [mem.Index] = mem;
+                    _attributeMembersArray[mem.Index] = mem;
                 return _attributeMembersArray;
             }
         }
@@ -522,12 +628,12 @@ namespace System.Xml.Serialization
         {
             get { return _flatLists; }
         }
-        
+
         public ArrayList MembersWithDefault
         {
             get { return _membersWithDefault; }
         }
-        
+
         public ArrayList ListMembers
         {
             get { return _listMembers; }
@@ -537,7 +643,7 @@ namespace System.Xml.Serialization
         {
             get { return _xmlTextCollector; }
         }
-        
+
         public XmlTypeMapMember ReturnMember
         {
             get { return _returnMember; }
@@ -547,35 +653,37 @@ namespace System.Xml.Serialization
         {
             get
             {
-                if (!_canBeSimpleType || _elementMembers == null || _elementMembers.Count != 1) return null;
-                XmlTypeMapMemberElement member = (XmlTypeMapMemberElement) _elementMembers[0];
-                if (member.ElementInfo.Count != 1) return null;
-                XmlTypeMapElementInfo einfo = (XmlTypeMapElementInfo) member.ElementInfo[0];
-                if (!einfo.IsTextElement) return null;
-                if (member.TypeData.SchemaType == SchemaTypes.Primitive || member.TypeData.SchemaType == SchemaTypes.Enum)
-                    return new XmlQualifiedName (einfo.TypeData.XmlType, einfo.DataTypeNamespace);
+                if (!_canBeSimpleType || _elementMembers == null || _elementMembers.Count != 1)
+                    return null;
+                XmlTypeMapMemberElement member = (XmlTypeMapMemberElement)_elementMembers[0];
+                if (member.ElementInfo.Count != 1)
+                    return null;
+                XmlTypeMapElementInfo einfo = (XmlTypeMapElementInfo)member.ElementInfo[0];
+                if (!einfo.IsTextElement)
+                    return null;
+                if (
+                    member.TypeData.SchemaType == SchemaTypes.Primitive
+                    || member.TypeData.SchemaType == SchemaTypes.Enum
+                )
+                    return new XmlQualifiedName(einfo.TypeData.XmlType, einfo.DataTypeNamespace);
                 return null;
             }
         }
-        
-        public void SetCanBeSimpleType (bool can)
+
+        public void SetCanBeSimpleType(bool can)
         {
             _canBeSimpleType = can;
         }
 
         public bool HasSimpleContent
         {
-            get
-            {
-                return SimpleContentBaseType != null;
-            }
+            get { return SimpleContentBaseType != null; }
         }
-
     }
 
     // Mapping info for arrays and lists
 
-    internal class ListMap: ObjectMap
+    internal class ListMap : ObjectMap
     {
         XmlTypeMapElementInfoList _itemInfo;
         bool _gotNestedMapping;
@@ -584,10 +692,7 @@ namespace System.Xml.Serialization
 
         public bool IsMultiArray
         {
-            get
-            {
-                return (NestedArrayMapping != null);
-            }
+            get { return (NestedArrayMapping != null); }
         }
 
         public string ChoiceMember
@@ -600,19 +705,24 @@ namespace System.Xml.Serialization
         {
             get
             {
-                if (_gotNestedMapping) return _nestedArrayMapping;
+                if (_gotNestedMapping)
+                    return _nestedArrayMapping;
                 _gotNestedMapping = true;
 
                 _nestedArrayMapping = ((XmlTypeMapElementInfo)_itemInfo[0]).MappedType;
 
-                if (_nestedArrayMapping == null) return null;
-                
-                if (_nestedArrayMapping.TypeData.SchemaType != SchemaTypes.Array) {
-                    _nestedArrayMapping = null; return null;
+                if (_nestedArrayMapping == null)
+                    return null;
+
+                if (_nestedArrayMapping.TypeData.SchemaType != SchemaTypes.Array)
+                {
+                    _nestedArrayMapping = null;
+                    return null;
                 }
 
                 foreach (XmlTypeMapElementInfo elem in _itemInfo)
-                    if (elem.MappedType != _nestedArrayMapping) {
+                    if (elem.MappedType != _nestedArrayMapping)
+                    {
                         _nestedArrayMapping = null;
                         return null;
                     }
@@ -623,84 +733,98 @@ namespace System.Xml.Serialization
 
         public XmlTypeMapElementInfoList ItemInfo
         {
-
             get { return _itemInfo; }
             set { _itemInfo = value; }
         }
 
-        public XmlTypeMapElementInfo FindElement (object ob, int index, object memberValue)
+        public XmlTypeMapElementInfo FindElement(object ob, int index, object memberValue)
         {
-            if (_itemInfo.Count == 1) 
-                return (XmlTypeMapElementInfo) _itemInfo[0];
+            if (_itemInfo.Count == 1)
+                return (XmlTypeMapElementInfo)_itemInfo[0];
             else if (_choiceMember != null && index != -1)
             {
-                Array values = (Array) XmlTypeMapMember.GetValue (ob, _choiceMember);
+                Array values = (Array)XmlTypeMapMember.GetValue(ob, _choiceMember);
                 if (values == null || index >= values.Length)
-                    throw new InvalidOperationException ("Invalid or missing choice enum value in member '" + _choiceMember + "'.");
-                object val = values.GetValue (index);
+                    throw new InvalidOperationException(
+                        "Invalid or missing choice enum value in member '" + _choiceMember + "'."
+                    );
+                object val = values.GetValue(index);
                 foreach (XmlTypeMapElementInfo elem in _itemInfo)
-                    if (elem.ChoiceValue != null && elem.ChoiceValue.Equals (val))
+                    if (elem.ChoiceValue != null && elem.ChoiceValue.Equals(val))
                         return elem;
             }
             else
             {
-                if (memberValue == null) return null;
+                if (memberValue == null)
+                    return null;
                 Type type = memberValue.GetType();
                 XmlTypeMapElementInfo bestMatch = null;
-                foreach (XmlTypeMapElementInfo elem in _itemInfo) {
+                foreach (XmlTypeMapElementInfo elem in _itemInfo)
+                {
                     if (elem.TypeData.Type == type)
                         return elem;
-                    if (elem.TypeData.Type.IsAssignableFrom (type) &&
-                        (bestMatch == null || elem.TypeData.Type.IsAssignableFrom (bestMatch.TypeData.Type)))
+                    if (
+                        elem.TypeData.Type.IsAssignableFrom(type)
+                        && (
+                            bestMatch == null
+                            || elem.TypeData.Type.IsAssignableFrom(bestMatch.TypeData.Type)
+                        )
+                    )
                         bestMatch = elem;
                 }
                 return bestMatch;
             }
             return null;
-        }    
-
-        public XmlTypeMapElementInfo FindElement (string elementName, string ns)
-        {
-            foreach (XmlTypeMapElementInfo elem in _itemInfo)
-                if (elem.ElementName == elementName && elem.Namespace == ns) return elem;
-            return null;
-        }
-        
-        public XmlTypeMapElementInfo FindTextElement ()
-        {
-            foreach (XmlTypeMapElementInfo elem in _itemInfo)
-                if (elem.IsTextElement) return elem;
-            return null;
-        }
-        
-        public string GetSchemaArrayName ()
-        {
-            XmlTypeMapElementInfo einfo = (XmlTypeMapElementInfo) _itemInfo[0];
-            if (einfo.MappedType != null) return TypeTranslator.GetArrayName (einfo.MappedType.XmlType);
-            else return TypeTranslator.GetArrayName (einfo.TypeData.XmlType);
         }
 
-        public void GetArrayType (int itemCount, out string localName, out string ns)
+        public XmlTypeMapElementInfo FindElement(string elementName, string ns)
+        {
+            foreach (XmlTypeMapElementInfo elem in _itemInfo)
+                if (elem.ElementName == elementName && elem.Namespace == ns)
+                    return elem;
+            return null;
+        }
+
+        public XmlTypeMapElementInfo FindTextElement()
+        {
+            foreach (XmlTypeMapElementInfo elem in _itemInfo)
+                if (elem.IsTextElement)
+                    return elem;
+            return null;
+        }
+
+        public string GetSchemaArrayName()
+        {
+            XmlTypeMapElementInfo einfo = (XmlTypeMapElementInfo)_itemInfo[0];
+            if (einfo.MappedType != null)
+                return TypeTranslator.GetArrayName(einfo.MappedType.XmlType);
+            else
+                return TypeTranslator.GetArrayName(einfo.TypeData.XmlType);
+        }
+
+        public void GetArrayType(int itemCount, out string localName, out string ns)
         {
             string arrayDim;
-            if (itemCount != -1) arrayDim = "[" + itemCount + "]";
-            else arrayDim = "[]";
+            if (itemCount != -1)
+                arrayDim = "[" + itemCount + "]";
+            else
+                arrayDim = "[]";
 
-            XmlTypeMapElementInfo info = (XmlTypeMapElementInfo) _itemInfo[0];
+            XmlTypeMapElementInfo info = (XmlTypeMapElementInfo)_itemInfo[0];
             if (info.TypeData.SchemaType == SchemaTypes.Array)
             {
                 string nm;
-                ((ListMap)info.MappedType.ObjectMap).GetArrayType (-1, out nm, out ns);
+                ((ListMap)info.MappedType.ObjectMap).GetArrayType(-1, out nm, out ns);
                 localName = nm + arrayDim;
             }
-            else 
+            else
             {
                 if (info.MappedType != null)
                 {
                     localName = info.MappedType.XmlType + arrayDim;
                     ns = info.MappedType.Namespace;
                 }
-                else 
+                else
                 {
                     localName = info.TypeData.XmlType + arrayDim;
                     ns = info.DataTypeNamespace;
@@ -708,24 +832,27 @@ namespace System.Xml.Serialization
             }
         }
 
-        public override bool Equals (object other)
+        public override bool Equals(object other)
         {
             ListMap lmap = other as ListMap;
-            if (lmap == null) return false;
+            if (lmap == null)
+                return false;
 
-            if (_itemInfo.Count != lmap._itemInfo.Count) return false;
-            for (int n=0; n<_itemInfo.Count; n++)
-                if (!_itemInfo[n].Equals (lmap._itemInfo[n])) return false;
+            if (_itemInfo.Count != lmap._itemInfo.Count)
+                return false;
+            for (int n = 0; n < _itemInfo.Count; n++)
+                if (!_itemInfo[n].Equals(lmap._itemInfo[n]))
+                    return false;
             return true;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return base.GetHashCode ();
+            return base.GetHashCode();
         }
     }
 
-    internal class EnumMap: ObjectMap
+    internal class EnumMap : ObjectMap
     {
         readonly EnumMapMember[] _members;
         readonly bool _isFlags;
@@ -740,12 +867,10 @@ namespace System.Xml.Serialization
             readonly long _value;
             string _documentation;
 
-             public EnumMapMember (string xmlName, string enumName)
-                : this (xmlName, enumName, 0)
-             {
-            }
+            public EnumMapMember(string xmlName, string enumName)
+                : this(xmlName, enumName, 0) { }
 
-            public EnumMapMember (string xmlName, string enumName, long value)
+            public EnumMapMember(string xmlName, string enumName, long value)
             {
                 _xmlName = xmlName;
                 _enumName = enumName;
@@ -774,7 +899,7 @@ namespace System.Xml.Serialization
             }
         }
 
-        public EnumMap (EnumMapMember[] members, bool isFlags)
+        public EnumMap(EnumMapMember[] members, bool isFlags)
         {
             _members = members;
             _isFlags = isFlags;
@@ -783,14 +908,15 @@ namespace System.Xml.Serialization
             _xmlNames = new string[_members.Length];
             _values = new long[_members.Length];
 
-            for (int i = 0; i < _members.Length; i++) {
+            for (int i = 0; i < _members.Length; i++)
+            {
                 EnumMapMember mem = _members[i];
                 _enumNames[i] = mem.EnumName;
                 _xmlNames[i] = mem.XmlName;
                 _values[i] = mem.Value;
             }
         }
-        
+
         public bool IsFlags
         {
             get { return _isFlags; }
@@ -803,40 +929,39 @@ namespace System.Xml.Serialization
 
         public string[] EnumNames
         {
-            get {
-                return _enumNames;
-            }
+            get { return _enumNames; }
         }
 
         public string[] XmlNames
         {
-            get {
-                return _xmlNames;
-            }
+            get { return _xmlNames; }
         }
 
         public long[] Values
         {
-            get {
-                return _values;
-            }
+            get { return _values; }
         }
 
-        public string GetXmlName (string typeName, object enumValue)
+        public string GetXmlName(string typeName, object enumValue)
         {
-            if (enumValue is string) {
-                throw new InvalidCastException ();
+            if (enumValue is string)
+            {
+                throw new InvalidCastException();
             }
 
             long value = 0;
 
-            try {
-                value = ((IConvertible) enumValue).ToInt64 (CultureInfo.CurrentCulture);
-            } catch (FormatException) {
-                throw new InvalidCastException ();
+            try
+            {
+                value = ((IConvertible)enumValue).ToInt64(CultureInfo.CurrentCulture);
+            }
+            catch (FormatException)
+            {
+                throw new InvalidCastException();
             }
 
-            for (int i = 0; i < Values.Length; i++) {
+            for (int i = 0; i < Values.Length; i++)
+            {
                 if (Values[i] == value)
                     return XmlNames[i];
             }
@@ -845,50 +970,72 @@ namespace System.Xml.Serialization
                 return string.Empty;
 
             string xmlName = string.Empty;
-            if (IsFlags) {
-                xmlName = XmlCustomFormatter.FromEnum (value, XmlNames, Values, typeName);
+            if (IsFlags)
+            {
+                xmlName = XmlCustomFormatter.FromEnum(value, XmlNames, Values, typeName);
             }
 
-            if (xmlName.Length == 0) {
-                throw new InvalidOperationException (string.Format(CultureInfo.CurrentCulture,
-                    "'{0}' is not a valid value for {1}.", value, typeName));
+            if (xmlName.Length == 0)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "'{0}' is not a valid value for {1}.",
+                        value,
+                        typeName
+                    )
+                );
             }
             return xmlName;
         }
 
-        public string GetEnumName (string typeName, string xmlName)
+        public string GetEnumName(string typeName, string xmlName)
         {
-            if (_isFlags) {
-                xmlName = xmlName.Trim ();
+            if (_isFlags)
+            {
+                xmlName = xmlName.Trim();
                 if (xmlName.Length == 0)
                     return "0";
 
-                System.Text.StringBuilder sb = new System.Text.StringBuilder ();
-                string[] enumNames = xmlName.Split (null);
-                foreach (string name in enumNames) {
-                    if (name == string.Empty) continue;
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                string[] enumNames = xmlName.Split(null);
+                foreach (string name in enumNames)
+                {
+                    if (name == string.Empty)
+                        continue;
                     string foundEnumValue = null;
                     for (int i = 0; i < XmlNames.Length; i++)
-                        if (XmlNames[i] == name) {
+                        if (XmlNames[i] == name)
+                        {
                             foundEnumValue = EnumNames[i];
                             break;
                         }
 
-                    if (foundEnumValue != null) {
+                    if (foundEnumValue != null)
+                    {
                         if (sb.Length > 0)
-                            sb.Append (',');
-                        sb.Append (foundEnumValue);
-                    } else {
-                        throw new InvalidOperationException (string.Format (CultureInfo.CurrentCulture,
-                            "'{0}' is not a valid value for {1}.", name, typeName));
+                            sb.Append(',');
+                        sb.Append(foundEnumValue);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                "'{0}' is not a valid value for {1}.",
+                                name,
+                                typeName
+                            )
+                        );
                     }
                 }
-                return sb.ToString ();
+                return sb.ToString();
             }
 
             foreach (EnumMapMember mem in _members)
-                if (mem.XmlName == xmlName) return mem.EnumName;
-                
+                if (mem.XmlName == xmlName)
+                    return mem.EnumName;
+
             return null;
         }
     }

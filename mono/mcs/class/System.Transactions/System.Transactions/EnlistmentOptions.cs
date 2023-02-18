@@ -11,9 +11,9 @@
 namespace System.Transactions
 {
     [Flags]
-    public enum EnlistmentOptions {
+    public enum EnlistmentOptions
+    {
         None,
         EnlistDuringPrepareRequired,
     }
 }
-

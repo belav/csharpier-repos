@@ -30,26 +30,27 @@ namespace System.Data.OracleClient
     {
         #region Constructors
 
-        public OracleRowUpdatingEventArgs (DataRow row, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
-            : base (row, command, statementType, tableMapping)
-        {
-        }
+        public OracleRowUpdatingEventArgs(
+            DataRow row,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+            : base(row, command, statementType, tableMapping) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        protected override IDbCommand BaseCommand {
-            get {
-                return base.BaseCommand;
-            }
-            set {
-                base.BaseCommand = value;
-            }
+        protected override IDbCommand BaseCommand
+        {
+            get { return base.BaseCommand; }
+            set { base.BaseCommand = value; }
         }
 
-        public new OracleCommand Command {
-            get { return (OracleCommand) base.Command; }
+        public new OracleCommand Command
+        {
+            get { return (OracleCommand)base.Command; }
             set { base.Command = value; }
         }
 

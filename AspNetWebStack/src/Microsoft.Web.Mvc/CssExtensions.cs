@@ -38,7 +38,10 @@ namespace Microsoft.Web.Mvc
             {
                 linkTag.MergeAttribute("media", mediaType);
             }
-            linkTag.MergeAttribute("href", UrlHelper.GenerateContentUrl(src, helper.ViewContext.HttpContext));
+            linkTag.MergeAttribute(
+                "href",
+                UrlHelper.GenerateContentUrl(src, helper.ViewContext.HttpContext)
+            );
             return MvcHtmlString.Create(linkTag.ToString(TagRenderMode.SelfClosing));
         }
     }

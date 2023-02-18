@@ -4,25 +4,21 @@ namespace Mono.Linker.Tests.Cases.Inheritance.VirtualMethods
 {
     class UnusedTypeWithOverrideOfVirtualMethodIsRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            new Base ().Call ();
+            new Base().Call();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Base
         {
             [Kept]
-            public virtual void Call ()
-            {
-            }
+            public virtual void Call() { }
         }
 
         class B : Base
         {
-            public override void Call ()
-            {
-            }
+            public override void Call() { }
         }
     }
 }

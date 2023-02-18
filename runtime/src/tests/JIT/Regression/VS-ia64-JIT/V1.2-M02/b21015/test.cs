@@ -19,10 +19,7 @@ struct T
 
     public string TheString
     {
-        get
-        {
-            return (S != null ? S : "<nothing>");
-        }
+        get { return (S != null ? S : "<nothing>"); }
     }
 }
 
@@ -30,7 +27,8 @@ public class Tester
 {
     public static int Main()
     {
-        T t1, t2;
+        T t1,
+            t2;
 
         t1 = new T();
         t2 = new T("passed.");

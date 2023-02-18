@@ -10,18 +10,29 @@ class Program
 {
     static int Main()
     {
-        var ab = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Mine"), AssemblyBuilderAccess.Run);
+        var ab = AssemblyBuilder.DefineDynamicAssembly(
+            new AssemblyName("Mine"),
+            AssemblyBuilderAccess.Run
+        );
         var modb = ab.DefineDynamicModule("Mine.dll");
 
         //
         // Set up the IFoo interface
         //
 
-        var ifooType = modb.DefineType("IFoo", TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public);
+        var ifooType = modb.DefineType(
+            "IFoo",
+            TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public
+        );
 
         // Define a simple instance method on the interface
         {
-            var mb = ifooType.DefineMethod("InstanceMethod", MethodAttributes.Public, typeof(int), Type.EmptyTypes);
+            var mb = ifooType.DefineMethod(
+                "InstanceMethod",
+                MethodAttributes.Public,
+                typeof(int),
+                Type.EmptyTypes
+            );
             var ilg = mb.GetILGenerator();
             ilg.Emit(OpCodes.Ldc_I4_1);
             ilg.Emit(OpCodes.Ret);
@@ -29,7 +40,12 @@ class Program
 
         // Define a default interface method
         {
-            var mb = ifooType.DefineMethod("DefaultMethod", MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot, typeof(int), Type.EmptyTypes);
+            var mb = ifooType.DefineMethod(
+                "DefaultMethod",
+                MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot,
+                typeof(int),
+                Type.EmptyTypes
+            );
             var ilg = mb.GetILGenerator();
             ilg.Emit(OpCodes.Ldc_I4_2);
             ilg.Emit(OpCodes.Ret);
@@ -37,7 +53,15 @@ class Program
 
         // Define a regular interface method
         {
-            var mb = ifooType.DefineMethod("InterfaceMethod", MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Abstract, typeof(int), Type.EmptyTypes);
+            var mb = ifooType.DefineMethod(
+                "InterfaceMethod",
+                MethodAttributes.Public
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Abstract,
+                typeof(int),
+                Type.EmptyTypes
+            );
         }
 
         ifooType.CreateTypeInfo();
@@ -46,11 +70,24 @@ class Program
         // Set up the IBar interface
         //
 
-        var ibarType = modb.DefineType("IBar", TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public, null, new Type[] { ifooType });
+        var ibarType = modb.DefineType(
+            "IBar",
+            TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public,
+            null,
+            new Type[] { ifooType }
+        );
 
         // Override the regular interface method on IFoo with a default implementation
         {
-            var mb = ibarType.DefineMethod("InterfaceMethodImpl", MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final, typeof(int), Type.EmptyTypes);
+            var mb = ibarType.DefineMethod(
+                "InterfaceMethodImpl",
+                MethodAttributes.Public
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Final,
+                typeof(int),
+                Type.EmptyTypes
+            );
             var ilg = mb.GetILGenerator();
             ilg.Emit(OpCodes.Ldc_I4_4);
             ilg.Emit(OpCodes.Ret);
@@ -64,7 +101,12 @@ class Program
         // Make a simple Foo class that implements IBar
         //
 
-        var fooType = modb.DefineType("Foo", TypeAttributes.Class | TypeAttributes.Public, typeof(object), new Type[] { ibarType });
+        var fooType = modb.DefineType(
+            "Foo",
+            TypeAttributes.Class | TypeAttributes.Public,
+            typeof(object),
+            new Type[] { ibarType }
+        );
 
         fooType.CreateTypeInfo();
 
@@ -86,17 +128,40 @@ class Program
         // Set up the IBaz interface
         //
 
-        var ibazType = modb.DefineType("IBaz", TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public, null, new Type[] { ifooType });
+        var ibazType = modb.DefineType(
+            "IBaz",
+            TypeAttributes.Interface | TypeAttributes.Abstract | TypeAttributes.Public,
+            null,
+            new Type[] { ifooType }
+        );
 
         // Override the default interface method on IFoo with a reabstraction
         {
-            var mb = ibazType.DefineMethod("DefaultMethodImpl", MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final | MethodAttributes.Abstract, typeof(int), Type.EmptyTypes);
+            var mb = ibazType.DefineMethod(
+                "DefaultMethodImpl",
+                MethodAttributes.Public
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Final
+                    | MethodAttributes.Abstract,
+                typeof(int),
+                Type.EmptyTypes
+            );
             ibazType.DefineMethodOverride(mb, ifooType.GetMethod("DefaultMethod"));
         }
 
         // Override the regular interface method on IFoo with a reabstraction
         {
-            var mb = ibazType.DefineMethod("InterfaceMethodImpl", MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final | MethodAttributes.Abstract, typeof(int), Type.EmptyTypes);
+            var mb = ibazType.DefineMethod(
+                "InterfaceMethodImpl",
+                MethodAttributes.Public
+                    | MethodAttributes.Virtual
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Final
+                    | MethodAttributes.Abstract,
+                typeof(int),
+                Type.EmptyTypes
+            );
             ibazType.DefineMethodOverride(mb, ifooType.GetMethod("InterfaceMethod"));
         }
 
@@ -106,7 +171,12 @@ class Program
         // Make a simple Baz class that implements IBaz
         //
 
-        var bazType = modb.DefineType("Baz", TypeAttributes.Class | TypeAttributes.Public, typeof(object), new Type[] { ibazType });
+        var bazType = modb.DefineType(
+            "Baz",
+            TypeAttributes.Class | TypeAttributes.Public,
+            typeof(object),
+            new Type[] { ibazType }
+        );
 
         bazType.CreateTypeInfo();
 
@@ -117,7 +187,8 @@ class Program
             {
                 ifooType.GetMethod("DefaultMethod").Invoke(o, null);
             }
-            catch (TargetInvocationException ie) when (ie.InnerException is EntryPointNotFoundException)
+            catch (TargetInvocationException ie)
+                when (ie.InnerException is EntryPointNotFoundException)
             {
                 result |= 0x10;
             }
@@ -126,7 +197,8 @@ class Program
             {
                 ifooType.GetMethod("InterfaceMethod").Invoke(o, null);
             }
-            catch (TargetInvocationException ie) when (ie.InnerException is EntryPointNotFoundException)
+            catch (TargetInvocationException ie)
+                when (ie.InnerException is EntryPointNotFoundException)
             {
                 result |= 0x20;
             }

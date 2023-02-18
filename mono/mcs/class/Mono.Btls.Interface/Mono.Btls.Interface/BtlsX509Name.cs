@@ -29,34 +29,32 @@ namespace Mono.Btls.Interface
 {
     public class BtlsX509Name : BtlsObject
     {
-        new internal MonoBtlsX509Name Instance {
+        new internal MonoBtlsX509Name Instance
+        {
             get { return (MonoBtlsX509Name)base.Instance; }
         }
 
-        internal BtlsX509Name (MonoBtlsX509Name name)
-            : base (name)
+        internal BtlsX509Name(MonoBtlsX509Name name)
+            : base(name) { }
+
+        public string GetString()
         {
+            return Instance.GetString();
         }
 
-        public string GetString ()
+        public byte[] GetRawData(bool use_canon_enc)
         {
-            return Instance.GetString ();
+            return Instance.GetRawData(use_canon_enc);
         }
 
-        public byte[] GetRawData (bool use_canon_enc)
+        public long GetHash()
         {
-            return Instance.GetRawData (use_canon_enc);
+            return Instance.GetHash();
         }
 
-        public long GetHash ()
+        public long GetHashOld()
         {
-            return Instance.GetHash ();
-        }
-
-        public long GetHashOld ()
-        {
-            return Instance.GetHashOld ();
+            return Instance.GetHashOld();
         }
     }
 }
-

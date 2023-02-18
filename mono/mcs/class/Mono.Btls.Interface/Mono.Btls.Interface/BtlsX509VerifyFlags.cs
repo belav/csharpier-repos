@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+
 namespace Mono.Btls.Interface
 {
     // Keep in sync with NativeBoringX509VerifyFlags
@@ -35,4 +36,3 @@ namespace Mono.Btls.Interface
         X509_STRIC = 4
     }
 }
-

@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,10 +34,10 @@
 using System;
 using System.Globalization;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
     [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SoapTime : ISoapXsd
     {
         static readonly string[] _datetimeFormats = new string[]
@@ -67,24 +67,24 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
             "HH:mm:ss.ffffffZ",
             "HH:mm:ss.fffffffZ"
         };
-        
-        DateTime _value;
-        
-        public SoapTime ()
-        {
-        }
 
-        public SoapTime (DateTime value)
+        DateTime _value;
+
+        public SoapTime() { }
+
+        public SoapTime(DateTime value)
         {
             _value = value;
         }
 
-        public DateTime Value {
-            get { return _value; } 
+        public DateTime Value
+        {
+            get { return _value; }
             set { _value = value; }
         }
-        
-        public static string XsdType {
+
+        public static string XsdType
+        {
             get { return "time"; }
         }
 
@@ -92,10 +92,12 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
         {
             return XsdType;
         }
-        
-        public static SoapTime Parse (string value)
+
+        public static SoapTime Parse(string value)
         {
-            return new SoapTime (DateTime.ParseExact (value, _datetimeFormats, null, DateTimeStyles.None));
+            return new SoapTime(
+                DateTime.ParseExact(value, _datetimeFormats, null, DateTimeStyles.None)
+            );
         }
 
         public override string ToString()

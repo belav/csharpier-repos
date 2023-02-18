@@ -18,10 +18,14 @@ public class SimpleTests : IClassFixture<MvcTestFixture<SimpleWebSite.Startup>>
     public async Task JsonSerializeFormatted()
     {
         // Arrange
-        var expected = "{" + Environment.NewLine
-             + "  \"first\": \"wall\"," + Environment.NewLine
-             + "  \"second\": \"floor\"" + Environment.NewLine
-             + "}";
+        var expected =
+            "{"
+            + Environment.NewLine
+            + "  \"first\": \"wall\","
+            + Environment.NewLine
+            + "  \"second\": \"floor\""
+            + Environment.NewLine
+            + "}";
 
         // Act
         var content = await Client.GetStringAsync("http://localhost/Home/Index");

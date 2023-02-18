@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,59 +33,62 @@ using System.Collections.Specialized;
 namespace System.Web.Configuration
 {
     [Serializable]
-    public sealed class VirtualDirectoryMappingCollection: NameObjectCollectionBase
+    public sealed class VirtualDirectoryMappingCollection : NameObjectCollectionBase
     {
-        public void Add (string virtualDirectory, VirtualDirectoryMapping mapping)
+        public void Add(string virtualDirectory, VirtualDirectoryMapping mapping)
         {
-            mapping.SetVirtualDirectory (virtualDirectory);
-            BaseAdd (virtualDirectory, mapping);
+            mapping.SetVirtualDirectory(virtualDirectory);
+            BaseAdd(virtualDirectory, mapping);
         }
-        
-        public void Clear ()
+
+        public void Clear()
         {
-            BaseClear ();
+            BaseClear();
         }
-        
-        public void CopyTo (VirtualDirectoryMapping[] array, int index)
+
+        public void CopyTo(VirtualDirectoryMapping[] array, int index)
         {
-            ((ICollection)this).CopyTo (array, index);
+            ((ICollection)this).CopyTo(array, index);
         }
-        
-        public VirtualDirectoryMapping Get (int index)
+
+        public VirtualDirectoryMapping Get(int index)
         {
-            return (VirtualDirectoryMapping) BaseGet (index);
+            return (VirtualDirectoryMapping)BaseGet(index);
         }
-        
-        public VirtualDirectoryMapping Get (string virtualDirectory)
+
+        public VirtualDirectoryMapping Get(string virtualDirectory)
         {
-            return (VirtualDirectoryMapping) BaseGet (virtualDirectory);
+            return (VirtualDirectoryMapping)BaseGet(virtualDirectory);
         }
-        
-        public string GetKey (int index)
+
+        public string GetKey(int index)
         {
-            return BaseGetKey (index);
+            return BaseGetKey(index);
         }
-        
-        public void Remove (string virtualDirectory)
+
+        public void Remove(string virtualDirectory)
         {
-            BaseRemove (virtualDirectory);
+            BaseRemove(virtualDirectory);
         }
-        
-        public void RemoveAt (int index)
+
+        public void RemoveAt(int index)
         {
-            BaseRemoveAt (index);
+            BaseRemoveAt(index);
         }
-        
-        public ICollection AllKeys {
-            get { return BaseGetAllKeys (); }
+
+        public ICollection AllKeys
+        {
+            get { return BaseGetAllKeys(); }
         }
-        
-        public VirtualDirectoryMapping this [int index] {
-            get { return (VirtualDirectoryMapping) BaseGet (index); }
+
+        public VirtualDirectoryMapping this[int index]
+        {
+            get { return (VirtualDirectoryMapping)BaseGet(index); }
         }
-        
-        public VirtualDirectoryMapping this [string virtualDirectory] {
-            get { return (VirtualDirectoryMapping) BaseGet (virtualDirectory); }
+
+        public VirtualDirectoryMapping this[string virtualDirectory]
+        {
+            get { return (VirtualDirectoryMapping)BaseGet(virtualDirectory); }
         }
     }
 }

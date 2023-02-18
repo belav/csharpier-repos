@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -50,352 +50,350 @@ namespace MonoTests.System.ServiceModel.Security
     {
         class MyManager : ServiceCredentialsSecurityTokenManager
         {
-            public MyManager ()
-                : this (new ServiceCredentials ())
-            {
-            }
+            public MyManager()
+                : this(new ServiceCredentials()) { }
 
-            public MyManager (ServiceCredentials cred)
-                : base (cred)
-            {
-            }
+            public MyManager(ServiceCredentials cred)
+                : base(cred) { }
 
-            public bool IsIssued (SecurityTokenRequirement r)
+            public bool IsIssued(SecurityTokenRequirement r)
             {
-                return IsIssuedSecurityTokenRequirement (r);
+                return IsIssuedSecurityTokenRequirement(r);
             }
         }
 
         class MySslSecurityTokenParameters : SslSecurityTokenParameters
         {
-            public void InitRequirement (SecurityTokenRequirement r)
+            public void InitRequirement(SecurityTokenRequirement r)
             {
-                InitializeSecurityTokenRequirement (r);
+                InitializeSecurityTokenRequirement(r);
             }
         }
 
         MyManager def_c;
 
         [SetUp]
-        public void Initialize ()
+        public void Initialize()
         {
-            def_c = new MyManager ();
+            def_c = new MyManager();
         }
 
         [Test]
-        public void DefaultValues ()
+        public void DefaultValues()
         {
             // FIXME: check more
-            MyManager mgr = new MyManager ();
-            Assert.IsTrue (mgr.ServiceCredentials.SecureConversationAuthentication.SecurityStateEncoder is DataProtectionSecurityStateEncoder, "#n-1");
+            MyManager mgr = new MyManager();
+            Assert.IsTrue(
+                mgr.ServiceCredentials.SecureConversationAuthentication.SecurityStateEncoder
+                    is DataProtectionSecurityStateEncoder,
+                "#n-1"
+            );
         }
 
         [Test]
-        public void IsIssuedSecurityTokenRequirement ()
+        public void IsIssuedSecurityTokenRequirement()
         {
             RecipientServiceModelSecurityTokenRequirement r;
-            MyManager mgr = new MyManager ();
+            MyManager mgr = new MyManager();
 
-            r = new RecipientServiceModelSecurityTokenRequirement ();
-            MySslSecurityTokenParameters ssl =
-                new MySslSecurityTokenParameters ();
-            ssl.InitRequirement (r);
-            Assert.IsFalse (mgr.IsIssued (r), "ssl");
+            r = new RecipientServiceModelSecurityTokenRequirement();
+            MySslSecurityTokenParameters ssl = new MySslSecurityTokenParameters();
+            ssl.InitRequirement(r);
+            Assert.IsFalse(mgr.IsIssued(r), "ssl");
 
-            r = new RecipientServiceModelSecurityTokenRequirement ();
-            MySspiSecurityTokenParameters sspi =
-                new MySspiSecurityTokenParameters ();
-            sspi.InitRequirement (r);
-            Assert.IsFalse (mgr.IsIssued (r), "sspi");
+            r = new RecipientServiceModelSecurityTokenRequirement();
+            MySspiSecurityTokenParameters sspi = new MySspiSecurityTokenParameters();
+            sspi.InitRequirement(r);
+            Assert.IsFalse(mgr.IsIssued(r), "sspi");
 
-            r = new RecipientServiceModelSecurityTokenRequirement ();
-            MyIssuedSecurityTokenParameters issued =
-                new MyIssuedSecurityTokenParameters ();
-            issued.InitRequirement (r);
-            Assert.IsTrue (mgr.IsIssued (r), "issued");
+            r = new RecipientServiceModelSecurityTokenRequirement();
+            MyIssuedSecurityTokenParameters issued = new MyIssuedSecurityTokenParameters();
+            issued.InitRequirement(r);
+            Assert.IsTrue(mgr.IsIssued(r), "issued");
 
-/*
-            r = new RecipientServiceModelSecurityTokenRequirement ();
-            MySecureConversationSecurityTokenParameters sc =
-                new MySecureConversationSecurityTokenParameters (
-                    new SymmetricSecurityBindingElement (new X509SecurityTokenParameters ()),
-                    false,
-                    new ChannelProtectionRequirements ());
-            r.Properties [ReqType.IssuerBindingContextProperty] =
-                new BindingContext (new CustomBinding (), new BindingParameterCollection ());
-            r.Properties [ReqType.MessageSecurityVersionProperty] =
-                MessageSecurityVersion.Default;
-            r.Properties [ReqType.ChannelParametersCollectionProperty] =
-                new ChannelParameterCollection ();
-            r.Properties [ReqType.IssuedSecurityTokenParametersProperty] = sc.Clone ();
-            r.Properties [ReqType.IssuerBindingProperty] =
-                new CustomBinding (new HttpTransportBindingElement ());
-            r.Properties [ReqType.MessageDirectionProperty] =
-                MessageDirection.Input;
-            r.SecureConversationSecurityBindingElement =
-                new SymmetricSecurityBindingElement (
-                    new X509SecurityTokenParameters ());
-            r.SecurityAlgorithmSuite = SecurityAlgorithmSuite.Default;
-            r.Properties [ReqType.SupportSecurityContextCancellationProperty] = true;
-            r.ListenUri = new Uri ("http://localhost:8080");
-            r.KeySize = 256;
-            sc.InitRequirement (r);
-            Assert.IsFalse (mgr.IsIssued (r), "sc");
-*/
+            /*
+                        r = new RecipientServiceModelSecurityTokenRequirement ();
+                        MySecureConversationSecurityTokenParameters sc =
+                            new MySecureConversationSecurityTokenParameters (
+                                new SymmetricSecurityBindingElement (new X509SecurityTokenParameters ()),
+                                false,
+                                new ChannelProtectionRequirements ());
+                        r.Properties [ReqType.IssuerBindingContextProperty] =
+                            new BindingContext (new CustomBinding (), new BindingParameterCollection ());
+                        r.Properties [ReqType.MessageSecurityVersionProperty] =
+                            MessageSecurityVersion.Default;
+                        r.Properties [ReqType.ChannelParametersCollectionProperty] =
+                            new ChannelParameterCollection ();
+                        r.Properties [ReqType.IssuedSecurityTokenParametersProperty] = sc.Clone ();
+                        r.Properties [ReqType.IssuerBindingProperty] =
+                            new CustomBinding (new HttpTransportBindingElement ());
+                        r.Properties [ReqType.MessageDirectionProperty] =
+                            MessageDirection.Input;
+                        r.SecureConversationSecurityBindingElement =
+                            new SymmetricSecurityBindingElement (
+                                new X509SecurityTokenParameters ());
+                        r.SecurityAlgorithmSuite = SecurityAlgorithmSuite.Default;
+                        r.Properties [ReqType.SupportSecurityContextCancellationProperty] = true;
+                        r.ListenUri = new Uri ("http://localhost:8080");
+                        r.KeySize = 256;
+                        sc.InitRequirement (r);
+                        Assert.IsFalse (mgr.IsIssued (r), "sc");
+            */
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void CreateProviderDefault ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void CreateProviderDefault()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
-            def_c.CreateSecurityTokenProvider (r);
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
+            def_c.CreateSecurityTokenProvider(r);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        [Ignore ("")]
-        public void CreateProviderUserNameWithoutName ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        [Ignore("")]
+        public void CreateProviderUserNameWithoutName()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.UserName;
-            def_c.CreateSecurityTokenProvider (r);
+            def_c.CreateSecurityTokenProvider(r);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void CreateProviderUserName ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void CreateProviderUserName()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.UserName;
-            def_c.CreateSecurityTokenProvider (r);
+            def_c.CreateSecurityTokenProvider(r);
         }
 
         class MyUserNameValidator : UserNamePasswordValidator
         {
-            public override void Validate (string userName, string password)
+            public override void Validate(string userName, string password)
             {
-                throw new Exception ();
+                throw new Exception();
             }
         }
 
         [Test]
-        public void CreateAuthenticatorUserName ()
+        public void CreateAuthenticatorUserName()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.UserName;
             SecurityTokenResolver resolver;
 
-            SecurityTokenAuthenticator a =
-                def_c.CreateSecurityTokenAuthenticator (r, out resolver);
-            Assert.AreEqual (typeof (WindowsUserNameSecurityTokenAuthenticator), a.GetType (), "#1");
-            Assert.IsNull (resolver, "#2");
+            SecurityTokenAuthenticator a = def_c.CreateSecurityTokenAuthenticator(r, out resolver);
+            Assert.AreEqual(typeof(WindowsUserNameSecurityTokenAuthenticator), a.GetType(), "#1");
+            Assert.IsNull(resolver, "#2");
 
-            def_c.ServiceCredentials.UserNameAuthentication.UserNamePasswordValidationMode = UserNamePasswordValidationMode.Custom;
-            def_c.ServiceCredentials.UserNameAuthentication.CustomUserNamePasswordValidator = new MyUserNameValidator ();
-            a = def_c.CreateSecurityTokenAuthenticator (r, out resolver);
-            Assert.AreEqual (typeof (CustomUserNameSecurityTokenAuthenticator), a.GetType (), "#3");
-            Assert.IsNull (resolver, "#4");
+            def_c.ServiceCredentials.UserNameAuthentication.UserNamePasswordValidationMode =
+                UserNamePasswordValidationMode.Custom;
+            def_c.ServiceCredentials.UserNameAuthentication.CustomUserNamePasswordValidator =
+                new MyUserNameValidator();
+            a = def_c.CreateSecurityTokenAuthenticator(r, out resolver);
+            Assert.AreEqual(typeof(CustomUserNameSecurityTokenAuthenticator), a.GetType(), "#3");
+            Assert.IsNull(resolver, "#4");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void CreateAuthenticatorUserNameCustomWithoutValidator ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CreateAuthenticatorUserNameCustomWithoutValidator()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.UserName;
             SecurityTokenResolver resolver;
-            def_c.ServiceCredentials.UserNameAuthentication.UserNamePasswordValidationMode = UserNamePasswordValidationMode.Custom;
-            def_c.CreateSecurityTokenAuthenticator (r, out resolver);
+            def_c.ServiceCredentials.UserNameAuthentication.UserNamePasswordValidationMode =
+                UserNamePasswordValidationMode.Custom;
+            def_c.CreateSecurityTokenAuthenticator(r, out resolver);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void CreateProviderRsaDefault ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void CreateProviderRsaDefault()
         {
             // actually is Rsa usable here??
 
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.Rsa;
-            def_c.CreateSecurityTokenProvider (r);
+            def_c.CreateSecurityTokenProvider(r);
         }
 
         [Test]
-        public void CreateAuthenticatorRsaDefault ()
+        public void CreateAuthenticatorRsaDefault()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             SecurityTokenResolver resolver;
             r.TokenType = SecurityTokenTypes.Rsa;
-            SecurityTokenAuthenticator a = def_c.CreateSecurityTokenAuthenticator (r, out resolver);
-            Assert.AreEqual (typeof (RsaSecurityTokenAuthenticator), a.GetType (), "#1");
-            Assert.IsNull (resolver, "#2");
+            SecurityTokenAuthenticator a = def_c.CreateSecurityTokenAuthenticator(r, out resolver);
+            Assert.AreEqual(typeof(RsaSecurityTokenAuthenticator), a.GetType(), "#1");
+            Assert.IsNull(resolver, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void CreateProviderX509WithoutCert ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CreateProviderX509WithoutCert()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.X509Certificate;
-            def_c.CreateSecurityTokenProvider (r);
+            def_c.CreateSecurityTokenProvider(r);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void CreateProviderX509PublicOnlyKey ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateProviderX509PublicOnlyKey()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.X509Certificate;
-            X509Certificate2 cert = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.cer"));
+            X509Certificate2 cert = new X509Certificate2(
+                TestResourceHelper.GetFullPathOfResource("Test/Resources/test.cer")
+            );
             def_c.ServiceCredentials.ServiceCertificate.Certificate = cert;
-            def_c.CreateSecurityTokenProvider (r);
+            def_c.CreateSecurityTokenProvider(r);
         }
 
         [Test]
-        public void CreateProviderX509 ()
+        public void CreateProviderX509()
         {
-            SecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+            SecurityTokenRequirement r = new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.X509Certificate;
-            def_c.ServiceCredentials.ServiceCertificate.Certificate =
-                new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.pfx"), "mono");
+            def_c.ServiceCredentials.ServiceCertificate.Certificate = new X509Certificate2(
+                TestResourceHelper.GetFullPathOfResource("Test/Resources/test.pfx"),
+                "mono"
+            );
             X509SecurityTokenProvider p =
-                def_c.CreateSecurityTokenProvider (r)
-                as X509SecurityTokenProvider;
-            Assert.IsNotNull (p, "#1");
+                def_c.CreateSecurityTokenProvider(r) as X509SecurityTokenProvider;
+            Assert.IsNotNull(p, "#1");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void CreateProviderX509Initiator ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CreateProviderX509Initiator()
         {
             InitiatorServiceModelSecurityTokenRequirement r =
-                new InitiatorServiceModelSecurityTokenRequirement ();
+                new InitiatorServiceModelSecurityTokenRequirement();
             r.TokenType = SecurityTokenTypes.X509Certificate;
             r.KeyUsage = SecurityKeyUsage.Exchange;
             // ClientCredential is somehow required ...
-            def_c.ServiceCredentials.ServiceCertificate.Certificate =
-                new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.pfx"), "mono");
+            def_c.ServiceCredentials.ServiceCertificate.Certificate = new X509Certificate2(
+                TestResourceHelper.GetFullPathOfResource("Test/Resources/test.pfx"),
+                "mono"
+            );
 
             X509SecurityTokenProvider p =
-                def_c.CreateSecurityTokenProvider (r)
-                as X509SecurityTokenProvider;
-            Assert.IsNotNull (p, "#1");
+                def_c.CreateSecurityTokenProvider(r) as X509SecurityTokenProvider;
+            Assert.IsNotNull(p, "#1");
         }
 
-        RecipientServiceModelSecurityTokenRequirement CreateSecureConvRequirement ()
+        RecipientServiceModelSecurityTokenRequirement CreateSecureConvRequirement()
         {
-            RecipientServiceModelSecurityTokenRequirement r =
-                CreateRecipientRequirement (ServiceModelSecurityTokenTypes.SecureConversation);
-            r.Properties [ReqType.IssuedSecurityTokenParametersProperty] = new SecureConversationSecurityTokenParameters (new SymmetricSecurityBindingElement (new X509SecurityTokenParameters ()));
+            RecipientServiceModelSecurityTokenRequirement r = CreateRecipientRequirement(
+                ServiceModelSecurityTokenTypes.SecureConversation
+            );
+            r.Properties[ReqType.IssuedSecurityTokenParametersProperty] =
+                new SecureConversationSecurityTokenParameters(
+                    new SymmetricSecurityBindingElement(new X509SecurityTokenParameters())
+                );
             // without it, "The key length (...) is not a multiple of 8 for symmetric keys" occurs.
-            r.SecureConversationSecurityBindingElement =
-                new SymmetricSecurityBindingElement ();
+            r.SecureConversationSecurityBindingElement = new SymmetricSecurityBindingElement();
             return r;
         }
 
-        RecipientServiceModelSecurityTokenRequirement CreateRecipientRequirement (string tokenType)
+        RecipientServiceModelSecurityTokenRequirement CreateRecipientRequirement(string tokenType)
         {
             RecipientServiceModelSecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+                new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = tokenType;
-            r.SecurityBindingElement = new SymmetricSecurityBindingElement ();
-            r.Properties [ReqType.IssuerBindingContextProperty] =
-                new BindingContext (new CustomBinding (), new BindingParameterCollection ());
-            r.Properties [ReqType.IssuedSecurityTokenParametersProperty] = new IssuedSecurityTokenParameters ();
-            r.MessageSecurityVersion =
-                MessageSecurityVersion.Default.SecurityTokenVersion;
+            r.SecurityBindingElement = new SymmetricSecurityBindingElement();
+            r.Properties[ReqType.IssuerBindingContextProperty] = new BindingContext(
+                new CustomBinding(),
+                new BindingParameterCollection()
+            );
+            r.Properties[ReqType.IssuedSecurityTokenParametersProperty] =
+                new IssuedSecurityTokenParameters();
+            r.MessageSecurityVersion = MessageSecurityVersion.Default.SecurityTokenVersion;
             return r;
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void CreateProviderSecureConv ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void CreateProviderSecureConv()
         {
             RecipientServiceModelSecurityTokenRequirement r =
-                new RecipientServiceModelSecurityTokenRequirement ();
+                new RecipientServiceModelSecurityTokenRequirement();
             r.TokenType = ServiceModelSecurityTokenTypes.SecureConversation;
-            r.ListenUri = new Uri ("http://localhost:8080");
+            r.ListenUri = new Uri("http://localhost:8080");
             r.MessageSecurityVersion = MessageSecurityVersion.Default.SecurityTokenVersion;
             r.KeySize = 256;
-            def_c.CreateSecurityTokenProvider (r);
+            def_c.CreateSecurityTokenProvider(r);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        [Category ("NotDotNet")] // it results in NRE inside InitializeSecurityTokenRequirement().
-        public void CreateProviderSecureConv2 ()
+        [ExpectedException(typeof(NotSupportedException))]
+        [Category("NotDotNet")] // it results in NRE inside InitializeSecurityTokenRequirement().
+        public void CreateProviderSecureConv2()
         {
-            var sbe = (SymmetricSecurityBindingElement) SecurityBindingElement.CreateSecureConversationBindingElement (SecurityBindingElement.CreateUserNameForCertificateBindingElement ());
-            var p = new MySecureConversationSecurityTokenParameters ((SecureConversationSecurityTokenParameters) sbe.ProtectionTokenParameters);
-            var r = new RecipientServiceModelSecurityTokenRequirement ();
-            p.InitRequirement (r);
-            def_c.CreateSecurityTokenProvider (r);
+            var sbe = (SymmetricSecurityBindingElement)
+                SecurityBindingElement.CreateSecureConversationBindingElement(
+                    SecurityBindingElement.CreateUserNameForCertificateBindingElement()
+                );
+            var p = new MySecureConversationSecurityTokenParameters(
+                (SecureConversationSecurityTokenParameters)sbe.ProtectionTokenParameters
+            );
+            var r = new RecipientServiceModelSecurityTokenRequirement();
+            p.InitRequirement(r);
+            def_c.CreateSecurityTokenProvider(r);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void CreateAuthenticatorSecureConvNoSecurityBindingElement ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateAuthenticatorSecureConvNoSecurityBindingElement()
         {
-            RecipientServiceModelSecurityTokenRequirement r =
-                CreateSecureConvRequirement ();
+            RecipientServiceModelSecurityTokenRequirement r = CreateSecureConvRequirement();
             r.SecurityBindingElement = null;
             SecurityTokenResolver resolver;
-            def_c.CreateSecurityTokenAuthenticator (r, out resolver);
+            def_c.CreateSecurityTokenAuthenticator(r, out resolver);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void CreateAuthenticatorSecureConvNoIssuedSecurityTokenParameters ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateAuthenticatorSecureConvNoIssuedSecurityTokenParameters()
         {
-            RecipientServiceModelSecurityTokenRequirement r =
-                CreateSecureConvRequirement ();
-            r.Properties.Remove (ReqType.IssuedSecurityTokenParametersProperty);
+            RecipientServiceModelSecurityTokenRequirement r = CreateSecureConvRequirement();
+            r.Properties.Remove(ReqType.IssuedSecurityTokenParametersProperty);
             SecurityTokenResolver resolver;
-            def_c.CreateSecurityTokenAuthenticator (r, out resolver);
+            def_c.CreateSecurityTokenAuthenticator(r, out resolver);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void CreateAuthenticatorSecureConvNoIssuerBindingContext ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateAuthenticatorSecureConvNoIssuerBindingContext()
         {
-            RecipientServiceModelSecurityTokenRequirement r =
-                CreateSecureConvRequirement ();
-            r.Properties.Remove (ReqType.IssuerBindingContextProperty);
+            RecipientServiceModelSecurityTokenRequirement r = CreateSecureConvRequirement();
+            r.Properties.Remove(ReqType.IssuerBindingContextProperty);
             SecurityTokenResolver resolver;
-            def_c.CreateSecurityTokenAuthenticator (r, out resolver);
+            def_c.CreateSecurityTokenAuthenticator(r, out resolver);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void CreateAuthenticatorSecureConvNoMessageSecurityVersion ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateAuthenticatorSecureConvNoMessageSecurityVersion()
         {
-            RecipientServiceModelSecurityTokenRequirement r =
-                CreateSecureConvRequirement ();
-            r.Properties.Remove (ReqType.MessageSecurityVersionProperty);
+            RecipientServiceModelSecurityTokenRequirement r = CreateSecureConvRequirement();
+            r.Properties.Remove(ReqType.MessageSecurityVersionProperty);
             SecurityTokenResolver resolver;
-            def_c.CreateSecurityTokenAuthenticator (r, out resolver);
+            def_c.CreateSecurityTokenAuthenticator(r, out resolver);
         }
 
         [Test]
-        public void CreateAuthenticatorSecureConv ()
+        public void CreateAuthenticatorSecureConv()
         {
             // service certificate is not required
-            RecipientServiceModelSecurityTokenRequirement r =
-                CreateSecureConvRequirement ();
+            RecipientServiceModelSecurityTokenRequirement r = CreateSecureConvRequirement();
             SecurityTokenResolver resolver;
             //SecurityTokenAuthenticator a =
-                def_c.CreateSecurityTokenAuthenticator (r, out resolver);
-            Assert.IsNotNull (resolver, "#1");
+            def_c.CreateSecurityTokenAuthenticator(r, out resolver);
+            Assert.IsNotNull(resolver, "#1");
         }
     }
 }

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,45 +31,46 @@
 
 using System.Runtime.Remoting.Contexts;
 
-namespace System.Runtime.Remoting.Activation {
-
+namespace System.Runtime.Remoting.Activation
+{
     [Serializable]
-    [System.Runtime.InteropServices.ComVisible (true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class UrlAttribute : ContextAttribute
     {
         string url;
-        
-        public UrlAttribute (string callsiteURL)
-            : base (callsiteURL)
+
+        public UrlAttribute(string callsiteURL)
+            : base(callsiteURL)
         {
             url = callsiteURL;
         }
 
-        public string UrlValue {
+        public string UrlValue
+        {
             get { return url; }
         }
 
-        public override bool Equals (object o)
+        public override bool Equals(object o)
         {
             if (!(o is UrlAttribute))
                 return false;
-            
-            return (((UrlAttribute) o).UrlValue == url);
+
+            return (((UrlAttribute)o).UrlValue == url);
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return url.GetHashCode ();
+            return url.GetHashCode();
         }
 
-        [System.Runtime.InteropServices.ComVisible (true)]
-        public override void GetPropertiesForNewContext (IConstructionCallMessage ctorMsg)
+        [System.Runtime.InteropServices.ComVisible(true)]
+        public override void GetPropertiesForNewContext(IConstructionCallMessage ctorMsg)
         {
             // No new properties
         }
 
-        [System.Runtime.InteropServices.ComVisible (true)]
-        public override bool IsContextOK (Context ctx, IConstructionCallMessage msg)
+        [System.Runtime.InteropServices.ComVisible(true)]
+        public override bool IsContextOK(Context ctx, IConstructionCallMessage msg)
         {
             return true;
         }

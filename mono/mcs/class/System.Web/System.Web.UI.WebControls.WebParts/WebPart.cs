@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,102 +31,120 @@ namespace System.Web.UI.WebControls.WebParts
 {
     public abstract class WebPart : Part, IWebPart, IWebActionable
 #if IWebEditableInterface
-      , IWebEditable
+            , IWebEditable
 #endif
     {
         [Flags]
-        enum Allow {
-            Close      = 0x01,
-            Connect    = 0x02,
-            Edit       = 0x04,
-            Hide       = 0x08,
-            Minimize   = 0x10,
+        enum Allow
+        {
+            Close = 0x01,
+            Connect = 0x02,
+            Edit = 0x04,
+            Hide = 0x08,
+            Minimize = 0x10,
             ZoneChange = 0x20
         }
-
 
         WebPartVerbCollection verbs = new WebPartVerbCollection();
         Allow allow;
         string auth_filter;
         string catalog_icon_url;
         WebPartExportMode exportMode = WebPartExportMode.None;
-        string    titleIconImageUrl,     
-                titleUrl,            
-                helpUrl;
-        bool isStatic, hidden, isClosed, hasSharedData, hasUserData;
+        string titleIconImageUrl,
+            titleUrl,
+            helpUrl;
+        bool isStatic,
+            hidden,
+            isClosed,
+            hasSharedData,
+            hasUserData;
         WebPartHelpMode helpMode = WebPartHelpMode.Navigate;
-        int zoneIndex ;
+        int zoneIndex;
 
-        protected WebPart ()
+        protected WebPart()
         {
             verbs = new WebPartVerbCollection();
-            allow = Allow.Close | Allow.Connect | Allow.Edit | Allow.Hide | Allow.Minimize | Allow.ZoneChange;
+            allow =
+                Allow.Close
+                | Allow.Connect
+                | Allow.Edit
+                | Allow.Hide
+                | Allow.Minimize
+                | Allow.ZoneChange;
             auth_filter = "";
             catalog_icon_url = "";
-            titleIconImageUrl    = string.Empty;
-            titleUrl        = string.Empty;
-            helpUrl            = string.Empty;
-            isStatic        = false;
-            hasUserData        = false;
-            hasSharedData    = false;
+            titleIconImageUrl = string.Empty;
+            titleUrl = string.Empty;
+            helpUrl = string.Empty;
+            isStatic = false;
+            hasUserData = false;
+            hasSharedData = false;
             hidden = false;
             isClosed = false;
         }
 
 #if IWebEditableInterface
         [MonoTODO("Not implemented")]
-        public virtual EditorPartCollection CreateEditorParts ()
+        public virtual EditorPartCollection CreateEditorParts()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 #endif
 
         [MonoTODO("Not implemented")]
-        protected void SetPersonalizationDirty ()
+        protected void SetPersonalizationDirty()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO("Not implemented")]
-        public static void SetPersonalizationDirty (Control control)
+        public static void SetPersonalizationDirty(Control control)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void TrackViewState ()
+        protected override void TrackViewState()
         {
             base.TrackViewState();
 
-            foreach (IStateManager verb in verbs) {
+            foreach (IStateManager verb in verbs)
+            {
                 verb.TrackViewState();
             }
         }
 
-        internal void SetZoneIndex (int index)
+        internal void SetZoneIndex(int index)
         {
             zoneIndex = index;
         }
-        
-        protected internal virtual void OnClosing (EventArgs e)
-        { /* no base class implementation */ }
 
-        protected internal virtual void OnConnectModeChanged (EventArgs e)
-        { /* no base class implementation */ }
+        protected internal virtual void OnClosing(
+            EventArgs e
+        ) { /* no base class implementation */
+        }
 
-        protected internal virtual void OnDeleting (EventArgs e)
-        { /* no base class implementation */ }
+        protected internal virtual void OnConnectModeChanged(
+            EventArgs e
+        ) { /* no base class implementation */
+        }
 
-        protected internal virtual void OnEditModeChanged (EventArgs e)
-        { /* no base class implementation */ }
+        protected internal virtual void OnDeleting(
+            EventArgs e
+        ) { /* no base class implementation */
+        }
 
-        [WebSysDescriptionAttribute ("")]
-        [WebCategoryAttribute ("Behavior")]
-        public virtual bool AllowClose 
+        protected internal virtual void OnEditModeChanged(
+            EventArgs e
+        ) { /* no base class implementation */
+        }
+
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        public virtual bool AllowClose
         {
-            get {
-                return (allow & Allow.Close) != 0;
-            }
-            set {
+            get { return (allow & Allow.Close) != 0; }
+            set
+            {
                 if (value)
                     allow |= Allow.Close;
                 else
@@ -134,14 +152,13 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        [WebSysDescriptionAttribute ("")]
-        [WebCategoryAttribute ("Behavior")]
-        public virtual bool AllowConnect 
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        public virtual bool AllowConnect
         {
-            get {
-                return (allow & Allow.Connect) != 0;
-            }
-            set {
+            get { return (allow & Allow.Connect) != 0; }
+            set
+            {
                 if (value)
                     allow |= Allow.Connect;
                 else
@@ -149,14 +166,13 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        [WebSysDescriptionAttribute ("")]
-        [WebCategoryAttribute ("Behavior")]
-        public virtual bool AllowEdit 
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        public virtual bool AllowEdit
         {
-            get {
-                return (allow & Allow.Edit) != 0;
-            }
-            set {
+            get { return (allow & Allow.Edit) != 0; }
+            set
+            {
                 if (value)
                     allow |= Allow.Edit;
                 else
@@ -164,14 +180,13 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        [WebSysDescriptionAttribute ("")]
-        [WebCategoryAttribute ("Behavior")]
-        public virtual bool AllowHide 
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        public virtual bool AllowHide
         {
-            get {
-                return (allow & Allow.Hide) != 0;
-            }
-            set {
+            get { return (allow & Allow.Hide) != 0; }
+            set
+            {
                 if (value)
                     allow |= Allow.Hide;
                 else
@@ -179,14 +194,13 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        [WebSysDescriptionAttribute ("")]
-        [WebCategoryAttribute ("Behavior")]
-        public virtual bool AllowMinimize 
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        public virtual bool AllowMinimize
         {
-            get {
-                return (allow & Allow.Minimize) != 0;
-            }
-            set {
+            get { return (allow & Allow.Minimize) != 0; }
+            set
+            {
                 if (value)
                     allow |= Allow.Minimize;
                 else
@@ -194,14 +208,13 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        [WebSysDescriptionAttribute ("")]
-        [WebCategoryAttribute ("Behavior")]
-        public virtual bool AllowZoneChange 
+        [WebSysDescriptionAttribute("")]
+        [WebCategoryAttribute("Behavior")]
+        public virtual bool AllowZoneChange
         {
-            get {
-                return (allow & Allow.ZoneChange) != 0;
-            }
-            set {
+            get { return (allow & Allow.ZoneChange) != 0; }
+            set
+            {
                 if (value)
                     allow |= Allow.ZoneChange;
                 else
@@ -209,276 +222,185 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        public virtual string AuthorizationFilter 
+        public virtual string AuthorizationFilter
         {
-            get {
-                return auth_filter;
-            }
-            set {
-                auth_filter = value;
-            }
+            get { return auth_filter; }
+            set { auth_filter = value; }
         }
 
-        public virtual string CatalogIconImageUrl 
+        public virtual string CatalogIconImageUrl
         {
-            get {
-                return catalog_icon_url;
-            }
-            set {
-                catalog_icon_url = value;
-            }
+            get { return catalog_icon_url; }
+            set { catalog_icon_url = value; }
         }
 
-        public override PartChromeState ChromeState 
+        public override PartChromeState ChromeState
         {
-            get {
-                return base.ChromeState;
-            }
-            set {
-                base.ChromeState = value;
-            }
+            get { return base.ChromeState; }
+            set { base.ChromeState = value; }
         }
 
-        public override PartChromeType ChromeType 
+        public override PartChromeType ChromeType
         {
-            get {
-                return base.ChromeType;
-            }
-            set {
-                base.ChromeType = value;
-            }
+            get { return base.ChromeType; }
+            set { base.ChromeType = value; }
         }
 
         [MonoTODO("Not implemented")]
-        public string ConnectErrorMessage 
+        public string ConnectErrorMessage
         {
-            get {
-                return "";
-            }
+            get { return ""; }
         }
 
-        public override string Description 
+        public override string Description
         {
-            get {
-                return base.Description;
-            }
-            set {
-                base.Description = value;
-            }
+            get { return base.Description; }
+            set { base.Description = value; }
         }
 
         [MonoTODO("Not implemented")]
         /* msdn2 lists this as an override, but it doesn't appear to work with our implementation */
-        public override ContentDirection Direction 
+        public override ContentDirection Direction
         {
-            get {
-                throw new NotImplementedException ();
-            }
-            set {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
-        public string DisplayTitle 
+        public string DisplayTitle
         {
-            get {
-                return "Untitled";
-            }
+            get { return "Untitled"; }
         }
 
-        public virtual WebPartExportMode ExportMode 
+        public virtual WebPartExportMode ExportMode
         {
-            get {
-                return exportMode;
-            }
-            set {
-                exportMode = value;
-            }
+            get { return exportMode; }
+            set { exportMode = value; }
         }
 
-        public bool HasSharedData 
+        public bool HasSharedData
         {
-            get {
-                return hasSharedData;
-            }
+            get { return hasSharedData; }
         }
 
-        public bool HasUserData 
+        public bool HasUserData
         {
-            get {
-                return hasUserData;
-            }
+            get { return hasUserData; }
         }
 
-        public override Unit Height 
+        public override Unit Height
         {
-            get {
-                return base.Height;
-            }
-            set {
-                base.Height = value;
-            }
+            get { return base.Height; }
+            set { base.Height = value; }
         }
 
-        public virtual WebPartHelpMode HelpMode 
+        public virtual WebPartHelpMode HelpMode
         {
-            get {
-                return helpMode;
-            }
-            set {
-                helpMode = value;
-            }
+            get { return helpMode; }
+            set { helpMode = value; }
         }
 
-        public virtual string HelpUrl 
+        public virtual string HelpUrl
         {
-            get {
-                return helpUrl;
-            }
-            set {
-                helpUrl = value;
-            }
+            get { return helpUrl; }
+            set { helpUrl = value; }
         }
 
-        public virtual bool Hidden 
+        public virtual bool Hidden
         {
-            get {
-                return hidden;
-            }
-            set {
-                hidden = value;
-            }
+            get { return hidden; }
+            set { hidden = value; }
         }
 
-        public virtual string ImportErrorMessage 
+        public virtual string ImportErrorMessage
         {
-            get {
+            get
+            {
                 return ViewState.GetString("ImportErrorMessage", "Cannot import this Web Part.");
             }
-            set {
-                ViewState ["ImportErrorMessage"] = value;
-            }
+            set { ViewState["ImportErrorMessage"] = value; }
         }
 
-        public bool IsClosed 
+        public bool IsClosed
         {
-            get {
-                return isClosed;
-            }
+            get { return isClosed; }
         }
 
-        public bool IsShared 
+        public bool IsShared
         {
-            get {
-                return false;
-            }
+            get { return false; }
         }
 
-        public bool IsStandalone 
+        public bool IsStandalone
         {
-            get {
-                return true;
-            }
+            get { return true; }
         }
 
-        public bool IsStatic 
+        public bool IsStatic
         {
-            get {
-                return isStatic;
-            }
+            get { return isStatic; }
         }
 
-        public virtual string Subtitle 
+        public virtual string Subtitle
         {
-            get {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
-        public override string Title 
+        public override string Title
         {
-            get {
-                return base.Title;
-            }
-            set {
-                base.Title = value;
-            }
+            get { return base.Title; }
+            set { base.Title = value; }
         }
 
-        public virtual string TitleIconImageUrl 
+        public virtual string TitleIconImageUrl
         {
-            get {
-                return titleIconImageUrl;
-            }
-            set {
-                titleIconImageUrl = value;
-            }
+            get { return titleIconImageUrl; }
+            set { titleIconImageUrl = value; }
         }
 
-        public virtual string TitleUrl 
+        public virtual string TitleUrl
         {
-            get {
-                return titleUrl;
-            }
-            set {
-                titleUrl = value;
-            }
+            get { return titleUrl; }
+            set { titleUrl = value; }
         }
 
-        public virtual WebPartVerbCollection Verbs 
+        public virtual WebPartVerbCollection Verbs
         {
-            get {
-                return verbs;
-            }
+            get { return verbs; }
         }
 
 #if IWebEditableInterface
         [MonoTODO("Not implemented")]
-        public virtual object WebBrowsableObject 
+        public virtual object WebBrowsableObject
         {
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 #endif
 
 #if notyet
         [MonoTODO("Not implemented")]
-        protected WebPartManager WebPartManager 
+        protected WebPartManager WebPartManager
         {
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 #endif
 
-        public override Unit Width 
+        public override Unit Width
         {
-            get {
-                return base.Width;
-            }
-            set {
-                base.Width = value;
-            }
+            get { return base.Width; }
+            set { base.Width = value; }
         }
 
 #if notyet
         [MonoTODO("Not implemented")]
-        public WebPartZoneBase Zone 
+        public WebPartZoneBase Zone
         {
-            get {
-                throw new NotImplementedException ();
-            }
+            get { throw new NotImplementedException(); }
         }
 #endif
 
-        public int ZoneIndex 
+        public int ZoneIndex
         {
-            get {
-                return zoneIndex;
-            }
+            get { return zoneIndex; }
         }
     }
-
 }
-

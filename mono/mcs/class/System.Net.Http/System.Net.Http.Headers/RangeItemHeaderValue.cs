@@ -30,20 +30,21 @@ namespace System.Net.Http.Headers
 {
     public class RangeItemHeaderValue : ICloneable
     {
-        public RangeItemHeaderValue (long? from, long? to)
+        public RangeItemHeaderValue(long? from, long? to)
         {
             if (from == null && to == null)
-                throw new ArgumentException ();
+                throw new ArgumentException();
 
-            if (from != null && to != null && from > to) {
-                throw new ArgumentOutOfRangeException ("from");
+            if (from != null && to != null && from > to)
+            {
+                throw new ArgumentOutOfRangeException("from");
             }
 
             if (from < 0)
-                throw new ArgumentOutOfRangeException ("from");
+                throw new ArgumentOutOfRangeException("from");
 
             if (to < 0)
-                throw new ArgumentOutOfRangeException ("to");
+                throw new ArgumentOutOfRangeException("to");
 
             From = from;
             To = to;
@@ -52,23 +53,23 @@ namespace System.Net.Http.Headers
         public long? From { get; private set; }
         public long? To { get; private set; }
 
-        object ICloneable.Clone ()
+        object ICloneable.Clone()
         {
-            return MemberwiseClone ();
+            return MemberwiseClone();
         }
 
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             var source = obj as RangeItemHeaderValue;
             return source != null && source.From == From && source.To == To;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return From.GetHashCode () ^ To.GetHashCode ();
+            return From.GetHashCode() ^ To.GetHashCode();
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (From == null)
                 return "-" + To.Value;

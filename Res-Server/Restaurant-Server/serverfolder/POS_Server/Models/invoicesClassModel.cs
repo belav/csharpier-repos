@@ -18,7 +18,7 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
         public string notes { get; set; }
         public byte isActive { get; set; }
-     
+
         public bool canDelete { get; set; }
 
         public long invClassMemberId { get; set; }
@@ -27,6 +27,5 @@ namespace POS_Server.Models
         public long invClassDiscountId { get; set; }
         public Nullable<long> invoiceId { get; set; }
         public Nullable<decimal> finalDiscount { get; set; }
-
     }
 }

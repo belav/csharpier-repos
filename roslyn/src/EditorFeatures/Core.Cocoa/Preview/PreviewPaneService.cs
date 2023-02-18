@@ -18,16 +18,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewPaneService()
-        {
-        }
+        public PreviewPaneService() { }
 
-        IWorkspaceService IWorkspaceServiceFactory.CreateService(HostWorkspaceServices workspaceServices)
+        IWorkspaceService IWorkspaceServiceFactory.CreateService(
+            HostWorkspaceServices workspaceServices
+        )
         {
             return this;
         }
 
-        object? IPreviewPaneService.GetPreviewPane(DiagnosticData? data, IReadOnlyList<object>? previewContent)
+        object? IPreviewPaneService.GetPreviewPane(
+            DiagnosticData? data,
+            IReadOnlyList<object>? previewContent
+        )
         {
             if (data == null || string.IsNullOrWhiteSpace(data.Message))
             {
@@ -38,7 +41,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     return null;
                 }
 
-                return new PreviewPane(id: null, title: null, helpLink: null, helpLinkToolTipText: null, previewContent);
+                return new PreviewPane(
+                    id: null,
+                    title: null,
+                    helpLink: null,
+                    helpLinkToolTipText: null,
+                    previewContent
+                );
             }
 
             if (previewContent == null)
@@ -53,8 +62,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 id: data.Id,
                 title: data.Message,
                 helpLink: helpLinkUri,
-                helpLinkToolTipText: (helpLinkUri != null) ? string.Format(EditorFeaturesResources.Get_help_for_0, data.Id) : null,
-                previewContent: previewContent);
+                helpLinkToolTipText: (helpLinkUri != null)
+                    ? string.Format(EditorFeaturesResources.Get_help_for_0, data.Id)
+                    : null,
+                previewContent: previewContent
+            );
         }
     }
 }

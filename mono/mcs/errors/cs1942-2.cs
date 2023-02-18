@@ -5,7 +5,7 @@ using System;
 
 class TestA
 {
-    public string Select<U> (Func<TestA, U> f)
+    public string Select<U>(Func<TestA, U> f)
     {
         return "";
     }
@@ -13,8 +13,8 @@ class TestA
 
 public class C
 {
-    static void Main ()
+    static void Main()
     {
-        string foo = from a in new TestA () select null;
+        string foo = from a in new TestA() select null;
     }
 }

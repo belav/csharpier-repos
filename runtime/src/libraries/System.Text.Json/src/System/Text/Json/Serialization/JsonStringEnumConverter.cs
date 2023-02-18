@@ -13,9 +13,10 @@ namespace System.Text.Json.Serialization
     /// Reading is case insensitive, writing can be customized via a <see cref="JsonNamingPolicy" />.
     /// </remarks>
     [RequiresDynamicCode(
-        "JsonStringEnumConverter cannot be statically analyzed and requires runtime code generation. " +
-        "Consider authoring a custom converter that is not a factory to work around the issue. " +
-        "See https://github.com/dotnet/runtime/issues/73124.")]
+        "JsonStringEnumConverter cannot be statically analyzed and requires runtime code generation. "
+            + "Consider authoring a custom converter that is not a factory to work around the issue. "
+            + "See https://github.com/dotnet/runtime/issues/73124."
+    )]
     public class JsonStringEnumConverter : JsonConverterFactory
     {
         private readonly JsonNamingPolicy? _namingPolicy;
@@ -41,7 +42,10 @@ namespace System.Text.Json.Serialization
         /// True to allow undefined enum values. When true, if an enum value isn't
         /// defined it will output as a number rather than a string.
         /// </param>
-        public JsonStringEnumConverter(JsonNamingPolicy? namingPolicy = null, bool allowIntegerValues = true)
+        public JsonStringEnumConverter(
+            JsonNamingPolicy? namingPolicy = null,
+            bool allowIntegerValues = true
+        )
         {
             _namingPolicy = namingPolicy;
             _converterOptions = allowIntegerValues
@@ -56,7 +60,9 @@ namespace System.Text.Json.Serialization
         }
 
         /// <inheritdoc />
-        public sealed override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
-            EnumConverterFactory.Create(typeToConvert, _converterOptions, _namingPolicy, options);
+        public sealed override JsonConverter CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) => EnumConverterFactory.Create(typeToConvert, _converterOptions, _namingPolicy, options);
     }
 }

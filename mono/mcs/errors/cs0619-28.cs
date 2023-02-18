@@ -6,6 +6,7 @@ using System;
 [Obsolete("Do not use it", true)]
 delegate void D();
 
-class B {
+class B
+{
     event D e;
 }

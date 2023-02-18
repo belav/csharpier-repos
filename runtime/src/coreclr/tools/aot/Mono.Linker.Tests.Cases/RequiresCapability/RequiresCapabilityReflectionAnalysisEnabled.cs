@@ -11,23 +11,23 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
     [ExpectedNoWarnings]
     public class RequiresCapabilityReflectionAnalysisEnabled
     {
-        [LogContains ("-- DynamicallyAccessedMembersEnabled --")]
-        [LogContains ("-- ReflectionPattern --")]
-        [LogContains ("-- DynamicallyAccessedMembersOnGenericsEnabled --")]
-        public static void Main ()
+        [LogContains("-- DynamicallyAccessedMembersEnabled --")]
+        [LogContains("-- ReflectionPattern --")]
+        [LogContains("-- DynamicallyAccessedMembersOnGenericsEnabled --")]
+        public static void Main()
         {
-            TestRequiresAttributeWithDynamicallyAccessedMembersEnabled ();
-            TestRequiresAttributeWithReflectionPattern ();
-            TestRequiresAttributeWithDynamicallyAccessedMembersOnGenericsEnabled ();
-            TestRequiresAndDynamicallyAccessedMembers.Test ();
+            TestRequiresAttributeWithDynamicallyAccessedMembersEnabled();
+            TestRequiresAttributeWithReflectionPattern();
+            TestRequiresAttributeWithDynamicallyAccessedMembersOnGenericsEnabled();
+            TestRequiresAndDynamicallyAccessedMembers.Test();
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-        [RequiresUnreferencedCode ("-- DynamicallyAccessedMembersEnabled --")]
-        static void TestRequiresAttributeWithDynamicallyAccessedMembersEnabled ()
+        [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+        [RequiresUnreferencedCode("-- DynamicallyAccessedMembersEnabled --")]
+        static void TestRequiresAttributeWithDynamicallyAccessedMembersEnabled()
         {
-            typeof (TypeWithPublicFieldsAccessed).RequiresPublicFields ();
+            typeof(TypeWithPublicFieldsAccessed).RequiresPublicFields();
         }
 
         [Kept]
@@ -40,39 +40,40 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-        [RequiresUnreferencedCode ("-- ReflectionPattern --")]
-        static void TestRequiresAttributeWithReflectionPattern ()
+        [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+        [RequiresUnreferencedCode("-- ReflectionPattern --")]
+        static void TestRequiresAttributeWithReflectionPattern()
         {
-            typeof (TypeWithMethodAccessed).GetMethod ("PublicMethod");
+            typeof(TypeWithMethodAccessed).GetMethod("PublicMethod");
         }
 
         [Kept]
         class TypeWithMethodAccessed
         {
             [Kept]
-            public void PublicMethod () { }
+            public void PublicMethod() { }
 
-            public void PublicMethod2 () { }
+            public void PublicMethod2() { }
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-        [RequiresUnreferencedCode ("-- DynamicallyAccessedMembersOnGenericsEnabled --")]
-        static void TestRequiresAttributeWithDynamicallyAccessedMembersOnGenericsEnabled ()
+        [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+        [RequiresUnreferencedCode("-- DynamicallyAccessedMembersOnGenericsEnabled --")]
+        static void TestRequiresAttributeWithDynamicallyAccessedMembersOnGenericsEnabled()
         {
-            TypeRequiresPublicFields<TypeWithPublicFieldsForGenericType>.Method ();
-            MethodRequiresPublicFields<TypeWithPublicFieldsForGenericMethod> ();
+            TypeRequiresPublicFields<TypeWithPublicFieldsForGenericType>.Method();
+            MethodRequiresPublicFields<TypeWithPublicFieldsForGenericMethod>();
         }
 
         [Kept]
         class TypeRequiresPublicFields<
-            [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-        [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)]
-        T>
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                T
+        >
         {
             [Kept]
-            public static void Method () { }
+            public static void Method() { }
         }
 
         [Kept]
@@ -86,11 +87,10 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 
         [Kept]
         static void MethodRequiresPublicFields<
-            [KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute))]
-        [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)]
-        T> ()
-        {
-        }
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                T
+        >() { }
 
         [Kept]
         class TypeWithPublicFieldsForGenericMethod
@@ -105,27 +105,28 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
         class TestRequiresAndDynamicallyAccessedMembers
         {
             [Kept]
-            [KeptAttributeAttribute (typeof (RequiresUnreferencedCodeAttribute))]
-            [RequiresUnreferencedCode ("--- RequiresAndPublicMethods ---")]
-            static void RequiresAndPublicMethods (
+            [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
+            [RequiresUnreferencedCode("--- RequiresAndPublicMethods ---")]
+            static void RequiresAndPublicMethods(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                Type type)
+                    Type type
+            )
             {
                 // This should not produce a warning since the method is annotated with Requires
-                type.RequiresPublicFields ();
+                type.RequiresPublicFields();
 
                 // This will still "work" in that it will apply the PublicFields requirement onto the specified type
-                typeof (TestRequiresAndDynamicallyAccessedMembers).RequiresPublicFields ();
+                typeof(TestRequiresAndDynamicallyAccessedMembers).RequiresPublicFields();
             }
 
             [Kept]
-            public void PublicInstanceMethod () { }
+            public void PublicInstanceMethod() { }
 
             [Kept]
-            public static void PublicStaticMethod () { }
+            public static void PublicStaticMethod() { }
 
-            static void PrivateInstanceMethod () { }
+            static void PrivateInstanceMethod() { }
 
             [Kept]
             public static int PublicStaticField;
@@ -133,10 +134,10 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             static int PrivateStaticField;
 
             [Kept]
-            [ExpectedWarning ("IL2026", "--- RequiresAndPublicMethods ---")]
-            public static void Test ()
+            [ExpectedWarning("IL2026", "--- RequiresAndPublicMethods ---")]
+            public static void Test()
             {
-                RequiresAndPublicMethods (typeof (TestRequiresAndDynamicallyAccessedMembers));
+                RequiresAndPublicMethods(typeof(TestRequiresAndDynamicallyAccessedMembers));
             }
         }
     }

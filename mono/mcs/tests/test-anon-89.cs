@@ -2,14 +2,14 @@ using System;
 
 class C
 {
-    public delegate void D ();
+    public delegate void D();
 
     int[] chats;
     int total;
 
-    public static int Main ()
+    public static int Main()
     {
-        new C ().Test ();
+        new C().Test();
         return 0;
     }
 
@@ -19,41 +19,59 @@ class C
         set { }
     }
 
-    public static void Invoke (D d)
-    {
-    }
+    public static void Invoke(D d) { }
 
-    void Test ()
+    void Test()
     {
-        try {
+        try
+        {
             if (total < 0)
                 return;
 
             int x = 0;
 
-            Invoke (delegate {
-                try {
-                    Invoke (delegate {
-                        GdkWindow = null;
-                    });
+            Invoke(
+                delegate
+                {
+                    try
+                    {
+                        Invoke(
+                            delegate
+                            {
+                                GdkWindow = null;
+                            }
+                        );
 
-                    total = x;
-                    int[] chats = new int[] { 1, 2 };
+                        total = x;
+                        int[] chats = new int[] { 1, 2 };
 
-                    Invoke (delegate {
-                        foreach (int chat in chats) {
-                            total = chat;
-                        }
-                    });
-                } finally {
-                    Invoke (delegate {
-                        if (GdkWindow != null) {
-                            GdkWindow = null;
-                        }
-                    });
+                        Invoke(
+                            delegate
+                            {
+                                foreach (int chat in chats)
+                                {
+                                    total = chat;
+                                }
+                            }
+                        );
+                    }
+                    finally
+                    {
+                        Invoke(
+                            delegate
+                            {
+                                if (GdkWindow != null)
+                                {
+                                    GdkWindow = null;
+                                }
+                            }
+                        );
+                    }
                 }
-            });
-        } catch {
+            );
+        }
+        catch
+        {
             int x = 9;
         }
     }

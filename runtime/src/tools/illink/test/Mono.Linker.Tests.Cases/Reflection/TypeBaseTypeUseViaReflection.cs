@@ -13,32 +13,35 @@ namespace Mono.Linker.Tests.Cases.Reflection
 {
     public class TypeBaseTypeUseViaReflection
     {
-        public static void Main ()
+        public static void Main()
         {
-            KnownType_Derived.Test ();
+            KnownType_Derived.Test();
         }
 
         [Kept]
         class KnownType_Base
         {
             [Kept]
-            public KnownType_Base () { }
+            public KnownType_Base() { }
 
             [Kept]
-            private static void UsedViaReflection () { }
+            private static void UsedViaReflection() { }
 
-            private static void Unused () { }
+            private static void Unused() { }
         }
 
         [Kept]
-        [KeptBaseType (typeof (KnownType_Base))]
+        [KeptBaseType(typeof(KnownType_Base))]
         class KnownType_Derived : KnownType_Base
         {
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                typeof (KnownType_Derived).BaseType.GetMethod ("UsedViaReflection", BindingFlags.NonPublic | BindingFlags.Static);
-                typeof (KnownType_Derived).BaseType.GetConstructor (Type.EmptyTypes);
+                typeof(KnownType_Derived).BaseType.GetMethod(
+                    "UsedViaReflection",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
+                typeof(KnownType_Derived).BaseType.GetConstructor(Type.EmptyTypes);
             }
         }
     }

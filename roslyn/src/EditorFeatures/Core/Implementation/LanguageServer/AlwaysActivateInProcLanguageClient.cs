@@ -42,13 +42,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             DefaultCapabilitiesProvider defaultCapabilitiesProvider,
             ILspLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(csharpVBRequestDispatcherFactory, globalOptions, diagnosticService: null, listenerProvider, lspWorkspaceRegistrationService, lspLoggerFactory, threadingContext, diagnosticsClientName: null)
+            IThreadingContext threadingContext
+        )
+            : base(
+                csharpVBRequestDispatcherFactory,
+                globalOptions,
+                diagnosticService: null,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                lspLoggerFactory,
+                threadingContext,
+                diagnosticsClientName: null
+            )
         {
             _defaultCapabilitiesProvider = defaultCapabilitiesProvider;
         }
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         public override string Name => CSharpVisualBasicLanguageServerFactory.UserVisibleName;
 
@@ -60,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             var isLspEditorEnabled = GlobalOptions.GetOption(LspOptions.LspEditorFeatureFlag);
             if (isLspEditorEnabled)
             {
-                serverCapabilities = (VSInternalServerCapabilities)_defaultCapabilitiesProvider.GetCapabilities(clientCapabilities);
+                serverCapabilities = (VSInternalServerCapabilities)
+                    _defaultCapabilitiesProvider.GetCapabilities(clientCapabilities);
             }
             else
             {
@@ -72,7 +84,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 };
             }
 
-            serverCapabilities.SupportsDiagnosticRequests = GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
+            serverCapabilities.SupportsDiagnosticRequests = GlobalOptions.IsPullDiagnostics(
+                InternalDiagnosticsOptions.NormalDiagnosticMode
+            );
 
             // This capability is always enabled as we provide cntrl+Q VS search only via LSP in ever scenario.
             serverCapabilities.WorkspaceSymbolProvider = true;
@@ -82,7 +96,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             // However, when the experimental LSP editor is enabled we want LSP to power NavigateTo, so we set DisableGoToWorkspaceSymbols=false.
             serverCapabilities.DisableGoToWorkspaceSymbols = !isLspEditorEnabled;
 
-            var isLspSemanticTokensEnabled = GlobalOptions.GetOption(LspOptions.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokensEnabled = GlobalOptions.GetOption(
+                LspOptions.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokensEnabled)
             {
                 serverCapabilities.SemanticTokensOptions = new SemanticTokensOptions
@@ -91,7 +107,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                     Range = true,
                     Legend = new SemanticTokensLegend
                     {
-                        TokenTypes = SemanticTokenTypes.AllTypes.Concat(SemanticTokensHelpers.RoslynCustomTokenTypes).ToArray(),
+                        TokenTypes = SemanticTokenTypes.AllTypes
+                            .Concat(SemanticTokensHelpers.RoslynCustomTokenTypes)
+                            .ToArray(),
                         TokenModifiers = new string[] { SemanticTokenModifiers.Static }
                     }
                 };
@@ -105,6 +123,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// they will get no diagnostics.  When not enabled we don't show the failure box (failure will still be recorded in the task status center)
         /// as the failure is not catastrophic.
         /// </summary>
-        public override bool ShowNotificationOnInitializeFailed => GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
+        public override bool ShowNotificationOnInitializeFailed =>
+            GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
     }
 }

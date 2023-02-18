@@ -24,12 +24,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DebuggerFindReferencesService(
             IThreadingContext threadingContext,
-            Lazy<IStreamingFindUsagesPresenter> streamingPresenter)
+            Lazy<IStreamingFindUsagesPresenter> streamingPresenter
+        )
         {
             _streamingPresenter = streamingPresenter;
         }
 
-        public async Task FindSymbolReferencesAsync(ISymbol symbol, Project project, CancellationToken cancellationToken)
+        public async Task FindSymbolReferencesAsync(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             var streamingPresenter = _streamingPresenter.Value;
 
@@ -40,11 +45,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
             // fire-and-forget streaming fashion).  As such, we do not want to use the cancellation
             // token provided by the presenter.  Instead, we'll let our caller own if this work
             // is cancelable.
-            var (context, _) = streamingPresenter.StartSearch(EditorFeaturesResources.Find_References, supportsReferences: true);
+            var (context, _) = streamingPresenter.StartSearch(
+                EditorFeaturesResources.Find_References,
+                supportsReferences: true
+            );
 
             try
             {
-                await AbstractFindUsagesService.FindSymbolReferencesAsync(context, symbol, project, cancellationToken).ConfigureAwait(false);
+                await AbstractFindUsagesService
+                    .FindSymbolReferencesAsync(context, symbol, project, cancellationToken)
+                    .ConfigureAwait(false);
             }
             finally
             {

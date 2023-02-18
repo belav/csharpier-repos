@@ -3,5 +3,6 @@
 
 class C
 {
-    const object a = null, b = 1;
+    const object a = null,
+        b = 1;
 }

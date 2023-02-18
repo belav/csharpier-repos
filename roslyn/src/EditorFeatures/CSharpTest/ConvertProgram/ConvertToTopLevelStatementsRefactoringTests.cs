@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertProgram
         [Fact]
         public async Task TestNotOnEmptyFile()
         {
-            var code = @"
+            var code =
+                @"
 $$
 ";
 
@@ -43,7 +44,8 @@ $$
         [Fact]
         public async Task TestConvertToTopLevelStatementsWithDefaultTopLevelStatementPreference()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void $$Main(string[] args)
@@ -69,7 +71,8 @@ class Program
             // user actually prefers Program.Main.  As such, we only offer to convert to the alternative as a refactoring.
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class Program
 {
     static void $$Main(string[] args)
@@ -78,14 +81,19 @@ class Program
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 System.Console.WriteLine(args[0]);
 ",
                 LanguageVersion = LanguageVersion.CSharp10,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion },
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
                 }
             }.RunAsync();
         }
@@ -93,7 +101,8 @@ System.Console.WriteLine(args[0]);
         [Fact]
         public async Task TestNotOfferedInLibrary()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void $$Main(string[] args)
@@ -110,7 +119,11 @@ class Program
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion },
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
                 }
             }.RunAsync();
         }
@@ -118,7 +131,8 @@ class Program
         [Fact]
         public async Task TestNotWithNonViableType()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     void $$Main(string[] args)
@@ -136,7 +150,11 @@ class Program
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion },
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
                 },
                 ExpectedDiagnostics =
                 {
@@ -149,7 +167,8 @@ class Program
         [Fact]
         public async Task TestNoConvertToTopLevelStatementsWithProgramMainPreferenceSuggestionBeforeCSharp9()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void $$Main(string[] args)
@@ -168,7 +187,11 @@ class Program
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion },
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
                 }
             }.RunAsync();
         }
@@ -176,7 +199,8 @@ class Program
         [Fact]
         public async Task TestNoConvertToTopLevelStatementsWithTopLevelStatementsPreferenceSuggestion()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void $$Main(string[] args)
@@ -193,7 +217,11 @@ class Program
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, true, NotificationOption2.Suggestion },
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        true,
+                        NotificationOption2.Suggestion
+                    },
                 }
             }.RunAsync();
         }
@@ -201,7 +229,8 @@ class Program
         [Fact]
         public async Task TestNoConvertToTopLevelStatementsWithTopLevelStatementsPreferenceSilent()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void $$Main(string[] args)
@@ -218,7 +247,11 @@ class Program
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, true, NotificationOption2.Silent },
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        true,
+                        NotificationOption2.Silent
+                    },
                 }
             }.RunAsync();
         }
@@ -229,7 +262,8 @@ class Program
             // if the user has the analyzer suppressed, then we want to supply teh refactoring.
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 internal class Program
 {
     private static void $$Main(string[] args)
@@ -238,14 +272,19 @@ internal class Program
     }
 }
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 System.Console.WriteLine(0);
 ",
                 LanguageVersion = LanguageVersion.CSharp10,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, true, NotificationOption2.None },
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        true,
+                        NotificationOption2.None
+                    },
                 }
             }.RunAsync();
         }

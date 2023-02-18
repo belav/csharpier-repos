@@ -64,7 +64,9 @@ public class ViewBufferTest
     {
         // Arrange
         var buffer = new ViewBuffer(new TestViewBufferScope(), "some-name", pageSize: 32);
-        var expected = Enumerable.Range(0, 32).Select(i => i.ToString(CultureInfo.InvariantCulture));
+        var expected = Enumerable
+            .Range(0, 32)
+            .Select(i => i.ToString(CultureInfo.InvariantCulture));
 
         // Act
         foreach (var item in expected)
@@ -82,7 +84,9 @@ public class ViewBufferTest
     {
         // Arrange
         var buffer = new ViewBuffer(new TestViewBufferScope(), "some-name", pageSize: 32);
-        var expected = Enumerable.Range(0, 32).Select(i => i.ToString(CultureInfo.InvariantCulture));
+        var expected = Enumerable
+            .Range(0, 32)
+            .Select(i => i.ToString(CultureInfo.InvariantCulture));
 
         // Act
         foreach (var item in expected)
@@ -94,14 +98,16 @@ public class ViewBufferTest
 
         // Assert
         Assert.Equal(2, buffer.Count);
-        Assert.Collection(new[] { buffer[0], buffer[1] },
+        Assert.Collection(
+            new[] { buffer[0], buffer[1] },
             page => Assert.Equal(expected, page.Buffer.Select(v => v.Value)),
             page =>
             {
                 var array = page.Buffer;
                 Assert.Equal("Hello", array[0].Value);
                 Assert.Equal("world", array[1].Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -109,8 +115,12 @@ public class ViewBufferTest
     {
         // Arrange
         var buffer = new ViewBuffer(new TestViewBufferScope(), "some-name", pageSize: 32);
-        var expected0 = Enumerable.Range(0, 32).Select(i => i.ToString(CultureInfo.InvariantCulture));
-        var expected1 = Enumerable.Range(32, 32).Select(i => i.ToString(CultureInfo.InvariantCulture));
+        var expected0 = Enumerable
+            .Range(0, 32)
+            .Select(i => i.ToString(CultureInfo.InvariantCulture));
+        var expected1 = Enumerable
+            .Range(32, 32)
+            .Select(i => i.ToString(CultureInfo.InvariantCulture));
 
         // Act
         foreach (var item in expected0)
@@ -126,7 +136,8 @@ public class ViewBufferTest
 
         // Assert
         Assert.Equal(3, buffer.Count);
-        Assert.Collection(new[] { buffer[0], buffer[1], buffer[2] },
+        Assert.Collection(
+            new[] { buffer[0], buffer[1], buffer[2] },
             page => Assert.Equal(expected0, page.Buffer.Select(v => v.Value)),
             page => Assert.Equal(expected1, page.Buffer.Select(v => v.Value)),
             page =>
@@ -134,13 +145,14 @@ public class ViewBufferTest
                 var array = page.Buffer;
                 Assert.Equal("Hello", array[0].Value);
                 Assert.Equal("world", array[1].Value);
-            });
+            }
+        );
     }
 
     [Theory]
-    [InlineData(1)]             // Create one page before clear
-    [InlineData(35)]            // Create two pages before clear
-    [InlineData(65)]            // Create many pages before clear
+    [InlineData(1)] // Create one page before clear
+    [InlineData(35)] // Create two pages before clear
+    [InlineData(65)] // Create many pages before clear
     public void Clear_ResetsBackingBufferAndIndex(int valuesToWrite)
     {
         // Arrange
@@ -405,7 +417,8 @@ public class ViewBufferTest
             item => Assert.Equal("original-0", item.Value),
             item => Assert.Equal("original-1", item.Value),
             item => Assert.Equal("other-0", item.Value),
-            item => Assert.Equal("other-1", item.Value));
+            item => Assert.Equal("other-1", item.Value)
+        );
     }
 
     [Fact]
@@ -443,13 +456,15 @@ public class ViewBufferTest
             item => Assert.Equal("original-0", item.Value),
             item => Assert.Equal("original-1", item.Value),
             item => Assert.Equal("original-2", item.Value),
-            item => Assert.Null(item.Value));
+            item => Assert.Null(item.Value)
+        );
         Assert.Collection(
             original[1].Buffer,
             item => Assert.Equal("other-0", item.Value),
             item => Assert.Equal("other-1", item.Value),
             item => Assert.Equal("other-2", item.Value),
-            item => Assert.Equal("after-merge", item.Value));
+            item => Assert.Equal("after-merge", item.Value)
+        );
     }
 
     [Fact]
@@ -489,24 +504,28 @@ public class ViewBufferTest
             item => Assert.Equal("original-0", item.Value),
             item => Assert.Equal("original-1", item.Value),
             item => Assert.Null(item.Value),
-            item => Assert.Null(item.Value));
+            item => Assert.Null(item.Value)
+        );
         Assert.Collection(
             original[1].Buffer,
             item => Assert.Equal("other-0", item.Value),
             item => Assert.Equal("other-1", item.Value),
             item => Assert.Equal("other-2", item.Value),
-            item => Assert.Equal("other-3", item.Value));
+            item => Assert.Equal("other-3", item.Value)
+        );
         Assert.Collection(
             original[2].Buffer,
             item => Assert.Equal("other-4", item.Value),
             item => Assert.Equal("other-5", item.Value),
             item => Assert.Equal("other-6", item.Value),
-            item => Assert.Equal("other-7", item.Value));
+            item => Assert.Equal("other-7", item.Value)
+        );
         Assert.Collection(
             original[3].Buffer,
             item => Assert.Equal("other-8", item.Value),
             item => Assert.Null(item.Value),
             item => Assert.Null(item.Value),
-            item => Assert.Null(item.Value));
+            item => Assert.Null(item.Value)
+        );
     }
 }

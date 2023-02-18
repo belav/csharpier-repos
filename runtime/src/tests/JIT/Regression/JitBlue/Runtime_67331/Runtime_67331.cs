@@ -9,16 +9,31 @@
 // Release: Outputs 1
 public class Runtime_67331
 {
-    public static short[] s_2 = new short[]{0};
+    public static short[] s_2 = new short[] { 0 };
+
     public static int Main()
     {
         var vr3 = (uint)s_2[0];
-        var vr4 = new byte[]{0};
-        var vr5 = new byte[, ]{{0}};
+        var vr4 = new byte[] { 0 };
+        var vr5 = new byte[,]
+        {
+            { 0 }
+        };
         return M3(vr3, false, 0, 0, vr4, true, vr5, 0, 1, 1) == 1 ? 100 : -1;
     }
 
-    public static int M3(uint arg2, bool arg3, ulong arg4, int arg5, byte[] arg6, bool arg7, byte[, ] arg8, int arg9, sbyte arg10, short arg11)
+    public static int M3(
+        uint arg2,
+        bool arg3,
+        ulong arg4,
+        int arg5,
+        byte[] arg6,
+        bool arg7,
+        byte[,] arg8,
+        int arg9,
+        sbyte arg10,
+        short arg11
+    )
     {
         arg10 = 0;
         return arg11;

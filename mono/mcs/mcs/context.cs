@@ -54,11 +54,16 @@ namespace Mono.CSharp
         bool IsUnsafe { get; }
         bool IsStatic { get; }
 
-        string GetSignatureForError ();
+        string GetSignatureForError();
 
-        ExtensionMethodCandidates LookupExtensionMethod (string name, int arity);
-        FullNamedExpression LookupNamespaceOrType (string name, int arity, LookupMode mode, Location loc);
-        FullNamedExpression LookupNamespaceAlias (string name);
+        ExtensionMethodCandidates LookupExtensionMethod(string name, int arity);
+        FullNamedExpression LookupNamespaceOrType(
+            string name,
+            int arity,
+            LookupMode mode,
+            Location loc
+        );
+        FullNamedExpression LookupNamespaceAlias(string name);
     }
 
     public interface IModuleContext
@@ -78,11 +83,11 @@ namespace Mono.CSharp
         //
         public int AssignmentInfoOffset;
 
-        public BlockContext (IMemberContext mc, ExplicitBlock block, TypeSpec returnType)
-            : base (mc)
+        public BlockContext(IMemberContext mc, ExplicitBlock block, TypeSpec returnType)
+            : base(mc)
         {
             if (returnType == null)
-                throw new ArgumentNullException ("returnType");
+                throw new ArgumentNullException("returnType");
 
             this.return_type = returnType;
 
@@ -90,13 +95,13 @@ namespace Mono.CSharp
             CurrentBlock = block;
         }
 
-        public BlockContext (ResolveContext rc, ExplicitBlock block, TypeSpec returnType)
-            : this (rc.MemberContext, block, returnType)
+        public BlockContext(ResolveContext rc, ExplicitBlock block, TypeSpec returnType)
+            : this(rc.MemberContext, block, returnType)
         {
             if (rc.IsUnsafe)
                 flags |= ResolveContext.Options.UnsafeScope;
 
-            if (rc.HasSet (ResolveContext.Options.CheckedScope))
+            if (rc.HasSet(ResolveContext.Options.CheckedScope))
                 flags |= ResolveContext.Options.CheckedScope;
 
             if (!rc.ConstantCheckState)
@@ -105,16 +110,16 @@ namespace Mono.CSharp
             if (rc.IsInProbingMode)
                 flags |= ResolveContext.Options.ProbingMode;
 
-            if (rc.HasSet (ResolveContext.Options.FieldInitializerScope))
+            if (rc.HasSet(ResolveContext.Options.FieldInitializerScope))
                 flags |= ResolveContext.Options.FieldInitializerScope;
 
-            if (rc.HasSet (ResolveContext.Options.ExpressionTreeConversion))
+            if (rc.HasSet(ResolveContext.Options.ExpressionTreeConversion))
                 flags |= ResolveContext.Options.ExpressionTreeConversion;
 
-            if (rc.HasSet (ResolveContext.Options.BaseInitializer))
+            if (rc.HasSet(ResolveContext.Options.BaseInitializer))
                 flags |= ResolveContext.Options.BaseInitializer;
 
-            if (rc.HasSet (ResolveContext.Options.QueryClauseScope))
+            if (rc.HasSet(ResolveContext.Options.QueryClauseScope))
                 flags |= ResolveContext.Options.QueryClauseScope;
         }
 
@@ -128,7 +133,8 @@ namespace Mono.CSharp
 
         public Switch Switch { get; set; }
 
-        public TypeSpec ReturnType {
+        public TypeSpec ReturnType
+        {
             get { return return_type; }
         }
     }
@@ -156,7 +162,7 @@ namespace Mono.CSharp
             /// <summary>
             ///   The constant check state is always set to `true' and cant be changed
             ///   from the command line.  The source code can change this setting with
-            ///   the `checked' and `unchecked' statements and expressions. 
+            ///   the `checked' and `unchecked' statements and expressions.
             /// </summary>
             ConstantCheckState = 1 << 1,
 
@@ -202,7 +208,7 @@ namespace Mono.CSharp
             QueryClauseScope = 1 << 18,
 
             ///
-            /// Indicates the current context is in probing mode, no errors are reported. 
+            /// Indicates the current context is in probing mode, no errors are reported.
             ///
             ProbingMode = 1 << 22,
 
@@ -225,28 +231,27 @@ namespace Mono.CSharp
         public struct FlagsHandle : IDisposable
         {
             readonly ResolveContext ec;
-            readonly Options invmask, oldval;
+            readonly Options invmask,
+                oldval;
 
-            public FlagsHandle (ResolveContext ec, Options flagsToSet)
-                : this (ec, flagsToSet, flagsToSet)
-            {
-            }
+            public FlagsHandle(ResolveContext ec, Options flagsToSet)
+                : this(ec, flagsToSet, flagsToSet) { }
 
-            internal FlagsHandle (ResolveContext ec, Options mask, Options val)
+            internal FlagsHandle(ResolveContext ec, Options mask, Options val)
             {
                 this.ec = ec;
                 invmask = ~mask;
                 oldval = ec.flags & mask;
                 ec.flags = (ec.flags & invmask) | (val & mask);
 
-//                if ((mask & Options.ProbingMode) != 0)
-//                    ec.Report.DisableReporting ();
+                //                if ((mask & Options.ProbingMode) != 0)
+                //                    ec.Report.DisableReporting ();
             }
 
-            public void Dispose ()
+            public void Dispose()
             {
-//                if ((invmask & Options.ProbingMode) == 0)
-//                    ec.Report.EnableReporting ();
+                //                if ((invmask & Options.ProbingMode) == 0)
+                //                    ec.Report.EnableReporting ();
 
                 ec.flags = (ec.flags & invmask) | oldval;
             }
@@ -268,10 +273,10 @@ namespace Mono.CSharp
 
         public readonly IMemberContext MemberContext;
 
-        public ResolveContext (IMemberContext mc)
+        public ResolveContext(IMemberContext mc)
         {
             if (mc == null)
-                throw new ArgumentNullException ();
+                throw new ArgumentNullException();
 
             MemberContext = mc;
 
@@ -287,101 +292,99 @@ namespace Mono.CSharp
             flags |= Options.ConstantCheckState;
         }
 
-        public ResolveContext (IMemberContext mc, Options options)
-            : this (mc)
+        public ResolveContext(IMemberContext mc, Options options)
+            : this(mc)
         {
             flags |= options;
         }
 
         #region Properties
 
-        public BuiltinTypes BuiltinTypes {
-            get {
-                return MemberContext.Module.Compiler.BuiltinTypes;
-            }
+        public BuiltinTypes BuiltinTypes
+        {
+            get { return MemberContext.Module.Compiler.BuiltinTypes; }
         }
 
-        public virtual ExplicitBlock ConstructorBlock {
-            get {
-                return CurrentBlock.Explicit;
-            }
+        public virtual ExplicitBlock ConstructorBlock
+        {
+            get { return CurrentBlock.Explicit; }
         }
 
         //
         // The current iterator
         //
-        public Iterator CurrentIterator {
+        public Iterator CurrentIterator
+        {
             get { return CurrentAnonymousMethod as Iterator; }
         }
 
-        public TypeSpec CurrentType {
+        public TypeSpec CurrentType
+        {
             get { return MemberContext.CurrentType; }
         }
 
-        public TypeParameters CurrentTypeParameters {
+        public TypeParameters CurrentTypeParameters
+        {
             get { return MemberContext.CurrentTypeParameters; }
         }
 
-        public MemberCore CurrentMemberDefinition {
+        public MemberCore CurrentMemberDefinition
+        {
             get { return MemberContext.CurrentMemberDefinition; }
         }
 
-        public bool ConstantCheckState {
+        public bool ConstantCheckState
+        {
             get { return (flags & Options.ConstantCheckState) != 0; }
         }
 
-        public bool IsInProbingMode {
-            get {
-                return (flags & Options.ProbingMode) != 0;
-            }
+        public bool IsInProbingMode
+        {
+            get { return (flags & Options.ProbingMode) != 0; }
         }
 
-        public bool IsObsolete {
-            get {
+        public bool IsObsolete
+        {
+            get
+            {
                 // Disables obsolete checks when probing is on
                 return MemberContext.IsObsolete;
             }
         }
 
-        public bool IsStatic {
-            get {
-                return MemberContext.IsStatic;
-            }
+        public bool IsStatic
+        {
+            get { return MemberContext.IsStatic; }
         }
 
-        public bool IsUnsafe {
-            get {
-                return HasSet (Options.UnsafeScope) || MemberContext.IsUnsafe;
-            }
+        public bool IsUnsafe
+        {
+            get { return HasSet(Options.UnsafeScope) || MemberContext.IsUnsafe; }
         }
 
-        public bool IsRuntimeBinder {
-            get {
-                return Module.Compiler.IsRuntimeBinder;
-            }
+        public bool IsRuntimeBinder
+        {
+            get { return Module.Compiler.IsRuntimeBinder; }
         }
 
-        public bool IsVariableCapturingRequired {
-            get {
-                return !IsInProbingMode;
-            }
+        public bool IsVariableCapturingRequired
+        {
+            get { return !IsInProbingMode; }
         }
 
-        public ModuleContainer Module {
-            get {
-                return MemberContext.Module;
-            }
+        public ModuleContainer Module
+        {
+            get { return MemberContext.Module; }
         }
 
-        public Report Report {
-            get {
-                return Module.Compiler.Report;
-            }
+        public Report Report
+        {
+            get { return Module.Compiler.Report; }
         }
 
         #endregion
 
-        public bool MustCaptureVariable (INamedBlockVariable local)
+        public bool MustCaptureVariable(INamedBlockVariable local)
         {
             if (CurrentAnonymousMethod == null)
                 return false;
@@ -395,58 +398,64 @@ namespace Mono.CSharp
 
             //
             // Capture only if this or any of child blocks contain await
-            // or it's a parameter or we need to access variable from 
+            // or it's a parameter or we need to access variable from
             // different parameter block
             //
             if (CurrentAnonymousMethod is AsyncInitializer)
-                return local.IsParameter || local.Block.Explicit.HasAwait || CurrentBlock.Explicit.HasAwait ||
-                    local.Block.ParametersBlock != CurrentBlock.ParametersBlock.Original;
+                return local.IsParameter
+                    || local.Block.Explicit.HasAwait
+                    || CurrentBlock.Explicit.HasAwait
+                    || local.Block.ParametersBlock != CurrentBlock.ParametersBlock.Original;
 
             return local.Block.ParametersBlock != CurrentBlock.ParametersBlock.Original;
         }
 
-        public bool HasSet (Options options)
+        public bool HasSet(Options options)
         {
             return (this.flags & options) == options;
         }
 
-        public bool HasAny (Options options)
+        public bool HasAny(Options options)
         {
             return (this.flags & options) != 0;
         }
 
-
         // Temporarily set all the given flags to the given value.  Should be used in an 'using' statement
-        public FlagsHandle Set (Options options)
+        public FlagsHandle Set(Options options)
         {
-            return new FlagsHandle (this, options);
+            return new FlagsHandle(this, options);
         }
 
-        public FlagsHandle With (Options options, bool enable)
+        public FlagsHandle With(Options options, bool enable)
         {
-            return new FlagsHandle (this, options, enable ? options : 0);
+            return new FlagsHandle(this, options, enable ? options : 0);
         }
 
         #region IMemberContext Members
 
-        public string GetSignatureForError ()
+        public string GetSignatureForError()
         {
-            return MemberContext.GetSignatureForError ();
+            return MemberContext.GetSignatureForError();
         }
 
-        public ExtensionMethodCandidates LookupExtensionMethod (string name, int arity)
+        public ExtensionMethodCandidates LookupExtensionMethod(string name, int arity)
         {
-            return MemberContext.LookupExtensionMethod (name, arity);
+            return MemberContext.LookupExtensionMethod(name, arity);
         }
 
-        public FullNamedExpression LookupNamespaceOrType (string name, int arity, LookupMode mode, Location loc)
+        public FullNamedExpression LookupNamespaceOrType(
+            string name,
+            int arity,
+            LookupMode mode,
+            Location loc
+        )
         {
-            return MemberContext.LookupNamespaceOrType (name, arity, mode, loc);
+            return MemberContext.LookupNamespaceOrType(name, arity, mode, loc);
         }
 
-        public FullNamedExpression LookupNamespaceAlias (string name)
+        public FullNamedExpression LookupNamespaceAlias(string name)
         {
-            return MemberContext.LookupNamespaceAlias (name);
+            return MemberContext.LookupNamespaceAlias(name);
         }
 
         #endregion
@@ -456,14 +465,19 @@ namespace Mono.CSharp
     {
         readonly CompilerContext ctx;
 
-        public FlowAnalysisContext (CompilerContext ctx, ParametersBlock parametersBlock, int definiteAssignmentLength)
+        public FlowAnalysisContext(
+            CompilerContext ctx,
+            ParametersBlock parametersBlock,
+            int definiteAssignmentLength
+        )
         {
             this.ctx = ctx;
             this.ParametersBlock = parametersBlock;
 
-            DefiniteAssignment = definiteAssignmentLength == 0 ?
-                DefiniteAssignmentBitSet.Empty :
-                new DefiniteAssignmentBitSet (definiteAssignmentLength);
+            DefiniteAssignment =
+                definiteAssignmentLength == 0
+                    ? DefiniteAssignmentBitSet.Empty
+                    : new DefiniteAssignmentBitSet(definiteAssignmentLength);
         }
 
         public DefiniteAssignmentBitSet DefiniteAssignment { get; set; }
@@ -476,10 +490,9 @@ namespace Mono.CSharp
 
         public ParametersBlock ParametersBlock { get; set; }
 
-        public Report Report {
-            get {
-                return ctx.Report;
-            }
+        public Report Report
+        {
+            get { return ctx.Report; }
         }
 
         public DefiniteAssignmentBitSet SwitchInitialDefinitiveAssignment { get; set; }
@@ -488,94 +501,100 @@ namespace Mono.CSharp
 
         public bool UnreachableReported { get; set; }
 
-        public bool AddReachedLabel (Statement label)
+        public bool AddReachedLabel(Statement label)
         {
             List<DefiniteAssignmentBitSet> das;
-            if (LabelStack == null) {
-                LabelStack = new Dictionary<Statement, List<DefiniteAssignmentBitSet>> ();
+            if (LabelStack == null)
+            {
+                LabelStack = new Dictionary<Statement, List<DefiniteAssignmentBitSet>>();
                 das = null;
-            } else {
-                LabelStack.TryGetValue (label, out das);
+            }
+            else
+            {
+                LabelStack.TryGetValue(label, out das);
             }
 
-            if (das == null) {
-                das = new List<DefiniteAssignmentBitSet> ();
-                das.Add (new DefiniteAssignmentBitSet (DefiniteAssignment));
-                LabelStack.Add (label, das);
+            if (das == null)
+            {
+                das = new List<DefiniteAssignmentBitSet>();
+                das.Add(new DefiniteAssignmentBitSet(DefiniteAssignment));
+                LabelStack.Add(label, das);
                 return false;
             }
 
-            foreach (var existing in das) {
-                if (DefiniteAssignmentBitSet.IsIncluded (existing, DefiniteAssignment))
+            foreach (var existing in das)
+            {
+                if (DefiniteAssignmentBitSet.IsIncluded(existing, DefiniteAssignment))
                     return true;
             }
 
             if (DefiniteAssignment == DefiniteAssignmentBitSet.Empty)
-                das.Add (DefiniteAssignment);
+                das.Add(DefiniteAssignment);
             else
-                das.Add (new DefiniteAssignmentBitSet (DefiniteAssignment));
+                das.Add(new DefiniteAssignmentBitSet(DefiniteAssignment));
 
             return false;
         }
 
-        public DefiniteAssignmentBitSet BranchDefiniteAssignment ()
+        public DefiniteAssignmentBitSet BranchDefiniteAssignment()
         {
-            return BranchDefiniteAssignment (DefiniteAssignment);
+            return BranchDefiniteAssignment(DefiniteAssignment);
         }
 
-        public DefiniteAssignmentBitSet BranchDefiniteAssignment (DefiniteAssignmentBitSet da)
+        public DefiniteAssignmentBitSet BranchDefiniteAssignment(DefiniteAssignmentBitSet da)
         {
-            if (da != DefiniteAssignmentBitSet.Empty) {
-                DefiniteAssignment = new DefiniteAssignmentBitSet (da);
+            if (da != DefiniteAssignmentBitSet.Empty)
+            {
+                DefiniteAssignment = new DefiniteAssignmentBitSet(da);
             }
 
             return da;
         }
 
-        public Dictionary<Statement, List<DefiniteAssignmentBitSet>> CopyLabelStack ()
+        public Dictionary<Statement, List<DefiniteAssignmentBitSet>> CopyLabelStack()
         {
             if (LabelStack == null)
                 return null;
 
-            var dest = new Dictionary<Statement, List<DefiniteAssignmentBitSet>> ();
-            foreach (var entry in LabelStack) {
-                dest.Add (entry.Key, new List<DefiniteAssignmentBitSet> (entry.Value));
+            var dest = new Dictionary<Statement, List<DefiniteAssignmentBitSet>>();
+            foreach (var entry in LabelStack)
+            {
+                dest.Add(entry.Key, new List<DefiniteAssignmentBitSet>(entry.Value));
             }
 
             return dest;
         }
 
-        public bool IsDefinitelyAssigned (VariableInfo variable)
+        public bool IsDefinitelyAssigned(VariableInfo variable)
         {
-            return variable.IsAssigned (DefiniteAssignment);
+            return variable.IsAssigned(DefiniteAssignment);
         }
 
-        public bool IsStructFieldDefinitelyAssigned (VariableInfo variable, string name)
+        public bool IsStructFieldDefinitelyAssigned(VariableInfo variable, string name)
         {
-            return variable.IsStructFieldAssigned (DefiniteAssignment, name);
+            return variable.IsStructFieldAssigned(DefiniteAssignment, name);
         }
 
-        public void SetLabelStack (Dictionary<Statement, List<DefiniteAssignmentBitSet>> labelStack)
+        public void SetLabelStack(Dictionary<Statement, List<DefiniteAssignmentBitSet>> labelStack)
         {
             LabelStack = labelStack;
         }
 
-        public void SetVariableAssigned (VariableInfo variable, bool generatedAssignment = false)
+        public void SetVariableAssigned(VariableInfo variable, bool generatedAssignment = false)
         {
-            variable.SetAssigned (DefiniteAssignment, generatedAssignment);
+            variable.SetAssigned(DefiniteAssignment, generatedAssignment);
         }
 
-        public void SetVariableAssigned (VariableInfo variable, DefiniteAssignmentBitSet da)
+        public void SetVariableAssigned(VariableInfo variable, DefiniteAssignmentBitSet da)
         {
-            variable.SetAssigned (da, false);
+            variable.SetAssigned(da, false);
         }
 
-        public void SetStructFieldAssigned (VariableInfo variable, string name)
+        public void SetStructFieldAssigned(VariableInfo variable, string name)
         {
-            variable.SetStructFieldAssigned (DefiniteAssignment, name);
+            variable.SetStructFieldAssigned(DefiniteAssignment, name);
         }
     }
-
 
     //
     // This class is used during the Statement.Clone operation
@@ -587,18 +606,19 @@ namespace Mono.CSharp
     //
     public class CloneContext
     {
-        Dictionary<Block, Block> block_map = new Dictionary<Block, Block> ();
+        Dictionary<Block, Block> block_map = new Dictionary<Block, Block>();
 
-        public void AddBlockMap (Block from, Block to)
+        public void AddBlockMap(Block from, Block to)
         {
-            block_map.Add (from, to);
+            block_map.Add(from, to);
         }
 
-        public Block LookupBlock (Block from)
+        public Block LookupBlock(Block from)
         {
             Block result;
-            if (!block_map.TryGetValue (from, out result)) {
-                result = (Block) from.Clone (this);
+            if (!block_map.TryGetValue(from, out result))
+            {
+                result = (Block)from.Clone(this);
             }
 
             return result;
@@ -607,10 +627,10 @@ namespace Mono.CSharp
         ///
         /// Remaps block to cloned copy if one exists.
         ///
-        public Block RemapBlockCopy (Block from)
+        public Block RemapBlockCopy(Block from)
         {
             Block mapped_to;
-            if (!block_map.TryGetValue (from, out mapped_to))
+            if (!block_map.TryGetValue(from, out mapped_to))
                 return from;
 
             return mapped_to;
@@ -622,7 +642,7 @@ namespace Mono.CSharp
     //
     public class CompilerContext
     {
-        static readonly TimeReporter DisabledTimeReporter = new TimeReporter (false);
+        static readonly TimeReporter DisabledTimeReporter = new TimeReporter(false);
 
         readonly Report report;
         readonly BuiltinTypes builtin_types;
@@ -630,49 +650,41 @@ namespace Mono.CSharp
 
         Dictionary<string, SourceFile> all_source_files;
 
-        public CompilerContext (CompilerSettings settings, ReportPrinter reportPrinter)
+        public CompilerContext(CompilerSettings settings, ReportPrinter reportPrinter)
         {
             this.settings = settings;
-            this.report = new Report (this, reportPrinter);
-            this.builtin_types = new BuiltinTypes ();
+            this.report = new Report(this, reportPrinter);
+            this.builtin_types = new BuiltinTypes();
             this.TimeReporter = DisabledTimeReporter;
         }
 
         #region Properties
 
-        public BuiltinTypes BuiltinTypes {
-            get {
-                return builtin_types;
-            }
+        public BuiltinTypes BuiltinTypes
+        {
+            get { return builtin_types; }
         }
 
         // Used for special handling of runtime dynamic context mostly
         // by error reporting but also by member accessibility checks
-        public bool IsRuntimeBinder {
-            get; set;
+        public bool IsRuntimeBinder { get; set; }
+
+        public Report Report
+        {
+            get { return report; }
         }
 
-        public Report Report {
-            get {
-                return report;
-            }
+        public CompilerSettings Settings
+        {
+            get { return settings; }
         }
 
-        public CompilerSettings Settings {
-            get {
-                return settings;
-            }
+        public List<SourceFile> SourceFiles
+        {
+            get { return settings.SourceFiles; }
         }
 
-        public List<SourceFile> SourceFiles {
-            get {
-                return settings.SourceFiles;
-            }
-        }
-
-        internal TimeReporter TimeReporter {
-            get; set;
-        }
+        internal TimeReporter TimeReporter { get; set; }
 
         #endregion
 
@@ -680,32 +692,35 @@ namespace Mono.CSharp
         // This is used when we encounter a #line preprocessing directive during parsing
         // to register additional source file names
         //
-        public SourceFile LookupFile (CompilationSourceFile comp_unit, string name)
+        public SourceFile LookupFile(CompilationSourceFile comp_unit, string name)
         {
-            if (all_source_files == null) {
-                all_source_files = new Dictionary<string, SourceFile> ();
+            if (all_source_files == null)
+            {
+                all_source_files = new Dictionary<string, SourceFile>();
                 foreach (var source in SourceFiles)
                     all_source_files[source.OriginalFullPathName] = source;
             }
 
             string path;
-            if (!Path.IsPathRooted (name)) {
+            if (!Path.IsPathRooted(name))
+            {
                 var loc = comp_unit.SourceFile;
-                string root = Path.GetDirectoryName (loc.OriginalFullPathName);
-                path = Path.GetFullPath (Path.Combine (root, name));
-                var dir = Path.GetDirectoryName (loc.Name);
-                if (!string.IsNullOrEmpty (dir))
-                    name = Path.Combine (dir, name);
-            } else
+                string root = Path.GetDirectoryName(loc.OriginalFullPathName);
+                path = Path.GetFullPath(Path.Combine(root, name));
+                var dir = Path.GetDirectoryName(loc.Name);
+                if (!string.IsNullOrEmpty(dir))
+                    name = Path.Combine(dir, name);
+            }
+            else
                 path = name;
 
             SourceFile retval;
-            if (all_source_files.TryGetValue (path, out retval))
+            if (all_source_files.TryGetValue(path, out retval))
                 return retval;
 
-            retval = new SourceFile (name, path, all_source_files.Count + 1);
-            Location.AddFile (retval);
-            all_source_files.Add (path, retval);
+            retval = new SourceFile(name, path, all_source_files.Count + 1);
+            Location.AddFile(retval);
+            all_source_files.Add(path, retval);
             return retval;
         }
     }
@@ -744,14 +759,13 @@ namespace Mono.CSharp
         public struct FlagsHandle : IDisposable
         {
             readonly BuilderContext ec;
-            readonly Options invmask, oldval;
+            readonly Options invmask,
+                oldval;
 
-            public FlagsHandle (BuilderContext ec, Options flagsToSet)
-                : this (ec, flagsToSet, flagsToSet)
-            {
-            }
+            public FlagsHandle(BuilderContext ec, Options flagsToSet)
+                : this(ec, flagsToSet, flagsToSet) { }
 
-            internal FlagsHandle (BuilderContext ec, Options mask, Options val)
+            internal FlagsHandle(BuilderContext ec, Options mask, Options val)
             {
                 this.ec = ec;
                 invmask = ~mask;
@@ -759,7 +773,7 @@ namespace Mono.CSharp
                 ec.flags = (ec.flags & invmask) | (val & mask);
             }
 
-            public void Dispose ()
+            public void Dispose()
             {
                 ec.flags = (ec.flags & invmask) | oldval;
             }
@@ -767,15 +781,15 @@ namespace Mono.CSharp
 
         protected Options flags;
 
-        public bool HasSet (Options options)
+        public bool HasSet(Options options)
         {
             return (this.flags & options) == options;
         }
 
         // Temporarily set all the given flags to the given value.  Should be used in an 'using' statement
-        public FlagsHandle With (Options options, bool enable)
+        public FlagsHandle With(Options options, bool enable)
         {
-            return new FlagsHandle (this, options, enable ? options : 0);
+            return new FlagsHandle(this, options, enable ? options : 0);
         }
     }
 
@@ -787,9 +801,13 @@ namespace Mono.CSharp
     {
         MD5 md5;
 
-        public readonly char[] StreamReaderBuffer = new char[SeekableStreamReader.DefaultReadAheadSize * 2];
-        public readonly Dictionary<char[], string>[] Identifiers = new Dictionary<char[], string>[Tokenizer.MaxIdentifierLength + 1];
-        public readonly List<Parameter> ParametersStack = new List<Parameter> (4);
+        public readonly char[] StreamReaderBuffer = new char[
+            SeekableStreamReader.DefaultReadAheadSize * 2
+        ];
+        public readonly Dictionary<char[], string>[] Identifiers = new Dictionary<char[], string>[
+            Tokenizer.MaxIdentifierLength + 1
+        ];
+        public readonly List<Parameter> ParametersStack = new List<Parameter>(4);
         public readonly char[] IDBuilder = new char[Tokenizer.MaxIdentifierLength];
         public readonly char[] NumberBuilder = new char[Tokenizer.MaxNumberLength];
 
@@ -797,9 +815,9 @@ namespace Mono.CSharp
         public bool UseJayGlobalArrays { get; set; }
         public LocatedToken[] LocatedTokens { get; set; }
 
-        public MD5 GetChecksumAlgorithm ()
+        public MD5 GetChecksumAlgorithm()
         {
-            return md5 ?? (md5 = MD5.Create ());
+            return md5 ?? (md5 = MD5.Create());
         }
     }
 }

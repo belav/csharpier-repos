@@ -30,46 +30,46 @@ using System.Collections;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace MonoTests.Microsoft.Build.Tasks {
-
-    public class TestEngine : IBuildEngine {
-        public bool BuildProjectFile (string projectFileName, string[] targetNames, IDictionary globalProperties,
-                          IDictionary targetOutputs)
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    public class TestEngine : IBuildEngine
+    {
+        public bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            IDictionary globalProperties,
+            IDictionary targetOutputs
+        )
         {
             return true;
         }
 
-        public void LogCustomEvent (CustomBuildEventArgs e)
-        {
-        }
+        public void LogCustomEvent(CustomBuildEventArgs e) { }
 
-        public void LogErrorEvent (BuildErrorEventArgs e)
-        {
-        }
+        public void LogErrorEvent(BuildErrorEventArgs e) { }
 
-        public void LogMessageEvent (BuildMessageEventArgs e)
-        {
-        }
+        public void LogMessageEvent(BuildMessageEventArgs e) { }
 
-        public void LogWarningEvent (BuildWarningEventArgs e)
-        {
-        }
+        public void LogWarningEvent(BuildWarningEventArgs e) { }
 
-        public int ColumnNumberOfTaskNode {
+        public int ColumnNumberOfTaskNode
+        {
             get { return 0; }
         }
 
-        public bool ContinueOnError {
+        public bool ContinueOnError
+        {
             get { return true; }
         }
 
-        public int LineNumberOfTaskNode {
+        public int LineNumberOfTaskNode
+        {
             get { return 0; }
         }
 
-        public string ProjectFileOfTaskNode {
+        public string ProjectFileOfTaskNode
+        {
             get { return String.Empty; }
         }
     }
-
 }

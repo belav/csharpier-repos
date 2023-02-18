@@ -13,15 +13,16 @@ namespace ILLink.RoslynAnalyzer.Tests
         public override string Path { get; }
 
         readonly Stream Doc;
-        public XmlText (string path, Stream data)
+
+        public XmlText(string path, Stream data)
         {
             Path = path;
             Doc = data;
         }
 
-        public override SourceText? GetText (CancellationToken token = default)
+        public override SourceText? GetText(CancellationToken token = default)
         {
-            return SourceText.From (Doc);
+            return SourceText.From(Doc);
         }
     }
 }

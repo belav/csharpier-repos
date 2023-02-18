@@ -35,42 +35,45 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class WebControl_ctor_H
-        : GHTBaseWeb {
+    public class WebControl_ctor_H : GHTBaseWeb
+    {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) {
+        override protected void OnInit(EventArgs e)
+        {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
             //
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
         int m_ctrlCounter = 0;
-        private void Page_Load(object sender, System.EventArgs e) {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             int num1 = 1;
             do
             {
                 if (!((num1 == 0x4f) | (num1 == 0x49)))
                 {
-                    HtmlTextWriterTag tag1 = (HtmlTextWriterTag) num1;
+                    HtmlTextWriterTag tag1 = (HtmlTextWriterTag)num1;
                     this.Test(ref tag1);
-                    num1 = (int) tag1;
+                    num1 = (int)tag1;
                 }
                 num1++;
-            }
-            while (num1 <= 0x60);
+            } while (num1 <= 0x60);
             GHTTestEnd();
         }
 
@@ -78,7 +81,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         {
             try
             {
-                this.GHTSubTestBegin("Tag = " + ((HtmlTextWriterTag) testTag).ToString());
+                this.GHTSubTestBegin("Tag = " + ((HtmlTextWriterTag)testTag).ToString());
                 WebControl control1 = new WebControl(testTag);
                 this.m_ctrlCounter++;
                 control1.ID = "ctrl_" + this.m_ctrlCounter.ToString();
@@ -93,5 +96,5 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             }
             this.GHTSubTestEnd();
         }
-     }
+    }
 }

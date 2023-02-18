@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,68 +42,91 @@ namespace System.Web.Configuration
         static ConfigurationProperty redirectModeProp;
         static ConfigurationPropertyCollection properties;
 
-        static CustomErrorsSection ()
+        static CustomErrorsSection()
         {
-            defaultRedirectProp = new ConfigurationProperty ("defaultRedirect", typeof (string), null);
-            errorsProp = new ConfigurationProperty (String.Empty, typeof (CustomErrorCollection), null,
-                                null, PropertyHelper.DefaultValidator,
-                                ConfigurationPropertyOptions.IsDefaultCollection);
-            modeProp = new ConfigurationProperty ("mode", typeof (CustomErrorsMode), CustomErrorsMode.RemoteOnly,
-                                  new GenericEnumConverter (typeof (CustomErrorsMode)),
-                                  PropertyHelper.DefaultValidator,
-                                  ConfigurationPropertyOptions.None);
-            redirectModeProp = new ConfigurationProperty ("redirectMode", typeof (CustomErrorsRedirectMode), CustomErrorsRedirectMode.ResponseRedirect,
-                                      new GenericEnumConverter (typeof (CustomErrorsRedirectMode)),
-                                      PropertyHelper.DefaultValidator, ConfigurationPropertyOptions.None);
-            
-            properties = new ConfigurationPropertyCollection ();
+            defaultRedirectProp = new ConfigurationProperty(
+                "defaultRedirect",
+                typeof(string),
+                null
+            );
+            errorsProp = new ConfigurationProperty(
+                String.Empty,
+                typeof(CustomErrorCollection),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
+            modeProp = new ConfigurationProperty(
+                "mode",
+                typeof(CustomErrorsMode),
+                CustomErrorsMode.RemoteOnly,
+                new GenericEnumConverter(typeof(CustomErrorsMode)),
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            redirectModeProp = new ConfigurationProperty(
+                "redirectMode",
+                typeof(CustomErrorsRedirectMode),
+                CustomErrorsRedirectMode.ResponseRedirect,
+                new GenericEnumConverter(typeof(CustomErrorsRedirectMode)),
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (defaultRedirectProp);
-            properties.Add (errorsProp);
-            properties.Add (modeProp);
-            properties.Add (redirectModeProp);
+            properties = new ConfigurationPropertyCollection();
+
+            properties.Add(defaultRedirectProp);
+            properties.Add(errorsProp);
+            properties.Add(modeProp);
+            properties.Add(redirectModeProp);
         }
 
         // Why override?
-        protected internal override void DeserializeSection (XmlReader reader)
+        protected internal override void DeserializeSection(XmlReader reader)
         {
-            base.DeserializeSection (reader);
+            base.DeserializeSection(reader);
         }
 
         // Why override?
-        protected internal override void Reset (ConfigurationElement parentElement)
+        protected internal override void Reset(ConfigurationElement parentElement)
         {
-            base.Reset (parentElement);
+            base.Reset(parentElement);
         }
-        
-        [ConfigurationProperty ("defaultRedirect")]
-        public string DefaultRedirect {
-            get { return (string) base [defaultRedirectProp];}
+
+        [ConfigurationProperty("defaultRedirect")]
+        public string DefaultRedirect
+        {
+            get { return (string)base[defaultRedirectProp]; }
             set { base[defaultRedirectProp] = value; }
         }
 
-        [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public CustomErrorCollection Errors {
-            get { return (CustomErrorCollection) base [errorsProp];}
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public CustomErrorCollection Errors
+        {
+            get { return (CustomErrorCollection)base[errorsProp]; }
         }
 
-        [ConfigurationProperty ("mode", DefaultValue = "RemoteOnly")]
-        public CustomErrorsMode Mode {
-            get { return (CustomErrorsMode) base [modeProp];}
+        [ConfigurationProperty("mode", DefaultValue = "RemoteOnly")]
+        public CustomErrorsMode Mode
+        {
+            get { return (CustomErrorsMode)base[modeProp]; }
             set { base[modeProp] = value; }
         }
 
-        [ConfigurationProperty ("redirectMode", DefaultValue = CustomErrorsRedirectMode.ResponseRedirect)]
-        public CustomErrorsRedirectMode RedirectMode {
-            get { return (CustomErrorsRedirectMode) base [redirectModeProp]; }
-            set { base [redirectModeProp] = value; }
+        [ConfigurationProperty(
+            "redirectMode",
+            DefaultValue = CustomErrorsRedirectMode.ResponseRedirect
+        )]
+        public CustomErrorsRedirectMode RedirectMode
+        {
+            get { return (CustomErrorsRedirectMode)base[redirectModeProp]; }
+            set { base[redirectModeProp] = value; }
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
+        protected internal override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
-
     }
-
 }
-

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,7 +40,7 @@ namespace Mono.Web.Util
         Windows,
         Unix
     };
-  
+
     internal class SettingsMapping
     {
         string _sectionTypeName;
@@ -48,23 +48,31 @@ namespace Mono.Web.Util
         string _mapperTypeName;
         Type _mapperType;
         SettingsMappingPlatform _platform;
-        List <SettingsMappingWhat> _whats;
-    
-        public Type SectionType {
-            get {
+        List<SettingsMappingWhat> _whats;
+
+        public Type SectionType
+        {
+            get
+            {
                 if (_sectionType == null)
-                    _sectionType = Type.GetType (_sectionTypeName, false);
+                    _sectionType = Type.GetType(_sectionTypeName, false);
                 return _sectionType;
             }
         }
 
-        public Type MapperType {
-            get {
-                if (_mapperType == null) {
-                    _mapperType = Type.GetType (_mapperTypeName, true);
-                    if (!typeof (ISectionSettingsMapper).IsAssignableFrom (_mapperType)) {
+        public Type MapperType
+        {
+            get
+            {
+                if (_mapperType == null)
+                {
+                    _mapperType = Type.GetType(_mapperTypeName, true);
+                    if (!typeof(ISectionSettingsMapper).IsAssignableFrom(_mapperType))
+                    {
                         _mapperType = null;
-                        throw new InvalidOperationException ("Mapper type does not implement the ISectionSettingsMapper interface");
+                        throw new InvalidOperationException(
+                            "Mapper type does not implement the ISectionSettingsMapper interface"
+                        );
                     }
                 }
 
@@ -72,39 +80,42 @@ namespace Mono.Web.Util
             }
         }
 
-        public SettingsMappingPlatform Platform {
+        public SettingsMappingPlatform Platform
+        {
             get { return _platform; }
         }
-    
-        public SettingsMapping (XPathNavigator nav)
+
+        public SettingsMapping(XPathNavigator nav)
         {
-            _sectionTypeName = nav.GetAttribute ("sectionType", String.Empty);
-            _mapperTypeName = nav.GetAttribute ("mapperType", String.Empty);
+            _sectionTypeName = nav.GetAttribute("sectionType", String.Empty);
+            _mapperTypeName = nav.GetAttribute("mapperType", String.Empty);
 
-            EnumConverter cvt = new EnumConverter (typeof (SettingsMappingPlatform));
-            _platform = (SettingsMappingPlatform) cvt.ConvertFromInvariantString (nav.GetAttribute ("platform", String.Empty));
+            EnumConverter cvt = new EnumConverter(typeof(SettingsMappingPlatform));
+            _platform = (SettingsMappingPlatform)
+                cvt.ConvertFromInvariantString(nav.GetAttribute("platform", String.Empty));
 
-            LoadContents (nav);
+            LoadContents(nav);
         }
 
-        public object MapSection (object input, Type type)
+        public object MapSection(object input, Type type)
         {
             if (type != SectionType)
-                throw new ArgumentException ("type", "Invalid section type for this mapper");
+                throw new ArgumentException("type", "Invalid section type for this mapper");
 
-            ISectionSettingsMapper mapper = Activator.CreateInstance (MapperType) as ISectionSettingsMapper;
+            ISectionSettingsMapper mapper =
+                Activator.CreateInstance(MapperType) as ISectionSettingsMapper;
             if (mapper == null)
                 return input;
-      
-            return mapper.MapSection (input, _whats);
+
+            return mapper.MapSection(input, _whats);
         }
-    
-        void LoadContents (XPathNavigator nav)
+
+        void LoadContents(XPathNavigator nav)
         {
-            XPathNodeIterator iter = nav.Select ("./what[string-length (@value) > 0]");
-            _whats = new List <SettingsMappingWhat> ();
-            while (iter.MoveNext ())
-                _whats.Add (new SettingsMappingWhat (iter.Current));
+            XPathNodeIterator iter = nav.Select("./what[string-length (@value) > 0]");
+            _whats = new List<SettingsMappingWhat>();
+            while (iter.MoveNext())
+                _whats.Add(new SettingsMappingWhat(iter.Current));
         }
     }
 }

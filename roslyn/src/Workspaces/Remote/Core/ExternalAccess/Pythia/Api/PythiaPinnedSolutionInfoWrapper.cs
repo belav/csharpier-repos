@@ -13,10 +13,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
         [DataMember(Order = 0)]
         internal readonly Checksum UnderlyingObject;
 
-        public PythiaPinnedSolutionInfoWrapper(Checksum underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public PythiaPinnedSolutionInfoWrapper(Checksum underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
-        public static implicit operator PythiaPinnedSolutionInfoWrapper(Checksum info)
-            => new(info);
+        public static implicit operator PythiaPinnedSolutionInfoWrapper(Checksum info) => new(info);
     }
 }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,16 +26,16 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-    public class OSFeature : FeatureSupport {
+namespace System.Windows.Forms
+{
+    public class OSFeature : FeatureSupport
+    {
         #region Local Variables
-        private static OSFeature    feature = new OSFeature();
+        private static OSFeature feature = new OSFeature();
         #endregion    // Local Variables
 
         #region Protected Constructors
-        protected OSFeature() {
-            
-        }
+        protected OSFeature() { }
         #endregion    // Protected Constructors
 
         #region Public Static Fields
@@ -44,83 +44,140 @@ namespace System.Windows.Forms {
         #endregion    // Public Static Fields
 
         #region Public Static Properties
-        public static OSFeature Feature {
-            get {
-                return  feature;
-            }
-        }
-        
-        public static bool IsPresent (SystemParameter enumVal)
+        public static OSFeature Feature
         {
-#pragma warning disable 219            
-            object o;
-#pragma warning restore 219            
+            get { return feature; }
+        }
 
-            switch (enumVal) {
+        public static bool IsPresent(SystemParameter enumVal)
+        {
+#pragma warning disable 219
+            object o;
+#pragma warning restore 219
+
+            switch (enumVal)
+            {
                 case SystemParameter.DropShadow:
-                    try {
+                    try
+                    {
                         o = SystemInformation.IsDropShadowEnabled;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.FlatMenu:
-                    try {
+                    try
+                    {
                         o = SystemInformation.IsFlatMenuEnabled;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.FontSmoothingContrastMetric:
-                    try {
+                    try
+                    {
                         o = SystemInformation.FontSmoothingContrast;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.FontSmoothingTypeMetric:
-                    try {
+                    try
+                    {
                         o = SystemInformation.FontSmoothingType;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.MenuFadeEnabled:
-                    try {
+                    try
+                    {
                         o = SystemInformation.IsMenuFadeEnabled;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.SelectionFade:
-                    try {
+                    try
+                    {
                         o = SystemInformation.IsSelectionFadeEnabled;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.ToolTipAnimationMetric:
-                    try {
+                    try
+                    {
                         o = SystemInformation.IsToolTipAnimationEnabled;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.UIEffects:
-                    try {
+                    try
+                    {
                         o = SystemInformation.UIEffectsEnabled;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.CaretWidthMetric:
-                    try {
+                    try
+                    {
                         o = SystemInformation.CaretWidth;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.VerticalFocusThicknessMetric:
-                    try {
+                    try
+                    {
                         o = SystemInformation.VerticalFocusThickness;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
                 case SystemParameter.HorizontalFocusThicknessMetric:
-                    try {
+                    try
+                    {
                         o = SystemInformation.HorizontalFocusThickness;
                         return true;
-                    } catch (Exception) { return false; }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
             }
-            
+
             return false;
         }
         #endregion    // Public Static Properties
 
         #region Public Instance Methods
-        public override Version GetVersionPresent(object feature) {
-            if (feature == Themes) {
+        public override Version GetVersionPresent(object feature)
+        {
+            if (feature == Themes)
+            {
                 return ThemeEngine.Current.Version;
             }
             return null;

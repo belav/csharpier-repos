@@ -13,15 +13,17 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// <summary>
         /// Breaks an identifier string into constituent parts.
         /// </summary>
-        public static void AddWordParts(string identifier, ref TemporaryArray<TextSpan> parts)
-            => AddParts(identifier, word: true, ref parts);
+        public static void AddWordParts(string identifier, ref TemporaryArray<TextSpan> parts) =>
+            AddParts(identifier, word: true, ref parts);
 
-        public static void AddCharacterParts(string identifier, ref TemporaryArray<TextSpan> parts)
-            => AddParts(identifier, word: false, ref parts);
+        public static void AddCharacterParts(
+            string identifier,
+            ref TemporaryArray<TextSpan> parts
+        ) => AddParts(identifier, word: false, ref parts);
 
         public static void AddParts(string text, bool word, ref TemporaryArray<TextSpan> parts)
         {
-            for (var start = 0; start < text.Length;)
+            for (var start = 0; start < text.Length; )
             {
                 var span = StringBreaker.GenerateSpan(text, start, word);
                 if (span.IsEmpty)
@@ -88,7 +90,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (IsLower(c))
             {
                 // "Do"
-                // 
+                //
                 // scan the lowercase letters from here on to scna out 'Document'.
                 return ScanLowerCaseRun(identifier, length, wordStart);
             }
@@ -137,7 +139,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             else if (IsLower(c))
             {
                 // "Do"
-                // 
+                //
                 // scan the lowercase letters from here on to scan out 'Document'.
                 return ScanLowerCaseRun(identifier, length, wordStart);
             }
@@ -196,7 +198,6 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return char.IsLower(c);
         }
 
-        private static bool IsAscii(char v)
-            => v < 0x80;
+        private static bool IsAscii(char v) => v < 0x80;
     }
 }

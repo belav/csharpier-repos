@@ -8,12 +8,13 @@ class A
     {
         class C : Exception { }
 
-        public B () {
-            try {
-                throw new A.B.C ();
+        public B()
+        {
+            try
+            {
+                throw new A.B.C();
             }
-            catch (C e) {
-            }
+            catch (C e) { }
         }
     }
 

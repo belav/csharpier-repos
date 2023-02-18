@@ -7,11 +7,9 @@ namespace Test
 {
     public class SomeAttribute : Attribute
     {
-        SomeAttribute() {}
+        SomeAttribute() { }
     }
 
     [SomeAttribute]
-    public class SomeClass
-    {
-    } 
+    public class SomeClass { }
 }

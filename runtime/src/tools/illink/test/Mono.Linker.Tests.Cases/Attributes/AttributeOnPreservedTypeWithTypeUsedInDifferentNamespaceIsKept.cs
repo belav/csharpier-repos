@@ -6,34 +6,26 @@ namespace NamespaceForAttributeOnPreservedTypeWithTypeUsedInDifferentNamespaceIs
     [Kept]
     class A
     {
-        public A ()
-        {
-        }
+        public A() { }
     }
 }
 
 namespace Mono.Linker.Tests.Cases.Attributes
 {
-    [Foo (typeof (NamespaceForAttributeOnPreservedTypeWithTypeUsedInDifferentNamespaceIsKept.A))]
-    [KeptAttributeAttribute (typeof (FooAttribute))]
+    [Foo(typeof(NamespaceForAttributeOnPreservedTypeWithTypeUsedInDifferentNamespaceIsKept.A))]
+    [KeptAttributeAttribute(typeof(FooAttribute))]
     class AttributeOnPreservedTypeWithTypeUsedInDifferentNamespaceIsKept
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
-        [KeptBaseType (typeof (System.Attribute))]
+        [KeptBaseType(typeof(System.Attribute))]
         class FooAttribute : Attribute
         {
             [Kept]
-            public FooAttribute (Type val)
-            {
-            }
+            public FooAttribute(Type val) { }
         }
 
         // This A is not used and should be removed
-        class A
-        {
-        }
+        class A { }
     }
 }

@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             private readonly FormattingContext _context;
             private readonly ChainedFormattingRules _formattingRules;
 
-            public OperationApplier(FormattingContext context, ChainedFormattingRules formattingRules)
+            public OperationApplier(
+                FormattingContext context,
+                ChainedFormattingRules formattingRules
+            )
             {
                 _context = context;
                 _formattingRules = formattingRules;
@@ -60,20 +63,35 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 Contract.ThrowIfFalse(triviaInfo.LineBreaks == 0);
 
-                var indentation = _context.GetBaseIndentation(_context.TokenStream.GetToken(pairIndex + 1));
+                var indentation = _context.GetBaseIndentation(
+                    _context.TokenStream.GetToken(pairIndex + 1)
+                );
 
                 var previousToken = _context.TokenStream.GetToken(pairIndex);
-                _context.TokenStream.GetTokenLength(previousToken, out var tokenLength, out var multipleLines);
+                _context.TokenStream.GetTokenLength(
+                    previousToken,
+                    out var tokenLength,
+                    out var multipleLines
+                );
 
                 // get end column of previous token
-                var endColumnOfPreviousToken = multipleLines ? tokenLength : _context.TokenStream.GetCurrentColumn(previousToken) + tokenLength;
+                var endColumnOfPreviousToken = multipleLines
+                    ? tokenLength
+                    : _context.TokenStream.GetCurrentColumn(previousToken) + tokenLength;
 
                 // check whether current position is less than indentation
                 if (endColumnOfPreviousToken < indentation)
                 {
                     Debug.Assert(!_context.IsFormattingDisabled(pairIndex));
 
-                    _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithSpace(indentation - endColumnOfPreviousToken, _context, _formattingRules));
+                    _context.TokenStream.ApplyChange(
+                        pairIndex,
+                        triviaInfo.WithSpace(
+                            indentation - endColumnOfPreviousToken,
+                            _context,
+                            _formattingRules
+                        )
+                    );
                     return true;
                 }
 
@@ -81,7 +99,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 return ApplySpaceIfSingleLine(operation, pairIndex);
             }
 
-            private bool ApplyPreserveSpacesOperation(AdjustSpacesOperation operation, int pairIndex)
+            private bool ApplyPreserveSpacesOperation(
+                AdjustSpacesOperation operation,
+                int pairIndex
+            )
             {
                 var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
                 var space = operation.Space;
@@ -100,7 +121,10 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 Debug.Assert(!_context.IsFormattingDisabled(pairIndex));
 
-                _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithSpace(space, _context, _formattingRules));
+                _context.TokenStream.ApplyChange(
+                    pairIndex,
+                    triviaInfo.WithSpace(space, _context, _formattingRules)
+                );
                 return true;
             }
 
@@ -115,7 +139,10 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 Debug.Assert(!_context.IsFormattingDisabled(pairIndex));
 
-                _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithSpace(operation.Space, _context, _formattingRules));
+                _context.TokenStream.ApplyChange(
+                    pairIndex,
+                    triviaInfo.WithSpace(operation.Space, _context, _formattingRules)
+                );
                 return true;
             }
 
@@ -138,11 +165,18 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 Debug.Assert(!_context.IsFormattingDisabled(pairIndex));
 
-                _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithSpace(space, _context, _formattingRules));
+                _context.TokenStream.ApplyChange(
+                    pairIndex,
+                    triviaInfo.WithSpace(space, _context, _formattingRules)
+                );
                 return true;
             }
 
-            public bool Apply(AdjustNewLinesOperation operation, int pairIndex, CancellationToken cancellationToken)
+            public bool Apply(
+                AdjustNewLinesOperation operation,
+                int pairIndex,
+                CancellationToken cancellationToken
+            )
             {
                 if (operation.Option == AdjustNewLinesOption.PreserveLines)
                 {
@@ -160,8 +194,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                     // else we leave the tokens as it is (Note: We should not preserve too. If we
                     // we do, then that will be counted as a line operation and the indentation of
                     // the second token will be modified)
-                    if (_context.TokenStream.TwoTokensOnSameLine(_context.TokenStream.GetToken(pairIndex),
-                                                        _context.TokenStream.GetToken(pairIndex + 1)))
+                    if (
+                        _context.TokenStream.TwoTokensOnSameLine(
+                            _context.TokenStream.GetToken(pairIndex),
+                            _context.TokenStream.GetToken(pairIndex + 1)
+                        )
+                    )
                     {
                         return ApplyForceLinesOperation(operation, pairIndex, cancellationToken);
                     }
@@ -172,12 +210,22 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
             }
 
-            private bool ApplyForceLinesOperation(AdjustNewLinesOperation operation, int pairIndex, CancellationToken cancellationToken)
+            private bool ApplyForceLinesOperation(
+                AdjustNewLinesOperation operation,
+                int pairIndex,
+                CancellationToken cancellationToken
+            )
             {
                 var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
 
-                var indentation = _context.GetBaseIndentation(_context.TokenStream.GetToken(pairIndex + 1));
-                if (triviaInfo.LineBreaks == operation.Line && triviaInfo.Spaces == indentation && !triviaInfo.TreatAsElastic)
+                var indentation = _context.GetBaseIndentation(
+                    _context.TokenStream.GetToken(pairIndex + 1)
+                );
+                if (
+                    triviaInfo.LineBreaks == operation.Line
+                    && triviaInfo.Spaces == indentation
+                    && !triviaInfo.TreatAsElastic
+                )
                 {
                     // things are already in the shape we want, so we don't actually need to do
                     // anything but, conceptually, we handled this case
@@ -187,37 +235,71 @@ namespace Microsoft.CodeAnalysis.Formatting
                 Debug.Assert(!_context.IsFormattingDisabled(pairIndex));
 
                 // well, force it regardless original content
-                _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithLine(operation.Line, indentation, _context, _formattingRules, cancellationToken));
+                _context.TokenStream.ApplyChange(
+                    pairIndex,
+                    triviaInfo.WithLine(
+                        operation.Line,
+                        indentation,
+                        _context,
+                        _formattingRules,
+                        cancellationToken
+                    )
+                );
                 return true;
             }
 
             public bool ApplyPreserveLinesOperation(
-                AdjustNewLinesOperation operation, int pairIndex, CancellationToken cancellationToken)
+                AdjustNewLinesOperation operation,
+                int pairIndex,
+                CancellationToken cancellationToken
+            )
             {
                 var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
 
                 // okay, check whether there is line between token more than we want
                 // check whether we should force it if it is less than given number
-                var indentation = _context.GetBaseIndentation(_context.TokenStream.GetToken(pairIndex + 1));
+                var indentation = _context.GetBaseIndentation(
+                    _context.TokenStream.GetToken(pairIndex + 1)
+                );
                 if (operation.Line > triviaInfo.LineBreaks)
                 {
                     Debug.Assert(!_context.IsFormattingDisabled(pairIndex));
 
                     // alright force them
-                    _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithLine(operation.Line, indentation, _context, _formattingRules, cancellationToken));
+                    _context.TokenStream.ApplyChange(
+                        pairIndex,
+                        triviaInfo.WithLine(
+                            operation.Line,
+                            indentation,
+                            _context,
+                            _formattingRules,
+                            cancellationToken
+                        )
+                    );
                     return true;
                 }
 
                 // lines between tokens are as expected, but indentation is not right
-                if (triviaInfo.SecondTokenIsFirstTokenOnLine &&
-                    indentation != triviaInfo.Spaces)
+                if (triviaInfo.SecondTokenIsFirstTokenOnLine && indentation != triviaInfo.Spaces)
                 {
                     // Formatting can only be disabled for entire lines. This block only modifies the line containing
                     // the second token of the current pair, so we only need to check for disabled formatting at the
                     // starting position of the second token of the pair.
-                    Debug.Assert(!_context.IsFormattingDisabled(new TextSpan(_context.TokenStream.GetToken(pairIndex + 1).SpanStart, 0)));
+                    Debug.Assert(
+                        !_context.IsFormattingDisabled(
+                            new TextSpan(_context.TokenStream.GetToken(pairIndex + 1).SpanStart, 0)
+                        )
+                    );
 
-                    _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithIndentation(indentation, _context, _formattingRules, cancellationToken));
+                    _context.TokenStream.ApplyChange(
+                        pairIndex,
+                        triviaInfo.WithIndentation(
+                            indentation,
+                            _context,
+                            _formattingRules,
+                            cancellationToken
+                        )
+                    );
                     return true;
                 }
 
@@ -228,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             private bool CanAlignBeApplied(
                 SyntaxToken token,
                 IEnumerable<SyntaxToken> operationTokens,
-                [NotNullWhen(true)] out IList<TokenData>? tokenData)
+                [NotNullWhen(true)] out IList<TokenData>? tokenData
+            )
             {
                 // if there are no tokens to align, or no visible
                 // base token to be aligned to, then don't do anything
@@ -254,19 +337,28 @@ namespace Microsoft.CodeAnalysis.Formatting
                 IEnumerable<SyntaxToken> tokens,
                 Dictionary<SyntaxToken, int> previousChangesMap,
                 [NotNullWhen(true)] out IList<TokenData>? tokenData,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (!CanAlignBeApplied(token, tokens, out tokenData))
                 {
                     return false;
                 }
 
-                ApplyIndentationToAlignWithGivenToken(token, tokenData, previousChangesMap, cancellationToken);
+                ApplyIndentationToAlignWithGivenToken(
+                    token,
+                    tokenData,
+                    previousChangesMap,
+                    cancellationToken
+                );
                 return true;
             }
 
             public bool ApplyAlignment(
-                AlignTokensOperation operation, Dictionary<SyntaxToken, int> previousChangesMap, CancellationToken cancellationToken)
+                AlignTokensOperation operation,
+                Dictionary<SyntaxToken, int> previousChangesMap,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfNull(previousChangesMap);
 
@@ -275,7 +367,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 switch (operation.Option)
                 {
                     case AlignTokensOption.AlignIndentationOfTokensToBaseToken:
-                        if (!ApplyAlignment(operation.BaseToken, operation.Tokens, previousChangesMap, out tokenData, cancellationToken))
+                        if (
+                            !ApplyAlignment(
+                                operation.BaseToken,
+                                operation.Tokens,
+                                previousChangesMap,
+                                out tokenData,
+                                cancellationToken
+                            )
+                        )
                         {
                             return false;
                         }
@@ -283,7 +383,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                         break;
 
                     case AlignTokensOption.AlignIndentationOfTokensToFirstTokenOfBaseTokenLine:
-                        if (!ApplyAlignment(_context.TokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken), operation.Tokens, previousChangesMap, out tokenData, cancellationToken))
+                        if (
+                            !ApplyAlignment(
+                                _context.TokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken),
+                                operation.Tokens,
+                                previousChangesMap,
+                                out tokenData,
+                                cancellationToken
+                            )
+                        )
                         {
                             return false;
                         }
@@ -294,7 +402,11 @@ namespace Microsoft.CodeAnalysis.Formatting
                         throw ExceptionUtilities.UnexpectedValue(operation.Option);
                 }
 
-                ApplyIndentationChangesToDependentTokens(tokenData, previousChangesMap, cancellationToken);
+                ApplyIndentationChangesToDependentTokens(
+                    tokenData,
+                    previousChangesMap,
+                    cancellationToken
+                );
 
                 return true;
             }
@@ -303,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 SyntaxToken token,
                 IList<TokenData> list,
                 Dictionary<SyntaxToken, int> previousChangesMap,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // rather than having external new changes map, having snapshot concept
                 // in token stream might be easier to understand.
@@ -314,14 +427,23 @@ namespace Microsoft.CodeAnalysis.Formatting
                     var currentToken = list[i];
                     var previousToken = _context.TokenStream.GetPreviousTokenData(currentToken);
 
-                    var triviaInfo = _context.TokenStream.GetTriviaData(previousToken, currentToken);
+                    var triviaInfo = _context.TokenStream.GetTriviaData(
+                        previousToken,
+                        currentToken
+                    );
                     if (!triviaInfo.SecondTokenIsFirstTokenOnLine)
                     {
                         continue;
                     }
 
                     ApplyIndentationToGivenPosition(
-                        previousToken, currentToken, triviaInfo, baseSpaceOrIndentation, previousChangesMap, cancellationToken);
+                        previousToken,
+                        currentToken,
+                        triviaInfo,
+                        baseSpaceOrIndentation,
+                        previousChangesMap,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -331,7 +453,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 TriviaData triviaInfo,
                 int baseSpaceOrIndentation,
                 Dictionary<SyntaxToken, int> previousChangesMap,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // add or replace existing value. this could happen if a token get moved multiple times
                 // due to one being involved in multiple alignment operations
@@ -343,7 +466,10 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 // before make any change, check whether spacing is allowed
-                var spanBetweenTokens = TextSpan.FromBounds(previousToken.Token.Span.End, currentToken.Token.SpanStart);
+                var spanBetweenTokens = TextSpan.FromBounds(
+                    previousToken.Token.Span.End,
+                    currentToken.Token.SpanStart
+                );
                 if (_context.IsSpacingSuppressed(spanBetweenTokens, triviaInfo.TreatAsElastic))
                 {
                     return;
@@ -357,7 +483,13 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // okay, update indentation
                 _context.TokenStream.ApplyChange(
                     previousToken.IndexInStream,
-                    triviaInfo.WithIndentation(baseSpaceOrIndentation, _context, _formattingRules, cancellationToken));
+                    triviaInfo.WithIndentation(
+                        baseSpaceOrIndentation,
+                        _context,
+                        _formattingRules,
+                        cancellationToken
+                    )
+                );
             }
 
             private IList<TokenData> GetTokenWithIndices(IEnumerable<SyntaxToken> tokens)
@@ -386,7 +518,10 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             private bool ApplyIndentationChangesToDependentTokens(
-                IList<TokenData> tokenWithIndices, Dictionary<SyntaxToken, int> newChangesMap, CancellationToken cancellationToken)
+                IList<TokenData> tokenWithIndices,
+                Dictionary<SyntaxToken, int> newChangesMap,
+                CancellationToken cancellationToken
+            )
             {
                 for (var i = 0; i < tokenWithIndices.Count; i++)
                 {
@@ -408,7 +543,13 @@ namespace Microsoft.CodeAnalysis.Formatting
                         lastToken = _context.TokenStream.LastTokenInStream;
                     }
 
-                    ApplyBaseTokenIndentationChangesFromTo(firstToken, firstToken, lastToken, newChangesMap, cancellationToken);
+                    ApplyBaseTokenIndentationChangesFromTo(
+                        firstToken,
+                        firstToken,
+                        lastToken,
+                        newChangesMap,
+                        cancellationToken
+                    );
                 }
 
                 return true;
@@ -419,10 +560,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 TokenData lastToken,
                 int indentationDelta,
                 Dictionary<SyntaxToken, int> previousChangesMap,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // can this run parallel? at least finding out all first token on line.
-                for (var pairIndex = firstToken.IndexInStream; pairIndex < lastToken.IndexInStream; pairIndex++)
+                for (
+                    var pairIndex = firstToken.IndexInStream;
+                    pairIndex < lastToken.IndexInStream;
+                    pairIndex++
+                )
                 {
                     var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
                     if (!triviaInfo.SecondTokenIsFirstTokenOnLine)
@@ -445,7 +591,14 @@ namespace Microsoft.CodeAnalysis.Formatting
                         continue;
                     }
 
-                    this.ApplyIndentationDelta(pairIndex, currentToken, indentationDelta, triviaInfo, previousChangesMap, cancellationToken);
+                    this.ApplyIndentationDelta(
+                        pairIndex,
+                        currentToken,
+                        indentationDelta,
+                        triviaInfo,
+                        previousChangesMap,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -455,7 +608,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int indentationDelta,
                 TriviaData triviaInfo,
                 Dictionary<SyntaxToken, int> previousChangesMap,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfFalse(triviaInfo.SecondTokenIsFirstTokenOnLine);
 
@@ -474,7 +628,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 previousChangesMap.Add(currentToken, triviaInfo.Spaces);
 
                 // okay, update indentation
-                _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithIndentation(indentation, _context, _formattingRules, cancellationToken));
+                _context.TokenStream.ApplyChange(
+                    pairIndex,
+                    triviaInfo.WithIndentation(
+                        indentation,
+                        _context,
+                        _formattingRules,
+                        cancellationToken
+                    )
+                );
             }
 
             public bool ApplyBaseTokenIndentationChangesFromTo(
@@ -482,16 +644,26 @@ namespace Microsoft.CodeAnalysis.Formatting
                 SyntaxToken startToken,
                 SyntaxToken endToken,
                 Dictionary<SyntaxToken, int> previousChangesMap,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                Contract.ThrowIfFalse(baseToken.RawKind != 0 && startToken.RawKind != 0 && endToken.RawKind != 0);
+                Contract.ThrowIfFalse(
+                    baseToken.RawKind != 0 && startToken.RawKind != 0 && endToken.RawKind != 0
+                );
 
                 var baseTokenWithIndex = _context.TokenStream.GetTokenData(baseToken);
-                var firstTokenWithIndex = _context.TokenStream.GetTokenData(startToken).GetPreviousTokenData();
+                var firstTokenWithIndex = _context.TokenStream
+                    .GetTokenData(startToken)
+                    .GetPreviousTokenData();
                 var lastTokenWithIndex = _context.TokenStream.GetTokenData(endToken);
 
                 return ApplyBaseTokenIndentationChangesFromTo(
-                    baseTokenWithIndex, firstTokenWithIndex, lastTokenWithIndex, previousChangesMap, cancellationToken);
+                    baseTokenWithIndex,
+                    firstTokenWithIndex,
+                    lastTokenWithIndex,
+                    previousChangesMap,
+                    cancellationToken
+                );
             }
 
             private bool ApplyBaseTokenIndentationChangesFromTo(
@@ -499,7 +671,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 TokenData startToken,
                 TokenData endToken,
                 Dictionary<SyntaxToken, int> previousChangesMap,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // if baseToken is not in the stream, then it is guaranteed to be not moved.
                 var tokenWithIndex = baseToken;
@@ -520,8 +693,12 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                     // okay, this token is not moved, check one before me as long as it is on the same line
                     var tokenPairIndex = tokenWithIndex.IndexInStream - 1;
-                    if (tokenPairIndex < 0 ||
-                        _context.TokenStream.GetTriviaData(tokenPairIndex).SecondTokenIsFirstTokenOnLine)
+                    if (
+                        tokenPairIndex < 0
+                        || _context.TokenStream
+                            .GetTriviaData(tokenPairIndex)
+                            .SecondTokenIsFirstTokenOnLine
+                    )
                     {
                         return false;
                     }
@@ -536,21 +713,37 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 // we are not moved
-                var indentationDelta = _context.GetDeltaFromPreviousChangesMap(tokenWithIndex.Token, previousChangesMap);
+                var indentationDelta = _context.GetDeltaFromPreviousChangesMap(
+                    tokenWithIndex.Token,
+                    previousChangesMap
+                );
                 if (indentationDelta == 0)
                 {
                     return false;
                 }
 
-                startToken = startToken.IndexInStream < 0 ? _context.TokenStream.FirstTokenInStream : startToken;
-                endToken = endToken.IndexInStream < 0 ? _context.TokenStream.LastTokenInStream : endToken;
+                startToken =
+                    startToken.IndexInStream < 0
+                        ? _context.TokenStream.FirstTokenInStream
+                        : startToken;
+                endToken =
+                    endToken.IndexInStream < 0 ? _context.TokenStream.LastTokenInStream : endToken;
 
-                ApplyIndentationDeltaFromTo(startToken, endToken, indentationDelta, previousChangesMap, cancellationToken);
+                ApplyIndentationDeltaFromTo(
+                    startToken,
+                    endToken,
+                    indentationDelta,
+                    previousChangesMap,
+                    cancellationToken
+                );
                 return true;
             }
 
             public bool ApplyAnchorIndentation(
-                int pairIndex, Dictionary<SyntaxToken, int> previousChangesMap, CancellationToken cancellationToken)
+                int pairIndex,
+                Dictionary<SyntaxToken, int> previousChangesMap,
+                CancellationToken cancellationToken
+            )
             {
                 var triviaInfo = _context.TokenStream.GetTriviaData(pairIndex);
 
@@ -566,7 +759,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
 
                 var firstTokenOnLine = _context.TokenStream.GetToken(pairIndex + 1);
-                var indentation = triviaInfo.Spaces + _context.GetAnchorDeltaFromOriginalColumn(firstTokenOnLine);
+                var indentation =
+                    triviaInfo.Spaces + _context.GetAnchorDeltaFromOriginalColumn(firstTokenOnLine);
 
                 if (triviaInfo.Spaces != indentation)
                 {
@@ -574,7 +768,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                     previousChangesMap.Add(firstTokenOnLine, triviaInfo.Spaces);
 
                     // okay, update indentation
-                    _context.TokenStream.ApplyChange(pairIndex, triviaInfo.WithIndentation(indentation, _context, _formattingRules, cancellationToken));
+                    _context.TokenStream.ApplyChange(
+                        pairIndex,
+                        triviaInfo.WithIndentation(
+                            indentation,
+                            _context,
+                            _formattingRules,
+                            cancellationToken
+                        )
+                    );
                     return true;
                 }
 

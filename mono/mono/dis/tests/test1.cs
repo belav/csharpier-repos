@@ -4,20 +4,23 @@
      assemblies till gmcs is fixed.
 */
 
-class X<T1> {
-    public static void Xfoo () {
+class X<T1>
+{
+    public static void Xfoo()
+    {
         X<T1>.Xfoo();
     }
 }
 
-class Y<T2> {
-    public static void Yfoo () {
+class Y<T2>
+{
+    public static void Yfoo()
+    {
         X<T2>.Xfoo();
     }
 }
 
-class Test {
-    static void Main ()
-    {
-    }
+class Test
+{
+    static void Main() { }
 }

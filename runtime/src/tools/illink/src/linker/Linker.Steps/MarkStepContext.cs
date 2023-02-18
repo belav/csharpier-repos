@@ -9,31 +9,30 @@ namespace Mono.Linker.Steps
 {
     public class MarkStepContext : MarkContext
     {
-
         public List<Action<AssemblyDefinition>> MarkAssemblyActions { get; }
         public List<Action<TypeDefinition>> MarkTypeActions { get; }
         public List<Action<MethodDefinition>> MarkMethodActions { get; }
 
-        public MarkStepContext ()
+        public MarkStepContext()
         {
-            MarkAssemblyActions = new List<Action<AssemblyDefinition>> ();
-            MarkTypeActions = new List<Action<TypeDefinition>> ();
-            MarkMethodActions = new List<Action<MethodDefinition>> ();
+            MarkAssemblyActions = new List<Action<AssemblyDefinition>>();
+            MarkTypeActions = new List<Action<TypeDefinition>>();
+            MarkMethodActions = new List<Action<MethodDefinition>>();
         }
 
-        public override void RegisterMarkAssemblyAction (Action<AssemblyDefinition> action)
+        public override void RegisterMarkAssemblyAction(Action<AssemblyDefinition> action)
         {
-            MarkAssemblyActions.Add (action);
+            MarkAssemblyActions.Add(action);
         }
 
-        public override void RegisterMarkTypeAction (Action<TypeDefinition> action)
+        public override void RegisterMarkTypeAction(Action<TypeDefinition> action)
         {
-            MarkTypeActions.Add (action);
+            MarkTypeActions.Add(action);
         }
 
-        public override void RegisterMarkMethodAction (Action<MethodDefinition> action)
+        public override void RegisterMarkMethodAction(Action<MethodDefinition> action)
         {
-            MarkMethodActions.Add (action);
+            MarkMethodActions.Add(action);
         }
     }
 }

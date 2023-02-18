@@ -9,9 +9,9 @@ namespace InlineAssignmentTest
 
     public class MainClass
     {
-        public static int Main ()
+        public static int Main()
         {
-            var foo = new Foo () { B = false };
+            var foo = new Foo() { B = false };
             if (foo.B != false)
                 return 1;
 

@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             }
             catch (Exception ex)
             {
-                // It is possible for AppSettings to throw when the application or machine configuration 
+                // It is possible for AppSettings to throw when the application or machine configuration
                 // is corrupted.  This should not prevent the server from starting, but instead just revert
                 // to the default configuration.
                 appSettings = new NameValueCollection();

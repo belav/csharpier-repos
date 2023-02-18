@@ -5,17 +5,17 @@
 
 using System;
 
-interface R {
-}
+interface R { }
 
-enum XX {
+enum XX
+{
     A
 }
 
-struct S {
-}
+struct S { }
 
-class X {
+class X
+{
     volatile byte a;
     volatile sbyte b;
     volatile short c;
@@ -34,5 +34,5 @@ class X {
     unsafe volatile XX* udd;
     unsafe volatile S* us;
 
-    public static void Main () {}
+    public static void Main() { }
 }

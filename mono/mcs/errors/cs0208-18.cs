@@ -12,6 +12,4 @@ public struct S
     AC ac;
 }
 
-abstract class AC
-{
-}
+abstract class AC { }

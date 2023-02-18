@@ -96,7 +96,9 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteEndAttribute();
                 w.WriteEndElement();
             }
-            Assert.True(utils.CompareString("<Root ~a p1 a~:attr1=\"\" xmlns:~a p1 A~=\"http://my.com\" />"));
+            Assert.True(
+                utils.CompareString("<Root ~a p1 a~:attr1=\"\" xmlns:~a p1 A~=\"http://my.com\" />")
+            );
         }
 
         // Sanity test for overload WriteStartAttribute(prefix, name, ns)
@@ -111,7 +113,9 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteEndAttribute();
                 w.WriteEndElement();
             }
-            Assert.True(utils.CompareReader("<Root pre1:attr1=\"\" xmlns:pre1=\"http://my.com\" />"));
+            Assert.True(
+                utils.CompareReader("<Root pre1:attr1=\"\" xmlns:pre1=\"http://my.com\" />")
+            );
         }
 
         // DCR 64183: Duplicate attribute 'attr1'
@@ -177,7 +181,13 @@ namespace System.Xml.XmlWriterApiTests
                 catch (ArgumentException e)
                 {
                     CError.WriteLineIgnore("Exception: " + e.ToString());
-                    CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                    CError.Compare(
+                        w.WriteState,
+                        (utils.WriterType == WriterType.CharCheckingWriter)
+                            ? WriteState.Element
+                            : WriteState.Error,
+                        "WriteState should be Error"
+                    );
                     return;
                 }
             }
@@ -200,7 +210,13 @@ namespace System.Xml.XmlWriterApiTests
                 catch (ArgumentException e)
                 {
                     CError.WriteLineIgnore("Exception: " + e.ToString());
-                    CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                    CError.Compare(
+                        w.WriteState,
+                        (utils.WriterType == WriterType.CharCheckingWriter)
+                            ? WriteState.Element
+                            : WriteState.Error,
+                        "WriteState should be Error"
+                    );
                     return;
                 }
             }
@@ -236,7 +252,12 @@ namespace System.Xml.XmlWriterApiTests
                 try
                 {
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "invalid");
+                    w.WriteAttributeString(
+                        "xml",
+                        "space",
+                        "http://www.w3.org/XML/1998/namespace",
+                        "invalid"
+                    );
                 }
                 catch (ArgumentException e)
                 {
@@ -290,7 +311,9 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteAttributeString("c", "&#x43;");
                 w.WriteEndElement();
             }
-            Assert.True(utils.CompareReader("<Root a=\"&amp;\" b=\"&amp;#65;\" c=\"&amp;#x43;\" />"));
+            Assert.True(
+                utils.CompareReader("<Root a=\"&amp;\" b=\"&amp;#65;\" c=\"&amp;#x43;\" />")
+            );
         }
 
         // WriteAttributeString followed by WriteString
@@ -367,9 +390,13 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteEndElement();
                 w.WriteEndElement();
             }
-            string exp = utils.IsIndent() ?
-                "<test xmlns:n1=\"http://testbasens\">" + Environment.NewLine + "  <base n1:id=\"5\" p4:lang=\"en\" xmlns:p4=\"http://common\" />" + Environment.NewLine + "</test>" :
-                "<test xmlns:~f n1 A~=\"http://testbasens\"><base ~f n1 a~:id=\"5\" ~a p4 a~:lang=\"en\" xmlns:~a p4 A~=\"http://common\" /></test>";
+            string exp = utils.IsIndent()
+                ? "<test xmlns:n1=\"http://testbasens\">"
+                    + Environment.NewLine
+                    + "  <base n1:id=\"5\" p4:lang=\"en\" xmlns:p4=\"http://common\" />"
+                    + Environment.NewLine
+                    + "</test>"
+                : "<test xmlns:~f n1 A~=\"http://testbasens\"><base ~f n1 a~:id=\"5\" ~a p4 a~:lang=\"en\" xmlns:~a p4 A~=\"http://common\" /></test>";
             Assert.True(utils.CompareString(exp));
         }
 
@@ -378,7 +405,8 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData]
         public void attribute_22(XmlWriterUtils utils)
         {
-            string exp = "<test ~f p a~:a1=\"v\" xmlns:~f p A~=\"ns1\"><base ~f p b~:a2=\"v\" ~a p4 ab~:a3=\"v\" xmlns:~a p4 AB~=\"ns2\" /></test>";
+            string exp =
+                "<test ~f p a~:a1=\"v\" xmlns:~f p A~=\"ns1\"><base ~f p b~:a2=\"v\" ~a p4 ab~:a3=\"v\" xmlns:~a p4 AB~=\"ns2\" /></test>";
 
             using (XmlWriter w = utils.CreateWriter())
             {
@@ -390,8 +418,13 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteEndElement();
                 w.WriteEndElement();
             }
-            exp = utils.IsIndent() ?
-                "<test p:a1=\"v\" xmlns:p=\"ns1\">" + Environment.NewLine + "  <base p:a2=\"v\" p4:a3=\"v\" xmlns:p4=\"ns2\" />" + Environment.NewLine + "</test>" : exp;
+            exp = utils.IsIndent()
+                ? "<test p:a1=\"v\" xmlns:p=\"ns1\">"
+                    + Environment.NewLine
+                    + "  <base p:a2=\"v\" p4:a3=\"v\" xmlns:p4=\"ns2\" />"
+                    + Environment.NewLine
+                    + "</test>"
+                : exp;
             Assert.True(utils.CompareString(exp));
         }
 
@@ -460,7 +493,9 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteStartAttribute("attr");
                 w.WriteEndElement();
             }
-            Assert.True(utils.CompareReader("<pre:test pre:attr=\"\" attr=\"\" xmlns:pre=\"ns\" />"));
+            Assert.True(
+                utils.CompareReader("<pre:test pre:attr=\"\" attr=\"\" xmlns:pre=\"ns\" />")
+            );
         }
 
         // XmlCharCheckingWriter should not normalize newLines in attribute values when NewLinesHandling = Replace
@@ -495,7 +530,9 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteElementString("foo", "|\x0D\x0A|");
                 w.WriteEndElement();
             }
-            Assert.True(utils.CompareReader("<root a=\"|&#xD;&#xA;|\"><foo>|\x0D\x0A|</foo></root>"));
+            Assert.True(
+                utils.CompareReader("<root a=\"|&#xD;&#xA;|\"><foo>|\x0D\x0A|</foo></root>")
+            );
         }
 
         // WriteAttributeString doesn't fail on invalid surrogate pair sequences

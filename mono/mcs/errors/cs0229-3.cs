@@ -4,8 +4,8 @@
 
 public class Test
 {
-   public static void Main()
-   {
-      System.Console.WriteLine(TestLib.FOO);
-   }
+    public static void Main()
+    {
+        System.Console.WriteLine(TestLib.FOO);
+    }
 }

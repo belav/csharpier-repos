@@ -1,6 +1,6 @@
-// 
-// OciTransactionHandle.cs 
-//  
+//
+// OciTransactionHandle.cs
+//
 // Part of managed C#/.NET library System.Data.OracleClient.dll
 //
 // Part of the Mono class libraries at
@@ -8,17 +8,18 @@
 //
 // Assembly: System.Data.OracleClient.dll
 // Namespace: System.Data.OracleClient.Oci
-// 
-// Author: 
+//
+// Author:
 //     Tim Coleman <tim@timcoleman.com>
-//         
+//
 // Copyright (C) Tim Coleman, 2003
-// 
+//
 
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Data.OracleClient.Oci {
+namespace System.Data.OracleClient.Oci
+{
     internal sealed class OciTransactionHandle : OciHandle, IDisposable
     {
         #region Fields
@@ -31,21 +32,21 @@ namespace System.Data.OracleClient.Oci {
 
         #region Constructors
 
-        public OciTransactionHandle (OciHandle parent, IntPtr handle)
-            : base (OciHandleType.Transaction, parent, handle)
-        {
-        }
+        public OciTransactionHandle(OciHandle parent, IntPtr handle)
+            : base(OciHandleType.Transaction, parent, handle) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public OciErrorHandle ErrorHandle {
+        public OciErrorHandle ErrorHandle
+        {
             get { return errorHandle; }
             set { errorHandle = value; }
         }
 
-        public OciServiceHandle Service {
+        public OciServiceHandle Service
+        {
             get { return serviceHandle; }
             set { serviceHandle = value; }
         }
@@ -54,94 +55,103 @@ namespace System.Data.OracleClient.Oci {
 
         #region Methods
 
-        public void AttachToServiceContext ()
+        public void AttachToServiceContext()
         {
             int status = 0;
-            status = OciCalls.OCIAttrSet (Service,
-                            OciHandleType.Service,
-                            this,
-                            0,
-                            OciAttributeType.Transaction,
-                            ErrorHandle);
-            if (status != 0) {
-                OciErrorInfo info = ErrorHandle.HandleError ();
-                throw new OracleException (info.ErrorCode, info.ErrorMessage);
+            status = OciCalls.OCIAttrSet(
+                Service,
+                OciHandleType.Service,
+                this,
+                0,
+                OciAttributeType.Transaction,
+                ErrorHandle
+            );
+            if (status != 0)
+            {
+                OciErrorInfo info = ErrorHandle.HandleError();
+                throw new OracleException(info.ErrorCode, info.ErrorMessage);
             }
         }
 
-        public void DetachFromServiceContext ()
+        public void DetachFromServiceContext()
         {
             int status = 0;
-            status = OciCalls.OCIAttrSet (Service,
+            status = OciCalls.OCIAttrSet(
+                Service,
                 OciHandleType.Service,
                 IntPtr.Zero,
                 0,
                 OciAttributeType.Transaction,
-                ErrorHandle);
-            if (status != 0) 
+                ErrorHandle
+            );
+            if (status != 0)
             {
-                OciErrorInfo info = ErrorHandle.HandleError ();
-                throw new OracleException (info.ErrorCode, info.ErrorMessage);
+                OciErrorInfo info = ErrorHandle.HandleError();
+                throw new OracleException(info.ErrorCode, info.ErrorMessage);
             }
         }
 
-        public void Begin ()
+        public void Begin()
         {
             int status = 0;
 
-            AttachToServiceContext ();
+            AttachToServiceContext();
 
-            status = OciCalls.OCITransStart (Service,
-                        ErrorHandle,
-                        60,
-                        OciTransactionFlags.New);
+            status = OciCalls.OCITransStart(Service, ErrorHandle, 60, OciTransactionFlags.New);
 
-            if (status != 0) {
-                OciErrorInfo info = ErrorHandle.HandleError ();
-                throw new OracleException (info.ErrorCode, info.ErrorMessage);
+            if (status != 0)
+            {
+                OciErrorInfo info = ErrorHandle.HandleError();
+                throw new OracleException(info.ErrorCode, info.ErrorMessage);
             }
         }
 
-        public void Commit ()
+        public void Commit()
         {
             int status = 0;
-            AttachToServiceContext ();
-            try {
-                status = OciCalls.OCITransCommit (Service, ErrorHandle, 0);
+            AttachToServiceContext();
+            try
+            {
+                status = OciCalls.OCITransCommit(Service, ErrorHandle, 0);
 
-                if (status != 0) 
+                if (status != 0)
                 {
-                    OciErrorInfo info = ErrorHandle.HandleError ();
-                    throw new OracleException (info.ErrorCode, info.ErrorMessage);
+                    OciErrorInfo info = ErrorHandle.HandleError();
+                    throw new OracleException(info.ErrorCode, info.ErrorMessage);
                 }
             }
-            finally {
-                DetachFromServiceContext ();
+            finally
+            {
+                DetachFromServiceContext();
             }
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (!disposed) {
+            if (!disposed)
+            {
                 disposed = true;
-                base.Dispose (disposing);
+                base.Dispose(disposing);
             }
         }
 
-        public void Rollback ()
+        public void Rollback()
         {
-            try {
+            try
+            {
                 int status = 0;
-                AttachToServiceContext ();
-                status = OciCalls.OCITransRollback (Service, ErrorHandle, 0);
+                AttachToServiceContext();
+                status = OciCalls.OCITransRollback(Service, ErrorHandle, 0);
 
-                if (status != 0) {
-                    OciErrorInfo info = ErrorHandle.HandleError ();
-                    throw new OracleException (info.ErrorCode, info.ErrorMessage);
+                if (status != 0)
+                {
+                    OciErrorInfo info = ErrorHandle.HandleError();
+                    throw new OracleException(info.ErrorCode, info.ErrorMessage);
                 }
             }
-            finally {
-                DetachFromServiceContext ();
+            finally
+            {
+                DetachFromServiceContext();
             }
         }
 

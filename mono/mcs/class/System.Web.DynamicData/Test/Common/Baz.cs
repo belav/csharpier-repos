@@ -19,39 +19,39 @@ namespace MonoTests.Common
         public bool PrimaryKeyColumn3 { get; set; }
         public string CustomPropertyColumn1 { get; set; }
 
-        [UIHint ("UI Hint")]
+        [UIHint("UI Hint")]
         public string CustomPropertyColumn2 { get; set; }
-        
+
         public int GeneratedColumn1 { get; set; }
 
-        [UIHint ("UI Hint")]
+        [UIHint("UI Hint")]
         public int GeneratedColumn2 { get; set; }
 
-        [ReadOnly (true)]
-        public int ReadOnlyColumn { get; private set;  }
+        [ReadOnly(true)]
+        public int ReadOnlyColumn { get; private set; }
 
-        [ReadOnly (false)]
+        [ReadOnly(false)]
         public int ReadWriteColumn { get; private set; }
 
-        [DisplayFormat (NullDisplayText="Text")]
+        [DisplayFormat(NullDisplayText = "Text")]
         public DateTime NullDisplayTextColumn { get; set; }
 
-        [Required (ErrorMessage = "Custom error message")]
+        [Required(ErrorMessage = "Custom error message")]
         public int ErrorMessageColumn1 { get; set; }
 
-        [Required (ErrorMessage = "s")]
+        [Required(ErrorMessage = "s")]
         public int ErrorMessageColumn2 { get; set; }
 
-        [UIHint ("")]
+        [UIHint("")]
         public int EmptyHintColumn { get; set; }
 
-        [DynamicDataSortable (true)]
+        [DynamicDataSortable(true)]
         public int SortableColumn1 { get; set; }
 
-        [UIHint ("MyCustomUIHintTemplate")]
+        [UIHint("MyCustomUIHintTemplate")]
         public string CustomUIHintColumn { get; set; }
 
-        public Baz ()
+        public Baz()
         {
             Column1 = 123;
             PrimaryKeyColumn1 = 456;

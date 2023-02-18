@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,20 +23,21 @@
 //    Chris Toshok (toshok@ximian.com)
 //
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
+    public interface IEditableCollectionView
+    {
+        void EditItem(object item);
+        object AddNew();
 
-    public interface IEditableCollectionView {
-        void EditItem (object item);
-        object AddNew ();
+        void CancelEdit();
+        void CancelNew();
 
-        void CancelEdit ();
-        void CancelNew ();
+        void CommitEdit();
+        void CommitNew();
 
-        void CommitEdit ();
-        void CommitNew ();
-
-        void Remove (object item);
-        void RemoveAt (int index);
+        void Remove(object item);
+        void RemoveAt(int index);
 
         object CurrentAddItem { get; }
         object CurrentEditItem { get; }
@@ -50,5 +51,4 @@ namespace System.ComponentModel {
 
         NewItemPlaceholderPosition NewItemPlaceholderPosition { get; set; }
     }
-
 }

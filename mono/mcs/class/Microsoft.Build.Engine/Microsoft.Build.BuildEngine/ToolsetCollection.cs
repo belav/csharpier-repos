@@ -31,66 +31,68 @@ using System.Collections;
 
 namespace Microsoft.Build.BuildEngine
 {
-
     public class ToolsetCollection : ICollection<Toolset>, IEnumerable<Toolset>, IEnumerable
     {
         List<Toolset> toolsets;
-        
-        internal ToolsetCollection ()
+
+        internal ToolsetCollection()
         {
-            toolsets = new List<Toolset> ();
+            toolsets = new List<Toolset>();
         }
-        
+
         public int Count
         {
             get { return toolsets.Count; }
         }
-        
-        public bool IsReadOnly { get { return false; } }
-            
-        public Toolset this [string toolsVersion]
+
+        public bool IsReadOnly
         {
-            get { return toolsets.Find (item => item.ToolsVersion == toolsVersion); }
-        }
-        
-        public void Add (Toolset item)
-        {
-            toolsets.Add (item);
-        }
-        
-        public void Clear ()
-        {
-            toolsets.Clear ();
-        }
-        
-        public bool Contains (string toolsVersion)
-        {
-            return toolsets.Exists (item => item.ToolsVersion == toolsVersion);
-        }
-        
-        public bool Contains (Toolset item)
-        {
-            return toolsets.Contains (item);
+            get { return false; }
         }
 
-        public void CopyTo (Toolset[] array, int arrayIndex)
+        public Toolset this[string toolsVersion]
         {
-            toolsets.CopyTo (array, arrayIndex);
+            get { return toolsets.Find(item => item.ToolsVersion == toolsVersion); }
         }
-        
-        public IEnumerator<Toolset> GetEnumerator ()
+
+        public void Add(Toolset item)
         {
-            return toolsets.GetEnumerator ();
+            toolsets.Add(item);
         }
-        
-        IEnumerator IEnumerable.GetEnumerator ()
+
+        public void Clear()
         {
-            return toolsets.GetEnumerator ();
+            toolsets.Clear();
         }
-        
-        public bool Remove (Toolset item)
+
+        public bool Contains(string toolsVersion)
         {
-            return toolsets.Remove (item);
+            return toolsets.Exists(item => item.ToolsVersion == toolsVersion);
+        }
+
+        public bool Contains(Toolset item)
+        {
+            return toolsets.Contains(item);
+        }
+
+        public void CopyTo(Toolset[] array, int arrayIndex)
+        {
+            toolsets.CopyTo(array, arrayIndex);
+        }
+
+        public IEnumerator<Toolset> GetEnumerator()
+        {
+            return toolsets.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return toolsets.GetEnumerator();
+        }
+
+        public bool Remove(Toolset item)
+        {
+            return toolsets.Remove(item);
         }
     }
 }

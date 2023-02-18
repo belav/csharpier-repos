@@ -1,25 +1,29 @@
 using System;
 
-public class TestFinallyException {
-
-    public static int Main (string[] args)
+public class TestFinallyException
+{
+    public static int Main(string[] args)
     {
         int ret = -1;
 
-        try {
-        } finally {
-            try {
-                try {
-                } finally {
-                    throw new Exception ();
+        try { }
+        finally
+        {
+            try
+            {
+                try { }
+                finally
+                {
+                    throw new Exception();
                 }
                 ret = 1;
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 ret = 0;
             }
         }
 
         return ret;
     }
-
 }

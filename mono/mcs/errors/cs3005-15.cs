@@ -3,10 +3,9 @@
 // Compiler options: -warnaserror
 
 using System;
-[assembly:CLSCompliant (true)]
 
-public enum A {
-}
+[assembly: CLSCompliant(true)]
 
-public interface a {
-}
+public enum A { }
+
+public interface a { }

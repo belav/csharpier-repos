@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,44 +37,41 @@ using System.Xml;
 namespace System.ServiceModel
 {
     [MonoTODO]
-    public abstract class WSHttpBindingBase : Binding, 
-        IBindingRuntimePreferences
+    public abstract class WSHttpBindingBase : Binding, IBindingRuntimePreferences
     {
-        bool bypass_proxy_on_local, reliable_session_enabled;
-        HostNameComparisonMode host_name_comparison_mode
-            = HostNameComparisonMode.StrongWildcard;
+        bool bypass_proxy_on_local,
+            reliable_session_enabled;
+        HostNameComparisonMode host_name_comparison_mode = HostNameComparisonMode.StrongWildcard;
+
         // FIXME: could be configurable
         long max_buffer_pool_size = 0x80000;
+
         // FIXME: could be configurable
         long max_recv_msg_size = 0x10000;
-        WSMessageEncoding message_encoding
-            = WSMessageEncoding.Text;
+        WSMessageEncoding message_encoding = WSMessageEncoding.Text;
         Uri proxy_address;
-        XmlDictionaryReaderQuotas reader_quotas
-            = new XmlDictionaryReaderQuotas ();
+        XmlDictionaryReaderQuotas reader_quotas = new XmlDictionaryReaderQuotas();
         OptionalReliableSession reliable_session;
+
         // FIXME: could be configurable.
         EnvelopeVersion env_version = EnvelopeVersion.Soap12;
-        Encoding text_encoding = new UTF8Encoding ();
+        Encoding text_encoding = new UTF8Encoding();
         bool transaction_flow;
         bool use_default_web_proxy = true;
 
-        ReliableSessionBindingElement rel_element =
-            new ReliableSessionBindingElement ();
+        ReliableSessionBindingElement rel_element = new ReliableSessionBindingElement();
 
-        protected WSHttpBindingBase ()
-            : this (false)
-        {
-        }
+        protected WSHttpBindingBase()
+            : this(false) { }
 
-        protected WSHttpBindingBase (bool reliableSessionEnabled)
+        protected WSHttpBindingBase(bool reliableSessionEnabled)
         {
-            reliable_session = new OptionalReliableSession (rel_element);
+            reliable_session = new OptionalReliableSession(rel_element);
             reliable_session.Enabled = reliableSessionEnabled;
         }
 
-        internal WSHttpBindingBase (WSHttpBindingBaseElement config)
-            : this (config.ReliableSession.Enabled)
+        internal WSHttpBindingBase(WSHttpBindingBaseElement config)
+            : this(config.ReliableSession.Enabled)
         {
             BypassProxyOnLocal = config.BypassProxyOnLocal;
             HostNameComparisonMode = config.HostNameComparisonMode;
@@ -87,108 +84,127 @@ namespace System.ServiceModel
             TextEncoding = config.TextEncoding;
             TransactionFlow = config.TransactionFlow;
             UseDefaultWebProxy = config.UseDefaultWebProxy;
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public bool BypassProxyOnLocal {
+        public bool BypassProxyOnLocal
+        {
             get { return bypass_proxy_on_local; }
             set { bypass_proxy_on_local = value; }
         }
 
-        public HostNameComparisonMode HostNameComparisonMode {
+        public HostNameComparisonMode HostNameComparisonMode
+        {
             get { return host_name_comparison_mode; }
             set { host_name_comparison_mode = value; }
         }
 
-        public long MaxBufferPoolSize {
+        public long MaxBufferPoolSize
+        {
             get { return max_buffer_pool_size; }
             set { max_buffer_pool_size = value; }
         }
 
-        public long MaxReceivedMessageSize {
+        public long MaxReceivedMessageSize
+        {
             get { return max_recv_msg_size; }
             set { max_recv_msg_size = value; }
         }
 
-        public WSMessageEncoding MessageEncoding {
+        public WSMessageEncoding MessageEncoding
+        {
             get { return message_encoding; }
             set { message_encoding = value; }
         }
 
-        public Uri ProxyAddress {
+        public Uri ProxyAddress
+        {
             get { return proxy_address; }
             set { proxy_address = value; }
         }
 
-        public XmlDictionaryReaderQuotas ReaderQuotas {
+        public XmlDictionaryReaderQuotas ReaderQuotas
+        {
             get { return reader_quotas; }
             set { reader_quotas = value; }
         }
 
-        public override string Scheme {
-            get { return GetTransport ().Scheme; }
+        public override string Scheme
+        {
+            get { return GetTransport().Scheme; }
         }
 
-        public OptionalReliableSession ReliableSession {
+        public OptionalReliableSession ReliableSession
+        {
             get { return reliable_session; }
         }
 
-        public EnvelopeVersion EnvelopeVersion {
+        public EnvelopeVersion EnvelopeVersion
+        {
             get { return env_version; }
         }
 
-        public Encoding TextEncoding {
+        public Encoding TextEncoding
+        {
             get { return text_encoding; }
             set { text_encoding = value; }
         }
 
-        public bool TransactionFlow {
+        public bool TransactionFlow
+        {
             get { return transaction_flow; }
             set { transaction_flow = value; }
         }
 
-        public bool UseDefaultWebProxy {
+        public bool UseDefaultWebProxy
+        {
             get { return use_default_web_proxy; }
             set { use_default_web_proxy = value; }
         }
 
         [MonoTODO]
-        public override BindingElementCollection
-            CreateBindingElements ()
+        public override BindingElementCollection CreateBindingElements()
         {
-            BindingElement tx = new TransactionFlowBindingElement (TransactionProtocol.WSAtomicTransactionOctober2004);
-            SecurityBindingElement sec = CreateMessageSecurity ();
+            BindingElement tx = new TransactionFlowBindingElement(
+                TransactionProtocol.WSAtomicTransactionOctober2004
+            );
+            SecurityBindingElement sec = CreateMessageSecurity();
             BindingElement msg = null;
-            MessageVersion msgver = MessageVersion.CreateVersion (EnvelopeVersion, AddressingVersion.WSAddressing10);
-            switch (MessageEncoding) {
-            case WSMessageEncoding.Mtom:
-                msg = new MtomMessageEncodingBindingElement (msgver, TextEncoding);
-                break;
-            case WSMessageEncoding.Text:
-                msg = new TextMessageEncodingBindingElement (msgver, TextEncoding);
-                break;
-            default:
-                throw new NotImplementedException ("mhm, another WSMessageEncoding?");
+            MessageVersion msgver = MessageVersion.CreateVersion(
+                EnvelopeVersion,
+                AddressingVersion.WSAddressing10
+            );
+            switch (MessageEncoding)
+            {
+                case WSMessageEncoding.Mtom:
+                    msg = new MtomMessageEncodingBindingElement(msgver, TextEncoding);
+                    break;
+                case WSMessageEncoding.Text:
+                    msg = new TextMessageEncodingBindingElement(msgver, TextEncoding);
+                    break;
+                default:
+                    throw new NotImplementedException("mhm, another WSMessageEncoding?");
             }
-            BindingElement tr = GetTransport ();
-            List<BindingElement> list = new List<BindingElement> ();
-            list.Add (tx); // it is always added.
+            BindingElement tr = GetTransport();
+            List<BindingElement> list = new List<BindingElement>();
+            list.Add(tx); // it is always added.
             if (sec != null)
-                list.Add (sec);
-            list.Add (msg);
+                list.Add(sec);
+            list.Add(msg);
             if (tr != null)
-                list.Add (tr);
+                list.Add(tr);
             // FIXME: add ReliableSessionBindingElement
-            return new BindingElementCollection (list.ToArray ());
+            return new BindingElementCollection(list.ToArray());
         }
 
-        protected abstract SecurityBindingElement CreateMessageSecurity ();
+        protected abstract SecurityBindingElement CreateMessageSecurity();
 
-        protected abstract TransportBindingElement GetTransport ();
+        protected abstract TransportBindingElement GetTransport();
 
         // explicit interface implementations
 
-        bool IBindingRuntimePreferences.ReceiveSynchronously {
+        bool IBindingRuntimePreferences.ReceiveSynchronously
+        {
             get { return false; }
         }
     }

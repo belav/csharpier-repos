@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,34 +33,47 @@ namespace System.Xaml
     {
         class DirectiveMemberInvoker : XamlMemberInvoker
         {
-            public DirectiveMemberInvoker (XamlDirective directive)
-                : base (directive)
-            {
-            }
+            public DirectiveMemberInvoker(XamlDirective directive)
+                : base(directive) { }
         }
 
-        public XamlDirective (string xamlNamespace, string name)
-            : this (new string [] {xamlNamespace}, name, new XamlType (typeof (object), new XamlSchemaContext (new XamlSchemaContextSettings ())), null, AllowedMemberLocations.Any)
+        public XamlDirective(string xamlNamespace, string name)
+            : this(
+                new string[] { xamlNamespace },
+                name,
+                new XamlType(
+                    typeof(object),
+                    new XamlSchemaContext(new XamlSchemaContextSettings())
+                ),
+                null,
+                AllowedMemberLocations.Any
+            )
         {
             if (xamlNamespace == null)
-                throw new ArgumentNullException ("xamlNamespace");
+                throw new ArgumentNullException("xamlNamespace");
             is_unknown = true;
         }
 
-        public XamlDirective (IEnumerable<string> xamlNamespaces, string name, XamlType xamlType, XamlValueConverter<TypeConverter> typeConverter, AllowedMemberLocations allowedLocation)
-            : base (true, xamlNamespaces != null ? xamlNamespaces.FirstOrDefault () : null, name)
+        public XamlDirective(
+            IEnumerable<string> xamlNamespaces,
+            string name,
+            XamlType xamlType,
+            XamlValueConverter<TypeConverter> typeConverter,
+            AllowedMemberLocations allowedLocation
+        )
+            : base(true, xamlNamespaces != null ? xamlNamespaces.FirstOrDefault() : null, name)
         {
             if (xamlNamespaces == null)
-                throw new ArgumentNullException ("xamlNamespaces");
+                throw new ArgumentNullException("xamlNamespaces");
             if (xamlType == null)
-                throw new ArgumentNullException ("xamlType");
+                throw new ArgumentNullException("xamlType");
 
             type = xamlType;
-            xaml_namespaces = new List<string> (xamlNamespaces);
+            xaml_namespaces = new List<string>(xamlNamespaces);
             AllowedLocation = allowedLocation;
             type_converter = typeConverter;
-            
-            invoker = new DirectiveMemberInvoker (this);
+
+            invoker = new DirectiveMemberInvoker(this);
         }
 
         public AllowedMemberLocations AllowedLocation { get; private set; }
@@ -71,110 +84,113 @@ namespace System.Xaml
         IList<string> xaml_namespaces;
 
         // this is for XamlLanguage.UnknownContent
-        internal bool InternalIsUnknown {
+        internal bool InternalIsUnknown
+        {
             set { is_unknown = value; }
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return ToString ().GetHashCode ();
+            return ToString().GetHashCode();
         }
 
-        public override IList<string> GetXamlNamespaces ()
+        public override IList<string> GetXamlNamespaces()
         {
             return xaml_namespaces;
         }
 
-        protected override sealed ICustomAttributeProvider LookupCustomAttributeProvider ()
+        protected override sealed ICustomAttributeProvider LookupCustomAttributeProvider()
         {
             return null; // as documented.
         }
 
-        protected override sealed XamlValueConverter<XamlDeferringLoader> LookupDeferringLoader ()
+        protected override sealed XamlValueConverter<XamlDeferringLoader> LookupDeferringLoader()
         {
             return null; // as documented.
         }
 
-        protected override sealed IList<XamlMember> LookupDependsOn ()
+        protected override sealed IList<XamlMember> LookupDependsOn()
         {
             return null; // as documented.
         }
 
-        protected override sealed XamlMemberInvoker LookupInvoker ()
+        protected override sealed XamlMemberInvoker LookupInvoker()
         {
             return invoker;
         }
 
-        protected override sealed bool LookupIsAmbient ()
+        protected override sealed bool LookupIsAmbient()
         {
             return false;
         }
 
-        protected override sealed bool LookupIsEvent ()
+        protected override sealed bool LookupIsEvent()
         {
             return false;
         }
 
-        protected override sealed bool LookupIsReadOnly ()
+        protected override sealed bool LookupIsReadOnly()
         {
             return false;
         }
 
-        protected override sealed bool LookupIsReadPublic ()
+        protected override sealed bool LookupIsReadPublic()
         {
             return true;
         }
 
-        protected override sealed bool LookupIsUnknown ()
+        protected override sealed bool LookupIsUnknown()
         {
             return is_unknown;
         }
 
-        protected override sealed bool LookupIsWriteOnly ()
+        protected override sealed bool LookupIsWriteOnly()
         {
             return false;
         }
 
-        protected override sealed bool LookupIsWritePublic ()
+        protected override sealed bool LookupIsWritePublic()
         {
             return true;
         }
 
-        protected override sealed XamlType LookupTargetType ()
+        protected override sealed XamlType LookupTargetType()
         {
             return null;
         }
 
-        protected override sealed XamlType LookupType ()
+        protected override sealed XamlType LookupType()
         {
             return type;
         }
 
-        protected override sealed XamlValueConverter<TypeConverter> LookupTypeConverter ()
+        protected override sealed XamlValueConverter<TypeConverter> LookupTypeConverter()
         {
             if (type_converter == null)
-                type_converter = base.LookupTypeConverter ();
+                type_converter = base.LookupTypeConverter();
             return type_converter;
         }
 
-        protected override sealed MethodInfo LookupUnderlyingGetter ()
+        protected override sealed MethodInfo LookupUnderlyingGetter()
         {
             return null;
         }
 
-        protected override sealed MemberInfo LookupUnderlyingMember ()
+        protected override sealed MemberInfo LookupUnderlyingMember()
         {
             return null;
         }
 
-        protected override sealed MethodInfo LookupUnderlyingSetter ()
+        protected override sealed MethodInfo LookupUnderlyingSetter()
         {
             return null;
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return String.IsNullOrEmpty (PreferredXamlNamespace) ? Name : String.Concat ("{", PreferredXamlNamespace, "}", Name);
+            return String.IsNullOrEmpty(PreferredXamlNamespace)
+                ? Name
+                : String.Concat("{", PreferredXamlNamespace, "}", Name);
         }
     }
 }

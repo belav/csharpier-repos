@@ -1,13 +1,12 @@
 // identity functions
 using System;
 
-class Test {
-    public static void Main ()
-    {
-    }
+class Test
+{
+    public static void Main() { }
 
-    static void Foo<T> ()
+    static void Foo<T>()
     {
-        Func<T,T> f = n => n;
+        Func<T, T> f = n => n;
     }
 }

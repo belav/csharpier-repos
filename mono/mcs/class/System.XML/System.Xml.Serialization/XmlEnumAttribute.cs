@@ -1,5 +1,5 @@
 //
-// XmlEnumAttribute.cs: 
+// XmlEnumAttribute.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,25 +40,24 @@ namespace System.Xml.Serialization
     {
         private string name;
 
-        public XmlEnumAttribute ()
-        {
-        }
+        public XmlEnumAttribute() { }
 
-        public XmlEnumAttribute (string name) 
+        public XmlEnumAttribute(string name)
         {
             this.name = name;
         }
 
-        public string Name {
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
 
-        internal void AddKeyHash (System.Text.StringBuilder sb)
+        internal void AddKeyHash(System.Text.StringBuilder sb)
         {
-            sb.Append ("XENA ");
-            KeyHelper.AddField (sb, 1, name);
-            sb.Append ('|');
+            sb.Append("XENA ");
+            KeyHelper.AddField(sb, 1, name);
+            sb.Append('|');
         }
     }
 }

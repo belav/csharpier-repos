@@ -2,9 +2,9 @@
 // Line: 9
 // Compiler options: -warnaserror -warn:1
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public interface I 
+public interface I
 {
-       ulong Error();
+    ulong Error();
 }

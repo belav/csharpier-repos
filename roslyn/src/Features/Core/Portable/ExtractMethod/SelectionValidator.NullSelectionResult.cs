@@ -14,34 +14,31 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         protected class NullSelectionResult : SelectionResult
         {
             public NullSelectionResult()
-                : this(OperationStatus.FailedWithUnknownReason)
-            {
-            }
+                : this(OperationStatus.FailedWithUnknownReason) { }
 
             protected NullSelectionResult(OperationStatus status)
-                : base(status)
-            {
-            }
+                : base(status) { }
 
-            protected override bool UnderAnonymousOrLocalMethod(SyntaxToken token, SyntaxToken firstToken, SyntaxToken lastToken)
-                => throw new InvalidOperationException();
+            protected override bool UnderAnonymousOrLocalMethod(
+                SyntaxToken token,
+                SyntaxToken firstToken,
+                SyntaxToken lastToken
+            ) => throw new InvalidOperationException();
 
-            public override bool ContainingScopeHasAsyncKeyword()
-                => throw new InvalidOperationException();
+            public override bool ContainingScopeHasAsyncKeyword() =>
+                throw new InvalidOperationException();
 
-            public override SyntaxNode GetContainingScope()
-                => throw new InvalidOperationException();
+            public override SyntaxNode GetContainingScope() =>
+                throw new InvalidOperationException();
 
-            public override ITypeSymbol GetContainingScopeType()
-                => throw new InvalidOperationException();
+            public override ITypeSymbol GetContainingScopeType() =>
+                throw new InvalidOperationException();
         }
 
         protected class ErrorSelectionResult : NullSelectionResult
         {
             public ErrorSelectionResult(OperationStatus status)
-                : base(status.MakeFail())
-            {
-            }
+                : base(status.MakeFail()) { }
         }
     }
 }

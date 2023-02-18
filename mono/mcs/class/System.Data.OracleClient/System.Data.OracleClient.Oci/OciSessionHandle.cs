@@ -22,7 +22,8 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Data.OracleClient.Oci {
+namespace System.Data.OracleClient.Oci
+{
     internal sealed class OciSessionHandle : OciHandle, IDisposable
     {
         #region Fields
@@ -39,26 +40,27 @@ namespace System.Data.OracleClient.Oci {
 
         #region Constructors
 
-        public OciSessionHandle (OciHandle parent, IntPtr handle)
-            : base (OciHandleType.Session, parent, handle)
-        {
-        }
+        public OciSessionHandle(OciHandle parent, IntPtr handle)
+            : base(OciHandleType.Session, parent, handle) { }
 
         #endregion // Constructors
 
         #region Properties
 
-        public OciServiceHandle Service {
+        public OciServiceHandle Service
+        {
             get { return serviceHandle; }
             set { serviceHandle = value; }
         }
 
-        internal string Username {
+        internal string Username
+        {
             get { return username; }
             set { username = value; }
         }
 
-        internal string Password {
+        internal string Password
+        {
             get { return String.Empty; }
             set { password = value; }
         }
@@ -67,51 +69,56 @@ namespace System.Data.OracleClient.Oci {
 
         #region Methods
 
-        internal bool SetCredentialAttributes (OciErrorHandle error)
+        internal bool SetCredentialAttributes(OciErrorHandle error)
         {
             errorHandle = error;
 
             int status;
 
-            status = OciCalls.OCIAttrSetString (this,
+            status = OciCalls.OCIAttrSetString(
+                this,
                 OciHandleType.Session,
                 username,
-                (uint) username.Length,
+                (uint)username.Length,
                 OciAttributeType.Username,
-                errorHandle);
+                errorHandle
+            );
 
             if (status != 0)
                 return false;
 
-            status = OciCalls.OCIAttrSetString (this,
+            status = OciCalls.OCIAttrSetString(
+                this,
                 OciHandleType.Session,
                 password,
-                (uint) password.Length,
+                (uint)password.Length,
                 OciAttributeType.Password,
-                errorHandle);
+                errorHandle
+            );
 
             if (status != 0)
                 return false;
-            
+
             return true;
         }
 
-        public bool BeginSession (OciCredentialType credentialType, OciSessionMode mode, OciErrorHandle error)
+        public bool BeginSession(
+            OciCredentialType credentialType,
+            OciSessionMode mode,
+            OciErrorHandle error
+        )
         {
             errorHandle = error;
 
             int status;
 
-            if (credentialType == OciCredentialType.RDBMS) {
-                if (!SetCredentialAttributes (errorHandle))
+            if (credentialType == OciCredentialType.RDBMS)
+            {
+                if (!SetCredentialAttributes(errorHandle))
                     return false;
             }
 
-            status = OciCalls.OCISessionBegin (Service,
-                        errorHandle,
-                        Handle,
-                        credentialType,
-                        mode);
+            status = OciCalls.OCISessionBegin(Service, errorHandle, Handle, credentialType, mode);
 
             if (status != 0)
                 return false;
@@ -121,22 +128,26 @@ namespace System.Data.OracleClient.Oci {
             return true;
         }
 
-        public void EndSession (OciErrorHandle error)
+        public void EndSession(OciErrorHandle error)
         {
             if (!begun)
                 return;
-            OciCalls.OCISessionEnd (Service, error, this, 0);
+            OciCalls.OCISessionEnd(Service, error, this, 0);
             begun = false;
         }
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            if (!disposed) {
-                try {
+            if (!disposed)
+            {
+                try
+                {
                     //EndSession (errorHandle);
                     disposed = false;
-                } finally {
-                    base.Dispose (disposing);
+                }
+                finally
+                {
+                    base.Dispose(disposing);
                 }
             }
         }

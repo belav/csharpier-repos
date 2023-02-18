@@ -4,10 +4,8 @@ unsafe class Baz
 {
     struct Foo
     {
-        public Foo *next;
+        public Foo* next;
     }
-    
-    public static void Main ()
-    {
-    }
+
+    public static void Main() { }
 }

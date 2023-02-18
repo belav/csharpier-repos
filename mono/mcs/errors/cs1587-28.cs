@@ -13,7 +13,9 @@ namespace TopNS
 
     class Foo : AFoo
     {
-        sealed /** is "sealed" checked? */ internal override int Prop {
+        sealed
+        /** is "sealed" checked? */internal override int Prop
+        {
             get { return 0; }
         }
     }

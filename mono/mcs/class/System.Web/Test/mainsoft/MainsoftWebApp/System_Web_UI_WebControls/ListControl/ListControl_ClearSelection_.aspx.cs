@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class ListControl_ClearSelection
-        : GHTListControlBase
+    public class ListControl_ClearSelection : GHTListControlBase
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,31 +46,30 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
             foreach (Type currentType in TestedTypes)
                 ListControl_ClearSelection(currentType);
-      
 
             // Clearing multiple selected items:
             // This cannot be tested in ListControl, because only ListBox can have multiple selection.
             GHTSubTestBegin("Clear multiple selection");
             System.Web.UI.WebControls.ListBox lb = new System.Web.UI.WebControls.ListBox();
             GHTActiveSubTest.Controls.Add(lb);
-            try 
+            try
             {
                 lb.Items.Add("A");
                 lb.Items.Add("B");
@@ -83,14 +81,13 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 lb.Items[2].Selected = true;
                 lb.ClearSelection();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
             GHTSubTestEnd();
 
             GHTTestEnd();
-
         }
     }
 }

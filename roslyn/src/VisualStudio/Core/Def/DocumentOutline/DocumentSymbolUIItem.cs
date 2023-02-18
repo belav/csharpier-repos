@@ -24,6 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         public SnapshotSpan SelectionRangeSpan { get; }
         public SymbolKind SymbolKind { get; }
         public ImageMoniker ImageMoniker { get; }
+
         // _isSelected and _isExpanded should only be mutated/read from the UI thread.
         private bool _isSelected;
         private bool _isExpanded;
@@ -63,7 +64,11 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             }
         }
 
-        public DocumentSymbolUIItem(DocumentSymbolData documentSymbolData, ImmutableArray<DocumentSymbolUIItem> children, IThreadingContext threadingContext)
+        public DocumentSymbolUIItem(
+            DocumentSymbolData documentSymbolData,
+            ImmutableArray<DocumentSymbolUIItem> children,
+            IThreadingContext threadingContext
+        )
         {
             _threadingContext = threadingContext;
             Name = documentSymbolData.Name;
@@ -76,8 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             SelectionRangeSpan = documentSymbolData.SelectionRangeSpan;
         }
 
-        private void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        private void NotifyPropertyChanged([CallerMemberName] string? propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

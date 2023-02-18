@@ -19,16 +19,20 @@ namespace System.Net.Http
     // we should put this in place now.
     internal sealed class BrowserHttpHandler : HttpMessageHandler
     {
-        private static readonly HttpRequestOptionsKey<bool> EnableStreamingResponse = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
-        private static readonly HttpRequestOptionsKey<IDictionary<string, object>> FetchOptions = new HttpRequestOptionsKey<IDictionary<string, object>>("WebAssemblyFetchOptions");
+        private static readonly HttpRequestOptionsKey<bool> EnableStreamingResponse =
+            new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
+        private static readonly HttpRequestOptionsKey<IDictionary<string, object>> FetchOptions =
+            new HttpRequestOptionsKey<IDictionary<string, object>>("WebAssemblyFetchOptions");
         private bool _allowAutoRedirect = HttpHandlerDefaults.DefaultAutomaticRedirection;
+
         // flag to determine if the _allowAutoRedirect was explicitly set or not.
         private bool _isAllowAutoRedirectTouched;
 
         /// <summary>
         /// Gets whether the current Browser supports streaming responses
         /// </summary>
-        private static bool StreamingSupported { get; } = BrowserHttpInterop.SupportsStreamingResponse();
+        private static bool StreamingSupported { get; } =
+            BrowserHttpInterop.SupportsStreamingResponse();
 
         #region PlatformNotSupported
 #pragma warning disable CA1822
@@ -121,14 +125,22 @@ namespace System.Net.Http
         public const bool SupportsRedirectConfiguration = true;
 
         private Dictionary<string, object?>? _properties;
-        public IDictionary<string, object?> Properties => _properties ??= new Dictionary<string, object?>();
+        public IDictionary<string, object?> Properties =>
+            _properties ??= new Dictionary<string, object?>();
 
-        protected internal override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected internal override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        private static async Task<WasmFetchResponse> CallFetch(HttpRequestMessage request, CancellationToken cancellationToken, bool? allowAutoRedirect)
+        private static async Task<WasmFetchResponse> CallFetch(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken,
+            bool? allowAutoRedirect
+        )
         {
             int headerCount = request.Headers.Count + request.Content?.Headers.Count ?? 0;
             List<string> headerNames = new List<string>(headerCount);
@@ -149,10 +161,18 @@ namespace System.Net.Http
                     throw new ArgumentNullException(nameof(request.RequestUri));
                 }
 
-                string uri = request.RequestUri.IsAbsoluteUri ? request.RequestUri.AbsoluteUri : request.RequestUri.ToString();
+                string uri = request.RequestUri.IsAbsoluteUri
+                    ? request.RequestUri.AbsoluteUri
+                    : request.RequestUri.ToString();
 
-                bool hasFetchOptions = request.Options.TryGetValue(FetchOptions, out IDictionary<string, object>? fetchOptions);
-                int optionCount = 1 + (allowAutoRedirect.HasValue ? 1 : 0) + (hasFetchOptions && fetchOptions != null ? fetchOptions.Count : 0);
+                bool hasFetchOptions = request.Options.TryGetValue(
+                    FetchOptions,
+                    out IDictionary<string, object>? fetchOptions
+                );
+                int optionCount =
+                    1
+                    + (allowAutoRedirect.HasValue ? 1 : 0)
+                    + (hasFetchOptions && fetchOptions != null ? fetchOptions.Count : 0);
                 int optionIndex = 0;
                 string[] optionNames = new string[optionCount];
                 object?[] optionValues = new object?[optionCount];
@@ -178,7 +198,9 @@ namespace System.Net.Http
 
                 if (request.Content != null)
                 {
-                    foreach (KeyValuePair<string, IEnumerable<string>> header in request.Content.Headers)
+                    foreach (
+                        KeyValuePair<string, IEnumerable<string>> header in request.Content.Headers
+                    )
                     {
                         foreach (string value in header.Value)
                         {
@@ -204,28 +226,57 @@ namespace System.Net.Http
                 {
                     if (request.Content is StringContent)
                     {
-                        string body = await request.Content.ReadAsStringAsync(cancellationToken)
+                        string body = await request.Content
+                            .ReadAsStringAsync(cancellationToken)
                             .ConfigureAwait(true);
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        promise = BrowserHttpInterop.Fetch(uri, headerNames.ToArray(), headerValues.ToArray(), optionNames, optionValues, abortController, body);
+                        promise = BrowserHttpInterop.Fetch(
+                            uri,
+                            headerNames.ToArray(),
+                            headerValues.ToArray(),
+                            optionNames,
+                            optionValues,
+                            abortController,
+                            body
+                        );
                     }
                     else
                     {
-                        byte[] buffer = await request.Content.ReadAsByteArrayAsync(cancellationToken)
+                        byte[] buffer = await request.Content
+                            .ReadAsByteArrayAsync(cancellationToken)
                             .ConfigureAwait(true);
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        promise = BrowserHttpInterop.Fetch(uri, headerNames.ToArray(), headerValues.ToArray(), optionNames, optionValues, abortController, buffer);
+                        promise = BrowserHttpInterop.Fetch(
+                            uri,
+                            headerNames.ToArray(),
+                            headerValues.ToArray(),
+                            optionNames,
+                            optionValues,
+                            abortController,
+                            buffer
+                        );
                     }
                 }
                 else
                 {
-                    promise = BrowserHttpInterop.Fetch(uri, headerNames.ToArray(), headerValues.ToArray(), optionNames, optionValues, abortController);
+                    promise = BrowserHttpInterop.Fetch(
+                        uri,
+                        headerNames.ToArray(),
+                        headerValues.ToArray(),
+                        optionNames,
+                        optionValues,
+                        abortController
+                    );
                 }
 
                 cancellationToken.ThrowIfCancellationRequested();
-                ValueTask<JSObject> wrappedTask = BrowserHttpInterop.CancelationHelper(promise, cancellationToken, abortController);
+                ValueTask<JSObject> wrappedTask = BrowserHttpInterop.CancelationHelper(
+                    promise,
+                    cancellationToken,
+                    abortController
+                );
                 JSObject fetchResponse = await wrappedTask.ConfigureAwait(true);
                 return new WasmFetchResponse(fetchResponse, abortRegistration.Value);
             }
@@ -237,10 +288,15 @@ namespace System.Net.Http
             }
         }
 
-        private static HttpResponseMessage ConvertResponse(HttpRequestMessage request, WasmFetchResponse fetchResponse)
+        private static HttpResponseMessage ConvertResponse(
+            HttpRequestMessage request,
+            WasmFetchResponse fetchResponse
+        )
         {
             string? responseType = fetchResponse.ResponseType;
-            HttpResponseMessage responseMessage = new HttpResponseMessage((HttpStatusCode)fetchResponse.Status);
+            HttpResponseMessage responseMessage = new HttpResponseMessage(
+                (HttpStatusCode)fetchResponse.Status
+            );
             responseMessage.RequestMessage = request;
             if (responseType == "opaqueredirect")
             {
@@ -264,22 +320,41 @@ namespace System.Net.Http
                 ? new StreamContent(new WasmHttpReadStream(fetchResponse))
                 : new BrowserHttpContent(fetchResponse);
 
-
             // Some of the headers may not even be valid header types in .NET thus we use TryAddWithoutValidation
             // CORS will only allow access to certain headers on browser.
-            BrowserHttpInterop.GetResponseHeaders(fetchResponse.FetchResponse, responseMessage.Headers, responseMessage.Content.Headers);
+            BrowserHttpInterop.GetResponseHeaders(
+                fetchResponse.FetchResponse,
+                responseMessage.Headers,
+                responseMessage.Content.Headers
+            );
 
             return responseMessage;
         }
 
-        protected internal override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected internal override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(request);
-            return Impl(request, cancellationToken, _isAllowAutoRedirectTouched ? AllowAutoRedirect : null);
+            return Impl(
+                request,
+                cancellationToken,
+                _isAllowAutoRedirectTouched ? AllowAutoRedirect : null
+            );
 
-            static async Task<HttpResponseMessage> Impl(HttpRequestMessage request, CancellationToken cancellationToken, bool? allowAutoRedirect)
+            static async Task<HttpResponseMessage> Impl(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken,
+                bool? allowAutoRedirect
+            )
             {
-                WasmFetchResponse fetchRespose = await CallFetch(request, cancellationToken, allowAutoRedirect).ConfigureAwait(true);
+                WasmFetchResponse fetchRespose = await CallFetch(
+                        request,
+                        cancellationToken,
+                        allowAutoRedirect
+                    )
+                    .ConfigureAwait(true);
                 return ConvertResponse(request, fetchRespose);
             }
         }
@@ -291,7 +366,10 @@ namespace System.Net.Http
         private readonly CancellationTokenRegistration _abortRegistration;
         private bool _isDisposed;
 
-        public WasmFetchResponse(JSObject fetchResponse, CancellationTokenRegistration abortRegistration)
+        public WasmFetchResponse(
+            JSObject fetchResponse,
+            CancellationTokenRegistration abortRegistration
+        )
         {
             ArgumentNullException.ThrowIfNull(fetchResponse);
 
@@ -301,18 +379,12 @@ namespace System.Net.Http
 
         public string ResponseType
         {
-            get
-            {
-                return FetchResponse.GetPropertyAsString("type")!;
-            }
+            get { return FetchResponse.GetPropertyAsString("type")!; }
         }
 
         public int Status
         {
-            get
-            {
-                return FetchResponse.GetPropertyAsInt32("status");
-            }
+            get { return FetchResponse.GetPropertyAsInt32("status"); }
         }
 
         public void ThrowIfDisposed()
@@ -361,10 +433,15 @@ namespace System.Net.Http
             }
             _fetchResponse.ThrowIfDisposed();
             Task<int> promise = BrowserHttpInterop.GetResponseLength(_fetchResponse.FetchResponse);
-            _length = await BrowserHttpInterop.CancelationHelper(promise, cancellationToken, null, _fetchResponse.FetchResponse).ConfigureAwait(true);
+            _length = await BrowserHttpInterop
+                .CancelationHelper(promise, cancellationToken, null, _fetchResponse.FetchResponse)
+                .ConfigureAwait(true);
             _data = new byte[_length];
 
-            BrowserHttpInterop.GetResponseBytes(_fetchResponse.FetchResponse, new Span<byte>(_data));
+            BrowserHttpInterop.GetResponseBytes(
+                _fetchResponse.FetchResponse,
+                new Span<byte>(_data)
+            );
 
             return _data;
         }
@@ -378,7 +455,11 @@ namespace System.Net.Http
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context) =>
             SerializeToStreamAsync(stream, context, CancellationToken.None);
 
-        protected override async Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        protected override async Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(stream, nameof(stream));
             byte[] data = await GetResponseData(cancellationToken).ConfigureAwait(true);
@@ -413,7 +494,10 @@ namespace System.Net.Http
             _fetchResponse = fetchResponse;
         }
 
-        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(buffer, nameof(buffer));
 
@@ -422,15 +506,35 @@ namespace System.Net.Http
             using (Buffers.MemoryHandle handle = buffer.Pin())
             {
                 Task<int> promise = GetStreamedResponseBytesUnsafe(_fetchResponse, buffer, handle);
-                int response = await BrowserHttpInterop.CancelationHelper(promise, cancellationToken, null, _fetchResponse.FetchResponse).ConfigureAwait(true);
+                int response = await BrowserHttpInterop
+                    .CancelationHelper(
+                        promise,
+                        cancellationToken,
+                        null,
+                        _fetchResponse.FetchResponse
+                    )
+                    .ConfigureAwait(true);
                 return response;
             }
 
-            unsafe static Task<int> GetStreamedResponseBytesUnsafe(WasmFetchResponse _fetchResponse, Memory<byte> buffer, System.Buffers.MemoryHandle handle)
-                => BrowserHttpInterop.GetStreamedResponseBytes(_fetchResponse.FetchResponse, (IntPtr)handle.Pointer, buffer.Length);
+            unsafe static Task<int> GetStreamedResponseBytesUnsafe(
+                WasmFetchResponse _fetchResponse,
+                Memory<byte> buffer,
+                System.Buffers.MemoryHandle handle
+            ) =>
+                BrowserHttpInterop.GetStreamedResponseBytes(
+                    _fetchResponse.FetchResponse,
+                    (IntPtr)handle.Pointer,
+                    buffer.Length
+                );
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
@@ -451,9 +555,7 @@ namespace System.Net.Http
             _fetchResponse?.Dispose();
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

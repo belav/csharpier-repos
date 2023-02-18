@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,29 +37,31 @@ namespace System.Windows.Forms.Design
     {
         #region Public Instance Constructors
 
-        public FolderNameEditor ()
-        {
-        }
+        public FolderNameEditor() { }
 
         #endregion Public Instance Constructors
 
         #region Override implementation of UITypeEditor
 
-        public override object EditValue (ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             if (folderBrowser == null)
             {
-                folderBrowser = new FolderBrowser ();
-                InitializeDialog (folderBrowser);
+                folderBrowser = new FolderBrowser();
+                InitializeDialog(folderBrowser);
             }
-            if (this.folderBrowser.ShowDialog () != DialogResult.OK)
+            if (this.folderBrowser.ShowDialog() != DialogResult.OK)
             {
                 return value;
             }
             return folderBrowser.DirectoryPath;
         }
 
-        public override UITypeEditorEditStyle GetEditStyle (ITypeDescriptorContext context)
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.Modal;
         }
@@ -68,9 +70,7 @@ namespace System.Windows.Forms.Design
 
         #region Protected Instance Methods
 
-        protected virtual void InitializeDialog (FolderBrowser folderBrowser)
-        {
-        }
+        protected virtual void InitializeDialog(FolderBrowser folderBrowser) { }
 
         #endregion Protected Instance Methods
 
@@ -111,7 +111,7 @@ namespace System.Windows.Forms.Design
         protected sealed class FolderBrowser : Component
         {
             [MonoTODO]
-            public FolderBrowser ()
+            public FolderBrowser()
             {
                 startLocation = FolderBrowserFolder.Desktop;
                 publicOptions = FolderBrowserStyles.RestrictToFilesystem;
@@ -123,46 +123,24 @@ namespace System.Windows.Forms.Design
 
             public string Description
             {
-                get
-                {
-                    return descriptionText;
-                }
-                set
-                {
-                    descriptionText = (value == null) ? string.Empty : value;
-                }
+                get { return descriptionText; }
+                set { descriptionText = (value == null) ? string.Empty : value; }
             }
             public string DirectoryPath
             {
-                get
-                {
-                    return directoryPath;
-                }
+                get { return directoryPath; }
             }
 
             public FolderBrowserFolder StartLocation
             {
-                get
-                {
-                    return startLocation;
-                }
-                set
-                {
-                    startLocation = value;
-                }
+                get { return startLocation; }
+                set { startLocation = value; }
             }
 
             public FolderBrowserStyles Style
             {
-                get
-                {
-                    return publicOptions;
-                }
-
-                set
-                {
-                    publicOptions = value;
-                }
+                get { return publicOptions; }
+                set { publicOptions = value; }
             }
 
             #endregion Public Instance Properties
@@ -170,15 +148,15 @@ namespace System.Windows.Forms.Design
             #region Public Instance Methods
 
             [MonoTODO]
-            public DialogResult ShowDialog ()
+            public DialogResult ShowDialog()
             {
-                return ShowDialog (null);
+                return ShowDialog(null);
             }
 
             [MonoTODO]
-            public DialogResult ShowDialog (IWin32Window owner)
+            public DialogResult ShowDialog(IWin32Window owner)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
             #endregion Public Instance Methods

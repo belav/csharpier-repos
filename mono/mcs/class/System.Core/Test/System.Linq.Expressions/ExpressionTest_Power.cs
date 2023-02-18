@@ -33,77 +33,79 @@ namespace MonoTests.System.Linq.Expressions
     public class ExpressionTest_Power
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg1Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg1Null()
         {
-            Expression.Power (null, Expression.Constant (1.0));
+            Expression.Power(null, Expression.Constant(1.0));
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg2Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg2Null()
         {
-            Expression.Power (Expression.Constant (1.0), null);
+            Expression.Power(Expression.Constant(1.0), null);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ArgTypesDifferent ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ArgTypesDifferent()
         {
-            Expression.Power (Expression.Constant (1), Expression.Constant (2.0));
+            Expression.Power(Expression.Constant(1), Expression.Constant(2.0));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ArgTypesInt ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ArgTypesInt()
         {
-            Expression.Power (Expression.Constant (1), Expression.Constant (2));
+            Expression.Power(Expression.Constant(1), Expression.Constant(2));
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ArgTypesFloat ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ArgTypesFloat()
         {
-            Expression.Power (Expression.Constant ((float)1), Expression.Constant ((float)2));
+            Expression.Power(Expression.Constant((float)1), Expression.Constant((float)2));
         }
 
         [Test]
-        public void ArgTypesDouble ()
+        public void ArgTypesDouble()
         {
-            var p = Expression.Power (Expression.Constant (1.0), Expression.Constant (2.0));
+            var p = Expression.Power(Expression.Constant(1.0), Expression.Constant(2.0));
 
-            Assert.AreEqual (ExpressionType.Power, p.NodeType, "Power#01");
-            Assert.AreEqual (typeof (double), p.Type, "Add#02");
-            Assert.AreEqual ("(1 ** 2)", p.ToString ());
+            Assert.AreEqual(ExpressionType.Power, p.NodeType, "Power#01");
+            Assert.AreEqual(typeof(double), p.Type, "Add#02");
+            Assert.AreEqual("(1 ** 2)", p.ToString());
         }
 
         [Test]
-        public void TestCompile ()
+        public void TestCompile()
         {
-            var a = Expression.Parameter (typeof (double), "a");
-            var b = Expression.Parameter (typeof (double), "b");
+            var a = Expression.Parameter(typeof(double), "a");
+            var b = Expression.Parameter(typeof(double), "b");
 
-            var power = Expression.Lambda<Func<double,double,double>> (
-                Expression.Power (a, b), a, b).Compile ();
+            var power = Expression
+                .Lambda<Func<double, double, double>>(Expression.Power(a, b), a, b)
+                .Compile();
 
-            Assert.AreEqual (1, power (1, 10));
-            Assert.AreEqual (16, power (2, 4));
+            Assert.AreEqual(1, power(1, 10));
+            Assert.AreEqual(16, power(2, 4));
         }
 
         [Test]
-        public void NullablePower ()
+        public void NullablePower()
         {
-            var a = Expression.Parameter (typeof (double?), "a");
-            var b = Expression.Parameter (typeof (double?), "b");
+            var a = Expression.Parameter(typeof(double?), "a");
+            var b = Expression.Parameter(typeof(double?), "b");
 
-            var power = Expression.Lambda<Func<double?, double?, double?>> (
-                Expression.Power (a, b), a, b).Compile ();
+            var power = Expression
+                .Lambda<Func<double?, double?, double?>>(Expression.Power(a, b), a, b)
+                .Compile();
 
-            Assert.AreEqual ((double?) 1, power (1, 10));
-            Assert.AreEqual ((double?) 16, power (2, 4));
-            Assert.AreEqual ((double?) null, power (1, null));
-            Assert.AreEqual ((double?) null, power (null, 1));
-            Assert.AreEqual ((double?) null, power (null, null));
+            Assert.AreEqual((double?)1, power(1, 10));
+            Assert.AreEqual((double?)16, power(2, 4));
+            Assert.AreEqual((double?)null, power(1, null));
+            Assert.AreEqual((double?)null, power(null, 1));
+            Assert.AreEqual((double?)null, power(null, null));
         }
     }
 }

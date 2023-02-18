@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,31 +24,37 @@
 using System;
 using System.Text;
 using System.Data;
-using System.Data.OracleClient ;
+using System.Data.OracleClient;
 
 using MonoTests.System.Data.Utils;
-
 
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient
 {
     [TestFixture]
-    public class OracleDataReader_NextResult : ADONetTesterClass 
+    public class OracleDataReader_NextResult : ADONetTesterClass
     {
         OracleConnection con;
         Exception exp = null;
 
         [SetUp]
-        public void SetUp() {
-            base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-            con = new OracleConnection (MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+        public void SetUp()
+        {
+            base.PrepareDataForTesting(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
+            con = new OracleConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
             con.Open();
         }
 
         [TearDown]
-        public void TearDown() {
-            if (con.State == ConnectionState.Open) con.Close();
+        public void TearDown()
+        {
+            if (con.State == ConnectionState.Open)
+                con.Close();
         }
 
         public static void Main()
@@ -60,29 +66,34 @@ namespace MonoTests.System.Data.OracleClient
                 tc.BeginTest("OracleDataReader_NextResult");
                 tc.run();
             }
-            catch(Exception ex){exp = ex;}
-            finally    {tc.EndTest(exp);}
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
         }
 
         public void run()
         {
-
-
-            base.PrepareDataForTesting(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
+            base.PrepareDataForTesting(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
             con.Open();
 
             TestMultipleResultSetsWithSP();
             TestMultipleResultSetsWithSQLText();
 
-            if (con.State == ConnectionState.Open) con.Close();
-
+            if (con.State == ConnectionState.Open)
+                con.Close();
         }
 
         [Test]
-        [Ignore ("JVM test")]
+        [Ignore("JVM test")]
         public void TestMultipleResultSetsWithSQLText()
         {
-
             if (ConnectedDataProvider.GetDbType() == DataBaseServer.Oracle)
             {
                 this.Log("Multiple result sets by sql text is not tested in oracle.");
@@ -98,9 +109,9 @@ namespace MonoTests.System.Data.OracleClient
             bool NextResultExists = false;
             OracleDataReader rdr = null;
             OracleCommand cmd;
-            int TblResult0=-1;
-            int TblResult1=-1;
-            int TblResult2=-1;
+            int TblResult0 = -1;
+            int TblResult1 = -1;
+            int TblResult2 = -1;
             try
             {
                 BeginCase("Setup: Get expected results.");
@@ -118,7 +129,6 @@ namespace MonoTests.System.Data.OracleClient
                 EndCase(exp);
             }
 
-
             string cmdTxt = BuildCommandText();
             cmd = new OracleCommand(cmdTxt, con);
             cmd.CommandType = CommandType.Text;
@@ -130,11 +140,11 @@ namespace MonoTests.System.Data.OracleClient
                 BeginCase("(Multiple Resultsets sql text) - Check if ResultSet 1 exists");
                 Compare(rdr != null, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -145,11 +155,11 @@ namespace MonoTests.System.Data.OracleClient
                 NextResultExists = rdr.Read();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -164,11 +174,11 @@ namespace MonoTests.System.Data.OracleClient
                 }
                 Compare(i, TblResult0);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -176,13 +186,16 @@ namespace MonoTests.System.Data.OracleClient
             {
                 exp = null;
                 BeginCase("(Multiple Resultsets sql text) - Check ResultSet 1 Schema");
-                Compare(rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(), "CUSTOMERID");
+                Compare(
+                    rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(),
+                    "CUSTOMERID"
+                );
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -194,11 +207,11 @@ namespace MonoTests.System.Data.OracleClient
                 NextResultExists = rdr.NextResult();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -209,11 +222,11 @@ namespace MonoTests.System.Data.OracleClient
                 NextResultExists = rdr.Read();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -228,11 +241,11 @@ namespace MonoTests.System.Data.OracleClient
                 }
                 Compare(i, TblResult1);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -240,14 +253,17 @@ namespace MonoTests.System.Data.OracleClient
             {
                 exp = null;
                 BeginCase("(Multiple Resultsets sql text) - Check ResultSet 2 Schema");
-                Compare(rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(), "CATEGORYID");
+                Compare(
+                    rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(),
+                    "CATEGORYID"
+                );
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
             // -------------- ResultSet  3 ------------
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -258,11 +274,11 @@ namespace MonoTests.System.Data.OracleClient
                 NextResultExists = rdr.NextResult();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -273,11 +289,11 @@ namespace MonoTests.System.Data.OracleClient
                 NextResultExists = rdr.Read();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -292,11 +308,11 @@ namespace MonoTests.System.Data.OracleClient
                 }
                 Compare(i, TblResult2);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -304,43 +320,50 @@ namespace MonoTests.System.Data.OracleClient
             {
                 exp = null;
                 BeginCase("(Multiple Resultsets sql text) - Check ResultSet 3 Schema");
-                Compare(rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(), "REGIONID");
+                Compare(
+                    rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(),
+                    "REGIONID"
+                );
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
             try
             {
                 exp = null;
-                BeginCase("(Multiple Resultsets sql text) - Check that resultset 4 does not exist.");
+                BeginCase(
+                    "(Multiple Resultsets sql text) - Check that resultset 4 does not exist."
+                );
                 NextResultExists = rdr.NextResult();
                 Compare(NextResultExists, false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
             try
             {
                 exp = null;
-                BeginCase("(Multiple Resultsets sql text) - Check that resultset 4 does not contain data.");
+                BeginCase(
+                    "(Multiple Resultsets sql text) - Check that resultset 4 does not contain data."
+                );
                 NextResultExists = rdr.Read();
                 Compare(NextResultExists, false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -349,13 +372,15 @@ namespace MonoTests.System.Data.OracleClient
         }
 
         [Test]
-        [Ignore ("JVM test")]
+        [Ignore("JVM test")]
         public void TestMultipleResultSetsWithSP()
         {
 #if !JAVA
             if (ConnectedDataProvider.GetDbType() == DataBaseServer.Oracle)
             {
-                this.Log("Not testing Stored procedures with multiple ref-cursors on Oracle with .NET due to bug in .NET (only the first ref-cursor is retrived).");
+                this.Log(
+                    "Not testing Stored procedures with multiple ref-cursors on Oracle with .NET due to bug in .NET (only the first ref-cursor is retrived)."
+                );
                 return;
             }
 
@@ -366,14 +391,16 @@ namespace MonoTests.System.Data.OracleClient
                 return;
             }
 #endif
-            
             bool NextResultExists = false;
             // transaction use was add for PostgreSQL
             OracleTransaction tr = con.BeginTransaction();
             OracleCommand cmd = new OracleCommand("GH_MULTIRECORDSETS", con, tr);
-            cmd.Parameters.Add(new OracleParameter("RCT_Employees", OracleType.Cursor)).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(new OracleParameter("RCT_Customers", OracleType.Cursor)).Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(new OracleParameter("RCT_Orders", OracleType.Cursor)).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("RCT_Employees", OracleType.Cursor)).Direction =
+                ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("RCT_Customers", OracleType.Cursor)).Direction =
+                ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("RCT_Orders", OracleType.Cursor)).Direction =
+                ParameterDirection.Output;
             cmd.CommandType = CommandType.StoredProcedure;
             OracleDataReader rdr = cmd.ExecuteReader();
 
@@ -383,26 +410,28 @@ namespace MonoTests.System.Data.OracleClient
                 BeginCase("(Multiple Resultsets stored proc.) - Check if ResultSet 1 exists");
                 Compare(rdr != null, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
             try
             {
                 exp = null;
-                BeginCase("(Multiple Resultsets stored proc.) - Check if ResultSet 1 contains data");
+                BeginCase(
+                    "(Multiple Resultsets stored proc.) - Check if ResultSet 1 contains data"
+                );
                 NextResultExists = rdr.Read();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -412,11 +441,11 @@ namespace MonoTests.System.Data.OracleClient
                 BeginCase("(Multiple Resultsets stored proc.) - Check ResultSet 1 Data");
                 Compare(rdr.GetValue(1).ToString(), "Yavine");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -424,18 +453,20 @@ namespace MonoTests.System.Data.OracleClient
             {
                 exp = null;
                 BeginCase("(Multiple Resultsets stored proc.) - Check ResultSet 1 Schema");
-                Compare(rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(), "EMPLOYEEID");
+                Compare(
+                    rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(),
+                    "EMPLOYEEID"
+                );
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
 
-            
             // -------------- ResultSet  2 ------------
             try
             {
@@ -444,26 +475,28 @@ namespace MonoTests.System.Data.OracleClient
                 NextResultExists = rdr.NextResult();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
             try
             {
                 exp = null;
-                BeginCase("(Multiple Resultsets stored proc.) - Check if ResultSet 2 contains data");
+                BeginCase(
+                    "(Multiple Resultsets stored proc.) - Check if ResultSet 2 contains data"
+                );
                 NextResultExists = rdr.Read();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -473,11 +506,11 @@ namespace MonoTests.System.Data.OracleClient
                 BeginCase("(Multiple Resultsets stored proc.) - Check ResultSet 2 Data");
                 Compare(rdr.GetValue(1).ToString(), "Morgenstern Gesundkost");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -485,13 +518,16 @@ namespace MonoTests.System.Data.OracleClient
             {
                 exp = null;
                 BeginCase("(Multiple Resultsets stored proc.) - Check ResultSet 2 Schema");
-                Compare(rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(), "CUSTOMERID");
+                Compare(
+                    rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(),
+                    "CUSTOMERID"
+                );
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -504,26 +540,28 @@ namespace MonoTests.System.Data.OracleClient
                 NextResultExists = rdr.NextResult();
                 Compare(NextResultExists, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
             try
             {
                 exp = null;
-                BeginCase("(Multiple Resultsets stored proc.) - Check if ResultSet 3 contains data");
+                BeginCase(
+                    "(Multiple Resultsets stored proc.) - Check if ResultSet 3 contains data"
+                );
                 NextResultExists = rdr.Read();
                 Compare(NextResultExists, false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -531,43 +569,50 @@ namespace MonoTests.System.Data.OracleClient
             {
                 exp = null;
                 BeginCase("(Multiple Resultsets stored proc.) - Check ResultSet 3 Schema");
-                Compare(rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(), "ORDERID");
+                Compare(
+                    rdr.GetSchemaTable().Rows[0].ItemArray.GetValue(0).ToString().ToUpper(),
+                    "ORDERID"
+                );
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
             try
             {
                 exp = null;
-                BeginCase("(Multiple Resultsets stored proc.) - Check that resultset 4 does not exist.");
+                BeginCase(
+                    "(Multiple Resultsets stored proc.) - Check that resultset 4 does not exist."
+                );
                 NextResultExists = rdr.NextResult();
                 Compare(NextResultExists, false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
             try
             {
                 exp = null;
-                BeginCase("(Multiple Resultsets stored proc.) - Check that resultset 4 does not contain data.");
+                BeginCase(
+                    "(Multiple Resultsets stored proc.) - Check that resultset 4 does not contain data."
+                );
                 NextResultExists = rdr.Read();
                 Compare(NextResultExists, false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 exp = ex;
             }
-            finally    
+            finally
             {
                 EndCase(exp);
             }
@@ -580,9 +625,7 @@ namespace MonoTests.System.Data.OracleClient
 
             // transaction use was add for PostgreSQL
             tr.Commit();
-
         }
-
 
         #region "Private Utilities"
         private string BuildCommandText()
@@ -590,9 +633,19 @@ namespace MonoTests.System.Data.OracleClient
             string beginStatement;
             string endStatement;
             string commandDelimiter;
-            string[] commands = new string[] {"select * from Customers", "select * from Categories", "select * from Region"};
+            string[] commands = new string[]
+            {
+                "select * from Customers",
+                "select * from Categories",
+                "select * from Region"
+            };
 
-            GetDBSpecificSyntax(ConnectedDataProvider.GetDbType(), out beginStatement, out endStatement, out commandDelimiter);
+            GetDBSpecificSyntax(
+                ConnectedDataProvider.GetDbType(),
+                out beginStatement,
+                out endStatement,
+                out commandDelimiter
+            );
 
             StringBuilder cmdBuilder = new StringBuilder();
             cmdBuilder.Append(beginStatement);
@@ -607,7 +660,13 @@ namespace MonoTests.System.Data.OracleClient
 
             return cmdBuilder.ToString();
         }
-        private void GetDBSpecificSyntax(DataBaseServer dbServer, out string beginStatement, out string endStatement, out string commandDelimiter)
+
+        private void GetDBSpecificSyntax(
+            DataBaseServer dbServer,
+            out string beginStatement,
+            out string endStatement,
+            out string commandDelimiter
+        )
         {
             switch (dbServer)
             {
@@ -628,6 +687,7 @@ namespace MonoTests.System.Data.OracleClient
                     break;
 
                 case DataBaseServer.DB2:
+
                     {
                         beginStatement = "";
                         endStatement = "";
@@ -646,13 +706,14 @@ namespace MonoTests.System.Data.OracleClient
                     throw new ApplicationException("Unknown DataBaseServer type");
             }
         }
+
         private void GetExcpectedResults(ref int TblResult0, ref int TblResult1, ref int TblResult2)
         {
             // get excpected results
-            
+
             // transaction use was add for PostgreSQL
             OracleTransaction tr = con.BeginTransaction();
-            OracleCommand cmd = new OracleCommand("", con,tr);
+            OracleCommand cmd = new OracleCommand("", con, tr);
             cmd.CommandText = "Select count(*) from Customers";
             TblResult0 = Int32.Parse(cmd.ExecuteScalar().ToString());
             cmd.CommandText = "Select count(*) from Categories";

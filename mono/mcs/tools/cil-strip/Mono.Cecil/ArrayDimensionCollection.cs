@@ -29,60 +29,62 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
     using System.Collections;
 
     using Mono.Cecil.Cil;
 
-    internal sealed class ArrayDimensionCollection : CollectionBase {
-
+    internal sealed class ArrayDimensionCollection : CollectionBase
+    {
         ArrayType m_container;
 
-        public ArrayDimension this [int index] {
-            get { return List [index] as ArrayDimension; }
-            set { List [index] = value; }
+        public ArrayDimension this[int index]
+        {
+            get { return List[index] as ArrayDimension; }
+            set { List[index] = value; }
         }
 
-        public ArrayType Container {
+        public ArrayType Container
+        {
             get { return m_container; }
         }
 
-        public ArrayDimensionCollection (ArrayType container)
+        public ArrayDimensionCollection(ArrayType container)
         {
             m_container = container;
         }
 
-        public void Add (ArrayDimension value)
+        public void Add(ArrayDimension value)
         {
-            List.Add (value);
+            List.Add(value);
         }
 
-        public bool Contains (ArrayDimension value)
+        public bool Contains(ArrayDimension value)
         {
-            return List.Contains (value);
+            return List.Contains(value);
         }
 
-        public int IndexOf (ArrayDimension value)
+        public int IndexOf(ArrayDimension value)
         {
-            return List.IndexOf (value);
+            return List.IndexOf(value);
         }
 
-        public void Insert (int index, ArrayDimension value)
+        public void Insert(int index, ArrayDimension value)
         {
-            List.Insert (index, value);
+            List.Insert(index, value);
         }
 
-        public void Remove (ArrayDimension value)
+        public void Remove(ArrayDimension value)
         {
-            List.Remove (value);
+            List.Remove(value);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            if (! (o is ArrayDimension))
-                throw new ArgumentException ("Must be of type " + typeof (ArrayDimension).FullName);
+            if (!(o is ArrayDimension))
+                throw new ArgumentException("Must be of type " + typeof(ArrayDimension).FullName);
         }
     }
 }

@@ -4,9 +4,9 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     class ComplexNestedClassesHasUnusedRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            new A.AB.ABD ();
+            new A.AB.ABD();
         }
 
         [Kept]
@@ -15,17 +15,13 @@ namespace Mono.Linker.Tests.Cases.Basic
             [Kept]
             public class AB
             {
-                public class ABC
-                {
-                }
+                public class ABC { }
 
                 [Kept]
-                [KeptMember (".ctor()")]
+                [KeptMember(".ctor()")]
                 public class ABD
                 {
-                    public class ABDE
-                    {
-                    }
+                    public class ABDE { }
                 }
             }
         }

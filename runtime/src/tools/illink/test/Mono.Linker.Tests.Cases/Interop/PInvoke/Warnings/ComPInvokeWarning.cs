@@ -10,229 +10,235 @@ namespace Mono.Linker.Tests.Cases.Interop.PInvoke.Warnings
 {
     [SkipKeptItemsValidation]
     [ExpectedNoWarnings]
-    [KeptModuleReference ("Foo")]
-    [SetupCompileArgument ("/unsafe")]
+    [KeptModuleReference("Foo")]
+    [SetupCompileArgument("/unsafe")]
     class ComPInvokeWarning
     {
-        [UnconditionalSuppressMessage ("trim", "IL2026")]
-        static void Main ()
+        [UnconditionalSuppressMessage("trim", "IL2026")]
+        static void Main()
         {
-            Call_SomeMethodReturningAutoLayoutClass ();
-            Call_SomeMethodTakingInterface ();
-            Call_SomeMethodTakingObject ();
-            Call_SomeMethodTakingArray ();
-            Call_SomeMethodTakingString ();
-            Call_SomeMethodTakingStringBuilder ();
-            Call_SomeMethodTakingCriticalHandle ();
-            Call_SomeMethodTakingSafeHandle ();
-            Call_SomeMethodTakingExplicitLayoutClass ();
-            Call_SomeMethodTakingSequentialLayoutClass ();
-            Call_SomeMethodTakingAutoLayoutClass ();
-            Call_GetInterface ();
-            Call_CanSuppressWarningOnParameter ();
-            Call_CanSuppressWarningOnReturnType ();
-            Call_CanSuppressWithRequiresUnreferencedCode ();
-            Call_CanSuppressPInvokeWithRequiresUnreferencedCode ();
-            Call_PInvokeWithRequiresUnreferencedCode ();
-            Call_PInvokeWithVoidPointerArg ();
-            Call_PInvokeWithStructPointerArg ();
-            Call_PInvokeWithSequentialStructPointerArg ();
+            Call_SomeMethodReturningAutoLayoutClass();
+            Call_SomeMethodTakingInterface();
+            Call_SomeMethodTakingObject();
+            Call_SomeMethodTakingArray();
+            Call_SomeMethodTakingString();
+            Call_SomeMethodTakingStringBuilder();
+            Call_SomeMethodTakingCriticalHandle();
+            Call_SomeMethodTakingSafeHandle();
+            Call_SomeMethodTakingExplicitLayoutClass();
+            Call_SomeMethodTakingSequentialLayoutClass();
+            Call_SomeMethodTakingAutoLayoutClass();
+            Call_GetInterface();
+            Call_CanSuppressWarningOnParameter();
+            Call_CanSuppressWarningOnReturnType();
+            Call_CanSuppressWithRequiresUnreferencedCode();
+            Call_CanSuppressPInvokeWithRequiresUnreferencedCode();
+            Call_PInvokeWithRequiresUnreferencedCode();
+            Call_PInvokeWithVoidPointerArg();
+            Call_PInvokeWithStructPointerArg();
+            Call_PInvokeWithSequentialStructPointerArg();
         }
 
-        [ExpectedWarning ("IL2050")]
-        static void Call_SomeMethodTakingInterface ()
+        [ExpectedWarning("IL2050")]
+        static void Call_SomeMethodTakingInterface()
         {
-            SomeMethodTakingInterface (null);
+            SomeMethodTakingInterface(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingInterface (IFoo foo);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingInterface(IFoo foo);
 
-        [ExpectedWarning ("IL2050")]
-        static void Call_SomeMethodTakingObject ()
+        [ExpectedWarning("IL2050")]
+        static void Call_SomeMethodTakingObject()
         {
-            SomeMethodTakingObject (null);
+            SomeMethodTakingObject(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingObject ([MarshalAs (UnmanagedType.IUnknown)] object obj);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingObject([MarshalAs(UnmanagedType.IUnknown)] object obj);
 
-        [ExpectedWarning ("IL2050")]
-        static void Call_SomeMethodTakingArray ()
+        [ExpectedWarning("IL2050")]
+        static void Call_SomeMethodTakingArray()
         {
-            SomeMethodTakingArray (null);
+            SomeMethodTakingArray(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingArray (Array array);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingArray(Array array);
 
-        static void Call_SomeMethodTakingStringBuilder ()
+        static void Call_SomeMethodTakingStringBuilder()
         {
-            SomeMethodTakingStringBuilder (null);
+            SomeMethodTakingStringBuilder(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingStringBuilder (StringBuilder str);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingStringBuilder(StringBuilder str);
 
-        static void Call_SomeMethodTakingCriticalHandle ()
+        static void Call_SomeMethodTakingCriticalHandle()
         {
-            SomeMethodTakingCriticalHandle (null);
+            SomeMethodTakingCriticalHandle(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingCriticalHandle (MyCriticalHandle handle);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingCriticalHandle(MyCriticalHandle handle);
 
-
-        static void Call_SomeMethodTakingSafeHandle ()
+        static void Call_SomeMethodTakingSafeHandle()
         {
-            SomeMethodTakingSafeHandle (null);
+            SomeMethodTakingSafeHandle(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingSafeHandle (TestSafeHandle handle);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingSafeHandle(TestSafeHandle handle);
 
-        static void Call_SomeMethodTakingExplicitLayoutClass ()
+        static void Call_SomeMethodTakingExplicitLayoutClass()
         {
-            SomeMethodTakingExplicitLayout (null);
+            SomeMethodTakingExplicitLayout(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingExplicitLayout (ExplicitLayout _class);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingExplicitLayout(ExplicitLayout _class);
 
-        static void Call_SomeMethodTakingSequentialLayoutClass ()
+        static void Call_SomeMethodTakingSequentialLayoutClass()
         {
-            SomeMethodTakingSequentialLayout (null);
+            SomeMethodTakingSequentialLayout(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingSequentialLayout (SequentialLayout _class);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingSequentialLayout(SequentialLayout _class);
 
-        [ExpectedWarning ("IL2050")]
-        static void Call_SomeMethodTakingAutoLayoutClass ()
+        [ExpectedWarning("IL2050")]
+        static void Call_SomeMethodTakingAutoLayoutClass()
         {
-            SomeMethodTakingAutoLayout (null);
+            SomeMethodTakingAutoLayout(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingAutoLayout (AutoLayout _class);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingAutoLayout(AutoLayout _class);
 
-        [ExpectedWarning ("IL2050")]
-        static void Call_SomeMethodReturningAutoLayoutClass ()
+        [ExpectedWarning("IL2050")]
+        static void Call_SomeMethodReturningAutoLayoutClass()
         {
-            SomeMethodReturningAutoLayout ();
+            SomeMethodReturningAutoLayout();
         }
 
-        [DllImport ("Foo")]
-        static extern AutoLayout SomeMethodReturningAutoLayout ();
+        [DllImport("Foo")]
+        static extern AutoLayout SomeMethodReturningAutoLayout();
 
-        static void Call_SomeMethodTakingString ()
+        static void Call_SomeMethodTakingString()
         {
-            SomeMethodTakingString (null);
+            SomeMethodTakingString(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void SomeMethodTakingString (String str);
+        [DllImport("Foo")]
+        static extern void SomeMethodTakingString(String str);
 
-        [ExpectedWarning ("IL2050")]
-        static void Call_GetInterface ()
+        [ExpectedWarning("IL2050")]
+        static void Call_GetInterface()
         {
-            GetInterface ();
+            GetInterface();
         }
 
-        [DllImport ("Foo")]
-        static extern IFoo GetInterface ();
+        [DllImport("Foo")]
+        static extern IFoo GetInterface();
 
-        [UnconditionalSuppressMessage ("trim", "IL2050")]
-        static void Call_CanSuppressWarningOnParameter ()
+        [UnconditionalSuppressMessage("trim", "IL2050")]
+        static void Call_CanSuppressWarningOnParameter()
         {
-            CanSuppressWarningOnParameter (null);
+            CanSuppressWarningOnParameter(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void CanSuppressWarningOnParameter ([MarshalAs (UnmanagedType.IUnknown)] object obj);
+        [DllImport("Foo")]
+        static extern void CanSuppressWarningOnParameter(
+            [MarshalAs(UnmanagedType.IUnknown)] object obj
+        );
 
-        [UnconditionalSuppressMessage ("trim", "IL2050")]
-        static void Call_CanSuppressWarningOnReturnType ()
+        [UnconditionalSuppressMessage("trim", "IL2050")]
+        static void Call_CanSuppressWarningOnReturnType()
         {
-            CanSuppressWarningOnReturnType ();
+            CanSuppressWarningOnReturnType();
         }
 
-        [DllImport ("Foo")]
-        static extern IFoo CanSuppressWarningOnReturnType ();
+        [DllImport("Foo")]
+        static extern IFoo CanSuppressWarningOnReturnType();
 
-        [RequiresUnreferencedCode ("test")]
-        static void Call_CanSuppressWithRequiresUnreferencedCode ()
+        [RequiresUnreferencedCode("test")]
+        static void Call_CanSuppressWithRequiresUnreferencedCode()
         {
-            CanSuppressWithRequiresUnreferencedCode (null);
+            CanSuppressWithRequiresUnreferencedCode(null);
         }
 
-        [DllImport ("Foo")]
-        static extern void CanSuppressWithRequiresUnreferencedCode (IFoo foo);
+        [DllImport("Foo")]
+        static extern void CanSuppressWithRequiresUnreferencedCode(IFoo foo);
 
-        [RequiresUnreferencedCode ("test")]
-        static void Call_CanSuppressPInvokeWithRequiresUnreferencedCode ()
+        [RequiresUnreferencedCode("test")]
+        static void Call_CanSuppressPInvokeWithRequiresUnreferencedCode()
         {
-            CanSuppressPInvokeWithRequiresUnreferencedCode (null);
+            CanSuppressPInvokeWithRequiresUnreferencedCode(null);
         }
 
-        [RequiresUnreferencedCode ("test")]
-        [DllImport ("Foo")]
-        static extern void CanSuppressPInvokeWithRequiresUnreferencedCode (IFoo foo);
+        [RequiresUnreferencedCode("test")]
+        [DllImport("Foo")]
+        static extern void CanSuppressPInvokeWithRequiresUnreferencedCode(IFoo foo);
 
-        [ExpectedWarning ("IL2050")]
-        [ExpectedWarning ("IL2026")]
-        static void Call_PInvokeWithRequiresUnreferencedCode ()
+        [ExpectedWarning("IL2050")]
+        [ExpectedWarning("IL2026")]
+        static void Call_PInvokeWithRequiresUnreferencedCode()
         {
-            PInvokeWithRequiresUnreferencedCode (null);
+            PInvokeWithRequiresUnreferencedCode(null);
         }
 
-        [RequiresUnreferencedCode ("test")]
-        [DllImport ("Foo")]
-        static extern void PInvokeWithRequiresUnreferencedCode (IFoo foo);
+        [RequiresUnreferencedCode("test")]
+        [DllImport("Foo")]
+        static extern void PInvokeWithRequiresUnreferencedCode(IFoo foo);
 
-        static unsafe void Call_PInvokeWithVoidPointerArg ()
+        static unsafe void Call_PInvokeWithVoidPointerArg()
         {
-            PInvokeWithVoidPointerArg (null);
+            PInvokeWithVoidPointerArg(null);
         }
 
-        [DllImport ("Foo")]
-        static extern unsafe void PInvokeWithVoidPointerArg (void* arg);
+        [DllImport("Foo")]
+        static extern unsafe void PInvokeWithVoidPointerArg(void* arg);
 
-        static unsafe void Call_PInvokeWithStructPointerArg ()
+        static unsafe void Call_PInvokeWithStructPointerArg()
         {
-            PInvokeWithStructPointerArg (null);
+            PInvokeWithStructPointerArg(null);
         }
 
-        [DllImport ("Foo")]
-        static extern unsafe ExplicitLayoutStruct* PInvokeWithStructPointerArg (ExplicitLayoutStruct* arg);
+        [DllImport("Foo")]
+        static extern unsafe ExplicitLayoutStruct* PInvokeWithStructPointerArg(
+            ExplicitLayoutStruct* arg
+        );
 
-        static unsafe void Call_PInvokeWithSequentialStructPointerArg ()
+        static unsafe void Call_PInvokeWithSequentialStructPointerArg()
         {
-            PInvokeWithSequentialStructPointerArg (null);
+            PInvokeWithSequentialStructPointerArg(null);
         }
 
-        [DllImport ("Foo")]
-        static extern unsafe SequentialLayoutStruct* PInvokeWithSequentialStructPointerArg (SequentialLayoutStruct* arg);
+        [DllImport("Foo")]
+        static extern unsafe SequentialLayoutStruct* PInvokeWithSequentialStructPointerArg(
+            SequentialLayoutStruct* arg
+        );
 
-        static unsafe void Call_PInvokeWithAutoStructPointerArg ()
+        static unsafe void Call_PInvokeWithAutoStructPointerArg()
         {
-            PInvokeWithAutoStructPointerArg (null);
+            PInvokeWithAutoStructPointerArg(null);
         }
 
-        [DllImport ("Foo")]
-        static extern unsafe AutoLayoutStruct* PInvokeWithAutoStructPointerArg (AutoLayoutStruct* arg);
+        [DllImport("Foo")]
+        static extern unsafe AutoLayoutStruct* PInvokeWithAutoStructPointerArg(
+            AutoLayoutStruct* arg
+        );
 
         interface IFoo { }
 
         class TestSafeHandle : SafeHandle
         {
-            public TestSafeHandle ()
-                : base (IntPtr.Zero, true)
-            { }
+            public TestSafeHandle()
+                : base(IntPtr.Zero, true) { }
 
             public override bool IsInvalid => handle == IntPtr.Zero;
 
-            protected override bool ReleaseHandle ()
+            protected override bool ReleaseHandle()
             {
                 return true;
             }
@@ -240,46 +246,36 @@ namespace Mono.Linker.Tests.Cases.Interop.PInvoke.Warnings
 
         class MyCriticalHandle : CriticalHandle
         {
-            public MyCriticalHandle () : base (new IntPtr (-1)) { }
+            public MyCriticalHandle()
+                : base(new IntPtr(-1)) { }
 
-            public override bool IsInvalid {
+            public override bool IsInvalid
+            {
                 get { return false; }
             }
 
-            protected override bool ReleaseHandle ()
+            protected override bool ReleaseHandle()
             {
                 return false;
             }
         }
 
-        [StructLayout (LayoutKind.Explicit)]
-        public class ExplicitLayout
-        {
-        }
+        [StructLayout(LayoutKind.Explicit)]
+        public class ExplicitLayout { }
 
-        [StructLayout (LayoutKind.Sequential)]
-        public class SequentialLayout
-        {
-        }
+        [StructLayout(LayoutKind.Sequential)]
+        public class SequentialLayout { }
 
-        [StructLayout (LayoutKind.Auto)]
-        public class AutoLayout
-        {
-        }
+        [StructLayout(LayoutKind.Auto)]
+        public class AutoLayout { }
 
-        [StructLayout (LayoutKind.Explicit)]
-        public struct ExplicitLayoutStruct
-        {
-        }
+        [StructLayout(LayoutKind.Explicit)]
+        public struct ExplicitLayoutStruct { }
 
-        [StructLayout (LayoutKind.Sequential)]
-        public struct SequentialLayoutStruct
-        {
-        }
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SequentialLayoutStruct { }
 
-        [StructLayout (LayoutKind.Auto)]
-        public struct AutoLayoutStruct
-        {
-        }
+        [StructLayout(LayoutKind.Auto)]
+        public struct AutoLayoutStruct { }
     }
 }

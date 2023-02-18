@@ -1,19 +1,19 @@
-//  
+//
 // Author:
 //       Marek Habersack <grendel@twistedcode.net>
-// 
+//
 // Copyright (c) 2011 Novell, Inc (http://novell.com/)
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -35,103 +35,111 @@ namespace Microsoft.Web.Infrastructure.DynamicValidationHelper
     {
         WebROCollection wrapped;
         RequestValidationSource validationSource;
-        
-        public LazyWebROCollection (RequestValidationSource validationSource, WebROCollection wrapped)
+
+        public LazyWebROCollection(
+            RequestValidationSource validationSource,
+            WebROCollection wrapped
+        )
         {
             if (wrapped == null)
-                throw new ArgumentNullException ("wrapped");
-            
+                throw new ArgumentNullException("wrapped");
+
             this.validationSource = validationSource;
             this.wrapped = wrapped;
         }
-        
-        public new string this [int index] {
-            get { return Get (index); }
+
+        public new string this[int index]
+        {
+            get { return Get(index); }
         }
 
-        public new string this [string name] {
-            get { return Get (name); }
-            set{ Set (name,value); }
+        public new string this[string name]
+        {
+            get { return Get(name); }
+            set { Set(name, value); }
         }
-        
-        public override string[] AllKeys {
+
+        public override string[] AllKeys
+        {
             get { return wrapped.AllKeys; }
         }
 
-        public override int Count {
+        public override int Count
+        {
             get { return wrapped.Count; }
         }
-        
-        public override NameObjectCollectionBase.KeysCollection Keys {
+
+        public override NameObjectCollectionBase.KeysCollection Keys
+        {
             get { return wrapped.Keys; }
         }
 
-        public new void Add (NameValueCollection c)
+        public new void Add(NameValueCollection c)
         {
-            wrapped.Add (c);
-        }
-            
-        public override void Add (string name, string val)
-        {
-            wrapped.Add (name, val);
-        }
-        
-        public override void Clear ()
-        {
-            wrapped.Clear ();
+            wrapped.Add(c);
         }
 
-        public override string Get (string name)
+        public override void Add(string name, string val)
         {
-            return Validate (name, wrapped.Get (name));
+            wrapped.Add(name, val);
         }
 
-        public override string Get (int index)
+        public override void Clear()
         {
-            return Validate (wrapped.GetKey (index), wrapped.Get (index));
+            wrapped.Clear();
         }
 
-        public override void GetObjectData (SerializationInfo info, StreamingContext context)
+        public override string Get(string name)
         {
-            wrapped.GetObjectData (info, context);
-        }
-        
-        public override IEnumerator GetEnumerator ()
-        {
-            return wrapped.GetEnumerator ();
+            return Validate(name, wrapped.Get(name));
         }
 
-        public override string GetKey (int index)
+        public override string Get(int index)
         {
-            return wrapped.GetKey (index);
+            return Validate(wrapped.GetKey(index), wrapped.Get(index));
         }
 
-        public override string[] GetValues (int index)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            return wrapped.GetValues (index);
+            wrapped.GetObjectData(info, context);
         }
 
-        public override string[] GetValues (string name)
+        public override IEnumerator GetEnumerator()
         {
-            return wrapped.GetValues (name);
+            return wrapped.GetEnumerator();
         }
 
-        public override void OnDeserialization (object sender)
+        public override string GetKey(int index)
         {
-            wrapped.OnDeserialization (sender);
+            return wrapped.GetKey(index);
         }
-        
-        public override void Set (string name, string value)
+
+        public override string[] GetValues(int index)
         {
-            wrapped.Set (name, value);
+            return wrapped.GetValues(index);
         }
-        
-        string Validate (string key, string value)
+
+        public override string[] GetValues(string name)
         {
-            if (String.IsNullOrEmpty (value))
+            return wrapped.GetValues(name);
+        }
+
+        public override void OnDeserialization(object sender)
+        {
+            wrapped.OnDeserialization(sender);
+        }
+
+        public override void Set(string name, string value)
+        {
+            wrapped.Set(name, value);
+        }
+
+        string Validate(string key, string value)
+        {
+            if (String.IsNullOrEmpty(value))
                 return value;
 
-            HttpRequest.ValidateString (key, value, validationSource);
+            HttpRequest.ValidateString(key, value, validationSource);
             return value;
         }
     }

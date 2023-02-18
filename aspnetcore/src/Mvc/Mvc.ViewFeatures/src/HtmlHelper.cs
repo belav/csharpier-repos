@@ -64,7 +64,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         IModelMetadataProvider metadataProvider,
         IViewBufferScope bufferScope,
         HtmlEncoder htmlEncoder,
-        UrlEncoder urlEncoder)
+        UrlEncoder urlEncoder
+    )
     {
         if (htmlGenerator == null)
         {
@@ -188,7 +189,9 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
 
         if (htmlAttributes != null)
         {
-            foreach (var helper in HtmlAttributePropertyHelper.GetProperties(htmlAttributes.GetType()))
+            foreach (
+                var helper in HtmlAttributePropertyHelper.GetProperties(htmlAttributes.GetType())
+            )
             {
                 dictionary[helper.Name] = helper.GetValue(htmlAttributes);
             }
@@ -220,7 +223,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string hostname,
         string fragment,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (linkText == null)
         {
@@ -236,7 +240,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             hostname,
             fragment,
             routeValues,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -259,15 +264,20 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         object routeValues,
         FormMethod method,
         bool? antiforgery,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Push the new FormContext; MvcForm.GenerateEndForm() does the corresponding pop.
-        _viewContext.FormContext = new FormContext
-        {
-            CanRenderAtEndOfForm = true
-        };
+        _viewContext.FormContext = new FormContext { CanRenderAtEndOfForm = true };
 
-        return GenerateForm(actionName, controllerName, routeValues, method, antiforgery, htmlAttributes);
+        return GenerateForm(
+            actionName,
+            controllerName,
+            routeValues,
+            method,
+            antiforgery,
+            htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -276,13 +286,11 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         object routeValues,
         FormMethod method,
         bool? antiforgery,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         // Push the new FormContext; MvcForm.GenerateEndForm() does the corresponding pop.
-        _viewContext.FormContext = new FormContext
-        {
-            CanRenderAtEndOfForm = true
-        };
+        _viewContext.FormContext = new FormContext { CanRenderAtEndOfForm = true };
 
         return GenerateRouteForm(routeName, routeValues, method, antiforgery, htmlAttributes);
     }
@@ -301,7 +309,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             modelExplorer: null,
             expression: expression,
             isChecked: isChecked,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -330,7 +339,11 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             throw new ArgumentNullException(nameof(fullName));
         }
 
-        return NameAndIdProvider.CreateSanitizedId(ViewContext, fullName, IdAttributeDotReplacement);
+        return NameAndIdProvider.CreateSanitizedId(
+            ViewContext,
+            fullName,
+            IdAttributeDotReplacement
+        );
     }
 
     /// <inheritdoc />
@@ -338,28 +351,42 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         string templateName,
         string htmlFieldName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
-        var metadata = ExpressionMetadataProvider.FromStringExpression(expression, ViewData, MetadataProvider);
+        var metadata = ExpressionMetadataProvider.FromStringExpression(
+            expression,
+            ViewData,
+            MetadataProvider
+        );
 
         return GenerateDisplay(
             metadata,
             htmlFieldName ?? GetExpressionText(expression),
             templateName,
-            additionalViewData);
+            additionalViewData
+        );
     }
 
     /// <inheritdoc />
     public string DisplayName(string expression)
     {
-        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(expression, ViewData, MetadataProvider);
+        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
+            expression,
+            ViewData,
+            MetadataProvider
+        );
         return GenerateDisplayName(modelExplorer, expression);
     }
 
     /// <inheritdoc />
     public string DisplayText(string expression)
     {
-        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(expression, ViewData, MetadataProvider);
+        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
+            expression,
+            ViewData,
+            MetadataProvider
+        );
         return GenerateDisplayText(modelExplorer);
     }
 
@@ -368,14 +395,16 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         IEnumerable<SelectListItem> selectList,
         string optionLabel,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         return GenerateDropDown(
             modelExplorer: null,
             expression: expression,
             selectList: selectList,
             optionLabel: optionLabel,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -383,19 +412,26 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         string templateName,
         string htmlFieldName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
-        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(expression, ViewData, MetadataProvider);
+        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
+            expression,
+            ViewData,
+            MetadataProvider
+        );
 
         return GenerateEditor(
             modelExplorer,
             htmlFieldName ?? GetExpressionText(expression),
             templateName,
-            additionalViewData);
+            additionalViewData
+        );
     }
 
     /// <inheritdoc />
-    public IEnumerable<SelectListItem> GetEnumSelectList<TEnum>() where TEnum : struct
+    public IEnumerable<SelectListItem> GetEnumSelectList<TEnum>()
+        where TEnum : struct
     {
         var type = typeof(TEnum);
         var metadata = MetadataProvider.GetMetadataForType(type);
@@ -404,7 +440,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             var message = Resources.FormatHtmlHelper_TypeNotSupported_ForGetEnumSelectList(
                 type.FullName,
                 nameof(Enum).ToLowerInvariant(),
-                nameof(FlagsAttribute));
+                nameof(FlagsAttribute)
+            );
             throw new ArgumentException(message, nameof(TEnum));
         }
 
@@ -425,7 +462,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             var message = Resources.FormatHtmlHelper_TypeNotSupported_ForGetEnumSelectList(
                 enumType.FullName,
                 nameof(Enum).ToLowerInvariant(),
-                nameof(FlagsAttribute));
+                nameof(FlagsAttribute)
+            );
             throw new ArgumentException(message, nameof(enumType));
         }
 
@@ -440,7 +478,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             expression: expression,
             value: value,
             useViewData: (value == null),
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -452,22 +491,27 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     /// <inheritdoc />
     public IHtmlContent Label(string expression, string labelText, object htmlAttributes)
     {
-        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(expression, ViewData, MetadataProvider);
-        return GenerateLabel(
-            modelExplorer,
+        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
             expression,
-            labelText,
-            htmlAttributes);
+            ViewData,
+            MetadataProvider
+        );
+        return GenerateLabel(modelExplorer, expression, labelText, htmlAttributes);
     }
 
     /// <inheritdoc />
-    public IHtmlContent ListBox(string expression, IEnumerable<SelectListItem> selectList, object htmlAttributes)
+    public IHtmlContent ListBox(
+        string expression,
+        IEnumerable<SelectListItem> selectList,
+        object htmlAttributes
+    )
     {
         return GenerateListBox(
             modelExplorer: null,
             expression: expression,
             selectList: selectList,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -480,14 +524,19 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     public async Task<IHtmlContent> PartialAsync(
         string partialViewName,
         object model,
-        ViewDataDictionary viewData)
+        ViewDataDictionary viewData
+    )
     {
         if (partialViewName == null)
         {
             throw new ArgumentNullException(nameof(partialViewName));
         }
 
-        var viewBuffer = new ViewBuffer(_bufferScope, partialViewName, ViewBuffer.PartialViewPageSize);
+        var viewBuffer = new ViewBuffer(
+            _bufferScope,
+            partialViewName,
+            ViewBuffer.PartialViewPageSize
+        );
         using (var writer = new ViewBufferTextWriter(viewBuffer, Encoding.UTF8))
         {
             await RenderPartialCoreAsync(partialViewName, model, viewData, writer);
@@ -496,7 +545,11 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     }
 
     /// <inheritdoc />
-    public Task RenderPartialAsync(string partialViewName, object model, ViewDataDictionary viewData)
+    public Task RenderPartialAsync(
+        string partialViewName,
+        object model,
+        ViewDataDictionary viewData
+    )
     {
         if (partialViewName == null)
         {
@@ -518,7 +571,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         ModelExplorer modelExplorer,
         string htmlFieldName,
         string templateName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         var templateBuilder = new TemplateBuilder(
             _viewEngine,
@@ -529,7 +583,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             htmlFieldName,
             templateName,
             readOnly: true,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
 
         return templateBuilder.Build();
     }
@@ -546,7 +601,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string partialViewName,
         object model,
         ViewDataDictionary viewData,
-        TextWriter writer)
+        TextWriter writer
+    )
     {
         if (partialViewName == null)
         {
@@ -556,11 +612,16 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         var viewEngineResult = _viewEngine.GetView(
             ViewContext.ExecutingFilePath,
             partialViewName,
-            isMainPage: false);
+            isMainPage: false
+        );
         var originalLocations = viewEngineResult.SearchedLocations;
         if (!viewEngineResult.Success)
         {
-            viewEngineResult = _viewEngine.FindView(ViewContext, partialViewName, isMainPage: false);
+            viewEngineResult = _viewEngine.FindView(
+                ViewContext,
+                partialViewName,
+                isMainPage: false
+            );
         }
 
         if (!viewEngineResult.Success)
@@ -568,17 +629,20 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             var locations = string.Empty;
             if (originalLocations.Any())
             {
-                locations = Environment.NewLine + string.Join(Environment.NewLine, originalLocations);
+                locations =
+                    Environment.NewLine + string.Join(Environment.NewLine, originalLocations);
             }
 
             if (viewEngineResult.SearchedLocations.Any())
             {
                 locations +=
-                    Environment.NewLine + string.Join(Environment.NewLine, viewEngineResult.SearchedLocations);
+                    Environment.NewLine
+                    + string.Join(Environment.NewLine, viewEngineResult.SearchedLocations);
             }
 
             throw new InvalidOperationException(
-                Resources.FormatViewEngine_PartialViewNotFound(partialViewName, locations));
+                Resources.FormatViewEngine_PartialViewNotFound(partialViewName, locations)
+            );
         }
 
         var view = viewEngineResult.View;
@@ -601,18 +665,25 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             modelExplorer: null,
             expression: expression,
             value: value,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
-    public IHtmlContent RadioButton(string expression, object value, bool? isChecked, object htmlAttributes)
+    public IHtmlContent RadioButton(
+        string expression,
+        object value,
+        bool? isChecked,
+        object htmlAttributes
+    )
     {
         return GenerateRadioButton(
             modelExplorer: null,
             expression: expression,
             value: value,
             isChecked: isChecked,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -635,7 +706,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string hostName,
         string fragment,
         object routeValues,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (linkText == null)
         {
@@ -650,7 +722,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             hostName,
             fragment,
             routeValues,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -660,14 +733,20 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     }
 
     /// <inheritdoc />
-    public IHtmlContent ValidationMessage(string expression, string message, object htmlAttributes, string tag)
+    public IHtmlContent ValidationMessage(
+        string expression,
+        string message,
+        object htmlAttributes,
+        string tag
+    )
     {
         return GenerateValidationMessage(
             modelExplorer: null,
             expression: expression,
             message: message,
             tag: tag,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -675,7 +754,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         bool excludePropertyErrors,
         string message,
         object htmlAttributes,
-        string tag)
+        string tag
+    )
     {
         return GenerateValidationSummary(excludePropertyErrors, message, htmlAttributes, tag);
     }
@@ -699,9 +779,19 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     }
 
     /// <inheritdoc />
-    public IHtmlContent TextArea(string expression, string value, int rows, int columns, object htmlAttributes)
+    public IHtmlContent TextArea(
+        string expression,
+        string value,
+        int rows,
+        int columns,
+        object htmlAttributes
+    )
     {
-        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(expression, ViewData, MetadataProvider);
+        var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
+            expression,
+            ViewData,
+            MetadataProvider
+        );
         if (value != null)
         {
             // As a special case we allow treating a string value as a model of arbitrary type.
@@ -714,21 +804,28 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
                 MetadataProvider,
                 modelExplorer.Container,
                 modelExplorer.Metadata,
-                value);
+                value
+            );
         }
 
         return GenerateTextArea(modelExplorer, expression, rows, columns, htmlAttributes);
     }
 
     /// <inheritdoc />
-    public IHtmlContent TextBox(string expression, object value, string format, object htmlAttributes)
+    public IHtmlContent TextBox(
+        string expression,
+        object value,
+        string format,
+        object htmlAttributes
+    )
     {
         return GenerateTextBox(
             modelExplorer: null,
             expression: expression,
             value: value,
             format: format,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <inheritdoc />
@@ -762,14 +859,16 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         ModelExplorer modelExplorer,
         string expression,
         bool? isChecked,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var checkbox = _htmlGenerator.GenerateCheckBox(
             ViewContext,
             modelExplorer,
             expression,
             isChecked,
-            htmlAttributes);
+            htmlAttributes
+        );
 
         if (checkbox == null)
         {
@@ -781,14 +880,20 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             return checkbox;
         }
 
-        var hiddenForCheckbox = _htmlGenerator.GenerateHiddenForCheckbox(ViewContext, modelExplorer, expression);
+        var hiddenForCheckbox = _htmlGenerator.GenerateHiddenForCheckbox(
+            ViewContext,
+            modelExplorer,
+            expression
+        );
         if (hiddenForCheckbox == null)
         {
             return HtmlString.Empty;
         }
 
-        if (!hiddenForCheckbox.Attributes.ContainsKey("name") &&
-            checkbox.Attributes.TryGetValue("name", out var name))
+        if (
+            !hiddenForCheckbox.Attributes.ContainsKey("name")
+            && checkbox.Attributes.TryGetValue("name", out var name)
+        )
         {
             // The checkbox and hidden elements should have the same name attribute value. Attributes will match
             // if both are present because both have a generated value. Reach here in the special case where user
@@ -796,7 +901,10 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             hiddenForCheckbox.MergeAttribute("name", name);
         }
 
-        if (ViewContext.CheckBoxHiddenInputRenderMode == CheckBoxHiddenInputRenderMode.EndOfForm && ViewContext.FormContext.CanRenderAtEndOfForm)
+        if (
+            ViewContext.CheckBoxHiddenInputRenderMode == CheckBoxHiddenInputRenderMode.EndOfForm
+            && ViewContext.FormContext.CanRenderAtEndOfForm
+        )
         {
             ViewContext.FormContext.EndOfFormContent.Add(hiddenForCheckbox);
             return checkbox;
@@ -823,7 +931,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         // We don't call ModelMetadata.GetDisplayName here because
         // we want to fall back to the field name rather than the ModelType.
         // This is similar to how the GenerateLabel get the text of a label.
-        var resolvedDisplayName = modelExplorer.Metadata.DisplayName ?? modelExplorer.Metadata.PropertyName;
+        var resolvedDisplayName =
+            modelExplorer.Metadata.DisplayName ?? modelExplorer.Metadata.PropertyName;
         if (resolvedDisplayName == null && expression != null)
         {
             var index = expression.LastIndexOf('.');
@@ -868,7 +977,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         IEnumerable<SelectListItem> selectList,
         string optionLabel,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateSelect(
             ViewContext,
@@ -877,7 +987,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             expression,
             selectList,
             allowMultiple: false,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -898,7 +1009,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         ModelExplorer modelExplorer,
         string htmlFieldName,
         string templateName,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         var templateBuilder = new TemplateBuilder(
             _viewEngine,
@@ -909,7 +1021,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             htmlFieldName,
             templateName,
             readOnly: false,
-            additionalViewData: additionalViewData);
+            additionalViewData: additionalViewData
+        );
 
         return templateBuilder.Build();
     }
@@ -949,7 +1062,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         object routeValues,
         FormMethod method,
         bool? antiforgery,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateForm(
             ViewContext,
@@ -957,7 +1071,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             controllerName,
             routeValues,
             GetFormMethodString(method),
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder != null)
         {
             tagBuilder.TagRenderMode = TagRenderMode.StartTag;
@@ -967,7 +1082,9 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         var shouldGenerateAntiforgery = antiforgery ?? method != FormMethod.Get;
         if (shouldGenerateAntiforgery)
         {
-            ViewContext.FormContext.EndOfFormContent.Add(_htmlGenerator.GenerateAntiforgery(ViewContext));
+            ViewContext.FormContext.EndOfFormContent.Add(
+                _htmlGenerator.GenerateAntiforgery(ViewContext)
+            );
         }
 
         return CreateForm();
@@ -1006,14 +1123,16 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         object routeValues,
         FormMethod method,
         bool? antiforgery,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateRouteForm(
             ViewContext,
             routeName,
             routeValues,
             GetFormMethodString(method),
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder != null)
         {
             tagBuilder.TagRenderMode = TagRenderMode.StartTag;
@@ -1023,7 +1142,9 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         var shouldGenerateAntiforgery = antiforgery ?? method != FormMethod.Get;
         if (shouldGenerateAntiforgery)
         {
-            ViewContext.FormContext.EndOfFormContent.Add(_htmlGenerator.GenerateAntiforgery(ViewContext));
+            ViewContext.FormContext.EndOfFormContent.Add(
+                _htmlGenerator.GenerateAntiforgery(ViewContext)
+            );
         }
 
         return CreateForm();
@@ -1046,7 +1167,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         object value,
         bool useViewData,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateHidden(
             ViewContext,
@@ -1054,7 +1176,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             expression,
             value,
             useViewData,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1090,7 +1213,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         ModelExplorer modelExplorer,
         string expression,
         string labelText,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (modelExplorer == null)
         {
@@ -1102,7 +1226,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             modelExplorer,
             expression,
             labelText,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1118,9 +1243,11 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
                 // Element has no content and no attributes.
                 return HtmlString.Empty;
             }
-            else if (tagBuilder.Attributes.Count == 1 &&
-                tagBuilder.Attributes.TryGetValue("for", out var forAttribute) &&
-                string.IsNullOrEmpty(forAttribute))
+            else if (
+                tagBuilder.Attributes.Count == 1
+                && tagBuilder.Attributes.TryGetValue("for", out var forAttribute)
+                && string.IsNullOrEmpty(forAttribute)
+            )
             {
                 // Element has no content and only an empty (therefore useless) "for" attribute.
                 return HtmlString.Empty;
@@ -1145,7 +1272,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         ModelExplorer modelExplorer,
         string expression,
         IEnumerable<SelectListItem> selectList,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateSelect(
             ViewContext,
@@ -1154,7 +1282,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             expression: expression,
             selectList: selectList,
             allowMultiple: true,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1189,14 +1318,16 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         ModelExplorer modelExplorer,
         string expression,
         object value,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GeneratePassword(
             ViewContext,
             modelExplorer,
             expression,
             value,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1222,7 +1353,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         object value,
         bool? isChecked,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateRadioButton(
             ViewContext,
@@ -1230,7 +1362,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             expression,
             value,
             isChecked,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1256,7 +1389,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         int rows,
         int columns,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateTextArea(
             ViewContext,
@@ -1264,7 +1398,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             expression,
             rows,
             columns,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1290,7 +1425,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         object value,
         string format,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateTextBox(
             ViewContext,
@@ -1298,7 +1434,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             expression,
             value,
             format,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1324,7 +1461,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         string expression,
         string message,
         string tag,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateValidationMessage(
             ViewContext,
@@ -1332,7 +1470,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             expression,
             message,
             tag,
-            htmlAttributes);
+            htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1356,14 +1495,16 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         bool excludePropertyErrors,
         string message,
         object htmlAttributes,
-        string tag)
+        string tag
+    )
     {
         var tagBuilder = _htmlGenerator.GenerateValidationSummary(
             ViewContext,
             excludePropertyErrors,
             message,
             headerTag: tag,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
         if (tagBuilder == null)
         {
             return HtmlString.Empty;
@@ -1380,11 +1521,16 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     /// <param name="format">The format.</param>
     /// <param name="useViewData">Whether to use view data.</param>
     /// <returns>The value.</returns>
-    protected virtual string GenerateValue(string expression, object value, string format, bool useViewData)
+    protected virtual string GenerateValue(
+        string expression,
+        object value,
+        string format,
+        bool useViewData
+    )
     {
         var fullName = NameAndIdProvider.GetFullHtmlFieldName(ViewContext, expression);
-        var attemptedValue =
-            (string)DefaultHtmlGenerator.GetModelStateValue(ViewContext, fullName, typeof(string));
+        var attemptedValue = (string)
+            DefaultHtmlGenerator.GetModelStateValue(ViewContext, fullName, typeof(string));
 
         string resolvedValue;
         if (attemptedValue != null)
@@ -1430,7 +1576,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             var message = Resources.FormatHtmlHelper_TypeNotSupported_ForGetEnumSelectList(
                 metadata.ModelType.FullName,
                 nameof(Enum).ToLowerInvariant(),
-                nameof(FlagsAttribute));
+                nameof(FlagsAttribute)
+            );
             throw new ArgumentException(message, nameof(metadata));
         }
 
@@ -1448,7 +1595,10 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             {
                 if (!groupList.ContainsKey(keyValuePair.Key.Group))
                 {
-                    groupList[keyValuePair.Key.Group] = new SelectListGroup() { Name = keyValuePair.Key.Group };
+                    groupList[keyValuePair.Key.Group] = new SelectListGroup()
+                    {
+                        Name = keyValuePair.Key.Group
+                    };
                 }
 
                 selectListItem.Group = groupList[keyValuePair.Key.Group];
@@ -1463,6 +1613,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     private static string GetExpressionText(string expression)
     {
         // If it's exactly "model", then give them an empty string, to replicate the lambda behavior.
-        return string.Equals(expression, "model", StringComparison.OrdinalIgnoreCase) ? string.Empty : expression;
+        return string.Equals(expression, "model", StringComparison.OrdinalIgnoreCase)
+            ? string.Empty
+            : expression;
     }
 }

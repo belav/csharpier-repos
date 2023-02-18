@@ -4,22 +4,26 @@
 using System;
 using System.IO;
 
-interface IFoo {
+interface IFoo
+{
     void foo();
 }
 
-class My {
+class My
+{
     static int Main()
     {
-        try {
-           IFoo s = null;
-           s.foo();           
+        try
+        {
+            IFoo s = null;
+            s.foo();
         }
-        catch (NullReferenceException) {
+        catch (NullReferenceException)
+        {
             Console.WriteLine("Successfully caught a null reference exception.");
             return 100;
         }
-        
+
         Console.WriteLine("Failed!!");
         return -1;
     }

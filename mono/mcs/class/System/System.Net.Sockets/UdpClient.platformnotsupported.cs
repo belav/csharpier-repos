@@ -33,214 +33,239 @@ namespace System.Net.Sockets
 {
     public class UdpClient : IDisposable
     {
-        const string EXCEPTION_MESSAGE = "System.Net.Sockets.UdpClient is not supported on the current platform.";
+        const string EXCEPTION_MESSAGE =
+            "System.Net.Sockets.UdpClient is not supported on the current platform.";
 
-        public UdpClient ()
+        public UdpClient()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
         public UdpClient(AddressFamily family)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public UdpClient (int port)
+        public UdpClient(int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public UdpClient (IPEndPoint localEP)
+        public UdpClient(IPEndPoint localEP)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public UdpClient (int port, AddressFamily family)
+        public UdpClient(int port, AddressFamily family)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public UdpClient (string hostname, int port)
+        public UdpClient(string hostname, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void Close ()
+        public void Close()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void Connect (IPEndPoint endPoint)
+        public void Connect(IPEndPoint endPoint)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void Connect (IPAddress addr, int port)
+        public void Connect(IPAddress addr, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void Connect (string hostname, int port)
+        public void Connect(string hostname, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void DropMulticastGroup (IPAddress multicastAddr)
+        public void DropMulticastGroup(IPAddress multicastAddr)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void DropMulticastGroup (IPAddress multicastAddr, int ifindex)
+        public void DropMulticastGroup(IPAddress multicastAddr, int ifindex)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void JoinMulticastGroup (IPAddress multicastAddr)
+        public void JoinMulticastGroup(IPAddress multicastAddr)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void JoinMulticastGroup (int ifindex, IPAddress multicastAddr)
+        public void JoinMulticastGroup(int ifindex, IPAddress multicastAddr)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void JoinMulticastGroup (IPAddress multicastAddr, int timeToLive)
+        public void JoinMulticastGroup(IPAddress multicastAddr, int timeToLive)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public void JoinMulticastGroup (IPAddress multicastAddr, IPAddress localAddress)
+        public void JoinMulticastGroup(IPAddress multicastAddr, IPAddress localAddress)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public byte [] Receive (ref IPEndPoint remoteEP)
+        public byte[] Receive(ref IPEndPoint remoteEP)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public int Send (byte [] dgram, int bytes)
+        public int Send(byte[] dgram, int bytes)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public int Send (byte [] dgram, int bytes, IPEndPoint endPoint)
+        public int Send(byte[] dgram, int bytes, IPEndPoint endPoint)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public int Send (byte [] dgram, int bytes, string hostname, int port)
+        public int Send(byte[] dgram, int bytes, string hostname, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public IAsyncResult BeginSend (byte[] datagram, int bytes, AsyncCallback requestCallback, object state)
+        public IAsyncResult BeginSend(
+            byte[] datagram,
+            int bytes,
+            AsyncCallback requestCallback,
+            object state
+        )
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public IAsyncResult BeginSend (byte[] datagram, int bytes, IPEndPoint endPoint, AsyncCallback requestCallback, object state)
+        public IAsyncResult BeginSend(
+            byte[] datagram,
+            int bytes,
+            IPEndPoint endPoint,
+            AsyncCallback requestCallback,
+            object state
+        )
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public IAsyncResult BeginSend (byte[] datagram, int bytes, string hostname, int port, AsyncCallback requestCallback, object state)
+        public IAsyncResult BeginSend(
+            byte[] datagram,
+            int bytes,
+            string hostname,
+            int port,
+            AsyncCallback requestCallback,
+            object state
+        )
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public int EndSend (IAsyncResult asyncResult)
+        public int EndSend(IAsyncResult asyncResult)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public IAsyncResult BeginReceive (AsyncCallback requestCallback, object state)
+        public IAsyncResult BeginReceive(AsyncCallback requestCallback, object state)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public byte[] EndReceive (IAsyncResult asyncResult, ref IPEndPoint remoteEP)
+        public byte[] EndReceive(IAsyncResult asyncResult, ref IPEndPoint remoteEP)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        protected bool Active {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public Socket Client {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int Available {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool DontFragment {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool EnableBroadcast {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool ExclusiveAddressUse {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool MulticastLoopback {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public short Ttl {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public void AllowNatTraversal (bool allowed)
+        protected bool Active
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void Dispose ()
+        public Socket Client
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        protected virtual void Dispose (bool disposing)
+        public int Available
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        ~UdpClient ()
+        public bool DontFragment
         {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public Task<UdpReceiveResult> ReceiveAsync ()
+        public bool EnableBroadcast
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public Task<int> SendAsync (byte[] datagram, int bytes)
+        public bool ExclusiveAddressUse
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public Task<int> SendAsync (byte[] datagram, int bytes, IPEndPoint endPoint)
+        public bool MulticastLoopback
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public Task<int> SendAsync (byte[] datagram, int bytes, string hostname, int port)
+        public short Ttl
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
+        public void AllowNatTraversal(bool allowed)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void Dispose()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        ~UdpClient() { }
+
+        public Task<UdpReceiveResult> ReceiveAsync()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public Task<int> SendAsync(byte[] datagram, int bytes)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public Task<int> SendAsync(byte[] datagram, int bytes, IPEndPoint endPoint)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public Task<int> SendAsync(byte[] datagram, int bytes, string hostname, int port)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
     }
 }

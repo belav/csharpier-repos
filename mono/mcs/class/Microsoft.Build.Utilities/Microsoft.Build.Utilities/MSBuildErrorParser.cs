@@ -57,25 +57,29 @@ namespace Microsoft.Build.Utilities
         //  code: error code, no whietspace or punctuation
         //  message: arbitraty text, no restrictions
         //
-        public static Result TryParseLine (string line)
+        public static Result TryParseLine(string line)
         {
-            int originEnd, originStart = 0;
-            var result = new Result ();
+            int originEnd,
+                originStart = 0;
+            var result = new Result();
 
-            MoveNextNonSpace (line, ref originStart);
+            MoveNextNonSpace(line, ref originStart);
 
             if (originStart >= line.Length)
                 return null;
 
             //find the origin section
             //the filename may include a colon for Windows drive e.g. C:\foo, so ignore colon in first 2 chars
-            if (line[originStart] != ':') {
+            if (line[originStart] != ':')
+            {
                 if (originStart + 2 >= line.Length)
                     return null;
 
-                if ((originEnd = line.IndexOf (':', originStart + 2) - 1) < 0)
+                if ((originEnd = line.IndexOf(':', originStart + 2) - 1) < 0)
                     return null;
-            } else {
+            }
+            else
+            {
                 originEnd = originStart;
             }
 
@@ -84,43 +88,50 @@ namespace Microsoft.Build.Utilities
             if (categoryStart > line.Length)
                 return null;
 
-            MovePrevNonSpace (line, ref originEnd);
+            MovePrevNonSpace(line, ref originEnd);
 
             //if there is no origin section, then we can't parse the message
             if (originEnd < 0 || originEnd < originStart)
                 return null;
 
             //find the category section, if there is one
-            MoveNextNonSpace (line, ref categoryStart);
+            MoveNextNonSpace(line, ref categoryStart);
 
-            int categoryEnd = line.IndexOf (':', categoryStart) - 1;
+            int categoryEnd = line.IndexOf(':', categoryStart) - 1;
             int messageStart = categoryEnd + 2;
 
-            if (categoryEnd >= 0) {
-                MovePrevNonSpace (line, ref categoryEnd);
+            if (categoryEnd >= 0)
+            {
+                MovePrevNonSpace(line, ref categoryEnd);
                 if (categoryEnd <= categoryStart)
                     categoryEnd = -1;
             }
 
             //if there is a category section and it parses
-            if (categoryEnd > 0 && ParseCategory (line, categoryStart, categoryEnd, result)) {
+            if (categoryEnd > 0 && ParseCategory(line, categoryStart, categoryEnd, result))
+            {
                 //then parse the origin section
-                if (originEnd > originStart && !ParseOrigin (line, originStart, originEnd, result))
+                if (originEnd > originStart && !ParseOrigin(line, originStart, originEnd, result))
                     return null;
-            } else {
+            }
+            else
+            {
                 //there is no origin, parse the origin section as if it were the category
-                if (!ParseCategory (line, originStart, originEnd, result))
+                if (!ParseCategory(line, originStart, originEnd, result))
                     return null;
                 messageStart = categoryStart;
             }
 
             //read the remaining message
-            MoveNextNonSpace (line, ref messageStart);
+            MoveNextNonSpace(line, ref messageStart);
             int messageEnd = line.Length - 1;
-            MovePrevNonSpace (line, ref messageEnd, messageStart);
-            if (messageEnd > messageStart) {
-                result.Message = line.Substring (messageStart, messageEnd - messageStart + 1);
-            } else {
+            MovePrevNonSpace(line, ref messageEnd, messageStart);
+            if (messageEnd > messageStart)
+            {
+                result.Message = line.Substring(messageStart, messageEnd - messageStart + 1);
+            }
+            else
+            {
                 result.Message = "";
             }
 
@@ -128,40 +139,47 @@ namespace Microsoft.Build.Utilities
         }
 
         // filename (line,col) | tool :
-        static bool ParseOrigin (string line, int start, int end, Result result)
+        static bool ParseOrigin(string line, int start, int end, Result result)
         {
             // no line/col
-            if (line [end] != ')') {
-                result.Origin = line.Substring (start, end - start + 1);
+            if (line[end] != ')')
+            {
+                result.Origin = line.Substring(start, end - start + 1);
                 return true;
             }
 
             //scan back for matching (, assuming at least one char between them
-            int posStart = line.LastIndexOf ('(', end - 2, end - start - 2);
+            int posStart = line.LastIndexOf('(', end - 2, end - start - 2);
             if (posStart < 0)
                 return false;
 
-            if (!ParsePosition (line, posStart + 1, end, result)) {
-                result.Origin = line.Substring (start, end - start + 1);
+            if (!ParsePosition(line, posStart + 1, end, result))
+            {
+                result.Origin = line.Substring(start, end - start + 1);
                 return true;
             }
 
             end = posStart - 1;
-            MovePrevNonSpace (line, ref end, start);
+            MovePrevNonSpace(line, ref end, start);
 
-            result.Origin = line.Substring (start, end - start + 1);
+            result.Origin = line.Substring(start, end - start + 1);
             return true;
         }
 
-        static bool ParseLineColVal (string str, out int val)
+        static bool ParseLineColVal(string str, out int val)
         {
-            try {
-                val = int.Parse (str);
+            try
+            {
+                val = int.Parse(str);
                 return true;
-            } catch (OverflowException) {
+            }
+            catch (OverflowException)
+            {
                 val = 0;
                 return true;
-            } catch (FormatException) {
+            }
+            catch (FormatException)
+            {
                 val = 0;
                 return false;
             }
@@ -179,43 +197,52 @@ namespace Microsoft.Build.Utilities
         // Any other characters abort parsing and the (...) gets treated as pert of the filename.
         // Overflows are silently treated as zeroes.
         //
-        static bool ParsePosition (string str, int start, int end, Result result)
+        static bool ParsePosition(string str, int start, int end, Result result)
         {
-            int line = 0, col = 0, endLine = 0, endCol = 0;
+            int line = 0,
+                col = 0,
+                endLine = 0,
+                endCol = 0;
 
-            var a = str.Substring (start, end - start).Split (',');
+            var a = str.Substring(start, end - start).Split(',');
 
             if (a.Length > 4 || a.Length == 3)
                 return true;
 
-            if (a.Length == 4) {
+            if (a.Length == 4)
+            {
                 bool valid =
-                    ParseLineColVal (a [0], out line) &&
-                    ParseLineColVal (a [1], out col) &&
-                    ParseLineColVal (a [2], out endLine) &&
-                    ParseLineColVal (a [3], out endCol);
+                    ParseLineColVal(a[0], out line)
+                    && ParseLineColVal(a[1], out col)
+                    && ParseLineColVal(a[2], out endLine)
+                    && ParseLineColVal(a[3], out endCol);
                 if (!valid)
                     return false;
-            } else {
-                var b = a [0].Split ('-');
+            }
+            else
+            {
+                var b = a[0].Split('-');
                 if (b.Length > 2)
                     return true;
-                if (!ParseLineColVal (b [0], out line))
+                if (!ParseLineColVal(b[0], out line))
                     return false;
-                if (b.Length == 2) {
+                if (b.Length == 2)
+                {
                     if (a.Length == 2)
                         return true;
-                    if (!ParseLineColVal (b [1], out endLine))
+                    if (!ParseLineColVal(b[1], out endLine))
                         return false;
                 }
-                if (a.Length == 2) {
-                    var c = a [1].Split ('-');
+                if (a.Length == 2)
+                {
+                    var c = a[1].Split('-');
                     if (c.Length > 2)
                         return true;
-                    if (!ParseLineColVal (c [0], out col))
+                    if (!ParseLineColVal(c[0], out col))
                         return false;
-                    if (c.Length == 2) {
-                        if (!ParseLineColVal (c [1], out endCol))
+                    if (c.Length == 2)
+                    {
+                        if (!ParseLineColVal(c[1], out endCol))
                             return false;
                     }
                 }
@@ -228,56 +255,59 @@ namespace Microsoft.Build.Utilities
             return true;
         }
 
-        static bool ParseCategory (string line, int start, int end, Result result)
+        static bool ParseCategory(string line, int start, int end, Result result)
         {
             int idx = end;
-            MovePrevWordStart (line, ref idx, start);
+            MovePrevWordStart(line, ref idx, start);
             if (idx < start + 1)
                 return false;
 
-            string code = line.Substring (idx, end - idx + 1);
+            string code = line.Substring(idx, end - idx + 1);
 
             idx--;
-            MovePrevNonSpace (line, ref idx, start);
+            MovePrevNonSpace(line, ref idx, start);
             end = idx;
-            MovePrevWordStart (line, ref idx, start);
+            MovePrevWordStart(line, ref idx, start);
             if (idx < start)
                 return false;
 
-            string category = line.Substring (idx , end - idx + 1);
-            if (string.Equals (category, "error", StringComparison.OrdinalIgnoreCase))
+            string category = line.Substring(idx, end - idx + 1);
+            if (string.Equals(category, "error", StringComparison.OrdinalIgnoreCase))
                 result.IsError = true;
-            else if (!string.Equals (category, "warning", StringComparison.OrdinalIgnoreCase))
+            else if (!string.Equals(category, "warning", StringComparison.OrdinalIgnoreCase))
                 return false;
 
             result.Code = code;
 
             idx--;
-            if (idx > start) {
-                MovePrevNonSpace (line, ref idx, start);
-                result.Subcategory = line.Substring (start, idx - start + 1);
-            } else {
+            if (idx > start)
+            {
+                MovePrevNonSpace(line, ref idx, start);
+                result.Subcategory = line.Substring(start, idx - start + 1);
+            }
+            else
+            {
                 result.Subcategory = "";
             }
 
             return true;
         }
 
-        static void MoveNextNonSpace (string s, ref int idx)
+        static void MoveNextNonSpace(string s, ref int idx)
         {
-            while (idx < s.Length && char.IsWhiteSpace (s[idx]))
+            while (idx < s.Length && char.IsWhiteSpace(s[idx]))
                 idx++;
         }
 
-        static void MovePrevNonSpace (string s, ref int idx, int min = 0)
+        static void MovePrevNonSpace(string s, ref int idx, int min = 0)
         {
-            while (idx > min && char.IsWhiteSpace (s[idx]))
+            while (idx > min && char.IsWhiteSpace(s[idx]))
                 idx--;
         }
 
-        static void MovePrevWordStart (string s, ref int idx, int min = 0)
+        static void MovePrevWordStart(string s, ref int idx, int min = 0)
         {
-            while (idx > min && char.IsLetterOrDigit (s[idx - 1]))
+            while (idx > min && char.IsLetterOrDigit(s[idx - 1]))
                 idx--;
         }
     }

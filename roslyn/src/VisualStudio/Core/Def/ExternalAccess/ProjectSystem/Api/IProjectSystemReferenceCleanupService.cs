@@ -17,16 +17,18 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.ProjectSystem.A
         /// </summary>
         Task<ImmutableArray<ProjectSystemReferenceInfo>> GetProjectReferencesAsync(
             string projectPath,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
-        /// Updates the project’s references by removing or marking references as
+        /// Updates the projectï¿½s references by removing or marking references as
         /// TreatAsUsed in the project file.
         /// </summary>
         /// <returns>True, if the reference was updated.</returns>
         Task<bool> TryUpdateReferenceAsync(
             string projectPath,
             ProjectSystemReferenceUpdate referenceUpdate,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

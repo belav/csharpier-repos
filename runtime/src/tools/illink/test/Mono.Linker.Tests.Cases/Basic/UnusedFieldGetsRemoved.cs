@@ -4,20 +4,18 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     class UnusedFieldGetsRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            new B ().Method ();
+            new B().Method();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class B
         {
             public int _unused;
 
             [Kept]
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
     }
 }

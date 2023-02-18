@@ -4,34 +4,32 @@
 
 using System;
 
-struct S
-{
-}
+struct S { }
 
 class C2
 {
     S s;
-    
-    void Foo ()
+
+    void Foo()
     {
         Func<string> f = s.ToString;
-        Console.WriteLine (f);
+        Console.WriteLine(f);
     }
 }
 
-[Foo (Product = "Mono")]
+[Foo(Product = "Mono")]
 class Program
 {
     S s;
-    
-    void Test ()
+
+    void Test()
     {
-        s.ToString ();
+        s.ToString();
     }
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        new Program ().Test ();
+        new Program().Test();
     }
 }
 
@@ -39,7 +37,5 @@ class FooAttribute : Attribute
 {
     public string Product;
 
-    public FooAttribute ()
-    {
-    }
+    public FooAttribute() { }
 }

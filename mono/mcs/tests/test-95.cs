@@ -1,14 +1,12 @@
-class X {
-
+class X
+{
     double d = 0;
 
-    X ()
-    {
-    }
+    X() { }
 
-    public static int Main ()
+    public static int Main()
     {
-        X x = new X ();
+        X x = new X();
 
         if (x.d != 0)
             return 1;

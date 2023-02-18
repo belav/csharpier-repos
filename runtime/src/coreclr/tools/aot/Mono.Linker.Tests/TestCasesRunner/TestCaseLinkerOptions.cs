@@ -27,12 +27,13 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public bool IlcFrameworkCompilation;
 
-        public List<KeyValuePair<string, string[]>> AdditionalArguments = new List<KeyValuePair<string, string[]>> ();
+        public List<KeyValuePair<string, string[]>> AdditionalArguments =
+            new List<KeyValuePair<string, string[]>>();
 
-        public List<string> Descriptors = new List<string> ();
+        public List<string> Descriptors = new List<string>();
 
-        public List<string> Substitutions = new List<string> ();
+        public List<string> Substitutions = new List<string>();
 
-        public List<string> LinkAttributes = new List<string> ();
+        public List<string> LinkAttributes = new List<string>();
     }
 }

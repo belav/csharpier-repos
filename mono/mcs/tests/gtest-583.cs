@@ -2,8 +2,8 @@
 
 public class Test
 {
-    public static void Main ()
+    public static void Main()
     {
-        new C<short> ();
+        new C<short>();
     }
 }

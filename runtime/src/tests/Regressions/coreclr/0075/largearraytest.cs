@@ -11,23 +11,25 @@ using System;
 
 public class LargeArrayTest
 {
-    
-    public static int Main() 
+    public static int Main()
     {
         int lowerBound = 100;
 
-        if (!TestLibrary.Utilities.IsWindows) lowerBound = 35;
+        if (!TestLibrary.Utilities.IsWindows)
+            lowerBound = 35;
 
         TestLibrary.TestFramework.BeginTestCase("Large array test");
 
-        TestLibrary.TestFramework.BeginScenario("Allocate arrays of values Int32.MaxValue to Int32.MaxValue-" + lowerBound);
+        TestLibrary.TestFramework.BeginScenario(
+            "Allocate arrays of values Int32.MaxValue to Int32.MaxValue-" + lowerBound
+        );
 
-        for (int i=0; i<= lowerBound; i++)
+        for (int i = 0; i <= lowerBound; i++)
         {
             try
             {
-                TestLibrary.Logging.Write("now try Int32.MaxValue-"+i+": ");
-                Array a = Array.CreateInstance((new byte().GetType()), Int32.MaxValue-i);
+                TestLibrary.Logging.Write("now try Int32.MaxValue-" + i + ": ");
+                Array a = Array.CreateInstance((new byte().GetType()), Int32.MaxValue - i);
                 TestLibrary.Logging.WriteLine("" + a.GetLength(0));
                 a = null; // need to null a, or we hit VSWhidbey 135712
             }
@@ -35,7 +37,7 @@ public class LargeArrayTest
             {
                 TestLibrary.TestFramework.LogInformation("");
                 TestLibrary.TestFramework.LogInformation("" + e.Message);
-            } 
+            }
             catch (Exception e)
             {
                 TestLibrary.TestFramework.LogError("000", "");
@@ -53,5 +55,4 @@ public class LargeArrayTest
         TestLibrary.TestFramework.LogInformation("Test Passed!");
         return 100;
     }
-
 }

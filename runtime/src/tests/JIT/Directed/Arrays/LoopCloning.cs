@@ -11,12 +11,15 @@ public class Program
     public static unsafe int Main()
     {
         int result = 0;
-        try {
+        try
+        {
             test_up_big(new int[10], 5, 2);
-        } catch (IndexOutOfRangeException) {
+        }
+        catch (IndexOutOfRangeException)
+        {
             result = 100;
         }
-        
+
         return result;
     }
 

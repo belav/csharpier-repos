@@ -4,7 +4,7 @@ using System;
 
 class X
 {
-    static void Main ()
+    static void Main()
     {
         int a = 7;
         +a = 9;

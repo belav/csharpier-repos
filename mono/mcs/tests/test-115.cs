@@ -5,8 +5,9 @@
 //
 using System;
 
-class A {
-    public static explicit operator X (A foo)
+class A
+{
+    public static explicit operator X(A foo)
     {
         X myX = new X();
 
@@ -14,22 +15,24 @@ class A {
     }
 }
 
-class X {
-}
+class X { }
 
-class Y : X {
-}
+class Y : X { }
 
-class blah {
-    public static int Main ()
+class blah
+{
+    public static int Main()
     {
         A testA = new A();
-        
-        X testX = (X) testA;
 
-        try {
-            Y testY = (Y) testA;
-        } catch (InvalidCastException){
+        X testX = (X)testA;
+
+        try
+        {
+            Y testY = (Y)testA;
+        }
+        catch (InvalidCastException)
+        {
             return 0;
         }
 
@@ -39,4 +42,3 @@ class blah {
         return 1;
     }
 }
-        

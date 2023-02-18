@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
         public StringIndentationTag(
             StringIndentationTaggerProvider provider,
             IEditorFormatMap editorFormatMap,
-            ImmutableArray<SnapshotSpan> orderedHoleSpans)
+            ImmutableArray<SnapshotSpan> orderedHoleSpans
+        )
             : base(editorFormatMap)
         {
             _provider = provider;
@@ -34,17 +35,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
 
         protected override Color? GetColor(IWpfTextView view, IEditorFormatMap editorFormatMap)
         {
-            var brush = view.VisualElement.TryFindResource("outlining.verticalrule.foreground") as SolidColorBrush;
+            var brush =
+                view.VisualElement.TryFindResource("outlining.verticalrule.foreground")
+                as SolidColorBrush;
             return brush?.Color;
         }
 
         // Intentionally throwing, we have never supported this facility, and there is no contract around placing
         // these tags in sets or maps.
-        public override int GetHashCode()
-            => throw new NotImplementedException();
+        public override int GetHashCode() => throw new NotImplementedException();
 
-        public override bool Equals(object? obj)
-            => Equals(obj as StringIndentationTag);
+        public override bool Equals(object? obj) => Equals(obj as StringIndentationTag);
 
         public bool Equals(StringIndentationTag? other)
         {

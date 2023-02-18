@@ -42,124 +42,141 @@ namespace MonoTests.System.Runtime.Serialization
     {
         /*
          * This reads a normal .wsdl file from an embedded resource.
-         * 
+         *
          * You can simply fetch them from your server using
          * 'curl http://yourserver/YourService.svc?singleWsdl > YourService.wsdl',
          * add the .wsdl file to Test/Resources/WSDL and add it to `TEST_RESOURCE_FILES'
          * in the Makefile.
          */
 
-        public static MetadataSet GetMetadataSet (string name)
+        public static MetadataSet GetMetadataSet(string name)
         {
-            var asm = Assembly.GetExecutingAssembly ();
-            using (var stream = asm.GetManifestResourceStream (name)) {
+            var asm = Assembly.GetExecutingAssembly();
+            using (var stream = asm.GetManifestResourceStream(name))
+            {
                 if (stream == null)
-                    throw new InvalidOperationException (string.Format (
-                        "Cannot find resource file '{0}'.", name));
-                return GetMetadataSet (stream);
+                    throw new InvalidOperationException(
+                        string.Format("Cannot find resource file '{0}'.", name)
+                    );
+                return GetMetadataSet(stream);
             }
         }
-        
-        public static MetadataSet GetMetadataSet (Stream stream)
+
+        public static MetadataSet GetMetadataSet(Stream stream)
         {
-            var dr = new ContractReference ();
-            var doc = (WebServices.Description.ServiceDescription) dr.ReadDocument (stream);
-            
-            var metadata = new MetadataSet ();
-            metadata.MetadataSections.Add (
-                new MetadataSection (MetadataSection.ServiceDescriptionDialect, "", doc));
+            var dr = new ContractReference();
+            var doc = (WebServices.Description.ServiceDescription)dr.ReadDocument(stream);
+
+            var metadata = new MetadataSet();
+            metadata.MetadataSections.Add(
+                new MetadataSection(MetadataSection.ServiceDescriptionDialect, "", doc)
+            );
             return metadata;
         }
 
-        public static CodeCompileUnit Import (MetadataSet metadata, ImportOptions options)
+        public static CodeCompileUnit Import(MetadataSet metadata, ImportOptions options)
         {
-            var importer = new WsdlImporter (metadata);
-            var xsdImporter = new XsdDataContractImporter ();
+            var importer = new WsdlImporter(metadata);
+            var xsdImporter = new XsdDataContractImporter();
             xsdImporter.Options = options;
-            importer.State.Add (typeof(XsdDataContractImporter), xsdImporter);
-            
-            var contracts = importer.ImportAllContracts ();
-            
-            CodeCompileUnit ccu = new CodeCompileUnit ();
-            var generator = new ServiceContractGenerator (ccu);
+            importer.State.Add(typeof(XsdDataContractImporter), xsdImporter);
+
+            var contracts = importer.ImportAllContracts();
+
+            CodeCompileUnit ccu = new CodeCompileUnit();
+            var generator = new ServiceContractGenerator(ccu);
 
             if (contracts.Count != 1)
-                throw new InvalidOperationException (string.Format (
-                    "Metadata import failed: found {0} contracts.", contracts.Count));
-            
-            var contract = contracts.First ();
-            generator.GenerateServiceContractType (contract);
-            
+                throw new InvalidOperationException(
+                    string.Format("Metadata import failed: found {0} contracts.", contracts.Count)
+                );
+
+            var contract = contracts.First();
+            generator.GenerateServiceContractType(contract);
+
             return ccu;
         }
 
-        public static CodeNamespace Find (this CodeNamespaceCollection collection, string name)
+        public static CodeNamespace Find(this CodeNamespaceCollection collection, string name)
         {
-            foreach (CodeNamespace ns in collection) {
+            foreach (CodeNamespace ns in collection)
+            {
                 if (ns.Name == name)
                     return ns;
             }
-            
+
             return null;
         }
-        
-        public static CodeNamespace FindNamespace (this CodeCompileUnit unit, string name)
+
+        public static CodeNamespace FindNamespace(this CodeCompileUnit unit, string name)
         {
-            foreach (CodeNamespace ns in unit.Namespaces) {
+            foreach (CodeNamespace ns in unit.Namespaces)
+            {
                 if (ns.Name == name)
                     return ns;
             }
-            
+
             return null;
         }
-        
-        public static CodeTypeDeclaration FindType (this CodeNamespace ns, string name)
+
+        public static CodeTypeDeclaration FindType(this CodeNamespace ns, string name)
         {
-            foreach (CodeTypeDeclaration type in ns.Types) {
+            foreach (CodeTypeDeclaration type in ns.Types)
+            {
                 if (type.Name == name)
                     return type;
             }
-            
+
             return null;
         }
-        
-        public static CodeTypeDeclaration FindType (this CodeCompileUnit unit, string name)
+
+        public static CodeTypeDeclaration FindType(this CodeCompileUnit unit, string name)
         {
-            foreach (CodeNamespace ns in unit.Namespaces) {
-                foreach (CodeTypeDeclaration type in ns.Types) {
+            foreach (CodeNamespace ns in unit.Namespaces)
+            {
+                foreach (CodeTypeDeclaration type in ns.Types)
+                {
                     if (type.Name == name)
                         return type;
                 }
             }
-            
+
             return null;
         }
-        
-        public static CodeMemberMethod FindMethod (this CodeTypeDeclaration type, string name)
+
+        public static CodeMemberMethod FindMethod(this CodeTypeDeclaration type, string name)
         {
-            foreach (var member in type.Members) {
+            foreach (var member in type.Members)
+            {
                 var method = member as CodeMemberMethod;
                 if (method == null)
                     continue;
                 if (method.Name == name)
                     return method;
             }
-            
+
             return null;
         }
-        
-        public static CodeMemberMethod FindMethod (this CodeCompileUnit unit, string typeName,
-                                                   string methodName)
+
+        public static CodeMemberMethod FindMethod(
+            this CodeCompileUnit unit,
+            string typeName,
+            string methodName
+        )
         {
-            var type = unit.FindType (typeName);
+            var type = unit.FindType(typeName);
             if (type == null)
                 return null;
-            return type.FindMethod (methodName);
+            return type.FindMethod(methodName);
         }
 
-        public static CodeAttributeDeclaration FindAttribute (this CodeTypeDeclaration type, string name)
+        public static CodeAttributeDeclaration FindAttribute(
+            this CodeTypeDeclaration type,
+            string name
+        )
         {
-            foreach (CodeAttributeDeclaration attr in type.CustomAttributes) {
+            foreach (CodeAttributeDeclaration attr in type.CustomAttributes)
+            {
                 if (attr.Name == name)
                     return attr;
             }
@@ -167,9 +184,13 @@ namespace MonoTests.System.Runtime.Serialization
             return null;
         }
 
-        public static CodeAttributeArgument FindArgument (this CodeAttributeDeclaration attr, string name)
+        public static CodeAttributeArgument FindArgument(
+            this CodeAttributeDeclaration attr,
+            string name
+        )
         {
-            foreach (CodeAttributeArgument arg in attr.Arguments) {
+            foreach (CodeAttributeArgument arg in attr.Arguments)
+            {
                 if (arg.Name == name)
                     return arg;
             }
@@ -180,4 +201,3 @@ namespace MonoTests.System.Runtime.Serialization
 }
 
 #endif
-

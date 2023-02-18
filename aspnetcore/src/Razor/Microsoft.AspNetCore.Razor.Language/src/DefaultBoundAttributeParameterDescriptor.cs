@@ -16,7 +16,8 @@ internal class DefaultBoundAttributeParameterDescriptor : BoundAttributeParamete
         string displayName,
         bool caseSensitive,
         Dictionary<string, string> metadata,
-        RazorDiagnostic[] diagnostics)
+        RazorDiagnostic[] diagnostics
+    )
         : base(kind)
     {
         Name = name;

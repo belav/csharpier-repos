@@ -4,7 +4,7 @@ using System;
 
 public class Foo
 {
-    public static void Main () 
+    public static void Main()
     {
         Comparison<TestClass.A<TestClass.Nested>> b = TestClass.B.Compare;
     }

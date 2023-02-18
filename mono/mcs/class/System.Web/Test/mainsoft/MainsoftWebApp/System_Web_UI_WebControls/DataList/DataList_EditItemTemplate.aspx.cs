@@ -36,11 +36,10 @@ using System.Drawing;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataList_EditItemTemplate
-        : GHTBaseWeb 
+    public class DataList_EditItemTemplate : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,15 +47,14 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
@@ -70,66 +68,77 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest4;
         protected System.Web.UI.WebControls.DataList DataList5;
         protected GHTWebControls.GHTSubTest GHTSubTest5;
-        private static string [] m_data = new String[] {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg"};
-
-        private void Page_Load(object sender, System.EventArgs e) 
+        private static string[] m_data = new String[]
         {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+            "aaa",
+            "bbb",
+            "ccc",
+            "ddd",
+            "eee",
+            "fff",
+            "ggg"
+        };
+
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
-                DataList1.DataSource = m_data;;
-                DataList1.DataBind();;
+                DataList1.DataSource = m_data;
+                ;
+                DataList1.DataBind();
+                ;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest2;
-            try 
+            try
             {
                 Datalist2.DataSource = m_data;
                 Datalist2.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = Ghtsubtest3;
-            try 
+            try
             {
                 Datalist3.DataSource = m_data;
                 Datalist3.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest4;
-            try 
+            try
             {
                 DataList4.DataSource = m_data;
                 DataList4.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest5;
-            try 
+            try
             {
                 DataList5.EditItemTemplate = new EditItemTemplate();
                 DataList5.ItemTemplate = new ItemTemplate();
                 DataList5.DataSource = m_data;
                 DataList5.DataBind();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
@@ -137,33 +146,30 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestEnd();
         }
 
-            // Template for edited items.
-            private class EditItemTemplate : ITemplate
-            {
+        // Template for edited items.
+        private class EditItemTemplate : ITemplate
+        {
+            private Label m_l;
 
-                private Label m_l;
-                public void InstantiateIn(Control container)
-                {
-                    this.m_l = new Label();
-                    this.m_l.BackColor = Color.Aquamarine;
-                    container.Controls.Add(this.m_l);
-                    m_l.DataBinding += new EventHandler(m_l_DataBinding);
-                }
- 
-                private void m_l_DataBinding(object sender, EventArgs e)
-                {
-                    DataListItem item1 = (DataListItem) ((Label) sender).NamingContainer;
-                    this.m_l.Text = (string)(item1.DataItem);
-                }
- 
+            public void InstantiateIn(Control container)
+            {
+                this.m_l = new Label();
+                this.m_l.BackColor = Color.Aquamarine;
+                container.Controls.Add(this.m_l);
+                m_l.DataBinding += new EventHandler(m_l_DataBinding);
             }
+
+            private void m_l_DataBinding(object sender, EventArgs e)
+            {
+                DataListItem item1 = (DataListItem)((Label)sender).NamingContainer;
+                this.m_l.Text = (string)(item1.DataItem);
+            }
+        }
 
         // Template for regular item.
         private class ItemTemplate : ITemplate
         {
-
             private Label m_l;
-
 
             public void InstantiateIn(Control container)
             {
@@ -172,12 +178,12 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 container.Controls.Add(this.m_l);
                 m_l.DataBinding += new EventHandler(m_l_DataBinding);
             }
+
             private void m_l_DataBinding(object sender, EventArgs e)
             {
-                DataListItem item1 = (DataListItem) ((Label) sender).NamingContainer;
+                DataListItem item1 = (DataListItem)((Label)sender).NamingContainer;
                 this.m_l.Text = (string)(item1.DataItem);
             }
- 
         }
     }
 }

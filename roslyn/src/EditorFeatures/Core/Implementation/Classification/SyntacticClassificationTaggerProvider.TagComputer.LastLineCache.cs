@@ -19,16 +19,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             private class LastLineCache : ForegroundThreadAffinitizedObject
             {
                 // this helper class is primarily to improve active typing perf. don't bother to cache
-                // something very big. 
+                // something very big.
                 private const int MaxClassificationNumber = 32;
 
                 // mutating state
                 private SnapshotSpan _span;
                 private readonly ArrayBuilder<ClassifiedSpan> _classifications = new();
 
-                public LastLineCache(IThreadingContext threadingContext) : base(threadingContext)
-                {
-                }
+                public LastLineCache(IThreadingContext threadingContext)
+                    : base(threadingContext) { }
 
                 private void Clear()
                 {
@@ -38,7 +37,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                     _classifications.Clear();
                 }
 
-                public bool TryUseCache(SnapshotSpan span, ArrayBuilder<ClassifiedSpan> classifications)
+                public bool TryUseCache(
+                    SnapshotSpan span,
+                    ArrayBuilder<ClassifiedSpan> classifications
+                )
                 {
                     this.AssertIsForeground();
 

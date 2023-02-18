@@ -2,30 +2,30 @@
 // Line: 14
 // Compiler options: -warnaserror -warn:4
 
-class BaseClass {
-        protected virtual int Value { 
-                get {
-                        return 0;
-                }
-                set { }
-        }
+class BaseClass
+{
+    protected virtual int Value
+    {
+        get { return 0; }
+        set { }
+    }
 }
 
-abstract class DerivedClass: BaseClass {
-        protected new int get_Value () {
-                return 1;
-        }
+abstract class DerivedClass : BaseClass
+{
+    protected new int get_Value()
+    {
+        return 1;
+    }
 }
 
+class ErrorClass : DerivedClass
+{
+    protected override int Value
+    {
+        get { return 0; }
+        set { }
+    }
 
-class ErrorClass: DerivedClass {
-        protected override int Value { 
-                get {
-                        return 0;
-                }
-                set { }
-        }
-
-        static void Main () {}
+    static void Main() { }
 }
-

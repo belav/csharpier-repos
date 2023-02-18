@@ -27,12 +27,20 @@ namespace Moq
     /// </summary>
     internal sealed class ActionObserver : ExpressionReconstructor
     {
-        public override Expression<Action<T>> ReconstructExpression<T>(Action<T> action, object[] ctorArgs = null)
+        public override Expression<Action<T>> ReconstructExpression<T>(
+            Action<T> action,
+            object[] ctorArgs = null
+        )
         {
             using (var matcherObserver = MatcherObserver.Activate())
             {
                 // Create the root recording proxy:
-                var root = (T)CreateProxy(typeof(T), ctorArgs, matcherObserver, out var rootRecorder);
+                var root = (T)CreateProxy(
+                    typeof(T),
+                    ctorArgs,
+                    matcherObserver,
+                    out var rootRecorder
+                );
 
                 Exception error = null;
                 try
@@ -64,8 +72,10 @@ namespace Moq
                         var resultType = invocation.Method.DeclaringType;
                         if (resultType.IsAssignableFrom(body.Type) == false)
                         {
-                            if (AwaitableFactory.TryGet(body.Type) is { } awaitableHandler
-                                && awaitableHandler.ResultType.IsAssignableFrom(resultType))
+                            if (
+                                AwaitableFactory.TryGet(body.Type) is { } awaitableHandler
+                                && awaitableHandler.ResultType.IsAssignableFrom(resultType)
+                            )
                             {
                                 // We are here because the current invocation cannot be chained onto the previous one,
                                 // however it *can* be chained if we assume that there was a `.Result` query on the
@@ -74,7 +84,11 @@ namespace Moq
                                 body = awaitableHandler.CreateResultExpression(body);
                             }
                         }
-                        body = Expression.Call(body, invocation.Method, GetArgumentExpressions(invocation, recorder.Matches.ToArray()));
+                        body = Expression.Call(
+                            body,
+                            invocation.Method,
+                            GetArgumentExpressions(invocation, recorder.Matches.ToArray())
+                        );
                     }
                     else
                     {
@@ -85,7 +99,9 @@ namespace Moq
                                 CultureInfo.CurrentCulture,
                                 Resources.UnsupportedExpressionWithHint,
                                 $"{actionParameterName} => {body.ToStringFixed()}...",
-                                Resources.NextMemberNonInterceptable));
+                                Resources.NextMemberNonInterceptable
+                            )
+                        );
                     }
                 }
 
@@ -94,7 +110,10 @@ namespace Moq
                 // diagnostic purposes:
                 if (error == null)
                 {
-                    return Expression.Lambda<Action<T>>(body.Apply(UpgradePropertyAccessorMethods.Rewriter), rootExpression);
+                    return Expression.Lambda<Action<T>>(
+                        body.Apply(UpgradePropertyAccessorMethods.Rewriter),
+                        rootExpression
+                    );
                 }
                 else
                 {
@@ -103,7 +122,9 @@ namespace Moq
                             CultureInfo.CurrentCulture,
                             Resources.UnsupportedExpressionWithHint,
                             $"{actionParameterName} => {body.ToStringFixed()}...",
-                            error.Message));
+                            error.Message
+                        )
+                    );
                 }
             }
 
@@ -115,14 +136,21 @@ namespace Moq
                 var expressions = new Expression[parameterCount];
                 for (int i = 0; i < parameterCount; ++i)
                 {
-                    expressions[i] = Expression.Constant(invocation.Arguments[i], parameterTypes[i]);
+                    expressions[i] = Expression.Constant(
+                        invocation.Arguments[i],
+                        parameterTypes[i]
+                    );
                 }
 
                 // Now let's override the above constant expressions with argument matchers, if available:
                 if (matches.Length > 0)
                 {
                     int matchIndex = 0;
-                    for (int argumentIndex = 0; matchIndex < matches.Length && argumentIndex < expressions.Length; ++argumentIndex)
+                    for (
+                        int argumentIndex = 0;
+                        matchIndex < matches.Length && argumentIndex < expressions.Length;
+                        ++argumentIndex
+                    )
                     {
                         // We are assuming that by default matchers return `default(T)`. If a matcher was used,
                         // it will have left behind a `default(T)` argument, possibly coerced to the parameter type.
@@ -131,7 +159,10 @@ namespace Moq
                         object defaultValue = defaultValueType.GetDefaultValue();
                         try
                         {
-                            defaultValue = Convert.ChangeType(defaultValue, parameterTypes[argumentIndex]);
+                            defaultValue = Convert.ChangeType(
+                                defaultValue,
+                                parameterTypes[argumentIndex]
+                            );
                         }
                         catch
                         {
@@ -145,12 +176,21 @@ namespace Moq
                             continue;
                         }
 
-                        if (parameterTypes[argumentIndex].IsAssignableFrom(defaultValue?.GetType() ?? defaultValueType))
+                        if (
+                            parameterTypes[argumentIndex].IsAssignableFrom(
+                                defaultValue?.GetType() ?? defaultValueType
+                            )
+                        )
                         {
                             // We found a potential match. (Matcher type is assignment-compatible to parameter type.)
 
-                            if (matchIndex < matches.Length - 1
-                                && !(argumentIndex < expressions.Length - 1 || CanDistribute(matchIndex + 1, argumentIndex + 1)))
+                            if (
+                                matchIndex < matches.Length - 1
+                                && !(
+                                    argumentIndex < expressions.Length - 1
+                                    || CanDistribute(matchIndex + 1, argumentIndex + 1)
+                                )
+                            )
                             {
                                 // We get here if there are more matchers to distribute,
                                 // but we either:
@@ -178,7 +218,9 @@ namespace Moq
                                 CultureInfo.CurrentCulture,
                                 Resources.MatcherAssignmentFailedDuringExpressionReconstruction,
                                 matches.Length,
-                                $"{invocation.Method.DeclaringType.GetFormattedName()}.{invocation.Method.Name}"));
+                                $"{invocation.Method.DeclaringType.GetFormattedName()}.{invocation.Method.Name}"
+                            )
+                        );
                     }
 
                     bool CanDistribute(int msi, int asi)
@@ -187,8 +229,10 @@ namespace Moq
                         var matchType = match.RenderExpression.Type;
                         for (int ai = asi; ai < expressions.Length; ++ai)
                         {
-                            if (parameterTypes[ai].IsAssignableFrom(matchType)
-                                && CanDistribute(msi + 1, ai + 1))
+                            if (
+                                parameterTypes[ai].IsAssignableFrom(matchType)
+                                && CanDistribute(msi + 1, ai + 1)
+                            )
                             {
                                 return true;
                             }
@@ -203,10 +247,14 @@ namespace Moq
                     var argument = expressions[i];
                     var parameterType = parameterTypes[i];
 
-                    if (argument.Type == parameterType) continue;
+                    if (argument.Type == parameterType)
+                        continue;
 
                     // nullable type coercion:
-                    if (Nullable.GetUnderlyingType(parameterType) != null && Nullable.GetUnderlyingType(argument.Type) == null)
+                    if (
+                        Nullable.GetUnderlyingType(parameterType) != null
+                        && Nullable.GetUnderlyingType(argument.Type) == null
+                    )
                     {
                         expressions[i] = Expression.Convert(argument, parameterType);
                     }
@@ -216,7 +264,10 @@ namespace Moq
                         expressions[i] = Expression.Convert(argument, parameterType);
                     }
                     // if types don't match exactly and aren't assignment compatible:
-                    else if (argument.Type != parameterType && !parameterType.IsAssignableFrom(argument.Type))
+                    else if (
+                        argument.Type != parameterType
+                        && !parameterType.IsAssignableFrom(argument.Type)
+                    )
                     {
                         expressions[i] = Expression.Convert(argument, parameterType);
                     }
@@ -227,10 +278,21 @@ namespace Moq
         }
 
         // Creates a proxy (way more light-weight than a `Mock<T>`!) with an invocation `Recorder` attached to it.
-        private static IProxy CreateProxy(Type type, object[] ctorArgs, MatcherObserver matcherObserver, out Recorder recorder)
+        private static IProxy CreateProxy(
+            Type type,
+            object[] ctorArgs,
+            MatcherObserver matcherObserver,
+            out Recorder recorder
+        )
         {
             recorder = new Recorder(matcherObserver);
-            return (IProxy)ProxyFactory.Instance.CreateProxy(type, recorder, Type.EmptyTypes, ctorArgs ?? new object[0]);
+            return (IProxy)
+                ProxyFactory.Instance.CreateProxy(
+                    type,
+                    recorder,
+                    Type.EmptyTypes,
+                    ctorArgs ?? new object[0]
+                );
         }
 
         // Records an invocation, mocks return values, and builds a chain to the return value's recorder.
@@ -258,11 +320,16 @@ namespace Moq
                 get
                 {
                     Debug.Assert(this.invocationTimestamp != default);
-                    return this.matcherObserver.GetMatchesBetween(this.creationTimestamp, this.invocationTimestamp);
+                    return this.matcherObserver.GetMatchesBetween(
+                        this.creationTimestamp,
+                        this.invocationTimestamp
+                    );
                 }
             }
 
-            public Recorder Next => (Awaitable.TryGetResultRecursive(this.returnValue) as IProxy)?.Interceptor as Recorder;
+            public Recorder Next =>
+                (Awaitable.TryGetResultRecursive(this.returnValue) as IProxy)?.Interceptor
+                as Recorder;
 
             public void Intercept(Invocation invocation)
             {
@@ -293,16 +360,28 @@ namespace Moq
                     }
                     else if (AwaitableFactory.TryGet(returnType) is { } awaitableFactory)
                     {
-                        var result = CreateProxy(awaitableFactory.ResultType, null, this.matcherObserver, out _);
+                        var result = CreateProxy(
+                            awaitableFactory.ResultType,
+                            null,
+                            this.matcherObserver,
+                            out _
+                        );
                         this.returnValue = awaitableFactory.CreateCompleted(result);
                     }
                     else if (returnType.IsMockable())
                     {
-                        this.returnValue = CreateProxy(returnType, null, this.matcherObserver, out _);
+                        this.returnValue = CreateProxy(
+                            returnType,
+                            null,
+                            this.matcherObserver,
+                            out _
+                        );
                     }
                     else
                     {
-                        throw new NotSupportedException(Resources.LastMemberHasNonInterceptableReturnType);
+                        throw new NotSupportedException(
+                            Resources.LastMemberHasNonInterceptableReturnType
+                        );
                     }
                 }
 

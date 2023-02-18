@@ -38,7 +38,7 @@ namespace System.Windows.Forms
         #endregion
 
         #region Constructors
-        public SelectedGridItemChangedEventArgs ( GridItem oldSel , GridItem newSel )
+        public SelectedGridItemChangedEventArgs(GridItem oldSel, GridItem newSel)
         {
             old_selection = oldSel;
             new_selection = newSel;
@@ -48,18 +48,13 @@ namespace System.Windows.Forms
         #region Public Instance Properties
         public GridItem NewSelection
         {
-            get {
-                return new_selection;
-            }
+            get { return new_selection; }
         }
 
         public GridItem OldSelection
         {
-            get {
-                return old_selection;
-            }
+            get { return old_selection; }
         }
         #endregion    // Public Instance Properties
     }
 }
-

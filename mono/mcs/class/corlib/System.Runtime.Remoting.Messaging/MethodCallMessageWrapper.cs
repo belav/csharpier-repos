@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,97 +34,116 @@ using System;
 using System.Collections;
 using System.Reflection;
 
-namespace System.Runtime.Remoting.Messaging {
-
-    [System.Runtime.InteropServices.ComVisible (true)]
-    public class MethodCallMessageWrapper : InternalMessageWrapper, IMethodCallMessage, IMethodMessage, IMessage
+namespace System.Runtime.Remoting.Messaging
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class MethodCallMessageWrapper
+        : InternalMessageWrapper,
+            IMethodCallMessage,
+            IMethodMessage,
+            IMessage
     {
         object[] _args;
         ArgInfo _inArgInfo;
         DictionaryWrapper _properties;
 
-        public MethodCallMessageWrapper (IMethodCallMessage msg)
-            : base (msg)
+        public MethodCallMessageWrapper(IMethodCallMessage msg)
+            : base(msg)
         {
             _args = ((IMethodCallMessage)WrappedMessage).Args;
-            _inArgInfo = new ArgInfo (msg.MethodBase, ArgInfoType.In);
+            _inArgInfo = new ArgInfo(msg.MethodBase, ArgInfoType.In);
         }
-        
-        public virtual int ArgCount {
+
+        public virtual int ArgCount
+        {
             get { return ((IMethodCallMessage)WrappedMessage).ArgCount; }
         }
 
-        public virtual object [] Args {
+        public virtual object[] Args
+        {
             get { return _args; }
             set { _args = value; }
         }
-        
-        public virtual bool HasVarArgs {
+
+        public virtual bool HasVarArgs
+        {
             get { return ((IMethodCallMessage)WrappedMessage).HasVarArgs; }
         }
 
-        public virtual int InArgCount {
+        public virtual int InArgCount
+        {
             get { return _inArgInfo.GetInOutArgCount(); }
         }
 
-        public virtual object[] InArgs {
-            get { return _inArgInfo.GetInOutArgs (_args); }
+        public virtual object[] InArgs
+        {
+            get { return _inArgInfo.GetInOutArgs(_args); }
         }
-        
-        public virtual LogicalCallContext LogicalCallContext {
+
+        public virtual LogicalCallContext LogicalCallContext
+        {
             get { return ((IMethodCallMessage)WrappedMessage).LogicalCallContext; }
         }
-        
-        public virtual MethodBase MethodBase {
+
+        public virtual MethodBase MethodBase
+        {
             get { return ((IMethodCallMessage)WrappedMessage).MethodBase; }
         }
 
-        public virtual string MethodName {
+        public virtual string MethodName
+        {
             get { return ((IMethodCallMessage)WrappedMessage).MethodName; }
         }
 
-        public virtual object MethodSignature {
+        public virtual object MethodSignature
+        {
             get { return ((IMethodCallMessage)WrappedMessage).MethodSignature; }
         }
-        
-        public virtual IDictionary Properties 
+
+        public virtual IDictionary Properties
         {
-            get 
-            { 
-                if (_properties == null) _properties = new DictionaryWrapper(this, WrappedMessage.Properties);
-                return _properties; 
+            get
+            {
+                if (_properties == null)
+                    _properties = new DictionaryWrapper(this, WrappedMessage.Properties);
+                return _properties;
             }
         }
 
-        public virtual string TypeName {
+        public virtual string TypeName
+        {
             get { return ((IMethodCallMessage)WrappedMessage).TypeName; }
         }
 
-        public virtual string Uri {
+        public virtual string Uri
+        {
             get { return ((IMethodCallMessage)WrappedMessage).Uri; }
-            set {
+            set
+            {
                 IInternalMessage im = WrappedMessage as IInternalMessage;
-                if (im != null) im.Uri = value;
-                else Properties["__Uri"] = value; 
+                if (im != null)
+                    im.Uri = value;
+                else
+                    Properties["__Uri"] = value;
             }
         }
 
-        public virtual object GetArg (int argNum)
+        public virtual object GetArg(int argNum)
         {
             return _args[argNum];
         }
 
-        public virtual string GetArgName (int index)
+        public virtual string GetArgName(int index)
         {
-            return ((IMethodCallMessage)WrappedMessage).GetArgName (index);
+            return ((IMethodCallMessage)WrappedMessage).GetArgName(index);
         }
 
-        public virtual object GetInArg (int argNum)
+        public virtual object GetInArg(int argNum)
         {
-            return _args[_inArgInfo.GetInOutArgIndex (argNum)];
+            return _args[_inArgInfo.GetInOutArgIndex(argNum)];
         }
 
-        public virtual string GetInArgName (int index)
+        public virtual string GetInArgName(int index)
         {
             return _inArgInfo.GetInOutArgName(index);
         }
@@ -132,9 +151,10 @@ namespace System.Runtime.Remoting.Messaging {
         class DictionaryWrapper : MCMDictionary
         {
             IDictionary _wrappedDictionary;
-            static string[] _keys = new string[] {"__Args"};
+            static string[] _keys = new string[] { "__Args" };
 
-            public DictionaryWrapper(IMethodMessage message, IDictionary wrappedDictionary) : base (message)
+            public DictionaryWrapper(IMethodMessage message, IDictionary wrappedDictionary)
+                : base(message)
             {
                 _wrappedDictionary = wrappedDictionary;
                 MethodKeys = _keys;
@@ -145,16 +165,20 @@ namespace System.Runtime.Remoting.Messaging {
                 return _wrappedDictionary;
             }
 
-            protected override void SetMethodProperty (string key, object value)
+            protected override void SetMethodProperty(string key, object value)
             {
-                if (key == "__Args") ((MethodCallMessageWrapper)_message)._args = (object[])value;
-                else base.SetMethodProperty (key, value);
+                if (key == "__Args")
+                    ((MethodCallMessageWrapper)_message)._args = (object[])value;
+                else
+                    base.SetMethodProperty(key, value);
             }
 
-            protected override object GetMethodProperty (string key)
+            protected override object GetMethodProperty(string key)
             {
-                if (key == "__Args") return ((MethodCallMessageWrapper)_message)._args;
-                else return base.GetMethodProperty (key);
+                if (key == "__Args")
+                    return ((MethodCallMessageWrapper)_message)._args;
+                else
+                    return base.GetMethodProperty(key);
             }
         }
     }

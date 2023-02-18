@@ -10,9 +10,10 @@
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-namespace System.Web.Configuration {
-
-    public enum FormsAuthPasswordFormat {
+namespace System.Web.Configuration
+{
+    public enum FormsAuthPasswordFormat
+    {
         Clear,
         SHA1,
         MD5,

@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -27,272 +27,319 @@
 
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.BuildEngine {
-    internal class EventSource : IEventSource {
-        
-        AnyEventHandler            anyEventRaised;
-        BuildFinishedEventHandler    buildFinished;
-        BuildStartedEventHandler    buildStarted;
-        CustomBuildEventHandler        customEventRaised;
-        BuildErrorEventHandler        errorRaised;
-        BuildMessageEventHandler    messageRaised;
-        ProjectFinishedEventHandler    projectFinished;
-        ProjectStartedEventHandler    projectStarted;
-        BuildStatusEventHandler        statusEventRaised;
-        TargetFinishedEventHandler    targetFinished;
-        TargetStartedEventHandler    targetStarted;
-        TaskFinishedEventHandler    taskFinished;
-        TaskStartedEventHandler        taskStarted;
-        BuildWarningEventHandler    warningRaised;
-        bool                onlyLogCriticalEvents;
+namespace Microsoft.Build.BuildEngine
+{
+    internal class EventSource : IEventSource
+    {
+        AnyEventHandler anyEventRaised;
+        BuildFinishedEventHandler buildFinished;
+        BuildStartedEventHandler buildStarted;
+        CustomBuildEventHandler customEventRaised;
+        BuildErrorEventHandler errorRaised;
+        BuildMessageEventHandler messageRaised;
+        ProjectFinishedEventHandler projectFinished;
+        ProjectStartedEventHandler projectStarted;
+        BuildStatusEventHandler statusEventRaised;
+        TargetFinishedEventHandler targetFinished;
+        TargetStartedEventHandler targetStarted;
+        TaskFinishedEventHandler taskFinished;
+        TaskStartedEventHandler taskStarted;
+        BuildWarningEventHandler warningRaised;
+        bool onlyLogCriticalEvents;
 
-        public EventSource ()
+        public EventSource()
         {
             this.onlyLogCriticalEvents = false;
         }
-        
-        public void FireCustomEventRaised (object sender, CustomBuildEventArgs cbea)
+
+        public void FireCustomEventRaised(object sender, CustomBuildEventArgs cbea)
         {
             if (customEventRaised != null)
-                customEventRaised (sender, cbea);
-            FireAnyEvent (sender, cbea);
+                customEventRaised(sender, cbea);
+            FireAnyEvent(sender, cbea);
         }
-        public void FireErrorRaised (object sender, BuildErrorEventArgs beea)
+
+        public void FireErrorRaised(object sender, BuildErrorEventArgs beea)
         {
             if (errorRaised != null)
-                errorRaised (sender, beea);
-            FireAnyEvent (sender, beea);
+                errorRaised(sender, beea);
+            FireAnyEvent(sender, beea);
         }
-        public void FireMessageRaised (object sender, BuildMessageEventArgs bmea)
+
+        public void FireMessageRaised(object sender, BuildMessageEventArgs bmea)
         {
             if (messageRaised != null)
-                messageRaised (sender, bmea);
-            FireAnyEvent (sender, bmea);
+                messageRaised(sender, bmea);
+            FireAnyEvent(sender, bmea);
         }
-        public void FireWarningRaised (object sender, BuildWarningEventArgs bwea)
+
+        public void FireWarningRaised(object sender, BuildWarningEventArgs bwea)
         {
             if (warningRaised != null)
-                warningRaised (sender, bwea);
-            FireAnyEvent (sender, bwea);
+                warningRaised(sender, bwea);
+            FireAnyEvent(sender, bwea);
         }
-        
-        public void FireTargetStarted (object sender, TargetStartedEventArgs tsea)
+
+        public void FireTargetStarted(object sender, TargetStartedEventArgs tsea)
         {
             if (targetStarted != null)
-                targetStarted (sender, tsea);
-            FireAnyEvent (sender, tsea);
+                targetStarted(sender, tsea);
+            FireAnyEvent(sender, tsea);
         }
-        
-        public void FireTargetFinished (object sender, TargetFinishedEventArgs tfea)
+
+        public void FireTargetFinished(object sender, TargetFinishedEventArgs tfea)
         {
             if (targetFinished != null)
-                targetFinished (sender, tfea);
-            FireAnyEvent (sender, tfea);
+                targetFinished(sender, tfea);
+            FireAnyEvent(sender, tfea);
         }
-        
-        public void FireBuildStarted (object sender, BuildStartedEventArgs bsea)
+
+        public void FireBuildStarted(object sender, BuildStartedEventArgs bsea)
         {
             if (buildStarted != null)
-                buildStarted (sender, bsea);
-            FireAnyEvent (sender, bsea);
+                buildStarted(sender, bsea);
+            FireAnyEvent(sender, bsea);
         }
-        
-        public void FireBuildFinished (object sender, BuildFinishedEventArgs bfea)
+
+        public void FireBuildFinished(object sender, BuildFinishedEventArgs bfea)
         {
             if (buildFinished != null)
-                buildFinished (sender, bfea);
-            FireAnyEvent (sender, bfea);
+                buildFinished(sender, bfea);
+            FireAnyEvent(sender, bfea);
         }
-        
-        public void FireProjectStarted (object sender, ProjectStartedEventArgs psea)
+
+        public void FireProjectStarted(object sender, ProjectStartedEventArgs psea)
         {
             if (projectStarted != null)
-                projectStarted (sender, psea);
-            FireAnyEvent (sender, psea);
+                projectStarted(sender, psea);
+            FireAnyEvent(sender, psea);
         }
-        
-        public void FireProjectFinished (object sender, ProjectFinishedEventArgs pfea)
+
+        public void FireProjectFinished(object sender, ProjectFinishedEventArgs pfea)
         {
             if (projectFinished != null)
-                projectFinished (sender, pfea);
-            FireAnyEvent (sender, pfea);
+                projectFinished(sender, pfea);
+            FireAnyEvent(sender, pfea);
         }
-        
-        public void FireTaskStarted (object sender, TaskStartedEventArgs tsea)
+
+        public void FireTaskStarted(object sender, TaskStartedEventArgs tsea)
         {
             if (taskStarted != null)
-                taskStarted (sender, tsea);
-            FireAnyEvent (sender, tsea);
+                taskStarted(sender, tsea);
+            FireAnyEvent(sender, tsea);
         }
-        
-        public void FireTaskFinished (object sender, TaskFinishedEventArgs tfea)
+
+        public void FireTaskFinished(object sender, TaskFinishedEventArgs tfea)
         {
             if (taskFinished != null)
-                taskFinished (sender, tfea);
-            FireAnyEvent (sender, tfea);
+                taskFinished(sender, tfea);
+            FireAnyEvent(sender, tfea);
         }
 
-        public void FireAnyEvent (object sender, BuildEventArgs bea)
+        public void FireAnyEvent(object sender, BuildEventArgs bea)
         {
             if (anyEventRaised != null)
-                anyEventRaised (sender, bea);
+                anyEventRaised(sender, bea);
         }
 
-        public event AnyEventHandler AnyEventRaised {
-            add {
+        public event AnyEventHandler AnyEventRaised
+        {
+            add
+            {
                 lock (this)
                     anyEventRaised += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     anyEventRaised -= value;
             }
         }
-        
-        public event BuildFinishedEventHandler BuildFinished {
-            add {
+
+        public event BuildFinishedEventHandler BuildFinished
+        {
+            add
+            {
                 lock (this)
                     buildFinished += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     buildFinished -= value;
             }
         }
-        
-        public event BuildStartedEventHandler BuildStarted {
-            add {
+
+        public event BuildStartedEventHandler BuildStarted
+        {
+            add
+            {
                 lock (this)
                     buildStarted += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     buildStarted -= value;
             }
         }
-        
-        public event CustomBuildEventHandler CustomEventRaised {
-            add {
+
+        public event CustomBuildEventHandler CustomEventRaised
+        {
+            add
+            {
                 lock (this)
                     customEventRaised += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     customEventRaised -= value;
             }
         }
-        
-        public event BuildErrorEventHandler ErrorRaised {
-            add {
+
+        public event BuildErrorEventHandler ErrorRaised
+        {
+            add
+            {
                 lock (this)
                     errorRaised += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     errorRaised -= value;
             }
         }
-        
-        public event BuildMessageEventHandler MessageRaised {
-            add {
+
+        public event BuildMessageEventHandler MessageRaised
+        {
+            add
+            {
                 lock (this)
                     messageRaised += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     messageRaised -= value;
             }
         }
-        
-        public event ProjectFinishedEventHandler ProjectFinished {
-            add {
+
+        public event ProjectFinishedEventHandler ProjectFinished
+        {
+            add
+            {
                 lock (this)
                     projectFinished += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     projectFinished -= value;
             }
         }
-        
-        public event ProjectStartedEventHandler ProjectStarted {
-            add {
+
+        public event ProjectStartedEventHandler ProjectStarted
+        {
+            add
+            {
                 lock (this)
                     projectStarted += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     projectStarted -= value;
             }
         }
-        
-        public event BuildStatusEventHandler StatusEventRaised {
-            add {
+
+        public event BuildStatusEventHandler StatusEventRaised
+        {
+            add
+            {
                 lock (this)
                     statusEventRaised += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     statusEventRaised -= value;
             }
         }
-        
-        public event TargetFinishedEventHandler TargetFinished {
-            add {
+
+        public event TargetFinishedEventHandler TargetFinished
+        {
+            add
+            {
                 lock (this)
                     targetFinished += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     targetFinished -= value;
             }
         }
-        
-        public event TargetStartedEventHandler TargetStarted {
-            add {
+
+        public event TargetStartedEventHandler TargetStarted
+        {
+            add
+            {
                 lock (this)
                     targetStarted += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     targetStarted -= value;
             }
         }
-        
-        public event TaskFinishedEventHandler TaskFinished {
-            add {
+
+        public event TaskFinishedEventHandler TaskFinished
+        {
+            add
+            {
                 lock (this)
                     taskFinished += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     taskFinished -= value;
             }
         }
-        
-        public event TaskStartedEventHandler TaskStarted {
-            add {
+
+        public event TaskStartedEventHandler TaskStarted
+        {
+            add
+            {
                 lock (this)
                     taskStarted += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     taskStarted -= value;
             }
         }
-        
-        public event BuildWarningEventHandler WarningRaised {
-            add {
+
+        public event BuildWarningEventHandler WarningRaised
+        {
+            add
+            {
                 lock (this)
                     warningRaised += value;
             }
-            remove {
+            remove
+            {
                 lock (this)
                     warningRaised -= value;
             }
         }
-        
-        public bool OnlyLogCriticalEvents {
+
+        public bool OnlyLogCriticalEvents
+        {
             get { return onlyLogCriticalEvents; }
             set { onlyLogCriticalEvents = value; }
         }

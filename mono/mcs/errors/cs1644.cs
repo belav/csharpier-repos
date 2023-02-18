@@ -2,5 +2,4 @@
 // Line: 5
 // Compiler options: -langversion:ISO-1
 
-static class Class {
-}
+static class Class { }

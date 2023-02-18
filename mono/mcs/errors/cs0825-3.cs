@@ -6,4 +6,3 @@ public class Test
 {
     const var v = 9;
 }
-

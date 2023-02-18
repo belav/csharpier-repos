@@ -3,23 +3,17 @@
 
 class A
 {
-    public void Foo (int i)
-    {
-    }
+    public void Foo(int i) { }
 
-    private void Foo ()
-    {
-    }
+    private void Foo() { }
 }
 
 class B : A
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 
-    void Test ()
+    void Test()
     {
-        Foo ();
+        Foo();
     }
 }

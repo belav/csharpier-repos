@@ -13,7 +13,9 @@ namespace System.IO.Compression.Tests
             using (ZipArchive archive = ZipFile.Open(zfile("normal.zip"), ZipArchiveMode.Read))
             {
                 string tempFolder = GetTestFilePath();
-                Assert.Throws<ArgumentNullException>(() => ((ZipArchive)null).ExtractToDirectory(tempFolder));
+                Assert.Throws<ArgumentNullException>(
+                    () => ((ZipArchive)null).ExtractToDirectory(tempFolder)
+                );
                 Assert.Throws<ArgumentNullException>(() => archive.ExtractToDirectory(null));
                 archive.ExtractToDirectory(tempFolder);
 
@@ -22,7 +24,10 @@ namespace System.IO.Compression.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/72951", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/72951",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void ExtractToDirectoryExtension_Unicode()
         {
             using (ZipArchive archive = ZipFile.OpenRead(zfile("unicode.zip")))
@@ -32,6 +37,5 @@ namespace System.IO.Compression.Tests
                 DirFileNamesEqual(tempFolder, zfolder("unicode"));
             }
         }
-
     }
 }

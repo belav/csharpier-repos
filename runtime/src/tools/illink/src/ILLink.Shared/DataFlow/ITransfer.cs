@@ -33,6 +33,6 @@ namespace ILLink.Shared.DataFlow
         // any modifications to the values are observable by the caller (consider
         // using readonly structs to prevent the implementation from making changes
         // that won't be reflected in the caller).
-        void Transfer (TOperation operation, TState state);
+        void Transfer(TOperation operation, TState state);
     }
 }

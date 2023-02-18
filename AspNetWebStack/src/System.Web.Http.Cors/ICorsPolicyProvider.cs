@@ -19,6 +19,9 @@ namespace System.Web.Http.Cors
         /// <param name="request">The request.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>The <see cref="CorsPolicy"/>.</returns>
-        Task<CorsPolicy> GetCorsPolicyAsync(HttpRequestMessage request, CancellationToken cancellationToken);
+        Task<CorsPolicy> GetCorsPolicyAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        );
     }
 }

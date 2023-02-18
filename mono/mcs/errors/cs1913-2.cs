@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 class Data
 {
-    public int Count ()
+    public int Count()
     {
         return 1;
     }
@@ -15,7 +15,7 @@ class Data
 
 public class Test
 {
-    static void Main ()
+    static void Main()
     {
         var c = new Data { Count = 10 };
     }

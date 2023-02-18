@@ -1,22 +1,23 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // <Area> Generics - Expressions - specific catch clauses </Area>
-// <Title> 
+// <Title>
 // catch type parameters bound by Exception or a subclass of it in the form catch(T)
 // </Title>
-// <RelatedBugs> </RelatedBugs>  
+// <RelatedBugs> </RelatedBugs>
 
 //<Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 
 using System;
 
-public class GenException<T> : Exception {}
+public class GenException<T> : Exception { }
 
-public class GenExceptionSub<T> : GenException<T> {}
+public class GenExceptionSub<T> : GenException<T> { }
 
-public class Gen<Ex,T> where Ex : GenException<T> 
+public class Gen<Ex, T>
+    where Ex : GenException<T>
 {
     public static void ExceptionTest(Ex e)
     {
@@ -24,9 +25,9 @@ public class Gen<Ex,T> where Ex : GenException<T>
         {
             throw e;
         }
-        catch(Ex E)
+        catch (Ex E)
         {
-            Test_typeparameter011.Eval(Object.ReferenceEquals(e,E));
+            Test_typeparameter011.Eval(Object.ReferenceEquals(e, E));
         }
         catch
         {
@@ -40,6 +41,7 @@ public class Test_typeparameter011
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -48,15 +50,14 @@ public class Test_typeparameter011
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-    
     }
-    
+
     public static int Main()
     {
-        Gen<GenException<int>,int>.ExceptionTest(new GenExceptionSub<int>());
-        Gen<GenException<string>,string>.ExceptionTest(new GenExceptionSub<string>());
-        Gen<GenException<Guid>,Guid>.ExceptionTest(new GenExceptionSub<Guid>());
-        
+        Gen<GenException<int>, int>.ExceptionTest(new GenExceptionSub<int>());
+        Gen<GenException<string>, string>.ExceptionTest(new GenExceptionSub<string>());
+        Gen<GenException<Guid>, Guid>.ExceptionTest(new GenExceptionSub<Guid>());
+
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -68,7 +69,6 @@ public class Test_typeparameter011
             return 1;
         }
     }
-        
 }
 
 // </Code>

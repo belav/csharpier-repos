@@ -33,73 +33,80 @@ namespace System.Runtime.Loader
     //
     public abstract class AssemblyLoadContext
     {
-        protected AssemblyLoadContext ()
+        protected AssemblyLoadContext() { }
+
+        public static System.Runtime.Loader.AssemblyLoadContext Default
         {
-        }
-        
-        public static System.Runtime.Loader.AssemblyLoadContext Default { 
-            get { 
-                throw new NotImplementedException ();
-            }
-        }
-        
-        public static System.Reflection.AssemblyName GetAssemblyName (string assemblyPath)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        public static AssemblyLoadContext GetLoadContext (System.Reflection.Assembly assembly) 
-        {
-            throw new NotImplementedException ();
-        }
-        
-        protected abstract System.Reflection.Assembly Load (System.Reflection.AssemblyName assemblyName);
-        
-        public System.Reflection.Assembly LoadFromAssemblyName(System.Reflection.AssemblyName assemblyName) 
-        {
-            throw new NotImplementedException ();
-        }
-        
-        public System.Reflection.Assembly LoadFromAssemblyPath (string assemblyPath)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        public System.Reflection.Assembly LoadFromNativeImagePath (string nativeImagePath, string assemblyPath)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        public System.Reflection.Assembly LoadFromStream (System.IO.Stream assembly)
-        {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public System.Reflection.Assembly LoadFromStream (System.IO.Stream assembly, System.IO.Stream assemblySymbols) 
+        public static System.Reflection.AssemblyName GetAssemblyName(string assemblyPath)
         {
-            throw new NotImplementedException ();
-        }
-        
-        protected IntPtr LoadUnmanagedDllFromPath (string unmanagedDllPath)
-        {
-            throw new NotImplementedException ();
-        }
-        
-        protected virtual IntPtr LoadUnmanagedDll (string unmanagedDllName)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void SetProfileOptimizationRoot (string directoryPath)
+        public static AssemblyLoadContext GetLoadContext(System.Reflection.Assembly assembly)
         {
+            throw new NotImplementedException();
         }
 
-        public void StartProfileOptimization (string profile)
-        {            
+        protected abstract System.Reflection.Assembly Load(
+            System.Reflection.AssemblyName assemblyName
+        );
+
+        public System.Reflection.Assembly LoadFromAssemblyName(
+            System.Reflection.AssemblyName assemblyName
+        )
+        {
+            throw new NotImplementedException();
         }
+
+        public System.Reflection.Assembly LoadFromAssemblyPath(string assemblyPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Reflection.Assembly LoadFromNativeImagePath(
+            string nativeImagePath,
+            string assemblyPath
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Reflection.Assembly LoadFromStream(System.IO.Stream assembly)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.Reflection.Assembly LoadFromStream(
+            System.IO.Stream assembly,
+            System.IO.Stream assemblySymbols
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        protected IntPtr LoadUnmanagedDllFromPath(string unmanagedDllPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual IntPtr LoadUnmanagedDll(string unmanagedDllName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetProfileOptimizationRoot(string directoryPath) { }
+
+        public void StartProfileOptimization(string profile) { }
 
 #pragma warning disable 67
-        public event Func<AssemblyLoadContext, System.Reflection.AssemblyName, System.Reflection.Assembly> Resolving;
+        public event Func<
+            AssemblyLoadContext,
+            System.Reflection.AssemblyName,
+            System.Reflection.Assembly
+        > Resolving;
         public event Action<AssemblyLoadContext> Unloading;
 #pragma warning restore
     }

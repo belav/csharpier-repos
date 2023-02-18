@@ -3,14 +3,13 @@
 // Compiler options: -warnaserror -warn:2
 
 using System;
-[assembly:CLSCompliant (true)]
+
+[assembly: CLSCompliant(true)]
 
 public partial class CLSClass
 {
-    [CLSCompliant (false)]
-    partial void Foo ();
-    
-    partial void Foo ()
-    {
-    }
+    [CLSCompliant(false)]
+    partial void Foo();
+
+    partial void Foo() { }
 }

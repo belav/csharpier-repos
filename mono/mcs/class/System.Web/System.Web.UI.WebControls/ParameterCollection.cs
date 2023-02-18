@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,204 +35,215 @@ using System.Data;
 
 namespace System.Web.UI.WebControls
 {
-
-    [EditorAttribute ("System.Web.UI.Design.WebControls.ParameterCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
+    [EditorAttribute(
+        "System.Web.UI.Design.WebControls.ParameterCollectionEditor, "
+            + Consts.AssemblySystem_Design,
+        "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+    )]
     public class ParameterCollection : StateManagedCollection
     {
+        static Type[] _knownTypes = new Type[]
+        {
+            typeof(ControlParameter),
+            typeof(CookieParameter),
+            typeof(FormParameter),
+            typeof(Parameter),
+            typeof(QueryStringParameter),
+            typeof(SessionParameter)
+        };
 
-        static Type[] _knownTypes = new Type[] {
-                                            typeof (ControlParameter),
-                            typeof (CookieParameter),
-                            typeof (FormParameter),
-                            typeof (Parameter),
-                            typeof (QueryStringParameter),
-                            typeof (SessionParameter) };
-                            
         EventHandler _parametersChanged;
 
-        public int Add (Parameter parameter)
+        public int Add(Parameter parameter)
         {
-            return ((IList)this).Add (parameter);
+            return ((IList)this).Add(parameter);
         }
 
-        public int Add (string name, string value)
+        public int Add(string name, string value)
         {
-            return ((IList)this).Add (new Parameter (name, TypeCode.Object, value));
+            return ((IList)this).Add(new Parameter(name, TypeCode.Object, value));
         }
 
-        public int Add (string name, TypeCode type, string value)
+        public int Add(string name, TypeCode type, string value)
         {
-            return ((IList)this).Add (new Parameter (name, type, value));
+            return ((IList)this).Add(new Parameter(name, type, value));
         }
 
-        public int Add (string name, DbType dbType, string value)
+        public int Add(string name, DbType dbType, string value)
         {
-            return ((IList)this).Add (new Parameter (name, dbType, value));
+            return ((IList)this).Add(new Parameter(name, dbType, value));
         }
-        
-        protected override object CreateKnownType (int index)
+
+        protected override object CreateKnownType(int index)
         {
-            switch (index) {
-            case 0:
-                return new ControlParameter ();
-            case 1:
-                return new CookieParameter ();            
-            case 2:
-                return new FormParameter ();            
-            case 3:
-                return new Parameter ();        
-            case 4:
-                return new QueryStringParameter ();        
-            case 5:
-                return new SessionParameter ();            
+            switch (index)
+            {
+                case 0:
+                    return new ControlParameter();
+                case 1:
+                    return new CookieParameter();
+                case 2:
+                    return new FormParameter();
+                case 3:
+                    return new Parameter();
+                case 4:
+                    return new QueryStringParameter();
+                case 5:
+                    return new SessionParameter();
             }
 
-            throw new ArgumentOutOfRangeException ("index");
+            throw new ArgumentOutOfRangeException("index");
         }
 
-        protected override Type[] GetKnownTypes ()
+        protected override Type[] GetKnownTypes()
         {
             return _knownTypes;
         }
 
-        public IOrderedDictionary GetValues (HttpContext context, Control control)
+        public IOrderedDictionary GetValues(HttpContext context, Control control)
         {
-            OrderedDictionary values = new OrderedDictionary ();
+            OrderedDictionary values = new OrderedDictionary();
             foreach (Parameter param in this)
             {
                 string name = param.Name;
-                for (int i = 1; values.Contains (name); i++)
-                    name = param.Name + i.ToString ();
-                values.Add (name, param.GetValue (context, control));
+                for (int i = 1; values.Contains(name); i++)
+                    name = param.Name + i.ToString();
+                values.Add(name, param.GetValue(context, control));
             }
             return values;
         }
-        
-        public void UpdateValues (HttpContext context, Control control)
+
+        public void UpdateValues(HttpContext context, Control control)
         {
             foreach (Parameter param in this)
-                param.UpdateValue (context, control);
-        }
-        
-        public void Insert (int index, Parameter parameter)
-        {
-            ((IList)this).Insert (index, parameter);
+                param.UpdateValue(context, control);
         }
 
-        protected override void OnClearComplete ()
+        public void Insert(int index, Parameter parameter)
         {
-            base.OnClearComplete ();
-            OnParametersChanged (EventArgs.Empty);
+            ((IList)this).Insert(index, parameter);
         }
 
-        protected override void OnInsert (int index, object value)
+        protected override void OnClearComplete()
         {
-            base.OnInsert (index, value);
-            ((Parameter)value).SetOwnerCollection (this);
+            base.OnClearComplete();
+            OnParametersChanged(EventArgs.Empty);
         }
 
-        protected override void OnInsertComplete (int index, object value)
+        protected override void OnInsert(int index, object value)
         {
-            base.OnInsertComplete (index, value);
-            OnParametersChanged (EventArgs.Empty);
+            base.OnInsert(index, value);
+            ((Parameter)value).SetOwnerCollection(this);
         }
 
-        protected virtual void OnParametersChanged (EventArgs e)
+        protected override void OnInsertComplete(int index, object value)
+        {
+            base.OnInsertComplete(index, value);
+            OnParametersChanged(EventArgs.Empty);
+        }
+
+        protected virtual void OnParametersChanged(EventArgs e)
         {
             if (_parametersChanged != null)
                 _parametersChanged(this, e);
         }
 
-        protected override void OnValidate (object o)
+        protected override void OnValidate(object o)
         {
-            base.OnValidate (o);
-            
+            base.OnValidate(o);
+
             if ((o is Parameter) == false)
-                throw new ArgumentException ("o is not a Parameter");
+                throw new ArgumentException("o is not a Parameter");
         }
 
-        public void Remove (Parameter parameter)
+        public void Remove(Parameter parameter)
         {
-            ((IList)this).Remove (parameter);
+            ((IList)this).Remove(parameter);
         }
 
-        public void RemoveAt (int index)
+        public void RemoveAt(int index)
         {
-            ((IList)this).RemoveAt (index);
+            ((IList)this).RemoveAt(index);
         }
 
-        protected override void SetDirtyObject (object o)
+        protected override void SetDirtyObject(object o)
         {
-            ((Parameter)o).SetDirty ();
+            ((Parameter)o).SetDirty();
         }
 
-        internal void CallOnParameterChanged ()
+        internal void CallOnParameterChanged()
         {
-            OnParametersChanged (EventArgs.Empty);
+            OnParametersChanged(EventArgs.Empty);
         }
 
-        int IndexOfString (string name)
+        int IndexOfString(string name)
         {
             for (int i = 0; i < Count; i++)
             {
-                if (string.Compare (((Parameter) ((IList) this) [i]).Name, name, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        ((Parameter)((IList)this)[i]).Name,
+                        name,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                     return i;
             }
             return -1;
         }
 
-        public Parameter this[int index] {
-            get {
-                return (Parameter) ((IList)this)[index];
-            }
-            set {
-                ((IList)this)[index] = value;
-            }
+        public Parameter this[int index]
+        {
+            get { return (Parameter)((IList)this)[index]; }
+            set { ((IList)this)[index] = value; }
         }
 
-        public Parameter this[string name] {
-            get {
-                int idx = IndexOfString (name);
+        public Parameter this[string name]
+        {
+            get
+            {
+                int idx = IndexOfString(name);
                 if (idx == -1)
                     return null;
-                return ((Parameter) ((IList)this)[idx]);
+                return ((Parameter)((IList)this)[idx]);
             }
-            set {
-                int idx = IndexOfString (name);
-                if (idx == -1) {
-                    Add (value);
+            set
+            {
+                int idx = IndexOfString(name);
+                if (idx == -1)
+                {
+                    Add(value);
                     return;
                 }
                 ((IList)this)[idx] = value;
             }
         }
 
-        public event EventHandler ParametersChanged {
+        public event EventHandler ParametersChanged
+        {
             add { _parametersChanged += value; }
             remove { _parametersChanged -= value; }
         }
 
-        public bool Contains (Parameter parameter)
+        public bool Contains(Parameter parameter)
         {
-            return ((IList)this).Contains (parameter);
+            return ((IList)this).Contains(parameter);
         }
 
-        public void CopyTo (Parameter[] parameterArray, int index)
+        public void CopyTo(Parameter[] parameterArray, int index)
         {
-            ((IList)this).CopyTo (parameterArray, index);
+            ((IList)this).CopyTo(parameterArray, index);
         }
 
-        public int IndexOf (Parameter parameter)
+        public int IndexOf(Parameter parameter)
         {
-            return ((IList)this).IndexOf (parameter);
+            return ((IList)this).IndexOf(parameter);
         }
 
-        protected override void OnRemoveComplete (int index, object value)
+        protected override void OnRemoveComplete(int index, object value)
         {
-            base.OnRemoveComplete (index, value);            
-            OnParametersChanged (EventArgs.Empty);
+            base.OnRemoveComplete(index, value);
+            OnParametersChanged(EventArgs.Empty);
         }
-        
     }
 }
-

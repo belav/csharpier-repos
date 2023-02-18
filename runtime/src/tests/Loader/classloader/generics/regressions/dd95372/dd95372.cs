@@ -16,37 +16,48 @@ public class my
             Console.WriteLine("FAIL: {0}", e.Message);
             return 99;
         }
-        
+
         Console.WriteLine("PASS");
         return 100;
     }
-
 }
 
 public class test<T> : TopLevel<T>
-    where T : IMember<IMember<T, object>, object>
-{ }
+    where T : IMember<IMember<T, object>, object> { }
 
+public interface TopLevel<T> : ISubIface<T, object>
+    where T : IMember<IMember<T, object>, object> { }
 
+public interface ISubIface<
+    T,
+    U /*=object*/
+>
+    : IMembers<
+        T,
+        IMember<
+            T,
+            U /*=object*/
+        >,
+        object
+    >
+    where T : IMember<
+            IMember<
+                T,
+                U /*=object*/
+            >,
+            object
+        > { }
 
-public interface TopLevel<T> :
-ISubIface<T, object>
-where T :
-    IMember<IMember<T, object>, object>
-{ }
+public interface IMembers<
+    T,
+    U /*=IMember<T, U>*/
+    ,
+    V /*=object*/
+>
+    where T : IMember<
+            U /*=IMember<T, U>*/
+            ,
+            V /*=object*/
+        > { }
 
-public interface ISubIface<T, U /*=object*/> :
-IMembers<T, IMember<T, U /*=object*/>, object>
-where T :
-    IMember<IMember<T, U /*=object*/>, object>
-{ }
-
-public interface IMembers<T, U /*=IMember<T, U>*/, V /*=object*/>
-where T :
-    IMember<U /*=IMember<T, U>*/, V /*=object*/>
-{ }
-
-public interface IMember<T, U>
-{ }
-
-
+public interface IMember<T, U> { }

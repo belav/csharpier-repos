@@ -3,16 +3,16 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.UnreachableBody
 {
-    [SetupLinkerArgument ("--enable-opt", "unreachablebodies")]
+    [SetupLinkerArgument("--enable-opt", "unreachablebodies")]
     public class SimpleGetter
     {
-        public static void Main ()
+        public static void Main()
         {
-            UsedToMarkMethod (null);
+            UsedToMarkMethod(null);
         }
 
         [Kept]
-        static void UsedToMarkMethod (Foo f)
+        static void UsedToMarkMethod(Foo f)
         {
             var tmp = f.Property;
         }
@@ -21,7 +21,13 @@ namespace Mono.Linker.Tests.Cases.UnreachableBody
         class Foo
         {
             [Kept]
-            public string Property { [Kept][ExpectBodyModified] get; set; }
+            public string Property
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+                set;
+            }
         }
     }
 }

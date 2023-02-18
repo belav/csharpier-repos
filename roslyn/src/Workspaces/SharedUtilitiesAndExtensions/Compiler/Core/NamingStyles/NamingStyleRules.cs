@@ -15,18 +15,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         public ImmutableArray<NamingRule> NamingRules { get; }
 
         private readonly ImmutableArray<SymbolKind> _symbolKindsThatCanBeOverridden =
-            ImmutableArray.Create(
-                SymbolKind.Method,
-                SymbolKind.Property,
-                SymbolKind.Event);
+            ImmutableArray.Create(SymbolKind.Method, SymbolKind.Property, SymbolKind.Event);
 
-        public NamingStyleRules(ImmutableArray<NamingRule> namingRules)
-            => NamingRules = namingRules;
+        public NamingStyleRules(ImmutableArray<NamingRule> namingRules) =>
+            NamingRules = namingRules;
 
         internal bool TryGetApplicableRule(ISymbol symbol, out NamingRule applicableRule)
         {
-            if (NamingRules != null &&
-                IsSymbolNameAnalyzable(symbol))
+            if (NamingRules != null && IsSymbolNameAnalyzable(symbol))
             {
                 foreach (var namingRule in NamingRules)
                 {
@@ -44,15 +40,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private bool IsSymbolNameAnalyzable(ISymbol symbol)
         {
-            if (_symbolKindsThatCanBeOverridden.Contains(symbol.Kind) && DoesSymbolImplementAnotherSymbol(symbol))
+            if (
+                _symbolKindsThatCanBeOverridden.Contains(symbol.Kind)
+                && DoesSymbolImplementAnotherSymbol(symbol)
+            )
             {
                 return false;
             }
 
             if (symbol is IMethodSymbol method)
             {
-                return method.MethodKind is MethodKind.Ordinary or
-                       MethodKind.LocalFunction;
+                return method.MethodKind is MethodKind.Ordinary or MethodKind.LocalFunction;
             }
 
             if (symbol is IPropertySymbol property)
@@ -76,9 +74,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 return false;
             }
 
-            return symbol.IsOverride ||
-                symbol.ExplicitInterfaceImplementations().Any() ||
-                IsInterfaceImplementation(symbol);
+            return symbol.IsOverride
+                || symbol.ExplicitInterfaceImplementations().Any()
+                || IsInterfaceImplementation(symbol);
         }
 
         /// <summary>
@@ -97,10 +95,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
             foreach (var implementedInterface in implementedInterfaces)
             {
-                var implementedInterfaceMembersWithSameName = implementedInterface.GetMembers(symbol.Name);
+                var implementedInterfaceMembersWithSameName = implementedInterface.GetMembers(
+                    symbol.Name
+                );
                 foreach (var implementedInterfaceMember in implementedInterfaceMembersWithSameName)
                 {
-                    if (symbol.Equals(containingType.FindImplementationForInterfaceMember(implementedInterfaceMember)))
+                    if (
+                        symbol.Equals(
+                            containingType.FindImplementationForInterfaceMember(
+                                implementedInterfaceMember
+                            )
+                        )
+                    )
                     {
                         return true;
                     }

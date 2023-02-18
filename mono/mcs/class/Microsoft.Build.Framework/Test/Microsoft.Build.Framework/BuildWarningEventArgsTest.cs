@@ -28,11 +28,13 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
+namespace MonoTests.Microsoft.Build.Framework
+{
     [TestFixture]
-    public class BuildWarningEventArgsTest {
+    public class BuildWarningEventArgsTest
+    {
         [Test]
-        public void AssignmentTest ()
+        public void AssignmentTest()
         {
             BuildWarningEventArgs bwea;
             string subcategory = "subcategory";
@@ -45,20 +47,30 @@ namespace MonoTests.Microsoft.Build.Framework {
             string message = "message";
             string helpKeyword = "helpKeyword";
             string senderName = "senderName";
-            
-            bwea = new BuildWarningEventArgs (subcategory, code, file, lineNumber, columnNumber, endLineNumber,
-                endColumnNumber, message, helpKeyword, senderName);
-            
-            Assert.AreEqual (subcategory, bwea.Subcategory, "Subcategory");
-            Assert.AreEqual (code, bwea.Code, "Code");
-            Assert.AreEqual (file, bwea.File, "File");
-            Assert.AreEqual (lineNumber, bwea.LineNumber, "LineNumber");
-            Assert.AreEqual (columnNumber, bwea.ColumnNumber, "ColumnNumber");
-            Assert.AreEqual (endLineNumber, bwea.EndLineNumber, "EndLineNumber");
-            Assert.AreEqual (endColumnNumber, bwea.EndColumnNumber, "EndColumnNumber");
-            Assert.AreEqual (message, bwea.Message, "Message");
-            Assert.AreEqual (helpKeyword, bwea.HelpKeyword, "HelpKeyword");
-            Assert.AreEqual (senderName, bwea.SenderName, "SenderName");
+
+            bwea = new BuildWarningEventArgs(
+                subcategory,
+                code,
+                file,
+                lineNumber,
+                columnNumber,
+                endLineNumber,
+                endColumnNumber,
+                message,
+                helpKeyword,
+                senderName
+            );
+
+            Assert.AreEqual(subcategory, bwea.Subcategory, "Subcategory");
+            Assert.AreEqual(code, bwea.Code, "Code");
+            Assert.AreEqual(file, bwea.File, "File");
+            Assert.AreEqual(lineNumber, bwea.LineNumber, "LineNumber");
+            Assert.AreEqual(columnNumber, bwea.ColumnNumber, "ColumnNumber");
+            Assert.AreEqual(endLineNumber, bwea.EndLineNumber, "EndLineNumber");
+            Assert.AreEqual(endColumnNumber, bwea.EndColumnNumber, "EndColumnNumber");
+            Assert.AreEqual(message, bwea.Message, "Message");
+            Assert.AreEqual(helpKeyword, bwea.HelpKeyword, "HelpKeyword");
+            Assert.AreEqual(senderName, bwea.SenderName, "SenderName");
         }
     }
 }

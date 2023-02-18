@@ -19,10 +19,7 @@ public class MockSystemClock : ISystemClock
     public long CurrentTicks
     {
         get => _nowTicks;
-        set
-        {
-            Interlocked.Exchange(ref _nowTicks, value);
-        }
+        set { Interlocked.Exchange(ref _nowTicks, value); }
     }
 
     private long NextLong(long minValue, long maxValue)

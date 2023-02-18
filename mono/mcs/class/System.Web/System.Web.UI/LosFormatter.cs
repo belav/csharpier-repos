@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,91 +34,100 @@ using System.Security.Permissions;
 using System.Text;
 using System.Web.Util;
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     // CAS - no InheritanceDemand here as the class is sealed
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public sealed class LosFormatter
     {
         ObjectStateFormatter osf;
-        
-        public LosFormatter ()
+
+        public LosFormatter()
         {
-            osf = new ObjectStateFormatter ();
+            osf = new ObjectStateFormatter();
         }
 
-        public LosFormatter (bool enableMac, string macKeyModifier) : this (enableMac, String.IsNullOrEmpty (macKeyModifier) ? null : Encoding.ASCII.GetBytes (macKeyModifier))
-        {
-        }
+        public LosFormatter(bool enableMac, string macKeyModifier)
+            : this(
+                enableMac,
+                String.IsNullOrEmpty(macKeyModifier)
+                    ? null
+                    : Encoding.ASCII.GetBytes(macKeyModifier)
+            ) { }
 
-        public LosFormatter (bool enableMac, byte[] macKeyModifier)
+        public LosFormatter(bool enableMac, byte[] macKeyModifier)
         {
-            osf = new ObjectStateFormatter ();
-            if (enableMac && (macKeyModifier != null)) {
-                SetMacKey (macKeyModifier);
+            osf = new ObjectStateFormatter();
+            if (enableMac && (macKeyModifier != null))
+            {
+                SetMacKey(macKeyModifier);
             }
         }
 
-        private void SetMacKey (byte[] macKeyModifier)
+        private void SetMacKey(byte[] macKeyModifier)
         {
-            try {
-                osf.Section.ValidationKey = MachineKeySectionUtils.GetHexString (macKeyModifier);
+            try
+            {
+                osf.Section.ValidationKey = MachineKeySectionUtils.GetHexString(macKeyModifier);
             }
-            catch (ArgumentException) {
-            }
-            catch (ConfigurationErrorsException) {
+            catch (ArgumentException) { }
+            catch (ConfigurationErrorsException)
+            {
                 // bad key (e.g. size), default key will be used
             }
         }
 
-        public object Deserialize (Stream stream)
+        public object Deserialize(Stream stream)
         {
             if (stream == null)
-                throw new ArgumentNullException ("stream");
-            using (StreamReader sr = new StreamReader (stream)) {
-                return Deserialize (sr.ReadToEnd ());
+                throw new ArgumentNullException("stream");
+            using (StreamReader sr = new StreamReader(stream))
+            {
+                return Deserialize(sr.ReadToEnd());
             }
         }
 
-        public object Deserialize (TextReader input)
+        public object Deserialize(TextReader input)
         {
             if (input == null)
-                throw new ArgumentNullException ("input");
+                throw new ArgumentNullException("input");
 
-            return Deserialize (input.ReadToEnd ());
+            return Deserialize(input.ReadToEnd());
         }
 
-        public object Deserialize (string input)
+        public object Deserialize(string input)
         {
             if (input == null)
                 return null;
 
-            return osf.Deserialize (input);
+            return osf.Deserialize(input);
         }
 
-        internal string SerializeToBase64 (object value)
+        internal string SerializeToBase64(object value)
         {
-            return osf.Serialize (value);
+            return osf.Serialize(value);
         }
 
-        public void Serialize (Stream stream, object value)
+        public void Serialize(Stream stream, object value)
         {
             if (stream == null)
-                throw new ArgumentNullException ("stream");
+                throw new ArgumentNullException("stream");
             if (!stream.CanSeek)
-                throw new NotSupportedException ();
-            string b64 = SerializeToBase64 (value);
-            byte [] bytes = Encoding.ASCII.GetBytes (b64);
-            stream.Write (bytes, 0, bytes.Length);
+                throw new NotSupportedException();
+            string b64 = SerializeToBase64(value);
+            byte[] bytes = Encoding.ASCII.GetBytes(b64);
+            stream.Write(bytes, 0, bytes.Length);
         }
 
-        public void Serialize (TextWriter output, object value)
+        public void Serialize(TextWriter output, object value)
         {
             if (output == null)
-                throw new ArgumentNullException ("output");
+                throw new ArgumentNullException("output");
 
-            output.Write (SerializeToBase64 (value));
-        }    
+            output.Write(SerializeToBase64(value));
+        }
     }
 }
-

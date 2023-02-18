@@ -17,18 +17,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 
 public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
 {
-    public InlineCompletionsTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    {
-    }
+    public InlineCompletionsTests(ITestOutputHelper testOutputHelper)
+        : base(testOutputHelper) { }
 
-    protected override TestComposition Composition => base.Composition
-        .AddParts(typeof(TestSnippetInfoService));
+    protected override TestComposition Composition =>
+        base.Composition.AddParts(typeof(TestSnippetInfoService));
 
     [Fact]
     public async Task TestSimpleSnippet()
     {
         var markup =
-@"class A
+            @"class A
 {
     void M()
     {
@@ -36,7 +35,7 @@ public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
     }
 }";
         var expectedSnippet =
-@"if (${1:true})
+            @"if (${1:true})
         {
             $0
         }";
@@ -48,7 +47,7 @@ public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
     public async Task TestSnippetIgnoresCase()
     {
         var markup =
-@"class A
+            @"class A
 {
     void M()
     {
@@ -56,7 +55,7 @@ public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
     }
 }";
         var expectedSnippet =
-@"if (${1:true})
+            @"if (${1:true})
         {
             $0
         }";
@@ -68,7 +67,7 @@ public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
     public async Task TestSnippetUsesOptionsFromRequest()
     {
         var markup =
-@"class A
+            @"class A
 {
     void M()
     {
@@ -76,19 +75,23 @@ public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
     }
 }";
         var expectedSnippet =
-@"if (${1:true})
+            @"if (${1:true})
   {
    $0
   }";
 
-        await VerifyMarkupAndExpected(markup, expectedSnippet, options: new LSP.FormattingOptions { TabSize = 1, InsertSpaces = true });
+        await VerifyMarkupAndExpected(
+            markup,
+            expectedSnippet,
+            options: new LSP.FormattingOptions { TabSize = 1, InsertSpaces = true }
+        );
     }
 
     [Fact]
     public async Task TestSnippetWithMultipleDeclarations()
     {
         var markup =
-@"class A
+            @"class A
 {
     void M()
     {
@@ -96,7 +99,7 @@ public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
     }
 }";
         var expectedSnippet =
-@"for (int ${1:i} = 0; ${1:i} < ${2:length}; ${1:i}++)
+            @"for (int ${1:i} = 0; ${1:i} < ${2:length}; ${1:i}++)
         {
             $0
         }";
@@ -108,7 +111,7 @@ public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
     public async Task TestSnippetWithSimpleTypeNameFunctionFullyQualifies()
     {
         var markup =
-@"class A
+            @"class A
 {
     void M()
     {
@@ -124,7 +127,7 @@ public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
     public async Task TestSnippetWithSimpleTypeNameFunctionWithUsing()
     {
         var markup =
-@"using System;
+            @"using System;
 class A
 {
     void M()
@@ -141,12 +144,12 @@ class A
     public async Task TestSnippetWithClassNameFunction()
     {
         var markup =
-@"class A
+            @"class A
 {
     ctor{|tab:|}
 }";
         var expectedSnippet =
-@"public A()
+            @"public A()
     {
         $0
     }";
@@ -157,10 +160,9 @@ class A
     [Fact]
     public async Task TestSnippetWithClassNameFunctionOutsideOfClass()
     {
-        var markup =
-@"ctor{|tab:|}";
+        var markup = @"ctor{|tab:|}";
         var expectedSnippet =
-@"public ClassNamePlaceholder ()
+            @"public ClassNamePlaceholder ()
 {
     $0
 }";
@@ -172,7 +174,7 @@ class A
     public async Task TestSnippetWithSwitchFunctionOnlyGeneratesDefault()
     {
         var markup =
-@"class A
+            @"class A
 {
     void M()
     {
@@ -180,7 +182,7 @@ class A
     }
 }";
         var expectedSnippet =
-@"switch (${1:switch_on})
+            @"switch (${1:switch_on})
         {
             default:
         }$0";
@@ -192,12 +194,12 @@ class A
     public async Task TestSnippetWithNoEditableFields()
     {
         var markup =
-@"class A
+            @"class A
 {
     equals{|tab:|}
 }";
         var expectedSnippet =
-@"// override object.Equals
+            @"// override object.Equals
     public override bool Equals(object obj)
     {
         //       
@@ -232,7 +234,7 @@ class A
     public async Task TestSnippetCached()
     {
         var markup =
-@"class A
+            @"class A
 {
     void M()
     {
@@ -240,7 +242,7 @@ class A
     }
 }";
         var expectedSnippet =
-@"if (${1:true})
+            @"if (${1:true})
         {
             $0
         }";
@@ -251,31 +253,48 @@ class A
         var document = testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single();
 
         // Verify we haven't parsed snippets until asked.
-        var snippetParser = testLspServer.TestWorkspace.ExportProvider.GetExportedValue<XmlSnippetParser>();
+        var snippetParser =
+            testLspServer.TestWorkspace.ExportProvider.GetExportedValue<XmlSnippetParser>();
         Assert.Equal(0, snippetParser.GetTestAccessor().GetCachedSnippetsCount());
 
         // Verify that the first time we ask for a snippet it gets parsed and added to the cache.
-        var result = await GetInlineCompletionsAsync(testLspServer, locationTyped, new LSP.FormattingOptions { InsertSpaces = true, TabSize = 4 });
+        var result = await GetInlineCompletionsAsync(
+            testLspServer,
+            locationTyped,
+            new LSP.FormattingOptions { InsertSpaces = true, TabSize = 4 }
+        );
         Assert.Equal(expectedSnippet, result.Items.Single().Text);
         Assert.Equal(1, snippetParser.GetTestAccessor().GetCachedSnippetsCount());
         var firstSnippet = snippetParser.GetTestAccessor().GetCachedSnippet("if");
 
         // Verify that the next time we ask for the same snippet we do not parse again.
-        result = await GetInlineCompletionsAsync(testLspServer, locationTyped, new LSP.FormattingOptions { InsertSpaces = true, TabSize = 4 });
+        result = await GetInlineCompletionsAsync(
+            testLspServer,
+            locationTyped,
+            new LSP.FormattingOptions { InsertSpaces = true, TabSize = 4 }
+        );
         Assert.Equal(expectedSnippet, result.Items.Single().Text);
         Assert.Equal(1, snippetParser.GetTestAccessor().GetCachedSnippetsCount());
         var secondSnippet = snippetParser.GetTestAccessor().GetCachedSnippet("if");
         Assert.Same(firstSnippet, secondSnippet);
     }
 
-    private async Task VerifyMarkupAndExpected(string markup, string expected, LSP.FormattingOptions? options = null)
+    private async Task VerifyMarkupAndExpected(
+        string markup,
+        string expected,
+        LSP.FormattingOptions? options = null
+    )
     {
         await using var testLspServer = await CreateTestLspServerAsync(markup);
         var locationTyped = testLspServer.GetLocations("tab").Single();
 
         var document = testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single();
 
-        var result = await GetInlineCompletionsAsync(testLspServer, locationTyped, options ?? new LSP.FormattingOptions { InsertSpaces = true, TabSize = 4 });
+        var result = await GetInlineCompletionsAsync(
+            testLspServer,
+            locationTyped,
+            options ?? new LSP.FormattingOptions { InsertSpaces = true, TabSize = 4 }
+        );
 
         AssertEx.NotNull(result);
         Assert.Single(result.Items);
@@ -287,9 +306,10 @@ class A
     }
 
     private static async Task<LSP.VSInternalInlineCompletionList> GetInlineCompletionsAsync(
-            TestLspServer testLspServer,
-            LSP.Location locationTyped,
-            LSP.FormattingOptions options)
+        TestLspServer testLspServer,
+        LSP.Location locationTyped,
+        LSP.FormattingOptions options
+    )
     {
         var request = new LSP.VSInternalInlineCompletionRequest
         {
@@ -303,8 +323,10 @@ class A
             Options = options
         };
 
-        var response = await testLspServer.ExecuteRequestAsync<LSP.VSInternalInlineCompletionRequest, LSP.VSInternalInlineCompletionList>(
-            LSP.VSInternalMethods.TextDocumentInlineCompletionName, request, CancellationToken.None);
+        var response = await testLspServer.ExecuteRequestAsync<
+            LSP.VSInternalInlineCompletionRequest,
+            LSP.VSInternalInlineCompletionList
+        >(LSP.VSInternalMethods.TextDocumentInlineCompletionName, request, CancellationToken.None);
         Contract.ThrowIfNull(response);
         return response;
     }

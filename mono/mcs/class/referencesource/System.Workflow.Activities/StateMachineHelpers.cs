@@ -122,14 +122,16 @@ namespace System.Workflow.Activities
         internal static string GetInitialStateName(StateActivity state)
         {
             StateActivity rootState = GetRootState(state);
-            return (string)rootState.GetValue(StateMachineWorkflowActivity.InitialStateNameProperty);
+            return (string)
+                rootState.GetValue(StateMachineWorkflowActivity.InitialStateNameProperty);
         }
 
         internal static string GetCompletedStateName(StateActivity state)
         {
             Debug.Assert(state != null);
             StateActivity rootState = GetRootState(state);
-            return (string)rootState.GetValue(StateMachineWorkflowActivity.CompletedStateNameProperty);
+            return (string)
+                rootState.GetValue(StateMachineWorkflowActivity.CompletedStateNameProperty);
         }
 
         /*
@@ -160,7 +162,10 @@ namespace System.Workflow.Activities
             StateActivity state = context.Activity as StateActivity;
             if (state == null)
                 state = FindEnclosingState(context.Activity);
-            Debug.Assert(state != null, "StateMachineHelpers.GetCurrentState: only valid to call this method from a State executor or a contained EventDriven");
+            Debug.Assert(
+                state != null,
+                "StateMachineHelpers.GetCurrentState: only valid to call this method from a State executor or a contained EventDriven"
+            );
             StateActivity rootState = GetRootState(state);
 
             StateMachineExecutionState executionState = StateMachineExecutionState.Get(rootState);
@@ -173,9 +178,15 @@ namespace System.Workflow.Activities
             return currentState;
         }
 
-        static internal StateActivity FindDynamicStateByName(StateActivity state, string stateQualifiedName)
+        static internal StateActivity FindDynamicStateByName(
+            StateActivity state,
+            string stateQualifiedName
+        )
         {
-            while (!state.QualifiedName.Equals(stateQualifiedName) && ContainsState(state, stateQualifiedName))
+            while (
+                !state.QualifiedName.Equals(stateQualifiedName)
+                && ContainsState(state, stateQualifiedName)
+            )
             {
                 foreach (Activity activity in state.EnabledActivities)
                 {
@@ -185,7 +196,8 @@ namespace System.Workflow.Activities
 
                     if (ContainsState(childState, stateQualifiedName))
                     {
-                        StateActivity dynamicChildState = (StateActivity)state.GetDynamicActivity(childState);
+                        StateActivity dynamicChildState = (StateActivity)
+                            state.GetDynamicActivity(childState);
                         if (dynamicChildState == null)
                             return null;
                         state = dynamicChildState;
@@ -207,7 +219,10 @@ namespace System.Workflow.Activities
             return found;
         }
 
-        static internal Activity FindActivityByName(CompositeActivity parentActivity, string qualifiedName)
+        static internal Activity FindActivityByName(
+            CompositeActivity parentActivity,
+            string qualifiedName
+        )
         {
             return parentActivity.GetActivityByName(qualifiedName, true);
         }

@@ -7,12 +7,12 @@ public class Test
 {
     public static void Main()
     {
-        var m = nameof (A.X);
+        var m = nameof(A.X);
     }
 }
-     
+
 public class A
 {
-    [Obsolete ("", true)]
+    [Obsolete("", true)]
     public int X;
 }

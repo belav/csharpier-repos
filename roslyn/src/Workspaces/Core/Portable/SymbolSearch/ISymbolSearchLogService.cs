@@ -15,7 +15,11 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     /// </summary>
     internal interface ISymbolSearchLogService
     {
-        ValueTask LogExceptionAsync(string exception, string text, CancellationToken cancellationToken);
+        ValueTask LogExceptionAsync(
+            string exception,
+            string text,
+            CancellationToken cancellationToken
+        );
         ValueTask LogInfoAsync(string text, CancellationToken cancellationToken);
     }
 }

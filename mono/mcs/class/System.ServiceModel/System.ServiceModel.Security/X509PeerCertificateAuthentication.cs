@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,9 +38,7 @@ namespace System.ServiceModel.Security
     [MonoTODO]
     public class X509PeerCertificateAuthentication
     {
-        internal X509PeerCertificateAuthentication ()
-        {
-        }
+        internal X509PeerCertificateAuthentication() { }
 
         X509CertificateValidator validator;
         X509RevocationMode revocation_mode = X509RevocationMode.Online;
@@ -48,27 +46,31 @@ namespace System.ServiceModel.Security
         X509CertificateValidationMode validation_mode =
             X509CertificateValidationMode.PeerOrChainTrust;
 
-        internal X509PeerCertificateAuthentication Clone ()
+        internal X509PeerCertificateAuthentication Clone()
         {
-            return (X509PeerCertificateAuthentication) MemberwiseClone ();
+            return (X509PeerCertificateAuthentication)MemberwiseClone();
         }
 
-        public X509CertificateValidator CustomCertificateValidator {
+        public X509CertificateValidator CustomCertificateValidator
+        {
             get { return validator; }
             set { validator = value; }
         }
 
-        public X509RevocationMode RevocationMode {
+        public X509RevocationMode RevocationMode
+        {
             get { return revocation_mode; }
             set { revocation_mode = value; }
         }
 
-        public StoreLocation TrustedStoreLocation {
+        public StoreLocation TrustedStoreLocation
+        {
             get { return store_loc; }
             set { store_loc = value; }
         }
 
-        public X509CertificateValidationMode CertificateValidationMode {
+        public X509CertificateValidationMode CertificateValidationMode
+        {
             get { return validation_mode; }
             set { validation_mode = value; }
         }

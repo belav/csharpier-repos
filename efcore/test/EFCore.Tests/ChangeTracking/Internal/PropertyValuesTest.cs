@@ -44,8 +44,14 @@ public class PropertyValuesTest
         entity.Entity.Name = NewNameValue;
 
         // Act
-        var current = entity.CurrentValues.TryGetValue<string>("Non_Existent_Property", out var non_existent_current);
-        var original = entity.OriginalValues.TryGetValue<string>("Non_Existent_Property", out var non_existent_original);
+        var current = entity.CurrentValues.TryGetValue<string>(
+            "Non_Existent_Property",
+            out var non_existent_current
+        );
+        var original = entity.OriginalValues.TryGetValue<string>(
+            "Non_Existent_Property",
+            out var non_existent_original
+        );
 
         // Assert
         Assert.False(current);
@@ -59,8 +65,8 @@ public class PropertyValuesTest
     {
         public DbSet<SimpleEntity> SimpleEntities { get; set; }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase("DB1");
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase("DB1");
     }
 
     private class SimpleEntity

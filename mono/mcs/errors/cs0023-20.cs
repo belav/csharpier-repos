@@ -8,6 +8,6 @@ class C
     static void Main()
     {
         int k = 0;
-        var r = k?.ToString ();
+        var r = k?.ToString();
     }
 }

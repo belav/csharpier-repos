@@ -1,4 +1,3 @@
-
 using Mono.Linker.Tests.Cases.TestFramework.Dependencies;
 
 [assembly: VerifyAttributesInAssemblyWorks_Base.ForAssertingKept]
@@ -15,9 +14,7 @@ namespace Mono.Linker.Tests.Cases.TestFramework.Dependencies
             public static int Field;
 
             [VerifyAttributesInAssemblyWorks_Base.ForAssertingKept]
-            public static void Method ()
-            {
-            }
+            public static void Method() { }
 
             [VerifyAttributesInAssemblyWorks_Base.ForAssertingKept]
             public static int Property { get; set; }
@@ -30,9 +27,7 @@ namespace Mono.Linker.Tests.Cases.TestFramework.Dependencies
             public static int Field;
 
             [VerifyAttributesInAssemblyWorks_Base.ForAssertingRemove]
-            public static void Method ()
-            {
-            }
+            public static void Method() { }
 
             [VerifyAttributesInAssemblyWorks_Base.ForAssertingRemove]
             public static int Property { get; set; }

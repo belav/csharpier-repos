@@ -1,6 +1,6 @@
-// 
-// OciHandleType.cs 
-//  
+//
+// OciHandleType.cs
+//
 // Part of managed C#/.NET library System.Data.OracleClient.dll
 //
 // Part of the Mono class libraries at
@@ -8,17 +8,19 @@
 //
 // Assembly: System.Data.OracleClient.dll
 // Namespace: System.Data.OracleClient.Oci
-// 
-// Author: 
+//
+// Author:
 //     Tim Coleman <tim@timcoleman.com>
-//         
+//
 // Copyright (C) Tim Coleman, 2003
-// 
+//
 
 using System;
 
-namespace System.Data.OracleClient.Oci {
-    internal enum OciHandleType {
+namespace System.Data.OracleClient.Oci
+{
+    internal enum OciHandleType
+    {
         Environment = 0x01,
         Error = 0x02,
         Service = 0x03,
@@ -44,6 +46,7 @@ namespace System.Data.OracleClient.Oci {
         ResultSet = 0x34,
         Parameter = 0x35,
         RowId = 0x36,
+
         //ComplexObject = 0x37,
         FileLobLocator = 0x38,
         EnqueueOptions = 0x39,

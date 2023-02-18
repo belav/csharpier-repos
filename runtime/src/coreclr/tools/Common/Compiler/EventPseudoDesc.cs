@@ -49,34 +49,22 @@ namespace ILCompiler
 
         public CustomAttributeHandleCollection GetCustomAttributes
         {
-            get
-            {
-                return Definition.GetCustomAttributes();
-            }
+            get { return Definition.GetCustomAttributes(); }
         }
 
         public MetadataType OwningType
         {
-            get
-            {
-                return _type;
-            }
+            get { return _type; }
         }
 
         public string Name
         {
-            get
-            {
-                return _type.MetadataReader.GetString(Definition.Name);
-            }
+            get { return _type.MetadataReader.GetString(Definition.Name); }
         }
 
         public EventDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
 
         public EventPseudoDesc(EcmaType type, EventDefinitionHandle handle)
@@ -89,9 +77,14 @@ namespace ILCompiler
 
         #region Do not use these
         public override bool Equals(object obj) => throw new NotImplementedException();
+
         public override int GetHashCode() => throw new NotImplementedException();
-        public static bool operator ==(EventPseudoDesc a, EventPseudoDesc b) => throw new NotImplementedException();
-        public static bool operator !=(EventPseudoDesc a, EventPseudoDesc b) => throw new NotImplementedException();
+
+        public static bool operator ==(EventPseudoDesc a, EventPseudoDesc b) =>
+            throw new NotImplementedException();
+
+        public static bool operator !=(EventPseudoDesc a, EventPseudoDesc b) =>
+            throw new NotImplementedException();
         #endregion
     }
 }

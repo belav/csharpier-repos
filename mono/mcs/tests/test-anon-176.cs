@@ -4,29 +4,35 @@ namespace TestDelegateFinallyOut
 {
     class Test
     {
-        static void CallDelegate (Action test)
+        static void CallDelegate(Action test)
         {
-            throw new Exception ("test");
+            throw new Exception("test");
         }
 
-        private static bool TestMethod (out int test)
+        private static bool TestMethod(out int test)
         {
-            try {
-                CallDelegate (delegate {
-                    return;
-                });
-            } catch (Exception) {
-                Console.WriteLine ("caught exception");
-            } finally {
+            try
+            {
+                CallDelegate(
+                    delegate
+                    {
+                        return;
+                    }
+                );
             }
+            catch (Exception)
+            {
+                Console.WriteLine("caught exception");
+            }
+            finally { }
             test = 1;
             return false;
         }
 
-        static int Main ()
+        static int Main()
         {
             int t;
-            TestMethod (out t);
+            TestMethod(out t);
             if (t != 1)
                 return 1;
 

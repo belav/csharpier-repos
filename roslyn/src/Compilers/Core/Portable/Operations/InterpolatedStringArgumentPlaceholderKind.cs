@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.Operations
         /// The corresponding argument index is accessed in <see cref="IInterpolatedStringHandlerArgumentPlaceholderOperation.ArgumentIndex"/>.
         /// </summary>
         CallsiteArgument,
+
         /// <summary>
         /// This is a placeholder for the receiver of the containing method call, indexer access, or object creation.
         /// </summary>
         CallsiteReceiver,
+
         /// <summary>
         /// This is a placeholder for the trailing bool out parameter of the interpolated string handler type. This bool
         /// controls whether the conditional evaluation for the rest of the interpolated string should be run after the

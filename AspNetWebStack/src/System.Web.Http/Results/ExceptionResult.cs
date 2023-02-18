@@ -31,20 +31,28 @@ namespace System.Web.Http.Results
         /// <param name="contentNegotiator">The content negotiator to handle content negotiation.</param>
         /// <param name="request">The request message which led to this result.</param>
         /// <param name="formatters">The formatters to use to negotiate and format the content.</param>
-        public ExceptionResult(Exception exception, bool includeErrorDetail, IContentNegotiator contentNegotiator,
-            HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
-            : this(exception, new DirectDependencyProvider(includeErrorDetail, contentNegotiator, request,
-                formatters))
-        {
-        }
+        public ExceptionResult(
+            Exception exception,
+            bool includeErrorDetail,
+            IContentNegotiator contentNegotiator,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
+            : this(
+                exception,
+                new DirectDependencyProvider(
+                    includeErrorDetail,
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>Initializes a new instance of the <see cref="ExceptionResult"/> class.</summary>
         /// <param name="exception">The exception to include in the error.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public ExceptionResult(Exception exception, ApiController controller)
-            : this(exception, new ApiControllerDependencyProvider(controller))
-        {
-        }
+            : this(exception, new ApiControllerDependencyProvider(controller)) { }
 
         private ExceptionResult(Exception exception, IDependencyProvider dependencies)
         {
@@ -98,8 +106,13 @@ namespace System.Web.Http.Results
         private HttpResponseMessage Execute()
         {
             HttpError error = new HttpError(_exception, _dependencies.IncludeErrorDetail);
-            return NegotiatedContentResult<HttpError>.Execute(HttpStatusCode.InternalServerError, error,
-                _dependencies.ContentNegotiator, _dependencies.Request, _dependencies.Formatters);
+            return NegotiatedContentResult<HttpError>.Execute(
+                HttpStatusCode.InternalServerError,
+                error,
+                _dependencies.ContentNegotiator,
+                _dependencies.Request,
+                _dependencies.Formatters
+            );
         }
 
         /// <summary>Defines a provider for dependencies that are not always directly available.</summary>
@@ -126,8 +139,12 @@ namespace System.Web.Http.Results
             private readonly HttpRequestMessage _request;
             private readonly IEnumerable<MediaTypeFormatter> _formatters;
 
-            public DirectDependencyProvider(bool includeErrorDetail, IContentNegotiator contentNegotiator,
-                HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
+            public DirectDependencyProvider(
+                bool includeErrorDetail,
+                IContentNegotiator contentNegotiator,
+                HttpRequestMessage request,
+                IEnumerable<MediaTypeFormatter> formatters
+            )
             {
                 if (contentNegotiator == null)
                 {
@@ -236,7 +253,8 @@ namespace System.Web.Http.Results
                     if (configuration == null)
                     {
                         throw new InvalidOperationException(
-                            SRResources.HttpControllerContext_ConfigurationMustNotBeNull);
+                            SRResources.HttpControllerContext_ConfigurationMustNotBeNull
+                        );
                     }
 
                     ServicesContainer services = configuration.Services;
@@ -245,22 +263,32 @@ namespace System.Web.Http.Results
 
                     if (contentNegotiator == null)
                     {
-                        throw new InvalidOperationException(Error.Format(
-                            SRResources.HttpRequestMessageExtensions_NoContentNegotiator, typeof(IContentNegotiator)));
+                        throw new InvalidOperationException(
+                            Error.Format(
+                                SRResources.HttpRequestMessageExtensions_NoContentNegotiator,
+                                typeof(IContentNegotiator)
+                            )
+                        );
                     }
 
                     HttpRequestMessage request = _controller.Request;
 
                     if (request == null)
                     {
-                        throw new InvalidOperationException(SRResources.ApiController_RequestMustNotBeNull);
+                        throw new InvalidOperationException(
+                            SRResources.ApiController_RequestMustNotBeNull
+                        );
                     }
 
                     IEnumerable<MediaTypeFormatter> formatters = configuration.Formatters;
                     Contract.Assert(formatters != null);
 
-                    _resolvedDependencies = new DirectDependencyProvider(includeErrorDetail, contentNegotiator, request,
-                        formatters);
+                    _resolvedDependencies = new DirectDependencyProvider(
+                        includeErrorDetail,
+                        contentNegotiator,
+                        request,
+                        formatters
+                    );
                 }
             }
         }

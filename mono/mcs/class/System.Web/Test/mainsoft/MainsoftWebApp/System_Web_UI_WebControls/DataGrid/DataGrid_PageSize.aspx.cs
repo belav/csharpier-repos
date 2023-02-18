@@ -37,8 +37,7 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class DataGrid_PageSize
-        : GHTBaseWeb 
+    public class DataGrid_PageSize : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.DataGrid DataGrid1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
@@ -52,8 +51,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         protected GHTWebControls.GHTSubTest GHTSubTest5;
         protected System.Web.UI.WebControls.DataGrid DataGrid6;
         protected GHTWebControls.GHTSubTest GHTSubTest6;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -61,19 +61,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
@@ -81,94 +80,100 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             GHTTestBegin(frm);
 
             GHTActiveSubTest = GHTSubTest1;
-            try 
+            try
             {
                 DataGrid1.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid1.AllowPaging = true;
-                DataGrid1.DataBind();;
+                DataGrid1.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid1.PageSize.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest2;
-            try 
+            try
             {
                 DataGrid2.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid2.AllowPaging = true;
                 DataGrid2.PageSize = 10;
-                DataGrid2.DataBind();;
+                DataGrid2.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid2.PageSize.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest3;
-            try 
+            try
             {
                 DataGrid3.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid3.AllowPaging = true;
                 DataGrid3.PageSize = 2;
-                DataGrid3.DataBind();;
+                DataGrid3.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid3.PageSize.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest4;
-            try 
+            try
             {
                 DataGrid4.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid4.AllowPaging = true;
                 DataGrid4.PageSize = 0;
-                DataGrid4.DataBind();;
+                DataGrid4.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid4.CurrentPageIndex.ToString());
                 GHTSubTestExpectedExceptionNotCaught("ArgumentOutOfRangeException");
             }
-            catch (ArgumentOutOfRangeException eex) 
+            catch (ArgumentOutOfRangeException eex)
             {
-                GHTSubTestExpectedExceptionCaught(eex); 
+                GHTSubTestExpectedExceptionCaught(eex);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest5;
-            try 
+            try
             {
                 DataGrid5.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid5.AllowPaging = true;
                 DataGrid5.PageSize = -1;
-                DataGrid5.DataBind();;
+                DataGrid5.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid5.CurrentPageIndex.ToString());
                 GHTSubTestExpectedExceptionNotCaught("ArgumentOutOfRangeException");
             }
-            catch (ArgumentOutOfRangeException eex) 
+            catch (ArgumentOutOfRangeException eex)
             {
-                GHTSubTestExpectedExceptionCaught(eex); 
+                GHTSubTestExpectedExceptionCaught(eex);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }
 
             GHTActiveSubTest = GHTSubTest6;
-            try 
+            try
             {
                 DataGrid6.DataSource = GHTTests.GHDataSources.DSDataTable(1, 3);
                 DataGrid6.AllowPaging = true;
                 DataGrid6.PageSize = 150;
-                DataGrid6.DataBind();;
+                DataGrid6.DataBind();
+                ;
                 GHTSubTestAddResult(DataGrid6.PageSize.ToString());
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

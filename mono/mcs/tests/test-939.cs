@@ -2,13 +2,11 @@
 
 class X
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 
-    static void RealTest ()
+    static void RealTest()
     {
-        A.Foo ();
-        new B ();
+        A.Foo();
+        new B();
     }
 }

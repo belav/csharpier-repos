@@ -41,20 +41,16 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
             if (CertificateSet != null)
             {
-
                 writer.PushSetOf(new Asn1Tag(TagClass.ContextSpecific, 0));
                 for (int i = 0; i < CertificateSet.Length; i++)
                 {
                     CertificateSet[i].Encode(writer);
                 }
                 writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, 0));
-
             }
-
 
             if (Crls != null)
             {
-
                 writer.PushSetOf(new Asn1Tag(TagClass.ContextSpecific, 1));
                 for (int i = 0; i < Crls.Length; i++)
                 {
@@ -68,9 +64,7 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                     }
                 }
                 writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, 1));
-
             }
-
 
             writer.PushSetOf();
             for (int i = 0; i < SignerInfos.Length; i++)
@@ -87,7 +81,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static SignedDataAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static SignedDataAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -103,12 +101,21 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out SignedDataAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out SignedDataAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out SignedDataAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out SignedDataAsn decoded
+        )
         {
             try
             {
@@ -120,7 +127,12 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out SignedDataAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out SignedDataAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -129,12 +141,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-
             if (!sequenceReader.TryReadInt32(out decoded.Version))
             {
                 sequenceReader.ThrowIfNotEmpty();
             }
-
 
             // Decode SEQUENCE OF for DigestAlgorithms
             {
@@ -144,57 +154,80 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref collectionReader, rebind, out tmpItem);
+                    System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                        ref collectionReader,
+                        rebind,
+                        out tmpItem
+                    );
                     tmpList.Add(tmpItem);
                 }
 
                 decoded.DigestAlgorithms = tmpList.ToArray();
             }
 
-            System.Security.Cryptography.Pkcs.Asn1.EncapsulatedContentInfoAsn.Decode(ref sequenceReader, rebind, out decoded.EncapContentInfo);
+            System.Security.Cryptography.Pkcs.Asn1.EncapsulatedContentInfoAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.EncapContentInfo
+            );
 
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
+            )
             {
-
                 // Decode SEQUENCE OF for CertificateSet
                 {
-                    collectionReader = sequenceReader.ReadSetOf(new Asn1Tag(TagClass.ContextSpecific, 0));
-                    var tmpList = new List<System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn>();
+                    collectionReader = sequenceReader.ReadSetOf(
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    );
+                    var tmpList =
+                        new List<System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn>();
                     System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn tmpItem;
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn.Decode(ref collectionReader, rebind, out tmpItem);
+                        System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn.Decode(
+                            ref collectionReader,
+                            rebind,
+                            out tmpItem
+                        );
                         tmpList.Add(tmpItem);
                     }
 
                     decoded.CertificateSet = tmpList.ToArray();
                 }
-
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1))
+            )
             {
-
                 // Decode SEQUENCE OF for Crls
                 {
-                    collectionReader = sequenceReader.ReadSetOf(new Asn1Tag(TagClass.ContextSpecific, 1));
+                    collectionReader = sequenceReader.ReadSetOf(
+                        new Asn1Tag(TagClass.ContextSpecific, 1)
+                    );
                     var tmpList = new List<ReadOnlyMemory<byte>>();
                     ReadOnlyMemory<byte> tmpItem;
 
                     while (collectionReader.HasData)
                     {
                         tmpSpan = collectionReader.ReadEncodedValue();
-                        tmpItem = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                        tmpItem = rebindSpan.Overlaps(tmpSpan, out offset)
+                            ? rebind.Slice(offset, tmpSpan.Length)
+                            : tmpSpan.ToArray();
                         tmpList.Add(tmpItem);
                     }
 
                     decoded.Crls = tmpList.ToArray();
                 }
-
             }
-
 
             // Decode SEQUENCE OF for SignerInfos
             {
@@ -204,13 +237,16 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 while (collectionReader.HasData)
                 {
-                    System.Security.Cryptography.Pkcs.Asn1.SignerInfoAsn.Decode(ref collectionReader, rebind, out tmpItem);
+                    System.Security.Cryptography.Pkcs.Asn1.SignerInfoAsn.Decode(
+                        ref collectionReader,
+                        rebind,
+                        out tmpItem
+                    );
                     tmpList.Add(tmpItem);
                 }
 
                 decoded.SignerInfos = tmpList.ToArray();
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

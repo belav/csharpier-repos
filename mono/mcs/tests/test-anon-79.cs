@@ -1,6 +1,6 @@
 class Test
 {
-    delegate void D ();
+    delegate void D();
     event D E;
     D proxy;
 
@@ -9,18 +9,15 @@ class Test
         add
         {
             if (proxy == null)
-                proxy = delegate () { Foo (); };
+                proxy = delegate()
+                {
+                    Foo();
+                };
         }
-        remove
-        {
-        }
+        remove { }
     }
 
-    void Foo ()
-    {
-    }
+    void Foo() { }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

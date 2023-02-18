@@ -15,11 +15,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
         : AbstractUseConditionalExpressionForAssignmentDiagnosticAnalyzer<IfStatementSyntax>
     {
         public CSharpUseConditionalExpressionForAssignmentDiagnosticAnalyzer()
-            : base(new LocalizableResourceString(nameof(CSharpAnalyzersResources.if_statement_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.if_statement_can_be_simplified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
     }
 }

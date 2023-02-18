@@ -29,16 +29,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static PdbToXmlOptions ToPdbToXmlOptions(this PdbValidationOptions options)
         {
             const PdbValidationOptions mask =
-                PdbValidationOptions.ExcludeDocuments |
-                PdbValidationOptions.ExcludeMethods |
-                PdbValidationOptions.ExcludeSequencePoints |
-                PdbValidationOptions.ExcludeScopes |
-                PdbValidationOptions.ExcludeNamespaces |
-                PdbValidationOptions.ExcludeAsyncInfo |
-                PdbValidationOptions.ExcludeCustomDebugInformation |
-                PdbValidationOptions.IncludeModuleDebugInfo;
+                PdbValidationOptions.ExcludeDocuments
+                | PdbValidationOptions.ExcludeMethods
+                | PdbValidationOptions.ExcludeSequencePoints
+                | PdbValidationOptions.ExcludeScopes
+                | PdbValidationOptions.ExcludeNamespaces
+                | PdbValidationOptions.ExcludeAsyncInfo
+                | PdbValidationOptions.ExcludeCustomDebugInformation
+                | PdbValidationOptions.IncludeModuleDebugInfo;
 
-            return PdbToXmlOptions.ResolveTokens | PdbToXmlOptions.ThrowOnError | PdbToXmlOptions.IncludeEmbeddedSources | (PdbToXmlOptions)(options & mask);
+            return PdbToXmlOptions.ResolveTokens
+                | PdbToXmlOptions.ThrowOnError
+                | PdbToXmlOptions.IncludeEmbeddedSources
+                | (PdbToXmlOptions)(options & mask);
         }
     }
 }

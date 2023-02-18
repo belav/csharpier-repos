@@ -17,10 +17,8 @@ namespace C
     using X = A.XAttribute;
 
     [X]
-    class Test 
+    class Test
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }

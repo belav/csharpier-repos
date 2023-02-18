@@ -14,18 +14,19 @@ namespace ILLink.RoslynAnalyzer.DataFlow
 
         readonly CaptureId? CaptureId;
 
-        public LocalKey (ILocalSymbol symbol) => (Local, CaptureId) = (symbol, null);
+        public LocalKey(ILocalSymbol symbol) => (Local, CaptureId) = (symbol, null);
 
-        public LocalKey (CaptureId captureId) => (Local, CaptureId) = (null, captureId);
+        public LocalKey(CaptureId captureId) => (Local, CaptureId) = (null, captureId);
 
-        public bool Equals (LocalKey other) => SymbolEqualityComparer.Default.Equals (Local, other.Local) &&
-            (CaptureId?.Equals (other.CaptureId) ?? other.CaptureId == null);
+        public bool Equals(LocalKey other) =>
+            SymbolEqualityComparer.Default.Equals(Local, other.Local)
+            && (CaptureId?.Equals(other.CaptureId) ?? other.CaptureId == null);
 
-        public override string ToString ()
+        public override string ToString()
         {
             if (Local != null)
-                return Local.ToString ();
-            return $"capture {CaptureId.GetHashCode ()}";
+                return Local.ToString();
+            return $"capture {CaptureId.GetHashCode()}";
         }
     }
 
@@ -39,30 +40,38 @@ namespace ILLink.RoslynAnalyzer.DataFlow
         // are tracked as part of the dictionary of values, keyed by LocalKey.
         public DefaultValueDictionary<CaptureId, CapturedReferenceValue> CapturedReferences;
 
-        public LocalState (TValue defaultValue)
-            : this (new DefaultValueDictionary<LocalKey, TValue> (defaultValue),
-                new DefaultValueDictionary<CaptureId, CapturedReferenceValue> (new CapturedReferenceValue ()))
-        {
-        }
+        public LocalState(TValue defaultValue)
+            : this(
+                new DefaultValueDictionary<LocalKey, TValue>(defaultValue),
+                new DefaultValueDictionary<CaptureId, CapturedReferenceValue>(
+                    new CapturedReferenceValue()
+                )
+            ) { }
 
-        public LocalState (DefaultValueDictionary<LocalKey, TValue> dictionary, DefaultValueDictionary<CaptureId, CapturedReferenceValue> capturedReferences)
+        public LocalState(
+            DefaultValueDictionary<LocalKey, TValue> dictionary,
+            DefaultValueDictionary<CaptureId, CapturedReferenceValue> capturedReferences
+        )
         {
             Dictionary = dictionary;
             CapturedReferences = capturedReferences;
         }
 
-        public LocalState (DefaultValueDictionary<LocalKey, TValue> dictionary)
-            : this (dictionary, new DefaultValueDictionary<CaptureId, CapturedReferenceValue> (new CapturedReferenceValue ()))
-        {
-        }
+        public LocalState(DefaultValueDictionary<LocalKey, TValue> dictionary)
+            : this(
+                dictionary,
+                new DefaultValueDictionary<CaptureId, CapturedReferenceValue>(
+                    new CapturedReferenceValue()
+                )
+            ) { }
 
-        public bool Equals (LocalState<TValue> other) => Dictionary.Equals (other.Dictionary);
+        public bool Equals(LocalState<TValue> other) => Dictionary.Equals(other.Dictionary);
 
-        public TValue Get (LocalKey key) => Dictionary.Get (key);
+        public TValue Get(LocalKey key) => Dictionary.Get(key);
 
-        public void Set (LocalKey key, TValue value) => Dictionary.Set (key, value);
+        public void Set(LocalKey key, TValue value) => Dictionary.Set(key, value);
 
-        public override string ToString () => Dictionary.ToString ();
+        public override string ToString() => Dictionary.ToString();
     }
 
     // Wrapper struct exists purely to substitute a concrete LocalKey for TKey of DictionaryLattice
@@ -71,22 +80,33 @@ namespace ILLink.RoslynAnalyzer.DataFlow
         where TValueLattice : ILattice<TValue>
     {
         public readonly DictionaryLattice<LocalKey, TValue, TValueLattice> Lattice;
-        public readonly DictionaryLattice<CaptureId, CapturedReferenceValue, CapturedReferenceLattice> CapturedReferenceLattice;
+        public readonly DictionaryLattice<
+            CaptureId,
+            CapturedReferenceValue,
+            CapturedReferenceLattice
+        > CapturedReferenceLattice;
 
-        public LocalStateLattice (TValueLattice valueLattice)
+        public LocalStateLattice(TValueLattice valueLattice)
         {
-            Lattice = new DictionaryLattice<LocalKey, TValue, TValueLattice> (valueLattice);
-            CapturedReferenceLattice = new DictionaryLattice<CaptureId, CapturedReferenceValue, CapturedReferenceLattice> (new CapturedReferenceLattice ());
-            Top = new (Lattice.Top);
+            Lattice = new DictionaryLattice<LocalKey, TValue, TValueLattice>(valueLattice);
+            CapturedReferenceLattice = new DictionaryLattice<
+                CaptureId,
+                CapturedReferenceValue,
+                CapturedReferenceLattice
+            >(new CapturedReferenceLattice());
+            Top = new(Lattice.Top);
         }
 
         public LocalState<TValue> Top { get; }
 
-        public LocalState<TValue> Meet (LocalState<TValue> left, LocalState<TValue> right)
+        public LocalState<TValue> Meet(LocalState<TValue> left, LocalState<TValue> right)
         {
-            var dictionary = Lattice.Meet (left.Dictionary, right.Dictionary);
-            var capturedProperties = CapturedReferenceLattice.Meet (left.CapturedReferences, right.CapturedReferences);
-            return new LocalState<TValue> (dictionary, capturedProperties);
+            var dictionary = Lattice.Meet(left.Dictionary, right.Dictionary);
+            var capturedProperties = CapturedReferenceLattice.Meet(
+                left.CapturedReferences,
+                right.CapturedReferences
+            );
+            return new LocalState<TValue>(dictionary, capturedProperties);
         }
     }
 }

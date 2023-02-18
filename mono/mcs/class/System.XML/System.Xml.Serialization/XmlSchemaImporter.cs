@@ -1,4 +1,4 @@
-// 
+//
 // System.Xml.Serialization.XmlSchemaImporter
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,10 +41,10 @@ using System.Configuration;
 using System.Xml.Serialization.Configuration;
 #endif
 
-namespace System.Xml.Serialization 
+namespace System.Xml.Serialization
 {
 #if MOBILE
-    public abstract class SchemaImporter {}
+    public abstract class SchemaImporter { }
 #endif
 
     public class XmlSchemaImporter : SchemaImporter
@@ -53,25 +53,34 @@ namespace System.Xml.Serialization
 
         XmlSchemas schemas;
         CodeIdentifiers typeIdentifiers;
-        CodeIdentifiers elemIdentifiers = new CodeIdentifiers ();
-        Hashtable mappedTypes = new Hashtable ();
-        Hashtable primitiveDerivedMappedTypes = new Hashtable ();
-        Hashtable dataMappedTypes = new Hashtable ();
-        Queue pendingMaps = new Queue ();
-        Hashtable sharedAnonymousTypes = new Hashtable ();
+        CodeIdentifiers elemIdentifiers = new CodeIdentifiers();
+        Hashtable mappedTypes = new Hashtable();
+        Hashtable primitiveDerivedMappedTypes = new Hashtable();
+        Hashtable dataMappedTypes = new Hashtable();
+        Queue pendingMaps = new Queue();
+        Hashtable sharedAnonymousTypes = new Hashtable();
         bool encodedFormat = false;
         XmlReflectionImporter auxXmlRefImporter;
         SoapReflectionImporter auxSoapRefImporter;
         bool anyTypeImported;
 
-//        CodeGenerationOptions options;
+        //        CodeGenerationOptions options;
 
-        static readonly XmlQualifiedName anyType = new XmlQualifiedName ("anyType",XmlSchema.Namespace);
-        static readonly XmlQualifiedName arrayType = new XmlQualifiedName ("Array",XmlSerializer.EncodingNamespace);
-        static readonly XmlQualifiedName arrayTypeRefName = new XmlQualifiedName ("arrayType",XmlSerializer.EncodingNamespace);
-        
+        static readonly XmlQualifiedName anyType = new XmlQualifiedName(
+            "anyType",
+            XmlSchema.Namespace
+        );
+        static readonly XmlQualifiedName arrayType = new XmlQualifiedName(
+            "Array",
+            XmlSerializer.EncodingNamespace
+        );
+        static readonly XmlQualifiedName arrayTypeRefName = new XmlQualifiedName(
+            "arrayType",
+            XmlSerializer.EncodingNamespace
+        );
+
         const string XmlNamespace = "http://www.w3.org/XML/1998/namespace";
-        
+
         XmlSchemaElement anyElement = null;
 
         class MapFixup
@@ -85,71 +94,87 @@ namespace System.Xml.Serialization
 
         #region Constructors
 
-        public XmlSchemaImporter (XmlSchemas schemas)
+        public XmlSchemaImporter(XmlSchemas schemas)
         {
             this.schemas = schemas;
-            typeIdentifiers = new CodeIdentifiers ();
+            typeIdentifiers = new CodeIdentifiers();
 
-            InitializeExtensions ();
+            InitializeExtensions();
         }
 
-        public XmlSchemaImporter (XmlSchemas schemas, CodeIdentifiers typeIdentifiers)
-            : this (schemas)
+        public XmlSchemaImporter(XmlSchemas schemas, CodeIdentifiers typeIdentifiers)
+            : this(schemas)
         {
             this.typeIdentifiers = typeIdentifiers;
         }
-        
+
 #if !MOBILE
         [MonoTODO]
-        public XmlSchemaImporter (XmlSchemas schemas, CodeGenerationOptions options, CodeDomProvider codeProvider, ImportContext context)
+        public XmlSchemaImporter(
+            XmlSchemas schemas,
+            CodeGenerationOptions options,
+            CodeDomProvider codeProvider,
+            ImportContext context
+        )
         {
             this.schemas = schemas;
-//            this.options = options;
-            if (context != null) {
+            //            this.options = options;
+            if (context != null)
+            {
                 typeIdentifiers = context.TypeIdentifiers;
-                InitSharedData (context);
+                InitSharedData(context);
             }
             else
-                typeIdentifiers = new CodeIdentifiers ();
+                typeIdentifiers = new CodeIdentifiers();
 
-            InitializeExtensions ();
+            InitializeExtensions();
         }
 
         [MonoTODO]
-        public XmlSchemaImporter (XmlSchemas schemas, CodeGenerationOptions options, ImportContext context)
+        public XmlSchemaImporter(
+            XmlSchemas schemas,
+            CodeGenerationOptions options,
+            ImportContext context
+        )
         {
             this.schemas = schemas;
-//            this.options = options;
-            if (context != null) {
+            //            this.options = options;
+            if (context != null)
+            {
                 typeIdentifiers = context.TypeIdentifiers;
-                InitSharedData (context);
+                InitSharedData(context);
             }
             else
-                typeIdentifiers = new CodeIdentifiers ();
+                typeIdentifiers = new CodeIdentifiers();
 
-            InitializeExtensions ();
+            InitializeExtensions();
         }
-        
+
         [MonoTODO]
-        public XmlSchemaImporter (XmlSchemas schemas, CodeIdentifiers typeIdentifiers, CodeGenerationOptions options)
+        public XmlSchemaImporter(
+            XmlSchemas schemas,
+            CodeIdentifiers typeIdentifiers,
+            CodeGenerationOptions options
+        )
         {
             this.typeIdentifiers = typeIdentifiers;
             this.schemas = schemas;
-//            this.options = options;
+            //            this.options = options;
 
-            InitializeExtensions ();
+            InitializeExtensions();
         }
 
-        void InitSharedData (ImportContext context)
+        void InitSharedData(ImportContext context)
         {
-            if (context.ShareTypes) {
+            if (context.ShareTypes)
+            {
                 mappedTypes = context.MappedTypes;
                 dataMappedTypes = context.DataMappedTypes;
                 sharedAnonymousTypes = context.SharedAnonymousTypes;
             }
         }
 #endif
-        
+
         internal bool UseEncodedFormat
         {
             get { return encodedFormat; }
@@ -160,111 +185,156 @@ namespace System.Xml.Serialization
 
         #region Methods
 
-        void InitializeExtensions ()
+        void InitializeExtensions()
         {
 #if CONFIGURATION_DEP
-            SerializationSectionGroup root = ConfigurationManager.GetSection ("system.xml.serialization") as SerializationSectionGroup;
+            SerializationSectionGroup root =
+                ConfigurationManager.GetSection("system.xml.serialization")
+                as SerializationSectionGroup;
             if (root == null)
                 return;
 
-            foreach (SchemaImporterExtensionElement element in
-                 root.SchemaImporterExtensions.SchemaImporterExtensions)
-                Extensions.Add (element.Name, element.Type);
+            foreach (
+                SchemaImporterExtensionElement element in root.SchemaImporterExtensions.SchemaImporterExtensions
+            )
+                Extensions.Add(element.Name, element.Type);
 #endif
         }
 
-        public XmlMembersMapping ImportAnyType (XmlQualifiedName typeName, string elementName)
+        public XmlMembersMapping ImportAnyType(XmlQualifiedName typeName, string elementName)
         {
             if (typeName == XmlQualifiedName.Empty)
             {
-                XmlTypeMapMemberAnyElement mapMem = new XmlTypeMapMemberAnyElement ();
+                XmlTypeMapMemberAnyElement mapMem = new XmlTypeMapMemberAnyElement();
                 mapMem.Name = typeName.Name;
                 mapMem.TypeData = TypeTranslator.GetTypeData(typeof(XmlNode));
-                mapMem.ElementInfo.Add (CreateElementInfo (typeName.Namespace, mapMem, typeName.Name, mapMem.TypeData, true, XmlSchemaForm.None, -1));
-                
-                XmlMemberMapping[] mm = new XmlMemberMapping [1];
-                mm[0] = new XmlMemberMapping (typeName.Name, typeName.Namespace, mapMem, encodedFormat);
-                return new XmlMembersMapping (mm);
+                mapMem.ElementInfo.Add(
+                    CreateElementInfo(
+                        typeName.Namespace,
+                        mapMem,
+                        typeName.Name,
+                        mapMem.TypeData,
+                        true,
+                        XmlSchemaForm.None,
+                        -1
+                    )
+                );
+
+                XmlMemberMapping[] mm = new XmlMemberMapping[1];
+                mm[0] = new XmlMemberMapping(
+                    typeName.Name,
+                    typeName.Namespace,
+                    mapMem,
+                    encodedFormat
+                );
+                return new XmlMembersMapping(mm);
             }
             else
             {
-                XmlSchemaComplexType stype = (XmlSchemaComplexType) schemas.Find (typeName, typeof (XmlSchemaComplexType));
-                if (stype == null) 
-                    throw new InvalidOperationException ("Referenced type '" + typeName + "' not found");
-                
-                if (!CanBeAnyElement (stype))
-                    throw new InvalidOperationException ("The type '" + typeName + "' is not valid for a collection of any elements");
-                    
-                ClassMap cmap = new ClassMap ();
-                CodeIdentifiers classIds = new CodeIdentifiers ();
+                XmlSchemaComplexType stype = (XmlSchemaComplexType)
+                    schemas.Find(typeName, typeof(XmlSchemaComplexType));
+                if (stype == null)
+                    throw new InvalidOperationException(
+                        "Referenced type '" + typeName + "' not found"
+                    );
+
+                if (!CanBeAnyElement(stype))
+                    throw new InvalidOperationException(
+                        "The type '" + typeName + "' is not valid for a collection of any elements"
+                    );
+
+                ClassMap cmap = new ClassMap();
+                CodeIdentifiers classIds = new CodeIdentifiers();
                 bool isMixed = stype.IsMixed;
-                ImportSequenceContent (typeName, cmap, ((XmlSchemaSequence) stype.Particle).Items, classIds, false, ref isMixed);
-                XmlTypeMapMemberAnyElement mapMem = (XmlTypeMapMemberAnyElement) cmap.AllMembers[0];
+                ImportSequenceContent(
+                    typeName,
+                    cmap,
+                    ((XmlSchemaSequence)stype.Particle).Items,
+                    classIds,
+                    false,
+                    ref isMixed
+                );
+                XmlTypeMapMemberAnyElement mapMem = (XmlTypeMapMemberAnyElement)cmap.AllMembers[0];
                 mapMem.Name = typeName.Name;
-                
-                XmlMemberMapping[] mm = new XmlMemberMapping [1];
-                mm[0] = new XmlMemberMapping (typeName.Name, typeName.Namespace, mapMem, encodedFormat);
-                return new XmlMembersMapping (mm);
+
+                XmlMemberMapping[] mm = new XmlMemberMapping[1];
+                mm[0] = new XmlMemberMapping(
+                    typeName.Name,
+                    typeName.Namespace,
+                    mapMem,
+                    encodedFormat
+                );
+                return new XmlMembersMapping(mm);
             }
         }
 
-        public XmlTypeMapping ImportDerivedTypeMapping (XmlQualifiedName name, Type baseType)
+        public XmlTypeMapping ImportDerivedTypeMapping(XmlQualifiedName name, Type baseType)
         {
-            return ImportDerivedTypeMapping (name, baseType, true);
+            return ImportDerivedTypeMapping(name, baseType, true);
         }
-        
-        public XmlTypeMapping ImportDerivedTypeMapping (XmlQualifiedName name, Type baseType, bool baseTypeCanBeIndirect)
+
+        public XmlTypeMapping ImportDerivedTypeMapping(
+            XmlQualifiedName name,
+            Type baseType,
+            bool baseTypeCanBeIndirect
+        )
         {
             XmlQualifiedName qname;
             XmlSchemaType stype;
-            
+
             if (encodedFormat)
             {
                 qname = name;
-                stype = schemas.Find (name, typeof (XmlSchemaComplexType)) as XmlSchemaComplexType;
-                if (stype == null) throw new InvalidOperationException ("Schema type '" + name + "' not found or not valid");
+                stype = schemas.Find(name, typeof(XmlSchemaComplexType)) as XmlSchemaComplexType;
+                if (stype == null)
+                    throw new InvalidOperationException(
+                        "Schema type '" + name + "' not found or not valid"
+                    );
             }
             else
             {
-                if (!LocateElement (name, out qname, out stype))
+                if (!LocateElement(name, out qname, out stype))
                     return null;
             }
 
-            XmlTypeMapping map = GetRegisteredTypeMapping (qname, baseType);
+            XmlTypeMapping map = GetRegisteredTypeMapping(qname, baseType);
             if (map != null)
             {
-                // If the type has already been imported, make sure that the map 
+                // If the type has already been imported, make sure that the map
                 // has the requested base type
-                
-                SetMapBaseType (map, baseType);
-                map.UpdateRoot (name);
+
+                SetMapBaseType(map, baseType);
+                map.UpdateRoot(name);
                 return map;
             }
-            
-            map = CreateTypeMapping (qname, SchemaTypes.Class, name);
-            if (stype != null) {
-                map.Documentation = GetDocumentation (stype);
-                RegisterMapFixup (map, qname, (XmlSchemaComplexType)stype);
-            } else {
-                ClassMap cmap = new ClassMap ();
-                CodeIdentifiers classIds = new CodeIdentifiers ();
-                map.ObjectMap = cmap;
-                AddTextMember (qname, cmap, classIds);
+
+            map = CreateTypeMapping(qname, SchemaTypes.Class, name);
+            if (stype != null)
+            {
+                map.Documentation = GetDocumentation(stype);
+                RegisterMapFixup(map, qname, (XmlSchemaComplexType)stype);
             }
-            
-            BuildPendingMaps ();
-            SetMapBaseType (map, baseType);
-            
+            else
+            {
+                ClassMap cmap = new ClassMap();
+                CodeIdentifiers classIds = new CodeIdentifiers();
+                map.ObjectMap = cmap;
+                AddTextMember(qname, cmap, classIds);
+            }
+
+            BuildPendingMaps();
+            SetMapBaseType(map, baseType);
+
             return map;
         }
-        
-        void SetMapBaseType (XmlTypeMapping map, Type baseType)
+
+        void SetMapBaseType(XmlTypeMapping map, Type baseType)
         {
             // This method sets the base type for a given map.
             // If the map already inherits from this type, it does nothing.
-            
+
             // Fiirst of all, check if the map already inherits from baseType
-                
+
             XmlTypeMapping topMap = null;
             while (map != null)
             {
@@ -273,38 +343,41 @@ namespace System.Xml.Serialization
                 topMap = map;
                 map = map.BaseMap;
             }
-            
+
             // Does not have the requested base type.
             // Then, get/create a map for that base type.
 
-            XmlTypeMapping baseMap = ReflectType (baseType);
-            
+            XmlTypeMapping baseMap = ReflectType(baseType);
+
             // Add this map as a derived map of the base map
 
             topMap.BaseMap = baseMap;
-            baseMap.DerivedTypes.Add (topMap);
-            baseMap.DerivedTypes.AddRange (topMap.DerivedTypes);
-            
+            baseMap.DerivedTypes.Add(topMap);
+            baseMap.DerivedTypes.AddRange(topMap.DerivedTypes);
+
             // Now add the base type fields to all derived maps
 
             ClassMap baseClassMap = (ClassMap)baseMap.ObjectMap;
-            
+
             ClassMap cmap = (ClassMap)topMap.ObjectMap;
             foreach (XmlTypeMapMember member in baseClassMap.AllMembers)
-                cmap.AddMember (member);
-                
+                cmap.AddMember(member);
+
             foreach (XmlTypeMapping derivedMap in topMap.DerivedTypes)
             {
                 cmap = (ClassMap)derivedMap.ObjectMap;
                 foreach (XmlTypeMapMember member in baseClassMap.AllMembers)
-                    cmap.AddMember (member);
+                    cmap.AddMember(member);
             }
         }
 
-        public XmlMembersMapping ImportMembersMapping (XmlQualifiedName name)
+        public XmlMembersMapping ImportMembersMapping(XmlQualifiedName name)
         {
-            XmlSchemaElement elem = (XmlSchemaElement) schemas.Find (name, typeof (XmlSchemaElement));
-            if (elem == null) throw new InvalidOperationException ("Schema element '" + name + "' not found or not valid");
+            XmlSchemaElement elem = (XmlSchemaElement)schemas.Find(name, typeof(XmlSchemaElement));
+            if (elem == null)
+                throw new InvalidOperationException(
+                    "Schema element '" + name + "' not found or not valid"
+                );
 
             XmlSchemaComplexType stype;
             if (elem.SchemaType != null)
@@ -313,192 +386,293 @@ namespace System.Xml.Serialization
             }
             else
             {
-                if (elem.SchemaTypeName.IsEmpty) return null;
-                object type = schemas.Find (elem.SchemaTypeName, typeof (XmlSchemaComplexType));
-                if (type == null) {
-                    if (IsPrimitiveTypeNamespace (elem.SchemaTypeName.Namespace)) return null;
-                    throw new InvalidOperationException ("Schema type '" + elem.SchemaTypeName + "' not found");
+                if (elem.SchemaTypeName.IsEmpty)
+                    return null;
+                object type = schemas.Find(elem.SchemaTypeName, typeof(XmlSchemaComplexType));
+                if (type == null)
+                {
+                    if (IsPrimitiveTypeNamespace(elem.SchemaTypeName.Namespace))
+                        return null;
+                    throw new InvalidOperationException(
+                        "Schema type '" + elem.SchemaTypeName + "' not found"
+                    );
                 }
                 stype = type as XmlSchemaComplexType;
             }
-            
-            if (stype == null) 
-                throw new InvalidOperationException ("Schema element '" + name + "' not found or not valid");
-            
-            XmlMemberMapping[] mapping = ImportMembersMappingComposite (stype, name);            
-            return new XmlMembersMapping (name.Name, name.Namespace, mapping);
+
+            if (stype == null)
+                throw new InvalidOperationException(
+                    "Schema element '" + name + "' not found or not valid"
+                );
+
+            XmlMemberMapping[] mapping = ImportMembersMappingComposite(stype, name);
+            return new XmlMembersMapping(name.Name, name.Namespace, mapping);
         }
-        
-        public XmlMembersMapping ImportMembersMapping (XmlQualifiedName[] names)
+
+        public XmlMembersMapping ImportMembersMapping(XmlQualifiedName[] names)
         {
-            XmlMemberMapping[] mapping = new XmlMemberMapping [names.Length];
-            for (int n=0; n<names.Length; n++)
+            XmlMemberMapping[] mapping = new XmlMemberMapping[names.Length];
+            for (int n = 0; n < names.Length; n++)
             {
-                XmlSchemaElement elem = (XmlSchemaElement) schemas.Find (names[n], typeof (XmlSchemaElement));
-                if (elem == null) throw new InvalidOperationException ("Schema element '" + names[n] + "' not found");
-                
-                XmlQualifiedName typeQName = new XmlQualifiedName ("Message", names[n].Namespace);
+                XmlSchemaElement elem = (XmlSchemaElement)
+                    schemas.Find(names[n], typeof(XmlSchemaElement));
+                if (elem == null)
+                    throw new InvalidOperationException(
+                        "Schema element '" + names[n] + "' not found"
+                    );
+
+                XmlQualifiedName typeQName = new XmlQualifiedName("Message", names[n].Namespace);
                 XmlTypeMapping tmap;
-                TypeData td = GetElementTypeData (typeQName, elem, names[n], out tmap);
-                
-                mapping[n] = ImportMemberMapping (elem.Name, typeQName.Namespace, elem.IsNillable, td, tmap, n);
+                TypeData td = GetElementTypeData(typeQName, elem, names[n], out tmap);
+
+                mapping[n] = ImportMemberMapping(
+                    elem.Name,
+                    typeQName.Namespace,
+                    elem.IsNillable,
+                    td,
+                    tmap,
+                    n
+                );
             }
-            BuildPendingMaps ();
-            return new XmlMembersMapping (mapping);
+            BuildPendingMaps();
+            return new XmlMembersMapping(mapping);
         }
-        
+
         [MonoTODO]
-        public XmlMembersMapping ImportMembersMapping (string name, string ns, SoapSchemaMember[] members)
+        public XmlMembersMapping ImportMembersMapping(
+            string name,
+            string ns,
+            SoapSchemaMember[] members
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
-        
-        public XmlTypeMapping ImportSchemaType (XmlQualifiedName typeName)
+
+        public XmlTypeMapping ImportSchemaType(XmlQualifiedName typeName)
         {
-            return ImportSchemaType (typeName, typeof (object));
+            return ImportSchemaType(typeName, typeof(object));
         }
-        
-        public XmlTypeMapping ImportSchemaType (XmlQualifiedName typeName, Type baseType)
+
+        public XmlTypeMapping ImportSchemaType(XmlQualifiedName typeName, Type baseType)
         {
-            return ImportSchemaType (typeName, typeof (object), false);
+            return ImportSchemaType(typeName, typeof(object), false);
         }
-        
-        [MonoTODO ("baseType and baseTypeCanBeIndirect are ignored")]
-        public XmlTypeMapping ImportSchemaType (XmlQualifiedName typeName, Type baseType, bool baseTypeCanBeIndirect)
+
+        [MonoTODO("baseType and baseTypeCanBeIndirect are ignored")]
+        public XmlTypeMapping ImportSchemaType(
+            XmlQualifiedName typeName,
+            Type baseType,
+            bool baseTypeCanBeIndirect
+        )
         {
             XmlSchemaType stype =
-                (XmlSchemaType) schemas.Find (typeName, typeof (XmlSchemaComplexType)) ??
-                (XmlSchemaType) schemas.Find (typeName, typeof (XmlSchemaSimpleType));
-            return ImportTypeCommon (typeName, typeName, stype, true);
+                (XmlSchemaType)schemas.Find(typeName, typeof(XmlSchemaComplexType))
+                ?? (XmlSchemaType)schemas.Find(typeName, typeof(XmlSchemaSimpleType));
+            return ImportTypeCommon(typeName, typeName, stype, true);
         }
-        
-        internal XmlMembersMapping ImportEncodedMembersMapping (string name, string ns, SoapSchemaMember[] members, bool hasWrapperElement)
+
+        internal XmlMembersMapping ImportEncodedMembersMapping(
+            string name,
+            string ns,
+            SoapSchemaMember[] members,
+            bool hasWrapperElement
+        )
         {
-            XmlMemberMapping[] mapping = new XmlMemberMapping [members.Length];
-            for (int n=0; n<members.Length; n++)
+            XmlMemberMapping[] mapping = new XmlMemberMapping[members.Length];
+            for (int n = 0; n < members.Length; n++)
             {
-                TypeData td = GetTypeData (members[n].MemberType, null, false); // FIXME: isNullable could be true?
-                XmlTypeMapping tmap = GetTypeMapping (td);
-                mapping[n] = ImportMemberMapping (members[n].MemberName, members[n].MemberType.Namespace, true, td, tmap, n);
+                TypeData td = GetTypeData(members[n].MemberType, null, false); // FIXME: isNullable could be true?
+                XmlTypeMapping tmap = GetTypeMapping(td);
+                mapping[n] = ImportMemberMapping(
+                    members[n].MemberName,
+                    members[n].MemberType.Namespace,
+                    true,
+                    td,
+                    tmap,
+                    n
+                );
             }
-            BuildPendingMaps ();
-            return new XmlMembersMapping (name, ns, hasWrapperElement, false, mapping);
+            BuildPendingMaps();
+            return new XmlMembersMapping(name, ns, hasWrapperElement, false, mapping);
         }
-        
-        internal XmlMembersMapping ImportEncodedMembersMapping (string name, string ns, SoapSchemaMember member)
-        {
-            XmlSchemaComplexType stype = schemas.Find (member.MemberType, typeof (XmlSchemaComplexType)) as XmlSchemaComplexType;
-            if (stype == null) throw new InvalidOperationException ("Schema type '" + member.MemberType + "' not found or not valid");
 
-            XmlMemberMapping[] mapping = ImportMembersMappingComposite (stype, member.MemberType);            
-            return new XmlMembersMapping (name, ns, mapping);
+        internal XmlMembersMapping ImportEncodedMembersMapping(
+            string name,
+            string ns,
+            SoapSchemaMember member
+        )
+        {
+            XmlSchemaComplexType stype =
+                schemas.Find(member.MemberType, typeof(XmlSchemaComplexType))
+                as XmlSchemaComplexType;
+            if (stype == null)
+                throw new InvalidOperationException(
+                    "Schema type '" + member.MemberType + "' not found or not valid"
+                );
+
+            XmlMemberMapping[] mapping = ImportMembersMappingComposite(stype, member.MemberType);
+            return new XmlMembersMapping(name, ns, mapping);
         }
-        
-        XmlMemberMapping[] ImportMembersMappingComposite (XmlSchemaComplexType stype, XmlQualifiedName refer)
-        {
-            if (stype.Particle == null) 
-                return new XmlMemberMapping [0];
 
-            ClassMap cmap = new ClassMap ();
-            
+        XmlMemberMapping[] ImportMembersMappingComposite(
+            XmlSchemaComplexType stype,
+            XmlQualifiedName refer
+        )
+        {
+            if (stype.Particle == null)
+                return new XmlMemberMapping[0];
+
+            ClassMap cmap = new ClassMap();
+
             XmlSchemaSequence seq = stype.Particle as XmlSchemaSequence;
-            if (seq == null) throw new InvalidOperationException ("Schema element '" + refer + "' cannot be imported as XmlMembersMapping");
+            if (seq == null)
+                throw new InvalidOperationException(
+                    "Schema element '" + refer + "' cannot be imported as XmlMembersMapping"
+                );
 
-            CodeIdentifiers classIds = new CodeIdentifiers ();
-            ImportParticleComplexContent (refer, cmap, seq, classIds, false);
-            ImportAttributes (refer, cmap, stype.Attributes, stype.AnyAttribute, classIds);
+            CodeIdentifiers classIds = new CodeIdentifiers();
+            ImportParticleComplexContent(refer, cmap, seq, classIds, false);
+            ImportAttributes(refer, cmap, stype.Attributes, stype.AnyAttribute, classIds);
 
-            BuildPendingMaps ();
+            BuildPendingMaps();
 
             int n = 0;
-            XmlMemberMapping[] mapping = new XmlMemberMapping [cmap.AllMembers.Count];
+            XmlMemberMapping[] mapping = new XmlMemberMapping[cmap.AllMembers.Count];
             foreach (XmlTypeMapMember mapMem in cmap.AllMembers)
-                mapping[n++] = new XmlMemberMapping (mapMem.Name, refer.Namespace, mapMem, encodedFormat);
-                
+                mapping[n++] = new XmlMemberMapping(
+                    mapMem.Name,
+                    refer.Namespace,
+                    mapMem,
+                    encodedFormat
+                );
+
             return mapping;
         }
-        
-        XmlMemberMapping ImportMemberMapping (string name, string ns, bool isNullable, TypeData type, XmlTypeMapping emap, int order)
+
+        XmlMemberMapping ImportMemberMapping(
+            string name,
+            string ns,
+            bool isNullable,
+            TypeData type,
+            XmlTypeMapping emap,
+            int order
+        )
         {
             XmlTypeMapMemberElement mapMem;
-            
+
             if (type.IsListType)
-                mapMem = new XmlTypeMapMemberList ();
+                mapMem = new XmlTypeMapMemberList();
             else
-                mapMem = new XmlTypeMapMemberElement ();
-            
+                mapMem = new XmlTypeMapMemberElement();
+
             mapMem.Name = name;
             mapMem.TypeData = type;
-            mapMem.ElementInfo.Add (CreateElementInfo (ns, mapMem, name, type, isNullable, XmlSchemaForm.None, emap, order));
-            return new XmlMemberMapping (name, ns, mapMem, encodedFormat);
-        }
-        
-        [MonoTODO]
-        public XmlMembersMapping ImportMembersMapping (XmlQualifiedName[] names, Type baseType, bool baseTypeCanBeIndirect)
-        {
-            throw new NotImplementedException ();
+            mapMem.ElementInfo.Add(
+                CreateElementInfo(
+                    ns,
+                    mapMem,
+                    name,
+                    type,
+                    isNullable,
+                    XmlSchemaForm.None,
+                    emap,
+                    order
+                )
+            );
+            return new XmlMemberMapping(name, ns, mapMem, encodedFormat);
         }
 
-        public XmlTypeMapping ImportTypeMapping (XmlQualifiedName name)
+        [MonoTODO]
+        public XmlMembersMapping ImportMembersMapping(
+            XmlQualifiedName[] names,
+            Type baseType,
+            bool baseTypeCanBeIndirect
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public XmlTypeMapping ImportTypeMapping(XmlQualifiedName name)
         {
             XmlQualifiedName qname;
             XmlSchemaType stype;
 
             if (!schemas.IsCompiled)
-                schemas.Compile (null, true);
-            XmlSchemaElement elem = (XmlSchemaElement) schemas.Find (name, typeof (XmlSchemaElement));
-            if (!LocateElement (elem, out qname, out stype))
-                throw new InvalidOperationException (String.Format ("'{0}' is missing.", name));
-            return ImportTypeCommon (name, qname, stype, elem.IsNillable);
+                schemas.Compile(null, true);
+            XmlSchemaElement elem = (XmlSchemaElement)schemas.Find(name, typeof(XmlSchemaElement));
+            if (!LocateElement(elem, out qname, out stype))
+                throw new InvalidOperationException(String.Format("'{0}' is missing.", name));
+            return ImportTypeCommon(name, qname, stype, elem.IsNillable);
         }
 
         // FIXME: name and qname are confusing. Rename one either
         // (name is in schema itself, qname is for actual processing.
         //  For example simple types have qname as in xsd namespace.)
-        private XmlTypeMapping ImportTypeCommon (XmlQualifiedName name, XmlQualifiedName qname, XmlSchemaType stype, bool isNullable)
+        private XmlTypeMapping ImportTypeCommon(
+            XmlQualifiedName name,
+            XmlQualifiedName qname,
+            XmlSchemaType stype,
+            bool isNullable
+        )
         {
-            if (stype == null) {
-                if (qname == anyType) {
+            if (stype == null)
+            {
+                if (qname == anyType)
+                {
                     // Importing anyType.
-                    XmlTypeMapping xmap = GetTypeMapping (TypeTranslator.GetTypeData (typeof (object)));
+                    XmlTypeMapping xmap = GetTypeMapping(
+                        TypeTranslator.GetTypeData(typeof(object))
+                    );
                     // This also means, all complexTypes
                     // are imported as well.
-                    BuildPendingMaps ();
+                    BuildPendingMaps();
                     return xmap;
-                } else {
+                }
+                else
+                {
                     // Importing a primitive type
-                    TypeData td = TypeTranslator.GetPrimitiveTypeData (qname.Name);
-                    return ReflectType (td, name.Namespace);
+                    TypeData td = TypeTranslator.GetPrimitiveTypeData(qname.Name);
+                    return ReflectType(td, name.Namespace);
                 }
             }
-            
-            XmlTypeMapping map = GetRegisteredTypeMapping (qname);
-            if (map != null) return map;
-            
+
+            XmlTypeMapping map = GetRegisteredTypeMapping(qname);
+            if (map != null)
+                return map;
+
             if (stype is XmlSchemaSimpleType)
-                return ImportClassSimpleType (stype.QualifiedName, (XmlSchemaSimpleType) stype, name);
-            
-            map = CreateTypeMapping (qname, SchemaTypes.Class, name);
-            map.Documentation = GetDocumentation (stype);
+                return ImportClassSimpleType(stype.QualifiedName, (XmlSchemaSimpleType)stype, name);
+
+            map = CreateTypeMapping(qname, SchemaTypes.Class, name);
+            map.Documentation = GetDocumentation(stype);
             map.IsNullable = isNullable;
-            RegisterMapFixup (map, qname, (XmlSchemaComplexType)stype);
-            
-            BuildPendingMaps ();
+            RegisterMapFixup(map, qname, (XmlSchemaComplexType)stype);
+
+            BuildPendingMaps();
             return map;
         }
 
-        bool LocateElement (XmlQualifiedName name, out XmlQualifiedName qname, out XmlSchemaType stype)
+        bool LocateElement(
+            XmlQualifiedName name,
+            out XmlQualifiedName qname,
+            out XmlSchemaType stype
+        )
         {
-            XmlSchemaElement elem = (XmlSchemaElement) schemas.Find (name, typeof (XmlSchemaElement));
-            return LocateElement (elem, out qname, out stype);
+            XmlSchemaElement elem = (XmlSchemaElement)schemas.Find(name, typeof(XmlSchemaElement));
+            return LocateElement(elem, out qname, out stype);
         }
 
-        bool LocateElement (XmlSchemaElement elem, out XmlQualifiedName qname, out XmlSchemaType stype)
+        bool LocateElement(
+            XmlSchemaElement elem,
+            out XmlQualifiedName qname,
+            out XmlSchemaType stype
+        )
         {
             qname = null;
             stype = null;
-            
-            if (elem == null) return false;
+
+            if (elem == null)
+                return false;
 
             // The root element must be an element with complex type
 
@@ -514,85 +688,121 @@ namespace System.Xml.Serialization
             }
             else
             {
-                if (elem.SchemaTypeName.IsEmpty) return false;
-                
-                object type = schemas.Find (elem.SchemaTypeName, typeof (XmlSchemaComplexType));
-                if (type == null) type = schemas.Find (elem.SchemaTypeName, typeof (XmlSchemaSimpleType));
-                if (type == null) {
-                    if (IsPrimitiveTypeNamespace (elem.SchemaTypeName.Namespace)) {
+                if (elem.SchemaTypeName.IsEmpty)
+                    return false;
+
+                object type = schemas.Find(elem.SchemaTypeName, typeof(XmlSchemaComplexType));
+                if (type == null)
+                    type = schemas.Find(elem.SchemaTypeName, typeof(XmlSchemaSimpleType));
+                if (type == null)
+                {
+                    if (IsPrimitiveTypeNamespace(elem.SchemaTypeName.Namespace))
+                    {
                         qname = elem.SchemaTypeName;
                         return true;
                     }
-                    throw new InvalidOperationException ("Schema type '" + elem.SchemaTypeName + "' not found");
+                    throw new InvalidOperationException(
+                        "Schema type '" + elem.SchemaTypeName + "' not found"
+                    );
                 }
-                stype = (XmlSchemaType) type;
+                stype = (XmlSchemaType)type;
                 qname = stype.QualifiedName;
-                
+
                 XmlSchemaType btype = stype.BaseSchemaType as XmlSchemaType;
                 if (btype != null && btype.QualifiedName == elem.SchemaTypeName)
-                    throw new InvalidOperationException ("Cannot import schema for type '" + elem.SchemaTypeName.Name + "' from namespace '" + elem.SchemaTypeName.Namespace + "'. Redefine not supported");
+                    throw new InvalidOperationException(
+                        "Cannot import schema for type '"
+                            + elem.SchemaTypeName.Name
+                            + "' from namespace '"
+                            + elem.SchemaTypeName.Namespace
+                            + "'. Redefine not supported"
+                    );
             }
 
             //if (stype is XmlSchemaSimpleType) return false;
             return true;
         }
 
-        XmlTypeMapping ImportType (XmlQualifiedName name, XmlQualifiedName root, bool throwOnError)
+        XmlTypeMapping ImportType(XmlQualifiedName name, XmlQualifiedName root, bool throwOnError)
         {
-            XmlTypeMapping map = GetRegisteredTypeMapping (name);
-            if (map != null) {
-                map.UpdateRoot (root);
+            XmlTypeMapping map = GetRegisteredTypeMapping(name);
+            if (map != null)
+            {
+                map.UpdateRoot(root);
                 return map;
             }
 
-            XmlSchemaType type = (XmlSchemaType) schemas.Find (name, typeof (XmlSchemaComplexType));
-            if (type == null) type = (XmlSchemaType) schemas.Find (name, typeof (XmlSchemaSimpleType));
-            
-            if (type == null) 
+            XmlSchemaType type = (XmlSchemaType)schemas.Find(name, typeof(XmlSchemaComplexType));
+            if (type == null)
+                type = (XmlSchemaType)schemas.Find(name, typeof(XmlSchemaSimpleType));
+
+            if (type == null)
             {
-                if (throwOnError) {
+                if (throwOnError)
+                {
                     if (name.Namespace == XmlSerializer.EncodingNamespace)
-                        throw new InvalidOperationException ("Referenced type '" + name + "' valid only for encoded SOAP.");
+                        throw new InvalidOperationException(
+                            "Referenced type '" + name + "' valid only for encoded SOAP."
+                        );
                     else
-                        throw new InvalidOperationException ("Referenced type '" + name + "' not found.");
-                } else
+                        throw new InvalidOperationException(
+                            "Referenced type '" + name + "' not found."
+                        );
+                }
+                else
                     return null;
             }
 
-            return ImportType (name, type, root);
+            return ImportType(name, type, root);
         }
 
-        XmlTypeMapping ImportClass (XmlQualifiedName name)
+        XmlTypeMapping ImportClass(XmlQualifiedName name)
         {
-            XmlTypeMapping map = ImportType (name, null, true);
-            if (map.TypeData.SchemaType == SchemaTypes.Class) return map;
-            XmlSchemaComplexType stype = schemas.Find (name, typeof (XmlSchemaComplexType)) as XmlSchemaComplexType;
-            return CreateClassMap (name, stype, new XmlQualifiedName (map.ElementName, map.Namespace));
+            XmlTypeMapping map = ImportType(name, null, true);
+            if (map.TypeData.SchemaType == SchemaTypes.Class)
+                return map;
+            XmlSchemaComplexType stype =
+                schemas.Find(name, typeof(XmlSchemaComplexType)) as XmlSchemaComplexType;
+            return CreateClassMap(
+                name,
+                stype,
+                new XmlQualifiedName(map.ElementName, map.Namespace)
+            );
         }
-        
-        XmlTypeMapping ImportType (XmlQualifiedName name, XmlSchemaType stype, XmlQualifiedName root)
+
+        XmlTypeMapping ImportType(XmlQualifiedName name, XmlSchemaType stype, XmlQualifiedName root)
         {
-            XmlTypeMapping map = GetRegisteredTypeMapping (name);
-            if (map != null) {
+            XmlTypeMapping map = GetRegisteredTypeMapping(name);
+            if (map != null)
+            {
                 XmlSchemaComplexType ct = stype as XmlSchemaComplexType;
-                if (map.TypeData.SchemaType != SchemaTypes.Class || ct == null || !CanBeArray (name, ct)) {
-                    map.UpdateRoot (root);
+                if (
+                    map.TypeData.SchemaType != SchemaTypes.Class
+                    || ct == null
+                    || !CanBeArray(name, ct)
+                )
+                {
+                    map.UpdateRoot(root);
                     return map;
                 }
-                    
+
                 // The map was initially imported as a class, but it turns out that it is an
                 // array. It has to be imported now as array.
             }
-            
-            if (stype is XmlSchemaComplexType)
-                return ImportClassComplexType (name, (XmlSchemaComplexType) stype, root);
-            else if (stype is XmlSchemaSimpleType)
-                return ImportClassSimpleType (name, (XmlSchemaSimpleType) stype, root);
 
-            throw new NotSupportedException ("Schema type not supported: " + stype.GetType ());
+            if (stype is XmlSchemaComplexType)
+                return ImportClassComplexType(name, (XmlSchemaComplexType)stype, root);
+            else if (stype is XmlSchemaSimpleType)
+                return ImportClassSimpleType(name, (XmlSchemaSimpleType)stype, root);
+
+            throw new NotSupportedException("Schema type not supported: " + stype.GetType());
         }
 
-        XmlTypeMapping ImportClassComplexType (XmlQualifiedName typeQName, XmlSchemaComplexType stype, XmlQualifiedName root)
+        XmlTypeMapping ImportClassComplexType(
+            XmlQualifiedName typeQName,
+            XmlSchemaComplexType stype,
+            XmlQualifiedName root
+        )
         {
             // The need for fixups: If the complex type is an array, then to get the type of the
             // array we need first to get the type of the items of the array.
@@ -601,168 +811,230 @@ namespace System.Xml.Serialization
             // the class map is registered before parsing the children. We can't do the same
             // with the array type because to register the array map we need the type of the array.
 
-            if (CanBeArray (typeQName, stype))
+            if (CanBeArray(typeQName, stype))
             {
                 TypeData typeData;
-                ListMap listMap = BuildArrayMap (typeQName, stype, out typeData);
+                ListMap listMap = BuildArrayMap(typeQName, stype, out typeData);
                 if (listMap != null)
                 {
-                    XmlTypeMapping map = CreateArrayTypeMapping (typeQName, typeData);
+                    XmlTypeMapping map = CreateArrayTypeMapping(typeQName, typeData);
                     map.ObjectMap = listMap;
                     return map;
                 }
 
                 // After all, it is not an array. Create a class map then.
             }
-            else if (CanBeIXmlSerializable (stype))
+            else if (CanBeIXmlSerializable(stype))
             {
-                return ImportXmlSerializableMapping (typeQName.Namespace);
+                return ImportXmlSerializableMapping(typeQName.Namespace);
             }
 
             // Register the map right now but do not build it,
             // This will avoid loops.
 
-            return CreateClassMap (typeQName, stype, root);
+            return CreateClassMap(typeQName, stype, root);
         }
-        
-        XmlTypeMapping CreateClassMap (XmlQualifiedName typeQName, XmlSchemaComplexType stype, XmlQualifiedName root)
+
+        XmlTypeMapping CreateClassMap(
+            XmlQualifiedName typeQName,
+            XmlSchemaComplexType stype,
+            XmlQualifiedName root
+        )
         {
-            XmlTypeMapping map = CreateTypeMapping (typeQName, SchemaTypes.Class, root);
-            map.Documentation = GetDocumentation (stype);
-            RegisterMapFixup (map, typeQName, stype);
+            XmlTypeMapping map = CreateTypeMapping(typeQName, SchemaTypes.Class, root);
+            map.Documentation = GetDocumentation(stype);
+            RegisterMapFixup(map, typeQName, stype);
             return map;
         }
 
-        ArrayList fixup_registered_types = new ArrayList ();
+        ArrayList fixup_registered_types = new ArrayList();
 
-        void RegisterMapFixup (XmlTypeMapping map, XmlQualifiedName typeQName, XmlSchemaComplexType stype)
+        void RegisterMapFixup(
+            XmlTypeMapping map,
+            XmlQualifiedName typeQName,
+            XmlSchemaComplexType stype
+        )
         {
             // This check is introduced for bug #650117, but might be too wide to catch erroneous cases...
-            if (fixup_registered_types.Contains (stype))
-                throw new InvalidOperationException (String.Format ("Circular dependency for schema type {0} in namespace {1}", map.ElementName, map.Namespace));
-            fixup_registered_types.Add (stype);
-            MapFixup fixup = new MapFixup ();
+            if (fixup_registered_types.Contains(stype))
+                throw new InvalidOperationException(
+                    String.Format(
+                        "Circular dependency for schema type {0} in namespace {1}",
+                        map.ElementName,
+                        map.Namespace
+                    )
+                );
+            fixup_registered_types.Add(stype);
+            MapFixup fixup = new MapFixup();
             fixup.Map = map;
             fixup.SchemaType = stype;
             fixup.TypeName = typeQName;
-            pendingMaps.Enqueue (fixup);
+            pendingMaps.Enqueue(fixup);
         }
 
-        void BuildPendingMaps ()
+        void BuildPendingMaps()
         {
-            while (pendingMaps.Count > 0) {
-                MapFixup fixup  = (MapFixup) pendingMaps.Dequeue ();
-                if (fixup.Map.ObjectMap == null) {
-                    BuildClassMap (fixup.Map, fixup.TypeName, fixup.SchemaType);
-                    if (fixup.Map.ObjectMap == null) pendingMaps.Enqueue (fixup);
+            while (pendingMaps.Count > 0)
+            {
+                MapFixup fixup = (MapFixup)pendingMaps.Dequeue();
+                if (fixup.Map.ObjectMap == null)
+                {
+                    BuildClassMap(fixup.Map, fixup.TypeName, fixup.SchemaType);
+                    if (fixup.Map.ObjectMap == null)
+                        pendingMaps.Enqueue(fixup);
                 }
             }
         }
 
-        void BuildPendingMap (XmlTypeMapping map)
+        void BuildPendingMap(XmlTypeMapping map)
         {
-            if (map.ObjectMap != null) return;
+            if (map.ObjectMap != null)
+                return;
 
             foreach (MapFixup fixup in pendingMaps)
             {
-                if (fixup.Map == map) {
-                    BuildClassMap (fixup.Map, fixup.TypeName, fixup.SchemaType);
+                if (fixup.Map == map)
+                {
+                    BuildClassMap(fixup.Map, fixup.TypeName, fixup.SchemaType);
                     return;
                 }
             }
-            throw new InvalidOperationException ("Can't complete map of type " + map.XmlType + " : " + map.Namespace);
+            throw new InvalidOperationException(
+                "Can't complete map of type " + map.XmlType + " : " + map.Namespace
+            );
         }
 
-        void BuildClassMap (XmlTypeMapping map, XmlQualifiedName typeQName, XmlSchemaComplexType stype)
+        void BuildClassMap(
+            XmlTypeMapping map,
+            XmlQualifiedName typeQName,
+            XmlSchemaComplexType stype
+        )
         {
             CodeIdentifiers classIds = new CodeIdentifiers();
-            classIds.AddReserved (map.TypeData.TypeName);
+            classIds.AddReserved(map.TypeData.TypeName);
 
-            ClassMap cmap = new ClassMap ();
+            ClassMap cmap = new ClassMap();
             map.ObjectMap = cmap;
             bool isMixed = stype.IsMixed;
 
             if (stype.Particle != null)
-                ImportParticleComplexContent (typeQName, cmap, stype.Particle, classIds, isMixed);
+                ImportParticleComplexContent(typeQName, cmap, stype.Particle, classIds, isMixed);
             else
             {
-                if (stype.ContentModel is XmlSchemaSimpleContent) {
-                    ImportSimpleContent (typeQName, map, (XmlSchemaSimpleContent)stype.ContentModel, classIds, isMixed);
+                if (stype.ContentModel is XmlSchemaSimpleContent)
+                {
+                    ImportSimpleContent(
+                        typeQName,
+                        map,
+                        (XmlSchemaSimpleContent)stype.ContentModel,
+                        classIds,
+                        isMixed
+                    );
                 }
-                else if (stype.ContentModel is XmlSchemaComplexContent) {
-                    ImportComplexContent (typeQName, map, (XmlSchemaComplexContent)stype.ContentModel, classIds, isMixed);
+                else if (stype.ContentModel is XmlSchemaComplexContent)
+                {
+                    ImportComplexContent(
+                        typeQName,
+                        map,
+                        (XmlSchemaComplexContent)stype.ContentModel,
+                        classIds,
+                        isMixed
+                    );
                 }
             }
 
-            ImportAttributes (typeQName, cmap, stype.Attributes, stype.AnyAttribute, classIds);
-            ImportExtensionTypes (typeQName);
+            ImportAttributes(typeQName, cmap, stype.Attributes, stype.AnyAttribute, classIds);
+            ImportExtensionTypes(typeQName);
 
-            if (isMixed) AddTextMember (typeQName, cmap, classIds);
-            
-            AddObjectDerivedMap (map);
+            if (isMixed)
+                AddTextMember(typeQName, cmap, classIds);
+
+            AddObjectDerivedMap(map);
         }
-        
-        void ImportAttributes (XmlQualifiedName typeQName, ClassMap cmap, XmlSchemaObjectCollection atts, XmlSchemaAnyAttribute anyat, CodeIdentifiers classIds)
+
+        void ImportAttributes(
+            XmlQualifiedName typeQName,
+            ClassMap cmap,
+            XmlSchemaObjectCollection atts,
+            XmlSchemaAnyAttribute anyat,
+            CodeIdentifiers classIds
+        )
         {
-            atts = CollectAttributeUsesNonOverlap (atts, cmap);
+            atts = CollectAttributeUsesNonOverlap(atts, cmap);
 
             if (anyat != null)
             {
-                XmlTypeMapMemberAnyAttribute member = new XmlTypeMapMemberAnyAttribute ();
-                member.Name = classIds.AddUnique ("AnyAttribute", member);
-                member.TypeData = TypeTranslator.GetTypeData (typeof(XmlAttribute[]));
-                cmap.AddMember (member);
+                XmlTypeMapMemberAnyAttribute member = new XmlTypeMapMemberAnyAttribute();
+                member.Name = classIds.AddUnique("AnyAttribute", member);
+                member.TypeData = TypeTranslator.GetTypeData(typeof(XmlAttribute[]));
+                cmap.AddMember(member);
             }
-            
+
             foreach (XmlSchemaObject at in atts)
             {
                 if (at is XmlSchemaAttribute)
                 {
                     string ns;
                     XmlSchemaAttribute attr = (XmlSchemaAttribute)at;
-                    XmlSchemaAttribute refAttr = GetRefAttribute (typeQName, attr, out ns);
-                    XmlTypeMapMemberAttribute member = new XmlTypeMapMemberAttribute ();
-                    member.Name = classIds.AddUnique (CodeIdentifier.MakeValid (refAttr.Name), member);
-                    member.Documentation = GetDocumentation (attr);
+                    XmlSchemaAttribute refAttr = GetRefAttribute(typeQName, attr, out ns);
+                    XmlTypeMapMemberAttribute member = new XmlTypeMapMemberAttribute();
+                    member.Name = classIds.AddUnique(
+                        CodeIdentifier.MakeValid(refAttr.Name),
+                        member
+                    );
+                    member.Documentation = GetDocumentation(attr);
                     member.AttributeName = refAttr.Name;
                     member.Namespace = ns;
                     member.Form = refAttr.Form;
-                    member.TypeData = GetAttributeTypeData (typeQName, attr);
-                    
-                    if (refAttr.DefaultValue != null) 
-                        member.DefaultValue = ImportDefaultValue (member.TypeData, refAttr.DefaultValue);
+                    member.TypeData = GetAttributeTypeData(typeQName, attr);
+
+                    if (refAttr.DefaultValue != null)
+                        member.DefaultValue = ImportDefaultValue(
+                            member.TypeData,
+                            refAttr.DefaultValue
+                        );
                     else if (member.TypeData.IsValueType)
                         member.IsOptionalValueType = (refAttr.Use != XmlSchemaUse.Required);
-                        
+
                     if (member.TypeData.IsComplexType)
-                        member.MappedType = GetTypeMapping (member.TypeData);
-                    cmap.AddMember (member);
+                        member.MappedType = GetTypeMapping(member.TypeData);
+                    cmap.AddMember(member);
                 }
                 else if (at is XmlSchemaAttributeGroupRef)
                 {
                     XmlSchemaAttributeGroupRef gref = (XmlSchemaAttributeGroupRef)at;
-                    XmlSchemaAttributeGroup grp = FindRefAttributeGroup (gref.RefName);
-                    ImportAttributes (typeQName, cmap, grp.Attributes, grp.AnyAttribute, classIds);
+                    XmlSchemaAttributeGroup grp = FindRefAttributeGroup(gref.RefName);
+                    ImportAttributes(typeQName, cmap, grp.Attributes, grp.AnyAttribute, classIds);
                 }
             }
         }
-        
-        IEnumerable<XmlSchemaAttribute> EnumerateAttributes (XmlSchemaObjectCollection col, List<XmlSchemaAttributeGroup> recurse)
+
+        IEnumerable<XmlSchemaAttribute> EnumerateAttributes(
+            XmlSchemaObjectCollection col,
+            List<XmlSchemaAttributeGroup> recurse
+        )
         {
-            foreach (var o in col) {
-                if (o is XmlSchemaAttributeGroupRef) {
-                    var gr = (XmlSchemaAttributeGroupRef) o;
-                    var g = FindRefAttributeGroup (gr.RefName);
-                    if (recurse.Contains (g))
+            foreach (var o in col)
+            {
+                if (o is XmlSchemaAttributeGroupRef)
+                {
+                    var gr = (XmlSchemaAttributeGroupRef)o;
+                    var g = FindRefAttributeGroup(gr.RefName);
+                    if (recurse.Contains(g))
                         continue;
-                    recurse.Add (g);
+                    recurse.Add(g);
                     if (g == null)
-                        throw new InvalidOperationException (string.Format ("Referenced AttributeGroup '{0}' was not found.", gr.RefName));
-                    foreach (var a in EnumerateAttributes (g.Attributes, recurse))
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "Referenced AttributeGroup '{0}' was not found.",
+                                gr.RefName
+                            )
+                        );
+                    foreach (var a in EnumerateAttributes(g.Attributes, recurse))
                         yield return a;
                 }
                 else
-                    yield return (XmlSchemaAttribute) o;
+                    yield return (XmlSchemaAttribute)o;
             }
         }
 
@@ -770,65 +1042,99 @@ namespace System.Xml.Serialization
         // FIXME: this is nothing more than just a hack.
         // Basically it should use
         // XmlSchemaComplexType.AttributeUses.
-        XmlSchemaObjectCollection CollectAttributeUsesNonOverlap (
-            XmlSchemaObjectCollection src, ClassMap map)
+        XmlSchemaObjectCollection CollectAttributeUsesNonOverlap(
+            XmlSchemaObjectCollection src,
+            ClassMap map
+        )
         {
-            XmlSchemaObjectCollection atts = new XmlSchemaObjectCollection ();
-            foreach (var a in EnumerateAttributes (src, new List<XmlSchemaAttributeGroup> ()))
-                if (map.GetAttribute (a.QualifiedName.Name, a.QualifiedName.Namespace) == null)
-                    atts.Add (a);
+            XmlSchemaObjectCollection atts = new XmlSchemaObjectCollection();
+            foreach (var a in EnumerateAttributes(src, new List<XmlSchemaAttributeGroup>()))
+                if (map.GetAttribute(a.QualifiedName.Name, a.QualifiedName.Namespace) == null)
+                    atts.Add(a);
             return atts;
         }
 
-        ListMap BuildArrayMap (XmlQualifiedName typeQName, XmlSchemaComplexType stype, out TypeData arrayTypeData)
+        ListMap BuildArrayMap(
+            XmlQualifiedName typeQName,
+            XmlSchemaComplexType stype,
+            out TypeData arrayTypeData
+        )
         {
             if (encodedFormat)
             {
                 XmlSchemaComplexContent content = stype.ContentModel as XmlSchemaComplexContent;
-                XmlSchemaComplexContentRestriction rest = content.Content as XmlSchemaComplexContentRestriction;
-                XmlSchemaAttribute arrayTypeAt = FindArrayAttribute (rest.Attributes);
-                
+                XmlSchemaComplexContentRestriction rest =
+                    content.Content as XmlSchemaComplexContentRestriction;
+                XmlSchemaAttribute arrayTypeAt = FindArrayAttribute(rest.Attributes);
+
                 if (arrayTypeAt != null)
                 {
                     XmlAttribute[] uatts = arrayTypeAt.UnhandledAttributes;
-                    if (uatts == null || uatts.Length == 0) throw new InvalidOperationException ("arrayType attribute not specified in array declaration: " + typeQName);
-                    
+                    if (uatts == null || uatts.Length == 0)
+                        throw new InvalidOperationException(
+                            "arrayType attribute not specified in array declaration: " + typeQName
+                        );
+
                     XmlAttribute xat = null;
                     foreach (XmlAttribute at in uatts)
-                        if (at.LocalName == "arrayType" && at.NamespaceURI == XmlSerializer.WsdlNamespace)
-                            { xat = at; break; }
-                    
-                    if (xat == null) 
-                        throw new InvalidOperationException ("arrayType attribute not specified in array declaration: " + typeQName);
-    
-                    string name, ns, dims;
-                    TypeTranslator.ParseArrayType (xat.Value, out name, out ns, out dims);
-                    return BuildEncodedArrayMap (name + dims, ns, out arrayTypeData);
+                        if (
+                            at.LocalName == "arrayType"
+                            && at.NamespaceURI == XmlSerializer.WsdlNamespace
+                        )
+                        {
+                            xat = at;
+                            break;
+                        }
+
+                    if (xat == null)
+                        throw new InvalidOperationException(
+                            "arrayType attribute not specified in array declaration: " + typeQName
+                        );
+
+                    string name,
+                        ns,
+                        dims;
+                    TypeTranslator.ParseArrayType(xat.Value, out name, out ns, out dims);
+                    return BuildEncodedArrayMap(name + dims, ns, out arrayTypeData);
                 }
                 else
                 {
                     XmlSchemaElement elem = null;
                     XmlSchemaSequence seq = rest.Particle as XmlSchemaSequence;
-                    if (seq != null && seq.Items.Count == 1) 
+                    if (seq != null && seq.Items.Count == 1)
                         elem = seq.Items[0] as XmlSchemaElement;
-                    else {
+                    else
+                    {
                         XmlSchemaAll all = rest.Particle as XmlSchemaAll;
                         if (all != null && all.Items.Count == 1)
                             elem = all.Items[0] as XmlSchemaElement;
                     }
                     if (elem == null)
-                        throw new InvalidOperationException ("Unknown array format");
-                        
-                    return BuildEncodedArrayMap (elem.SchemaTypeName.Name + "[]", elem.SchemaTypeName.Namespace, out arrayTypeData);
+                        throw new InvalidOperationException("Unknown array format");
+
+                    return BuildEncodedArrayMap(
+                        elem.SchemaTypeName.Name + "[]",
+                        elem.SchemaTypeName.Namespace,
+                        out arrayTypeData
+                    );
                 }
             }
             else
             {
-                ClassMap cmap = new ClassMap ();
+                ClassMap cmap = new ClassMap();
                 CodeIdentifiers classIds = new CodeIdentifiers();
-                ImportParticleComplexContent (typeQName, cmap, stype.Particle, classIds, stype.IsMixed);
+                ImportParticleComplexContent(
+                    typeQName,
+                    cmap,
+                    stype.Particle,
+                    classIds,
+                    stype.IsMixed
+                );
 
-                XmlTypeMapMemberFlatList list = (cmap.AllMembers.Count == 1) ? cmap.AllMembers[0] as XmlTypeMapMemberFlatList : null;
+                XmlTypeMapMemberFlatList list =
+                    (cmap.AllMembers.Count == 1)
+                        ? cmap.AllMembers[0] as XmlTypeMapMemberFlatList
+                        : null;
                 if (list != null && list.ChoiceMember == null)
                 {
                     arrayTypeData = list.TypeData;
@@ -841,223 +1147,344 @@ namespace System.Xml.Serialization
                 }
             }
         }
-        
-        ListMap BuildEncodedArrayMap (string type, string ns, out TypeData arrayTypeData)
+
+        ListMap BuildEncodedArrayMap(string type, string ns, out TypeData arrayTypeData)
         {
-            ListMap map = new ListMap ();
-            
-            int i = type.LastIndexOf ("[");
-            if (i == -1) throw new InvalidOperationException ("Invalid arrayType value: " + type);
-            if (type.IndexOf (",",i) != -1) throw new InvalidOperationException ("Multidimensional arrays are not supported");
-            
-            string itemType = type.Substring (0,i);
-            
+            ListMap map = new ListMap();
+
+            int i = type.LastIndexOf("[");
+            if (i == -1)
+                throw new InvalidOperationException("Invalid arrayType value: " + type);
+            if (type.IndexOf(",", i) != -1)
+                throw new InvalidOperationException("Multidimensional arrays are not supported");
+
+            string itemType = type.Substring(0, i);
+
             TypeData itemTypeData;
-            if (itemType.IndexOf ("[") != -1) 
+            if (itemType.IndexOf("[") != -1)
             {
-                ListMap innerListMap = BuildEncodedArrayMap (itemType, ns, out itemTypeData);
-                
-                int dims = itemType.Split ('[').Length - 1;
-                string name = TypeTranslator.GetArrayName (type, dims);
-                XmlQualifiedName qname = new XmlQualifiedName (name, ns);
-                XmlTypeMapping tmap = CreateArrayTypeMapping (qname, itemTypeData);
+                ListMap innerListMap = BuildEncodedArrayMap(itemType, ns, out itemTypeData);
+
+                int dims = itemType.Split('[').Length - 1;
+                string name = TypeTranslator.GetArrayName(type, dims);
+                XmlQualifiedName qname = new XmlQualifiedName(name, ns);
+                XmlTypeMapping tmap = CreateArrayTypeMapping(qname, itemTypeData);
                 tmap.ObjectMap = innerListMap;
             }
             else
             {
-                itemTypeData = GetTypeData (new XmlQualifiedName (itemType, ns), null, false);
+                itemTypeData = GetTypeData(new XmlQualifiedName(itemType, ns), null, false);
             }
-            
+
             arrayTypeData = itemTypeData.ListTypeData;
-            
+
             map.ItemInfo = new XmlTypeMapElementInfoList();
-            map.ItemInfo.Add (CreateElementInfo ("", null, "Item", itemTypeData, true, XmlSchemaForm.None, -1));
+            map.ItemInfo.Add(
+                CreateElementInfo("", null, "Item", itemTypeData, true, XmlSchemaForm.None, -1)
+            );
             return map;
         }
-        
-        XmlSchemaAttribute FindArrayAttribute (XmlSchemaObjectCollection atts)
+
+        XmlSchemaAttribute FindArrayAttribute(XmlSchemaObjectCollection atts)
         {
             foreach (object ob in atts)
             {
                 XmlSchemaAttribute att = ob as XmlSchemaAttribute;
-                if (att != null && att.RefName == arrayTypeRefName) return att;
-                
+                if (att != null && att.RefName == arrayTypeRefName)
+                    return att;
+
                 XmlSchemaAttributeGroupRef gref = ob as XmlSchemaAttributeGroupRef;
                 if (gref != null)
                 {
-                    XmlSchemaAttributeGroup grp = FindRefAttributeGroup (gref.RefName);
-                    att = FindArrayAttribute (grp.Attributes);
-                    if (att != null) return att;
+                    XmlSchemaAttributeGroup grp = FindRefAttributeGroup(gref.RefName);
+                    att = FindArrayAttribute(grp.Attributes);
+                    if (att != null)
+                        return att;
                 }
             }
             return null;
         }
 
-        void ImportParticleComplexContent (XmlQualifiedName typeQName, ClassMap cmap, XmlSchemaParticle particle, CodeIdentifiers classIds, bool isMixed)
+        void ImportParticleComplexContent(
+            XmlQualifiedName typeQName,
+            ClassMap cmap,
+            XmlSchemaParticle particle,
+            CodeIdentifiers classIds,
+            bool isMixed
+        )
         {
-            ImportParticleContent (typeQName, cmap, particle, classIds, false, ref isMixed);
-            if (isMixed) AddTextMember (typeQName, cmap, classIds);
+            ImportParticleContent(typeQName, cmap, particle, classIds, false, ref isMixed);
+            if (isMixed)
+                AddTextMember(typeQName, cmap, classIds);
         }
-        
-        void AddTextMember (XmlQualifiedName typeQName, ClassMap cmap, CodeIdentifiers classIds)
+
+        void AddTextMember(XmlQualifiedName typeQName, ClassMap cmap, CodeIdentifiers classIds)
         {
             if (cmap.XmlTextCollector == null)
             {
-                XmlTypeMapMemberFlatList member = new XmlTypeMapMemberFlatList ();
-                member.Name = classIds.AddUnique ("Text", member);
-                member.TypeData = TypeTranslator.GetTypeData (typeof(string[]));
-                member.ElementInfo.Add (CreateTextElementInfo (typeQName.Namespace, member, member.TypeData.ListItemTypeData));
+                XmlTypeMapMemberFlatList member = new XmlTypeMapMemberFlatList();
+                member.Name = classIds.AddUnique("Text", member);
+                member.TypeData = TypeTranslator.GetTypeData(typeof(string[]));
+                member.ElementInfo.Add(
+                    CreateTextElementInfo(
+                        typeQName.Namespace,
+                        member,
+                        member.TypeData.ListItemTypeData
+                    )
+                );
                 member.IsXmlTextCollector = true;
-                member.ListMap = new ListMap ();
+                member.ListMap = new ListMap();
                 member.ListMap.ItemInfo = member.ElementInfo;
-                cmap.AddMember (member);
+                cmap.AddMember(member);
             }
         }
-        
-        void ImportParticleContent (XmlQualifiedName typeQName, ClassMap cmap, XmlSchemaParticle particle, CodeIdentifiers classIds, bool multiValue, ref bool isMixed)
+
+        void ImportParticleContent(
+            XmlQualifiedName typeQName,
+            ClassMap cmap,
+            XmlSchemaParticle particle,
+            CodeIdentifiers classIds,
+            bool multiValue,
+            ref bool isMixed
+        )
         {
-            if (particle == null) return;
-            
-            if (particle is XmlSchemaGroupRef)
-                particle = GetRefGroupParticle ((XmlSchemaGroupRef)particle);
+            if (particle == null)
+                return;
 
-            if (particle.MaxOccurs > 1) multiValue = true;
-            
-            if (particle is XmlSchemaSequence) {
-                ImportSequenceContent (typeQName, cmap, ((XmlSchemaSequence)particle).Items, classIds, multiValue, ref isMixed);
+            if (particle is XmlSchemaGroupRef)
+                particle = GetRefGroupParticle((XmlSchemaGroupRef)particle);
+
+            if (particle.MaxOccurs > 1)
+                multiValue = true;
+
+            if (particle is XmlSchemaSequence)
+            {
+                ImportSequenceContent(
+                    typeQName,
+                    cmap,
+                    ((XmlSchemaSequence)particle).Items,
+                    classIds,
+                    multiValue,
+                    ref isMixed
+                );
             }
-            else if (particle is XmlSchemaChoice) {
+            else if (particle is XmlSchemaChoice)
+            {
                 if (((XmlSchemaChoice)particle).Items.Count == 1)
-                    ImportSequenceContent (typeQName, cmap, ((XmlSchemaChoice)particle).Items, classIds, multiValue, ref isMixed);
+                    ImportSequenceContent(
+                        typeQName,
+                        cmap,
+                        ((XmlSchemaChoice)particle).Items,
+                        classIds,
+                        multiValue,
+                        ref isMixed
+                    );
                 else
-                    ImportChoiceContent (typeQName, cmap, (XmlSchemaChoice)particle, classIds, multiValue);
+                    ImportChoiceContent(
+                        typeQName,
+                        cmap,
+                        (XmlSchemaChoice)particle,
+                        classIds,
+                        multiValue
+                    );
             }
-            else if (particle is XmlSchemaAll) {
-                ImportSequenceContent (typeQName, cmap, ((XmlSchemaAll)particle).Items, classIds, multiValue, ref isMixed);
+            else if (particle is XmlSchemaAll)
+            {
+                ImportSequenceContent(
+                    typeQName,
+                    cmap,
+                    ((XmlSchemaAll)particle).Items,
+                    classIds,
+                    multiValue,
+                    ref isMixed
+                );
             }
         }
 
-        void ImportSequenceContent (XmlQualifiedName typeQName, ClassMap cmap, XmlSchemaObjectCollection items, CodeIdentifiers classIds, bool multiValue, ref bool isMixed)
+        void ImportSequenceContent(
+            XmlQualifiedName typeQName,
+            ClassMap cmap,
+            XmlSchemaObjectCollection items,
+            CodeIdentifiers classIds,
+            bool multiValue,
+            ref bool isMixed
+        )
         {
             foreach (XmlSchemaObject item in items)
             {
                 if (item is XmlSchemaElement)
                 {
                     string ns;
-                    XmlSchemaElement elem = (XmlSchemaElement) item;
+                    XmlSchemaElement elem = (XmlSchemaElement)item;
                     XmlTypeMapping emap;
-                    TypeData typeData = GetElementTypeData (typeQName, elem, null, out emap);
-                    XmlSchemaElement refElem = GetRefElement (typeQName, elem, out ns);
+                    TypeData typeData = GetElementTypeData(typeQName, elem, null, out emap);
+                    XmlSchemaElement refElem = GetRefElement(typeQName, elem, out ns);
 
                     if (elem.MaxOccurs == 1 && !multiValue)
                     {
                         XmlTypeMapMemberElement member = null;
                         if (typeData.SchemaType != SchemaTypes.Array)
                         {
-                            member = new XmlTypeMapMemberElement ();
-                            if (refElem.DefaultValue != null) member.DefaultValue = ImportDefaultValue (typeData, refElem.DefaultValue);
+                            member = new XmlTypeMapMemberElement();
+                            if (refElem.DefaultValue != null)
+                                member.DefaultValue = ImportDefaultValue(
+                                    typeData,
+                                    refElem.DefaultValue
+                                );
                         }
-                        else if (GetTypeMapping (typeData).IsSimpleType)
+                        else if (GetTypeMapping(typeData).IsSimpleType)
                         {
                             // It is a simple list (space separated list).
                             // Since this is not supported, map as a single item value
-                            member = new XmlTypeMapMemberElement ();
+                            member = new XmlTypeMapMemberElement();
                             // In MS.NET those types are mapped to a string
                             typeData = TypeTranslator.GetTypeData(typeof(string));
                         }
                         else
-                            member = new XmlTypeMapMemberList ();
+                            member = new XmlTypeMapMemberList();
 
                         if (elem.MinOccurs == 0 && typeData.IsValueType)
                             member.IsOptionalValueType = true;
 
-                        member.Name = classIds.AddUnique(CodeIdentifier.MakeValid(refElem.Name), member);
-                        member.Documentation = GetDocumentation (elem);
+                        member.Name = classIds.AddUnique(
+                            CodeIdentifier.MakeValid(refElem.Name),
+                            member
+                        );
+                        member.Documentation = GetDocumentation(elem);
                         member.TypeData = typeData;
-                        member.ElementInfo.Add (CreateElementInfo (ns, member, refElem.Name, typeData, refElem.IsNillable, refElem.Form, emap, items.IndexOf (item)));
-                        cmap.AddMember (member);
+                        member.ElementInfo.Add(
+                            CreateElementInfo(
+                                ns,
+                                member,
+                                refElem.Name,
+                                typeData,
+                                refElem.IsNillable,
+                                refElem.Form,
+                                emap,
+                                items.IndexOf(item)
+                            )
+                        );
+                        cmap.AddMember(member);
                     }
                     else
                     {
-                        XmlTypeMapMemberFlatList member = new XmlTypeMapMemberFlatList ();
-                        member.ListMap = new ListMap ();
-                        member.Name = classIds.AddUnique(CodeIdentifier.MakeValid(refElem.Name), member);
-                        member.Documentation = GetDocumentation (elem);
+                        XmlTypeMapMemberFlatList member = new XmlTypeMapMemberFlatList();
+                        member.ListMap = new ListMap();
+                        member.Name = classIds.AddUnique(
+                            CodeIdentifier.MakeValid(refElem.Name),
+                            member
+                        );
+                        member.Documentation = GetDocumentation(elem);
                         member.TypeData = typeData.ListTypeData;
-                        member.ElementInfo.Add (CreateElementInfo (ns, member, refElem.Name, typeData, refElem.IsNillable, refElem.Form, emap, items.IndexOf (item)));
+                        member.ElementInfo.Add(
+                            CreateElementInfo(
+                                ns,
+                                member,
+                                refElem.Name,
+                                typeData,
+                                refElem.IsNillable,
+                                refElem.Form,
+                                emap,
+                                items.IndexOf(item)
+                            )
+                        );
                         member.ListMap.ItemInfo = member.ElementInfo;
-                        cmap.AddMember (member);
+                        cmap.AddMember(member);
                     }
                 }
                 else if (item is XmlSchemaAny)
                 {
-                    XmlSchemaAny elem = (XmlSchemaAny) item;
-                    XmlTypeMapMemberAnyElement member = new XmlTypeMapMemberAnyElement ();
-                    member.Name = classIds.AddUnique ("Any", member);
-                    member.Documentation = GetDocumentation (elem);
-                    
+                    XmlSchemaAny elem = (XmlSchemaAny)item;
+                    XmlTypeMapMemberAnyElement member = new XmlTypeMapMemberAnyElement();
+                    member.Name = classIds.AddUnique("Any", member);
+                    member.Documentation = GetDocumentation(elem);
+
                     Type ctype;
                     if (elem.MaxOccurs != 1 || multiValue)
                         ctype = isMixed ? typeof(XmlNode[]) : typeof(XmlElement[]);
                     else
                         ctype = isMixed ? typeof(XmlNode) : typeof(XmlElement);
 
-                    member.TypeData = TypeTranslator.GetTypeData (ctype);
-                    XmlTypeMapElementInfo einfo = new XmlTypeMapElementInfo (member, member.TypeData);
+                    member.TypeData = TypeTranslator.GetTypeData(ctype);
+                    XmlTypeMapElementInfo einfo = new XmlTypeMapElementInfo(
+                        member,
+                        member.TypeData
+                    );
                     einfo.IsUnnamedAnyElement = true;
-                    member.ElementInfo.Add (einfo);
+                    member.ElementInfo.Add(einfo);
 
                     if (isMixed)
                     {
-                        einfo = CreateTextElementInfo (typeQName.Namespace, member, member.TypeData);
-                        member.ElementInfo.Add (einfo);
+                        einfo = CreateTextElementInfo(typeQName.Namespace, member, member.TypeData);
+                        member.ElementInfo.Add(einfo);
                         member.IsXmlTextCollector = true;
-                        isMixed = false;    //Allow only one XmlTextAttribute
+                        isMixed = false; //Allow only one XmlTextAttribute
                     }
-                    
-                    cmap.AddMember (member);
+
+                    cmap.AddMember(member);
                 }
-                else if (item is XmlSchemaParticle) {
-                    ImportParticleContent (typeQName, cmap, (XmlSchemaParticle)item, classIds, multiValue, ref isMixed);
+                else if (item is XmlSchemaParticle)
+                {
+                    ImportParticleContent(
+                        typeQName,
+                        cmap,
+                        (XmlSchemaParticle)item,
+                        classIds,
+                        multiValue,
+                        ref isMixed
+                    );
                 }
             }
         }
-        
-        object ImportDefaultValue (TypeData typeData, string value)
-        {
-            if (typeData.SchemaType == SchemaTypes.Enum) {
-                XmlTypeMapping map = GetTypeMapping (typeData);
-                EnumMap emap = (EnumMap) map.ObjectMap;
-                string res = emap.GetEnumName (map.TypeFullName, value);
-                if (res == null) throw new InvalidOperationException ("'" + value + "' is not a valid enumeration value");
-                return res;
-            } else
-                return XmlCustomFormatter.FromXmlString (typeData, value);
-        }
-        
-        void ImportChoiceContent (XmlQualifiedName typeQName, ClassMap cmap, XmlSchemaChoice choice, CodeIdentifiers classIds, bool multiValue)
-        {
-            XmlTypeMapElementInfoList choices = new XmlTypeMapElementInfoList ();
-            multiValue = ImportChoices (typeQName, null, choices, choice.Items) || multiValue;
-            if (choices.Count == 0) return;
 
-            if (choice.MaxOccurs > 1) multiValue = true;
+        object ImportDefaultValue(TypeData typeData, string value)
+        {
+            if (typeData.SchemaType == SchemaTypes.Enum)
+            {
+                XmlTypeMapping map = GetTypeMapping(typeData);
+                EnumMap emap = (EnumMap)map.ObjectMap;
+                string res = emap.GetEnumName(map.TypeFullName, value);
+                if (res == null)
+                    throw new InvalidOperationException(
+                        "'" + value + "' is not a valid enumeration value"
+                    );
+                return res;
+            }
+            else
+                return XmlCustomFormatter.FromXmlString(typeData, value);
+        }
+
+        void ImportChoiceContent(
+            XmlQualifiedName typeQName,
+            ClassMap cmap,
+            XmlSchemaChoice choice,
+            CodeIdentifiers classIds,
+            bool multiValue
+        )
+        {
+            XmlTypeMapElementInfoList choices = new XmlTypeMapElementInfoList();
+            multiValue = ImportChoices(typeQName, null, choices, choice.Items) || multiValue;
+            if (choices.Count == 0)
+                return;
+
+            if (choice.MaxOccurs > 1)
+                multiValue = true;
 
             XmlTypeMapMemberElement member;
             if (multiValue)
             {
-                member = new XmlTypeMapMemberFlatList ();
-                member.Name = classIds.AddUnique ("Items", member);
-                ListMap listMap = new ListMap ();
+                member = new XmlTypeMapMemberFlatList();
+                member.Name = classIds.AddUnique("Items", member);
+                ListMap listMap = new ListMap();
                 listMap.ItemInfo = choices;
                 ((XmlTypeMapMemberFlatList)member).ListMap = listMap;
             }
             else
             {
-                member = new XmlTypeMapMemberElement ();
-                member.Name = classIds.AddUnique ("Item", member);
+                member = new XmlTypeMapMemberElement();
+                member.Name = classIds.AddUnique("Item", member);
             }
-            
+
             // If all choices have the same type, use that type for the member.
             // If not use System.Object.
             // If there are at least two choices with the same type, use a choice
@@ -1066,26 +1493,30 @@ namespace System.Xml.Serialization
             TypeData typeData = null;
             bool twoEqual = false;
             bool allEqual = true;
-            Hashtable types = new Hashtable ();
+            Hashtable types = new Hashtable();
 
             for (int n = choices.Count - 1; n >= 0; n--)
             {
-                XmlTypeMapElementInfo einfo = (XmlTypeMapElementInfo) choices [n];
-                
+                XmlTypeMapElementInfo einfo = (XmlTypeMapElementInfo)choices[n];
+
                 // In some complex schemas, we may end up with several options
                 // with the same name. It is better to ignore the extra options
                 // than to crash. It's the best we can do, and btw it works
                 // better than in MS.NET.
-                
-                if (cmap.GetElement (einfo.ElementName, einfo.Namespace, einfo.ExplicitOrder) != null ||
-                    choices.IndexOfElement (einfo.ElementName, einfo.Namespace) != n)
+
+                if (
+                    cmap.GetElement(einfo.ElementName, einfo.Namespace, einfo.ExplicitOrder) != null
+                    || choices.IndexOfElement(einfo.ElementName, einfo.Namespace) != n
+                )
                 {
-                    choices.RemoveAt (n);
+                    choices.RemoveAt(n);
                     continue;
                 }
-                    
-                if (types.ContainsKey (einfo.TypeData)) twoEqual = true;
-                else types.Add (einfo.TypeData, einfo);
+
+                if (types.ContainsKey(einfo.TypeData))
+                    twoEqual = true;
+                else
+                    types.Add(einfo.TypeData, einfo);
 
                 TypeData choiceType = einfo.TypeData;
                 if (choiceType.SchemaType == SchemaTypes.Class)
@@ -1093,185 +1524,256 @@ namespace System.Xml.Serialization
                     // When comparing class types, use the most generic class in the
                     // inheritance hierarchy
 
-                    XmlTypeMapping choiceMap = GetTypeMapping (choiceType);
-                    BuildPendingMap (choiceMap);
-                    while (choiceMap.BaseMap != null) {
+                    XmlTypeMapping choiceMap = GetTypeMapping(choiceType);
+                    BuildPendingMap(choiceMap);
+                    while (choiceMap.BaseMap != null)
+                    {
                         choiceMap = choiceMap.BaseMap;
-                        BuildPendingMap (choiceMap);
+                        BuildPendingMap(choiceMap);
                         choiceType = choiceMap.TypeData;
                     }
                 }
-                
-                if (typeData == null) typeData = choiceType;
-                else if (typeData != choiceType) allEqual = false;
+
+                if (typeData == null)
+                    typeData = choiceType;
+                else if (typeData != choiceType)
+                    allEqual = false;
             }
 
             if (!allEqual)
-                typeData = TypeTranslator.GetTypeData (typeof(object));
+                typeData = TypeTranslator.GetTypeData(typeof(object));
 
             if (twoEqual)
             {
                 // Create the choice member
-                XmlTypeMapMemberElement choiceMember = new XmlTypeMapMemberElement ();
+                XmlTypeMapMemberElement choiceMember = new XmlTypeMapMemberElement();
                 choiceMember.Ignore = true;
-                choiceMember.Name = classIds.AddUnique (member.Name + "ElementName", choiceMember);
+                choiceMember.Name = classIds.AddUnique(member.Name + "ElementName", choiceMember);
                 member.ChoiceMember = choiceMember.Name;
 
                 // Create the choice enum
-                XmlTypeMapping enumMap = CreateTypeMapping (new XmlQualifiedName (member.Name + "ChoiceType", typeQName.Namespace), SchemaTypes.Enum, null);
+                XmlTypeMapping enumMap = CreateTypeMapping(
+                    new XmlQualifiedName(member.Name + "ChoiceType", typeQName.Namespace),
+                    SchemaTypes.Enum,
+                    null
+                );
                 enumMap.IncludeInSchema = false;
 
-                CodeIdentifiers codeIdents = new CodeIdentifiers ();
-                EnumMap.EnumMapMember[] members = new EnumMap.EnumMapMember [choices.Count];
-                for (int n=0; n<choices.Count; n++)
+                CodeIdentifiers codeIdents = new CodeIdentifiers();
+                EnumMap.EnumMapMember[] members = new EnumMap.EnumMapMember[choices.Count];
+                for (int n = 0; n < choices.Count; n++)
                 {
-                    XmlTypeMapElementInfo it =(XmlTypeMapElementInfo) choices[n];
-                    bool extraNs = (it.Namespace != null && it.Namespace != "" && it.Namespace != typeQName.Namespace);
+                    XmlTypeMapElementInfo it = (XmlTypeMapElementInfo)choices[n];
+                    bool extraNs = (
+                        it.Namespace != null
+                        && it.Namespace != ""
+                        && it.Namespace != typeQName.Namespace
+                    );
                     string xmlName = extraNs ? it.Namespace + ":" + it.ElementName : it.ElementName;
-                    string enumName = codeIdents.AddUnique (CodeIdentifier.MakeValid (it.ElementName), it);
-                    members [n] = new EnumMap.EnumMapMember (xmlName, enumName);
+                    string enumName = codeIdents.AddUnique(
+                        CodeIdentifier.MakeValid(it.ElementName),
+                        it
+                    );
+                    members[n] = new EnumMap.EnumMapMember(xmlName, enumName);
                 }
-                enumMap.ObjectMap = new EnumMap (members, false);
+                enumMap.ObjectMap = new EnumMap(members, false);
 
-                choiceMember.TypeData = multiValue ? enumMap.TypeData.ListTypeData : enumMap.TypeData;
-                choiceMember.ElementInfo.Add (CreateElementInfo (typeQName.Namespace, choiceMember, choiceMember.Name, choiceMember.TypeData, false, XmlSchemaForm.None, -1));
-                cmap.AddMember (choiceMember);
+                choiceMember.TypeData = multiValue
+                    ? enumMap.TypeData.ListTypeData
+                    : enumMap.TypeData;
+                choiceMember.ElementInfo.Add(
+                    CreateElementInfo(
+                        typeQName.Namespace,
+                        choiceMember,
+                        choiceMember.Name,
+                        choiceMember.TypeData,
+                        false,
+                        XmlSchemaForm.None,
+                        -1
+                    )
+                );
+                cmap.AddMember(choiceMember);
             }
-            
+
             if (typeData == null)
                 return;
-    
+
             if (multiValue)
                 typeData = typeData.ListTypeData;
 
             member.ElementInfo = choices;
-            member.Documentation = GetDocumentation (choice);
+            member.Documentation = GetDocumentation(choice);
             member.TypeData = typeData;
-            cmap.AddMember (member);
+            cmap.AddMember(member);
         }
 
-        bool ImportChoices (XmlQualifiedName typeQName, XmlTypeMapMember member, XmlTypeMapElementInfoList choices, XmlSchemaObjectCollection items)
+        bool ImportChoices(
+            XmlQualifiedName typeQName,
+            XmlTypeMapMember member,
+            XmlTypeMapElementInfoList choices,
+            XmlSchemaObjectCollection items
+        )
         {
             bool multiValue = false;
             foreach (XmlSchemaObject titem in items)
             {
                 XmlSchemaObject item = titem;
                 if (item is XmlSchemaGroupRef)
-                    item = GetRefGroupParticle ((XmlSchemaGroupRef)item);
+                    item = GetRefGroupParticle((XmlSchemaGroupRef)item);
 
                 if (item is XmlSchemaElement)
                 {
                     string ns;
-                    XmlSchemaElement elem = (XmlSchemaElement) item;
+                    XmlSchemaElement elem = (XmlSchemaElement)item;
                     XmlTypeMapping emap;
-                    TypeData typeData = GetElementTypeData (typeQName, elem, null, out emap);
-                    XmlSchemaElement refElem = GetRefElement (typeQName, elem, out ns);
-                    choices.Add (CreateElementInfo (ns, member, refElem.Name, typeData, refElem.IsNillable, refElem.Form, emap, -1));
-                    if (elem.MaxOccurs > 1) multiValue = true;
+                    TypeData typeData = GetElementTypeData(typeQName, elem, null, out emap);
+                    XmlSchemaElement refElem = GetRefElement(typeQName, elem, out ns);
+                    choices.Add(
+                        CreateElementInfo(
+                            ns,
+                            member,
+                            refElem.Name,
+                            typeData,
+                            refElem.IsNillable,
+                            refElem.Form,
+                            emap,
+                            -1
+                        )
+                    );
+                    if (elem.MaxOccurs > 1)
+                        multiValue = true;
                 }
                 else if (item is XmlSchemaAny)
                 {
-                    XmlTypeMapElementInfo einfo = new XmlTypeMapElementInfo (member, TypeTranslator.GetTypeData(typeof(XmlElement)));
+                    XmlTypeMapElementInfo einfo = new XmlTypeMapElementInfo(
+                        member,
+                        TypeTranslator.GetTypeData(typeof(XmlElement))
+                    );
                     einfo.IsUnnamedAnyElement = true;
-                    choices.Add (einfo);
+                    choices.Add(einfo);
                 }
-                else if (item is XmlSchemaChoice) {
-                    multiValue = ImportChoices (typeQName, member, choices, ((XmlSchemaChoice)item).Items) || multiValue;
+                else if (item is XmlSchemaChoice)
+                {
+                    multiValue =
+                        ImportChoices(typeQName, member, choices, ((XmlSchemaChoice)item).Items)
+                        || multiValue;
                 }
-                else if (item is XmlSchemaSequence) {
-                    multiValue = ImportChoices (typeQName, member, choices, ((XmlSchemaSequence)item).Items) || multiValue;
+                else if (item is XmlSchemaSequence)
+                {
+                    multiValue =
+                        ImportChoices(typeQName, member, choices, ((XmlSchemaSequence)item).Items)
+                        || multiValue;
                 }
             }
             return multiValue;
         }
 
-        void ImportSimpleContent (XmlQualifiedName typeQName, XmlTypeMapping map, XmlSchemaSimpleContent content, CodeIdentifiers classIds, bool isMixed)
+        void ImportSimpleContent(
+            XmlQualifiedName typeQName,
+            XmlTypeMapping map,
+            XmlSchemaSimpleContent content,
+            CodeIdentifiers classIds,
+            bool isMixed
+        )
         {
-            XmlSchemaSimpleContentExtension ext = content.Content as XmlSchemaSimpleContentExtension;
+            XmlSchemaSimpleContentExtension ext =
+                content.Content as XmlSchemaSimpleContentExtension;
             ClassMap cmap = (ClassMap)map.ObjectMap;
-            XmlQualifiedName qname = GetContentBaseType (content.Content);
+            XmlQualifiedName qname = GetContentBaseType(content.Content);
             TypeData simpleType = null;
-            
-            if (!IsPrimitiveTypeNamespace (qname.Namespace))
+
+            if (!IsPrimitiveTypeNamespace(qname.Namespace))
             {
                 // Add base map members to this map
-    
-                XmlTypeMapping baseMap = ImportType (qname, null, true);
-                BuildPendingMap (baseMap);
-                
-                if (baseMap.IsSimpleType) {
+
+                XmlTypeMapping baseMap = ImportType(qname, null, true);
+                BuildPendingMap(baseMap);
+
+                if (baseMap.IsSimpleType)
+                {
                     simpleType = baseMap.TypeData;
-                } else {
+                }
+                else
+                {
                     ClassMap baseClassMap = (ClassMap)baseMap.ObjectMap;
-        
+
                     foreach (XmlTypeMapMember member in baseClassMap.AllMembers)
-                        cmap.AddMember (member);
-        
+                        cmap.AddMember(member);
+
                     map.BaseMap = baseMap;
-                    baseMap.DerivedTypes.Add (map);
+                    baseMap.DerivedTypes.Add(map);
                 }
             }
             else
-                simpleType = FindBuiltInType (qname);
-                
-            if (simpleType != null) {
-                XmlTypeMapMemberElement member = new XmlTypeMapMemberElement ();
+                simpleType = FindBuiltInType(qname);
+
+            if (simpleType != null)
+            {
+                XmlTypeMapMemberElement member = new XmlTypeMapMemberElement();
                 member.Name = classIds.AddUnique("Value", member);
                 member.TypeData = simpleType;
-                member.ElementInfo.Add (CreateTextElementInfo (typeQName.Namespace, member, member.TypeData));
+                member.ElementInfo.Add(
+                    CreateTextElementInfo(typeQName.Namespace, member, member.TypeData)
+                );
                 member.IsXmlTextCollector = true;
-                cmap.AddMember (member);
+                cmap.AddMember(member);
             }
-            
+
             if (ext != null)
-                ImportAttributes (typeQName, cmap, ext.Attributes, ext.AnyAttribute, classIds);
+                ImportAttributes(typeQName, cmap, ext.Attributes, ext.AnyAttribute, classIds);
         }
 
-        TypeData FindBuiltInType (XmlQualifiedName qname)
+        TypeData FindBuiltInType(XmlQualifiedName qname)
         {
-            XmlSchemaComplexType ct = (XmlSchemaComplexType) schemas.Find (qname, typeof(XmlSchemaComplexType));
+            XmlSchemaComplexType ct = (XmlSchemaComplexType)
+                schemas.Find(qname, typeof(XmlSchemaComplexType));
             if (ct != null)
             {
                 XmlSchemaSimpleContent sc = ct.ContentModel as XmlSchemaSimpleContent;
-                if (sc == null) throw new InvalidOperationException ("Invalid schema");
-                return FindBuiltInType (GetContentBaseType (sc.Content));
+                if (sc == null)
+                    throw new InvalidOperationException("Invalid schema");
+                return FindBuiltInType(GetContentBaseType(sc.Content));
             }
-            
-            XmlSchemaSimpleType st = (XmlSchemaSimpleType) schemas.Find (qname, typeof(XmlSchemaSimpleType));
+
+            XmlSchemaSimpleType st = (XmlSchemaSimpleType)
+                schemas.Find(qname, typeof(XmlSchemaSimpleType));
             if (st != null)
-                return FindBuiltInType (qname, st);
+                return FindBuiltInType(qname, st);
 
-            if (IsPrimitiveTypeNamespace (qname.Namespace))
-                return TypeTranslator.GetPrimitiveTypeData (qname.Name);
+            if (IsPrimitiveTypeNamespace(qname.Namespace))
+                return TypeTranslator.GetPrimitiveTypeData(qname.Name);
 
-            throw new InvalidOperationException ("Definition of type '" + qname + "' not found");
+            throw new InvalidOperationException("Definition of type '" + qname + "' not found");
         }
 
-        TypeData FindBuiltInType (XmlQualifiedName qname, XmlSchemaSimpleType st)
+        TypeData FindBuiltInType(XmlQualifiedName qname, XmlSchemaSimpleType st)
         {
-            if (CanBeEnum (st) && qname != null)
-                return ImportType (qname, null, true).TypeData;
+            if (CanBeEnum(st) && qname != null)
+                return ImportType(qname, null, true).TypeData;
 
-            if (st.Content is XmlSchemaSimpleTypeRestriction) {
-                XmlSchemaSimpleTypeRestriction rest = (XmlSchemaSimpleTypeRestriction) st.Content;
-                XmlQualifiedName bn = GetContentBaseType (rest);
+            if (st.Content is XmlSchemaSimpleTypeRestriction)
+            {
+                XmlSchemaSimpleTypeRestriction rest = (XmlSchemaSimpleTypeRestriction)st.Content;
+                XmlQualifiedName bn = GetContentBaseType(rest);
                 if (bn == XmlQualifiedName.Empty && rest.BaseType != null)
-                    return FindBuiltInType (qname, rest.BaseType);
+                    return FindBuiltInType(qname, rest.BaseType);
                 else
-                    return FindBuiltInType (bn);
+                    return FindBuiltInType(bn);
             }
-            else if (st.Content is XmlSchemaSimpleTypeList) {
-                return FindBuiltInType (GetContentBaseType (st.Content)).ListTypeData;
+            else if (st.Content is XmlSchemaSimpleTypeList)
+            {
+                return FindBuiltInType(GetContentBaseType(st.Content)).ListTypeData;
             }
-            else if (st.Content is XmlSchemaSimpleTypeUnion) {
+            else if (st.Content is XmlSchemaSimpleTypeUnion)
+            {
                 // MS.NET always import simple unions as string
-                return FindBuiltInType (new XmlQualifiedName ("string", XmlSchema.Namespace));
+                return FindBuiltInType(new XmlQualifiedName("string", XmlSchema.Namespace));
             }
             else
                 return null;
         }
 
-        XmlQualifiedName GetContentBaseType (XmlSchemaObject ob)
+        XmlQualifiedName GetContentBaseType(XmlSchemaObject ob)
         {
             if (ob is XmlSchemaSimpleContentExtension)
                 return ((XmlSchemaSimpleContentExtension)ob).BaseTypeName;
@@ -1285,89 +1787,128 @@ namespace System.Xml.Serialization
                 return null;
         }
 
-        void ImportComplexContent (XmlQualifiedName typeQName, XmlTypeMapping map, XmlSchemaComplexContent content, CodeIdentifiers classIds, bool isMixed)
+        void ImportComplexContent(
+            XmlQualifiedName typeQName,
+            XmlTypeMapping map,
+            XmlSchemaComplexContent content,
+            CodeIdentifiers classIds,
+            bool isMixed
+        )
         {
             ClassMap cmap = (ClassMap)map.ObjectMap;
             XmlQualifiedName qname;
 
-            XmlSchemaComplexContentExtension ext = content.Content as XmlSchemaComplexContentExtension;
-            if (ext != null) qname = ext.BaseTypeName;
-            else qname = ((XmlSchemaComplexContentRestriction)content.Content).BaseTypeName;
-            
+            XmlSchemaComplexContentExtension ext =
+                content.Content as XmlSchemaComplexContentExtension;
+            if (ext != null)
+                qname = ext.BaseTypeName;
+            else
+                qname = ((XmlSchemaComplexContentRestriction)content.Content).BaseTypeName;
+
             if (qname == typeQName)
-                throw new InvalidOperationException ("Cannot import schema for type '" + typeQName.Name + "' from namespace '" + typeQName.Namespace + "'. Redefine not supported");
-            
+                throw new InvalidOperationException(
+                    "Cannot import schema for type '"
+                        + typeQName.Name
+                        + "' from namespace '"
+                        + typeQName.Namespace
+                        + "'. Redefine not supported"
+                );
+
             // Add base map members to this map
 
-            XmlTypeMapping baseMap = ImportClass (qname);
-            BuildPendingMap (baseMap);
+            XmlTypeMapping baseMap = ImportClass(qname);
+            BuildPendingMap(baseMap);
             ClassMap baseClassMap = (ClassMap)baseMap.ObjectMap;
 
             foreach (XmlTypeMapMember member in baseClassMap.AllMembers)
-                cmap.AddMember (member);
+                cmap.AddMember(member);
 
-            if (baseClassMap.XmlTextCollector != null) isMixed = false;
-            else if (content.IsMixed) isMixed = true;
+            if (baseClassMap.XmlTextCollector != null)
+                isMixed = false;
+            else if (content.IsMixed)
+                isMixed = true;
 
             map.BaseMap = baseMap;
-            baseMap.DerivedTypes.Add (map);
+            baseMap.DerivedTypes.Add(map);
 
-            if (ext != null) {
+            if (ext != null)
+            {
                 // Add the members of this map
-                ImportParticleComplexContent (typeQName, cmap, ext.Particle, classIds, isMixed);
-                ImportAttributes (typeQName, cmap, ext.Attributes, ext.AnyAttribute, classIds);
+                ImportParticleComplexContent(typeQName, cmap, ext.Particle, classIds, isMixed);
+                ImportAttributes(typeQName, cmap, ext.Attributes, ext.AnyAttribute, classIds);
             }
-            else {
-                if (isMixed) ImportParticleComplexContent (typeQName, cmap, null, classIds, true);
+            else
+            {
+                if (isMixed)
+                    ImportParticleComplexContent(typeQName, cmap, null, classIds, true);
             }
         }
-        
-        void ImportExtensionTypes (XmlQualifiedName qname)
+
+        void ImportExtensionTypes(XmlQualifiedName qname)
         {
-            foreach (XmlSchema schema in schemas) {
-                foreach (XmlSchemaObject sob in schema.Items) 
+            foreach (XmlSchema schema in schemas)
+            {
+                foreach (XmlSchemaObject sob in schema.Items)
                 {
                     XmlSchemaComplexType sct = sob as XmlSchemaComplexType;
-                    if (sct != null && sct.ContentModel is XmlSchemaComplexContent) {
+                    if (sct != null && sct.ContentModel is XmlSchemaComplexContent)
+                    {
                         XmlQualifiedName exqname;
-                        XmlSchemaComplexContentExtension ext = sct.ContentModel.Content as XmlSchemaComplexContentExtension;
-                        if (ext != null) exqname = ext.BaseTypeName;
-                        else exqname = ((XmlSchemaComplexContentRestriction)sct.ContentModel.Content).BaseTypeName;
+                        XmlSchemaComplexContentExtension ext =
+                            sct.ContentModel.Content as XmlSchemaComplexContentExtension;
+                        if (ext != null)
+                            exqname = ext.BaseTypeName;
+                        else
+                            exqname = (
+                                (XmlSchemaComplexContentRestriction)sct.ContentModel.Content
+                            ).BaseTypeName;
                         if (exqname == qname)
-                            ImportType (new XmlQualifiedName (sct.Name, schema.TargetNamespace), sct, null);
+                            ImportType(
+                                new XmlQualifiedName(sct.Name, schema.TargetNamespace),
+                                sct,
+                                null
+                            );
                     }
                 }
-            }                    
+            }
         }
 
-        XmlTypeMapping ImportClassSimpleType (XmlQualifiedName typeQName, XmlSchemaSimpleType stype, XmlQualifiedName root)
+        XmlTypeMapping ImportClassSimpleType(
+            XmlQualifiedName typeQName,
+            XmlSchemaSimpleType stype,
+            XmlQualifiedName root
+        )
         {
-            if (CanBeEnum (stype))
+            if (CanBeEnum(stype))
             {
                 // Create an enum map
 
-                CodeIdentifiers codeIdents = new CodeIdentifiers ();
-                XmlTypeMapping enumMap = CreateTypeMapping (typeQName, SchemaTypes.Enum, root);
-                enumMap.Documentation = GetDocumentation (stype);
-                
+                CodeIdentifiers codeIdents = new CodeIdentifiers();
+                XmlTypeMapping enumMap = CreateTypeMapping(typeQName, SchemaTypes.Enum, root);
+                enumMap.Documentation = GetDocumentation(stype);
+
                 bool isFlags = false;
-                if (stype.Content is XmlSchemaSimpleTypeList) {
+                if (stype.Content is XmlSchemaSimpleTypeList)
+                {
                     stype = ((XmlSchemaSimpleTypeList)stype.Content).ItemType;
                     isFlags = true;
                 }
                 XmlSchemaSimpleTypeRestriction rest = (XmlSchemaSimpleTypeRestriction)stype.Content;
 
-                codeIdents.AddReserved (enumMap.TypeData.TypeName);
+                codeIdents.AddReserved(enumMap.TypeData.TypeName);
 
-                EnumMap.EnumMapMember[] members = new EnumMap.EnumMapMember [rest.Facets.Count];
-                for (int n=0; n<rest.Facets.Count; n++)
+                EnumMap.EnumMapMember[] members = new EnumMap.EnumMapMember[rest.Facets.Count];
+                for (int n = 0; n < rest.Facets.Count; n++)
                 {
-                    XmlSchemaEnumerationFacet enu = (XmlSchemaEnumerationFacet) rest.Facets[n];
-                    string enumName = codeIdents.AddUnique(CodeIdentifier.MakeValid (enu.Value), enu);
-                    members [n] = new EnumMap.EnumMapMember (enu.Value, enumName);
-                    members [n].Documentation = GetDocumentation (enu);
+                    XmlSchemaEnumerationFacet enu = (XmlSchemaEnumerationFacet)rest.Facets[n];
+                    string enumName = codeIdents.AddUnique(
+                        CodeIdentifier.MakeValid(enu.Value),
+                        enu
+                    );
+                    members[n] = new EnumMap.EnumMapMember(enu.Value, enumName);
+                    members[n].Documentation = GetDocumentation(enu);
                 }
-                enumMap.ObjectMap = new EnumMap (members, isFlags);
+                enumMap.ObjectMap = new EnumMap(members, isFlags);
                 enumMap.IsSimpleType = true;
                 return enumMap;
             }
@@ -1375,82 +1916,105 @@ namespace System.Xml.Serialization
             if (stype.Content is XmlSchemaSimpleTypeList)
             {
                 XmlSchemaSimpleTypeList slist = (XmlSchemaSimpleTypeList)stype.Content;
-                TypeData arrayTypeData = FindBuiltInType (slist.ItemTypeName, stype);
+                TypeData arrayTypeData = FindBuiltInType(slist.ItemTypeName, stype);
 
-                ListMap listMap = new ListMap ();
+                ListMap listMap = new ListMap();
 
-                listMap.ItemInfo = new XmlTypeMapElementInfoList ();
-                listMap.ItemInfo.Add (CreateElementInfo (typeQName.Namespace, null, "Item", arrayTypeData.ListItemTypeData, false, XmlSchemaForm.None, -1));
+                listMap.ItemInfo = new XmlTypeMapElementInfoList();
+                listMap.ItemInfo.Add(
+                    CreateElementInfo(
+                        typeQName.Namespace,
+                        null,
+                        "Item",
+                        arrayTypeData.ListItemTypeData,
+                        false,
+                        XmlSchemaForm.None,
+                        -1
+                    )
+                );
 
-                XmlTypeMapping map = CreateArrayTypeMapping (typeQName, arrayTypeData);
+                XmlTypeMapping map = CreateArrayTypeMapping(typeQName, arrayTypeData);
                 map.ObjectMap = listMap;
                 map.IsSimpleType = true;
                 return map;
             }
 
             // It is an extension of a primitive or known type
-            
-            TypeData typeData = FindBuiltInType (typeQName, stype);
-            XmlTypeMapping rmap = GetTypeMapping (typeData);
-            
+
+            TypeData typeData = FindBuiltInType(typeQName, stype);
+            XmlTypeMapping rmap = GetTypeMapping(typeData);
+
             // The resulting map must be a simple type. It needs to be explicitely set for arrays
             rmap.IsSimpleType = true;
             return rmap;
         }
 
-        bool CanBeEnum (XmlSchemaSimpleType stype)
+        bool CanBeEnum(XmlSchemaSimpleType stype)
         {
             if (stype.Content is XmlSchemaSimpleTypeRestriction)
             {
                 XmlSchemaSimpleTypeRestriction rest = (XmlSchemaSimpleTypeRestriction)stype.Content;
-                if (rest.Facets.Count == 0) return false;
+                if (rest.Facets.Count == 0)
+                    return false;
                 foreach (object ob in rest.Facets)
-                    if (!(ob is XmlSchemaEnumerationFacet)) return false;
+                    if (!(ob is XmlSchemaEnumerationFacet))
+                        return false;
                 return true;
             }
             else if (stype.Content is XmlSchemaSimpleTypeList)
             {
-                XmlSchemaSimpleTypeList list = (XmlSchemaSimpleTypeList) stype.Content;
-                return (list.ItemType != null && CanBeEnum (list.ItemType));
+                XmlSchemaSimpleTypeList list = (XmlSchemaSimpleTypeList)stype.Content;
+                return (list.ItemType != null && CanBeEnum(list.ItemType));
             }
             return false;
         }
 
-        bool CanBeArray (XmlQualifiedName typeQName, XmlSchemaComplexType stype)
+        bool CanBeArray(XmlQualifiedName typeQName, XmlSchemaComplexType stype)
         {
             if (encodedFormat)
             {
                 XmlSchemaComplexContent content = stype.ContentModel as XmlSchemaComplexContent;
-                if (content == null) return false;
-                XmlSchemaComplexContentRestriction rest = content.Content as XmlSchemaComplexContentRestriction;
-                if (rest == null) return false;
+                if (content == null)
+                    return false;
+                XmlSchemaComplexContentRestriction rest =
+                    content.Content as XmlSchemaComplexContentRestriction;
+                if (rest == null)
+                    return false;
                 return rest.BaseTypeName == arrayType;
             }
             else
             {
-                if (stype.Attributes.Count > 0 || stype.AnyAttribute != null) return false;
-                else return !stype.IsMixed && CanBeArray (typeQName, stype.Particle, false);
+                if (stype.Attributes.Count > 0 || stype.AnyAttribute != null)
+                    return false;
+                else
+                    return !stype.IsMixed && CanBeArray(typeQName, stype.Particle, false);
             }
         }
 
-        bool CanBeArray (XmlQualifiedName typeQName, XmlSchemaParticle particle, bool multiValue)
+        bool CanBeArray(XmlQualifiedName typeQName, XmlSchemaParticle particle, bool multiValue)
         {
             // To be an array, there can't be a direct child of type typeQName
 
-            if (particle == null) return false;
+            if (particle == null)
+                return false;
 
             multiValue = multiValue || particle.MaxOccurs > 1;
 
             if (particle is XmlSchemaGroupRef)
-                return CanBeArray (typeQName, GetRefGroupParticle ((XmlSchemaGroupRef)particle), multiValue);
+                return CanBeArray(
+                    typeQName,
+                    GetRefGroupParticle((XmlSchemaGroupRef)particle),
+                    multiValue
+                );
 
             if (particle is XmlSchemaElement)
             {
                 XmlSchemaElement elem = (XmlSchemaElement)particle;
                 if (!elem.RefName.IsEmpty)
-                    return CanBeArray (typeQName, FindRefElement (elem), multiValue);
+                    return CanBeArray(typeQName, FindRefElement(elem), multiValue);
                 else
-                    return multiValue && !typeQName.Equals (((XmlSchemaElement)particle).SchemaTypeName);
+                    return multiValue
+                        && !typeQName.Equals(((XmlSchemaElement)particle).SchemaTypeName);
             }
 
             if (particle is XmlSchemaAny)
@@ -1459,85 +2023,106 @@ namespace System.Xml.Serialization
             if (particle is XmlSchemaSequence)
             {
                 XmlSchemaSequence seq = particle as XmlSchemaSequence;
-                if (seq.Items.Count != 1) return false;
-                return CanBeArray (typeQName, (XmlSchemaParticle)seq.Items[0], multiValue);
+                if (seq.Items.Count != 1)
+                    return false;
+                return CanBeArray(typeQName, (XmlSchemaParticle)seq.Items[0], multiValue);
             }
 
             if (particle is XmlSchemaChoice)
             {
                 // Can be array if all choices have different types
-                ArrayList types = new ArrayList ();
-                if(!CheckChoiceType (typeQName, particle, types, ref multiValue)) return false;
+                ArrayList types = new ArrayList();
+                if (!CheckChoiceType(typeQName, particle, types, ref multiValue))
+                    return false;
                 return multiValue;
             }
 
             return false;
         }
 
-        bool CheckChoiceType (XmlQualifiedName typeQName, XmlSchemaParticle particle, ArrayList types, ref bool multiValue)
+        bool CheckChoiceType(
+            XmlQualifiedName typeQName,
+            XmlSchemaParticle particle,
+            ArrayList types,
+            ref bool multiValue
+        )
         {
             XmlQualifiedName type = null;
 
             multiValue = multiValue || particle.MaxOccurs > 1;
 
             if (particle is XmlSchemaGroupRef)
-                return CheckChoiceType (typeQName, GetRefGroupParticle ((XmlSchemaGroupRef)particle), types, ref multiValue);
+                return CheckChoiceType(
+                    typeQName,
+                    GetRefGroupParticle((XmlSchemaGroupRef)particle),
+                    types,
+                    ref multiValue
+                );
 
-            if (particle is XmlSchemaElement) {
+            if (particle is XmlSchemaElement)
+            {
                 string ns;
                 XmlSchemaElement elem = (XmlSchemaElement)particle;
-                XmlSchemaElement refElem = GetRefElement (typeQName, elem, out ns);
-                if (refElem.SchemaType != null) return true;
+                XmlSchemaElement refElem = GetRefElement(typeQName, elem, out ns);
+                if (refElem.SchemaType != null)
+                    return true;
                 type = refElem.SchemaTypeName;
             }
-            else if (particle is XmlSchemaAny) {
+            else if (particle is XmlSchemaAny)
+            {
                 type = anyType;
             }
             else if (particle is XmlSchemaSequence)
             {
                 XmlSchemaSequence seq = particle as XmlSchemaSequence;
                 foreach (XmlSchemaParticle par in seq.Items)
-                    if (!CheckChoiceType (typeQName, par, types, ref multiValue)) return false;
+                    if (!CheckChoiceType(typeQName, par, types, ref multiValue))
+                        return false;
                 return true;
             }
             else if (particle is XmlSchemaChoice)
             {
                 foreach (XmlSchemaParticle choice in ((XmlSchemaChoice)particle).Items)
-                    if (!CheckChoiceType (typeQName, choice, types, ref multiValue)) return false;
+                    if (!CheckChoiceType(typeQName, choice, types, ref multiValue))
+                        return false;
                 return true;
             }
 
-            if (typeQName.Equals (type)) return false;
+            if (typeQName.Equals(type))
+                return false;
 
             // For primitive types, compare using CLR types, since several
             // xml types can be mapped to a single CLR type
 
             string t;
-            if (IsPrimitiveTypeNamespace (type.Namespace))
-                t = TypeTranslator.GetPrimitiveTypeData (type.Name).FullTypeName + ":" + type.Namespace;
-
+            if (IsPrimitiveTypeNamespace(type.Namespace))
+                t =
+                    TypeTranslator.GetPrimitiveTypeData(type.Name).FullTypeName
+                    + ":"
+                    + type.Namespace;
             else
                 t = type.Name + ":" + type.Namespace;
 
-            if (types.Contains (t)) return false;
-            types.Add (t);
+            if (types.Contains(t))
+                return false;
+            types.Add(t);
             return true;
         }
-        
-        bool CanBeAnyElement (XmlSchemaComplexType stype)
+
+        bool CanBeAnyElement(XmlSchemaComplexType stype)
         {
             XmlSchemaSequence seq = stype.Particle as XmlSchemaSequence;
             return (seq != null) && (seq.Items.Count == 1) && (seq.Items[0] is XmlSchemaAny);
         }
-        
-        Type GetAnyElementType (XmlSchemaComplexType stype)
+
+        Type GetAnyElementType(XmlSchemaComplexType stype)
         {
             XmlSchemaSequence seq = stype.Particle as XmlSchemaSequence;
-            
+
             if ((seq == null) || (seq.Items.Count != 1) || !(seq.Items[0] is XmlSchemaAny))
                 return null;
-            
-            if (encodedFormat) 
+
+            if (encodedFormat)
                 return typeof(object);
 
             XmlSchemaAny any = seq.Items[0] as XmlSchemaAny;
@@ -1557,60 +2142,103 @@ namespace System.Xml.Serialization
             }
         }
 
-        bool CanBeIXmlSerializable (XmlSchemaComplexType stype)
+        bool CanBeIXmlSerializable(XmlSchemaComplexType stype)
         {
             XmlSchemaSequence seq = stype.Particle as XmlSchemaSequence;
-            if (seq == null) return false;
-            if (seq.Items.Count != 2) return false;
+            if (seq == null)
+                return false;
+            if (seq.Items.Count != 2)
+                return false;
             XmlSchemaElement elem = seq.Items[0] as XmlSchemaElement;
-            if (elem == null) return false;
-            if (elem.RefName != new XmlQualifiedName ("schema",XmlSchema.Namespace)) return false;
+            if (elem == null)
+                return false;
+            if (elem.RefName != new XmlQualifiedName("schema", XmlSchema.Namespace))
+                return false;
             return (seq.Items[1] is XmlSchemaAny);
         }
-        
-        XmlTypeMapping ImportXmlSerializableMapping (string ns)
+
+        XmlTypeMapping ImportXmlSerializableMapping(string ns)
         {
-            XmlQualifiedName qname = new XmlQualifiedName ("System.Data.DataSet",ns);
-            XmlTypeMapping map = GetRegisteredTypeMapping (qname);
-            if (map != null) return map;
-            
-            TypeData typeData = new TypeData ("System.Data.DataSet", "System.Data.DataSet", "System.Data.DataSet", SchemaTypes.XmlSerializable, null);
-            map = new XmlTypeMapping ("System.Data.DataSet", "", typeData, "System.Data.DataSet", ns);
+            XmlQualifiedName qname = new XmlQualifiedName("System.Data.DataSet", ns);
+            XmlTypeMapping map = GetRegisteredTypeMapping(qname);
+            if (map != null)
+                return map;
+
+            TypeData typeData = new TypeData(
+                "System.Data.DataSet",
+                "System.Data.DataSet",
+                "System.Data.DataSet",
+                SchemaTypes.XmlSerializable,
+                null
+            );
+            map = new XmlTypeMapping(
+                "System.Data.DataSet",
+                "",
+                typeData,
+                "System.Data.DataSet",
+                ns
+            );
             map.IncludeInSchema = true;
-            RegisterTypeMapping (qname, typeData, map);
+            RegisterTypeMapping(qname, typeData, map);
             return map;
         }
-        
-        XmlTypeMapElementInfo CreateElementInfo (string ns, XmlTypeMapMember member, string name, TypeData typeData, bool isNillable, XmlSchemaForm form, int order)
+
+        XmlTypeMapElementInfo CreateElementInfo(
+            string ns,
+            XmlTypeMapMember member,
+            string name,
+            TypeData typeData,
+            bool isNillable,
+            XmlSchemaForm form,
+            int order
+        )
         {
             if (typeData.IsComplexType)
-                return CreateElementInfo (ns, member, name, typeData, isNillable, form, GetTypeMapping (typeData), order);
+                return CreateElementInfo(
+                    ns,
+                    member,
+                    name,
+                    typeData,
+                    isNillable,
+                    form,
+                    GetTypeMapping(typeData),
+                    order
+                );
             else
-                return CreateElementInfo (ns, member, name, typeData, isNillable, form, null, order);
+                return CreateElementInfo(ns, member, name, typeData, isNillable, form, null, order);
         }
-        
-        XmlTypeMapElementInfo CreateElementInfo (string ns, XmlTypeMapMember member, string name, TypeData typeData, bool isNillable, XmlSchemaForm form, XmlTypeMapping emap, int order)
+
+        XmlTypeMapElementInfo CreateElementInfo(
+            string ns,
+            XmlTypeMapMember member,
+            string name,
+            TypeData typeData,
+            bool isNillable,
+            XmlSchemaForm form,
+            XmlTypeMapping emap,
+            int order
+        )
         {
-            XmlTypeMapElementInfo einfo = new XmlTypeMapElementInfo (member, typeData);
+            XmlTypeMapElementInfo einfo = new XmlTypeMapElementInfo(member, typeData);
             einfo.ElementName = name;
             einfo.Namespace = ns;
             einfo.IsNullable = isNillable;
-            einfo.Form = GetForm (form, ns, true);
+            einfo.Form = GetForm(form, ns, true);
             if (typeData.IsComplexType)
                 einfo.MappedType = emap;
             einfo.ExplicitOrder = order;
             return einfo;
         }
-        
-        XmlSchemaForm GetForm (XmlSchemaForm form, string ns, bool forElement)
+
+        XmlSchemaForm GetForm(XmlSchemaForm form, string ns, bool forElement)
         {
             // Returns the schema form for an element or attribute, taking
             // into account the schema defaults. If the form has not been explicitly
             // set and there is no default, use Unqualified as default.
-            
+
             if (form != XmlSchemaForm.None)
                 return form;
-            XmlSchema s = schemas [ns];
+            XmlSchema s = schemas[ns];
             if (s == null)
                 return XmlSchemaForm.Unqualified;
             XmlSchemaForm schemaForm = forElement ? s.ElementFormDefault : s.AttributeFormDefault;
@@ -1620,60 +2248,93 @@ namespace System.Xml.Serialization
                 return XmlSchemaForm.Unqualified;
         }
 
-        XmlTypeMapElementInfo CreateTextElementInfo (string ns, XmlTypeMapMember member, TypeData typeData)
+        XmlTypeMapElementInfo CreateTextElementInfo(
+            string ns,
+            XmlTypeMapMember member,
+            TypeData typeData
+        )
         {
-            XmlTypeMapElementInfo einfo = new XmlTypeMapElementInfo (member, typeData);
+            XmlTypeMapElementInfo einfo = new XmlTypeMapElementInfo(member, typeData);
             einfo.IsTextElement = true;
             einfo.WrappedElement = false;
             if (typeData.IsComplexType)
-                einfo.MappedType = GetTypeMapping (typeData);
+                einfo.MappedType = GetTypeMapping(typeData);
             return einfo;
         }
 
-        XmlTypeMapping CreateTypeMapping (XmlQualifiedName typeQName, SchemaTypes schemaType, XmlQualifiedName root)
+        XmlTypeMapping CreateTypeMapping(
+            XmlQualifiedName typeQName,
+            SchemaTypes schemaType,
+            XmlQualifiedName root
+        )
         {
-            string typeName = CodeIdentifier.MakeValid (typeQName.Name);
-            typeName = typeIdentifiers.AddUnique (typeName, null);
+            string typeName = CodeIdentifier.MakeValid(typeQName.Name);
+            typeName = typeIdentifiers.AddUnique(typeName, null);
 
-            TypeData typeData = new TypeData (typeName, typeName, typeName, schemaType, null);
+            TypeData typeData = new TypeData(typeName, typeName, typeName, schemaType, null);
 
             string rootElem;
             string rootNs;
-            if (root != null) {
+            if (root != null)
+            {
                 rootElem = root.Name;
                 rootNs = root.Namespace;
             }
-            else {
+            else
+            {
                 rootElem = typeQName.Name;
                 rootNs = "";
             }
-            
-            XmlTypeMapping map = new XmlTypeMapping (rootElem, rootNs, typeData, typeQName.Name, typeQName.Namespace);
+
+            XmlTypeMapping map = new XmlTypeMapping(
+                rootElem,
+                rootNs,
+                typeData,
+                typeQName.Name,
+                typeQName.Namespace
+            );
             map.IncludeInSchema = true;
-            RegisterTypeMapping (typeQName, typeData, map);
+            RegisterTypeMapping(typeQName, typeData, map);
 
             return map;
         }
 
-        XmlTypeMapping CreateArrayTypeMapping (XmlQualifiedName typeQName, TypeData arrayTypeData)
+        XmlTypeMapping CreateArrayTypeMapping(XmlQualifiedName typeQName, TypeData arrayTypeData)
         {
             XmlTypeMapping map;
-            if (encodedFormat) map = new XmlTypeMapping ("Array", XmlSerializer.EncodingNamespace, arrayTypeData, "Array", XmlSerializer.EncodingNamespace);
-            else map = new XmlTypeMapping (arrayTypeData.XmlType, typeQName.Namespace, arrayTypeData, arrayTypeData.XmlType, typeQName.Namespace);
-            
+            if (encodedFormat)
+                map = new XmlTypeMapping(
+                    "Array",
+                    XmlSerializer.EncodingNamespace,
+                    arrayTypeData,
+                    "Array",
+                    XmlSerializer.EncodingNamespace
+                );
+            else
+                map = new XmlTypeMapping(
+                    arrayTypeData.XmlType,
+                    typeQName.Namespace,
+                    arrayTypeData,
+                    arrayTypeData.XmlType,
+                    typeQName.Namespace
+                );
+
             map.IncludeInSchema = true;
-            RegisterTypeMapping (typeQName, arrayTypeData, map);
+            RegisterTypeMapping(typeQName, arrayTypeData, map);
 
             return map;
         }
 
-        XmlSchemaElement GetRefElement (XmlQualifiedName typeQName, XmlSchemaElement elem, out string ns)
+        XmlSchemaElement GetRefElement(
+            XmlQualifiedName typeQName,
+            XmlSchemaElement elem,
+            out string ns
+        )
         {
-
             if (!elem.RefName.IsEmpty)
             {
                 ns = elem.RefName.Namespace;
-                return FindRefElement (elem);
+                return FindRefElement(elem);
             }
             else
             {
@@ -1682,13 +2343,20 @@ namespace System.Xml.Serialization
             }
         }
 
-        XmlSchemaAttribute GetRefAttribute (XmlQualifiedName typeQName, XmlSchemaAttribute attr, out string ns)
+        XmlSchemaAttribute GetRefAttribute(
+            XmlQualifiedName typeQName,
+            XmlSchemaAttribute attr,
+            out string ns
+        )
         {
             if (!attr.RefName.IsEmpty)
             {
                 ns = attr.RefName.Namespace;
-                XmlSchemaAttribute at = FindRefAttribute (attr.RefName);
-                if (at == null) throw new InvalidOperationException ("The attribute " + attr.RefName + " is missing");
+                XmlSchemaAttribute at = FindRefAttribute(attr.RefName);
+                if (at == null)
+                    throw new InvalidOperationException(
+                        "The attribute " + attr.RefName + " is missing"
+                    );
                 return at;
             }
             else
@@ -1698,66 +2366,92 @@ namespace System.Xml.Serialization
             }
         }
 
-        TypeData GetElementTypeData (XmlQualifiedName typeQName, XmlSchemaElement elem, XmlQualifiedName root, out XmlTypeMapping map)
+        TypeData GetElementTypeData(
+            XmlQualifiedName typeQName,
+            XmlSchemaElement elem,
+            XmlQualifiedName root,
+            out XmlTypeMapping map
+        )
         {
             bool sharedAnnType = false;
             map = null;
-            
-            if (!elem.RefName.IsEmpty) {
-                XmlSchemaElement refElem = FindRefElement (elem);
-                if (refElem == null) throw new InvalidOperationException ("Global element not found: " + elem.RefName);
+
+            if (!elem.RefName.IsEmpty)
+            {
+                XmlSchemaElement refElem = FindRefElement(elem);
+                if (refElem == null)
+                    throw new InvalidOperationException(
+                        "Global element not found: " + elem.RefName
+                    );
                 root = elem.RefName;
                 elem = refElem;
                 sharedAnnType = true;
             }
 
             TypeData td;
-            if (!elem.SchemaTypeName.IsEmpty) {
-                td = GetTypeData (elem.SchemaTypeName, root, elem.IsNillable);
-                map = GetRegisteredTypeMapping (td);
+            if (!elem.SchemaTypeName.IsEmpty)
+            {
+                td = GetTypeData(elem.SchemaTypeName, root, elem.IsNillable);
+                map = GetRegisteredTypeMapping(td);
             }
-            else if (elem.SchemaType == null) 
-                td = TypeTranslator.GetTypeData (typeof(object));
-            else 
-                td = GetTypeData (elem.SchemaType, typeQName, elem.Name, sharedAnnType, root);
-            
+            else if (elem.SchemaType == null)
+                td = TypeTranslator.GetTypeData(typeof(object));
+            else
+                td = GetTypeData(elem.SchemaType, typeQName, elem.Name, sharedAnnType, root);
+
             if (map == null && td.IsComplexType)
-                map = GetTypeMapping (td);
-                
+                map = GetTypeMapping(td);
+
             return td;
         }
 
-        TypeData GetAttributeTypeData (XmlQualifiedName typeQName, XmlSchemaAttribute attr)
+        TypeData GetAttributeTypeData(XmlQualifiedName typeQName, XmlSchemaAttribute attr)
         {
             bool sharedAnnType = false;
 
-            if (!attr.RefName.IsEmpty) {
-                XmlSchemaAttribute refAtt = FindRefAttribute (attr.RefName);
-                if (refAtt == null) throw new InvalidOperationException ("Global attribute not found: " + attr.RefName);
+            if (!attr.RefName.IsEmpty)
+            {
+                XmlSchemaAttribute refAtt = FindRefAttribute(attr.RefName);
+                if (refAtt == null)
+                    throw new InvalidOperationException(
+                        "Global attribute not found: " + attr.RefName
+                    );
                 attr = refAtt;
                 sharedAnnType = true;
             }
-            
-            if (!attr.SchemaTypeName.IsEmpty) return GetTypeData (attr.SchemaTypeName, null, false);
-            if (attr.SchemaType == null) return TypeTranslator.GetTypeData (typeof(string));
-            else return GetTypeData (attr.SchemaType, typeQName, attr.Name, sharedAnnType, null);
+
+            if (!attr.SchemaTypeName.IsEmpty)
+                return GetTypeData(attr.SchemaTypeName, null, false);
+            if (attr.SchemaType == null)
+                return TypeTranslator.GetTypeData(typeof(string));
+            else
+                return GetTypeData(attr.SchemaType, typeQName, attr.Name, sharedAnnType, null);
         }
 
-        TypeData GetTypeData (XmlQualifiedName typeQName, XmlQualifiedName root, bool isNullable)
+        TypeData GetTypeData(XmlQualifiedName typeQName, XmlQualifiedName root, bool isNullable)
         {
-            if (IsPrimitiveTypeNamespace (typeQName.Namespace)) {
-                XmlTypeMapping map = ImportType (typeQName, root, false);
-                if (map != null) return map.TypeData;
-                else return TypeTranslator.GetPrimitiveTypeData (typeQName.Name, isNullable);
+            if (IsPrimitiveTypeNamespace(typeQName.Namespace))
+            {
+                XmlTypeMapping map = ImportType(typeQName, root, false);
+                if (map != null)
+                    return map.TypeData;
+                else
+                    return TypeTranslator.GetPrimitiveTypeData(typeQName.Name, isNullable);
             }
-            
-            if (encodedFormat && typeQName.Namespace == "")
-                return TypeTranslator.GetPrimitiveTypeData (typeQName.Name);
 
-            return ImportType (typeQName, root, true).TypeData;
+            if (encodedFormat && typeQName.Namespace == "")
+                return TypeTranslator.GetPrimitiveTypeData(typeQName.Name);
+
+            return ImportType(typeQName, root, true).TypeData;
         }
 
-        TypeData GetTypeData (XmlSchemaType stype, XmlQualifiedName typeQNname, string propertyName, bool sharedAnnType, XmlQualifiedName root)
+        TypeData GetTypeData(
+            XmlSchemaType stype,
+            XmlQualifiedName typeQNname,
+            string propertyName,
+            bool sharedAnnType,
+            XmlQualifiedName root
+        )
         {
             string baseName;
 
@@ -1765,216 +2459,273 @@ namespace System.Xml.Serialization
             {
                 // Anonymous types defined in root elements or attributes can be shared among all elements that
                 // reference this root element or attribute
-                TypeData std = sharedAnonymousTypes [stype] as TypeData;
-                if (std != null) return std;
+                TypeData std = sharedAnonymousTypes[stype] as TypeData;
+                if (std != null)
+                    return std;
                 baseName = propertyName;
             }
             else
-                baseName = typeQNname.Name + typeIdentifiers.MakeRightCase (propertyName);
+                baseName = typeQNname.Name + typeIdentifiers.MakeRightCase(propertyName);
 
-            baseName = elemIdentifiers.AddUnique (baseName, stype);
-            
+            baseName = elemIdentifiers.AddUnique(baseName, stype);
+
             XmlQualifiedName newName;
-            newName = new XmlQualifiedName (baseName, typeQNname.Namespace);
+            newName = new XmlQualifiedName(baseName, typeQNname.Namespace);
 
-            XmlTypeMapping map = ImportType (newName, stype, root);
-            if (sharedAnnType) sharedAnonymousTypes [stype] = map.TypeData;
+            XmlTypeMapping map = ImportType(newName, stype, root);
+            if (sharedAnnType)
+                sharedAnonymousTypes[stype] = map.TypeData;
 
             return map.TypeData;
         }
 
-        XmlTypeMapping GetTypeMapping (TypeData typeData)
+        XmlTypeMapping GetTypeMapping(TypeData typeData)
         {
             if (typeData.Type == typeof(object) && !anyTypeImported)
-                ImportAllObjectTypes ();
-                
-            XmlTypeMapping map = GetRegisteredTypeMapping (typeData);
-            if (map != null) return map;
-            
+                ImportAllObjectTypes();
+
+            XmlTypeMapping map = GetRegisteredTypeMapping(typeData);
+            if (map != null)
+                return map;
+
             if (typeData.IsListType)
             {
                 // Create an array map for the type
 
-                XmlTypeMapping itemMap = GetTypeMapping (typeData.ListItemTypeData);
-                
-                map = new XmlTypeMapping (typeData.XmlType, itemMap.Namespace, typeData, typeData.XmlType, itemMap.Namespace);
+                XmlTypeMapping itemMap = GetTypeMapping(typeData.ListItemTypeData);
+
+                map = new XmlTypeMapping(
+                    typeData.XmlType,
+                    itemMap.Namespace,
+                    typeData,
+                    typeData.XmlType,
+                    itemMap.Namespace
+                );
                 map.IncludeInSchema = true;
 
-                ListMap listMap = new ListMap ();
+                ListMap listMap = new ListMap();
                 listMap.ItemInfo = new XmlTypeMapElementInfoList();
-                listMap.ItemInfo.Add (CreateElementInfo (itemMap.Namespace, null, typeData.ListItemTypeData.XmlType, typeData.ListItemTypeData, false, XmlSchemaForm.None, -1));
+                listMap.ItemInfo.Add(
+                    CreateElementInfo(
+                        itemMap.Namespace,
+                        null,
+                        typeData.ListItemTypeData.XmlType,
+                        typeData.ListItemTypeData,
+                        false,
+                        XmlSchemaForm.None,
+                        -1
+                    )
+                );
                 map.ObjectMap = listMap;
-                
-                RegisterTypeMapping (new XmlQualifiedName(map.ElementName, map.Namespace), typeData, map);
+
+                RegisterTypeMapping(
+                    new XmlQualifiedName(map.ElementName, map.Namespace),
+                    typeData,
+                    map
+                );
                 return map;
             }
-            else if (typeData.SchemaType == SchemaTypes.Primitive || typeData.Type == typeof(object) || typeof(XmlNode).IsAssignableFrom(typeData.Type))
+            else if (
+                typeData.SchemaType == SchemaTypes.Primitive
+                || typeData.Type == typeof(object)
+                || typeof(XmlNode).IsAssignableFrom(typeData.Type)
+            )
             {
-                return CreateSystemMap (typeData);
+                return CreateSystemMap(typeData);
             }
-            
-            throw new InvalidOperationException ("Map for type " + typeData.TypeName + " not found");
+
+            throw new InvalidOperationException("Map for type " + typeData.TypeName + " not found");
         }
-        
-        void AddObjectDerivedMap (XmlTypeMapping map)
+
+        void AddObjectDerivedMap(XmlTypeMapping map)
         {
-            TypeData typeData = TypeTranslator.GetTypeData (typeof(object));
-            XmlTypeMapping omap = GetRegisteredTypeMapping (typeData);
+            TypeData typeData = TypeTranslator.GetTypeData(typeof(object));
+            XmlTypeMapping omap = GetRegisteredTypeMapping(typeData);
             if (omap == null)
-                omap = CreateSystemMap (typeData);
-            omap.DerivedTypes.Add (map);
+                omap = CreateSystemMap(typeData);
+            omap.DerivedTypes.Add(map);
         }
-        
-        XmlTypeMapping CreateSystemMap (TypeData typeData)
+
+        XmlTypeMapping CreateSystemMap(TypeData typeData)
         {
-            XmlTypeMapping map = new XmlTypeMapping (typeData.XmlType, XmlSchema.Namespace, typeData, typeData.XmlType, XmlSchema.Namespace);
+            XmlTypeMapping map = new XmlTypeMapping(
+                typeData.XmlType,
+                XmlSchema.Namespace,
+                typeData,
+                typeData.XmlType,
+                XmlSchema.Namespace
+            );
             map.IncludeInSchema = false;
-            map.ObjectMap = new ClassMap ();
-            dataMappedTypes [typeData] = map;
+            map.ObjectMap = new ClassMap();
+            dataMappedTypes[typeData] = map;
             return map;
         }
-        
-        void ImportAllObjectTypes ()
+
+        void ImportAllObjectTypes()
         {
-            // All complex types are subtypes of anyType, so all of them 
+            // All complex types are subtypes of anyType, so all of them
             // must also be imported
-            
+
             anyTypeImported = true;
-            foreach (XmlSchema schema in schemas) {
-                foreach (XmlSchemaObject sob in schema.Items) 
+            foreach (XmlSchema schema in schemas)
+            {
+                foreach (XmlSchemaObject sob in schema.Items)
                 {
                     XmlSchemaComplexType sct = sob as XmlSchemaComplexType;
                     if (sct != null)
-                        ImportType (new XmlQualifiedName (sct.Name, schema.TargetNamespace), sct, null);
+                        ImportType(
+                            new XmlQualifiedName(sct.Name, schema.TargetNamespace),
+                            sct,
+                            null
+                        );
                 }
-            }                    
-        }
-        
-        XmlTypeMapping GetRegisteredTypeMapping (XmlQualifiedName typeQName, Type baseType)
-        {
-            // Primitive types with a forced base class are stored in a different table.
-            // In this way it is possible to have two maps for primitive types: one with
-            // the forced base class (returned by ImportDerivedTypeMapping) and one
-            // with the regular primitive map.
-            
-            if (IsPrimitiveTypeNamespace (typeQName.Namespace))
-                return (XmlTypeMapping) primitiveDerivedMappedTypes [typeQName];
-            else
-                return (XmlTypeMapping) mappedTypes [typeQName];
-        }
-        
-        XmlTypeMapping GetRegisteredTypeMapping (XmlQualifiedName typeQName)
-        {
-            return (XmlTypeMapping) mappedTypes [typeQName];
-        }
-        
-        XmlTypeMapping GetRegisteredTypeMapping (TypeData typeData)
-        {
-            return (XmlTypeMapping) dataMappedTypes [typeData];
-        }
-        
-        void RegisterTypeMapping (XmlQualifiedName qname, TypeData typeData, XmlTypeMapping map)
-        {
-            // Primitive types with a forced base class are stored in a different table.
-            // In this way it is possible to have two maps for primitive types: one with
-            // the forced base class (returned by ImportDerivedTypeMapping) and one
-            // with the regular primitive map.
-            
-            dataMappedTypes [typeData] = map;
-            if (IsPrimitiveTypeNamespace (qname.Namespace) && !map.IsSimpleType)
-                primitiveDerivedMappedTypes [qname] = map;
-            else
-                mappedTypes [qname] = map;
+            }
         }
 
-        XmlSchemaParticle GetRefGroupParticle (XmlSchemaGroupRef refGroup)
+        XmlTypeMapping GetRegisteredTypeMapping(XmlQualifiedName typeQName, Type baseType)
         {
-            XmlSchemaGroup grp = (XmlSchemaGroup) schemas.Find (refGroup.RefName, typeof (XmlSchemaGroup));
+            // Primitive types with a forced base class are stored in a different table.
+            // In this way it is possible to have two maps for primitive types: one with
+            // the forced base class (returned by ImportDerivedTypeMapping) and one
+            // with the regular primitive map.
+
+            if (IsPrimitiveTypeNamespace(typeQName.Namespace))
+                return (XmlTypeMapping)primitiveDerivedMappedTypes[typeQName];
+            else
+                return (XmlTypeMapping)mappedTypes[typeQName];
+        }
+
+        XmlTypeMapping GetRegisteredTypeMapping(XmlQualifiedName typeQName)
+        {
+            return (XmlTypeMapping)mappedTypes[typeQName];
+        }
+
+        XmlTypeMapping GetRegisteredTypeMapping(TypeData typeData)
+        {
+            return (XmlTypeMapping)dataMappedTypes[typeData];
+        }
+
+        void RegisterTypeMapping(XmlQualifiedName qname, TypeData typeData, XmlTypeMapping map)
+        {
+            // Primitive types with a forced base class are stored in a different table.
+            // In this way it is possible to have two maps for primitive types: one with
+            // the forced base class (returned by ImportDerivedTypeMapping) and one
+            // with the regular primitive map.
+
+            dataMappedTypes[typeData] = map;
+            if (IsPrimitiveTypeNamespace(qname.Namespace) && !map.IsSimpleType)
+                primitiveDerivedMappedTypes[qname] = map;
+            else
+                mappedTypes[qname] = map;
+        }
+
+        XmlSchemaParticle GetRefGroupParticle(XmlSchemaGroupRef refGroup)
+        {
+            XmlSchemaGroup grp = (XmlSchemaGroup)
+                schemas.Find(refGroup.RefName, typeof(XmlSchemaGroup));
             return grp.Particle;
         }
 
-        XmlSchemaElement FindRefElement (XmlSchemaElement elem)
+        XmlSchemaElement FindRefElement(XmlSchemaElement elem)
         {
-            XmlSchemaElement refelem = (XmlSchemaElement) schemas.Find (elem.RefName, typeof(XmlSchemaElement));
-            if (refelem != null) return refelem;
-            
-            if (IsPrimitiveTypeNamespace (elem.RefName.Namespace))
+            XmlSchemaElement refelem = (XmlSchemaElement)
+                schemas.Find(elem.RefName, typeof(XmlSchemaElement));
+            if (refelem != null)
+                return refelem;
+
+            if (IsPrimitiveTypeNamespace(elem.RefName.Namespace))
             {
-                if (anyElement != null) return anyElement;
-                anyElement = new XmlSchemaElement ();
+                if (anyElement != null)
+                    return anyElement;
+                anyElement = new XmlSchemaElement();
                 anyElement.Name = "any";
                 anyElement.SchemaTypeName = anyType;
                 return anyElement;
-            } else
+            }
+            else
                 return null;
         }
-        
-        XmlSchemaAttribute FindRefAttribute (XmlQualifiedName refName)
+
+        XmlSchemaAttribute FindRefAttribute(XmlQualifiedName refName)
         {
             if (refName.Namespace == XmlNamespace)
             {
-                XmlSchemaAttribute at = new XmlSchemaAttribute ();
+                XmlSchemaAttribute at = new XmlSchemaAttribute();
                 at.Name = refName.Name;
-                at.SchemaTypeName = new XmlQualifiedName ("string",XmlSchema.Namespace);
+                at.SchemaTypeName = new XmlQualifiedName("string", XmlSchema.Namespace);
                 return at;
             }
-            return (XmlSchemaAttribute) schemas.Find (refName, typeof(XmlSchemaAttribute));
+            return (XmlSchemaAttribute)schemas.Find(refName, typeof(XmlSchemaAttribute));
         }
-        
-        XmlSchemaAttributeGroup FindRefAttributeGroup (XmlQualifiedName refName)
+
+        XmlSchemaAttributeGroup FindRefAttributeGroup(XmlQualifiedName refName)
         {
-            XmlSchemaAttributeGroup grp = (XmlSchemaAttributeGroup) schemas.Find (refName, typeof(XmlSchemaAttributeGroup));
+            XmlSchemaAttributeGroup grp = (XmlSchemaAttributeGroup)
+                schemas.Find(refName, typeof(XmlSchemaAttributeGroup));
             foreach (XmlSchemaObject at in grp.Attributes)
             {
-                if (at is XmlSchemaAttributeGroupRef && ((XmlSchemaAttributeGroupRef)at).RefName == refName)
-                    throw new InvalidOperationException ("Cannot import attribute group '" + refName.Name + "' from namespace '" + refName.Namespace + "'. Redefine not supported");
-                    
+                if (
+                    at is XmlSchemaAttributeGroupRef
+                    && ((XmlSchemaAttributeGroupRef)at).RefName == refName
+                )
+                    throw new InvalidOperationException(
+                        "Cannot import attribute group '"
+                            + refName.Name
+                            + "' from namespace '"
+                            + refName.Namespace
+                            + "'. Redefine not supported"
+                    );
             }
             return grp;
         }
 
-        XmlTypeMapping ReflectType (Type type)
+        XmlTypeMapping ReflectType(Type type)
         {
-            TypeData typeData = TypeTranslator.GetTypeData (type);
-            return ReflectType (typeData, (string) null);
+            TypeData typeData = TypeTranslator.GetTypeData(type);
+            return ReflectType(typeData, (string)null);
         }
 
-        XmlTypeMapping ReflectType (TypeData typeData, string ns)
+        XmlTypeMapping ReflectType(TypeData typeData, string ns)
         {
             if (!encodedFormat)
             {
-                if (auxXmlRefImporter == null) auxXmlRefImporter = new XmlReflectionImporter ();
-                return auxXmlRefImporter.ImportTypeMapping (typeData, ns);
+                if (auxXmlRefImporter == null)
+                    auxXmlRefImporter = new XmlReflectionImporter();
+                return auxXmlRefImporter.ImportTypeMapping(typeData, ns);
             }
             else
             {
-                if (auxSoapRefImporter == null) auxSoapRefImporter = new SoapReflectionImporter ();
-                return auxSoapRefImporter.ImportTypeMapping (typeData, ns);
+                if (auxSoapRefImporter == null)
+                    auxSoapRefImporter = new SoapReflectionImporter();
+                return auxSoapRefImporter.ImportTypeMapping(typeData, ns);
             }
         }
 
-
-        string GetDocumentation (XmlSchemaAnnotated elem)
+        string GetDocumentation(XmlSchemaAnnotated elem)
         {
             string res = "";
             XmlSchemaAnnotation anot = elem.Annotation;
-            if (anot == null || anot.Items == null) return null;
-            
+            if (anot == null || anot.Items == null)
+                return null;
+
             foreach (object ob in anot.Items)
             {
                 XmlSchemaDocumentation doc = ob as XmlSchemaDocumentation;
-                if (doc != null && doc.Markup != null && doc.Markup.Length > 0) {
-                    if (res != string.Empty) res += "\n";
+                if (doc != null && doc.Markup != null && doc.Markup.Length > 0)
+                {
+                    if (res != string.Empty)
+                        res += "\n";
                     foreach (XmlNode node in doc.Markup)
                         res += node.Value;
                 }
             }
             return res;
         }
-        
-        bool IsPrimitiveTypeNamespace (string ns)
+
+        bool IsPrimitiveTypeNamespace(string ns)
         {
-            return (ns == XmlSchema.Namespace) || (encodedFormat && ns == XmlSerializer.EncodingNamespace);
+            return (ns == XmlSchema.Namespace)
+                || (encodedFormat && ns == XmlSerializer.EncodingNamespace);
         }
 
         #endregion // Methods

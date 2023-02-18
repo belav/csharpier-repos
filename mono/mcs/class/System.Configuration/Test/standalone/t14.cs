@@ -7,7 +7,7 @@ using System.Xml;
 
 public class CustomCollection : KeyValueConfigurationCollection
 {
-    public CustomCollection () 
+    public CustomCollection()
     {
         AddElementName = "insert";
         ClearElementName = "removeall";
@@ -15,24 +15,24 @@ public class CustomCollection : KeyValueConfigurationCollection
     }
 }
 
-public class CustomSection :  ConfigurationSection
+public class CustomSection : ConfigurationSection
 {
-    public CustomSection()
+    public CustomSection() { }
+
+    [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+    public KeyValueConfigurationCollection Settings
     {
-    }
-  
-    [ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-    public KeyValueConfigurationCollection Settings {
-        get {
+        get
+        {
             if (settings == null)
                 settings = new CustomCollection();
             return settings;
         }
     }
 
-    protected override void DeserializeElement (XmlReader reader, bool serializeCollectionKey)
+    protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
     {
-        Settings.DeserializeElement (reader, serializeCollectionKey);
+        Settings.DeserializeElement(reader, serializeCollectionKey);
     }
 
     KeyValueConfigurationCollection settings;
@@ -44,17 +44,20 @@ class T1
     {
         try
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(
+                ConfigurationUserLevel.None
+            );
             CustomSection sect = (CustomSection)config.GetSection("customSection");
 
-            foreach (string key in sect.Settings.AllKeys) {
+            foreach (string key in sect.Settings.AllKeys)
+            {
                 KeyValueConfigurationElement e = sect.Settings[key];
-                Console.WriteLine ("{0} = {1}", e.Key, e.Value);
+                Console.WriteLine("{0} = {1}", e.Key, e.Value);
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine ("Exception raised: {0}\n{1}", e.GetType(), e);
+            Console.WriteLine("Exception raised: {0}\n{1}", e.GetType(), e);
         }
     }
 }

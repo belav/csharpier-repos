@@ -12,7 +12,10 @@ namespace System.Web.Http.Controllers
     /// <typeparam name="T">The declared return type of an action.</typeparam>
     public class ValueResultConverter<T> : IActionResultConverter
     {
-        public HttpResponseMessage Convert(HttpControllerContext controllerContext, object actionResult)
+        public HttpResponseMessage Convert(
+            HttpControllerContext controllerContext,
+            object actionResult
+        )
         {
             if (controllerContext == null)
             {
@@ -27,7 +30,11 @@ namespace System.Web.Http.Controllers
             }
 
             T value = (T)actionResult;
-            return controllerContext.Request.CreateResponse<T>(HttpStatusCode.OK, value, controllerContext.Configuration);
+            return controllerContext.Request.CreateResponse<T>(
+                HttpStatusCode.OK,
+                value,
+                controllerContext.Configuration
+            );
         }
     }
 }

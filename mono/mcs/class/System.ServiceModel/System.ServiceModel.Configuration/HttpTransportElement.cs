@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,166 +56,328 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public class HttpTransportElement
-         : TransportElement
+    public class HttpTransportElement : TransportElement
     {
         ConfigurationPropertyCollection _properties;
 
-        public HttpTransportElement () {
-        }
-
+        public HttpTransportElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("allowCookies",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool AllowCookies {
-            get { return (bool) base ["allowCookies"]; }
-            set { base ["allowCookies"] = value; }
+        [ConfigurationProperty(
+            "allowCookies",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool AllowCookies
+        {
+            get { return (bool)base["allowCookies"]; }
+            set { base["allowCookies"] = value; }
         }
 
-        [ConfigurationProperty ("authenticationScheme",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Anonymous")]
-        public AuthenticationSchemes AuthenticationScheme {
-            get { return (AuthenticationSchemes) base ["authenticationScheme"]; }
-            set { base ["authenticationScheme"] = value; }
+        [ConfigurationProperty(
+            "authenticationScheme",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Anonymous"
+        )]
+        public AuthenticationSchemes AuthenticationScheme
+        {
+            get { return (AuthenticationSchemes)base["authenticationScheme"]; }
+            set { base["authenticationScheme"] = value; }
         }
 
-        public override Type BindingElementType {
-            get { return typeof (HttpTransportBindingElement); }
+        public override Type BindingElementType
+        {
+            get { return typeof(HttpTransportBindingElement); }
         }
 
-        [ConfigurationProperty ("bypassProxyOnLocal",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool BypassProxyOnLocal {
-            get { return (bool) base ["bypassProxyOnLocal"]; }
-            set { base ["bypassProxyOnLocal"] = value; }
+        [ConfigurationProperty(
+            "bypassProxyOnLocal",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool BypassProxyOnLocal
+        {
+            get { return (bool)base["bypassProxyOnLocal"]; }
+            set { base["bypassProxyOnLocal"] = value; }
         }
 
-        [ConfigurationProperty ("hostNameComparisonMode",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "StrongWildcard")]
-        public HostNameComparisonMode HostNameComparisonMode {
-            get { return (HostNameComparisonMode) base ["hostNameComparisonMode"]; }
-            set { base ["hostNameComparisonMode"] = value; }
+        [ConfigurationProperty(
+            "hostNameComparisonMode",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "StrongWildcard"
+        )]
+        public HostNameComparisonMode HostNameComparisonMode
+        {
+            get { return (HostNameComparisonMode)base["hostNameComparisonMode"]; }
+            set { base["hostNameComparisonMode"] = value; }
         }
 
-        [ConfigurationProperty ("keepAliveEnabled",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = true)]
-        public bool KeepAliveEnabled {
-            get { return (bool) base ["keepAliveEnabled"]; }
-            set { base ["keepAliveEnabled"] = value; }
+        [ConfigurationProperty(
+            "keepAliveEnabled",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true
+        )]
+        public bool KeepAliveEnabled
+        {
+            get { return (bool)base["keepAliveEnabled"]; }
+            set { base["keepAliveEnabled"] = value; }
         }
 
-        [IntegerValidator (MinValue = 1,
-            MaxValue = int.MaxValue,
-            ExcludeRange = false)]
-        [ConfigurationProperty ("maxBufferSize",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "65536")]
-        public int MaxBufferSize {
-            get { return (int) base ["maxBufferSize"]; }
-            set { base ["maxBufferSize"] = value; }
+        [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxBufferSize",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "65536"
+        )]
+        public int MaxBufferSize
+        {
+            get { return (int)base["maxBufferSize"]; }
+            set { base["maxBufferSize"] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                if (_properties == null) {
-                    _properties = new ConfigurationPropertyCollection ();
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = new ConfigurationPropertyCollection();
                     foreach (ConfigurationProperty cp in base.Properties)
-                        _properties.Add (cp);
-                    _properties.Add (new ConfigurationProperty ("allowCookies", typeof (bool), "false", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("authenticationScheme", typeof (AuthenticationSchemes), "Anonymous", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("bypassProxyOnLocal", typeof (bool), "false", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("hostNameComparisonMode", typeof (HostNameComparisonMode), "StrongWildcard", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("keepAliveEnabled", typeof (bool), "true", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("maxBufferSize", typeof (int), "65536", null, new IntegerValidator (1, int.MaxValue, false), ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("proxyAddress", typeof (Uri), null, new UriTypeConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("proxyAuthenticationScheme", typeof (AuthenticationSchemes), "Anonymous", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("realm", typeof (string), "", new StringConverter (), new StringValidator (0, int.MaxValue, null), ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("transferMode", typeof (TransferMode), "Buffered", null, null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("unsafeConnectionNtlmAuthentication", typeof (bool), "false", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("useDefaultWebProxy", typeof (bool), "true", new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("decompressionEnabled", typeof (bool), false, new BooleanConverter (), null, ConfigurationPropertyOptions.None));
-                    _properties.Add (new ConfigurationProperty ("extendedProtectionPolicy", typeof (ExtendedProtectionPolicyElement), null, new ExtendedProtectionPolicyTypeConverter (), null, ConfigurationPropertyOptions.None));
+                        _properties.Add(cp);
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "allowCookies",
+                            typeof(bool),
+                            "false",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "authenticationScheme",
+                            typeof(AuthenticationSchemes),
+                            "Anonymous",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "bypassProxyOnLocal",
+                            typeof(bool),
+                            "false",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "hostNameComparisonMode",
+                            typeof(HostNameComparisonMode),
+                            "StrongWildcard",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "keepAliveEnabled",
+                            typeof(bool),
+                            "true",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "maxBufferSize",
+                            typeof(int),
+                            "65536",
+                            null,
+                            new IntegerValidator(1, int.MaxValue, false),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "proxyAddress",
+                            typeof(Uri),
+                            null,
+                            new UriTypeConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "proxyAuthenticationScheme",
+                            typeof(AuthenticationSchemes),
+                            "Anonymous",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "realm",
+                            typeof(string),
+                            "",
+                            new StringConverter(),
+                            new StringValidator(0, int.MaxValue, null),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "transferMode",
+                            typeof(TransferMode),
+                            "Buffered",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "unsafeConnectionNtlmAuthentication",
+                            typeof(bool),
+                            "false",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "useDefaultWebProxy",
+                            typeof(bool),
+                            "true",
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "decompressionEnabled",
+                            typeof(bool),
+                            false,
+                            new BooleanConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "extendedProtectionPolicy",
+                            typeof(ExtendedProtectionPolicyElement),
+                            null,
+                            new ExtendedProtectionPolicyTypeConverter(),
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                 }
                 return _properties;
             }
         }
 
-        [ConfigurationProperty ("decompressionEnabled",
-             Options = ConfigurationPropertyOptions.None)]
-        public bool DecompressionEnabled {
-            get { return (bool) base ["decompressionEnabled"]; }
-            set { base ["decompressionEnabled"] = value; }
-        }
-
-        [ConfigurationProperty ("extendedProtectionPolicy",
-             Options = ConfigurationPropertyOptions.None)]
-        public ExtendedProtectionPolicyElement ExtendedProtectionPolicy {
-            get { return (ExtendedProtectionPolicyElement) base ["extendedProtectionPolicy"]; }
-            set { base ["extendedProtectionPolicy"] = value; }
-        }
-
-        [ConfigurationProperty ("proxyAddress",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = null)]
-        public Uri ProxyAddress {
-            get { return (Uri) base ["proxyAddress"]; }
-            set { base ["proxyAddress"] = value; }
-        }
-
-        [ConfigurationProperty ("proxyAuthenticationScheme",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Anonymous")]
-        public AuthenticationSchemes ProxyAuthenticationScheme {
-            get { return (AuthenticationSchemes) base ["proxyAuthenticationScheme"]; }
-            set { base ["proxyAuthenticationScheme"] = value; }
-        }
-
-        [ConfigurationProperty ("realm",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "")]
-        [StringValidator (MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        public string Realm {
-            get { return (string) base ["realm"]; }
-            set { base ["realm"] = value; }
-        }
-
-        [ConfigurationProperty ("transferMode",
-             Options = ConfigurationPropertyOptions.None,
-             DefaultValue = "Buffered")]
-        public TransferMode TransferMode {
-            get { return (TransferMode) base ["transferMode"]; }
-            set { base ["transferMode"] = value; }
-        }
-
-        [ConfigurationProperty ("unsafeConnectionNtlmAuthentication",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = false)]
-        public bool UnsafeConnectionNtlmAuthentication {
-            get { return (bool) base ["unsafeConnectionNtlmAuthentication"]; }
-            set { base ["unsafeConnectionNtlmAuthentication"] = value; }
-        }
-
-        [ConfigurationProperty ("useDefaultWebProxy",
-             Options = ConfigurationPropertyOptions.None,
-            DefaultValue = true)]
-        public bool UseDefaultWebProxy {
-            get { return (bool) base ["useDefaultWebProxy"]; }
-            set { base ["useDefaultWebProxy"] = value; }
-        }
-
-        public override void ApplyConfiguration (BindingElement bindingElement)
+        [ConfigurationProperty("decompressionEnabled", Options = ConfigurationPropertyOptions.None)]
+        public bool DecompressionEnabled
         {
-            var b = (HttpTransportBindingElement) bindingElement;
-            base.ApplyConfiguration (b);
+            get { return (bool)base["decompressionEnabled"]; }
+            set { base["decompressionEnabled"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "extendedProtectionPolicy",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public ExtendedProtectionPolicyElement ExtendedProtectionPolicy
+        {
+            get { return (ExtendedProtectionPolicyElement)base["extendedProtectionPolicy"]; }
+            set { base["extendedProtectionPolicy"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "proxyAddress",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = null
+        )]
+        public Uri ProxyAddress
+        {
+            get { return (Uri)base["proxyAddress"]; }
+            set { base["proxyAddress"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "proxyAuthenticationScheme",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Anonymous"
+        )]
+        public AuthenticationSchemes ProxyAuthenticationScheme
+        {
+            get { return (AuthenticationSchemes)base["proxyAuthenticationScheme"]; }
+            set { base["proxyAuthenticationScheme"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "realm",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = ""
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string Realm
+        {
+            get { return (string)base["realm"]; }
+            set { base["realm"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "transferMode",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "Buffered"
+        )]
+        public TransferMode TransferMode
+        {
+            get { return (TransferMode)base["transferMode"]; }
+            set { base["transferMode"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "unsafeConnectionNtlmAuthentication",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool UnsafeConnectionNtlmAuthentication
+        {
+            get { return (bool)base["unsafeConnectionNtlmAuthentication"]; }
+            set { base["unsafeConnectionNtlmAuthentication"] = value; }
+        }
+
+        [ConfigurationProperty(
+            "useDefaultWebProxy",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = true
+        )]
+        public bool UseDefaultWebProxy
+        {
+            get { return (bool)base["useDefaultWebProxy"]; }
+            set { base["useDefaultWebProxy"] = value; }
+        }
+
+        public override void ApplyConfiguration(BindingElement bindingElement)
+        {
+            var b = (HttpTransportBindingElement)bindingElement;
+            base.ApplyConfiguration(b);
             b.AllowCookies = AllowCookies;
             b.AuthenticationScheme = AuthenticationScheme;
             b.BypassProxyOnLocal = BypassProxyOnLocal;
@@ -233,10 +395,10 @@ namespace System.ServiceModel.Configuration
             //b.ExtendedProtectionPolicy = ExtendedProtectionPolicy.BuildPolicy ();
         }
 
-        public override void CopyFrom (ServiceModelExtensionElement from)
+        public override void CopyFrom(ServiceModelExtensionElement from)
         {
-            var e = (HttpTransportElement) from;
-            base.CopyFrom (from);
+            var e = (HttpTransportElement)from;
+            base.CopyFrom(from);
             AllowCookies = e.AllowCookies;
             AuthenticationScheme = e.AuthenticationScheme;
             BypassProxyOnLocal = e.BypassProxyOnLocal;
@@ -258,15 +420,15 @@ namespace System.ServiceModel.Configuration
             */
         }
 
-        protected override TransportBindingElement CreateDefaultBindingElement ()
+        protected override TransportBindingElement CreateDefaultBindingElement()
         {
-            return new HttpTransportBindingElement ();
+            return new HttpTransportBindingElement();
         }
 
-        protected internal override void InitializeFrom (BindingElement bindingElement)
+        protected internal override void InitializeFrom(BindingElement bindingElement)
         {
-            var b = (HttpTransportBindingElement) bindingElement;
-            base.InitializeFrom (b);
+            var b = (HttpTransportBindingElement)bindingElement;
+            base.InitializeFrom(b);
             AllowCookies = b.AllowCookies;
             AuthenticationScheme = b.AuthenticationScheme;
             BypassProxyOnLocal = b.BypassProxyOnLocal;

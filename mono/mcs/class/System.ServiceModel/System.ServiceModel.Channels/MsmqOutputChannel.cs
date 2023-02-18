@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,89 +37,105 @@ namespace System.ServiceModel.Channels
         MsmqChannelFactory<IOutputChannel> source;
         MessageQueue queue;
 
-        public MsmqOutputChannel (MsmqChannelFactory<IOutputChannel> factory,
-            EndpointAddress address, Uri via)
-            : base (factory, address, via)
+        public MsmqOutputChannel(
+            MsmqChannelFactory<IOutputChannel> factory,
+            EndpointAddress address,
+            Uri via
+        )
+            : base(factory, address, via)
         {
             this.source = factory;
         }
 
         // Send
 
-        public override IAsyncResult BeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            ThrowIfDisposedOrNotOpen ();
+            ThrowIfDisposedOrNotOpen();
 
-            return new MsmqChannelOutputAsyncResult (this, message, timeout, callback, state);
+            return new MsmqChannelOutputAsyncResult(this, message, timeout, callback, state);
         }
 
-        public override void EndSend (IAsyncResult result)
+        public override void EndSend(IAsyncResult result)
         {
             if (result == null)
-                throw new ArgumentNullException ("result");
+                throw new ArgumentNullException("result");
             MsmqChannelOutputAsyncResult r = result as MsmqChannelOutputAsyncResult;
             if (r == null)
-                throw new InvalidOperationException ("Wrong IAsyncResult");
-            r.WaitEnd ();
+                throw new InvalidOperationException("Wrong IAsyncResult");
+            r.WaitEnd();
         }
 
-        public override void Send (Message message, TimeSpan timeout)
+        public override void Send(Message message, TimeSpan timeout)
         {
-            ThrowIfDisposedOrNotOpen ();
+            ThrowIfDisposedOrNotOpen();
 
-            MemoryStream ms = new MemoryStream ();
-            source.MessageEncoder.WriteMessage (message, ms);
+            MemoryStream ms = new MemoryStream();
+            source.MessageEncoder.WriteMessage(message, ms);
 
-            queue.Send (ms);
+            queue.Send(ms);
 
             //throw new NotImplementedException ();
         }
 
         // Abort
 
-        protected override void OnAbort ()
+        protected override void OnAbort()
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         // Close
 
-        protected override void OnClose (TimeSpan timeout)
+        protected override void OnClose(TimeSpan timeout)
         {
             if (queue != null)
-                queue.Close ();
+                queue.Close();
             queue = null;
         }
 
-        protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndClose (IAsyncResult result)
+        protected override void OnEndClose(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         // Open
 
-        protected override void OnOpen (TimeSpan timeout)
+        protected override void OnOpen(TimeSpan timeout)
         {
             // FIXME: is distination really like this?
             Uri destination = Via != null ? Via : RemoteAddress.Uri;
 
-            queue = new MessageQueue (destination.GetLeftPart (UriPartial.Scheme));
+            queue = new MessageQueue(destination.GetLeftPart(UriPartial.Scheme));
             // FIXME: setup queue
         }
 
-        protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        protected override void OnEndOpen (IAsyncResult result)
+        protected override void OnEndOpen(IAsyncResult result)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         class MsmqChannelOutputAsyncResult : IAsyncResult
@@ -130,10 +146,17 @@ namespace System.ServiceModel.Channels
             AsyncCallback callback;
             object state;
             AutoResetEvent wait;
-            bool done, waiting;
+            bool done,
+                waiting;
             Exception error;
 
-            public MsmqChannelOutputAsyncResult (MsmqOutputChannel channel, Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public MsmqChannelOutputAsyncResult(
+                MsmqOutputChannel channel,
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 this.channel = channel;
                 this.message = message;
@@ -141,43 +164,56 @@ namespace System.ServiceModel.Channels
                 this.callback = callback;
                 this.state = state;
 
-                wait = new AutoResetEvent (false);
-                Thread t = new Thread (delegate () {
-                    try {
-                        channel.Send (message, timeout);
-                        if (callback != null)
-                            callback (this);
-                    } catch (Exception ex) {
-                        error = ex;
-                    } finally {
-                        done = true;
-                        wait.Set ();
+                wait = new AutoResetEvent(false);
+                Thread t = new Thread(
+                    delegate()
+                    {
+                        try
+                        {
+                            channel.Send(message, timeout);
+                            if (callback != null)
+                                callback(this);
+                        }
+                        catch (Exception ex)
+                        {
+                            error = ex;
+                        }
+                        finally
+                        {
+                            done = true;
+                            wait.Set();
+                        }
                     }
-                });
-                t.Start ();
+                );
+                t.Start();
             }
 
-            public WaitHandle AsyncWaitHandle {
+            public WaitHandle AsyncWaitHandle
+            {
                 get { return wait; }
             }
 
-            public object AsyncState {
+            public object AsyncState
+            {
                 get { return state; }
             }
 
-            public bool CompletedSynchronously {
+            public bool CompletedSynchronously
+            {
                 get { return done && !waiting; }
             }
 
-            public bool IsCompleted {
+            public bool IsCompleted
+            {
                 get { return done; }
             }
 
-            public void WaitEnd ()
+            public void WaitEnd()
             {
-                if (!done) {
+                if (!done)
+                {
                     waiting = true;
-                    wait.WaitOne (timeout, true);
+                    wait.WaitOne(timeout, true);
                 }
                 if (error != null)
                     throw error;

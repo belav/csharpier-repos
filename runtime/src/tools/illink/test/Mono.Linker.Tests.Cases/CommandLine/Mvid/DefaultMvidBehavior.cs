@@ -4,14 +4,12 @@ namespace Mono.Linker.Tests.Cases.CommandLine.Mvid
 {
     public class DefaultMvidBehavior
     {
-        public static void Main ()
+        public static void Main()
         {
-            Method ();
+            Method();
         }
 
         [Kept]
-        static void Method ()
-        {
-        }
+        static void Method() { }
     }
 }

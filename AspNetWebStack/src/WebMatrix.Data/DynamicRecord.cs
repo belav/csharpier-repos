@@ -64,8 +64,8 @@ namespace WebMatrix.Data
             if (!Columns.Contains(name, StringComparer.OrdinalIgnoreCase))
             {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  DataResources.InvalidColumnName, name));
+                    String.Format(CultureInfo.CurrentCulture, DataResources.InvalidColumnName, name)
+                );
             }
         }
 
@@ -122,10 +122,11 @@ namespace WebMatrix.Data
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
         {
             // Get the name and type for each column name
-            var properties = from columnName in Columns
-                             let columnIndex = Record.GetOrdinal(columnName)
-                             let type = Record.GetFieldType(columnIndex)
-                             select new DynamicPropertyDescriptor(columnName, type);
+            var properties =
+                from columnName in Columns
+                let columnIndex = Record.GetOrdinal(columnName)
+                let type = Record.GetFieldType(columnIndex)
+                select new DynamicPropertyDescriptor(columnName, type);
 
             return new PropertyDescriptorCollection(properties.ToArray(), readOnly: true);
         }
@@ -180,15 +181,15 @@ namespace WebMatrix.Data
             public override void ResetValue(object component)
             {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  DataResources.RecordIsReadOnly, Name));
+                    String.Format(CultureInfo.CurrentCulture, DataResources.RecordIsReadOnly, Name)
+                );
             }
 
             public override void SetValue(object component, object value)
             {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  DataResources.RecordIsReadOnly, Name));
+                    String.Format(CultureInfo.CurrentCulture, DataResources.RecordIsReadOnly, Name)
+                );
             }
 
             public override bool ShouldSerializeValue(object component)

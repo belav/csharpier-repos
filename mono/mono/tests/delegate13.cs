@@ -2,10 +2,10 @@ using System;
 
 public static class Program
 {
-    public static int Main ()
+    public static int Main()
     {
-        Action d1 = new Action (Method1);
-        Action d2 = new Action (Method2);
+        Action d1 = new Action(Method1);
+        Action d2 = new Action(Method2);
         Action d12 = d1 + d2;
         Action d21 = d2 + d1;
 
@@ -21,11 +21,7 @@ public static class Program
         return 0;
     }
 
-    public static void Method1 ()
-    {
-    }
+    public static void Method1() { }
 
-    public static void Method2 ()
-    {
-    }
+    public static void Method2() { }
 }

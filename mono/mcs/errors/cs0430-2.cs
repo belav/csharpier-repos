@@ -10,7 +10,5 @@ namespace N
 
 public class Tester
 {
-    static void Main ()
-    {
-    }
+    static void Main() { }
 }

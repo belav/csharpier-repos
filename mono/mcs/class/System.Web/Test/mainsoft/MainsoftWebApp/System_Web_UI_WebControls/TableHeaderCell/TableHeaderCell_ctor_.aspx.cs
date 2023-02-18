@@ -35,13 +35,13 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class TableHeaderCell_ctor_
-        : GHTBaseWeb 
+    public class TableHeaderCell_ctor_ : GHTBaseWeb
     {
         protected System.Web.UI.WebControls.Table Table1;
         protected GHTWebControls.GHTSubTest GHTSubTest1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -49,45 +49,44 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
 
 
             base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
 
-            try 
+            try
             {
                 base.GHTSubTestBegin("TableHeaderCell");
                 base.GHTActiveSubTest.Controls.Add(Table1);
 
                 // Create a header for the table.
-                System.Web.UI.WebControls.TableHeaderCell header = new System.Web.UI.WebControls.TableHeaderCell();
+                System.Web.UI.WebControls.TableHeaderCell header =
+                    new System.Web.UI.WebControls.TableHeaderCell();
                 header.Text = "Table of (x,y) Values";
 
                 // Add the header row to the table.
                 Table1.Rows.AddAt(0, new TableRow());
                 Table1.Rows[0].Cells.Add(header);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 base.GHTSubTestUnexpectedExceptionCaught(ex);
             }
             base.GHTSubTestEnd();
             base.GHTTestEnd();
-
         }
     }
 }

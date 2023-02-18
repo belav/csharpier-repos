@@ -8,20 +8,19 @@ using System.Linq;
 
 class Test
 {
-    static int Prop {
-        get {
-            return 4;
-        }
+    static int Prop
+    {
+        get { return 4; }
     }
 
-    public static int Main ()
+    public static int Main()
     {
-        var parsed = from t in new[] { "2" } select int.Parse (t);
-        if (parsed.First () != 2)
+        var parsed = from t in new[] { "2" } select int.Parse(t);
+        if (parsed.First() != 2)
             return 1;
 
         var s = new string[] { "x", "a" };
-        Array.Sort (s, (a, b) => String.Compare (a, b));
+        Array.Sort(s, (a, b) => String.Compare(a, b));
         if (s[0] != "a")
             return 10;
 
@@ -29,14 +28,17 @@ class Test
             return 11;
 
         Func<int> i = () => Prop;
-        if (i () != 4)
+        if (i() != 4)
             return 20;
 
-        var em = new IEnumerable[] { new int[] { 1 } }.Select (l => l.Cast<int> ()).First ().First ();
+        var em = new IEnumerable[] { new int[] { 1 } }
+            .Select(l => l.Cast<int>())
+            .First()
+            .First();
         if (em != 1)
             return 30;
 
-        Console.WriteLine ("ok");
+        Console.WriteLine("ok");
         return 0;
     }
 }

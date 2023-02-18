@@ -29,34 +29,29 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-    
-    internal class BuildTaskPropertyGroup : BuildPropertyGroup, IBuildTask {
-        
-        public bool ContinueOnError {
-            get; set;
-        }
-        
-        internal BuildTaskPropertyGroup (XmlElement element, Target target)
-            : base (element, target.Project, null, false, true)
+namespace Microsoft.Build.BuildEngine
+{
+    internal class BuildTaskPropertyGroup : BuildPropertyGroup, IBuildTask
+    {
+        public bool ContinueOnError { get; set; }
+
+        internal BuildTaskPropertyGroup(XmlElement element, Target target)
+            : base(element, target.Project, null, false, true) { }
+
+        public bool Execute()
         {
-        }
-        
-        public bool Execute ()
-        {
-            Evaluate ();
+            Evaluate();
             return true;
         }
 
-        IEnumerable<string> IBuildTask.GetAttributes ()
+        IEnumerable<string> IBuildTask.GetAttributes()
         {
-            return GetAttributes ();
+            return GetAttributes();
         }
 
-        public bool ResolveOutputItems ()
+        public bool ResolveOutputItems()
         {
             return true;
         }
     }
 }
-

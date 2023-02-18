@@ -29,6 +29,7 @@ public class GitHub_18780
     // The byte cast was then removed, but since the NEG byte node still
     // produces a wide result this meant (byte)val was -1.
     static byte s_1 = 1;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool M2()
     {

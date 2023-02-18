@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         internal static async Task<ImmutableArray<ReferencedSymbol>> FindRenamableReferencesAsync(
             ImmutableArray<ISymbol> symbols,
             Solution solution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using (Logger.LogBlock(FunctionId.FindReference_Rename, cancellationToken))
             {
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     documents: null,
                     ReferenceFinders.DefaultRenameReferenceFinders,
                     streamingProgress,
-                    FindReferencesSearchOptions.Default);
+                    FindReferencesSearchOptions.Default
+                );
 
                 await engine.FindReferencesAsync(symbols, cancellationToken).ConfigureAwait(false);
                 return streamingProgress.GetReferencedSymbols();

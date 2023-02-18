@@ -225,7 +225,8 @@ namespace System.Drawing
         public static Brush LightBlue => GetBrush(s_lightBlueKey, Color.LightBlue);
         public static Brush LightCoral => GetBrush(s_lightCoralKey, Color.LightCoral);
         public static Brush LightCyan => GetBrush(s_lightCyanKey, Color.LightCyan);
-        public static Brush LightGoldenrodYellow => GetBrush(s_lightGoldenrodYellowKey, Color.LightGoldenrodYellow);
+        public static Brush LightGoldenrodYellow =>
+            GetBrush(s_lightGoldenrodYellowKey, Color.LightGoldenrodYellow);
         public static Brush LightGreen => GetBrush(s_lightGreenKey, Color.LightGreen);
         public static Brush LightGray => GetBrush(s_lightGrayKey, Color.LightGray);
         public static Brush LightPink => GetBrush(s_lightPinkKey, Color.LightPink);
@@ -241,15 +242,20 @@ namespace System.Drawing
 
         public static Brush Magenta => GetBrush(s_magentaKey, Color.Magenta);
         public static Brush Maroon => GetBrush(s_maroonKey, Color.Maroon);
-        public static Brush MediumAquamarine => GetBrush(s_mediumAquamarineKey, Color.MediumAquamarine);
+        public static Brush MediumAquamarine =>
+            GetBrush(s_mediumAquamarineKey, Color.MediumAquamarine);
         public static Brush MediumBlue => GetBrush(s_mediumBlueKey, Color.MediumBlue);
         public static Brush MediumOrchid => GetBrush(s_mediumOrchidKey, Color.MediumOrchid);
         public static Brush MediumPurple => GetBrush(s_mediumPurpleKey, Color.MediumPurple);
         public static Brush MediumSeaGreen => GetBrush(s_mediumSeaGreenKey, Color.MediumSeaGreen);
-        public static Brush MediumSlateBlue => GetBrush(s_mediumSlateBlueKey, Color.MediumSlateBlue);
-        public static Brush MediumSpringGreen => GetBrush(s_mediumSpringGreenKey, Color.MediumSpringGreen);
-        public static Brush MediumTurquoise => GetBrush(s_mediumTurquoiseKey, Color.MediumTurquoise);
-        public static Brush MediumVioletRed => GetBrush(s_mediumVioletRedKey, Color.MediumVioletRed);
+        public static Brush MediumSlateBlue =>
+            GetBrush(s_mediumSlateBlueKey, Color.MediumSlateBlue);
+        public static Brush MediumSpringGreen =>
+            GetBrush(s_mediumSpringGreenKey, Color.MediumSpringGreen);
+        public static Brush MediumTurquoise =>
+            GetBrush(s_mediumTurquoiseKey, Color.MediumTurquoise);
+        public static Brush MediumVioletRed =>
+            GetBrush(s_mediumVioletRedKey, Color.MediumVioletRed);
         public static Brush MidnightBlue => GetBrush(s_midnightBlueKey, Color.MidnightBlue);
         public static Brush MintCream => GetBrush(s_mintCreamKey, Color.MintCream);
         public static Brush MistyRose => GetBrush(s_mistyRoseKey, Color.MistyRose);

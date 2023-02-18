@@ -26,13 +26,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Signatures {
-
-    internal sealed class MethodSpec {
-
+namespace Mono.Cecil.Signatures
+{
+    internal sealed class MethodSpec
+    {
         public GenericInstSignature Signature;
 
-        public MethodSpec (GenericInstSignature sig)
+        public MethodSpec(GenericInstSignature sig)
         {
             this.Signature = sig;
         }

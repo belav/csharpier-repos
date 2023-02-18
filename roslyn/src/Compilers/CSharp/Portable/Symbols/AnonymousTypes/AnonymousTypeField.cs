@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ScopedKind scope,
             ConstantValue? defaultValue = null,
             bool isParams = false,
-            bool hasUnscopedRefAttribute = false)
+            bool hasUnscopedRefAttribute = false
+        )
         {
             this.Name = name;
             this.Location = location;
@@ -55,10 +56,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public AnonymousTypeField WithType(TypeWithAnnotations type)
         {
-            return new AnonymousTypeField(Name, Location, type, RefKind, Scope, DefaultValue, IsParams, HasUnscopedRefAttribute);
+            return new AnonymousTypeField(
+                Name,
+                Location,
+                type,
+                RefKind,
+                Scope,
+                DefaultValue,
+                IsParams,
+                HasUnscopedRefAttribute
+            );
         }
 
-        internal static bool Equals(in AnonymousTypeField x, in AnonymousTypeField y, TypeCompareKind comparison)
+        internal static bool Equals(
+            in AnonymousTypeField x,
+            in AnonymousTypeField y,
+            TypeCompareKind comparison
+        )
         {
             return x.TypeWithAnnotations.Equals(y.TypeWithAnnotations, comparison)
                 && x.RefKind == y.RefKind
@@ -71,7 +85,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         [Conditional("DEBUG")]
         internal void AssertIsGood()
         {
-            Debug.Assert(this.Name != null && this.Location != null && this.TypeWithAnnotations.HasType);
+            Debug.Assert(
+                this.Name != null && this.Location != null && this.TypeWithAnnotations.HasType
+            );
         }
     }
 }

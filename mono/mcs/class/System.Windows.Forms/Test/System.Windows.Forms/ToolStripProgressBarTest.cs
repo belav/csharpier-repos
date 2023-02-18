@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,187 +39,190 @@ namespace MonoTests.System.Windows.Forms
     public class ToolStripProgressBarTests : TestHelper
     {
         [Test]
-        public void Constructor ()
+        public void Constructor()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
 
-            Assert.AreEqual (100, tsi.MarqueeAnimationSpeed, "A1");
-            Assert.AreEqual (100, tsi.Maximum, "A2");
-            Assert.AreEqual (0, tsi.Minimum, "A3");
-            Assert.AreEqual ("System.Windows.Forms.ProgressBar", tsi.ProgressBar.GetType ().ToString (), "A4");
-            Assert.AreEqual (false, tsi.RightToLeftLayout, "A5");
-            Assert.AreEqual (10, tsi.Step, "A6");
-            Assert.AreEqual (ProgressBarStyle.Blocks, tsi.Style, "A7");
-            Assert.AreEqual (string.Empty, tsi.Text, "A8");
-            Assert.AreEqual (0, tsi.Value, "A9");
+            Assert.AreEqual(100, tsi.MarqueeAnimationSpeed, "A1");
+            Assert.AreEqual(100, tsi.Maximum, "A2");
+            Assert.AreEqual(0, tsi.Minimum, "A3");
+            Assert.AreEqual(
+                "System.Windows.Forms.ProgressBar",
+                tsi.ProgressBar.GetType().ToString(),
+                "A4"
+            );
+            Assert.AreEqual(false, tsi.RightToLeftLayout, "A5");
+            Assert.AreEqual(10, tsi.Step, "A6");
+            Assert.AreEqual(ProgressBarStyle.Blocks, tsi.Style, "A7");
+            Assert.AreEqual(string.Empty, tsi.Text, "A8");
+            Assert.AreEqual(0, tsi.Value, "A9");
 
-            tsi = new ToolStripProgressBar ("Bob");
-            Assert.AreEqual ("Bob", tsi.Name, "A10");
-            Assert.AreEqual (string.Empty, tsi.Control.Name, "A11");
-        }
-    
-        [Test]
-        public void ProtectedProperties ()
-        {
-            ExposeProtectedProperties epp = new ExposeProtectedProperties ();
-
-            Assert.AreEqual (new Padding (1, 2, 1, 1), epp.DefaultMargin, "C1");
-            Assert.AreEqual (new Size (100, 15), epp.DefaultSize, "C2");
+            tsi = new ToolStripProgressBar("Bob");
+            Assert.AreEqual("Bob", tsi.Name, "A10");
+            Assert.AreEqual(string.Empty, tsi.Control.Name, "A11");
         }
 
         [Test]
-        public void PropertyMarqueeAnimationSpeed ()
+        public void ProtectedProperties()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            EventWatcher ew = new EventWatcher (tsi);
+            ExposeProtectedProperties epp = new ExposeProtectedProperties();
+
+            Assert.AreEqual(new Padding(1, 2, 1, 1), epp.DefaultMargin, "C1");
+            Assert.AreEqual(new Size(100, 15), epp.DefaultSize, "C2");
+        }
+
+        [Test]
+        public void PropertyMarqueeAnimationSpeed()
+        {
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
+            EventWatcher ew = new EventWatcher(tsi);
 
             tsi.MarqueeAnimationSpeed = 200;
-            Assert.AreEqual (200, tsi.MarqueeAnimationSpeed, "B1");
-            Assert.AreEqual (string.Empty, ew.ToString (), "B2");
+            Assert.AreEqual(200, tsi.MarqueeAnimationSpeed, "B1");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B2");
 
-            ew.Clear ();
+            ew.Clear();
             tsi.MarqueeAnimationSpeed = 200;
-            Assert.AreEqual (string.Empty, ew.ToString (), "B3");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B3");
         }
 
         [Test]
-        public void PropertyMaximum ()
+        public void PropertyMaximum()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            EventWatcher ew = new EventWatcher (tsi);
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
+            EventWatcher ew = new EventWatcher(tsi);
 
             tsi.Maximum = 200;
-            Assert.AreEqual (200, tsi.Maximum, "B1");
-            Assert.AreEqual (string.Empty, ew.ToString (), "B2");
+            Assert.AreEqual(200, tsi.Maximum, "B1");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B2");
 
-            ew.Clear ();
+            ew.Clear();
             tsi.Maximum = 200;
-            Assert.AreEqual (string.Empty, ew.ToString (), "B3");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B3");
         }
 
         [Test]
-        public void PropertyMinimum ()
+        public void PropertyMinimum()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            EventWatcher ew = new EventWatcher (tsi);
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
+            EventWatcher ew = new EventWatcher(tsi);
 
             tsi.Minimum = 200;
-            Assert.AreEqual (200, tsi.Minimum, "B1");
-            Assert.AreEqual (string.Empty, ew.ToString (), "B2");
+            Assert.AreEqual(200, tsi.Minimum, "B1");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B2");
 
-            ew.Clear ();
+            ew.Clear();
             tsi.Minimum = 200;
-            Assert.AreEqual (string.Empty, ew.ToString (), "B3");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B3");
         }
 
         [Test]
-        public void PropertyRightToLeft ()
+        public void PropertyRightToLeft()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            EventWatcher ew = new EventWatcher (tsi);
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
+            EventWatcher ew = new EventWatcher(tsi);
 
             tsi.RightToLeftLayout = true;
-            Assert.AreEqual (true, tsi.RightToLeftLayout, "B1");
-            Assert.AreEqual ("RightToLeftLayoutChanged", ew.ToString (), "B2");
+            Assert.AreEqual(true, tsi.RightToLeftLayout, "B1");
+            Assert.AreEqual("RightToLeftLayoutChanged", ew.ToString(), "B2");
 
-            ew.Clear ();
+            ew.Clear();
             tsi.RightToLeftLayout = true;
-            Assert.AreEqual (string.Empty, ew.ToString (), "B3");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B3");
         }
 
-
         [Test]
-        public void PropertyStep ()
+        public void PropertyStep()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            EventWatcher ew = new EventWatcher (tsi);
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
+            EventWatcher ew = new EventWatcher(tsi);
 
             tsi.Step = 200;
-            Assert.AreEqual (200, tsi.Step, "B1");
-            Assert.AreEqual (string.Empty, ew.ToString (), "B2");
+            Assert.AreEqual(200, tsi.Step, "B1");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B2");
 
-            ew.Clear ();
+            ew.Clear();
             tsi.Step = 200;
-            Assert.AreEqual (string.Empty, ew.ToString (), "B3");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B3");
         }
 
         [Test]
-        public void PropertyStyle ()
+        public void PropertyStyle()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            EventWatcher ew = new EventWatcher (tsi);
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
+            EventWatcher ew = new EventWatcher(tsi);
 
             tsi.Style = ProgressBarStyle.Continuous;
-            Assert.AreEqual (ProgressBarStyle.Continuous, tsi.Style, "B1");
-            Assert.AreEqual (string.Empty, ew.ToString (), "B2");
+            Assert.AreEqual(ProgressBarStyle.Continuous, tsi.Style, "B1");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B2");
 
-            ew.Clear ();
+            ew.Clear();
             tsi.Style = ProgressBarStyle.Continuous;
-            Assert.AreEqual (string.Empty, ew.ToString (), "B3");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B3");
         }
 
         [Test]
-        public void PropertyText ()
+        public void PropertyText()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            EventWatcher ew = new EventWatcher (tsi);
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
+            EventWatcher ew = new EventWatcher(tsi);
 
             tsi.Text = "Hi";
-            Assert.AreEqual ("Hi", tsi.Text, "B1");
-            Assert.AreEqual ("Hi", tsi.ProgressBar.Text, "B2");
-            Assert.AreEqual (string.Empty, ew.ToString (), "B3");
+            Assert.AreEqual("Hi", tsi.Text, "B1");
+            Assert.AreEqual("Hi", tsi.ProgressBar.Text, "B2");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B3");
 
-            ew.Clear ();
+            ew.Clear();
             tsi.Text = "Hi";
-            Assert.AreEqual (string.Empty, ew.ToString (), "B4");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B4");
         }
 
         [Test]
-        public void PropertyValue ()
+        public void PropertyValue()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            EventWatcher ew = new EventWatcher (tsi);
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
+            EventWatcher ew = new EventWatcher(tsi);
 
             tsi.Value = 30;
-            Assert.AreEqual (30, tsi.Value, "B1");
-            Assert.AreEqual (string.Empty, ew.ToString (), "B2");
+            Assert.AreEqual(30, tsi.Value, "B1");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B2");
 
-            ew.Clear ();
+            ew.Clear();
             tsi.Value = 30;
-            Assert.AreEqual (string.Empty, ew.ToString (), "B3");
+            Assert.AreEqual(string.Empty, ew.ToString(), "B3");
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentOutOfRangeException))]
-        public void PropertyValueAOORE ()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void PropertyValueAOORE()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
 
             tsi.Value = 200;
         }
 
         [Test]
-        public void BehaviorIncrement ()
+        public void BehaviorIncrement()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
-            
-            tsi.Increment (14);
-            Assert.AreEqual (14, tsi.Value, "B1");
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
 
-            tsi.Increment (104);
-            Assert.AreEqual (100, tsi.Value, "B2");
+            tsi.Increment(14);
+            Assert.AreEqual(14, tsi.Value, "B1");
 
-            tsi.Increment (-245);
-            Assert.AreEqual (0, tsi.Value, "B3");
+            tsi.Increment(104);
+            Assert.AreEqual(100, tsi.Value, "B2");
+
+            tsi.Increment(-245);
+            Assert.AreEqual(0, tsi.Value, "B3");
         }
 
         [Test]
-        public void BehaviorPerformStep ()
+        public void BehaviorPerformStep()
         {
-            ToolStripProgressBar tsi = new ToolStripProgressBar ();
+            ToolStripProgressBar tsi = new ToolStripProgressBar();
 
-            tsi.PerformStep ();
-            Assert.AreEqual (10, tsi.Value, "B1");
+            tsi.PerformStep();
+            Assert.AreEqual(10, tsi.Value, "B1");
         }
 
         //[Test]
@@ -252,7 +255,7 @@ namespace MonoTests.System.Windows.Forms
         //        Assert.AreEqual (AnchorStyles.Top | AnchorStyles.Left, ts.Anchor, "A1");
         //        Assert.AreEqual (DockStyle.Top, ts.Dock, "A2");
         //}
-        
+
         //[Test]
         //[Ignore ("Accessibility still needs some work")]
         //public void Accessibility ()
@@ -295,29 +298,41 @@ namespace MonoTests.System.Windows.Forms
         private class EventWatcher
         {
             private string events = string.Empty;
-            
-            public EventWatcher (ToolStripProgressBar tsi)
+
+            public EventWatcher(ToolStripProgressBar tsi)
             {
-                tsi.RightToLeftLayoutChanged += new EventHandler (delegate (Object obj, EventArgs e) { events += ("RightToLeftLayoutChanged;"); });
+                tsi.RightToLeftLayoutChanged += new EventHandler(
+                    delegate(Object obj, EventArgs e)
+                    {
+                        events += ("RightToLeftLayoutChanged;");
+                    }
+                );
             }
 
-            public override string ToString ()
+            public override string ToString()
             {
-                return events.TrimEnd (';');
+                return events.TrimEnd(';');
             }
-            
-            public void Clear ()
+
+            public void Clear()
             {
                 events = string.Empty;
             }
         }
-        
+
         private class ExposeProtectedProperties : ToolStripProgressBar
         {
-            public ExposeProtectedProperties () : base () {}
+            public ExposeProtectedProperties()
+                : base() { }
 
-            public new Padding DefaultMargin { get { return base.DefaultMargin; } }
-            public new Size DefaultSize { get { return base.DefaultSize; } }
+            public new Padding DefaultMargin
+            {
+                get { return base.DefaultMargin; }
+            }
+            public new Size DefaultSize
+            {
+                get { return base.DefaultSize; }
+            }
         }
     }
 }

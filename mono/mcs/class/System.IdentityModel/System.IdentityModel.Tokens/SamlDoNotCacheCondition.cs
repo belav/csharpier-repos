@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,41 +36,43 @@ namespace System.IdentityModel.Tokens
 {
     public class SamlDoNotCacheCondition : SamlCondition
     {
-        public SamlDoNotCacheCondition ()
-        {
-        }
+        public SamlDoNotCacheCondition() { }
 
         bool is_readonly;
 
-        public override bool IsReadOnly {
+        public override bool IsReadOnly
+        {
             get { return is_readonly; }
         }
 
-        public override void MakeReadOnly ()
+        public override void MakeReadOnly()
         {
             is_readonly = true;
         }
 
         [MonoTODO]
-        public override void ReadXml (XmlDictionaryReader reader,
+        public override void ReadXml(
+            XmlDictionaryReader reader,
             SamlSerializer samlSerializer,
             SecurityTokenSerializer keyInfoSerializer,
-            SecurityTokenResolver outOfBandTokenResolver)
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override void WriteXml (
+        public override void WriteXml(
             XmlDictionaryWriter writer,
             SamlSerializer samlSerializer,
-            SecurityTokenSerializer keyInfoSerializer)
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
             if (writer == null)
-                throw new ArgumentNullException ("writer");
+                throw new ArgumentNullException("writer");
             if (samlSerializer == null)
-                throw new ArgumentNullException ("samlSerializer");
-            writer.WriteStartElement ("saml", "DoNotCacheCondition", SamlConstants.Namespace);
-            writer.WriteEndElement ();
+                throw new ArgumentNullException("samlSerializer");
+            writer.WriteStartElement("saml", "DoNotCacheCondition", SamlConstants.Namespace);
+            writer.WriteEndElement();
         }
     }
 }

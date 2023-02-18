@@ -32,47 +32,48 @@ namespace MonoTests.System.Linq.Expressions
     public class ExpressionTest_Quote
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void Arg1Null ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg1Null()
         {
-            Expression.Quote (null);
+            Expression.Quote(null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void QuoteConstant ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void QuoteConstant()
         {
-            Expression.Quote (Expression.Constant (1));
+            Expression.Quote(Expression.Constant(1));
         }
 
         [Test]
-        public void CompiledQuote ()
+        public void CompiledQuote()
         {
-            var quote42 = Expression.Lambda<Func<Expression<Func<int>>>> (
-                Expression.Quote (
-                    Expression.Lambda<Func<int>> (
-                        42.ToConstant ()))).Compile ();
+            var quote42 = Expression
+                .Lambda<Func<Expression<Func<int>>>>(
+                    Expression.Quote(Expression.Lambda<Func<int>>(42.ToConstant()))
+                )
+                .Compile();
 
-            var get42 = quote42 ().Compile ();
+            var get42 = quote42().Compile();
 
-            Assert.AreEqual (42, get42 ());
+            Assert.AreEqual(42, get42());
         }
 
         [Test]
-        public void ParameterInQuotedExpression () // #550722
+        public void ParameterInQuotedExpression() // #550722
         {
             // Expression<Func<string, Expression<Func<string>>>> e = (string s) => () => s;
 
-            var s = Expression.Parameter (typeof (string), "s");
+            var s = Expression.Parameter(typeof(string), "s");
 
-            var lambda = Expression.Lambda<Func<string, Expression<Func<string>>>> (
-                Expression.Quote (
-                    Expression.Lambda<Func<string>> (s, new ParameterExpression [0])),
-                s);
+            var lambda = Expression.Lambda<Func<string, Expression<Func<string>>>>(
+                Expression.Quote(Expression.Lambda<Func<string>>(s, new ParameterExpression[0])),
+                s
+            );
 
-            var fs = lambda.Compile () ("bingo").Compile ();
+            var fs = lambda.Compile()("bingo").Compile();
 
-            Assert.AreEqual ("bingo", fs ());
+            Assert.AreEqual("bingo", fs());
         }
     }
 }

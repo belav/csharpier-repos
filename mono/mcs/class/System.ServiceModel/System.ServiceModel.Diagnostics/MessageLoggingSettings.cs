@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,7 @@ namespace System.ServiceModel.Diagnostics
 {
     internal class MessageLoggingSettings
     {
-        public MessageLoggingSettings ()
+        public MessageLoggingSettings()
         {
 #if !MOBILE && !XAMMAC_4_5
             var e = ConfigUtil.DiagnosticSection.MessageLogging;
@@ -50,16 +50,22 @@ namespace System.ServiceModel.Diagnostics
 
         [MonoTODO]
         public bool LogEntireMessage { get; set; }
+
         [MonoTODO] // how is it used?
         public bool LogKnownPii { get; set; }
+
         [MonoTODO]
         public bool LogMalformedMessages { get; set; }
+
         [MonoTODO]
         public bool LogMessagesAtServiceLevel { get; set; }
+
         [MonoTODO]
         public bool LogMessagesAtTransportLevel { get; set; }
+
         [MonoTODO]
         public int MaxMessagesToLog { get; set; }
+
         [MonoTODO]
         public int MaxSizeOfMessageToLog { get; set; }
     }

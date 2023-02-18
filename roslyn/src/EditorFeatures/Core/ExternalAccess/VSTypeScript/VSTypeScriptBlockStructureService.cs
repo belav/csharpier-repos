@@ -19,19 +19,39 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptBlockStructureService(IVSTypeScriptBlockStructureServiceImplementation impl)
+        public VSTypeScriptBlockStructureService(
+            IVSTypeScriptBlockStructureServiceImplementation impl
+        )
         {
             _impl = impl;
         }
 
         public override string Language => InternalLanguageNames.TypeScript;
 
-        public override async Task<BlockStructure> GetBlockStructureAsync(Document document, BlockStructureOptions options, CancellationToken cancellationToken)
+        public override async Task<BlockStructure> GetBlockStructureAsync(
+            Document document,
+            BlockStructureOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var blockStructure = await _impl.GetBlockStructureAsync(document, cancellationToken).ConfigureAwait(false);
+            var blockStructure = await _impl
+                .GetBlockStructureAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
-            return new BlockStructure(blockStructure.Spans.SelectAsArray(
-                x => new BlockSpan(x.Type, x.IsCollapsible, x.TextSpan, x.HintSpan, x.BannerText, x.AutoCollapse, x.IsDefaultCollapsed)));
+            return new BlockStructure(
+                blockStructure.Spans.SelectAsArray(
+                    x =>
+                        new BlockSpan(
+                            x.Type,
+                            x.IsCollapsible,
+                            x.TextSpan,
+                            x.HintSpan,
+                            x.BannerText,
+                            x.AutoCollapse,
+                            x.IsDefaultCollapsed
+                        )
+                )
+            );
         }
     }
 }

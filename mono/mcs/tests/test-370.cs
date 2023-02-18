@@ -32,15 +32,15 @@ namespace Test
         public static int Main()
         {
             int result1 = ParseType("foo");
-            Console.WriteLine (result1);
+            Console.WriteLine(result1);
             if (result1 != 1)
                 return 1;
 
             int result2 = ParseType("headed");
-            Console.WriteLine (result2);
+            Console.WriteLine(result2);
             if (result1 != result2)
                 return 2;
-            
+
             return 0;
         }
     }

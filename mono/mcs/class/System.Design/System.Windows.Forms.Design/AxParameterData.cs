@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,42 +36,43 @@ namespace System.Windows.Forms.Design
     public class AxParameterData
     {
         [MonoTODO]
-        public AxParameterData (ParameterInfo info) : this (info, false)
+        public AxParameterData(ParameterInfo info)
+            : this(info, false) { }
+
+        [MonoTODO]
+        public AxParameterData(ParameterInfo info, bool ignoreByRefs)
         {
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public AxParameterData (ParameterInfo info, bool ignoreByRefs)
+        public AxParameterData(string inname, string typeName)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public AxParameterData (string inname, string typeName)
+        public AxParameterData(string inname, Type type)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public AxParameterData (string inname, Type type)
+        public static AxParameterData[] Convert(ParameterInfo[] infos)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static AxParameterData[] Convert (ParameterInfo[] infos)
+        public static AxParameterData[] Convert(ParameterInfo[] infos, bool ignoreByRefs)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        [MonoTODO]
-        public static AxParameterData[] Convert (ParameterInfo[] infos, bool ignoreByRefs)
+        public FieldDirection Direction
         {
-            throw new NotImplementedException ();
-        }
-
-        public FieldDirection Direction {
-            get {
+            get
+            {
                 if (this.IsOut)
                     return FieldDirection.Out;
 
@@ -81,51 +82,42 @@ namespace System.Windows.Forms.Design
                 return FieldDirection.In;
             }
         }
-        public bool IsByRef {
-            get {
-                return isByRef;
-            }
+        public bool IsByRef
+        {
+            get { return isByRef; }
         }
 
-        public bool IsIn {
-            get {
-                return isIn;
-            }
+        public bool IsIn
+        {
+            get { return isIn; }
         }
 
-        public bool IsOptional {
-            get {
-                return isOptional;
-            }
+        public bool IsOptional
+        {
+            get { return isOptional; }
         }
 
-        public bool IsOut {
-            get {
-                return isOut;
-            }
+        public bool IsOut
+        {
+            get { return isOut; }
         }
 
-        public string Name {
-            get {
-                return name;
-            }
+        public string Name
+        {
+            get { return name; }
             [MonoTODO]
-            set {
-                throw new NotImplementedException ();
-            }
+            set { throw new NotImplementedException(); }
         }
 
-        public Type ParameterType {
-            get {
-                return type;
-            }
+        public Type ParameterType
+        {
+            get { return type; }
         }
 
         [MonoTODO]
-        public string TypeName {
-            get {
-                throw new NotImplementedException ();
-            }
+        public string TypeName
+        {
+            get { throw new NotImplementedException(); }
         }
 
         private bool isByRef;
@@ -134,6 +126,6 @@ namespace System.Windows.Forms.Design
         private bool isOut;
         private string name;
         private Type type;
-//        private string typeName;
+        //        private string typeName;
     }
 }

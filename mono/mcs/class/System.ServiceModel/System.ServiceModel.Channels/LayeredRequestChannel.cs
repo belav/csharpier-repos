@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,76 +33,90 @@ namespace System.ServiceModel.Channels
     {
         IRequestChannel inner;
 
-        public LayeredRequestChannel (IRequestChannel source)
-            : base (source)
+        public LayeredRequestChannel(IRequestChannel source)
+            : base(source)
         {
             inner = source;
         }
 
         public abstract ChannelFactoryBase Factory { get; }
 
-        public override ChannelManagerBase ChannelManager {
+        public override ChannelManagerBase ChannelManager
+        {
             get { return Factory; }
         }
 
         // IRequestChannel
-        public virtual EndpointAddress RemoteAddress {
+        public virtual EndpointAddress RemoteAddress
+        {
             get { return inner.RemoteAddress; }
         }
 
-        public IAsyncResult BeginRequest (Message message, AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(Message message, AsyncCallback callback, object state)
         {
             // FIXME: send + receive?
-            return BeginRequest (message, Factory.DefaultSendTimeout, callback, state);
+            return BeginRequest(message, Factory.DefaultSendTimeout, callback, state);
         }
 
-        public virtual IAsyncResult BeginRequest (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            ThrowIfNotOpen ();
-            return OnBeginRequest (message, timeout, callback, state);
+            ThrowIfNotOpen();
+            return OnBeginRequest(message, timeout, callback, state);
         }
 
-        protected virtual IAsyncResult OnBeginRequest (Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected virtual IAsyncResult OnBeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return inner.BeginRequest (message, timeout, callback, state);
+            return inner.BeginRequest(message, timeout, callback, state);
         }
 
-        public Message EndRequest (IAsyncResult result)
+        public Message EndRequest(IAsyncResult result)
         {
-            return OnEndRequest (result);
+            return OnEndRequest(result);
         }
 
-        protected virtual Message OnEndRequest (IAsyncResult result)
+        protected virtual Message OnEndRequest(IAsyncResult result)
         {
-            return inner.EndRequest (result);
+            return inner.EndRequest(result);
         }
 
-        public Message Request (Message message)
+        public Message Request(Message message)
         {
             // FIXME: send + receive?
-            return Request (message, Factory.DefaultSendTimeout);
+            return Request(message, Factory.DefaultSendTimeout);
         }
 
-        public Message Request (Message message, TimeSpan timeout)
+        public Message Request(Message message, TimeSpan timeout)
         {
-            ThrowIfNotOpen ();
-            return OnRequest (message, timeout);
+            ThrowIfNotOpen();
+            return OnRequest(message, timeout);
         }
 
-        protected virtual Message OnRequest (Message message, TimeSpan timeout)
+        protected virtual Message OnRequest(Message message, TimeSpan timeout)
         {
-            return inner.Request (message, timeout);
+            return inner.Request(message, timeout);
         }
 
-        public virtual Uri Via {
+        public virtual Uri Via
+        {
             get { return inner.Via; }
         }
 
         // IChannel
 
-        public virtual T GetProperty<T> () where T : class
+        public virtual T GetProperty<T>()
+            where T : class
         {
-            return inner.GetProperty<T> ();
+            return inner.GetProperty<T>();
         }
     }
 }

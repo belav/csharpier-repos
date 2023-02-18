@@ -8,12 +8,12 @@ public interface ICode
 
 static class Program
 {
-    public static void Main ()
+    public static void Main()
     {
         IEnumerable<object> array = new ICode[10];
-        IEnumerator<object> x = array.GetEnumerator ();
+        IEnumerator<object> x = array.GetEnumerator();
 
-        x.MoveNext ();
+        x.MoveNext();
         object o = x.Current;
     }
 }

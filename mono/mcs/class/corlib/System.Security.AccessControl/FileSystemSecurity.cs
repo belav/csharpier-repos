@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,103 +36,129 @@ namespace System.Security.AccessControl
 {
     public abstract class FileSystemSecurity : NativeObjectSecurity
     {
-        internal FileSystemSecurity (bool isContainer)
-            : base (isContainer, ResourceType.FileObject)
+        internal FileSystemSecurity(bool isContainer)
+            : base(isContainer, ResourceType.FileObject) { }
+
+        internal FileSystemSecurity(
+            bool isContainer,
+            string name,
+            AccessControlSections includeSections
+        )
+            : base(isContainer, ResourceType.FileObject, name, includeSections) { }
+
+        internal FileSystemSecurity(
+            bool isContainer,
+            SafeHandle handle,
+            AccessControlSections includeSections
+        )
+            : base(isContainer, ResourceType.FileObject, handle, includeSections) { }
+
+        public override Type AccessRightType
         {
+            get { return typeof(FileSystemRights); }
         }
 
-        internal FileSystemSecurity (bool isContainer, string name, AccessControlSections includeSections)
-            : base (isContainer, ResourceType.FileObject, name, includeSections)
+        public override Type AccessRuleType
         {
+            get { return typeof(FileSystemAccessRule); }
         }
 
-        internal FileSystemSecurity (bool isContainer, SafeHandle handle, AccessControlSections includeSections)
-            : base (isContainer, ResourceType.FileObject, handle, includeSections)
+        public override Type AuditRuleType
         {
-        }
-        
-        public override Type AccessRightType {
-            get { return typeof (FileSystemRights); }
-        }
-        
-        public override Type AccessRuleType {
-            get { return typeof (FileSystemAccessRule); }
+            get { return typeof(FileSystemAuditRule); }
         }
 
-        public override Type AuditRuleType {
-            get { return typeof (FileSystemAuditRule); }
+        public override sealed AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
+        {
+            return new FileSystemAccessRule(
+                identityReference,
+                (FileSystemRights)accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            );
         }
 
-        public override sealed AccessRule AccessRuleFactory (IdentityReference identityReference, int accessMask,
-                                     bool isInherited, InheritanceFlags inheritanceFlags,
-                                     PropagationFlags propagationFlags, AccessControlType type)
+        public void AddAccessRule(FileSystemAccessRule rule)
         {
-            return new FileSystemAccessRule (identityReference, (FileSystemRights) accessMask, isInherited,
-                             inheritanceFlags, propagationFlags, type);
+            AddAccessRule((AccessRule)rule);
         }
-        
-        public void AddAccessRule (FileSystemAccessRule rule)
+
+        public bool RemoveAccessRule(FileSystemAccessRule rule)
         {
-            AddAccessRule ((AccessRule)rule);
+            return RemoveAccessRule((AccessRule)rule);
         }
-        
-        public bool RemoveAccessRule (FileSystemAccessRule rule)
+
+        public void RemoveAccessRuleAll(FileSystemAccessRule rule)
         {
-            return RemoveAccessRule ((AccessRule)rule);
+            RemoveAccessRuleAll((AccessRule)rule);
         }
-        
-        public void RemoveAccessRuleAll (FileSystemAccessRule rule)
+
+        public void RemoveAccessRuleSpecific(FileSystemAccessRule rule)
         {
-            RemoveAccessRuleAll ((AccessRule)rule);
+            RemoveAccessRuleSpecific((AccessRule)rule);
         }
-        
-        public void RemoveAccessRuleSpecific (FileSystemAccessRule rule)
+
+        public void ResetAccessRule(FileSystemAccessRule rule)
         {
-            RemoveAccessRuleSpecific ((AccessRule)rule);
+            ResetAccessRule((AccessRule)rule);
         }
-        
-        public void ResetAccessRule (FileSystemAccessRule rule)
+
+        public void SetAccessRule(FileSystemAccessRule rule)
         {
-            ResetAccessRule ((AccessRule)rule);
+            SetAccessRule((AccessRule)rule);
         }
-        
-        public void SetAccessRule (FileSystemAccessRule rule)
+
+        public override sealed AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
         {
-            SetAccessRule ((AccessRule)rule);
+            return new FileSystemAuditRule(
+                identityReference,
+                (FileSystemRights)accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            );
         }
-        
-        public override sealed AuditRule AuditRuleFactory (IdentityReference identityReference, int accessMask,
-                                   bool isInherited, InheritanceFlags inheritanceFlags,
-                                   PropagationFlags propagationFlags, AuditFlags flags)
+
+        public void AddAuditRule(FileSystemAuditRule rule)
         {
-            return new FileSystemAuditRule (identityReference, (FileSystemRights) accessMask, isInherited,
-                            inheritanceFlags, propagationFlags, flags);
+            AddAuditRule((AuditRule)rule);
         }
-        
-        public void AddAuditRule (FileSystemAuditRule rule)
-        {
-            AddAuditRule ((AuditRule)rule);
-        }
-        
-        public bool RemoveAuditRule (FileSystemAuditRule rule)
+
+        public bool RemoveAuditRule(FileSystemAuditRule rule)
         {
             return RemoveAuditRule((AuditRule)rule);
         }
-        
-        public void RemoveAuditRuleAll (FileSystemAuditRule rule)
+
+        public void RemoveAuditRuleAll(FileSystemAuditRule rule)
         {
             RemoveAuditRuleAll((AuditRule)rule);
         }
-        
-        public void RemoveAuditRuleSpecific (FileSystemAuditRule rule)
+
+        public void RemoveAuditRuleSpecific(FileSystemAuditRule rule)
         {
             RemoveAuditRuleSpecific((AuditRule)rule);
         }
-        
-        public void SetAuditRule (FileSystemAuditRule rule)
+
+        public void SetAuditRule(FileSystemAuditRule rule)
         {
             SetAuditRule((AuditRule)rule);
         }
     }
 }
-

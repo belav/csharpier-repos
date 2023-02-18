@@ -21,46 +21,28 @@ namespace System.Net.Http.Internal
 
         public ICollection<TKey> Keys
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public ICollection<TValue> Values
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public int Count
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return ((IDictionary)_dictionary).IsReadOnly;
-            }
+            get { return ((IDictionary)_dictionary).IsReadOnly; }
         }
 
         public TValue this[TKey key]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         public void Add(TKey key, TValue value)
@@ -168,7 +150,11 @@ namespace System.Net.Http.Internal
             }
         }
 
-        public TValue AddOrUpdate(TKey key, TValue addValue, Func<TKey, TValue, TValue> updateValueFactory)
+        public TValue AddOrUpdate(
+            TKey key,
+            TValue addValue,
+            Func<TKey, TValue, TValue> updateValueFactory
+        )
         {
             lock (_lock)
             {

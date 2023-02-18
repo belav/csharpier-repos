@@ -31,8 +31,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return false;
             }
 
-            public override string ToString()
-                => _description;
+            public override string ToString() => _description;
         }
     }
 }

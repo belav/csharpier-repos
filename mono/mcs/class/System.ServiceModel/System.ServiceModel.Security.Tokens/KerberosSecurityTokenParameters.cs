@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,51 +33,55 @@ namespace System.ServiceModel.Security.Tokens
 {
     public class KerberosSecurityTokenParameters : SecurityTokenParameters
     {
-        public KerberosSecurityTokenParameters ()
+        public KerberosSecurityTokenParameters() { }
+
+        protected KerberosSecurityTokenParameters(KerberosSecurityTokenParameters other)
+            : base(other) { }
+
+        [MonoTODO]
+        protected override bool HasAsymmetricKey
         {
+            get { throw new NotImplementedException(); }
         }
 
-        protected KerberosSecurityTokenParameters (KerberosSecurityTokenParameters other)
-            : base (other)
+        [MonoTODO]
+        protected override bool SupportsClientAuthentication
         {
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        protected override bool HasAsymmetricKey {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        protected override bool SupportsClientAuthentication {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        protected override bool SupportsClientWindowsIdentity {
-            get { throw new NotImplementedException (); }
-        }
-
-        [MonoTODO]
-        protected override bool SupportsServerAuthentication {
-            get { throw new NotImplementedException (); }
-        }
-
-        protected override SecurityTokenParameters CloneCore ()
+        protected override bool SupportsClientWindowsIdentity
         {
-            return new KerberosSecurityTokenParameters (this);
+            get { throw new NotImplementedException(); }
         }
 
         [MonoTODO]
-        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
-            SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        protected override bool SupportsServerAuthentication
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        protected internal override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
+        protected override SecurityTokenParameters CloneCore()
+        {
+            return new KerberosSecurityTokenParameters(this);
+        }
+
+        [MonoTODO]
+        protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        protected internal override void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        )
         {
             if (requirement == null)
-                throw new ArgumentNullException ("requirement");
+                throw new ArgumentNullException("requirement");
             requirement.TokenType = SecurityTokenTypes.Kerberos;
             requirement.RequireCryptographicToken = true;
             requirement.KeyType = SecurityKeyType.SymmetricKey;

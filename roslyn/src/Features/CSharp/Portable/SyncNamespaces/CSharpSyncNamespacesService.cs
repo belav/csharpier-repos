@@ -15,19 +15,24 @@ using Microsoft.CodeAnalysis.SyncNamespaces;
 namespace Microsoft.CodeAnalysis.CSharp.SyncNamespaces
 {
     [ExportLanguageService(typeof(ISyncNamespacesService), LanguageNames.CSharp), Shared]
-    internal sealed class CSharpSyncNamespacesService : AbstractSyncNamespacesService<SyntaxKind, BaseNamespaceDeclarationSyntax>
+    internal sealed class CSharpSyncNamespacesService
+        : AbstractSyncNamespacesService<SyntaxKind, BaseNamespaceDeclarationSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpSyncNamespacesService(
             CSharpMatchFolderAndNamespaceDiagnosticAnalyzer diagnosticAnalyzer,
-            CSharpChangeNamespaceToMatchFolderCodeFixProvider codeFixProvider)
+            CSharpChangeNamespaceToMatchFolderCodeFixProvider codeFixProvider
+        )
         {
             DiagnosticAnalyzer = diagnosticAnalyzer;
             CodeFixProvider = codeFixProvider;
         }
 
-        public override AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<SyntaxKind, BaseNamespaceDeclarationSyntax> DiagnosticAnalyzer { get; }
+        public override AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<
+            SyntaxKind,
+            BaseNamespaceDeclarationSyntax
+        > DiagnosticAnalyzer { get; }
 
         public override AbstractChangeNamespaceToMatchFolderCodeFixProvider CodeFixProvider { get; }
     }

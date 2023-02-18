@@ -4,13 +4,13 @@
 
 public unsafe class Test
 {
-    static int* Error ()
+    static int* Error()
     {
         return (int*)0;
     }
-    
-    static void Main ()
+
+    static void Main()
     {
-        var v = new { Value = Error () };
+        var v = new { Value = Error() };
     }
 }

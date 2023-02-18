@@ -5,19 +5,19 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Serialization
 {
-    [Reference ("System.Runtime.Serialization.Xml.dll")]
-    [Reference ("System.Xml.ReaderWriter.dll")]
-    [Reference ("System.Xml.XmlSerializer.dll")]
+    [Reference("System.Runtime.Serialization.Xml.dll")]
+    [Reference("System.Xml.ReaderWriter.dll")]
+    [Reference("System.Xml.XmlSerializer.dll")]
     public class XmlSerializationUnused
     {
-        public static void Main ()
+        public static void Main()
         {
             // Even if the attributed type is referenced, don't keep its members if
             // not using the serializer.
-            var _ = typeof (AttributedType);
+            var _ = typeof(AttributedType);
 
             // Using a different serializer shouldn't keep XmlSerializer attributed types
-            var ser = new DataContractSerializer (typeof (DataContractSerializerType));
+            var ser = new DataContractSerializer(typeof(DataContractSerializerType));
         }
 
         [Kept]
@@ -28,7 +28,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
         }
 
         [Kept]
-        [KeptAttributeAttribute (typeof (XmlRootAttribute))]
+        [KeptAttributeAttribute(typeof(XmlRootAttribute))]
         [XmlRoot]
         class AttributedType
         {

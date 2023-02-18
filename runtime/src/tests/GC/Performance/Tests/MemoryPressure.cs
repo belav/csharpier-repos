@@ -13,9 +13,9 @@ public class MemoryPressure
         Console.WriteLine("MemoryPressure.exe <iterations> <add|remove>");
     }
 
-    public static void Main(string[] args)                                                                           
+    public static void Main(string[] args)
     {
-        if (args.Length!=2)
+        if (args.Length != 2)
         {
             Usage();
             return;
@@ -27,9 +27,9 @@ public class MemoryPressure
             return;
         }
 
-        if(iterations == 0)
+        if (iterations == 0)
         {
-            iterations=200;
+            iterations = 200;
         }
 
         MemoryPressure mp = new MemoryPressure(iterations);
@@ -55,7 +55,7 @@ public class MemoryPressure
 
     public void RemoveMemoryPressure()
     {
-        for(long i = 0; i < iterations; i++)
+        for (long i = 0; i < iterations; i++)
         {
             GC.AddMemoryPressure(Int32.MaxValue);
             GC.AddMemoryPressure(Int32.MaxValue);
@@ -69,7 +69,7 @@ public class MemoryPressure
             GC.AddMemoryPressure(Int32.MaxValue);
         }
 
-        for(long i = 0; i < iterations; i++)
+        for (long i = 0; i < iterations; i++)
         {
             GC.RemoveMemoryPressure(Int32.MaxValue);
             GC.RemoveMemoryPressure(Int32.MaxValue);
@@ -86,10 +86,9 @@ public class MemoryPressure
 
     public void AddMemoryPressure()
     {
-
         GC.AddMemoryPressure(Int32.MaxValue);
 
-        for(long i = 0; i < iterations; i++)
+        for (long i = 0; i < iterations; i++)
         {
             GC.AddMemoryPressure(Int32.MaxValue);
             GC.AddMemoryPressure(Int32.MaxValue);

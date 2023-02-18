@@ -30,7 +30,12 @@ namespace Moq
 
         private string declarationSite;
 
-        public MethodCall(Expression originalExpression, Mock mock, Condition condition, MethodExpectation expectation)
+        public MethodCall(
+            Expression originalExpression,
+            Mock mock,
+            Condition condition,
+            MethodExpectation expectation
+        )
             : base(originalExpression, mock, expectation)
         {
             this.condition = condition;
@@ -69,13 +74,20 @@ namespace Moq
                 var frame = new StackTrace(true)
                     .GetFrames()
                     .SkipWhile(f => f.GetMethod() != thisMethod)
-                    .SkipWhile(f => f.GetMethod().DeclaringType == null || f.GetMethod().DeclaringType.Assembly == mockAssembly)
+                    .SkipWhile(
+                        f =>
+                            f.GetMethod().DeclaringType == null
+                            || f.GetMethod().DeclaringType.Assembly == mockAssembly
+                    )
                     .FirstOrDefault();
                 var member = frame?.GetMethod();
                 if (member != null)
                 {
                     var declaredAt = new StringBuilder();
-                    declaredAt.AppendNameOf(member.DeclaringType).Append('.').AppendNameOf(member, false);
+                    declaredAt
+                        .AppendNameOf(member.DeclaringType)
+                        .Append('.')
+                        .AppendNameOf(member, false);
                     var fileName = Path.GetFileName(frame.GetFileName());
                     if (fileName != null)
                     {
@@ -122,7 +134,7 @@ namespace Moq
             }
             else
             {
-                HandleEventSubscription.Handle(invocation, this.Mock);  // no-op for everything other than event accessors
+                HandleEventSubscription.Handle(invocation, this.Mock); // no-op for everything other than event accessors
             }
 
             this.afterReturnCallback?.Execute(invocation);
@@ -145,8 +157,9 @@ namespace Moq
                 throw new ArgumentNullException(nameof(callback));
             }
 
-            ref Behavior behavior = ref (this.returnOrThrow == null) ? ref this.callback
-                                                                     : ref this.afterReturnCallback;
+            ref Behavior behavior = ref (this.returnOrThrow == null)
+                ? ref this.callback
+                : ref this.afterReturnCallback;
 
             if (callback is Action callbackWithoutArguments)
             {
@@ -169,14 +182,19 @@ namespace Moq
                             CultureInfo.CurrentCulture,
                             Resources.InvalidCallbackParameterMismatch,
                             this.Method.GetParameterTypeList(),
-                            callback.GetMethodInfo().GetParameterTypeList()));
+                            callback.GetMethodInfo().GetParameterTypeList()
+                        )
+                    );
                 }
 
                 var callbackMethod = callback.GetMethodInfo();
 
                 if (callbackMethod.ReturnType != typeof(void))
                 {
-                    throw new ArgumentException(Resources.InvalidCallbackNotADelegateWithReturnTypeVoid, nameof(callback));
+                    throw new ArgumentException(
+                        Resources.InvalidCallbackNotADelegateWithReturnTypeVoid,
+                        nameof(callback)
+                    );
                 }
 
                 if (callbackMethod.GetParameterTypes().Any(Extensions.IsOrContainsTypeMatcher))
@@ -184,7 +202,9 @@ namespace Moq
                     throw new ArgumentException(Resources.TypeMatchersMayNotBeUsedWithCallbacks);
                 }
 
-                behavior = new Callback(invocation => callback.InvokePreserveStack(invocation.Arguments));
+                behavior = new Callback(
+                    invocation => callback.InvokePreserveStack(invocation.Arguments)
+                );
             }
         }
 
@@ -198,19 +218,28 @@ namespace Moq
         {
             Guard.NotNull(eventExpression, nameof(eventExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(eventExpression, this.Mock.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                eventExpression,
+                this.Mock.ConstructorArguments
+            );
 
             // TODO: validate that expression is for event subscription or unsubscription
 
             this.raiseEvent = new RaiseEvent(this.Mock, expression, func, null);
         }
 
-        public void SetRaiseEventBehavior<TMock>(Action<TMock> eventExpression, params object[] args)
+        public void SetRaiseEventBehavior<TMock>(
+            Action<TMock> eventExpression,
+            params object[] args
+        )
             where TMock : class
         {
             Guard.NotNull(eventExpression, nameof(eventExpression));
 
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(eventExpression, this.Mock.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                eventExpression,
+                this.Mock.ConstructorArguments
+            );
 
             // TODO: validate that expression is for event subscription or unsubscription
 
@@ -230,8 +259,9 @@ namespace Moq
             Debug.Assert(this.Method.ReturnType != typeof(void));
             Debug.Assert(this.returnOrThrow == null);
 
-            var expectedReturnType = this.Expectation.HasResultExpression(out var awaitable) ? awaitable.ResultType
-                                                                                             : this.Method.ReturnType;
+            var expectedReturnType = this.Expectation.HasResultExpression(out var awaitable)
+                ? awaitable.ResultType
+                : this.Method.ReturnType;
 
             if (valueFactory == null)
             {
@@ -253,7 +283,9 @@ namespace Moq
             }
             else if (IsInvocationFunc(valueFactory))
             {
-                this.returnOrThrow = new ReturnComputedValue(invocation => valueFactory.InvokePreserveStack(new object[] { invocation }));
+                this.returnOrThrow = new ReturnComputedValue(
+                    invocation => valueFactory.InvokePreserveStack(new object[] { invocation })
+                );
             }
             else
             {
@@ -262,11 +294,15 @@ namespace Moq
                 if (valueFactory.CompareParameterTypesTo(Type.EmptyTypes))
                 {
                     // we need this for the user to be able to use parameterless methods
-                    this.returnOrThrow = new ReturnComputedValue(invocation => valueFactory.InvokePreserveStack());
+                    this.returnOrThrow = new ReturnComputedValue(
+                        invocation => valueFactory.InvokePreserveStack()
+                    );
                 }
                 else
                 {
-                    this.returnOrThrow = new ReturnComputedValue(invocation => valueFactory.InvokePreserveStack(invocation.Arguments));
+                    this.returnOrThrow = new ReturnComputedValue(
+                        invocation => valueFactory.InvokePreserveStack(invocation.Arguments)
+                    );
                 }
             }
 
@@ -277,7 +313,10 @@ namespace Moq
                 {
                     var typeArguments = type.GetGenericArguments();
                     return typeArguments[0] == typeof(IInvocation)
-                        && (typeArguments[1] == typeof(object) || expectedReturnType.IsAssignableFrom(typeArguments[1]));
+                        && (
+                            typeArguments[1] == typeof(object)
+                            || expectedReturnType.IsAssignableFrom(typeArguments[1])
+                        );
                 }
 
                 return false;
@@ -297,7 +336,7 @@ namespace Moq
                 }
             }
         }
-        
+
         public void SetThrowExceptionBehavior(Exception exception)
         {
             this.returnOrThrow = new ThrowException(exception);
@@ -328,11 +367,16 @@ namespace Moq
                 if (exceptionFactory.CompareParameterTypesTo(Type.EmptyTypes))
                 {
                     // we need this for the user to be able to use parameterless methods
-                    this.returnOrThrow = new ThrowComputedException(invocation => exceptionFactory.InvokePreserveStack() as Exception);
+                    this.returnOrThrow = new ThrowComputedException(
+                        invocation => exceptionFactory.InvokePreserveStack() as Exception
+                    );
                 }
                 else
                 {
-                    this.returnOrThrow = new ThrowComputedException(invocation => exceptionFactory.InvokePreserveStack(invocation.Arguments) as Exception);
+                    this.returnOrThrow = new ThrowComputedException(
+                        invocation =>
+                            exceptionFactory.InvokePreserveStack(invocation.Arguments) as Exception
+                    );
                 }
             }
         }
@@ -378,7 +422,10 @@ namespace Moq
             return message.ToString().Trim();
         }
 
-        private void ValidateNumberOfCallbackParameters(Delegate callback, MethodInfo callbackMethod)
+        private void ValidateNumberOfCallbackParameters(
+            Delegate callback,
+            MethodInfo callbackMethod
+        )
         {
             var numberOfActualParameters = callbackMethod.GetParameters().Length;
             if (callbackMethod.IsStatic)
@@ -399,7 +446,9 @@ namespace Moq
                             CultureInfo.CurrentCulture,
                             Resources.InvalidCallbackParameterCountMismatch,
                             numberOfExpectedParameters,
-                            numberOfActualParameters));
+                            numberOfActualParameters
+                        )
+                    );
                 }
             }
         }
@@ -410,7 +459,9 @@ namespace Moq
 
             if (actualReturnType == typeof(void))
             {
-                throw new ArgumentException(Resources.InvalidReturnsCallbackNotADelegateWithReturnType);
+                throw new ArgumentException(
+                    Resources.InvalidReturnsCallbackNotADelegateWithReturnType
+                );
             }
 
             if (!expectedReturnType.IsAssignableFrom(actualReturnType))
@@ -423,7 +474,9 @@ namespace Moq
                             CultureInfo.CurrentCulture,
                             Resources.InvalidCallbackReturnTypeMismatch,
                             expectedReturnType.GetFormattedName(),
-                            actualReturnType.GetFormattedName()));
+                            actualReturnType.GetFormattedName()
+                        )
+                    );
                 }
             }
         }

@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,9 +46,8 @@ namespace System.Reflection.Emit
     /*
      * TypeBuilderInstantiation represents an instantiation of a generic TypeBuilder.
      */
-    [StructLayout (LayoutKind.Sequential)]
-    sealed class TypeBuilderInstantiation :
-        TypeInfo
+    [StructLayout(LayoutKind.Sequential)]
+    sealed class TypeBuilderInstantiation : TypeInfo
     {
         #region Keep in sync with object-internals.h MonoReflectionGenericClass
 #pragma warning disable 649
@@ -57,262 +56,298 @@ namespace System.Reflection.Emit
 #pragma warning restore 649
         #endregion
 
-        Hashtable fields, ctors, methods;
+        Hashtable fields,
+            ctors,
+            methods;
 
-        internal TypeBuilderInstantiation ()
+        internal TypeBuilderInstantiation()
         {
             // this should not be used
-            throw new InvalidOperationException ();
+            throw new InvalidOperationException();
         }
 
-        internal TypeBuilderInstantiation (Type tb, Type[] args)
+        internal TypeBuilderInstantiation(Type tb, Type[] args)
         {
             this.generic_type = tb;
             this.type_arguments = args;
         }
 
-        internal override Type InternalResolve ()
+        internal override Type InternalResolve()
         {
-            Type gtd = generic_type.InternalResolve ();
-            Type[] args = new Type [type_arguments.Length];
+            Type gtd = generic_type.InternalResolve();
+            Type[] args = new Type[type_arguments.Length];
             for (int i = 0; i < type_arguments.Length; ++i)
-                args [i] = type_arguments [i].InternalResolve ();
-            return gtd.MakeGenericType (args);
+                args[i] = type_arguments[i].InternalResolve();
+            return gtd.MakeGenericType(args);
         }
 
         // Called from the runtime to return the corresponding finished Type object
-        internal override Type RuntimeResolve ()
+        internal override Type RuntimeResolve()
         {
-            if (generic_type is TypeBuilder type_builder && !type_builder.IsCreated ())
-                AppDomain.CurrentDomain.DoTypeBuilderResolve (type_builder);
-            for (int i = 0; i < type_arguments.Length; ++i) {
-                var t = type_arguments [i];
-                if (t is TypeBuilder tb && !tb.IsCreated ())
-                    AppDomain.CurrentDomain.DoTypeBuilderResolve (tb);
+            if (generic_type is TypeBuilder type_builder && !type_builder.IsCreated())
+                AppDomain.CurrentDomain.DoTypeBuilderResolve(type_builder);
+            for (int i = 0; i < type_arguments.Length; ++i)
+            {
+                var t = type_arguments[i];
+                if (t is TypeBuilder tb && !tb.IsCreated())
+                    AppDomain.CurrentDomain.DoTypeBuilderResolve(tb);
             }
-            return InternalResolve ();
+            return InternalResolve();
         }
 
-        internal bool IsCreated {
-            get {
+        internal bool IsCreated
+        {
+            get
+            {
                 TypeBuilder tb = generic_type as TypeBuilder;
                 return tb != null ? tb.is_created : true;
             }
         }
 
-        private const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic |
-        BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly;
+        private const BindingFlags flags =
+            BindingFlags.Public
+            | BindingFlags.NonPublic
+            | BindingFlags.Static
+            | BindingFlags.Instance
+            | BindingFlags.DeclaredOnly;
 
-        Type GetParentType ()
+        Type GetParentType()
         {
-            return InflateType (generic_type.BaseType);        
+            return InflateType(generic_type.BaseType);
         }
 
-        internal Type InflateType (Type type)
+        internal Type InflateType(Type type)
         {
-            return InflateType (type, type_arguments, null);
+            return InflateType(type, type_arguments, null);
         }
 
-        internal Type InflateType (Type type, Type[] method_args)
+        internal Type InflateType(Type type, Type[] method_args)
         {
-            return InflateType (type, type_arguments, method_args);
+            return InflateType(type, type_arguments, method_args);
         }
 
-        internal static Type InflateType (Type type, Type[] type_args, Type[] method_args)
+        internal static Type InflateType(Type type, Type[] type_args, Type[] method_args)
         {
             if (type == null)
                 return null;
             if (!type.IsGenericParameter && !type.ContainsGenericParameters)
                 return type;
-            if (type.IsGenericParameter) {
+            if (type.IsGenericParameter)
+            {
                 if (type.DeclaringMethod == null)
-                    return type_args == null ? type : type_args [type.GenericParameterPosition];
-                return method_args == null ? type : method_args [type.GenericParameterPosition];
+                    return type_args == null ? type : type_args[type.GenericParameterPosition];
+                return method_args == null ? type : method_args[type.GenericParameterPosition];
             }
             if (type.IsPointer)
-                return InflateType (type.GetElementType (), type_args, method_args).MakePointerType ();
+                return InflateType(type.GetElementType(), type_args, method_args).MakePointerType();
             if (type.IsByRef)
-                return InflateType (type.GetElementType (), type_args, method_args).MakeByRefType ();
-            if (type.IsArray) {
-                if (type.GetArrayRank () > 1)
-                    return InflateType (type.GetElementType (), type_args, method_args).MakeArrayType (type.GetArrayRank ());
-                
-                if (type.ToString ().EndsWith ("[*]", StringComparison.Ordinal)) /*FIXME, the reflection API doesn't offer a way around this*/
-                    return InflateType (type.GetElementType (), type_args, method_args).MakeArrayType (1);
-                return InflateType (type.GetElementType (), type_args, method_args).MakeArrayType ();
+                return InflateType(type.GetElementType(), type_args, method_args).MakeByRefType();
+            if (type.IsArray)
+            {
+                if (type.GetArrayRank() > 1)
+                    return InflateType(type.GetElementType(), type_args, method_args)
+                        .MakeArrayType(type.GetArrayRank());
+
+                if (type.ToString().EndsWith("[*]", StringComparison.Ordinal)) /*FIXME, the reflection API doesn't offer a way around this*/
+                    return InflateType(type.GetElementType(), type_args, method_args).MakeArrayType(1);
+                return InflateType(type.GetElementType(), type_args, method_args).MakeArrayType();
             }
 
-            Type[] args = type.GetGenericArguments ();
+            Type[] args = type.GetGenericArguments();
             for (int i = 0; i < args.Length; ++i)
-                args [i] = InflateType (args [i], type_args, method_args);
+                args[i] = InflateType(args[i], type_args, method_args);
 
-            Type gtd = type.IsGenericTypeDefinition ? type : type.GetGenericTypeDefinition ();
-            return gtd.MakeGenericType (args);
+            Type gtd = type.IsGenericTypeDefinition ? type : type.GetGenericTypeDefinition();
+            return gtd.MakeGenericType(args);
         }
-        
-        public override Type BaseType {
+
+        public override Type BaseType
+        {
             get { return generic_type.BaseType; }
         }
 
-        public override Type[] GetInterfaces ()
+        public override Type[] GetInterfaces()
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override bool IsValueTypeImpl ()
+        protected override bool IsValueTypeImpl()
         {
             return generic_type.IsValueType;
         }
 
-        internal override MethodInfo GetMethod (MethodInfo fromNoninstanciated)
+        internal override MethodInfo GetMethod(MethodInfo fromNoninstanciated)
         {
             if (methods == null)
-                methods = new Hashtable ();
-            if (!methods.ContainsKey (fromNoninstanciated))
-                methods [fromNoninstanciated] = new MethodOnTypeBuilderInst (this, fromNoninstanciated);
-            return (MethodInfo)methods [fromNoninstanciated];
+                methods = new Hashtable();
+            if (!methods.ContainsKey(fromNoninstanciated))
+                methods[fromNoninstanciated] = new MethodOnTypeBuilderInst(
+                    this,
+                    fromNoninstanciated
+                );
+            return (MethodInfo)methods[fromNoninstanciated];
         }
 
-        internal override ConstructorInfo GetConstructor (ConstructorInfo fromNoninstanciated)
+        internal override ConstructorInfo GetConstructor(ConstructorInfo fromNoninstanciated)
         {
             if (ctors == null)
-                ctors = new Hashtable ();
-            if (!ctors.ContainsKey (fromNoninstanciated))
-                ctors [fromNoninstanciated] = new ConstructorOnTypeBuilderInst (this, fromNoninstanciated);
-            return (ConstructorInfo)ctors [fromNoninstanciated];
+                ctors = new Hashtable();
+            if (!ctors.ContainsKey(fromNoninstanciated))
+                ctors[fromNoninstanciated] = new ConstructorOnTypeBuilderInst(
+                    this,
+                    fromNoninstanciated
+                );
+            return (ConstructorInfo)ctors[fromNoninstanciated];
         }
 
-        internal override FieldInfo GetField (FieldInfo fromNoninstanciated)
+        internal override FieldInfo GetField(FieldInfo fromNoninstanciated)
         {
             if (fields == null)
-                fields = new Hashtable ();
-            if (!fields.ContainsKey (fromNoninstanciated))
-                fields [fromNoninstanciated] = new FieldOnTypeBuilderInst (this, fromNoninstanciated);
-            return (FieldInfo)fields [fromNoninstanciated];
-        }
-        
-        public override MethodInfo[] GetMethods (BindingFlags bf)
-        {
-            throw new NotSupportedException ();
+                fields = new Hashtable();
+            if (!fields.ContainsKey(fromNoninstanciated))
+                fields[fromNoninstanciated] = new FieldOnTypeBuilderInst(this, fromNoninstanciated);
+            return (FieldInfo)fields[fromNoninstanciated];
         }
 
-        public override ConstructorInfo[] GetConstructors (BindingFlags bf)
+        public override MethodInfo[] GetMethods(BindingFlags bf)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override FieldInfo[] GetFields (BindingFlags bf)
+        public override ConstructorInfo[] GetConstructors(BindingFlags bf)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override PropertyInfo[] GetProperties (BindingFlags bf)
+        public override FieldInfo[] GetFields(BindingFlags bf)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override EventInfo[] GetEvents (BindingFlags bf)
+        public override PropertyInfo[] GetProperties(BindingFlags bf)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override Type[] GetNestedTypes (BindingFlags bf)
+        public override EventInfo[] GetEvents(BindingFlags bf)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override bool IsAssignableFrom (Type c)
+        public override Type[] GetNestedTypes(BindingFlags bf)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override Type UnderlyingSystemType {
+        public override bool IsAssignableFrom(Type c)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override Type UnderlyingSystemType
+        {
             get { return this; }
         }
 
-        public override Assembly Assembly {
+        public override Assembly Assembly
+        {
             get { return generic_type.Assembly; }
         }
 
-        public override Module Module {
+        public override Module Module
+        {
             get { return generic_type.Module; }
         }
 
-        public override string Name {
+        public override string Name
+        {
             get { return generic_type.Name; }
         }
 
-        public override string Namespace {
+        public override string Namespace
+        {
             get { return generic_type.Namespace; }
         }
 
-        public override string FullName {
-            get { return format_name (true, false); }
-        }
-
-        public override string AssemblyQualifiedName {
-            get { return format_name (true, true); }
-        }
-
-        public override Guid GUID {
-            get { throw new NotSupportedException (); }
-        }
-
-        string format_name (bool full_name, bool assembly_qualified)
+        public override string FullName
         {
-            StringBuilder sb = new StringBuilder (generic_type.FullName);
+            get { return format_name(true, false); }
+        }
 
-            sb.Append ("[");
-            for (int i = 0; i < type_arguments.Length; ++i) {
+        public override string AssemblyQualifiedName
+        {
+            get { return format_name(true, true); }
+        }
+
+        public override Guid GUID
+        {
+            get { throw new NotSupportedException(); }
+        }
+
+        string format_name(bool full_name, bool assembly_qualified)
+        {
+            StringBuilder sb = new StringBuilder(generic_type.FullName);
+
+            sb.Append("[");
+            for (int i = 0; i < type_arguments.Length; ++i)
+            {
                 if (i > 0)
-                    sb.Append (",");
-                
+                    sb.Append(",");
+
                 string name;
-                if (full_name) {
-                    string assemblyName = type_arguments [i].Assembly.FullName;
-                    name = type_arguments [i].FullName;
+                if (full_name)
+                {
+                    string assemblyName = type_arguments[i].Assembly.FullName;
+                    name = type_arguments[i].FullName;
                     if (name != null && assemblyName != null)
                         name = name + ", " + assemblyName;
-                } else {
-                    name = type_arguments [i].ToString ();
                 }
-                if (name == null) {
+                else
+                {
+                    name = type_arguments[i].ToString();
+                }
+                if (name == null)
+                {
                     return null;
                 }
                 if (full_name)
-                    sb.Append ("[");
-                sb.Append (name);
+                    sb.Append("[");
+                sb.Append(name);
                 if (full_name)
-                    sb.Append ("]");
+                    sb.Append("]");
             }
-            sb.Append ("]");
-            if (assembly_qualified) {
-                sb.Append (", ");
-                sb.Append (generic_type.Assembly.FullName);
+            sb.Append("]");
+            if (assembly_qualified)
+            {
+                sb.Append(", ");
+                sb.Append(generic_type.Assembly.FullName);
             }
-            return sb.ToString ();
+            return sb.ToString();
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
-            return format_name (false, false);
+            return format_name(false, false);
         }
 
-        public override Type GetGenericTypeDefinition ()
+        public override Type GetGenericTypeDefinition()
         {
             return generic_type;
         }
 
-        public override Type[] GetGenericArguments ()
+        public override Type[] GetGenericArguments()
         {
-            Type[] ret = new Type [type_arguments.Length];
-            type_arguments.CopyTo (ret, 0);
+            Type[] ret = new Type[type_arguments.Length];
+            type_arguments.CopyTo(ret, 0);
             return ret;
         }
 
-        public override bool ContainsGenericParameters {
-            get {
-                foreach (Type t in type_arguments) {
+        public override bool ContainsGenericParameters
+        {
+            get
+            {
+                foreach (Type t in type_arguments)
+                {
                     if (t.ContainsGenericParameters)
                         return true;
                 }
@@ -320,165 +355,189 @@ namespace System.Reflection.Emit
             }
         }
 
-        public override bool IsGenericTypeDefinition {
+        public override bool IsGenericTypeDefinition
+        {
             get { return false; }
         }
 
-        public override bool IsGenericType {
+        public override bool IsGenericType
+        {
             get { return true; }
         }
 
-        public override Type DeclaringType {
+        public override Type DeclaringType
+        {
             get { return generic_type.DeclaringType; }
         }
 
-        public override RuntimeTypeHandle TypeHandle {
-            get {
-                throw new NotSupportedException ();
-            }
-        }
-
-        public override Type MakeArrayType ()
+        public override RuntimeTypeHandle TypeHandle
         {
-            return new ArrayType (this, 0);
+            get { throw new NotSupportedException(); }
         }
 
-        public override Type MakeArrayType (int rank)
+        public override Type MakeArrayType()
+        {
+            return new ArrayType(this, 0);
+        }
+
+        public override Type MakeArrayType(int rank)
         {
             if (rank < 1)
-                throw new IndexOutOfRangeException ();
-            return new ArrayType (this, rank);
+                throw new IndexOutOfRangeException();
+            return new ArrayType(this, rank);
         }
 
-        public override Type MakeByRefType ()
+        public override Type MakeByRefType()
         {
-            return new ByRefType (this);
+            return new ByRefType(this);
         }
 
-        public override Type MakePointerType ()
+        public override Type MakePointerType()
         {
-            return new PointerType (this);
+            return new PointerType(this);
         }
 
-        public override Type GetElementType ()
+        public override Type GetElementType()
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override bool HasElementTypeImpl ()
-        {
-            return false;
-        }
-
-        protected override bool IsCOMObjectImpl ()
+        protected override bool HasElementTypeImpl()
         {
             return false;
         }
 
-        protected override bool IsPrimitiveImpl ()
+        protected override bool IsCOMObjectImpl()
         {
             return false;
         }
 
-        protected override bool IsArrayImpl ()
+        protected override bool IsPrimitiveImpl()
         {
             return false;
         }
 
-        protected override bool IsByRefImpl ()
+        protected override bool IsArrayImpl()
         {
             return false;
         }
 
-        protected override bool IsPointerImpl ()
+        protected override bool IsByRefImpl()
         {
             return false;
         }
 
-        protected override TypeAttributes GetAttributeFlagsImpl ()
+        protected override bool IsPointerImpl()
         {
-            return generic_type.Attributes; 
+            return false;
+        }
+
+        protected override TypeAttributes GetAttributeFlagsImpl()
+        {
+            return generic_type.Attributes;
         }
 
         //stuff that throws
-        public override Type GetInterface (string name, bool ignoreCase)
+        public override Type GetInterface(string name, bool ignoreCase)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override EventInfo GetEvent (string name, BindingFlags bindingAttr)
+        public override EventInfo GetEvent(string name, BindingFlags bindingAttr)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override FieldInfo GetField( string name, BindingFlags bindingAttr)
+        public override FieldInfo GetField(string name, BindingFlags bindingAttr)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override MemberInfo[] GetMembers (BindingFlags bindingAttr)
+        public override MemberInfo[] GetMembers(BindingFlags bindingAttr)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override Type GetNestedType (string name, BindingFlags bindingAttr)
+        public override Type GetNestedType(string name, BindingFlags bindingAttr)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override object InvokeMember (string name, BindingFlags invokeAttr,
-                             Binder binder, object target, object[] args,
-                             ParameterModifier[] modifiers,
-                             CultureInfo culture, string[] namedParameters)
+        public override object InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object target,
+            object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParameters
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override MethodInfo GetMethodImpl (string name, BindingFlags bindingAttr, Binder binder,
-                                                     CallingConventions callConvention, Type[] types,
-                                                     ParameterModifier[] modifiers)
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override PropertyInfo GetPropertyImpl (string name, BindingFlags bindingAttr, Binder binder,
-                                                         Type returnType, Type[] types, ParameterModifier[] modifiers)
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        protected override ConstructorInfo GetConstructorImpl (BindingFlags bindingAttr,
-                                       Binder binder,
-                                       CallingConventions callConvention,
-                                       Type[] types,
-                                       ParameterModifier[] modifiers)
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
         //MemberInfo
-        public override bool IsDefined (Type attributeType, bool inherit)
+        public override bool IsDefined(Type attributeType, bool inherit)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
-        public override object [] GetCustomAttributes (bool inherit)
-        {
-            if (IsCreated)
-                return generic_type.GetCustomAttributes (inherit);
-            throw new NotSupportedException ();
-        }
-
-        public override object [] GetCustomAttributes (Type attributeType, bool inherit)
+        public override object[] GetCustomAttributes(bool inherit)
         {
             if (IsCreated)
-                return generic_type.GetCustomAttributes (attributeType, inherit);
-            throw new NotSupportedException ();
+                return generic_type.GetCustomAttributes(inherit);
+            throw new NotSupportedException();
         }
 
-        internal override bool IsUserType {
-            get {
-                foreach (var t in type_arguments) {
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            if (IsCreated)
+                return generic_type.GetCustomAttributes(attributeType, inherit);
+            throw new NotSupportedException();
+        }
+
+        internal override bool IsUserType
+        {
+            get
+            {
+                foreach (var t in type_arguments)
+                {
                     if (t.IsUserType)
                         return true;
                 }
@@ -486,9 +545,9 @@ namespace System.Reflection.Emit
             }
         }
 
-        internal static Type MakeGenericType (Type type, Type[] typeArguments)
+        internal static Type MakeGenericType(Type type, Type[] typeArguments)
         {
-            return new TypeBuilderInstantiation (type, typeArguments);
+            return new TypeBuilderInstantiation(type, typeArguments);
         }
 
         public override bool IsTypeDefinition => false;
@@ -501,9 +560,9 @@ namespace System.Reflection.Emit
 {
     abstract class TypeBuilderInstantiation : TypeInfo
     {
-        internal static Type MakeGenericType (Type type, Type[] typeArguments)
+        internal static Type MakeGenericType(Type type, Type[] typeArguments)
         {
-            throw new NotSupportedException ("User types are not supported under full aot");
+            throw new NotSupportedException("User types are not supported under full aot");
         }
     }
 }

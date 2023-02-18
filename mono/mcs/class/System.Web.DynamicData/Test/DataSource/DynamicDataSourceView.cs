@@ -56,33 +56,50 @@ namespace MonoTests.DataSource
                     return dataContainer;
 
                 object inst = owner.DataContainerInstance;
-                if (inst != null) {
+                if (inst != null)
+                {
                     dataContainer = inst as IDynamicDataContainer<T>;
                     if (dataContainer == null)
-                        throw new InvalidOperationException (
-                            "DynamicDataSource.DataContainerInstance must be set to an instance of '" + typeof (IDynamicDataContainer <T>) + "'.");
-                    if (String.IsNullOrEmpty (dataContainer.TableName))
+                        throw new InvalidOperationException(
+                            "DynamicDataSource.DataContainerInstance must be set to an instance of '"
+                                + typeof(IDynamicDataContainer<T>)
+                                + "'."
+                        );
+                    if (String.IsNullOrEmpty(dataContainer.TableName))
                         dataContainer.TableName = owner.EntitySetName;
                     return dataContainer;
                 }
 
                 string typeName = owner.DataContainerTypeName;
-                if (String.IsNullOrEmpty (typeName))
-                    throw new InvalidOperationException ("DynamicDataSource '" + owner.ID + "' does not specify either data container instance or its type name.");
+                if (String.IsNullOrEmpty(typeName))
+                    throw new InvalidOperationException(
+                        "DynamicDataSource '"
+                            + owner.ID
+                            + "' does not specify either data container instance or its type name."
+                    );
 
-                Type type = Type.GetType (typeName, true);
-                if (!typeof (IDynamicDataContainer<T>).IsAssignableFrom (type))
-                    throw new InvalidOperationException ("Data container type '" + typeName + "' specified by DynamicDataSource '" + owner.ID + "' does not implement the IDynamicDataContainer interface.");
-                dataContainer = Activator.CreateInstance (type, owner.EntitySetName) as IDynamicDataContainer<T>;
+                Type type = Type.GetType(typeName, true);
+                if (!typeof(IDynamicDataContainer<T>).IsAssignableFrom(type))
+                    throw new InvalidOperationException(
+                        "Data container type '"
+                            + typeName
+                            + "' specified by DynamicDataSource '"
+                            + owner.ID
+                            + "' does not implement the IDynamicDataContainer interface."
+                    );
+                dataContainer =
+                    Activator.CreateInstance(type, owner.EntitySetName) as IDynamicDataContainer<T>;
                 if (dataContainer == null)
-                    throw new InvalidOperationException ("Failed to create instance of data container type '" + typeName + "'.");
+                    throw new InvalidOperationException(
+                        "Failed to create instance of data container type '" + typeName + "'."
+                    );
                 return dataContainer;
             }
         }
 
         #region Constructors
-        public DynamicDataSourceView (DynamicDataSource owner, string viewName)
-            : base (owner, viewName)
+        public DynamicDataSourceView(DynamicDataSource owner, string viewName)
+            : base(owner, viewName)
         {
             this.owner = owner;
         }
@@ -90,24 +107,28 @@ namespace MonoTests.DataSource
         #endregion
 
         #region DataSourceView methods
-        protected override int ExecuteDelete (IDictionary keys, IDictionary oldValues)
+        protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
         {
-            return DataContainerInstance.Delete (keys, oldValues);
+            return DataContainerInstance.Delete(keys, oldValues);
         }
 
-        protected override int ExecuteInsert (IDictionary values)
+        protected override int ExecuteInsert(IDictionary values)
         {
-            return DataContainerInstance.Insert (values);
+            return DataContainerInstance.Insert(values);
         }
 
-        protected override int ExecuteUpdate (IDictionary keys, IDictionary values, IDictionary oldValues)
+        protected override int ExecuteUpdate(
+            IDictionary keys,
+            IDictionary values,
+            IDictionary oldValues
+        )
         {
-            return DataContainerInstance.Update (keys, values, oldValues);
+            return DataContainerInstance.Update(keys, values, oldValues);
         }
 
-        protected override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
+        protected override IEnumerable ExecuteSelect(DataSourceSelectArguments arguments)
         {
-            return DataContainerInstance.Select (arguments, owner.Where, owner.WhereParameters);
+            return DataContainerInstance.Select(arguments, owner.Where, owner.WhereParameters);
         }
         #endregion
     }

@@ -2,12 +2,12 @@
 
 class C
 {
-    public static int Main ()
+    public static int Main()
     {
         var a = new A<string>();
-        if (a ["s"] != 2)
+        if (a["s"] != 2)
             return 1;
-        
+
         return 0;
     }
 }

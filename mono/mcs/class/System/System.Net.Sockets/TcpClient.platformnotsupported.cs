@@ -34,158 +34,183 @@ namespace System.Net.Sockets
 {
     public class TcpClient : IDisposable
     {
-        const string EXCEPTION_MESSAGE = "System.Net.Sockets.TcpClient is not supported on the current platform.";
+        const string EXCEPTION_MESSAGE =
+            "System.Net.Sockets.TcpClient is not supported on the current platform.";
 
-        public TcpClient ()
+        public TcpClient()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public TcpClient (AddressFamily family)
+        public TcpClient(AddressFamily family)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public TcpClient (IPEndPoint localEP)
+        public TcpClient(IPEndPoint localEP)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public TcpClient (string hostname, int port)
+        public TcpClient(string hostname, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        protected bool Active {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public Socket Client {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int Available {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool Connected {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool ExclusiveAddressUse {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public LingerOption LingerState {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public bool NoDelay {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int ReceiveBufferSize {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int ReceiveTimeout {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int SendBufferSize {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public int SendTimeout {
-            get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-            set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-        }
-
-        public void Close ()
+        protected bool Active
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void Connect (IPEndPoint remoteEP)
+        public Socket Client
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void Connect (IPAddress address, int port)
+        public int Available
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void Connect (string hostname, int port)
+        public bool Connected
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void Connect (IPAddress[] ipAddresses, int port)
+        public bool ExclusiveAddressUse
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void EndConnect (IAsyncResult asyncResult)
+        public LingerOption LingerState
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public IAsyncResult BeginConnect (IPAddress address, int port, AsyncCallback requestCallback, object state)
+        public bool NoDelay
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public IAsyncResult BeginConnect (IPAddress[] addresses, int port, AsyncCallback requestCallback, object state)
+        public int ReceiveBufferSize
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public IAsyncResult BeginConnect (string host, int port, AsyncCallback requestCallback, object state)
+        public int ReceiveTimeout
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        public void Dispose ()
+        public int SendBufferSize
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        protected virtual void Dispose (bool disposing)
+        public int SendTimeout
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
         }
 
-        ~TcpClient ()
+        public void Close()
         {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
+
+        public void Connect(IPEndPoint remoteEP)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void Connect(IPAddress address, int port)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void Connect(string hostname, int port)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void Connect(IPAddress[] ipAddresses, int port)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void EndConnect(IAsyncResult asyncResult)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public IAsyncResult BeginConnect(
+            IPAddress address,
+            int port,
+            AsyncCallback requestCallback,
+            object state
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public IAsyncResult BeginConnect(
+            IPAddress[] addresses,
+            int port,
+            AsyncCallback requestCallback,
+            object state
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public IAsyncResult BeginConnect(
+            string host,
+            int port,
+            AsyncCallback requestCallback,
+            object state
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        public void Dispose()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        ~TcpClient() { }
 
         public NetworkStream GetStream()
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public Task ConnectAsync (IPAddress address, int port)
+        public Task ConnectAsync(IPAddress address, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public Task ConnectAsync (IPAddress[] addresses, int port)
+        public Task ConnectAsync(IPAddress[] addresses, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
 
-        public Task ConnectAsync (string host, int port)
+        public Task ConnectAsync(string host, int port)
         {
-            throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
         }
     }
 }

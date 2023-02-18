@@ -4,26 +4,24 @@ namespace Mono.Linker.Tests.Cases.Basic
 {
     class UninvokedInterfaceMemberGetsRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            I i = new B ();
-            var tmp = i.ToString ();
+            I i = new B();
+            var tmp = i.ToString();
         }
 
         [Kept]
         interface I
         {
-            void Method ();
+            void Method();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (I))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(I))]
         class B : I
         {
-            public void Method ()
-            {
-            }
+            public void Method() { }
         }
     }
 }

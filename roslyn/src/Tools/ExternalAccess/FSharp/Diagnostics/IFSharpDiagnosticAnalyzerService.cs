@@ -13,6 +13,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Diagnostics
         /// <summary>
         /// re-analyze given projects and documents
         /// </summary>
-        void Reanalyze(Workspace workspace, IEnumerable<ProjectId> projectIds = null, IEnumerable<DocumentId> documentIds = null, bool highPriority = false);
+        void Reanalyze(
+            Workspace workspace,
+            IEnumerable<ProjectId> projectIds = null,
+            IEnumerable<DocumentId> documentIds = null,
+            bool highPriority = false
+        );
     }
 }

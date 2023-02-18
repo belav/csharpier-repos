@@ -3,15 +3,13 @@
 
 using System.Reflection;
 
-[assembly: AssemblyKeyFile ("cs1606.pub")]
+[assembly: AssemblyKeyFile("cs1606.pub")]
 
 // note that cs1606.pub is the ECMA key (same as mcs/class/ecma.pub)
 // this is the same as cs1548-3.cs (Missing private key in strongname file)
 // expect the the error code is different for the ECMA key
 
-class MyClass {
-
-    public static void Main (string [] args)
-    {
-    }
+class MyClass
+{
+    public static void Main(string[] args) { }
 }

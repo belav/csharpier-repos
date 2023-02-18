@@ -11,8 +11,8 @@ public class Test
     {
         public int Count;
     }
-    
-    static void Main ()
+
+    static void Main()
     {
         var c = new Container { Count = 1, Count = 10 };
     }

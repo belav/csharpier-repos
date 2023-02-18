@@ -2,16 +2,15 @@ using System;
 
 class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
-        SomeMethod (() => {
-            Func<int,int> f = b => b;
-        retry:
+        SomeMethod(() =>
+        {
+            Func<int, int> f = b => b;
+            retry:
             goto retry;
         });
     }
 
-    static void SomeMethod (Action a)
-    {
-    }
+    static void SomeMethod(Action a) { }
 }

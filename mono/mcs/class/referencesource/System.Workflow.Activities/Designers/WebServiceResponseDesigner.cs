@@ -27,7 +27,9 @@ namespace System.Workflow.Activities
 
             ITypeProvider typeProvider = (ITypeProvider)GetService(typeof(ITypeProvider));
             if (typeProvider == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                );
 
             WebServiceOutputActivity webServiceResponse = this.Activity as WebServiceOutputActivity;
             webServiceResponse.GetParameterPropertyDescriptors(properties);
@@ -49,6 +51,7 @@ namespace System.Workflow.Activities
         }
         #endregion
     }
+
     #region WebServiceResponseDesignerTheme
     internal sealed class WebServiceResponseDesignerTheme : ActivityDesignerTheme
     {

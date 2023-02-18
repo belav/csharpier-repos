@@ -5,6 +5,6 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock.Dependencies
 {
     public static class LibReturningConstant
     {
-        public static bool ReturnFalse () => false;
+        public static bool ReturnFalse() => false;
     }
 }

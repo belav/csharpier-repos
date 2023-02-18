@@ -3,12 +3,10 @@
 
 class C
 {
-    static void Foo (int x, int y)
+    static void Foo(int x, int y) { }
+
+    public static void Main()
     {
-    }
-    
-    public static void Main ()
-    {
-        Foo (1, b : 2);
+        Foo(1, b: 2);
     }
 }

@@ -16,29 +16,33 @@ namespace ILLink.RoslynAnalyzer
             IsSystemReflectionIReflect = 0x02,
         }
 
-        public static bool IsTypeInterestingForDataflow (this ITypeSymbol type)
+        public static bool IsTypeInterestingForDataflow(this ITypeSymbol type)
         {
             if (type.SpecialType == SpecialType.System_String)
                 return true;
 
-            var flags = GetFlags (type);
-            return IsSystemType (flags) || IsSystemReflectionIReflect (flags);
+            var flags = GetFlags(type);
+            return IsSystemType(flags) || IsSystemReflectionIReflect(flags);
         }
 
-        private static HierarchyFlags GetFlags (ITypeSymbol type)
+        private static HierarchyFlags GetFlags(ITypeSymbol type)
         {
             HierarchyFlags flags = 0;
-            if (type.IsTypeOf (WellKnownType.System_Reflection_IReflect)) {
+            if (type.IsTypeOf(WellKnownType.System_Reflection_IReflect))
+            {
                 flags |= HierarchyFlags.IsSystemReflectionIReflect;
             }
 
             ITypeSymbol? baseType = type;
-            while (baseType != null) {
-                if (baseType.IsTypeOf (WellKnownType.System_Type))
+            while (baseType != null)
+            {
+                if (baseType.IsTypeOf(WellKnownType.System_Type))
                     flags |= HierarchyFlags.IsSystemType;
 
-                foreach (var iface in baseType.Interfaces) {
-                    if (iface.IsTypeOf (WellKnownType.System_Reflection_IReflect)) {
+                foreach (var iface in baseType.Interfaces)
+                {
+                    if (iface.IsTypeOf(WellKnownType.System_Reflection_IReflect))
+                    {
                         flags |= HierarchyFlags.IsSystemReflectionIReflect;
                     }
                 }
@@ -48,28 +52,36 @@ namespace ILLink.RoslynAnalyzer
             return flags;
         }
 
-        private static bool IsSystemType (HierarchyFlags flags) => (flags & HierarchyFlags.IsSystemType) != 0;
+        private static bool IsSystemType(HierarchyFlags flags) =>
+            (flags & HierarchyFlags.IsSystemType) != 0;
 
-        private static bool IsSystemReflectionIReflect (HierarchyFlags flags) => (flags & HierarchyFlags.IsSystemReflectionIReflect) != 0;
+        private static bool IsSystemReflectionIReflect(HierarchyFlags flags) =>
+            (flags & HierarchyFlags.IsSystemReflectionIReflect) != 0;
 
-        public static bool IsTypeOf (this ITypeSymbol symbol, string @namespace, string name)
+        public static bool IsTypeOf(this ITypeSymbol symbol, string @namespace, string name)
         {
-            return symbol.ContainingNamespace?.GetDisplayName () == @namespace && symbol.MetadataName == name;
+            return symbol.ContainingNamespace?.GetDisplayName() == @namespace
+                && symbol.MetadataName == name;
         }
 
-        public static bool IsTypeOf (this ITypeSymbol symbol, WellKnownType wellKnownType)
+        public static bool IsTypeOf(this ITypeSymbol symbol, WellKnownType wellKnownType)
         {
-            return symbol.TryGetWellKnownType () == wellKnownType;
+            return symbol.TryGetWellKnownType() == wellKnownType;
         }
 
-        public static WellKnownType? TryGetWellKnownType (this ITypeSymbol symbol)
+        public static WellKnownType? TryGetWellKnownType(this ITypeSymbol symbol)
         {
-            return symbol.SpecialType switch {
+            return symbol.SpecialType switch
+            {
                 SpecialType.System_String => WellKnownType.System_String,
                 SpecialType.System_Nullable_T => WellKnownType.System_Nullable_T,
                 SpecialType.System_Array => WellKnownType.System_Array,
                 SpecialType.System_Object => WellKnownType.System_Object,
-                _ => WellKnownTypeExtensions.GetWellKnownType (symbol.ContainingNamespace?.GetDisplayName () ?? "", symbol.MetadataName)
+                _
+                    => WellKnownTypeExtensions.GetWellKnownType(
+                        symbol.ContainingNamespace?.GetDisplayName() ?? "",
+                        symbol.MetadataName
+                    )
             };
         }
     }

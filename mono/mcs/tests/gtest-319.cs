@@ -8,7 +8,7 @@ public class Temp<T> : IEnumerable<Temp<T>.Foo>
 
     public IEnumerator<Temp<T>.Foo> GetEnumerator()
     {
-        yield return new Foo ();
+        yield return new Foo();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -19,6 +19,5 @@ public class Temp<T> : IEnumerable<Temp<T>.Foo>
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

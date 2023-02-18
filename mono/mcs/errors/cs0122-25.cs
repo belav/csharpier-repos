@@ -7,6 +7,4 @@ class AAttribute : System.Attribute
 }
 
 [A]
-class C
-{
-}
+class C { }

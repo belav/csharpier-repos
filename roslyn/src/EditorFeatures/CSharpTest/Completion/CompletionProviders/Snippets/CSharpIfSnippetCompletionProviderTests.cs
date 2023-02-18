@@ -4,7 +4,8 @@
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
-    public class CSharpIfSnippetCompletionProviderTests : AbstractCSharpConditionalBlockSnippetCompletionProviderTests
+    public class CSharpIfSnippetCompletionProviderTests
+        : AbstractCSharpConditionalBlockSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "if";
     }

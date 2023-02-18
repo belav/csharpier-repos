@@ -21,7 +21,11 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 3 }))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 3 }
+                    )
+                )
                 {
                     try
                     {
@@ -64,13 +68,15 @@ namespace IntelHardwareIntrinsicTest
             return testResult;
         }
 
-        public unsafe struct TestTable<T> : IDisposable where T : struct
+        public unsafe struct TestTable<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
 
             public void* inArrayPtr => inHandle.AddrOfPinnedObject().ToPointer();
 
             GCHandle inHandle;
+
             public TestTable(T[] a)
             {
                 this.inArray = a;

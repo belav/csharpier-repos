@@ -3,15 +3,14 @@
 
 using System;
 
-class ErrorCS0073 {
-    delegate void Handler ();
-    event Handler OnFoo {
+class ErrorCS0073
+{
+    delegate void Handler();
+    event Handler OnFoo
+    {
         add;
-        remove {
-            OnFoo -= value;
-        }
+        remove { OnFoo -= value; }
     }
-    public static void Main () {
-    }
-}
 
+    public static void Main() { }
+}

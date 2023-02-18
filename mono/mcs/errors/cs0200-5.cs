@@ -5,7 +5,7 @@ class C
 {
     public static int S { get; }
 
-    public C ()
+    public C()
     {
         S = 3;
     }

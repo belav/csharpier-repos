@@ -3,40 +3,38 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.CoreLink
 {
-    [SetupLinkerTrimMode ("link")]
+    [SetupLinkerTrimMode("link")]
     // Need to skip due to `Runtime critical type System.Reflection.CustomAttributeData not found` failure
-    [SkipPeVerify (SkipPeVerifyForToolchian.Pedump)]
+    [SkipPeVerify(SkipPeVerifyForToolchian.Pedump)]
     public class NeverInstantiatedTypeWithOverridesFromObject
     {
-        public static void Main ()
+        public static void Main()
         {
-            typeof (Foo).ToString ();
+            typeof(Foo).ToString();
         }
 
         [Kept]
         class Foo
         {
-            ~Foo ()
+            ~Foo()
             {
                 // Finalize shouldn't be empty
-                DoCleanupStuff ();
+                DoCleanupStuff();
             }
 
-            void DoCleanupStuff ()
-            {
-            }
+            void DoCleanupStuff() { }
 
-            public override bool Equals (object obj)
+            public override bool Equals(object obj)
             {
                 return false;
             }
 
-            public override string ToString ()
+            public override string ToString()
             {
                 return null;
             }
 
-            public override int GetHashCode ()
+            public override int GetHashCode()
             {
                 return 0;
             }

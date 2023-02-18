@@ -18,13 +18,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
     {
         protected readonly string FieldName;
 
-        public SnippetFunctionClassName(AbstractSnippetExpansionClient snippetExpansionClient, ITextBuffer subjectBuffer, string fieldName, IThreadingContext threadingContext)
+        public SnippetFunctionClassName(
+            AbstractSnippetExpansionClient snippetExpansionClient,
+            ITextBuffer subjectBuffer,
+            string fieldName,
+            IThreadingContext threadingContext
+        )
             : base(snippetExpansionClient, subjectBuffer, threadingContext)
         {
             this.FieldName = fieldName;
         }
 
-        protected override async Task<(int ExitCode, string Value, int HasDefaultValue)> GetDefaultValueAsync(CancellationToken cancellationToken)
+        protected override async Task<(
+            int ExitCode,
+            string Value,
+            int HasDefaultValue
+        )> GetDefaultValueAsync(CancellationToken cancellationToken)
         {
             var hasDefaultValue = 0;
             var value = string.Empty;
@@ -34,18 +43,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
 
             var surfaceBufferFieldSpan = new VsTextSpan[1];
-            if (snippetExpansionClient.ExpansionSession.GetFieldSpan(FieldName, surfaceBufferFieldSpan) != VSConstants.S_OK)
+            if (
+                snippetExpansionClient.ExpansionSession.GetFieldSpan(
+                    FieldName,
+                    surfaceBufferFieldSpan
+                ) != VSConstants.S_OK
+            )
             {
                 return (VSConstants.E_FAIL, value, hasDefaultValue);
             }
 
-            if (!snippetExpansionClient.TryGetSubjectBufferSpan(surfaceBufferFieldSpan[0], out var subjectBufferFieldSpan))
+            if (
+                !snippetExpansionClient.TryGetSubjectBufferSpan(
+                    surfaceBufferFieldSpan[0],
+                    out var subjectBufferFieldSpan
+                )
+            )
             {
                 return (VSConstants.E_FAIL, value, hasDefaultValue);
             }
 
-            var snippetFunctionService = document.Project.GetRequiredLanguageService<SnippetFunctionService>();
-            value = await snippetFunctionService.GetContainingClassNameAsync(document, subjectBufferFieldSpan.Start.Position, cancellationToken).ConfigureAwait(false);
+            var snippetFunctionService =
+                document.Project.GetRequiredLanguageService<SnippetFunctionService>();
+            value = await snippetFunctionService
+                .GetContainingClassNameAsync(
+                    document,
+                    subjectBufferFieldSpan.Start.Position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!string.IsNullOrWhiteSpace(value))
             {

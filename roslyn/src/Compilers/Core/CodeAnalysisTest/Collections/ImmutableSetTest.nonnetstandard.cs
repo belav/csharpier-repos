@@ -28,8 +28,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void SymmetricExceptTest()
         {
-            SymmetricExceptTestHelper(Empty<int>().Add(1).Add(3).Add(5).Add(7), Enumerable.Range(0, 9).ToArray());
-            SymmetricExceptTestHelper(Empty<int>().Add(1).Add(3).Add(5).Add(7), Enumerable.Range(0, 5).ToArray());
+            SymmetricExceptTestHelper(
+                Empty<int>().Add(1).Add(3).Add(5).Add(7),
+                Enumerable.Range(0, 9).ToArray()
+            );
+            SymmetricExceptTestHelper(
+                Empty<int>().Add(1).Add(3).Add(5).Add(7),
+                Enumerable.Range(0, 5).ToArray()
+            );
         }
 
         [Fact]
@@ -55,15 +61,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             UnionTestHelper(this.Empty<int>(), new[] { 1, 3, 5, 7 });
             UnionTestHelper(this.Empty<int>().Union(new[] { 2, 4, 6 }), new[] { 1, 3, 5, 7 });
             UnionTestHelper(this.Empty<int>().Union(new[] { 1, 2, 3 }), Array.Empty<int>());
-            UnionTestHelper(this.Empty<int>().Union(new[] { 2 }), Enumerable.Range(0, 1000).ToArray());
+            UnionTestHelper(
+                this.Empty<int>().Union(new[] { 2 }),
+                Enumerable.Range(0, 1000).ToArray()
+            );
         }
 
-        protected static IComparer<T>? GetComparer<T>(System.Collections.Immutable.IImmutableSet<T> set)
+        protected static IComparer<T>? GetComparer<T>(
+            System.Collections.Immutable.IImmutableSet<T> set
+        )
         {
             return set switch
             {
                 // Unordered collections
-                ImmutableSegmentedHashSet<T> => null,
+                ImmutableSegmentedHashSet<T>
+                    => null,
                 System.Collections.Immutable.ImmutableHashSet<T> => null,
 
                 // Ordered collections
@@ -74,12 +86,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             };
         }
 
-        protected static IEqualityComparer<T>? GetEqualityComparer<T>(System.Collections.Immutable.IImmutableSet<T> set)
+        protected static IEqualityComparer<T>? GetEqualityComparer<T>(
+            System.Collections.Immutable.IImmutableSet<T> set
+        )
         {
             return set switch
             {
                 // Unordered collections
-                ImmutableSegmentedHashSet<T> s => s.KeyComparer,
+                ImmutableSegmentedHashSet<T> s
+                    => s.KeyComparer,
                 System.Collections.Immutable.ImmutableHashSet<T> s => s.KeyComparer,
 
                 // Ordered collections
@@ -90,7 +105,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             };
         }
 
-        protected static void TryGetValueTestHelper(System.Collections.Immutable.IImmutableSet<string> set)
+        protected static void TryGetValueTestHelper(
+            System.Collections.Immutable.IImmutableSet<string> set
+        )
         {
             Assert.NotNull(set);
 
@@ -107,7 +124,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal("nonexistent", actual);
         }
 
-        private static void ExceptTestHelper<T>(System.Collections.Immutable.IImmutableSet<T> set, params T[] valuesToRemove)
+        private static void ExceptTestHelper<T>(
+            System.Collections.Immutable.IImmutableSet<T> set,
+            params T[] valuesToRemove
+        )
         {
             Assert.NotNull(set);
             Assert.NotNull(valuesToRemove);
@@ -119,7 +139,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             CollectionAssertAreEquivalent(expectedSet.ToList(), actualSet.ToList());
         }
 
-        private static void SymmetricExceptTestHelper<T>(System.Collections.Immutable.IImmutableSet<T> set, params T[] otherCollection)
+        private static void SymmetricExceptTestHelper<T>(
+            System.Collections.Immutable.IImmutableSet<T> set,
+            params T[] otherCollection
+        )
         {
             Assert.NotNull(set);
             Assert.NotNull(otherCollection);
@@ -131,7 +154,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             CollectionAssertAreEquivalent(expectedSet.ToList(), actualSet.ToList());
         }
 
-        private static void IntersectTestHelper<T>(System.Collections.Immutable.IImmutableSet<T> set, params T[] values)
+        private static void IntersectTestHelper<T>(
+            System.Collections.Immutable.IImmutableSet<T> set,
+            params T[] values
+        )
         {
             Assert.NotNull(set);
             Assert.NotNull(values);
@@ -145,7 +171,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             CollectionAssertAreEquivalent(expected.ToList(), actual.ToList());
         }
 
-        private static void UnionTestHelper<T>(System.Collections.Immutable.IImmutableSet<T> set, params T[] values)
+        private static void UnionTestHelper<T>(
+            System.Collections.Immutable.IImmutableSet<T> set,
+            params T[] values
+        )
         {
             Assert.NotNull(set);
             Assert.NotNull(values);

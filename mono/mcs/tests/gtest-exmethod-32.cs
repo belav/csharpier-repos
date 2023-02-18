@@ -9,29 +9,28 @@ class A : IEnumerable
         get { return 0; }
     }
 
-    IEnumerator IEnumerable.GetEnumerator ()
+    IEnumerator IEnumerable.GetEnumerator()
     {
         return null;
     }
 }
 
-class G<T> where T : A
+class G<T>
+    where T : A
 {
-    void Test ()
+    void Test()
     {
         T var = null;
-        int i = var.Count ();
+        int i = var.Count();
     }
 }
 
 public static class Extensions
 {
-    public static int Count (this IEnumerable seq)
+    public static int Count(this IEnumerable seq)
     {
         return 0;
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

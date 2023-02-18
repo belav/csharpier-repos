@@ -24,10 +24,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilLoop(QilNodeType nodeType, QilNode variable, QilNode body) : base(nodeType, variable, body)
-        {
-        }
-
+        public QilLoop(QilNodeType nodeType, QilNode variable, QilNode body)
+            : base(nodeType, variable, body) { }
 
         //-----------------------------------------------
         // QilLoop methods

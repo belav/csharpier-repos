@@ -52,9 +52,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             }
 
             // If we returned fewer than the requested number of elements, we return S_FALSE
-            return celt == pceltFetched
-                ? VSConstants.S_OK
-                : VSConstants.S_FALSE;
+            return celt == pceltFetched ? VSConstants.S_OK : VSConstants.S_FALSE;
         }
 
         public int Reset()

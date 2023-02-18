@@ -10,11 +10,13 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void LabelWithAttributesFromAnonymousObject_WithUnderscoreInName_TransformsUnderscoresToDashs()
         {
-            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs((helper, attributes) =>
-                helper.Label("foo", attributes));
+            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs(
+                (helper, attributes) => helper.Label("foo", attributes)
+            );
 
-            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs((helper, attributes) =>
-                helper.Label("foo", "bar", attributes));
+            HtmlHelperTest.AssertHelperTransformsAttributesUnderscoresToDashs(
+                (helper, attributes) => helper.Label("foo", "bar", attributes)
+            );
         }
     }
 }

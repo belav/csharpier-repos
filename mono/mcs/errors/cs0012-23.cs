@@ -4,7 +4,7 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
         var val = B.ArrayMember;
     }

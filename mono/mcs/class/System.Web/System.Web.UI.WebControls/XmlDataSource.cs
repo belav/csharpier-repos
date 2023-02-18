@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,22 +41,31 @@ using System.IO;
 using System.Web.Caching;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     // CAS
-    [AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     // attributes
-    [DesignerAttribute ("System.Web.UI.Design.WebControls.XmlDataSourceDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-    [DefaultProperty ("DataFile")]
-    [DefaultEvent ("Transforming")]
-    [ParseChildren (true)]
-    [PersistChildren (false)]
-    [WebSysDescription ("Connect to an XML file.")]
-//    [WebSysDisplayName ("XML file")]
-    [ToolboxBitmap ("")]
-    public class XmlDataSource : HierarchicalDataSourceControl, IDataSource, IListSource {
-
+    [DesignerAttribute(
+        "System.Web.UI.Design.WebControls.XmlDataSourceDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    [DefaultProperty("DataFile")]
+    [DefaultEvent("Transforming")]
+    [ParseChildren(true)]
+    [PersistChildren(false)]
+    [WebSysDescription("Connect to an XML file.")]
+    //    [WebSysDisplayName ("XML file")]
+    [ToolboxBitmap("")]
+    public class XmlDataSource : HierarchicalDataSourceControl, IDataSource, IListSource
+    {
         string _data = string.Empty;
         string _transform = string.Empty;
         string _xpath = string.Empty;
@@ -66,97 +75,103 @@ namespace System.Web.UI.WebControls {
         bool _enableCaching = true;
         int _cacheDuration = 0;
         bool _documentNeedsUpdate;
-        
+
         DataSourceCacheExpiry _cacheExpirationPolicy = DataSourceCacheExpiry.Absolute;
-        static readonly string [] emptyNames = new string [] { "DefaultView" };
-        
-        event EventHandler IDataSource.DataSourceChanged {
+        static readonly string[] emptyNames = new string[] { "DefaultView" };
+
+        event EventHandler IDataSource.DataSourceChanged
+        {
             add { ((IHierarchicalDataSource)this).DataSourceChanged += value; }
             remove { ((IHierarchicalDataSource)this).DataSourceChanged -= value; }
         }
-        
-        static object EventTransforming = new object ();
-        public event EventHandler Transforming {
-            add { Events.AddHandler (EventTransforming, value); }
-            remove { Events.RemoveHandler (EventTransforming, value); }
+
+        static object EventTransforming = new object();
+        public event EventHandler Transforming
+        {
+            add { Events.AddHandler(EventTransforming, value); }
+            remove { Events.RemoveHandler(EventTransforming, value); }
         }
 
-        protected virtual void OnTransforming (EventArgs e)
+        protected virtual void OnTransforming(EventArgs e)
         {
-            EventHandler eh = Events [EventTransforming] as EventHandler;
+            EventHandler eh = Events[EventTransforming] as EventHandler;
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
-        
+
         XmlDocument xmlDocument;
-        public XmlDocument GetXmlDocument ()
+
+        public XmlDocument GetXmlDocument()
         {
             if (_documentNeedsUpdate)
-                UpdateXml ();
-            
-            if (xmlDocument == null && EnableCaching)
-                xmlDocument = GetXmlDocumentFromCache ();
+                UpdateXml();
 
-            if (xmlDocument == null) {
-                xmlDocument = LoadXmlDocument ();
-                UpdateCache ();
+            if (xmlDocument == null && EnableCaching)
+                xmlDocument = GetXmlDocumentFromCache();
+
+            if (xmlDocument == null)
+            {
+                xmlDocument = LoadXmlDocument();
+                UpdateCache();
             }
 
             return xmlDocument;
         }
 
-        [MonoTODO ("schema")]
-        XmlDocument LoadXmlDocument ()
+        [MonoTODO("schema")]
+        XmlDocument LoadXmlDocument()
         {
-            XmlDocument document = LoadFileOrData (DataFile, Data);
-            if (String.IsNullOrEmpty (TransformFile) && String.IsNullOrEmpty (Transform))
+            XmlDocument document = LoadFileOrData(DataFile, Data);
+            if (String.IsNullOrEmpty(TransformFile) && String.IsNullOrEmpty(Transform))
                 return document;
 
-            XslTransform xslTransform = new XslTransform ();
-            XmlDocument xsl = LoadFileOrData (TransformFile, Transform);
-            xslTransform.Load (xsl);
+            XslTransform xslTransform = new XslTransform();
+            XmlDocument xsl = LoadFileOrData(TransformFile, Transform);
+            xslTransform.Load(xsl);
 
-            OnTransforming (EventArgs.Empty);
+            OnTransforming(EventArgs.Empty);
 
-            XmlDocument transofrResult = new XmlDocument ();
-            transofrResult.Load (xslTransform.Transform (document, TransformArgumentList));
+            XmlDocument transofrResult = new XmlDocument();
+            transofrResult.Load(xslTransform.Transform(document, TransformArgumentList));
 
             return transofrResult;
         }
 
-        XmlDocument LoadFileOrData (string filename, string data)
+        XmlDocument LoadFileOrData(string filename, string data)
         {
-            XmlDocument document = new XmlDocument ();
-            if (!String.IsNullOrEmpty (filename)) {
+            XmlDocument document = new XmlDocument();
+            if (!String.IsNullOrEmpty(filename))
+            {
                 Uri uri;
-                if (Uri.TryCreate (filename, UriKind.Absolute, out uri))
-                    document.Load (filename);
+                if (Uri.TryCreate(filename, UriKind.Absolute, out uri))
+                    document.Load(filename);
                 else
-                    document.Load (MapPathSecure (filename));
-            } else
-                if (!String.IsNullOrEmpty (data))
-                    document.LoadXml (data);
+                    document.Load(MapPathSecure(filename));
+            }
+            else if (!String.IsNullOrEmpty(data))
+                document.LoadXml(data);
             return document;
         }
 
-        XmlDocument GetXmlDocumentFromCache ()
+        XmlDocument GetXmlDocumentFromCache()
         {
             if (DataCache != null)
-                return (XmlDocument) DataCache [GetDataKey ()];
+                return (XmlDocument)DataCache[GetDataKey()];
 
             return null;
         }
 
-        string GetDataKey ()
+        string GetDataKey()
         {
-            if (String.IsNullOrEmpty (DataFile) && !String.IsNullOrEmpty (Data)) {
+            if (String.IsNullOrEmpty(DataFile) && !String.IsNullOrEmpty(Data))
+            {
                 string key = CacheKeyContext;
-                if (!String.IsNullOrEmpty (key))
+                if (!String.IsNullOrEmpty(key))
                     return key;
             }
             Page page = Page;
-            string p = page != null ? page.ToString () : "NullPage";
-            
+            string p = page != null ? page.ToString() : "NullPage";
+
             return TemplateSourceDirectory + "_" + p + "_" + ID;
         }
 
@@ -171,7 +186,7 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-        void UpdateCache ()
+        void UpdateCache()
         {
             if (!EnableCaching)
                 return;
@@ -179,217 +194,259 @@ namespace System.Web.UI.WebControls {
             if (DataCache == null)
                 return;
 
-            string dataKey = GetDataKey ();
-            if (DataCache [dataKey] != null)
-                DataCache.Remove (dataKey);
+            string dataKey = GetDataKey();
+            if (DataCache[dataKey] != null)
+                DataCache.Remove(dataKey);
 
             DateTime absoluteExpiration = Cache.NoAbsoluteExpiration;
             TimeSpan slidindExpiraion = Cache.NoSlidingExpiration;
 
-            if (CacheDuration > 0) {
+            if (CacheDuration > 0)
+            {
                 if (CacheExpirationPolicy == DataSourceCacheExpiry.Absolute)
-                    absoluteExpiration = DateTime.Now.AddSeconds (CacheDuration);
+                    absoluteExpiration = DateTime.Now.AddSeconds(CacheDuration);
                 else
-                    slidindExpiraion = new TimeSpan (CacheDuration * 10000L);
+                    slidindExpiraion = new TimeSpan(CacheDuration * 10000L);
             }
 
             CacheDependency dependency = null;
             if (CacheKeyDependency.Length > 0)
-                dependency = new CacheDependency (new string [] { }, new string [] { CacheKeyDependency });
+                dependency = new CacheDependency(
+                    new string[] { },
+                    new string[] { CacheKeyDependency }
+                );
             else
-                dependency = new CacheDependency (new string [] { }, new string [] { });
+                dependency = new CacheDependency(new string[] { }, new string[] { });
 
-            DataCache.Add (dataKey, xmlDocument, dependency,
-                absoluteExpiration, slidindExpiraion, CacheItemPriority.Default, null);
+            DataCache.Add(
+                dataKey,
+                xmlDocument,
+                dependency,
+                absoluteExpiration,
+                slidindExpiraion,
+                CacheItemPriority.Default,
+                null
+            );
         }
-        
+
         // If datafile changed, then DO NOT USE the cached data, but update it.
         void UpdateXml()
         {
-            xmlDocument = LoadXmlDocument (); 
-            UpdateCache ();
+            xmlDocument = LoadXmlDocument();
+            UpdateCache();
             _documentNeedsUpdate = false;
         }
 
-        public void Save ()
+        public void Save()
         {
             if (!CanBeSaved)
-                throw new InvalidOperationException ();
+                throw new InvalidOperationException();
 
             if (xmlDocument != null)
-                xmlDocument.Save (MapPathSecure (DataFile));
+                xmlDocument.Save(MapPathSecure(DataFile));
         }
-        
-        bool CanBeSaved {
-            get {
-                return Transform == String.Empty && TransformFile == String.Empty && DataFile != String.Empty;
+
+        bool CanBeSaved
+        {
+            get
+            {
+                return Transform == String.Empty
+                    && TransformFile == String.Empty
+                    && DataFile != String.Empty;
             }
         }
-        
-        protected override HierarchicalDataSourceView GetHierarchicalView (string viewPath)
+
+        protected override HierarchicalDataSourceView GetHierarchicalView(string viewPath)
         {
-            XmlNode doc = this.GetXmlDocument ();
+            XmlNode doc = this.GetXmlDocument();
             XmlNodeList ret = null;
-            
-            if (!String.IsNullOrEmpty (viewPath)) {
-                XmlNode n = doc.SelectSingleNode (viewPath);
+
+            if (!String.IsNullOrEmpty(viewPath))
+            {
+                XmlNode n = doc.SelectSingleNode(viewPath);
                 if (n != null)
                     ret = n.ChildNodes;
-            } else if (!String.IsNullOrEmpty (XPath)) {
-                ret = doc.SelectNodes (XPath);
-            } else {
+            }
+            else if (!String.IsNullOrEmpty(XPath))
+            {
+                ret = doc.SelectNodes(XPath);
+            }
+            else
+            {
                 ret = doc.ChildNodes;
             }
-            
-            return new XmlHierarchicalDataSourceView (ret);
+
+            return new XmlHierarchicalDataSourceView(ret);
         }
-        
-        IList IListSource.GetList ()
+
+        IList IListSource.GetList()
         {
-            return ListSourceHelper.GetList (this);
+            return ListSourceHelper.GetList(this);
         }
-        
-        bool IListSource.ContainsListCollection {
-            get { return ListSourceHelper.ContainsListCollection (this); }
-        }
-        
-        DataSourceView IDataSource.GetView (string viewName)
+
+        bool IListSource.ContainsListCollection
         {
-            if (String.IsNullOrEmpty (viewName))
+            get { return ListSourceHelper.ContainsListCollection(this); }
+        }
+
+        DataSourceView IDataSource.GetView(string viewName)
+        {
+            if (String.IsNullOrEmpty(viewName))
                 viewName = "DefaultView";
-            
-            return new XmlDataSourceView (this, viewName);
+
+            return new XmlDataSourceView(this, viewName);
         }
-        
-        ICollection IDataSource.GetViewNames ()
+
+        ICollection IDataSource.GetViewNames()
         {
             return emptyNames;
         }
-        
-        [DefaultValue (0)]
-        [TypeConverter (typeof(DataSourceCacheDurationConverter))]
-        public virtual int CacheDuration {
-            get {
-                return _cacheDuration;
-            }
-            set {
-                _cacheDuration = value;
-            }
+
+        [DefaultValue(0)]
+        [TypeConverter(typeof(DataSourceCacheDurationConverter))]
+        public virtual int CacheDuration
+        {
+            get { return _cacheDuration; }
+            set { _cacheDuration = value; }
         }
 
-        [DefaultValue (DataSourceCacheExpiry.Absolute)]
-        public virtual DataSourceCacheExpiry CacheExpirationPolicy {
-            get {
-                return _cacheExpirationPolicy;
-            }
-            set {
-                _cacheExpirationPolicy = value;
-            }
+        [DefaultValue(DataSourceCacheExpiry.Absolute)]
+        public virtual DataSourceCacheExpiry CacheExpirationPolicy
+        {
+            get { return _cacheExpirationPolicy; }
+            set { _cacheExpirationPolicy = value; }
         }
 
-        [DefaultValue ("")]
-        public virtual string CacheKeyDependency {
-            get {
-                return _cacheKeyDependency;
-            }
-            set {
-                _cacheKeyDependency = value;
-            }
+        [DefaultValue("")]
+        public virtual string CacheKeyDependency
+        {
+            get { return _cacheKeyDependency; }
+            set { _cacheKeyDependency = value; }
         }
 
-        [DefaultValue (true)]
-        public virtual bool EnableCaching {
-            get {
-                return _enableCaching;
-            }
-            set {
-                _enableCaching = value;
-            }
+        [DefaultValue(true)]
+        public virtual bool EnableCaching
+        {
+            get { return _enableCaching; }
+            set { _enableCaching = value; }
         }
 
-        [DefaultValue ("")]
-        [PersistenceMode (PersistenceMode.InnerProperty)]
-        [WebSysDescription ("Inline XML data.")]
-        [WebCategory ("Data")]
-        [EditorAttribute ("System.ComponentModel.Design.MultilineStringEditor," + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [TypeConverter (typeof(MultilineStringConverter))]
-        public virtual string Data {
+        [DefaultValue("")]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [WebSysDescription("Inline XML data.")]
+        [WebCategory("Data")]
+        [EditorAttribute(
+            "System.ComponentModel.Design.MultilineStringEditor," + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [TypeConverter(typeof(MultilineStringConverter))]
+        public virtual string Data
+        {
             get { return _data; }
-            set {
-                if (_data != value) {
+            set
+            {
+                if (_data != value)
+                {
                     _data = value;
                     _documentNeedsUpdate = true;
                     OnDataSourceChanged(EventArgs.Empty);
                 }
             }
         }
-        
-        [DefaultValueAttribute ("")]
-        [EditorAttribute ("System.Web.UI.Design.XmlDataFileEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [MonoLimitation ("Absolute path to the file system is not supported; use a relative URI instead.")]
-        public virtual string DataFile {
+
+        [DefaultValueAttribute("")]
+        [EditorAttribute(
+            "System.Web.UI.Design.XmlDataFileEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [MonoLimitation(
+            "Absolute path to the file system is not supported; use a relative URI instead."
+        )]
+        public virtual string DataFile
+        {
             get { return _dataFile; }
-            set {
-                if (_dataFile != value) {
+            set
+            {
+                if (_dataFile != value)
+                {
                     _dataFile = value;
                     _documentNeedsUpdate = true;
                     OnDataSourceChanged(EventArgs.Empty);
                 }
             }
         }
-        
+
         XsltArgumentList transformArgumentList;
-        
-        [BrowsableAttribute (false)]
-        public virtual XsltArgumentList TransformArgumentList {
+
+        [BrowsableAttribute(false)]
+        public virtual XsltArgumentList TransformArgumentList
+        {
             get { return transformArgumentList; }
             set { transformArgumentList = value; }
         }
-        
-        [PersistenceModeAttribute (PersistenceMode.InnerProperty)]
-        [EditorAttribute ("System.ComponentModel.Design.MultilineStringEditor," + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [DefaultValueAttribute ("")]
-        [TypeConverterAttribute (typeof(MultilineStringConverter))]
-        public virtual string Transform {
+
+        [PersistenceModeAttribute(PersistenceMode.InnerProperty)]
+        [EditorAttribute(
+            "System.ComponentModel.Design.MultilineStringEditor," + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [DefaultValueAttribute("")]
+        [TypeConverterAttribute(typeof(MultilineStringConverter))]
+        public virtual string Transform
+        {
             get { return _transform; }
-            set {
-                if (_transform != value) {
-                    _transform = value; 
+            set
+            {
+                if (_transform != value)
+                {
+                    _transform = value;
                     _documentNeedsUpdate = true;
                     OnDataSourceChanged(EventArgs.Empty);
                 }
             }
         }
-        
-        [EditorAttribute ("System.Web.UI.Design.XslTransformFileEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [DefaultValueAttribute ("")]
-        [MonoLimitation ("Absolute path to the file system is not supported; use a relative URI instead.")]
-        public virtual string TransformFile {
+
+        [EditorAttribute(
+            "System.Web.UI.Design.XslTransformFileEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [DefaultValueAttribute("")]
+        [MonoLimitation(
+            "Absolute path to the file system is not supported; use a relative URI instead."
+        )]
+        public virtual string TransformFile
+        {
             get { return _transformFile; }
-            set {
-                if (_transformFile != value) {
+            set
+            {
+                if (_transformFile != value)
+                {
                     _transformFile = value;
                     _documentNeedsUpdate = true;
                     OnDataSourceChanged(EventArgs.Empty);
                 }
             }
         }
-        
-        [DefaultValueAttribute ("")]
-        public virtual string XPath {
+
+        [DefaultValueAttribute("")]
+        public virtual string XPath
+        {
             get { return _xpath; }
-            set {
-                if (_xpath != value) {
+            set
+            {
+                if (_xpath != value)
+                {
                     _xpath = value;
                     OnDataSourceChanged(EventArgs.Empty);
                 }
             }
         }
-        [DefaultValue ("")]
-        public virtual string CacheKeyContext {
-            get { return ViewState.GetString ("CacheKeyContext", String.Empty); }
-            set { ViewState ["CacheKeyContext"] = value; }
+
+        [DefaultValue("")]
+        public virtual string CacheKeyContext
+        {
+            get { return ViewState.GetString("CacheKeyContext", String.Empty); }
+            set { ViewState["CacheKeyContext"] = value; }
         }
     }
 }
-

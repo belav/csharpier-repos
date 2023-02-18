@@ -3,16 +3,16 @@
 
 static class S
 {
-    public static int Test (this int value)
+    public static int Test(this int value)
     {
-    return value;
+        return value;
     }
 }
 
 class M
 {
-    public static void Main ()
+    public static void Main()
     {
-        1.Test (value: 1);
+        1.Test(value: 1);
     }
 }

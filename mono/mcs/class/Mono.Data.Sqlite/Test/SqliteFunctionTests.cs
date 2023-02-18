@@ -2,7 +2,7 @@
 //
 // Authors:
 //   Rolf Bjarne Kvinge <rolf@xamarin.com>
-// 
+//
 
 //
 // Copyright (C) 2014 Xamarin Inc (http://www.xamarin.com)
@@ -23,16 +23,16 @@ namespace MonoTests.Mono.Data.Sqlite
         string uri;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
-            uri = Path.GetTempFileName ();
+            uri = Path.GetTempFileName();
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
-            if (File.Exists (uri))
-                File.Delete (uri);
+            if (File.Exists(uri))
+                File.Delete(uri);
         }
 
         [Test]
@@ -42,25 +42,26 @@ namespace MonoTests.Mono.Data.Sqlite
             builder.DataSource = uri;
 
             var connectionString = builder.ToString();
-            using (var connection = new SqliteConnection (connectionString)) {
-                connection.Open ();
-                connection.Close ();
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                connection.Close();
             }
         }
 
         [SqliteFunction(Name = "TestCollation", FuncType = FunctionType.Collation)]
         public class TestCollation : SqliteFunction
         {
-            public override int Compare (string param1, string param2)
+            public override int Compare(string param1, string param2)
             {
-                return string.Compare (param1, param2);
+                return string.Compare(param1, param2);
             }
         }
 
         [SqliteFunction(Name = "TestScalar", FuncType = FunctionType.Scalar)]
         public class TestScalar : SqliteFunction
         {
-            public override object Invoke (object[] args)
+            public override object Invoke(object[] args)
             {
                 return null;
             }
@@ -69,11 +70,9 @@ namespace MonoTests.Mono.Data.Sqlite
         [SqliteFunction(Name = "TestAggregate", FuncType = FunctionType.Aggregate)]
         public class TestAggregate : SqliteFunction
         {
-            public override void Step(object[] args, int stepNumber, ref object contextData)
-            {
-            }
+            public override void Step(object[] args, int stepNumber, ref object contextData) { }
 
-            public override object Final (object contextData)
+            public override object Final(object contextData)
             {
                 return null;
             }

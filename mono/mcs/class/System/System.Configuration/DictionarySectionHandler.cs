@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -53,34 +52,34 @@ namespace System.Configuration
         /// <returns></returns>
         public virtual object Create(object parent, object context, XmlNode section)
         {
-#if (XML_DEP)            
-            return ConfigHelper.GetDictionary (parent as IDictionary, section,
-                               KeyAttributeName, ValueAttributeName);
+#if (XML_DEP)
+            return ConfigHelper.GetDictionary(
+                parent as IDictionary,
+                section,
+                KeyAttributeName,
+                ValueAttributeName
+            );
 #else
             return null;
 #endif
         }
 
         /// <summary>
-        ///        Gets the name of the key attribute tag. This property is overidden by derived classes to change 
+        ///        Gets the name of the key attribute tag. This property is overidden by derived classes to change
         ///        the name of the key attribute tag. The default is "key".
         /// </summary>
         protected virtual string KeyAttributeName
         {
-            get {
-                return "key";
-            }
+            get { return "key"; }
         }
 
         /// <summary>
         ///        Gets the name of the value tag. This property may be overidden by derived classes to change
         ///        the name of the value tag. The default is "value".
         /// </summary>
-        protected virtual string ValueAttributeName 
+        protected virtual string ValueAttributeName
         {
-            get {
-                return "value";
-            }
+            get { return "value"; }
         }
     }
 }

@@ -53,12 +53,20 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                JsonConvert.DeserializeObject(
-                    @"[""1"",",
-                    new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.None, MaxDepth = 1024 });
-            }, "Unexpected end when reading token. Path ''.");
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    JsonConvert.DeserializeObject(
+                        @"[""1"",",
+                        new JsonSerializerSettings()
+                        {
+                            TypeNameHandling = TypeNameHandling.None,
+                            MaxDepth = 1024
+                        }
+                    );
+                },
+                "Unexpected end when reading token. Path ''."
+            );
         }
 
         [Test]
@@ -70,10 +78,13 @@ namespace Newtonsoft.Json.Tests.Issues
 
             JsonTextReader reader = new JsonTextReader(new StringReader(@"[""1"","));
 
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                writer.WriteToken(reader);
-            }, "Unexpected end when reading token. Path ''.");
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    writer.WriteToken(reader);
+                },
+                "Unexpected end when reading token. Path ''."
+            );
         }
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
@@ -86,10 +97,13 @@ namespace Newtonsoft.Json.Tests.Issues
 
             JsonTextReader reader = new JsonTextReader(new StringReader(@"[""1"","));
 
-            await ExceptionAssert.ThrowsAsync<JsonWriterException>(async () =>
-            {
-                await writer.WriteTokenAsync(reader);
-            }, "Unexpected end when reading token. Path ''.");
+            await ExceptionAssert.ThrowsAsync<JsonWriterException>(
+                async () =>
+                {
+                    await writer.WriteTokenAsync(reader);
+                },
+                "Unexpected end when reading token. Path ''."
+            );
         }
 #endif
 
@@ -103,10 +117,13 @@ namespace Newtonsoft.Json.Tests.Issues
             JsonTextReader reader = new JsonTextReader(new StringReader(@"[""1"","));
             reader.Read();
 
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                writer.WriteToken(reader);
-            }, "Unexpected end when reading token. Path ''.");
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    writer.WriteToken(reader);
+                },
+                "Unexpected end when reading token. Path ''."
+            );
         }
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
@@ -120,10 +137,13 @@ namespace Newtonsoft.Json.Tests.Issues
             JsonTextReader reader = new JsonTextReader(new StringReader(@"[""1"","));
             await reader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonWriterException>(async () =>
-            {
-                await writer.WriteTokenAsync(reader);
-            }, "Unexpected end when reading token. Path ''.");
+            await ExceptionAssert.ThrowsAsync<JsonWriterException>(
+                async () =>
+                {
+                    await writer.WriteTokenAsync(reader);
+                },
+                "Unexpected end when reading token. Path ''."
+            );
         }
 #endif
 
@@ -138,10 +158,13 @@ namespace Newtonsoft.Json.Tests.Issues
             reader.Read();
             reader.Read();
 
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                writer.WriteToken(reader);
-            }, "Unexpected end when reading token. Path ''.");
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    writer.WriteToken(reader);
+                },
+                "Unexpected end when reading token. Path ''."
+            );
         }
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
@@ -156,10 +179,13 @@ namespace Newtonsoft.Json.Tests.Issues
             await reader.ReadAsync();
             await reader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonWriterException>(async () =>
-            {
-                await writer.WriteTokenAsync(reader);
-            }, "Unexpected end when reading token. Path ''.");
+            await ExceptionAssert.ThrowsAsync<JsonWriterException>(
+                async () =>
+                {
+                    await writer.WriteTokenAsync(reader);
+                },
+                "Unexpected end when reading token. Path ''."
+            );
         }
 #endif
 
@@ -174,10 +200,13 @@ namespace Newtonsoft.Json.Tests.Issues
             reader.Read();
             reader.Read();
 
-            ExceptionAssert.Throws<JsonWriterException>(() =>
-            {
-                writer.WriteToken(reader);
-            }, "Unexpected end when reading token. Path '[0]'.");
+            ExceptionAssert.Throws<JsonWriterException>(
+                () =>
+                {
+                    writer.WriteToken(reader);
+                },
+                "Unexpected end when reading token. Path '[0]'."
+            );
         }
 
 #if !(NET20 || NET35 || NET40 || PORTABLE40)
@@ -192,10 +221,13 @@ namespace Newtonsoft.Json.Tests.Issues
             await reader.ReadAsync();
             await reader.ReadAsync();
 
-            await ExceptionAssert.ThrowsAsync<JsonWriterException>(async () =>
-            {
-                await writer.WriteTokenAsync(reader);
-            }, "Unexpected end when reading token. Path '[0]'.");
+            await ExceptionAssert.ThrowsAsync<JsonWriterException>(
+                async () =>
+                {
+                    await writer.WriteTokenAsync(reader);
+                },
+                "Unexpected end when reading token. Path '[0]'."
+            );
         }
 #endif
     }

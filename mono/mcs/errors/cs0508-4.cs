@@ -3,13 +3,13 @@
 
 abstract class A<T>
 {
-    public abstract T getT ();
+    public abstract T getT();
 
     public class B : A<B>
     {
-        public override B getT ()
+        public override B getT()
         {
-            return default (B);
+            return default(B);
         }
     }
 }

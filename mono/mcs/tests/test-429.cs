@@ -2,16 +2,18 @@
 
 using global = Foo;
 
-namespace Foo {
+namespace Foo
+{
     class A { }
 }
 
 class A { }
 
-class X {
-    public static void Main ()
+class X
+{
+    public static void Main()
     {
-        A a = new global::A ();
-        System.Console.WriteLine (a.GetType ());
+        A a = new global::A();
+        System.Console.WriteLine(a.GetType());
     }
 }

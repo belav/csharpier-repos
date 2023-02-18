@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -46,66 +46,77 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-    public sealed partial class WebHttpSecurityElement
-         : ConfigurationElement
+    public sealed partial class WebHttpSecurityElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
         static ConfigurationProperty mode;
         static ConfigurationProperty transport;
 
-        static WebHttpSecurityElement ()
+        static WebHttpSecurityElement()
         {
-            properties = new ConfigurationPropertyCollection ();
+            properties = new ConfigurationPropertyCollection();
 
-            mode = new ConfigurationProperty ("mode",
-                typeof (WebHttpSecurityMode), "None", null/* FIXME: get converter for WebHttpSecurityMode*/, null,
-                ConfigurationPropertyOptions.None);
+            mode = new ConfigurationProperty(
+                "mode",
+                typeof(WebHttpSecurityMode),
+                "None",
+                null /* FIXME: get converter for WebHttpSecurityMode*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            transport = new ConfigurationProperty ("transport",
-                typeof (HttpTransportSecurityElement), null, null/* FIXME: get converter for HttpTransportSecurityElement*/, null,
-                ConfigurationPropertyOptions.None);
+            transport = new ConfigurationProperty(
+                "transport",
+                typeof(HttpTransportSecurityElement),
+                null,
+                null /* FIXME: get converter for HttpTransportSecurityElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (mode);
-            properties.Add (transport);
+            properties.Add(mode);
+            properties.Add(transport);
         }
 
-        public WebHttpSecurityElement ()
-        {
-        }
-
+        public WebHttpSecurityElement() { }
 
         // Properties
 
-        [ConfigurationProperty ("mode",
-             DefaultValue = "None",
-             Options = ConfigurationPropertyOptions.None)]
-        public WebHttpSecurityMode Mode {
-            get { return (WebHttpSecurityMode) base [mode]; }
-            set { base [mode] = value; }
+        [ConfigurationProperty(
+            "mode",
+            DefaultValue = "None",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public WebHttpSecurityMode Mode
+        {
+            get { return (WebHttpSecurityMode)base[mode]; }
+            set { base[mode] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        [ConfigurationProperty ("transport",
-             Options = ConfigurationPropertyOptions.None)]
-        public HttpTransportSecurityElement Transport {
-            get { return (HttpTransportSecurityElement) base [transport]; }
+        [ConfigurationProperty("transport", Options = ConfigurationPropertyOptions.None)]
+        public HttpTransportSecurityElement Transport
+        {
+            get { return (HttpTransportSecurityElement)base[transport]; }
         }
-        
-        internal void ApplyConfiguration (WebHttpSecurity security)
+
+        internal void ApplyConfiguration(WebHttpSecurity security)
         {
             security.Mode = Mode;
             security.Transport.ClientCredentialType = Transport.ClientCredentialType;
         }
-        
-        internal void InitializeFrom (WebHttpSecurity security)
+
+        internal void InitializeFrom(WebHttpSecurity security)
         {
             Mode = security.Mode;
             Transport.ClientCredentialType = security.Transport.ClientCredentialType;
         }
     }
-
 }

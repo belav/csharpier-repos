@@ -53,22 +53,21 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            User user1 = new User
-            {
-                UserName = "jamesn",
-                Enabled = true
-            };
+            User user1 = new User { UserName = "jamesn", Enabled = true };
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
                 NamingStrategy = new KebabCaseNamingStrategy()
             };
 
-            string json = JsonConvert.SerializeObject(user1, new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver,
-                Formatting = Formatting.Indented
-            });
+            string json = JsonConvert.SerializeObject(
+                user1,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver,
+                    Formatting = Formatting.Indented
+                }
+            );
 
             Console.WriteLine(json);
             // {
@@ -77,10 +76,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""user-name"": ""jamesn"",
   ""enabled"": true
-}", json);
+}",
+                json
+            );
         }
     }
 }

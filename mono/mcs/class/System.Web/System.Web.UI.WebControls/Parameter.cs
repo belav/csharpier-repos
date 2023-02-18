@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,54 +36,59 @@ using System.Text;
 using System.Data;
 using System.ComponentModel;
 
-namespace System.Web.UI.WebControls {
-    [DefaultPropertyAttribute ("DefaultValue")]
-    public class Parameter : ICloneable, IStateManager 
+namespace System.Web.UI.WebControls
+{
+    [DefaultPropertyAttribute("DefaultValue")]
+    public class Parameter : ICloneable, IStateManager
     {
-        public Parameter () : base ()
-        {
-        }
+        public Parameter()
+            : base() { }
 
-        protected Parameter (Parameter original)
+        protected Parameter(Parameter original)
         {
             if (original == null)
-                throw new NullReferenceException (".NET emulation");
-            
+                throw new NullReferenceException(".NET emulation");
+
             this.DefaultValue = original.DefaultValue;
             this.Direction = original.Direction;
             this.ConvertEmptyStringToNull = original.ConvertEmptyStringToNull;
             this.Type = original.Type;
             this.Name = original.Name;
         }
-        
-        public Parameter (string name)
+
+        public Parameter(string name)
         {
             this.Name = name;
         }
-        
-        public Parameter(string name, TypeCode type) : this (name)
+
+        public Parameter(string name, TypeCode type)
+            : this(name)
         {
             this.Type = type;
         }
-        
-        public Parameter (string name, TypeCode type, string defaultValue) : this (name, type)
+
+        public Parameter(string name, TypeCode type, string defaultValue)
+            : this(name, type)
         {
             this.DefaultValue = defaultValue;
         }
 
-        public Parameter (string name, DbType dbType) : this (name)
+        public Parameter(string name, DbType dbType)
+            : this(name)
         {
             this.DbType = dbType;
         }
 
-        public Parameter (string name, DbType dbType, string defaultValue) : this (name, dbType)
+        public Parameter(string name, DbType dbType, string defaultValue)
+            : this(name, dbType)
         {
             this.DefaultValue = defaultValue;
         }
 
-        public static TypeCode ConvertDbTypeToTypeCode (DbType dbType)
+        public static TypeCode ConvertDbTypeToTypeCode(DbType dbType)
         {
-            switch (dbType) {
+            switch (dbType)
+            {
                 case DbType.AnsiString:
                 case DbType.AnsiStringFixedLength:
                 case DbType.StringFixedLength:
@@ -116,7 +121,7 @@ namespace System.Web.UI.WebControls {
 
                 case DbType.Double:
                     return TypeCode.Double;
-                
+
                 case DbType.Int16:
                     return TypeCode.Int16;
 
@@ -125,7 +130,7 @@ namespace System.Web.UI.WebControls {
 
                 case DbType.Int64:
                     return TypeCode.Int64;
-                
+
                 case DbType.SByte:
                     return TypeCode.SByte;
 
@@ -146,12 +151,13 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-        public static DbType ConvertTypeCodeToDbType (TypeCode typeCode)
+        public static DbType ConvertTypeCodeToDbType(TypeCode typeCode)
         {
-            switch (typeCode) {
+            switch (typeCode)
+            {
                 case TypeCode.Empty:
                 case TypeCode.Object:
-                case TypeCode.DBNull:                    
+                case TypeCode.DBNull:
                     return DbType.Object;
 
                 case TypeCode.Boolean:
@@ -204,255 +210,290 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-        public DbType GetDatabaseType ()
+        public DbType GetDatabaseType()
         {
             DbType dt = this.DbType;
 
             if (dt != DbType.Object)
-                throw new InvalidOperationException ("The DbType property is already set to a value other than DbType.Object.");
+                throw new InvalidOperationException(
+                    "The DbType property is already set to a value other than DbType.Object."
+                );
 
-            return ConvertTypeCodeToDbType (this.Type);
+            return ConvertTypeCodeToDbType(this.Type);
         }
-        
-        protected virtual Parameter Clone ()
+
+        protected virtual Parameter Clone()
         {
-            return new Parameter (this);
+            return new Parameter(this);
         }
-        
-        protected void OnParameterChanged ()
+
+        protected void OnParameterChanged()
         {
             if (_owner != null)
-                _owner.CallOnParameterChanged ();
+                _owner.CallOnParameterChanged();
         }
-        
-        protected virtual void LoadViewState (object savedState)
+
+        protected virtual void LoadViewState(object savedState)
         {
-            ViewState.LoadViewState (savedState);
+            ViewState.LoadViewState(savedState);
         }
-        
-        protected virtual object SaveViewState ()
+
+        protected virtual object SaveViewState()
         {
-            return ViewState.SaveViewState ();
+            return ViewState.SaveViewState();
         }
-        
-        protected virtual void TrackViewState ()
+
+        protected virtual void TrackViewState()
         {
             isTrackingViewState = true;
             if (viewState != null)
-                viewState.TrackViewState ();
+                viewState.TrackViewState();
         }
-        
-        object ICloneable.Clone ()
+
+        object ICloneable.Clone()
         {
-            return this.Clone ();
+            return this.Clone();
         }
-        
-        void IStateManager.LoadViewState (object savedState)
+
+        void IStateManager.LoadViewState(object savedState)
         {
-            this.LoadViewState (savedState);
+            this.LoadViewState(savedState);
         }
-        
-        object IStateManager.SaveViewState ()
+
+        object IStateManager.SaveViewState()
         {
-            return this.SaveViewState ();
+            return this.SaveViewState();
         }
-        
-        void IStateManager.TrackViewState ()
+
+        void IStateManager.TrackViewState()
         {
-            this.TrackViewState ();
+            this.TrackViewState();
         }
-        
-        bool IStateManager.IsTrackingViewState {
+
+        bool IStateManager.IsTrackingViewState
+        {
             get { return this.IsTrackingViewState; }
         }
-        
+
         // MSDN: The ToString method returns the Name property of the Parameter object. If the Parameter object has no name, ToString returns String.Empty.
-        public override string ToString ()
+        public override string ToString()
         {
             return Name;
         }
-        
-        [WebCategoryAttribute ("Parameter")]
-        [DefaultValueAttribute (null)]
-        [WebSysDescriptionAttribute ("Default value to be used in case value is null.")]
-        public string DefaultValue {
-            get { return ViewState.GetString ("DefaultValue", null); }
-            set {
-                
-                if (DefaultValue != value) {
-                    ViewState ["DefaultValue"] = value;
-                    OnParameterChanged ();
+
+        [WebCategoryAttribute("Parameter")]
+        [DefaultValueAttribute(null)]
+        [WebSysDescriptionAttribute("Default value to be used in case value is null.")]
+        public string DefaultValue
+        {
+            get { return ViewState.GetString("DefaultValue", null); }
+            set
+            {
+
+                if (DefaultValue != value)
+                {
+                    ViewState["DefaultValue"] = value;
+                    OnParameterChanged();
                 }
             }
         }
 
-        [WebCategoryAttribute ("Parameter")]
-        [DefaultValueAttribute ("Input")]
-        [WebSysDescriptionAttribute ("Parameter's direction.")]
+        [WebCategoryAttribute("Parameter")]
+        [DefaultValueAttribute("Input")]
+        [WebSysDescriptionAttribute("Parameter's direction.")]
         public ParameterDirection Direction
         {
-            get { return (ParameterDirection) ViewState.GetInt ("Direction", (int)ParameterDirection.Input); }
-            set {                
-                if (Direction != value) {
-                    ViewState ["Direction"] = value;
-                    OnParameterChanged ();
+            get
+            {
+                return (ParameterDirection)
+                    ViewState.GetInt("Direction", (int)ParameterDirection.Input);
+            }
+            set
+            {
+                if (Direction != value)
+                {
+                    ViewState["Direction"] = value;
+                    OnParameterChanged();
                 }
             }
         }
 
-
-        [WebCategoryAttribute ("Parameter")]
-        [DefaultValueAttribute ("")]
-        [WebSysDescriptionAttribute ("Parameter's name.")]
+        [WebCategoryAttribute("Parameter")]
+        [DefaultValueAttribute("")]
+        [WebSysDescriptionAttribute("Parameter's name.")]
         public string Name
         {
-            get {
-                string s = ViewState ["Name"] as string;
+            get
+            {
+                string s = ViewState["Name"] as string;
                 if (s != null)
                     return s;
-                
+
                 return String.Empty;
             }
-            set {
-                
-                if (Name != value) {
-                    ViewState ["Name"] = value;
-                    OnParameterChanged ();
+            set
+            {
+
+                if (Name != value)
+                {
+                    ViewState["Name"] = value;
+                    OnParameterChanged();
                 }
             }
         }
 
-        [WebCategoryAttribute ("Parameter")]
-        [DefaultValueAttribute (true)]
-            [WebSysDescriptionAttribute ("Checks whether an empty string is treated as a null value.")]
+        [WebCategoryAttribute("Parameter")]
+        [DefaultValueAttribute(true)]
+        [WebSysDescriptionAttribute("Checks whether an empty string is treated as a null value.")]
         public bool ConvertEmptyStringToNull
         {
-            get { return ViewState.GetBool ("ConvertEmptyStringToNull", true); }
-            set {
-                if (ConvertEmptyStringToNull != value) {
+            get { return ViewState.GetBool("ConvertEmptyStringToNull", true); }
+            set
+            {
+                if (ConvertEmptyStringToNull != value)
+                {
                     ViewState["ConvertEmptyStringToNull"] = value;
-                    OnParameterChanged ();
+                    OnParameterChanged();
                 }
             }
         }
 
-        [WebCategoryAttribute ("Parameter")]
-        [DefaultValueAttribute (DbType.Object)]
-        [WebSysDescriptionAttribute ("Parameter's DbType.")]
+        [WebCategoryAttribute("Parameter")]
+        [DefaultValueAttribute(DbType.Object)]
+        [WebSysDescriptionAttribute("Parameter's DbType.")]
         public DbType DbType
         {
-            get {
-                object o = ViewState ["DbType"];
+            get
+            {
+                object o = ViewState["DbType"];
                 if (o == null)
                     return DbType.Object;
-                return (DbType) o;
+                return (DbType)o;
             }
-            set {
-                if (DbType != value) {
-                    ViewState ["DbType"] = value;
-                    OnParameterChanged ();
+            set
+            {
+                if (DbType != value)
+                {
+                    ViewState["DbType"] = value;
+                    OnParameterChanged();
                 }
             }
         }
 
-        [DefaultValue (0)]
-        public int Size {
-            get { return ViewState.GetInt ("Size", 0); }
-            set {
-                if (Size != value) {
+        [DefaultValue(0)]
+        public int Size
+        {
+            get { return ViewState.GetInt("Size", 0); }
+            set
+            {
+                if (Size != value)
+                {
                     ViewState["Size"] = value;
-                    OnParameterChanged ();
+                    OnParameterChanged();
                 }
             }
         }
 
-        [DefaultValueAttribute (TypeCode.Empty)]
-        [WebCategoryAttribute ("Parameter"), 
-        WebSysDescriptionAttribute("Represents type of the parameter.")]
-        public TypeCode Type {
-            get { return (TypeCode) ViewState.GetInt ("Type", (int)TypeCode.Empty); }
-            set {
-                
-                if (Type != value) {
-                    ViewState ["Type"] = value;
-                    OnParameterChanged ();
+        [DefaultValueAttribute(TypeCode.Empty)]
+        [
+            WebCategoryAttribute("Parameter"),
+            WebSysDescriptionAttribute("Represents type of the parameter.")
+        ]
+        public TypeCode Type
+        {
+            get { return (TypeCode)ViewState.GetInt("Type", (int)TypeCode.Empty); }
+            set
+            {
+
+                if (Type != value)
+                {
+                    ViewState["Type"] = value;
+                    OnParameterChanged();
                 }
             }
         }
-        
+
         StateBag viewState;
-        [BrowsableAttribute (false), 
-        DesignerSerializationVisibilityAttribute (DesignerSerializationVisibility.Hidden)]
-        protected StateBag ViewState {
-            get {
-                if (viewState == null) {
-                    viewState = new StateBag ();
+
+        [
+            BrowsableAttribute(false),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)
+        ]
+        protected StateBag ViewState
+        {
+            get
+            {
+                if (viewState == null)
+                {
+                    viewState = new StateBag();
                     if (IsTrackingViewState)
-                        viewState.TrackViewState ();
+                        viewState.TrackViewState();
                 }
                 return viewState;
             }
         }
-        
+
         bool isTrackingViewState = false;
-        protected bool IsTrackingViewState {
+        protected bool IsTrackingViewState
+        {
             get { return isTrackingViewState; }
         }
 
-        // MSDN: The default implementation of the Evaluate method is to return 
-        // a null reference (Nothing in Visual Basic) in all cases. 
-        // Classes that derive from the Parameter class override the Evaluate method 
-        // to return an updated parameter value. For example, the ControlParameter object 
-        // returns the value of the control that it is bound to, while 
-        // the QueryStringParameter object retrieves the current name/value pair from 
+        // MSDN: The default implementation of the Evaluate method is to return
+        // a null reference (Nothing in Visual Basic) in all cases.
+        // Classes that derive from the Parameter class override the Evaluate method
+        // to return an updated parameter value. For example, the ControlParameter object
+        // returns the value of the control that it is bound to, while
+        // the QueryStringParameter object retrieves the current name/value pair from
         // the HttpRequest object.
-        protected internal
-        virtual    object Evaluate (HttpContext context, Control control)
+        protected internal virtual object Evaluate(HttpContext context, Control control)
         {
             return null;
         }
 
-        internal void UpdateValue (HttpContext context, Control control)
+        internal void UpdateValue(HttpContext context, Control control)
         {
-            object oldValue = ViewState ["ParameterValue"];
+            object oldValue = ViewState["ParameterValue"];
 
-            object newValue = Evaluate (context, control);
+            object newValue = Evaluate(context, control);
 
-            if (!object.Equals (oldValue, newValue)) {
-                ViewState ["ParameterValue"] = newValue;
-                OnParameterChanged ();
+            if (!object.Equals(oldValue, newValue))
+            {
+                ViewState["ParameterValue"] = newValue;
+                OnParameterChanged();
             }
         }
 
-        internal object GetValue (HttpContext context, Control control)
+        internal object GetValue(HttpContext context, Control control)
         {
-            UpdateValue (context, control);
+            UpdateValue(context, control);
 
-            object value = ConvertValue (ViewState ["ParameterValue"]);
+            object value = ConvertValue(ViewState["ParameterValue"]);
             if (value == null)
-                value = ConvertValue (DefaultValue);
+                value = ConvertValue(DefaultValue);
 
             return value;
         }
-        
-        internal object ConvertValue (object val)
+
+        internal object ConvertValue(object val)
         {
-            if (val == null) return null;
-            if (ConvertEmptyStringToNull && val.Equals (string.Empty))
+            if (val == null)
                 return null;
-            return Type != TypeCode.Empty ? Convert.ChangeType (val, Type) : val;
+            if (ConvertEmptyStringToNull && val.Equals(string.Empty))
+                return null;
+            return Type != TypeCode.Empty ? Convert.ChangeType(val, Type) : val;
         }
-        
+
         protected internal virtual void SetDirty()
         {
-            ViewState.SetDirty (true);
+            ViewState.SetDirty(true);
         }
 
         ParameterCollection _owner;
-        internal void SetOwnerCollection (ParameterCollection own)
+
+        internal void SetOwnerCollection(ParameterCollection own)
         {
             _owner = own;
         }
     }
 }
-

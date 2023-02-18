@@ -5,7 +5,7 @@ class C
 {
     public int P { get; }
 
-    public void Foo ()
+    public void Foo()
     {
         P = 10;
     }

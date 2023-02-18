@@ -6,11 +6,9 @@ using Z = A.B;
 class A
 {
     [System.Obsolete("yes", true)]
-    public class B
-    {
-    }
+    public class B { }
 
-    static void Main ()
+    static void Main()
     {
         Z z;
     }

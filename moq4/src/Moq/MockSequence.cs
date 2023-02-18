@@ -42,9 +42,13 @@ namespace Moq
         {
             var expectationPosition = sequenceLength++;
 
-            return new WhenPhrase<TMock>(mock, new Condition(
-                condition: () => expectationPosition == sequenceStep,
-                success: NextStep));
+            return new WhenPhrase<TMock>(
+                mock,
+                new Condition(
+                    condition: () => expectationPosition == sequenceStep,
+                    success: NextStep
+                )
+            );
         }
     }
 
@@ -59,7 +63,8 @@ namespace Moq
         /// </summary>
         public static ISetupConditionResult<TMock> InSequence<TMock>(
             this Mock<TMock> mock,
-            MockSequence sequence)
+            MockSequence sequence
+        )
             where TMock : class
         {
             Guard.NotNull(sequence, nameof(sequence));

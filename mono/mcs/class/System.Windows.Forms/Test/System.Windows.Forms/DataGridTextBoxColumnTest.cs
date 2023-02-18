@@ -44,65 +44,70 @@ namespace MonoTests.System.Windows.Forms
     public class DataGridTextBoxColumnTest : TestHelper
     {
         private bool eventhandled;
+
         //private object Element;
         //private CollectionChangeAction Action;
 
         [Test]
-        public void TestDefaultValues ()
+        public void TestDefaultValues()
         {
-            DataGridTextBoxColumn col = new DataGridTextBoxColumn ();
+            DataGridTextBoxColumn col = new DataGridTextBoxColumn();
 
-            Assert.AreEqual (HorizontalAlignment.Left, col.Alignment, "HorizontalAlignment property");
-            Assert.AreEqual ("", col.HeaderText, "HeaderText property");
-            Assert.AreEqual ("", col.MappingName, "MappingName property");
-            Assert.AreEqual ("(null)", col.NullText, "NullText property");
-            Assert.AreEqual (false, col.ReadOnly, "ReadOnly property");
-            Assert.AreEqual (-1, col.Width, "Width property");
-            Assert.AreEqual ("", col.Format, "Format property");
-            Assert.AreEqual (null, col.FormatInfo, "FormatInfo property");
+            Assert.AreEqual(
+                HorizontalAlignment.Left,
+                col.Alignment,
+                "HorizontalAlignment property"
+            );
+            Assert.AreEqual("", col.HeaderText, "HeaderText property");
+            Assert.AreEqual("", col.MappingName, "MappingName property");
+            Assert.AreEqual("(null)", col.NullText, "NullText property");
+            Assert.AreEqual(false, col.ReadOnly, "ReadOnly property");
+            Assert.AreEqual(-1, col.Width, "Width property");
+            Assert.AreEqual("", col.Format, "Format property");
+            Assert.AreEqual(null, col.FormatInfo, "FormatInfo property");
         }
 
         [Test]
-        public void TestMappingNameChangedEvent ()
+        public void TestMappingNameChangedEvent()
         {
-            DataGridTextBoxColumn col = new DataGridTextBoxColumn ();
+            DataGridTextBoxColumn col = new DataGridTextBoxColumn();
             eventhandled = false;
-            col.MappingNameChanged += new EventHandler (OnEventHandler);
+            col.MappingNameChanged += new EventHandler(OnEventHandler);
             col.MappingName = "name1";
-            Assert.AreEqual (true, eventhandled, "A1");
+            Assert.AreEqual(true, eventhandled, "A1");
         }
 
         [Test]
-        public void TestAlignmentChangedEvent ()
+        public void TestAlignmentChangedEvent()
         {
-            DataGridTextBoxColumn col = new DataGridTextBoxColumn ();
+            DataGridTextBoxColumn col = new DataGridTextBoxColumn();
             eventhandled = false;
-            col.AlignmentChanged += new EventHandler (OnEventHandler);
+            col.AlignmentChanged += new EventHandler(OnEventHandler);
             col.Alignment = HorizontalAlignment.Center;
-            Assert.AreEqual (true, eventhandled, "A1");
+            Assert.AreEqual(true, eventhandled, "A1");
         }
 
         [Test]
-        public void TestHeaderTextChangedEvent ()
+        public void TestHeaderTextChangedEvent()
         {
-            DataGridTextBoxColumn col = new DataGridTextBoxColumn ();
+            DataGridTextBoxColumn col = new DataGridTextBoxColumn();
             eventhandled = false;
-            col.HeaderTextChanged += new EventHandler (OnEventHandler);
+            col.HeaderTextChanged += new EventHandler(OnEventHandler);
             col.HeaderText = "Header";
-            Assert.AreEqual (true, eventhandled, "A1");
+            Assert.AreEqual(true, eventhandled, "A1");
         }
 
         [Test]
-        public void TestNullTextChangedEvent ()
+        public void TestNullTextChangedEvent()
         {
-            DataGridTextBoxColumn col = new DataGridTextBoxColumn ();
+            DataGridTextBoxColumn col = new DataGridTextBoxColumn();
             eventhandled = false;
-            col.NullTextChanged += new EventHandler (OnEventHandler);
+            col.NullTextChanged += new EventHandler(OnEventHandler);
             col.NullText = "Null";
-            Assert.AreEqual (true, eventhandled, "A1");
+            Assert.AreEqual(true, eventhandled, "A1");
         }
 
-        private void OnEventHandler (object sender, EventArgs e)
+        private void OnEventHandler(object sender, EventArgs e)
         {
             eventhandled = true;
         }
@@ -113,438 +118,512 @@ namespace MonoTests.System.Windows.Forms
         ColumnPoker nameColumnStyle;
         ColumnPoker companyColumnStyle;
 
-        public void MakeTable (bool readonly_name)
+        public void MakeTable(bool readonly_name)
         {
-            table = new DataTable ();
+            table = new DataTable();
             view = table.DefaultView;
-            table.Columns.Add (new DataColumn ("who"));
-            table.Columns.Add (new DataColumn ("where"));
-            DataRow row = table.NewRow ();
-            row ["who"] = "Miguel";
-            row ["where"] = null;
-            table.Rows.Add (row);
+            table.Columns.Add(new DataColumn("who"));
+            table.Columns.Add(new DataColumn("where"));
+            DataRow row = table.NewRow();
+            row["who"] = "Miguel";
+            row["where"] = null;
+            table.Rows.Add(row);
 
-            row = table.NewRow ();
-            row ["who"] = "Toshok";
-            row ["where"] = "Novell";
-            table.Rows.Add (row);
+            row = table.NewRow();
+            row["who"] = "Toshok";
+            row["where"] = "Novell";
+            table.Rows.Add(row);
 
-            tableStyle = new DataGridTableStyle ();
-            nameColumnStyle = new ColumnPoker ();
+            tableStyle = new DataGridTableStyle();
+            nameColumnStyle = new ColumnPoker();
             nameColumnStyle.MappingName = "who";
             nameColumnStyle.ReadOnly = readonly_name;
-            tableStyle.GridColumnStyles.Add (nameColumnStyle);
-            companyColumnStyle = new ColumnPoker ();
+            tableStyle.GridColumnStyles.Add(nameColumnStyle);
+            companyColumnStyle = new ColumnPoker();
             companyColumnStyle.HeaderText = "Company";
             companyColumnStyle.MappingName = "where";
             companyColumnStyle.NullText = "(not set)";
-            tableStyle.GridColumnStyles.Add (companyColumnStyle);
+            tableStyle.GridColumnStyles.Add(companyColumnStyle);
         }
 
         class ColumnPoker : DataGridTextBoxColumn
         {
-            public ColumnPoker ()
+            public ColumnPoker() { }
+
+            public ColumnPoker(PropertyDescriptor prop)
+                : base(prop) { }
+
+            public void DoAbort(int rowNum)
             {
+                base.Abort(rowNum);
             }
 
-            public ColumnPoker (PropertyDescriptor prop) : base (prop)
+            public bool DoCommit(CurrencyManager dataSource, int rowNum)
             {
+                return base.Commit(dataSource, rowNum);
             }
 
-            public void DoAbort (int rowNum)
+            public void DoConcedeFocus()
             {
-                base.Abort (rowNum);
+                base.ConcedeFocus();
             }
 
-            public bool DoCommit (CurrencyManager dataSource, int rowNum)
+            public void DoEdit(
+                CurrencyManager source,
+                int rowNum,
+                Rectangle bounds,
+                bool _ro,
+                string instantText,
+                bool cellIsVisible
+            )
             {
-                return base.Commit (dataSource, rowNum);
+                base.Edit(source, rowNum, bounds, _ro, instantText, cellIsVisible);
             }
 
-            public void DoConcedeFocus ()
+            public void DoEndEdit()
             {
-                base.ConcedeFocus ();
+                base.EndEdit();
             }
 
-            public void DoEdit (CurrencyManager source, int rowNum,  Rectangle bounds,  bool _ro, string instantText, bool cellIsVisible)
+            public void DoEnterNullValue()
             {
-                base.Edit (source, rowNum, bounds, _ro, instantText, cellIsVisible);
+                base.EnterNullValue();
             }
 
-            public void DoEndEdit ()
+            public void DoHideEditBox()
             {
-                base.EndEdit ();
+                base.HideEditBox();
             }
 
-            public void DoEnterNullValue ()
+            public void DoReleaseHostedControl()
             {
-                base.EnterNullValue ();
+                base.ReleaseHostedControl();
             }
 
-            public void DoHideEditBox ()
+            public void DoSetDataGridInColumn(DataGrid value)
             {
-                base.HideEditBox ();
+                base.SetDataGridInColumn(value);
             }
 
-            public void DoReleaseHostedControl ()
+            public void DoUpdateUI(CurrencyManager source, int rowNum, string instantText)
             {
-                base.ReleaseHostedControl ();
-            }
-
-            public void DoSetDataGridInColumn (DataGrid value)
-            {
-                base.SetDataGridInColumn (value);
-            }
-
-            public void DoUpdateUI (CurrencyManager source, int rowNum, string instantText)
-            {
-                base.UpdateUI (source, rowNum, instantText);
+                base.UpdateUI(source, rowNum, instantText);
             }
         }
 
         [Test]
-        public void TestDoEdit ()
+        public void TestDoEdit()
         {
-            MakeTable (true);
+            MakeTable(true);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             TextBox tb = nameColumnStyle.TextBox;
 
-            Assert.IsNotNull (tb, "1");
-            Assert.AreEqual (typeof (DataGridTextBox), tb.GetType(), "2");
-            Assert.IsTrue (tb.Enabled, "3");
-            Assert.IsFalse (tb.Visible, "4");
-            Assert.AreEqual ("", tb.Text, "5");
-            Assert.IsFalse (tb.ReadOnly, "6");
+            Assert.IsNotNull(tb, "1");
+            Assert.AreEqual(typeof(DataGridTextBox), tb.GetType(), "2");
+            Assert.IsTrue(tb.Enabled, "3");
+            Assert.IsFalse(tb.Visible, "4");
+            Assert.AreEqual("", tb.Text, "5");
+            Assert.IsFalse(tb.ReadOnly, "6");
 
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
-            Assert.IsTrue (tb.ReadOnly, "7");
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
+            Assert.IsTrue(tb.ReadOnly, "7");
 
             // since it's readonly
-            Assert.AreEqual ("Miguel", tb.Text, "8");
+            Assert.AreEqual("Miguel", tb.Text, "8");
         }
 
         [Test]
-        public void TestDoEdit_NullInstantTest ()
+        public void TestDoEdit_NullInstantTest()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             TextBox tb = nameColumnStyle.TextBox;
 
-            Assert.IsNotNull (tb, "1");
-            Assert.AreEqual (typeof (DataGridTextBox), tb.GetType(), "2");
-            Assert.IsTrue (tb.Enabled, "3");
-            Assert.IsFalse (tb.Visible, "4");
-            Assert.AreEqual ("", tb.Text, "5");
-            Assert.IsFalse (tb.ReadOnly, "6");
+            Assert.IsNotNull(tb, "1");
+            Assert.AreEqual(typeof(DataGridTextBox), tb.GetType(), "2");
+            Assert.IsTrue(tb.Enabled, "3");
+            Assert.IsFalse(tb.Visible, "4");
+            Assert.AreEqual("", tb.Text, "5");
+            Assert.IsFalse(tb.ReadOnly, "6");
 
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-            Assert.IsFalse (tb.ReadOnly, "7");
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                null,
+                true
+            );
+            Assert.IsFalse(tb.ReadOnly, "7");
 
             // since it's readonly
-            Assert.AreEqual ("Miguel", tb.Text, "8");
+            Assert.AreEqual("Miguel", tb.Text, "8");
         }
 
         [Test]
-        public void TestEndEdit ()
+        public void TestEndEdit()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             TextBox tb = column.TextBox;
 
-            Assert.AreEqual ("", tb.Text, "1");
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
-            Assert.AreEqual ("hi there", tb.Text, "2");
+            Assert.AreEqual("", tb.Text, "1");
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
+            Assert.AreEqual("hi there", tb.Text, "2");
 
             tb.Text = "yo";
 
-            column.DoEndEdit ();
+            column.DoEndEdit();
 
             DataRowView v = (DataRowView)cm.Current;
 
-            Assert.AreEqual ("Miguel", v[0], "3");
+            Assert.AreEqual("Miguel", v[0], "3");
         }
 
         [Test]
-        public void TestCommit ()
+        public void TestCommit()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             DataGridTextBox tb = (DataGridTextBox)column.TextBox;
 
-            Assert.AreEqual ("", tb.Text, "1");
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "1.5");
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
-            Assert.AreEqual ("hi there", tb.Text, "2");
-            Assert.AreEqual (new Rectangle (new Point (2,2), new Size (97,97)), tb.Bounds, "3");
-            Assert.IsFalse (tb.ReadOnly, "4");
-            Assert.IsFalse (tb.IsInEditOrNavigateMode, "5");
+            Assert.AreEqual("", tb.Text, "1");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "1.5");
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
+            Assert.AreEqual("hi there", tb.Text, "2");
+            Assert.AreEqual(new Rectangle(new Point(2, 2), new Size(97, 97)), tb.Bounds, "3");
+            Assert.IsFalse(tb.ReadOnly, "4");
+            Assert.IsFalse(tb.IsInEditOrNavigateMode, "5");
 
             bool rv;
-            rv = column.DoCommit (cm, cm.Position);
-            column.DoEndEdit ();
+            rv = column.DoCommit(cm, cm.Position);
+            column.DoEndEdit();
 
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "6");
-            Assert.IsTrue (rv, "7");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "6");
+            Assert.IsTrue(rv, "7");
             DataRowView v = (DataRowView)cm.Current;
-            Assert.AreEqual ("hi there", v[0], "8");
+            Assert.AreEqual("hi there", v[0], "8");
         }
 
         [Test]
-        public void TestCommit2 ()
+        public void TestCommit2()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             DataGridTextBox tb = (DataGridTextBox)column.TextBox;
 
-            Assert.AreEqual ("", tb.Text, "1");
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "1.5");
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
-            Assert.AreEqual ("hi there", tb.Text, "2");
-            Assert.AreEqual (new Rectangle (new Point (2,2), new Size (97,97)), tb.Bounds, "3");
-            Assert.IsFalse (tb.ReadOnly, "4");
-            Assert.IsFalse (tb.IsInEditOrNavigateMode, "5");
+            Assert.AreEqual("", tb.Text, "1");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "1.5");
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
+            Assert.AreEqual("hi there", tb.Text, "2");
+            Assert.AreEqual(new Rectangle(new Point(2, 2), new Size(97, 97)), tb.Bounds, "3");
+            Assert.IsFalse(tb.ReadOnly, "4");
+            Assert.IsFalse(tb.IsInEditOrNavigateMode, "5");
 
             tb.Text = "yo";
 
-            column.DoEndEdit ();
+            column.DoEndEdit();
 
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "5.5");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "5.5");
 
-            bool rv = column.DoCommit (cm, cm.Position);
-            Assert.IsTrue (rv, "6");
+            bool rv = column.DoCommit(cm, cm.Position);
+            Assert.IsTrue(rv, "6");
             DataRowView v = (DataRowView)cm.Current;
-            Assert.AreEqual ("Miguel", v[0], "7");
+            Assert.AreEqual("Miguel", v[0], "7");
 
             /* try it again with the DoCommit before the DoEndEdit */
             cm.Position = 0;
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100,100)), false, "hi there", true);
-            Assert.AreEqual ("hi there", tb.Text, "8");
-            Assert.AreEqual (new Rectangle (new Point (2,2), new Size (97,97)), tb.Bounds, "9");
-            Assert.IsFalse (tb.ReadOnly, "10");
-            Assert.IsFalse (tb.IsInEditOrNavigateMode, "11");
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
+            Assert.AreEqual("hi there", tb.Text, "8");
+            Assert.AreEqual(new Rectangle(new Point(2, 2), new Size(97, 97)), tb.Bounds, "9");
+            Assert.IsFalse(tb.ReadOnly, "10");
+            Assert.IsFalse(tb.IsInEditOrNavigateMode, "11");
             tb.Text = "yo";
 
-            rv = column.DoCommit (cm, cm.Position);
-            column.DoEndEdit ();
-            Assert.IsTrue (rv, "12");
+            rv = column.DoCommit(cm, cm.Position);
+            column.DoEndEdit();
+            Assert.IsTrue(rv, "12");
             v = (DataRowView)cm.Current;
-            Assert.AreEqual ("yo", v[0], "13");
+            Assert.AreEqual("yo", v[0], "13");
         }
 
         [Test]
-        public void TestAbort ()
+        public void TestAbort()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             DataGridTextBox tb = (DataGridTextBox)column.TextBox;
 
-            Assert.AreEqual ("", tb.Text, "1");
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "1.5");
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
-            Assert.AreEqual ("hi there", tb.Text, "2");
-            Assert.AreEqual (new Rectangle (new Point (2,2), new Size (97,97)), tb.Bounds, "3");
-            Assert.IsFalse (tb.ReadOnly, "4");
-            Assert.IsFalse (tb.IsInEditOrNavigateMode, "5");
+            Assert.AreEqual("", tb.Text, "1");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "1.5");
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
+            Assert.AreEqual("hi there", tb.Text, "2");
+            Assert.AreEqual(new Rectangle(new Point(2, 2), new Size(97, 97)), tb.Bounds, "3");
+            Assert.IsFalse(tb.ReadOnly, "4");
+            Assert.IsFalse(tb.IsInEditOrNavigateMode, "5");
 
             tb.Text = "yo";
 
-            column.DoAbort (0);
+            column.DoAbort(0);
 
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "6");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "6");
             DataRowView v = (DataRowView)cm.Current;
-            Assert.AreEqual ("Miguel", v[0], "7");
+            Assert.AreEqual("Miguel", v[0], "7");
         }
 
         [Test]
-        public void TestAbort_DifferentRow ()
+        public void TestAbort_DifferentRow()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             DataGridTextBox tb = (DataGridTextBox)column.TextBox;
 
-            Assert.AreEqual ("", tb.Text, "1");
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "1.5");
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
-            Assert.AreEqual ("hi there", tb.Text, "2");
-            Assert.AreEqual (new Rectangle (new Point (2,2), new Size (97,97)), tb.Bounds, "3");
-            Assert.IsFalse (tb.ReadOnly, "4");
-            Assert.IsFalse (tb.IsInEditOrNavigateMode, "5");
+            Assert.AreEqual("", tb.Text, "1");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "1.5");
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
+            Assert.AreEqual("hi there", tb.Text, "2");
+            Assert.AreEqual(new Rectangle(new Point(2, 2), new Size(97, 97)), tb.Bounds, "3");
+            Assert.IsFalse(tb.ReadOnly, "4");
+            Assert.IsFalse(tb.IsInEditOrNavigateMode, "5");
 
             tb.Text = "yo";
 
-            column.DoAbort (1);
+            column.DoAbort(1);
 
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "6");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "6");
             DataRowView v = (DataRowView)cm.Current;
-            Assert.AreEqual ("Miguel", v[0], "7");
+            Assert.AreEqual("Miguel", v[0], "7");
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void TestUpdateUI ()
+        [Category("NotWorking")]
+        public void TestUpdateUI()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             DataGridTextBox tb = (DataGridTextBox)column.TextBox;
 
-            Assert.AreEqual ("", tb.Text, "1");
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "2");
+            Assert.AreEqual("", tb.Text, "1");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "2");
 
-            Assert.AreEqual (Point.Empty, tb.Location, "3");
+            Assert.AreEqual(Point.Empty, tb.Location, "3");
 
-            column.DoUpdateUI (cm, 0, "hi there");
+            column.DoUpdateUI(cm, 0, "hi there");
 
-            Assert.AreEqual (Point.Empty, tb.Location, "4");
+            Assert.AreEqual(Point.Empty, tb.Location, "4");
 
-            Assert.AreEqual ("hi there", tb.Text, "5");
-            Assert.IsFalse (tb.ReadOnly, "6");
-            Assert.IsTrue (tb.IsInEditOrNavigateMode, "7");
+            Assert.AreEqual("hi there", tb.Text, "5");
+            Assert.IsFalse(tb.ReadOnly, "6");
+            Assert.IsTrue(tb.IsInEditOrNavigateMode, "7");
 
             DataRowView v = (DataRowView)cm.Current;
-            Assert.AreEqual ("Miguel", v[0], "8");
+            Assert.AreEqual("Miguel", v[0], "8");
         }
 
         [Test]
-        public void TestReadOnly_InEditCall ()
+        public void TestReadOnly_InEditCall()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             TextBox tb = nameColumnStyle.TextBox;
 
-            Assert.IsNotNull (tb, "1");
-            Assert.AreEqual (typeof (DataGridTextBox), tb.GetType(), "2");
-            Assert.IsTrue (tb.Enabled, "3");
-            Assert.IsFalse (tb.Visible, "4");
-            Assert.AreEqual ("", tb.Text, "5");
-            Assert.IsFalse (tb.ReadOnly, "6");
+            Assert.IsNotNull(tb, "1");
+            Assert.AreEqual(typeof(DataGridTextBox), tb.GetType(), "2");
+            Assert.IsTrue(tb.Enabled, "3");
+            Assert.IsFalse(tb.Visible, "4");
+            Assert.AreEqual("", tb.Text, "5");
+            Assert.IsFalse(tb.ReadOnly, "6");
 
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), true, "hi there", true);
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                true,
+                "hi there",
+                true
+            );
 
-            Assert.IsTrue (tb.ReadOnly, "7");
+            Assert.IsTrue(tb.ReadOnly, "7");
 
             // since it's readonly
-            Assert.AreEqual ("Miguel", tb.Text, "8");
+            Assert.AreEqual("Miguel", tb.Text, "8");
         }
 
         [Test]
-        public void TestReadOnly_AfterEditCall ()
+        public void TestReadOnly_AfterEditCall()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             CurrencyManager cm = (CurrencyManager)bc[view];
             ColumnPoker column = nameColumnStyle;
             TextBox tb = nameColumnStyle.TextBox;
 
-            Assert.IsNotNull (tb, "1");
-            Assert.AreEqual (typeof (DataGridTextBox), tb.GetType(), "2");
-            Assert.IsTrue (tb.Enabled, "3");
-            Assert.IsFalse (tb.Visible, "4");
-            Assert.AreEqual ("", tb.Text, "5");
-            Assert.IsFalse (tb.ReadOnly, "6");
+            Assert.IsNotNull(tb, "1");
+            Assert.AreEqual(typeof(DataGridTextBox), tb.GetType(), "2");
+            Assert.IsTrue(tb.Enabled, "3");
+            Assert.IsFalse(tb.Visible, "4");
+            Assert.AreEqual("", tb.Text, "5");
+            Assert.IsFalse(tb.ReadOnly, "6");
 
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
             column.ReadOnly = true;
 
-            Assert.IsFalse (tb.ReadOnly, "7");
+            Assert.IsFalse(tb.ReadOnly, "7");
 
-            Assert.AreEqual ("hi there", tb.Text, "8");
+            Assert.AreEqual("hi there", tb.Text, "8");
 
             bool rv;
 
-            rv = column.DoCommit (cm, cm.Position);
-            column.DoEndEdit ();
-            Assert.IsTrue (rv, "9");
+            rv = column.DoCommit(cm, cm.Position);
+            column.DoEndEdit();
+            Assert.IsTrue(rv, "9");
             DataRowView v = (DataRowView)cm.Current;
-            Assert.AreEqual ("hi there", v[0], "10");
+            Assert.AreEqual("hi there", v[0], "10");
         }
 
         [Test]
-        public void TestReadOnly_DataGrid ()
+        public void TestReadOnly_DataGrid()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
             dg.ReadOnly = true;
 
@@ -552,37 +631,44 @@ namespace MonoTests.System.Windows.Forms
             ColumnPoker column = nameColumnStyle;
             TextBox tb = nameColumnStyle.TextBox;
 
-            Assert.IsNotNull (tb, "1");
-            Assert.AreEqual (typeof (DataGridTextBox), tb.GetType(), "2");
-            Assert.IsTrue (tb.Enabled, "3");
-            Assert.IsFalse (tb.Visible, "4");
-            Assert.AreEqual ("", tb.Text, "5");
-            Assert.IsFalse (tb.ReadOnly, "6");
+            Assert.IsNotNull(tb, "1");
+            Assert.AreEqual(typeof(DataGridTextBox), tb.GetType(), "2");
+            Assert.IsTrue(tb.Enabled, "3");
+            Assert.IsFalse(tb.Visible, "4");
+            Assert.AreEqual("", tb.Text, "5");
+            Assert.IsFalse(tb.ReadOnly, "6");
 
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
 
-            Assert.IsFalse (tb.ReadOnly, "7");
+            Assert.IsFalse(tb.ReadOnly, "7");
 
-            Assert.AreEqual ("hi there", tb.Text, "8");
+            Assert.AreEqual("hi there", tb.Text, "8");
 
             bool rv;
 
-            rv = column.DoCommit (cm, cm.Position);
-            column.DoEndEdit ();
-            Assert.IsTrue (rv, "9");
+            rv = column.DoCommit(cm, cm.Position);
+            column.DoEndEdit();
+            Assert.IsTrue(rv, "9");
             DataRowView v = (DataRowView)cm.Current;
-            Assert.AreEqual ("hi there", v[0], "10");
+            Assert.AreEqual("hi there", v[0], "10");
         }
 
         [Test]
-        public void TestReadOnly_TableStyle ()
+        public void TestReadOnly_TableStyle()
         {
-            MakeTable (false);
+            MakeTable(false);
 
-            BindingContext bc = new BindingContext ();
-            DataGrid dg = new DataGrid ();
+            BindingContext bc = new BindingContext();
+            DataGrid dg = new DataGrid();
             dg.BindingContext = bc;
-            dg.TableStyles.Add (tableStyle);
+            dg.TableStyles.Add(tableStyle);
             dg.DataSource = table;
 
             tableStyle.ReadOnly = true;
@@ -591,347 +677,598 @@ namespace MonoTests.System.Windows.Forms
             ColumnPoker column = nameColumnStyle;
             TextBox tb = nameColumnStyle.TextBox;
 
-            Assert.IsNotNull (tb, "1");
-            Assert.AreEqual (typeof (DataGridTextBox), tb.GetType(), "2");
-            Assert.IsTrue (tb.Enabled, "3");
-            Assert.IsFalse (tb.Visible, "4");
-            Assert.AreEqual ("", tb.Text, "5");
-            Assert.IsFalse (tb.ReadOnly, "6");
+            Assert.IsNotNull(tb, "1");
+            Assert.AreEqual(typeof(DataGridTextBox), tb.GetType(), "2");
+            Assert.IsTrue(tb.Enabled, "3");
+            Assert.IsFalse(tb.Visible, "4");
+            Assert.AreEqual("", tb.Text, "5");
+            Assert.IsFalse(tb.ReadOnly, "6");
 
-            column.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "hi there", true);
+            column.DoEdit(
+                cm,
+                0,
+                new Rectangle(new Point(0, 0), new Size(100, 100)),
+                false,
+                "hi there",
+                true
+            );
 
-            Assert.IsTrue (tb.ReadOnly, "7");
+            Assert.IsTrue(tb.ReadOnly, "7");
 
-            Assert.AreEqual ("Miguel", tb.Text, "8");
+            Assert.AreEqual("Miguel", tb.Text, "8");
         }
 
         [Test]
-        public void IFormattable ()
+        public void IFormattable()
         {
             CultureInfo originalCulture = CultureInfo.CurrentCulture;
 
-            try {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo ("en-GB");
+            try
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
 
-                table = new DataTable ();
+                table = new DataTable();
                 view = table.DefaultView;
-                table.Columns.Add (new DataColumn ("Amount", typeof (MockNumeric)));
+                table.Columns.Add(new DataColumn("Amount", typeof(MockNumeric)));
 
-                DataRow row = table.NewRow ();
-                row ["Amount"] = new MockNumericFormattable (1);
-                table.Rows.Add (row);
+                DataRow row = table.NewRow();
+                row["Amount"] = new MockNumericFormattable(1);
+                table.Rows.Add(row);
 
-                row = table.NewRow ();
-                row ["Amount"] = new MockNumericFormattable (2);
-                table.Rows.Add (row);
+                row = table.NewRow();
+                row["Amount"] = new MockNumericFormattable(2);
+                table.Rows.Add(row);
 
-                row = table.NewRow ();
-                row ["Amount"] = new MockNumeric (3);
-                table.Rows.Add (row);
+                row = table.NewRow();
+                row["Amount"] = new MockNumeric(3);
+                table.Rows.Add(row);
 
-                tableStyle = new DataGridTableStyle ();
-                ColumnPoker amountColumnStyle = new ColumnPoker ();
+                tableStyle = new DataGridTableStyle();
+                ColumnPoker amountColumnStyle = new ColumnPoker();
                 amountColumnStyle.MappingName = "Amount";
-                tableStyle.GridColumnStyles.Add (amountColumnStyle);
+                tableStyle.GridColumnStyles.Add(amountColumnStyle);
 
-                BindingContext bc = new BindingContext ();
-                DataGrid dg = new DataGrid ();
+                BindingContext bc = new BindingContext();
+                DataGrid dg = new DataGrid();
                 dg.BindingContext = bc;
-                dg.TableStyles.Add (tableStyle);
+                dg.TableStyles.Add(tableStyle);
                 dg.DataSource = table;
 
-                CurrencyManager cm = (CurrencyManager) bc [view];
+                CurrencyManager cm = (CurrencyManager)bc[view];
                 TextBox tb = amountColumnStyle.TextBox;
 
-                Assert.IsNotNull (tb, "#A1");
-                Assert.AreEqual (string.Empty, tb.Text, "#A2");
+                Assert.IsNotNull(tb, "#A1");
+                Assert.AreEqual(string.Empty, tb.Text, "#A2");
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("uno", tb.Text, "#B1");
-                Assert.AreEqual (new MockNumericFormattable (1), table.Rows [0] ["Amount"], "#B2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("uno", tb.Text, "#B1");
+                Assert.AreEqual(new MockNumericFormattable(1), table.Rows[0]["Amount"], "#B2");
 
-                amountColumnStyle.DoEdit (cm, 1, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("dos", tb.Text, "#C1");
-                Assert.AreEqual (new MockNumericFormattable (2), table.Rows [1] ["Amount"], "#C2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    1,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("dos", tb.Text, "#C1");
+                Assert.AreEqual(new MockNumericFormattable(2), table.Rows[1]["Amount"], "#C2");
 
-                amountColumnStyle.DoEdit (cm, 2, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("tres", tb.Text, "#D1");
-                Assert.AreEqual (new MockNumeric (3), table.Rows [2] ["Amount"], "#D2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    2,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("tres", tb.Text, "#D1");
+                Assert.AreEqual(new MockNumeric(3), table.Rows[2]["Amount"], "#D2");
 
                 amountColumnStyle.Format = string.Empty;
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("uno", tb.Text, "#E1");
-                Assert.AreEqual (new MockNumericFormattable (1), table.Rows [0] ["Amount"], "#E2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("uno", tb.Text, "#E1");
+                Assert.AreEqual(new MockNumericFormattable(1), table.Rows[0]["Amount"], "#E2");
 
                 amountColumnStyle.Format = "currency";
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("#£1.00", tb.Text, "#F1");
-                Assert.AreEqual (new MockNumericFormattable (1), table.Rows [0] ["Amount"], "#F2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("#£1.00", tb.Text, "#F1");
+                Assert.AreEqual(new MockNumericFormattable(1), table.Rows[0]["Amount"], "#F2");
 
-                amountColumnStyle.DoEdit (cm, 2, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("tres", tb.Text, "#G1");
-                Assert.AreEqual (new MockNumeric (3), table.Rows [2] ["Amount"], "#G2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    2,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("tres", tb.Text, "#G1");
+                Assert.AreEqual(new MockNumeric(3), table.Rows[2]["Amount"], "#G2");
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "#£5.00", true);
-                Assert.AreEqual ("#£5.00", tb.Text, "#H1");
-                Assert.AreEqual (new MockNumericFormattable (1), table.Rows [0] ["Amount"], "#H2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "#£5.00",
+                    true
+                );
+                Assert.AreEqual("#£5.00", tb.Text, "#H1");
+                Assert.AreEqual(new MockNumericFormattable(1), table.Rows[0]["Amount"], "#H2");
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "INVALID", true);
-                Assert.IsFalse (amountColumnStyle.DoCommit (cm, 0), "#I1");
-                Assert.AreEqual ("INVALID", tb.Text, "#I2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "INVALID",
+                    true
+                );
+                Assert.IsFalse(amountColumnStyle.DoCommit(cm, 0), "#I1");
+                Assert.AreEqual("INVALID", tb.Text, "#I2");
                 //Assert.AreEqual ("INVALID", table.Rows [0] ["Amount"], "#I3");
 
-                amountColumnStyle.FormatInfo = new CultureInfo ("en-US");
+                amountColumnStyle.FormatInfo = new CultureInfo("en-US");
 
-                amountColumnStyle.DoEdit (cm, 1, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("#$2.00", tb.Text, "#J1");
-                Assert.AreEqual (new MockNumericFormattable (2), table.Rows [1] ["Amount"], "#J2");
-            } finally {
+                amountColumnStyle.DoEdit(
+                    cm,
+                    1,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("#$2.00", tb.Text, "#J1");
+                Assert.AreEqual(new MockNumericFormattable(2), table.Rows[1]["Amount"], "#J2");
+            }
+            finally
+            {
                 Thread.CurrentThread.CurrentCulture = originalCulture;
             }
         }
 
         [Test]
-        [Category ("NotWorking")]
-        public void IFormattable_DateTime ()
+        [Category("NotWorking")]
+        public void IFormattable_DateTime()
         {
             CultureInfo originalCulture = CultureInfo.CurrentCulture;
 
-            try {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo ("nl-BE");
+            try
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-BE");
                 DateTime today = DateTime.Today;
                 DateTime now = DateTime.Now;
 
-                table = new DataTable ();
+                table = new DataTable();
                 view = table.DefaultView;
-                table.Columns.Add (new DataColumn ("Date", typeof (DateTime)));
+                table.Columns.Add(new DataColumn("Date", typeof(DateTime)));
 
-                DataRow row = table.NewRow ();
-                row ["Date"] = today;
-                table.Rows.Add (row);
+                DataRow row = table.NewRow();
+                row["Date"] = today;
+                table.Rows.Add(row);
 
-                row = table.NewRow ();
-                row ["Date"] = now;
-                table.Rows.Add (row);
+                row = table.NewRow();
+                row["Date"] = now;
+                table.Rows.Add(row);
 
-                tableStyle = new DataGridTableStyle ();
-                ColumnPoker dateColumnStyle = new ColumnPoker ();
+                tableStyle = new DataGridTableStyle();
+                ColumnPoker dateColumnStyle = new ColumnPoker();
                 dateColumnStyle.MappingName = "Date";
-                tableStyle.GridColumnStyles.Add (dateColumnStyle);
+                tableStyle.GridColumnStyles.Add(dateColumnStyle);
 
-                BindingContext bc = new BindingContext ();
-                DataGrid dg = new DataGrid ();
+                BindingContext bc = new BindingContext();
+                DataGrid dg = new DataGrid();
                 dg.BindingContext = bc;
-                dg.TableStyles.Add (tableStyle);
+                dg.TableStyles.Add(tableStyle);
                 dg.DataSource = table;
 
-                CurrencyManager cm = (CurrencyManager) bc [view];
+                CurrencyManager cm = (CurrencyManager)bc[view];
                 TextBox tb = dateColumnStyle.TextBox;
-                DateTimeConverter converter = new DateTimeConverter ();
+                DateTimeConverter converter = new DateTimeConverter();
 
-                Assert.IsNotNull (tb, "#A1");
-                Assert.AreEqual (string.Empty, tb.Text, "#A2");
+                Assert.IsNotNull(tb, "#A1");
+                Assert.AreEqual(string.Empty, tb.Text, "#A2");
 
-                dateColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual (converter.ConvertTo (null, CultureInfo.CurrentCulture,
-                    today, typeof (string)), tb.Text, "#B1");
-                Assert.AreEqual (today, table.Rows [0] ["Date"], "#B2");
+                dateColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual(
+                    converter.ConvertTo(null, CultureInfo.CurrentCulture, today, typeof(string)),
+                    tb.Text,
+                    "#B1"
+                );
+                Assert.AreEqual(today, table.Rows[0]["Date"], "#B2");
 
-                dateColumnStyle.DoEdit (cm, 1, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual (converter.ConvertTo (null, CultureInfo.CurrentCulture,
-                    now, typeof (string)), tb.Text, "#C1");
-                Assert.AreEqual (now, table.Rows [1] ["Date"], "#C2");
+                dateColumnStyle.DoEdit(
+                    cm,
+                    1,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual(
+                    converter.ConvertTo(null, CultureInfo.CurrentCulture, now, typeof(string)),
+                    tb.Text,
+                    "#C1"
+                );
+                Assert.AreEqual(now, table.Rows[1]["Date"], "#C2");
 
                 dateColumnStyle.Format = "MM";
 
-                dateColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual (today.ToString ("MM", CultureInfo.CurrentCulture), tb.Text, "#D1");
-                Assert.AreEqual (today, table.Rows [0] ["Date"], "#D2");
+                dateColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual(today.ToString("MM", CultureInfo.CurrentCulture), tb.Text, "#D1");
+                Assert.AreEqual(today, table.Rows[0]["Date"], "#D2");
 
-                dateColumnStyle.DoEdit (cm, 1, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual (now.ToString ("MM", CultureInfo.CurrentCulture), tb.Text, "#E1");
-                Assert.AreEqual (now, table.Rows [1] ["Date"], "#E2");
+                dateColumnStyle.DoEdit(
+                    cm,
+                    1,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual(now.ToString("MM", CultureInfo.CurrentCulture), tb.Text, "#E1");
+                Assert.AreEqual(now, table.Rows[1]["Date"], "#E2");
 
-                dateColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "INVALID", true);
-                Assert.IsFalse (dateColumnStyle.DoCommit (cm, 0), "#F1");
-                Assert.AreEqual ("INVALID", tb.Text, "#F2");
-                Assert.AreEqual (today, table.Rows [0] ["Date"], "#F3");
+                dateColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "INVALID",
+                    true
+                );
+                Assert.IsFalse(dateColumnStyle.DoCommit(cm, 0), "#F1");
+                Assert.AreEqual("INVALID", tb.Text, "#F2");
+                Assert.AreEqual(today, table.Rows[0]["Date"], "#F3");
 
-                dateColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "12", true);
-                Assert.IsFalse (dateColumnStyle.DoCommit (cm, 0), "#G1");
-                Assert.AreEqual ("12", tb.Text, "#G2");
-                Assert.AreEqual (today, table.Rows [0] ["Date"], "#G3");
+                dateColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "12",
+                    true
+                );
+                Assert.IsFalse(dateColumnStyle.DoCommit(cm, 0), "#G1");
+                Assert.AreEqual("12", tb.Text, "#G2");
+                Assert.AreEqual(today, table.Rows[0]["Date"], "#G3");
 
-                dateColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "07/09/2007", true);
-                Assert.IsTrue (dateColumnStyle.DoCommit (cm, 0), "#H1");
-                Assert.AreEqual (converter.ConvertTo (null, CultureInfo.CurrentCulture,
-                    new DateTime (2007, 9, 7), typeof (string)), tb.Text, "#H2");
-                Assert.AreEqual (new DateTime (2007, 9, 7), table.Rows [0] ["Date"], "#H3");
+                dateColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "07/09/2007",
+                    true
+                );
+                Assert.IsTrue(dateColumnStyle.DoCommit(cm, 0), "#H1");
+                Assert.AreEqual(
+                    converter.ConvertTo(
+                        null,
+                        CultureInfo.CurrentCulture,
+                        new DateTime(2007, 9, 7),
+                        typeof(string)
+                    ),
+                    tb.Text,
+                    "#H2"
+                );
+                Assert.AreEqual(new DateTime(2007, 9, 7), table.Rows[0]["Date"], "#H3");
 
                 dateColumnStyle.FormatInfo = CultureInfo.CurrentCulture;
 
-                dateColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "08/06/2005", true);
-                Assert.IsTrue (dateColumnStyle.DoCommit (cm, 0), "#I1");
-                Assert.AreEqual ("06", tb.Text, "#I2");
-                Assert.AreEqual (new DateTime (2005, 6, 8), table.Rows [0] ["Date"], "#I3");
-            } finally {
+                dateColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "08/06/2005",
+                    true
+                );
+                Assert.IsTrue(dateColumnStyle.DoCommit(cm, 0), "#I1");
+                Assert.AreEqual("06", tb.Text, "#I2");
+                Assert.AreEqual(new DateTime(2005, 6, 8), table.Rows[0]["Date"], "#I3");
+            }
+            finally
+            {
                 Thread.CurrentThread.CurrentCulture = originalCulture;
             }
         }
 
         [Test]
-        public void StringConverterTest ()
+        public void StringConverterTest()
         {
             CultureInfo originalCulture = CultureInfo.CurrentCulture;
 
-            try {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo ("en-GB");
+            try
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
 
-                table = new DataTable ();
+                table = new DataTable();
                 view = table.DefaultView;
-                table.Columns.Add (new DataColumn ("Amount", typeof (MockNumericStringConvertable)));
+                table.Columns.Add(new DataColumn("Amount", typeof(MockNumericStringConvertable)));
 
-                DataRow row = table.NewRow ();
-                row ["Amount"] = new MockNumericStringConvertable (1);
-                table.Rows.Add (row);
+                DataRow row = table.NewRow();
+                row["Amount"] = new MockNumericStringConvertable(1);
+                table.Rows.Add(row);
 
-                row = table.NewRow ();
-                row ["Amount"] = new MockNumericStringConvertable (2);
-                table.Rows.Add (row);
+                row = table.NewRow();
+                row["Amount"] = new MockNumericStringConvertable(2);
+                table.Rows.Add(row);
 
-                tableStyle = new DataGridTableStyle ();
-                ColumnPoker amountColumnStyle = new ColumnPoker ();
+                tableStyle = new DataGridTableStyle();
+                ColumnPoker amountColumnStyle = new ColumnPoker();
                 amountColumnStyle.MappingName = "Amount";
-                tableStyle.GridColumnStyles.Add (amountColumnStyle);
+                tableStyle.GridColumnStyles.Add(amountColumnStyle);
 
-                BindingContext bc = new BindingContext ();
-                DataGrid dg = new DataGrid ();
+                BindingContext bc = new BindingContext();
+                DataGrid dg = new DataGrid();
                 dg.BindingContext = bc;
-                dg.TableStyles.Add (tableStyle);
+                dg.TableStyles.Add(tableStyle);
                 dg.DataSource = table;
 
-                CurrencyManager cm = (CurrencyManager) bc [view];
-                DataGridTextBox tb = (DataGridTextBox) amountColumnStyle.TextBox;
+                CurrencyManager cm = (CurrencyManager)bc[view];
+                DataGridTextBox tb = (DataGridTextBox)amountColumnStyle.TextBox;
 
-                Assert.IsNotNull (tb, "#A1");
-                Assert.AreEqual (string.Empty, tb.Text, "#A2");
-                Assert.IsTrue (tb.IsInEditOrNavigateMode, "#A3");
+                Assert.IsNotNull(tb, "#A1");
+                Assert.AreEqual(string.Empty, tb.Text, "#A2");
+                Assert.IsTrue(tb.IsInEditOrNavigateMode, "#A3");
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("£1.00", tb.Text, "#B1");
-                Assert.AreEqual (new MockNumericStringConvertable (1), table.Rows [0] ["Amount"], "#B2");
-                Assert.IsTrue (tb.IsInEditOrNavigateMode, "#B3");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("£1.00", tb.Text, "#B1");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(1),
+                    table.Rows[0]["Amount"],
+                    "#B2"
+                );
+                Assert.IsTrue(tb.IsInEditOrNavigateMode, "#B3");
 
-                amountColumnStyle.DoEdit (cm, 1, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("£2.00", tb.Text, "#C1");
-                Assert.AreEqual (new MockNumericStringConvertable (2), table.Rows [1] ["Amount"], "#C2");
-                Assert.IsTrue (tb.IsInEditOrNavigateMode, "#C3");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    1,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("£2.00", tb.Text, "#C1");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(2),
+                    table.Rows[1]["Amount"],
+                    "#C2"
+                );
+                Assert.IsTrue(tb.IsInEditOrNavigateMode, "#C3");
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "£3.00", true);
-                Assert.AreEqual ("£3.00", tb.Text, "#D1");
-                Assert.AreEqual (new MockNumericStringConvertable (1), table.Rows [0] ["Amount"], "#D2");
-                Assert.IsFalse (tb.IsInEditOrNavigateMode, "#D3");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "£3.00",
+                    true
+                );
+                Assert.AreEqual("£3.00", tb.Text, "#D1");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(1),
+                    table.Rows[0]["Amount"],
+                    "#D2"
+                );
+                Assert.IsFalse(tb.IsInEditOrNavigateMode, "#D3");
 
-                Assert.IsTrue (amountColumnStyle.DoCommit (cm, cm.Position), "#E1");
-                Assert.AreEqual ("£3.00", tb.Text, "#E2");
-                Assert.AreEqual (new MockNumericStringConvertable (3), table.Rows [0] ["Amount"], "#E3");
-                Assert.IsTrue (tb.IsInEditOrNavigateMode, "#E4");
+                Assert.IsTrue(amountColumnStyle.DoCommit(cm, cm.Position), "#E1");
+                Assert.AreEqual("£3.00", tb.Text, "#E2");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(3),
+                    table.Rows[0]["Amount"],
+                    "#E3"
+                );
+                Assert.IsTrue(tb.IsInEditOrNavigateMode, "#E4");
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, "INVALID", true);
-                Assert.IsFalse (amountColumnStyle.DoCommit (cm, cm.Position), "#F1");
-                Assert.AreEqual ("INVALID", tb.Text, "#F2");
-                Assert.AreEqual (new MockNumericStringConvertable (3), table.Rows [0] ["Amount"], "#F3");
-                Assert.IsFalse (tb.IsInEditOrNavigateMode, "#F4");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "INVALID",
+                    true
+                );
+                Assert.IsFalse(amountColumnStyle.DoCommit(cm, cm.Position), "#F1");
+                Assert.AreEqual("INVALID", tb.Text, "#F2");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(3),
+                    table.Rows[0]["Amount"],
+                    "#F3"
+                );
+                Assert.IsFalse(tb.IsInEditOrNavigateMode, "#F4");
 
                 amountColumnStyle.Format = "whatever";
-                amountColumnStyle.FormatInfo = new CultureInfo ("en-US");
+                amountColumnStyle.FormatInfo = new CultureInfo("en-US");
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0,0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("£3.00", tb.Text, "#G1");
-                Assert.AreEqual (new MockNumericStringConvertable (3), table.Rows [0] ["Amount"], "#G2");
-                Assert.IsFalse (tb.IsInEditOrNavigateMode, "#G3");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("£3.00", tb.Text, "#G1");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(3),
+                    table.Rows[0]["Amount"],
+                    "#G2"
+                );
+                Assert.IsFalse(tb.IsInEditOrNavigateMode, "#G3");
 
                 tb.Text = "5";
-                Assert.IsTrue (amountColumnStyle.DoCommit (cm, cm.Position), "#H1");
-                Assert.AreEqual ("£5.00", tb.Text, "#H2");
-                Assert.AreEqual (new MockNumericStringConvertable (5), table.Rows [0] ["Amount"], "#H3");
-            } finally {
+                Assert.IsTrue(amountColumnStyle.DoCommit(cm, cm.Position), "#H1");
+                Assert.AreEqual("£5.00", tb.Text, "#H2");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(5),
+                    table.Rows[0]["Amount"],
+                    "#H3"
+                );
+            }
+            finally
+            {
                 Thread.CurrentThread.CurrentCulture = originalCulture;
             }
         }
 
         [Test]
-        public void NonStringConverterTest ()
+        public void NonStringConverterTest()
         {
             CultureInfo originalCulture = CultureInfo.CurrentCulture;
 
-            try {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo ("en-GB");
+            try
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
 
-                table = new DataTable ();
+                table = new DataTable();
                 view = table.DefaultView;
-                table.Columns.Add (new DataColumn ("Amount", typeof (MockNumericNonStringConvertable)));
+                table.Columns.Add(
+                    new DataColumn("Amount", typeof(MockNumericNonStringConvertable))
+                );
 
-                DataRow row = table.NewRow ();
-                row ["Amount"] = new MockNumericNonStringConvertable (1);
-                table.Rows.Add (row);
+                DataRow row = table.NewRow();
+                row["Amount"] = new MockNumericNonStringConvertable(1);
+                table.Rows.Add(row);
 
-                row = table.NewRow ();
-                row ["Amount"] = new MockNumericNonStringConvertable (2);
-                table.Rows.Add (row);
+                row = table.NewRow();
+                row["Amount"] = new MockNumericNonStringConvertable(2);
+                table.Rows.Add(row);
 
-                tableStyle = new DataGridTableStyle ();
-                ColumnPoker amountColumnStyle = new ColumnPoker ();
+                tableStyle = new DataGridTableStyle();
+                ColumnPoker amountColumnStyle = new ColumnPoker();
                 amountColumnStyle.MappingName = "Amount";
-                tableStyle.GridColumnStyles.Add (amountColumnStyle);
+                tableStyle.GridColumnStyles.Add(amountColumnStyle);
 
-                BindingContext bc = new BindingContext ();
-                DataGrid dg = new DataGrid ();
+                BindingContext bc = new BindingContext();
+                DataGrid dg = new DataGrid();
                 dg.BindingContext = bc;
-                dg.TableStyles.Add (tableStyle);
+                dg.TableStyles.Add(tableStyle);
                 dg.DataSource = table;
 
-                CurrencyManager cm = (CurrencyManager) bc [view];
+                CurrencyManager cm = (CurrencyManager)bc[view];
                 TextBox tb = amountColumnStyle.TextBox;
 
-                Assert.IsNotNull (tb, "#A1");
-                Assert.AreEqual (string.Empty, tb.Text, "#A2");
+                Assert.IsNotNull(tb, "#A1");
+                Assert.AreEqual(string.Empty, tb.Text, "#A2");
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0, 0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("uno", tb.Text, "#B1");
-                Assert.AreEqual (new MockNumericStringConvertable (1), table.Rows [0] ["Amount"], "#B2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("uno", tb.Text, "#B1");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(1),
+                    table.Rows[0]["Amount"],
+                    "#B2"
+                );
 
-                amountColumnStyle.DoEdit (cm, 1, new Rectangle (new Point (0, 0), new Size (100, 100)), false, null, true);
-                Assert.AreEqual ("dos", tb.Text, "#C1");
-                Assert.AreEqual (new MockNumericStringConvertable (2), table.Rows [1] ["Amount"], "#C2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    1,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    null,
+                    true
+                );
+                Assert.AreEqual("dos", tb.Text, "#C1");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(2),
+                    table.Rows[1]["Amount"],
+                    "#C2"
+                );
 
-                amountColumnStyle.DoEdit (cm, 0, new Rectangle (new Point (0, 0), new Size (100, 100)), false, "£3.00", true);
-                Assert.AreEqual ("£3.00", tb.Text, "#D1");
-                Assert.AreEqual (new MockNumericStringConvertable (1), table.Rows [0] ["Amount"], "#D2");
+                amountColumnStyle.DoEdit(
+                    cm,
+                    0,
+                    new Rectangle(new Point(0, 0), new Size(100, 100)),
+                    false,
+                    "£3.00",
+                    true
+                );
+                Assert.AreEqual("£3.00", tb.Text, "#D1");
+                Assert.AreEqual(
+                    new MockNumericStringConvertable(1),
+                    table.Rows[0]["Amount"],
+                    "#D2"
+                );
 
-                Assert.IsFalse (amountColumnStyle.DoCommit (cm, cm.Position), "#E1");
-                Assert.AreEqual ("£3.00", tb.Text, "#E2");
+                Assert.IsFalse(amountColumnStyle.DoCommit(cm, cm.Position), "#E1");
+                Assert.AreEqual("£3.00", tb.Text, "#E2");
                 //Assert.AreEqual ("£3.00", table.Rows [0] ["Amount"], "#E3");
-            } finally {
+            }
+            finally
+            {
                 Thread.CurrentThread.CurrentCulture = originalCulture;
             }
         }
 
         class MockNumeric
         {
-            public MockNumeric (int number)
+            public MockNumeric(int number)
             {
                 this.number = number;
             }
 
-            public int Number {
+            public int Number
+            {
                 get { return number; }
                 set { number = value; }
             }
 
-            public override bool Equals (object obj)
+            public override bool Equals(object obj)
             {
                 if (obj == null)
                     return false;
@@ -940,22 +1277,23 @@ namespace MonoTests.System.Windows.Forms
                 return (numeric != null && numeric.Number == Number);
             }
 
-            public override int GetHashCode ()
+            public override int GetHashCode()
             {
-                return number.GetHashCode ();
+                return number.GetHashCode();
             }
 
-            public override string ToString ()
+            public override string ToString()
             {
-                switch (Number) {
-                case 1:
-                    return "uno";
-                case 2:
-                    return "dos";
-                case 3:
-                    return "tres";
-                default:
-                    return "bad";
+                switch (Number)
+                {
+                    case 1:
+                        return "uno";
+                    case 2:
+                        return "dos";
+                    case 3:
+                        return "tres";
+                    default:
+                        return "bad";
                 }
             }
 
@@ -964,100 +1302,120 @@ namespace MonoTests.System.Windows.Forms
 
         class MockNumericFormattable : MockNumeric, IFormattable
         {
-            public MockNumericFormattable (int number) : base (number)
-            {
-            }
+            public MockNumericFormattable(int number)
+                : base(number) { }
 
-            string IFormattable.ToString (string format, IFormatProvider formatProvider)
+            string IFormattable.ToString(string format, IFormatProvider formatProvider)
             {
-                if (format == "currency") {
-                    return "#" + Number.ToString ("c", formatProvider);
-                } else {
-                    return "#" + Number.ToString (formatProvider);
+                if (format == "currency")
+                {
+                    return "#" + Number.ToString("c", formatProvider);
+                }
+                else
+                {
+                    return "#" + Number.ToString(formatProvider);
                 }
             }
         }
 
-        [TypeConverter (typeof (MockNumericStringConverter))]
+        [TypeConverter(typeof(MockNumericStringConverter))]
         class MockNumericStringConvertable : MockNumeric
         {
-            public MockNumericStringConvertable (int number) : base (number)
-            {
-            }
+            public MockNumericStringConvertable(int number)
+                : base(number) { }
         }
 
-        [TypeConverter (typeof (MockNumericNonStringConverter))]
+        [TypeConverter(typeof(MockNumericNonStringConverter))]
         class MockNumericNonStringConvertable : MockNumeric
         {
-            public MockNumericNonStringConvertable (int number) : base (number)
-            {
-            }
+            public MockNumericNonStringConvertable(int number)
+                : base(number) { }
         }
 
         class MockNumericStringConverter : TypeConverter
         {
-            public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             {
-                if (sourceType == typeof (string))
+                if (sourceType == typeof(string))
                     return true;
                 return false;
             }
 
-            public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
-                if (destinationType == typeof (string))
+                if (destinationType == typeof(string))
                     return true;
                 return false;
             }
 
-            public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
                 if (value == null)
                     return value;
 
                 string val = value as string;
-                if (val != null) {
-                    int number = int.Parse (val, NumberStyles.Currency, culture);
-                    return new MockNumericStringConvertable (number);
+                if (val != null)
+                {
+                    int number = int.Parse(val, NumberStyles.Currency, culture);
+                    return new MockNumericStringConvertable(number);
                 }
 
-                return base.ConvertFrom (context, culture, value);
+                return base.ConvertFrom(context, culture, value);
             }
 
-            public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
             {
                 if (value == null)
                     return value;
 
-                if (destinationType == typeof (string)) {
+                if (destinationType == typeof(string))
+                {
                     MockNumeric val = value as MockNumeric;
-                    return val.Number.ToString ("C", culture);
+                    return val.Number.ToString("C", culture);
                 }
 
-                return base.ConvertTo (context, culture, value, destinationType);
+                return base.ConvertTo(context, culture, value, destinationType);
             }
         }
 
         class MockNumericNonStringConverter : TypeConverter
         {
-            public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             {
                 return false;
             }
 
-            public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 return false;
             }
 
-            public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
-                throw new NotSupportedException ();
+                throw new NotSupportedException();
             }
 
-            public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
             {
-                throw new NotSupportedException ();
+                throw new NotSupportedException();
             }
         }
     }

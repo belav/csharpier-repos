@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,16 +37,17 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-    class WriteTextNodeEventArgs : EventArgs {
-        public XmlDictionaryReader  Reader;
-        public bool                 IsAttribute;
+    class WriteTextNodeEventArgs : EventArgs
+    {
+        public XmlDictionaryReader Reader;
+        public bool IsAttribute;
     }
 
     class DelegatingXmlDictionaryWriter : XmlDictionaryWriter
     {
         XmlWriter d;
 
-        public DelegatingXmlDictionaryWriter (XmlWriter delegateTo)
+        public DelegatingXmlDictionaryWriter(XmlWriter delegateTo)
         {
             d = delegateTo;
         }
@@ -55,174 +56,177 @@ namespace MonoTests.System.Xml
         // XmlWriter Methods
         //
 
-        public override WriteState WriteState {
-            get {return d.WriteState;}
-        }
-
-        public override void Close ()
+        public override WriteState WriteState
         {
-            d.Close ();
+            get { return d.WriteState; }
         }
 
-        public override void Flush ()
+        public override void Close()
         {
-            d.Flush ();
+            d.Close();
         }
 
-        public override string LookupPrefix (string ns)
+        public override void Flush()
         {
-            return d.LookupPrefix (ns);
+            d.Flush();
         }
 
-        public override void WriteBase64 (byte[] buffer, int index, int count)
+        public override string LookupPrefix(string ns)
+        {
+            return d.LookupPrefix(ns);
+        }
+
+        public override void WriteBase64(byte[] buffer, int index, int count)
         {
             var e = WriteBase64Event;
             if (e != null)
-                e (this, new EventArgs ());
-            d.WriteBase64 (buffer, index, count);
+                e(this, new EventArgs());
+            d.WriteBase64(buffer, index, count);
         }
 
-        public override void WriteCData (string text)
+        public override void WriteCData(string text)
         {
-            d.WriteCData (text);
+            d.WriteCData(text);
         }
 
-        public override void WriteCharEntity (char ch)
+        public override void WriteCharEntity(char ch)
         {
-            d.WriteCharEntity (ch);
+            d.WriteCharEntity(ch);
         }
 
-        public override void WriteChars (char[] buffer, int index, int count)
+        public override void WriteChars(char[] buffer, int index, int count)
         {
-            d.WriteChars (buffer, index, count);
+            d.WriteChars(buffer, index, count);
         }
 
-        public override void WriteComment (string text)
+        public override void WriteComment(string text)
         {
-            d.WriteComment (text);
+            d.WriteComment(text);
         }
 
-        public override void WriteDocType (string name, string pubid, string sysid, string subset)
+        public override void WriteDocType(string name, string pubid, string sysid, string subset)
         {
-            d.WriteDocType (name, pubid, sysid, subset);
+            d.WriteDocType(name, pubid, sysid, subset);
         }
 
-        public override void WriteEndAttribute ()
+        public override void WriteEndAttribute()
         {
-            d.WriteEndAttribute ();
+            d.WriteEndAttribute();
         }
 
-        public override void WriteEndDocument ()
+        public override void WriteEndDocument()
         {
-            d.WriteEndDocument ();
+            d.WriteEndDocument();
         }
 
-        public override void WriteEndElement ()
+        public override void WriteEndElement()
         {
-            d.WriteEndElement ();
+            d.WriteEndElement();
         }
 
-        public override void WriteEntityRef (string name)
+        public override void WriteEntityRef(string name)
         {
-            d.WriteEntityRef (name);
+            d.WriteEntityRef(name);
         }
 
-        public override void WriteFullEndElement ()
+        public override void WriteFullEndElement()
         {
-            d.WriteFullEndElement ();
+            d.WriteFullEndElement();
         }
 
-        public override void WriteProcessingInstruction (string name, string text)
+        public override void WriteProcessingInstruction(string name, string text)
         {
-            d.WriteProcessingInstruction (name, text);
+            d.WriteProcessingInstruction(name, text);
         }
 
-        public override void WriteRaw (char[] buffer, int index, int count)
+        public override void WriteRaw(char[] buffer, int index, int count)
         {
-            d.WriteRaw (buffer, index, count);
+            d.WriteRaw(buffer, index, count);
         }
 
-        public override void WriteRaw (string data)
+        public override void WriteRaw(string data)
         {
-            d.WriteRaw (data);
+            d.WriteRaw(data);
         }
 
-        public override void WriteStartAttribute (string prefix, string localName, string ns)
+        public override void WriteStartAttribute(string prefix, string localName, string ns)
         {
-            d.WriteStartAttribute (prefix, localName, ns);
+            d.WriteStartAttribute(prefix, localName, ns);
         }
 
-        public override void WriteStartDocument ()
+        public override void WriteStartDocument()
         {
-            d.WriteStartDocument ();
+            d.WriteStartDocument();
         }
 
-        public override void WriteStartDocument (bool standalone)
+        public override void WriteStartDocument(bool standalone)
         {
-            d.WriteStartDocument (standalone);
+            d.WriteStartDocument(standalone);
         }
 
-        public override void WriteStartElement (string prefix, string localName, string ns)
+        public override void WriteStartElement(string prefix, string localName, string ns)
         {
-            d.WriteStartElement (prefix, localName, ns);
+            d.WriteStartElement(prefix, localName, ns);
         }
 
-        public override void WriteString (string text)
+        public override void WriteString(string text)
         {
-            d.WriteString (text);
+            d.WriteString(text);
         }
 
-        public override void WriteSurrogateCharEntity (char lowChar, char highChar)
+        public override void WriteSurrogateCharEntity(char lowChar, char highChar)
         {
-            d.WriteSurrogateCharEntity (lowChar, highChar);
+            d.WriteSurrogateCharEntity(lowChar, highChar);
         }
 
-        public override void WriteWhitespace (string ws)
+        public override void WriteWhitespace(string ws)
         {
-            d.WriteWhitespace (ws);
+            d.WriteWhitespace(ws);
         }
 
         //
         // XmlDictionaryWriter methods
         //
 
-        protected override void WriteTextNode (XmlDictionaryReader reader, bool isAttribute)
+        protected override void WriteTextNode(XmlDictionaryReader reader, bool isAttribute)
         {
             var e = WriteTextNodeEvent;
             if (e != null)
-                e (this, new WriteTextNodeEventArgs { Reader = reader, IsAttribute = isAttribute });
-            base.WriteTextNode (reader, isAttribute);
+                e(this, new WriteTextNodeEventArgs { Reader = reader, IsAttribute = isAttribute });
+            base.WriteTextNode(reader, isAttribute);
         }
 
-        public void TestWriteTextNode (XmlDictionaryReader reader, bool isAttribute)
+        public void TestWriteTextNode(XmlDictionaryReader reader, bool isAttribute)
         {
-            base.WriteTextNode (reader, isAttribute);
+            base.WriteTextNode(reader, isAttribute);
         }
 
         public event EventHandler<EventArgs> WriteBase64Event;
         public event EventHandler<WriteTextNodeEventArgs> WriteTextNodeEvent;
     }
 
-    class ReleaseStreamEventArgs : EventArgs {
+    class ReleaseStreamEventArgs : EventArgs
+    {
         public Stream Stream;
     }
 
-    class DummyStreamProvider : IStreamProvider {
+    class DummyStreamProvider : IStreamProvider
+    {
         public Stream Stream;
 
-        public Stream GetStream ()
+        public Stream GetStream()
         {
             var e = GetStreamEvent;
             if (e != null)
-                e (this, new EventArgs ());
+                e(this, new EventArgs());
             return Stream;
         }
 
-        public void ReleaseStream (Stream stream)
+        public void ReleaseStream(Stream stream)
         {
             var e = ReleaseStreamEvent;
             if (e != null)
-                e (this, new ReleaseStreamEventArgs { Stream = stream });
+                e(this, new ReleaseStreamEventArgs { Stream = stream });
         }
 
         public event EventHandler<EventArgs> GetStreamEvent;
@@ -233,246 +237,262 @@ namespace MonoTests.System.Xml
     public class XmlDictionaryWriterTest
     {
         DelegatingXmlDictionaryWriter writer;
-        StringBuilder       contents;
+        StringBuilder contents;
 
         [SetUp]
         public void Setup()
         {
-            var s = new XmlWriterSettings ();
-            s.ConformanceLevel   = ConformanceLevel.Fragment;
+            var s = new XmlWriterSettings();
+            s.ConformanceLevel = ConformanceLevel.Fragment;
             s.OmitXmlDeclaration = true;
-            writer = new DelegatingXmlDictionaryWriter (
-                    XmlWriter.Create (contents = new StringBuilder (), s));
+            writer = new DelegatingXmlDictionaryWriter(
+                XmlWriter.Create(contents = new StringBuilder(), s)
+            );
         }
 
         [TearDown]
         public void TearDown()
         {
             contents = null;
-            writer   = null;
+            writer = null;
         }
 
-        [Test, ExpectedException (typeof (ArgumentException))]
-        public void WriteElementString_localNameNull ()
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void WriteElementString_localNameNull()
         {
-            XmlDictionaryString localName = null, namespaceUri = null;
-            string prefix = null, value = null;
-            writer.WriteElementString (prefix, localName, namespaceUri, value);
+            XmlDictionaryString localName = null,
+                namespaceUri = null;
+            string prefix = null,
+                value = null;
+            writer.WriteElementString(prefix, localName, namespaceUri, value);
         }
 
-        [Test, ExpectedException (typeof (ArgumentException))]
-        public void WriteElementString_PrefixWithEmptyNamespace ()
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void WriteElementString_PrefixWithEmptyNamespace()
         {
-            XmlDictionary d = new XmlDictionary ();
-            XmlDictionaryString localName = d.Add ("foo"), namespaceUri = null;
-            string prefix = "ns", value = null;
-            writer.WriteElementString (prefix, localName, namespaceUri, value);
+            XmlDictionary d = new XmlDictionary();
+            XmlDictionaryString localName = d.Add("foo"),
+                namespaceUri = null;
+            string prefix = "ns",
+                value = null;
+            writer.WriteElementString(prefix, localName, namespaceUri, value);
         }
 
         [Test]
-        public void WriteElementString ()
+        public void WriteElementString()
         {
-            XmlDictionary d = new XmlDictionary ();
-            XmlDictionaryString foo     = d.Add ("foo");
-            XmlDictionaryString fooUri  = d.Add ("urn:bar");
-            string             ns      = "ns";
+            XmlDictionary d = new XmlDictionary();
+            XmlDictionaryString foo = d.Add("foo");
+            XmlDictionaryString fooUri = d.Add("urn:bar");
+            string ns = "ns";
 
-            // 
+            //
             // Skipping empty string values because Mono & .NET generate
             // different XML: <foo /> (Mono) vs. <foo></foo> (.NET).
             //
-            writer.WriteElementString (null, foo, null, "data");
+            writer.WriteElementString(null, foo, null, "data");
             // writer.WriteElementString (null, foo, null, "");
-            writer.WriteElementString (null, foo, null, null);
+            writer.WriteElementString(null, foo, null, null);
 
-            writer.WriteElementString (null, foo, fooUri, "data");
+            writer.WriteElementString(null, foo, fooUri, "data");
             // writer.WriteElementString (null, foo, fooUri, "");
-            writer.WriteElementString (null, foo, fooUri, null);
+            writer.WriteElementString(null, foo, fooUri, null);
 
-            writer.WriteElementString (ns, foo, fooUri, "data");
+            writer.WriteElementString(ns, foo, fooUri, "data");
             // writer.WriteElementString (ns, foo, fooUri, "");
-            writer.WriteElementString (ns, foo, fooUri, null);
-            writer.Flush ();
+            writer.WriteElementString(ns, foo, fooUri, null);
+            writer.Flush();
 
-            Assert.AreEqual (
-                    "<foo>data</foo><foo />" +
-                    "<foo xmlns=\"urn:bar\">data</foo><foo xmlns=\"urn:bar\" />" +
-                    "<ns:foo xmlns:ns=\"urn:bar\">data</ns:foo><ns:foo xmlns:ns=\"urn:bar\" />", 
-                    contents.ToString ());
+            Assert.AreEqual(
+                "<foo>data</foo><foo />"
+                    + "<foo xmlns=\"urn:bar\">data</foo><foo xmlns=\"urn:bar\" />"
+                    + "<ns:foo xmlns:ns=\"urn:bar\">data</ns:foo><ns:foo xmlns:ns=\"urn:bar\" />",
+                contents.ToString()
+            );
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void WriteNode_XmlDictionaryReader_ReaderNull ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void WriteNode_XmlDictionaryReader_ReaderNull()
         {
             XmlDictionaryReader reader = null;
-            writer.WriteNode (reader, true);
+            writer.WriteNode(reader, true);
         }
 
         [Test]
-        public void WriteNode_XmlDictionaryReader ()
+        public void WriteNode_XmlDictionaryReader()
         {
             string xml = "<outer attr='a'>data<inner attr='b'>more-data</inner>end</outer>";
-            XmlDictionaryReader reader = XmlDictionaryReader.CreateDictionaryReader (
-                    XmlReader.Create (new StringReader (xml)));
+            XmlDictionaryReader reader = XmlDictionaryReader.CreateDictionaryReader(
+                XmlReader.Create(new StringReader(xml))
+            );
             int writeTextNodeCount = 0;
-            writer.WriteTextNodeEvent += (o, e) => {
+            writer.WriteTextNodeEvent += (o, e) =>
+            {
                 ++writeTextNodeCount;
-                writer.WriteString ("[text]");
+                writer.WriteString("[text]");
             };
-            writer.WriteNode (reader, false);
-            writer.Flush ();
+            writer.WriteNode(reader, false);
+            writer.Flush();
 
-            Assert.AreEqual (5, writeTextNodeCount);
-            Assert.AreEqual (
-                    "<outer attr=\"[text]a\">[text]data<inner attr=\"[text]b\">[text]more-data</inner>[text]end</outer>",
-                    contents.ToString ());
+            Assert.AreEqual(5, writeTextNodeCount);
+            Assert.AreEqual(
+                "<outer attr=\"[text]a\">[text]data<inner attr=\"[text]b\">[text]more-data</inner>[text]end</outer>",
+                contents.ToString()
+            );
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void WriteNode_XmlReader_ReaderNull ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void WriteNode_XmlReader_ReaderNull()
         {
             XmlReader reader = null;
-            writer.WriteNode (reader, true);
+            writer.WriteNode(reader, true);
         }
 
         [Test]
-        public void WriteNode_XmlReader ()
+        public void WriteNode_XmlReader()
         {
             string xml = "<outer attr='a'>data<inner attr='b'>more-data</inner>end</outer>";
-            XmlReader reader = XmlReader.Create (new StringReader (xml));
+            XmlReader reader = XmlReader.Create(new StringReader(xml));
             int writeTextNodeCount = 0;
-            writer.WriteTextNodeEvent += (o, e) => {
+            writer.WriteTextNodeEvent += (o, e) =>
+            {
                 ++writeTextNodeCount;
-                writer.WriteString ("[text]");
+                writer.WriteString("[text]");
             };
-            writer.WriteNode (reader, false);
-            writer.Flush ();
+            writer.WriteNode(reader, false);
+            writer.Flush();
 
-            Assert.AreEqual (0, writeTextNodeCount);
-            Assert.AreEqual (
-                    "<outer attr=\"a\">data<inner attr=\"b\">more-data</inner>end</outer>",
-                    contents.ToString ());
+            Assert.AreEqual(0, writeTextNodeCount);
+            Assert.AreEqual(
+                "<outer attr=\"a\">data<inner attr=\"b\">more-data</inner>end</outer>",
+                contents.ToString()
+            );
         }
 
-        [Test, ExpectedException (typeof (NullReferenceException))]
-        public void WriteTextNode_ReaderNull ()
+        [Test, ExpectedException(typeof(NullReferenceException))]
+        public void WriteTextNode_ReaderNull()
         {
-            writer.TestWriteTextNode (null, false);
+            writer.TestWriteTextNode(null, false);
         }
 
         [Test]
-        public void WriteTextNode ()
+        public void WriteTextNode()
         {
             string xml = "<foo attr='a'>data</foo>";
 
-            XmlDictionaryReader reader = XmlDictionaryReader.CreateDictionaryReader (
-                    XmlReader.Create (new StringReader (xml)));
-            reader.MoveToContent ();
-            reader.MoveToFirstAttribute ();
-            Assert.AreEqual (XmlNodeType.Attribute, reader.NodeType);
-            writer.TestWriteTextNode (reader, true);
-            writer.Flush ();
-            Assert.AreEqual (XmlNodeType.Attribute, reader.NodeType);
-            Assert.AreEqual ("a", contents.ToString ());
+            XmlDictionaryReader reader = XmlDictionaryReader.CreateDictionaryReader(
+                XmlReader.Create(new StringReader(xml))
+            );
+            reader.MoveToContent();
+            reader.MoveToFirstAttribute();
+            Assert.AreEqual(XmlNodeType.Attribute, reader.NodeType);
+            writer.TestWriteTextNode(reader, true);
+            writer.Flush();
+            Assert.AreEqual(XmlNodeType.Attribute, reader.NodeType);
+            Assert.AreEqual("a", contents.ToString());
             contents.Length = 0;
-            writer.TestWriteTextNode (reader, false);
-            writer.Flush ();
-            Assert.AreEqual ("a", contents.ToString ());
-            Assert.AreEqual (XmlNodeType.Text, reader.NodeType);
+            writer.TestWriteTextNode(reader, false);
+            writer.Flush();
+            Assert.AreEqual("a", contents.ToString());
+            Assert.AreEqual(XmlNodeType.Text, reader.NodeType);
 
             contents.Length = 0;
-            writer.TestWriteTextNode (reader, true);
-            writer.Flush ();
-            Assert.AreEqual ("data", contents.ToString ());
-            Assert.AreEqual (XmlNodeType.Text, reader.NodeType);
+            writer.TestWriteTextNode(reader, true);
+            writer.Flush();
+            Assert.AreEqual("data", contents.ToString());
+            Assert.AreEqual(XmlNodeType.Text, reader.NodeType);
 
             contents.Length = 0;
-            writer.TestWriteTextNode (reader, false);
-            writer.Flush ();
-            Assert.AreEqual ("data", contents.ToString ());
-            Assert.AreNotEqual (XmlNodeType.Text, reader.NodeType);
+            writer.TestWriteTextNode(reader, false);
+            writer.Flush();
+            Assert.AreEqual("data", contents.ToString());
+            Assert.AreNotEqual(XmlNodeType.Text, reader.NodeType);
         }
 
         [Test]
-        public void WriteValue_Guid ()
+        public void WriteValue_Guid()
         {
-            writer.WriteValue (new Guid ());
-            writer.Flush ();
+            writer.WriteValue(new Guid());
+            writer.Flush();
 
-            Assert.AreEqual (new Guid().ToString (), contents.ToString ());
+            Assert.AreEqual(new Guid().ToString(), contents.ToString());
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void WriteValue_IStreamProvider_ValueNull ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void WriteValue_IStreamProvider_ValueNull()
         {
             IStreamProvider value = null;
-            writer.WriteValue (value);
+            writer.WriteValue(value);
         }
 
         [Test]
-        public void WriteValue_IStreamProvider ()
+        public void WriteValue_IStreamProvider()
         {
-            byte[] data = Encoding.UTF8.GetBytes ("Hello, Worlds!!");
+            byte[] data = Encoding.UTF8.GetBytes("Hello, Worlds!!");
             int getStreamCount = 0;
             int releaseStreamCount = 0;
-            var provider = new DummyStreamProvider {
-                Stream = new MemoryStream (data)
+            var provider = new DummyStreamProvider { Stream = new MemoryStream(data) };
+            provider.GetStreamEvent += (o, e) =>
+            {
+                ++getStreamCount;
             };
-            provider.GetStreamEvent += (o, e) => { ++getStreamCount; };
-            provider.ReleaseStreamEvent += (o, e) => {
+            provider.ReleaseStreamEvent += (o, e) =>
+            {
                 ++releaseStreamCount;
-                Assert.IsTrue (object.ReferenceEquals (provider.Stream, e.Stream));
+                Assert.IsTrue(object.ReferenceEquals(provider.Stream, e.Stream));
             };
-            writer.WriteValue (provider);
-            writer.Flush ();
-            Assert.AreEqual (1, getStreamCount);
-            Assert.AreEqual (1, releaseStreamCount);
-            Assert.AreEqual (data.Length, provider.Stream.Position);
-            Assert.AreEqual (Convert.ToBase64String (data), contents.ToString ());
+            writer.WriteValue(provider);
+            writer.Flush();
+            Assert.AreEqual(1, getStreamCount);
+            Assert.AreEqual(1, releaseStreamCount);
+            Assert.AreEqual(data.Length, provider.Stream.Position);
+            Assert.AreEqual(Convert.ToBase64String(data), contents.ToString());
 
             provider.Stream.Position = 0;
-            writer.WriteBase64Event += (o, e) => {
-                throw new Exception ("incomplete!");
+            writer.WriteBase64Event += (o, e) =>
+            {
+                throw new Exception("incomplete!");
             };
             getStreamCount = 0;
             releaseStreamCount = 0;
             Exception thrown = null;
-            try {
-                writer.WriteValue (provider);
+            try
+            {
+                writer.WriteValue(provider);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 thrown = e;
             }
-            Assert.IsNotNull (thrown);
-            Assert.AreEqual (1, getStreamCount);
-            Assert.AreEqual (0, releaseStreamCount);
+            Assert.IsNotNull(thrown);
+            Assert.AreEqual(1, getStreamCount);
+            Assert.AreEqual(0, releaseStreamCount);
         }
 
         [Test]
-        public void WriteValue_TimeSpan ()
+        public void WriteValue_TimeSpan()
         {
-            writer.WriteValue (new TimeSpan ());
-            writer.Flush ();
+            writer.WriteValue(new TimeSpan());
+            writer.Flush();
 
-            Assert.AreEqual (XmlConvert.ToString (new TimeSpan()), contents.ToString ());
+            Assert.AreEqual(XmlConvert.ToString(new TimeSpan()), contents.ToString());
         }
 
-        [Test, ExpectedException (typeof (ArgumentNullException))]
-        public void WriteValue_UniqueId_IdNull ()
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void WriteValue_UniqueId_IdNull()
         {
             UniqueId value = null;
-            writer.WriteValue (value);
+            writer.WriteValue(value);
         }
 
         [Test]
-        public void WriteValue_UniqueId ()
+        public void WriteValue_UniqueId()
         {
-            writer.WriteValue (new UniqueId (new Guid ()));
-            writer.WriteValue (new UniqueId ("string"));
-            writer.Flush ();
+            writer.WriteValue(new UniqueId(new Guid()));
+            writer.WriteValue(new UniqueId("string"));
+            writer.Flush();
 
-            Assert.AreEqual ("urn:uuid:" + new Guid ().ToString () + "string",
-                    contents.ToString ());
+            Assert.AreEqual("urn:uuid:" + new Guid().ToString() + "string", contents.ToString());
         }
     }
 }

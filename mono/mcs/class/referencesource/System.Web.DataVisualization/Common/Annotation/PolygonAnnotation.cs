@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -13,7 +13,7 @@
 //
 //  Purpose:    Polyline and polygon annotation classes.
 //
-//    Reviewed:    
+//    Reviewed:
 //
 //===================================================================
 
@@ -55,46 +55,52 @@ using System.Collections.ObjectModel;
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting
-
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
     /// <summary>
     /// <b>PolylineAnnotation</b> is a class that represents a polyline annotation.
     /// </summary>
-    [
-        SRDescription("DescriptionAttributePolylineAnnotation_PolylineAnnotation"),
-    ]
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Polyline")]
+    [SRDescription("DescriptionAttributePolylineAnnotation_PolylineAnnotation"),]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Polyline"
+    )]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class PolylineAnnotation : Annotation
     {
         #region Fields
 
         // Path with polygon points.
-        private    GraphicsPath    _defaultGraphicsPath = new GraphicsPath();
-        private    GraphicsPath    _graphicsPath;
+        private GraphicsPath _defaultGraphicsPath = new GraphicsPath();
+        private GraphicsPath _graphicsPath;
 
         // Indicates that path was changed
-        internal    bool            pathChanged = false;
+        internal bool pathChanged = false;
 
         // Collection of path points exposed at design-time
         private AnnotationPathPointCollection _pathPoints;
 
         // Indicate that filled polygon must be drawn
-        internal bool                isPolygon = false;
+        internal bool isPolygon = false;
 
         // Indicates that annotation will be placed using free-draw style
-        internal bool                isFreeDrawPlacement = false;
+        internal bool isFreeDrawPlacement = false;
 
         // Line start/end caps
-        private        LineAnchorCapStyle        _startCap = LineAnchorCapStyle.None;
-        private        LineAnchorCapStyle        _endCap = LineAnchorCapStyle.None;
+        private LineAnchorCapStyle _startCap = LineAnchorCapStyle.None;
+        private LineAnchorCapStyle _endCap = LineAnchorCapStyle.None;
 
         #endregion
 
@@ -103,11 +109,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Default public constructor.
         /// </summary>
-        public PolylineAnnotation() 
+        public PolylineAnnotation()
             : base()
         {
             _pathPoints = new AnnotationPathPointCollection(this);
-             
+
             _graphicsPath = _defaultGraphicsPath;
         }
 
@@ -125,16 +131,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="LineAnchorCapStyle"/> value used for a cap style used at the start of an annotation line.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(LineAnchorCapStyle.None),
-        SRDescription("DescriptionAttributeStartCap3"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(LineAnchorCapStyle.None),
+            SRDescription("DescriptionAttributeStartCap3"),
         ]
         virtual public LineAnchorCapStyle StartCap
         {
-            get
-            {
-                return _startCap;
-            }
+            get { return _startCap; }
             set
             {
                 _startCap = value;
@@ -150,16 +153,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="LineAnchorCapStyle"/> value used for a cap style used at the end of an annotation line.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(LineAnchorCapStyle.None),
-        SRDescription("DescriptionAttributeStartCap3"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(LineAnchorCapStyle.None),
+            SRDescription("DescriptionAttributeStartCap3"),
         ]
         virtual public LineAnchorCapStyle EndCap
         {
-            get
-            {
-                return _endCap;
-            }
+            get { return _endCap; }
             set
             {
                 _endCap = value;
@@ -178,20 +178,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="ContentAlignment"/> value.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(ContentAlignment), "MiddleCenter"),
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(ContentAlignment), "MiddleCenter"),
         ]
         override public ContentAlignment Alignment
         {
-            get
-            {
-                return base.Alignment;
-            }
-            set
-            {
-                base.Alignment = value;
-            }
+            get { return base.Alignment; }
+            set { base.Alignment = value; }
         }
 
         /// <summary>
@@ -206,14 +200,8 @@ namespace System.Web.UI.DataVisualization.Charting
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override TextStyle TextStyle
         {
-            get
-            {
-                return base.TextStyle;
-            }
-            set
-            {
-                base.TextStyle = value;
-            }
+            get { return base.TextStyle; }
+            set { base.TextStyle = value; }
         }
 
         /// <summary>
@@ -224,23 +212,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Color"/> value.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(Color), "Black"),
-        SRDescription("DescriptionAttributeForeColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(Color), "Black"),
+            SRDescription("DescriptionAttributeForeColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         override public Color ForeColor
         {
-            get
-            {
-                return base.ForeColor;
-            }
-            set
-            {
-                base.ForeColor = value;
-            }
+            get { return base.ForeColor; }
+            set { base.ForeColor = value; }
         }
 
         /// <summary>
@@ -251,110 +233,80 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Font"/> object.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(Font), "Microsoft Sans Serif, 8pt"),
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(Font), "Microsoft Sans Serif, 8pt"),
         ]
         override public Font Font
         {
-            get
-            {
-                return base.Font;
-            }
-            set
-            {
-                base.Font = value;
-            }
+            get { return base.Font; }
+            set { base.Font = value; }
         }
 
         /// <summary>
         /// Not applicable to this annotation type.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(Color), ""),
-        NotifyParentPropertyAttribute(true),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(Color), ""),
+            NotifyParentPropertyAttribute(true),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         override public Color BackColor
         {
-            get
-            {
-                return base.BackColor;
-            }
-            set
-            {
-                base.BackColor = value;
-            }
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
         }
 
         /// <summary>
         /// Not applicable to this annotation type.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(ChartHatchStyle.None),
-        NotifyParentPropertyAttribute(true),
-        Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(ChartHatchStyle.None),
+            NotifyParentPropertyAttribute(true),
+            Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
         ]
         override public ChartHatchStyle BackHatchStyle
         {
-            get
-            {
-                return base.BackHatchStyle;
-            }
-            set
-            {
-                base.BackHatchStyle = value;
-            }
+            get { return base.BackHatchStyle; }
+            set { base.BackHatchStyle = value; }
         }
 
         /// <summary>
         /// Not applicable to this annotation type.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(GradientStyle.None),
-        NotifyParentPropertyAttribute(true),
-        Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
-        ]        
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(GradientStyle.None),
+            NotifyParentPropertyAttribute(true),
+            Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
+        ]
         override public GradientStyle BackGradientStyle
         {
-            get
-            {
-                return base.BackGradientStyle;
-            }
-            set
-            {
-                base.BackGradientStyle = value;
-            }
+            get { return base.BackGradientStyle; }
+            set { base.BackGradientStyle = value; }
         }
 
         /// <summary>
         /// Not applicable to this annotation type.
         /// </summary>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(typeof(Color), ""),
-        NotifyParentPropertyAttribute(true),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
-        ] 
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(typeof(Color), ""),
+            NotifyParentPropertyAttribute(true),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+        ]
         override public Color BackSecondaryColor
         {
-            get
-            {
-                return base.BackSecondaryColor;
-            }
-            set
-            {
-                base.BackSecondaryColor = value;
-            }
+            get { return base.BackSecondaryColor; }
+            set { base.BackSecondaryColor = value; }
         }
 
         #endregion
@@ -365,88 +317,76 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets an annotation's type name.
         /// </summary>
         /// <remarks>
-        /// This property is used to get the name of each annotation type 
-        /// (e.g. Line, Rectangle, Ellipse). 
+        /// This property is used to get the name of each annotation type
+        /// (e.g. Line, Rectangle, Ellipse).
         /// <para>
         /// This property is for internal use and is hidden at design and run time.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAnnotationType"),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAnnotationType"),
         ]
         public override string AnnotationType
         {
-            get
-            {
-                return "Polyline";
-            }
+            get { return "Polyline"; }
         }
 
         /// <summary>
         /// Gets or sets an annotation selection points style.
         /// </summary>
         /// <value>
-        /// A <see cref="SelectionPointsStyle"/> value that represents the annotation 
+        /// A <see cref="SelectionPointsStyle"/> value that represents the annotation
         /// selection style.
         /// </value>
         /// <remarks>
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(SelectionPointsStyle.Rectangle),
-        ParenthesizePropertyNameAttribute(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeSelectionPointsStyle"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(SelectionPointsStyle.Rectangle),
+            ParenthesizePropertyNameAttribute(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeSelectionPointsStyle"),
         ]
         override internal SelectionPointsStyle SelectionPointsStyle
         {
-            get
-            {
-                return SelectionPointsStyle.Rectangle;
-            }
+            get { return SelectionPointsStyle.Rectangle; }
         }
 
         /// <summary>
         /// Gets or sets a flag that determines whether an annotation should be placed using the free-draw mode.
         /// </summary>
         /// <value>
-        /// <b>True</b> if an annotation should be placed using free-draw mode, 
+        /// <b>True</b> if an annotation should be placed using free-draw mode,
         /// <b>false</b> otherwise.  Defaults to <b>false</b>.
         /// </value>
         /// <remarks>
-        /// Two different placement modes are supported when the Annotation.BeginPlacement 
-        /// method is called. Set this property to <b>true</b> to switch from the default 
+        /// Two different placement modes are supported when the Annotation.BeginPlacement
+        /// method is called. Set this property to <b>true</b> to switch from the default
         /// mode to free-draw mode, which allows the caller to free-draw while moving the mouse cursor.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue(false),
-        SRDescription("DescriptionAttributeFreeDrawPlacement"),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue(false),
+            SRDescription("DescriptionAttributeFreeDrawPlacement"),
 #if !Microsoft_CONTROL
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Never),
+            Browsable(false),
+            EditorBrowsable(EditorBrowsableState.Never),
 #endif // !Microsoft_CONTROL
         ]
         virtual public bool IsFreeDrawPlacement
         {
-            get
-            {
-                return isFreeDrawPlacement;
-            }
-            set
-            {
-                isFreeDrawPlacement = value;
-            }
+            get { return isFreeDrawPlacement; }
+            set { isFreeDrawPlacement = value; }
         }
 
         /// <summary>
@@ -456,27 +396,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="GraphicsPath"/> object with the polyline shape.
         /// </value>
         /// <remarks>
-        /// A polyline must use coordinates relative to an annotation object, where (0,0) is 
-        /// the top-left coordinates and (100,100) is the bottom-right coordinates of the annotation.  
+        /// A polyline must use coordinates relative to an annotation object, where (0,0) is
+        /// the top-left coordinates and (100,100) is the bottom-right coordinates of the annotation.
         /// <para>
-        /// This property is not accessible at design time (at design-time, use the 
+        /// This property is not accessible at design time (at design-time, use the
         /// <see cref="GraphicsPathPoints"/> property instead).
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(null),
-        SRDescription("DescriptionAttributePath"),
-        Browsable(false),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(null),
+            SRDescription("DescriptionAttributePath"),
+            Browsable(false),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
         ]
         virtual public GraphicsPath GraphicsPath
         {
-            get
-            {
-                return _graphicsPath;
-            }
+            get { return _graphicsPath; }
             set
             {
                 _graphicsPath = value;
@@ -491,40 +428,45 @@ namespace System.Web.UI.DataVisualization.Charting
         /// An <see cref="AnnotationPathPointCollection"/> object with the polyline shape.
         /// </value>
         /// <remarks>
-        /// A polyline must use coordinates relative to an annotation object, where (0,0) is 
+        /// A polyline must use coordinates relative to an annotation object, where (0,0) is
         /// the top-left coordinates and (100,100) is the bottom-right coordinates of the annotation.
         /// <para>
-        /// This property is not accessible at runtime (at runtime, use the <see cref="GraphicsPath"/> 
+        /// This property is not accessible at runtime (at runtime, use the <see cref="GraphicsPath"/>
         /// property instead).
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        SRDescription("DescriptionAttributePathPoints"),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        Editor(Editors.ChartCollectionEditor.Editor, Editors.ChartCollectionEditor.Base),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            SRCategory("CategoryAttributePosition"),
+            SRDescription("DescriptionAttributePathPoints"),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            Editor(Editors.ChartCollectionEditor.Editor, Editors.ChartCollectionEditor.Base),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
 #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.InnerProperty)
+            PersistenceMode(PersistenceMode.InnerProperty)
 #endif
         ]
         public AnnotationPathPointCollection GraphicsPathPoints
         {
             get
             {
-                if(this.pathChanged ||
-                    _graphicsPath.PointCount != _pathPoints.Count)
+                if (this.pathChanged || _graphicsPath.PointCount != _pathPoints.Count)
                 {
                     // Recreate collection from graphics path
                     _pathPoints.annotation = null;
                     _pathPoints.Clear();
-                    if (_graphicsPath.PointCount > 0 )
+                    if (_graphicsPath.PointCount > 0)
                     {
                         PointF[] points = _graphicsPath.PathPoints;
                         byte[] types = _graphicsPath.PathTypes;
                         for (int index = 0; index < points.Length; index++)
                         {
-                            _pathPoints.Add(new AnnotationPathPoint(points[index].X, points[index].Y, types[index]));
+                            _pathPoints.Add(
+                                new AnnotationPathPoint(
+                                    points[index].X,
+                                    points[index].Y,
+                                    types[index]
+                                )
+                            );
                         }
                     }
                     _pathPoints.annotation = this;
@@ -553,7 +495,7 @@ namespace System.Web.UI.DataVisualization.Charting
         override internal void Paint(Chart chart, ChartGraphics graphics)
         {
             // Check for empty path
-            if(_graphicsPath.PointCount == 0)
+            if (_graphicsPath.PointCount == 0)
             {
                 return;
             }
@@ -563,29 +505,37 @@ namespace System.Web.UI.DataVisualization.Charting
             PointF anchorPoint = PointF.Empty;
             SizeF size = SizeF.Empty;
             GetRelativePosition(out firstPoint, out size, out anchorPoint);
-            PointF    secondPoint = new PointF(firstPoint.X + size.Width, firstPoint.Y + size.Height);
+            PointF secondPoint = new PointF(firstPoint.X + size.Width, firstPoint.Y + size.Height);
 
             // Create selection rectangle
-            RectangleF selectionRect = new RectangleF(firstPoint, new SizeF(secondPoint.X - firstPoint.X, secondPoint.Y - firstPoint.Y));
+            RectangleF selectionRect = new RectangleF(
+                firstPoint,
+                new SizeF(secondPoint.X - firstPoint.X, secondPoint.Y - firstPoint.Y)
+            );
 
             // Get position
-            RectangleF    rectanglePosition = new RectangleF(selectionRect.Location, selectionRect.Size);
-            if(rectanglePosition.Width < 0)
+            RectangleF rectanglePosition = new RectangleF(
+                selectionRect.Location,
+                selectionRect.Size
+            );
+            if (rectanglePosition.Width < 0)
             {
                 rectanglePosition.X = rectanglePosition.Right;
                 rectanglePosition.Width = -rectanglePosition.Width;
             }
-            if(rectanglePosition.Height < 0)
+            if (rectanglePosition.Height < 0)
             {
                 rectanglePosition.Y = rectanglePosition.Bottom;
                 rectanglePosition.Height = -rectanglePosition.Height;
             }
 
             // Check if position is valid
-            if( float.IsNaN(rectanglePosition.X) || 
-                float.IsNaN(rectanglePosition.Y) || 
-                float.IsNaN(rectanglePosition.Right) || 
-                float.IsNaN(rectanglePosition.Bottom) )
+            if (
+                float.IsNaN(rectanglePosition.X)
+                || float.IsNaN(rectanglePosition.Y)
+                || float.IsNaN(rectanglePosition.Right)
+                || float.IsNaN(rectanglePosition.Bottom)
+            )
             {
                 return;
             }
@@ -596,27 +546,30 @@ namespace System.Web.UI.DataVisualization.Charting
             // Calculate scaling
             float groupScaleX = rectanglePositionAbs.Width / 100.0f;
             float groupScaleY = rectanglePositionAbs.Height / 100.0f;
-            
+
             // Convert path to pixel coordinates
             PointF[] pathPoints = _graphicsPath.PathPoints;
             byte[] pathTypes = _graphicsPath.PathTypes;
-            for(int pointIndex = 0; pointIndex < pathPoints.Length; pointIndex++)
+            for (int pointIndex = 0; pointIndex < pathPoints.Length; pointIndex++)
             {
-                pathPoints[pointIndex].X = rectanglePositionAbs.X + pathPoints[pointIndex].X * groupScaleX;
-                pathPoints[pointIndex].Y = rectanglePositionAbs.Y + pathPoints[pointIndex].Y * groupScaleY;
+                pathPoints[pointIndex].X =
+                    rectanglePositionAbs.X + pathPoints[pointIndex].X * groupScaleX;
+                pathPoints[pointIndex].Y =
+                    rectanglePositionAbs.Y + pathPoints[pointIndex].Y * groupScaleY;
             }
 
             using (GraphicsPath pathAbs = new GraphicsPath(pathPoints, pathTypes))
             {
-
                 // Set line caps
                 bool capChanged = false;
                 LineCap oldStartCap = LineCap.Flat;
                 LineCap oldEndCap = LineCap.Flat;
                 if (!this.isPolygon)
                 {
-                    if (this._startCap != LineAnchorCapStyle.None ||
-                        this._endCap != LineAnchorCapStyle.None)
+                    if (
+                        this._startCap != LineAnchorCapStyle.None
+                        || this._endCap != LineAnchorCapStyle.None
+                    )
                     {
                         capChanged = true;
                         oldStartCap = graphics.Pen.StartCap;
@@ -633,7 +586,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                 graphics.Pen.CustomStartCap = new AdjustableArrowCap(
                                     this.LineWidth + adjustment,
                                     this.LineWidth + adjustment,
-                                    true);
+                                    true
+                                );
                             }
                             else
                             {
@@ -662,7 +616,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                 graphics.Pen.CustomEndCap = new AdjustableArrowCap(
                                     this.LineWidth + adjustment,
                                     this.LineWidth + adjustment,
-                                    true);
+                                    true
+                                );
                             }
                             else
                             {
@@ -706,7 +661,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             this.LineDashStyle,
                             PenAlignment.Center,
                             this.ShadowOffset,
-                            this.ShadowColor);
+                            this.ShadowColor
+                        );
                     }
                     else
                     {
@@ -726,7 +682,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             this.LineDashStyle,
                             PenAlignment.Center,
                             this.ShadowOffset,
-                            this.ShadowColor);
+                            this.ShadowColor
+                        );
                     }
                 }
 
@@ -759,9 +716,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                 // GraphicsPath.Widen incorrectly throws OutOfMemoryException
                                 // catching here and reacting by not widening
                             }
-                            catch (ArgumentException)
-                            {
-                            }
+                            catch (ArgumentException) { }
                         }
                     }
 
@@ -772,16 +727,17 @@ namespace System.Web.UI.DataVisualization.Charting
                         false,
                         ReplaceKeywords(this.ToolTip),
 #if Microsoft_CONTROL
-                    String.Empty,
-                    String.Empty,
-                    String.Empty,
+                        String.Empty,
+                        String.Empty,
+                        String.Empty,
 #else // Microsoft_CONTROL
- ReplaceKeywords(this.Url),
+                        ReplaceKeywords(this.Url),
                         ReplaceKeywords(this.MapAreaAttributes),
                         ReplaceKeywords(this.PostBackValue),
 #endif // Microsoft_CONTROL
- this,
-                        ChartElementType.Annotation);
+                        this,
+                        ChartElementType.Annotation
+                    );
 
                     //Clean up
                     if (newPath != null)
@@ -805,12 +761,12 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Position Changing
 #if Microsoft_CONTROL
         /// <summary>
-        /// Changes annotation position, so it exactly matches the bounary of the 
+        /// Changes annotation position, so it exactly matches the bounary of the
         /// polyline path.
         /// </summary>
         private void ResizeToPathBoundary()
         {
-            if(_graphicsPath.PointCount > 0)
+            if (_graphicsPath.PointCount > 0)
             {
                 // Get current annotation position in relative coordinates
                 PointF firstPoint = PointF.Empty;
@@ -828,9 +784,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 pathBoundary.Height *= size.Height / 100f;
 
                 // Scale all current points
-                using( Matrix matrix = new Matrix() )
+                using (Matrix matrix = new Matrix())
                 {
-                    matrix.Scale(size.Width/pathBoundary.Width, size.Height/pathBoundary.Height);
+                    matrix.Scale(
+                        size.Width / pathBoundary.Width,
+                        size.Height / pathBoundary.Height
+                    );
                     matrix.Translate(-pathBoundary.X, -pathBoundary.Y);
                     _graphicsPath.Transform(matrix);
                 }
@@ -840,6 +799,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 #endif //Microsoft_CONTROL
+
         /// <summary>
         /// Adjust annotation location and\or size as a result of user action.
         /// </summary>
@@ -847,10 +807,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="resizeMode">Resizing mode.</param>
         /// <param name="pixelCoord">Distance is in pixels, otherwise relative.</param>
         /// <param name="userInput">Indicates if position changing was a result of the user input.</param>
-        override internal void AdjustLocationSize(SizeF movingDistance, ResizingMode resizeMode, bool pixelCoord, bool userInput)
+        override internal void AdjustLocationSize(
+            SizeF movingDistance,
+            ResizingMode resizeMode,
+            bool pixelCoord,
+            bool userInput
+        )
         {
             // Call base class when not resizing the path points
-            if(resizeMode != ResizingMode.MovingPathPoints)
+            if (resizeMode != ResizingMode.MovingPathPoints)
             {
                 base.AdjustLocationSize(movingDistance, resizeMode, pixelCoord, userInput);
                 return;
@@ -863,7 +828,7 @@ namespace System.Web.UI.DataVisualization.Charting
             GetRelativePosition(out firstPoint, out size, out anchorPoint);
 
             // Remember path before moving operation
-            if(userInput == true && startMovePathRel == null)
+            if (userInput == true && startMovePathRel == null)
             {
 #if Microsoft_CONTROL
                 this.startMovePathRel = (GraphicsPath)_graphicsPath.Clone();
@@ -874,7 +839,7 @@ namespace System.Web.UI.DataVisualization.Charting
             }
 
             // Convert moving distance to coordinates relative to the anotation
-            if(pixelCoord)
+            if (pixelCoord)
             {
                 movingDistance = this.GetGraphics().GetRelativeSize(movingDistance);
             }
@@ -882,18 +847,20 @@ namespace System.Web.UI.DataVisualization.Charting
             movingDistance.Height /= startMovePositionRel.Height / 100.0f;
 
             // Get path points and adjust position of one of them
-            if(_graphicsPath.PointCount > 0)
+            if (_graphicsPath.PointCount > 0)
             {
                 GraphicsPath pathToMove = (userInput) ? startMovePathRel : _graphicsPath;
                 PointF[] pathPoints = pathToMove.PathPoints;
                 byte[] pathTypes = pathToMove.PathTypes;
 
-                for(int pointIndex = 0; pointIndex < pathPoints.Length; pointIndex++)
+                for (int pointIndex = 0; pointIndex < pathPoints.Length; pointIndex++)
                 {
                     // Adjust position
-                    if( currentPathPointIndex == pointIndex ||
-                        currentPathPointIndex < 0 ||
-                        currentPathPointIndex >= pathPoints.Length )
+                    if (
+                        currentPathPointIndex == pointIndex
+                        || currentPathPointIndex < 0
+                        || currentPathPointIndex >= pathPoints.Length
+                    )
                     {
                         pathPoints[pointIndex].X -= movingDistance.Width;
                         pathPoints[pointIndex].Y -= movingDistance.Height;
@@ -903,7 +870,7 @@ namespace System.Web.UI.DataVisualization.Charting
 #if Microsoft_CONTROL
 
                 // Adjust annotation position to the boundary of the path
-                if(userInput && this.AllowResizing)
+                if (userInput && this.AllowResizing)
                 {
                     // Get path bounds in relative coordinates
                     _defaultGraphicsPath.Dispose();
@@ -922,14 +889,19 @@ namespace System.Web.UI.DataVisualization.Charting
                     this.SetPositionRelative(pathBounds, anchorPoint);
 
                     // Adjust path point position
-                    for(int pointIndex = 0; pointIndex < pathPoints.Length; pointIndex++)
+                    for (int pointIndex = 0; pointIndex < pathPoints.Length; pointIndex++)
                     {
-    
-                        pathPoints[pointIndex].X = startMovePositionRel.X + pathPoints[pointIndex].X * (startMovePositionRel.Width / 100f);
-                        pathPoints[pointIndex].Y = startMovePositionRel.Y + pathPoints[pointIndex].Y * (startMovePositionRel.Height / 100f);
+                        pathPoints[pointIndex].X =
+                            startMovePositionRel.X
+                            + pathPoints[pointIndex].X * (startMovePositionRel.Width / 100f);
+                        pathPoints[pointIndex].Y =
+                            startMovePositionRel.Y
+                            + pathPoints[pointIndex].Y * (startMovePositionRel.Height / 100f);
 
-                        pathPoints[pointIndex].X = (pathPoints[pointIndex].X - pathBounds.X) / (pathBounds.Width / 100f);
-                        pathPoints[pointIndex].Y = (pathPoints[pointIndex].Y - pathBounds.Y) / (pathBounds.Height / 100f);
+                        pathPoints[pointIndex].X =
+                            (pathPoints[pointIndex].X - pathBounds.X) / (pathBounds.Width / 100f);
+                        pathPoints[pointIndex].Y =
+                            (pathPoints[pointIndex].Y - pathBounds.Y) / (pathBounds.Height / 100f);
                     }
                 }
 
@@ -939,7 +911,6 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Position changed
                 this.positionChanged = true;
 #endif // Microsoft_CONTROL
-            
                 // Recreate path with new points
                 _defaultGraphicsPath.Dispose();
                 _defaultGraphicsPath = new GraphicsPath(pathPoints, pathTypes);
@@ -961,11 +932,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Ends user placement of an annotation.
         /// </summary>
         /// <remarks>
-        /// Ends an annotation placement operation previously started by a 
+        /// Ends an annotation placement operation previously started by a
         /// <see cref="Annotation.BeginPlacement"/> method call.
         /// <para>
         /// Calling this method is not required, since placement will automatically
-        /// end when an end user enters all required points. However, it is useful when an annotation 
+        /// end when an end user enters all required points. However, it is useful when an annotation
         /// placement operation needs to be aborted for some reason.
         /// </para>
         /// </remarks>
@@ -975,7 +946,7 @@ namespace System.Web.UI.DataVisualization.Charting
             base.EndPlacement();
 
             // Position was changed
-            if(this.Chart != null)
+            if (this.Chart != null)
             {
                 this.Chart.OnAnnotationPositionChanged(this);
             }
@@ -997,25 +968,24 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="buttons">Mouse button down.</param>
         internal override void PlacementMouseDown(PointF point, MouseButtons buttons)
         {
-            // Call base class method if path editing is not allowed 
-            if(!this.AllowPathEditing)
+            // Call base class method if path editing is not allowed
+            if (!this.AllowPathEditing)
             {
                 base.PlacementMouseDown(point, buttons);
                 return;
             }
 
-            if(buttons == MouseButtons.Right)
+            if (buttons == MouseButtons.Right)
             {
                 // Stop pacement
                 this.EndPlacement();
             }
-            if(buttons == MouseButtons.Left &&
-                IsValidPlacementPosition(point.X, point.Y))
+            if (buttons == MouseButtons.Left && IsValidPlacementPosition(point.X, point.Y))
             {
                 // Convert coordinate to relative
                 PointF newPoint = this.GetGraphics().GetRelativePoint(point);
 
-                if(this.lastPlacementPosition.IsEmpty)
+                if (this.lastPlacementPosition.IsEmpty)
                 {
                     // Set annotation coordinates to full chart
                     this.X = 0f;
@@ -1028,8 +998,10 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 else
                 {
-                    if(this.lastPlacementPosition.X == newPoint.X && 
-                        this.lastPlacementPosition.Y == newPoint.Y)
+                    if (
+                        this.lastPlacementPosition.X == newPoint.X
+                        && this.lastPlacementPosition.Y == newPoint.Y
+                    )
                     {
                         // Stop pacement
                         this.EndPlacement();
@@ -1037,10 +1009,10 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Add a line from prev. position to current into the path
-                using( GraphicsPath tmpPath = new GraphicsPath() )
+                using (GraphicsPath tmpPath = new GraphicsPath())
                 {
                     PointF firstPoint = this.lastPlacementPosition;
-                    if(_graphicsPath.PointCount > 1)
+                    if (_graphicsPath.PointCount > 1)
                     {
                         firstPoint = _graphicsPath.GetLastPoint();
                     }
@@ -1052,7 +1024,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 this.lastPlacementPosition = newPoint;
 
                 // Invalidate and update the chart
-                if(Chart != null)
+                if (Chart != null)
                 {
                     Invalidate();
                     Chart.UpdateAnnotations();
@@ -1068,18 +1040,16 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>Return true when placing finished.</returns>
         internal override bool PlacementMouseUp(PointF point, MouseButtons buttons)
         {
-            // Call base class method if path editing is not allowed 
-            if(!this.AllowPathEditing)
+            // Call base class method if path editing is not allowed
+            if (!this.AllowPathEditing)
             {
                 return base.PlacementMouseUp(point, buttons);
             }
 
-            if(buttons == MouseButtons.Left &&
-                isFreeDrawPlacement)
+            if (buttons == MouseButtons.Left && isFreeDrawPlacement)
             {
                 // Stop pacement
                 this.EndPlacement();
-
             }
 
             return false;
@@ -1091,27 +1061,29 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="point">Mouse cursor position in pixels.</param>
         internal override void PlacementMouseMove(PointF point)
         {
-            // Call base class method if path editing is not allowed 
-            if(!this.AllowPathEditing)
+            // Call base class method if path editing is not allowed
+            if (!this.AllowPathEditing)
             {
                 base.PlacementMouseMove(point);
                 return;
             }
 
             // Check if annotation was moved
-            if( this.GetGraphics() != null &&
-                _graphicsPath.PointCount > 0 &&
-                !this.lastPlacementPosition.IsEmpty)
+            if (
+                this.GetGraphics() != null
+                && _graphicsPath.PointCount > 0
+                && !this.lastPlacementPosition.IsEmpty
+            )
             {
                 // Convert coordinate to relative
                 PointF newPoint = this.GetGraphics().GetRelativePoint(point);
-                if(this.isFreeDrawPlacement)
+                if (this.isFreeDrawPlacement)
                 {
                     // Add new point
-                    using( GraphicsPath tmpPath = new GraphicsPath() )
+                    using (GraphicsPath tmpPath = new GraphicsPath())
                     {
                         PointF firstPoint = this.lastPlacementPosition;
-                        if(_graphicsPath.PointCount > 1)
+                        if (_graphicsPath.PointCount > 1)
                         {
                             firstPoint = _graphicsPath.GetLastPoint();
                         }
@@ -1129,14 +1101,13 @@ namespace System.Web.UI.DataVisualization.Charting
                     _defaultGraphicsPath.Dispose();
                     _defaultGraphicsPath = new GraphicsPath(pathPoints, pathTypes);
                     _graphicsPath = _defaultGraphicsPath;
-
                 }
 
                 // Position changed
                 this.positionChanged = true;
 
                 // Invalidate and update the chart
-                if(this.Chart != null)
+                if (this.Chart != null)
                 {
                     Invalidate();
                     this.Chart.UpdateAnnotations();
@@ -1150,7 +1121,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         #endregion
 
-        #region IDisposable override 
+        #region IDisposable override
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
@@ -1169,23 +1140,25 @@ namespace System.Web.UI.DataVisualization.Charting
                     _pathPoints.Dispose();
                     _pathPoints = null;
                 }
-
             }
             base.Dispose(disposing);
         }
         #endregion
-
     }
 
     /// <summary>
     /// <b>PolygonAnnotation</b> is a class that represents a polygon annotation.
     /// </summary>
-    [
-        SRDescription("DescriptionAttributePolygonAnnotation_PolygonAnnotation"),
-    ]
+    [SRDescription("DescriptionAttributePolygonAnnotation_PolygonAnnotation"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class PolygonAnnotation : PolylineAnnotation
     {
@@ -1194,7 +1167,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Default public constructor.
         /// </summary>
-        public PolygonAnnotation() 
+        public PolygonAnnotation()
             : base()
         {
             this.isPolygon = true;
@@ -1214,20 +1187,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="LineAnchorCapStyle"/> value.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(LineAnchorCapStyle.None),
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(LineAnchorCapStyle.None),
         ]
         override public LineAnchorCapStyle StartCap
         {
-            get
-            {
-                return base.StartCap;
-            }
-            set
-            {
-                base.StartCap = value;
-            }
+            get { return base.StartCap; }
+            set { base.StartCap = value; }
         }
 
         /// <summary>
@@ -1238,20 +1205,14 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="LineAnchorCapStyle"/> value.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(false),
-        DefaultValue(LineAnchorCapStyle.None),
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(false),
+            DefaultValue(LineAnchorCapStyle.None),
         ]
         override public LineAnchorCapStyle EndCap
         {
-            get
-            {
-                return base.EndCap;
-            }
-            set
-            {
-                base.EndCap = value;
-            }
+            get { return base.EndCap; }
+            set { base.EndCap = value; }
         }
 
         #endregion
@@ -1268,24 +1229,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A <see cref="Color"/> value used for the background of an annotation.
         /// </value>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(true),
-        DefaultValue(typeof(Color), ""),
-        SRDescription("DescriptionAttributeBackColor"),
-        NotifyParentPropertyAttribute(true),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(true),
+            DefaultValue(typeof(Color), ""),
+            SRDescription("DescriptionAttributeBackColor"),
+            NotifyParentPropertyAttribute(true),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
         ]
         override public Color BackColor
         {
-            get
-            {
-                return base.BackColor;
-            }
-            set
-            {
-                base.BackColor = value;
-            }
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
         }
 
         /// <summary>
@@ -1301,23 +1256,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Two colors are used to draw the hatching, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(true),
-        DefaultValue(ChartHatchStyle.None),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeBackHatchStyle"),
-        Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(true),
+            DefaultValue(ChartHatchStyle.None),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeBackHatchStyle"),
+            Editor(Editors.HatchStyleEditor.Editor, Editors.HatchStyleEditor.Base)
         ]
         override public ChartHatchStyle BackHatchStyle
         {
-            get
-            {
-                return base.BackHatchStyle;
-            }
-            set
-            {
-                base.BackHatchStyle = value;
-            }
+            get { return base.BackHatchStyle; }
+            set { base.BackHatchStyle = value; }
         }
 
         /// <summary>
@@ -1333,23 +1282,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Two colors are used to draw the gradient, <see cref="BackColor"/> and <see cref="BackSecondaryColor"/>.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(true),
-        DefaultValue(GradientStyle.None),
-        NotifyParentPropertyAttribute(true),
-                SRDescription("DescriptionAttributeBackGradientStyle"),
-        Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
-        ]        
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(true),
+            DefaultValue(GradientStyle.None),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeBackGradientStyle"),
+            Editor(Editors.GradientEditor.Editor, Editors.GradientEditor.Base)
+        ]
         override public GradientStyle BackGradientStyle
         {
-            get
-            {
-                return base.BackGradientStyle;
-            }
-            set
-            {
-                base.BackGradientStyle = value;
-            }
+            get { return base.BackGradientStyle; }
+            set { base.BackGradientStyle = value; }
         }
 
         /// <summary>
@@ -1359,7 +1302,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <seealso cref="BackGradientStyle"/>
         /// </summary>
         /// <value>
-        /// A <see cref="Color"/> value used for the secondary color of an annotation background with 
+        /// A <see cref="Color"/> value used for the secondary color of an annotation background with
         /// hatching or gradient fill.
         /// </value>
         /// <remarks>
@@ -1367,24 +1310,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <see cref="BackGradientStyle"/> are used.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        Browsable(true),
-        DefaultValue(typeof(Color), ""),
-        NotifyParentPropertyAttribute(true),
-        SRDescription("DescriptionAttributeBackSecondaryColor"),
-        TypeConverter(typeof(ColorConverter)),
-        Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
-        ] 
+            SRCategory("CategoryAttributeAppearance"),
+            Browsable(true),
+            DefaultValue(typeof(Color), ""),
+            NotifyParentPropertyAttribute(true),
+            SRDescription("DescriptionAttributeBackSecondaryColor"),
+            TypeConverter(typeof(ColorConverter)),
+            Editor(Editors.ChartColorEditor.Editor, Editors.ChartColorEditor.Base)
+        ]
         override public Color BackSecondaryColor
         {
-            get
-            {
-                return base.BackSecondaryColor;
-            }
-            set
-            {
-                base.BackSecondaryColor = value;
-            }
+            get { return base.BackSecondaryColor; }
+            set { base.BackSecondaryColor = value; }
         }
 
         #endregion
@@ -1395,55 +1332,49 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets or sets an annotation's type name.
         /// </summary>
         /// <remarks>
-        /// This property is used to get the name of each annotation type 
-        /// (e.g. Line, Rectangle, Ellipse). 
+        /// This property is used to get the name of each annotation type
+        /// (e.g. Line, Rectangle, Ellipse).
         /// <para>
         /// This property is for internal use and is hidden at design and run time.
         /// </para>
         /// </remarks>
         [
-        SRCategory("CategoryAttributeMisc"),
-        Bindable(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeAnnotationType"),
+            SRCategory("CategoryAttributeMisc"),
+            Bindable(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeAnnotationType"),
         ]
         public override string AnnotationType
         {
-            get
-            {
-                return "Polygon";
-            }
+            get { return "Polygon"; }
         }
 
         /// <summary>
         /// Gets or sets an annotation's selection points style.
         /// </summary>
         /// <value>
-        /// A <see cref="SelectionPointsStyle"/> value that represents an annotation's 
+        /// A <see cref="SelectionPointsStyle"/> value that represents an annotation's
         /// selection style.
         /// </value>
         /// <remarks>
         /// This property is for internal use and is hidden at design and run time.
         /// </remarks>
         [
-        SRCategory("CategoryAttributeAppearance"),
-        DefaultValue(SelectionPointsStyle.Rectangle),
-        ParenthesizePropertyNameAttribute(true),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
-        SRDescription("DescriptionAttributeSelectionPointsStyle"),
+            SRCategory("CategoryAttributeAppearance"),
+            DefaultValue(SelectionPointsStyle.Rectangle),
+            ParenthesizePropertyNameAttribute(true),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRDescription("DescriptionAttributeSelectionPointsStyle"),
         ]
         override internal SelectionPointsStyle SelectionPointsStyle
         {
-            get
-            {
-                return SelectionPointsStyle.Rectangle;
-            }
+            get { return SelectionPointsStyle.Rectangle; }
         }
 
         #endregion
@@ -1451,28 +1382,34 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
     }
 
-    /// <summary><b>AnnotationPathPointCollection</b> is a collection of polyline 
-    /// annotation path points, and is only available via the <b>GraphicsPathPoints</b> 
+    /// <summary><b>AnnotationPathPointCollection</b> is a collection of polyline
+    /// annotation path points, and is only available via the <b>GraphicsPathPoints</b>
     /// property at design-time.
     /// <seealso cref="PolylineAnnotation.GraphicsPathPoints"/></summary>
     /// <remarks>
-    /// This collection is used at design-time only, and uses serialization to expose the 
+    /// This collection is used at design-time only, and uses serialization to expose the
     /// shape of the polyline and polygon via their GraphicsPathPoints collection property.
     /// At run-time, use Path property to set the path of a polyline or polygon
     /// </remarks>
-    [
-        SRDescription("DescriptionAttributeAnnotationPathPointCollection_AnnotationPathPointCollection"),
-    ]
+    [SRDescription(
+        "DescriptionAttributeAnnotationPathPointCollection_AnnotationPathPointCollection"
+    ),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class AnnotationPathPointCollection : ChartElementCollection<AnnotationPathPoint>
     {
         #region Fields
 
-        internal        PolylineAnnotation    annotation = null;
-        private         GraphicsPath        _graphicsPath = null;
+        internal PolylineAnnotation annotation = null;
+        private GraphicsPath _graphicsPath = null;
 
         #endregion // Fields
 
@@ -1539,7 +1476,7 @@ namespace System.Web.UI.DataVisualization.Charting
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {   
+            {
                 // Free up managed resources
                 if (this._graphicsPath != null)
                 {
@@ -1554,31 +1491,35 @@ namespace System.Web.UI.DataVisualization.Charting
     }
 
     /// <summary>
-    /// The <b>AnnotationPathPoint</b> class represents a path point of a polyline or polygon, 
+    /// The <b>AnnotationPathPoint</b> class represents a path point of a polyline or polygon,
     /// and is stored in their <b>GraphicsPathPoints</b> property, which is only available at design-time.
     /// </summary>
     /// <remarks>
     /// At run-time, use <b>Path</b> property to set the path of a polyline or polygon.
     /// </remarks>
-    [
-        SRDescription("DescriptionAttributeAnnotationPathPoint_AnnotationPathPoint"),
-    ]
+    [SRDescription("DescriptionAttributeAnnotationPathPoint_AnnotationPathPoint"),]
 #if ASPPERM_35
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
-    public class AnnotationPathPoint: ChartElement
+    public class AnnotationPathPoint : ChartElement
     {
         #region Fields
 
         // Point X value
-        private float        _x = 0f;
+        private float _x = 0f;
 
         // Point Y value
-        private float        _y = 0f;
+        private float _y = 0f;
 
         // Point type
-        private byte        _pointType = 1;
+        private byte _pointType = 1;
 
         #endregion // Fields
 
@@ -1587,17 +1528,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Default public constructor.
         /// </summary>
-        public AnnotationPathPoint()
-        {
-        }
+        public AnnotationPathPoint() { }
 
         /// <summary>
         /// Constructor that takes X and Y parameters.
         /// </summary>
         /// <param name="x">Point's X value.</param>
         /// <param name="y">Point's Y value.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification="X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public AnnotationPathPoint(float x, float y)
         {
             this._x = x;
@@ -1610,8 +1552,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="x">Point's X value.</param>
         /// <param name="y">Point's Y value.</param>
         /// <param name="type">Point type.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
-            Justification = "X and Y are cartesian coordinates and well understood")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "X and Y are cartesian coordinates and well understood"
+        )]
         public AnnotationPathPoint(float x, float y, byte type)
         {
             this._x = x;
@@ -1630,25 +1575,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A float value for the point's X coordinate.
         /// </value>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(0f),
-        Browsable(true),
-        SRDescription("DescriptionAttributeAnnotationPathPoint_X"),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(0f),
+            Browsable(true),
+            SRDescription("DescriptionAttributeAnnotationPathPoint_X"),
 #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
         ]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "X")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "X"
+        )]
         public float X
         {
-            get
-            {
-                return _x;
-            }
-            set
-            {
-                _x = value;
-            }
+            get { return _x; }
+            set { _x = value; }
         }
 
         /// <summary>
@@ -1658,25 +1601,23 @@ namespace System.Web.UI.DataVisualization.Charting
         /// A float value for the point's Y coordinate.
         /// </value>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(0f),
-        Browsable(true),
-        SRDescription("DescriptionAttributeAnnotationPathPoint_Y"),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(0f),
+            Browsable(true),
+            SRDescription("DescriptionAttributeAnnotationPathPoint_Y"),
 #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
         ]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Y")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Y"
+        )]
         public float Y
         {
-            get
-            {
-                return _y;
-            }
-            set
-            {
-                _y = value;
-            }
+            get { return _y; }
+            set { _y = value; }
         }
 
         /// <summary>
@@ -1689,25 +1630,19 @@ namespace System.Web.UI.DataVisualization.Charting
         /// See the <see cref="PathPointType"/> enumeration for more details.
         /// </remarks>
         [
-        SRCategory("CategoryAttributePosition"),
-        DefaultValue(typeof(byte), "1"),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        SRDescription("DescriptionAttributeAnnotationPathPoint_Name"),
+            SRCategory("CategoryAttributePosition"),
+            DefaultValue(typeof(byte), "1"),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            SRDescription("DescriptionAttributeAnnotationPathPoint_Name"),
 #if !Microsoft_CONTROL
-        PersistenceMode(PersistenceMode.Attribute),
+            PersistenceMode(PersistenceMode.Attribute),
 #endif
         ]
         public byte PointType
         {
-            get
-            {
-                return _pointType;
-            }
-            set
-            {
-                _pointType = value;
-            }
+            get { return _pointType; }
+            set { _pointType = value; }
         }
 
         /// <summary>
@@ -1717,23 +1652,19 @@ namespace System.Web.UI.DataVisualization.Charting
         /// This property is for internal use and is hidden at design and run time.
         /// </para>
         [
-        SRCategory("CategoryAttributeMisc"),
-        DefaultValue("PathPoint"),
-        Browsable(false),
-        EditorBrowsableAttribute(EditorBrowsableState.Never),
-        SRDescription("DescriptionAttributeAnnotationPathPoint_Name"),
-        DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-        SerializationVisibilityAttribute(SerializationVisibility.Hidden),
+            SRCategory("CategoryAttributeMisc"),
+            DefaultValue("PathPoint"),
+            Browsable(false),
+            EditorBrowsableAttribute(EditorBrowsableState.Never),
+            SRDescription("DescriptionAttributeAnnotationPathPoint_Name"),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden),
         ]
         public string Name
         {
-            get
-            {
-                return "PathPoint";
-            }
+            get { return "PathPoint"; }
         }
 
         #endregion // Properties
-
     }
 }

@@ -18,7 +18,8 @@ internal readonly struct LifecycleProperty
         Key = key;
         _propertyHelper = new PropertyHelper(propertyInfo);
         var propertyType = propertyInfo.PropertyType;
-        _isReferenceTypeOrNullable = !propertyType.IsValueType || Nullable.GetUnderlyingType(propertyType) != null;
+        _isReferenceTypeOrNullable =
+            !propertyType.IsValueType || Nullable.GetUnderlyingType(propertyType) != null;
     }
 
     public string Key { get; }

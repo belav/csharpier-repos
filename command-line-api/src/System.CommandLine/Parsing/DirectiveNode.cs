@@ -7,11 +7,8 @@ namespace System.CommandLine.Parsing
 {
     internal class DirectiveNode : SyntaxNode
     {
-        public DirectiveNode(
-            Token token,
-            CommandNode parent,
-            string name,
-            string? value) : base(token, parent)
+        public DirectiveNode(Token token, CommandNode parent, string name, string? value)
+            : base(token, parent)
         {
             Debug.Assert(token.Type == TokenType.Directive, $"Incorrect token type: {token}");
 

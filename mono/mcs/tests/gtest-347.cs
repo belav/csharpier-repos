@@ -8,7 +8,7 @@ class X
     {
         throw new NotImplementedException();
     }
-    
+
     public IEnumerable<T> Enumerable<T>(string query)
     {
         throw new NotImplementedException();
@@ -19,7 +19,5 @@ class X
         throw new NotImplementedException();
     }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

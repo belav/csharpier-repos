@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,47 +37,47 @@ namespace System.Web.UI.WebControls
         IOrderedDictionary _keys;
         IOrderedDictionary _values;
 
-        internal ListViewDeletedEventArgs (int affectedRows, Exception exception, IOrderedDictionary keys, IOrderedDictionary values)
-            : this (affectedRows, exception)
+        internal ListViewDeletedEventArgs(
+            int affectedRows,
+            Exception exception,
+            IOrderedDictionary keys,
+            IOrderedDictionary values
+        )
+            : this(affectedRows, exception)
         {
             _keys = keys;
             _values = values;
         }
-        
-        public ListViewDeletedEventArgs (int affectedRows, Exception exception)
+
+        public ListViewDeletedEventArgs(int affectedRows, Exception exception)
         {
             AffectedRows = affectedRows;
             Exception = exception;
             ExceptionHandled = false;
         }
-        
-        public int AffectedRows {
-            get;
-            private set;
-        }
-        
-        public Exception Exception {
-            get;
-            private set;
-        }
-        
-        public bool ExceptionHandled {
-            get;
-            set;
-        }
-        
-        public IOrderedDictionary Keys {
-            get {
+
+        public int AffectedRows { get; private set; }
+
+        public Exception Exception { get; private set; }
+
+        public bool ExceptionHandled { get; set; }
+
+        public IOrderedDictionary Keys
+        {
+            get
+            {
                 if (_keys == null)
-                    _keys = new OrderedDictionary ();
+                    _keys = new OrderedDictionary();
                 return _keys;
             }
         }
-        
-        public IOrderedDictionary Values {
-            get {
+
+        public IOrderedDictionary Values
+        {
+            get
+            {
                 if (_values == null)
-                    _values = new OrderedDictionary ();
+                    _values = new OrderedDictionary();
                 return _values;
             }
         }

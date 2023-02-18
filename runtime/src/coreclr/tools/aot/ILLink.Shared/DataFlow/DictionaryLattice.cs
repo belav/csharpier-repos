@@ -9,7 +9,8 @@ using System;
 namespace ILLink.Shared.DataFlow
 {
     // A lattice over dictionaries where the stored values are also from a lattice.
-    public readonly struct DictionaryLattice<TKey, TValue, TValueLattice> : ILattice<DefaultValueDictionary<TKey, TValue>>
+    public readonly struct DictionaryLattice<TKey, TValue, TValueLattice>
+        : ILattice<DefaultValueDictionary<TKey, TValue>>
         where TKey : IEquatable<TKey>
         where TValue : IEquatable<TValue>
         where TValueLattice : ILattice<TValue>
@@ -18,19 +19,23 @@ namespace ILLink.Shared.DataFlow
 
         public DefaultValueDictionary<TKey, TValue> Top { get; }
 
-        public DictionaryLattice (TValueLattice valueLattice)
+        public DictionaryLattice(TValueLattice valueLattice)
         {
             ValueLattice = valueLattice;
-            Top = new DefaultValueDictionary<TKey, TValue> (valueLattice.Top);
+            Top = new DefaultValueDictionary<TKey, TValue>(valueLattice.Top);
         }
 
-        public DefaultValueDictionary<TKey, TValue> Meet (DefaultValueDictionary<TKey, TValue> left, DefaultValueDictionary<TKey, TValue> right)
+        public DefaultValueDictionary<TKey, TValue> Meet(
+            DefaultValueDictionary<TKey, TValue> left,
+            DefaultValueDictionary<TKey, TValue> right
+        )
         {
-            var met = new DefaultValueDictionary<TKey, TValue> (left);
-            foreach (var kvp in right) {
+            var met = new DefaultValueDictionary<TKey, TValue>(left);
+            foreach (var kvp in right)
+            {
                 TKey key = kvp.Key;
                 TValue rightValue = kvp.Value;
-                met.Set (key, ValueLattice.Meet (left.Get (key), rightValue));
+                met.Set(key, ValueLattice.Meet(left.Get(key), rightValue));
             }
             return met;
         }

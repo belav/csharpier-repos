@@ -33,118 +33,129 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
-
-    internal class TestErrorLogger : ILogger {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    internal class TestErrorLogger : ILogger
+    {
         IList errors;
-        
-        public TestErrorLogger ()
+
+        public TestErrorLogger()
         {
-            errors = new ArrayList ();
+            errors = new ArrayList();
         }
-    
-        public LoggerVerbosity Verbosity { get { return LoggerVerbosity.Normal; } set { } }
-        
-        public string Parameters { get { return null; } set { } }
-        
-        public void Initialize (IEventSource eventSource)
+
+        public LoggerVerbosity Verbosity
         {
-            eventSource.ErrorRaised += new BuildErrorEventHandler (ErrorHandler);
+            get { return LoggerVerbosity.Normal; }
+            set { }
         }
-        
-        public void Shutdown ()
+
+        public string Parameters
         {
+            get { return null; }
+            set { }
         }
-        
-        private void ErrorHandler (object sender, BuildErrorEventArgs args)
+
+        public void Initialize(IEventSource eventSource)
         {
-            errors.Add (args);
+            eventSource.ErrorRaised += new BuildErrorEventHandler(ErrorHandler);
         }
-        
-        public int CheckHead (string text, string helpKeyword, string code)
+
+        public void Shutdown() { }
+
+        private void ErrorHandler(object sender, BuildErrorEventArgs args)
+        {
+            errors.Add(args);
+        }
+
+        public int CheckHead(string text, string helpKeyword, string code)
         {
             BuildErrorEventArgs actual;
-        
-            if (errors.Count > 0) {
-                actual = (BuildErrorEventArgs) errors [0];
-                errors.RemoveAt (0);
-            } else
+
+            if (errors.Count > 0)
+            {
+                actual = (BuildErrorEventArgs)errors[0];
+                errors.RemoveAt(0);
+            }
+            else
                 return 1;
-            
+
             if (text == actual.Message && helpKeyword == actual.HelpKeyword && code == actual.Code)
                 return 0;
-            else {
+            else
+            {
                 return 2;
             }
         }
     }
 
     [TestFixture]
-    public class ErrorTest {
-
+    public class ErrorTest
+    {
         Engine engine;
         Project project;
         TestErrorLogger testLogger;
 
         [Test]
-        public void TestAssignment ()
+        public void TestAssignment()
         {
             string code = "code";
             string helpKeyword = "helpKeyword";
             string text = "text";
-            
-            Error error = new Error ();
-            
+
+            Error error = new Error();
+
             error.Code = code;
             error.HelpKeyword = helpKeyword;
             error.Text = text;
 
-            Assert.AreEqual (code, error.Code, "#1");
-            Assert.AreEqual (helpKeyword, error.HelpKeyword, "#2");
-            Assert.AreEqual (text, error.Text, "#3");
+            Assert.AreEqual(code, error.Code, "#1");
+            Assert.AreEqual(helpKeyword, error.HelpKeyword, "#2");
+            Assert.AreEqual(text, error.Text, "#3");
         }
 
         [Test]
-        public void TestExecution1 ()
+        public void TestExecution1()
         {
-            string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='1'>
                         <Error Text='Text' HelpKeyword='HelpKeyword' Code='Code' />
                     </Target>
                 </Project>
             ";
-            
-            engine = new Engine (Consts.BinPath);
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
 
-            bool result = project.Build ("1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-            Assert.AreEqual (false, result, "#1");
+            bool result = project.Build("1");
+
+            Assert.AreEqual(false, result, "#1");
         }
-        
+
         [Test]
-        public void TestExecution2 ()
+        public void TestExecution2()
         {
-            string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
                     <Target Name='1'>
                         <Error Text='Text' HelpKeyword='HelpKeyword' Code='Code' />
                     </Target>
                 </Project>
             ";
-            
-            engine = new Engine (Consts.BinPath);
-            testLogger = new TestErrorLogger ();
-            engine.RegisterLogger (testLogger);
-            
-            project = engine.CreateNewProject ();
-            project.LoadXml (documentString);
-            project.Build ("1");
-            
-            Assert.AreEqual (0, testLogger.CheckHead ("Text", "HelpKeyword", "Code"), "A1");
+
+            engine = new Engine(Consts.BinPath);
+            testLogger = new TestErrorLogger();
+            engine.RegisterLogger(testLogger);
+
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            project.Build("1");
+
+            Assert.AreEqual(0, testLogger.CheckHead("Text", "HelpKeyword", "Code"), "A1");
         }
     }
 }
-        

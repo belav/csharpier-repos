@@ -11,11 +11,12 @@ namespace System.Web.WebPages.Html
     public class ModelStateDictionary : IDictionary<string, ModelState>
     {
         internal const string FormFieldKey = "_FORM";
-        private readonly Dictionary<string, ModelState> _innerDictionary = new Dictionary<string, ModelState>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, ModelState> _innerDictionary = new Dictionary<
+            string,
+            ModelState
+        >(StringComparer.OrdinalIgnoreCase);
 
-        public ModelStateDictionary()
-        {
-        }
+        public ModelStateDictionary() { }
 
         public ModelStateDictionary(ModelStateDictionary dictionary)
         {

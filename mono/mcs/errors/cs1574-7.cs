@@ -2,20 +2,19 @@
 // Line: 11
 // Compiler options: -doc:dummy.xml -warnaserror
 /// <summary />
-public interface IExecutable {
+public interface IExecutable
+{
     /// <summary />
-    void ExecuteSilently ();
+    void ExecuteSilently();
 }
 
 /// <summary>
 /// <see cref="ExecuteSilently">this is not allowed</see>
 /// </summary>
-public class A : IExecutable {
-    static void Main () {
-    }
+public class A : IExecutable
+{
+    static void Main() { }
 
     /// <summary />
-    void IExecutable.ExecuteSilently () {
-    }
+    void IExecutable.ExecuteSilently() { }
 }
-

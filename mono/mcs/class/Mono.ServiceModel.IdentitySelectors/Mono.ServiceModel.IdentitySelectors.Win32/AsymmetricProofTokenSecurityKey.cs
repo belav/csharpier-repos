@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,72 +39,79 @@ namespace Mono.ServiceModel.IdentitySelectors.Win32
         NativeAsymmetricCryptoParameters parameters;
         NativeInfocardCryptoHandle handle;
 
-        public AsymmetricProofTokenSecurityKey (NativeAsymmetricCryptoParameters parameters, NativeInfocardCryptoHandle handle)
+        public AsymmetricProofTokenSecurityKey(
+            NativeAsymmetricCryptoParameters parameters,
+            NativeInfocardCryptoHandle handle
+        )
         {
             this.parameters = parameters;
             this.handle = handle;
         }
 
-        void IDisposable.Dispose ()
+        void IDisposable.Dispose()
         {
-            CloseCryptoHandle (handle);
+            CloseCryptoHandle(handle);
         }
 
-        public override AsymmetricAlgorithm GetAsymmetricAlgorithm (string algorithm, bool privateKey)
+        public override AsymmetricAlgorithm GetAsymmetricAlgorithm(
+            string algorithm,
+            bool privateKey
+        )
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override HashAlgorithm GetHashAlgorithmForSignature (string algorithm)
+        public override HashAlgorithm GetHashAlgorithmForSignature(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override AsymmetricSignatureFormatter GetSignatureFormatter (string algorithm)
+        public override AsymmetricSignatureFormatter GetSignatureFormatter(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override AsymmetricSignatureDeformatter GetSignatureDeformatter (string algorithm)
+        public override AsymmetricSignatureDeformatter GetSignatureDeformatter(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override byte [] DecryptKey (string algorithm, byte [] input)
+        public override byte[] DecryptKey(string algorithm, byte[] input)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override byte [] EncryptKey (string algorithm, byte [] input)
+        public override byte[] EncryptKey(string algorithm, byte[] input)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool IsAsymmetricAlgorithm (string algorithm)
+        public override bool IsAsymmetricAlgorithm(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool IsSymmetricAlgorithm (string algorithm)
+        public override bool IsSymmetricAlgorithm(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool IsSupportedAlgorithm (string algorithm)
+        public override bool IsSupportedAlgorithm(string algorithm)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public override bool HasPrivateKey ()
+        public override bool HasPrivateKey()
         {
             return true;
         }
 
-        public override int KeySize {
+        public override int KeySize
+        {
             get { return parameters.KeySize; }
         }
 
-        [DllImport ("cardspaceapi")]
-        static extern void CloseCryptoHandle (NativeInfocardCryptoHandle handle);
+        [DllImport("cardspaceapi")]
+        static extern void CloseCryptoHandle(NativeInfocardCryptoHandle handle);
     }
 }

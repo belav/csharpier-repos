@@ -4,7 +4,7 @@
 
 class A : C
 {
-    void Test ()
+    void Test()
     {
         i = 0;
     }

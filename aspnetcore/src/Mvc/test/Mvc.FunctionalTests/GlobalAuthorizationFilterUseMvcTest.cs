@@ -6,11 +6,19 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class GlobalAuthorizationFilterUseMvcTest : GlobalAuthorizationFilterTestBase, IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilterWithUseMvc>>
+public class GlobalAuthorizationFilterUseMvcTest
+    : GlobalAuthorizationFilterTestBase,
+        IClassFixture<
+            MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilterWithUseMvc>
+        >
 {
-    public GlobalAuthorizationFilterUseMvcTest(MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilterWithUseMvc> fixture)
+    public GlobalAuthorizationFilterUseMvcTest(
+        MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilterWithUseMvc> fixture
+    )
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = Factory.CreateDefaultClient();
     }
 

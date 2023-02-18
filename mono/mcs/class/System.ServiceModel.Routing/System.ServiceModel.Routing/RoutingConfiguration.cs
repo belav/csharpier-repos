@@ -10,13 +10,16 @@ namespace System.ServiceModel.Routing
 {
     public sealed class RoutingConfiguration
     {
-        public RoutingConfiguration ()
-            : this (new MessageFilterTable<IEnumerable<ServiceEndpoint>> (), true)
+        public RoutingConfiguration()
+            : this(new MessageFilterTable<IEnumerable<ServiceEndpoint>>(), true)
         {
             // probably init from configuration
         }
 
-        public RoutingConfiguration (MessageFilterTable<IEnumerable<ServiceEndpoint>> filterTable, bool routeOnHeadersOnly)
+        public RoutingConfiguration(
+            MessageFilterTable<IEnumerable<ServiceEndpoint>> filterTable,
+            bool routeOnHeadersOnly
+        )
         {
             FilterTable = filterTable;
             RouteOnHeadersOnly = routeOnHeadersOnly;

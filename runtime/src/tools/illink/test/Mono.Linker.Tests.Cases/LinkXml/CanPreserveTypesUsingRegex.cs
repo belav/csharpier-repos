@@ -4,31 +4,25 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.LinkXml
 {
-    [KeptMember (".ctor()")]
-    [SetupLinkerDescriptorFile ("CanPreserveTypesUsingRegex.xml")]
+    [KeptMember(".ctor()")]
+    [SetupLinkerDescriptorFile("CanPreserveTypesUsingRegex.xml")]
     class CanPreserveTypesUsingRegex
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
         [Kept]
-        void UnusedHelper ()
-        {
-        }
+        void UnusedHelper() { }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        class Bar
-        {
-        }
+        [KeptMember(".ctor()")]
+        class Bar { }
     }
 }
 
 namespace Mono.Linker.Tests.Cases.LinkXml.PreserveNamespace
 {
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     class Type1
     {
         [Kept]
@@ -36,20 +30,18 @@ namespace Mono.Linker.Tests.Cases.LinkXml.PreserveNamespace
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     class Type2
     {
         [Kept]
-        public void Method ()
-        {
-        }
+        public void Method() { }
     }
 }
 
 namespace Mono.Linker.Tests.Cases.LinkXml.PreserveNamespace.SubNamespace
 {
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     class Type1
     {
         [Kept]
@@ -57,12 +49,10 @@ namespace Mono.Linker.Tests.Cases.LinkXml.PreserveNamespace.SubNamespace
     }
 
     [Kept]
-    [KeptMember (".ctor()")]
+    [KeptMember(".ctor()")]
     class Type2
     {
         [Kept]
-        public void Method ()
-        {
-        }
+        public void Method() { }
     }
 }

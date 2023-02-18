@@ -5,15 +5,15 @@ using System.Collections;
 
 class X
 {
-    public static IEnumerable Test (ref int a)
+    public static IEnumerable Test(ref int a)
     {
         yield return 0;
-        }
+    }
 
-    static void Main ()
+    static void Main()
     {
         int i = 3;
-        IEnumerable a = Test (ref i);
-        Console.WriteLine (a);
+        IEnumerable a = Test(ref i);
+        Console.WriteLine(a);
     }
 }

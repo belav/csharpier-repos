@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,161 +33,190 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-    [TypeConverterAttribute (typeof(ExpandableObjectConverter))]
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    public abstract class HotSpot: IStateManager
+    [TypeConverterAttribute(typeof(ExpandableObjectConverter))]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public abstract class HotSpot : IStateManager
     {
-        StateBag viewState = new StateBag ();
-        
-        [LocalizableAttribute (true)]
-        [DefaultValueAttribute ("")]
-        public virtual string AccessKey {
-            get {
-                object o = viewState ["AccessKey"];
-                return o != null ? (string) o : String.Empty;
+        StateBag viewState = new StateBag();
+
+        [LocalizableAttribute(true)]
+        [DefaultValueAttribute("")]
+        public virtual string AccessKey
+        {
+            get
+            {
+                object o = viewState["AccessKey"];
+                return o != null ? (string)o : String.Empty;
             }
-            set {
+            set
+            {
                 if (value == null || value.Length < 2)
-                    viewState ["AccessKey"] = value;
+                    viewState["AccessKey"] = value;
                 else
-                    throw new ArgumentOutOfRangeException ("value", "AccessKey can only be null, empty or a single character");
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        "AccessKey can only be null, empty or a single character"
+                    );
             }
         }
-        
-        [LocalizableAttribute (true)]
-        [NotifyParentPropertyAttribute (true)]
-        [WebCategoryAttribute ("Behavior")]
-        [DefaultValueAttribute ("")]
-        [BindableAttribute (true)]
-        public virtual string AlternateText {
-            get {
-                object o = viewState ["AlternateText"];
-                return o != null ? (string) o : String.Empty;
+
+        [LocalizableAttribute(true)]
+        [NotifyParentPropertyAttribute(true)]
+        [WebCategoryAttribute("Behavior")]
+        [DefaultValueAttribute("")]
+        [BindableAttribute(true)]
+        public virtual string AlternateText
+        {
+            get
+            {
+                object o = viewState["AlternateText"];
+                return o != null ? (string)o : String.Empty;
             }
-            set { viewState ["AlternateText"] = value; }
+            set { viewState["AlternateText"] = value; }
         }
-        
-        [WebCategoryAttribute ("Behavior")]
-        [DefaultValueAttribute (HotSpotMode.NotSet)]
-        [NotifyParentPropertyAttribute (true)]
-        public virtual HotSpotMode HotSpotMode {
-            get {
-                object o = viewState ["HotSpotMode"];
-                return o != null ? (HotSpotMode) o : HotSpotMode.NotSet;
+
+        [WebCategoryAttribute("Behavior")]
+        [DefaultValueAttribute(HotSpotMode.NotSet)]
+        [NotifyParentPropertyAttribute(true)]
+        public virtual HotSpotMode HotSpotMode
+        {
+            get
+            {
+                object o = viewState["HotSpotMode"];
+                return o != null ? (HotSpotMode)o : HotSpotMode.NotSet;
             }
-            set {
-                if ((int) value < 0 || (int) value > 3)
-                    throw new ArgumentOutOfRangeException ("value");
-                viewState ["HotSpotMode"] = value;
+            set
+            {
+                if ((int)value < 0 || (int)value > 3)
+                    throw new ArgumentOutOfRangeException("value");
+                viewState["HotSpotMode"] = value;
             }
         }
-        
-        [DefaultValueAttribute ("")]
-        [BindableAttribute (true)]
-        [EditorAttribute ("System.Web.UI.Design.UrlEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-        [NotifyParentPropertyAttribute (true)]
+
+        [DefaultValueAttribute("")]
+        [BindableAttribute(true)]
+        [EditorAttribute(
+            "System.Web.UI.Design.UrlEditor, " + Consts.AssemblySystem_Design,
+            "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+        )]
+        [NotifyParentPropertyAttribute(true)]
         [UrlPropertyAttribute]
-        public string NavigateUrl {
-            get {
-                object o = viewState ["NavigateUrl"];
-                return o != null ? (string) o : String.Empty;
+        public string NavigateUrl
+        {
+            get
+            {
+                object o = viewState["NavigateUrl"];
+                return o != null ? (string)o : String.Empty;
             }
-            set { viewState ["NavigateUrl"] = value; }
+            set { viewState["NavigateUrl"] = value; }
         }
-        
-        [BindableAttribute (true)]
-        [WebCategoryAttribute ("Behavior")]
-        [DefaultValueAttribute ("")]
-        [NotifyParentPropertyAttribute (true)]
-        public string PostBackValue {
-            get {
-                object o = viewState ["PostBackValue"];
-                return o != null ? (string) o : String.Empty;
+
+        [BindableAttribute(true)]
+        [WebCategoryAttribute("Behavior")]
+        [DefaultValueAttribute("")]
+        [NotifyParentPropertyAttribute(true)]
+        public string PostBackValue
+        {
+            get
+            {
+                object o = viewState["PostBackValue"];
+                return o != null ? (string)o : String.Empty;
             }
-            set { viewState ["PostBackValue"] = value; }
+            set { viewState["PostBackValue"] = value; }
         }
-        
-        [DefaultValueAttribute ((short)0)]
-        [WebCategoryAttribute ("Accessibility")]
-        public virtual short TabIndex {
-            get {
-                object o = viewState ["TabIndex"];
-                return o != null ? (short) o : (short) 0;
+
+        [DefaultValueAttribute((short)0)]
+        [WebCategoryAttribute("Accessibility")]
+        public virtual short TabIndex
+        {
+            get
+            {
+                object o = viewState["TabIndex"];
+                return o != null ? (short)o : (short)0;
             }
-            set { viewState ["TabIndex"] = value; }
+            set { viewState["TabIndex"] = value; }
         }
-        
-        [WebCategoryAttribute ("Behavior")]
-        [NotifyParentPropertyAttribute (true)]
-        [DefaultValueAttribute ("")]
-        [TypeConverterAttribute (typeof(TargetConverter))]
-        public virtual string Target {
-            get {
-                object o = viewState ["Target"];
-                return o != null ? (string) o : String.Empty;
+
+        [WebCategoryAttribute("Behavior")]
+        [NotifyParentPropertyAttribute(true)]
+        [DefaultValueAttribute("")]
+        [TypeConverterAttribute(typeof(TargetConverter))]
+        public virtual string Target
+        {
+            get
+            {
+                object o = viewState["Target"];
+                return o != null ? (string)o : String.Empty;
             }
-            set { viewState ["Target"] = value; }
+            set { viewState["Target"] = value; }
         }
-        
-        [Browsable (false)]
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        protected StateBag ViewState {
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        protected StateBag ViewState
+        {
             get { return viewState; }
-        } 
-        
-        protected virtual void LoadViewState (object savedState)
-        {
-            viewState.LoadViewState (savedState);
         }
-        
-        protected virtual object SaveViewState ()
+
+        protected virtual void LoadViewState(object savedState)
         {
-            return viewState.SaveViewState ();
+            viewState.LoadViewState(savedState);
         }
-        
-        protected virtual void TrackViewState ()
+
+        protected virtual object SaveViewState()
         {
-            viewState.TrackViewState ();
+            return viewState.SaveViewState();
         }
-        
+
+        protected virtual void TrackViewState()
+        {
+            viewState.TrackViewState();
+        }
+
         protected virtual bool IsTrackingViewState
         {
             get { return viewState.IsTrackingViewState; }
         }
-    
-        void IStateManager.LoadViewState (object savedState)
+
+        void IStateManager.LoadViewState(object savedState)
         {
-            LoadViewState (savedState);
+            LoadViewState(savedState);
         }
-        
-        object IStateManager.SaveViewState ()
+
+        object IStateManager.SaveViewState()
         {
-            return SaveViewState ();
+            return SaveViewState();
         }
-        
-        void IStateManager.TrackViewState ()
+
+        void IStateManager.TrackViewState()
         {
-            TrackViewState ();
+            TrackViewState();
         }
-        
-        bool IStateManager.IsTrackingViewState {
+
+        bool IStateManager.IsTrackingViewState
+        {
             get { return IsTrackingViewState; }
         }
-        
-        public override string ToString ()
+
+        public override string ToString()
         {
             return GetType().Name;
         }
-        
-        internal void SetDirty ()
+
+        internal void SetDirty()
         {
-            viewState.SetDirty (true);
+            viewState.SetDirty(true);
         }
-    
-        public abstract string GetCoordinates ();
-        
+
+        public abstract string GetCoordinates();
+
         protected internal abstract string MarkupName { get; }
     }
 }
-

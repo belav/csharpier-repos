@@ -1,5 +1,5 @@
 //
-// OracleString.cs 
+// OracleString.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -28,14 +28,14 @@ namespace System.Data.OracleClient
         string value;
         bool notNull;
 
-        public static readonly OracleString Empty = new OracleString (String.Empty);
-        public static readonly OracleString Null = new OracleString ();
+        public static readonly OracleString Empty = new OracleString(String.Empty);
+        public static readonly OracleString Null = new OracleString();
 
         #endregion // Fields
 
         #region Constructors
 
-        public OracleString (string s)
+        public OracleString(string s)
         {
             value = s;
             notNull = true;
@@ -45,19 +45,23 @@ namespace System.Data.OracleClient
 
         #region Properties
 
-        public bool IsNull {
+        public bool IsNull
+        {
             get { return !notNull; }
         }
 
-        public int Length {
+        public int Length
+        {
             get { return value.Length; }
         }
 
-        public char this [int index] {
-            get { return value [index]; }
+        public char this[int index]
+        {
+            get { return value[index]; }
         }
 
-        public string Value {
+        public string Value
+        {
             get { return value; }
         }
 
@@ -65,76 +69,77 @@ namespace System.Data.OracleClient
 
         #region Methods
 
-        public int CompareTo (object obj)
+        public int CompareTo(object obj)
         {
             if (obj == null)
                 return 1;
             else if (!(obj is OracleString))
-                throw new ArgumentException ("Value is not a System.Data.OracleClient.OracleString");
-            else if (((OracleString) obj).IsNull)
+                throw new ArgumentException("Value is not a System.Data.OracleClient.OracleString");
+            else if (((OracleString)obj).IsNull)
                 return 1;
             else
-                return value.CompareTo (((OracleString) obj).Value);
+                return value.CompareTo(((OracleString)obj).Value);
         }
 
-        public static OracleBoolean GreaterThan (OracleString x, OracleString y)
+        public static OracleBoolean GreaterThan(OracleString x, OracleString y)
         {
             if (x.IsNull || y.IsNull)
                 return OracleBoolean.Null;
             return (x > y);
         }
 
-        public static OracleBoolean GreaterThanOrEqual (OracleString x, OracleString y)
+        public static OracleBoolean GreaterThanOrEqual(OracleString x, OracleString y)
         {
             if (x.IsNull || y.IsNull)
                 return OracleBoolean.Null;
-            return (x  >= y);
+            return (x >= y);
         }
 
-        public static OracleBoolean LessThan (OracleString x, OracleString y)
+        public static OracleBoolean LessThan(OracleString x, OracleString y)
         {
             return (x < y);
         }
 
-        public static OracleBoolean LessThanOrEqual (OracleString x, OracleString y)
+        public static OracleBoolean LessThanOrEqual(OracleString x, OracleString y)
         {
             return (x <= y);
         }
 
-        public static OracleString Concat (OracleString x, OracleString y)
+        public static OracleString Concat(OracleString x, OracleString y)
         {
             return x + y;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             // It returns value string's HashCode.
-            return notNull ? value.GetHashCode () : 0;
+            return notNull ? value.GetHashCode() : 0;
         }
 
-        public override bool Equals (object value)
+        public override bool Equals(object value)
         {
-            if (value is OracleString) {
-                OracleString s = (OracleString) value;
+            if (value is OracleString)
+            {
+                OracleString s = (OracleString)value;
                 if (notNull && s.notNull)
                     return this.value == s.value;
                 else
-                    throw new InvalidOperationException ("the value is Null.");
+                    throw new InvalidOperationException("the value is Null.");
             }
             return false;
         }
 
-        public static OracleBoolean Equals (OracleString x, OracleString y)
+        public static OracleBoolean Equals(OracleString x, OracleString y)
         {
             return (x == y);
         }
 
-        public static OracleBoolean NotEquals (OracleString x, OracleString y)
+        public static OracleBoolean NotEquals(OracleString x, OracleString y)
         {
             return (x != y);
         }
 
-        public override string ToString ()
+        public override string ToString()
         {
             return notNull ? value : "Null";
         }
@@ -143,58 +148,61 @@ namespace System.Data.OracleClient
 
         #region Operators
 
-        public static OracleString operator + (OracleString x, OracleString y)
+        public static OracleString operator +(OracleString x, OracleString y)
         {
-            return (x.notNull && y.notNull) ?
-                new OracleString (x.value + y.value) :
-                Null;
+            return (x.notNull && y.notNull) ? new OracleString(x.value + y.value) : Null;
         }
 
-        public static OracleBoolean operator == (OracleString x, OracleString y)
+        public static OracleBoolean operator ==(OracleString x, OracleString y)
         {
-            return (!x.notNull || !y.notNull) ?
-                OracleBoolean.Null : new OracleBoolean (x.value == y.value);
+            return (!x.notNull || !y.notNull)
+                ? OracleBoolean.Null
+                : new OracleBoolean(x.value == y.value);
         }
 
-        public static explicit operator string (OracleString x)
+        public static explicit operator string(OracleString x)
         {
             return x.Value;
         }
 
         [MonoTODO]
-        public static OracleBoolean operator > (OracleString x, OracleString y)
+        public static OracleBoolean operator >(OracleString x, OracleString y)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static OracleBoolean operator >= (OracleString x, OracleString y)
+        public static OracleBoolean operator >=(OracleString x, OracleString y)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public static implicit operator OracleString (string s)
+        public static implicit operator OracleString(string s)
         {
-            return new OracleString (s);
+            return new OracleString(s);
         }
 
-        public static OracleBoolean operator != (OracleString x, OracleString y)
+        public static OracleBoolean operator !=(OracleString x, OracleString y)
         {
-            return (!x.notNull || !y.notNull) ?
-                OracleBoolean.Null : x.value != y.value;
+            return (!x.notNull || !y.notNull) ? OracleBoolean.Null : x.value != y.value;
         }
 
-        public static OracleBoolean operator < (OracleString x, OracleString y)
+        public static OracleBoolean operator <(OracleString x, OracleString y)
         {
-            return (!x.notNull || !y.notNull) ?
-                OracleBoolean.Null :
-                new OracleBoolean (String.Compare (x.value, y.value, false, CultureInfo.InvariantCulture) < 0);
+            return (!x.notNull || !y.notNull)
+                ? OracleBoolean.Null
+                : new OracleBoolean(
+                    String.Compare(x.value, y.value, false, CultureInfo.InvariantCulture) < 0
+                );
         }
 
-        public static OracleBoolean operator <= (OracleString x, OracleString y)
+        public static OracleBoolean operator <=(OracleString x, OracleString y)
         {
-            return (!x.notNull || !y.notNull) ?
-                OracleBoolean.Null : new OracleBoolean (String.Compare (x.value, y.value, false, CultureInfo.InvariantCulture) <= 0);
+            return (!x.notNull || !y.notNull)
+                ? OracleBoolean.Null
+                : new OracleBoolean(
+                    String.Compare(x.value, y.value, false, CultureInfo.InvariantCulture) <= 0
+                );
         }
 
         #endregion // Operators

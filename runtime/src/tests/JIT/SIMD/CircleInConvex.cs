@@ -10,10 +10,8 @@ using System.Numerics;
 
 using Point = System.Numerics.Vector2;
 
-
 namespace ClassLibrary
 {
-
     public class test
     {
         const float EPS = Single.Epsilon;
@@ -27,7 +25,9 @@ namespace ClassLibrary
 
         public struct Line
         {
-            public float a, b, c;
+            public float a,
+                b,
+                c;
         };
 
         static public float abs(float a)
@@ -57,9 +57,8 @@ namespace ClassLibrary
             a = b;
             b = c;
         }
-        
-        
-        // Calc the radius of a circle, with a center in (x, y), the is bounded with Lines. 
+
+        // Calc the radius of a circle, with a center in (x, y), the is bounded with Lines.
         static public float radius(float x, float y, List<Line> l)
         {
             int n = (int)l.Count;
@@ -78,12 +77,17 @@ namespace ClassLibrary
         static public float y_radius(float x, List<Point> a, List<Line> l, out float yOut)
         {
             int n = (int)a.Count;
-            float ly = INF, ry = -INF;
+            float ly = INF,
+                ry = -INF;
             for (int i = 0; i < n; ++i)
             {
-                float x1 = a[i].X, x2 = a[(i + 1) % n].X, y1 = a[i].Y, y2 = a[(i + 1) % n].Y;
+                float x1 = a[i].X,
+                    x2 = a[(i + 1) % n].X,
+                    y1 = a[i].Y,
+                    y2 = a[(i + 1) % n].Y;
 
-                if (x1 == x2) continue;
+                if (x1 == x2)
+                    continue;
                 if (x1 > x2)
                 {
                     swap(ref x1, ref x2);
@@ -100,8 +104,10 @@ namespace ClassLibrary
             for (int sy = 0; sy < steps; ++sy)
             {
                 float diff = (ry - ly) / 3;
-                float y1 = ly + diff, y2 = ry - diff;
-                float f1 = radius(x, y1, l), f2 = radius(x, y2, l);
+                float y1 = ly + diff,
+                    y2 = ry - diff;
+                float f1 = radius(x, y1, l),
+                    f2 = radius(x, y2, l);
                 if (f1 < f2)
                     ly = y1;
                 else
@@ -119,7 +125,6 @@ namespace ClassLibrary
                 float z = vectMul((points[i] - points[i - 2]), (points[i - 1] - points[i - 2]));
                 if (z * zn < 0)
                 {
-
                     return false;
                 }
                 if (zn == 0) // If we have some points on 1 line it is not error.
@@ -160,7 +165,8 @@ namespace ClassLibrary
                 l.Add(currL);
             }
 
-            float lx = INF, rx = -INF;
+            float lx = INF,
+                rx = -INF;
             for (int i = 0; i < n; ++i)
             {
                 lx = min(lx, points[i].X);
@@ -170,9 +176,11 @@ namespace ClassLibrary
             for (int sx = 0; sx < steps; ++sx)
             {
                 float diff = (rx - lx) / 3;
-                float x1 = lx + diff, x2 = rx - diff;
+                float x1 = lx + diff,
+                    x2 = rx - diff;
                 float xOut;
-                float f1 = y_radius(x1, points, l, out xOut), f2 = y_radius(x2, points, l, out xOut);
+                float f1 = y_radius(x1, points, l, out xOut),
+                    f2 = y_radius(x2, points, l, out xOut);
                 if (f1 < f2)
                     lx = x1;
                 else
@@ -186,13 +194,20 @@ namespace ClassLibrary
             return true;
         }
 
-
         static int cmp(Point a, Point b)
         {
             if (a.X == b.X)
-                return a.Y < b.Y ? 1 : a.Y > b.Y ? -1 : 0;
+                return a.Y < b.Y
+                    ? 1
+                    : a.Y > b.Y
+                        ? -1
+                        : 0;
             else
-                return a.X < b.X ? 1 : a.X > b.X ? -1 : 0;
+                return a.X < b.X
+                    ? 1
+                    : a.X > b.X
+                        ? -1
+                        : 0;
         }
 
         static bool cw(Point a, Point b, Point c)
@@ -207,10 +222,13 @@ namespace ClassLibrary
 
         static void convex_hull(List<Point> a)
         {
-            if (a.Count == 1) return;
+            if (a.Count == 1)
+                return;
             a.Sort(cmp);
-            Point p1 = a[0], p2 = a.Last();
-            List<Point> up = new List<Point>(), down = new List<Point>();
+            Point p1 = a[0],
+                p2 = a.Last();
+            List<Point> up = new List<Point>(),
+                down = new List<Point>();
             up.Add(p1);
             down.Add(p1);
             for (int i = 1; i < a.Count; ++i)
@@ -223,7 +241,9 @@ namespace ClassLibrary
                 }
                 if (i == a.Count - 1 || ccw(p1, a[i], p2))
                 {
-                    while (down.Count >= 2 && !ccw(down[down.Count - 2], down[down.Count - 1], a[i]))
+                    while (
+                        down.Count >= 2 && !ccw(down[down.Count - 2], down[down.Count - 1], a[i])
+                    )
                         down.RemoveAt(down.Count - 1);
                     down.Add(a[i]);
                 }
@@ -259,7 +279,7 @@ namespace ClassLibrary
             FindCircle(points, out O, out r);
 
             float expRes = 1191233374.188854F;
-            float ulp    =             384.0F;
+            float ulp = 384.0F;
             if (Math.Abs(r - expRes) <= ulp)
                 return 100;
             return 0;

@@ -32,35 +32,38 @@ class FloatTests
 class Tests
 #endif
 {
-
 #if !__MOBILE__
-    public static int Main (string[] args) {
-        return TestDriver.RunTests (typeof (Tests), args);
+    public static int Main(string[] args)
+    {
+        return TestDriver.RunTests(typeof(Tests), args);
     }
 #endif
-    
-    public static int test_0_beq () {
+    public static int test_0_beq()
+    {
         double a = 2.0;
         if (a != 2.0)
             return 1;
         return 0;
     }
 
-    public static int test_0_bne_un () {
+    public static int test_0_bne_un()
+    {
         double a = 2.0;
         if (a == 1.0)
             return 1;
         return 0;
     }
 
-    public static int test_0_conv_r8 () {
+    public static int test_0_conv_r8()
+    {
         double a = 2;
         if (a != 2.0)
             return 1;
         return 0;
     }
 
-    public static int test_0_conv_i () {
+    public static int test_0_conv_i()
+    {
         double a = 2.0;
         int i = (int)a;
         if (i != 2)
@@ -83,7 +86,8 @@ class Tests
         return 0;
     }
 
-    public static int test_0_fconv_u8 () {
+    public static int test_0_fconv_u8()
+    {
         double d = Double.NaN;
         ulong ui;
         ui = (ulong)d;
@@ -102,7 +106,8 @@ class Tests
         return 0;
     }
 
-    public static int test_0_fconv_u4 () {
+    public static int test_0_fconv_u4()
+    {
         double d = Double.NaN;
         uint ui;
         ui = (uint)d;
@@ -120,7 +125,8 @@ class Tests
         return 0;
     }
 
-    public static int test_0_rconv_u8 () {
+    public static int test_0_rconv_u8()
+    {
         float d = float.NaN;
         ulong ui;
         ui = (ulong)d;
@@ -139,7 +145,8 @@ class Tests
         return 0;
     }
 
-    public static int test_0_rconv_u4 () {
+    public static int test_0_rconv_u4()
+    {
         float d = float.NaN;
         uint ui;
         ui = (uint)d;
@@ -157,72 +164,84 @@ class Tests
         return 0;
     }
 
-    public static int test_5_conv_r4 () {
+    public static int test_5_conv_r4()
+    {
         int i = 5;
         float f = (float)i;
         return (int)f;
     }
 
-    public static int test_0_conv_r4_m1 () {
+    public static int test_0_conv_r4_m1()
+    {
         int i = -1;
         float f = (float)i;
         return (int)f + 1;
     }
 
-    public static int test_5_double_conv_r4 () {
+    public static int test_5_double_conv_r4()
+    {
         double d = 5.0;
         float f = (float)d;
         return (int)f;
     }
 
-    public static int test_5_float_conv_r8 () {
+    public static int test_5_float_conv_r8()
+    {
         float f = 5.0F;
         double d = (double)f;
         return (int)d;
     }
 
-    public static int test_5_conv_r8 () {
+    public static int test_5_conv_r8()
+    {
         int i = 5;
         double f = (double)i;
         return (int)f;
     }
 
-    public static int test_5_add () {
+    public static int test_5_add()
+    {
         double a = 2.0;
-        double b = 3.0;        
+        double b = 3.0;
         return (int)(a + b);
     }
 
-    public static int test_5_sub () {
+    public static int test_5_sub()
+    {
         double a = 8.0;
-        double b = 3.0;        
+        double b = 3.0;
         return (int)(a - b);
-    }    
+    }
 
-    public static int test_24_mul () {
+    public static int test_24_mul()
+    {
         double a = 8.0;
-        double b = 3.0;        
+        double b = 3.0;
         return (int)(a * b);
-    }    
+    }
 
-    public static int test_4_div () {
+    public static int test_4_div()
+    {
         double a = 8.0;
-        double b = 2.0;        
+        double b = 2.0;
         return (int)(a / b);
-    }    
+    }
 
-    public static int test_2_rem () {
+    public static int test_2_rem()
+    {
         double a = 8.0;
-        double b = 3.0;        
+        double b = 3.0;
         return (int)(a % b);
-    }    
+    }
 
-    public static int test_2_neg () {
-        double a = -2.0;        
+    public static int test_2_neg()
+    {
+        double a = -2.0;
         return (int)(-a);
     }
-    
-    public static int test_46_float_add_spill () {
+
+    public static int test_46_float_add_spill()
+    {
         // we overflow the FP stack
         double a = 1;
         double b = 2;
@@ -237,7 +256,8 @@ class Tests
         return (int)(1.0 + (a + (b + (c + (d + (e + (f + (g + (h + i)))))))));
     }
 
-    public static int test_4_float_sub_spill () {
+    public static int test_4_float_sub_spill()
+    {
         // we overflow the FP stack
         double a = 1;
         double b = 2;
@@ -253,7 +273,8 @@ class Tests
         ////// -(int)(1.0 - (1 - (2 - (3 - (4 - (5 - (6 - (7 - (8 - 9)))))))));
     }
 
-    public static int test_362880_float_mul_spill () {
+    public static int test_362880_float_mul_spill()
+    {
         // we overflow the FP stack
         double a = 1;
         double b = 2;
@@ -268,7 +289,8 @@ class Tests
         return (int)(1.0 * (a * (b * (c * (d * (e * (f * (g * (h * i)))))))));
     }
 
-    public static int test_4_long_cast () {
+    public static int test_4_long_cast()
+    {
         long a = 1000;
         double d = (double)a;
         long b = (long)d;
@@ -282,7 +304,8 @@ class Tests
         return 4;
     }
 
-    public static int test_4_ulong_cast () {
+    public static int test_4_ulong_cast()
+    {
         ulong a = 1000;
         double d = (double)a;
         ulong b = (ulong)d;
@@ -295,7 +318,8 @@ class Tests
         return 4;
     }
 
-    public static int test_4_single_long_cast () {
+    public static int test_4_single_long_cast()
+    {
         long a = 1000;
         float d = (float)a;
         long b = (long)d;
@@ -309,41 +333,46 @@ class Tests
         return 4;
     }
 
-    public static int test_0_lconv_to_r8 () {
+    public static int test_0_lconv_to_r8()
+    {
         long a = 150;
-        double b = (double) a;
+        double b = (double)a;
 
         if (b != 150.0)
             return 1;
         return 0;
     }
 
-    public static int test_0_lconv_to_r4 () {
+    public static int test_0_lconv_to_r4()
+    {
         long a = 3000;
-        float b = (float) a;
+        float b = (float)a;
 
         if (b != 3000.0F)
             return 1;
         return 0;
     }
 
-    static void doit (double value, out long m) {
-        m = (long) value;
+    static void doit(double value, out long m)
+    {
+        m = (long)value;
     }
 
-    public static int test_0_ftol_clobber () {
+    public static int test_0_ftol_clobber()
+    {
         long m;
-        doit (1.3, out m);
+        doit(1.3, out m);
         if (m != 1)
             return 2;
         return 0;
     }
 
-    public static int test_0_rounding () {
+    public static int test_0_rounding()
+    {
         long ticks = 631502475130080000L;
         long ticksperday = 864000000000L;
 
-        double days = (double) ticks / ticksperday;
+        double days = (double)ticks / ticksperday;
 
         if ((int)days != 730905)
             return 1;
@@ -372,12 +401,13 @@ class Tests
     }
     */
 
-    public static int test_16_float_cmp () {
+    public static int test_16_float_cmp()
+    {
         double a = 2.0;
         double b = 1.0;
         int result = 0;
         bool val;
-        
+
         val = a == a;
         if (!val)
             return result;
@@ -461,12 +491,13 @@ class Tests
         return result;
     }
 
-    public static int test_15_float_cmp_un () {
+    public static int test_15_float_cmp_un()
+    {
         double a = Double.NaN;
         double b = 1.0;
         int result = 0;
         bool val;
-        
+
         val = a == a;
         if (val)
             return result;
@@ -545,11 +576,12 @@ class Tests
         return result;
     }
 
-    public static int test_15_float_branch () {
+    public static int test_15_float_branch()
+    {
         double a = 2.0;
         double b = 1.0;
         int result = 0;
-        
+
         if (!(a == a))
             return result;
         result++;
@@ -613,11 +645,12 @@ class Tests
         return result;
     }
 
-    public static int test_15_float_branch_un () {
+    public static int test_15_float_branch_un()
+    {
         double a = Double.NaN;
         double b = 1.0;
         int result = 0;
-        
+
         if (a == a)
             return result;
         result++;
@@ -681,10 +714,11 @@ class Tests
         return result;
     }
 
-    public static int test_0_float_precision () {
+    public static int test_0_float_precision()
+    {
         float f1 = 3.40282346638528859E+38f;
-        float f2 = 3.40282346638528859E+38f;        
-        float PositiveInfinity =  (float)(1.0f / 0.0f);
+        float f2 = 3.40282346638528859E+38f;
+        float PositiveInfinity = (float)(1.0f / 0.0f);
         float f = (float)(f1 + f2);
 
         return f == PositiveInfinity ? 0 : 1;
@@ -692,7 +726,8 @@ class Tests
 
     static double VALUE = 0.19975845134874831D;
 
-    public static int test_0_float_conversion_reduces_double_precision () {
+    public static int test_0_float_conversion_reduces_double_precision()
+    {
         double d = (float)VALUE;
         if (d != 0.19975845515727997d)
             return 1;
@@ -715,7 +750,7 @@ class Tests
 
     public static int INT_VAL = 0x13456799;
 
-    public static int test_0_int4_to_float_convertion ()
+    public static int test_0_int4_to_float_convertion()
     {
         double d = (double)(float)INT_VAL;
 
@@ -724,7 +759,7 @@ class Tests
         return 0;
     }
 
-    public static int test_0_int8_to_float_convertion ()
+    public static int test_0_int8_to_float_convertion()
     {
         double d = (double)(float)(long)INT_VAL;
 
@@ -733,73 +768,85 @@ class Tests
         return 0;
     }
 
-    public static int test_5_r4_fadd () {
+    public static int test_5_r4_fadd()
+    {
         float f1 = 3.0f;
         float f2 = 2.0f;
         return (int)(f1 + f2);
     }
 
-    public static int test_1_r4_fsub () {
+    public static int test_1_r4_fsub()
+    {
         float f1 = 3.0f;
         float f2 = 2.0f;
         return (int)(f1 - f2);
     }
 
-    public static int test_6_fmul_r4 () {
+    public static int test_6_fmul_r4()
+    {
         float f1 = 2.0f;
         float f2 = 3.0f;
         return (int)(f1 * f2);
     }
 
-    public static int test_3_fdiv_r4 () {
+    public static int test_3_fdiv_r4()
+    {
         float f1 = 6.0f;
         float f2 = 2.0f;
         return (int)(f1 / f2);
     }
 
-    public static int test_1_frem_r4 () {
+    public static int test_1_frem_r4()
+    {
         float f1 = 7.0f;
         float f2 = 2.0f;
         return (int)(f1 % f2);
     }
 
-    public static int test_0_fcmp_eq_r4 () {
+    public static int test_0_fcmp_eq_r4()
+    {
         float f1 = 1.0f;
         float f2 = 1.0f;
         return f1 == f2 ? 0 : 1;
     }
 
-    public static int test_0_fcmp_eq_2_r4 () {
+    public static int test_0_fcmp_eq_2_r4()
+    {
         float f1 = 1.0f;
         float f2 = 2.0f;
         return f1 == f2 ? 1 : 0;
     }
 
-    public static int test_0_fcmp_eq_r4_mixed () {
+    public static int test_0_fcmp_eq_r4_mixed()
+    {
         float f1 = 1.0f;
         double f2 = 1.0;
         return f1 == f2 ? 0 : 1;
     }
 
-    public static int test_3_iconv_to_r4 () {
+    public static int test_3_iconv_to_r4()
+    {
         int i = 3;
         float f = (float)i;
         return (int)f;
     }
 
-    public static int test_2_neg_r4 () {
+    public static int test_2_neg_r4()
+    {
         float a = -2.0f;
         return (int)(-a);
     }
 
-    public static int test_0_fceq_r4 () {
+    public static int test_0_fceq_r4()
+    {
         float f1 = 1.0f;
         float f2 = 1.0f;
         bool res = f1 == f2;
         return res ? 0 : 1;
     }
 
-    public static int test_0_fcgt_r4 () {
+    public static int test_0_fcgt_r4()
+    {
         float f1 = 2.0f;
         float f2 = 1.0f;
         bool res = f1 > f2;
@@ -807,7 +854,8 @@ class Tests
         return res && !res2 ? 0 : 1;
     }
 
-    public static int test_0_fclt_r4 () {
+    public static int test_0_fclt_r4()
+    {
         float f1 = 1.0f;
         float f2 = 2.0f;
         bool res = f1 < f2;
@@ -815,7 +863,8 @@ class Tests
         return res && !res2 ? 0 : 1;
     }
 
-    public static int test_0_fclt_un_r4 () {
+    public static int test_0_fclt_un_r4()
+    {
         float f1 = 2.0f;
         float f2 = 1.0f;
         bool res = f1 >= f2;
@@ -823,7 +872,8 @@ class Tests
         return res && !res2 ? 0 : 1;
     }
 
-    public static int test_0_fcgt_un_r4 () {
+    public static int test_0_fcgt_un_r4()
+    {
         float f1 = 1.0f;
         float f2 = 2.0f;
         bool res = f1 <= f2;
@@ -831,47 +881,51 @@ class Tests
         return res && !res2 ? 0 : 1;
     }
 
-    public static int test_0_fconv_to_u4_r4 () {
+    public static int test_0_fconv_to_u4_r4()
+    {
         float a = 10.0f;
 
         uint b = (uint)a;
         return b == 10 ? 0 : 1;
     }
 
-    public static int test_0_fconv_to_u1_r4 () {
+    public static int test_0_fconv_to_u1_r4()
+    {
         float a = 10.0f;
 
         byte b = (byte)a;
         return b == 10 ? 0 : 1;
     }
 
-    public static int test_0_fconv_to_i1_r4 () {
+    public static int test_0_fconv_to_i1_r4()
+    {
         float a = 127.0f;
 
         sbyte b = (sbyte)a;
         return b == 127 ? 0 : 1;
     }
 
-    public static int test_0_fconv_to_u2_r4 () {
+    public static int test_0_fconv_to_u2_r4()
+    {
         float a = 10.0f;
 
         ushort b = (ushort)a;
         return b == 10 ? 0 : 1;
     }
 
-    public static int test_0_fconv_to_i2_r4 () {
+    public static int test_0_fconv_to_i2_r4()
+    {
         float a = 127.0f;
 
         short b = (short)a;
         return b == 127 ? 0 : 1;
     }
 
-    public static int test_10_rconv_to_u8 () {
+    public static int test_10_rconv_to_u8()
+    {
         ulong l = 10;
         float f = (float)l;
         l = (ulong)f;
         return (int)l;
     }
-
 }
-

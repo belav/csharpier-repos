@@ -34,86 +34,77 @@ namespace Mono.Net.Security
     {
         ChainValidationHelper certificateValidator;
 
-        protected MobileTlsContext (MobileAuthenticatedStream parent, MonoSslAuthenticationOptions options)
+        protected MobileTlsContext(
+            MobileAuthenticatedStream parent,
+            MonoSslAuthenticationOptions options
+        )
         {
             Parent = parent;
             Options = options;
             IsServer = options.ServerMode;
             EnabledProtocols = options.EnabledSslProtocols;
 
-            if (options.ServerMode) {
+            if (options.ServerMode)
+            {
                 LocalServerCertificate = options.ServerCertificate;
                 AskForClientCertificate = options.ClientCertificateRequired;
-            } else {
+            }
+            else
+            {
                 ClientCertificates = options.ClientCertificates;
                 TargetHost = options.TargetHost;
                 ServerName = options.TargetHost;
-                if (!string.IsNullOrEmpty (ServerName)) {
-                    var pos = ServerName.IndexOf (':');
+                if (!string.IsNullOrEmpty(ServerName))
+                {
+                    var pos = ServerName.IndexOf(':');
                     if (pos > 0)
-                        ServerName = ServerName.Substring (0, pos);
+                        ServerName = ServerName.Substring(0, pos);
                 }
             }
 
-            certificateValidator = ChainValidationHelper.GetInternalValidator (
-                parent.SslStream, parent.Provider, parent.Settings);
+            certificateValidator = ChainValidationHelper.GetInternalValidator(
+                parent.SslStream,
+                parent.Provider,
+                parent.Settings
+            );
         }
 
-        internal MonoSslAuthenticationOptions Options {
-            get;
-        }
+        internal MonoSslAuthenticationOptions Options { get; }
 
-        internal MobileAuthenticatedStream Parent {
-            get;
-        }
+        internal MobileAuthenticatedStream Parent { get; }
 
         public MonoTlsSettings Settings => Parent.Settings;
 
         public MonoTlsProvider Provider => Parent.Provider;
 
-        [SD.Conditional ("MONO_TLS_DEBUG")]
-        protected void Debug (string message, params object[] args)
+        [SD.Conditional("MONO_TLS_DEBUG")]
+        protected void Debug(string message, params object[] args)
         {
-            Parent.Debug ("{0}: {1}", GetType ().Name, string.Format (message, args));
+            Parent.Debug("{0}: {1}", GetType().Name, string.Format(message, args));
         }
 
-        public abstract bool HasContext {
-            get;
-        }
+        public abstract bool HasContext { get; }
 
-        public abstract bool IsAuthenticated {
-            get;
-        }
+        public abstract bool IsAuthenticated { get; }
 
-        public bool IsServer {
-            get;
-        }
+        public bool IsServer { get; }
 
-        internal string TargetHost {
-            get;
-        }
+        internal string TargetHost { get; }
 
-        protected string ServerName {
-            get;
-        }
+        protected string ServerName { get; }
 
-        protected bool AskForClientCertificate {
-            get;
-        }
+        protected bool AskForClientCertificate { get; }
 
-        protected SslProtocols EnabledProtocols {
-            get;
-        }
+        protected SslProtocols EnabledProtocols { get; }
 
-        protected X509CertificateCollection ClientCertificates {
-            get;
-        }
+        protected X509CertificateCollection ClientCertificates { get; }
 
-        internal bool AllowRenegotiation {
+        internal bool AllowRenegotiation
+        {
             get { return false; }
         }
 
-        protected void GetProtocolVersions (out TlsProtocolCode? min, out TlsProtocolCode? max)
+        protected void GetProtocolVersions(out TlsProtocolCode? min, out TlsProtocolCode? max)
         {
             if ((EnabledProtocols & SslProtocols.Tls) != 0)
                 min = TlsProtocolCode.Tls10;
@@ -134,101 +125,115 @@ namespace Mono.Net.Security
                 max = null;
         }
 
-        public abstract void StartHandshake ();
+        public abstract void StartHandshake();
 
-        public abstract bool ProcessHandshake ();
+        public abstract bool ProcessHandshake();
 
-        public abstract void FinishHandshake ();
+        public abstract void FinishHandshake();
 
-        public abstract MonoTlsConnectionInfo ConnectionInfo {
-            get;
-        }
+        public abstract MonoTlsConnectionInfo ConnectionInfo { get; }
 
-        internal X509Certificate LocalServerCertificate {
-            get;
-            private set;
-        }
+        internal X509Certificate LocalServerCertificate { get; private set; }
 
-        internal abstract bool IsRemoteCertificateAvailable {
-            get;
-        }
+        internal abstract bool IsRemoteCertificateAvailable { get; }
 
-        internal abstract X509Certificate LocalClientCertificate {
-            get;
-        }
+        internal abstract X509Certificate LocalClientCertificate { get; }
 
-        public abstract X509Certificate2 RemoteCertificate {
-            get;
-        }
+        public abstract X509Certificate2 RemoteCertificate { get; }
 
-        public abstract TlsProtocols NegotiatedProtocol {
-            get;
-        }
+        public abstract TlsProtocols NegotiatedProtocol { get; }
 
-        public abstract void Flush ();
+        public abstract void Flush();
 
-        public abstract (int ret, bool wantMore) Read (byte[] buffer, int offset, int count);
+        public abstract (int ret, bool wantMore) Read(byte[] buffer, int offset, int count);
 
-        public abstract (int ret, bool wantMore) Write (byte[] buffer, int offset, int count);
+        public abstract (int ret, bool wantMore) Write(byte[] buffer, int offset, int count);
 
-        public abstract void Shutdown ();
+        public abstract void Shutdown();
 
-        public abstract bool PendingRenegotiation ();
+        public abstract bool PendingRenegotiation();
 
-        protected bool ValidateCertificate (X509Certificate2 leaf, X509Chain chain)
+        protected bool ValidateCertificate(X509Certificate2 leaf, X509Chain chain)
         {
-            var result = certificateValidator.ValidateCertificate (TargetHost, IsServer, leaf, chain);
+            var result = certificateValidator.ValidateCertificate(
+                TargetHost,
+                IsServer,
+                leaf,
+                chain
+            );
             return result != null && result.Trusted && !result.UserDenied;
         }
 
-        protected bool ValidateCertificate (X509Certificate2Collection certificates)
+        protected bool ValidateCertificate(X509Certificate2Collection certificates)
         {
-            var result = certificateValidator.ValidateCertificate (TargetHost, IsServer, certificates);
+            var result = certificateValidator.ValidateCertificate(
+                TargetHost,
+                IsServer,
+                certificates
+            );
             return result != null && result.Trusted && !result.UserDenied;
         }
 
-        protected X509Certificate SelectServerCertificate (string serverIdentity)
+        protected X509Certificate SelectServerCertificate(string serverIdentity)
         {
             // There are three options for selecting the server certificate. When
             // selecting which to use, we prioritize the new ServerCertSelectionDelegate
             // API. If the new API isn't used we call LocalCertSelectionCallback (for compat
             // with .NET Framework), and if neither is set we fall back to using ServerCertificate.
 
-            if (Options.ServerCertSelectionDelegate != null) {
-                LocalServerCertificate = Options.ServerCertSelectionDelegate (serverIdentity);
+            if (Options.ServerCertSelectionDelegate != null)
+            {
+                LocalServerCertificate = Options.ServerCertSelectionDelegate(serverIdentity);
 
                 if (LocalServerCertificate == null)
-                    throw new AuthenticationException (SR.net_ssl_io_no_server_cert);
-            } else if (Settings.ClientCertificateSelectionCallback != null) {
-                var tempCollection = new X509CertificateCollection ();
-                tempCollection.Add (Options.ServerCertificate);
+                    throw new AuthenticationException(SR.net_ssl_io_no_server_cert);
+            }
+            else if (Settings.ClientCertificateSelectionCallback != null)
+            {
+                var tempCollection = new X509CertificateCollection();
+                tempCollection.Add(Options.ServerCertificate);
                 // We pass string.Empty here to maintain strict compatability with .NET Framework.
-                LocalServerCertificate = Settings.ClientCertificateSelectionCallback (string.Empty, tempCollection, null, Array.Empty<string>());
-            } else {
+                LocalServerCertificate = Settings.ClientCertificateSelectionCallback(
+                    string.Empty,
+                    tempCollection,
+                    null,
+                    Array.Empty<string>()
+                );
+            }
+            else
+            {
                 LocalServerCertificate = Options.ServerCertificate;
             }
 
             if (LocalServerCertificate == null)
-                throw new NotSupportedException (SR.net_ssl_io_no_server_cert);
+                throw new NotSupportedException(SR.net_ssl_io_no_server_cert);
 
             return LocalServerCertificate;
         }
 
-        protected X509Certificate SelectClientCertificate (string[] acceptableIssuers)
+        protected X509Certificate SelectClientCertificate(string[] acceptableIssuers)
         {
             if (Settings.DisallowUnauthenticatedCertificateRequest && !IsAuthenticated)
                 return null;
 
             if (RemoteCertificate == null)
-                throw new TlsException (AlertDescription.InternalError, "Cannot request client certificate before receiving one from the server.");
+                throw new TlsException(
+                    AlertDescription.InternalError,
+                    "Cannot request client certificate before receiving one from the server."
+                );
 
             /*
              * We need to pass null to the user selection callback during the initial handshake, to allow the callback to distinguish
              * between an authenticated and unauthenticated session.
              */
             X509Certificate certificate;
-            var selected = certificateValidator.SelectClientCertificate (
-                TargetHost, ClientCertificates, IsAuthenticated ? RemoteCertificate : null, acceptableIssuers, out certificate);
+            var selected = certificateValidator.SelectClientCertificate(
+                TargetHost,
+                ClientCertificates,
+                IsAuthenticated ? RemoteCertificate : null,
+                acceptableIssuers,
+                out certificate
+            );
             if (selected)
                 return certificate;
 
@@ -242,20 +247,22 @@ namespace Mono.Net.Security
              * to have a private key in them (explicitly or implicitly via OS X keychain lookup).
              */
             if (acceptableIssuers == null || acceptableIssuers.Length == 0)
-                return ClientCertificates [0];
+                return ClientCertificates[0];
 
             // Copied from the referencesource implementation in referencesource/System/net/System/Net/_SecureChannel.cs.
-            for (int i = 0; i < ClientCertificates.Count; i++) {
+            for (int i = 0; i < ClientCertificates.Count; i++)
+            {
                 var certificate2 = ClientCertificates[i] as X509Certificate2;
                 if (certificate2 == null)
                     continue;
 
                 X509Chain chain = null;
-                try {
-                    chain = new X509Chain ();
+                try
+                {
+                    chain = new X509Chain();
                     chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                     chain.ChainPolicy.VerificationFlags = X509VerificationFlags.IgnoreInvalidName;
-                    chain.Build (certificate2);
+                    chain.Build(certificate2);
 
                     //
                     // We ignore any errors happened with chain.
@@ -263,16 +270,21 @@ namespace Mono.Net.Security
                     //
                     if (chain.ChainElements.Count == 0)
                         continue;
-                    for (int ii=0; ii< chain.ChainElements.Count; ++ii) {
+                    for (int ii = 0; ii < chain.ChainElements.Count; ++ii)
+                    {
                         var issuer = chain.ChainElements[ii].Certificate.Issuer;
-                        if (Array.IndexOf (acceptableIssuers, issuer) != -1)
+                        if (Array.IndexOf(acceptableIssuers, issuer) != -1)
                             return certificate2;
                     }
-                } catch {
+                }
+                catch
+                {
                     ; // ignore errors
-                } finally {
+                }
+                finally
+                {
                     if (chain != null)
-                        chain.Reset ();
+                        chain.Reset();
                 }
             }
 
@@ -280,25 +292,21 @@ namespace Mono.Net.Security
             return null;
         }
 
-        public abstract bool CanRenegotiate {
-            get;
+        public abstract bool CanRenegotiate { get; }
+
+        public abstract void Renegotiate();
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        public abstract void Renegotiate ();
+        protected virtual void Dispose(bool disposing) { }
 
-        public void Dispose ()
+        ~MobileTlsContext()
         {
-            Dispose (true);
-            GC.SuppressFinalize (this);
-        }
-
-        protected virtual void Dispose (bool disposing)
-        {
-        }
-
-        ~MobileTlsContext ()
-        {
-            Dispose (false);
+            Dispose(false);
         }
     }
 }

@@ -13,21 +13,19 @@ namespace System.Web.Razor.Test.Parser.CSharp
         [Fact]
         public void StatementBlockDoesNotAcceptTrailingNewlineIfNewlinesAreSignificantToAncestor()
         {
-            ParseBlockTest("@: @if (true) { }" + Environment.NewLine
-                         + "}",
-                           new MarkupBlock(
-                               Factory.MarkupTransition()
-                                   .Accepts(AcceptedCharacters.None),
-                               Factory.MetaMarkup(":", HtmlSymbolType.Colon),
-                               Factory.Markup(" "),
-                               new StatementBlock(
-                                   Factory.CodeTransition()
-                                       .Accepts(AcceptedCharacters.None),
-                                   Factory.Code("if (true) { }")
-                                       .AsStatement()
-                                   ),
-                               Factory.Markup("\r\n")
-                                   .Accepts(AcceptedCharacters.None)));
+            ParseBlockTest(
+                "@: @if (true) { }" + Environment.NewLine + "}",
+                new MarkupBlock(
+                    Factory.MarkupTransition().Accepts(AcceptedCharacters.None),
+                    Factory.MetaMarkup(":", HtmlSymbolType.Colon),
+                    Factory.Markup(" "),
+                    new StatementBlock(
+                        Factory.CodeTransition().Accepts(AcceptedCharacters.None),
+                        Factory.Code("if (true) { }").AsStatement()
+                    ),
+                    Factory.Markup("\r\n").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
     }
 }

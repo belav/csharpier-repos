@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 class Test
 {
-    async static Task M1 ()
+    async static Task M1()
     {
-        try {
-        }
-        catch when (await Task.Factory.StartNew (() => false)) {
-        }
+        try { }
+        catch when (await Task.Factory.StartNew(() => false)) { }
     }
 }

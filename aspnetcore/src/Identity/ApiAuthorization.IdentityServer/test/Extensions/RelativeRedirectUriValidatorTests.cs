@@ -26,7 +26,10 @@ public class RelativeRedirectUriValidatorTests
         var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
         // Act
-        var validator = await redirectUriValidator.IsRedirectUriValidAsync(providedFullUrl, expectedClient);
+        var validator = await redirectUriValidator.IsRedirectUriValidAsync(
+            providedFullUrl,
+            expectedClient
+        );
 
         // Assert
         Assert.True(validator);
@@ -50,7 +53,10 @@ public class RelativeRedirectUriValidatorTests
         var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
         // Act
-        var validator = await redirectUriValidator.IsRedirectUriValidAsync(providedFullUrl, expectedClient);
+        var validator = await redirectUriValidator.IsRedirectUriValidAsync(
+            providedFullUrl,
+            expectedClient
+        );
 
         // Assert
         Assert.False(validator);
@@ -70,7 +76,10 @@ public class RelativeRedirectUriValidatorTests
         var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
         // Act
-        var validator = await redirectUriValidator.IsRedirectUriValidAsync(providedFullUrl, expectedClient);
+        var validator = await redirectUriValidator.IsRedirectUriValidAsync(
+            providedFullUrl,
+            expectedClient
+        );
 
         // Assert
         Assert.True(validator);
@@ -90,7 +99,10 @@ public class RelativeRedirectUriValidatorTests
         var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
         // Act
-        var validator = await redirectUriValidator.IsRedirectUriValidAsync(providedFullUrl, expectedClient);
+        var validator = await redirectUriValidator.IsRedirectUriValidAsync(
+            providedFullUrl,
+            expectedClient
+        );
 
         // Assert
         Assert.False(validator);
@@ -114,7 +126,10 @@ public class RelativeRedirectUriValidatorTests
         var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
         // Act
-        var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(providedFullUrl, expectedClient);
+        var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(
+            providedFullUrl,
+            expectedClient
+        );
 
         // Assert
         Assert.True(validator);
@@ -138,7 +153,10 @@ public class RelativeRedirectUriValidatorTests
         var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
         // Act
-        var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(providedFullUrl, expectedClient);
+        var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(
+            providedFullUrl,
+            expectedClient
+        );
 
         // Assert
         Assert.False(validator);
@@ -158,7 +176,10 @@ public class RelativeRedirectUriValidatorTests
         var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
         // Act
-        var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(providedFullUrl, expectedClient);
+        var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(
+            providedFullUrl,
+            expectedClient
+        );
 
         // Assert
         Assert.True(validator);
@@ -178,7 +199,10 @@ public class RelativeRedirectUriValidatorTests
         var redirectUriValidator = new RelativeRedirectUriValidator(factory);
 
         // Act
-        var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(providedFullUrl, expectedClient);
+        var validator = await redirectUriValidator.IsPostLogoutRedirectUriValidAsync(
+            providedFullUrl,
+            expectedClient
+        );
 
         // Assert
         Assert.False(validator);
@@ -189,9 +213,7 @@ public class RelativeRedirectUriValidatorTests
         private readonly string _path;
         private readonly string _result;
 
-        public TestUrlFactory()
-        {
-        }
+        public TestUrlFactory() { }
 
         public TestUrlFactory(string path, string result)
         {

@@ -62,7 +62,7 @@ namespace HtmlAgilityPack
     /// <summary>
     /// Represents an HTML node.
     /// </summary>
-    public class HtmlNode: IXPathNavigable
+    public class HtmlNode : IXPathNavigable
     {
         /// <summary>
         /// Gets the name of a comment node. It is actually defined as '#comment'.
@@ -168,7 +168,7 @@ namespace HtmlAgilityPack
             {
                 return false;
             }
-            return (((HtmlElementFlag)flag)&HtmlElementFlag.Closed) != 0;
+            return (((HtmlElementFlag)flag) & HtmlElementFlag.Closed) != 0;
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace HtmlAgilityPack
             {
                 return false;
             }
-            return (((HtmlElementFlag)flag)&HtmlElementFlag.CanOverlap) != 0;
+            return (((HtmlElementFlag)flag) & HtmlElementFlag.CanOverlap) != 0;
         }
 
         /// <summary>
@@ -206,9 +206,7 @@ namespace HtmlAgilityPack
             if (text.Length <= 4)
                 return false;
 
-            if ((text[0] != '<') ||
-                (text[text.Length - 1] != '>') ||
-                (text[1] != '/'))
+            if ((text[0] != '<') || (text[text.Length - 1] != '>') || (text[1] != '/'))
                 return false;
 
             string name = text.Substring(2, text.Length - 3);
@@ -232,7 +230,7 @@ namespace HtmlAgilityPack
             {
                 return false;
             }
-            return (((HtmlElementFlag)flag)&HtmlElementFlag.CData) != 0;
+            return (((HtmlElementFlag)flag) & HtmlElementFlag.CData) != 0;
         }
 
         /// <summary>
@@ -257,19 +255,19 @@ namespace HtmlAgilityPack
             {
                 return true;
             }
-            
+
             // <?xml ...
             if ('?' == name[0])
             {
                 return true;
             }
-            
+
             object flag = ElementsFlags[name.ToLower()];
             if (flag == null)
             {
                 return false;
             }
-            return (((HtmlElementFlag)flag)&HtmlElementFlag.Empty) != 0;
+            return (((HtmlElementFlag)flag) & HtmlElementFlag.Empty) != 0;
         }
 
         /// <summary>
@@ -309,7 +307,7 @@ namespace HtmlAgilityPack
             Attributes.RemoveAll();
             if (node.HasAttributes)
             {
-                foreach(HtmlAttribute att in node.Attributes)
+                foreach (HtmlAttribute att in node.Attributes)
                 {
                     SetAttributeValue(att.Name, att.Value);
                 }
@@ -320,7 +318,7 @@ namespace HtmlAgilityPack
                 RemoveAllChildren();
                 if (node.HasChildNodes)
                 {
-                    foreach(HtmlNode child in node.ChildNodes)
+                    foreach (HtmlNode child in node.ChildNodes)
                     {
                         AppendChild(child.CloneNode(true));
                     }
@@ -334,7 +332,7 @@ namespace HtmlAgilityPack
             _ownerdocument = ownerdocument;
             _outerstartindex = index;
 
-            switch(type)
+            switch (type)
             {
                 case HtmlNodeType.Comment:
                     _name = HtmlNodeTypeNameComment;
@@ -365,7 +363,7 @@ namespace HtmlAgilityPack
                     }
                 }
             }
-            
+
             if ((-1 == index) && (type != HtmlNodeType.Comment) && (type != HtmlNodeType.Text))
             {
                 // innerhtml and outerhtml must be calculated
@@ -381,7 +379,7 @@ namespace HtmlAgilityPack
                 // close all children
                 if (_childnodes != null)
                 {
-                    foreach(HtmlNode child in _childnodes)
+                    foreach (HtmlNode child in _childnodes)
                     {
                         if (child.Closed)
                             continue;
@@ -424,10 +422,7 @@ namespace HtmlAgilityPack
 
         internal HtmlNode EndNode
         {
-            get
-            {
-                return _endnode;
-            }
+            get { return _endnode; }
         }
 
         internal string GetId()
@@ -526,7 +521,7 @@ namespace HtmlAgilityPack
                 {
                     throw new Exception(HtmlDocument.HtmlExceptionUseIdAttributeFalse);
                 }
-                
+
                 if (value == null)
                 {
                     throw new ArgumentNullException("value");
@@ -540,10 +535,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int Line
         {
-            get
-            {
-                return _line;
-            }
+            get { return _line; }
         }
 
         /// <summary>
@@ -551,10 +543,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int LinePosition
         {
-            get
-            {
-                return _lineposition;
-            }
+            get { return _lineposition; }
         }
 
         /// <summary>
@@ -562,10 +551,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public int StreamPosition
         {
-            get
-            {
-                return _streamposition;
-            }
+            get { return _streamposition; }
         }
 
         /// <summary>
@@ -573,10 +559,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public bool Closed
         {
-            get
-            {
-                return (_endnode != null);
-            }
+            get { return (_endnode != null); }
         }
 
         /// <summary>
@@ -592,10 +575,7 @@ namespace HtmlAgilityPack
                 }
                 return _name;
             }
-            set
-            {
-                _name = value;
-            }
+            set { _name = value; }
         }
 
         /// <summary>
@@ -623,7 +603,7 @@ namespace HtmlAgilityPack
                 }
 
                 string s = null;
-                foreach(HtmlNode node in ChildNodes)
+                foreach (HtmlNode node in ChildNodes)
                 {
                     s += node.InnerText;
                 }
@@ -741,12 +721,12 @@ namespace HtmlAgilityPack
             HtmlNode node = _ownerdocument.CreateNode(_nodetype);
             node._name = Name;
 
-            switch(_nodetype)
+            switch (_nodetype)
             {
                 case HtmlNodeType.Comment:
                     ((HtmlCommentNode)node).Comment = ((HtmlCommentNode)this).Comment;
                     return node;
-        
+
                 case HtmlNodeType.Text:
                     ((HtmlTextNode)node).Text = ((HtmlTextNode)this).Text;
                     return node;
@@ -755,7 +735,7 @@ namespace HtmlAgilityPack
             // attributes
             if (HasAttributes)
             {
-                foreach(HtmlAttribute att in _attributes)
+                foreach (HtmlAttribute att in _attributes)
                 {
                     HtmlAttribute newatt = att.Clone();
                     node.Attributes.Append(newatt);
@@ -766,7 +746,7 @@ namespace HtmlAgilityPack
             if (HasClosingAttributes)
             {
                 node._endnode = _endnode.CloneNode(false);
-                foreach(HtmlAttribute att in _endnode._attributes)
+                foreach (HtmlAttribute att in _endnode._attributes)
                 {
                     HtmlAttribute newatt = att.Clone();
                     node._endnode._attributes.Append(newatt);
@@ -783,7 +763,7 @@ namespace HtmlAgilityPack
             }
 
             // child nodes
-            foreach(HtmlNode child in _childnodes)
+            foreach (HtmlNode child in _childnodes)
             {
                 HtmlNode newchild = child.Clone();
                 node.AppendChild(newchild);
@@ -796,10 +776,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlNode NextSibling
         {
-            get
-            {
-                return _nextnode;
-            }
+            get { return _nextnode; }
         }
 
         /// <summary>
@@ -807,10 +784,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlNode PreviousSibling
         {
-            get
-            {
-                return _prevnode;
-            }
+            get { return _prevnode; }
         }
 
         /// <summary>
@@ -849,7 +823,7 @@ namespace HtmlAgilityPack
             if (_ownerdocument.OptionUseIdAttribute)
             {
                 // remove nodes from id list
-                foreach(HtmlNode node in _childnodes)
+                foreach (HtmlNode node in _childnodes)
                 {
                     _ownerdocument.SetIdForNode(null, node.GetId());
                 }
@@ -910,7 +884,7 @@ namespace HtmlAgilityPack
                 HtmlNode prev = oldChild.PreviousSibling;
 
                 // reroute grand children to ourselves
-                foreach(HtmlNode grandchild in oldChild._childnodes)
+                foreach (HtmlNode grandchild in oldChild._childnodes)
                 {
                     InsertAfter(grandchild, prev);
                 }
@@ -1071,7 +1045,7 @@ namespace HtmlAgilityPack
                 {
                     return null;
                 }
-                return _childnodes[_childnodes.Count-1];
+                return _childnodes[_childnodes.Count - 1];
             }
         }
 
@@ -1080,10 +1054,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlNodeType NodeType
         {
-            get
-            {
-                return _nodetype;
-            }
+            get { return _nodetype; }
         }
 
         /// <summary>
@@ -1091,10 +1062,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlNode ParentNode
         {
-            get
-            {
-                return _parentnode;
-            }
+            get { return _parentnode; }
         }
 
         /// <summary>
@@ -1102,10 +1070,7 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlDocument OwnerDocument
         {
-            get
-            {
-                return _ownerdocument;
-            }
+            get { return _ownerdocument; }
         }
 
         /// <summary>
@@ -1152,7 +1117,7 @@ namespace HtmlAgilityPack
                 throw new ArgumentNullException("newChildren");
             }
 
-            foreach(HtmlNode newChild in newChildren)
+            foreach (HtmlNode newChild in newChildren)
             {
                 PrependChild(newChild);
             }
@@ -1186,7 +1151,7 @@ namespace HtmlAgilityPack
             if (newChildren == null)
                 throw new ArgumentNullException("newChildrend");
 
-            foreach(HtmlNode newChild in newChildren)
+            foreach (HtmlNode newChild in newChildren)
             {
                 AppendChild(newChild);
             }
@@ -1427,8 +1392,12 @@ namespace HtmlAgilityPack
 
                 if (att.Name.Length >= 4)
                 {
-                    if ((att.Name[0] == '<') && (att.Name[1] == '%') &&
-                        (att.Name[att.Name.Length-1] == '>') && (att.Name[att.Name.Length-2] == '%'))
+                    if (
+                        (att.Name[0] == '<')
+                        && (att.Name[1] == '%')
+                        && (att.Name[att.Name.Length - 1] == '>')
+                        && (att.Name[att.Name.Length - 2] == '%')
+                    )
                     {
                         outText.Write(" " + name);
                         return;
@@ -1436,7 +1405,7 @@ namespace HtmlAgilityPack
                 }
                 if (_ownerdocument.OptionOutputOptimizeAttributeValues)
                 {
-                    if (att.Value.IndexOfAny(new Char[]{(char)10, (char)13, (char)9, ' '}) < 0)
+                    if (att.Value.IndexOfAny(new Char[] { (char)10, (char)13, (char)9, ' ' }) < 0)
                     {
                         outText.Write(" " + name + "=" + att.Value);
                     }
@@ -1459,7 +1428,7 @@ namespace HtmlAgilityPack
                 return;
             }
             // we use _hashitems to make sure attributes are written only once
-            foreach(HtmlAttribute att in node.Attributes._hashitems.Values)
+            foreach (HtmlAttribute att in node.Attributes._hashitems.Values)
             {
                 writer.WriteAttributeString(att.XmlName, att.Value);
             }
@@ -1474,7 +1443,7 @@ namespace HtmlAgilityPack
                     return;
                 }
                 // we use _hashitems to make sure attributes are written only once
-                foreach(HtmlAttribute att in _attributes._hashitems.Values)
+                foreach (HtmlAttribute att in _attributes._hashitems.Values)
                 {
                     WriteAttribute(outText, att);
                 }
@@ -1485,22 +1454,29 @@ namespace HtmlAgilityPack
             {
                 if (_attributes != null)
                 {
-
-                    foreach(HtmlAttribute att in _attributes)
+                    foreach (HtmlAttribute att in _attributes)
                     {
                         WriteAttribute(outText, att);
                     }
                 }
                 if (_ownerdocument.OptionAddDebuggingAttributes)
                 {
-                    WriteAttribute(outText, _ownerdocument.CreateAttribute("_closed", Closed.ToString()));
-                    WriteAttribute(outText, _ownerdocument.CreateAttribute("_children", ChildNodes.Count.ToString()));
+                    WriteAttribute(
+                        outText,
+                        _ownerdocument.CreateAttribute("_closed", Closed.ToString())
+                    );
+                    WriteAttribute(
+                        outText,
+                        _ownerdocument.CreateAttribute("_children", ChildNodes.Count.ToString())
+                    );
 
                     int i = 0;
-                    foreach(HtmlNode n in ChildNodes)
+                    foreach (HtmlNode n in ChildNodes)
                     {
-                        WriteAttribute(outText, _ownerdocument.CreateAttribute("_child_" + i,
-                            n.Name));
+                        WriteAttribute(
+                            outText,
+                            _ownerdocument.CreateAttribute("_child_" + i, n.Name)
+                        );
                         i++;
                     }
                 }
@@ -1522,14 +1498,20 @@ namespace HtmlAgilityPack
                     return;
                 }
 
-                foreach(HtmlAttribute att in _endnode._attributes)
+                foreach (HtmlAttribute att in _endnode._attributes)
                 {
                     WriteAttribute(outText, att);
                 }
                 if (_ownerdocument.OptionAddDebuggingAttributes)
                 {
-                    WriteAttribute(outText, _ownerdocument.CreateAttribute("_closed", Closed.ToString()));
-                    WriteAttribute(outText, _ownerdocument.CreateAttribute("_children", ChildNodes.Count.ToString()));
+                    WriteAttribute(
+                        outText,
+                        _ownerdocument.CreateAttribute("_closed", Closed.ToString())
+                    );
+                    WriteAttribute(
+                        outText,
+                        _ownerdocument.CreateAttribute("_children", ChildNodes.Count.ToString())
+                    );
                 }
             }
         }
@@ -1537,7 +1519,7 @@ namespace HtmlAgilityPack
         internal static string GetXmlComment(HtmlCommentNode comment)
         {
             string s = comment.Comment;
-            return s.Substring(4, s.Length-7).Replace("--", " - -");
+            return s.Substring(4, s.Length - 7).Replace("--", " - -");
         }
 
         /// <summary>
@@ -1547,7 +1529,7 @@ namespace HtmlAgilityPack
         public void WriteTo(TextWriter outText)
         {
             string html;
-            switch(_nodetype)
+            switch (_nodetype)
             {
                 case HtmlNodeType.Comment:
                     html = ((HtmlCommentNode)this).Comment;
@@ -1564,7 +1546,11 @@ namespace HtmlAgilityPack
                 case HtmlNodeType.Document:
                     if (_ownerdocument.OptionOutputAsXml)
                     {
-                        outText.Write("<?xml version=\"1.0\" encoding=\"" + _ownerdocument.GetOutEncoding().BodyName + "\"?>");
+                        outText.Write(
+                            "<?xml version=\"1.0\" encoding=\""
+                                + _ownerdocument.GetOutEncoding().BodyName
+                                + "\"?>"
+                        );
 
                         // check there is a root element
                         if (_ownerdocument.DocumentNode.HasChildNodes)
@@ -1575,7 +1561,7 @@ namespace HtmlAgilityPack
                                 HtmlNode xml = _ownerdocument.GetXmlDeclaration();
                                 if (xml != null)
                                 {
-                                    rootnodes --;
+                                    rootnodes--;
                                 }
 
                                 if (rootnodes > 1)
@@ -1652,7 +1638,10 @@ namespace HtmlAgilityPack
                     {
                         if (HtmlNode.IsEmptyElement(Name))
                         {
-                            if ((_ownerdocument.OptionWriteEmptyNodes) || (_ownerdocument.OptionOutputAsXml))
+                            if (
+                                (_ownerdocument.OptionWriteEmptyNodes)
+                                || (_ownerdocument.OptionOutputAsXml)
+                            )
                             {
                                 outText.Write(" />");
                             }
@@ -1720,17 +1709,22 @@ namespace HtmlAgilityPack
         public void WriteTo(XmlWriter writer)
         {
             string html;
-            switch(_nodetype)
+            switch (_nodetype)
             {
                 case HtmlNodeType.Comment:
                     writer.WriteComment(GetXmlComment((HtmlCommentNode)this));
                     break;
 
                 case HtmlNodeType.Document:
-                    writer.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"" + _ownerdocument.GetOutEncoding().BodyName + "\"");
+                    writer.WriteProcessingInstruction(
+                        "xml",
+                        "version=\"1.0\" encoding=\""
+                            + _ownerdocument.GetOutEncoding().BodyName
+                            + "\""
+                    );
                     if (HasChildNodes)
                     {
-                        foreach(HtmlNode subnode in ChildNodes)
+                        foreach (HtmlNode subnode in ChildNodes)
                         {
                             subnode.WriteTo(writer);
                         }
@@ -1757,7 +1751,7 @@ namespace HtmlAgilityPack
 
                     if (HasChildNodes)
                     {
-                        foreach(HtmlNode subnode in ChildNodes)
+                        foreach (HtmlNode subnode in ChildNodes)
                         {
                             subnode.WriteTo(writer);
                         }
@@ -1778,7 +1772,7 @@ namespace HtmlAgilityPack
                 return;
             }
 
-            foreach(HtmlNode node in _childnodes)
+            foreach (HtmlNode node in _childnodes)
             {
                 node.WriteTo(outText);
             }
@@ -1812,7 +1806,7 @@ namespace HtmlAgilityPack
     /// <summary>
     /// Represents a combined list and collection of HTML nodes.
     /// </summary>
-    public class HtmlNodeCollection: IEnumerable
+    public class HtmlNodeCollection : IEnumerable
     {
         private ArrayList _items = new ArrayList();
         private HtmlNode _parentnode;
@@ -1827,15 +1821,12 @@ namespace HtmlAgilityPack
         /// </summary>
         public int Count
         {
-            get
-            {
-                return _items.Count;
-            }
+            get { return _items.Count; }
         }
 
         internal void Clear()
         {
-            foreach(HtmlNode node in _items)
+            foreach (HtmlNode node in _items)
             {
                 node._parentnode = null;
                 node._nextnode = null;
@@ -1852,16 +1843,16 @@ namespace HtmlAgilityPack
 
             if (index > 0)
             {
-                prev = (HtmlNode)_items[index-1];
+                prev = (HtmlNode)_items[index - 1];
             }
 
-            if (index < (_items.Count-1))
+            if (index < (_items.Count - 1))
             {
-                next = (HtmlNode)_items[index+1];
+                next = (HtmlNode)_items[index + 1];
             }
 
             _items.RemoveAt(index);
-            
+
             if (prev != null)
             {
                 if (next == prev)
@@ -1887,18 +1878,18 @@ namespace HtmlAgilityPack
             HtmlNode prev = null;
             HtmlNode oldnode = (HtmlNode)_items[index];
 
-            if (index>0)
+            if (index > 0)
             {
-                prev = (HtmlNode)_items[index-1];
+                prev = (HtmlNode)_items[index - 1];
             }
 
-            if (index<(_items.Count-1))
+            if (index < (_items.Count - 1))
             {
-                next = (HtmlNode)_items[index+1];
+                next = (HtmlNode)_items[index + 1];
             }
 
             _items[index] = node;
-            
+
             if (prev != null)
             {
                 if (node == prev)
@@ -1908,7 +1899,7 @@ namespace HtmlAgilityPack
                 prev._nextnode = node;
             }
 
-            if (next!=null)
+            if (next != null)
             {
                 next._prevnode = node;
             }
@@ -1931,12 +1922,12 @@ namespace HtmlAgilityPack
             HtmlNode next = null;
             HtmlNode prev = null;
 
-            if (index>0)
+            if (index > 0)
             {
-                prev = (HtmlNode)_items[index-1];
+                prev = (HtmlNode)_items[index - 1];
             }
 
-            if (index<_items.Count)
+            if (index < _items.Count)
             {
                 next = (HtmlNode)_items[index];
             }
@@ -1973,7 +1964,7 @@ namespace HtmlAgilityPack
             HtmlNode last = null;
             if (_items.Count > 0)
             {
-                last = (HtmlNode)_items[_items.Count-1];
+                last = (HtmlNode)_items[_items.Count - 1];
             }
 
             _items.Add(node);
@@ -2023,16 +2014,13 @@ namespace HtmlAgilityPack
         /// </summary>
         public HtmlNode this[int index]
         {
-            get
-            {
-                return _items[index] as HtmlNode;
-            }
+            get { return _items[index] as HtmlNode; }
         }
 
         internal int GetNodeIndex(HtmlNode node)
         {
             // TODO: should we rewrite this? what would be the key of a node?
-            for(int i=0;i<_items.Count;i++)
+            for (int i = 0; i < _items.Count; i++)
             {
                 if (node == ((HtmlNode)_items[i]))
                 {
@@ -2052,7 +2040,12 @@ namespace HtmlAgilityPack
                 int index = GetNodeIndex(node);
                 if (index == -1)
                 {
-                    throw new ArgumentOutOfRangeException("node", "Node \"" + node.CloneNode(false).OuterHtml + "\" was not found in the collection");
+                    throw new ArgumentOutOfRangeException(
+                        "node",
+                        "Node \""
+                            + node.CloneNode(false).OuterHtml
+                            + "\" was not found in the collection"
+                    );
                 }
                 return index;
             }
@@ -2062,12 +2055,12 @@ namespace HtmlAgilityPack
         /// Returns an enumerator that can iterate through the list.
         /// </summary>
         /// <returns>An IEnumerator for the entire list.</returns>
-        public HtmlNodeEnumerator GetEnumerator() 
+        public HtmlNodeEnumerator GetEnumerator()
         {
             return new HtmlNodeEnumerator(_items);
         }
 
-        IEnumerator IEnumerable.GetEnumerator() 
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -2075,12 +2068,12 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Represents an enumerator that can iterate through the list.
         /// </summary>
-        public class HtmlNodeEnumerator: IEnumerator 
+        public class HtmlNodeEnumerator : IEnumerator
         {
             int _index;
             ArrayList _items;
 
-            internal HtmlNodeEnumerator(ArrayList items) 
+            internal HtmlNodeEnumerator(ArrayList items)
             {
                 _items = items;
                 _index = -1;
@@ -2089,7 +2082,7 @@ namespace HtmlAgilityPack
             /// <summary>
             /// Sets the enumerator to its initial position, which is before the first element in the collection.
             /// </summary>
-            public void Reset() 
+            public void Reset()
             {
                 _index = -1;
             }
@@ -2098,32 +2091,26 @@ namespace HtmlAgilityPack
             /// Advances the enumerator to the next element of the collection.
             /// </summary>
             /// <returns>true if the enumerator was successfully advanced to the next element, false if the enumerator has passed the end of the collection.</returns>
-            public bool MoveNext() 
+            public bool MoveNext()
             {
                 _index++;
-                return (_index<_items.Count);
+                return (_index < _items.Count);
             }
 
             /// <summary>
             /// Gets the current element in the collection.
             /// </summary>
-            public HtmlNode Current 
+            public HtmlNode Current
             {
-                get 
-                {
-                    return (HtmlNode)(_items[_index]);
-                }
+                get { return (HtmlNode)(_items[_index]); }
             }
 
             /// <summary>
             /// Gets the current element in the collection.
             /// </summary>
-            object IEnumerator.Current 
+            object IEnumerator.Current
             {
-                get 
-                {
-                    return (Current);
-                }
+                get { return (Current); }
             }
         }
     }
@@ -2131,28 +2118,20 @@ namespace HtmlAgilityPack
     /// <summary>
     /// Represents an HTML text node.
     /// </summary>
-    public class HtmlTextNode: HtmlNode
+    public class HtmlTextNode : HtmlNode
     {
         private string _text;
 
-        internal HtmlTextNode(HtmlDocument ownerdocument, int index):
-            base(HtmlNodeType.Text, ownerdocument, index)
-        {
-        }
+        internal HtmlTextNode(HtmlDocument ownerdocument, int index)
+            : base(HtmlNodeType.Text, ownerdocument, index) { }
 
         /// <summary>
         /// Gets or Sets the HTML between the start and end tags of the object. In the case of a text node, it is equals to OuterHtml.
         /// </summary>
         public override string InnerHtml
         {
-            get
-            {
-                return OuterHtml;
-            }
-            set
-            {
-                _text = value;
-            }
+            get { return OuterHtml; }
+            set { _text = value; }
         }
 
         /// <summary>
@@ -2183,24 +2162,19 @@ namespace HtmlAgilityPack
                 }
                 return _text;
             }
-            set
-            {
-                _text = value;
-            }
+            set { _text = value; }
         }
     }
 
     /// <summary>
     /// Represents an HTML comment.
     /// </summary>
-    public class HtmlCommentNode: HtmlNode
+    public class HtmlCommentNode : HtmlNode
     {
         private string _comment;
 
-        internal HtmlCommentNode(HtmlDocument ownerdocument, int index):
-            base(HtmlNodeType.Comment, ownerdocument, index)
-        {
-        }
+        internal HtmlCommentNode(HtmlDocument ownerdocument, int index)
+            : base(HtmlNodeType.Comment, ownerdocument, index) { }
 
         /// <summary>
         /// Gets or Sets the HTML between the start and end tags of the object. In the case of a text node, it is equals to OuterHtml.
@@ -2215,10 +2189,7 @@ namespace HtmlAgilityPack
                 }
                 return _comment;
             }
-            set
-            {
-                _comment = value;
-            }
+            set { _comment = value; }
         }
 
         /// <summary>
@@ -2249,11 +2220,7 @@ namespace HtmlAgilityPack
                 }
                 return _comment;
             }
-            set
-            {
-                _comment = value;
-            }
+            set { _comment = value; }
         }
     }
-
 }

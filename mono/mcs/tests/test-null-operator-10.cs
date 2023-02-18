@@ -8,7 +8,7 @@ class Event
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
         var evt = new Event();
         string str = (evt.Foo != null ? evt?.Name : "").Trim();

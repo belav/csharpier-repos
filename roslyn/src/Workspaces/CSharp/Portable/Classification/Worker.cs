@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
     /// <summary>
     /// Worker is an utility class that can classify a list of tokens or a tree within a
     /// requested span The implementation is generic and can produce any kind of classification
-    /// artifacts T T is normally either ClassificationSpan or a Tuple (for testing purposes) 
+    /// artifacts T T is normally either ClassificationSpan or a Tuple (for testing purposes)
     /// and constructed via provided factory.
     /// </summary>
     internal readonly ref partial struct Worker
@@ -26,7 +26,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         private readonly ArrayBuilder<ClassifiedSpan> _result;
         private readonly CancellationToken _cancellationToken;
 
-        private Worker(TextSpan textSpan, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
+        private Worker(
+            TextSpan textSpan,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             _result = result;
             _textSpan = textSpan;
@@ -34,7 +38,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         }
 
         internal static void CollectClassifiedSpans(
-            IEnumerable<SyntaxToken> tokens, TextSpan textSpan, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
+            IEnumerable<SyntaxToken> tokens,
+            TextSpan textSpan,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             var worker = new Worker(textSpan, result, cancellationToken);
             foreach (var tk in tokens)
@@ -44,7 +52,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         }
 
         internal static void CollectClassifiedSpans(
-            SyntaxNode node, TextSpan textSpan, ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
+            SyntaxNode node,
+            TextSpan textSpan,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             var worker = new Worker(textSpan, result, cancellationToken);
             worker.ClassifyNode(node);
@@ -58,14 +70,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             }
         }
 
-        private bool ShouldAddSpan(TextSpan span)
-            => span.Length > 0 && _textSpan.OverlapsWith(span);
+        private bool ShouldAddSpan(TextSpan span) =>
+            span.Length > 0 && _textSpan.OverlapsWith(span);
 
-        private void AddClassification(SyntaxTrivia trivia, string type)
-            => AddClassification(trivia.Span, type);
+        private void AddClassification(SyntaxTrivia trivia, string type) =>
+            AddClassification(trivia.Span, type);
 
-        private void AddClassification(SyntaxToken token, string type)
-            => AddClassification(token.Span, type);
+        private void AddClassification(SyntaxToken token, string type) =>
+            AddClassification(token.Span, type);
 
         private void ClassifyNodeOrToken(SyntaxNodeOrToken nodeOrToken)
         {
@@ -101,18 +113,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                     AddClassification(span, type);
 
                     // Additionally classify static symbols
-                    if (token.Kind() == SyntaxKind.IdentifierToken
-                        && ClassificationHelpers.IsStaticallyDeclared(token))
+                    if (
+                        token.Kind() == SyntaxKind.IdentifierToken
+                        && ClassificationHelpers.IsStaticallyDeclared(token)
+                    )
                     {
                         AddClassification(span, ClassificationTypeNames.StaticSymbol);
                     }
-                    else if (token.Kind() is
-                                SyntaxKind.Utf8StringLiteralToken or
-                                SyntaxKind.Utf8SingleLineRawStringLiteralToken or
-                                SyntaxKind.Utf8MultiLineRawStringLiteralToken &&
-                            token.Text.EndsWith("u8", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        token.Kind()
+                            is SyntaxKind.Utf8StringLiteralToken
+                                or SyntaxKind.Utf8SingleLineRawStringLiteralToken
+                                or SyntaxKind.Utf8MultiLineRawStringLiteralToken
+                        && token.Text.EndsWith("u8", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
-                        AddClassification(new TextSpan(token.Span.End - "u8".Length, "u8".Length), ClassificationTypeNames.Keyword);
+                        AddClassification(
+                            new TextSpan(token.Span.End - "u8".Length, "u8".Length),
+                            ClassificationTypeNames.Keyword
+                        );
                     }
                 }
             }
@@ -148,7 +167,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
                 if (enumerator.Current.FullSpan.End > classificationSpanStart)
                 {
-                    // Found trivia that is after the text span we're classifying.  
+                    // Found trivia that is after the text span we're classifying.
                     break;
                 }
             }
@@ -166,8 +185,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 }
 
                 ClassifyTrivia(trivia, list);
-            }
-            while (enumerator.MoveNext());
+            } while (enumerator.MoveNext());
         }
 
         private void ClassifyTrivia(SyntaxTrivia trivia, SyntaxTriviaList triviaList)
@@ -190,7 +208,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
                 case SyntaxKind.SingleLineDocumentationCommentTrivia:
                 case SyntaxKind.MultiLineDocumentationCommentTrivia:
-                    ClassifyDocumentationComment((DocumentationCommentTriviaSyntax)trivia.GetStructure()!);
+                    ClassifyDocumentationComment(
+                        (DocumentationCommentTriviaSyntax)trivia.GetStructure()!
+                    );
                     return;
 
                 case SyntaxKind.DocumentationCommentExteriorTrivia:
@@ -238,19 +258,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             }
         }
 
-        private void ClassifyConflictMarker(SyntaxTrivia trivia)
-            => AddClassification(trivia, ClassificationTypeNames.Comment);
+        private void ClassifyConflictMarker(SyntaxTrivia trivia) =>
+            AddClassification(trivia, ClassificationTypeNames.Comment);
 
         private void ClassifyDisabledText(SyntaxTrivia trivia, SyntaxTriviaList triviaList)
         {
             var index = triviaList.IndexOf(trivia);
-            if (index >= 2 &&
-                triviaList[index - 1].Kind() == SyntaxKind.EndOfLineTrivia &&
-                triviaList[index - 2].Kind() == SyntaxKind.ConflictMarkerTrivia)
+            if (
+                index >= 2
+                && triviaList[index - 1].Kind() == SyntaxKind.EndOfLineTrivia
+                && triviaList[index - 2].Kind() == SyntaxKind.ConflictMarkerTrivia
+            )
             {
                 // for the ======== add a comment for the first line, and then lex all
                 // subsequent lines up until the end of the conflict marker.
-                foreach (var token in SyntaxFactory.ParseTokens(text: trivia.ToFullString(), initialTokenPosition: trivia.SpanStart))
+                foreach (
+                    var token in SyntaxFactory.ParseTokens(
+                        text: trivia.ToFullString(),
+                        initialTokenPosition: trivia.SpanStart
+                    )
+                )
                 {
                     ClassifyToken(token);
                 }

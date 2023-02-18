@@ -13,8 +13,11 @@ namespace System.CommandLine.Completions
     /// </summary>
     internal static class CompletionSource
     {
-        private static readonly ConcurrentDictionary<Type, Func<CompletionContext, IEnumerable<CompletionItem>>> _completionSourcesByType = new();
-        
+        private static readonly ConcurrentDictionary<
+            Type,
+            Func<CompletionContext, IEnumerable<CompletionItem>>
+        > _completionSourcesByType = new();
+
         /// <summary>
         /// Gets a completion source that provides completions for a type (e.g. enum) with well-known values.
         /// </summary>
@@ -23,7 +26,10 @@ namespace System.CommandLine.Completions
             return _completionSourcesByType.GetOrAdd(type, t => GetCompletionSourceForType(t));
         }
 
-        private static Func<CompletionContext, IEnumerable<CompletionItem>> GetCompletionSourceForType(Type type)
+        private static Func<
+            CompletionContext,
+            IEnumerable<CompletionItem>
+        > GetCompletionSourceForType(Type type)
         {
             Type actualType = type.TryGetNullableType(out var nullableType) ? nullableType : type;
 
@@ -33,11 +39,8 @@ namespace System.CommandLine.Completions
             }
             else if (actualType == typeof(bool))
             {
-                return static _ => new CompletionItem[]
-                {
-                    new(bool.TrueString),
-                    new(bool.FalseString)
-                };
+                return static _ =>
+                    new CompletionItem[] { new(bool.TrueString), new(bool.FalseString) };
             }
 
             return static _ => Array.Empty<CompletionItem>();

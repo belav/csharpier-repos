@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,124 +38,123 @@ namespace MonoTests.System.Windows.Markup
     public class ArrayExtensionTest
     {
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNullType ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNullType()
         {
-            new ArrayExtension ((Type) null);
+            new ArrayExtension((Type)null);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void ConstructorNullElement ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorNullElement()
         {
-            new ArrayExtension ((object []) null);
+            new ArrayExtension((object[])null);
         }
 
         [Test]
-        public void AddChild ()
+        public void AddChild()
         {
-            var x = new ArrayExtension ();
-            x.AddChild (new object ());
-            x.AddChild (5);
-            x.AddChild ("test");
+            var x = new ArrayExtension();
+            x.AddChild(new object());
+            x.AddChild(5);
+            x.AddChild("test");
         }
 
         [Test]
-        public void AddChild2 ()
+        public void AddChild2()
         {
-            var x = new ArrayExtension (new int [0]);
-            x.AddChild (new object ());
-            x.AddChild (5);
-            x.AddChild ("test");
+            var x = new ArrayExtension(new int[0]);
+            x.AddChild(new object());
+            x.AddChild(5);
+            x.AddChild("test");
         }
 
         [Test]
-        public void AddInconsistent ()
+        public void AddInconsistent()
         {
-            var x = new ArrayExtension (typeof (int));
-            Assert.AreEqual (typeof (int), x.Type, "#1");
+            var x = new ArrayExtension(typeof(int));
+            Assert.AreEqual(typeof(int), x.Type, "#1");
             // adding inconsistent items is not rejected, while calling ProvideValue() results in an error.
-            x.AddChild (new object ());
-            Assert.AreEqual (typeof (int), x.Type, "#2");
+            x.AddChild(new object());
+            Assert.AreEqual(typeof(int), x.Type, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ProvideValueInconsistent ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ProvideValueInconsistent()
         {
-            var x = new ArrayExtension (typeof (int));
-            x.AddChild (new object ());
-            x.ProvideValue (null);
+            var x = new ArrayExtension(typeof(int));
+            x.AddChild(new object());
+            x.ProvideValue(null);
         }
 
         [Test]
-        public void AddInconsistent2 ()
+        public void AddInconsistent2()
         {
-            var x = new ArrayExtension (new int [] {1, 3});
-            Assert.AreEqual (typeof (int), x.Type, "#1");
-            x.AddChild (new object ());
-            Assert.AreEqual (typeof (int), x.Type, "#2");
+            var x = new ArrayExtension(new int[] { 1, 3 });
+            Assert.AreEqual(typeof(int), x.Type, "#1");
+            x.AddChild(new object());
+            Assert.AreEqual(typeof(int), x.Type, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ProvideValueWithoutType ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ProvideValueWithoutType()
         {
-            var x = new ArrayExtension ();
-            x.ProvideValue (null); // Type must be set first.
+            var x = new ArrayExtension();
+            x.ProvideValue(null); // Type must be set first.
         }
 
         [Test]
-        public void ProvideValueEmpty ()
+        public void ProvideValueEmpty()
         {
-            var x = new ArrayExtension (typeof (int));
-            x.ProvideValue (null); // allowed.
+            var x = new ArrayExtension(typeof(int));
+            x.ProvideValue(null); // allowed.
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ProvideValueInconsistent2 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ProvideValueInconsistent2()
         {
-            var x = new ArrayExtension (new int [] {1, 3});
-            x.AddChild (new object ());
-            x.AddChild (null); // allowed
-            Assert.AreEqual (4, x.Items.Count);
-            x.ProvideValue (null);
+            var x = new ArrayExtension(new int[] { 1, 3 });
+            x.AddChild(new object());
+            x.AddChild(null); // allowed
+            Assert.AreEqual(4, x.Items.Count);
+            x.ProvideValue(null);
         }
 
         [Test]
-        public void ProvideValue ()
+        public void ProvideValue()
         {
-            var x = new ArrayExtension (new int [] {1, 3});
-            x.AddChild (5);
-            Assert.AreEqual (3, x.Items.Count);
-            var ret = x.ProvideValue (null);
-            Assert.IsNotNull (ret, "#1");
-            var arr = ret as int [];
-            Assert.IsNotNull (arr, "#2");
-            Assert.AreEqual (3, arr.Length, "#3");
-            Assert.AreEqual (5, arr [2], "#4");
+            var x = new ArrayExtension(new int[] { 1, 3 });
+            x.AddChild(5);
+            Assert.AreEqual(3, x.Items.Count);
+            var ret = x.ProvideValue(null);
+            Assert.IsNotNull(ret, "#1");
+            var arr = ret as int[];
+            Assert.IsNotNull(arr, "#2");
+            Assert.AreEqual(3, arr.Length, "#3");
+            Assert.AreEqual(5, arr[2], "#4");
         }
 
         [Test]
-        public void AddTextInconsistent ()
+        public void AddTextInconsistent()
         {
-            var x = new ArrayExtension (new int [] {1, 3});
-            Assert.AreEqual (typeof (int), x.Type, "#1");
-            x.AddText ("test");
-            x.AddText (null); // allowed
-            Assert.AreEqual (4, x.Items.Count);
-            Assert.AreEqual (typeof (int), x.Type, "#2");
+            var x = new ArrayExtension(new int[] { 1, 3 });
+            Assert.AreEqual(typeof(int), x.Type, "#1");
+            x.AddText("test");
+            x.AddText(null); // allowed
+            Assert.AreEqual(4, x.Items.Count);
+            Assert.AreEqual(typeof(int), x.Type, "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ProvideValueInconsistent3 ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ProvideValueInconsistent3()
         {
-            var x = new ArrayExtension (new int [] {1, 3});
-            x.AddText ("test");
-            x.ProvideValue (null);
+            var x = new ArrayExtension(new int[] { 1, 3 });
+            x.AddText("test");
+            x.ProvideValue(null);
         }
     }
 }
-

@@ -18,13 +18,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             private readonly ImmutableArray<ISymbol> _symbols;
 
-            public NonCascadingSymbolSet(FindReferencesSearchEngine engine, MetadataUnifyingSymbolHashSet searchSymbols) : base(engine)
-                => _symbols = searchSymbols.ToImmutableArray();
+            public NonCascadingSymbolSet(
+                FindReferencesSearchEngine engine,
+                MetadataUnifyingSymbolHashSet searchSymbols
+            )
+                : base(engine) => _symbols = searchSymbols.ToImmutableArray();
 
-            public override ImmutableArray<ISymbol> GetAllSymbols()
-                => _symbols;
+            public override ImmutableArray<ISymbol> GetAllSymbols() => _symbols;
 
-            public override Task InheritanceCascadeAsync(Project project, CancellationToken cancellationToken)
+            public override Task InheritanceCascadeAsync(
+                Project project,
+                CancellationToken cancellationToken
+            )
             {
                 // Nothing to do here.  We're in a non-cascading scenario, so even as we encounter a new project we
                 // don't have to figure out what new symbols may be found.

@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpCacheability_Enum
-        : GHTBaseWeb 
+    public class HttpCacheability_Enum : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,18 +46,18 @@ namespace GHTTests.System_Web_dll.System_Web
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
@@ -75,22 +74,23 @@ namespace GHTTests.System_Web_dll.System_Web
             GHTSubTestEnd();
             GHTTestEnd();
         }
-        public string Test() 
-        { 
-            string result = string.Empty; 
-            string[] Names; 
-            int[] Values; 
-            Names = System.Enum.GetNames(typeof(System.Web.HttpCacheRevalidation)); 
-            foreach (string name in Names) 
-            { 
-                result += name + "; "; 
-            } 
-            Values = (int[])System.Enum.GetValues(typeof(System.Web.HttpCacheRevalidation)); 
-            foreach (int val in Values) 
-            { 
-                result += val.ToString() + "; "; 
-            } 
-            return result; 
+
+        public string Test()
+        {
+            string result = string.Empty;
+            string[] Names;
+            int[] Values;
+            Names = System.Enum.GetNames(typeof(System.Web.HttpCacheRevalidation));
+            foreach (string name in Names)
+            {
+                result += name + "; ";
+            }
+            Values = (int[])System.Enum.GetValues(typeof(System.Web.HttpCacheRevalidation));
+            foreach (int val in Values)
+            {
+                result += val.ToString() + "; ";
+            }
+            return result;
         }
     }
 }

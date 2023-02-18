@@ -1,26 +1,26 @@
 class X
 {
-    void Test (string arg)
+    void Test(string arg)
     {
-        while (Call (out string s))
+        while (Call(out string s))
         {
-            arg = s.ToString ();
+            arg = s.ToString();
         }
 
-        while (true && Call (out string s2))
+        while (true && Call(out string s2))
         {
-            arg = s2.ToString ();
+            arg = s2.ToString();
         }
     }
 
-    static bool Call (out string s)
+    static bool Call(out string s)
     {
         s = "";
         return true;
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        Call (out string s);
+        Call(out string s);
     }
 }

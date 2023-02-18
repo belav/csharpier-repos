@@ -1,5 +1,5 @@
 //
-// System.Xml.Serialization.SerializationCodeGeneratorConfiguration.cs: 
+// System.Xml.Serialization.SerializationCodeGeneratorConfiguration.cs:
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,131 +34,162 @@ using System.Xml.Serialization;
 
 namespace System.Xml.Serialization
 {
-    [XmlType ("configuration")]
+    [XmlType("configuration")]
     internal class SerializationCodeGeneratorConfiguration
     {
-        [XmlElement ("serializer")]
+        [XmlElement("serializer")]
         public SerializerInfo[] Serializers;
     }
-    
-    [XmlType ("serializer")]
+
+    [XmlType("serializer")]
     internal class SerializerInfo
     {
-        [XmlAttribute ("class")]
+        [XmlAttribute("class")]
         public string ClassName;
-    
-        [XmlAttribute ("assembly")]
+
+        [XmlAttribute("assembly")]
         public string Assembly;
-    
-        [XmlElement ("reader")]
+
+        [XmlElement("reader")]
         public string ReaderClassName;
-        
-        [XmlElement ("writer")]
+
+        [XmlElement("writer")]
         public string WriterClassName;
-    
-        [XmlElement ("baseSerializer")]
+
+        [XmlElement("baseSerializer")]
         public string BaseSerializerClassName;
-    
-        [XmlElement ("implementation")]
+
+        [XmlElement("implementation")]
         public string ImplementationClassName;
-    
-        [XmlElement ("noreader")]
+
+        [XmlElement("noreader")]
         public bool NoReader;
-        
-        [XmlElement ("nowriter")]
+
+        [XmlElement("nowriter")]
         public bool NoWriter;
-        
-        [XmlElement ("generateAsInternal")]
+
+        [XmlElement("generateAsInternal")]
         public bool GenerateAsInternal;
-        
-        [XmlElement ("namespace")]
+
+        [XmlElement("namespace")]
         public string Namespace;
-        
-        [XmlArray ("namespaceImports")]
-        [XmlArrayItem ("namespaceImport")]
-        public string [] NamespaceImports;
-        
-        [System.ComponentModel.DefaultValue (SerializationFormat.Literal)]
+
+        [XmlArray("namespaceImports")]
+        [XmlArrayItem("namespaceImport")]
+        public string[] NamespaceImports;
+
+        [System.ComponentModel.DefaultValue(SerializationFormat.Literal)]
         public SerializationFormat SerializationFormat = SerializationFormat.Literal;
-        
-        [XmlElement ("outFileName")]
+
+        [XmlElement("outFileName")]
         public string OutFileName;
-        
-        [XmlArray ("readerHooks")]
+
+        [XmlArray("readerHooks")]
         public Hook[] ReaderHooks;
-    
-        [XmlArray ("writerHooks")]
+
+        [XmlArray("writerHooks")]
         public Hook[] WriterHooks;
-        
-        public ArrayList GetHooks (HookType hookType, XmlMappingAccess dir, HookAction action, Type type, string member)
+
+        public ArrayList GetHooks(
+            HookType hookType,
+            XmlMappingAccess dir,
+            HookAction action,
+            Type type,
+            string member
+        )
         {
             if ((dir & XmlMappingAccess.Read) != 0)
-                return FindHook (ReaderHooks, hookType, action, type, member);
+                return FindHook(ReaderHooks, hookType, action, type, member);
             if ((dir & XmlMappingAccess.Write) != 0)
-                return FindHook (WriterHooks, hookType, action, type, member);
+                return FindHook(WriterHooks, hookType, action, type, member);
             else
-                throw new Exception ("INTERNAL ERROR");
+                throw new Exception("INTERNAL ERROR");
         }
-        
-        ArrayList FindHook (Hook[] hooks, HookType hookType, HookAction action, Type type, string member)
+
+        ArrayList FindHook(
+            Hook[] hooks,
+            HookType hookType,
+            HookAction action,
+            Type type,
+            string member
+        )
         {
-            ArrayList foundHooks = new ArrayList ();
-            if (hooks == null) return foundHooks;
-    
+            ArrayList foundHooks = new ArrayList();
+            if (hooks == null)
+                return foundHooks;
+
             foreach (Hook hook in hooks)
             {
-                if (action == HookAction.InsertBefore && (hook.InsertBefore == null || hook.InsertBefore == ""))
+                if (
+                    action == HookAction.InsertBefore
+                    && (hook.InsertBefore == null || hook.InsertBefore == "")
+                )
                     continue;
-                else if (action == HookAction.InsertAfter && (hook.InsertAfter == null || hook.InsertAfter == ""))
+                else if (
+                    action == HookAction.InsertAfter
+                    && (hook.InsertAfter == null || hook.InsertAfter == "")
+                )
                     continue;
-                else if (action == HookAction.Replace && (hook.Replace == null || hook.Replace == ""))
+                else if (
+                    action == HookAction.Replace && (hook.Replace == null || hook.Replace == "")
+                )
                     continue;
-                    
+
                 if (hook.HookType != hookType)
                     continue;
-                    
+
                 if (hook.Select != null)
                 {
                     if (hook.Select.TypeName != null && hook.Select.TypeName != "")
-                        if (hook.Select.TypeName != type.FullName) continue;
-        
+                        if (hook.Select.TypeName != type.FullName)
+                            continue;
+
                     if (hook.Select.TypeMember != null && hook.Select.TypeMember != "")
-                        if (hook.Select.TypeMember != member) continue;
-                        
+                        if (hook.Select.TypeMember != member)
+                            continue;
+
                     if (hook.Select.TypeAttributes != null && hook.Select.TypeAttributes.Length > 0)
                     {
-                        object[] ats = type.GetCustomAttributes (true);
+                        object[] ats = type.GetCustomAttributes(true);
                         bool found = false;
                         foreach (object at in ats)
-                            if (Array.IndexOf (hook.Select.TypeAttributes, at.GetType().FullName) != -1) { found = true; break; }
-                        if (!found) continue;
+                            if (
+                                Array.IndexOf(hook.Select.TypeAttributes, at.GetType().FullName)
+                                != -1
+                            )
+                            {
+                                found = true;
+                                break;
+                            }
+                        if (!found)
+                            continue;
                     }
                 }
-                foundHooks.Add (hook);
+                foundHooks.Add(hook);
             }
             return foundHooks;
         }
     }
-    
-    [XmlType ("hook")]
+
+    [XmlType("hook")]
     internal class Hook
     {
-        [XmlAttribute ("type")]
+        [XmlAttribute("type")]
         public HookType HookType;
-    
-        [XmlElement ("select")]
+
+        [XmlElement("select")]
         public Select Select;
-        
-        [XmlElement ("insertBefore")]
+
+        [XmlElement("insertBefore")]
         public string InsertBefore;
 
-        [XmlElement ("insertAfter")]
+        [XmlElement("insertAfter")]
         public string InsertAfter;
 
-        [XmlElement ("replace")]
+        [XmlElement("replace")]
         public string Replace;
-        
-        public string GetCode (HookAction action)
+
+        public string GetCode(HookAction action)
         {
             if (action == HookAction.InsertBefore)
                 return InsertBefore;
@@ -168,28 +199,28 @@ namespace System.Xml.Serialization
                 return Replace;
         }
     }
-    
-    [XmlType ("select")]
+
+    [XmlType("select")]
     internal class Select
     {
-        [XmlElement ("typeName")]
+        [XmlElement("typeName")]
         public string TypeName;
-        
+
         [XmlElement("typeAttribute")]
         public string[] TypeAttributes;
-        
-        [XmlElement ("typeMember")]
+
+        [XmlElement("typeMember")]
         public string TypeMember;
     }
-    
+
     internal enum HookAction
     {
         InsertBefore,
         InsertAfter,
         Replace
     }
-    
-    [XmlType ("hookType")]
+
+    [XmlType("hookType")]
     internal enum HookType
     {
         attributes,

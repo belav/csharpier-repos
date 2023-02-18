@@ -3,9 +3,9 @@
 
 public class Foo
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo k = new Foo ();
+        Foo k = new Foo();
         int i = k + 6;
     }
 }

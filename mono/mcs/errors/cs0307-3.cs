@@ -3,8 +3,8 @@
 
 public class Tests
 {
-    public static void Test (int a)
+    public static void Test(int a)
     {
-        a<int> ();
+        a<int>();
     }
 }

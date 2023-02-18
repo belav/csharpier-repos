@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
 {
     internal static partial class TestProjectAssetsFile
     {
-        public static ProjectAssetsFile Create(int version, string targetFramework, ImmutableArray<ReferenceInfo> references)
+        public static ProjectAssetsFile Create(
+            int version,
+            string targetFramework,
+            ImmutableArray<ReferenceInfo> references
+        )
         {
             var allReferences = new List<ReferenceInfo>();
             FlattenReferences(references, allReferences);
@@ -32,19 +36,27 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
             return projectAssets;
         }
 
-        private static void FlattenReferences(ImmutableArray<ReferenceInfo> references, List<ReferenceInfo> allReferences)
+        private static void FlattenReferences(
+            ImmutableArray<ReferenceInfo> references,
+            List<ReferenceInfo> allReferences
+        )
         {
             foreach (var reference in references)
                 FlattenReference(reference, allReferences);
         }
 
-        private static void FlattenReference(ReferenceInfo reference, List<ReferenceInfo> allReferences)
+        private static void FlattenReference(
+            ReferenceInfo reference,
+            List<ReferenceInfo> allReferences
+        )
         {
             allReferences.Add(reference);
             FlattenReferences(reference.Dependencies, allReferences);
         }
 
-        private static Dictionary<string, ProjectAssetsLibrary> BuildLibraries(List<ReferenceInfo> references)
+        private static Dictionary<string, ProjectAssetsLibrary> BuildLibraries(
+            List<ReferenceInfo> references
+        )
         {
             var libraries = new Dictionary<string, ProjectAssetsLibrary>();
             foreach (var reference in references)
@@ -56,7 +68,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
             return libraries;
         }
 
-        private static Dictionary<string, Dictionary<string, ProjectAssetsTargetLibrary>> BuildTargets(string targetFramework, List<ReferenceInfo> references)
+        private static Dictionary<
+            string,
+            Dictionary<string, ProjectAssetsTargetLibrary>
+        > BuildTargets(string targetFramework, List<ReferenceInfo> references)
         {
             var libraries = new Dictionary<string, ProjectAssetsTargetLibrary>();
             foreach (var reference in references)
@@ -65,13 +80,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
                 var library = new ProjectAssetsTargetLibrary()
                 {
                     Type = GetLibraryType(reference.ReferenceType),
-                    Compile = new Dictionary<string, ProjectAssetsTargetLibraryCompile>() { { Path.ChangeExtension(reference.ItemSpecification, "dll"), new ProjectAssetsTargetLibraryCompile() } },
+                    Compile = new Dictionary<string, ProjectAssetsTargetLibraryCompile>()
+                    {
+                        {
+                            Path.ChangeExtension(reference.ItemSpecification, "dll"),
+                            new ProjectAssetsTargetLibraryCompile()
+                        }
+                    },
                     Dependencies = dependencies
                 };
                 libraries[Path.GetFileNameWithoutExtension(reference.ItemSpecification)] = library;
             }
 
-            return new Dictionary<string, Dictionary<string, ProjectAssetsTargetLibrary>>() { { targetFramework, libraries } };
+            return new Dictionary<string, Dictionary<string, ProjectAssetsTargetLibrary>>()
+            {
+                { targetFramework, libraries }
+            };
         }
 
         private static string GetLibraryType(ReferenceType referenceType)
@@ -84,9 +108,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
             };
         }
 
-        private static Dictionary<string, string> BuildDependencies(ImmutableArray<ReferenceInfo> references)
+        private static Dictionary<string, string> BuildDependencies(
+            ImmutableArray<ReferenceInfo> references
+        )
         {
-            return references.ToDictionary(reference => Path.GetFileNameWithoutExtension(reference.ItemSpecification), reference => string.Empty);
+            return references.ToDictionary(
+                reference => Path.GetFileNameWithoutExtension(reference.ItemSpecification),
+                reference => string.Empty
+            );
         }
 
         private static ProjectAssetsProject BuildProject(string targetFramework)
@@ -95,7 +124,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.UnusedReferences.ProjectAssets
             // This ensures the project asset reader does not error in these cases.
             return new ProjectAssetsProject()
             {
-                Frameworks = new Dictionary<string, ProjectAssetsProjectFramework>() { { targetFramework, new ProjectAssetsProjectFramework() } }
+                Frameworks = new Dictionary<string, ProjectAssetsProjectFramework>()
+                {
+                    { targetFramework, new ProjectAssetsProjectFramework() }
+                }
             };
         }
     }

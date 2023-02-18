@@ -8,23 +8,23 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 namespace Mono.Linker.Tests.Cases.Warnings
 {
     [SkipKeptItemsValidation]
-    [SetupLinkerArgument ("--warnaserror")]
-    [SetupLinkerArgument ("--nowarn", "IL2026,IL2075")]
-    [LogDoesNotContain ("IL2026")]
-    [LogDoesNotContain ("IL2075")]
+    [SetupLinkerArgument("--warnaserror")]
+    [SetupLinkerArgument("--nowarn", "IL2026,IL2075")]
+    [LogDoesNotContain("IL2026")]
+    [LogDoesNotContain("IL2075")]
     public class NoWarnRegardlessOfWarnAsError
     {
-        public static void Main ()
+        public static void Main()
         {
-            GetMethod ();
+            GetMethod();
         }
 
-        [DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicFields)]
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
         static string type;
 
-        static void GetMethod ()
+        static void GetMethod()
         {
-            _ = Type.GetType (type).GetMethod ("Foo");
+            _ = Type.GetType(type).GetMethod("Foo");
         }
     }
 }

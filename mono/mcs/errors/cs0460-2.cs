@@ -3,12 +3,12 @@
 
 abstract class A
 {
-    protected abstract int Test<T>() where T : class;
+    protected abstract int Test<T>()
+        where T : class;
 }
 
 class C : A
 {
-    protected override int Test<T>() where T : new()
-    {
-    }
+    protected override int Test<T>()
+        where T : new() { }
 }

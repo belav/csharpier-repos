@@ -4,16 +4,12 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo (out var y);
+        Foo(out var y);
     }
 
-    static void Foo (int x)
-    {
-    }
+    static void Foo(int x) { }
 
-    static void Foo (string x)
-    {
-    }
+    static void Foo(string x) { }
 }

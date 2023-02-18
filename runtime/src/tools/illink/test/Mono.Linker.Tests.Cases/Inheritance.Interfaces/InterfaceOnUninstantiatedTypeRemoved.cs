@@ -5,47 +5,45 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces
 {
     public class InterfaceOnUninstantiatedTypeRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            A a = HelperToMarkA ();
-            a.Foo ();
+            A a = HelperToMarkA();
+            a.Foo();
 
-            StandaloneHelperToMarkIFoo ();
+            StandaloneHelperToMarkIFoo();
         }
 
         [Kept]
         interface IFoo
         {
             [Kept]
-            void Foo ();
+            void Foo();
         }
 
         [Kept]
         class A : IFoo
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
         }
 
         [Kept]
-        static A HelperToMarkA ()
+        static A HelperToMarkA()
         {
             return null;
         }
 
         [Kept]
-        static void StandaloneHelperToMarkIFoo ()
+        static void StandaloneHelperToMarkIFoo()
         {
             // Reference IFoo outside Main to prevent it from being
             // kept by the body stack logic
-            IFoo i = HelperToMarkIFoo ();
-            i.Foo ();
+            IFoo i = HelperToMarkIFoo();
+            i.Foo();
         }
 
         [Kept]
-        static IFoo HelperToMarkIFoo ()
+        static IFoo HelperToMarkIFoo()
         {
             return null;
         }

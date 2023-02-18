@@ -2,10 +2,10 @@
 // Line: 7
 // Compiler options: -unsafe
 
-class UnsafeClass {
-        unsafe UnsafeClass (int* pointer) {
-                if (pointer is string) {}
-        }
+class UnsafeClass
+{
+    unsafe UnsafeClass(int* pointer)
+    {
+        if (pointer is string) { }
+    }
 }
-
-

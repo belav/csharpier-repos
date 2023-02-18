@@ -28,13 +28,19 @@ namespace System.Globalization.Tests
         public void CurrencyGroupSeparator_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "CurrencyGroupSeparator", () => format.CurrencyGroupSeparator = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "CurrencyGroupSeparator",
+                () => format.CurrencyGroupSeparator = null
+            );
         }
 
         [Fact]
         public void CurrencyGroupSeparator_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.CurrencyGroupSeparator = "string");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.CurrencyGroupSeparator = "string"
+            );
         }
     }
 }

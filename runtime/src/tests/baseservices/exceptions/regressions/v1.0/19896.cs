@@ -19,8 +19,7 @@ public class b19896
                 Type.GetType("System.Foo", true);
             }
         }
-
-        catch(System.TypeLoadException)
+        catch (System.TypeLoadException)
         {
             Console.WriteLine("TEST PASSED");
             retVal = 100;

@@ -10,7 +10,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 {
     public partial class X509StoreTests
     {
-
         [ConditionalFact(nameof(NotRunningAsRootAndRemoteExecutorSupported))] // root can read '2.pem'
         [PlatformSpecific(TestPlatforms.Linux)] // Windows/OSX doesn't use SSL_CERT_{DIR,FILE}.
         private void X509Store_MachineStoreLoadSkipsInvalidFiles()
@@ -38,18 +37,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             var psi = new ProcessStartInfo();
             psi.Environment.Add("SSL_CERT_DIR", sslCertDir);
             psi.Environment.Add("SSL_CERT_FILE", "/nonexisting");
-            RemoteExecutor.Invoke(() =>
-            {
-                using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
-                {
-                    store.Open(OpenFlags.OpenExistingOnly);
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        using (
+                            var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
+                        )
+                        {
+                            store.Open(OpenFlags.OpenExistingOnly);
 
-                    // Check nr of certificates in store.
-                    Assert.Equal(2, store.Certificates.Count);
-                }
-            }, new RemoteInvokeOptions { StartInfo = psi }).Dispose();
+                            // Check nr of certificates in store.
+                            Assert.Equal(2, store.Certificates.Count);
+                        }
+                    },
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+                .Dispose();
         }
 
-        public static bool NotRunningAsRootAndRemoteExecutorSupported => Interop.Sys.GetEUid() != 0 && RemoteExecutor.IsSupported;
+        public static bool NotRunningAsRootAndRemoteExecutorSupported =>
+            Interop.Sys.GetEUid() != 0 && RemoteExecutor.IsSupported;
     }
 }

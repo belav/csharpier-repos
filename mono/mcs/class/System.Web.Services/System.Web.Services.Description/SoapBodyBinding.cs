@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.SoapBodyBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,12 +32,19 @@ using System.ComponentModel;
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-    [XmlFormatExtension ("body", "http://schemas.xmlsoap.org/wsdl/soap/", typeof (InputBinding), typeof (OutputBinding), typeof (MimePart))]
-    public class SoapBodyBinding : ServiceDescriptionFormatExtension {
-
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtension(
+        "body",
+        "http://schemas.xmlsoap.org/wsdl/soap/",
+        typeof(InputBinding),
+        typeof(OutputBinding),
+        typeof(MimePart)
+    )]
+    public class SoapBodyBinding : ServiceDescriptionFormatExtension
+    {
         #region Fields
-        
+
         string encoding;
         string ns;
         string[] parts;
@@ -47,8 +54,8 @@ namespace System.Web.Services.Description {
         #endregion // Fields
 
         #region Constructors
-        
-        public SoapBodyBinding ()
+
+        public SoapBodyBinding()
         {
             encoding = String.Empty;
             ns = String.Empty;
@@ -56,29 +63,33 @@ namespace System.Web.Services.Description {
             partsString = null;
             use = SoapBindingUse.Default;
         }
-        
+
         #endregion // Constructors
 
         #region Properties
 
-        [DefaultValue ("")]
-        [XmlAttribute ("encodingStyle")]
-        public string Encoding {
+        [DefaultValue("")]
+        [XmlAttribute("encodingStyle")]
+        public string Encoding
+        {
             get { return encoding; }
             set { encoding = value; }
         }
 
-        [DefaultValue ("")]
-        [XmlAttribute ("namespace")]
-        public string Namespace {
+        [DefaultValue("")]
+        [XmlAttribute("namespace")]
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
 
         [XmlIgnore]
-        public string[] Parts {
+        public string[] Parts
+        {
             get { return parts; }
-            set {
+            set
+            {
                 parts = value;
                 if (value == null)
                     partsString = null;
@@ -87,10 +98,12 @@ namespace System.Web.Services.Description {
             }
         }
 
-        [XmlAttribute ("parts")]
-        public string PartsString {
+        [XmlAttribute("parts")]
+        public string PartsString
+        {
             get { return partsString; }
-            set {
+            set
+            {
                 partsString = value;
                 if (value == null)
                     parts = null;
@@ -99,9 +112,10 @@ namespace System.Web.Services.Description {
             }
         }
 
-        [DefaultValue (SoapBindingUse.Default)]
-        [XmlAttribute ("use")]
-        public SoapBindingUse Use {
+        [DefaultValue(SoapBindingUse.Default)]
+        [XmlAttribute("use")]
+        public SoapBindingUse Use
+        {
             get { return use; }
             set { use = value; }
         }

@@ -9,18 +9,18 @@ namespace Mono.Linker.Tests.TestCasesRunner
 {
     public static class ExpectationsProvider
     {
-
-        public static bool IsAssemblyAssertion (CustomAttribute attr)
+        public static bool IsAssemblyAssertion(CustomAttribute attr)
         {
-            return attr.AttributeType.Name == nameof (KeptAssemblyAttribute) ||
-                attr.AttributeType.Name == nameof (RemovedAssemblyAttribute) ||
-                attr.AttributeType.Name == nameof (SetupLinkerActionAttribute) ||
-                attr.AttributeType.Name == nameof (SetupLinkerTrimModeAttribute);
+            return attr.AttributeType.Name == nameof(KeptAssemblyAttribute)
+                || attr.AttributeType.Name == nameof(RemovedAssemblyAttribute)
+                || attr.AttributeType.Name == nameof(SetupLinkerActionAttribute)
+                || attr.AttributeType.Name == nameof(SetupLinkerTrimModeAttribute);
         }
 
-        public static bool IsSymbolAssertion (CustomAttribute attr)
+        public static bool IsSymbolAssertion(CustomAttribute attr)
         {
-            return attr.AttributeType.Name == nameof (KeptSymbolsAttribute) || attr.AttributeType.Name == nameof (RemovedSymbolsAttribute);
+            return attr.AttributeType.Name == nameof(KeptSymbolsAttribute)
+                || attr.AttributeType.Name == nameof(RemovedSymbolsAttribute);
         }
     }
 }

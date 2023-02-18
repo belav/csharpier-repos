@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 class C
 {
-    static async Task<int> Method ()
+    static async Task<int> Method()
     {
         return 0;
     }
-    
-    public static void Main ()
-    {
-    }
+
+    public static void Main() { }
 }

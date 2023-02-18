@@ -26,12 +26,18 @@ namespace System.ServiceModel.Dispatcher
         WorkflowInstanceLifetimeManagerExtension workflowInstanceLifeTimeManager;
         WorkflowRuntime workflowRuntime;
 
-        public WorkflowOperationInvoker(OperationDescription operationDescription, WorkflowOperationBehavior workflowOperationBehavior,
-            WorkflowRuntime workflowRuntime, DispatchRuntime dispatchRuntime)
+        public WorkflowOperationInvoker(
+            OperationDescription operationDescription,
+            WorkflowOperationBehavior workflowOperationBehavior,
+            WorkflowRuntime workflowRuntime,
+            DispatchRuntime dispatchRuntime
+        )
         {
             if (operationDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("operationDescription");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "operationDescription"
+                );
             }
 
             if (workflowRuntime == null)
@@ -41,7 +47,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (workflowOperationBehavior == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("workflowOperationBehavior");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "workflowOperationBehavior"
+                );
             }
 
             this.isOneWay = operationDescription.IsOneWay;
@@ -49,20 +57,27 @@ namespace System.ServiceModel.Dispatcher
             if (operationDescription.BeginMethod != null)
             {
                 this.syncMethod = operationDescription.BeginMethod;
-                inParameterCount = GetFlowedInParameterCount(operationDescription.BeginMethod.GetParameters()) - 2;
+                inParameterCount =
+                    GetFlowedInParameterCount(operationDescription.BeginMethod.GetParameters()) - 2;
             }
             else
             {
                 this.syncMethod = operationDescription.SyncMethod;
-                inParameterCount = GetFlowedInParameterCount(operationDescription.SyncMethod.GetParameters());
+                inParameterCount = GetFlowedInParameterCount(
+                    operationDescription.SyncMethod.GetParameters()
+                );
             }
 
             this.operationDescription = operationDescription;
             this.workflowRuntime = workflowRuntime;
             this.canCreateInstance = workflowOperationBehavior.CanCreateInstance;
-            this.serviceAuthorizationManager = workflowOperationBehavior.ServiceAuthorizationManager;
+            this.serviceAuthorizationManager =
+                workflowOperationBehavior.ServiceAuthorizationManager;
             this.dispatchRuntime = dispatchRuntime;
-            staticQueueName = QueueNameHelper.Create(this.syncMethod.DeclaringType, operationDescription.Name);
+            staticQueueName = QueueNameHelper.Create(
+                this.syncMethod.DeclaringType,
+                operationDescription.Name
+            );
         }
 
         public bool CanCreateInstance
@@ -81,7 +96,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.workflowInstanceLifeTimeManager == null)
                 {
-                    this.workflowInstanceLifeTimeManager = this.dispatchRuntime.ChannelDispatcher.Host.Extensions.Find<WorkflowInstanceLifetimeManagerExtension>();
+                    this.workflowInstanceLifeTimeManager =
+                        this.dispatchRuntime.ChannelDispatcher.Host.Extensions.Find<WorkflowInstanceLifetimeManagerExtension>();
                 }
 
                 return this.workflowInstanceLifeTimeManager;
@@ -114,10 +130,17 @@ namespace System.ServiceModel.Dispatcher
 
         public object Invoke(object instance, object[] inputs, out object[] outputs)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
-        public IAsyncResult InvokeBegin(object instance, object[] inputs, AsyncCallback callback, object state)
+        public IAsyncResult InvokeBegin(
+            object instance,
+            object[] inputs,
+            AsyncCallback callback,
+            object state
+        )
         {
             long beginTime = 0;
 
@@ -135,16 +158,23 @@ namespace System.ServiceModel.Dispatcher
                 catch (SecurityException exception)
                 {
                     DiagnosticUtility.TraceHandledException(exception, TraceEventType.Warning);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityException(SR.GetString("PartialTrustPerformanceCountersNotEnabled"), exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityException(
+                            SR.GetString("PartialTrustPerformanceCountersNotEnabled"),
+                            exception
+                        )
+                    );
                 }
             }
 
             Authorize();
 
-            WorkflowDurableInstance durableInstance = (WorkflowDurableInstance) instance;
+            WorkflowDurableInstance durableInstance = (WorkflowDurableInstance)instance;
 
-            Fx.Assert(durableInstance.CurrentOperationInvocation == null,
-                "At the time WorkflowOperationInvoker.InvokeBegin is called, the WorkflowDurableInstance.CurrentOperationInvocation is expected to be null given the ConcurrencyMode.Single.");
+            Fx.Assert(
+                durableInstance.CurrentOperationInvocation == null,
+                "At the time WorkflowOperationInvoker.InvokeBegin is called, the WorkflowDurableInstance.CurrentOperationInvocation is expected to be null given the ConcurrencyMode.Single."
+            );
 
             durableInstance.CurrentOperationInvocation = new WorkflowOperationAsyncResult(
                 this,
@@ -152,7 +182,8 @@ namespace System.ServiceModel.Dispatcher
                 inputs,
                 callback,
                 state,
-                beginTime);
+                beginTime
+            );
 
             return durableInstance.CurrentOperationInvocation;
         }
@@ -166,11 +197,13 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("result");
             }
 
-            WorkflowDurableInstance durableInstance = (WorkflowDurableInstance) instance;
-            WorkflowOperationAsyncResult asyncResult = (WorkflowOperationAsyncResult) result;
+            WorkflowDurableInstance durableInstance = (WorkflowDurableInstance)instance;
+            WorkflowOperationAsyncResult asyncResult = (WorkflowOperationAsyncResult)result;
 
-            Fx.Assert(durableInstance.CurrentOperationInvocation != null,
-                "At the time WorkflowOperationInvoker.InvokeEnd is called, the WorkflowDurableInstance.CurrentOperationInvocation is expected to be present.");
+            Fx.Assert(
+                durableInstance.CurrentOperationInvocation != null,
+                "At the time WorkflowOperationInvoker.InvokeEnd is called, the WorkflowDurableInstance.CurrentOperationInvocation is expected to be present."
+            );
 
             try
             {
@@ -211,11 +244,17 @@ namespace System.ServiceModel.Dispatcher
                         long currentTime = 0;
                         long duration = 0;
 
-                        if ((asyncResult.BeginTime >= 0) && (UnsafeNativeMethods.QueryPerformanceCounter(out currentTime) != 0))
+                        if (
+                            (asyncResult.BeginTime >= 0)
+                            && (UnsafeNativeMethods.QueryPerformanceCounter(out currentTime) != 0)
+                        )
                         {
                             duration = currentTime - asyncResult.BeginTime;
                         }
-                        PerformanceCounters.MethodReturnedSuccess(this.operationDescription.Name, duration);
+                        PerformanceCounters.MethodReturnedSuccess(
+                            this.operationDescription.Name,
+                            duration
+                        );
                     }
                 }
             }
@@ -250,7 +289,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!this.serviceAuthorizationManager.CheckAccess(OperationContext.Current))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        AuthorizationBehavior.CreateAccessDeniedFaultException()
+                    );
                 }
             }
         }

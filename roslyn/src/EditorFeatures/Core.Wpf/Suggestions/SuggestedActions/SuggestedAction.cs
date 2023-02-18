@@ -30,7 +30,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// <summary>
     /// Base class for all Roslyn light bulb menu items.
     /// </summary>
-    internal abstract partial class SuggestedAction : ForegroundThreadAffinitizedObject, ISuggestedAction3, IEquatable<ISuggestedAction>
+    internal abstract partial class SuggestedAction
+        : ForegroundThreadAffinitizedObject,
+            ISuggestedAction3,
+            IEquatable<ISuggestedAction>
     {
         protected readonly SuggestedActionsSourceProvider SourceProvider;
 
@@ -50,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             Solution originalSolution,
             ITextBuffer subjectBuffer,
             object provider,
-            CodeAction codeAction)
+            CodeAction codeAction
+        )
             : base(threadingContext)
         {
             Contract.ThrowIfNull(provider);
@@ -74,27 +78,43 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
         // NOTE: We want to avoid computing the operations on the UI thread. So we use Task.Run() to do this work on the background thread.
         protected Task<ImmutableArray<CodeActionOperation>> GetOperationsAsync(
-            IProgressTracker progressTracker, CancellationToken cancellationToken)
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             return Task.Run(
-                () => CodeAction.GetOperationsAsync(progressTracker, cancellationToken), cancellationToken);
+                () => CodeAction.GetOperationsAsync(progressTracker, cancellationToken),
+                cancellationToken
+            );
         }
 
-        protected static Task<IEnumerable<CodeActionOperation>> GetOperationsAsync(CodeActionWithOptions actionWithOptions, object options, CancellationToken cancellationToken)
+        protected static Task<IEnumerable<CodeActionOperation>> GetOperationsAsync(
+            CodeActionWithOptions actionWithOptions,
+            object options,
+            CancellationToken cancellationToken
+        )
         {
             return Task.Run(
-                () => actionWithOptions.GetOperationsAsync(options, cancellationToken), cancellationToken);
+                () => actionWithOptions.GetOperationsAsync(options, cancellationToken),
+                cancellationToken
+            );
         }
 
-        protected Task<ImmutableArray<CodeActionOperation>> GetPreviewOperationsAsync(CancellationToken cancellationToken)
+        protected Task<ImmutableArray<CodeActionOperation>> GetPreviewOperationsAsync(
+            CancellationToken cancellationToken
+        )
         {
             return Task.Run(
-                () => CodeAction.GetPreviewOperationsAsync(cancellationToken), cancellationToken);
+                () => CodeAction.GetPreviewOperationsAsync(cancellationToken),
+                cancellationToken
+            );
         }
 
         public void Invoke(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException("Invoke(CancellationToken) is no longer supported. Use Invoke(IUIThreadOperationContext) instead.");
+            throw new NotImplementedException(
+                "Invoke(CancellationToken) is no longer supported. Use Invoke(IUIThreadOperationContext) instead."
+            );
         }
 
         public void Invoke(IUIThreadOperationContext context)
@@ -111,46 +131,73 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         {
             try
             {
-                using var token = SourceProvider.OperationListener.BeginAsyncOperation($"{nameof(SuggestedAction)}.{nameof(Invoke)}");
+                using var token = SourceProvider.OperationListener.BeginAsyncOperation(
+                    $"{nameof(SuggestedAction)}.{nameof(Invoke)}"
+                );
                 using var context = SourceProvider.UIThreadOperationExecutor.BeginExecute(
-                    EditorFeaturesResources.Execute_Suggested_Action, CodeAction.Title, allowCancellation: true, showProgress: true);
+                    EditorFeaturesResources.Execute_Suggested_Action,
+                    CodeAction.Title,
+                    allowCancellation: true,
+                    showProgress: true
+                );
                 using var scope = context.AddScope(allowCancellation: true, CodeAction.Message);
-                await this.InnerInvokeAsync(new UIThreadOperationContextProgressTracker(scope), context.UserCancellationToken).ConfigureAwait(false);
+                await this.InnerInvokeAsync(
+                        new UIThreadOperationContextProgressTracker(scope),
+                        context.UserCancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
         }
 
-        protected virtual async Task InnerInvokeAsync(IProgressTracker progressTracker, CancellationToken cancellationToken)
+        protected virtual async Task InnerInvokeAsync(
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             using (new CaretPositionRestorer(SubjectBuffer, EditHandler.AssociatedViewService))
             {
                 // ConfigureAwait(true) so that CaretPositionRestorer.Dispose runs on the UI thread.
-                await Workspace.Services.GetService<IExtensionManager>().PerformActionAsync(
-                    Provider, () => InvokeWorkerAsync(progressTracker, cancellationToken)).ConfigureAwait(true);
+                await Workspace.Services
+                    .GetService<IExtensionManager>()
+                    .PerformActionAsync(
+                        Provider,
+                        () => InvokeWorkerAsync(progressTracker, cancellationToken)
+                    )
+                    .ConfigureAwait(true);
             }
         }
 
-        private async Task InvokeWorkerAsync(IProgressTracker progressTracker, CancellationToken cancellationToken)
+        private async Task InvokeWorkerAsync(
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             IEnumerable<CodeActionOperation> operations = null;
             if (CodeAction is CodeActionWithOptions actionWithOptions)
             {
                 var options = actionWithOptions.GetOptions(cancellationToken);
                 if (options != null)
-                    operations = await GetOperationsAsync(actionWithOptions, options, cancellationToken).ConfigureAwait(true);
+                    operations = await GetOperationsAsync(
+                            actionWithOptions,
+                            options,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(true);
             }
             else
             {
-                operations = await GetOperationsAsync(progressTracker, cancellationToken).ConfigureAwait(true);
+                operations = await GetOperationsAsync(progressTracker, cancellationToken)
+                    .ConfigureAwait(true);
             }
 
             AssertIsForeground();
@@ -161,19 +208,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 // We'll now show progress as we apply the action.
                 progressTracker.Clear();
 
-                using (Logger.LogBlock(
-                    FunctionId.CodeFixes_ApplyChanges, KeyValueLogMessage.Create(LogType.UserAction, m => CreateLogProperties(m)), cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.CodeFixes_ApplyChanges,
+                        KeyValueLogMessage.Create(LogType.UserAction, m => CreateLogProperties(m)),
+                        cancellationToken
+                    )
+                )
                 {
-                    var document = this.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document =
+                        this.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
 
-                    await EditHandler.ApplyAsync(
-                        Workspace,
-                        OriginalSolution,
-                        document,
-                        operations.ToImmutableArray(),
-                        CodeAction.Title,
-                        progressTracker,
-                        cancellationToken).ConfigureAwait(false);
+                    await EditHandler
+                        .ApplyAsync(
+                            Workspace,
+                            OriginalSolution,
+                            document,
+                            operations.ToImmutableArray(),
+                            CodeAction.Title,
+                            progressTracker,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
         }
@@ -208,14 +264,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 // Underscores will become an accelerator in the VS smart tag.  So we double all
                 // underscores so they actually get represented as an underscore in the UI.
                 var extensionManager = Workspace.Services.GetService<IExtensionManager>();
-                var text = extensionManager.PerformFunction(Provider, () => CodeAction.Title, defaultValue: string.Empty);
+                var text = extensionManager.PerformFunction(
+                    Provider,
+                    () => CodeAction.Title,
+                    defaultValue: string.Empty
+                );
                 return text.Replace("_", "__");
             }
         }
 
         public string DisplayTextSuffix => "";
 
-        protected async Task<SolutionPreviewResult> GetPreviewResultAsync(CancellationToken cancellationToken)
+        protected async Task<SolutionPreviewResult> GetPreviewResultAsync(
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -223,20 +285,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             AssertIsForeground();
 
             // We use ConfigureAwait(true) to stay on the UI thread.
-            var operations = await GetPreviewOperationsAsync(cancellationToken).ConfigureAwait(true);
+            var operations = await GetPreviewOperationsAsync(cancellationToken)
+                .ConfigureAwait(true);
 
-            return await EditHandler.GetPreviewsAsync(Workspace, operations, cancellationToken).ConfigureAwait(true);
+            return await EditHandler
+                .GetPreviewsAsync(Workspace, operations, cancellationToken)
+                .ConfigureAwait(true);
         }
 
         public virtual bool HasPreview => false;
 
-        public virtual Task<object> GetPreviewAsync(CancellationToken cancellationToken)
-            => SpecializedTasks.Null<object>();
+        public virtual Task<object> GetPreviewAsync(CancellationToken cancellationToken) =>
+            SpecializedTasks.Null<object>();
 
         public virtual bool HasActionSets => false;
 
-        public virtual Task<IEnumerable<SuggestedActionSet>> GetActionSetsAsync(CancellationToken cancellationToken)
-            => SpecializedTasks.EmptyEnumerable<SuggestedActionSet>();
+        public virtual Task<IEnumerable<SuggestedActionSet>> GetActionSetsAsync(
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.EmptyEnumerable<SuggestedActionSet>();
 
         #region not supported
 
@@ -257,14 +323,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 {
                     foreach (var service in SourceProvider.ImageIdServices)
                     {
-                        if (service.Value.TryGetImageId(tags, out var imageId) && !imageId.Equals(default(ImageId)))
+                        if (
+                            service.Value.TryGetImageId(tags, out var imageId)
+                            && !imageId.Equals(default(ImageId))
+                        )
                         {
                             // Not using the extension method because it's not available in Cocoa
-                            return new ImageMoniker
-                            {
-                                Guid = imageId.Guid,
-                                Id = imageId.Id
-                            };
+                            return new ImageMoniker { Guid = imageId.Guid, Id = imageId.Id };
                         }
                     }
                 }
@@ -280,11 +345,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
         #region IEquatable<ISuggestedAction>
 
-        public bool Equals(ISuggestedAction other)
-            => Equals(other as SuggestedAction);
+        public bool Equals(ISuggestedAction other) => Equals(other as SuggestedAction);
 
-        public override bool Equals(object obj)
-            => Equals(obj as SuggestedAction);
+        public override bool Equals(object obj) => Equals(obj as SuggestedAction);
 
         internal bool Equals(SuggestedAction otherSuggestedAction)
         {

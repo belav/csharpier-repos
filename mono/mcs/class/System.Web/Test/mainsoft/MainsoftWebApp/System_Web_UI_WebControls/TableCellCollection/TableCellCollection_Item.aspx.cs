@@ -35,12 +35,12 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class TableCellCollection_Item
-        : GHTBaseWeb 
+    public class TableCellCollection_Item : GHTBaseWeb
     {
         protected GHTWebControls.GHTSubTest GHTSubTest1;
+
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -48,19 +48,18 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
-
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             //Put user code to initialize the page here
             base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
@@ -80,15 +79,15 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             tbl.Rows[0].Cells[2].Text = "333";
             tbl.Rows[0].Cells[3].Text = "444";
 
-     
-
-            try 
+            try
             {
                 base.GHTSubTestBegin("Item");
                 for (int i = 0; i < tbl.Rows[0].Cells.Count; i++)
-                    base.GHTSubTestAddResult(" CellText " + i.ToString() + "= " + tbl.Rows[0].Cells[i].Text);
+                    base.GHTSubTestAddResult(
+                        " CellText " + i.ToString() + "= " + tbl.Rows[0].Cells[i].Text
+                    );
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 base.GHTSubTestUnexpectedExceptionCaught(ex);
             }

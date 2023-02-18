@@ -5,7 +5,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public static class ModelBinderProviders
     {
-        private static readonly ModelBinderProviderCollection _providers = CreateDefaultCollection();
+        private static readonly ModelBinderProviderCollection _providers =
+            CreateDefaultCollection();
 
         public static ModelBinderProviderCollection Providers
         {

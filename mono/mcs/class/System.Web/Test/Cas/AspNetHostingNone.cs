@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,92 +32,123 @@ using System.Security;
 using System.Security.Permissions;
 using System.Web;
 
-namespace MonoCasTests {
-
-    public abstract class AspNetHostingNone : AspNetHostingPermissionHelper {
-
+namespace MonoCasTests
+{
+    public abstract class AspNetHostingNone : AspNetHostingPermissionHelper
+    {
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Unrestricted)]
-        public void LinkDemand_PermitOnly_Unrestricted ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Unrestricted
+        )]
+        public void LinkDemand_PermitOnly_Unrestricted()
         {
-            Assert.IsNotNull (CreateControl (SecurityAction.PermitOnly, AspNetHostingPermissionLevel.Unrestricted));
+            Assert.IsNotNull(
+                CreateControl(SecurityAction.PermitOnly, AspNetHostingPermissionLevel.Unrestricted)
+            );
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-        public void LinkDemand_PermitOnly_High ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.High
+        )]
+        public void LinkDemand_PermitOnly_High()
         {
-            Assert.IsNotNull (CreateControl (SecurityAction.PermitOnly, AspNetHostingPermissionLevel.High));
+            Assert.IsNotNull(
+                CreateControl(SecurityAction.PermitOnly, AspNetHostingPermissionLevel.High)
+            );
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Medium)]
-        public void LinkDemand_PermitOnly_Medium ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public void LinkDemand_PermitOnly_Medium()
         {
-            Assert.IsNotNull (CreateControl (SecurityAction.PermitOnly, AspNetHostingPermissionLevel.Medium));
+            Assert.IsNotNull(
+                CreateControl(SecurityAction.PermitOnly, AspNetHostingPermissionLevel.Medium)
+            );
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Low)]
-        public void LinkDemand_PermitOnly_Low ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Low
+        )]
+        public void LinkDemand_PermitOnly_Low()
         {
-            Assert.IsNotNull (CreateControl (SecurityAction.PermitOnly, AspNetHostingPermissionLevel.Low));
+            Assert.IsNotNull(
+                CreateControl(SecurityAction.PermitOnly, AspNetHostingPermissionLevel.Low)
+            );
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-        public void LinkDemand_PermitOnly_Minimal ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        public void LinkDemand_PermitOnly_Minimal()
         {
-            Assert.IsNotNull (CreateControl (SecurityAction.PermitOnly, AspNetHostingPermissionLevel.Minimal));
+            Assert.IsNotNull(
+                CreateControl(SecurityAction.PermitOnly, AspNetHostingPermissionLevel.Minimal)
+            );
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.None)]
-        public void LinkDemand_PermitOnly_None ()
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.None
+        )]
+        public void LinkDemand_PermitOnly_None()
         {
-            CreateControl (SecurityAction.PermitOnly, AspNetHostingPermissionLevel.None);
+            CreateControl(SecurityAction.PermitOnly, AspNetHostingPermissionLevel.None);
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Unrestricted)]
-        public void LinkDemand_Deny_Unrestricted ()
+        [AspNetHostingPermission(
+            SecurityAction.Deny,
+            Level = AspNetHostingPermissionLevel.Unrestricted
+        )]
+        public void LinkDemand_Deny_Unrestricted()
         {
-            CreateControl (SecurityAction.Deny, AspNetHostingPermissionLevel.Unrestricted);
+            CreateControl(SecurityAction.Deny, AspNetHostingPermissionLevel.Unrestricted);
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-        public void LinkDemand_Deny_High ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+        public void LinkDemand_Deny_High()
         {
-            CreateControl (SecurityAction.Deny, AspNetHostingPermissionLevel.High);
+            CreateControl(SecurityAction.Deny, AspNetHostingPermissionLevel.High);
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
-        public void LinkDemand_Deny_Medium ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Medium)]
+        public void LinkDemand_Deny_Medium()
         {
-            CreateControl (SecurityAction.Deny, AspNetHostingPermissionLevel.Medium);
+            CreateControl(SecurityAction.Deny, AspNetHostingPermissionLevel.Medium);
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
-        public void LinkDemand_Deny_Low ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Low)]
+        public void LinkDemand_Deny_Low()
         {
-            CreateControl (SecurityAction.Deny, AspNetHostingPermissionLevel.Low);
+            CreateControl(SecurityAction.Deny, AspNetHostingPermissionLevel.Low);
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-        public void LinkDemand_Deny_Minimal ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        public void LinkDemand_Deny_Minimal()
         {
-            CreateControl (SecurityAction.Deny, AspNetHostingPermissionLevel.Minimal);
+            CreateControl(SecurityAction.Deny, AspNetHostingPermissionLevel.Minimal);
         }
 
         [Test]
-        [AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.None)]
-        public void LinkDemand_Deny_None ()
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.None)]
+        public void LinkDemand_Deny_None()
         {
-            Assert.IsNotNull (CreateControl (SecurityAction.Deny, AspNetHostingPermissionLevel.None));
+            Assert.IsNotNull(CreateControl(SecurityAction.Deny, AspNetHostingPermissionLevel.None));
         }
     }
 }

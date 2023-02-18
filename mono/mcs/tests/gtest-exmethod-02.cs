@@ -4,9 +4,9 @@ using System;
 
 public class M
 {
-    public static void Main ()
+    public static void Main()
     {
-        "foo".Test_1 ();
+        "foo".Test_1();
     }
 }
 
@@ -14,9 +14,9 @@ namespace N
 {
     public class M
     {
-        public static void Test2 ()
+        public static void Test2()
         {
-            "foo".Test_1 ();
+            "foo".Test_1();
         }
     }
 }

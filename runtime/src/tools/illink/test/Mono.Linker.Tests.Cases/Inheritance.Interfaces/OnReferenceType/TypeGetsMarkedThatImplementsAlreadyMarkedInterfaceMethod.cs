@@ -4,36 +4,34 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
 {
     class TypeGetsMarkedThatImplementsAlreadyMarkedInterfaceMethod
     {
-        public static void Main ()
+        public static void Main()
         {
-            IFoo i = new A ();
-            i.Foo ();
+            IFoo i = new A();
+            i.Foo();
         }
 
         interface IFoo
         {
             [Kept]
-            void Foo ();
+            void Foo();
         }
 
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IFoo))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IFoo))]
         class B : IFoo
         {
             [Kept]
-            public void Foo ()
-            {
-            }
+            public void Foo() { }
         }
 
-        [KeptMember (".ctor()")]
-        [KeptInterface (typeof (IFoo))]
+        [KeptMember(".ctor()")]
+        [KeptInterface(typeof(IFoo))]
         class A : IFoo
         {
             [Kept]
-            public void Foo ()
+            public void Foo()
             {
-                new B (); /*this will cause us to mark B, but will we be smart enough to realize B.Foo implements the already marked IFoo.Foo?*/
+                new B(); /*this will cause us to mark B, but will we be smart enough to realize B.Foo implements the already marked IFoo.Foo?*/
             }
         }
     }

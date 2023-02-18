@@ -1,25 +1,25 @@
-public struct ObjectID {
+public struct ObjectID
+{
     long l;
 
-    public ObjectID (long l)
+    public ObjectID(long l)
     {
         this.l = l;
     }
 
-    public static implicit operator long (ObjectID p)
+    public static implicit operator long(ObjectID p)
     {
         return p.l;
     }
 
-    public static implicit operator ObjectID (long l)
+    public static implicit operator ObjectID(long l)
     {
-        return new ObjectID (l);
+        return new ObjectID(l);
     }
 
-    public static void Main ()
+    public static void Main()
     {
-        ObjectID x = new ObjectID (0);
+        ObjectID x = new ObjectID(0);
         decimal y = x;
     }
 }
-

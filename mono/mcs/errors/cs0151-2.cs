@@ -1,35 +1,38 @@
 // CS0151: A switch expression of type `Y' cannot be converted to an integral type, bool, char, string, enum or nullable type
 // Line: 28
 
-class Y {
+class Y
+{
     byte b;
-    
-    public static implicit operator int (Y i)
+
+    public static implicit operator int(Y i)
     {
         return i.b;
     }
 
-    public static implicit operator byte (Y i)
+    public static implicit operator byte(Y i)
     {
         return i.b;
     }
 
-    public Y (byte b)
+    public Y(byte b)
     {
         this.b = b;
-    }            
+    }
 }
 
-class X {
-    static void Main ()
+class X
+{
+    static void Main()
     {
-        Y y = new Y (1);
+        Y y = new Y(1);
 
-        switch (y){
-        case 0:
-            break;
-        case 1:
-            break;
+        switch (y)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
         }
 
         int a = y;

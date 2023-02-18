@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -r:CS0534-6-lib.dll
 
-class M : C
-{
-}
+class M : C { }

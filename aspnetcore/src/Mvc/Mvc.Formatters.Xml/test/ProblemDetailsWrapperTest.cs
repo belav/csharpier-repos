@@ -13,20 +13,20 @@ public class ProblemDetailsWrapperTest
     public void ReadXml_ReadsProblemDetailsXml()
     {
         // Arrange
-        var xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<title>Some title</title>" +
-            "<status>403</status>" +
-            "<instance>Some instance</instance>" +
-            "<key1>Test Value 1</key1>" +
-            "<_x005B_key2_x005D_>Test Value 2</_x005B_key2_x005D_>" +
-            "<MVC-Empty>Test Value 3</MVC-Empty>" +
-            "</problem>";
+        var xml =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<title>Some title</title>"
+            + "<status>403</status>"
+            + "<instance>Some instance</instance>"
+            + "<key1>Test Value 1</key1>"
+            + "<_x005B_key2_x005D_>Test Value 2</_x005B_key2_x005D_>"
+            + "<MVC-Empty>Test Value 3</MVC-Empty>"
+            + "</problem>";
         var serializer = new DataContractSerializer(typeof(ProblemDetailsWrapper));
 
         // Act
-        var value = serializer.ReadObject(
-            new MemoryStream(Encoding.UTF8.GetBytes(xml)));
+        var value = serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
         // Assert
         var problemDetails = Assert.IsType<ProblemDetailsWrapper>(value).ProblemDetails;
@@ -50,7 +50,8 @@ public class ProblemDetailsWrapperTest
             {
                 Assert.Equal("key1", kvp.Key);
                 Assert.Equal("Test Value 1", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -62,23 +63,24 @@ public class ProblemDetailsWrapperTest
             Title = "Some title",
             Detail = "Some detail",
             Extensions =
-                {
-                    ["key1"] = "Test Value 1",
-                    ["[Key2]"] = "Test Value 2",
-                    [""] = "Test Value 3",
-                },
+            {
+                ["key1"] = "Test Value 1",
+                ["[Key2]"] = "Test Value 2",
+                [""] = "Test Value 3",
+            },
         };
 
         var wrapper = new ProblemDetailsWrapper(problemDetails);
         var outputStream = new MemoryStream();
-        var expectedContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<problem xmlns=\"urn:ietf:rfc:7807\">" +
-            "<detail>Some detail</detail>" +
-            "<title>Some title</title>" +
-            "<key1>Test Value 1</key1>" +
-            "<_x005B_Key2_x005D_>Test Value 2</_x005B_Key2_x005D_>" +
-            "<MVC-Empty>Test Value 3</MVC-Empty>" +
-            "</problem>";
+        var expectedContent =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<problem xmlns=\"urn:ietf:rfc:7807\">"
+            + "<detail>Some detail</detail>"
+            + "<title>Some title</title>"
+            + "<key1>Test Value 1</key1>"
+            + "<_x005B_Key2_x005D_>Test Value 2</_x005B_Key2_x005D_>"
+            + "<MVC-Empty>Test Value 3</MVC-Empty>"
+            + "</problem>";
 
         // Act
         using (var xmlWriter = XmlWriter.Create(outputStream))

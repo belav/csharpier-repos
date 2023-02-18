@@ -28,11 +28,13 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
+namespace MonoTests.Microsoft.Build.Framework
+{
     [TestFixture]
-    public class TargetStartedEventArgsTest {
+    public class TargetStartedEventArgsTest
+    {
         [Test]
-        public void AssignmentTest ()
+        public void AssignmentTest()
         {
             TargetStartedEventArgs tsea;
             string message = "message";
@@ -40,14 +42,20 @@ namespace MonoTests.Microsoft.Build.Framework {
             string targetName = "targetName";
             string projectFile = "projectFile";
             string targetFile = "targetFile";
-            
-            tsea = new TargetStartedEventArgs (message, helpKeyword, targetName, projectFile, targetFile);
-            
-            Assert.AreEqual (message, tsea.Message, "Message");
-            Assert.AreEqual (helpKeyword, tsea.HelpKeyword, "HelpKeyword");
-            Assert.AreEqual (targetName, tsea.TargetName, "TargetName");
-            Assert.AreEqual (projectFile, tsea.ProjectFile, "ProjectFile");
-            Assert.AreEqual (targetFile, tsea.TargetFile, "TargetFile");
+
+            tsea = new TargetStartedEventArgs(
+                message,
+                helpKeyword,
+                targetName,
+                projectFile,
+                targetFile
+            );
+
+            Assert.AreEqual(message, tsea.Message, "Message");
+            Assert.AreEqual(helpKeyword, tsea.HelpKeyword, "HelpKeyword");
+            Assert.AreEqual(targetName, tsea.TargetName, "TargetName");
+            Assert.AreEqual(projectFile, tsea.ProjectFile, "ProjectFile");
+            Assert.AreEqual(targetFile, tsea.TargetFile, "TargetFile");
         }
     }
 }

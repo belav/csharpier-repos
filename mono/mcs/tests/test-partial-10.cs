@@ -4,8 +4,7 @@ using System;
 
 namespace Test2
 {
-    public interface Base
-    { }
+    public interface Base { }
 
     public partial class Foo : Base
     {
@@ -14,14 +13,13 @@ namespace Test2
 
     public partial class Foo : Base
     {
-        public static int f2 = 9;        
+        public static int f2 = 9;
     }
 }
 
 namespace Test3
 {
-    public interface Base
-    { }
+    public interface Base { }
 
     public partial struct Foo : Base
     {
@@ -36,21 +34,21 @@ namespace Test3
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
         if (Test2.Foo.f != 10)
             return 1;
-        
+
         if (Test2.Foo.f2 != 9)
             return 1;
-        
+
         if (Test3.Foo.f != 10)
             return 1;
 
         if (Test3.Foo.f2 != 9)
             return 1;
-        
-        Console.WriteLine ("OK");
+
+        Console.WriteLine("OK");
         return 0;
     }
 }

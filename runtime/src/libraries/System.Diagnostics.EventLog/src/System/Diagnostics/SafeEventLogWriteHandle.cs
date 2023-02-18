@@ -6,7 +6,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeEventLogWriteHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeEventLogWriteHandle() : base(true) { }
+        public SafeEventLogWriteHandle()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

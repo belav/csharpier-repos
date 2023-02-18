@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -55,8 +55,7 @@ using System.Xml;
 namespace System.ServiceModel.Configuration
 {
     [MonoTODO]
-    public sealed partial class X509PeerCertificateElement
-         : ConfigurationElement
+    public sealed partial class X509PeerCertificateElement : ConfigurationElement
     {
         // Static Fields
         static ConfigurationPropertyCollection properties;
@@ -65,78 +64,106 @@ namespace System.ServiceModel.Configuration
         static ConfigurationProperty store_name;
         static ConfigurationProperty x509_find_type;
 
-        static X509PeerCertificateElement ()
+        static X509PeerCertificateElement()
         {
-            properties = new ConfigurationPropertyCollection ();
-            find_value = new ConfigurationProperty ("findValue",
-                typeof (string), "", new StringConverter (), null,
-                ConfigurationPropertyOptions.None);
+            properties = new ConfigurationPropertyCollection();
+            find_value = new ConfigurationProperty(
+                "findValue",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            store_location = new ConfigurationProperty ("storeLocation",
-                typeof (StoreLocation), "CurrentUser", null/* FIXME: get converter for StoreLocation*/, null,
-                ConfigurationPropertyOptions.None);
+            store_location = new ConfigurationProperty(
+                "storeLocation",
+                typeof(StoreLocation),
+                "CurrentUser",
+                null /* FIXME: get converter for StoreLocation*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            store_name = new ConfigurationProperty ("storeName",
-                typeof (StoreName), "My", null/* FIXME: get converter for StoreName*/, null,
-                ConfigurationPropertyOptions.None);
+            store_name = new ConfigurationProperty(
+                "storeName",
+                typeof(StoreName),
+                "My",
+                null /* FIXME: get converter for StoreName*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            x509_find_type = new ConfigurationProperty ("x509FindType",
-                typeof (X509FindType), "FindBySubjectDistinguishedName", null/* FIXME: get converter for X509FindType*/, null,
-                ConfigurationPropertyOptions.None);
+            x509_find_type = new ConfigurationProperty(
+                "x509FindType",
+                typeof(X509FindType),
+                "FindBySubjectDistinguishedName",
+                null /* FIXME: get converter for X509FindType*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-            properties.Add (find_value);
-            properties.Add (store_location);
-            properties.Add (store_name);
-            properties.Add (x509_find_type);
+            properties.Add(find_value);
+            properties.Add(store_location);
+            properties.Add(store_name);
+            properties.Add(x509_find_type);
         }
 
-        public X509PeerCertificateElement ()
-        {
-        }
-
+        public X509PeerCertificateElement() { }
 
         // Properties
 
-        [StringValidator ( MinLength = 0,
-            MaxLength = int.MaxValue,
-             InvalidCharacters = null)]
-        [ConfigurationProperty ("findValue",
-             DefaultValue = "",
-             Options = ConfigurationPropertyOptions.None)]
-        public string FindValue {
-            get { return (string) base [find_value]; }
-            set { base [find_value] = value; }
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "findValue",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public string FindValue
+        {
+            get { return (string)base[find_value]; }
+            set { base[find_value] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
+        protected override ConfigurationPropertyCollection Properties
+        {
             get { return properties; }
         }
 
-        [ConfigurationProperty ("storeLocation",
-             DefaultValue = "CurrentUser",
-             Options = ConfigurationPropertyOptions.None)]
-        public StoreLocation StoreLocation {
-            get { return (StoreLocation) base [store_location]; }
-            set { base [store_location] = value; }
+        [ConfigurationProperty(
+            "storeLocation",
+            DefaultValue = "CurrentUser",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public StoreLocation StoreLocation
+        {
+            get { return (StoreLocation)base[store_location]; }
+            set { base[store_location] = value; }
         }
 
-        [ConfigurationProperty ("storeName",
-             DefaultValue = "My",
-             Options = ConfigurationPropertyOptions.None)]
-        public StoreName StoreName {
-            get { return (StoreName) base [store_name]; }
-            set { base [store_name] = value; }
+        [ConfigurationProperty(
+            "storeName",
+            DefaultValue = "My",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public StoreName StoreName
+        {
+            get { return (StoreName)base[store_name]; }
+            set { base[store_name] = value; }
         }
 
-        [ConfigurationProperty ("x509FindType",
-             DefaultValue = "FindBySubjectDistinguishedName",
-             Options = ConfigurationPropertyOptions.None)]
-        public X509FindType X509FindType {
-            get { return (X509FindType) base [x509_find_type]; }
-            set { base [x509_find_type] = value; }
+        [ConfigurationProperty(
+            "x509FindType",
+            DefaultValue = "FindBySubjectDistinguishedName",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public X509FindType X509FindType
+        {
+            get { return (X509FindType)base[x509_find_type]; }
+            set { base[x509_find_type] = value; }
         }
-
-
     }
-
 }

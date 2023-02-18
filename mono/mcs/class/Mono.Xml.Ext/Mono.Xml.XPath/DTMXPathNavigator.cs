@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,16 +41,17 @@ namespace Mono.Xml.XPath
 #else
     internal
 #endif
-        class DTMXPathNavigator : XPathNavigator, IXmlLineInfo
+    class DTMXPathNavigator : XPathNavigator, IXmlLineInfo
     {
-
-#region Copy of XPathDocument
-        public DTMXPathNavigator (DTMXPathDocument document,
-            XmlNameTable nameTable, 
-            DTMXPathLinkedNode [] nodes,
-            DTMXPathAttributeNode [] attributes,
-            DTMXPathNamespaceNode [] namespaces,
-            Hashtable idTable)
+        #region Copy of XPathDocument
+        public DTMXPathNavigator(
+            DTMXPathDocument document,
+            XmlNameTable nameTable,
+            DTMXPathLinkedNode[] nodes,
+            DTMXPathAttributeNode[] attributes,
+            DTMXPathNamespaceNode[] namespaces,
+            Hashtable idTable
+        )
         {
             this.nodes = nodes;
             this.attributes = attributes;
@@ -58,15 +59,20 @@ namespace Mono.Xml.XPath
             this.idTable = idTable;
             this.nameTable = nameTable;
 
-            this.MoveToRoot ();
+            this.MoveToRoot();
             this.document = document;
         }
 
         // Copy constructor including position informations.
-        public DTMXPathNavigator (DTMXPathNavigator org)
-            : this (org.document, org.nameTable,
-            org.nodes, org.attributes, org.namespaces,
-            org.idTable)
+        public DTMXPathNavigator(DTMXPathNavigator org)
+            : this(
+                org.document,
+                org.nameTable,
+                org.nodes,
+                org.attributes,
+                org.namespaces,
+                org.idTable
+            )
         {
             currentIsNode = org.currentIsNode;
             currentIsAttr = org.currentIsAttr;
@@ -81,17 +87,17 @@ namespace Mono.Xml.XPath
         // Created XPathDocument. This is used to identify the origin of the navigator.
         DTMXPathDocument document;
 
-        DTMXPathLinkedNode [] nodes;// = new DTMXPathLinkedNode [0];
-        DTMXPathAttributeNode [] attributes;// = new DTMXPathAttributeNode [0];
-        DTMXPathNamespaceNode [] namespaces;// = new DTMXPathNamespaceNode [0];
+        DTMXPathLinkedNode[] nodes; // = new DTMXPathLinkedNode [0];
+        DTMXPathAttributeNode[] attributes; // = new DTMXPathAttributeNode [0];
+        DTMXPathNamespaceNode[] namespaces; // = new DTMXPathNamespaceNode [0];
 
         // ID table
         Hashtable idTable;
 
-//        // Key table (considered xsd:keyref for XPath 2.0)
-//        Hashtable keyRefTable;    // [string key-name] -> idTable
-//                    // idTable [string value] -> int nodeId
-#endregion
+        //        // Key table (considered xsd:keyref for XPath 2.0)
+        //        Hashtable keyRefTable;    // [string key-name] -> idTable
+        //                    // idTable [string value] -> int nodeId
+        #endregion
 
         bool currentIsNode;
         bool currentIsAttr;
@@ -102,71 +108,89 @@ namespace Mono.Xml.XPath
 
         StringBuilder valueBuilder;
 
-#region Ctor
+        #region Ctor
 
-        internal DTMXPathNavigator (XmlNameTable nt)
+        internal DTMXPathNavigator(XmlNameTable nt)
         {
             this.nameTable = nt;
         }
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
 
-        public override string BaseURI {
-            get { return nodes [currentNode].BaseURI; }
+        public override string BaseURI
+        {
+            get { return nodes[currentNode].BaseURI; }
         }
 
-        public override bool HasAttributes {
-            get { return currentIsNode ? nodes [currentNode].FirstAttribute != 0 : false; }
-        }
-        
-        public override bool HasChildren {
-            get { return currentIsNode ? nodes [currentNode].FirstChild != 0 : false; }
+        public override bool HasAttributes
+        {
+            get { return currentIsNode ? nodes[currentNode].FirstAttribute != 0 : false; }
         }
 
-        public override bool IsEmptyElement {
-            get { return currentIsNode ? nodes [currentNode].IsEmptyElement : false; }
+        public override bool HasChildren
+        {
+            get { return currentIsNode ? nodes[currentNode].FirstChild != 0 : false; }
         }
 
-        int IXmlLineInfo.LineNumber {
-            get {
-                return currentIsAttr ? attributes [currentAttr].LineNumber :
-                    nodes [currentNode].LineNumber;
+        public override bool IsEmptyElement
+        {
+            get { return currentIsNode ? nodes[currentNode].IsEmptyElement : false; }
+        }
+
+        int IXmlLineInfo.LineNumber
+        {
+            get
+            {
+                return currentIsAttr
+                    ? attributes[currentAttr].LineNumber
+                    : nodes[currentNode].LineNumber;
             }
         }
 
-        int IXmlLineInfo.LinePosition {
-            get {
-                return currentIsAttr ? attributes [currentAttr].LinePosition :
-                    nodes [currentNode].LinePosition;
+        int IXmlLineInfo.LinePosition
+        {
+            get
+            {
+                return currentIsAttr
+                    ? attributes[currentAttr].LinePosition
+                    : nodes[currentNode].LinePosition;
             }
         }
 
-        public override string LocalName {
-            get {
+        public override string LocalName
+        {
+            get
+            {
                 if (currentIsNode)
-                    return nodes [currentNode].LocalName;
+                    return nodes[currentNode].LocalName;
                 else if (currentIsAttr)
-                    return attributes [currentAttr].LocalName;
+                    return attributes[currentAttr].LocalName;
                 else
-                    return namespaces [currentNs].Name;
+                    return namespaces[currentNs].Name;
             }
         }
 
         // It maybe scarcely used, so I decided to compute it always.
-        public override string Name {
-            get {
+        public override string Name
+        {
+            get
+            {
                 string prefix;
                 string localName;
-                if (currentIsNode) {
-                    prefix = nodes [currentNode].Prefix;
-                    localName = nodes [currentNode].LocalName;
-                } else if (currentIsAttr) {
-                    prefix = attributes [currentAttr].Prefix;
-                    localName = attributes [currentAttr].LocalName;
-                } else
-                    return namespaces [currentNs].Name;
+                if (currentIsNode)
+                {
+                    prefix = nodes[currentNode].Prefix;
+                    localName = nodes[currentNode].LocalName;
+                }
+                else if (currentIsAttr)
+                {
+                    prefix = attributes[currentAttr].Prefix;
+                    localName = attributes[currentAttr].LocalName;
+                }
+                else
+                    return namespaces[currentNs].Name;
 
                 if (prefix != "")
                     return prefix + ':' + localName;
@@ -175,24 +199,29 @@ namespace Mono.Xml.XPath
             }
         }
 
-        public override string NamespaceURI {
-            get {
+        public override string NamespaceURI
+        {
+            get
+            {
                 if (currentIsNode)
-                    return nodes [currentNode].NamespaceURI;
+                    return nodes[currentNode].NamespaceURI;
                 if (currentIsAttr)
-                    return attributes [currentAttr].NamespaceURI;
+                    return attributes[currentAttr].NamespaceURI;
                 return String.Empty;
             }
         }
 
-        public override XmlNameTable NameTable {
+        public override XmlNameTable NameTable
+        {
             get { return nameTable; }
         }
 
-        public override XPathNodeType NodeType {
-            get {
+        public override XPathNodeType NodeType
+        {
+            get
+            {
                 if (currentIsNode)
-                    return nodes [currentNode].NodeType;
+                    return nodes[currentNode].NodeType;
                 else if (currentIsAttr)
                     return XPathNodeType.Attribute;
                 else
@@ -200,70 +229,78 @@ namespace Mono.Xml.XPath
             }
         }
 
-        public override string Prefix {
-            get {
+        public override string Prefix
+        {
+            get
+            {
                 if (currentIsNode)
-                    return nodes [currentNode].Prefix;
+                    return nodes[currentNode].Prefix;
                 else if (currentIsAttr)
-                    return attributes [currentAttr].Prefix;
+                    return attributes[currentAttr].Prefix;
                 return String.Empty;
             }
         }
 
-        public override string Value {
-            get {
+        public override string Value
+        {
+            get
+            {
                 if (currentIsAttr)
-                    return attributes [currentAttr].Value;
+                    return attributes[currentAttr].Value;
                 else if (!currentIsNode)
-                    return namespaces [currentNs].Namespace;
-                
-                switch (nodes [currentNode].NodeType) {
-                case XPathNodeType.Comment:
-                case XPathNodeType.ProcessingInstruction:
-                case XPathNodeType.Text:
-                case XPathNodeType.Whitespace:
-                case XPathNodeType.SignificantWhitespace:
-                    return nodes [currentNode].Value;
+                    return namespaces[currentNs].Namespace;
+
+                switch (nodes[currentNode].NodeType)
+                {
+                    case XPathNodeType.Comment:
+                    case XPathNodeType.ProcessingInstruction:
+                    case XPathNodeType.Text:
+                    case XPathNodeType.Whitespace:
+                    case XPathNodeType.SignificantWhitespace:
+                        return nodes[currentNode].Value;
                 }
 
                 // Element
                 if (valueBuilder == null)
-                    valueBuilder = new StringBuilder ();
+                    valueBuilder = new StringBuilder();
                 else
                     valueBuilder.Length = 0;
-                
-                int iter = nodes [currentNode].FirstChild;
-                int depth = nodes [currentNode].Depth;
-                while (iter < nodes.Length && nodes [iter].Depth > depth) {
-                    switch (nodes [iter].NodeType) {
-                    case XPathNodeType.Comment:
-                    case XPathNodeType.ProcessingInstruction:
-                        break;
-                    default:
-                        valueBuilder.Append (nodes [iter].Value);
-                        break;
+
+                int iter = nodes[currentNode].FirstChild;
+                int depth = nodes[currentNode].Depth;
+                while (iter < nodes.Length && nodes[iter].Depth > depth)
+                {
+                    switch (nodes[iter].NodeType)
+                    {
+                        case XPathNodeType.Comment:
+                        case XPathNodeType.ProcessingInstruction:
+                            break;
+                        default:
+                            valueBuilder.Append(nodes[iter].Value);
+                            break;
                     }
                     iter++;
                 }
-                
-                return valueBuilder.ToString ();
+
+                return valueBuilder.ToString();
             }
         }
 
-        public override string XmlLang {
-            get { return nodes [currentNode].XmlLang; }
-        }
-
-#endregion
-
-#region Methods
-
-        public override XPathNavigator Clone ()
+        public override string XmlLang
         {
-            return new DTMXPathNavigator (this);
+            get { return nodes[currentNode].XmlLang; }
         }
 
-        public override XmlNodeOrder ComparePosition (XPathNavigator nav)
+        #endregion
+
+        #region Methods
+
+        public override XPathNavigator Clone()
+        {
+            return new DTMXPathNavigator(this);
+        }
+
+        public override XmlNodeOrder ComparePosition(XPathNavigator nav)
         {
             DTMXPathNavigator another = nav as DTMXPathNavigator;
 
@@ -275,71 +312,85 @@ namespace Mono.Xml.XPath
             else if (currentNode < another.currentNode)
                 return XmlNodeOrder.Before;
 
-            // another may attr or ns, 
+            // another may attr or ns,
             // and this may be also attr or ns.
-            if (another.currentIsAttr) {
-                if (this.currentIsAttr) {
+            if (another.currentIsAttr)
+            {
+                if (this.currentIsAttr)
+                {
                     if (currentAttr > another.currentAttr)
                         return XmlNodeOrder.After;
                     else if (currentAttr < another.currentAttr)
                         return XmlNodeOrder.Before;
                     else
                         return XmlNodeOrder.Same;
-                } else
+                }
+                else
                     return XmlNodeOrder.Before;
-            } else if (!another.currentIsNode) {
-                if (!this.currentIsNode) {
+            }
+            else if (!another.currentIsNode)
+            {
+                if (!this.currentIsNode)
+                {
                     if (currentNs > another.currentNs)
                         return XmlNodeOrder.After;
                     else if (currentNs < another.currentNs)
                         return XmlNodeOrder.Before;
                     else
                         return XmlNodeOrder.Same;
-                } else
+                }
+                else
                     return XmlNodeOrder.Before;
-            } else
+            }
+            else
                 return !another.currentIsNode ? XmlNodeOrder.Before : XmlNodeOrder.Same;
         }
 
-        private int findAttribute (string localName, string namespaceURI)
+        private int findAttribute(string localName, string namespaceURI)
         {
-            if (currentIsNode && nodes [currentNode].NodeType == XPathNodeType.Element) {
-                int cur = nodes [currentNode].FirstAttribute;
-                while (cur != 0) {
-                    if (attributes [cur].LocalName == localName && attributes [cur].NamespaceURI == namespaceURI)
+            if (currentIsNode && nodes[currentNode].NodeType == XPathNodeType.Element)
+            {
+                int cur = nodes[currentNode].FirstAttribute;
+                while (cur != 0)
+                {
+                    if (
+                        attributes[cur].LocalName == localName
+                        && attributes[cur].NamespaceURI == namespaceURI
+                    )
                         return cur;
-                    cur = attributes [cur].NextAttribute;
+                    cur = attributes[cur].NextAttribute;
                 }
             }
             return 0;
         }
 
-        public override string GetAttribute (string localName,
-            string namespaceURI)
+        public override string GetAttribute(string localName, string namespaceURI)
         {
-            int attr = findAttribute (localName, namespaceURI);
-            return (attr != 0) ? attributes [attr].Value : String.Empty;
+            int attr = findAttribute(localName, namespaceURI);
+            return (attr != 0) ? attributes[attr].Value : String.Empty;
         }
 
-        public override string GetNamespace (string name)
+        public override string GetNamespace(string name)
         {
-            if (currentIsNode && nodes [currentNode].NodeType == XPathNodeType.Element) {
-                int nsNode = nodes [currentNode].FirstNamespace;
-                while (nsNode != 0) {
-                    if (namespaces [nsNode].Name == name)
-                        return namespaces [nsNode].Namespace;
-                    nsNode = namespaces [nsNode].NextNamespace;
+            if (currentIsNode && nodes[currentNode].NodeType == XPathNodeType.Element)
+            {
+                int nsNode = nodes[currentNode].FirstNamespace;
+                while (nsNode != 0)
+                {
+                    if (namespaces[nsNode].Name == name)
+                        return namespaces[nsNode].Namespace;
+                    nsNode = namespaces[nsNode].NextNamespace;
                 }
             }
             return String.Empty;
         }
 
-        bool IXmlLineInfo.HasLineInfo ()
+        bool IXmlLineInfo.HasLineInfo()
         {
             return true;
         }
 
-        public override bool IsDescendant (XPathNavigator nav)
+        public override bool IsDescendant(XPathNavigator nav)
         {
             DTMXPathNavigator another = nav as DTMXPathNavigator;
 
@@ -350,25 +401,28 @@ namespace Mono.Xml.XPath
             // comparing node indices.
             if (another.currentNode == currentNode)
                 return !another.currentIsNode;
-            int tmp = nodes [another.currentNode].Parent;
-            while (tmp != 0) {
+            int tmp = nodes[another.currentNode].Parent;
+            while (tmp != 0)
+            {
                 if (tmp == currentNode)
                     return true;
-                tmp = nodes [tmp].Parent;
+                tmp = nodes[tmp].Parent;
             }
             return false;
         }
 
-        public override bool IsSamePosition (XPathNavigator other)
+        public override bool IsSamePosition(XPathNavigator other)
         {
             DTMXPathNavigator another = other as DTMXPathNavigator;
 
             if (another == null || another.document != this.document)
                 return false;
 
-            if (this.currentNode != another.currentNode ||
-                this.currentIsAttr != another.currentIsAttr ||
-                this.currentIsNode != another.currentIsNode)
+            if (
+                this.currentNode != another.currentNode
+                || this.currentIsAttr != another.currentIsAttr
+                || this.currentIsNode != another.currentIsNode
+            )
                 return false;
 
             if (currentIsAttr)
@@ -378,7 +432,7 @@ namespace Mono.Xml.XPath
             return true;
         }
 
-        public override bool MoveTo (XPathNavigator other)
+        public override bool MoveTo(XPathNavigator other)
         {
             DTMXPathNavigator another = other as DTMXPathNavigator;
 
@@ -393,10 +447,9 @@ namespace Mono.Xml.XPath
             return true;
         }
 
-        public override bool MoveToAttribute (string localName,
-            string namespaceURI)
+        public override bool MoveToAttribute(string localName, string namespaceURI)
         {
-            int attr = findAttribute (localName, namespaceURI);
+            int attr = findAttribute(localName, namespaceURI);
             if (attr == 0)
                 return false;
 
@@ -406,31 +459,32 @@ namespace Mono.Xml.XPath
             return true;
         }
 
-        public override bool MoveToFirst ()
+        public override bool MoveToFirst()
         {
             if (currentIsAttr)
                 return false;
 
-            int cur = nodes [currentNode].PreviousSibling;
+            int cur = nodes[currentNode].PreviousSibling;
             if (cur == 0)
                 return false;
 
             int next = cur;
-            while (next != 0) {
+            while (next != 0)
+            {
                 cur = next;
-                next = nodes [cur].PreviousSibling;
+                next = nodes[cur].PreviousSibling;
             }
             currentNode = cur;
             currentIsNode = true;
             return true;
         }
 
-        public override bool MoveToFirstAttribute ()
+        public override bool MoveToFirstAttribute()
         {
             if (!currentIsNode)
                 return false;
 
-            int first = nodes [currentNode].FirstAttribute;
+            int first = nodes[currentNode].FirstAttribute;
             if (first == 0)
                 return false;
 
@@ -440,56 +494,60 @@ namespace Mono.Xml.XPath
             return true;
         }
 
-        public override bool MoveToFirstChild ()
+        public override bool MoveToFirstChild()
         {
             if (!currentIsNode)
                 return false;
 
-            int first = nodes [currentNode].FirstChild;
+            int first = nodes[currentNode].FirstChild;
             if (first == 0)
                 return false;
 
             currentNode = first;
             return true;
         }
-        
-        private bool moveToSpecifiedNamespace (int cur,
-            XPathNamespaceScope namespaceScope)
+
+        private bool moveToSpecifiedNamespace(int cur, XPathNamespaceScope namespaceScope)
         {
             if (cur == 0)
                 return false;
 
-            if (namespaceScope == XPathNamespaceScope.Local &&
-                    namespaces [cur].DeclaredElement != currentNode)
+            if (
+                namespaceScope == XPathNamespaceScope.Local
+                && namespaces[cur].DeclaredElement != currentNode
+            )
                 return false;
 
-            if (namespaceScope != XPathNamespaceScope.All
-                && namespaces [cur].Namespace == XmlNamespaces.XML)
+            if (
+                namespaceScope != XPathNamespaceScope.All
+                && namespaces[cur].Namespace == XmlNamespaces.XML
+            )
                 return false;
 
-            if (cur != 0) {
-                moveToNamespace (cur);
+            if (cur != 0)
+            {
+                moveToNamespace(cur);
                 return true;
             }
             else
                 return false;
         }
 
-        public override bool MoveToFirstNamespace (
-            XPathNamespaceScope namespaceScope)
+        public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope)
         {
             if (!currentIsNode)
                 return false;
-            int cur = nodes [currentNode].FirstNamespace;
-            return moveToSpecifiedNamespace (cur, namespaceScope);
+            int cur = nodes[currentNode].FirstNamespace;
+            return moveToSpecifiedNamespace(cur, namespaceScope);
         }
 
         // Note that this support is extension to XPathDocument.
         // XPathDocument does not support ID reference.
-        public override bool MoveToId (string id)
+        public override bool MoveToId(string id)
         {
-            if (idTable.ContainsKey (id)) {
-                currentNode = (int) idTable [id];
+            if (idTable.ContainsKey(id))
+            {
+                currentNode = (int)idTable[id];
                 currentIsNode = true;
                 currentIsAttr = false;
                 return true;
@@ -498,34 +556,36 @@ namespace Mono.Xml.XPath
                 return false;
         }
 
-        private void moveToNamespace (int nsNode)
+        private void moveToNamespace(int nsNode)
         {
             currentIsNode = currentIsAttr = false;
             currentNs = nsNode;
         }
 
-        public override bool MoveToNamespace (string name)
+        public override bool MoveToNamespace(string name)
         {
-            int cur = nodes [currentNode].FirstNamespace;
+            int cur = nodes[currentNode].FirstNamespace;
             if (cur == 0)
                 return false;
 
-            while (cur != 0) {
-                if (namespaces [cur].Name == name) {
-                    moveToNamespace (cur);
+            while (cur != 0)
+            {
+                if (namespaces[cur].Name == name)
+                {
+                    moveToNamespace(cur);
                     return true;
                 }
-                cur = namespaces [cur].NextNamespace;
+                cur = namespaces[cur].NextNamespace;
             }
             return false;
         }
 
-        public override bool MoveToNext ()
+        public override bool MoveToNext()
         {
             if (currentIsAttr)
                 return false;
 
-            int next = nodes [currentNode].NextSibling;
+            int next = nodes[currentNode].NextSibling;
             if (next == 0)
                 return false;
             currentNode = next;
@@ -533,50 +593,50 @@ namespace Mono.Xml.XPath
             return true;
         }
 
-        public override bool MoveToNextAttribute ()
+        public override bool MoveToNextAttribute()
         {
             if (!currentIsAttr)
                 return false;
 
-            int next = attributes [currentAttr].NextAttribute;
+            int next = attributes[currentAttr].NextAttribute;
             if (next == 0)
                 return false;
             currentAttr = next;
             return true;
         }
 
-        public override bool MoveToNextNamespace (
-            XPathNamespaceScope namespaceScope)
+        public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
         {
             if (currentIsAttr || currentIsNode)
                 return false;
 
-            int cur = namespaces [currentNs].NextNamespace;
-            return moveToSpecifiedNamespace (cur, namespaceScope);
+            int cur = namespaces[currentNs].NextNamespace;
+            return moveToSpecifiedNamespace(cur, namespaceScope);
         }
 
-        public override bool MoveToParent ()
+        public override bool MoveToParent()
         {
-            if (!currentIsNode) {
+            if (!currentIsNode)
+            {
                 currentIsNode = true;
                 currentIsAttr = false;
                 return true;
             }
 
-            int parent = nodes [currentNode].Parent;
-            if (parent == 0)    // It is root itself.
+            int parent = nodes[currentNode].Parent;
+            if (parent == 0) // It is root itself.
                 return false;
 
             currentNode = parent;
             return true;
         }
 
-        public override bool MoveToPrevious ()
+        public override bool MoveToPrevious()
         {
             if (currentIsAttr)
                 return false;
 
-            int previous = nodes [currentNode].PreviousSibling;
+            int previous = nodes[currentNode].PreviousSibling;
             if (previous == 0)
                 return false;
             currentNode = previous;
@@ -584,14 +644,14 @@ namespace Mono.Xml.XPath
             return true;
         }
 
-        public override void MoveToRoot ()
+        public override void MoveToRoot()
         {
-            currentNode = 1;    // root is 1.
+            currentNode = 1; // root is 1.
             currentIsNode = true;
             currentIsAttr = false;
         }
 
-#endregion
+        #endregion
 
         /*
         public string DebugDump {
@@ -619,7 +679,6 @@ namespace Mono.Xml.XPath
             }
         }
         */
-
     }
 
     internal class XmlNamespaces

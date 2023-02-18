@@ -3,10 +3,10 @@
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Vladimir Krasnov <vladimirk@mainsoft.com>
-//   
-// 
+//
+//
 // Copyright (c) 2002-2005 Mainsoft Corporation.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,12 +41,12 @@ namespace GHTTests
     public class GHTControlBase : GHTBaseWeb
     {
         #region "Data members"
-        protected Control m_cToTest;                //The control that is currently being tested.
-        protected TextBox m_tbToValidate;        //will be used by validation controls as the control to validate.
-        protected Item[] m_aDataSource;            //Array data source to use in data bound objects.
-        protected DataTable m_dtDataSource;//DataTable data source to use in data bound objects.
-        protected  ArrayList m_derivedTypes;    //The array that wil contain all types that are derived from Control, and need to be tested.
-        protected long m_controlsCounter;        //Used to generate a unique id for each of the controls created using GHTActiveSubTestControlClone
+        protected Control m_cToTest; //The control that is currently being tested.
+        protected TextBox m_tbToValidate; //will be used by validation controls as the control to validate.
+        protected Item[] m_aDataSource; //Array data source to use in data bound objects.
+        protected DataTable m_dtDataSource; //DataTable data source to use in data bound objects.
+        protected ArrayList m_derivedTypes; //The array that wil contain all types that are derived from Control, and need to be tested.
+        protected long m_controlsCounter; //Used to generate a unique id for each of the controls created using GHTActiveSubTestControlClone
         #endregion
 
         #region "Construction"
@@ -66,17 +66,11 @@ namespace GHTTests
         #region "Properties"
         protected Control TestedControl
         {
-            get
-            {
-                return m_cToTest;
-            }
+            get { return m_cToTest; }
         }
-        public  Type[] TypesToTest
+        public Type[] TypesToTest
         {
-            get
-            {
-                return (System.Type[])(m_derivedTypes.ToArray(typeof(System.Type)));
-            }
+            get { return (System.Type[])(m_derivedTypes.ToArray(typeof(System.Type))); }
         }
         #endregion
 
@@ -84,7 +78,7 @@ namespace GHTTests
         /// <summary>
         /// Initializes all the derived types that need to be tested.
         /// </summary>
-        protected virtual  void InitTypes()
+        protected virtual void InitTypes()
         {
             m_derivedTypes = new ArrayList();
 
@@ -147,8 +141,8 @@ namespace GHTTests
             m_derivedTypes.Add(typeof(System.Web.UI.WebControls.ValidationSummary));
 #endif
             //System.Web.UI.WebControls rich controls (currently not supported):
-//            m_derivedTypes.Add(typeof(System.Web.UI.WebControls.AdRotator));
-//            m_derivedTypes.Add(typeof(System.Web.UI.WebControls.Calendar));
+            //            m_derivedTypes.Add(typeof(System.Web.UI.WebControls.AdRotator));
+            //            m_derivedTypes.Add(typeof(System.Web.UI.WebControls.Calendar));
 
             //System.Web.UI.WebControls advanced list controls:
             m_derivedTypes.Add(typeof(System.Web.UI.WebControls.DataGrid));
@@ -166,7 +160,7 @@ namespace GHTTests
 
         /// <summary>
         /// Adds a control to page.
-        /// If the control is in the context of other control (Have a parent) 
+        /// If the control is in the context of other control (Have a parent)
         /// (e.g.) TableCell, then the parent control is added to the page.
         /// </summary>
         /// <param name="a_toAdd">The control to add to the page.</param>
@@ -181,7 +175,6 @@ namespace GHTTests
                 GHTAddToActiveForm(a_toAdd.Parent);
             }
         }
-        
 
         /// <summary>
         /// Creates a control to test, and adds it to a new subtest.
@@ -204,6 +197,7 @@ namespace GHTTests
             base.GHTSubTestBegin(a_ctrlType.ToString() + ": " + description);
             GHTActiveSubtestControlClone(a_ctrlType, a_addToPage);
         }
+
         /// <summary>
         /// Clones a control within its context, and adds it to the active subtest.
         /// e.g. if the control is a table cell, then a table will be created to wrap the table cell.
@@ -241,9 +235,9 @@ namespace GHTTests
                     GHTActiveSubTest.Controls.Add(m_cToTest);
                 }
             }
-            HandleValidationControls();    
+            HandleValidationControls();
             HandleCausesValidation();
-            SetId();    //Set a unique id to the control.
+            SetId(); //Set a unique id to the control.
         }
 
         /// <summary>
@@ -277,7 +271,11 @@ namespace GHTTests
             }
             else
             {
-                throw new ArgumentOutOfRangeException("ctrlType", ctrlType, "Must be a ListControl derived type.");
+                throw new ArgumentOutOfRangeException(
+                    "ctrlType",
+                    ctrlType,
+                    "Must be a ListControl derived type."
+                );
             }
         }
 
@@ -288,7 +286,7 @@ namespace GHTTests
         /// <returns>True if the ctrlType is an iteative control item, otherwise false.</returns>
         private bool IsIterativeControlControlItem(Type ctrlType)
         {
-            if ( ctrlType.Equals(typeof(RepeaterItem)))
+            if (ctrlType.Equals(typeof(RepeaterItem)))
             {
                 return true;
             }
@@ -321,20 +319,26 @@ namespace GHTTests
 
             if (ctrlType.Equals(typeof(DataListItem)))
             {
-                DataList l_datalist = GetIterativeControl(typeof(DataList), a_AddToPage) as DataList;
+                DataList l_datalist =
+                    GetIterativeControl(typeof(DataList), a_AddToPage) as DataList;
                 SetId(l_datalist);
                 return l_datalist.Items[0];
             }
-        
+
             if (ctrlType.Equals(typeof(DataGridItem)))
             {
-                DataGrid l_datagrid = GetIterativeControl(typeof(DataGrid), a_AddToPage) as DataGrid;
+                DataGrid l_datagrid =
+                    GetIterativeControl(typeof(DataGrid), a_AddToPage) as DataGrid;
                 SetId(l_datagrid);
                 return l_datagrid.Items[0];
             }
             else
             {
-                throw new ArgumentOutOfRangeException("ctrlType", ctrlType, "Allowed types are RepeaterItem, DataListItem or DataGridItem");
+                throw new ArgumentOutOfRangeException(
+                    "ctrlType",
+                    ctrlType,
+                    "Allowed types are RepeaterItem, DataListItem or DataGridItem"
+                );
             }
         }
 
@@ -345,7 +349,7 @@ namespace GHTTests
         /// <returns>True if the ctrlType is an iteative control, otherwise false.</returns>
         private bool IsIterativeControlControl(Type ctrlType)
         {
-            if ( ctrlType.Equals(typeof(Repeater)))
+            if (ctrlType.Equals(typeof(Repeater)))
             {
                 return true;
             }
@@ -371,20 +375,20 @@ namespace GHTTests
         {
             if (ctrlType.Equals(typeof(Repeater)))
             {
-                    Repeater l_rep = new Repeater();
-                    l_rep.ItemTemplate = new RepeaterTemplate();
-                    l_rep.DataSource = m_aDataSource;
-                    l_rep.DataBind();
-                    if (a_AddToPage)
-                    {
-                        GHTActiveSubTest.Controls.Add(l_rep);
-                    }
-                    return l_rep;
+                Repeater l_rep = new Repeater();
+                l_rep.ItemTemplate = new RepeaterTemplate();
+                l_rep.DataSource = m_aDataSource;
+                l_rep.DataBind();
+                if (a_AddToPage)
+                {
+                    GHTActiveSubTest.Controls.Add(l_rep);
+                }
+                return l_rep;
             }
             else if (ctrlType.Equals(typeof(DataList)))
             {
                 DataList l_dataList = new DataList();
-                l_dataList.ItemTemplate =  new DataListTemplate();
+                l_dataList.ItemTemplate = new DataListTemplate();
                 l_dataList.DataSource = m_aDataSource;
                 l_dataList.DataBind();
                 if (a_AddToPage)
@@ -406,7 +410,11 @@ namespace GHTTests
             }
             else
             {
-                throw new ArgumentOutOfRangeException("ctrlType", ctrlType, "Allowed types are Repeater, DataList or DataGrid");
+                throw new ArgumentOutOfRangeException(
+                    "ctrlType",
+                    ctrlType,
+                    "Allowed types are Repeater, DataList or DataGrid"
+                );
             }
         }
 
@@ -417,7 +425,7 @@ namespace GHTTests
         /// <returns>True if the ctrlType is a HtmlTable related type, otherwise false.</returns>
         private bool IsHTMLTableRelated(Type ctrlType)
         {
-            if ( ctrlType.Equals(typeof(HtmlTable)))
+            if (ctrlType.Equals(typeof(HtmlTable)))
             {
                 return true;
             }
@@ -446,17 +454,17 @@ namespace GHTTests
             HtmlTable l_table = new HtmlTable();
             HtmlTableRow l_row = new HtmlTableRow();
             HtmlTableCell l_cell = new HtmlTableCell();
-            
+
             if (a_AddToPage)
             {
                 GHTActiveSubTest.Controls.Add(l_table);
             }
             l_table.Rows.Add(l_row);
-            l_row.Cells.Add(l_cell);            
+            l_row.Cells.Add(l_cell);
 
             l_cell.InnerText = "Cell";
 
-            if ( l_table.GetType() == ctrlType)
+            if (l_table.GetType() == ctrlType)
             {
                 return l_table;
             }
@@ -470,10 +478,13 @@ namespace GHTTests
             }
             else
             {
-                throw new ArgumentException("Should be HtmlTable related type.", "ctrlType = " + ctrlType.ToString() );
+                throw new ArgumentException(
+                    "Should be HtmlTable related type.",
+                    "ctrlType = " + ctrlType.ToString()
+                );
             }
-
         }
+
         /// <summary>
         /// checks if a given type is a control that should be tested in the context of a table.
         /// </summary>
@@ -481,7 +492,7 @@ namespace GHTTests
         /// <returns>True if the ctrlType is a table related type, otherwise false.</returns>
         private bool IsTableRelated(Type ctrlType)
         {
-            if ( ctrlType.Equals(typeof(Table)))
+            if (ctrlType.Equals(typeof(Table)))
             {
                 return true;
             }
@@ -493,7 +504,7 @@ namespace GHTTests
             {
                 return true;
             }
-            else if(ctrlType.Equals(typeof(TableHeaderCell)))
+            else if (ctrlType.Equals(typeof(TableHeaderCell)))
             {
                 return true;
             }
@@ -516,7 +527,7 @@ namespace GHTTests
             TableRow l_row = new TableRow();
             TableCell l_cell = new TableCell();
             TableHeaderCell l_headerCell = new TableHeaderCell();
-            
+
             if (a_AddToPage)
             {
                 GHTActiveSubTest.Controls.Add(l_table);
@@ -526,12 +537,12 @@ namespace GHTTests
             l_table.Rows.Add(l_row);
 
             l_headerRow.Cells.Add(l_headerCell);
-            l_row.Cells.Add(l_cell);        
-    
+            l_row.Cells.Add(l_cell);
+
             l_headerCell.Text = "Header cell";
             l_cell.Text = "Table cell";
 
-            if ( l_table.GetType() == ctrlType)
+            if (l_table.GetType() == ctrlType)
             {
                 return l_table;
             }
@@ -543,15 +554,17 @@ namespace GHTTests
             {
                 return l_cell;
             }
-            else if(l_headerCell.GetType() == ctrlType)
+            else if (l_headerCell.GetType() == ctrlType)
             {
                 return l_headerCell;
             }
             else
             {
-                throw new ArgumentException("Should be table related type.", "ctrlType = " + ctrlType.ToString() );
+                throw new ArgumentException(
+                    "Should be table related type.",
+                    "ctrlType = " + ctrlType.ToString()
+                );
             }
-
         }
 
         /// <summary>
@@ -567,6 +580,7 @@ namespace GHTTests
             l_validator.ControlToValidate = "m_tbToValidate";
             HandleCompareValidator(l_toTest);
         }
+
         /// <summary>
         /// All validation controls must be assigned a control to validate before the page is loaded:
         /// </summary>
@@ -587,6 +601,7 @@ namespace GHTTests
             }
             l_compareValidator.ValueToCompare = "value to compare";
         }
+
         /// <summary>
         /// Compare validator must have either ValueToCompare or ControlToCompare set, before the page is loaded.
         /// </summary>
@@ -605,13 +620,13 @@ namespace GHTTests
         private void HandleCausesValidation()
         {
             //HtmlButton:
-            HtmlButton hButton  = m_cToTest as HtmlButton;
+            HtmlButton hButton = m_cToTest as HtmlButton;
             if (hButton != null)
             {
                 hButton.CausesValidation = false;
             }
             //HtmlInputButton
-            HtmlInputButton hInputButton  = m_cToTest as HtmlInputButton;
+            HtmlInputButton hInputButton = m_cToTest as HtmlInputButton;
             if (hInputButton != null)
             {
                 hInputButton.CausesValidation = false;
@@ -623,24 +638,25 @@ namespace GHTTests
                 hInputImage.CausesValidation = false;
             }
             //Button:
-            Button button  = m_cToTest as Button;
+            Button button = m_cToTest as Button;
             if (button != null)
             {
                 button.CausesValidation = false;
             }
             //ImageButton
-            ImageButton imageButton  = m_cToTest as ImageButton;
+            ImageButton imageButton = m_cToTest as ImageButton;
             if (imageButton != null)
             {
                 imageButton.CausesValidation = false;
             }
             //LinkButton
-            LinkButton linkButton  = m_cToTest as LinkButton;
+            LinkButton linkButton = m_cToTest as LinkButton;
             if (linkButton != null)
             {
                 linkButton.CausesValidation = false;
             }
         }
+
         /// <summary>
         /// Creates a textbox, and adds it to the page as not visable.
         /// Creates a Required Field validator, and adds it to the page as not visible.
@@ -667,10 +683,13 @@ namespace GHTTests
         /// </summary>
         private void InitDataArray()
         {
-            m_aDataSource = new Item[] {    new Item(1,"aaaa"),
-                                          new Item(2,"bbbb"),
-                                          new Item(3,"cccc"),
-                                          new Item(4,"dddd")};
+            m_aDataSource = new Item[]
+            {
+                new Item(1, "aaaa"),
+                new Item(2, "bbbb"),
+                new Item(3, "cccc"),
+                new Item(4, "dddd")
+            };
         }
 
         /// <summary>
@@ -685,8 +704,8 @@ namespace GHTTests
 
             m_dtDataSource.Columns.Add(l_dcId);
             m_dtDataSource.Columns.Add(l_dcDescription);
-            
-            for (int i=0; i<m_aDataSource.Length; i++)
+
+            for (int i = 0; i < m_aDataSource.Length; i++)
             {
                 DataRow l_drCurrent = m_dtDataSource.NewRow();
                 l_drCurrent["Id"] = m_aDataSource[i].Id;
@@ -694,7 +713,7 @@ namespace GHTTests
                 m_dtDataSource.Rows.Add(l_drCurrent);
             }
         }
-        
+
         /// <summary>
         /// Sets a unique unified id to the tested control based on the count of controls produced by this base.
         /// </summary>
@@ -719,9 +738,8 @@ namespace GHTTests
         public class Item
         {
             #region "Construction"
-            public Item() : this(0, String.Empty)
-            {
-            }
+            public Item()
+                : this(0, String.Empty) { }
 
             public Item(int a_id, string a_description)
             {
@@ -736,28 +754,16 @@ namespace GHTTests
             #endregion
 
             #region "Properties"
-            public int Id 
+            public int Id
             {
-                get
-                {
-                    return m_id;
-                }
-                set
-                {
-                    m_id = value;
-                }
+                get { return m_id; }
+                set { m_id = value; }
             }
 
             public string Description
             {
-                get
-                {
-                    return m_description;
-                }
-                set
-                {
-                    m_description = value;
-                }
+                get { return m_description; }
+                set { m_description = value; }
             }
 
             #endregion
@@ -768,9 +774,9 @@ namespace GHTTests
                 return this.Id + " " + this.Description;
             }
 
-#endregion
+            #endregion
         }
-    
+
         /// <summary>
         /// The templte used by repeater to render its items.
         /// </summary>
@@ -784,7 +790,7 @@ namespace GHTTests
             /// <param name="a_container">The controls to add the templated item to.</param>
             public void InstantiateIn(Control a_container)
             {
-                //Header labels:                
+                //Header labels:
                 //~~~~~~~~~~~
                 Label l_lIdHeader = new Label();
                 l_lIdHeader.Text = "ID: ";
@@ -832,7 +838,9 @@ namespace GHTTests
             {
                 Label l_lDescriptionData = (Label)sender;
                 RepeaterItem l_riContainer = (RepeaterItem)l_lDescriptionData.NamingContainer;
-                l_lDescriptionData.Text = (DataBinder.Eval(l_riContainer.DataItem, "Description")).ToString();
+                l_lDescriptionData.Text = (
+                    DataBinder.Eval(l_riContainer.DataItem, "Description")
+                ).ToString();
             }
         }
 
@@ -849,7 +857,7 @@ namespace GHTTests
             /// <param name="a_container">The controls to add the templated item to.</param>
             public void InstantiateIn(Control a_container)
             {
-                //Header labels:                
+                //Header labels:
                 //~~~~~~~~~~~
                 Label l_lIdHeader = new Label();
                 l_lIdHeader.Text = "ID: ";
@@ -897,9 +905,10 @@ namespace GHTTests
             {
                 Label l_lDescriptionData = (Label)sender;
                 DataListItem l_dliContainer = (DataListItem)l_lDescriptionData.NamingContainer;
-                l_lDescriptionData.Text = (DataBinder.Eval(l_dliContainer.DataItem, "Description")).ToString();
+                l_lDescriptionData.Text = (
+                    DataBinder.Eval(l_dliContainer.DataItem, "Description")
+                ).ToString();
             }
         }
-
     }
 }

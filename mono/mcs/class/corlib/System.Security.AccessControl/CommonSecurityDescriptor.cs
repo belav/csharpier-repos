@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,205 +42,244 @@ namespace System.Security.AccessControl
         SecurityIdentifier group;
         SystemAcl system_acl;
         DiscretionaryAcl discretionary_acl;
-        
-        public CommonSecurityDescriptor (bool isContainer, bool isDS, RawSecurityDescriptor rawSecurityDescriptor)
+
+        public CommonSecurityDescriptor(
+            bool isContainer,
+            bool isDS,
+            RawSecurityDescriptor rawSecurityDescriptor
+        )
         {
-            Init (isContainer, isDS, rawSecurityDescriptor);
+            Init(isContainer, isDS, rawSecurityDescriptor);
         }
-        
-        public CommonSecurityDescriptor (bool isContainer, bool isDS, string sddlForm)
+
+        public CommonSecurityDescriptor(bool isContainer, bool isDS, string sddlForm)
         {
-            Init (isContainer, isDS, new RawSecurityDescriptor (sddlForm));
+            Init(isContainer, isDS, new RawSecurityDescriptor(sddlForm));
         }
-        
-        public CommonSecurityDescriptor (bool isContainer, bool isDS, byte[] binaryForm, int offset)
+
+        public CommonSecurityDescriptor(bool isContainer, bool isDS, byte[] binaryForm, int offset)
         {
-            Init (isContainer, isDS, new RawSecurityDescriptor (binaryForm, offset));
+            Init(isContainer, isDS, new RawSecurityDescriptor(binaryForm, offset));
         }
-        
-        public CommonSecurityDescriptor (bool isContainer, bool isDS,
-                         ControlFlags flags,
-                         SecurityIdentifier owner,
-                         SecurityIdentifier group,
-                         SystemAcl systemAcl,
-                         DiscretionaryAcl discretionaryAcl)
+
+        public CommonSecurityDescriptor(
+            bool isContainer,
+            bool isDS,
+            ControlFlags flags,
+            SecurityIdentifier owner,
+            SecurityIdentifier group,
+            SystemAcl systemAcl,
+            DiscretionaryAcl discretionaryAcl
+        )
         {
-            Init (isContainer, isDS, flags, owner, group, systemAcl, discretionaryAcl);
+            Init(isContainer, isDS, flags, owner, group, systemAcl, discretionaryAcl);
         }
-        
-        void Init (bool isContainer, bool isDS, RawSecurityDescriptor rawSecurityDescriptor)
+
+        void Init(bool isContainer, bool isDS, RawSecurityDescriptor rawSecurityDescriptor)
         {
             if (null == rawSecurityDescriptor)
-                throw new ArgumentNullException ("rawSecurityDescriptor");
-                
+                throw new ArgumentNullException("rawSecurityDescriptor");
+
             SystemAcl sacl = null;
             if (null != rawSecurityDescriptor.SystemAcl)
-                sacl = new SystemAcl (isContainer, isDS, rawSecurityDescriptor.SystemAcl);
-                
+                sacl = new SystemAcl(isContainer, isDS, rawSecurityDescriptor.SystemAcl);
+
             DiscretionaryAcl dacl = null;
             if (null != rawSecurityDescriptor.DiscretionaryAcl)
-                dacl = new DiscretionaryAcl (isContainer, isDS, rawSecurityDescriptor.DiscretionaryAcl);
-                
-            Init (isContainer, isDS,
-                  rawSecurityDescriptor.ControlFlags,
-                  rawSecurityDescriptor.Owner,
-                  rawSecurityDescriptor.Group,
-                  sacl, dacl);
+                dacl = new DiscretionaryAcl(
+                    isContainer,
+                    isDS,
+                    rawSecurityDescriptor.DiscretionaryAcl
+                );
+
+            Init(
+                isContainer,
+                isDS,
+                rawSecurityDescriptor.ControlFlags,
+                rawSecurityDescriptor.Owner,
+                rawSecurityDescriptor.Group,
+                sacl,
+                dacl
+            );
         }
-        
-        void Init (bool isContainer, bool isDS,
-               ControlFlags flags,
-               SecurityIdentifier owner,
-               SecurityIdentifier group,
-               SystemAcl systemAcl,
-               DiscretionaryAcl discretionaryAcl)
+
+        void Init(
+            bool isContainer,
+            bool isDS,
+            ControlFlags flags,
+            SecurityIdentifier owner,
+            SecurityIdentifier group,
+            SystemAcl systemAcl,
+            DiscretionaryAcl discretionaryAcl
+        )
         {
             this.flags = flags & ~ControlFlags.SystemAclPresent;
             this.is_container = isContainer;
             this.is_ds = isDS;
-            
+
             Owner = owner;
             Group = group;
             SystemAcl = systemAcl;
             DiscretionaryAcl = discretionaryAcl;
         }
-        
-        public override ControlFlags ControlFlags {
-            get {
+
+        public override ControlFlags ControlFlags
+        {
+            get
+            {
                 ControlFlags realFlags = flags;
-                
+
                 realFlags |= ControlFlags.DiscretionaryAclPresent;
                 realFlags |= ControlFlags.SelfRelative;
                 if (SystemAcl != null)
                     realFlags |= ControlFlags.SystemAclPresent;
-                    
+
                 return realFlags;
             }
         }
-        
-        public DiscretionaryAcl DiscretionaryAcl {
+
+        public DiscretionaryAcl DiscretionaryAcl
+        {
             get { return discretionary_acl; }
-            set {
-                if (value == null) {
-                    value = new DiscretionaryAcl (IsContainer, IsDS, 1);
-                    value.AddAccess (AccessControlType.Allow, new SecurityIdentifier ("WD"), -1,
-                            IsContainer ? InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit
-                                    : InheritanceFlags.None, PropagationFlags.None);
+            set
+            {
+                if (value == null)
+                {
+                    value = new DiscretionaryAcl(IsContainer, IsDS, 1);
+                    value.AddAccess(
+                        AccessControlType.Allow,
+                        new SecurityIdentifier("WD"),
+                        -1,
+                        IsContainer
+                            ? InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit
+                            : InheritanceFlags.None,
+                        PropagationFlags.None
+                    );
                     value.IsAefa = true;
                 }
-                
-                CheckAclConsistency (value);
+
+                CheckAclConsistency(value);
                 discretionary_acl = value;
             }
         }
-        
-        internal override GenericAcl InternalDacl {
+
+        internal override GenericAcl InternalDacl
+        {
             get { return DiscretionaryAcl; }
         }
-        
-        public override SecurityIdentifier Group {
-            get { return  group; }
+
+        public override SecurityIdentifier Group
+        {
+            get { return group; }
             set { group = value; }
         }
 
-        public bool IsContainer {
+        public bool IsContainer
+        {
             get { return is_container; }
         }
-        
-        public bool IsDiscretionaryAclCanonical {
+
+        public bool IsDiscretionaryAclCanonical
+        {
             get { return DiscretionaryAcl.IsCanonical; }
         }
-        
-        public bool IsDS {
+
+        public bool IsDS
+        {
             get { return is_ds; }
         }
-        
-        public bool IsSystemAclCanonical {
+
+        public bool IsSystemAclCanonical
+        {
             get { return SystemAcl == null || SystemAcl.IsCanonical; }
         }
-        
-        public override SecurityIdentifier Owner {
-            get { return  owner; }
+
+        public override SecurityIdentifier Owner
+        {
+            get { return owner; }
             set { owner = value; }
         }
-        
-        public SystemAcl SystemAcl {
-            get { return system_acl;  }
-            set {
+
+        public SystemAcl SystemAcl
+        {
+            get { return system_acl; }
+            set
+            {
                 if (value != null)
-                    CheckAclConsistency (value);
-                    
+                    CheckAclConsistency(value);
+
                 system_acl = value;
             }
         }
-        
-        internal override GenericAcl InternalSacl {
+
+        internal override GenericAcl InternalSacl
+        {
             get { return SystemAcl; }
         }
 
-        public void PurgeAccessControl (SecurityIdentifier sid)
+        public void PurgeAccessControl(SecurityIdentifier sid)
         {
-            DiscretionaryAcl.Purge (sid);
+            DiscretionaryAcl.Purge(sid);
         }
-        
-        public void PurgeAudit (SecurityIdentifier sid)
+
+        public void PurgeAudit(SecurityIdentifier sid)
         {
             if (SystemAcl != null)
-                SystemAcl.Purge (sid);
+                SystemAcl.Purge(sid);
         }
-        
-        public void SetDiscretionaryAclProtection (bool isProtected,
-                               bool preserveInheritance)
+
+        public void SetDiscretionaryAclProtection(bool isProtected, bool preserveInheritance)
         {
             DiscretionaryAcl.IsAefa = false;
-            
-            if (!isProtected) {
+
+            if (!isProtected)
+            {
                 flags &= ~ControlFlags.DiscretionaryAclProtected;
                 return;
             }
-            
+
             flags |= ControlFlags.DiscretionaryAclProtected;
             if (!preserveInheritance)
-                DiscretionaryAcl.RemoveInheritedAces ();
+                DiscretionaryAcl.RemoveInheritedAces();
         }
-        
-        public void SetSystemAclProtection (bool isProtected,
-                            bool preserveInheritance)
+
+        public void SetSystemAclProtection(bool isProtected, bool preserveInheritance)
         {
-            if (!isProtected) {
+            if (!isProtected)
+            {
                 flags &= ~ControlFlags.SystemAclProtected;
                 return;
             }
-            
+
             flags |= ControlFlags.SystemAclProtected;
             if (!preserveInheritance && SystemAcl != null)
-                SystemAcl.RemoveInheritedAces ();
+                SystemAcl.RemoveInheritedAces();
         }
 
-        public void AddDiscretionaryAcl (byte revision, int trusted)
+        public void AddDiscretionaryAcl(byte revision, int trusted)
         {
-            DiscretionaryAcl = new DiscretionaryAcl (IsContainer, IsDS, revision, trusted);
+            DiscretionaryAcl = new DiscretionaryAcl(IsContainer, IsDS, revision, trusted);
             flags |= ControlFlags.DiscretionaryAclPresent;
         }
 
         public void AddSystemAcl(byte revision, int trusted)
         {
-            SystemAcl = new SystemAcl (IsContainer, IsDS, revision, trusted);
+            SystemAcl = new SystemAcl(IsContainer, IsDS, revision, trusted);
             flags |= ControlFlags.SystemAclPresent;
         }
 
-        void CheckAclConsistency (CommonAcl acl)
+        void CheckAclConsistency(CommonAcl acl)
         {
             if (IsContainer != acl.IsContainer)
-                throw new ArgumentException ("IsContainer must match between descriptor and ACL.");
-            
+                throw new ArgumentException("IsContainer must match between descriptor and ACL.");
+
             if (IsDS != acl.IsDS)
-                throw new ArgumentException ("IsDS must match between descriptor and ACL.");
+                throw new ArgumentException("IsDS must match between descriptor and ACL.");
         }
 
-        internal override bool DaclIsUnmodifiedAefa {
+        internal override bool DaclIsUnmodifiedAefa
+        {
             get { return DiscretionaryAcl.IsAefa; }
         }
     }
 }
-

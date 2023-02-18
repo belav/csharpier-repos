@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,13 +28,12 @@
 
 using System.ComponentModel;
 
-namespace System.Web.UI.WebControls {
-    [ToolboxItem ("")]
-    public class RepeaterItem : Control, INamingContainer
-        , IDataItemContainer
+namespace System.Web.UI.WebControls
+{
+    [ToolboxItem("")]
+    public class RepeaterItem : Control, INamingContainer, IDataItemContainer
     {
-    
-        public RepeaterItem (int itemIndex, ListItemType itemType)
+        public RepeaterItem(int itemIndex, ListItemType itemType)
         {
             idx = itemIndex;
             type = itemType;
@@ -46,50 +45,46 @@ namespace System.Web.UI.WebControls {
         // Command event of Buttons, LinkButtons, and ImageButtons within the
         // controls. Since the button's Command event calls RaiseBubbleEvent(), this
         // percolates the event up to the button's parent.
-        protected override bool OnBubbleEvent (object source, EventArgs e)
+        protected override bool OnBubbleEvent(object source, EventArgs e)
         {
             CommandEventArgs ce = e as CommandEventArgs;
-            if (ce != null) {
-                base.RaiseBubbleEvent (this, new RepeaterCommandEventArgs (this, source, ce));
+            if (ce != null)
+            {
+                base.RaiseBubbleEvent(this, new RepeaterCommandEventArgs(this, source, ce));
                 return true;
             }
 
             return false;
         }
-    
-        public virtual object DataItem {
-            get {
-                return data_item;
-            }
-            set {
-                data_item = value;
-            }
+
+        public virtual object DataItem
+        {
+            get { return data_item; }
+            set { data_item = value; }
         }
-    
-        public virtual int ItemIndex {
-            get {
-                return idx;
-            }
+
+        public virtual int ItemIndex
+        {
+            get { return idx; }
         }
-    
-        public virtual ListItemType ItemType {
-            get {
-                return type;
-            }
+
+        public virtual ListItemType ItemType
+        {
+            get { return type; }
         }
 
         object data_item;
         int idx;
         ListItemType type;
 
-
-        int IDataItemContainer.DataItemIndex {
+        int IDataItemContainer.DataItemIndex
+        {
             get { return ItemIndex; }
         }
 
-        int IDataItemContainer.DisplayIndex {
+        int IDataItemContainer.DisplayIndex
+        {
             get { return ItemIndex; }
         }
-
     }
 }

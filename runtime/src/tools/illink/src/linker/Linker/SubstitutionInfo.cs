@@ -13,32 +13,32 @@ namespace Mono.Linker
         public Dictionary<FieldDefinition, object?> FieldValues { get; }
         public HashSet<FieldDefinition> FieldInit { get; }
 
-        public SubstitutionInfo ()
+        public SubstitutionInfo()
         {
-            MethodActions = new Dictionary<MethodDefinition, MethodAction> ();
-            MethodStubValues = new Dictionary<MethodDefinition, object?> ();
-            FieldValues = new Dictionary<FieldDefinition, object?> ();
-            FieldInit = new HashSet<FieldDefinition> ();
+            MethodActions = new Dictionary<MethodDefinition, MethodAction>();
+            MethodStubValues = new Dictionary<MethodDefinition, object?>();
+            FieldValues = new Dictionary<FieldDefinition, object?>();
+            FieldInit = new HashSet<FieldDefinition>();
         }
 
-        public void SetMethodAction (MethodDefinition method, MethodAction action)
+        public void SetMethodAction(MethodDefinition method, MethodAction action)
         {
             MethodActions[method] = action;
         }
 
-        public void SetMethodStubValue (MethodDefinition method, object? value)
+        public void SetMethodStubValue(MethodDefinition method, object? value)
         {
             MethodStubValues[method] = value;
         }
 
-        public void SetFieldValue (FieldDefinition field, object? value)
+        public void SetFieldValue(FieldDefinition field, object? value)
         {
             FieldValues[field] = value;
         }
 
-        public void SetFieldInit (FieldDefinition field)
+        public void SetFieldInit(FieldDefinition field)
         {
-            FieldInit.Add (field);
+            FieldInit.Add(field);
         }
     }
 }

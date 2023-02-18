@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,111 +39,122 @@ using System.ServiceModel.Configuration;
 
 namespace System.ServiceModel
 {
-    public class BasicHttpsBinding : HttpBindingBase,
-        IBindingRuntimePreferences
+    public class BasicHttpsBinding : HttpBindingBase, IBindingRuntimePreferences
     {
         WSMessageEncoding message_encoding = WSMessageEncoding.Text;
         BasicHttpsSecurity security;
 
-        public BasicHttpsBinding ()
-            : this (BasicHttpsSecurityMode.Transport)
-        {
-        }
-        
+        public BasicHttpsBinding()
+            : this(BasicHttpsSecurityMode.Transport) { }
+
 #if !MOBILE && !XAMMAC_4_5
-        public BasicHttpsBinding (string configurationName)
-            : this ()
+        public BasicHttpsBinding(string configurationName)
+            : this()
         {
             BindingsSection bindingsSection = ConfigUtil.BindingsSection;
-            BasicHttpsBindingElement el = 
-                bindingsSection.BasicHttpsBinding.Bindings [configurationName];
+            BasicHttpsBindingElement el = bindingsSection.BasicHttpsBinding.Bindings[
+                configurationName
+            ];
 
-            el.ApplyConfiguration (this);
+            el.ApplyConfiguration(this);
         }
 #endif
 
-        public BasicHttpsBinding (
-            BasicHttpsSecurityMode securityMode)
+        public BasicHttpsBinding(BasicHttpsSecurityMode securityMode)
         {
-            security = new BasicHttpsSecurity (securityMode);
+            security = new BasicHttpsSecurity(securityMode);
         }
 
-        public WSMessageEncoding MessageEncoding {
+        public WSMessageEncoding MessageEncoding
+        {
             get { return message_encoding; }
             set { message_encoding = value; }
         }
 
-        public override string Scheme {
+        public override string Scheme
+        {
             get { return Uri.UriSchemeHttps; }
         }
 
-        public BasicHttpsSecurity Security {
+        public BasicHttpsSecurity Security
+        {
             get { return security; }
             set { security = value; }
         }
 
-        public override BindingElementCollection
-            CreateBindingElements ()
+        public override BindingElementCollection CreateBindingElements()
         {
-            var list = new List<BindingElement> ();
-            
-            var security = CreateSecurityBindingElement ();
+            var list = new List<BindingElement>();
+
+            var security = CreateSecurityBindingElement();
             if (security != null)
-                list.Add (security);
+                list.Add(security);
 
-            list.Add (BuildMessageEncodingBindingElement ());
-            list.Add (GetTransport ());
+            list.Add(BuildMessageEncodingBindingElement());
+            list.Add(GetTransport());
 
-            return new BindingElementCollection (list.ToArray ());
+            return new BindingElementCollection(list.ToArray());
         }
-        
-        SecurityBindingElement CreateSecurityBindingElement () 
+
+        SecurityBindingElement CreateSecurityBindingElement()
         {
             SecurityBindingElement element;
-            switch (Security.Mode) {
-            case BasicHttpsSecurityMode.TransportWithMessageCredential:
+            switch (Security.Mode)
+            {
+                case BasicHttpsSecurityMode.TransportWithMessageCredential:
 #if MOBILE || XAMMAC_4_5
 
-                throw new NotImplementedException ();
+                    throw new NotImplementedException();
 #else
-                if (Security.Message.ClientCredentialType != BasicHttpMessageCredentialType.Certificate)
-                    // FIXME: pass proper security token parameters.
-                    element = SecurityBindingElement.CreateCertificateOverTransportBindingElement ();
-                else
-                    element = new AsymmetricSecurityBindingElement ();
-                break;
+                    if (
+                        Security.Message.ClientCredentialType
+                        != BasicHttpMessageCredentialType.Certificate
+                    )
+                        // FIXME: pass proper security token parameters.
+                        element =
+                            SecurityBindingElement.CreateCertificateOverTransportBindingElement();
+                    else
+                        element = new AsymmetricSecurityBindingElement();
+                    break;
 #endif
-            default: 
-                return null;
+                default:
+                    return null;
             }
-            
+
 #if !MOBILE && !XAMMAC_4_5
-            element.SetKeyDerivation (false);
+            element.SetKeyDerivation(false);
             element.SecurityHeaderLayout = SecurityHeaderLayout.Lax;
 #endif
             return element;
         }
 
-        MessageEncodingBindingElement BuildMessageEncodingBindingElement ()
+        MessageEncodingBindingElement BuildMessageEncodingBindingElement()
         {
-            if (MessageEncoding == WSMessageEncoding.Text) {
-                TextMessageEncodingBindingElement tm = new TextMessageEncodingBindingElement (
-                    MessageVersion.CreateVersion (EnvelopeVersion, AddressingVersion.None), TextEncoding);
-                ReaderQuotas.CopyTo (tm.ReaderQuotas);
+            if (MessageEncoding == WSMessageEncoding.Text)
+            {
+                TextMessageEncodingBindingElement tm = new TextMessageEncodingBindingElement(
+                    MessageVersion.CreateVersion(EnvelopeVersion, AddressingVersion.None),
+                    TextEncoding
+                );
+                ReaderQuotas.CopyTo(tm.ReaderQuotas);
                 return tm;
-            } else {
+            }
+            else
+            {
 #if MOBILE || XAMMAC_4_5
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
 #else
-                return new MtomMessageEncodingBindingElement (
-                    MessageVersion.CreateVersion (EnvelopeVersion, AddressingVersion.None), TextEncoding);
+                return new MtomMessageEncodingBindingElement(
+                    MessageVersion.CreateVersion(EnvelopeVersion, AddressingVersion.None),
+                    TextEncoding
+                );
 #endif
             }
         }
 
-        TransportBindingElement GetTransport ()
+        TransportBindingElement GetTransport()
         {
-            HttpsTransportBindingElement h = new HttpsTransportBindingElement ();
+            HttpsTransportBindingElement h = new HttpsTransportBindingElement();
 
             h.AllowCookies = AllowCookies;
             h.BypassProxyOnLocal = BypassProxyOnLocal;
@@ -154,25 +165,26 @@ namespace System.ServiceModel
             h.ProxyAddress = ProxyAddress;
             h.UseDefaultWebProxy = UseDefaultWebProxy;
             h.TransferMode = TransferMode;
-            
+
             h.ExtendedProtectionPolicy = Security.Transport.ExtendedProtectionPolicy;
 
-            switch (Security.Transport.ClientCredentialType) {
-            case HttpClientCredentialType.Basic:
-                h.AuthenticationScheme = AuthenticationSchemes.Basic;
-                break;
-            case HttpClientCredentialType.Ntlm:
-                h.AuthenticationScheme = AuthenticationSchemes.Ntlm;
-                break;
-            case HttpClientCredentialType.Windows:
-                h.AuthenticationScheme = AuthenticationSchemes.Negotiate;
-                break;
-            case HttpClientCredentialType.Digest:
-                h.AuthenticationScheme = AuthenticationSchemes.Digest;
-                break;
-            case HttpClientCredentialType.Certificate:
-                h.RequireClientCertificate = true;
-                break;
+            switch (Security.Transport.ClientCredentialType)
+            {
+                case HttpClientCredentialType.Basic:
+                    h.AuthenticationScheme = AuthenticationSchemes.Basic;
+                    break;
+                case HttpClientCredentialType.Ntlm:
+                    h.AuthenticationScheme = AuthenticationSchemes.Ntlm;
+                    break;
+                case HttpClientCredentialType.Windows:
+                    h.AuthenticationScheme = AuthenticationSchemes.Negotiate;
+                    break;
+                case HttpClientCredentialType.Digest:
+                    h.AuthenticationScheme = AuthenticationSchemes.Digest;
+                    break;
+                case HttpClientCredentialType.Certificate:
+                    h.RequireClientCertificate = true;
+                    break;
             }
 
             return h;

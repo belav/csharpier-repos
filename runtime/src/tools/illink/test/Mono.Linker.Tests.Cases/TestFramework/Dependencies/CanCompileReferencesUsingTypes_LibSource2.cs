@@ -6,9 +6,7 @@ namespace Mono.Linker.Tests.Cases.TestFramework.Dependencies
         {
             public class Nested2
             {
-                public static void MethodFromNestedNested ()
-                {
-                }
+                public static void MethodFromNestedNested() { }
             }
         }
     }

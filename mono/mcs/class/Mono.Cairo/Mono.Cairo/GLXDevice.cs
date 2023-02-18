@@ -2,11 +2,11 @@
 // Mono.Cairo.Device.cs
 //
 // Authors:
-//            JP Bruyère (jp_bruyere@hotmail.com)
+//            JP Bruyï¿½re (jp_bruyere@hotmail.com)
 //
 // This is an OO wrapper API for the Cairo API
 //
-// Copyright (C) 2016 JP Bruyère
+// Copyright (C) 2016 JP Bruyï¿½re
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,17 +33,17 @@ namespace Cairo
 {
     public class GLXDevice : Device
     {
-        public GLXDevice (IntPtr dpy, IntPtr gl_ctx) : base (NativeMethods.cairo_glx_device_create (dpy, gl_ctx), true)
+        public GLXDevice(IntPtr dpy, IntPtr gl_ctx)
+            : base(NativeMethods.cairo_glx_device_create(dpy, gl_ctx), true) { }
+
+        public IntPtr Display
         {
+            get { return NativeMethods.cairo_glx_device_get_display(Handle); }
         }
 
-        public IntPtr Display {
-            get { return NativeMethods.cairo_glx_device_get_display (Handle); }
-        }
-
-        public IntPtr Context {
-            get { return NativeMethods.cairo_glx_device_get_context (Handle); }
+        public IntPtr Context
+        {
+            get { return NativeMethods.cairo_glx_device_get_context(Handle); }
         }
     }
 }
-

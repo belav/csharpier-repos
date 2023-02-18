@@ -13,9 +13,9 @@ namespace MonoTests.System.ServiceModel.Activation
 {
     class MyHostFactory : WebScriptServiceHostFactory
     {
-        public ServiceHost DoCreateServiceHost (Type type, params Uri [] baseAddresses)
+        public ServiceHost DoCreateServiceHost(Type type, params Uri[] baseAddresses)
         {
-            return CreateServiceHost (type, baseAddresses);
+            return CreateServiceHost(type, baseAddresses);
         }
     }
 
@@ -23,48 +23,56 @@ namespace MonoTests.System.ServiceModel.Activation
     public class WebScriptServiceHostFactoryTest
     {
         [Test]
-        public void CreateServiceHost ()
+        public void CreateServiceHost()
         {
-            var port = NetworkHelpers.FindFreePort ();
-            var f = new MyHostFactory ();
-            var host = f.DoCreateServiceHost (typeof (TestService), new Uri [] {new Uri ($"http://localhost:{port}")});
-            Assert.IsFalse (host is WebServiceHost, "#1");
-            host.Open ();
-            host.Close ();
+            var port = NetworkHelpers.FindFreePort();
+            var f = new MyHostFactory();
+            var host = f.DoCreateServiceHost(
+                typeof(TestService),
+                new Uri[] { new Uri($"http://localhost:{port}") }
+            );
+            Assert.IsFalse(host is WebServiceHost, "#1");
+            host.Open();
+            host.Close();
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void ResponseWrappedIsInvalid ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ResponseWrappedIsInvalid()
         {
-            var port = NetworkHelpers.FindFreePort ();
-            var f = new MyHostFactory ();
-            var host = f.DoCreateServiceHost (typeof (TestService2), new Uri [] {new Uri ($"http://localhost:{port}")});
-            host.Open (); // should raise an error here.
+            var port = NetworkHelpers.FindFreePort();
+            var f = new MyHostFactory();
+            var host = f.DoCreateServiceHost(
+                typeof(TestService2),
+                new Uri[] { new Uri($"http://localhost:{port}") }
+            );
+            host.Open(); // should raise an error here.
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void MultipleContract ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void MultipleContract()
         {
-            var port = NetworkHelpers.FindFreePort ();
-            var f = new MyHostFactory ();
-            var host = f.DoCreateServiceHost (typeof (TestServiceMultiple), new Uri [] {new Uri ($"http://localhost:{port}")});
-            host.Open ();
+            var port = NetworkHelpers.FindFreePort();
+            var f = new MyHostFactory();
+            var host = f.DoCreateServiceHost(
+                typeof(TestServiceMultiple),
+                new Uri[] { new Uri($"http://localhost:{port}") }
+            );
+            host.Open();
         }
-
     }
 
     [ServiceContract]
     public interface ITestService
     {
         [OperationContract]
-        string DoWork (string s1, string s2);
+        string DoWork(string s1, string s2);
     }
 
     public class TestService : ITestService
     {
-        public string DoWork (string s1, string s2)
+        public string DoWork(string s1, string s2)
         {
             return s1 + s2;
         }
@@ -74,13 +82,13 @@ namespace MonoTests.System.ServiceModel.Activation
     public interface ITestService2
     {
         [OperationContract]
-        [WebGet (BodyStyle = WebMessageBodyStyle.WrappedResponse)]
-        string DoWork (string s1, string s2);
+        [WebGet(BodyStyle = WebMessageBodyStyle.WrappedResponse)]
+        string DoWork(string s1, string s2);
     }
 
     public class TestService2 : ITestService2
     {
-        public string DoWork (string s1, string s2)
+        public string DoWork(string s1, string s2)
         {
             return s1 + s2;
         }
@@ -88,7 +96,7 @@ namespace MonoTests.System.ServiceModel.Activation
 
     public class TestServiceMultiple : ITestService, ITestService2
     {
-        public string DoWork (string s1, string s2)
+        public string DoWork(string s1, string s2)
         {
             return s1 + s2;
         }

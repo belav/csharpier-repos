@@ -3,20 +3,18 @@
 
 using System;
 
-public class A
-{
-}
+public class A { }
 
 namespace N1
 {
     public static class X
     {
-        public static string Extension (this A a, long x)
+        public static string Extension(this A a, long x)
         {
             return null;
         }
-        
-        public static string Extension (this A a, int x)
+
+        public static string Extension(this A a, int x)
         {
             return null;
         }
@@ -26,13 +24,13 @@ namespace N1
 namespace N2
 {
     using N1;
-    
+
     public class Program
     {
-        public static int Main ()
+        public static int Main()
         {
             A a = null;
-            const string n = nameof (a.Extension);
+            const string n = nameof(a.Extension);
             if (n != "Extension")
                 return 1;
 

@@ -4,9 +4,7 @@ namespace System.CommandLine.Binding;
 /// Supports binding of custom types.
 /// </summary>
 /// <typeparam name="T">The type to be bound.</typeparam>
-public abstract class BinderBase<T> :
-    IValueDescriptor<T>,
-    IValueSource
+public abstract class BinderBase<T> : IValueDescriptor<T>, IValueSource
 {
     /// <summary>
     /// Gets a value from the binding context.
@@ -23,7 +21,11 @@ public abstract class BinderBase<T> :
 
     object? IValueDescriptor.GetDefaultValue() => default(T);
 
-    bool IValueSource.TryGetValue(IValueDescriptor valueDescriptor, BindingContext bindingContext, out object? boundValue)
+    bool IValueSource.TryGetValue(
+        IValueDescriptor valueDescriptor,
+        BindingContext bindingContext,
+        out object? boundValue
+    )
     {
         boundValue = GetBoundValue(bindingContext);
         return true;

@@ -2,25 +2,25 @@ namespace System.Runtime.Remoting
 {
     public sealed class ObjectHandle : MarshalByRefObject
     {
-#region Keep this code, it is used by the runtime
+        #region Keep this code, it is used by the runtime
 #pragma warning disable 169, 649
         private object _wrapped;
 #pragma warning restore 169, 649
-#endregion
+        #endregion
 
-        public ObjectHandle (object o)
+        public ObjectHandle(object o)
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public override object InitializeLifetimeService ()
+        public override object InitializeLifetimeService()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
 
-        public object Unwrap ()
+        public object Unwrap()
         {
-            throw new PlatformNotSupportedException ();
+            throw new PlatformNotSupportedException();
         }
     }
 }

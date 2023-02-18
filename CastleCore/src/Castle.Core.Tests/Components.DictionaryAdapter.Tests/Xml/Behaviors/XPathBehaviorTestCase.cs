@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,18 +35,17 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void Get_Existing()
             {
-                var foo = Create<IFoo>
-                (
+                var foo = Create<IFoo>(
                     "<Foo>",
-                        "<A>",
-                            "<B>b</B>",
-                            "<C H='value'>",
-                                "<D E='?'>",
-                                    "<F>f</F>",
-                                "</D>",
-                                "<G/>",
-                            "</C>",
-                        "</A>",
+                    "<A>",
+                    "<B>b</B>",
+                    "<C H='value'>",
+                    "<D E='?'>",
+                    "<F>f</F>",
+                    "</D>",
+                    "<G/>",
+                    "</C>",
+                    "</A>",
                     "</Foo>"
                 );
 
@@ -69,20 +68,22 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 foo.Value = "value";
 
-                CustomAssert.AreXmlEquivalent(string.Concat
-                (
-                    "<Foo>",
+                CustomAssert.AreXmlEquivalent(
+                    string.Concat(
+                        "<Foo>",
                         "<A>",
-                            "<C H='value'>",
-                                "<D E=''>",
-                                    "<F>f</F>",
-                                "</D>",
-                                "<G/>",
-                            "</C>",
-                            "<B>b</B>",
+                        "<C H='value'>",
+                        "<D E=''>",
+                        "<F>f</F>",
+                        "</D>",
+                        "<G/>",
+                        "</C>",
+                        "<B>b</B>",
                         "</A>",
-                    "</Foo>"
-                ), xml);
+                        "</Foo>"
+                    ),
+                    xml
+                );
                 Assert.AreEqual("value", foo.Value);
             }
         }
@@ -99,14 +100,13 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void Get_Existing()
             {
-                var foo = Create<IFoo>
-                (
+                var foo = Create<IFoo>(
                     "<Foo>",
-                        "<A D='value'>",
-                            "<B>",
-                                "<C>2</C>",
-                            "</B>",
-                        "</A>",
+                    "<A D='value'>",
+                    "<B>",
+                    "<C>2</C>",
+                    "</B>",
+                    "</A>",
                     "</Foo>"
                 );
 
@@ -129,16 +129,18 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 foo.Value = "value";
 
-                CustomAssert.AreXmlEquivalent(string.Concat
-                (
-                    "<Foo>",
+                CustomAssert.AreXmlEquivalent(
+                    string.Concat(
+                        "<Foo>",
                         "<A D='value'>",
-                            "<B>",
-                                "<C>2</C>",
-                            "</B>",
+                        "<B>",
+                        "<C>2</C>",
+                        "</B>",
                         "</A>",
-                    "</Foo>"
-                ), xml);
+                        "</Foo>"
+                    ),
+                    xml
+                );
                 Assert.AreEqual("value", foo.Value);
             }
         }
@@ -217,8 +219,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 var foo = Create<IFoo>("<Foo/>");
 
-                Assert.Throws<XPathException>(() => foo.StringValue  = "a");
-                Assert.Throws<XPathException>(() => foo.NumberValue  = 1);
+                Assert.Throws<XPathException>(() => foo.StringValue = "a");
+                Assert.Throws<XPathException>(() => foo.NumberValue = 1);
                 Assert.Throws<XPathException>(() => foo.BooleanValue = true);
             }
 
@@ -227,8 +229,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 var foo = Create<IFoo>("<Foo> <A>a</A> </Foo>");
 
-                Assert.False(XmlAdapter.For(foo).HasProperty("StringValue",  foo));
-                Assert.False(XmlAdapter.For(foo).HasProperty("NumberValue",  foo));
+                Assert.False(XmlAdapter.For(foo).HasProperty("StringValue", foo));
+                Assert.False(XmlAdapter.For(foo).HasProperty("NumberValue", foo));
                 Assert.False(XmlAdapter.For(foo).HasProperty("BooleanValue", foo));
             }
         }
@@ -280,7 +282,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 Assert.IsNull(bar.Value);
 
                 bar.Value = "value";
-                CustomAssert.AreXmlEquivalent("<Foo> <A> <X/> <B> <C>value</C> </B> </A> </Foo>", xml);
+                CustomAssert.AreXmlEquivalent(
+                    "<Foo> <A> <X/> <B> <C>value</C> </B> </A> </Foo>",
+                    xml
+                );
                 Assert.NotNull(bar);
                 Assert.AreSame(foo.Bar, bar);
                 Assert.AreEqual("value", bar.Value);
@@ -321,63 +326,52 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [Test]
             public void Delete_NotDoAnything()
             {
-                var xml = Xml
-                (
-                    "<Foo>",
-                        "<A>",
-                            "<B Id='1'> <C>value1</C> </B>",
-                        "</A>",
-                    "</Foo>"
-                );
+                var xml = Xml("<Foo>", "<A>", "<B Id='1'> <C>value1</C> </B>", "</A>", "</Foo>");
 
                 Create<IFoo>(xml).A = null;
 
-                CustomAssert.AreXmlEquivalent(string.Concat
-                (
-                    "<Foo>",
+                CustomAssert.AreXmlEquivalent(
+                    string.Concat(
+                        "<Foo>",
                         "<A>",
-                            "<B Id='1'> <C>value1</C> </B>",
+                        "<B Id='1'> <C>value1</C> </B>",
                         "</A>",
-                    "</Foo>"
-                ), xml);
+                        "</Foo>"
+                    ),
+                    xml
+                );
             }
 
             [Test]
             public void Delete_Partial()
             {
-                var xml = Xml
-                (
+                var xml = Xml(
                     "<Foo>",
-                        "<A>",
-                            "<B Id='1'> <C>value1</C> </B>",
-                            "<B Id='2'> <C>value2</C> </B>",
-                        "</A>",
+                    "<A>",
+                    "<B Id='1'> <C>value1</C> </B>",
+                    "<B Id='2'> <C>value2</C> </B>",
+                    "</A>",
                     "</Foo>"
                 );
 
                 Create<IFoo>(xml).A = null;
 
-                CustomAssert.AreXmlEquivalent(string.Concat
-                (
-                    "<Foo>",
+                CustomAssert.AreXmlEquivalent(
+                    string.Concat(
+                        "<Foo>",
                         "<A>",
-                            "<B Id='1'> <C>value1</C> </B>",
+                        "<B Id='1'> <C>value1</C> </B>",
                         "</A>",
-                    "</Foo>"
-                ), xml);
+                        "</Foo>"
+                    ),
+                    xml
+                );
             }
 
             [Test]
             public void Delete_Whole()
             {
-                var xml = Xml
-                (
-                    "<Foo>",
-                        "<A>",
-                            "<B Id='2'> <C>value2</C> </B>",
-                        "</A>",
-                    "</Foo>"
-                );
+                var xml = Xml("<Foo>", "<A>", "<B Id='2'> <C>value2</C> </B>", "</A>", "</Foo>");
 
                 Create<IFoo>(xml).A = null;
 
@@ -459,7 +453,6 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                     foo.A = Create<IBar>();
                 });
             }
-
         }
 
         [TestFixture]
@@ -569,8 +562,14 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         public class WithMockVariableAttribute : XPathVariableAttribute
         {
-            public override XmlName Name { get { return new XmlName("v", "p"); } }
-            public override XPathResultType VariableType { get { return XPathResultType.String; } }
+            public override XmlName Name
+            {
+                get { return new XmlName("v", "p"); }
+            }
+            public override XPathResultType VariableType
+            {
+                get { return XPathResultType.String; }
+            }
 
             public override object Evaluate(XsltContext context)
             {
@@ -580,9 +579,18 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         public class WithMockFunctionAttribute : XPathFunctionAttribute
         {
-            public override XmlName Name { get { return new XmlName("f", "p"); } }
-            public override XPathResultType ReturnType { get { return XPathResultType.String; } }
-            public override XPathResultType[] ArgTypes { get { return new[] { XPathResultType.String }; } }
+            public override XmlName Name
+            {
+                get { return new XmlName("f", "p"); }
+            }
+            public override XPathResultType ReturnType
+            {
+                get { return XPathResultType.String; }
+            }
+            public override XPathResultType[] ArgTypes
+            {
+                get { return new[] { XPathResultType.String }; }
+            }
 
             public override object Invoke(XsltContext context, object[] args, XPathNavigator node)
             {
@@ -597,12 +605,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             protected void TestGet<T>(Func<T, string> getter)
             {
-                var xml = Xml
-                (
+                var xml = Xml(
                     "<Foo>",
-                        "<A B='other'>wrong A</A>",
-                        "<A B='value'>correct</A>",
-                        "<A B='other'>wrong B</A>",
+                    "<A B='other'>wrong A</A>",
+                    "<A B='value'>correct</A>",
+                    "<A B='other'>wrong B</A>",
                     "</Foo>"
                 );
                 var obj = Create<T>(xml);
@@ -619,12 +626,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 setter(obj, "correct");
 
-                CustomAssert.AreXmlEquivalent(string.Concat
-                (
-                    "<Foo>",
-                        "<A B='value'>correct</A>",
-                    "</Foo>"
-                ), xml);
+                CustomAssert.AreXmlEquivalent(
+                    string.Concat("<Foo>", "<A B='value'>correct</A>", "</Foo>"),
+                    xml
+                );
             }
         }
     }

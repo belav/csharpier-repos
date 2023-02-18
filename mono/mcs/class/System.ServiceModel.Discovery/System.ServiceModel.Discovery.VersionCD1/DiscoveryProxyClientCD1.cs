@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,40 +33,50 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
-    internal class DiscoveryProxyClientCD1 : ClientBase<IDiscoveryProxyContractCD1>, DiscoveryClient.IDiscoveryCommon
+    internal class DiscoveryProxyClientCD1
+        : ClientBase<IDiscoveryProxyContractCD1>,
+            DiscoveryClient.IDiscoveryCommon
     {
-        public DiscoveryProxyClientCD1 (ServiceEndpoint endpoint)
-            : base (endpoint)
+        public DiscoveryProxyClientCD1(ServiceEndpoint endpoint)
+            : base(endpoint) { }
+
+        public IAsyncResult BeginFind(FindCriteria criteria, AsyncCallback callback, object state)
         {
+            var req = new MessageContractsCD1.FindRequest()
+            {
+                Body = new FindCriteriaCD1(criteria)
+            };
+            return Channel.BeginFind(req, callback, state);
         }
 
-        public IAsyncResult BeginFind (FindCriteria criteria, AsyncCallback callback, object state)
+        public FindResponse EndFind(IAsyncResult result)
         {
-            var req = new MessageContractsCD1.FindRequest () { Body = new FindCriteriaCD1 (criteria) };
-            return Channel.BeginFind (req, callback, state);
-        }
-        
-        public FindResponse EndFind (IAsyncResult result)
-        {
-            var ir = Channel.EndFind (result);
-            var ret = new FindResponse ();
+            var ir = Channel.EndFind(result);
+            var ret = new FindResponse();
             foreach (var fr in ir.Body)
-                ret.Endpoints.Add (fr.ToEndpointDiscoveryMetadata ());
+                ret.Endpoints.Add(fr.ToEndpointDiscoveryMetadata());
             return ret;
         }
 
-        public IAsyncResult BeginResolve (ResolveCriteria criteria, AsyncCallback callback, object state)
+        public IAsyncResult BeginResolve(
+            ResolveCriteria criteria,
+            AsyncCallback callback,
+            object state
+        )
         {
-            var req = new MessageContractsCD1.ResolveRequest () { Body = new ResolveCriteriaCD1 (criteria) };
-            return Channel.BeginResolve (req, callback, state);
+            var req = new MessageContractsCD1.ResolveRequest()
+            {
+                Body = new ResolveCriteriaCD1(criteria)
+            };
+            return Channel.BeginResolve(req, callback, state);
         }
 
-        public ResolveResponse EndResolve (IAsyncResult result)
+        public ResolveResponse EndResolve(IAsyncResult result)
         {
-            var ir = Channel.EndResolve (result);
-            var metadata = ir.Body.ToEndpointDiscoveryMetadata ();
-            var sequence = ir.MessageSequence.ToDiscoveryMessageSequence ();
-            return new ResolveResponse (metadata, sequence);
+            var ir = Channel.EndResolve(result);
+            var metadata = ir.Body.ToEndpointDiscoveryMetadata();
+            var sequence = ir.MessageSequence.ToDiscoveryMessageSequence();
+            return new ResolveResponse(metadata, sequence);
         }
     }
 }

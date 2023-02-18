@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,65 +33,71 @@ using System.Xml.XPath;
 
 namespace Mono.MonoConfig
 {
-    public class ConfigBlockNodeHandler : IDocumentNodeHandler, IStorageConsumer, IConfigBlockContainer
+    public class ConfigBlockNodeHandler
+        : IDocumentNodeHandler,
+            IStorageConsumer,
+            IConfigBlockContainer
     {
         string name;
         Section requirements;
         string contents;
-        Dictionary <string, ConfigBlockBlock> storage;
-        
-        public void ReadConfiguration (XPathNavigator nav)
-        {
-            name = Helpers.GetRequiredNonEmptyAttribute (nav, "name");
-            
-            requirements = new Section ();
-            Helpers.BuildSectionTree (nav.Select ("requires/section[string-length(@name) > 0]"), requirements);
+        Dictionary<string, ConfigBlockBlock> storage;
 
-            XPathNodeIterator iter = nav.Select ("contents/text()");
-            StringBuilder sb = new StringBuilder ();
-            
-            while (iter.MoveNext ())
-                sb.Append (iter.Current.Value);
-            if (sb.Length > 0)
-                contents = sb.ToString ();
-        }
-        
-        public void StoreConfiguration ()
+        public void ReadConfiguration(XPathNavigator nav)
         {
-            AssertStorage ();
-            
-            ConfigBlockBlock block = new ConfigBlockBlock (name, requirements, contents);
-            if (storage.ContainsKey (name))
-                storage [name] = block; // allow for silent override
+            name = Helpers.GetRequiredNonEmptyAttribute(nav, "name");
+
+            requirements = new Section();
+            Helpers.BuildSectionTree(
+                nav.Select("requires/section[string-length(@name) > 0]"),
+                requirements
+            );
+
+            XPathNodeIterator iter = nav.Select("contents/text()");
+            StringBuilder sb = new StringBuilder();
+
+            while (iter.MoveNext())
+                sb.Append(iter.Current.Value);
+            if (sb.Length > 0)
+                contents = sb.ToString();
+        }
+
+        public void StoreConfiguration()
+        {
+            AssertStorage();
+
+            ConfigBlockBlock block = new ConfigBlockBlock(name, requirements, contents);
+            if (storage.ContainsKey(name))
+                storage[name] = block; // allow for silent override
             else
-                storage.Add (name, block);
+                storage.Add(name, block);
 
             // Prepare to handle more sections
-            requirements = new Section ();
+            requirements = new Section();
             contents = null;
         }
 
-        public void SetStorage (object storage)
+        public void SetStorage(object storage)
         {
-            this.storage = storage as Dictionary <string, ConfigBlockBlock>;
+            this.storage = storage as Dictionary<string, ConfigBlockBlock>;
             if (this.storage == null)
-                throw new ApplicationException ("Invalid storage type.");
+                throw new ApplicationException("Invalid storage type.");
         }
 
-        public ConfigBlockBlock FindConfigBlock (string name)
+        public ConfigBlockBlock FindConfigBlock(string name)
         {
-            AssertStorage ();
+            AssertStorage();
 
-            if (storage.ContainsKey (name))
-                return storage [name];
+            if (storage.ContainsKey(name))
+                return storage[name];
 
             return null;
         }
-        
-        void AssertStorage ()
+
+        void AssertStorage()
         {
             if (storage == null)
-                throw new ApplicationException ("No storage attached");
+                throw new ApplicationException("No storage attached");
         }
     }
 }

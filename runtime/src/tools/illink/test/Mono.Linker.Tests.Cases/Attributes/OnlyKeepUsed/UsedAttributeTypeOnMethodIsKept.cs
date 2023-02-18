@@ -4,33 +4,29 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
 {
-    [SetupLinkerArgument ("--used-attrs-only", "true")]
+    [SetupLinkerArgument("--used-attrs-only", "true")]
     class UsedAttributeTypeOnMethodIsKept
     {
-        static void Main ()
+        static void Main()
         {
-            new Bar ().Method ();
-            var tmp = new Bar ();
-            var str = typeof (FooAttribute).ToString ();
+            new Bar().Method();
+            var tmp = new Bar();
+            var str = typeof(FooAttribute).ToString();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class Bar
         {
             [Foo]
             [Kept]
-            [KeptAttributeAttribute (typeof (FooAttribute))]
-            public void Method ()
-            {
-            }
+            [KeptAttributeAttribute(typeof(FooAttribute))]
+            public void Method() { }
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (Attribute))]
-        class FooAttribute : Attribute
-        {
-        }
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(Attribute))]
+        class FooAttribute : Attribute { }
     }
 }

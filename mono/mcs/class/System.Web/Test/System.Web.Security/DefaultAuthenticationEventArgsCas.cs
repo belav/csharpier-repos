@@ -1,5 +1,5 @@
 //
-// DefaultAuthenticationEventArgsCas.cs 
+// DefaultAuthenticationEventArgsCas.cs
 //    - CAS unit tests for System.Web.Security.DefaultAuthenticationEventArgs
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,39 +35,43 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.Security;
 
-namespace MonoCasTests.System.Web.Security {
-
+namespace MonoCasTests.System.Web.Security
+{
     [TestFixture]
-    [Category ("CAS")]
-    public class DefaultAuthenticationEventArgsCas : AspNetHostingMinimal {
-
+    [Category("CAS")]
+    public class DefaultAuthenticationEventArgsCas : AspNetHostingMinimal
+    {
         private HttpContext context;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            context = new HttpContext (null);
+            context = new HttpContext(null);
         }
 
         [Test]
-        [PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-        public void Constructor_Deny_Unrestricted ()
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted()
         {
-            DefaultAuthenticationEventArgs daea = new DefaultAuthenticationEventArgs (context);
-            Assert.IsNotNull (daea.Context, "Context");
+            DefaultAuthenticationEventArgs daea = new DefaultAuthenticationEventArgs(context);
+            Assert.IsNotNull(daea.Context, "Context");
         }
 
         // LinkDemand
 
-        public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
         {
-            ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HttpContext) });
-            Assert.IsNotNull (ci, ".ctor(HttpContext)");
-            return ci.Invoke (new object[1] { context });
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(HttpContext) });
+            Assert.IsNotNull(ci, ".ctor(HttpContext)");
+            return ci.Invoke(new object[1] { context });
         }
 
-        public override Type Type {
-            get { return typeof (DefaultAuthenticationEventArgs); }
+        public override Type Type
+        {
+            get { return typeof(DefaultAuthenticationEventArgs); }
         }
     }
 }

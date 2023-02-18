@@ -28,14 +28,23 @@ namespace System.Workflow.ComponentModel.Serialization
         private int lineNumber = -1;
         private int columnNumber = -1;
 
-        public WorkflowMarkupSerializationException(string message, int lineNumber, int columnNumber)
+        public WorkflowMarkupSerializationException(
+            string message,
+            int lineNumber,
+            int columnNumber
+        )
             : base(message)
         {
             this.lineNumber = lineNumber;
             this.columnNumber = columnNumber;
         }
 
-        public WorkflowMarkupSerializationException(string message, Exception innerException, int lineNumber, int columnNumber)
+        public WorkflowMarkupSerializationException(
+            string message,
+            Exception innerException,
+            int lineNumber,
+            int columnNumber
+        )
             : base(message, innerException)
         {
             this.lineNumber = lineNumber;
@@ -43,21 +52,18 @@ namespace System.Workflow.ComponentModel.Serialization
         }
 
         public WorkflowMarkupSerializationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public WorkflowMarkupSerializationException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public WorkflowMarkupSerializationException()
-            : base()
-        {
-        }
+            : base() { }
 
-        protected WorkflowMarkupSerializationException(SerializationInfo info, StreamingContext context)
+        protected WorkflowMarkupSerializationException(
+            SerializationInfo info,
+            StreamingContext context
+        )
             : base(info, context)
         {
             if (info == null)
@@ -80,20 +86,13 @@ namespace System.Workflow.ComponentModel.Serialization
 
         public int LineNumber
         {
-            get
-            {
-                return this.lineNumber;
-            }
+            get { return this.lineNumber; }
         }
 
         public int LinePosition
         {
-            get
-            {
-                return this.columnNumber;
-            }
+            get { return this.columnNumber; }
         }
     }
     #endregion
 }
-

@@ -6,9 +6,8 @@ using System.Linq;
 
 public class C
 {
-    public static unsafe void Main ()
+    public static unsafe void Main()
     {
-        var e = from int* a in "aaa"
-                select a;
+        var e = from int* a in "aaa" select a;
     }
 }

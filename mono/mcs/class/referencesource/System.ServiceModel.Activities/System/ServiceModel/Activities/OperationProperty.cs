@@ -7,7 +7,7 @@ namespace System.ServiceModel.Activities
     using System;
     using System.Collections.Generic;
     using System.ServiceModel.Description;
-    
+
     class OperationProperty
     {
         HashSet<Receive> implementingReceives;

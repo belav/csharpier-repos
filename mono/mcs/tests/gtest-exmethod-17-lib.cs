@@ -6,10 +6,9 @@ namespace Testy
 {
     public static class TestExtensions
     {
-        public static string MyFormat (this Object junk,
-                          string fmt, params object [] args)
+        public static string MyFormat(this Object junk, string fmt, params object[] args)
         {
-            return String.Format (fmt, args);
+            return String.Format(fmt, args);
         }
     }
 }

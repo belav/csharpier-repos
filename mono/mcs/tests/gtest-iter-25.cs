@@ -4,15 +4,16 @@ namespace Test
 {
     public static class Program
     {
-        public static void Main ()
+        public static void Main()
         {
-            foreach (var a in Test ())
-                Test ();
+            foreach (var a in Test())
+                Test();
         }
 
-        public static IEnumerable<object> Test ()
+        public static IEnumerable<object> Test()
         {
-            lock (new object ()) {
+            lock (new object())
+            {
                 yield return null;
                 yield break;
             }

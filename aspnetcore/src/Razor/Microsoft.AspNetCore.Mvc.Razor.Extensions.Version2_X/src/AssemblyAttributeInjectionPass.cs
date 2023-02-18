@@ -10,10 +10,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
 public class AssemblyAttributeInjectionPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
-    private const string RazorViewAttribute = "global::Microsoft.AspNetCore.Mvc.Razor.Compilation.RazorViewAttribute";
-    private const string RazorPageAttribute = "global::Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.RazorPageAttribute";
+    private const string RazorViewAttribute =
+        "global::Microsoft.AspNetCore.Mvc.Razor.Compilation.RazorViewAttribute";
+    private const string RazorPageAttribute =
+        "global::Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.RazorPageAttribute";
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         if (documentNode.Options.DesignTime)
         {
@@ -41,18 +46,24 @@ public class AssemblyAttributeInjectionPass : IntermediateNodePassBase, IRazorOp
         //
         // If we can't sanitize the path, we'll just set it to null and let is blow up at runtime - we don't
         // want to create noise if this code has to run in some unanticipated scenario.
-        var escapedPath = MakeVerbatimStringLiteral(ConvertToViewEnginePath(codeDocument.Source.RelativePath));
+        var escapedPath = MakeVerbatimStringLiteral(
+            ConvertToViewEnginePath(codeDocument.Source.RelativePath)
+        );
 
         string attribute;
         if (documentNode.DocumentKind == MvcViewDocumentClassifierPass.MvcViewDocumentKind)
         {
-            attribute = $"[assembly:{RazorViewAttribute}({escapedPath}, typeof({generatedTypeName}))]";
+            attribute =
+                $"[assembly:{RazorViewAttribute}({escapedPath}, typeof({generatedTypeName}))]";
         }
-        else if (documentNode.DocumentKind == RazorPageDocumentClassifierPass.RazorPageDocumentKind &&
-            PageDirective.TryGetPageDirective(documentNode, out var pageDirective))
+        else if (
+            documentNode.DocumentKind == RazorPageDocumentClassifierPass.RazorPageDocumentKind
+            && PageDirective.TryGetPageDirective(documentNode, out var pageDirective)
+        )
         {
             var escapedRoutePrefix = MakeVerbatimStringLiteral(pageDirective.RouteTemplate);
-            attribute = $"[assembly:{RazorPageAttribute}({escapedPath}, typeof({generatedTypeName}), {escapedRoutePrefix})]";
+            attribute =
+                $"[assembly:{RazorPageAttribute}({escapedPath}, typeof({generatedTypeName}), {escapedRoutePrefix})]";
         }
         else
         {
@@ -63,11 +74,9 @@ public class AssemblyAttributeInjectionPass : IntermediateNodePassBase, IRazorOp
         Debug.Assert(index >= 0);
 
         var pageAttribute = new CSharpCodeIntermediateNode();
-        pageAttribute.Children.Add(new IntermediateToken()
-        {
-            Kind = TokenKind.CSharp,
-            Content = attribute,
-        });
+        pageAttribute.Children.Add(
+            new IntermediateToken() { Kind = TokenKind.CSharp, Content = attribute, }
+        );
 
         documentNode.Children.Insert(index, pageAttribute);
     }
@@ -91,7 +100,10 @@ public class AssemblyAttributeInjectionPass : IntermediateNodePassBase, IRazorOp
         }
 
         // Checking for both / and \ because a \ will become a /.
-        if (!relativePath.StartsWith("/", StringComparison.Ordinal) && !relativePath.StartsWith("\\", StringComparison.Ordinal))
+        if (
+            !relativePath.StartsWith("/", StringComparison.Ordinal)
+            && !relativePath.StartsWith("\\", StringComparison.Ordinal)
+        )
         {
             relativePath = "/" + relativePath;
         }

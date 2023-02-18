@@ -73,7 +73,12 @@ namespace System.ServiceModel
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0}\n{1}", SR.GetString(SR.SFxExceptionDetailFormat), this.ToStringHelper(false));
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}\n{1}",
+                SR.GetString(SR.SFxExceptionDetailFormat),
+                this.ToStringHelper(false)
+            );
         }
 
         string ToStringHelper(bool isInner)
@@ -97,4 +102,3 @@ namespace System.ServiceModel
         }
     }
 }
-

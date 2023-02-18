@@ -3,16 +3,14 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.Attributes
 {
-    [Foo (Val = typeof (A))]
-    [KeptAttributeAttribute (typeof (FooAttribute))]
+    [Foo(Val = typeof(A))]
+    [KeptAttributeAttribute(typeof(FooAttribute))]
     class AttributeOnPreservedTypeWithTypeUsedInFieldIsKept
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
 
-        [KeptMember (".ctor()")]
-        [KeptBaseType (typeof (System.Attribute))]
+        [KeptMember(".ctor()")]
+        [KeptBaseType(typeof(System.Attribute))]
         class FooAttribute : Attribute
         {
             [Kept]
@@ -22,9 +20,7 @@ namespace Mono.Linker.Tests.Cases.Attributes
         [Kept]
         class A
         {
-            public A ()
-            {
-            }
+            public A() { }
         }
     }
 }

@@ -15,34 +15,33 @@ namespace Mono
         Level level;
         Action<string> logAction;
 
-        public Logger (Level level, Action<string> logAction)
+        public Logger(Level level, Action<string> logAction)
         {
             this.level = level;
             this.logAction = logAction;
         }
 
-        public void LogDebug (string str, params string[] vals)
+        public void LogDebug(string str, params string[] vals)
         {
-            Log (Level.Debug, "Debug: " + str, vals);
+            Log(Level.Debug, "Debug: " + str, vals);
         }
 
-        public void LogWarning (string str, params string[] vals)
+        public void LogWarning(string str, params string[] vals)
         {
-            Log (Level.Warning, "Warning: " + str, vals);
+            Log(Level.Warning, "Warning: " + str, vals);
         }
 
-        public void LogError (string str, params string[] vals)
+        public void LogError(string str, params string[] vals)
         {
-            Log (Level.Error, "Error: " + str, vals);
+            Log(Level.Error, "Error: " + str, vals);
         }
 
-        private void Log (Level msgLevel, string str, params string[] vals)
+        private void Log(Level msgLevel, string str, params string[] vals)
         {
-            if ((int) level > (int) msgLevel)
+            if ((int)level > (int)msgLevel)
                 return;
 
-            logAction (string.Format (str, vals));
+            logAction(string.Format(str, vals));
         }
     }
 }
-

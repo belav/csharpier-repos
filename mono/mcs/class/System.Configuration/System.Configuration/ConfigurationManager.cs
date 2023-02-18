@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,19 +37,19 @@ using System.IO;
 using System.Text;
 using System.Configuration.Internal;
 
-namespace System.Configuration {
-
+namespace System.Configuration
+{
     /*roaming user config path: C:\Documents and Settings\toshok\Application Data\domain-System.Configurati_Url_py3nlovv3wxe21qgacxc3n2b1mph2log\1.0.0.0\user.config */
 
     public static class ConfigurationManager
     {
-//        static bool systemWebInUse;
-        static InternalConfigurationFactory configFactory = new InternalConfigurationFactory ();
-        static IInternalConfigSystem configSystem = new ClientConfigurationSystem ();
-        static object lockobj = new object ();
-        
-        [MonoTODO ("Evidence and version still needs work")]
-        static string GetAssemblyInfo (Assembly a)
+        //        static bool systemWebInUse;
+        static InternalConfigurationFactory configFactory = new InternalConfigurationFactory();
+        static IInternalConfigSystem configSystem = new ClientConfigurationSystem();
+        static object lockobj = new object();
+
+        [MonoTODO("Evidence and version still needs work")]
+        static string GetAssemblyInfo(Assembly a)
         {
             object[] attrs;
             StringBuilder sb;
@@ -58,7 +58,7 @@ namespace System.Configuration {
             string evidence_str;
             string version;
 
-            attrs = a.GetCustomAttributes (typeof (AssemblyProductAttribute), false);
+            attrs = a.GetCustomAttributes(typeof(AssemblyProductAttribute), false);
             if (attrs != null && attrs.Length > 0)
                 app_name = ((AssemblyProductAttribute)attrs[0]).Product;
             else
@@ -66,23 +66,28 @@ namespace System.Configuration {
 
             sb = new StringBuilder();
 
-            sb.Append ("evidencehere");
+            sb.Append("evidencehere");
 
             evidence_str = sb.ToString();
 
-            attrs = a.GetCustomAttributes (typeof (AssemblyVersionAttribute), false);
+            attrs = a.GetCustomAttributes(typeof(AssemblyVersionAttribute), false);
             if (attrs != null && attrs.Length > 0)
                 version = ((AssemblyVersionAttribute)attrs[0]).Version;
             else
-                version = "1.0.0.0" /* XXX */;
+                version =
+                    "1.0.0.0" /* XXX */
+                ;
 
-
-            return Path.Combine (String.Format ("{0}_{1}", app_name, evidence_str), version);
+            return Path.Combine(String.Format("{0}_{1}", app_name, evidence_str), version);
         }
 
-        internal static Configuration OpenExeConfigurationInternal (ConfigurationUserLevel userLevel, Assembly calling_assembly, string exePath)
+        internal static Configuration OpenExeConfigurationInternal(
+            ConfigurationUserLevel userLevel,
+            Assembly calling_assembly,
+            string exePath
+        )
         {
-            ExeConfigurationFileMap map = new ExeConfigurationFileMap ();
+            ExeConfigurationFileMap map = new ExeConfigurationFileMap();
 
             /* Roaming and RoamingAndLocal should be different
 
@@ -91,103 +96,148 @@ namespace System.Configuration {
               PerUserRoamingAndLocal = \Documents and Settings\<username>\Local Settings\Application Data\...
             */
 
-            switch (userLevel) {
-            case ConfigurationUserLevel.None:
-                if (exePath == null || exePath.Length == 0) {
-                    map.ExeConfigFilename = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
-                } else {
-                    if (!Path.IsPathRooted (exePath))
-                        exePath = Path.GetFullPath (exePath);
-                    if (!File.Exists (exePath)) {
-                        Exception cause = new ArgumentException ("The specified path does not exist.", "exePath");
-                        throw new ConfigurationErrorsException ("Error Initializing the configuration system:", cause);
+            switch (userLevel)
+            {
+                case ConfigurationUserLevel.None:
+                    if (exePath == null || exePath.Length == 0)
+                    {
+                        map.ExeConfigFilename = AppDomain
+                            .CurrentDomain
+                            .SetupInformation
+                            .ConfigurationFile;
                     }
-                    map.ExeConfigFilename = exePath + ".config";
-                }
-                break;
-            case ConfigurationUserLevel.PerUserRoaming:
-                map.RoamingUserConfigFilename = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), GetAssemblyInfo(calling_assembly));
-                map.RoamingUserConfigFilename = Path.Combine (map.RoamingUserConfigFilename, "user.config");
-                goto case ConfigurationUserLevel.None;
+                    else
+                    {
+                        if (!Path.IsPathRooted(exePath))
+                            exePath = Path.GetFullPath(exePath);
+                        if (!File.Exists(exePath))
+                        {
+                            Exception cause = new ArgumentException(
+                                "The specified path does not exist.",
+                                "exePath"
+                            );
+                            throw new ConfigurationErrorsException(
+                                "Error Initializing the configuration system:",
+                                cause
+                            );
+                        }
+                        map.ExeConfigFilename = exePath + ".config";
+                    }
+                    break;
+                case ConfigurationUserLevel.PerUserRoaming:
+                    map.RoamingUserConfigFilename = Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                        GetAssemblyInfo(calling_assembly)
+                    );
+                    map.RoamingUserConfigFilename = Path.Combine(
+                        map.RoamingUserConfigFilename,
+                        "user.config"
+                    );
+                    goto case ConfigurationUserLevel.None;
 
-            case ConfigurationUserLevel.PerUserRoamingAndLocal:
-                map.LocalUserConfigFilename = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), GetAssemblyInfo(calling_assembly));
-                map.LocalUserConfigFilename = Path.Combine (map.LocalUserConfigFilename, "user.config");
-                goto case ConfigurationUserLevel.PerUserRoaming;
+                case ConfigurationUserLevel.PerUserRoamingAndLocal:
+                    map.LocalUserConfigFilename = Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        GetAssemblyInfo(calling_assembly)
+                    );
+                    map.LocalUserConfigFilename = Path.Combine(
+                        map.LocalUserConfigFilename,
+                        "user.config"
+                    );
+                    goto case ConfigurationUserLevel.PerUserRoaming;
             }
 
-            return ConfigurationFactory.Create (typeof(ExeConfigurationHost), map, userLevel);
+            return ConfigurationFactory.Create(typeof(ExeConfigurationHost), map, userLevel);
         }
 
-        public static Configuration OpenExeConfiguration (ConfigurationUserLevel userLevel)
+        public static Configuration OpenExeConfiguration(ConfigurationUserLevel userLevel)
         {
-            return OpenExeConfigurationInternal (userLevel, Assembly.GetEntryAssembly () ?? Assembly.GetCallingAssembly (), null);
+            return OpenExeConfigurationInternal(
+                userLevel,
+                Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly(),
+                null
+            );
         }
-        
-        public static Configuration OpenExeConfiguration (string exePath)
+
+        public static Configuration OpenExeConfiguration(string exePath)
         {
-            return OpenExeConfigurationInternal (ConfigurationUserLevel.None, Assembly.GetEntryAssembly () ?? Assembly.GetCallingAssembly (), exePath);
+            return OpenExeConfigurationInternal(
+                ConfigurationUserLevel.None,
+                Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly(),
+                exePath
+            );
         }
 
         [MonoLimitation("ConfigurationUserLevel parameter is not supported.")]
-        public static Configuration OpenMappedExeConfiguration (ExeConfigurationFileMap fileMap, ConfigurationUserLevel userLevel)
+        public static Configuration OpenMappedExeConfiguration(
+            ExeConfigurationFileMap fileMap,
+            ConfigurationUserLevel userLevel
+        )
         {
-            return ConfigurationFactory.Create (typeof(ExeConfigurationHost), fileMap, userLevel);
+            return ConfigurationFactory.Create(typeof(ExeConfigurationHost), fileMap, userLevel);
         }
 
-        public static Configuration OpenMachineConfiguration ()
+        public static Configuration OpenMachineConfiguration()
         {
-            ConfigurationFileMap map = new ConfigurationFileMap ();
-            return ConfigurationFactory.Create (typeof(MachineConfigurationHost), map);
+            ConfigurationFileMap map = new ConfigurationFileMap();
+            return ConfigurationFactory.Create(typeof(MachineConfigurationHost), map);
         }
-        
-        public static Configuration OpenMappedMachineConfiguration (ConfigurationFileMap fileMap)
+
+        public static Configuration OpenMappedMachineConfiguration(ConfigurationFileMap fileMap)
         {
-            return ConfigurationFactory.Create (typeof(MachineConfigurationHost), fileMap);
+            return ConfigurationFactory.Create(typeof(MachineConfigurationHost), fileMap);
         }
-        
-        internal static IInternalConfigConfigurationFactory ConfigurationFactory {
+
+        internal static IInternalConfigConfigurationFactory ConfigurationFactory
+        {
             get { return configFactory; }
         }
 
-        internal static IInternalConfigSystem ConfigurationSystem {
+        internal static IInternalConfigSystem ConfigurationSystem
+        {
             get { return configSystem; }
         }
 
-        public static object GetSection (string sectionName)
+        public static object GetSection(string sectionName)
         {
-            object o = ConfigurationSystem.GetSection (sectionName);
+            object o = ConfigurationSystem.GetSection(sectionName);
             if (o is ConfigurationSection)
-                return ((ConfigurationSection) o).GetRuntimeObject ();
+                return ((ConfigurationSection)o).GetRuntimeObject();
             else
                 return o;
         }
 
-        public static void RefreshSection (string sectionName)
+        public static void RefreshSection(string sectionName)
         {
-            ConfigurationSystem.RefreshConfig (sectionName);
+            ConfigurationSystem.RefreshConfig(sectionName);
         }
 
-        public static NameValueCollection AppSettings {
-            get {
-                return (NameValueCollection) GetSection ("appSettings");
-            }
+        public static NameValueCollection AppSettings
+        {
+            get { return (NameValueCollection)GetSection("appSettings"); }
         }
 
-        public static ConnectionStringSettingsCollection ConnectionStrings {
-            get {
-                ConnectionStringsSection connectionStrings = (ConnectionStringsSection) GetSection ("connectionStrings");
+        public static ConnectionStringSettingsCollection ConnectionStrings
+        {
+            get
+            {
+                ConnectionStringsSection connectionStrings = (ConnectionStringsSection)GetSection(
+                    "connectionStrings"
+                );
                 return connectionStrings.ConnectionStrings;
             }
         }
 
         /* invoked from System.Web */
-        internal static IInternalConfigSystem ChangeConfigurationSystem (IInternalConfigSystem newSystem)
+        internal static IInternalConfigSystem ChangeConfigurationSystem(
+            IInternalConfigSystem newSystem
+        )
         {
             if (newSystem == null)
-                throw new ArgumentNullException ("newSystem");
+                throw new ArgumentNullException("newSystem");
 
-            lock (lockobj) {
+            lock (lockobj)
+            {
                 // KLUDGE!! We need that when an assembly loaded inside an ASP.NET
                 // domain does OpenExeConfiguration ("") - we must return the path
                 // to web.config in that instance.

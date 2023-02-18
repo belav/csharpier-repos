@@ -11,7 +11,5 @@ public struct Cs0842ExpressionBodyGetterBug
 
 class C
 {
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

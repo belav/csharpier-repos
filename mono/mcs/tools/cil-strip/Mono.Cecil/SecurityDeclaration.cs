@@ -26,14 +26,17 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
-
+namespace Mono.Cecil
+{
     using System;
     using System.Collections;
     using System.Security;
 
-    internal sealed class SecurityDeclaration : IRequireResolving, IAnnotationProvider, IReflectionVisitable {
-
+    internal sealed class SecurityDeclaration
+        : IRequireResolving,
+            IAnnotationProvider,
+            IReflectionVisitable
+    {
         SecurityAction m_action;
         SecurityDeclarationReader m_reader;
         IDictionary m_annotations;
@@ -43,70 +46,77 @@ namespace Mono.Cecil {
 #endif
 
         bool m_resolved;
-        byte [] m_blob;
+        byte[] m_blob;
 
-        public SecurityAction Action {
+        public SecurityAction Action
+        {
             get { return m_action; }
             set { m_action = value; }
         }
 
 #if !CF_1_0 && !CF_2_0
-        public PermissionSet PermissionSet {
+        public PermissionSet PermissionSet
+        {
             get { return m_permSet; }
             set { m_permSet = value; }
         }
 #endif
 
-        public bool Resolved {
+        public bool Resolved
+        {
             get { return m_resolved; }
             set { m_resolved = value; }
         }
 
-        public byte [] Blob {
+        public byte[] Blob
+        {
             get { return m_blob; }
             set { m_blob = value; }
         }
 
-        IDictionary IAnnotationProvider.Annotations {
-            get {
+        IDictionary IAnnotationProvider.Annotations
+        {
+            get
+            {
                 if (m_annotations == null)
-                    m_annotations = new Hashtable ();
+                    m_annotations = new Hashtable();
                 return m_annotations;
             }
         }
 
-        public SecurityDeclaration (SecurityAction action)
+        public SecurityDeclaration(SecurityAction action)
         {
             m_action = action;
         }
 
-        internal SecurityDeclaration (SecurityAction action, SecurityDeclarationReader reader)
+        internal SecurityDeclaration(SecurityAction action, SecurityDeclarationReader reader)
         {
             m_action = action;
             m_reader = reader;
         }
 
-        public SecurityDeclaration Clone ()
+        public SecurityDeclaration Clone()
         {
-            return Clone (this);
+            return Clone(this);
         }
 
-        internal static SecurityDeclaration Clone (SecurityDeclaration sec)
+        internal static SecurityDeclaration Clone(SecurityDeclaration sec)
         {
-            SecurityDeclaration sd = new SecurityDeclaration (sec.Action);
-            if (!sec.Resolved) {
+            SecurityDeclaration sd = new SecurityDeclaration(sec.Action);
+            if (!sec.Resolved)
+            {
                 sd.Resolved = false;
                 sd.Blob = sec.Blob;
                 return sd;
             }
 
 #if !CF_1_0 && !CF_2_0
-            sd.PermissionSet = sec.PermissionSet.Copy ();
+            sd.PermissionSet = sec.PermissionSet.Copy();
 #endif
             return sd;
         }
 
-        public bool Resolve ()
+        public bool Resolve()
         {
             if (m_resolved)
                 return true;
@@ -114,23 +124,22 @@ namespace Mono.Cecil {
             if (m_reader == null)
                 return false;
 
-            SecurityDeclaration clone = m_reader.FromByteArray (m_action, m_blob, true);
+            SecurityDeclaration clone = m_reader.FromByteArray(m_action, m_blob, true);
             if (!clone.Resolved)
                 return false;
 
             m_action = clone.Action;
 #if !CF_1_0 && !CF_2_0
-            m_permSet = clone.PermissionSet.Copy ();
+            m_permSet = clone.PermissionSet.Copy();
 #endif
             m_resolved = true;
 
             return true;
         }
 
-        public void Accept (IReflectionVisitor visitor)
+        public void Accept(IReflectionVisitor visitor)
         {
-            visitor.VisitSecurityDeclaration (this);
+            visitor.VisitSecurityDeclaration(this);
         }
     }
 }
-

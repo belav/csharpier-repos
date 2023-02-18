@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,26 +33,27 @@ using System.Security;
 
 using NUnit.Framework;
 
-namespace MonoTests.System {
-
+namespace MonoTests.System
+{
     [TestFixture]
-    public class AppDomainManagerTest {
-
-        class ContreteSecurityState : SecurityState {
-            public override void EnsureState ()
+    public class AppDomainManagerTest
+    {
+        class ContreteSecurityState : SecurityState
+        {
+            public override void EnsureState()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
         [Test]
-        public void CheckSecuritySettings ()
+        public void CheckSecuritySettings()
         {
-            AppDomainManager adm = new AppDomainManager ();
-            Assert.IsFalse (adm.CheckSecuritySettings (null), "null");
+            AppDomainManager adm = new AppDomainManager();
+            Assert.IsFalse(adm.CheckSecuritySettings(null), "null");
 
-            ContreteSecurityState ss = new ContreteSecurityState ();
-            Assert.IsFalse (adm.CheckSecuritySettings (ss), "ContreteSecurityState");
+            ContreteSecurityState ss = new ContreteSecurityState();
+            Assert.IsFalse(adm.CheckSecuritySettings(ss), "ContreteSecurityState");
         }
     }
 }

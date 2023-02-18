@@ -1,4 +1,3 @@
-
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -7,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,11 +23,10 @@ using System.Collections;
 
 namespace IBM.Data.DB2
 {
-
     internal sealed class DB2Environment : IDisposable
     {
         volatile static DB2Environment environment;
-        static readonly object lockobj = new object ();
+        static readonly object lockobj = new object();
         internal Hashtable connectionPools;
         internal IntPtr penvHandle = IntPtr.Zero;
 
@@ -38,7 +36,13 @@ namespace IBM.Data.DB2
 
             //            short sqlRet = DB2CLIWrapper.SQLAllocHandle(DB2Constants.SQL_HANDLE_ENV, IntPtr.Zero, ref penvHandle);
             short sqlRet = DB2CLIWrapper.Initialize(ref penvHandle);
-            DB2ClientUtils.DB2CheckReturn(sqlRet, 0, IntPtr.Zero, "Unable to allocate Environment handle.", null);
+            DB2ClientUtils.DB2CheckReturn(
+                sqlRet,
+                0,
+                IntPtr.Zero,
+                "Unable to allocate Environment handle.",
+                null
+            );
 
             // SQLSetEnvAttr( hEnv=0:1, fAttribute=SQL_ATTR_APP_TYPE 2473, vParam=4, cbParam=0 )    // 4=ADO.NET apptype????
             // SQLSetEnvAttr( hEnv=0:1, fAttribute=SQL_ATTR_OUTPUT_NTS 10001, vParam=0, cbParam=0 ) // strings not 0-terminated
@@ -48,11 +52,11 @@ namespace IBM.Data.DB2
         {
             get
             {
-                if(environment == null)
+                if (environment == null)
                 {
-                    lock(lockobj)
+                    lock (lockobj)
                     {
-                        if(environment == null)
+                        if (environment == null)
                         {
                             environment = new DB2Environment();
                         }
@@ -61,9 +65,11 @@ namespace IBM.Data.DB2
                 return environment;
             }
         }
+
         #region IDisposable Members
 
         bool disposed;
+
         public void Dispose()
         {
             Dispose(true);
@@ -72,7 +78,7 @@ namespace IBM.Data.DB2
 
         public void Dispose(bool disposing)
         {
-            if(disposed)
+            if (disposed)
             {
                 DB2CLIWrapper.SQLFreeHandle(DB2Constants.SQL_HANDLE_ENV, penvHandle);
                 environment = null;
@@ -87,5 +93,4 @@ namespace IBM.Data.DB2
 
         #endregion
     }
-
 }

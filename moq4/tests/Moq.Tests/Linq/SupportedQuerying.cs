@@ -278,7 +278,10 @@ namespace Moq.Tests.Linq
 
             public class Foo
             {
-                public virtual int Id { get { return 0; } }
+                public virtual int Id
+                {
+                    get { return 0; }
+                }
             }
         }
     }

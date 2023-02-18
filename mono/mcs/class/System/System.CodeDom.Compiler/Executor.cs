@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,111 +35,181 @@ using System.Security.Permissions;
 using System.Security.Principal;
 using System.Threading;
 
-namespace System.CodeDom.Compiler {
-
-    [PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-    public static class Executor {
-
+namespace System.CodeDom.Compiler
+{
+    [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
+    public static class Executor
+    {
         class ProcessResultReader
         {
             StreamReader reader;
             string file;
-            
-            public ProcessResultReader (StreamReader reader, string file)
+
+            public ProcessResultReader(StreamReader reader, string file)
             {
                 this.reader = reader;
                 this.file = file;
             }
-            
-            public void Read ()
+
+            public void Read()
             {
-                StreamWriter sw = new StreamWriter (file);
-                
+                StreamWriter sw = new StreamWriter(file);
+
                 try
                 {
                     string line;
                     while ((line = reader.ReadLine()) != null)
-                        sw.WriteLine (line);
+                        sw.WriteLine(line);
                 }
-                finally 
+                finally
                 {
-                    sw.Close ();
+                    sw.Close();
                 }
             }
         }
 
-        public static void ExecWait (string cmd, TempFileCollection tempFiles)
+        public static void ExecWait(string cmd, TempFileCollection tempFiles)
         {
             string outputName = null;
             string errorName = null;
-            ExecWaitWithCapture (cmd, Environment.CurrentDirectory, tempFiles, ref outputName, ref errorName);
+            ExecWaitWithCapture(
+                cmd,
+                Environment.CurrentDirectory,
+                tempFiles,
+                ref outputName,
+                ref errorName
+            );
         }
 
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        [SecurityPermission (SecurityAction.Assert, ControlPrincipal = true)] // UnmanagedCode "covers" more than ControlPrincipal
-        public static Int32 ExecWaitWithCapture (IntPtr userToken, string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName)
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        [SecurityPermission(SecurityAction.Assert, ControlPrincipal = true)] // UnmanagedCode "covers" more than ControlPrincipal
+        public static Int32 ExecWaitWithCapture(
+            IntPtr userToken,
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
         {
             // WindowsImpersonationContext implements IDisposable only in 2.0
-            using (WindowsImpersonationContext context = WindowsIdentity.Impersonate (userToken)) {
-                return InternalExecWaitWithCapture (cmd, currentDir, tempFiles, ref outputName, ref errorName);
+            using (WindowsImpersonationContext context = WindowsIdentity.Impersonate(userToken))
+            {
+                return InternalExecWaitWithCapture(
+                    cmd,
+                    currentDir,
+                    tempFiles,
+                    ref outputName,
+                    ref errorName
+                );
             }
         }
-        
-        public static Int32 ExecWaitWithCapture (IntPtr userToken, string cmd, TempFileCollection tempFiles, ref string outputName, ref string errorName)
+
+        public static Int32 ExecWaitWithCapture(
+            IntPtr userToken,
+            string cmd,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
         {
-            return ExecWaitWithCapture (userToken, cmd, Environment.CurrentDirectory, tempFiles, ref outputName, ref errorName);
+            return ExecWaitWithCapture(
+                userToken,
+                cmd,
+                Environment.CurrentDirectory,
+                tempFiles,
+                ref outputName,
+                ref errorName
+            );
         }
 
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public static Int32 ExecWaitWithCapture (string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName )
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public static Int32 ExecWaitWithCapture(
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
         {
-            return InternalExecWaitWithCapture (cmd, currentDir, tempFiles, ref outputName, ref errorName);
+            return InternalExecWaitWithCapture(
+                cmd,
+                currentDir,
+                tempFiles,
+                ref outputName,
+                ref errorName
+            );
         }
 
-        [SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-        public static Int32 ExecWaitWithCapture (string cmd, TempFileCollection tempFiles, ref string outputName, ref string errorName)
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public static Int32 ExecWaitWithCapture(
+            string cmd,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
         {
-            return InternalExecWaitWithCapture (cmd, Environment.CurrentDirectory, tempFiles, ref outputName, ref errorName);
+            return InternalExecWaitWithCapture(
+                cmd,
+                Environment.CurrentDirectory,
+                tempFiles,
+                ref outputName,
+                ref errorName
+            );
         }
 
-        private static int InternalExecWaitWithCapture (string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName)
+        private static int InternalExecWaitWithCapture(
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
         {
             if ((cmd == null) || (cmd.Length == 0))
-                throw new ExternalException (Locale.GetText ("No command provided for execution."));
+                throw new ExternalException(Locale.GetText("No command provided for execution."));
 
             if (outputName == null)
-                outputName = tempFiles.AddExtension ("out");
-            
+                outputName = tempFiles.AddExtension("out");
+
             if (errorName == null)
-                errorName = tempFiles.AddExtension ("err");
+                errorName = tempFiles.AddExtension("err");
 
             int exit_code = -1;
-            Process proc = new Process ();
+            Process proc = new Process();
             proc.StartInfo.FileName = cmd;
             proc.StartInfo.CreateNoWindow = true;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.WorkingDirectory = currentDir;
-            
-            try {
+
+            try
+            {
                 proc.Start();
-            
-                ProcessResultReader outReader = new ProcessResultReader (proc.StandardOutput, outputName);
-                ProcessResultReader errReader = new ProcessResultReader (proc.StandardError, errorName);
-                
-                Thread t = new Thread (new ThreadStart (errReader.Read));
-                t.Start ();
-            
-                outReader.Read ();
-                t.Join ();
-                
+
+                ProcessResultReader outReader = new ProcessResultReader(
+                    proc.StandardOutput,
+                    outputName
+                );
+                ProcessResultReader errReader = new ProcessResultReader(
+                    proc.StandardError,
+                    errorName
+                );
+
+                Thread t = new Thread(new ThreadStart(errReader.Read));
+                t.Start();
+
+                outReader.Read();
+                t.Join();
+
                 proc.WaitForExit();
-            } 
-            finally  {
+            }
+            finally
+            {
                 exit_code = proc.ExitCode;
                 // the handle is cleared in Close (so no ExitCode)
-                proc.Close ();
+                proc.Close();
             }
             return exit_code;
         }

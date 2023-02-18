@@ -35,155 +35,162 @@ using System.Reflection;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Linq {
-
+namespace MonoTests.System.Linq
+{
     [TestFixture]
-    public class QueryableTest {
-
+    public class QueryableTest
+    {
         [Test] // #701187
-        public void ConcatCastedQueryables ()
+        public void ConcatCastedQueryables()
         {
-            var bs = new List<B> { new B (), new B () }.AsQueryable ();
-            var cs = new List<C> { new C (), new C () }.AsQueryable ();
+            var bs = new List<B> { new B(), new B() }.AsQueryable();
+            var cs = new List<C> { new C(), new C() }.AsQueryable();
 
-            var concat = abs.Cast<A> ().Concat (acs.Cast<A> ());
-            Assert.AreEqual (4, concat.Count ());
+            var concat = abs.Cast<A>().Concat(acs.Cast<A>());
+            Assert.AreEqual(4, concat.Count());
         }
 
         class A { }
+
         class B : A { }
+
         class C : A { }
 
         [Test]
-        public void TestElementType ()
+        public void TestElementType()
         {
-            var data = new int [] { 1, 2, 3 };
-            var queryable = data.AsQueryable ();
+            var data = new int[] { 1, 2, 3 };
+            var queryable = data.AsQueryable();
 
-            Assert.AreEqual (typeof (int), queryable.ElementType);
+            Assert.AreEqual(typeof(int), queryable.ElementType);
         }
 
         [Test]
-        public void TestCount ()
+        public void TestCount()
         {
-            var q = CreateQueryable<string> ();
+            var q = CreateQueryable<string>();
 
-            q.Count ();
+            q.Count();
 
-            AssertReceived (GetMethod ("Count", 0), q);
+            AssertReceived(GetMethod("Count", 0), q);
         }
 
         [Test]
-        public void TestCountPredicate ()
+        public void TestCountPredicate()
         {
-            var q = CreateQueryable<string> ();
+            var q = CreateQueryable<string>();
 
-            q.Count (s => true);
+            q.Count(s => true);
 
-            AssertReceived (GetMethod ("Count", 1), q);
+            AssertReceived(GetMethod("Count", 1), q);
         }
 
-        public static void AssertReceived<T> (MethodInfo method, MockQuery<T> query)
+        public static void AssertReceived<T>(MethodInfo method, MockQuery<T> query)
         {
             Expression expression = query.MockProvider.Received;
 
             MethodCallExpression call = expression as MethodCallExpression;
 
-            Assert.IsNotNull (call, "Expected a MethodCallExpression");
+            Assert.IsNotNull(call, "Expected a MethodCallExpression");
 
-            MethodInfo expected = method.MakeGenericMethod (typeof (T));
+            MethodInfo expected = method.MakeGenericMethod(typeof(T));
 
-            Assert.AreEqual (expected, call.Method, "Expected method: " + expected);
+            Assert.AreEqual(expected, call.Method, "Expected method: " + expected);
         }
 
-        public static MethodInfo GetMethod (string name, int parameters)
+        public static MethodInfo GetMethod(string name, int parameters)
         {
-            var methods = from m in typeof (Queryable).GetMethods ()
-                          where m.Name == name && m.GetParameters ().Length == parameters + 1
-                          select m;
+            var methods =
+                from m in typeof(Queryable).GetMethods()
+                where m.Name == name && m.GetParameters().Length == parameters + 1
+                select m;
 
-            return methods.First ();
+            return methods.First();
         }
 
-        static MockQuery<T> CreateQueryable<T> ()
+        static MockQuery<T> CreateQueryable<T>()
         {
-            return new MockQuery<T> (new MockQueryProvider ());
+            return new MockQuery<T>(new MockQueryProvider());
         }
 
-        public class MockQueryProvider : IQueryProvider {
-
+        public class MockQueryProvider : IQueryProvider
+        {
             Expression received;
 
-            public Expression Received {
+            public Expression Received
+            {
                 get { return received; }
             }
 
-            public IQueryable<TElement> CreateQuery<TElement> (Expression expression)
+            public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            public IQueryable CreateQuery (Expression expression)
+            public IQueryable CreateQuery(Expression expression)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            public TResult Execute<TResult> (Expression expression)
+            public TResult Execute<TResult>(Expression expression)
             {
                 received = expression;
 
-                return default (TResult);
+                return default(TResult);
             }
 
-            public object Execute (Expression expression)
+            public object Execute(Expression expression)
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
         }
 
-        public class MockQuery<T> : IQueryable<T> {
-
+        public class MockQuery<T> : IQueryable<T>
+        {
             MockQueryProvider provider;
             Expression expression;
 
-            public Type ElementType {
-                get { return typeof (T); }
+            public Type ElementType
+            {
+                get { return typeof(T); }
             }
 
-            public Expression Expression {
+            public Expression Expression
+            {
                 get { return expression; }
             }
 
-            public IQueryProvider Provider {
+            public IQueryProvider Provider
+            {
                 get { return provider; }
             }
 
-            public MockQueryProvider MockProvider {
+            public MockQueryProvider MockProvider
+            {
                 get { return provider; }
             }
 
-            public MockQuery (MockQueryProvider provider)
+            public MockQuery(MockQueryProvider provider)
             {
                 this.provider = provider;
-                this.expression = Expression.Constant (this);
+                this.expression = Expression.Constant(this);
             }
 
-            public MockQuery (MockQueryProvider provider, Expression expression)
+            public MockQuery(MockQueryProvider provider, Expression expression)
             {
                 this.provider = provider;
                 this.expression = expression;
             }
 
-            public IEnumerator<T> GetEnumerator ()
+            public IEnumerator<T> GetEnumerator()
             {
-                throw new NotImplementedException ();
+                throw new NotImplementedException();
             }
 
-            IEnumerator IEnumerable.GetEnumerator ()
+            IEnumerator IEnumerable.GetEnumerator()
             {
-                return GetEnumerator ();
+                return GetEnumerator();
             }
         }
-
     }
 }

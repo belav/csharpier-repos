@@ -4,24 +4,20 @@
 
 class D : B
 {
-    public void Test ()
+    public void Test()
     {
-        C.Get().Foo ();
+        C.Get().Foo();
     }
 }
 
-class D2 : B
-{
-}
+class D2 : B { }
 
-class B : A
-{
-}
+class B : A { }
 
 class C
 {
-    public static D2 Get ()
+    public static D2 Get()
     {
-        return new D2 ();
+        return new D2();
     }
 }

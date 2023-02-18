@@ -9,7 +9,9 @@ namespace Test
     public class App
     {
         static uint[] m_au = new uint[10];
+
         static void Method1(uint param1) { }
+
         public static int Main()
         {
             int a = 98;

@@ -38,10 +38,10 @@ namespace MonoTests.Mono.Security
     public class TestProvider
     {
         [Test]
-        public void GetProvider ()
+        public void GetProvider()
         {
-            var provider = MonoTlsProviderFactory.GetProvider ();
-            Assert.IsNotNull (provider, "TLS Provider");
+            var provider = MonoTlsProviderFactory.GetProvider();
+            Assert.IsNotNull(provider, "TLS Provider");
         }
     }
 }

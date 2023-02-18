@@ -3,15 +3,11 @@ using System.Collections.Generic;
 
 namespace Foo
 {
+    static partial class Extensions { }
 
     static partial class Extensions
     {
-    }
-
-    static partial class Extensions
-    {
-
-        public static string AsString (this IList<byte> bytes)
+        public static string AsString(this IList<byte> bytes)
         {
             return "42";
         }
@@ -20,20 +16,18 @@ namespace Foo
 
 namespace Bar
 {
-
     using Foo;
 
     class Program
     {
-
-        public static void Main ()
+        public static void Main()
         {
-            Console.WriteLine (Pan (new byte[0]));
+            Console.WriteLine(Pan(new byte[0]));
         }
 
-        internal static string Pan (byte[] bytes)
+        internal static string Pan(byte[] bytes)
         {
-            return bytes.AsString ();
+            return bytes.AsString();
         }
     }
 }

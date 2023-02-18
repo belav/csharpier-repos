@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MimePartCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,17 +30,20 @@
 
 using System.Collections;
 
-namespace System.Web.Services.Description {
-    public sealed class MimePartCollection : CollectionBase {
-
+namespace System.Web.Services.Description
+{
+    public sealed class MimePartCollection : CollectionBase
+    {
         #region Properties
 
-        public MimePart this [int index] {
-            get { 
+        public MimePart this[int index]
+        {
+            get
+            {
                 if (index < 0 || index > Count)
-                    throw new ArgumentOutOfRangeException ();
+                    throw new ArgumentOutOfRangeException();
 
-                return (MimePart) List[index]; 
+                return (MimePart)List[index];
             }
             set { List[index] = value; }
         }
@@ -49,37 +52,37 @@ namespace System.Web.Services.Description {
 
         #region Methods
 
-        public int Add (MimePart mimePart) 
+        public int Add(MimePart mimePart)
         {
-            Insert (Count, mimePart);    
+            Insert(Count, mimePart);
             return (Count - 1);
         }
 
-        public bool Contains (MimePart mimePart)
+        public bool Contains(MimePart mimePart)
         {
-            return List.Contains (mimePart);
+            return List.Contains(mimePart);
         }
 
-        public void CopyTo (MimePart[] array, int index) 
+        public void CopyTo(MimePart[] array, int index)
         {
-            List.CopyTo (array, index);
+            List.CopyTo(array, index);
         }
 
-        public int IndexOf (MimePart mimePart)
+        public int IndexOf(MimePart mimePart)
         {
-            return List.IndexOf (mimePart);
+            return List.IndexOf(mimePart);
         }
 
-        public void Insert (int index, MimePart mimePart)
+        public void Insert(int index, MimePart mimePart)
         {
-            List.Insert (index, mimePart);
+            List.Insert(index, mimePart);
         }
-    
-        public void Remove (MimePart mimePart)
+
+        public void Remove(MimePart mimePart)
         {
-            List.Remove (mimePart);
+            List.Remove(mimePart);
         }
-            
+
         #endregion // Methods
     }
 }

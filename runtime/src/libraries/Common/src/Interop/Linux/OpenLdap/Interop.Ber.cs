@@ -61,7 +61,12 @@ internal static partial class Interop
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ber_put_null")]
         public static partial int ber_put_null(SafeBerHandle berElement, nuint tag);
 
-        public static int ber_printf_int(SafeBerHandle berElement, string format, int value, nuint tag)
+        public static int ber_printf_int(
+            SafeBerHandle berElement,
+            string format,
+            int value,
+            nuint tag
+        )
         {
             if (format == "i")
             {
@@ -87,7 +92,13 @@ internal static partial class Interop
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ber_put_boolean")]
         public static partial int ber_put_boolean(SafeBerHandle berElement, int value, nuint tag);
 
-        public static int ber_printf_bytearray(SafeBerHandle berElement, string format, HGlobalMemHandle value, nuint length, nuint tag)
+        public static int ber_printf_bytearray(
+            SafeBerHandle berElement,
+            string format,
+            HGlobalMemHandle value,
+            nuint length,
+            nuint tag
+        )
         {
             if (format == "o")
             {
@@ -105,13 +116,27 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ber_put_ostring")]
-        private static partial int ber_put_ostring(SafeBerHandle berElement, HGlobalMemHandle value, nuint length, nuint tag);
+        private static partial int ber_put_ostring(
+            SafeBerHandle berElement,
+            HGlobalMemHandle value,
+            nuint length,
+            nuint tag
+        );
 
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ber_put_string")]
-        private static partial int ber_put_string(SafeBerHandle berElement, HGlobalMemHandle value, nuint tag);
+        private static partial int ber_put_string(
+            SafeBerHandle berElement,
+            HGlobalMemHandle value,
+            nuint tag
+        );
 
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ber_put_bitstring")]
-        private static partial int ber_put_bitstring(SafeBerHandle berElement, HGlobalMemHandle value, nuint length, nuint tag);
+        private static partial int ber_put_bitstring(
+            SafeBerHandle berElement,
+            HGlobalMemHandle value,
+            nuint length,
+            nuint tag
+        );
 
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ber_flatten")]
         public static partial int ber_flatten(SafeBerHandle berElement, ref IntPtr value);
@@ -124,7 +149,14 @@ internal static partial class Interop
 
         public static int ber_scanf_emptyarg(SafeBerHandle berElement, string format)
         {
-            Debug.Assert(format == "{" || format == "}" || format == "[" || format == "]" || format == "n" || format == "x");
+            Debug.Assert(
+                format == "{"
+                    || format == "}"
+                    || format == "["
+                    || format == "]"
+                    || format == "n"
+                    || format == "x"
+            );
             if (format == "{" || format == "[")
             {
                 nuint len = 0;
@@ -173,7 +205,12 @@ internal static partial class Interop
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ber_get_boolean")]
         private static partial int ber_get_boolean(SafeBerHandle berElement, ref int value);
 
-        public static int ber_scanf_bitstring(SafeBerHandle berElement, string format, ref IntPtr value, ref uint bitLength)
+        public static int ber_scanf_bitstring(
+            SafeBerHandle berElement,
+            string format,
+            ref IntPtr value,
+            ref uint bitLength
+        )
         {
             Debug.Assert(format == "B");
             nuint bitLengthAsNuint = 0;
@@ -183,7 +220,11 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.OpenLdap, EntryPoint = "ber_get_stringb")]
-        private static partial int ber_get_stringb(SafeBerHandle berElement, ref IntPtr value, ref nuint bitLength);
+        private static partial int ber_get_stringb(
+            SafeBerHandle berElement,
+            ref IntPtr value,
+            ref nuint bitLength
+        );
 
         public static int ber_scanf_ptr(SafeBerHandle berElement, string format, ref IntPtr value)
         {
@@ -195,14 +236,23 @@ internal static partial class Interop
         private static partial int ber_get_stringal(SafeBerHandle berElement, ref IntPtr value);
 
 #pragma warning disable IDE0060
-        public static int ber_printf_berarray(SafeBerHandle berElement, string format, IntPtr value, nuint tag)
+        public static int ber_printf_berarray(
+            SafeBerHandle berElement,
+            string format,
+            IntPtr value,
+            nuint tag
+        )
         {
             Debug.Assert(format == "v" || format == "V");
             // V and v are not supported on Unix yet.
             return -1;
         }
 
-        public static int ber_scanf_multibytearray(SafeBerHandle berElement, string format, ref IntPtr value)
+        public static int ber_scanf_multibytearray(
+            SafeBerHandle berElement,
+            string format,
+            ref IntPtr value
+        )
         {
             Debug.Assert(format == "v" || format == "V");
             // V and v are not supported on Unix yet.

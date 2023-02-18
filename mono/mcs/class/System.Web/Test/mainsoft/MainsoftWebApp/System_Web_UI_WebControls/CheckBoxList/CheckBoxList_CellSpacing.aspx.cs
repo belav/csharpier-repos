@@ -35,11 +35,10 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-    public class CheckBoxList_CellSpacing
-        : GHTBaseWeb 
+    public class CheckBoxList_CellSpacing : GHTBaseWeb
     {
         #region Web Form Designer generated code
-        override protected void OnInit(EventArgs e) 
+        override protected void OnInit(EventArgs e)
         {
             //
             // CODEGEN: This call is required by the ASP.NET Web Form Designer.
@@ -47,27 +46,28 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             InitializeComponent();
             base.OnInit(e);
         }
-        
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() 
-        {    
+        private void InitializeComponent()
+        {
             this.Load += new System.EventHandler(this.Page_Load);
         }
         #endregion
 
-        private void Page_Load(object sender, System.EventArgs e) 
+        private void Page_Load(object sender, System.EventArgs e)
         {
             HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
 
             // Negative CellSpacing value
             GHTSubTestBegin("Negative CellSpacing value");
-            try 
+            try
             {
-                System.Web.UI.WebControls.CheckBoxList cbl = new System.Web.UI.WebControls.CheckBoxList();
+                System.Web.UI.WebControls.CheckBoxList cbl =
+                    new System.Web.UI.WebControls.CheckBoxList();
                 cbl.CellSpacing = -2;
                 GHTSubTestExpectedExceptionNotCaught("ArgumentOutOfRangeException");
             }
@@ -75,7 +75,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             {
                 GHTSubTestExpectedExceptionCaught(ex);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 GHTSubTestUnexpectedExceptionCaught(ex);
             }

@@ -36,57 +36,85 @@ namespace MonoTests.System.Linq
         const int NumRun = 11;
 #endif
 
-        public static void Repeat (Action action)
+        public static void Repeat(Action action)
         {
-            Repeat (action, NumRun);
+            Repeat(action, NumRun);
         }
-        
-        public static void Repeat (Action action, int numRun)
+
+        public static void Repeat(Action action, int numRun)
         {
-            for (int i = 0; i < numRun; i++) {
-              //Console.WriteLine ("Run " + i.ToString ());
-                action ();
+            for (int i = 0; i < numRun; i++)
+            {
+                //Console.WriteLine ("Run " + i.ToString ());
+                action();
             }
         }
-        
+
         public static void ParallelStressTest<TSource>(TSource obj, Action<TSource> action)
         {
             ParallelStressTest(obj, action, Environment.ProcessorCount + 2);
         }
-        
-        public static void ParallelStressTest<TSource>(TSource obj, Action<TSource> action, int numThread)
+
+        public static void ParallelStressTest<TSource>(
+            TSource obj,
+            Action<TSource> action,
+            int numThread
+        )
         {
             Thread[] threads = new Thread[numThread];
-            for (int i = 0; i < numThread; i++) {
-                threads[i] = new Thread(new ThreadStart(delegate { action(obj); }));
+            for (int i = 0; i < numThread; i++)
+            {
+                threads[i] = new Thread(
+                    new ThreadStart(
+                        delegate
+                        {
+                            action(obj);
+                        }
+                    )
+                );
                 threads[i].Start();
             }
-            
+
             // Wait for the completion
             for (int i = 0; i < numThread; i++)
                 threads[i].Join();
         }
-        
+
         public static void ParallelAdder(IProducerConsumerCollection<int> collection, int numThread)
         {
             int startIndex = -10;
-            ParallelTestHelper.ParallelStressTest(collection, delegate (IProducerConsumerCollection<int> c) {
-                int start = Interlocked.Add(ref startIndex, 10);
-                for (int i = start; i < start + 10; i++) {
-                    c.TryAdd(i);
-                }
-            }, numThread);
+            ParallelTestHelper.ParallelStressTest(
+                collection,
+                delegate(IProducerConsumerCollection<int> c)
+                {
+                    int start = Interlocked.Add(ref startIndex, 10);
+                    for (int i = start; i < start + 10; i++)
+                    {
+                        c.TryAdd(i);
+                    }
+                },
+                numThread
+            );
         }
-        
-        public static void ParallelRemover(IProducerConsumerCollection<int> collection, int numThread, int times)
+
+        public static void ParallelRemover(
+            IProducerConsumerCollection<int> collection,
+            int numThread,
+            int times
+        )
         {
             int t = -1;
-            ParallelTestHelper.ParallelStressTest(collection, delegate (IProducerConsumerCollection<int> c) {
-                int num = Interlocked.Increment(ref t);
-                int value;
-                if (num < times)
-                    c.TryTake (out value);
-            }, numThread);
+            ParallelTestHelper.ParallelStressTest(
+                collection,
+                delegate(IProducerConsumerCollection<int> c)
+                {
+                    int num = Interlocked.Increment(ref t);
+                    int value;
+                    if (num < times)
+                        c.TryTake(out value);
+                },
+                numThread
+            );
         }
     }
 }

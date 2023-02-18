@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 class C
 {
-    async Task<int> Test ()
+    async Task<int> Test()
     {
-        Func<int> r = await Task.Factory.StartNew (() => () => 1);
+        Func<int> r = await Task.Factory.StartNew(() => () => 1);
     }
 }

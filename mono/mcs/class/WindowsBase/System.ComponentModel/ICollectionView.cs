@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,8 +29,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Globalization;
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     public interface ICollectionView : IEnumerable, INotifyCollectionChanged
     {
         bool CanFilter { get; }
@@ -39,7 +39,7 @@ namespace System.ComponentModel {
         CultureInfo Culture { get; set; }
         object CurrentItem { get; }
         int CurrentPosition { get; }
-        Predicate<object> Filter {get; set; }
+        Predicate<object> Filter { get; set; }
         ObservableCollection<GroupDescription> GroupDescriptions { get; }
         ReadOnlyObservableCollection<object> Groups { get; }
         bool IsCurrentAfterLast { get; }
@@ -51,15 +51,14 @@ namespace System.ComponentModel {
         event EventHandler CurrentChanged;
         event CurrentChangingEventHandler CurrentChanging;
 
-        bool Contains (object item);
-        IDisposable DeferRefresh ();
-        bool MoveCurrentTo (object item);
-        bool MoveCurrentToFirst ();
-        bool MoveCurrentToLast ();
-        bool MoveCurrentToNext ();
-        bool MoveCurrentToPosition (int position);
-        bool MoveCurrentToPrevious ();
-        void Refresh ();
+        bool Contains(object item);
+        IDisposable DeferRefresh();
+        bool MoveCurrentTo(object item);
+        bool MoveCurrentToFirst();
+        bool MoveCurrentToLast();
+        bool MoveCurrentToNext();
+        bool MoveCurrentToPosition(int position);
+        bool MoveCurrentToPrevious();
+        void Refresh();
     }
-
 }

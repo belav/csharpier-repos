@@ -11,10 +11,21 @@ namespace Microsoft.CodeAnalysis.Formatting;
 
 internal static class SyntaxFormattingOptionsStorage
 {
-    public static ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetSyntaxFormattingOptionsAsync(globalOptions.GetSyntaxFormattingOptions(document.Project.Services), cancellationToken);
+    public static ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetSyntaxFormattingOptionsAsync(
+            globalOptions.GetSyntaxFormattingOptions(document.Project.Services),
+            cancellationToken
+        );
 
-    public static SyntaxFormattingOptions GetSyntaxFormattingOptions(this IGlobalOptionService globalOptions, LanguageServices languageServices)
-        => languageServices.GetRequiredService<ISyntaxFormattingService>().GetFormattingOptions(globalOptions, fallbackOptions: null);
+    public static SyntaxFormattingOptions GetSyntaxFormattingOptions(
+        this IGlobalOptionService globalOptions,
+        LanguageServices languageServices
+    ) =>
+        languageServices
+            .GetRequiredService<ISyntaxFormattingService>()
+            .GetFormattingOptions(globalOptions, fallbackOptions: null);
 }
-

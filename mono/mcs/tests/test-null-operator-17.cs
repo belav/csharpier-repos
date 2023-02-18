@@ -5,7 +5,7 @@ class A
 
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
         A a = null;
         var m = a?.BB?[3];

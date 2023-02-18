@@ -22,29 +22,23 @@ namespace Microsoft.CodeAnalysis.Rename
 
         public static TokenRenameInfo CreateMemberGroupTokenInfo(IEnumerable<ISymbol> symbols)
         {
-            return new TokenRenameInfo
-            (
-                hasSymbols: true,
-                isMemberGroup: true,
-                symbols: symbols
-            );
+            return new TokenRenameInfo(hasSymbols: true, isMemberGroup: true, symbols: symbols);
         }
 
         public static TokenRenameInfo CreateSingleSymbolTokenInfo(ISymbol symbol)
         {
-            return new TokenRenameInfo
-            (
+            return new TokenRenameInfo(
                 hasSymbols: true,
                 isMemberGroup: false,
                 symbols: SpecializedCollections.SingletonEnumerable(symbol)
             );
         }
 
-        public static TokenRenameInfo NoSymbolsTokenInfo = new
-        (
-            hasSymbols: false,
-            isMemberGroup: false,
-            symbols: SpecializedCollections.EmptyEnumerable<ISymbol>()
-        );
+        public static TokenRenameInfo NoSymbolsTokenInfo =
+            new(
+                hasSymbols: false,
+                isMemberGroup: false,
+                symbols: SpecializedCollections.EmptyEnumerable<ISymbol>()
+            );
     }
 }

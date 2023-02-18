@@ -26,12 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Binary {
-
+namespace Mono.Cecil.Binary
+{
     using System.Collections;
 
-    internal class ResourceDirectoryTable : ResourceNode {
-
+    internal class ResourceDirectoryTable : ResourceNode
+    {
         private ArrayList m_entries;
 
         public uint Characteristics;
@@ -39,18 +39,20 @@ namespace Mono.Cecil.Binary {
         public ushort MajorVersion;
         public ushort MinorVersion;
 
-        public IList Entries {
+        public IList Entries
+        {
             get { return m_entries; }
         }
 
-        public ResourceDirectoryTable (int offset) : base (offset)
+        public ResourceDirectoryTable(int offset)
+            : base(offset)
         {
-            m_entries = new ArrayList ();
+            m_entries = new ArrayList();
         }
 
-        public ResourceDirectoryTable ()
+        public ResourceDirectoryTable()
         {
-            m_entries = new ArrayList ();
+            m_entries = new ArrayList();
         }
     }
 }

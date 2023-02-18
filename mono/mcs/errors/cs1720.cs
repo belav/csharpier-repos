@@ -4,7 +4,7 @@
 
 using System;
 
-public class Tester 
+public class Tester
 {
     public static void Main()
     {

@@ -2,14 +2,16 @@
 // Line: 12
 using System;
 
-class X {
-    delegate int T ();
+class X
+{
+    delegate int T();
 
-    static void Main ()
+    static void Main()
     {
         int a = 1;
-        
-        T t = delegate {
+
+        T t = delegate
+        {
             if (a == 1)
                 return 1;
         };

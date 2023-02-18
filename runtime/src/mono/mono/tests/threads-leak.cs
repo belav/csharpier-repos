@@ -3,7 +3,7 @@ using System.Threading;
 
 class Driver
 {
-    static ManualResetEvent mre = new ManualResetEvent (false);
+    static ManualResetEvent mre = new ManualResetEvent(false);
 
     class MyClassInThread
     {
@@ -11,18 +11,20 @@ class Driver
 
         ~MyClassInThread()
         {
-            try {
+            try
+            {
                 Console.WriteLine($"Finalizer {I}");
-            } catch (NotSupportedException) {
             }
+            catch (NotSupportedException) { }
 
-            mre.Set ();
+            mre.Set();
         }
     }
 
     public static void Main(string[] args)
     {
-        for (int i = 0; i < 50; ++i) {
+        for (int i = 0; i < 50; ++i)
+        {
             SpawnThread(i);
             GC.Collect();
             GC.Collect();
@@ -33,12 +35,12 @@ class Driver
         }
 
         if (!mre.WaitOne(0))
-            Environment.Exit (1);
+            Environment.Exit(1);
     }
 
     static void SpawnThread(int i)
     {
-        var th = new Thread(_ => {}) { IsBackground = true, };
+        var th = new Thread(_ => { }) { IsBackground = true, };
         th.Start(new MyClassInThread { I = i });
         th.Join();
     }

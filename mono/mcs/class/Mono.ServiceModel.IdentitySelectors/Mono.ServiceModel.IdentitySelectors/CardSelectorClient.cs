@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,31 +43,35 @@ namespace Mono.ServiceModel.IdentitySelectors
 {
     public abstract class CardSelectorClient
     {
-        public abstract void Manage ();
+        public abstract void Manage();
 
         #region Import
 
         // This must be implemented unless Import() is overriden.
-        public virtual string ReceivePassword ()
+        public virtual string ReceivePassword()
         {
-            throw new NotImplementedException ("Import is not implemented by this identity selector client");
+            throw new NotImplementedException(
+                "Import is not implemented by this identity selector client"
+            );
         }
 
-        public virtual void Import (string filename)
+        public virtual void Import(string filename)
         {
-            string password = ReceivePassword ();
+            string password = ReceivePassword();
             if (password == null)
                 return;
-            IdentityCard card = ProcessImport (filename, password);
-            IdentityStore.GetDefaultStore ().StoreCard (card, password);
+            IdentityCard card = ProcessImport(filename, password);
+            IdentityStore.GetDefaultStore().StoreCard(card, password);
         }
 
-        protected IdentityCard ProcessImport (string filename, string password)
+        protected IdentityCard ProcessImport(string filename, string password)
         {
-            string xml = new IdentityCardEncryption ().Decrypt (
-                new StreamReader (filename).ReadToEnd (), password);
-            IdentityCard card = new IdentityCard ();
-            card.Load (XmlReader.Create (new StringReader (xml)));
+            string xml = new IdentityCardEncryption().Decrypt(
+                new StreamReader(filename).ReadToEnd(),
+                password
+            );
+            IdentityCard card = new IdentityCard();
+            card.Load(XmlReader.Create(new StringReader(xml)));
             return card;
         }
 
@@ -75,90 +79,128 @@ namespace Mono.ServiceModel.IdentitySelectors
 
         // This is virtual since it might not be required when
         // GetToken() is overriden.
-        public virtual IdentityCard SelectCardToSend (CardSelectionContext context)
+        public virtual IdentityCard SelectCardToSend(CardSelectionContext context)
         {
-            throw new NotSupportedException ();
+            throw new NotSupportedException();
         }
 
         #region Default self-issued card processor
         // They are used to indicate a service URL when there is no
         // overriden behavior of RequestSelfIssuedToken().
 
-        string self_identity_issuer = Environment.GetEnvironmentVariable ("MONO_IDENTITY_SERVICE_URL") ?? "localhost:7450";
-        string self_identity_issuer_cert = Environment.GetEnvironmentVariable ("MONO_IDENTITY_SERVICE_CERTIFICATE");
+        string self_identity_issuer =
+            Environment.GetEnvironmentVariable("MONO_IDENTITY_SERVICE_URL") ?? "localhost:7450";
+        string self_identity_issuer_cert = Environment.GetEnvironmentVariable(
+            "MONO_IDENTITY_SERVICE_CERTIFICATE"
+        );
 
-        public virtual string SelfIdentityIssuerUrl {
+        public virtual string SelfIdentityIssuerUrl
+        {
             get { return self_identity_issuer; }
         }
 
-        public virtual string SelfIdentityIssuerCertificate {
+        public virtual string SelfIdentityIssuerCertificate
+        {
             get { return self_identity_issuer_cert; }
         }
         #endregion
 
-        public virtual GenericXmlSecurityToken GetToken (
-            CardSpacePolicyElement [] policyChain,
-            SecurityTokenSerializer serializer)
+        public virtual GenericXmlSecurityToken GetToken(
+            CardSpacePolicyElement[] policyChain,
+            SecurityTokenSerializer serializer
+        )
         {
             // FIXME: sort out what is supposed to be done here.
             foreach (CardSpacePolicyElement policy in policyChain)
-                return GetToken (policy.Target, policy.Issuer,
-                      policy.Parameters,
-                      policy.PolicyNoticeLink,
-                      policy.PolicyNoticeVersion);
-            throw new Exception ("INTERNAL ERROR: no policy to process");
+                return GetToken(
+                    policy.Target,
+                    policy.Issuer,
+                    policy.Parameters,
+                    policy.PolicyNoticeLink,
+                    policy.PolicyNoticeVersion
+                );
+            throw new Exception("INTERNAL ERROR: no policy to process");
         }
 
-        GenericXmlSecurityToken GetToken (
-            XmlElement target, XmlElement issuer,
+        GenericXmlSecurityToken GetToken(
+            XmlElement target,
+            XmlElement issuer,
             Collection<XmlElement> parameters,
-            Uri policyNoticeLink, int policyNoticeVersion)
+            Uri policyNoticeLink,
+            int policyNoticeVersion
+        )
         {
-            Collection<ClaimTypeRequirement> reqs = new Collection<ClaimTypeRequirement> ();
-            Collection<XmlElement> alist = new Collection<XmlElement> ();
-            foreach (XmlElement el in parameters) {
+            Collection<ClaimTypeRequirement> reqs = new Collection<ClaimTypeRequirement>();
+            Collection<XmlElement> alist = new Collection<XmlElement>();
+            foreach (XmlElement el in parameters)
+            {
                 if (el.LocalName == "Claims" && el.NamespaceURI == Constants.WstNamespace)
                     foreach (XmlElement c in el.ChildNodes)
-                        reqs.Add (new ClaimTypeRequirement (c.GetAttribute ("Uri"), c.GetAttribute ("Optional") == "true"));
+                        reqs.Add(
+                            new ClaimTypeRequirement(
+                                c.GetAttribute("Uri"),
+                                c.GetAttribute("Optional") == "true"
+                            )
+                        );
                 else
-                    alist.Add (el);
+                    alist.Add(el);
             }
 
-            CardSelectionContext ctx = new CardSelectionContext (
-                EndpointAddress.ReadFrom (XmlDictionaryReader.CreateDictionaryReader (new XmlNodeReader (target))),
-                EndpointAddress.ReadFrom (XmlDictionaryReader.CreateDictionaryReader (new XmlNodeReader (issuer))),
+            CardSelectionContext ctx = new CardSelectionContext(
+                EndpointAddress.ReadFrom(
+                    XmlDictionaryReader.CreateDictionaryReader(new XmlNodeReader(target))
+                ),
+                EndpointAddress.ReadFrom(
+                    XmlDictionaryReader.CreateDictionaryReader(new XmlNodeReader(issuer))
+                ),
                 reqs,
                 alist,
                 policyNoticeLink,
-                policyNoticeVersion);
+                policyNoticeVersion
+            );
 
-            IdentityCard card = SelectCardToSend (ctx);
+            IdentityCard card = SelectCardToSend(ctx);
 
             if (card.Issuer != null)
                 // process WS-Trust RST
-                return RequestTrustedToken (ctx, card);
+                return RequestTrustedToken(ctx, card);
             else
-                return RequestSelfIssuedToken (ctx, card);
+                return RequestSelfIssuedToken(ctx, card);
         }
 
-        public virtual GenericXmlSecurityToken RequestTrustedToken (CardSelectionContext ctx, IdentityCard card)
+        public virtual GenericXmlSecurityToken RequestTrustedToken(
+            CardSelectionContext ctx,
+            IdentityCard card
+        )
         {
-            X509Certificate2 cert = new X509Certificate2 (card.Certificate);
-            EndpointAddress issuer = new EndpointAddress (card.Issuer, new X509CertificateEndpointIdentity (cert));
-            return RequestToken (issuer, ctx);
+            X509Certificate2 cert = new X509Certificate2(card.Certificate);
+            EndpointAddress issuer = new EndpointAddress(
+                card.Issuer,
+                new X509CertificateEndpointIdentity(cert)
+            );
+            return RequestToken(issuer, ctx);
         }
 
-        public virtual GenericXmlSecurityToken RequestSelfIssuedToken (CardSelectionContext ctx, IdentityCard card)
+        public virtual GenericXmlSecurityToken RequestSelfIssuedToken(
+            CardSelectionContext ctx,
+            IdentityCard card
+        )
         {
-            Uri issuerUri = card.Issuer ?? new Uri (SelfIdentityIssuerUrl);
-            X509Certificate2 cert = new X509Certificate2 (SelfIdentityIssuerCertificate);
-            EndpointAddress issuer = new EndpointAddress (issuerUri, new X509CertificateEndpointIdentity (cert));
-            return RequestToken (issuer, ctx);
+            Uri issuerUri = card.Issuer ?? new Uri(SelfIdentityIssuerUrl);
+            X509Certificate2 cert = new X509Certificate2(SelfIdentityIssuerCertificate);
+            EndpointAddress issuer = new EndpointAddress(
+                issuerUri,
+                new X509CertificateEndpointIdentity(cert)
+            );
+            return RequestToken(issuer, ctx);
         }
 
         // This must be implemented unless other depending methods
         // are overriden.
-        public virtual GenericXmlSecurityToken RequestToken (EndpointAddress issuer, CardSelectionContext ctx)
+        public virtual GenericXmlSecurityToken RequestToken(
+            EndpointAddress issuer,
+            CardSelectionContext ctx
+        )
         {
             return null;
         }

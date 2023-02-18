@@ -6,19 +6,24 @@ namespace Microsoft.Build.Framework
     [SerializableAttribute]
     public struct BuildEngineResult
     {
-        public BuildEngineResult (bool result, List<IDictionary<string, ITaskItem[]>> targetOutputsPerProject)
+        public BuildEngineResult(
+            bool result,
+            List<IDictionary<string, ITaskItem[]>> targetOutputsPerProject
+        )
         {
             this.result = result;
             this.outputs = targetOutputsPerProject;
         }
 
         readonly bool result;
-        public bool Result {
+        public bool Result
+        {
             get { return result; }
         }
 
         readonly IList<IDictionary<string, ITaskItem[]>> outputs;
-        public IList<IDictionary<string, ITaskItem[]>> TargetOutputsPerProject {
+        public IList<IDictionary<string, ITaskItem[]>> TargetOutputsPerProject
+        {
             get { return outputs; }
         }
     }

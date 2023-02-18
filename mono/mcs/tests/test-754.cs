@@ -1,6 +1,6 @@
 namespace Bug
 {
-    public delegate void D ();
+    public delegate void D();
 
     public abstract class A
     {
@@ -18,8 +18,6 @@ namespace Bug
 
     class M
     {
-        public static void Main ()
-        {
-        }
+        public static void Main() { }
     }
 }

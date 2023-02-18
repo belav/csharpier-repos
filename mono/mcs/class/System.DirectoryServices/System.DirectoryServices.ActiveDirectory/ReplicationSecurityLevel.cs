@@ -20,6 +20,7 @@
 * SOFTWARE.
 *******************************************************************************/
 using System;
+
 namespace System.DirectoryServices.ActiveDirectory
 {
     public enum ReplicationSecurityLevel

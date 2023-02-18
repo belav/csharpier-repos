@@ -3,8 +3,6 @@
 
 public class A<T>
 {
-    public A (T i)
-        : this (i)
-    {
-    }
+    public A(T i)
+        : this(i) { }
 }

@@ -32,24 +32,28 @@ namespace Microsoft.Win32.SafeHandles
 {
     public abstract class SafeNCryptHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        protected SafeNCryptHandle ()
-            : base (true)
+        protected SafeNCryptHandle()
+            : base(true) { }
+
+        protected SafeNCryptHandle(
+            IntPtr handle,
+            System.Runtime.InteropServices.SafeHandle parentHandle
+        )
+            : base(false)
         {
+            throw new NotImplementedException();
         }
 
-        protected SafeNCryptHandle (IntPtr handle, System.Runtime.InteropServices.SafeHandle parentHandle)
-            : base (false)
+        public override bool IsInvalid
         {
-            throw new NotImplementedException ();
+            get { throw new NotImplementedException(); }
         }
 
-        public override bool IsInvalid { get { throw new NotImplementedException (); } }
-
-        protected override bool ReleaseHandle ()
+        protected override bool ReleaseHandle()
         {
             return false;
         }
 
         protected abstract bool ReleaseNativeHandle();
     }
-}    
+}

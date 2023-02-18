@@ -14,14 +14,14 @@ namespace MonoTests.SystemWeb.Framework
         string _body;
         HttpStatusCode _statusCode;
         string _statusDescription;
+
         /// <summary>
         /// Get the response body.
         /// </summary>
         public string Body
         {
             get { return _body; }
-            internal
-            set { _body = value; }
+            internal set { _body = value; }
         }
 
         /// <summary>
@@ -30,8 +30,7 @@ namespace MonoTests.SystemWeb.Framework
         public HttpStatusCode StatusCode
         {
             get { return _statusCode; }
-            internal
-            set { _statusCode = value; }
+            internal set { _statusCode = value; }
         }
 
         /// <summary>
@@ -40,8 +39,7 @@ namespace MonoTests.SystemWeb.Framework
         public string StatusDescription
         {
             get { return _statusDescription; }
-            internal
-            set { _statusDescription = value; }
+            internal set { _statusDescription = value; }
         }
     }
 }

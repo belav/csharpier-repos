@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,38 +33,48 @@ namespace Microsoft.Build.Execution
 {
     public class BuildResult
     {
-        public BuildResult ()
+        public BuildResult()
         {
-            ResultsByTarget = new Dictionary<string, TargetResult> ();
-        }
-        
-        public void AddResultsForTarget (string target, TargetResult result)
-        {
-            ResultsByTarget.Add (target, result);
+            ResultsByTarget = new Dictionary<string, TargetResult>();
         }
 
-        public bool HasResultsForTarget (string target)
+        public void AddResultsForTarget(string target, TargetResult result)
         {
-            return ResultsByTarget.ContainsKey (target);
+            ResultsByTarget.Add(target, result);
         }
 
-        public void MergeResults (BuildResult results)
+        public bool HasResultsForTarget(string target)
+        {
+            return ResultsByTarget.ContainsKey(target);
+        }
+
+        public void MergeResults(BuildResult results)
         {
             if (ConfigurationId != results.ConfigurationId)
-                throw new InvalidOperationException ("Argument BuildResults have inconsistent ConfigurationId.");
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent ConfigurationId."
+                );
             if (GlobalRequestId != results.GlobalRequestId)
-                throw new InvalidOperationException ("Argument BuildResults have inconsistent GlobalRequestId.");
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent GlobalRequestId."
+                );
             if (NodeRequestId != results.NodeRequestId)
-                throw new InvalidOperationException ("Argument BuildResults have inconsistent NodeRequestId.");
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent NodeRequestId."
+                );
             if (ParentGlobalRequestId != results.ParentGlobalRequestId)
-                throw new InvalidOperationException ("Argument BuildResults have inconsistent ParentGlobalRequestId.");
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent ParentGlobalRequestId."
+                );
             if (SubmissionId != results.SubmissionId)
-                throw new InvalidOperationException ("Argument BuildResults have inconsistent SubmissionId.");
-            
+                throw new InvalidOperationException(
+                    "Argument BuildResults have inconsistent SubmissionId."
+                );
+
             CircularDependency |= results.CircularDependency;
             Exception = Exception ?? results.Exception;
             foreach (var p in results.ResultsByTarget)
-                ResultsByTarget.Add (p.Key, p.Value);
+                ResultsByTarget.Add(p.Key, p.Value);
         }
 
         public bool CircularDependency { get; internal set; }
@@ -75,17 +85,20 @@ namespace Microsoft.Build.Execution
 
         public int GlobalRequestId { get; internal set; }
 
-        public ITargetResult this [string target] {
-            get { return ResultsByTarget [target]; }
+        public ITargetResult this[string target]
+        {
+            get { return ResultsByTarget[target]; }
         }
 
         public int NodeRequestId { get; internal set; }
 
         BuildResultCode? overall_result;
-        public BuildResultCode OverallResult {
-            get {
+        public BuildResultCode OverallResult
+        {
+            get
+            {
                 if (overall_result == null)
-                    throw new InvalidOperationException ("Build has not finished");
+                    throw new InvalidOperationException("Build has not finished");
                 return overall_result.Value;
             }
             internal set { overall_result = value; }
@@ -98,4 +111,3 @@ namespace Microsoft.Build.Execution
         public int SubmissionId { get; internal set; }
     }
 }
-

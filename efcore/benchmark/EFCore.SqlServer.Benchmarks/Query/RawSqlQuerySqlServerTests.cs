@@ -7,8 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
 {
     public class RawSqlQuerySqlServerTests : RawSqlQueryTests
     {
-        protected override string StoredProcedureCreationScript
-            => @"CREATE PROCEDURE dbo.SearchProducts
+        protected override string StoredProcedureCreationScript =>
+            @"CREATE PROCEDURE dbo.SearchProducts
                     @minPrice decimal(18, 2),
                     @maxPrice decimal(18, 2)
                 AS

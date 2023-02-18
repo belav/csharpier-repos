@@ -7,7 +7,7 @@ using System.Threading;
 
 class Runtime_77968
 {
-    private static readonly object o = new ();
+    private static readonly object o = new();
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int Foo()

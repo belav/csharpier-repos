@@ -23,7 +23,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         public TelemetryMessage(CancellationToken cancellationToken)
         {
             var logMessage = KeyValueLogMessage.Create(LogType.UserAction, SetLogProperties);
-            _logBlock = Logger.LogBlock(FunctionId.NavigateToExternalSources, logMessage, cancellationToken);
+            _logBlock = Logger.LogBlock(
+                FunctionId.NavigateToExternalSources,
+                logMessage,
+                cancellationToken
+            );
         }
 
         public void SetPdbSource(string source)

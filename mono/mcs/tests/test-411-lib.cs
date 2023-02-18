@@ -6,7 +6,6 @@ namespace Qt
     {
         protected static event MousePressEvent mousePressEvent;
 
-        protected delegate void MousePressEvent ();
+        protected delegate void MousePressEvent();
     }
-
 }

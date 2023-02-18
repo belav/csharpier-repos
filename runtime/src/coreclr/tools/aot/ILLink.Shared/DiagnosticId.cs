@@ -206,10 +206,11 @@ namespace ILLink.Shared
 
     public static class DiagnosticIdExtensions
     {
-        public static string AsString (this DiagnosticId diagnosticId) => $"IL{(int) diagnosticId}";
+        public static string AsString(this DiagnosticId diagnosticId) => $"IL{(int)diagnosticId}";
 
-        public static string GetDiagnosticSubcategory (this DiagnosticId diagnosticId) =>
-            (int) diagnosticId switch {
+        public static string GetDiagnosticSubcategory(this DiagnosticId diagnosticId) =>
+            (int)diagnosticId switch
+            {
                 2026 => MessageSubCategory.TrimAnalysis,
                 2032 => MessageSubCategory.TrimAnalysis,
                 2041 => MessageSubCategory.TrimAnalysis,
@@ -228,12 +229,16 @@ namespace ILLink.Shared
                 _ => MessageSubCategory.None,
             };
 
-        public static string GetDiagnosticCategory (this DiagnosticId diagnosticId) =>
-            (int) diagnosticId switch {
+        public static string GetDiagnosticCategory(this DiagnosticId diagnosticId) =>
+            (int)diagnosticId switch
+            {
                 > 2000 and < 3000 => DiagnosticCategory.Trimming,
                 >= 3000 and < 3050 => DiagnosticCategory.SingleFile,
                 >= 3050 and <= 6000 => DiagnosticCategory.AOT,
-                _ => throw new ArgumentException ($"The provided diagnostic id '{diagnosticId}' does not fall into the range of supported warning codes 2001 to 6000 (inclusive).")
+                _
+                    => throw new ArgumentException(
+                        $"The provided diagnostic id '{diagnosticId}' does not fall into the range of supported warning codes 2001 to 6000 (inclusive)."
+                    )
             };
     }
 }

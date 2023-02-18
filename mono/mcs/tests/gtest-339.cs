@@ -4,23 +4,19 @@ using System.Collections.Generic;
 
 class Program
 {
-    public static void Main ()
+    public static void Main()
     {
-        SerializeDictionary (new SerializerLazyDictionary ());
+        SerializeDictionary(new SerializerLazyDictionary());
     }
 
-    static void SerializeDictionary (IDictionary values)
-    {
-    }
+    static void SerializeDictionary(IDictionary values) { }
 
-    static void SerializeDictionary (IDictionary<string, object> values)
-    {
-    }
+    static void SerializeDictionary(IDictionary<string, object> values) { }
 }
 
 sealed class SerializerLazyDictionary : LazyDictionary
 {
-    protected override IEnumerator<KeyValuePair<string, object>> GetEnumerator ()
+    protected override IEnumerator<KeyValuePair<string, object>> GetEnumerator()
     {
         return null;
     }
@@ -28,89 +24,91 @@ sealed class SerializerLazyDictionary : LazyDictionary
 
 internal abstract class LazyDictionary : IDictionary<string, object>
 {
-    void IDictionary<string, object>.Add (string key, object value)
+    void IDictionary<string, object>.Add(string key, object value)
     {
-        throw new NotSupportedException ();
+        throw new NotSupportedException();
     }
 
-    bool IDictionary<string, object>.ContainsKey (string key)
+    bool IDictionary<string, object>.ContainsKey(string key)
     {
-        throw new NotSupportedException ();
+        throw new NotSupportedException();
     }
 
     ICollection<string> IDictionary<string, object>.Keys
     {
-        get { throw new NotSupportedException (); }
+        get { throw new NotSupportedException(); }
     }
 
-    bool IDictionary<string, object>.Remove (string key)
+    bool IDictionary<string, object>.Remove(string key)
     {
-        throw new NotSupportedException ();
+        throw new NotSupportedException();
     }
 
-    bool IDictionary<string, object>.TryGetValue (string key, out object value)
+    bool IDictionary<string, object>.TryGetValue(string key, out object value)
     {
-        throw new NotSupportedException ();
+        throw new NotSupportedException();
     }
 
     ICollection<object> IDictionary<string, object>.Values
     {
-        get { throw new NotSupportedException (); }
+        get { throw new NotSupportedException(); }
     }
 
-    object IDictionary<string, object>.this [string key] {
-        get {
-            throw new NotSupportedException ();
-        }
-        set {
-            throw new NotSupportedException ();
-        }
-    }
-
-    void ICollection<KeyValuePair<string, object>>.Add (KeyValuePair<string, object> item)
+    object IDictionary<string, object>.this[string key]
     {
-        throw new NotSupportedException ();
+        get { throw new NotSupportedException(); }
+        set { throw new NotSupportedException(); }
     }
 
-    void ICollection<KeyValuePair<string, object>>.Clear ()
+    void ICollection<KeyValuePair<string, object>>.Add(KeyValuePair<string, object> item)
     {
-        throw new NotSupportedException ();
+        throw new NotSupportedException();
     }
 
-    bool ICollection<KeyValuePair<string, object>>.Contains (KeyValuePair<string, object> item)
+    void ICollection<KeyValuePair<string, object>>.Clear()
     {
-        throw new NotSupportedException ();
+        throw new NotSupportedException();
     }
 
-    void ICollection<KeyValuePair<string, object>>.CopyTo (KeyValuePair<string, object> [] array, int arrayIndex)
+    bool ICollection<KeyValuePair<string, object>>.Contains(KeyValuePair<string, object> item)
     {
-        throw new NotSupportedException ();
+        throw new NotSupportedException();
+    }
+
+    void ICollection<KeyValuePair<string, object>>.CopyTo(
+        KeyValuePair<string, object>[] array,
+        int arrayIndex
+    )
+    {
+        throw new NotSupportedException();
     }
 
     int ICollection<KeyValuePair<string, object>>.Count
     {
-        get { throw new NotSupportedException (); }
+        get { throw new NotSupportedException(); }
     }
 
     bool ICollection<KeyValuePair<string, object>>.IsReadOnly
     {
-        get { throw new NotSupportedException (); }
+        get { throw new NotSupportedException(); }
     }
 
-    bool ICollection<KeyValuePair<string, object>>.Remove (KeyValuePair<string, object> item)
+    bool ICollection<KeyValuePair<string, object>>.Remove(KeyValuePair<string, object> item)
     {
-        throw new NotSupportedException ();
+        throw new NotSupportedException();
     }
 
-    IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator ()
+    IEnumerator<KeyValuePair<string, object>> IEnumerable<
+        KeyValuePair<string, object>
+    >.GetEnumerator()
     {
-        return GetEnumerator ();
+        return GetEnumerator();
     }
 
-    protected abstract IEnumerator<KeyValuePair<string, object>> GetEnumerator ();
+    protected abstract IEnumerator<KeyValuePair<string, object>> GetEnumerator();
 
-    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-        return ((IEnumerable<KeyValuePair<string, object>>) this).GetEnumerator ();
+        return ((IEnumerable<KeyValuePair<string, object>>)this).GetEnumerator();
     }
 }

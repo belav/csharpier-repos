@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,128 +29,135 @@
 using System.Collections;
 using System.ComponentModel;
 
-namespace System.Web.UI.WebControls {
-    public sealed class DataGridColumnCollection : ICollection, IStateManager {
-        public DataGridColumnCollection (DataGrid owner, ArrayList columns)
+namespace System.Web.UI.WebControls
+{
+    public sealed class DataGridColumnCollection : ICollection, IStateManager
+    {
+        public DataGridColumnCollection(DataGrid owner, ArrayList columns)
         {
             this.owner = owner;
             this.columns = columns;
         }
-    
-    
-        public void Add (DataGridColumn column)
+
+        public void Add(DataGridColumn column)
         {
-            columns.Add (column);
-            column.Set_Owner (owner);
+            columns.Add(column);
+            column.Set_Owner(owner);
             if (track)
-                ((IStateManager) column).TrackViewState ();
-        }
-    
-        public void AddAt (int index, DataGridColumn column)
-        {
-            columns.Insert (index, column);
-            column.Set_Owner (owner);
-            if (track)
-                ((IStateManager) column).TrackViewState ();
-        }
-    
-        public void Clear ()
-        {
-            columns.Clear ();
-        }
-    
-        public void CopyTo (Array array, int index)
-        {
-            columns.CopyTo (array, index);
-        }
-    
-        public IEnumerator GetEnumerator ()
-        {
-            return columns.GetEnumerator ();
-        }
-    
-        public int IndexOf (DataGridColumn column)
-        {
-            return columns.IndexOf (column);
+                ((IStateManager)column).TrackViewState();
         }
 
-        [Obsolete ("figure out what you need with me")]
-        internal void OnColumnsChanged ()
+        public void AddAt(int index, DataGridColumn column)
+        {
+            columns.Insert(index, column);
+            column.Set_Owner(owner);
+            if (track)
+                ((IStateManager)column).TrackViewState();
+        }
+
+        public void Clear()
+        {
+            columns.Clear();
+        }
+
+        public void CopyTo(Array array, int index)
+        {
+            columns.CopyTo(array, index);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return columns.GetEnumerator();
+        }
+
+        public int IndexOf(DataGridColumn column)
+        {
+            return columns.IndexOf(column);
+        }
+
+        [Obsolete("figure out what you need with me")]
+        internal void OnColumnsChanged()
         {
             // Do something
         }
-    
-        public void Remove (DataGridColumn column)
+
+        public void Remove(DataGridColumn column)
         {
-            columns.Remove (column);
+            columns.Remove(column);
         }
-    
-        public void RemoveAt (int index)
+
+        public void RemoveAt(int index)
         {
-            columns.RemoveAt (index);
+            columns.RemoveAt(index);
         }
-    
-        void System.Web.UI.IStateManager.LoadViewState (object savedState)
+
+        void System.Web.UI.IStateManager.LoadViewState(object savedState)
         {
-            object [] o = (object []) savedState;
+            object[] o = (object[])savedState;
             if (o == null)
                 return;
 
             int i = 0;
             foreach (IStateManager ism in this)
-                ism.LoadViewState (o [i++]);
+                ism.LoadViewState(o[i++]);
         }
-    
-        object System.Web.UI.IStateManager.SaveViewState ()
+
+        object System.Web.UI.IStateManager.SaveViewState()
         {
-            object [] o = new object [Count];
+            object[] o = new object[Count];
 
             int i = 0;
             foreach (IStateManager ism in this)
-                o [i++] = ism.SaveViewState ();
+                o[i++] = ism.SaveViewState();
 
             foreach (object a in o)
                 if (a != null)
                     return o;
             return null;
         }
-    
-        void System.Web.UI.IStateManager.TrackViewState ()
+
+        void System.Web.UI.IStateManager.TrackViewState()
         {
             track = true;
             foreach (IStateManager ism in this)
-                ism.TrackViewState ();
+                ism.TrackViewState();
         }
 
         [Browsable(false)]
-        public int Count {
+        public int Count
+        {
             get { return columns.Count; }
         }
-    
-        bool IStateManager.IsTrackingViewState {
+
+        bool IStateManager.IsTrackingViewState
+        {
             get { return track; }
         }
-    
+
         [Browsable(false)]
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return columns.IsReadOnly; }
         }
-    
+
         [Browsable(false)]
-        public bool IsSynchronized {
-            get { return columns.IsSynchronized; }    
+        public bool IsSynchronized
+        {
+            get { return columns.IsSynchronized; }
         }
 
         [Browsable(false)]
-        public DataGridColumn this [int index] {
-            get { return (DataGridColumn) columns [index]; }
+        public DataGridColumn this[int index]
+        {
+            get { return (DataGridColumn)columns[index]; }
         }
 
         [Browsable(false)]
-        public object SyncRoot {
+        public object SyncRoot
+        {
             get { return columns.SyncRoot; }
         }
-    
+
         DataGrid owner;
         ArrayList columns;
         bool track;

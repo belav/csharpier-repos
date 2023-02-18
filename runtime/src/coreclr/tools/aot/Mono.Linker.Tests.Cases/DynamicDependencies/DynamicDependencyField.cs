@@ -8,28 +8,26 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 {
     public class DynamicDependencyField
     {
-        public static void Main ()
+        public static void Main()
         {
-            DirectReference.Test ();
-            ReferenceViaReflection.Test ();
+            DirectReference.Test();
+            ReferenceViaReflection.Test();
         }
 
-        [KeptMember (".ctor()")]
+        [KeptMember(".ctor()")]
         class DirectReference
         {
             [Kept]
-            [DynamicDependency ("ExtraMethod1")]
+            [DynamicDependency("ExtraMethod1")]
             public int field;
 
             [Kept]
-            static void ExtraMethod1 ()
-            {
-            }
+            static void ExtraMethod1() { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                var b = new DirectReference ();
+                var b = new DirectReference();
                 b.field = 3;
             }
         }
@@ -37,18 +35,16 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
         class ReferenceViaReflection
         {
             [Kept]
-            [DynamicDependency ("TargetMethod")]
+            [DynamicDependency("TargetMethod")]
             public static int source;
 
             [Kept]
-            static void TargetMethod ()
-            {
-            }
+            static void TargetMethod() { }
 
             [Kept]
-            public static void Test ()
+            public static void Test()
             {
-                typeof (ReferenceViaReflection).RequiresPublicFields ();
+                typeof(ReferenceViaReflection).RequiresPublicFields();
             }
         }
     }

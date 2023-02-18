@@ -2,23 +2,25 @@
 
 class Test
 {
-    public static void Main (string[] args)
+    public static void Main(string[] args)
     {
         string s = "hello, world!";
-        Outer (s);
+        Outer(s);
     }
 
-    static void Outer (string s)
+    static void Outer(string s)
     {
-        unsafe {
-            fixed (char* sp = s) {
+        unsafe
+        {
+            fixed (char* sp = s)
+            {
                 char* p = sp;
-                Inner (ref p, sp);
+                Inner(ref p, sp);
             }
         }
     }
 
-    static unsafe void Inner (ref char* p, char* sp)
+    static unsafe void Inner(ref char* p, char* sp)
     {
         ++sp;
         p = sp;

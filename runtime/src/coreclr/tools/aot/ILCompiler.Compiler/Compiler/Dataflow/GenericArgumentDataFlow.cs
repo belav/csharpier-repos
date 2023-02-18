@@ -25,7 +25,12 @@ namespace ILCompiler.Dataflow
         private readonly FlowAnnotations _annotations;
         private readonly MessageOrigin _origin;
 
-        public GenericArgumentDataFlow(Logger logger, NodeFactory factory, FlowAnnotations annotations, in MessageOrigin origin)
+        public GenericArgumentDataFlow(
+            Logger logger,
+            NodeFactory factory,
+            FlowAnnotations annotations,
+            in MessageOrigin origin
+        )
         {
             _logger = logger;
             _factory = factory;
@@ -33,28 +38,57 @@ namespace ILCompiler.Dataflow
             _origin = origin;
         }
 
-        public DependencyList ProcessGenericArgumentDataFlow(GenericParameterDesc genericParameter, TypeDesc genericArgument)
+        public DependencyList ProcessGenericArgumentDataFlow(
+            GenericParameterDesc genericParameter,
+            TypeDesc genericArgument
+        )
         {
             var genericParameterValue = _annotations.GetGenericParameterValue(genericParameter);
-            Debug.Assert(genericParameterValue.DynamicallyAccessedMemberTypes != DynamicallyAccessedMemberTypes.None);
+            Debug.Assert(
+                genericParameterValue.DynamicallyAccessedMemberTypes
+                    != DynamicallyAccessedMemberTypes.None
+            );
 
-            MultiValue genericArgumentValue = _annotations.GetTypeValueFromGenericArgument(genericArgument);
+            MultiValue genericArgumentValue = _annotations.GetTypeValueFromGenericArgument(
+                genericArgument
+            );
 
             var diagnosticContext = new DiagnosticContext(
                 _origin,
-                _logger.ShouldSuppressAnalysisWarningsForRequires(_origin.MemberDefinition, DiagnosticUtilities.RequiresUnreferencedCodeAttribute),
-                _logger);
-            return RequireDynamicallyAccessedMembers(diagnosticContext, genericArgumentValue, genericParameterValue, new GenericParameterOrigin(genericParameter));
+                _logger.ShouldSuppressAnalysisWarningsForRequires(
+                    _origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresUnreferencedCodeAttribute
+                ),
+                _logger
+            );
+            return RequireDynamicallyAccessedMembers(
+                diagnosticContext,
+                genericArgumentValue,
+                genericParameterValue,
+                new GenericParameterOrigin(genericParameter)
+            );
         }
 
         private DependencyList RequireDynamicallyAccessedMembers(
             in DiagnosticContext diagnosticContext,
             in MultiValue value,
             ValueWithDynamicallyAccessedMembers targetValue,
-            Origin memberWithRequirements)
+            Origin memberWithRequirements
+        )
         {
-            var reflectionMarker = new ReflectionMarker(_logger, _factory, _annotations, typeHierarchyDataFlow: false, enabled: true);
-            var requireDynamicallyAccessedMembersAction = new RequireDynamicallyAccessedMembersAction(reflectionMarker, diagnosticContext, memberWithRequirements);
+            var reflectionMarker = new ReflectionMarker(
+                _logger,
+                _factory,
+                _annotations,
+                typeHierarchyDataFlow: false,
+                enabled: true
+            );
+            var requireDynamicallyAccessedMembersAction =
+                new RequireDynamicallyAccessedMembersAction(
+                    reflectionMarker,
+                    diagnosticContext,
+                    memberWithRequirements
+                );
             requireDynamicallyAccessedMembersAction.Invoke(value, targetValue);
             return reflectionMarker.Dependencies;
         }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,17 +28,21 @@
 
 using System.ComponentModel;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
     [ToolboxItemFilter("System.Windows.Forms")]
-    public abstract class CommonDialog : System.ComponentModel.Component {
+    public abstract class CommonDialog : System.ComponentModel.Component
+    {
         #region DialogForm
-        internal class DialogForm : Form {
+        internal class DialogForm : Form
+        {
             #region DialogForm Local Variables
-            protected CommonDialog    owner;
+            protected CommonDialog owner;
             #endregion DialogForm Local Variables
 
             #region DialogForm Constructors
-            internal DialogForm(CommonDialog owner) {
+            internal DialogForm(CommonDialog owner)
+            {
                 this.owner = owner;
                 ControlBox = true;
                 MinimizeBox = false;
@@ -50,13 +54,17 @@ namespace System.Windows.Forms {
             #endregion DialogForm Constructors
 
             #region Protected Instance Properties
-            protected override CreateParams CreateParams {
-                get {
-                    CreateParams    cp;
+            protected override CreateParams CreateParams
+            {
+                get
+                {
+                    CreateParams cp;
 
                     cp = base.CreateParams;
 
-                    cp.Style |= (int)(WindowStyles.WS_POPUP | WindowStyles.WS_CAPTION | WindowStyles.WS_SYSMENU);
+                    cp.Style |= (int)(
+                        WindowStyles.WS_POPUP | WindowStyles.WS_CAPTION | WindowStyles.WS_SYSMENU
+                    );
 
                     return cp;
                 }
@@ -64,84 +72,90 @@ namespace System.Windows.Forms {
             #endregion    // Protected Instance Properties
 
             #region Internal Methods
-            internal DialogResult RunDialog () {
-                owner.InitFormsSize (this);
+            internal DialogResult RunDialog()
+            {
+                owner.InitFormsSize(this);
 
-                this.ShowDialog ();
+                this.ShowDialog();
 
                 return this.DialogResult;
-
             }
             #endregion Internal Methods
         }
         #endregion DialogForm
 
         #region Local Variables
-        internal DialogForm    form;
+        internal DialogForm form;
         private object tag;
         #endregion Local Variables
 
         #region Public Constructors
-        public CommonDialog() {
-        }
+        public CommonDialog() { }
         #endregion Public Constructors
 
         #region Public Properties
-        [Localizable (false)]
-        [Bindable (true)]
-        [TypeConverter (typeof (StringConverter))]
-        [DefaultValue (null)]
-        [MWFCategory ("Data")]
-        public object Tag {
+        [Localizable(false)]
+        [Bindable(true)]
+        [TypeConverter(typeof(StringConverter))]
+        [DefaultValue(null)]
+        [MWFCategory("Data")]
+        public object Tag
+        {
             get { return this.tag; }
             set { this.tag = value; }
         }
         #endregion
 
         #region Internal Methods
-        internal virtual void InitFormsSize(Form form) {
+        internal virtual void InitFormsSize(Form form)
+        {
             // Override this to set a default size for the form
             form.Width = 200;
             form.Height = 200;
         }
         #endregion Internal Methods
-    
-        #region Public Instance Methods
-        public abstract void Reset ();
 
-        public DialogResult ShowDialog() {
-            return ShowDialog (null);
+        #region Public Instance Methods
+        public abstract void Reset();
+
+        public DialogResult ShowDialog()
+        {
+            return ShowDialog(null);
         }
 
-        public DialogResult ShowDialog (IWin32Window owner)
+        public DialogResult ShowDialog(IWin32Window owner)
         {
             // This is an external derived CommonDialog
-            if (form == null) {
-                if (RunDialog (owner == null ? IntPtr.Zero : owner.Handle))
+            if (form == null)
+            {
+                if (RunDialog(owner == null ? IntPtr.Zero : owner.Handle))
                     return DialogResult.OK;
                 return DialogResult.Cancel;
             }
-            
+
             // This is an internal derived CommonDialog
-            if (RunDialog (form.Handle))
-                form.ShowDialog (owner);
+            if (RunDialog(form.Handle))
+                form.ShowDialog(owner);
 
             return form.DialogResult;
         }
         #endregion    // Public Instance Methods
 
         #region Protected Instance Methods
-        protected virtual IntPtr HookProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam) {
+        protected virtual IntPtr HookProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam)
+        {
             return IntPtr.Zero;
         }
 
-        protected virtual void OnHelpRequest(EventArgs e) {
-            EventHandler eh = (EventHandler)(Events [HelpRequestEvent]);
+        protected virtual void OnHelpRequest(EventArgs e)
+        {
+            EventHandler eh = (EventHandler)(Events[HelpRequestEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
-        protected virtual IntPtr OwnerWndProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam) {
+        protected virtual IntPtr OwnerWndProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam)
+        {
             return IntPtr.Zero;
         }
 
@@ -149,11 +163,12 @@ namespace System.Windows.Forms {
         #endregion    // Protected Instance Methods
 
         #region Events
-        static object HelpRequestEvent = new object ();
+        static object HelpRequestEvent = new object();
 
-        public event EventHandler HelpRequest {
-            add { Events.AddHandler (HelpRequestEvent, value); }
-            remove { Events.RemoveHandler (HelpRequestEvent, value); }
+        public event EventHandler HelpRequest
+        {
+            add { Events.AddHandler(HelpRequestEvent, value); }
+            remove { Events.RemoveHandler(HelpRequestEvent, value); }
         }
         #endregion    // Events
     }

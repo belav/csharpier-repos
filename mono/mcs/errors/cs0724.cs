@@ -11,9 +11,7 @@ class C
         }
         catch
         {
-            try
-            {
-            }
+            try { }
             finally
             {
                 throw;

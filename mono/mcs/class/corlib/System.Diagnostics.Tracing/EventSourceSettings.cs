@@ -38,4 +38,3 @@ namespace System.Diagnostics.Tracing
         EtwSelfDescribingEventFormat = 8
     }
 }
-

@@ -2,27 +2,24 @@
 // Line: 10
 using System;
 
-public enum SomeEnum {
+public enum SomeEnum
+{
     Something1,
     Something2
 }
 
-public enum SomeEnum {
+public enum SomeEnum
+{
     Dog,
     Fish,
     Cat
 }
 
-public class DupeEnumTest {
-    public static void Main(string[] args) {
+public class DupeEnumTest
+{
+    public static void Main(string[] args)
+    {
         SomeEnum someEnum = SomeEnum.Dog;
-        Console.WriteLine("SomeEnum Result: " + someEnum.ToString
-());
+        Console.WriteLine("SomeEnum Result: " + someEnum.ToString());
     }
 }
-
-
-
-
-
-        

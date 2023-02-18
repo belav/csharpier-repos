@@ -1,5 +1,5 @@
 //
-// XmlTypeMapElementInfo.cs: 
+// XmlTypeMapElementInfo.cs:
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -45,13 +45,13 @@ namespace System.Xml.Serialization
         XmlTypeMapMember _member;
         object _choiceValue;
         bool _isNullable;
-        int _nestingLevel;    // Only for array items
+        int _nestingLevel; // Only for array items
         XmlTypeMapping _mappedType;
         TypeData _type;
         bool _wrappedElement = true;
         int _explicitOrder = -1;
-        
-        public XmlTypeMapElementInfo (XmlTypeMapMember member, TypeData type)
+
+        public XmlTypeMapElementInfo(XmlTypeMapMember member, TypeData type)
         {
             _member = member;
             _type = type;
@@ -85,23 +85,27 @@ namespace System.Xml.Serialization
 
         public string DataTypeNamespace
         {
-            get 
-            { 
-                if (_mappedType == null) return XmlSchema.Namespace;
-                else return _mappedType.XmlTypeNamespace;
+            get
+            {
+                if (_mappedType == null)
+                    return XmlSchema.Namespace;
+                else
+                    return _mappedType.XmlTypeNamespace;
             }
         }
 
         public string DataTypeName
         {
-            get 
-            { 
-                if (_mappedType == null) return TypeData.XmlType;
-                else return _mappedType.XmlType;
+            get
+            {
+                if (_mappedType == null)
+                    return TypeData.XmlType;
+                else
+                    return _mappedType.XmlType;
             }
         }
 
-        public XmlSchemaForm Form 
+        public XmlSchemaForm Form
         {
             get { return _form; }
             set { _form = value; }
@@ -138,10 +142,12 @@ namespace System.Xml.Serialization
 
         public bool MultiReferenceType
         {
-            get 
-            { 
-                if (_mappedType != null) return _mappedType.MultiReferenceType;
-                else return false;
+            get
+            {
+                if (_mappedType != null)
+                    return _mappedType.MultiReferenceType;
+                else
+                    return false;
             }
         }
 
@@ -154,20 +160,24 @@ namespace System.Xml.Serialization
         public bool IsTextElement
         {
             get { return ElementName == "<text>"; }
-            set {
+            set
+            {
                 if (!value)
-                    throw new Exception ("INTERNAL ERROR; someone wrote unexpected code in sys.xml");
-                ElementName = "<text>"; Namespace = string.Empty;
+                    throw new Exception("INTERNAL ERROR; someone wrote unexpected code in sys.xml");
+                ElementName = "<text>";
+                Namespace = string.Empty;
             }
         }
 
         public bool IsUnnamedAnyElement
         {
             get { return ElementName == string.Empty; }
-            set {
+            set
+            {
                 if (!value)
-                    throw new Exception ("INTERNAL ERROR; someone wrote unexpected code in sys.xml");
-                ElementName = string.Empty; Namespace = string.Empty;
+                    throw new Exception("INTERNAL ERROR; someone wrote unexpected code in sys.xml");
+                ElementName = string.Empty;
+                Namespace = string.Empty;
             }
         }
 
@@ -177,34 +187,43 @@ namespace System.Xml.Serialization
             set { _explicitOrder = value; }
         }
 
-        public override bool Equals (object other)
+        public override bool Equals(object other)
         {
             if (other == null)
                 return false;
             XmlTypeMapElementInfo oinfo = (XmlTypeMapElementInfo)other;
-            if (_elementName != oinfo._elementName) return false;
-            if (_type.XmlType != oinfo._type.XmlType) return false;
-            if (_namespace != oinfo._namespace) return false;
-            if (_form != oinfo._form) return false;
-            if (_type != oinfo._type) return false;
-            if (_isNullable != oinfo._isNullable) return false;
-            if (_choiceValue != null && !_choiceValue.Equals (oinfo._choiceValue)) return false;
-            if (_choiceValue != oinfo._choiceValue) return false;
+            if (_elementName != oinfo._elementName)
+                return false;
+            if (_type.XmlType != oinfo._type.XmlType)
+                return false;
+            if (_namespace != oinfo._namespace)
+                return false;
+            if (_form != oinfo._form)
+                return false;
+            if (_type != oinfo._type)
+                return false;
+            if (_isNullable != oinfo._isNullable)
+                return false;
+            if (_choiceValue != null && !_choiceValue.Equals(oinfo._choiceValue))
+                return false;
+            if (_choiceValue != oinfo._choiceValue)
+                return false;
             return true;
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            return base.GetHashCode ();
+            return base.GetHashCode();
         }
     }
 
-    class XmlTypeMapElementInfoList: ArrayList
+    class XmlTypeMapElementInfoList : ArrayList
     {
-        public int IndexOfElement (string name, string namspace)
+        public int IndexOfElement(string name, string namspace)
         {
-            for (int n=0; n<Count; n++) {
-                XmlTypeMapElementInfo info = (XmlTypeMapElementInfo) base [n];
+            for (int n = 0; n < Count; n++)
+            {
+                XmlTypeMapElementInfo info = (XmlTypeMapElementInfo)base[n];
                 if (info.ElementName == name && info.Namespace == namspace)
                     return n;
             }
@@ -212,4 +231,3 @@ namespace System.Xml.Serialization
         }
     }
 }
-

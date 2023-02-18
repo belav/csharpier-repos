@@ -6,15 +6,11 @@ public class CollectionValueBase<T>
     }
 }
 
-public class CollectionBase<T>: CollectionValueBase<T>
-{
-}
+public class CollectionBase<T> : CollectionValueBase<T> { }
 
-public class SequencedBase<T>: CollectionBase<T>
-{
-}
+public class SequencedBase<T> : CollectionBase<T> { }
 
-public class ArrayBase<T>: SequencedBase<T>
+public class ArrayBase<T> : SequencedBase<T>
 {
     public override T[] ToArray()
     {
@@ -24,6 +20,5 @@ public class ArrayBase<T>: SequencedBase<T>
 
 class X
 {
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

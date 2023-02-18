@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,38 +33,38 @@ using System;
 using System.Security.Cryptography.Xml;
 using System.Xml;
 
-namespace MonoTests.System.Security.Cryptography.Xml {
-
-    public class UnprotectedXmlDecryptionTransform : XmlDecryptionTransform {
-
-        public bool UnprotectedIsTargetElement (XmlElement inputElement, string idValue)
+namespace MonoTests.System.Security.Cryptography.Xml
+{
+    public class UnprotectedXmlDecryptionTransform : XmlDecryptionTransform
+    {
+        public bool UnprotectedIsTargetElement(XmlElement inputElement, string idValue)
         {
-            return base.IsTargetElement (inputElement, idValue);
+            return base.IsTargetElement(inputElement, idValue);
         }
     }
 
     [TestFixture]
-    public class XmlDecryptionTransformTest {
-
+    public class XmlDecryptionTransformTest
+    {
         private UnprotectedXmlDecryptionTransform transform;
 
         [TestFixtureSetUp]
-        public void FixtureSetUp ()
+        public void FixtureSetUp()
         {
-            transform = new UnprotectedXmlDecryptionTransform ();
+            transform = new UnprotectedXmlDecryptionTransform();
         }
 
         [Test]
-        public void IsTargetElement_XmlElementNull ()
+        public void IsTargetElement_XmlElementNull()
         {
-            Assert.IsFalse (transform.UnprotectedIsTargetElement (null, "value"));
+            Assert.IsFalse(transform.UnprotectedIsTargetElement(null, "value"));
         }
 
         [Test]
-        public void IsTargetElement_StringNull ()
+        public void IsTargetElement_StringNull()
         {
-            XmlDocument doc = new XmlDocument ();
-            Assert.IsFalse (transform.UnprotectedIsTargetElement (doc.DocumentElement, null));
+            XmlDocument doc = new XmlDocument();
+            Assert.IsFalse(transform.UnprotectedIsTargetElement(doc.DocumentElement, null));
         }
     }
 }

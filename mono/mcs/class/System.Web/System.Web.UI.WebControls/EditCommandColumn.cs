@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,20 +30,26 @@ using System.Security.Permissions;
 namespace System.Web.UI.WebControls
 {
     // CAS
-    [AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
     public class EditCommandColumn : DataGridColumn
     {
         #region Public Constructors
-        public EditCommandColumn()
-        {
-        }
+        public EditCommandColumn() { }
         #endregion    // Public Constructors
 
         #region Public Instance Properties
-        [DefaultValue (ButtonColumnType.LinkButton)]
-        public virtual ButtonColumnType ButtonType {
-            get {
+        [DefaultValue(ButtonColumnType.LinkButton)]
+        public virtual ButtonColumnType ButtonType
+        {
+            get
+            {
                 object obj;
 
                 obj = ViewState["ButtonType"];
@@ -51,39 +57,43 @@ namespace System.Web.UI.WebControls
                     return (ButtonColumnType)obj;
                 return ButtonColumnType.LinkButton;
             }
-
             set { ViewState["ButtonType"] = value; }
         }
 
-        [DefaultValue ("")]
-        [Localizable (true)]
-        public virtual string CancelText {
+        [DefaultValue("")]
+        [Localizable(true)]
+        public virtual string CancelText
+        {
             get { return ViewState.GetString("CancelText", String.Empty); }
             set { ViewState["CancelText"] = value; }
         }
 
         [DefaultValue(true)]
-        public virtual bool CausesValidation {
-            get { return ViewState.GetBool ("CausesValidation", true); }
-            set { ViewState ["CausesValidation"] = value; } 
+        public virtual bool CausesValidation
+        {
+            get { return ViewState.GetBool("CausesValidation", true); }
+            set { ViewState["CausesValidation"] = value; }
         }
 
         [DefaultValue("")]
-        public virtual string ValidationGroup {
-            get { return ViewState.GetString ("ValidationGroup", String.Empty); }
-            set { ViewState ["ValidationGroup"] = value; } 
+        public virtual string ValidationGroup
+        {
+            get { return ViewState.GetString("ValidationGroup", String.Empty); }
+            set { ViewState["ValidationGroup"] = value; }
         }
 
-        [DefaultValue ("")]
-        [Localizable (true)]
-        public virtual string EditText {
+        [DefaultValue("")]
+        [Localizable(true)]
+        public virtual string EditText
+        {
             get { return ViewState.GetString("EditText", String.Empty); }
             set { ViewState["EditText"] = value; }
         }
 
-        [DefaultValue ("")]
-        [Localizable (true)]
-        public virtual string UpdateText {
+        [DefaultValue("")]
+        [Localizable(true)]
+        public virtual string UpdateText
+        {
             get { return ViewState.GetString("UpdateText", String.Empty); }
             set { ViewState["UpdateText"] = value; }
         }
@@ -94,26 +104,32 @@ namespace System.Web.UI.WebControls
         // Modeled after Ben's CommandField.InitializeCell. Saved me a lot of figuring-out time :-)
         public override void InitializeCell(TableCell cell, int columnIndex, ListItemType itemType)
         {
-            base.InitializeCell (cell, columnIndex, itemType);
+            base.InitializeCell(cell, columnIndex, itemType);
 
-            switch(itemType) {
-                case ListItemType.Separator: 
+            switch (itemType)
+            {
+                case ListItemType.Separator:
                 case ListItemType.Pager:
                 case ListItemType.Footer:
-                case ListItemType.Header: {
+                case ListItemType.Header:
+                {
                     // Base handles header and footer, dunno about the others
                     return;
                 }
 
                 case ListItemType.Item:
                 case ListItemType.SelectedItem:
-                case ListItemType.AlternatingItem:{
+                case ListItemType.AlternatingItem:
+                {
                     cell.Controls.Add(CreateButton(ButtonType, EditText, "Edit", false));
                     break;
                 }
 
-                case ListItemType.EditItem: {
-                    cell.Controls.Add (CreateButton (ButtonType, UpdateText, "Update", CausesValidation));
+                case ListItemType.EditItem:
+                {
+                    cell.Controls.Add(
+                        CreateButton(ButtonType, UpdateText, "Update", CausesValidation)
+                    );
                     cell.Controls.Add(new LiteralControl("&nbsp;"));
                     cell.Controls.Add(CreateButton(ButtonType, CancelText, "Cancel", false));
                     break;
@@ -128,7 +144,8 @@ namespace System.Web.UI.WebControls
             Button b;
             LinkButton d;
 
-            if (type == ButtonColumnType.LinkButton) {
+            if (type == ButtonColumnType.LinkButton)
+            {
                 d = new ForeColorLinkButton();
                 d.Text = text;
                 d.CommandName = command;

@@ -14,192 +14,248 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
     [ExpectedNoWarnings]
     public class ReflectionAccessFromCompilerGeneratedCode
     {
-        public static void Main ()
+        public static void Main()
         {
-            ReflectionAccessFromStateMachine.Test ();
-            ReflectionAccessFromLocalFunction.Test ();
-            ReflectionAccessFromLambda.Test ();
+            ReflectionAccessFromStateMachine.Test();
+            ReflectionAccessFromLocalFunction.Test();
+            ReflectionAccessFromLambda.Test();
         }
 
         class ReflectionAccessFromStateMachine
         {
-            [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL2026", "--MethodWithLocalFunctionWithRUC.LocalFunction--", CompilerGeneratedCode = true,
-                ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2118", nameof (TypeWithMethodWithRequires.MethodWithLocalFunctionCallsRUC), "LocalFunction", CompilerGeneratedCode = true,
-                ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2111", nameof (TypeWithMethodWithRequires.MethodWithAnnotations), CompilerGeneratedCode = true)]
-            static IEnumerable<int> TestIterator ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TypeWithMethodWithRequires.MethodWithRequires--",
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--MethodWithLocalFunctionWithRUC.LocalFunction--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning(
+                "IL2118",
+                nameof(TypeWithMethodWithRequires.MethodWithLocalFunctionCallsRUC),
+                "LocalFunction",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning(
+                "IL2111",
+                nameof(TypeWithMethodWithRequires.MethodWithAnnotations),
+                CompilerGeneratedCode = true
+            )]
+            static IEnumerable<int> TestIterator()
             {
-                typeof (TypeWithMethodWithRequires).RequiresAll ();
+                typeof(TypeWithMethodWithRequires).RequiresAll();
                 yield return 0;
             }
 
-            [RequiresUnreferencedCode ("--TestIteratorWithRUC--")]
-            static IEnumerable<int> TestIteratorWithRUC ()
+            [RequiresUnreferencedCode("--TestIteratorWithRUC--")]
+            static IEnumerable<int> TestIteratorWithRUC()
             {
-                typeof (TypeWithMethodWithRequires).RequiresAll ();
+                typeof(TypeWithMethodWithRequires).RequiresAll();
                 yield return 0;
             }
 
-            [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--", CompilerGeneratedCode = true)]
-            [ExpectedWarning ("IL2026", "--MethodWithLocalFunctionWithRUC.LocalFunction--", CompilerGeneratedCode = true,
-                ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2118", nameof (TypeWithMethodWithRequires.MethodWithLocalFunctionCallsRUC), "LocalFunction", CompilerGeneratedCode = true,
-                ProducedBy = ProducedBy.Trimmer)]
-            [ExpectedWarning ("IL2111", nameof (TypeWithMethodWithRequires.MethodWithAnnotations), CompilerGeneratedCode = true)]
-            static async void TestAsync ()
+            [ExpectedWarning(
+                "IL2026",
+                "--TypeWithMethodWithRequires.MethodWithRequires--",
+                CompilerGeneratedCode = true
+            )]
+            [ExpectedWarning(
+                "IL2026",
+                "--MethodWithLocalFunctionWithRUC.LocalFunction--",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning(
+                "IL2118",
+                nameof(TypeWithMethodWithRequires.MethodWithLocalFunctionCallsRUC),
+                "LocalFunction",
+                CompilerGeneratedCode = true,
+                ProducedBy = ProducedBy.Trimmer
+            )]
+            [ExpectedWarning(
+                "IL2111",
+                nameof(TypeWithMethodWithRequires.MethodWithAnnotations),
+                CompilerGeneratedCode = true
+            )]
+            static async void TestAsync()
             {
-                typeof (TypeWithMethodWithRequires).RequiresAll ();
-                await MethodAsync ();
+                typeof(TypeWithMethodWithRequires).RequiresAll();
+                await MethodAsync();
             }
 
-            [RequiresUnreferencedCode ("--TestAsyncWithRUC--")]
-            static async void TestAsyncWithRUC ()
+            [RequiresUnreferencedCode("--TestAsyncWithRUC--")]
+            static async void TestAsyncWithRUC()
             {
-                typeof (TypeWithMethodWithRequires).RequiresAll ();
-                await MethodAsync ();
+                typeof(TypeWithMethodWithRequires).RequiresAll();
+                await MethodAsync();
             }
 
-            [ExpectedWarning ("IL2026", "--TestIteratorWithRUC--")]
-            [ExpectedWarning ("IL2026", "--TestAsyncWithRUC--")]
-            public static void Test ()
+            [ExpectedWarning("IL2026", "--TestIteratorWithRUC--")]
+            [ExpectedWarning("IL2026", "--TestAsyncWithRUC--")]
+            public static void Test()
             {
-                TestIterator ();
-                TestIteratorWithRUC ();
-                TestAsync ();
-                TestAsyncWithRUC ();
+                TestIterator();
+                TestIteratorWithRUC();
+                TestAsync();
+                TestAsyncWithRUC();
             }
         }
 
         class ReflectionAccessFromLocalFunction
         {
-            static void TestLocalFunction ()
+            static void TestLocalFunction()
             {
-                [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--")]
-                [ExpectedWarning ("IL2026", "--MethodWithLocalFunctionWithRUC.LocalFunction--",
-                    ProducedBy = ProducedBy.Trimmer)]
-                [ExpectedWarning ("IL2118", nameof (TypeWithMethodWithRequires.MethodWithLocalFunctionCallsRUC), "LocalFunction",
-                    ProducedBy = ProducedBy.Trimmer)]
-                [ExpectedWarning ("IL2111", nameof (TypeWithMethodWithRequires.MethodWithAnnotations))]
-                void LocalFunction ()
+                [ExpectedWarning("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--")]
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithLocalFunctionWithRUC.LocalFunction--",
+                    ProducedBy = ProducedBy.Trimmer
+                )]
+                [ExpectedWarning(
+                    "IL2118",
+                    nameof(TypeWithMethodWithRequires.MethodWithLocalFunctionCallsRUC),
+                    "LocalFunction",
+                    ProducedBy = ProducedBy.Trimmer
+                )]
+                [ExpectedWarning(
+                    "IL2111",
+                    nameof(TypeWithMethodWithRequires.MethodWithAnnotations)
+                )]
+                void LocalFunction()
                 {
-                    typeof (TypeWithMethodWithRequires).RequiresAll ();
+                    typeof(TypeWithMethodWithRequires).RequiresAll();
                 }
-                LocalFunction ();
+                LocalFunction();
             }
 
-            [ExpectedWarning ("IL2026", "--LocalFunction--")]
-            static void TestLocalFunctionWithRUC ()
+            [ExpectedWarning("IL2026", "--LocalFunction--")]
+            static void TestLocalFunctionWithRUC()
             {
-                [RequiresUnreferencedCode ("--LocalFunction--")]
-                void LocalFunction ()
+                [RequiresUnreferencedCode("--LocalFunction--")]
+                void LocalFunction()
                 {
-                    typeof (TypeWithMethodWithRequires).RequiresAll ();
+                    typeof(TypeWithMethodWithRequires).RequiresAll();
                 }
-                LocalFunction ();
+                LocalFunction();
             }
 
-            [RequiresUnreferencedCode ("--TestLocalFunctionInMethodWithRUC--")]
-            static void TestLocalFunctionInMethodWithRUC ()
+            [RequiresUnreferencedCode("--TestLocalFunctionInMethodWithRUC--")]
+            static void TestLocalFunctionInMethodWithRUC()
             {
-                void LocalFunction ()
+                void LocalFunction()
                 {
-                    typeof (TypeWithMethodWithRequires).RequiresAll ();
+                    typeof(TypeWithMethodWithRequires).RequiresAll();
                 }
-                LocalFunction ();
+                LocalFunction();
             }
 
-            [ExpectedWarning ("IL2026", "--TestLocalFunctionInMethodWithRUC--")]
-            public static void Test ()
+            [ExpectedWarning("IL2026", "--TestLocalFunctionInMethodWithRUC--")]
+            public static void Test()
             {
-                TestLocalFunction ();
-                TestLocalFunctionWithRUC ();
-                TestLocalFunctionInMethodWithRUC ();
+                TestLocalFunction();
+                TestLocalFunctionWithRUC();
+                TestLocalFunctionInMethodWithRUC();
             }
         }
 
         class ReflectionAccessFromLambda
         {
-            static void TestLambda ()
+            static void TestLambda()
             {
-                var lambda =
-                [ExpectedWarning ("IL2026", "--TypeWithMethodWithRequires.MethodWithRequires--")]
-                [ExpectedWarning ("IL2026", "--MethodWithLocalFunctionWithRUC.LocalFunction--",
-                    ProducedBy = ProducedBy.Trimmer)]
-                [ExpectedWarning ("IL2118", nameof (TypeWithMethodWithRequires.MethodWithLocalFunctionCallsRUC), "LocalFunction",
-                    ProducedBy = ProducedBy.Trimmer)]
-                [ExpectedWarning ("IL2111", nameof (TypeWithMethodWithRequires.MethodWithAnnotations))]
-                () => {
-                    typeof (TypeWithMethodWithRequires).RequiresAll ();
+                var lambda = [ExpectedWarning(
+                    "IL2026",
+                    "--TypeWithMethodWithRequires.MethodWithRequires--"
+                )]
+                [ExpectedWarning(
+                    "IL2026",
+                    "--MethodWithLocalFunctionWithRUC.LocalFunction--",
+                    ProducedBy = ProducedBy.Trimmer
+                )]
+                [ExpectedWarning(
+                    "IL2118",
+                    nameof(TypeWithMethodWithRequires.MethodWithLocalFunctionCallsRUC),
+                    "LocalFunction",
+                    ProducedBy = ProducedBy.Trimmer
+                )]
+                [ExpectedWarning(
+                    "IL2111",
+                    nameof(TypeWithMethodWithRequires.MethodWithAnnotations)
+                )]
+                () =>
+                {
+                    typeof(TypeWithMethodWithRequires).RequiresAll();
                 };
-                lambda ();
+                lambda();
             }
 
-            [ExpectedWarning ("IL2026", "--TestLambdaInMethodWithRUC--")]
-            static void TestLambdaWithRUC ()
+            [ExpectedWarning("IL2026", "--TestLambdaInMethodWithRUC--")]
+            static void TestLambdaWithRUC()
             {
-                var lambda =
-                [RequiresUnreferencedCode ("--TestLambdaInMethodWithRUC--")]
-                () => {
-                    typeof (TypeWithMethodWithRequires).RequiresAll ();
+                var lambda = [RequiresUnreferencedCode("--TestLambdaInMethodWithRUC--")]
+                () =>
+                {
+                    typeof(TypeWithMethodWithRequires).RequiresAll();
                 };
-                lambda ();
+                lambda();
             }
 
-            [RequiresUnreferencedCode ("--TestLambdaInMethodWithRUC--")]
-            static void TestLambdaInMethodWithRUC ()
+            [RequiresUnreferencedCode("--TestLambdaInMethodWithRUC--")]
+            static void TestLambdaInMethodWithRUC()
             {
-                var lambda =
-                () => {
-                    typeof (TypeWithMethodWithRequires).RequiresAll ();
+                var lambda = () =>
+                {
+                    typeof(TypeWithMethodWithRequires).RequiresAll();
                 };
-                lambda ();
+                lambda();
             }
 
-            [ExpectedWarning ("IL2026", "--TestLambdaInMethodWithRUC--")]
-            public static void Test ()
+            [ExpectedWarning("IL2026", "--TestLambdaInMethodWithRUC--")]
+            public static void Test()
             {
-                TestLambda ();
-                TestLambdaWithRUC ();
-                TestLambdaInMethodWithRUC ();
+                TestLambda();
+                TestLambdaWithRUC();
+                TestLambdaInMethodWithRUC();
             }
         }
 
-        static async Task<int> MethodAsync ()
+        static async Task<int> MethodAsync()
         {
-            return await Task.FromResult (0);
+            return await Task.FromResult(0);
         }
 
         class TypeWithMethodWithRequires
         {
-            [RequiresUnreferencedCode ("--TypeWithMethodWithRequires.MethodWithRequires--")]
-            [RequiresAssemblyFiles ("--TypeWithMethodWithRequires.MethodWithRequires--")]
-            [RequiresDynamicCode ("--TypeWithMethodWithRequires.MethodWithRequires--")]
-            public static void MethodWithRequires ()
+            [RequiresUnreferencedCode("--TypeWithMethodWithRequires.MethodWithRequires--")]
+            [RequiresAssemblyFiles("--TypeWithMethodWithRequires.MethodWithRequires--")]
+            [RequiresDynamicCode("--TypeWithMethodWithRequires.MethodWithRequires--")]
+            public static void MethodWithRequires() { }
+
+            public static void MethodWithAnnotations(
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type t
+            ) { }
+
+            [ExpectedWarning("IL2026", "--MethodWithLocalFunctionWithRUC.LocalFunction--")]
+            public static void MethodWithLocalFunctionWithRUC()
             {
+                [RequiresUnreferencedCode("--MethodWithLocalFunctionWithRUC.LocalFunction--")]
+                void LocalFunction() { }
+                LocalFunction();
             }
 
-            public static void MethodWithAnnotations ([DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.All)] Type t) { }
-
-            [ExpectedWarning ("IL2026", "--MethodWithLocalFunctionWithRUC.LocalFunction--")]
-            public static void MethodWithLocalFunctionWithRUC ()
+            public static void MethodWithLocalFunctionCallsRUC()
             {
-                [RequiresUnreferencedCode ("--MethodWithLocalFunctionWithRUC.LocalFunction--")]
-                void LocalFunction ()
-                { }
-                LocalFunction ();
-            }
-
-            public static void MethodWithLocalFunctionCallsRUC ()
-            {
-                [ExpectedWarning ("IL2026", "--MethodWithRUC--")]
-                void LocalFunction () => MethodWithRUC ();
-                LocalFunction ();
+                [ExpectedWarning("IL2026", "--MethodWithRUC--")]
+                void LocalFunction() => MethodWithRUC();
+                LocalFunction();
             }
         }
 
-        [RequiresUnreferencedCode ("--MethodWithRUC--")]
-        static void MethodWithRUC () { }
+        [RequiresUnreferencedCode("--MethodWithRUC--")]
+        static void MethodWithRUC() { }
     }
 }

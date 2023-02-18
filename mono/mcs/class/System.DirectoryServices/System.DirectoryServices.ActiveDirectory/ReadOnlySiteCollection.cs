@@ -26,25 +26,24 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     public class ReadOnlySiteCollection : ReadOnlyCollectionBase
     {
-        public ActiveDirectorySite this [int index] {
-            get {
-                throw new NotImplementedException ();
-            }
+        public ActiveDirectorySite this[int index]
+        {
+            get { throw new NotImplementedException(); }
         }
 
-        public bool Contains (ActiveDirectorySite site)
+        public bool Contains(ActiveDirectorySite site)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public int IndexOf (ActiveDirectorySite site)
+        public int IndexOf(ActiveDirectorySite site)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
 
-        public void CopyTo (ActiveDirectorySite[] sites, int index)
+        public void CopyTo(ActiveDirectorySite[] sites, int index)
         {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

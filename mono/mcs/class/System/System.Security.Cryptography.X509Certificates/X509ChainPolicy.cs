@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,10 +29,10 @@
 
 #if SECURITY_DEP
 
-namespace System.Security.Cryptography.X509Certificates {
-
-    public sealed class X509ChainPolicy {
-
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509ChainPolicy
+    {
         private OidCollection apps;
         private OidCollection cert;
         private X509CertificateCollection store;
@@ -45,9 +45,9 @@ namespace System.Security.Cryptography.X509Certificates {
 
         // constructors
 
-        public X509ChainPolicy () 
+        public X509ChainPolicy()
         {
-            Reset ();
+            Reset();
         }
 
         /*
@@ -62,83 +62,98 @@ namespace System.Security.Cryptography.X509Certificates {
          * Since 'ExtraStore' returns X509Certificate2Collection, we need to convert these to
          * X509Certificate2.
          */
-        internal X509ChainPolicy (X509CertificateCollection store)
+        internal X509ChainPolicy(X509CertificateCollection store)
         {
             this.store = store;
-            Reset ();
+            Reset();
         }
 
         // properties
 
-        public OidCollection ApplicationPolicy {
+        public OidCollection ApplicationPolicy
+        {
             get { return apps; }
         }
 
-        public OidCollection CertificatePolicy {
+        public OidCollection CertificatePolicy
+        {
             get { return cert; }
         }
 
-        public X509Certificate2Collection ExtraStore {
-            get {
+        public X509Certificate2Collection ExtraStore
+        {
+            get
+            {
                 if (store2 != null)
                     return store2;
 
-                store2 = new X509Certificate2Collection ();
-                if (store != null) {
-                    foreach (var cert in store) {
-                        store2.Add (new X509Certificate2 (cert));
+                store2 = new X509Certificate2Collection();
+                if (store != null)
+                {
+                    foreach (var cert in store)
+                    {
+                        store2.Add(new X509Certificate2(cert));
                     }
                 }
                 return store2;
             }
-            internal set {
-                store2 = value;
-            }
+            internal set { store2 = value; }
         }
 
-        public X509RevocationFlag RevocationFlag {
+        public X509RevocationFlag RevocationFlag
+        {
             get { return rflag; }
-            set {
-                if ((value < X509RevocationFlag.EndCertificateOnly) || (value > X509RevocationFlag.ExcludeRoot))
-                    throw new ArgumentException ("RevocationFlag");
+            set
+            {
+                if (
+                    (value < X509RevocationFlag.EndCertificateOnly)
+                    || (value > X509RevocationFlag.ExcludeRoot)
+                )
+                    throw new ArgumentException("RevocationFlag");
                 rflag = value;
             }
         }
 
-        public X509RevocationMode RevocationMode {
+        public X509RevocationMode RevocationMode
+        {
             get { return mode; }
-            set {
+            set
+            {
                 if ((value < X509RevocationMode.NoCheck) || (value > X509RevocationMode.Offline))
-                    throw new ArgumentException ("RevocationMode");
+                    throw new ArgumentException("RevocationMode");
                 mode = value;
             }
         }
 
-        public TimeSpan UrlRetrievalTimeout {
+        public TimeSpan UrlRetrievalTimeout
+        {
             get { return timeout; }
             set { timeout = value; }
         }
 
-        public X509VerificationFlags VerificationFlags {
+        public X509VerificationFlags VerificationFlags
+        {
             get { return vflags; }
-            set {
+            set
+            {
                 if ((value | X509VerificationFlags.AllFlags) != X509VerificationFlags.AllFlags)
-                    throw new ArgumentException ("VerificationFlags");
+                    throw new ArgumentException("VerificationFlags");
                 vflags = value;
             }
         }
 
-        public DateTime VerificationTime {
+        public DateTime VerificationTime
+        {
             get { return vtime; }
             set { vtime = value; }
         }
 
         // methods
 
-        public void Reset ()
+        public void Reset()
         {
-            apps = new OidCollection ();
-            cert = new OidCollection ();
+            apps = new OidCollection();
+            cert = new OidCollection();
             store2 = null;
             rflag = X509RevocationFlag.ExcludeRoot;
             mode = X509RevocationMode.Online;

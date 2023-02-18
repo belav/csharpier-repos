@@ -28,9 +28,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             Guid moduleVersionId,
             AssemblyIdentityComparer identityComparer,
             MakeAssemblyReferencesKind kind,
-            out IReadOnlyDictionary<string, ImmutableArray<(AssemblyIdentity, MetadataReference)>>? referencesBySimpleName)
+            out IReadOnlyDictionary<
+                string,
+                ImmutableArray<(AssemblyIdentity, MetadataReference)>
+            >? referencesBySimpleName
+        )
         {
-            RoslynDebug.Assert(kind == MakeAssemblyReferencesKind.AllAssemblies || moduleVersionId != Guid.Empty);
+            RoslynDebug.Assert(
+                kind == MakeAssemblyReferencesKind.AllAssemblies || moduleVersionId != Guid.Empty
+            );
             RoslynDebug.Assert(moduleVersionId == Guid.Empty || identityComparer != null);
 
             // Get metadata for each module.
@@ -46,7 +52,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             AssemblyIdentity? corLibrary = null;
             foreach (var block in metadataBlocks)
             {
-                var metadata = ModuleMetadata.CreateFromMetadata(block.Pointer, block.Size, includeEmbeddedInteropTypes: true);
+                var metadata = ModuleMetadata.CreateFromMetadata(
+                    block.Pointer,
+                    block.Size,
+                    includeEmbeddedInteropTypes: true
+                );
                 try
                 {
                     var reader = metadata.MetadataReader;
@@ -55,19 +65,30 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         bool hasNoAssemblyRefs = reader.AssemblyReferences.Count == 0;
                         // .NET Native uses a corlib with references
                         // (see https://github.com/dotnet/roslyn/issues/13275).
-                        if (hasNoAssemblyRefs || metadata.Name.Equals("System.Private.CoreLib.dll", StringComparison.OrdinalIgnoreCase))
+                        if (
+                            hasNoAssemblyRefs
+                            || metadata.Name.Equals(
+                                "System.Private.CoreLib.dll",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             // If this assembly declares System.Object, assume it is the corlib.
                             // (Note, it is order dependent which assembly we treat as corlib
                             // if there are multiple assemblies that meet these requirements.
-                            // That should be acceptable for evaluating expressions in the EE though.) 
+                            // That should be acceptable for evaluating expressions in the EE though.)
                             if (reader.DeclaresTheObjectClass())
                             {
                                 corLibrary = reader.ReadAssemblyIdentityOrThrow();
                                 // Compiler layer requires corlib to have no AssemblyRefs.
                                 if (!hasNoAssemblyRefs)
                                 {
-                                    metadata = ModuleMetadata.CreateFromMetadata(block.Pointer, block.Size, includeEmbeddedInteropTypes: true, ignoreAssemblyRefs: true);
+                                    metadata = ModuleMetadata.CreateFromMetadata(
+                                        block.Pointer,
+                                        block.Size,
+                                        includeEmbeddedInteropTypes: true,
+                                        ignoreAssemblyRefs: true
+                                    );
                                 }
                             }
                         }
@@ -119,7 +140,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             if (kind == MakeAssemblyReferencesKind.AllReferences)
             {
-                var refsBySimpleName = new Dictionary<string, ImmutableArray<(AssemblyIdentity, MetadataReference)>>(StringComparer.OrdinalIgnoreCase);
+                var refsBySimpleName = new Dictionary<
+                    string,
+                    ImmutableArray<(AssemblyIdentity, MetadataReference)>
+                >(StringComparer.OrdinalIgnoreCase);
                 MetadataReference? targetReference = null;
 
                 foreach (var metadata in metadataBuilder)
@@ -140,8 +164,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
                     refsBySimpleName[identity.Name] = refs.Add((identity, reference));
 
-                    if (targetReference == null &&
-                        reader.GetModuleVersionIdOrThrow() == moduleVersionId)
+                    if (
+                        targetReference == null
+                        && reader.GetModuleVersionIdOrThrow() == moduleVersionId
+                    )
                     {
                         targetReference = reference;
                     }
@@ -153,7 +179,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 // expects COR library to be included in the explicit assemblies.
                 RoslynDebug.AssertNotNull(corLibrary);
 
-                if (corLibrary != null && refsBySimpleName.TryGetValue(corLibrary.Name, out var corLibraryReferences))
+                if (
+                    corLibrary != null
+                    && refsBySimpleName.TryGetValue(corLibrary.Name, out var corLibraryReferences)
+                )
                 {
                     referencesBuilder.Add(corLibraryReferences[0].Item2);
                 }
@@ -170,7 +199,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             else
             {
                 var referencesBuilder = ArrayBuilder<MetadataReference>.GetInstance();
-                var identitiesBuilder = (kind == MakeAssemblyReferencesKind.DirectReferencesOnly) ? ArrayBuilder<AssemblyIdentity>.GetInstance() : null;
+                var identitiesBuilder =
+                    (kind == MakeAssemblyReferencesKind.DirectReferencesOnly)
+                        ? ArrayBuilder<AssemblyIdentity>.GetInstance()
+                        : null;
                 ModuleMetadata? targetModule = null;
                 AssemblyIdentity? intrinsicsAssembly = null;
 
@@ -190,14 +222,25 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         var identity = reader.ReadAssemblyIdentityOrThrow();
                         identitiesBuilder.Add(identity);
 
-                        if (targetModule == null &&
-                            reader.GetModuleVersionIdOrThrow() == moduleVersionId)
+                        if (
+                            targetModule == null
+                            && reader.GetModuleVersionIdOrThrow() == moduleVersionId
+                        )
                         {
                             targetModule = metadata;
                         }
 
-                        if (intrinsicsAssembly == null &&
-                            reader.DeclaresType((r, t) => r.IsPublicNonInterfaceType(t, ExpressionCompilerConstants.IntrinsicAssemblyNamespace, ExpressionCompilerConstants.IntrinsicAssemblyTypeName)))
+                        if (
+                            intrinsicsAssembly == null
+                            && reader.DeclaresType(
+                                (r, t) =>
+                                    r.IsPublicNonInterfaceType(
+                                        t,
+                                        ExpressionCompilerConstants.IntrinsicAssemblyNamespace,
+                                        ExpressionCompilerConstants.IntrinsicAssemblyTypeName
+                                    )
+                            )
+                        )
                         {
                             intrinsicsAssembly = identity;
                         }
@@ -210,8 +253,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     if (targetModule != null)
                     {
                         var referencedModules = ArrayBuilder<AssemblyIdentity>.GetInstance();
-                        referencedModules.Add(targetModule.MetadataReader.ReadAssemblyIdentityOrThrow());
-                        referencedModules.AddRange(targetModule.MetadataReader.GetReferencedAssembliesOrThrow());
+                        referencedModules.Add(
+                            targetModule.MetadataReader.ReadAssemblyIdentityOrThrow()
+                        );
+                        referencedModules.AddRange(
+                            targetModule.MetadataReader.GetReferencedAssembliesOrThrow()
+                        );
                         // Ensure COR library is included, otherwise any compilation will fail.
                         // (Note, an equivalent assembly may have already been included from
                         // GetReferencedAssembliesOrThrow above but RemoveUnreferencedModules
@@ -226,7 +273,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         {
                             referencedModules.Add(intrinsicsAssembly);
                         }
-                        RemoveUnreferencedModules(referencesBuilder, identitiesBuilder, identityComparer, referencedModules);
+                        RemoveUnreferencedModules(
+                            referencesBuilder,
+                            identitiesBuilder,
+                            identityComparer,
+                            referencedModules
+                        );
                         referencedModules.Free();
                     }
                     identitiesBuilder.Free();
@@ -237,7 +289,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 // each of the runtime winmds refer to the compile time module.
                 if (runtimeWinMdBuilder.Any())
                 {
-                    referencesBuilder.Add(MakeCompileTimeWinMdAssemblyMetadata(runtimeWinMdBuilder));
+                    referencesBuilder.Add(
+                        MakeCompileTimeWinMdAssemblyMetadata(runtimeWinMdBuilder)
+                    );
                 }
 
                 references = referencesBuilder.ToImmutableAndFree();
@@ -266,7 +320,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ArrayBuilder<MetadataReference> modules,
             ArrayBuilder<AssemblyIdentity> identities,
             AssemblyIdentityComparer identityComparer,
-            ArrayBuilder<AssemblyIdentity> referencedModules)
+            ArrayBuilder<AssemblyIdentity> referencedModules
+        )
         {
             Debug.Assert(modules.Count == identities.Count);
 
@@ -324,7 +379,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             referencedIndices.Free();
         }
 
-        private static PortableExecutableReference MakeAssemblyReference(ModuleMetadata metadata, Dictionary<string, ModuleMetadata?>? modulesByName)
+        private static PortableExecutableReference MakeAssemblyReference(
+            ModuleMetadata metadata,
+            Dictionary<string, ModuleMetadata?>? modulesByName
+        )
         {
             Debug.Assert(metadata.Module.IsManifestModule);
 
@@ -351,7 +409,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             if (!modulesByName.TryGetValue(name, out var module))
                             {
                                 // AssemblyFile names may contain file information (".dll", etc).
-                                modulesByName.TryGetValue(GetFileNameWithoutExtension(name), out module);
+                                modulesByName.TryGetValue(
+                                    GetFileNameWithoutExtension(name),
+                                    out module
+                                );
                             }
 
                             if (module != null)
@@ -393,7 +454,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static byte[] GetWindowsProxyBytes()
         {
             var assembly = typeof(ExpressionCompiler).GetTypeInfo().Assembly;
-            using (var stream = assembly.GetManifestResourceStream("Microsoft.CodeAnalysis.ExpressionEvaluator.Resources.WindowsProxy.winmd"))
+            using (
+                var stream = assembly.GetManifestResourceStream(
+                    "Microsoft.CodeAnalysis.ExpressionEvaluator.Resources.WindowsProxy.winmd"
+                )
+            )
             {
                 var bytes = new byte[stream.Length];
                 using (var memoryStream = new MemoryStream(bytes))
@@ -404,7 +469,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
         }
 
-        private static PortableExecutableReference MakeCompileTimeWinMdAssemblyMetadata(ArrayBuilder<ModuleMetadata> runtimeModules)
+        private static PortableExecutableReference MakeCompileTimeWinMdAssemblyMetadata(
+            ArrayBuilder<ModuleMetadata> runtimeModules
+        )
         {
             var metadata = ModuleMetadata.CreateFromImage(GetWindowsProxyBytes());
             var builder = ArrayBuilder<ModuleMetadata>.GetInstance();
@@ -437,9 +504,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         private static bool IsWindowsComponentName(string moduleName)
         {
-            return moduleName.StartsWith("windows.", StringComparison.OrdinalIgnoreCase) &&
-                moduleName.EndsWith(".winmd", StringComparison.OrdinalIgnoreCase) &&
-                !moduleName.Equals("windows.winmd", StringComparison.OrdinalIgnoreCase);
+            return moduleName.StartsWith("windows.", StringComparison.OrdinalIgnoreCase)
+                && moduleName.EndsWith(".winmd", StringComparison.OrdinalIgnoreCase)
+                && !moduleName.Equals("windows.winmd", StringComparison.OrdinalIgnoreCase);
         }
 
         internal static bool IsWindowsAssemblyName(string assemblyName)
@@ -449,11 +516,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal static bool IsWindowsAssemblyIdentity(this AssemblyIdentity assemblyIdentity)
         {
-            return IsWindowsAssemblyName(assemblyIdentity.Name) &&
-                assemblyIdentity.ContentType == System.Reflection.AssemblyContentType.WindowsRuntime;
+            return IsWindowsAssemblyName(assemblyIdentity.Name)
+                && assemblyIdentity.ContentType
+                    == System.Reflection.AssemblyContentType.WindowsRuntime;
         }
 
-        internal static ImmutableArray<string> GetLocalNames(this ArrayBuilder<ISymUnmanagedScope> scopes)
+        internal static ImmutableArray<string> GetLocalNames(
+            this ArrayBuilder<ISymUnmanagedScope> scopes
+        )
         {
             var builder = ArrayBuilder<string>.GetInstance();
             foreach (var scope in scopes)
@@ -473,7 +543,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return builder.ToImmutableAndFree();
         }
 
-        internal static ImmutableArray<int> GetSynthesizedMethods(byte[] assembly, string methodName)
+        internal static ImmutableArray<int> GetSynthesizedMethods(
+            byte[] assembly,
+            string methodName
+        )
         {
             var builder = ArrayBuilder<int>.GetInstance();
             using (var metadata = ModuleMetadata.CreateFromStream(new MemoryStream(assembly)))

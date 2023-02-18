@@ -5,22 +5,24 @@
 using System;
 using System.ComponentModel;
 
-class X {
-    static string msg (int c)
+class X
+{
+    static string msg(int c)
     {
-        return new Win32Exception (c).Message;
+        return new Win32Exception(c).Message;
     }
 
-    static bool check (int c, string s)
+    static bool check(int c, string s)
     {
-        if (msg (c) != s) {
-            Console.Error.WriteLine ("For {0} expected {1} got {2}", c, s, msg (c));
+        if (msg(c) != s)
+        {
+            Console.Error.WriteLine("For {0} expected {1} got {2}", c, s, msg(c));
             return false;
         }
         return true;
     }
 
-    static int Main ()
+    static int Main()
     {
         //
         // All this test does is instantiate two Win32Exceptions
@@ -30,14 +32,12 @@ class X {
         // If stderr gets any output, there is a sorting error
         // in mono/io-layer/messages.c
         //
-        Exception a = new Win32Exception (99999);
-        a = new Win32Exception (9805);
+        Exception a = new Win32Exception(99999);
+        a = new Win32Exception(9805);
 
-        if (!check (2, "Cannot find the specified file"))
+        if (!check(2, "Cannot find the specified file"))
             return 1;
-
 
         return 0;
     }
-
 }

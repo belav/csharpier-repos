@@ -5,9 +5,7 @@ namespace System.CommandLine.Parsing
 {
     internal abstract class SyntaxNode
     {
-        protected SyntaxNode(
-            Token token,
-            SyntaxNode? parent)
+        protected SyntaxNode(Token token, SyntaxNode? parent)
         {
             Token = token;
             Parent = parent;

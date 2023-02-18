@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Stefan Klinger
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -52,9 +52,20 @@ namespace DbLinq.Data.Linq.Mapping
                 var association = memberInfo.GetAttribute<AssociationAttribute>();
                 if (association == null)
                     continue;
-                var dataMember = new AttributedAssociationMetaDataMember(memberInfo, association, this);
+                var dataMember = new AttributedAssociationMetaDataMember(
+                    memberInfo,
+                    association,
+                    this
+                );
                 AssociationsLookup[memberInfo] = dataMember;
-                _AssociationFixupList.Add(new AssociationData() { Association = association, Member = memberInfo, DataMember = dataMember });
+                _AssociationFixupList.Add(
+                    new AssociationData()
+                    {
+                        Association = association,
+                        Member = memberInfo,
+                        DataMember = dataMember
+                    }
+                );
             }
         }
 
@@ -66,7 +77,8 @@ namespace DbLinq.Data.Linq.Mapping
         private ReadOnlyCollection<MetaAssociation> _associations;
         public override ReadOnlyCollection<MetaAssociation> Associations
         {
-            get {
+            get
+            {
                 if (_associations == null)
                 {
                     _associations = GetAssociations().ToList().AsReadOnly();
@@ -90,7 +102,11 @@ namespace DbLinq.Data.Linq.Mapping
 
             foreach (AssociationData data in associationFixupList)
             {
-                var metaAssociation = new AttributedMetaAssociation(data.Member, data.Association, data.DataMember);
+                var metaAssociation = new AttributedMetaAssociation(
+                    data.Member,
+                    data.Association,
+                    data.DataMember
+                );
                 data.DataMember.SetAssociation(metaAssociation);
                 yield return metaAssociation;
             }
@@ -105,15 +121,18 @@ namespace DbLinq.Data.Linq.Mapping
         private ReadOnlyCollection<MetaDataMember> dataMembers;
         public override ReadOnlyCollection<MetaDataMember> DataMembers
         {
-            get {
+            get
+            {
                 if (dataMembers == null)
                 {
-                    dataMembers =
-                        (from m in type.GetMembers()
-                         let c = m.GetAttribute<ColumnAttribute>()
-                         where c != null
-                         select (MetaDataMember) new AttributedColumnMetaDataMember(m, c, this))
-                        .ToList().AsReadOnly();
+                    dataMembers = (
+                        from m in type.GetMembers()
+                        let c = m.GetAttribute<ColumnAttribute>()
+                        where c != null
+                        select (MetaDataMember)new AttributedColumnMetaDataMember(m, c, this)
+                    )
+                        .ToList()
+                        .AsReadOnly();
                 }
                 return dataMembers;
             }
@@ -138,7 +157,11 @@ namespace DbLinq.Data.Linq.Mapping
         {
             // TODO: optimize?
             // A tip to know the MemberInfo for the same member is not the same when declared from a class and its inheritor
-            return (from m in PersistentDataMembers where m.Member.Name == member.Name select m).SingleOrDefault();
+            return (
+                from m in PersistentDataMembers
+                where m.Member.Name == member.Name
+                select m
+            ).SingleOrDefault();
         }
 
         public override MetaType GetInheritanceType(Type baseType)
@@ -179,11 +202,11 @@ namespace DbLinq.Data.Linq.Mapping
         private ReadOnlyCollection<MetaDataMember> identityMembers;
         public override ReadOnlyCollection<MetaDataMember> IdentityMembers
         {
-            get {
+            get
+            {
                 if (identityMembers == null)
-                    identityMembers =
-                        DataMembers.Where(m => m.IsPrimaryKey).ToList().AsReadOnly();
-                return identityMembers; 
+                    identityMembers = DataMembers.Where(m => m.IsPrimaryKey).ToList().AsReadOnly();
+                return identityMembers;
             }
         }
 
@@ -245,10 +268,13 @@ namespace DbLinq.Data.Linq.Mapping
         private ReadOnlyCollection<MetaDataMember> _persistentDataMembers;
         public override ReadOnlyCollection<MetaDataMember> PersistentDataMembers
         {
-            get {
+            get
+            {
                 if (_persistentDataMembers == null)
-                    _persistentDataMembers =
-                        DataMembers.Where(m => m.IsPersistent).ToList().AsReadOnly();
+                    _persistentDataMembers = DataMembers
+                        .Where(m => m.IsPersistent)
+                        .ToList()
+                        .AsReadOnly();
                 return _persistentDataMembers;
             }
         }

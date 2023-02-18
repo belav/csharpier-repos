@@ -88,14 +88,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""FullName"": ""Aaron Account"",
   ""EmailAddress"": ""aaron@example.com"",
   ""CreatedDate"": ""2010-10-01T00:00:00"",
   ""UpdatedDate"": ""2013-01-25T00:00:00"",
   ""Deleted"": true,
   ""DeletedDate"": ""2013-01-25T00:00:00""
-}", json);
+}",
+                json
+            );
         }
     }
 }

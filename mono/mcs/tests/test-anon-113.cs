@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 class X
 {
-    public delegate T ModuleBinder<T> (object o);
+    public delegate T ModuleBinder<T>(object o);
 
-    public ModuleBinder<TDelegate> CreateMethodUnscoped<TDelegate> ()
+    public ModuleBinder<TDelegate> CreateMethodUnscoped<TDelegate>()
     {
-        return delegate (object o) {
+        return delegate(object o)
+        {
             return (TDelegate)(object)null;
         };
     }
 
-    public static void Main ()
-    { }
+    public static void Main() { }
 }

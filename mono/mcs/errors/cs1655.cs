@@ -3,23 +3,33 @@
 
 using System.Collections;
 
-struct P {
+struct P
+{
     public int x;
 }
 
-struct Q {
+struct Q
+{
     public P p;
 }
 
-class Test {
-    static void bar (out int x) { x = 0; }
-    static IEnumerable foo () { return null; }
-
-    static void Main ()
+class Test
+{
+    static void bar(out int x)
     {
-        IEnumerable f = foo ();
+        x = 0;
+    }
+
+    static IEnumerable foo()
+    {
+        return null;
+    }
+
+    static void Main()
+    {
+        IEnumerable f = foo();
         if (f != null)
             foreach (Q q in f)
-                bar (out q.p.x);
+                bar(out q.p.x);
     }
 }

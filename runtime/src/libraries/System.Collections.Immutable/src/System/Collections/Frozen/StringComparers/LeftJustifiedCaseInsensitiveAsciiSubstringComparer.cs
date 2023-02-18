@@ -15,8 +15,14 @@ namespace System.Collections.Frozen
     /// </remarks>
     internal sealed class LeftJustifiedCaseInsensitiveAsciiSubstringComparer : SubstringComparerBase
     {
-        public override bool Equals(string? x, string? y) => StringComparer.OrdinalIgnoreCase.Equals(x, y);
-        public override bool EqualsPartial(string? x, string? y) => x.AsSpan(Index, Count).Equals(y.AsSpan(Index, Count), StringComparison.OrdinalIgnoreCase);
-        public override int GetHashCode(string s) => GetHashCodeOrdinalIgnoreCaseAscii(s.AsSpan(Index, Count));
+        public override bool Equals(string? x, string? y) =>
+            StringComparer.OrdinalIgnoreCase.Equals(x, y);
+
+        public override bool EqualsPartial(string? x, string? y) =>
+            x.AsSpan(Index, Count)
+                .Equals(y.AsSpan(Index, Count), StringComparison.OrdinalIgnoreCase);
+
+        public override int GetHashCode(string s) =>
+            GetHashCodeOrdinalIgnoreCaseAscii(s.AsSpan(Index, Count));
     }
 }

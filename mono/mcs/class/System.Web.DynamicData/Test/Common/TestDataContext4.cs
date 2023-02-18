@@ -24,29 +24,37 @@ namespace MonoTests.Common
             get
             {
                 if (bazValidationAttributes == null)
-                    bazValidationAttributes = new List<BazValidationAttributes> ();
+                    bazValidationAttributes = new List<BazValidationAttributes>();
 
                 return bazValidationAttributes;
             }
         }
 
         #region ITestDataContext Members
-        public IList GetTableData (string tableName, DataSourceSelectArguments args, string where, ParameterCollection whereParams)
+        public IList GetTableData(
+            string tableName,
+            DataSourceSelectArguments args,
+            string where,
+            ParameterCollection whereParams
+        )
         {
-            if (String.Compare (tableName, "BazValidationAttributesTable", StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                String.Compare(
+                    tableName,
+                    "BazValidationAttributesTable",
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
                 return BazValidationAttributes;
 
             return null;
         }
 
-        public List<DynamicDataTable> GetTables ()
+        public List<DynamicDataTable> GetTables()
         {
-            return new List<DynamicDataTable> {
-                new TestDataTable<BazValidationAttributes>()
-            };
+            return new List<DynamicDataTable> { new TestDataTable<BazValidationAttributes>() };
         }
 
         #endregion
     }
 }
-

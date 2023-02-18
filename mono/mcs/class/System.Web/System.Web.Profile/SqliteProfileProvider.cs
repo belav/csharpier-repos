@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -20,7 +20,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-// Copyright © 2006, 2007 Nauck IT KG        http://www.nauck-it.de
+// Copyright ï¿½ 2006, 2007 Nauck IT KG        http://www.nauck-it.de
 //
 // Author:
 //    Daniel Nauck        <d.nauck(at)nauck-it.de>
@@ -52,26 +52,31 @@ namespace System.Web.Profile
 
         SerializationHelper m_serializationHelper = new SerializationHelper();
 
-        DbParameter AddParameter (DbCommand command, string parameterName)
-                {
-                        return AddParameter (command, parameterName, null);
-                }
-        
-        DbParameter AddParameter (DbCommand command, string parameterName, object parameterValue)
-                {
-                        return AddParameter (command, parameterName, ParameterDirection.Input, parameterValue);
-                }
+        DbParameter AddParameter(DbCommand command, string parameterName)
+        {
+            return AddParameter(command, parameterName, null);
+        }
 
-                DbParameter AddParameter (DbCommand command, string parameterName, ParameterDirection direction, object parameterValue)
-                {
-                        DbParameter dbp = command.CreateParameter ();
-                        dbp.ParameterName = parameterName;
-                        dbp.Value = parameterValue;
-                        dbp.Direction = direction;
-                        command.Parameters.Add (dbp);
-                        return dbp;
-                }
-        
+        DbParameter AddParameter(DbCommand command, string parameterName, object parameterValue)
+        {
+            return AddParameter(command, parameterName, ParameterDirection.Input, parameterValue);
+        }
+
+        DbParameter AddParameter(
+            DbCommand command,
+            string parameterName,
+            ParameterDirection direction,
+            object parameterValue
+        )
+        {
+            DbParameter dbp = command.CreateParameter();
+            dbp.ParameterName = parameterName;
+            dbp.Value = parameterValue;
+            dbp.Direction = direction;
+            command.Parameters.Add(dbp);
+            return dbp;
+        }
+
         /// <summary>
         /// System.Configuration.Provider.ProviderBase.Initialize Method
         /// </summary>
@@ -93,22 +98,34 @@ namespace System.Web.Profile
             // Initialize the abstract base class.
             base.Initialize(name, config);
 
-            m_ApplicationName = GetConfigValue(config["applicationName"], HostingEnvironment.ApplicationVirtualPath);
+            m_ApplicationName = GetConfigValue(
+                config["applicationName"],
+                HostingEnvironment.ApplicationVirtualPath
+            );
 
             // Get connection string.
             string connStrName = config["connectionStringName"];
 
             if (string.IsNullOrEmpty(connStrName))
             {
-                throw new ArgumentOutOfRangeException("ConnectionStringName", Properties.Resources.ErrArgumentNullOrEmpty);
+                throw new ArgumentOutOfRangeException(
+                    "ConnectionStringName",
+                    Properties.Resources.ErrArgumentNullOrEmpty
+                );
             }
             else
             {
-                ConnectionStringSettings ConnectionStringSettings = ConfigurationManager.ConnectionStrings[connStrName];
+                ConnectionStringSettings ConnectionStringSettings =
+                    ConfigurationManager.ConnectionStrings[connStrName];
 
-                if (ConnectionStringSettings == null || string.IsNullOrEmpty(ConnectionStringSettings.ConnectionString.Trim()))
+                if (
+                    ConnectionStringSettings == null
+                    || string.IsNullOrEmpty(ConnectionStringSettings.ConnectionString.Trim())
+                )
                 {
-                    throw new ProviderException(Properties.Resources.ErrConnectionStringNullOrEmpty);
+                    throw new ProviderException(
+                        Properties.Resources.ErrConnectionStringNullOrEmpty
+                    );
                 }
 
                 m_ConnectionString = ConnectionStringSettings.ConnectionString;
@@ -136,9 +153,14 @@ namespace System.Web.Profile
         /// <summary>
         /// ProfileProvider.DeleteInactiveProfiles
         /// </summary>
-        public override int DeleteInactiveProfiles(ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
+        public override int DeleteInactiveProfiles(
+            ProfileAuthenticationOption authenticationOption,
+            DateTime userInactiveSinceDate
+        )
         {
-            throw new Exception("DeleteInactiveProfiles: The method or operation is not implemented.");
+            throw new Exception(
+                "DeleteInactiveProfiles: The method or operation is not implemented."
+            );
         }
 
         public override int DeleteProfiles(string[] usernames)
@@ -151,29 +173,64 @@ namespace System.Web.Profile
             throw new Exception("DeleteProfiles2: The method or operation is not implemented.");
         }
 
-        public override ProfileInfoCollection FindInactiveProfilesByUserName(ProfileAuthenticationOption authenticationOption, string usernameToMatch, DateTime userInactiveSinceDate, int pageIndex, int pageSize, out int totalRecords)
+        public override ProfileInfoCollection FindInactiveProfilesByUserName(
+            ProfileAuthenticationOption authenticationOption,
+            string usernameToMatch,
+            DateTime userInactiveSinceDate,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            throw new Exception("FindInactiveProfilesByUserName: The method or operation is not implemented.");
+            throw new Exception(
+                "FindInactiveProfilesByUserName: The method or operation is not implemented."
+            );
         }
 
-        public override ProfileInfoCollection FindProfilesByUserName(ProfileAuthenticationOption authenticationOption, string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override ProfileInfoCollection FindProfilesByUserName(
+            ProfileAuthenticationOption authenticationOption,
+            string usernameToMatch,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            throw new Exception("FindProfilesByUserName: The method or operation is not implemented.");
+            throw new Exception(
+                "FindProfilesByUserName: The method or operation is not implemented."
+            );
         }
 
-        public override ProfileInfoCollection GetAllInactiveProfiles(ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate, int pageIndex, int pageSize, out int totalRecords)
+        public override ProfileInfoCollection GetAllInactiveProfiles(
+            ProfileAuthenticationOption authenticationOption,
+            DateTime userInactiveSinceDate,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
-            throw new Exception("GetAllInactiveProfiles: The method or operation is not implemented.");
+            throw new Exception(
+                "GetAllInactiveProfiles: The method or operation is not implemented."
+            );
         }
 
-        public override ProfileInfoCollection GetAllProfiles(ProfileAuthenticationOption authenticationOption, int pageIndex, int pageSize, out int totalRecords)
+        public override ProfileInfoCollection GetAllProfiles(
+            ProfileAuthenticationOption authenticationOption,
+            int pageIndex,
+            int pageSize,
+            out int totalRecords
+        )
         {
             throw new Exception("GetAllProfiles: The method or operation is not implemented.");
         }
 
-        public override int GetNumberOfInactiveProfiles(ProfileAuthenticationOption authenticationOption, DateTime userInactiveSinceDate)
+        public override int GetNumberOfInactiveProfiles(
+            ProfileAuthenticationOption authenticationOption,
+            DateTime userInactiveSinceDate
+        )
         {
-            throw new Exception("GetNumberOfInactiveProfiles: The method or operation is not implemented.");
+            throw new Exception(
+                "GetNumberOfInactiveProfiles: The method or operation is not implemented."
+            );
         }
         #endregion
 
@@ -183,9 +240,12 @@ namespace System.Web.Profile
         #region System.Web.Security.SettingsProvider methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection collection)
+        public override SettingsPropertyValueCollection GetPropertyValues(
+            SettingsContext context,
+            SettingsPropertyCollection collection
+        )
         {
             SettingsPropertyValueCollection result = new SettingsPropertyValueCollection();
             string username = (string)context["UserName"];
@@ -196,11 +256,15 @@ namespace System.Web.Profile
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("SELECT \"Name\", \"ValueString\", \"ValueBinary\" FROM \"{0}\" WHERE \"Profile\" = (SELECT \"pId\" FROM \"{1}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated)", m_ProfileDataTableName, m_ProfilesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "SELECT \"Name\", \"ValueString\", \"ValueBinary\" FROM \"{0}\" WHERE \"Profile\" = (SELECT \"pId\" FROM \"{1}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated)",
+                        m_ProfileDataTableName,
+                        m_ProfilesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Username", username);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
-                    AddParameter (dbCommand, "@IsAuthenticated", !isAuthenticated);
+                    AddParameter(dbCommand, "@Username", username);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@IsAuthenticated", !isAuthenticated);
 
                     try
                     {
@@ -212,9 +276,9 @@ namespace System.Web.Profile
                             while (reader.Read())
                             {
                                 object resultData = null;
-                                if(!reader.IsDBNull(1))
+                                if (!reader.IsDBNull(1))
                                     resultData = reader.GetValue(1);
-                                else if(!reader.IsDBNull(2))
+                                else if (!reader.IsDBNull(2))
                                     resultData = reader.GetValue(2);
 
                                 databaseResult.Add(reader.GetString(0), resultData);
@@ -248,16 +312,20 @@ namespace System.Web.Profile
 
                 if ((databaseResult.ContainsKey(item.Name)) && (databaseResult[item.Name] != null))
                 {
-                    if(item.SerializeAs == SettingsSerializeAs.String)
-                        itemValue.PropertyValue = m_serializationHelper.DeserializeFromBase64((string)databaseResult[item.Name]);
-                    
+                    if (item.SerializeAs == SettingsSerializeAs.String)
+                        itemValue.PropertyValue = m_serializationHelper.DeserializeFromBase64(
+                            (string)databaseResult[item.Name]
+                        );
                     else if (item.SerializeAs == SettingsSerializeAs.Xml)
-                        itemValue.PropertyValue = m_serializationHelper.DeserializeFromXml((string)databaseResult[item.Name]);
-
+                        itemValue.PropertyValue = m_serializationHelper.DeserializeFromXml(
+                            (string)databaseResult[item.Name]
+                        );
                     else if (item.SerializeAs == SettingsSerializeAs.Binary)
-                        itemValue.PropertyValue = m_serializationHelper.DeserializeFromBinary((byte[])databaseResult[item.Name]);
+                        itemValue.PropertyValue = m_serializationHelper.DeserializeFromBinary(
+                            (byte[])databaseResult[item.Name]
+                        );
                 }
-                itemValue.IsDirty = false;                
+                itemValue.IsDirty = false;
                 result.Add(itemValue);
             }
 
@@ -266,7 +334,10 @@ namespace System.Web.Profile
             return result;
         }
 
-        public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection collection)
+        public override void SetPropertyValues(
+            SettingsContext context,
+            SettingsPropertyValueCollection collection
+        )
         {
             string username = (string)context["UserName"];
             bool isAuthenticated = (bool)context["IsAuthenticated"];
@@ -279,28 +350,37 @@ namespace System.Web.Profile
 
             using (SqliteConnection dbConn = new SqliteConnection(m_ConnectionString))
             {
-                using (SqliteCommand deleteCommand = dbConn.CreateCommand(),
-                    insertCommand = dbConn.CreateCommand())
+                using (
+                    SqliteCommand deleteCommand = dbConn.CreateCommand(),
+                        insertCommand = dbConn.CreateCommand()
+                )
                 {
-                    deleteCommand.CommandText = string.Format("DELETE FROM \"{0}\" WHERE \"Name\" = @Name AND \"Profile\" = (SELECT \"pId\" FROM \"{1}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated)", m_ProfileDataTableName, m_ProfilesTableName);
+                    deleteCommand.CommandText = string.Format(
+                        "DELETE FROM \"{0}\" WHERE \"Name\" = @Name AND \"Profile\" = (SELECT \"pId\" FROM \"{1}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated)",
+                        m_ProfileDataTableName,
+                        m_ProfilesTableName
+                    );
 
-                    AddParameter (deleteCommand, "@Name");
-                    AddParameter (deleteCommand, "@Username", username);
-                    AddParameter (deleteCommand, "@ApplicationName", m_ApplicationName);
-                    AddParameter (deleteCommand, "@IsAuthenticated", !isAuthenticated);
+                    AddParameter(deleteCommand, "@Name");
+                    AddParameter(deleteCommand, "@Username", username);
+                    AddParameter(deleteCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(deleteCommand, "@IsAuthenticated", !isAuthenticated);
 
+                    insertCommand.CommandText = string.Format(
+                        "INSERT INTO \"{0}\" (\"pId\", \"Profile\", \"Name\", \"ValueString\", \"ValueBinary\") VALUES (@pId, (SELECT \"pId\" FROM \"{1}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated), @Name, @ValueString, @ValueBinary)",
+                        m_ProfileDataTableName,
+                        m_ProfilesTableName
+                    );
 
-                    insertCommand.CommandText = string.Format("INSERT INTO \"{0}\" (\"pId\", \"Profile\", \"Name\", \"ValueString\", \"ValueBinary\") VALUES (@pId, (SELECT \"pId\" FROM \"{1}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated), @Name, @ValueString, @ValueBinary)", m_ProfileDataTableName, m_ProfilesTableName);
-
-                    AddParameter (insertCommand, "@pId");
-                    AddParameter (insertCommand, "@Name");
-                    AddParameter (insertCommand, "@ValueString");
+                    AddParameter(insertCommand, "@pId");
+                    AddParameter(insertCommand, "@Name");
+                    AddParameter(insertCommand, "@ValueString");
                     insertCommand.Parameters["@ValueString"].IsNullable = true;
-                    AddParameter (insertCommand, "@ValueBinary");
+                    AddParameter(insertCommand, "@ValueBinary");
                     insertCommand.Parameters["@ValueBinary"].IsNullable = true;
-                    AddParameter (insertCommand, "@Username", username);
-                    AddParameter (insertCommand, "@ApplicationName", m_ApplicationName);
-                    AddParameter (insertCommand, "@IsAuthenticated", !isAuthenticated);
+                    AddParameter(insertCommand, "@Username", username);
+                    AddParameter(insertCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(insertCommand, "@IsAuthenticated", !isAuthenticated);
 
                     SqliteTransaction dbTrans = null;
 
@@ -312,7 +392,6 @@ namespace System.Web.Profile
 
                         using (dbTrans = dbConn.BeginTransaction())
                         {
-
                             foreach (SettingsPropertyValue item in collection)
                             {
                                 if (!item.IsDirty)
@@ -325,20 +404,27 @@ namespace System.Web.Profile
 
                                 if (item.Property.SerializeAs == SettingsSerializeAs.String)
                                 {
-                                    insertCommand.Parameters["@ValueString"].Value = m_serializationHelper.SerializeToBase64(item.PropertyValue);
+                                    insertCommand.Parameters["@ValueString"].Value =
+                                        m_serializationHelper.SerializeToBase64(item.PropertyValue);
                                     insertCommand.Parameters["@ValueBinary"].Value = DBNull.Value; //new byte[0];//DBNull.Value;
                                 }
                                 else if (item.Property.SerializeAs == SettingsSerializeAs.Xml)
                                 {
-                                    item.SerializedValue = m_serializationHelper.SerializeToXml(item.PropertyValue);
-                                    insertCommand.Parameters["@ValueString"].Value = item.SerializedValue;
+                                    item.SerializedValue = m_serializationHelper.SerializeToXml(
+                                        item.PropertyValue
+                                    );
+                                    insertCommand.Parameters["@ValueString"].Value =
+                                        item.SerializedValue;
                                     insertCommand.Parameters["@ValueBinary"].Value = DBNull.Value; //new byte[0];//DBNull.Value;
                                 }
                                 else if (item.Property.SerializeAs == SettingsSerializeAs.Binary)
                                 {
-                                    item.SerializedValue = m_serializationHelper.SerializeToBinary(item.PropertyValue);
+                                    item.SerializedValue = m_serializationHelper.SerializeToBinary(
+                                        item.PropertyValue
+                                    );
                                     insertCommand.Parameters["@ValueString"].Value = DBNull.Value; //string.Empty;//DBNull.Value;
-                                    insertCommand.Parameters["@ValueBinary"].Value = item.SerializedValue;
+                                    insertCommand.Parameters["@ValueBinary"].Value =
+                                        item.SerializedValue;
                                 }
 
                                 deleteCommand.ExecuteNonQuery();
@@ -390,21 +476,26 @@ namespace System.Web.Profile
         {
             if (ProfileExists(username))
             {
-                throw new ProviderException(string.Format(Properties.Resources.ErrProfileAlreadyExist, username));
+                throw new ProviderException(
+                    string.Format(Properties.Resources.ErrProfileAlreadyExist, username)
+                );
             }
 
             using (SqliteConnection dbConn = new SqliteConnection(m_ConnectionString))
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("INSERT INTO \"{0}\" (\"pId\", \"Username\", \"ApplicationName\", \"IsAnonymous\", \"LastActivityDate\", \"LastUpdatedDate\") Values (@pId, @Username, @ApplicationName, @IsAuthenticated, @LastActivityDate, @LastUpdatedDate)", m_ProfilesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "INSERT INTO \"{0}\" (\"pId\", \"Username\", \"ApplicationName\", \"IsAnonymous\", \"LastActivityDate\", \"LastUpdatedDate\") Values (@pId, @Username, @ApplicationName, @IsAuthenticated, @LastActivityDate, @LastUpdatedDate)",
+                        m_ProfilesTableName
+                    );
 
-                    AddParameter (dbCommand, "@pId", Guid.NewGuid().ToString());
-                    AddParameter (dbCommand, "@Username", username);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
-                    AddParameter (dbCommand, "@IsAuthenticated", !isAuthenticated);
-                    AddParameter (dbCommand, "@LastActivityDate", DateTime.Now);
-                    AddParameter (dbCommand, "@LastUpdatedDate", DateTime.Now);
+                    AddParameter(dbCommand, "@pId", Guid.NewGuid().ToString());
+                    AddParameter(dbCommand, "@Username", username);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@IsAuthenticated", !isAuthenticated);
+                    AddParameter(dbCommand, "@LastActivityDate", DateTime.Now);
+                    AddParameter(dbCommand, "@LastUpdatedDate", DateTime.Now);
 
                     try
                     {
@@ -427,17 +518,19 @@ namespace System.Web.Profile
             }
         }
 
-
         bool ProfileExists(string username)
         {
             using (SqliteConnection dbConn = new SqliteConnection(m_ConnectionString))
             {
                 using (SqliteCommand dbCommand = dbConn.CreateCommand())
                 {
-                    dbCommand.CommandText = string.Format("SELECT COUNT(*) FROM \"{0}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName", m_ProfilesTableName);
+                    dbCommand.CommandText = string.Format(
+                        "SELECT COUNT(*) FROM \"{0}\" WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName",
+                        m_ProfilesTableName
+                    );
 
-                    AddParameter (dbCommand, "@Username", username);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@Username", username);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
 
                     try
                     {
@@ -482,21 +575,27 @@ namespace System.Web.Profile
                 {
                     if (activityOnly)
                     {
-                        dbCommand.CommandText = string.Format("UPDATE \"{0}\" SET \"LastActivityDate\" = @LastActivityDate WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated", m_ProfilesTableName);
+                        dbCommand.CommandText = string.Format(
+                            "UPDATE \"{0}\" SET \"LastActivityDate\" = @LastActivityDate WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated",
+                            m_ProfilesTableName
+                        );
 
-                        AddParameter (dbCommand, "@LastActivityDate", DateTime.Now);
+                        AddParameter(dbCommand, "@LastActivityDate", DateTime.Now);
                     }
                     else
                     {
-                        dbCommand.CommandText = string.Format("UPDATE \"{0}\" SET \"LastActivityDate\" = @LastActivityDate, \"LastUpdatedDate\" = @LastUpdatedDate WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated", m_ProfilesTableName);
+                        dbCommand.CommandText = string.Format(
+                            "UPDATE \"{0}\" SET \"LastActivityDate\" = @LastActivityDate, \"LastUpdatedDate\" = @LastUpdatedDate WHERE \"Username\" = @Username AND \"ApplicationName\" = @ApplicationName AND \"IsAnonymous\" = @IsAuthenticated",
+                            m_ProfilesTableName
+                        );
 
-                        AddParameter (dbCommand, "@LastActivityDate", DateTime.Now);
-                        AddParameter (dbCommand, "@LastUpdatedDate", DateTime.Now);
+                        AddParameter(dbCommand, "@LastActivityDate", DateTime.Now);
+                        AddParameter(dbCommand, "@LastUpdatedDate", DateTime.Now);
                     }
-                    
-                    AddParameter (dbCommand, "@Username", username);
-                    AddParameter (dbCommand, "@ApplicationName", m_ApplicationName);
-                    AddParameter (dbCommand, "@IsAuthenticated", !isAuthenticated);
+
+                    AddParameter(dbCommand, "@Username", username);
+                    AddParameter(dbCommand, "@ApplicationName", m_ApplicationName);
+                    AddParameter(dbCommand, "@IsAuthenticated", !isAuthenticated);
 
                     try
                     {

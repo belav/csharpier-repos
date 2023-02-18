@@ -58,7 +58,12 @@ namespace Castle.DynamicProxy.Tests
                 ["IsByValue"] = new[] { typeof(IsByValue) },
                 ["IsByValue_IsByValue"] = new[] { typeof(IsByValue), typeof(IsByValue) },
                 ["IsByValue_IsConst"] = new[] { typeof(IsByValue), typeof(IsConst) },
-                ["IsByValue_IsConst_IsLong"] = new[] { typeof(IsByValue), typeof(IsConst), typeof(IsLong) },
+                ["IsByValue_IsConst_IsLong"] = new[]
+                {
+                    typeof(IsByValue),
+                    typeof(IsConst),
+                    typeof(IsLong)
+                },
                 ["IsByValue_IsLong"] = new[] { typeof(IsByValue), typeof(IsLong) },
                 ["IsConst"] = new[] { typeof(IsConst) },
                 ["IsConst_IsConst"] = new[] { typeof(IsConst), typeof(IsConst) },
@@ -75,23 +80,31 @@ namespace Castle.DynamicProxy.Tests
             this.generatedTypes = new Dictionary<string, Type>();
         }
 
-        public static IEnumerable<string> AsModoptOnParamTypeNames
-            => CustomModifiersTestCase.customModifiers.Keys.Select(typeName => typeName + "_AsModoptOnParamType");
+        public static IEnumerable<string> AsModoptOnParamTypeNames =>
+            CustomModifiersTestCase.customModifiers.Keys.Select(
+                typeName => typeName + "_AsModoptOnParamType"
+            );
 
-        public static IEnumerable<string> AsModreqOnParamTypeNames
-            => CustomModifiersTestCase.customModifiers.Keys.Select(typeName => typeName + "_AsModreqOnParamType");
+        public static IEnumerable<string> AsModreqOnParamTypeNames =>
+            CustomModifiersTestCase.customModifiers.Keys.Select(
+                typeName => typeName + "_AsModreqOnParamType"
+            );
 
-        public static IEnumerable<string> AsModoptOnReturnTypeNames
-            => CustomModifiersTestCase.customModifiers.Keys.Select(typeName => typeName + "_AsModoptOnReturnType");
+        public static IEnumerable<string> AsModoptOnReturnTypeNames =>
+            CustomModifiersTestCase.customModifiers.Keys.Select(
+                typeName => typeName + "_AsModoptOnReturnType"
+            );
 
-        public static IEnumerable<string> AsModreqOnReturnTypeNames
-            => CustomModifiersTestCase.customModifiers.Keys.Select(typeName => typeName + "_AsModreqOnReturnType");
+        public static IEnumerable<string> AsModreqOnReturnTypeNames =>
+            CustomModifiersTestCase.customModifiers.Keys.Select(
+                typeName => typeName + "_AsModreqOnReturnType"
+            );
 
-        public static IEnumerable<string> AllTypeNames
-            => AsModoptOnParamTypeNames
-               .Concat(AsModreqOnParamTypeNames)
-               .Concat(AsModoptOnReturnTypeNames)
-               .Concat(AsModreqOnReturnTypeNames);
+        public static IEnumerable<string> AllTypeNames =>
+            AsModoptOnParamTypeNames
+                .Concat(AsModreqOnParamTypeNames)
+                .Concat(AsModoptOnReturnTypeNames)
+                .Concat(AsModreqOnReturnTypeNames);
 
         /// <summary>
         /// Emits types as specified by `this.modopts` and stores the dynamic assembly to disk.
@@ -102,7 +115,8 @@ namespace Castle.DynamicProxy.Tests
         public void GenerateTypes()
         {
             const string assemblyName = "Castle.Core.Tests.CustomModifiersTestCaseDynamicAssembly";
-            const string assemblyFileName = "Castle.Core.Tests.CustomModifiersTestCaseDynamicAssembly.dll";
+            const string assemblyFileName =
+                "Castle.Core.Tests.CustomModifiersTestCaseDynamicAssembly.dll";
 
             var moduleScope = new ModuleScope(
                 savePhysicalAssembly: true,
@@ -111,15 +125,32 @@ namespace Castle.DynamicProxy.Tests
                 strongAssemblyName: assemblyName,
                 strongModulePath: assemblyFileName,
                 weakAssemblyName: assemblyName,
-                weakModulePath: assemblyFileName);
+                weakModulePath: assemblyFileName
+            );
 
             foreach (var partialTypeName in CustomModifiersTestCase.customModifiers.Keys)
             {
                 var customModifiers = CustomModifiersTestCase.customModifiers[partialTypeName];
-                this.AddTypeWithCustomModifiersAsModoptOnParamType(moduleScope, partialTypeName, customModifiers);
-                this.AddTypeWithCustomModifiersAsModreqOnParamType(moduleScope, partialTypeName, customModifiers);
-                this.AddTypeWithCustomModifiersAsModoptOnReturnType(moduleScope, partialTypeName, customModifiers);
-                this.AddTypeWithCustomModifiersAsModreqOnReturnType(moduleScope, partialTypeName, customModifiers);
+                this.AddTypeWithCustomModifiersAsModoptOnParamType(
+                    moduleScope,
+                    partialTypeName,
+                    customModifiers
+                );
+                this.AddTypeWithCustomModifiersAsModreqOnParamType(
+                    moduleScope,
+                    partialTypeName,
+                    customModifiers
+                );
+                this.AddTypeWithCustomModifiersAsModoptOnReturnType(
+                    moduleScope,
+                    partialTypeName,
+                    customModifiers
+                );
+                this.AddTypeWithCustomModifiersAsModreqOnReturnType(
+                    moduleScope,
+                    partialTypeName,
+                    customModifiers
+                );
             }
 
 #if FEATURE_ASSEMBLYBUILDER_SAVE
@@ -137,7 +168,10 @@ namespace Castle.DynamicProxy.Tests
         /// the parameter type in the generated types.
         /// </summary>
         [TestCaseSource(nameof(AsModoptOnParamTypeNames))]
-        [Platform(Exclude = "Mono", Reason = "Mono reports custom modifiers in the opposite order than the CLR does. See https://github.com/castleproject/Core/issues/414 and https://github.com/mono/mono/issues/11302.")]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "Mono reports custom modifiers in the opposite order than the CLR does. See https://github.com/castleproject/Core/issues/414 and https://github.com/mono/mono/issues/11302."
+        )]
         public void ReflectionReturnsCorrectModoptOnParamTypeForGeneratedType(string typeName)
         {
             Assume.That(this.generatedTypes.ContainsKey(typeName));
@@ -148,9 +182,14 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modopts = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[0].GetOptionalCustomModifiers();
+            var modopts = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[
+                0
+            ].GetOptionalCustomModifiers();
 
-            CollectionAssert.AreEqual(expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(), actual: modopts);
+            CollectionAssert.AreEqual(
+                expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(),
+                actual: modopts
+            );
             // ^ The emission of custom modifiers performed by DynamicProxy is currently geared towards
             //   the CLR, which reports custom modifiers in reverse order. On Mono, before version 5.16,
             //   Reflection would not report custom modifiers at all; this has now changed. But unlike the
@@ -169,7 +208,10 @@ namespace Castle.DynamicProxy.Tests
         /// the parameter type in the generated types.
         /// </summary>
         [TestCaseSource(nameof(AsModreqOnParamTypeNames))]
-        [Platform(Exclude = "Mono", Reason = "Mono reports custom modifiers in the opposite order than the CLR does. See https://github.com/castleproject/Core/issues/414 and https://github.com/mono/mono/issues/11302.")]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "Mono reports custom modifiers in the opposite order than the CLR does. See https://github.com/castleproject/Core/issues/414 and https://github.com/mono/mono/issues/11302."
+        )]
         public void ReflectionReturnsCorrectModreqsOnParamTypeForGeneratedType(string typeName)
         {
             Assume.That(this.generatedTypes.ContainsKey(typeName));
@@ -180,10 +222,15 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modreqs = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[0].GetRequiredCustomModifiers();
+            var modreqs = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[
+                0
+            ].GetRequiredCustomModifiers();
             Assume.That(modreqs.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 
-            CollectionAssert.AreEqual(expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(), actual: modreqs);
+            CollectionAssert.AreEqual(
+                expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(),
+                actual: modreqs
+            );
             // ^ see comment about `.Reverse()` above.
         }
 
@@ -202,10 +249,15 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modopts = this.generatedTypes[typeName].GetMethod("Foo").ReturnParameter.GetOptionalCustomModifiers();
+            var modopts = this.generatedTypes[typeName]
+                .GetMethod("Foo")
+                .ReturnParameter.GetOptionalCustomModifiers();
             Assume.That(modopts.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 
-            CollectionAssert.AreEqual(expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(), actual: modopts);
+            CollectionAssert.AreEqual(
+                expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(),
+                actual: modopts
+            );
             // ^ see comment about `.Reverse()` above.
         }
 
@@ -224,10 +276,15 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modreqs = this.generatedTypes[typeName].GetMethod("Foo").ReturnParameter.GetRequiredCustomModifiers();
+            var modreqs = this.generatedTypes[typeName]
+                .GetMethod("Foo")
+                .ReturnParameter.GetRequiredCustomModifiers();
             Assume.That(modreqs.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 
-            CollectionAssert.AreEqual(expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(), actual: modreqs);
+            CollectionAssert.AreEqual(
+                expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(),
+                actual: modreqs
+            );
             // ^ see comment about `.Reverse()` above.
         }
 
@@ -244,11 +301,18 @@ namespace Castle.DynamicProxy.Tests
             var type = this.generatedTypes[typeName];
             var proxyGenerator = new ProxyGenerator();
 
-            var proxy = proxyGenerator.CreateInterfaceProxyWithoutTarget(type, new DoNothingInterceptor());
+            var proxy = proxyGenerator.CreateInterfaceProxyWithoutTarget(
+                type,
+                new DoNothingInterceptor()
+            );
             Assert.NotNull(proxy);
         }
 
-        private void AddTypeWithCustomModifiersAsModoptOnParamType(ModuleScope moduleScope, string typeName, params Type[] paramTypeModopts)
+        private void AddTypeWithCustomModifiersAsModoptOnParamType(
+            ModuleScope moduleScope,
+            string typeName,
+            params Type[] paramTypeModopts
+        )
         {
             // This method generates a type that would look as follows in IL:
             //
@@ -269,29 +333,39 @@ namespace Castle.DynamicProxy.Tests
             var typeBuilder = moduleScope.DefineType(
                 true,
                 typeName,
-                TypeAttributes.Class | TypeAttributes.Interface | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit);
+                TypeAttributes.Class
+                    | TypeAttributes.Interface
+                    | TypeAttributes.Public
+                    | TypeAttributes.Abstract
+                    | TypeAttributes.AutoLayout
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.BeforeFieldInit
+            );
 
             var methodBuilder = typeBuilder.DefineMethod(
                 "Foo",
-                MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Abstract
+                    | MethodAttributes.Virtual,
                 returnType: typeof(void),
                 returnTypeRequiredCustomModifiers: null,
                 returnTypeOptionalCustomModifiers: null,
-                parameterTypes: new[]
-                {
-                    typeof(int)
-                },
+                parameterTypes: new[] { typeof(int) },
                 parameterTypeRequiredCustomModifiers: null,
-                parameterTypeOptionalCustomModifiers: new[]
-                {
-                    paramTypeModopts
-                },
-                callingConvention: CallingConventions.Standard);
+                parameterTypeOptionalCustomModifiers: new[] { paramTypeModopts },
+                callingConvention: CallingConventions.Standard
+            );
 
             this.generatedTypes.Add(typeName, typeBuilder.CreateType());
         }
 
-        private void AddTypeWithCustomModifiersAsModreqOnParamType(ModuleScope moduleScope, string typeName, params Type[] paramTypeModreqs)
+        private void AddTypeWithCustomModifiersAsModreqOnParamType(
+            ModuleScope moduleScope,
+            string typeName,
+            params Type[] paramTypeModreqs
+        )
         {
             // This method generates a type that would look as follows in IL:
             //
@@ -305,29 +379,39 @@ namespace Castle.DynamicProxy.Tests
             var typeBuilder = moduleScope.DefineType(
                 true,
                 typeName,
-                TypeAttributes.Class | TypeAttributes.Interface | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit);
+                TypeAttributes.Class
+                    | TypeAttributes.Interface
+                    | TypeAttributes.Public
+                    | TypeAttributes.Abstract
+                    | TypeAttributes.AutoLayout
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.BeforeFieldInit
+            );
 
             var methodBuilder = typeBuilder.DefineMethod(
                 "Foo",
-                MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Abstract
+                    | MethodAttributes.Virtual,
                 returnType: typeof(void),
                 returnTypeRequiredCustomModifiers: null,
                 returnTypeOptionalCustomModifiers: null,
-                parameterTypes: new[]
-                {
-                    typeof(int)
-                },
-                parameterTypeRequiredCustomModifiers: new[]
-                {
-                    paramTypeModreqs
-                },
+                parameterTypes: new[] { typeof(int) },
+                parameterTypeRequiredCustomModifiers: new[] { paramTypeModreqs },
                 parameterTypeOptionalCustomModifiers: null,
-                callingConvention: CallingConventions.Standard);
+                callingConvention: CallingConventions.Standard
+            );
 
             this.generatedTypes.Add(typeName, typeBuilder.CreateType());
         }
 
-        private void AddTypeWithCustomModifiersAsModoptOnReturnType(ModuleScope moduleScope, string typeName, params Type[] returnTypeModopts)
+        private void AddTypeWithCustomModifiersAsModoptOnReturnType(
+            ModuleScope moduleScope,
+            string typeName,
+            params Type[] returnTypeModopts
+        )
         {
             // This method generates a type that would look as follows in IL:
             //
@@ -348,23 +432,39 @@ namespace Castle.DynamicProxy.Tests
             var typeBuilder = moduleScope.DefineType(
                 true,
                 typeName,
-                TypeAttributes.Class | TypeAttributes.Interface | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit);
+                TypeAttributes.Class
+                    | TypeAttributes.Interface
+                    | TypeAttributes.Public
+                    | TypeAttributes.Abstract
+                    | TypeAttributes.AutoLayout
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.BeforeFieldInit
+            );
 
             var methodBuilder = typeBuilder.DefineMethod(
                 "Foo",
-                MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Abstract
+                    | MethodAttributes.Virtual,
                 returnType: typeof(int),
                 returnTypeRequiredCustomModifiers: null,
                 returnTypeOptionalCustomModifiers: returnTypeModopts,
                 parameterTypes: null,
                 parameterTypeRequiredCustomModifiers: null,
                 parameterTypeOptionalCustomModifiers: null,
-                callingConvention: CallingConventions.Standard);
+                callingConvention: CallingConventions.Standard
+            );
 
             this.generatedTypes.Add(typeName, typeBuilder.CreateType());
         }
 
-        private void AddTypeWithCustomModifiersAsModreqOnReturnType(ModuleScope moduleScope, string typeName, params Type[] returnTypeModreqs)
+        private void AddTypeWithCustomModifiersAsModreqOnReturnType(
+            ModuleScope moduleScope,
+            string typeName,
+            params Type[] returnTypeModreqs
+        )
         {
             // This method generates a type that would look as follows in IL:
             //
@@ -378,23 +478,36 @@ namespace Castle.DynamicProxy.Tests
             var typeBuilder = moduleScope.DefineType(
                 true,
                 typeName,
-                TypeAttributes.Class | TypeAttributes.Interface | TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit);
+                TypeAttributes.Class
+                    | TypeAttributes.Interface
+                    | TypeAttributes.Public
+                    | TypeAttributes.Abstract
+                    | TypeAttributes.AutoLayout
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.BeforeFieldInit
+            );
 
             var methodBuilder = typeBuilder.DefineMethod(
                 "Foo",
-                MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Abstract
+                    | MethodAttributes.Virtual,
                 returnType: typeof(int),
                 returnTypeRequiredCustomModifiers: returnTypeModreqs,
                 returnTypeOptionalCustomModifiers: null,
                 parameterTypes: null,
                 parameterTypeRequiredCustomModifiers: null,
                 parameterTypeOptionalCustomModifiers: null,
-                callingConvention: CallingConventions.Standard);
+                callingConvention: CallingConventions.Standard
+            );
 
             this.generatedTypes.Add(typeName, typeBuilder.CreateType());
         }
 
         public class Foo { }
+
         public class Bar { }
     }
 }

@@ -57,7 +57,8 @@ internal static class BindMethodFinder
                     BindMethodBindingFlags,
                     binder: null,
                     new[] { typeof(ServiceBinderBase), currentServiceType },
-                    Array.Empty<ParameterModifier>());
+                    Array.Empty<ParameterModifier>()
+                );
             }
         } while ((currentServiceType = currentServiceType.BaseType) != null);
 
@@ -82,7 +83,8 @@ internal static class BindMethodFinder
             BindMethodBindingFlags,
             binder: null,
             new[] { typeof(ServiceBinderBase), baseType },
-            Array.Empty<ParameterModifier>());
+            Array.Empty<ParameterModifier>()
+        );
     }
 
     private static Type? GetServiceBaseType(Type serviceImplementation)

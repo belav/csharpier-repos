@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,27 +34,51 @@ namespace System.Web.UI.Design
 {
     public sealed class UrlBuilder
     {
-        private UrlBuilder ()
+        private UrlBuilder() { }
+
+        [MonoTODO]
+        public static string BuildUrl(
+            IComponent component,
+            System.Windows.Forms.Control owner,
+            string initialUrl,
+            string caption,
+            string filter
+        )
         {
+            return UrlBuilder.BuildUrl(
+                component,
+                owner,
+                initialUrl,
+                caption,
+                filter,
+                UrlBuilderOptions.None
+            );
         }
 
         [MonoTODO]
-        public static string BuildUrl (IComponent component, System.Windows.Forms.Control owner, string initialUrl, string caption, string filter)
+        public static string BuildUrl(
+            IComponent component,
+            System.Windows.Forms.Control owner,
+            string initialUrl,
+            string caption,
+            string filter,
+            UrlBuilderOptions options
+        )
         {
-            return UrlBuilder.BuildUrl (component, owner, initialUrl, 
-                caption, filter, UrlBuilderOptions.None);
+            throw new NotImplementedException();
         }
 
         [MonoTODO]
-        public static string BuildUrl (IComponent component, System.Windows.Forms.Control owner, string initialUrl, string caption, string filter, UrlBuilderOptions options)
+        public static string BuildUrl(
+            IServiceProvider serviceProvider,
+            System.Windows.Forms.Control owner,
+            string initialUrl,
+            string caption,
+            string filter,
+            UrlBuilderOptions options
+        )
         {
-            throw new NotImplementedException ();
-        }
-
-        [MonoTODO]
-        public static string BuildUrl (IServiceProvider serviceProvider, System.Windows.Forms.Control owner, string initialUrl, string caption, string filter, UrlBuilderOptions options)
-        {
-            throw new NotImplementedException ();
+            throw new NotImplementedException();
         }
     }
 }

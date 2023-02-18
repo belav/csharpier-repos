@@ -1,7 +1,7 @@
 // Bug #80731
 public partial class A<T>
 {
-    public class B {}
+    public class B { }
 }
 
 public partial class A<T>
@@ -11,9 +11,9 @@ public partial class A<T>
 
 class X
 {
-    public static void Main ()
+    public static void Main()
     {
-        A<int> a = new A<int> ();
-        a.Test = new A<int>.B ();
+        A<int> a = new A<int>();
+        a.Test = new A<int>.B();
     }
 }

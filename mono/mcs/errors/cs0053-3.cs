@@ -9,7 +9,8 @@ namespace MonoTests.System.ComponentModel
         {
             class NestedClass { }
 
-            public NestedClass Prop {
+            public NestedClass Prop
+            {
                 get { return null; }
             }
         }

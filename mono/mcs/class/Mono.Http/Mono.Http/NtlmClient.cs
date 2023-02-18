@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,17 +39,19 @@ namespace Mono.Http
     {
         MessageBase message;
 
-        public NtlmSession () 
-        {
-        }
+        public NtlmSession() { }
 
-        public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials) 
+        public Authorization Authenticate(
+            string challenge,
+            WebRequest webRequest,
+            ICredentials credentials
+        )
         {
             HttpWebRequest request = webRequest as HttpWebRequest;
             if (request == null)
                 return null;
-    
-            NetworkCredential cred = credentials.GetCredential (request.RequestUri, "NTLM");
+
+            NetworkCredential cred = credentials.GetCredential(request.RequestUri, "NTLM");
             if (cred == null)
                 return null;
 
@@ -58,45 +60,54 @@ namespace Mono.Http
             string password = cred.Password;
             if (userName == null || userName == "")
                 return null;
-            domain = domain != null && domain.Length > 0 ? domain : request.Headers ["Host"];
+            domain = domain != null && domain.Length > 0 ? domain : request.Headers["Host"];
 
             bool completed = false;
-            if (message == null) {
-                Type1Message type1 = new Type1Message ();
+            if (message == null)
+            {
+                Type1Message type1 = new Type1Message();
                 type1.Domain = domain;
                 message = type1;
-            } else if (message.Type == 1) {
+            }
+            else if (message.Type == 1)
+            {
                 // Should I check the credentials?
-                if (challenge == null) {
+                if (challenge == null)
+                {
                     message = null;
                     return null;
                 }
 
-                Type2Message type2 = new Type2Message (Convert.FromBase64String (challenge));
+                Type2Message type2 = new Type2Message(Convert.FromBase64String(challenge));
                 if (password == null)
                     password = "";
 
-                Type3Message type3 = new Type3Message ();
+                Type3Message type3 = new Type3Message();
                 type3.Domain = domain;
                 type3.Username = userName;
                 type3.Challenge = type2.Nonce;
                 type3.Password = password;
                 message = type3;
                 completed = true;
-            } else {
+            }
+            else
+            {
                 // Should I check the credentials?
                 // type must be 3 here
-                if (challenge == null || challenge == String.Empty) {
-                    Type1Message type1 = new Type1Message ();
+                if (challenge == null || challenge == String.Empty)
+                {
+                    Type1Message type1 = new Type1Message();
                     type1.Domain = domain;
                     message = type1;
-                } else {
+                }
+                else
+                {
                     completed = true;
                 }
             }
-            
-            string token = "NTLM " + Convert.ToBase64String (message.GetBytes ());
-            return new Authorization (token, completed);
+
+            string token = "NTLM " + Convert.ToBase64String(message.GetBytes());
+            return new Authorization(token, completed);
         }
     }
 
@@ -104,27 +115,34 @@ namespace Mono.Http
     {
         static Hashtable cache;
 
-        static NtlmClient () 
+        static NtlmClient()
         {
-            cache = new Hashtable ();
+            cache = new Hashtable();
         }
-    
-        public NtlmClient () {}
-    
-        public Authorization Authenticate (string challenge, WebRequest webRequest, ICredentials credentials) 
+
+        public NtlmClient() { }
+
+        public Authorization Authenticate(
+            string challenge,
+            WebRequest webRequest,
+            ICredentials credentials
+        )
         {
             if (credentials == null || challenge == null)
                 return null;
-    
-            string header = challenge.Trim ();
-            int idx = header.ToLower ().IndexOf ("ntlm");
+
+            string header = challenge.Trim();
+            int idx = header.ToLower().IndexOf("ntlm");
             if (idx == -1)
                 return null;
 
-            idx = header.IndexOfAny (new char [] {' ', '\t'});
-            if (idx != -1) {
-                header = header.Substring (idx).Trim ();
-            } else {
+            idx = header.IndexOfAny(new char[] { ' ', '\t' });
+            if (idx != -1)
+            {
+                header = header.Substring(idx).Trim();
+            }
+            else
+            {
                 header = null;
             }
 
@@ -132,29 +150,32 @@ namespace Mono.Http
             if (request == null)
                 return null;
 
-            lock (cache) {
-                NtlmSession ds = (NtlmSession) cache [request.RequestUri];
-                if (ds == null) {
-                    ds = new NtlmSession ();
-                    cache.Add (request.RequestUri, ds);
+            lock (cache)
+            {
+                NtlmSession ds = (NtlmSession)cache[request.RequestUri];
+                if (ds == null)
+                {
+                    ds = new NtlmSession();
+                    cache.Add(request.RequestUri, ds);
                 }
 
-                return ds.Authenticate (header, webRequest, credentials);
+                return ds.Authenticate(header, webRequest, credentials);
             }
         }
 
-        public Authorization PreAuthenticate (WebRequest webRequest, ICredentials credentials) 
+        public Authorization PreAuthenticate(WebRequest webRequest, ICredentials credentials)
         {
             return null;
         }
-    
-        public string AuthenticationType { 
+
+        public string AuthenticationType
+        {
             get { return "NTLM"; }
         }
-    
-        public bool CanPreAuthenticate { 
+
+        public bool CanPreAuthenticate
+        {
             get { return false; }
         }
     }
 }
-

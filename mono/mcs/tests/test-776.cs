@@ -2,7 +2,7 @@ using System;
 
 class First
 {
-    public virtual object this [string name]
+    public virtual object this[string name]
     {
         get { return "First"; }
         set { }
@@ -11,7 +11,7 @@ class First
 
 class Second : First
 {
-    public override object this [string name]
+    public override object this[string name]
     {
         get { return "Second"; }
         set { }
@@ -20,21 +20,21 @@ class Second : First
 
 class Third : Second
 {
-    public override object this [string name]
+    public override object this[string name]
     {
-        get { return base [name]; }
+        get { return base[name]; }
         set { }
     }
 }
 
 class a
 {
-    public static int Main (string[] args)
+    public static int Main(string[] args)
     {
-        First t = (First)new Third ();
-        if (t ["test"] != "Second")
+        First t = (First)new Third();
+        if (t["test"] != "Second")
             return 1;
-        
+
         return 0;
     }
 }

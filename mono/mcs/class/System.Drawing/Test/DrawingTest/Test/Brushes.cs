@@ -10,191 +10,191 @@ namespace Test.Sys.Drawing
     /// <summary>
     /// Summary description for Pens.
     /// </summary>
-    
+
     [TestFixture]
     public class BrushesFixture
     {
-
         [SetUp]
-        public void SetUp () 
-        {
-        }
+        public void SetUp() { }
 
         #region Names Array
-        string [] ar_brushes = {
-                                   "Transparent",
-                                   "AliceBlue",
-                                   "AntiqueWhite",
-                                   "Aqua",
-                                   "Aquamarine",
-                                   "Azure",
-                                   "Beige",
-                                   "Bisque",
-                                   "Black",
-                                   "BlanchedAlmond",
-                                   "Blue",
-                                   "BlueViolet",
-                                   "Brown",
-                                   "BurlyWood",
-                                   "CadetBlue",
-                                   "Chartreuse",
-                                   "Chocolate",
-                                   "Coral",
-                                   "CornflowerBlue",
-                                   "Cornsilk",
-                                   "Crimson",
-                                   "Cyan",
-                                   "DarkBlue",
-                                   "DarkCyan",
-                                   "DarkGoldenrod",
-                                   "DarkGray",
-                                   "DarkGreen",
-                                   "DarkKhaki",
-                                   "DarkMagenta",
-                                   "DarkOliveGreen",
-                                   "DarkOrange",
-                                   "DarkOrchid",
-                                   "DarkRed",
-                                   "DarkSalmon",
-                                   "DarkSeaGreen",
-                                   "DarkSlateBlue",
-                                   "DarkSlateGray",
-                                   "DarkTurquoise",
-                                   "DarkViolet",
-                                   "DeepPink",
-                                   "DeepSkyBlue",
-                                   "DimGray",
-                                   "DodgerBlue",
-                                   "Firebrick",
-                                   "FloralWhite",
-                                   "ForestGreen",
-                                   "Fuchsia",
-                                   "Gainsboro",
-                                   "GhostWhite",
-                                   "Gold",
-                                   "Goldenrod",
-                                   "Gray",
-                                   "Green",
-                                   "GreenYellow",
-                                   "Honeydew",
-                                   "HotPink",
-                                   "IndianRed",
-                                   "Indigo",
-                                   "Ivory",
-                                   "Khaki",
-                                   "Lavender",
-                                   "LavenderBlush",
-                                   "LawnGreen",
-                                   "LemonChiffon",
-                                   "LightBlue",
-                                   "LightCoral",
-                                   "LightCyan",
-                                   "LightGoldenrodYellow",
-                                   "LightGreen",
-                                   "LightGray",
-                                   "LightPink",
-                                   "LightSalmon",
-                                   "LightSeaGreen",
-                                   "LightSkyBlue",
-                                   "LightSlateGray",
-                                   "LightSteelBlue",
-                                   "LightYellow",
-                                   "Lime",
-                                   "LimeGreen",
-                                   "Linen",
-                                   "Magenta",
-                                   "Maroon",
-                                   "MediumAquamarine",
-                                   "MediumBlue",
-                                   "MediumOrchid",
-                                   "MediumPurple",
-                                   "MediumSeaGreen",
-                                   "MediumSlateBlue",
-                                   "MediumSpringGreen",
-                                   "MediumTurquoise",
-                                   "MediumVioletRed",
-                                   "MidnightBlue",
-                                   "MintCream",
-                                   "MistyRose",
-                                   "Moccasin",
-                                   "NavajoWhite",
-                                   "Navy",
-                                   "OldLace",
-                                   "Olive",
-                                   "OliveDrab",
-                                   "Orange",
-                                   "OrangeRed",
-                                   "Orchid",
-                                   "PaleGoldenrod",
-                                   "PaleGreen",
-                                   "PaleTurquoise",
-                                   "PaleVioletRed",
-                                   "PapayaWhip",
-                                   "PeachPuff",
-                                   "Peru",
-                                   "Pink",
-                                   "Plum",
-                                   "PowderBlue",
-                                   "Purple",
-                                   "Red",
-                                   "RosyBrown",
-                                   "RoyalBlue",
-                                   "SaddleBrown",
-                                   "Salmon",
-                                   "SandyBrown",
-                                   "SeaGreen",
-                                   "SeaShell",
-                                   "Sienna",
-                                   "Silver",
-                                   "SkyBlue",
-                                   "SlateBlue",
-                                   "SlateGray",
-                                   "Snow",
-                                   "SpringGreen",
-                                   "SteelBlue",
-                                   "Tan",
-                                   "Teal",
-                                   "Thistle",
-                                   "Tomato",
-                                   "Turquoise",
-                                   "Violet",
-                                   "Wheat",
-                                   "White",
-                                   "WhiteSmoke",
-                                   "Yellow",
-                                   "YellowGreen"};                
-    
-        string [] ar_system_brushes = {
-                                          "ActiveBorder",
-                                          "ActiveCaption",
-                                          "ActiveCaptionText",
-                                          "AppWorkspace",
-                                          "Desktop",
-                                          "Control",
-                                          "ControlLightLight",
-                                          "ControlLight",
-                                          "ControlDark",
-                                          "ControlDarkDark",
-                                          "ControlText",
-                                          "Highlight",
-                                          "HighlightText",
-                                          "HotTrack",
-                                          "InactiveCaption",
-                                          "InactiveBorder",
-                                          "Info",
-                                          "Menu",
-                                          "ScrollBar",
-                                          "Window",
-                                          "WindowText"};
-            
+        string[] ar_brushes =
+        {
+            "Transparent",
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
+            "YellowGreen"
+        };
+
+        string[] ar_system_brushes =
+        {
+            "ActiveBorder",
+            "ActiveCaption",
+            "ActiveCaptionText",
+            "AppWorkspace",
+            "Desktop",
+            "Control",
+            "ControlLightLight",
+            "ControlLight",
+            "ControlDark",
+            "ControlDarkDark",
+            "ControlText",
+            "Highlight",
+            "HighlightText",
+            "HotTrack",
+            "InactiveCaption",
+            "InactiveBorder",
+            "Info",
+            "Menu",
+            "ScrollBar",
+            "Window",
+            "WindowText"
+        };
 
         #endregion
-    
+
         [Test]
         public void BrushesPropertyCount()
         {
             Type t = typeof(Brushes);
-            PropertyInfo [] pi = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+            PropertyInfo[] pi = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
 
             int i = 0;
             foreach (PropertyInfo p in pi)
@@ -208,12 +208,12 @@ namespace Test.Sys.Drawing
         }
 
         [Test]
-        public void BrushesProperties () 
+        public void BrushesProperties()
         {
             Type t = typeof(Brushes);
             foreach (string s in ar_brushes)
             {
-                MemberInfo [] mi = t.GetMember(s);
+                MemberInfo[] mi = t.GetMember(s);
 
                 if (mi.Length == 1)
                 {
@@ -228,7 +228,7 @@ namespace Test.Sys.Drawing
                         Assert.Fail(s + " is not property of Brushes class");
                     }
                 }
-                else 
+                else
                 {
                     Assert.Fail("Property " + s + " not found in Brushes class");
                 }
@@ -236,12 +236,12 @@ namespace Test.Sys.Drawing
         }
 
         [Test]
-        public void BrushesAssignValue () 
+        public void BrushesAssignValue()
         {
             Type t = typeof(Brushes);
             foreach (string s in ar_brushes)
             {
-                MemberInfo [] mi = t.GetMember(s);
+                MemberInfo[] mi = t.GetMember(s);
 
                 if (mi.Length == 1)
                 {
@@ -260,7 +260,7 @@ namespace Test.Sys.Drawing
                             //Assert.Fail("SolidBrush.Color must throw exception");
                             Assert.IsTrue(true);
                         }
-                        catch(ArgumentException)
+                        catch (ArgumentException)
                         {
                             Assert.IsTrue(true);
                         }
@@ -270,7 +270,7 @@ namespace Test.Sys.Drawing
                         Assert.Fail(s + " is not property of Brushes class");
                     }
                 }
-                else 
+                else
                 {
                     Assert.Fail("Property " + s + " not found in Brushes class");
                 }
@@ -281,7 +281,7 @@ namespace Test.Sys.Drawing
         public void SystemBrushesPropertyCount()
         {
             Type t = typeof(SystemBrushes);
-            PropertyInfo [] pi = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+            PropertyInfo[] pi = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
 
             int i = 0;
             foreach (PropertyInfo p in pi)
@@ -295,12 +295,12 @@ namespace Test.Sys.Drawing
         }
 
         [Test]
-        public void SystemBrushesProperties () 
+        public void SystemBrushesProperties()
         {
             Type t = typeof(SystemBrushes);
             foreach (string s in ar_system_brushes)
             {
-                MemberInfo [] mi = t.GetMember(s);
+                MemberInfo[] mi = t.GetMember(s);
 
                 if (mi.Length == 1)
                 {
@@ -315,7 +315,7 @@ namespace Test.Sys.Drawing
                         Assert.Fail(s + " is not property of SystemBrushes class");
                     }
                 }
-                else 
+                else
                 {
                     Assert.Fail("Property " + s + " not found in SystemBrushes class");
                 }
@@ -323,12 +323,12 @@ namespace Test.Sys.Drawing
         }
 
         [Test]
-        public void SystemBrushesAssignValue () 
+        public void SystemBrushesAssignValue()
         {
             Type t = typeof(SystemBrushes);
             foreach (string s in ar_system_brushes)
             {
-                MemberInfo [] mi = t.GetMember(s);
+                MemberInfo[] mi = t.GetMember(s);
 
                 if (mi.Length == 1)
                 {
@@ -347,7 +347,7 @@ namespace Test.Sys.Drawing
                             //Assert.Fail("SolidBrush.Color must throw exception");
                             Assert.IsTrue(true);
                         }
-                        catch(ArgumentException)
+                        catch (ArgumentException)
                         {
                             Assert.IsTrue(true);
                         }
@@ -357,7 +357,7 @@ namespace Test.Sys.Drawing
                         Assert.Fail(s + " is not property of SystemBrushes class");
                     }
                 }
-                else 
+                else
                 {
                     Assert.Fail("Property " + s + " not found in SystemBrushes class");
                 }

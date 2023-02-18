@@ -4,7 +4,7 @@
 
 class A
 {
-    public A ()
+    public A()
     {
         int a = a = 5;
     }

@@ -6,23 +6,23 @@ namespace Mono.Linker.Tests.Cases.Interop.PInvoke.Com
 {
     class FieldsOfThisAreRemoved
     {
-        public static void Main ()
+        public static void Main()
         {
-            new A ().SomeMethod ();
+            new A().SomeMethod();
         }
 
         [Kept]
-        [KeptMember (".ctor()")]
-        [KeptAttributeAttribute (typeof (GuidAttribute))]
+        [KeptMember(".ctor()")]
+        [KeptAttributeAttribute(typeof(GuidAttribute))]
         [ComImport]
-        [Guid ("D7BB1889-3AB7-4681-A115-60CA9158FECA")]
+        [Guid("D7BB1889-3AB7-4681-A115-60CA9158FECA")]
         class A
         {
             private int field;
 
             [Kept]
-            [MethodImpl (MethodImplOptions.InternalCall)]
-            public extern void SomeMethod ();
+            [MethodImpl(MethodImplOptions.InternalCall)]
+            public extern void SomeMethod();
         }
     }
 }

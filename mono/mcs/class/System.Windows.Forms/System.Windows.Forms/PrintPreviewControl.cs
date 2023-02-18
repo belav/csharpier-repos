@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,11 +34,13 @@ using System.Drawing.Printing;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
     [DefaultPropertyAttribute("Document")]
-    [ClassInterface (ClassInterfaceType.AutoDispatch)]
-    [ComVisible (true)]
-    public class PrintPreviewControl : Control {
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [ComVisible(true)]
+    public class PrintPreviewControl : Control
+    {
         #region Local variables
         bool autozoom;
         int columns;
@@ -59,7 +61,8 @@ namespace System.Windows.Forms {
         #endregion // Local variables
 
         #region Public Constructors
-        public PrintPreviewControl() {
+        public PrintPreviewControl()
+        {
             autozoom = true;
             columns = 1;
             rows = 1;
@@ -67,82 +70,96 @@ namespace System.Windows.Forms {
 
             this.BackColor = SystemColors.AppWorkspace;
 
-            controller = new PreviewPrintController ();
+            controller = new PreviewPrintController();
 
-            vbar = new ImplicitVScrollBar ();
-            hbar = new ImplicitHScrollBar ();
+            vbar = new ImplicitVScrollBar();
+            hbar = new ImplicitHScrollBar();
 
             vbar.Visible = false;
             hbar.Visible = false;
-            vbar.ValueChanged += new EventHandler (VScrollBarValueChanged);
-            hbar.ValueChanged += new EventHandler (HScrollBarValueChanged);
+            vbar.ValueChanged += new EventHandler(VScrollBarValueChanged);
+            hbar.ValueChanged += new EventHandler(HScrollBarValueChanged);
 
-            SuspendLayout ();
-            Controls.AddImplicit (vbar);
-            Controls.AddImplicit (hbar);
-            ResumeLayout ();
+            SuspendLayout();
+            Controls.AddImplicit(vbar);
+            Controls.AddImplicit(hbar);
+            ResumeLayout();
         }
         #endregion // Public Constructors
 
-        
+
         #region Public Instance Properties
         [DefaultValue(true)]
-        public bool AutoZoom {
+        public bool AutoZoom
+        {
             get { return autozoom; }
-            set {
+            set
+            {
                 autozoom = value;
-                InvalidateLayout ();
-            }
-        }
-        [DefaultValue(1)]
-        public int Columns {
-            get { return columns; }
-            set {
-                columns = value;
-                InvalidateLayout ();
-            }
-        }
-        [DefaultValue(null)]
-        public PrintDocument Document {
-            get { return document; }
-            set {
-                document = value;
+                InvalidateLayout();
             }
         }
 
-        [Localizable (true)]
-        [AmbientValue (RightToLeft.Inherit)]
-        public override RightToLeft RightToLeft {
+        [DefaultValue(1)]
+        public int Columns
+        {
+            get { return columns; }
+            set
+            {
+                columns = value;
+                InvalidateLayout();
+            }
+        }
+
+        [DefaultValue(null)]
+        public PrintDocument Document
+        {
+            get { return document; }
+            set { document = value; }
+        }
+
+        [Localizable(true)]
+        [AmbientValue(RightToLeft.Inherit)]
+        public override RightToLeft RightToLeft
+        {
             get { return base.RightToLeft; }
             set { base.RightToLeft = value; }
         }
 
         [DefaultValue(1)]
-        public int Rows {
+        public int Rows
+        {
             get { return rows; }
-            set {
+            set
+            {
                 rows = value;
-                InvalidateLayout ();
+                InvalidateLayout();
             }
         }
+
         [DefaultValue(0)]
-        public int StartPage {
-            get {
+        public int StartPage
+        {
+            get
+            {
                 int value = startPage;
-                if (page_infos != null) {
-                    value = Math.Min (value, page_infos.Length - (rows * columns));
+                if (page_infos != null)
+                {
+                    value = Math.Min(value, page_infos.Length - (rows * columns));
                 }
-                return Math.Max (value, 0);
+                return Math.Max(value, 0);
             }
-            set {
+            set
+            {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException ("StartPage");
+                    throw new ArgumentOutOfRangeException("StartPage");
 
                 int start = StartPage;
                 startPage = value;
-                if (start != startPage) {
-                    InvalidateLayout ();
-                    OnStartPageChanged (EventArgs.Empty);
+                if (start != startPage)
+                {
+                    InvalidateLayout();
+                    OnStartPageChanged(EventArgs.Empty);
                 }
             }
         }
@@ -151,83 +168,112 @@ namespace System.Windows.Forms {
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override string Text {
+        public override string Text
+        {
             get { return base.Text; }
             set { base.Text = value; }
         }
 
         [DefaultValue(false)]
-        public bool UseAntiAlias {
+        public bool UseAntiAlias
+        {
             get { return controller.UseAntiAlias; }
             set { controller.UseAntiAlias = value; }
         }
 
-        [DefaultValue (0.3)]
-        public double Zoom {
+        [DefaultValue(0.3)]
+        public double Zoom
+        {
             get { return zoom; }
-            set {
+            set
+            {
                 if (value <= 0)
-                    throw new ArgumentException ("zoom");
+                    throw new ArgumentException("zoom");
                 autozoom = false;
                 zoom = value;
-                InvalidateLayout ();                
+                InvalidateLayout();
             }
         }
         #endregion // Public Instance Properties
 
-        
+
         #region Public Instance Methods
-        internal void GeneratePreview ()
+        internal void GeneratePreview()
         {
             if (document == null)
                 return;
 
-            try {
-                if (page_infos == null) {
+            try
+            {
+                if (page_infos == null)
+                {
                     var prevPrintController = document.PrintController;
 
-                    if (document.PrintController == null || !(document.PrintController is PrintControllerWithStatusDialog)) {
-                        document.PrintController = new PrintControllerWithStatusDialog (controller);
+                    if (
+                        document.PrintController == null
+                        || !(document.PrintController is PrintControllerWithStatusDialog)
+                    )
+                    {
+                        document.PrintController = new PrintControllerWithStatusDialog(controller);
                     }
-                    document.Print ();
+                    document.Print();
                     document.PrintController = prevPrintController;
-                    page_infos = controller.GetPreviewPageInfo ();
+                    page_infos = controller.GetPreviewPageInfo();
                 }
-                
-                if (image_cache == null) {
+
+                if (image_cache == null)
+                {
                     image_cache = new Image[page_infos.Length];
 
-                    if (page_infos.Length > 0) {
-                        image_size = ThemeEngine.Current.PrintPreviewControlGetPageSize (this);
+                    if (page_infos.Length > 0)
+                    {
+                        image_size = ThemeEngine.Current.PrintPreviewControlGetPageSize(this);
                         // Only resize the pages if they are stored as bitmaps. The print controller
                         // could internally use scalable metafiles and they should be preserved to
                         // allow loss-less resizing.
-                        for (int i = 0; i < page_infos.Length; i ++) {
-                            if (page_infos[i].Image is Bitmap
-                                && image_size.Width >= 0 && image_size.Width < page_infos[i].Image.Width
-                                && image_size.Height >= 0 && image_size.Height < page_infos[i].Image.Height) {
-
-                                image_cache[i] = new Bitmap (image_size.Width, image_size.Height);
-                                using (Graphics g = Graphics.FromImage (image_cache[i]))
-                                    g.DrawImage (page_infos[i].Image, new Rectangle (new Point (0, 0), image_size), 0, 0, page_infos[i].Image.Width, page_infos[i].Image.Height, GraphicsUnit.Pixel);
+                        for (int i = 0; i < page_infos.Length; i++)
+                        {
+                            if (
+                                page_infos[i].Image is Bitmap
+                                && image_size.Width >= 0
+                                && image_size.Width < page_infos[i].Image.Width
+                                && image_size.Height >= 0
+                                && image_size.Height < page_infos[i].Image.Height
+                            )
+                            {
+                                image_cache[i] = new Bitmap(image_size.Width, image_size.Height);
+                                using (Graphics g = Graphics.FromImage(image_cache[i]))
+                                    g.DrawImage(
+                                        page_infos[i].Image,
+                                        new Rectangle(new Point(0, 0), image_size),
+                                        0,
+                                        0,
+                                        page_infos[i].Image.Width,
+                                        page_infos[i].Image.Height,
+                                        GraphicsUnit.Pixel
+                                    );
                             }
                         }
                     }
                 }
                 UpdateScrollBars();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 page_infos = new PreviewPageInfo[0];
                 image_cache = new Image[0];
-                MessageBox.Show (e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         public void InvalidatePreview()
         {
-            if (page_infos != null) {
-                for (int i = 0; i < page_infos.Length; i++) {
-                    if (page_infos[i].Image != null) {
+            if (page_infos != null)
+            {
+                for (int i = 0; i < page_infos.Length; i++)
+                {
+                    if (page_infos[i].Image != null)
+                    {
                         page_infos[i].Image.Dispose();
                     }
                 }
@@ -245,15 +291,14 @@ namespace System.Windows.Forms {
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void ResetForeColor()
         {
-            base.ResetForeColor ();
+            base.ResetForeColor();
         }
         #endregion // Public Instance Methods
 
         #region Protected Instance Properties
-        protected override CreateParams CreateParams {
-            get {
-                return base.CreateParams;
-            }
+        protected override CreateParams CreateParams
+        {
+            get { return base.CreateParams; }
         }
 
         #endregion // Protected Instance Methods
@@ -263,40 +308,42 @@ namespace System.Windows.Forms {
         protected override void OnPaint(PaintEventArgs pevent)
         {
             if (page_infos == null || image_cache == null)
-                GeneratePreview ();
-            ThemeEngine.Current.PrintPreviewControlPaint (pevent, this, image_size);
+                GeneratePreview();
+            ThemeEngine.Current.PrintPreviewControlPaint(pevent, this, image_size);
         }
 
         protected override void OnResize(EventArgs eventargs)
         {
-            InvalidateLayout ();
-            base.OnResize (eventargs);
+            InvalidateLayout();
+            base.OnResize(eventargs);
         }
 
         protected virtual void OnStartPageChanged(EventArgs e)
         {
-            EventHandler eh = (EventHandler)(Events [StartPageChangedEvent]);
+            EventHandler eh = (EventHandler)(Events[StartPageChangedEvent]);
             if (eh != null)
-                eh (this, e);
+                eh(this, e);
         }
 
         protected override void WndProc(ref Message m)
         {
-            base.WndProc (ref m);
+            base.WndProc(ref m);
         }
 
         #endregion // Protected Instance Methods
 
-        static object StartPageChangedEvent = new object ();
+        static object StartPageChangedEvent = new object();
 
-        public event EventHandler StartPageChanged {
-            add { Events.AddHandler (StartPageChangedEvent, value); }
-            remove { Events.RemoveHandler (StartPageChangedEvent, value); }
+        public event EventHandler StartPageChanged
+        {
+            add { Events.AddHandler(StartPageChangedEvent, value); }
+            remove { Events.RemoveHandler(StartPageChangedEvent, value); }
         }
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public new event EventHandler TextChanged {
+        public new event EventHandler TextChanged
+        {
             add { base.TextChanged += value; }
             remove { base.TextChanged -= value; }
         }
@@ -305,16 +352,18 @@ namespace System.Windows.Forms {
         internal int hbar_value;
 
         #region UIA Framework Property
-        internal ScrollBar UIAVScrollBar {
+        internal ScrollBar UIAVScrollBar
+        {
             get { return vbar; }
         }
 
-        internal ScrollBar UIAHScrollBar {
+        internal ScrollBar UIAHScrollBar
+        {
             get { return hbar; }
         }
         #endregion
 
-        private void VScrollBarValueChanged (object sender, EventArgs e)
+        private void VScrollBarValueChanged(object sender, EventArgs e)
         {
             int pixels;
 
@@ -324,11 +373,10 @@ namespace System.Windows.Forms {
                 pixels = vbar_value - vbar.Value;
 
             vbar_value = vbar.Value;
-            XplatUI.ScrollWindow (Handle, ViewPort, 0, pixels, false);
+            XplatUI.ScrollWindow(Handle, ViewPort, 0, pixels, false);
         }
 
-
-        private void HScrollBarValueChanged (object sender, EventArgs e)
+        private void HScrollBarValueChanged(object sender, EventArgs e)
         {
             int pixels;
 
@@ -338,16 +386,17 @@ namespace System.Windows.Forms {
                 pixels = hbar_value - hbar.Value;
 
             hbar_value = hbar.Value;
-            XplatUI.ScrollWindow (Handle, ViewPort, pixels, 0, false);
+            XplatUI.ScrollWindow(Handle, ViewPort, pixels, 0, false);
         }
 
-        private void UpdateScrollBars ()
+        private void UpdateScrollBars()
         {
             ViewPort = ClientRectangle;
             if (AutoZoom)
                 return;
 
-            int total_width, total_height;
+            int total_width,
+                total_height;
 
             total_width = image_size.Width * Columns + (Columns + 1) * padding;
             total_height = image_size.Height * (Rows + 1) + (Rows + 2) * padding;
@@ -355,62 +404,78 @@ namespace System.Windows.Forms {
             bool vert = false;
             bool horz = false;
 
-            if (total_width > ClientRectangle.Width) {
+            if (total_width > ClientRectangle.Width)
+            {
                 /* we need the hbar */
                 horz = true;
                 ViewPort.Height -= hbar.Height;
             }
-            if (total_height > ViewPort.Height) {
+            if (total_height > ViewPort.Height)
+            {
                 /* we need the vbar */
                 vert = true;
                 ViewPort.Width -= vbar.Width;
             }
-            if (!horz && total_width > ViewPort.Width) {
+            if (!horz && total_width > ViewPort.Width)
+            {
                 horz = true;
                 ViewPort.Height -= hbar.Height;
             }
 
-            SuspendLayout ();
+            SuspendLayout();
 
-            if (vert) {
-                vbar.SetValues (total_height, ViewPort.Height);
+            if (vert)
+            {
+                vbar.SetValues(total_height, ViewPort.Height);
 
-                vbar.Bounds = new Rectangle (ClientRectangle.Width - vbar.Width, 0, vbar.Width,
-                                 ClientRectangle.Height -
-                                 (horz ? SystemInformation.VerticalScrollBarWidth : 0));
+                vbar.Bounds = new Rectangle(
+                    ClientRectangle.Width - vbar.Width,
+                    0,
+                    vbar.Width,
+                    ClientRectangle.Height - (horz ? SystemInformation.VerticalScrollBarWidth : 0)
+                );
                 vbar.Visible = true;
                 vbar_value = vbar.Value;
             }
-            else {
+            else
+            {
                 vbar.Visible = false;
             }
 
-            if (horz) {
-                hbar.SetValues (total_width, ViewPort.Width);
+            if (horz)
+            {
+                hbar.SetValues(total_width, ViewPort.Width);
 
-                hbar.Bounds = new Rectangle (0, ClientRectangle.Height - hbar.Height,
-                                 ClientRectangle.Width - (vert ?
-                                              SystemInformation.HorizontalScrollBarHeight : 0),
-                                 hbar.Height);
+                hbar.Bounds = new Rectangle(
+                    0,
+                    ClientRectangle.Height - hbar.Height,
+                    ClientRectangle.Width
+                        - (vert ? SystemInformation.HorizontalScrollBarHeight : 0),
+                    hbar.Height
+                );
                 hbar.Visible = true;
                 hbar_value = hbar.Value;
             }
-            else {
+            else
+            {
                 hbar.Visible = false;
             }
 
-            ResumeLayout (false);
+            ResumeLayout(false);
         }
 
-        private void InvalidateLayout() {
-            if (image_cache != null) {
-                for (int i = 0; i < image_cache.Length; i++) {
-                    if (image_cache[i] !=null)
+        private void InvalidateLayout()
+        {
+            if (image_cache != null)
+            {
+                for (int i = 0; i < image_cache.Length; i++)
+                {
+                    if (image_cache[i] != null)
                         image_cache[i].Dispose();
                 }
                 image_cache = null;
             }
-            Invalidate ();
+            Invalidate();
         }
     }
 }

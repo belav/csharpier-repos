@@ -56,7 +56,7 @@ internal readonly struct RequestContext
     public readonly Solution? Solution;
 
     /// <summary>
-    /// The document that the request is for, if applicable. This comes from the <see cref="TextDocumentIdentifier"/> returned from the handler itself via a call to 
+    /// The document that the request is for, if applicable. This comes from the <see cref="TextDocumentIdentifier"/> returned from the handler itself via a call to
     /// <see cref="ITextDocumentIdentifierHandler{RequestType, TextDocumentIdentifierType}.GetTextDocumentIdentifier(RequestType)"/>.
     /// </summary>
     public readonly Document? Document;
@@ -95,7 +95,8 @@ internal readonly struct RequestContext
         ImmutableDictionary<Uri, SourceText> trackedDocuments,
         ImmutableArray<string> supportedLanguages,
         ILspServices lspServices,
-        CancellationToken queueCancellationToken)
+        CancellationToken queueCancellationToken
+    )
     {
         Workspace = workspace;
         Document = document;
@@ -114,14 +115,18 @@ internal readonly struct RequestContext
     public ClientCapabilities GetRequiredClientCapabilities()
     {
         return _clientCapabilities is null
-            ? throw new ArgumentNullException($"{nameof(ClientCapabilities)} is null when it was required for {Method}")
+            ? throw new ArgumentNullException(
+                $"{nameof(ClientCapabilities)} is null when it was required for {Method}"
+            )
             : _clientCapabilities;
     }
 
     public Document GetRequiredDocument()
     {
         return Document is null
-            ? throw new ArgumentNullException($"{nameof(Document)} is null when it was required for {Method}")
+            ? throw new ArgumentNullException(
+                $"{nameof(Document)} is null when it was required for {Method}"
+            )
             : Document;
     }
 
@@ -135,10 +140,13 @@ internal readonly struct RequestContext
         ILspServices lspServices,
         ILspLogger logger,
         string method,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var lspWorkspaceManager = lspServices.GetRequiredService<LspWorkspaceManager>();
-        var documentChangeTracker = mutatesSolutionState ? (IDocumentChangeTracker)lspWorkspaceManager : new NonMutatingDocumentChangeTracker();
+        var documentChangeTracker = mutatesSolutionState
+            ? (IDocumentChangeTracker)lspWorkspaceManager
+            : new NonMutatingDocumentChangeTracker();
 
         // Retrieve the current LSP tracked text as of this request.
         // This is safe as all creation of request contexts cannot happen concurrently.
@@ -152,9 +160,19 @@ internal readonly struct RequestContext
         if (!requiresLSPSolution)
         {
             context = new RequestContext(
-                workspace: null, solution: null, logger: logger, method: method, clientCapabilities: clientCapabilities, serverKind: serverKind, document: null,
-                documentChangeTracker: documentChangeTracker, trackedDocuments: trackedDocuments, supportedLanguages: supportedLanguages, lspServices: lspServices,
-                queueCancellationToken: cancellationToken);
+                workspace: null,
+                solution: null,
+                logger: logger,
+                method: method,
+                clientCapabilities: clientCapabilities,
+                serverKind: serverKind,
+                document: null,
+                documentChangeTracker: documentChangeTracker,
+                trackedDocuments: trackedDocuments,
+                supportedLanguages: supportedLanguages,
+                lspServices: lspServices,
+                queueCancellationToken: cancellationToken
+            );
         }
         else
         {
@@ -167,17 +185,23 @@ internal readonly struct RequestContext
                 // There are certain cases where we may be asked for a document that does not exist (for example a
                 // document is removed) For example, document pull diagnostics can ask us after removal to clear
                 // diagnostics for a document.
-                (workspace, solution, document) = await lspWorkspaceManager.GetLspDocumentInfoAsync(textDocument, cancellationToken).ConfigureAwait(false);
+                (workspace, solution, document) = await lspWorkspaceManager
+                    .GetLspDocumentInfoAsync(textDocument, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             if (workspace is null)
             {
-                (workspace, solution) = await lspWorkspaceManager.GetLspSolutionInfoAsync(cancellationToken).ConfigureAwait(false);
+                (workspace, solution) = await lspWorkspaceManager
+                    .GetLspSolutionInfoAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             if (workspace is null)
             {
-                logger.LogError($"Could not find appropriate workspace for operation {workspace} on {method}");
+                logger.LogError(
+                    $"Could not find appropriate workspace for operation {workspace} on {method}"
+                );
             }
 
             context = new RequestContext(
@@ -192,7 +216,8 @@ internal readonly struct RequestContext
                 trackedDocuments,
                 supportedLanguages,
                 lspServices,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         return context;
@@ -202,19 +227,22 @@ internal readonly struct RequestContext
     /// Allows a mutating request to open a document and start it being tracked.
     /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
     /// </summary>
-    public void StartTracking(Uri uri, SourceText initialText)
-        => _documentChangeTracker.StartTracking(uri, initialText);
+    public void StartTracking(Uri uri, SourceText initialText) =>
+        _documentChangeTracker.StartTracking(uri, initialText);
 
     /// <summary>
     /// Allows a mutating request to update the contents of a tracked document.
     /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
     /// </summary>
-    public void UpdateTrackedDocument(Uri uri, SourceText changedText)
-        => _documentChangeTracker.UpdateTrackedDocument(uri, changedText);
+    public void UpdateTrackedDocument(Uri uri, SourceText changedText) =>
+        _documentChangeTracker.UpdateTrackedDocument(uri, changedText);
 
     public SourceText GetTrackedDocumentSourceText(Uri documentUri)
     {
-        Contract.ThrowIfFalse(_trackedDocuments.ContainsKey(documentUri), $"Attempted to get text for {documentUri} which is not open.");
+        Contract.ThrowIfFalse(
+            _trackedDocuments.ContainsKey(documentUri),
+            $"Attempted to get text for {documentUri} which is not open."
+        );
         return _trackedDocuments[documentUri];
     }
 
@@ -222,38 +250,35 @@ internal readonly struct RequestContext
     /// Allows a mutating request to close a document and stop it being tracked.
     /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
     /// </summary>
-    public void StopTracking(Uri uri)
-        => _documentChangeTracker.StopTracking(uri);
+    public void StopTracking(Uri uri) => _documentChangeTracker.StopTracking(uri);
 
-    public bool IsTracking(Uri documentUri)
-        => _trackedDocuments.ContainsKey(documentUri);
+    public bool IsTracking(Uri documentUri) => _trackedDocuments.ContainsKey(documentUri);
 
     /// <summary>
     /// Logs an informational message.
     /// </summary>
-    public void TraceInformation(string message)
-        => _logger.LogInformation(message);
+    public void TraceInformation(string message) => _logger.LogInformation(message);
 
-    public void TraceWarning(string message)
-        => _logger.LogWarning(message);
+    public void TraceWarning(string message) => _logger.LogWarning(message);
 
-    public void TraceError(string message)
-        => _logger.LogError(message);
+    public void TraceError(string message) => _logger.LogError(message);
 
-    public void TraceException(Exception exception)
-        => _logger.LogException(exception);
+    public void TraceException(Exception exception) => _logger.LogException(exception);
 
-    public T GetRequiredLspService<T>() where T : class, ILspService
+    public T GetRequiredLspService<T>()
+        where T : class, ILspService
     {
         return _lspServices.GetRequiredService<T>();
     }
 
-    public T GetRequiredService<T>() where T : class
+    public T GetRequiredService<T>()
+        where T : class
     {
         return _lspServices.GetRequiredService<T>();
     }
 
-    public IEnumerable<T> GetRequiredServices<T>() where T : class
+    public IEnumerable<T> GetRequiredServices<T>()
+        where T : class
     {
         return _lspServices.GetRequiredServices<T>();
     }

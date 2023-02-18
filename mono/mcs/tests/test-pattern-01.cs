@@ -2,7 +2,7 @@ using System;
 
 class TypePattern
 {
-    public static int Main ()
+    public static int Main()
     {
         object o = 3;
         bool r = o is System.String t1;
@@ -18,25 +18,29 @@ class TypePattern
         if (!r3)
             return 8;
 
-        Console.WriteLine ("ok");
+        Console.WriteLine("ok");
         return 0;
     }
 
-    static void Test1 (object arg)
+    static void Test1(object arg)
     {
-        while (arg is int b) {
+        while (arg is int b)
+        {
             b = 2;
         }
     }
 
-    static string Test2 (object arg)
+    static string Test2(object arg)
     {
-        if (arg is string s) {
+        if (arg is string s)
+        {
             return s;
-        } else {
+        }
+        else
+        {
             s = "";
         }
-        
+
         return s;
     }
 }

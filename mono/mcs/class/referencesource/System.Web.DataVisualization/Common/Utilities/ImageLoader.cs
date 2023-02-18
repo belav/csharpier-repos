@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,10 +11,10 @@
 //
 //    Classes:    ImageLoader
 //
-//  Purpose:    ImageLoader utility class loads specified image and 
+//  Purpose:    ImageLoader utility class loads specified image and
 //              caches it in the memory for the future use.
-//          
-//              Images can be loaded from different places including 
+//
+//              Images can be loaded from different places including
 //              Files, URIs, WebRequests and Control Resources.
 //
 //    Reviewed:    AG - August 7, 2002
@@ -37,25 +37,25 @@ using System.Security;
 using System.Resources;
 
 #if Microsoft_CONTROL
-    using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting;
 #else
-    using System.Web;
-    using System.Web.UI.DataVisualization.Charting;
+using System.Web;
+using System.Web.UI.DataVisualization.Charting;
 #endif
 
 #endregion
 
 #if Microsoft_CONTROL
-    namespace System.Windows.Forms.DataVisualization.Charting.Utilities
+namespace System.Windows.Forms.DataVisualization.Charting.Utilities
 #else
-    namespace System.Web.UI.DataVisualization.Charting.Utilities
+namespace System.Web.UI.DataVisualization.Charting.Utilities
 #endif
 {
     /// <summary>
-    /// ImageLoader utility class loads and returns specified image 
-    /// form the File, URI, Web Request or Chart Resources. 
-    /// Loaded images are stored in the internal hashtable which 
-    /// allows to improve performance if image need to be used 
+    /// ImageLoader utility class loads and returns specified image
+    /// form the File, URI, Web Request or Chart Resources.
+    /// Loaded images are stored in the internal hashtable which
+    /// allows to improve performance if image need to be used
     /// several times.
     /// </summary>
     internal class ImageLoader : IDisposable, IServiceProvider
@@ -63,10 +63,10 @@ using System.Resources;
         #region Fields
 
         // Image storage
-        private Hashtable            _imageData = null;
+        private Hashtable _imageData = null;
 
         // Reference to the service container
-        private IServiceContainer    _serviceContainer = null;
+        private IServiceContainer _serviceContainer = null;
 
         #endregion
 
@@ -75,9 +75,7 @@ using System.Resources;
         /// <summary>
         /// Default constructor is not accessible.
         /// </summary>
-        private ImageLoader()
-        {
-        }
+        private ImageLoader() { }
 
         /// <summary>
         /// Default public constructor.
@@ -85,9 +83,9 @@ using System.Resources;
         /// <param name="container">Service container.</param>
         public ImageLoader(IServiceContainer container)
         {
-            if(container == null)
+            if (container == null)
             {
-                throw(new ArgumentNullException(SR.ExceptionImageLoaderInvalidServiceContainer));
+                throw (new ArgumentNullException(SR.ExceptionImageLoaderInvalidServiceContainer));
             }
             _serviceContainer = container;
         }
@@ -100,11 +98,15 @@ using System.Resources;
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         object IServiceProvider.GetService(Type serviceType)
         {
-            if(serviceType == typeof(ImageLoader))
+            if (serviceType == typeof(ImageLoader))
             {
                 return this;
             }
-            throw (new ArgumentException( SR.ExceptionImageLoaderUnsupportedType( serviceType.ToString())));
+            throw (
+                new ArgumentException(
+                    SR.ExceptionImageLoaderUnsupportedType(serviceType.ToString())
+                )
+            );
         }
 
         /// <summary>
@@ -122,7 +124,7 @@ using System.Resources;
                     }
                 }
                 _imageData = null;
-                GC.SuppressFinalize(this);  
+                GC.SuppressFinalize(this);
             }
         }
 
@@ -139,7 +141,7 @@ using System.Resources;
         {
             return LoadImage(imageURL, true);
         }
-            
+
         /// <summary>
         /// Loads image from URL. Checks if image already loaded (cached).
         /// </summary>
@@ -154,11 +156,11 @@ using System.Resources;
             if (_serviceContainer != null)
             {
                 Chart chart = (Chart)_serviceContainer.GetService(typeof(Chart));
-                if(chart != null)
+                if (chart != null)
                 {
-                    foreach(NamedImage namedImage in chart.Images)
+                    foreach (NamedImage namedImage in chart.Images)
                     {
-                        if(namedImage.Name == imageURL)
+                        if (namedImage.Name == imageURL)
                         {
                             return namedImage.Image;
                         }
@@ -181,7 +183,7 @@ using System.Resources;
 #if ! Microsoft_CONTROL
 
             // Try to load as relative URL using the Control object
-            if(image == null)
+            if (image == null)
             {
                 Chart control = (Chart)_serviceContainer.GetService(typeof(Chart));
                 if (control != null && control.Page != null)
@@ -190,23 +192,24 @@ using System.Resources;
                     {
                         image = LoadFromFile(control.Page.MapPath(imageURL));
                     }
-                    else if (control.IsDesignMode() && !String.IsNullOrEmpty(control.webFormDocumentURL))
-                    {   
+                    else if (
+                        control.IsDesignMode() && !String.IsNullOrEmpty(control.webFormDocumentURL)
+                    )
+                    {
                         // Find current web page path and fileName
                         Uri pageUri = new Uri(control.webFormDocumentURL);
                         string path = pageUri.LocalPath;
-                        string pageFile = pageUri.Segments[pageUri.Segments.Length-1];
+                        string pageFile = pageUri.Segments[pageUri.Segments.Length - 1];
 
                         // Find full image fileName
                         string imageFileRelative = control.ResolveClientUrl(imageURL);
                         string imageFile = path.Replace(pageFile, imageFileRelative);
-                        
+
                         // Load image
                         image = LoadFromFile(imageFile);
                     }
                 }
-
-                else if ( HttpContext.Current != null )
+                else if (HttpContext.Current != null)
                 {
                     image = LoadFromFile(HttpContext.Current.Request.MapPath(imageURL));
                 }
@@ -214,18 +217,21 @@ using System.Resources;
 #endif
 
             // Try to load image from resource
-            if(image == null)
+            if (image == null)
             {
                 try
                 {
-
                     // Check if resource class type was specified
                     int columnIndex = imageURL.IndexOf("::", StringComparison.Ordinal);
                     if (columnIndex > 0)
                     {
                         string resourceRootName = imageURL.Substring(0, columnIndex);
                         string resourceName = imageURL.Substring(columnIndex + 2);
-                        System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(resourceRootName, Assembly.GetExecutingAssembly());
+                        System.Resources.ResourceManager resourceManager =
+                            new System.Resources.ResourceManager(
+                                resourceRootName,
+                                Assembly.GetExecutingAssembly()
+                            );
                         image = (System.Drawing.Image)(resourceManager.GetObject(resourceName));
                     }
 #if Microsoft_CONTROL
@@ -237,7 +243,11 @@ using System.Resources;
                         {
                             string resourceRootName = imageURL.Substring(0, columnIndex);
                             string resourceName = imageURL.Substring(columnIndex + 1);
-                            System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(resourceRootName, Assembly.GetEntryAssembly());
+                            System.Resources.ResourceManager resourceManager =
+                                new System.Resources.ResourceManager(
+                                    resourceRootName,
+                                    Assembly.GetEntryAssembly()
+                                );
                             image = (Image)(resourceManager.GetObject(resourceName));
                         }
                         else
@@ -248,17 +258,14 @@ using System.Resources;
                             {
                                 foreach (Type type in entryAssembly.GetTypes())
                                 {
-                                    System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(type);
+                                    System.Resources.ResourceManager resourceManager =
+                                        new System.Resources.ResourceManager(type);
                                     try
                                     {
                                         image = (Image)(resourceManager.GetObject(imageURL));
                                     }
-                                    catch (ArgumentNullException)
-                                    {
-                                    }
-                                    catch (MissingManifestResourceException)
-                                    {
-                                    }
+                                    catch (ArgumentNullException) { }
+                                    catch (MissingManifestResourceException) { }
 
                                     // Check if image was loaded
                                     if (image != null)
@@ -271,66 +278,58 @@ using System.Resources;
                     }
 #endif
                 }
-                catch (MissingManifestResourceException)
-                {
-                }
+                catch (MissingManifestResourceException) { }
             }
-        
 
             // Try to load image using the Web Request
-            if(image == null)
+            if (image == null)
             {
-                Uri    imageUri = null;
-                try 
+                Uri imageUri = null;
+                try
                 {
                     // Try to create URI directly from image URL (will work in case of absolute URL)
                     imageUri = new Uri(imageURL);
                 }
-                catch(UriFormatException)
-                {}
-
+                catch (UriFormatException) { }
 
                 // Load image from file or web resource
-                if(imageUri != null)
+                if (imageUri != null)
                 {
                     try
                     {
                         WebRequest request = WebRequest.Create(imageUri);
-                        image = System.Drawing.Image.FromStream(request.GetResponse().GetResponseStream());
+                        image = System.Drawing.Image.FromStream(
+                            request.GetResponse().GetResponseStream()
+                        );
                     }
-                    catch (ArgumentException)
-                    {
-                    }
-                    catch (NotSupportedException)
-                    {
-                    }
-                    catch (SecurityException)
-                    {
-                    }
+                    catch (ArgumentException) { }
+                    catch (NotSupportedException) { }
+                    catch (SecurityException) { }
                 }
             }
 #if Microsoft_CONTROL
             // absolute uri(without Server.MapPath)in web is not allowed. Loading from replative uri Server[Page].MapPath is done above.
             // Try to load as file
-            if(image == null)
+            if (image == null)
             {
-
                 image = LoadFromFile(imageURL);
             }
 #endif
 
             // Error loading image
-            if(image == null)
+            if (image == null)
             {
 #if ! Microsoft_CONTROL
-                throw(new ArgumentException( SR.ExceptionImageLoaderIncorrectImageUrl( imageURL ) ) );
+                throw (new ArgumentException(SR.ExceptionImageLoaderIncorrectImageUrl(imageURL)));
 #else
-                throw(new ArgumentException( SR.ExceptionImageLoaderIncorrectImageLocation( imageURL ) ) );
+                throw (
+                    new ArgumentException(SR.ExceptionImageLoaderIncorrectImageLocation(imageURL))
+                );
 #endif
             }
 
             // Save new image in cache
-            if(saveImage)
+            if (saveImage)
             {
                 _imageData[imageURL] = image;
             }
@@ -350,7 +349,7 @@ using System.Resources;
             {
                 return System.Drawing.Image.FromFile(fileName);
             }
-            catch(FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 return null;
             }
@@ -404,17 +403,22 @@ using System.Resources;
         /// <returns>true if they match, otherwise false.</returns>
         internal static bool DoDpisMatch(Image image, Graphics graphics)
         {
-            return graphics.DpiX == image.HorizontalResolution && graphics.DpiY == image.VerticalResolution;
+            return graphics.DpiX == image.HorizontalResolution
+                && graphics.DpiY == image.VerticalResolution;
         }
 
         internal static Image GetScaledImage(Image image, Graphics graphics)
         {
-            Bitmap scaledImage = new Bitmap(image, new Size((int)(image.Width * graphics.DpiX / image.HorizontalResolution),
-                (int)(image.Height * graphics.DpiY / image.VerticalResolution)));
+            Bitmap scaledImage = new Bitmap(
+                image,
+                new Size(
+                    (int)(image.Width * graphics.DpiX / image.HorizontalResolution),
+                    (int)(image.Height * graphics.DpiY / image.VerticalResolution)
+                )
+            );
 
             return scaledImage;
         }
-
 
         #endregion
     }

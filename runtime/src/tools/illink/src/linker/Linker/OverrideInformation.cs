@@ -6,29 +6,43 @@ using Mono.Cecil;
 
 namespace Mono.Linker
 {
-    [DebuggerDisplay ("{Override}")]
+    [DebuggerDisplay("{Override}")]
     public class OverrideInformation
     {
         readonly ITryResolveMetadata resolver;
         readonly OverridePair _pair;
         private InterfaceImplementation? _matchingInterfaceImplementation;
 
-        public OverrideInformation (MethodDefinition @base, MethodDefinition @override, ITryResolveMetadata resolver, InterfaceImplementation? matchingInterfaceImplementation = null)
+        public OverrideInformation(
+            MethodDefinition @base,
+            MethodDefinition @override,
+            ITryResolveMetadata resolver,
+            InterfaceImplementation? matchingInterfaceImplementation = null
+        )
         {
-            _pair = new OverridePair (@base, @override);
+            _pair = new OverridePair(@base, @override);
             _matchingInterfaceImplementation = matchingInterfaceImplementation;
             this.resolver = resolver;
         }
-        public readonly record struct OverridePair (MethodDefinition Base, MethodDefinition Override)
+
+        public readonly record struct OverridePair(MethodDefinition Base, MethodDefinition Override)
         {
-            public bool IsStaticInterfaceMethodPair () => Base.DeclaringType.IsInterface && Base.IsStatic && Override.IsStatic;
-            public InterfaceImplementation? GetMatchingInterfaceImplementation (ITryResolveMetadata resolver)
+            public bool IsStaticInterfaceMethodPair() =>
+                Base.DeclaringType.IsInterface && Base.IsStatic && Override.IsStatic;
+
+            public InterfaceImplementation? GetMatchingInterfaceImplementation(
+                ITryResolveMetadata resolver
+            )
             {
                 if (!Base.DeclaringType.IsInterface)
                     return null;
                 var interfaceType = Base.DeclaringType;
-                foreach (var @interface in Override.DeclaringType.Interfaces) {
-                    if (resolver.TryResolve (@interface.InterfaceType)?.Equals (interfaceType) == true) {
+                foreach (var @interface in Override.DeclaringType.Interfaces)
+                {
+                    if (
+                        resolver.TryResolve(@interface.InterfaceType)?.Equals(interfaceType) == true
+                    )
+                    {
                         return @interface;
                     }
                 }
@@ -36,19 +50,31 @@ namespace Mono.Linker
             }
         }
 
-        public MethodDefinition Base { get => _pair.Base; }
-        public MethodDefinition Override { get => _pair.Override; }
-        public InterfaceImplementation? MatchingInterfaceImplementation {
-            get {
+        public MethodDefinition Base
+        {
+            get => _pair.Base;
+        }
+        public MethodDefinition Override
+        {
+            get => _pair.Override;
+        }
+        public InterfaceImplementation? MatchingInterfaceImplementation
+        {
+            get
+            {
                 if (_matchingInterfaceImplementation is not null)
                     return _matchingInterfaceImplementation;
-                _matchingInterfaceImplementation = _pair.GetMatchingInterfaceImplementation (resolver);
+                _matchingInterfaceImplementation = _pair.GetMatchingInterfaceImplementation(
+                    resolver
+                );
                 return _matchingInterfaceImplementation;
             }
         }
 
-        public bool IsOverrideOfInterfaceMember {
-            get {
+        public bool IsOverrideOfInterfaceMember
+        {
+            get
+            {
                 if (MatchingInterfaceImplementation != null)
                     return true;
 
@@ -56,18 +82,20 @@ namespace Mono.Linker
             }
         }
 
-        public TypeDefinition? InterfaceType {
-            get {
+        public TypeDefinition? InterfaceType
+        {
+            get
+            {
                 if (!IsOverrideOfInterfaceMember)
                     return null;
 
                 if (MatchingInterfaceImplementation != null)
-                    return resolver.TryResolve (MatchingInterfaceImplementation.InterfaceType);
+                    return resolver.TryResolve(MatchingInterfaceImplementation.InterfaceType);
 
                 return Base.DeclaringType;
             }
         }
 
-        public bool IsStaticInterfaceMethodPair => _pair.IsStaticInterfaceMethodPair ();
+        public bool IsStaticInterfaceMethodPair => _pair.IsStaticInterfaceMethodPair();
     }
 }

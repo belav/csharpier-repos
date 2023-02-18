@@ -4,7 +4,7 @@
 
 class TestClass
 {
-    public unsafe static void Main ()
+    public unsafe static void Main()
     {
         int* arr = null;
         var i = arr["c"];

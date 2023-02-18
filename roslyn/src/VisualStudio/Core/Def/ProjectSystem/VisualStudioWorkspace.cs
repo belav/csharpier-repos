@@ -34,7 +34,9 @@ namespace Microsoft.VisualStudio.LanguageServices
         internal VisualStudioWorkspace(HostServices hostServices)
             : base(hostServices, WorkspaceKind.Host)
         {
-            _backgroundCompilationDisabled = this.Services.GetRequiredService<IWorkspaceConfigurationService>().Options.DisableBackgroundCompilation;
+            _backgroundCompilationDisabled = this.Services
+                .GetRequiredService<IWorkspaceConfigurationService>()
+                .Options.DisableBackgroundCompilation;
             if (!_backgroundCompilationDisabled)
             {
                 _backgroundCompiler = new BackgroundCompiler(this);
@@ -80,16 +82,16 @@ namespace Microsoft.VisualStudio.LanguageServices
             }
         }
 
-        protected override void OnDocumentTextChanged(Document document)
-            => _backgroundParser?.Parse(document);
+        protected override void OnDocumentTextChanged(Document document) =>
+            _backgroundParser?.Parse(document);
 
-        protected override void OnDocumentClosing(DocumentId documentId)
-            => _backgroundParser?.CancelParse(documentId);
+        protected override void OnDocumentClosing(DocumentId documentId) =>
+            _backgroundParser?.CancelParse(documentId);
 
         internal override bool IgnoreUnchangeableDocumentsWhenApplyingChanges => true;
 
         /// <summary>
-        /// Returns the hierarchy for a given project. 
+        /// Returns the hierarchy for a given project.
         /// </summary>
         /// <param name="projectId">The <see cref="ProjectId"/> for the project.</param>
         /// <returns>The <see cref="IVsHierarchy"/>, or null if the project doesn't have one.</returns>
@@ -97,8 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices
 
         internal abstract Guid GetProjectGuid(ProjectId projectId);
 
-        public virtual string? GetFilePath(DocumentId documentId)
-            => CurrentSolution.GetTextDocument(documentId)?.FilePath;
+        public virtual string? GetFilePath(DocumentId documentId) =>
+            CurrentSolution.GetTextDocument(documentId)?.FilePath;
 
         /// <summary>
         /// Given a document id, opens an invisible editor for the document.
@@ -114,12 +116,27 @@ namespace Microsoft.VisualStudio.LanguageServices
         internal abstract object? GetBrowseObject(SymbolListItem symbolListItem);
 
         [Obsolete("Use TryGoToDefinitionAsync instead", error: false)]
-        public abstract bool TryGoToDefinition(ISymbol symbol, Project project, CancellationToken cancellationToken);
-        public abstract Task<bool> TryGoToDefinitionAsync(ISymbol symbol, Project project, CancellationToken cancellationToken);
+        public abstract bool TryGoToDefinition(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        );
+        public abstract Task<bool> TryGoToDefinitionAsync(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        );
 
-        public abstract bool TryFindAllReferences(ISymbol symbol, Project project, CancellationToken cancellationToken);
+        public abstract bool TryFindAllReferences(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        );
 
-        public abstract void DisplayReferencedSymbols(Solution solution, IEnumerable<ReferencedSymbol> referencedSymbols);
+        public abstract void DisplayReferencedSymbols(
+            Solution solution,
+            IEnumerable<ReferencedSymbol> referencedSymbols
+        );
 
         /// <summary>
         /// Creates a <see cref="PortableExecutableReference" /> that correctly retrieves the Visual Studio context,
@@ -127,8 +144,11 @@ namespace Microsoft.VisualStudio.LanguageServices
         /// </summary>
         /// <param name="filePath">The file path of the assembly or module.</param>
         /// <param name="properties">The properties for the reference.</param>
-        public PortableExecutableReference CreatePortableExecutableReference(string filePath, MetadataReferenceProperties properties)
-            => this.Services.GetRequiredService<IMetadataService>().GetReference(filePath, properties);
+        public PortableExecutableReference CreatePortableExecutableReference(
+            string filePath,
+            MetadataReferenceProperties properties
+        ) =>
+            this.Services.GetRequiredService<IMetadataService>().GetReference(filePath, properties);
 
         internal abstract string? TryGetRuleSetPathForProject(ProjectId projectId);
     }

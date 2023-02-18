@@ -24,21 +24,30 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
         where TSyntaxKind : struct
         where TNamespaceSyntax : SyntaxNode
     {
-        public abstract AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<TSyntaxKind, TNamespaceSyntax> DiagnosticAnalyzer { get; }
+        public abstract AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<
+            TSyntaxKind,
+            TNamespaceSyntax
+        > DiagnosticAnalyzer { get; }
         public abstract AbstractChangeNamespaceToMatchFolderCodeFixProvider CodeFixProvider { get; }
 
         /// <inheritdoc/>
         public async Task<Solution> SyncNamespacesAsync(
             ImmutableArray<Project> projects,
             CodeActionOptionsProvider options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // all projects must be of the same language
             Debug.Assert(projects.All(project => project.Language == projects[0].Language));
 
             var solution = projects[0].Solution;
             var diagnosticAnalyzers = ImmutableArray.Create<DiagnosticAnalyzer>(DiagnosticAnalyzer);
-            var diagnosticsByProject = await GetDiagnosticsByProjectAsync(projects, diagnosticAnalyzers, cancellationToken).ConfigureAwait(false);
+            var diagnosticsByProject = await GetDiagnosticsByProjectAsync(
+                    projects,
+                    diagnosticAnalyzers,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // If no diagnostics are reported, then there is nothing to fix.
             if (diagnosticsByProject.Values.All(diagnostics => diagnostics.IsEmpty))
@@ -46,23 +55,39 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
                 return solution;
             }
 
-            var fixAllContext = await GetFixAllContextAsync(solution, CodeFixProvider, diagnosticsByProject, options, cancellationToken).ConfigureAwait(false);
+            var fixAllContext = await GetFixAllContextAsync(
+                    solution,
+                    CodeFixProvider,
+                    diagnosticsByProject,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var fixAllProvider = CodeFixProvider.GetFixAllProvider();
             RoslynDebug.AssertNotNull(fixAllProvider);
 
-            return await ApplyCodeFixAsync(fixAllProvider, fixAllContext, cancellationToken).ConfigureAwait(false);
+            return await ApplyCodeFixAsync(fixAllProvider, fixAllContext, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        private static async Task<ImmutableDictionary<Project, ImmutableArray<Diagnostic>>> GetDiagnosticsByProjectAsync(
+        private static async Task<
+            ImmutableDictionary<Project, ImmutableArray<Diagnostic>>
+        > GetDiagnosticsByProjectAsync(
             ImmutableArray<Project> projects,
             ImmutableArray<DiagnosticAnalyzer> diagnosticAnalyzers,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var builder = ImmutableDictionary.CreateBuilder<Project, ImmutableArray<Diagnostic>>();
 
             foreach (var project in projects)
             {
-                var diagnostics = await GetDiagnosticsAsync(project, diagnosticAnalyzers, cancellationToken).ConfigureAwait(false);
+                var diagnostics = await GetDiagnosticsAsync(
+                        project,
+                        diagnosticAnalyzers,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 builder.Add(project, diagnostics);
             }
 
@@ -72,9 +97,12 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
         private static async Task<ImmutableArray<Diagnostic>> GetDiagnosticsAsync(
             Project project,
             ImmutableArray<DiagnosticAnalyzer> diagnosticAnalyzers,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project
+                .GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             RoslynDebug.AssertNotNull(compilation);
 
             var analyzerOptions = new CompilationWithAnalyzersOptions(
@@ -82,10 +110,16 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
                 onAnalyzerException: null,
                 concurrentAnalysis: true,
                 logAnalyzerExecutionTime: false,
-                reportSuppressedDiagnostics: false);
-            var analyzerCompilation = compilation.WithAnalyzers(diagnosticAnalyzers, analyzerOptions);
+                reportSuppressedDiagnostics: false
+            );
+            var analyzerCompilation = compilation.WithAnalyzers(
+                diagnosticAnalyzers,
+                analyzerOptions
+            );
 
-            return await analyzerCompilation.GetAnalyzerDiagnosticsAsync(cancellationToken).ConfigureAwait(false);
+            return await analyzerCompilation
+                .GetAnalyzerDiagnosticsAsync(cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private static async Task<FixAllContext> GetFixAllContextAsync(
@@ -93,7 +127,8 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
             CodeFixProvider codeFixProvider,
             ImmutableDictionary<Project, ImmutableArray<Diagnostic>> diagnosticsByProject,
             CodeActionOptionsProvider options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var diagnosticProvider = new DiagnosticProvider(diagnosticsByProject);
 
@@ -113,7 +148,8 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
                 (a, _) => action ??= a,
                 options,
                 isBlocking: false,
-                cancellationToken);
+                cancellationToken
+            );
             await codeFixProvider.RegisterCodeFixesAsync(context).ConfigureAwait(false);
 
             return new FixAllContext(
@@ -127,21 +163,30 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
                     codeActionEquivalenceKey: action?.EquivalenceKey!, // FixAllState supports null equivalence key. This should still be supported.
                     diagnosticIds: codeFixProvider.FixableDiagnosticIds,
                     fixAllDiagnosticProvider: diagnosticProvider,
-                    options),
+                    options
+                ),
                 new ProgressTracker(),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         private static async Task<Solution> ApplyCodeFixAsync(
             FixAllProvider fixAllProvider,
             FixAllContext fixAllContext,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var fixAllAction = await fixAllProvider.GetFixAsync(fixAllContext).ConfigureAwait(false);
+            var fixAllAction = await fixAllProvider
+                .GetFixAsync(fixAllContext)
+                .ConfigureAwait(false);
             RoslynDebug.AssertNotNull(fixAllAction);
 
-            var operations = await fixAllAction.GetOperationsAsync(cancellationToken).ConfigureAwait(false);
-            var applyChangesOperation = operations.OfType<ApplyChangesOperation>().SingleOrDefault();
+            var operations = await fixAllAction
+                .GetOperationsAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var applyChangesOperation = operations
+                .OfType<ApplyChangesOperation>()
+                .SingleOrDefault();
             RoslynDebug.AssertNotNull(applyChangesOperation);
 
             return applyChangesOperation.ChangedSolution;
@@ -149,29 +194,50 @@ namespace Microsoft.CodeAnalysis.SyncNamespaces
 
         private class DiagnosticProvider : FixAllContext.DiagnosticProvider
         {
-            private static readonly Task<IEnumerable<Diagnostic>> EmptyDignosticResult = Task.FromResult(Enumerable.Empty<Diagnostic>());
+            private static readonly Task<IEnumerable<Diagnostic>> EmptyDignosticResult =
+                Task.FromResult(Enumerable.Empty<Diagnostic>());
 
-            private readonly ImmutableDictionary<Project, ImmutableArray<Diagnostic>> _diagnosticsByProject;
+            private readonly ImmutableDictionary<
+                Project,
+                ImmutableArray<Diagnostic>
+            > _diagnosticsByProject;
 
-            internal DiagnosticProvider(ImmutableDictionary<Project, ImmutableArray<Diagnostic>> diagnosticsByProject)
+            internal DiagnosticProvider(
+                ImmutableDictionary<Project, ImmutableArray<Diagnostic>> diagnosticsByProject
+            )
             {
                 _diagnosticsByProject = diagnosticsByProject;
             }
 
-            public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancellationToken)
+            public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(
+                Project project,
+                CancellationToken cancellationToken
+            )
             {
                 return GetProjectDiagnosticsAsync(project, cancellationToken);
             }
 
-            public override async Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancellationToken)
+            public override async Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(
+                Document document,
+                CancellationToken cancellationToken
+            )
             {
-                var projectDiagnostics = await GetProjectDiagnosticsAsync(document.Project, cancellationToken).ConfigureAwait(false);
+                var projectDiagnostics = await GetProjectDiagnosticsAsync(
+                        document.Project,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return projectDiagnostics
-                    .Where(diagnostic => diagnostic.Location.SourceTree?.FilePath == document.FilePath)
+                    .Where(
+                        diagnostic => diagnostic.Location.SourceTree?.FilePath == document.FilePath
+                    )
                     .ToImmutableArray();
             }
 
-            public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancellationToken)
+            public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
+                Project project,
+                CancellationToken cancellationToken
+            )
             {
                 return _diagnosticsByProject.ContainsKey(project)
                     ? Task.FromResult<IEnumerable<Diagnostic>>(_diagnosticsByProject[project])

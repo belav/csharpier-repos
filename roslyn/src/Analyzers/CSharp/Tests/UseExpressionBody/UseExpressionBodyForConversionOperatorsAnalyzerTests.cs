@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForConversionOperatorsAnalyzerTests
@@ -25,7 +26,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, ExpressionBodyPreference.WhenPossible } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                        ExpressionBodyPreference.WhenPossible
+                    }
+                }
             }.RunAsync();
         }
 
@@ -35,14 +42,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, ExpressionBodyPreference.Never } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                        ExpressionBodyPreference.Never
+                    }
+                }
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestUseExpressionBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static int Bar() { return 0; }
@@ -52,7 +66,8 @@ class C
         Bar();
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     static int Bar() { return 0; }
@@ -65,7 +80,8 @@ class C
         [Fact]
         public async Task TestUseExpressionBody2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static int Bar() { return 0; }
@@ -75,7 +91,8 @@ class C
         return Bar();
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     static int Bar() { return 0; }
@@ -88,7 +105,8 @@ class C
         [Fact]
         public async Task TestUseExpressionBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -98,7 +116,8 @@ class C
         throw new NotImplementedException();
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -111,7 +130,8 @@ class C
         [Fact]
         public async Task TestUseExpressionBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -121,7 +141,8 @@ class C
         throw new NotImplementedException(); // comment
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -134,14 +155,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static int Bar() { return 0; }
 
     {|IDE0023:public static implicit operator C(int i) => Bar();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     static int Bar() { return 0; }
@@ -157,14 +180,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
 {
     {|IDE0023:public static implicit operator C(int i) => throw new NotImplementedException();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -180,14 +205,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
 {
     {|IDE0023:public static implicit operator C(int i) => throw new NotImplementedException();|} // comment
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C

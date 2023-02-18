@@ -13,36 +13,31 @@ namespace Binding
             string region = null,
             string project = null,
             string package = null,
-            string[] args = null)
+            string[] args = null
+        )
         {
             return region switch
             {
-                "GetValueFromOptionArgument" =>
-                    GetValueSample.GetValueFromOptionArgument(),
-                    
-                "ComplexTypes" =>
-                    await HandlerBindingSample.ComplexTypes(),
+                "GetValueFromOptionArgument" => GetValueSample.GetValueFromOptionArgument(),
 
-                "FileSystemTypes" =>
-                    await HandlerBindingSample.FileSystemTypes(),
-                    
-                "MultipleArgs" =>
-                    await HandlerBindingSample.MultipleArgs(),
-                    
-                "Bool" =>
-                    await HandlerBindingSample.Bool(),
-                    
-                "Enum" =>
-                    await HandlerBindingSample.Enum(),
-                    
-                "Enumerables" =>
-                    await HandlerBindingSample.Enumerables(),
-                    
-                "DependencyInjection" =>
-                    await HandlerBindingSample.DependencyInjection(),
-                    
-                _ => 
-                    throw new ArgumentException($"There's no case in Program.Main for {nameof(region)} '{region}'")
+                "ComplexTypes" => await HandlerBindingSample.ComplexTypes(),
+
+                "FileSystemTypes" => await HandlerBindingSample.FileSystemTypes(),
+
+                "MultipleArgs" => await HandlerBindingSample.MultipleArgs(),
+
+                "Bool" => await HandlerBindingSample.Bool(),
+
+                "Enum" => await HandlerBindingSample.Enum(),
+
+                "Enumerables" => await HandlerBindingSample.Enumerables(),
+
+                "DependencyInjection" => await HandlerBindingSample.DependencyInjection(),
+
+                _
+                    => throw new ArgumentException(
+                        $"There's no case in Program.Main for {nameof(region)} '{region}'"
+                    )
             };
         }
     }

@@ -31,7 +31,9 @@ namespace System.Web.Http.WebHost
     /// </summary>
     internal sealed class HttpControllerTypeCacheSerializer
     {
-        private static readonly Guid _mvcVersionId = typeof(HttpControllerTypeCacheSerializer).Module.ModuleVersionId;
+        private static readonly Guid _mvcVersionId = typeof(HttpControllerTypeCacheSerializer)
+            .Module
+            .ModuleVersionId;
 
         // used for unit testing
 
@@ -42,7 +44,11 @@ namespace System.Web.Http.WebHost
 
         internal DateTime? CurrentDateOverride { get; set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This is an instance method for consistency with the SerializeTypes() method.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This is an instance method for consistency with the SerializeTypes() method."
+        )]
         public ICollection<Type> DeserializeTypes(TextReader input)
         {
             // DevDiv: 314059: TypeCacheSerializer should use regular serialization instead of DOM
@@ -91,17 +97,20 @@ namespace System.Web.Http.WebHost
 
         public void SerializeTypes(IEnumerable<Type> types, TextWriter output)
         {
-            var groupedByAssembly = from type in types
-                                    group type by type.Module
-                                    into groupedByModule
-                                    group groupedByModule by groupedByModule.Key.Assembly;
+            var groupedByAssembly =
+                from type in types
+                group type by type.Module into groupedByModule
+                group groupedByModule by groupedByModule.Key.Assembly;
 
             XmlDocument doc = new XmlDocument();
             doc.AppendChild(doc.CreateComment(SRResources.TypeCache_DoNotModify));
 
             XmlElement typeCacheElement = doc.CreateElement("typeCache");
             doc.AppendChild(typeCacheElement);
-            typeCacheElement.SetAttribute("lastModified", CurrentDate.ToString(CultureInfo.InvariantCulture));
+            typeCacheElement.SetAttribute(
+                "lastModified",
+                CurrentDate.ToString(CultureInfo.InvariantCulture)
+            );
             typeCacheElement.SetAttribute("mvcVersionId", _mvcVersionId.ToString());
 
             foreach (var assemblyGroup in groupedByAssembly)
@@ -114,7 +123,10 @@ namespace System.Web.Http.WebHost
                 {
                     XmlElement moduleElement = doc.CreateElement("module");
                     assemblyElement.AppendChild(moduleElement);
-                    moduleElement.SetAttribute("versionId", moduleGroup.Key.ModuleVersionId.ToString());
+                    moduleElement.SetAttribute(
+                        "versionId",
+                        moduleGroup.Key.ModuleVersionId.ToString()
+                    );
 
                     foreach (Type type in moduleGroup)
                     {

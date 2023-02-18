@@ -19,7 +19,7 @@ namespace System.Web.Http
             return scope;
         }
 
-        public string GetWithTwoEnumParameters([FromUri]TraceLevel level, TraceKind kind)
+        public string GetWithTwoEnumParameters([FromUri] TraceLevel level, TraceKind kind)
         {
             return level.ToString() + kind.ToString();
         }

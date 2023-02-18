@@ -71,8 +71,10 @@ namespace System.Drawing.Tests
                             fonts = new SystemFontList("Microsoft YaHei UI");
                             break;
                         default:
-                            throw new InvalidOperationException("The primary language ID is Chinese, however it was not able to" +
-                                                                $" determine the user locale from the LCID with value: {userLangId & 0xFFFF:X4}.");
+                            throw new InvalidOperationException(
+                                "The primary language ID is Chinese, however it was not able to"
+                                    + $" determine the user locale from the LCID with value: {userLangId & 0xFFFF:X4}."
+                            );
                     }
                     break;
                 case 0x1E: // th-TH
@@ -105,7 +107,11 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(SystemFonts_WindowsNames_TestData))]
-        public void SystemFont_Get_ReturnsExpected_WindowsNames(Func<Font> getFont, string systemFontName, string windowsFontName)
+        public void SystemFont_Get_ReturnsExpected_WindowsNames(
+            Func<Font> getFont,
+            string systemFontName,
+            string windowsFontName
+        )
         {
             using (Font font = getFont())
             using (Font otherFont = getFont())
@@ -160,14 +166,44 @@ namespace System.Drawing.Tests
 
             public IEnumerable<object[]> ToTestData()
             {
-                return new []
+                return new[]
                 {
-                new object[] {(Func<Font>)(() => SystemFonts.CaptionFont), nameof(CaptionFont), CaptionFont},
-                new object[] {(Func<Font>)(() => SystemFonts.IconTitleFont), nameof(IconTitleFont), IconTitleFont},
-                new object[] {(Func<Font>)(() => SystemFonts.MenuFont), nameof(MenuFont), MenuFont},
-                new object[] {(Func<Font>)(() => SystemFonts.MessageBoxFont), nameof(MessageBoxFont), MessageBoxFont},
-                new object[] {(Func<Font>)(() => SystemFonts.SmallCaptionFont), nameof(SmallCaptionFont), SmallCaptionFont},
-                new object[] {(Func<Font>)(() => SystemFonts.StatusFont), nameof(StatusFont), StatusFont}
+                    new object[]
+                    {
+                        (Func<Font>)(() => SystemFonts.CaptionFont),
+                        nameof(CaptionFont),
+                        CaptionFont
+                    },
+                    new object[]
+                    {
+                        (Func<Font>)(() => SystemFonts.IconTitleFont),
+                        nameof(IconTitleFont),
+                        IconTitleFont
+                    },
+                    new object[]
+                    {
+                        (Func<Font>)(() => SystemFonts.MenuFont),
+                        nameof(MenuFont),
+                        MenuFont
+                    },
+                    new object[]
+                    {
+                        (Func<Font>)(() => SystemFonts.MessageBoxFont),
+                        nameof(MessageBoxFont),
+                        MessageBoxFont
+                    },
+                    new object[]
+                    {
+                        (Func<Font>)(() => SystemFonts.SmallCaptionFont),
+                        nameof(SmallCaptionFont),
+                        SmallCaptionFont
+                    },
+                    new object[]
+                    {
+                        (Func<Font>)(() => SystemFonts.StatusFont),
+                        nameof(StatusFont),
+                        StatusFont
+                    }
                 };
             }
         }

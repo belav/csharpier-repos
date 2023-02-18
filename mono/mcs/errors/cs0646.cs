@@ -4,23 +4,19 @@
 using System;
 using System.Reflection;
 
-[DefaultMember ("Item")]
-public class Foo {
-
+[DefaultMember("Item")]
+public class Foo
+{
     string bar;
-    
-    public static void Main ()
+
+    public static void Main()
     {
-        Console.WriteLine ("foo");
+        Console.WriteLine("foo");
     }
 
-    string this [int idx] {
-        get {
-            return "foo";
-        }
-        set {
-            bar = value;
-        }
+    string this[int idx]
+    {
+        get { return "foo"; }
+        set { bar = value; }
     }
 }
-        

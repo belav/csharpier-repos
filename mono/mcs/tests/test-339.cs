@@ -2,20 +2,19 @@
 
 using System;
 
-struct SS
-{
-}
+struct SS { }
 
 public class C
 {
-    public static int[] field = new int [] { 66 };
+    public static int[] field = new int[] { 66 };
 
     public static int Main()
     {
-        unsafe {
-            SS* ss = stackalloc SS [10];
-            SS* s1 = &ss [5];
-        
+        unsafe
+        {
+            SS* ss = stackalloc SS[10];
+            SS* s1 = &ss[5];
+
             int* values = stackalloc int[20];
             int* p = &values[1];
             int* q = &values[15];
@@ -26,4 +25,3 @@ public class C
         return 0;
     }
 }
-

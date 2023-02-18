@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var text = "public class C {}";
             var tree = SyntaxFactory.ParseSyntaxTree(text);
             var annotation = new SyntaxAnnotation();
-            var root = tree.GetCompilationUnitRoot().WithAdditionalAnnotations(annotation, annotation);
+            var root = tree.GetCompilationUnitRoot()
+                .WithAdditionalAnnotations(annotation, annotation);
             Assert.True(root.ContainsAnnotations);
             Assert.True(root.HasAnnotation(annotation));
 
@@ -186,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var text = "public class C {}";
             var tree = SyntaxFactory.ParseSyntaxTree(text);
             var annotation1 = new SyntaxAnnotation("MyAnnotationId", "SomeData");
-            var root = tree.GetCompilationUnitRoot().WithAdditionalAnnotations(annotation1, annotation1);
+            var root = tree.GetCompilationUnitRoot()
+                .WithAdditionalAnnotations(annotation1, annotation1);
             Assert.True(root.ContainsAnnotations);
             Assert.True(root.HasAnnotation(annotation1));
             var removedRoot = root.WithoutAnnotations(annotation1);
@@ -224,8 +226,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void RoundTripXmlDocComment()
         {
-            RoundTrip(@"/// <summary>XML Doc comment</summary>
-class C { }");
+            RoundTrip(
+                @"/// <summary>XML Doc comment</summary>
+class C { }"
+            );
         }
 
         [Fact]
@@ -293,10 +297,16 @@ class C { }");
         {
             // trees with excessively deep expressions tend to overflow the stack when using recursive encoding.
             // test that the tree is successfully serialized using non-recursive encoding.
-            var text = @"
+            var text =
+                @"
 public class C
 {
-    public string B = " + string.Join(" + ", Enumerable.Range(0, 1000).Select(i => "\"" + i.ToString() + "\"").ToArray()) + @";
+    public string B = "
+                + string.Join(
+                    " + ",
+                    Enumerable.Range(0, 1000).Select(i => "\"" + i.ToString() + "\"").ToArray()
+                )
+                + @";
 }";
 
             // serialization should fail to encode stream using recursive object encoding and

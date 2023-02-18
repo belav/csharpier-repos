@@ -1,9 +1,9 @@
 class X
 {
-    public static int Main ()
+    public static int Main()
     {
-        const string s = nameof (X);
-        System.Console.WriteLine (s);
+        const string s = nameof(X);
+        System.Console.WriteLine(s);
         if (s != "X")
             return 1;
 

@@ -19,23 +19,22 @@ namespace MonoTests.System.Text
     public class DecoderReplacementFallbackTest
     {
         [Test]
-        public void Defaults ()
+        public void Defaults()
         {
-            DecoderReplacementFallback f =
-                new DecoderReplacementFallback ();
-            Assert.AreEqual ("?", f.DefaultString, "#1");
-            Assert.AreEqual (1, f.MaxCharCount, "#2");
+            DecoderReplacementFallback f = new DecoderReplacementFallback();
+            Assert.AreEqual("?", f.DefaultString, "#1");
+            Assert.AreEqual(1, f.MaxCharCount, "#2");
 
-            f = new DecoderReplacementFallback (String.Empty);
-            Assert.AreEqual (String.Empty, f.DefaultString, "#3");
-            Assert.AreEqual (0, f.MaxCharCount, "#4");
+            f = new DecoderReplacementFallback(String.Empty);
+            Assert.AreEqual(String.Empty, f.DefaultString, "#3");
+            Assert.AreEqual(0, f.MaxCharCount, "#4");
 
             f = Encoding.UTF8.DecoderFallback as DecoderReplacementFallback;
-            Assert.IsNotNull (f, "#5");
+            Assert.IsNotNull(f, "#5");
             // This behavior was introduced as
             // http://support.microsoft.com/kb/940521/
-            Assert.AreEqual ("\uFFFD", f.DefaultString, "#6");
-            Assert.AreEqual (1, f.MaxCharCount, "#7");
+            Assert.AreEqual("\uFFFD", f.DefaultString, "#6");
+            Assert.AreEqual(1, f.MaxCharCount, "#7");
 
             // after beta2 this test became invalid.
             //f = new MyEncoding ().DecoderFallback as DecoderReplacementFallback;
@@ -44,62 +43,60 @@ namespace MonoTests.System.Text
             //Assert.AreEqual (0, f.MaxCharCount, "#10");
 
             f = DecoderFallback.ReplacementFallback as DecoderReplacementFallback;
-            Assert.AreEqual ("?", f.DefaultString, "#11");
-            Assert.AreEqual (1, f.MaxCharCount, "#12");
+            Assert.AreEqual("?", f.DefaultString, "#11");
+            Assert.AreEqual(1, f.MaxCharCount, "#12");
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void DontChangeReadOnlyUTF8DecoderFallback ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DontChangeReadOnlyUTF8DecoderFallback()
         {
-            Encoding.UTF8.DecoderFallback =
-                new DecoderReplacementFallback ();
+            Encoding.UTF8.DecoderFallback = new DecoderReplacementFallback();
         }
 
         [Test]
-        public void DontChangeReadOnlyCodePageDecoderFallback ()
+        public void DontChangeReadOnlyCodePageDecoderFallback()
         {
-            Encoding encoding = Encoding.GetEncoding (Encoding.Default.CodePage);
-            try {
-                encoding.DecoderFallback = new DecoderReplacementFallback ();
-                Assert.Fail ("#1");
-            } catch (InvalidOperationException ex) {
-                Assert.AreEqual (typeof (InvalidOperationException), ex.GetType (), "#2");
-                Assert.IsNull (ex.InnerException, "#3");
-                Assert.IsNotNull (ex.Message, "#4");
+            Encoding encoding = Encoding.GetEncoding(Encoding.Default.CodePage);
+            try
+            {
+                encoding.DecoderFallback = new DecoderReplacementFallback();
+                Assert.Fail("#1");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Assert.AreEqual(typeof(InvalidOperationException), ex.GetType(), "#2");
+                Assert.IsNull(ex.InnerException, "#3");
+                Assert.IsNotNull(ex.Message, "#4");
             }
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void CustomEncodingSetEncoderFallback ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CustomEncodingSetEncoderFallback()
         {
-            new MyEncoding ().DecoderFallback =
-                new DecoderReplacementFallback ();
+            new MyEncoding().DecoderFallback = new DecoderReplacementFallback();
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void EncodingSetNullDecoderFallback ()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void EncodingSetNullDecoderFallback()
         {
             Encoding.Default.DecoderFallback = null;
         }
 
         [Test]
         // Don't throw an exception
-        public void SetDecoderFallback ()
+        public void SetDecoderFallback()
         {
-            Encoding.Default.GetDecoder ().Fallback =
-                new DecoderReplacementFallback ();
+            Encoding.Default.GetDecoder().Fallback = new DecoderReplacementFallback();
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentNullException))]
-        public void DecoderSetNullFallback ()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DecoderSetNullFallback()
         {
-            Encoding.Default.GetDecoder ().Fallback = null;
+            Encoding.Default.GetDecoder().Fallback = null;
         }
     }
 }
-
-

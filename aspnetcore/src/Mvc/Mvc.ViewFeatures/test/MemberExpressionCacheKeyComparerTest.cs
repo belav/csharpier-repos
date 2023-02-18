@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class MemberExpressionCacheKeyComparerTest
 {
-    private readonly MemberExpressionCacheKeyComparer Comparer = MemberExpressionCacheKeyComparer.Instance;
+    private readonly MemberExpressionCacheKeyComparer Comparer =
+        MemberExpressionCacheKeyComparer.Instance;
 
     [Fact]
     public void Equals_ReturnsTrue_ForTheSameExpression()
@@ -184,10 +185,13 @@ public class MemberExpressionCacheKeyComparerTest
         Assert.NotEqual(cachedKeyHashCode1, hashCode2);
     }
 
-    private static MemberExpressionCacheKey GetKey<TResult>(Expression<Func<TestModel, TResult>> expression)
-        => GetKey<TestModel, TResult>(expression);
+    private static MemberExpressionCacheKey GetKey<TResult>(
+        Expression<Func<TestModel, TResult>> expression
+    ) => GetKey<TestModel, TResult>(expression);
 
-    private static MemberExpressionCacheKey GetKey<TModel, TResult>(Expression<Func<TModel, TResult>> expression)
+    private static MemberExpressionCacheKey GetKey<TModel, TResult>(
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         var memberExpression = Assert.IsAssignableFrom<MemberExpression>(expression.Body);
         return new MemberExpressionCacheKey(typeof(TModel), memberExpression);

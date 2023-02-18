@@ -2,22 +2,23 @@
 // Line: 20
 using System;
 
-public delegate void Hello (Test test);
+public delegate void Hello(Test test);
 
 public class Test
 {
-    public void Whatever ()
-    { }
+    public void Whatever() { }
 
-    static void Main ()
+    static void Main()
     {
-        Hello hello = delegate (Test test) {
-            Hello hello2 = delegate (Test t) {
-                t.Whatever ();
+        Hello hello = delegate(Test test)
+        {
+            Hello hello2 = delegate(Test t)
+            {
+                t.Whatever();
             };
-            hello2 (test);
+            hello2(test);
         };
-        Test t = new Test ();
-        hello (t);
+        Test t = new Test();
+        hello(t);
     }
 }

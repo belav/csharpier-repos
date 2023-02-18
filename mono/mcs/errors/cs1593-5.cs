@@ -8,20 +8,20 @@ using System.Collections.Generic;
 namespace CrashRepro.Core
 {
     public class X
-    {        
-        async void Foo ()
+    {
+        async void Foo()
         {
-            var pushes = await Run ().ContinueWith (l =>
-            {
-                for (int i = 0; i < 1; ++i)
-                    Run ().ContinueWith(() => { });
-            });
+            var pushes = await Run()
+                .ContinueWith(l =>
+                {
+                    for (int i = 0; i < 1; ++i)
+                        Run().ContinueWith(() => { });
+                });
         }
 
-        Task Run ()
+        Task Run()
         {
             return null;
         }
     }
 }
-
