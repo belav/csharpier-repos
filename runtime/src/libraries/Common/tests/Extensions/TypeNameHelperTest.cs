@@ -169,9 +169,8 @@ namespace Microsoft.Extensions.Internal
             genArgsLevel[1] = typeof(string);
             var closedLevelType = openLevelType.MakeGenericType(genArgsLevel);
 
-            var openInnerType = typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<
-                ,
-            >.InnerGenericLeafNode<>);
+            var openInnerType =
+                typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>);
             var genArgsInnerType = openInnerType.GetGenericArguments();
             genArgsInnerType[3] = typeof(bool);
             var closedInnerType = openInnerType.MakeGenericType(genArgsInnerType);

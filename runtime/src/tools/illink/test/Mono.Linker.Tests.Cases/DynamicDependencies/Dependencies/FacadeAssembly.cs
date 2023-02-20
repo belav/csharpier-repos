@@ -7,7 +7,5 @@ using System.Runtime.CompilerServices;
     typeof(Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies.ImplementationLibrary)
 )]
 [assembly: TypeForwardedTo(
-    typeof(Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies.ImplementationLibraryGenericType<
-        ,
-    >)
+    typeof(Mono.Linker.Tests.Cases.DynamicDependencies.Dependencies.ImplementationLibraryGenericType<,>)
 )]

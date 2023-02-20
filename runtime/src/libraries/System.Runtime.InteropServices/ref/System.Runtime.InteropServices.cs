@@ -6048,9 +6048,7 @@ namespace System.Runtime.InteropServices.Marshalling
     [System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute(
         typeof(CustomMarshallerAttribute.GenericPlaceholder*[]),
         System.Runtime.InteropServices.Marshalling.MarshalMode.ManagedToUnmanagedIn,
-        typeof(System.Runtime.InteropServices.Marshalling.PointerArrayMarshaller<
-            ,
-        >.ManagedToUnmanagedIn)
+        typeof(System.Runtime.InteropServices.Marshalling.PointerArrayMarshaller<,>.ManagedToUnmanagedIn)
     )]
     [System.Runtime.InteropServices.Marshalling.ContiguousCollectionMarshaller]
     public static unsafe class PointerArrayMarshaller<T, TUnmanagedElement>

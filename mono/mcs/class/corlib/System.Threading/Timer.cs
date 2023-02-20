@@ -311,6 +311,7 @@ namespace System.Threading
                 }
             }
 #endif
+
             public static Scheduler Instance
             {
                 get { return instance; }

@@ -836,9 +836,11 @@ namespace PartialUniversalGen
             }
 
             {
-                var t = typeof(DerivedWithArrayWithTwoArgsLeadingToPartialAndNonShared<
-                    ,
-                >).MakeGenericType(TypeOf.Double, TypeOf.Double);
+                var t =
+                    typeof(DerivedWithArrayWithTwoArgsLeadingToPartialAndNonShared<,>).MakeGenericType(
+                        TypeOf.Double,
+                        TypeOf.Double
+                    );
                 IBase<int> b = (IBase<int>)Activator.CreateInstance(t);
                 IMiddle<double> m = (IMiddle<double>)b;
                 IDerived<double> d = (IDerived<double>)b;

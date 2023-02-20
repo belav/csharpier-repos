@@ -27,9 +27,7 @@ namespace System.Web.ModelBinding
             {
                 return ModelBinderUtil.GetPossibleBinderInstance(
                     bindingContext.ModelType,
-                    typeof(KeyValuePair<
-                        ,
-                    >) /* supported model type */
+                    typeof(KeyValuePair<,>) /* supported model type */
                     ,
                     typeof(KeyValuePairModelBinder<,>) /* binder type */
                 );

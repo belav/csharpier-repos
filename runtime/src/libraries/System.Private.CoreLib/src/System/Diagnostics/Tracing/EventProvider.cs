@@ -1449,6 +1449,7 @@ namespace System.Diagnostics.Tracing
         }
     }
 #endif
+
     internal sealed class NoOpEventProvider : IEventProvider
     {
         unsafe uint IEventProvider.EventRegister(

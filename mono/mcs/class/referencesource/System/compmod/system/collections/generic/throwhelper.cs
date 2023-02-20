@@ -102,6 +102,7 @@ namespace System
             throw new SerializationException(SR.GetString(GetResourceName(resource)));
         }
 #endif
+
         internal static void ThrowNotSupportedException(ExceptionResource resource)
         {
             throw new NotSupportedException(SR.GetString(GetResourceName(resource)));

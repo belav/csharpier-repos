@@ -282,9 +282,8 @@ namespace TypeOfRepo
                 s_TypeRepo["CDT_MyType7"] = typeof(CtorDict.MyType7);
                 s_TypeRepo["CDT_MyType8"] = typeof(CtorDict.MyType8);
 
-                s_TypeRepo["MUST_GenericClass"] = typeof(MethodAndUnboxingStubTesting.GenericClass<
-                    ,
-                >);
+                s_TypeRepo["MUST_GenericClass"] =
+                    typeof(MethodAndUnboxingStubTesting.GenericClass<,>);
                 s_TypeRepo["MUST_GenericClass2"] =
                     typeof(MethodAndUnboxingStubTesting.GenericClass2<,>);
                 s_TypeRepo["MUST_GenericStruct"] =
@@ -314,9 +313,8 @@ namespace TypeOfRepo
                 s_TypeRepo["UG_UCGInstanceFieldsMostDerived"] =
                     typeof(UniversalGen.UCGInstanceFieldsMostDerived<>);
                 s_TypeRepo["UG_UCGStaticFields"] = typeof(UniversalGen.UCGStaticFields<,>);
-                s_TypeRepo["UG_UCGThreadStaticFields"] = typeof(UniversalGen.UCGThreadStaticFields<
-                    ,
-                >);
+                s_TypeRepo["UG_UCGThreadStaticFields"] =
+                    typeof(UniversalGen.UCGThreadStaticFields<,>);
                 s_TypeRepo["UG_UCGClassConstructorType"] =
                     typeof(UniversalGen.UCGClassConstructorType<>);
                 s_TypeRepo["UG_UCGWrapperStruct"] = typeof(UniversalGen.UCGWrapperStruct);
@@ -362,9 +360,8 @@ namespace TypeOfRepo
 
             // Types in UniversalConstrainedCalls.cs
             {
-                s_TypeRepo["UCC_UCGConstrainedCall"] = typeof(UnivConstCalls.UCGConstrainedCall<
-                    ,,
-                >);
+                s_TypeRepo["UCC_UCGConstrainedCall"] =
+                    typeof(UnivConstCalls.UCGConstrainedCall<,,>);
                 s_TypeRepo["UCC_UCGReferenceConstrainedCall"] =
                     typeof(UnivConstCalls.UCGReferenceConstrainedCall<,>);
                 s_TypeRepo["UCC_ReferenceConstrainedCallType"] =
